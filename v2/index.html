@@ -229,10 +229,10 @@ a:focus-visible,button:focus-visible{outline:2px solid #5BB0FF;outline-offset:3p
       <div id="foot2" class="abs">Ingeniería · Data Science · Transición energética</div>
     </div>
   </div>
-  <div id="tools"><button id="btnSound" type="button" aria-pressed="false">SONIDO: NO</button><button id="btnSkip" type="button">OMITIR ›</button></div>
+  <div id="tools"><button id="btnSound" type="button" aria-pressed="false">SONIDO: SÍ</button><button id="btnSkip" type="button">OMITIR ›</button></div>
   <div id="edge"></div>
   <div id="fade" class="layer"></div>
-  <audio id="snd" src="h3l-intro.mp3" preload="none"></audio>
+  <audio id="snd" src="h3l-intro.mp3" preload="auto"></audio>
 </div>
 <script>
 const SW=1280,SH=720;
@@ -644,10 +644,22 @@ function endLoader(){
 
 /* ---------- controles: omitir, sonido, menú ---------- */
 const snd=$('snd'); let soundOn=false, t=0, frozen=false;
+function setLabel(){ $('btnSound').textContent='SONIDO: '+(soundOn?'SÍ':'NO'); $('btnSound').setAttribute('aria-pressed',soundOn); }
+function tryPlay(){
+  try{ if(t<10.8) snd.currentTime=Math.max(0,t); }catch(e){}
+  const p=snd.play();
+  if(p&&p.catch) p.catch(()=>armGesture());
+}
+let armed=false;
+function armGesture(){
+  if(armed) return; armed=true;
+  const go=()=>{ ['pointerdown','touchstart','keydown','click'].forEach(ev=>removeEventListener(ev,go,true)); armed=false;
+    if(soundOn&&snd.paused&&!loaderGone) tryPlay(); };
+  ['pointerdown','touchstart','keydown','click'].forEach(ev=>addEventListener(ev,go,true));
+}
 function setSound(on){
-  soundOn=on; $('btnSound').textContent='SONIDO: '+(on?'SÍ':'NO'); $('btnSound').setAttribute('aria-pressed',on);
-  if(on){ snd.preload='auto'; try{ if(t<10.8) snd.currentTime=Math.max(0,t); }catch(e){} const p=snd.play(); if(p&&p.catch) p.catch(()=>{ soundOn=false; $('btnSound').textContent='SONIDO: NO'; $('btnSound').setAttribute('aria-pressed',false); }); }
-  else snd.pause();
+  soundOn=on; setLabel();
+  if(on){ snd.preload='auto'; tryPlay(); } else snd.pause();
 }
 $('btnSound').addEventListener('click',()=>setSound(!soundOn));
 $('btnSkip').addEventListener('click',()=>{ if(t<T_CURTAIN-.05){ t=T_CURTAIN-.05; if(soundOn){ try{snd.currentTime=t;}catch(e){} } } });
@@ -678,6 +690,7 @@ function start(){
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
+  if(!(fast||reduce)) setSound(true);
   window.__h3l={get t(){return t;},set t(v){t=v;},render,layout,get frozen(){return frozen;},set frozen(v){frozen=!!v;needsPaint=true;}};
 }
 buildScene();
