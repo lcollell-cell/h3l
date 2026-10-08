@@ -97,6 +97,17 @@ a:focus-visible,button:focus-visible{outline:2px solid #5BB0FF;outline-offset:3p
 #foot1{left:96px;top:672px;font-weight:500;font-size:11px;color:#6f84ab;letter-spacing:.4px}
 #foot2{right:96px;top:672px;font-weight:500;font-size:11px;color:#6f84ab;letter-spacing:.4px}
 #chart{left:650px;top:150px}
+#gate{position:fixed;inset:0;z-index:15;display:flex;align-items:center;justify-content:center;background:rgba(5,13,22,.94);padding:24px}
+#gate[hidden]{display:none}
+#gate .gbox{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px}
+#gate .gl{font-weight:800;font-size:64px;line-height:1;color:#fff;letter-spacing:-1px}
+#gate .gl span{color:#4FB27C}
+#gate .gs{font-size:14px;color:#c9d3e6;margin-top:-6px}
+#gate button{font-family:'PlexMono',monospace;font-weight:500;font-size:13px;letter-spacing:1.4px;border-radius:8px;cursor:pointer;padding:15px 28px;min-width:260px}
+#gate #gYes{margin-top:18px;background:#3A6BD0;color:#fff;border:1px solid #3A6BD0}
+#gate #gYes:hover{background:#4a7be0}
+#gate #gNo{background:transparent;color:#c9d3e6;border:1px solid rgba(255,255,255,.28)}
+#gate #gNo:hover{background:rgba(255,255,255,.08);color:#fff}
 #tools{position:fixed;right:max(18px,env(safe-area-inset-right));top:max(14px,env(safe-area-inset-top));display:flex;gap:8px;z-index:12}
 #tools button{font-family:'PlexMono',monospace;font-weight:500;font-size:11px;letter-spacing:1.2px;color:#c9d3e6;background:rgba(10,20,38,.7);border:1px solid rgba(255,255,255,.22);border-radius:6px;padding:8px 12px;cursor:pointer;min-height:34px;transition:background .2s,color .2s}
 #tools button:hover{background:rgba(255,255,255,.1);color:#fff}
@@ -230,6 +241,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #5BB0FF;outline-offset:3p
     </div>
   </div>
   <div id="tools"><button id="btnSound" type="button" aria-pressed="false">SONIDO: SÍ</button><button id="btnSkip" type="button">OMITIR ›</button></div>
+  <div id="gate" role="dialog" aria-label="Entrar al sitio" hidden><div class="gbox"><div class="gl">H<span>3</span>L</div><div class="gs">Global Energy</div><button id="gYes" type="button">ENTRAR CON SONIDO</button><button id="gNo" type="button">ENTRAR SIN SONIDO</button></div></div>
   <div id="edge"></div>
   <div id="fade" class="layer"></div>
   <audio id="snd" src="h3l-intro.mp3" preload="auto"></audio>
@@ -645,13 +657,17 @@ function endLoader(){
 
 /* ---------- controles: omitir, sonido, menú ---------- */
 const snd=$('snd'); let soundOn=false, t=0, frozen=false;
-let blocked=false, lastGo=0;
+let blocked=false, lastGo=0, holding=false, gateShown=false;
 function setLabel(){ $('btnSound').textContent=(soundOn&&blocked)?'TOCÁ PARA ACTIVAR EL SONIDO':'SONIDO: '+(soundOn?'SÍ':'NO'); $('btnSound').setAttribute('aria-pressed',soundOn&&!blocked); }
 function tryPlay(){
   try{ if(t<10.8) snd.currentTime=Math.max(0,t); }catch(e){}
   const p=snd.play();
-  if(p&&p.then) p.then(()=>{ blocked=false; setLabel(); },()=>{ blocked=true; setLabel(); armGesture(); });
+  if(p&&p.then) p.then(()=>{ blocked=false; setLabel(); },()=>{ blocked=true; setLabel(); if(!gateShown&&!loaderGone&&t<1.5){ showGate(); } else armGesture(); });
 }
+function showGate(){ gateShown=true; holding=true; t=0; $('gate').hidden=false; try{$('gYes').focus({preventScroll:true});}catch(e){} }
+function closeGate(){ $('gate').hidden=true; holding=false; t=0; }
+$('gYes').addEventListener('click',()=>{ closeGate(); soundOn=true; blocked=false; setLabel(); tryPlay(); });
+$('gNo').addEventListener('click',()=>{ closeGate(); setSound(false); });
 let armed=false;
 function armGesture(){
   if(armed) return; armed=true;
@@ -665,7 +681,7 @@ function setSound(on){
 }
 $('btnSound').addEventListener('click',()=>{ if(soundOn&&performance.now()-lastGo<700){ setLabel(); return; } if(soundOn&&blocked){ tryPlay(); return; } setSound(!soundOn); });
 $('btnSkip').addEventListener('click',()=>{ if(t<T_CURTAIN-.05){ t=T_CURTAIN-.05; if(soundOn){ try{snd.currentTime=t;}catch(e){} } } });
-addEventListener('keydown',e=>{ if(e.key==='Escape'){ if(!loaderGone&&t<T_CURTAIN-.05) $('btnSkip').click(); closeMenu(); } });
+addEventListener('keydown',e=>{ if(e.key==='Escape'&&!holding){ if(!loaderGone&&t<T_CURTAIN-.05) $('btnSkip').click(); closeMenu(); } });
 const burger=$('burger'), menu=$('menu');
 function closeMenu(){ burger.classList.remove('open'); menu.classList.remove('open'); burger.setAttribute('aria-expanded','false'); }
 burger.addEventListener('click',e=>{ e.stopPropagation(); const o=!menu.classList.contains('open'); burger.classList.toggle('open',o); menu.classList.toggle('open',o); burger.setAttribute('aria-expanded',o); });
@@ -686,7 +702,7 @@ function start(){
   let last=performance.now();
   function frame(now){
     const dt=Math.min(.1,(now-last)/1000); last=now;
-    if(!frozen) t+=dt;
+    if(!frozen&&!holding) t+=dt;
     if(!frozen||needsPaint){ render(t); needsPaint=false; }
     if(t>7.6) $('tools').style.display='none';
     requestAnimationFrame(frame);
