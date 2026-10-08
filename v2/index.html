@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>H3L Global Energy — Upstream Oil &amp; Gas &amp; Energy Transition</title>
-<meta name="description" content="Plataforma de ingeniería y data science para la industria energética: reservas SPE-PRMS, quality control, transición energética, analítica y evaluación de proyectos upstream.">
+<title data-i18n="i.title">H3L Global Energy — Upstream Oil &amp; Gas &amp; Energy Transition</title>
+<meta name="description" content="Plataforma de ingeniería y data science para la industria energética: reservas SPE-PRMS, quality control, transición energética, analítica y evaluación de proyectos upstream." data-i18n-attr="content:i.desc">
 <meta name="theme-color" content="#050d16">
 <link rel="icon" href="../LOGO_H3L_icon.png">
 <link rel="preload" href="fonts/montserrat-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -53,6 +53,13 @@ a{color:inherit;text-decoration:none}
 #b1:hover{background:#f1f3f7}
 #b2{background:#3A6BD0;color:#fff}
 #b2:hover{filter:brightness(1.1)}
+#langNav{display:flex;align-items:center;margin-right:calc(14*var(--u)*1px)}
+#langNav .h3lang select{font-size:calc(13*var(--u)*1px);min-height:calc(38*var(--u)*1px)}
+#langMenu{display:none}
+#langGate{display:flex;justify-content:center;margin-top:16px}
+[data-mode=m] #langNav{margin-left:auto;margin-right:2px}
+[data-mode=m] #langNav .h3lang select{font-size:13px;min-height:40px}
+[data-mode=m] #burger{margin-left:0!important}
 #burger,#menu{display:none}
 
 #copy{position:absolute;left:calc(160*var(--u)*1px);top:50%;transform:translateY(-50%);width:calc(760*var(--u)*1px);z-index:3}
@@ -180,6 +187,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #5BB0FF;outline-offset:3p
 @media (prefers-reduced-motion:reduce){#c2 svg,#navitems a::after{transition:none}}
 </style>
 <noscript><style>#loader,#fade,#tools{display:none}#nav,#sub,#kpi,#ctas,#legacy{opacity:1!important}#wm span{opacity:1!important}</style></noscript>
+<script src="i18n.js"></script><script src="lang-index.js"></script>
 </head>
 <body>
 <div id="app">
@@ -187,52 +195,53 @@ a:focus-visible,button:focus-visible{outline:2px solid #5BB0FF;outline-offset:3p
   <div id="hero" class="layer">
     <div id="ocean" class="layer"></div>
     <canvas id="spark" class="layer"></canvas>
-    <div id="plat"><svg id="platSvg" viewBox="0 0 1280 720" preserveAspectRatio="xMaxYMax slice" role="img" aria-label="Bombeo mecánico, sol y panel de analítica de producción"></svg></div>
+    <div id="plat"><svg id="platSvg" viewBox="0 0 1280 720" preserveAspectRatio="xMaxYMax slice" role="img" aria-label="Bombeo mecánico, sol y panel de analítica de producción" data-i18n-attr="aria-label:i.hero"></svg></div>
     <div id="scrim" class="layer"></div>
     <div id="glow" class="layer"></div>
     <div id="wm" class="abs" aria-hidden="true"><span>H</span><span class="g">3</span><span>L</span></div>
 
-    <nav id="nav" aria-label="Principal">
-      <a class="logo" href="../index.html" aria-label="H3L Global Energy — inicio"><div class="lm">H<span>3</span>L</div><div class="ls">Global Energy</div></a>
+    <nav id="nav" aria-label="Principal" data-i18n-attr="aria-label:c.main">
+      <a class="logo" href="../index.html" aria-label="H3L Global Energy — inicio" data-i18n-attr="aria-label:c.home"><div class="lm">H<span>3</span>L</div><div class="ls">Global Energy</div></a>
       <div id="navitems">
-        <a href="../index.html?go=calculators">Calculadoras</a>
-        <a href="../index.html?go=agentes">Agentes IA</a>
-        <a href="../index.html?go=qcapps">Apps QC</a>
-        <a href="../index.html?go=demos-et">Transición</a>
-        <a href="dashboards.html">Dashboard</a>
-        <a href="../index.html?go=somos">Nosotros</a>
+        <a href="../index.html?go=calculators" data-i18n="c.calc">Calculadoras</a>
+        <a href="../index.html?go=agentes" data-i18n="c.agents">Agentes IA</a>
+        <a href="../index.html?go=qcapps" data-i18n="c.qc">Apps QC</a>
+        <a href="../index.html?go=demos-et" data-i18n="c.trans">Transición</a>
+        <a href="dashboards.html" data-i18n="c.dash">Dashboard</a>
+        <a href="../index.html?go=somos" data-i18n="c.about">Nosotros</a>
       </div>
-      <a class="btn" id="b1" href="../index.html?go=auth">Iniciar sesión</a>
-      <a class="btn" id="b2" href="../index.html?go=registro">Registro</a>
-      <button id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+      <span id="langNav"></span><a class="btn" id="b1" href="../index.html?go=auth" data-i18n="c.login">Iniciar sesión</a>
+      <a class="btn" id="b2" href="../index.html?go=registro" data-i18n="c.register">Registro</a>
+      <button id="burger" aria-label="Abrir menú" data-i18n-attr="aria-label:c.menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
     </nav>
     <div id="menu" role="menu">
-      <a href="../index.html?go=calculators">Calculadoras</a>
-      <a href="../index.html?go=agentes">Agentes IA</a>
-      <a href="../index.html?go=qcapps">Apps QC</a>
-      <a href="../index.html?go=demos-et">Transición energética</a>
-      <a href="dashboards.html">Dashboard</a>
-      <a href="../index.html?go=somos">Nosotros</a>
-      <div class="mb"><a href="../index.html?go=auth">Iniciar sesión</a><a class="pri" href="../index.html?go=registro">Registro</a></div>
+      <div id="langMenu"></div>
+      <a href="../index.html?go=calculators" data-i18n="c.calc">Calculadoras</a>
+      <a href="../index.html?go=agentes" data-i18n="c.agents">Agentes IA</a>
+      <a href="../index.html?go=qcapps" data-i18n="c.qc">Apps QC</a>
+      <a href="../index.html?go=demos-et" data-i18n="c.transFull">Transición energética</a>
+      <a href="dashboards.html" data-i18n="c.dash">Dashboard</a>
+      <a href="../index.html?go=somos" data-i18n="c.about">Nosotros</a>
+      <div class="mb"><a href="../index.html?go=auth" data-i18n="c.login">Iniciar sesión</a><a class="pri" href="../index.html?go=registro" data-i18n="c.register">Registro</a></div>
     </div>
 
     <div id="copy">
       <div class="mask"><h1 id="h1a">Upstream Oil &amp; Gas</h1></div>
       <div class="mask"><div id="h1b" aria-hidden="true">&amp; Energy Transition</div></div>
-      <p id="sub">Plataforma de ingeniería y data science para la industria energética.</p>
-      <div id="kpi">40 calculadoras certificadas &nbsp;·&nbsp; 32 agentes IA &nbsp;·&nbsp; 87 apps de QC</div>
+      <p id="sub" data-i18n="i.sub">Plataforma de ingeniería y data science para la industria energética.</p>
+      <div id="kpi" data-i18n-html="i.kpi">40 calculadoras certificadas &nbsp;·&nbsp; 32 agentes IA &nbsp;·&nbsp; 87 apps de QC</div>
       <div id="ctas">
-        <a id="c1" href="../index.html?go=calculators">Explorar calculadoras</a>
-        <a id="c2" href="dashboards.html">Ver dashboard <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a id="c1" href="../index.html?go=calculators" data-i18n="i.c1">Explorar calculadoras</a>
+        <a id="c2" href="dashboards.html"><span data-i18n="i.c2">Ver dashboard</span> <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
     </div>
-    <div id="legacy">VERSIÓN 2 · <a href="../index.html">Ir al sitio actual</a></div>
+    <div id="legacy"><span data-i18n="i.v2">VERSIÓN 2 ·</span> <a href="../index.html" data-i18n="i.cur">Ir al sitio actual</a></div>
   </div>
 
   <div id="loader" class="layer">
     <div id="lstage">
       <div id="llogo" class="abs logo" style="left:96px;top:56px"><div class="lm">H<span>3</span>L</div><div class="ls">Global Energy</div></div>
-      <div id="lhead" class="abs">QUICKLOOK DE SERVICIOS</div>
+      <div id="lhead" class="abs" data-i18n="i.lhead">QUICKLOOK DE SERVICIOS</div>
       <ul id="rows"></ul>
       <svg id="chart" class="abs" width="544" height="400" viewBox="0 0 544 400" aria-hidden="true">
         <text id="scap" x="0" y="14" fill="#8fa3c8" font-family="PlexMono" font-size="11" letter-spacing="1.4"></text>
@@ -243,18 +252,20 @@ a:focus-visible,button:focus-visible{outline:2px solid #5BB0FF;outline-offset:3p
       <div id="status" class="abs" aria-live="polite">Cargando módulo de reservas</div>
       <div id="modcount" class="abs">MÓDULO 1 DE 6</div>
       <div id="bar"></div>
-      <div id="foot1" class="abs">Desarrollado por Leandro Collell</div>
-      <div id="foot2" class="abs">Ingeniería · Data Science · Transición energética</div>
+      <div id="foot1" class="abs" data-i18n="i.foot1">Desarrollado por Leandro Collell</div>
+      <div id="foot2" class="abs" data-i18n="i.foot2">Ingeniería · Data Science · Transición energética</div>
     </div>
   </div>
-  <div id="tools"><button id="btnSound" type="button" aria-pressed="false">SONIDO: SÍ</button><button id="btnSkip" type="button">OMITIR ›</button></div>
-  <div id="gate" role="dialog" aria-label="Entrar al sitio" hidden><div class="gbox"><div class="gl">H<span>3</span>L</div><div class="gs">Global Energy</div><button id="gYes" type="button">ENTRAR CON SONIDO</button><button id="gNo" type="button">ENTRAR SIN SONIDO</button></div></div>
+  <div id="tools"><button id="btnSound" type="button" aria-pressed="false">SONIDO: SÍ</button><button id="btnSkip" type="button" data-i18n="i.skip">OMITIR ›</button></div>
+  <div id="gate" role="dialog" aria-label="Entrar al sitio" data-i18n-attr="aria-label:i.gAria" hidden><div class="gbox"><div class="gl">H<span>3</span>L</div><div class="gs">Global Energy</div><button id="gYes" type="button" data-i18n="i.gYes">ENTRAR CON SONIDO</button><button id="gNo" type="button" data-i18n="i.gNo">ENTRAR SIN SONIDO</button><div id="langGate"></div></div></div>
   <div id="edge"></div>
   <div id="fade" class="layer"></div>
   <audio id="snd" src="h3l-intro.mp3" preload="auto"></audio>
 </div>
 <script>
 const SW=1280,SH=720;
+const I=(k,v)=>H3L.t(k,v);
+H3L.apply();
 const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
 const eo3=x=>1-Math.pow(1-x,3);
 const eo5=x=>1-Math.pow(1-x,5);
@@ -272,14 +283,9 @@ const reduce=!params.has('intro')&&window.matchMedia&&matchMedia('(prefers-reduc
 /* ---------- parámetros de la línea de tiempo (idénticos al video aprobado) ---------- */
 const T0=.3, DUR=.95;
 const T_CURTAIN=7.05, T_CURTAIN_END=7.85;
-const STAGES=[
-  {lab:'Reservas',                                 cap:'01 · RESERVAS · CLASIFICACIÓN SPE-PRMS',             st:'Cargando módulo de reservas'},
-  {lab:'Quality control de ingeniería de desarrollo',cap:'02 · QUALITY CONTROL DE INGENIERÍA DE DESARROLLO',   st:'Validando controles de calidad de ingeniería'},
-  {lab:'Transición Energética',                    cap:'03 · TRANSICIÓN ENERGÉTICA',                         st:'Cargando indicadores de transición energética'},
-  {lab:'Analítica y simulación numérica',          cap:'04 · ANALÍTICA Y SIMULACIÓN NUMÉRICA',               st:'Inicializando analítica y simulación numérica'},
-  {lab:'Evaluación de proyectos upstream',         cap:'05 · EVALUACIÓN DE PROYECTOS UPSTREAM',              st:'Evaluando proyectos upstream'},
-  {lab:'Informes ejecutivos',                      cap:'06 · INFORMES EJECUTIVOS',                           st:'Compilando informes ejecutivos'}
-];
+const STAGES=[{},{},{},{},{},{}];
+function refreshStages(){ STAGES.forEach((s,i)=>{ s.lab=I('s'+(i+1)+'.lab'); s.cap=I('s'+(i+1)+'.cap'); s.st=I('s'+(i+1)+'.st'); if(s.el){ const l=s.el.querySelector('.lab'); if(l) l.textContent=s.lab; } }); }
+refreshStages();
 STAGES.forEach((s,i)=>{ s.a=T0+DUR*i; s.b=s.a+DUR; });
 const T_END=STAGES[5].b;
 
@@ -353,14 +359,14 @@ const scenesG=$('scenes'); const scenes=[];
 
 /* 1 · Reservas: barras anidadas 1P ⊂ 2P ⊂ 3P */
 (function(){ const g=mk('g',{},scenesG);
-  const bars=[{l:'1P · Probadas',w:.40,c:'#5BB0FF'},{l:'2P · Probables',w:.66,c:'#4F8FE0'},{l:'3P · Posibles',w:.92,c:'#3A6BD0'}];
+  const bars=[{l:I('sc.p1'),w:.40,c:'#5BB0FF'},{l:I('sc.p2'),w:.66,c:'#4F8FE0'},{l:I('sc.p3'),w:.92,c:'#3A6BD0'}];
   mk('path',{d:'M150 52V292',stroke:'rgba(255,255,255,.4)','stroke-width':1.2},g);
   const els=[];
   bars.forEach((b,i)=>{ const y=70+i*76;
     txt(g,0,y+25,b.l,{fill:'#dbe4f0','font-family':'Montserrat','font-size':14,'font-weight':500});
     els.push(mk('rect',{x:150,y,width:0,height:44,fill:b.c,rx:2},g));
   });
-  txt(g,150,326,'Incertidumbre  P90 · P50 · P10');
+  txt(g,150,326,I('sc.unc'));
   scenes.push({g,upd(sp){ els.forEach((r,i)=>{ const q=eo3(seg(sp,.05+i*.22,.5+i*.22)); r.setAttribute('width',(bars[i].w*372*q).toFixed(1)); }); }});
 })();
 
@@ -370,14 +376,14 @@ const scenesG=$('scenes'); const scenes=[];
   mk('path',{d:`M20 ${yU}H524`,stroke:'#E0B552','stroke-width':1.2,'stroke-dasharray':'6 5'},g);
   mk('path',{d:`M20 ${yM}H524`,stroke:'rgba(255,255,255,.4)','stroke-width':1.2},g);
   mk('path',{d:`M20 ${yL}H524`,stroke:'#E0B552','stroke-width':1.2,'stroke-dasharray':'6 5'},g);
-  txt(g,524,yU-6,'LSC',{'text-anchor':'end'}); txt(g,524,yM-6,'Media',{'text-anchor':'end'}); txt(g,524,yL-6,'LIC',{'text-anchor':'end'});
+  txt(g,524,yU-6,I('sc.ucl'),{'text-anchor':'end'}); txt(g,524,yM-6,I('sc.mean'),{'text-anchor':'end'}); txt(g,524,yL-6,I('sc.lcl'),{'text-anchor':'end'});
   let sd=11; const rr=()=>{ sd=(sd*16807)%2147483647; return sd/2147483647; };
   const N=26, pts=[]; for(let i=0;i<N;i++){ const x=36+i*(470/(N-1)); let y=yM+(rr()-.5)*118; if(i===16) y=yU-24; pts.push([x,y]); }
   const pl=mk('polyline',{fill:'none',stroke:'#5BB0FF','stroke-width':1.8,'stroke-linejoin':'round'},g);
   const cs=pts.map((p,i)=>mk('circle',{cx:p[0],cy:p[1],r:i===16?5:3.4,fill:i===16?'#E0B552':'#5BB0FF',opacity:0},g));
   const ring=mk('circle',{cx:pts[16][0],cy:pts[16][1],r:8,fill:'none',stroke:'#E0B552','stroke-width':1.4,opacity:0},g);
-  const lb=txt(g,pts[16][0]-14,pts[16][1]+4,'Desvío detectado',{'text-anchor':'end',fill:'#E0B552'}); lb.setAttribute('opacity',0);
-  const ok=txt(g,36,328,'Dentro de control',{fill:'#6fd49a'}); ok.setAttribute('opacity',0);
+  const lb=txt(g,pts[16][0]-14,pts[16][1]+4,I('sc.dev'),{'text-anchor':'end',fill:'#E0B552'}); lb.setAttribute('opacity',0);
+  const ok=txt(g,36,328,I('sc.ctl'),{fill:'#6fd49a'}); ok.setAttribute('opacity',0);
   scenes.push({g,upd(sp,t){ const n=Math.floor(N*seg(sp,.04,.88)+.0001);
     pl.setAttribute('points',pts.slice(0,n).map(p=>p.join(',')).join(' '));
     cs.forEach((c,i)=>c.setAttribute('opacity',i<n?1:0));
@@ -403,9 +409,9 @@ const scenesG=$('scenes'); const scenes=[];
   const mg=mk('g',{opacity:0},g);
   mk('path',{d:`M${mx} ${my}V${Y0}`,stroke:'#fff','stroke-width':1,'stroke-dasharray':'4 4',opacity:.7},mg);
   mk('circle',{cx:mx,cy:my,r:5,fill:'#fff'},mg);
-  txt(mg,mx+10,my-12,'Punto de cruce',{fill:'#dbe4f0'});
-  mk('path',{d:'M20 330H42',stroke:'#5BB0FF','stroke-width':2.6},g); txt(g,50,334,'Emisiones');
-  mk('path',{d:'M150 330H172',stroke:'#4FB27C','stroke-width':2.6},g); txt(g,180,334,'Energía de bajo carbono');
+  txt(mg,mx+10,my-12,I('sc.cross'),{fill:'#dbe4f0'});
+  mk('path',{d:'M20 330H42',stroke:'#5BB0FF','stroke-width':2.6},g); txt(g,50,334,I('sc.emis'));
+  mk('path',{d:'M150 330H172',stroke:'#4FB27C','stroke-width':2.6},g); txt(g,180,334,I('sc.low'));
   scenes.push({g,upd(sp){ const q=eio3(seg(sp,.04,.9)); cr.setAttribute('width',(PW*q+2).toFixed(1)); mg.setAttribute('opacity',q>uc+.02?1:0); }});
 })();
 
@@ -418,7 +424,7 @@ const scenesG=$('scenes'); const scenes=[];
   const defs=mk('defs',{},g); const lg=mk('linearGradient',{id:'rampG',x1:0,y1:0,x2:1,y2:0},defs);
   [['0','#0a1b38'],['.4','#3A6BD0'],['.75','#5BB0FF'],['1','#E0B552']].forEach(s=>mk('stop',{offset:s[0],'stop-color':s[1]},lg));
   mk('rect',{x:GX,y:306,width:200,height:8,fill:'url(#rampG)',rx:2},g);
-  txt(g,GX,332,'Presión baja'); txt(g,GX+200,332,'alta',{'text-anchor':'end'}); txt(g,512,332,'Malla 24 × 12',{'text-anchor':'end'});
+  txt(g,GX,332,I('sc.lp')); txt(g,GX+200,332,I('sc.hp'),{'text-anchor':'end'}); txt(g,512,332,I('sc.grid'),{'text-anchor':'end'});
   const st=[[0,[10,27,56]],[.4,[58,107,208]],[.75,[91,176,255]],[1,[224,181,82]]];
   const ramp=v=>{ v=clamp(v); for(let k=0;k<3;k++){ if(v<=st[k+1][0]){ const f=(v-st[k][0])/(st[k+1][0]-st[k][0]); const a=st[k][1],b=st[k+1][1]; return `rgb(${Math.round(a[0]+(b[0]-a[0])*f)},${Math.round(a[1]+(b[1]-a[1])*f)},${Math.round(a[2]+(b[2]-a[2])*f)})`; } } return 'rgb(224,181,82)'; };
   scenes.push({g,upd(sp,t){ const s1=.7+2.9*eio3(seg(sp,.02,.95)); const a2=clamp((sp-.25)/.35), s2=.7+2.9*eio3(clamp((sp-.25)/.7));
@@ -438,14 +444,14 @@ const scenesG=$('scenes'); const scenes=[];
   for(let i=52;i<=100;i++){ const u=i/100; dpos+=(i>52?'L':'M')+P(u); } dpos+=`L524 ${YZ}L${X0+PW*UP} ${YZ}Z`;
   mk('path',{d:`M20 ${YZ}H524`,stroke:'rgba(255,255,255,.45)','stroke-width':1.2,'stroke-dasharray':'5 5'},g);
   mk('path',{d:'M20 40V300',stroke:'rgba(255,255,255,.4)','stroke-width':1.2},g);
-  txt(g,26,56,'Flujo acumulado'); txt(g,524,YZ-8,'0',{'text-anchor':'end'});
+  txt(g,26,56,I('sc.cf')); txt(g,524,YZ-8,'0',{'text-anchor':'end'});
   const cg=mk('g',{'clip-path':'url(#cp4)'},g);
   mk('path',{d:dneg,fill:'rgba(224,181,82,.18)'},cg); mk('path',{d:dpos,fill:'rgba(79,178,124,.16)'},cg);
   mk('path',{d:dline,fill:'none',stroke:'#5BB0FF','stroke-width':2.8,'stroke-linecap':'round','stroke-linejoin':'round'},cg);
   const pm=mk('g',{opacity:0},g); const px=X0+PW*UP;
   mk('path',{d:`M${px} ${YZ}V300`,stroke:'#fff','stroke-width':1,'stroke-dasharray':'4 4',opacity:.7},pm);
   mk('circle',{cx:px,cy:YZ,r:5,fill:'#fff'},pm); txt(pm,px+8,294,'Payback',{fill:'#dbe4f0'});
-  ['VAN','TIR','Payback'].forEach((s,i)=>{ const x=20+i*92; mk('rect',{x,y:316,width:82,height:24,rx:12,fill:'none',stroke:'rgba(255,255,255,.3)'},g); txt(g,x+41,332,s,{'text-anchor':'middle',fill:'#dbe4f0'}); });
+  [I('sc.npv'),I('sc.irr'),'Payback'].forEach((s,i)=>{ const x=20+i*92; mk('rect',{x,y:316,width:82,height:24,rx:12,fill:'none',stroke:'rgba(255,255,255,.3)'},g); txt(g,x+41,332,s,{'text-anchor':'middle',fill:'#dbe4f0'}); });
   scenes.push({g,upd(sp){ const q=eio3(seg(sp,.04,.9)); cr.setAttribute('width',(PW*q+2).toFixed(1)); pm.setAttribute('opacity',q>UP+.02?1:0); }});
 })();
 
@@ -455,7 +461,7 @@ const scenesG=$('scenes'); const scenes=[];
   mk('rect',{x:X+8,y:Y+10,width:Wd,height:290,rx:6,fill:'#000',opacity:.35},g);
   mk('rect',{x:X,y:Y,width:Wd,height:290,rx:6,fill:'#f4f7fc'},g);
   const hd=mk('g',{opacity:0},g);
-  mk('rect',{x:X+16,y:Y+16,width:Wd-32,height:28,rx:3,fill:'#14213D'},hd); txt(hd,X+26,Y+35,'Informe ejecutivo',{fill:'#fff','font-family':'Montserrat','font-size':12,'font-weight':600});
+  mk('rect',{x:X+16,y:Y+16,width:Wd-32,height:28,rx:3,fill:'#14213D'},hd); txt(hd,X+26,Y+35,I('sc.rep'),{fill:'#fff','font-family':'Montserrat','font-size':12,'font-weight':600});
   const tt=mk('g',{opacity:0},g);
   mk('rect',{x:X+16,y:Y+58,width:180,height:10,rx:2,fill:'#14213D'},tt); mk('rect',{x:X+16,y:Y+74,width:124,height:7,rx:2,fill:'#8794b3'},tt);
   const kp=[0,1,2].map(i=>{ const k=mk('g',{opacity:0},g); const x=X+16+i*92;
@@ -553,7 +559,7 @@ function buildScene(){
   /* tarjeta de analítica: histórico + pronóstico */
   const card=mk('g',{opacity:0},svg); SC.card=card;
   mk('rect',{width:310,height:182,rx:10,fill:'rgba(8,20,36,.68)',stroke:'rgba(140,190,255,.30)'},card);
-  txt(card,18,26,'ANALÍTICA · PRODUCCIÓN',{'font-size':10.5,'letter-spacing':1.2});
+  txt(card,18,26,I('sc.card'),{'font-size':10.5,'letter-spacing':1.2});
   SC.dot=mk('circle',{cx:292,cy:22,r:3.4,fill:'#6fd49a'},card);
   [0,1,2,3].forEach(k=>mk('path',{d:`M18 ${52+k*30}H292`,stroke:'rgba(255,255,255,.08)','stroke-width':1},card));
   mk('path',{d:'M18 142H292M18 44V142',stroke:'rgba(255,255,255,.4)','stroke-width':1,fill:'none'},card);
@@ -566,8 +572,8 @@ function buildScene(){
   SC.dots=[]; for(let u=.025;u<.55;u+=.04){ const j=(rr()-.5)*12; SC.dots.push({u,e:mk('circle',{cx:X(u).toFixed(1),cy:(Y(u)+j).toFixed(1),r:2,fill:'#A9CDF0',opacity:0},card)}); }
   SC.mk=mk('circle',{r:4,fill:'#6fd49a',opacity:0},card); SC.mr=mk('circle',{r:6,fill:'none',stroke:'#6fd49a','stroke-width':1.2,opacity:0},card);
   SC.X=X; SC.Y=Y;
-  mk('path',{d:'M18 166H38',stroke:'#5BB0FF','stroke-width':2.2},card); txt(card,44,170,'Histórico',{'font-size':10});
-  mk('path',{d:'M120 166H140',stroke:'#4FB27C','stroke-width':2.2,'stroke-dasharray':'4 3'},card); txt(card,146,170,'Pronóstico',{'font-size':10});
+  mk('path',{d:'M18 166H38',stroke:'#5BB0FF','stroke-width':2.2},card); txt(card,44,170,I('sc.hist'),{'font-size':10});
+  mk('path',{d:'M120 166H140',stroke:'#4FB27C','stroke-width':2.2,'stroke-dasharray':'4 3'},card); txt(card,146,170,I('sc.fc'),{'font-size':10});
 }
 function updScene(t){
   const th=t*2*Math.PI/2.6, al=Math.asin(.2429*Math.sin(th));
@@ -629,9 +635,9 @@ function render(t){
       const arc=el.querySelector('.arc'), chk=el.querySelector('.chk'), val=el.querySelector('.val');
       arc.setAttribute('opacity',active?1:0); arc.setAttribute('transform',`rotate(${(t*420)%360} 13 13)`);
       chk.setAttribute('opacity',done?1:0);
-      if(done){ val.style.color='#6fd49a'; val.textContent='Listo'; }
-      else if(active){ val.style.color='#ffffff'; val.textContent='Cargando'; }
-      else { val.style.color='#8fa3c8'; val.textContent='En cola'; }
+      if(done){ val.style.color='#6fd49a'; val.textContent=I('i.done'); }
+      else if(active){ val.style.color='#ffffff'; val.textContent=I('i.loading'); }
+      else { val.style.color='#8fa3c8'; val.textContent=I('i.queue'); }
       p+=eio3(sp)/6;
       const sg=segEls[i], f=ss(sp), fill=sg.querySelector('.fill'), sh=sg.querySelector('.sh'), hd=sg.querySelector('.head');
       fill.style.width=(f*segW).toFixed(2)+'px';
@@ -641,8 +647,8 @@ function render(t){
     });
     $('pct').textContent=String(Math.round(p*100)).padStart(2,'0');
     const idx=clamp(Math.floor((t-T0)/DUR),0,5), fin=t>=T_END;
-    $('status').textContent=fin?'Plataforma lista':STAGES[idx].st;
-    $('modcount').textContent=fin?'6 DE 6 · COMPLETO':`MÓDULO ${idx+1} DE 6`;
+    $('status').textContent=fin?I('i.ready'):STAGES[idx].st;
+    $('modcount').textContent=fin?I('i.modEnd'):I('i.mod',{n:idx+1});
     $('scap').textContent=STAGES[idx].cap;
     const stP=inP(.15,.5); ['pctbox','status','modcount','bar','foot1','foot2'].forEach(id=>{ $(id).style.opacity=stP; });
     scenes.forEach((sc,i)=>{ const st=STAGES[i]; const fi=seg(t,st.a-.05,st.a+.2), fo=(i<5)?seg(t,st.b-.05,st.b+.2):0;
@@ -666,7 +672,7 @@ function endLoader(){
 /* ---------- controles: omitir, sonido, menú ---------- */
 const snd=$('snd'); let soundOn=false, t=0, frozen=false;
 let blocked=false, lastGo=0, holding=false, gateShown=false;
-function setLabel(){ $('btnSound').textContent=(soundOn&&blocked)?'ACTIVAR SONIDO':'SONIDO: '+(soundOn?'SÍ':'NO'); $('btnSound').setAttribute('aria-pressed',soundOn&&!blocked); }
+function setLabel(){ $('btnSound').textContent=(soundOn&&blocked)?I('i.sndAct'):I(soundOn?'i.sndOn':'i.sndOff'); $('btnSound').setAttribute('aria-pressed',soundOn&&!blocked); }
 function tryPlay(){
   try{ if(t<10.8) snd.currentTime=Math.max(0,t); }catch(e){}
   const p=snd.play();
@@ -697,6 +703,10 @@ document.addEventListener('click',e=>{ if(!menu.contains(e.target)) closeMenu();
 
 /* ---------- arranque ---------- */
 $('h1a').setAttribute('aria-label','Upstream Oil & Gas & Energy Transition');
+$('langNav').appendChild(H3L.select({}));
+$('langGate').appendChild(H3L.select({dark:true,full:true,onchange:()=>{ if(!$('gate').hidden) location.reload(); }}));
+H3L.apply();
+H3L.on(()=>{ refreshStages(); setLabel(); buildScene(); });
 let resizeT; addEventListener('resize',()=>{ clearTimeout(resizeT); resizeT=setTimeout(()=>{ layout(); if(MODE==='d') closeMenu(); },60); });
 addEventListener('orientationchange',()=>setTimeout(layout,250));
 
