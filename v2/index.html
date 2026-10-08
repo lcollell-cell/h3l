@@ -279,7 +279,8 @@ function layout(){
   else ls.style.transform='';
   /* escena del hero */
   if(MODE==='d'){
-    svgEl.setAttribute('viewBox','0 0 1280 720'); svgEl.setAttribute('preserveAspectRatio','xMaxYMax slice');
+    const sc=Math.min(VW/1280,VH/720), vw=VW/sc, vh=VH/sc;
+    svgEl.setAttribute('viewBox',(1280-vw).toFixed(2)+' '+(720-vh).toFixed(2)+' '+vw.toFixed(2)+' '+vh.toFixed(2)); svgEl.setAttribute('preserveAspectRatio','xMaxYMax meet');
     svgEl.style.top='0'; svgEl.style.bottom='auto'; svgEl.style.height='100%';
   } else {
     const cb=$('copy').getBoundingClientRect().bottom;
@@ -644,16 +645,17 @@ function endLoader(){
 
 /* ---------- controles: omitir, sonido, menú ---------- */
 const snd=$('snd'); let soundOn=false, t=0, frozen=false;
-function setLabel(){ $('btnSound').textContent='SONIDO: '+(soundOn?'SÍ':'NO'); $('btnSound').setAttribute('aria-pressed',soundOn); }
+let blocked=false, lastGo=0;
+function setLabel(){ $('btnSound').textContent=(soundOn&&blocked)?'TOCÁ PARA ACTIVAR EL SONIDO':'SONIDO: '+(soundOn?'SÍ':'NO'); $('btnSound').setAttribute('aria-pressed',soundOn&&!blocked); }
 function tryPlay(){
   try{ if(t<10.8) snd.currentTime=Math.max(0,t); }catch(e){}
   const p=snd.play();
-  if(p&&p.catch) p.catch(()=>armGesture());
+  if(p&&p.then) p.then(()=>{ blocked=false; setLabel(); },()=>{ blocked=true; setLabel(); armGesture(); });
 }
 let armed=false;
 function armGesture(){
   if(armed) return; armed=true;
-  const go=()=>{ ['pointerdown','touchstart','keydown','click'].forEach(ev=>removeEventListener(ev,go,true)); armed=false;
+  const go=()=>{ lastGo=performance.now(); ['pointerdown','touchstart','keydown','click'].forEach(ev=>removeEventListener(ev,go,true)); armed=false;
     if(soundOn&&snd.paused&&!loaderGone) tryPlay(); };
   ['pointerdown','touchstart','keydown','click'].forEach(ev=>addEventListener(ev,go,true));
 }
@@ -661,7 +663,7 @@ function setSound(on){
   soundOn=on; setLabel();
   if(on){ snd.preload='auto'; tryPlay(); } else snd.pause();
 }
-$('btnSound').addEventListener('click',()=>setSound(!soundOn));
+$('btnSound').addEventListener('click',()=>{ if(soundOn&&performance.now()-lastGo<700){ setLabel(); return; } if(soundOn&&blocked){ tryPlay(); return; } setSound(!soundOn); });
 $('btnSkip').addEventListener('click',()=>{ if(t<T_CURTAIN-.05){ t=T_CURTAIN-.05; if(soundOn){ try{snd.currentTime=t;}catch(e){} } } });
 addEventListener('keydown',e=>{ if(e.key==='Escape'){ if(!loaderGone&&t<T_CURTAIN-.05) $('btnSkip').click(); closeMenu(); } });
 const burger=$('burger'), menu=$('menu');
