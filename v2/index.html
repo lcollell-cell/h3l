@@ -655,9 +655,9 @@ function tryPlay(){
 let armed=false;
 function armGesture(){
   if(armed) return; armed=true;
-  const go=()=>{ lastGo=performance.now(); ['pointerdown','touchstart','keydown','click'].forEach(ev=>removeEventListener(ev,go,true)); armed=false;
+  const go=()=>{ lastGo=performance.now(); ['pointerdown','pointerup','touchstart','touchend','keydown','click'].forEach(ev=>removeEventListener(ev,go,true)); armed=false;
     if(soundOn&&snd.paused&&!loaderGone) tryPlay(); };
-  ['pointerdown','touchstart','keydown','click'].forEach(ev=>addEventListener(ev,go,true));
+  ['pointerdown','pointerup','touchstart','touchend','keydown','click'].forEach(ev=>addEventListener(ev,go,true));
 }
 function setSound(on){
   soundOn=on; setLabel();
