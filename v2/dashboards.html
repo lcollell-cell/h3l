@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Tableros de decisión — H3L Global Energy</title>
-<meta name="description" content="Cómo H3L convierte datos, cálculos de ingeniería y agentes de IA en tableros que terminan en una decisión: estratégicos, operativos, tácticos, de reservas y de transición energética.">
+<title data-i18n="d.title">Tableros de decisión — H3L Global Energy</title>
+<meta name="description" content="" data-i18n-attr="content:d.desc">
 <meta name="theme-color" content="#0A1426">
 <link rel="icon" href="../LOGO_H3L_icon.png">
 <link rel="preload" href="fonts/montserrat-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -37,6 +37,7 @@ button{font:inherit;color:inherit;-webkit-appearance:none;appearance:none;backgr
 .top{background:var(--navy);color:#fff;padding:16px 0 56px}
 .nav{background:#fff;color:var(--ink);border-radius:12px;display:flex;align-items:center;gap:20px;padding:10px 18px;box-shadow:0 10px 30px rgba(0,0,0,.28)}
 .nav .logo{display:block;flex:none}
+#langNav{display:flex;align-items:center}
 .nav .logo img{display:block;height:40px;width:auto}
 .nav .links{display:flex;gap:26px;margin-left:auto;font-size:14px;font-weight:600}
 .nav .links a{text-decoration:none;padding:6px 0;border-bottom:2px solid transparent}
@@ -150,7 +151,7 @@ main{padding:32px 0 8px}
 .ag+.ag{padding-left:16px;border-left:1px solid var(--line)}
 .ag b{display:block;font-size:14.5px;color:var(--ink);font-weight:700}
 .log{list-style:none;margin-top:6px;border-top:1px solid var(--line)}
-.log li{display:grid;grid-template-columns:104px minmax(0,1fr);gap:16px;padding:12px 0;border-bottom:1px solid var(--line-2);font-size:14px;line-height:1.55}
+.log li{display:grid;grid-template-columns:138px minmax(0,1fr);gap:16px;padding:12px 0;border-bottom:1px solid var(--line-2);font-size:14px;line-height:1.55}
 .log li .who{font-weight:700;display:flex;gap:8px;align-items:flex-start}
 .log li .st{flex:none;width:10px;height:10px;border-radius:50%;margin-top:6px;background:var(--green)}
 .log li.run .st{background:transparent;border:2px solid var(--blue);border-top-color:transparent;animation:spin .8s linear infinite}
@@ -241,7 +242,7 @@ main{padding:32px 0 8px}
   .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
   .kpi:nth-child(3){border-left:0}
   .kpi:nth-child(n+3){border-top:1px solid var(--line)}
-  .nav .links{display:none}.nav .btn{margin-left:auto}
+  .nav .links{display:none}#langNav{margin-left:auto}.nav .btn{margin-left:0}
 }
 @media (max-width:640px){
   .wrap{padding:0 16px}
@@ -255,37 +256,40 @@ main{padding:32px 0 8px}
   .seg{width:100%}.seg button{flex:1}
   .card{padding:16px 14px 10px}
   .nav .logo img{height:34px}
+  .nav{gap:10px;padding:10px 12px}.nav .btn{padding:0 12px;font-size:13px;min-height:40px}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 @media print{.pick,.nav,.cta .row,.dec .row,.seg{display:none}.top,.dec,.cta{background:#fff;color:#000}}
 </style>
+<script src="i18n.js"></script>
 </head>
 <body>
 <header class="top">
   <div class="wrap">
-    <nav class="nav" aria-label="Principal">
-      <a class="logo" href="index.html" aria-label="H3L Global Energy, inicio"><img src="../LOGO_H3L.png" alt="H3L Global Energy"></a>
+    <nav class="nav" data-i18n-attr="aria-label:c.main" aria-label="Principal">
+      <a class="logo" href="index.html" data-i18n-attr="aria-label:c.home" aria-label="H3L Global Energy, inicio"><img src="../LOGO_H3L.png" alt="H3L Global Energy"></a>
       <div class="links">
-        <a href="../index.html?go=calculators">Calculadoras</a>
-        <a href="../index.html?go=agentes">Agentes IA</a>
-        <a href="dashboards.html" aria-current="page">Tableros</a>
-        <a href="../index.html?go=somos">Nosotros</a>
+        <a href="../index.html?go=calculators" data-i18n="c.calc">Calculadoras</a>
+        <a href="../index.html?go=agentes" data-i18n="c.agents">Agentes IA</a>
+        <a href="dashboards.html" aria-current="page" data-i18n="d.navDash">Tableros</a>
+        <a href="../index.html?go=somos" data-i18n="c.about">Nosotros</a>
       </div>
-      <a class="btn pri" href="../index.html?go=contacto">Solicitar demostración</a>
+      <span id="langNav"></span>
+      <a class="btn pri" href="../index.html?go=contacto" data-i18n="d.demo">Solicitar demostración</a>
     </nav>
     <div class="intro">
       <div>
-        <h1>Un tablero sirve si termina en una decisión.</h1>
-        <p class="lead">Cinco tableros de demostración muestran cómo H3L junta datos, cálculos de ingeniería y agentes de IA para que cada área sepa qué hacer y pueda justificarlo ante su comité, su auditor o su directorio.</p>
+        <h1 data-i18n="d.h1">Un tablero sirve si termina en una decisión.</h1>
+        <p class="lead" data-i18n="d.lead">Cinco tableros de demostración muestran cómo H3L junta datos, cálculos de ingeniería y agentes de IA para que cada área sepa qué hacer y pueda justificarlo ante su comité, su auditor o su directorio.</p>
       </div>
       <div>
-        <h2>Cómo se construye cada tablero</h2>
+        <h2 data-i18n="d.mh">Cómo se construye cada tablero</h2>
         <ol class="method">
-          <li><span class="n">1</span><span><b>Se define la decisión.</b>Quién decide, cada cuánto y con qué criterio.</span></li>
-          <li><span class="n">2</span><span><b>Se validan los datos.</b>Fuentes, calidad y reglas, como SPE-PRMS en reservas.</span></li>
-          <li><span class="n">3</span><span><b>Se modela con cálculos certificados.</b>Las mismas calculadoras de ingeniería de H3L.</span></li>
-          <li><span class="n">4</span><span><b>Los agentes vigilan, explican y proponen.</b>Siempre con las fuentes a la vista.</span></li>
-          <li><span class="n">5</span><span><b>La persona decide y queda registro.</b>Qué se aprobó, con qué datos y qué versión del modelo.</span></li>
+          <li><span class="n">1</span><span><b data-i18n="d.m1b">Se define la decisión.</b><span data-i18n="d.m1t">Quién decide, cada cuánto y con qué criterio.</span></span></li>
+          <li><span class="n">2</span><span><b data-i18n="d.m2b">Se validan los datos.</b><span data-i18n="d.m2t">Fuentes, calidad y reglas, como SPE-PRMS en reservas.</span></span></li>
+          <li><span class="n">3</span><span><b data-i18n="d.m3b">Se modela con cálculos certificados.</b><span data-i18n="d.m3t">Las mismas calculadoras de ingeniería de H3L.</span></span></li>
+          <li><span class="n">4</span><span><b data-i18n="d.m4b">Los agentes vigilan, explican y proponen.</b><span data-i18n="d.m4t">Siempre con las fuentes a la vista.</span></span></li>
+          <li><span class="n">5</span><span><b data-i18n="d.m5b">La persona decide y queda registro.</b><span data-i18n="d.m5t">Qué se aprobó, con qué datos y qué versión del modelo.</span></span></li>
         </ol>
       </div>
     </div>
@@ -296,9 +300,9 @@ main{padding:32px 0 8px}
   <div class="wrap">
     <div class="ask-grid">
       <div>
-        <h2 id="ask-t">Pregunte en sus palabras y el tablero se arma solo.</h2>
-        <p class="lede">Escriba lo que quiere verificar. Un equipo de agentes busca en la documentación, calcula con los datos y dibuja los gráficos que hacen falta para responder.</p>
-        <form id="ask-f" autocomplete="off"><label class="sr" for="ask-q">Su consulta</label><input id="ask-q" type="text" maxlength="160" placeholder="Ej.: ¿Por qué bajó la producción de Costa?"><button class="btn pri" type="submit">Armar tablero</button></form>
+        <h2 id="ask-t" data-i18n="a.t">Pregunte en sus palabras y el tablero se arma solo.</h2>
+        <p class="lede" data-i18n="a.lede">Escriba lo que quiere verificar. Un equipo de agentes busca en la documentación, calcula con los datos y dibuja los gráficos que hacen falta para responder.</p>
+        <form id="ask-f" autocomplete="off"><label class="sr" for="ask-q" data-i18n="a.lbl">Su consulta</label><input id="ask-q" type="text" maxlength="160" data-i18n-attr="placeholder:a.ph" placeholder="Ej.: ¿Por qué bajó la producción de Costa?"><button class="btn pri" type="submit" data-i18n="a.btn">Armar tablero</button></form>
         <div class="chips" id="ask-chips"></div>
       </div>
       <div class="watch" id="watch" aria-live="polite"></div>
@@ -309,7 +313,7 @@ main{padding:32px 0 8px}
 
 <div class="pick" id="pick">
   <div class="wrap">
-    <div class="tabs" role="tablist" aria-label="Tipo de decisión" id="tabs"></div>
+    <div class="tabs" role="tablist" data-i18n-attr="aria-label:d.tabsAria" aria-label="Tipo de decisión" id="tabs"></div>
   </div>
 </div>
 
@@ -319,16 +323,16 @@ main{padding:32px 0 8px}
       <h2 id="bq"></h2>
       <p class="meta" id="bmeta"></p>
     </div>
-    <div class="seg" role="group" aria-label="Escenario">
-      <button type="button" id="sc-base" aria-pressed="true">Plan actual</button>
-      <button type="button" id="sc-dec" aria-pressed="false">Con la decisión</button>
+    <div class="seg" role="group" data-i18n-attr="aria-label:d.scen" aria-label="Escenario">
+      <button type="button" id="sc-base" aria-pressed="true" data-i18n="c.plan">Plan actual</button>
+      <button type="button" id="sc-dec" aria-pressed="false" data-i18n="c.dec">Con la decisión</button>
     </div>
   </div>
   <div class="kpis" id="kpis" aria-live="polite"></div>
   <div class="board">
     <div class="charts" id="charts"></div>
-    <aside class="aside" aria-label="Lectura integrada y decisión">
-      <section class="read"><h3>Lectura integrada</h3><p class="sub">Cada número remite al gráfico del mismo número.</p><ol id="read"></ol></section>
+    <aside class="aside" data-i18n-attr="aria-label:d.asideAria" aria-label="Lectura integrada y decisión">
+      <section class="read"><h3 data-i18n="d.read">Lectura integrada</h3><p class="sub" data-i18n="d.readSub">Cada número remite al gráfico del mismo número.</p><ol id="read"></ol></section>
       <section class="dec" id="dec"></section>
     </aside>
   </div>
@@ -336,26 +340,26 @@ main{padding:32px 0 8px}
   <section class="agents" aria-labelledby="agt">
     <div class="ah">
       <div>
-        <h3 id="agt">Agentes sobre este tablero</h3>
-        <p>Cuatro agentes con funciones distintas revisan el tablero antes de que alguien decida. Ninguno aprueba por su cuenta: la decisión es de una persona.</p>
+        <h3 id="agt" data-i18n="d.agt">Agentes sobre este tablero</h3>
+        <p data-i18n="d.agp">Cuatro agentes con funciones distintas revisan el tablero antes de que alguien decida. Ninguno aprueba por su cuenta: la decisión es de una persona.</p>
       </div>
-      <button type="button" class="btn pri" id="run">Ejecutar agentes</button>
+      <button type="button" class="btn pri" id="run" data-i18n="u.run">Ejecutar agentes</button>
     </div>
     <div class="roster" id="roster"></div>
     <ul class="log" id="log" aria-live="polite"></ul>
     <div id="gate"></div>
-    <p class="sim">Simulación con datos de demostración. En un proyecto real los agentes consultan sus propias fuentes y guardan cada paso para auditoría.</p>
+    <p class="sim" data-i18n="d.sim">Simulación con datos de demostración. En un proyecto real los agentes consultan sus propias fuentes y guardan cada paso para auditoría.</p>
   </section>
 
   <section class="how">
     <div>
-      <h2>Del primer tablero a decisiones con respaldo.</h2>
-      <p>No hace falta rehacer sus sistemas. Se empieza por una decisión concreta y se amplía a medida que el equipo confía en los resultados.</p>
+      <h2 data-i18n="d.how">Del primer tablero a decisiones con respaldo.</h2>
+      <p data-i18n="d.howp">No hace falta rehacer sus sistemas. Se empieza por una decisión concreta y se amplía a medida que el equipo confía en los resultados.</p>
     </div>
     <ol class="steps">
-      <li><span class="n">1</span><span><b>Elegimos la decisión que más le pesa.</b>Una pregunta con dueño, frecuencia y consecuencias claras.</span></li>
-      <li><span class="n">2</span><span><b>Conectamos y validamos sus datos.</b>Se revisan fuentes, unidades y reglas antes de graficar nada.</span></li>
-      <li><span class="n">3</span><span><b>Entregamos el tablero y los agentes.</b>Con supuestos visibles, sensibilidad y registro de cada decisión.</span></li>
+      <li><span class="n">1</span><span><b data-i18n="d.s1b">Elegimos la decisión que más le pesa.</b><span data-i18n="d.s1t">Una pregunta con dueño, frecuencia y consecuencias claras.</span></span></li>
+      <li><span class="n">2</span><span><b data-i18n="d.s2b">Conectamos y validamos sus datos.</b><span data-i18n="d.s2t">Se revisan fuentes, unidades y reglas antes de graficar nada.</span></span></li>
+      <li><span class="n">3</span><span><b data-i18n="d.s3b">Entregamos el tablero y los agentes.</b><span data-i18n="d.s3t">Con supuestos visibles, sensibilidad y registro de cada decisión.</span></span></li>
     </ol>
   </section>
 </main>
@@ -363,19 +367,19 @@ main{padding:32px 0 8px}
 <section class="cta">
   <div class="wrap in">
     <div>
-      <h2>Empecemos por la decisión que su equipo más necesita justificar.</h2>
-      <p>Traiga una pregunta y una muestra de datos. Le mostramos cómo quedaría su tablero y qué agentes lo acompañarían.</p>
+      <h2 data-i18n="d.ctaH">Empecemos por la decisión que su equipo más necesita justificar.</h2>
+      <p data-i18n="d.ctaP">Traiga una pregunta y una muestra de datos. Le mostramos cómo quedaría su tablero y qué agentes lo acompañarían.</p>
     </div>
     <div class="row">
-      <a class="btn lite" href="../index.html?go=contacto">Solicitar una demostración</a>
-      <a class="btn sec" href="../index.html?go=agentes">Ver los agentes de H3L</a>
+      <a class="btn lite" href="../index.html?go=contacto" data-i18n="d.cta1">Solicitar una demostración</a>
+      <a class="btn sec" href="../index.html?go=agentes" data-i18n="d.cta2">Ver los agentes de H3L</a>
     </div>
   </div>
 </section>
 <footer class="foot">
   <div class="wrap">
-    <p><b style="color:#C9D3E6">Datos de demostración.</b> Los cinco tableros usan un portafolio ficticio para ilustrar el método. Las cifras no corresponden a un cliente ni a resultados garantizados.</p>
-    <p>H3L Global Energy · Desarrollado por Leandro Collell · <a href="index.html">Volver al inicio</a></p>
+    <p><b style="color:#C9D3E6" data-i18n="d.foot1b">Datos de demostración.</b> <span data-i18n="d.foot1">Los cinco tableros usan un portafolio ficticio para ilustrar el método. Las cifras no corresponden a un cliente ni a resultados garantizados.</span></p>
+    <p data-i18n-html="d.foot2">H3L Global Energy · Desarrollado por Leandro Collell · <a href="index.html">Volver al inicio</a></p>
   </div>
 </footer>
 <div id="tip" role="tooltip"></div>
@@ -388,9 +392,11 @@ function S(tag,attrs,parent){var e=document.createElementNS(NS,tag);if(attrs)for
 function T(parent,x,y,s,cls,anchor){var e=S('text',{x:x,y:y,'class':cls||'t-lbl'},parent);if(anchor)e.setAttribute('text-anchor',anchor);e.textContent=s;return e}
 function H(tag,props,parent,text){var e=document.createElement(tag);if(props)for(var k in props){if(k==='class')e.className=props[k];else e.setAttribute(k,props[k])}if(text!=null)e.textContent=text;if(parent)parent.appendChild(e);return e}
 var reduce=false;try{reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){}
-/* es-AR: miles con punto, decimales con coma, signo menos tipográfico */
-function fmt(n,d){d=d||0;var neg=n<0&&Math.abs(n)>=Math.pow(10,-d)/2;var s=Math.abs(n).toFixed(d).split('.');var i=s[0].replace(/\B(?=(\d{3})+(?!\d))/g,'.');return (neg?'−':'')+i+(s[1]?','+s[1]:'')}
+/* números según el idioma: separador de miles y de decimales (H3L.nf), signo menos tipográfico */
+function TH(){var t=H3L.nf.th;return t===' '?'\u00a0':t}
+function fmt(n,d){d=d||0;var neg=n<0&&Math.abs(n)>=Math.pow(10,-d)/2;var s=Math.abs(n).toFixed(d).split('.');var i=s[0].replace(/\B(?=(\d{3})+(?!\d))/g,TH());return (neg?'−':'')+i+(s[1]?H3L.nf.dec+s[1]:'')}
 function sgn(n,d){var f=fmt(Math.abs(n),d);return (n>0?'+':(n<0&&parseFloat(Math.abs(n).toFixed(d||0))>0?'−':''))+f}
+function I(k,v){return H3L.t(k,v)}
 function nice(min,max,n){n=n||4;var span=(max-min)||1,s0=span/n,mag=Math.pow(10,Math.floor(Math.log10(s0))),r=s0/mag,step=(r<1.5?1:r<3?2:r<7?5:10)*mag;var lo=Math.floor(min/step+1e-9)*step,hi=Math.ceil(max/step-1e-9)*step,t=[];for(var v=lo;v<=hi+step/2;v+=step)t.push(+v.toFixed(10));return {lo:lo,hi:hi,ticks:t,step:step}}
 function wrap(s,n){var w=s.split(' '),L=[],c='';w.forEach(function(x){if((c+' '+x).trim().length>n&&c){L.push(c);c=x}else c=(c+' '+x).trim()});if(c)L.push(c);return L}
 
@@ -436,7 +442,7 @@ function barsH(host,sp){
     hbar(gr,m.l,by,w,bh,r.color||'var(--blue)',4);
     var lab=r.label;if(lab.length*6.4>lw-10){var L=wrap(lab,Math.floor((lw-10)/6.4));T(gr,m.l-10,y+rh/2+(L.length>1?-2:4),L[0],'t-lbl','end');if(L[1])T(gr,m.l-10,y+rh/2+11,L[1],'t-lbl','end')}else T(gr,m.l-10,y+rh/2+4,lab,'t-lbl','end');
     T(gr,m.l+w+7,y+rh/2+4,r.text||fmt(r.value,sp.d||0),'t-val','start');
-    var hit=S('rect',{x:0,y:y,width:f.W,height:rh,fill:'transparent'},gr);bindTip(hit,r.label,r.tip||[{k:sp.unit||'Valor',v:r.text||fmt(r.value,sp.d||0)}]);
+    var hit=S('rect',{x:0,y:y,width:f.W,height:rh,fill:'transparent'},gr);bindTip(hit,r.label,r.tip||[{k:sp.unit||I('v.value'),v:r.text||fmt(r.value,sp.d||0)}]);
   });
   S('line',{x1:m.l,x2:m.l,y1:m.t,y2:m.t+rows.length*rh,stroke:'var(--gray-dark)','stroke-width':1},svg);
   if(sp.ref){var rx=x(sp.ref.value);S('line',{x1:rx,x2:rx,y1:m.t-4,y2:m.t+rows.length*rh,stroke:'var(--ink-2)','stroke-width':1.5,opacity:.75},svg);T(svg,rx,m.t-9,sp.ref.label,'t-note','middle')}
@@ -458,7 +464,7 @@ function waterfall(host,sp){
     T(g,cx+cw/2,lblY,c.s.text,'t-val','middle');
     var L=wrap((band<54&&c.s.short)?c.s.short:c.s.label,Math.max(8,Math.floor(band/6.2)));L.slice(0,3).forEach(function(l,k){T(g,cx+cw/2,f.H-m.b+16+k*13,l,'t-lbl','middle')});
     if(i<n-1){var nx=m.l+band*(i+1)+(band-cw)/2;S('line',{x1:cx+cw,x2:nx,y1:y(c.y1),y2:y(c.y1),stroke:'var(--gray-dark)','stroke-width':1,opacity:.6},svg)}
-    var hit=S('rect',{x:m.l+band*i,y:m.t-10,width:band,height:f.ih+10,fill:'transparent'},g);bindTip(hit,c.s.label,c.s.tip||[{k:sp.unit||'Valor',v:c.s.text}]);
+    var hit=S('rect',{x:m.l+band*i,y:m.t-10,width:band,height:f.ih+10,fill:'transparent'},g);bindTip(hit,c.s.label,c.s.tip||[{k:sp.unit||I('v.value'),v:c.s.text}]);
   });
 }
 
@@ -474,7 +480,7 @@ function tornado(host,sp){
     hbarL(gr,x(r.low),by-bh/2+4,cx-x(r.low),bh,'var(--red)',4);
     hbar(gr,cx,by-bh/2+4,x(r.high)-cx,bh,'var(--blue)',4);
     T(gr,x(r.low)-5,by+8,sgn(r.low,(sp.d==null?1:sp.d)),'t-val','end');T(gr,x(r.high)+5,by+8,sgn(r.high,(sp.d==null?1:sp.d)),'t-val','start');
-    var hit=S('rect',{x:0,y:y,width:f.W,height:rh,fill:'transparent'},gr);bindTip(hit,r.label,[{k:'Caso bajo',v:sgn(r.low,(sp.d==null?1:sp.d))+' '+sp.unit,c:'var(--red)'},{k:'Caso alto',v:sgn(r.high,(sp.d==null?1:sp.d))+' '+sp.unit,c:'var(--blue)'}]);
+    var hit=S('rect',{x:0,y:y,width:f.W,height:rh,fill:'transparent'},gr);bindTip(hit,r.label,[{k:I('v.low'),v:sgn(r.low,(sp.d==null?1:sp.d))+' '+sp.unit,c:'var(--red)'},{k:I('v.high'),v:sgn(r.high,(sp.d==null?1:sp.d))+' '+sp.unit,c:'var(--blue)'}]);
   });
   S('line',{x1:cx,x2:cx,y1:m.t,y2:m.t+rows.length*rh,stroke:'var(--ink-2)','stroke-width':1.5},svg);
 }
@@ -504,14 +510,14 @@ function macc(host,sp){
   var sc=nice(cmin-4,cmax+4,4),f=frame(host,sp.h||270,{t:14,r:10,b:48,l:42},sp.label),svg=f.svg,m=f.m,
       y=function(v){return m.t+(1-(v-sc.lo)/(sc.hi-sc.lo))*f.ih},xs=nice(0,tot,4),x=function(v){return m.l+v/xs.hi*f.iw};
   yAxis(f,sc,y);
-  var ax=S('g',{'class':'ax'},svg);xs.ticks.forEach(function(t){T(ax,x(t),f.H-m.b+16,fmt(t),'','middle')});T(ax,m.l+f.iw/2,f.H-6,'kt CO₂e evitadas por año (acumulado)','','middle');
+  var ax=S('g',{'class':'ax'},svg);xs.ticks.forEach(function(t){T(ax,x(t),f.H-m.b+16,fmt(t),'','middle')});T(ax,m.l+f.iw/2,f.H-6,I('v.axis'),'','middle');
   S('line',{x1:m.l,x2:f.W-m.r,y1:y(0),y2:y(0),stroke:'var(--gray-dark)'},svg);
   var acc=0;
   ms.forEach(function(d){var x0=x(acc),w=x(acc+d.abate)-x0-2,col=(d.sel!=null?d.sel:d.cost<sp.price)?'var(--blue)':'var(--gray-mark)',g=S('g',{},svg);
     vbar(g,x0,y(0),y(d.cost),Math.max(2,w),col,4);
     T(g,x0+w/2,d.cost>=0?y(d.cost)-6:y(d.cost)+15,d.id,'t-val','middle');
     var hit=S('rect',{x:x0,y:m.t,width:Math.max(2,w)+2,height:f.ih,fill:'transparent'},g);
-    bindTip(hit,d.id.toUpperCase()+' · '+d.label,[{k:'Costo',v:sgn(d.cost,0)+' USD/t'},{k:'Evita',v:fmt(d.abate,1)+' kt/año'},{k:'Resultado anual',v:sgn(-d.cost*d.abate,0)+' mil USD'}]);acc+=d.abate});
+    bindTip(hit,d.id.toUpperCase()+' · '+d.label,[{k:I('v.cost'),v:sgn(d.cost,0)+' USD/t'},{k:I('v.avoid'),v:fmt(d.abate,1)+' '+I('v.ktyr')},{k:I('v.annual'),v:sgn(-d.cost*d.abate,0)+' '+I('v.kusd')}]);acc+=d.abate});
   S('line',{x1:m.l,x2:f.W-m.r,y1:y(sp.price),y2:y(sp.price),stroke:'var(--ink-2)','stroke-width':1.5,opacity:.75},svg);
   T(svg,m.l+6,y(sp.price)-6,sp.priceLabel,'t-note','start');
 }
@@ -537,11 +543,11 @@ function line(host,sp){
   (sp.dots||[]).forEach(function(s){s.pts.forEach(function(v,i){if(v!=null)S('circle',{cx:x(i),cy:y(v),r:s.r||3.2,fill:s.c,stroke:'var(--surface)','stroke-width':1.5,opacity:.95},svg)})});
   /* cursor vertical + lectura de todas las series */
   var cur=S('line',{y1:m.t,y2:m.t+f.ih,stroke:'var(--ink-2)','stroke-width':1,opacity:0},svg),dotsG=S('g',{},svg);
-  var ov=S('rect',{x:m.l,y:m.t,width:f.iw,height:f.ih,fill:'transparent',tabindex:0,'class':'mk',role:'group','aria-label':(sp.label||'Gráfico')+'. Use las flechas para recorrer los puntos.'},svg);
+  var ov=S('rect',{x:m.l,y:m.t,width:f.iw,height:f.ih,fill:'transparent',tabindex:0,'class':'mk',role:'group','aria-label':(sp.label||I('v.chart'))+'. '+I('v.arrows')},svg);
   var cursorI=Math.floor(n/2);
   function at(i,ev){i=Math.max(0,Math.min(n-1,i));cursorI=i;cur.setAttribute('x1',x(i));cur.setAttribute('x2',x(i));cur.setAttribute('opacity',1);dotsG.textContent='';
     var rows=[];sp.series.concat(sp.dots||[]).forEach(function(s){var v=s.pts[i];if(v!=null&&s.tip!==false){rows.push({k:s.name,v:(sp.tipFmt||fmt)(v),c:s.c});S('circle',{cx:x(i),cy:y(v),r:4,fill:s.c,stroke:'var(--surface)','stroke-width':2},dotsG)}});
-    (sp.bands||[]).forEach(function(b){if(b.lo[i]!=null&&b.name)rows.push({k:b.name,v:(sp.tipFmt||fmt)(b.lo[i])+' a '+(sp.tipFmt||fmt)(b.hi[i]),c:b.c})});
+    (sp.bands||[]).forEach(function(b){if(b.lo[i]!=null&&b.name)rows.push({k:b.name,v:(sp.tipFmt||fmt)(b.lo[i])+' '+I('v.to')+' '+(sp.tipFmt||fmt)(b.hi[i]),c:b.c})});
     showTip(ev,sp.x[i],rows)}
   ov.addEventListener('pointermove',function(e){var r=ov.getBoundingClientRect();at(Math.round((e.clientX-r.left)/r.width*(n-1)),e)});
   ov.addEventListener('pointerleave',function(){cur.setAttribute('opacity',0);dotsG.textContent='';hideTip()});
@@ -553,482 +559,11 @@ function line(host,sp){
 window.VZ={$:$,H:H,S:S,fmt:fmt,sgn:sgn,reduce:reduce,barsH:barsH,waterfall:waterfall,tornado:tornado,stackH:stackH,macc:macc,line:line,hideTip:hideTip};
 })();
 </script>
-<script>
-(function(){'use strict';
-var V=window.VZ,$=V.$,H=V.H,fmt=V.fmt,sgn=V.sgn,reduce=V.reduce;
-var C={blue:'var(--blue)',orange:'var(--orange)',red:'var(--red)',gm:'var(--gray-mark)',gd:'var(--gray-dark)',ink:'var(--ink-2)',o1:'var(--ord-1)',o2:'var(--ord-2)',o3:'var(--ord-3)'};
-function f0(n){return fmt(n,0)}function f1(n){return fmt(n,1)}function f2(n){return fmt(n,2)}
-function B(s){return '<b>'+s+'</b>'}
-function sum(a,fn){return a.reduce(function(t,x){return t+fn(x)},0)}
-function idx(a,x){return a.indexOf(x)>=0}
-
-/* =====================================================================
-   1 · ESTRATÉGICO — ¿Qué proyectos financiamos con el presupuesto?
-   ===================================================================== */
-function board1(){
-  var BUD=120,K={base:0.034,dec:0.026};
-  var P=[
-    {id:'A',n:'Infill Norte',s:'Infill',ss:'Infill',cap:18,npv:41},
-    {id:'B',n:'Waterflood fase 2',s:'Waterflood',ss:'Water.',cap:35,npv:56},
-    {id:'C',n:'Compresión de gas Sur',s:'Compresión',ss:'Compr.',cap:22,npv:24},
-    {id:'D',n:'Exploración Bloque 7',s:'Expl. B7',ss:'B7',cap:30,npv:18},
-    {id:'E',n:'Planta de tratamiento',s:'Planta',ss:'Planta',cap:28,npv:21},
-    {id:'F',n:'Fracturamiento etapa 3',s:'Fractura',ss:'Fract.',cap:26,npv:52},
-    {id:'G',n:'Electrificación de campos',s:'Electrif.',ss:'Elec.',cap:24,npv:20},
-    {id:'H',n:'Revamp de oleoducto',s:'Oleoducto',ss:'Oleod.',cap:15,npv:11}];
-  var by={};P.forEach(function(p){p.vpi=p.npv/p.cap;by[p.id]=p});
-  var order=P.slice().sort(function(a,b){return b.vpi-a.vpi});
-  var planIds=['D','E','B','C'],decIds=[],acc=0;
-  order.forEach(function(p){if(acc+p.cap<=BUD){decIds.push(p.id);acc+=p.cap}});
-  function tot(ids){var c=sum(ids,function(i){return by[i].cap}),n=sum(ids,function(i){return by[i].npv});return {ids:ids,cap:c,npv:n,vpi:n/c}}
-  var S={base:tot(planIds),dec:tot(decIds)};
-  var out=planIds.filter(function(i){return !idx(decIds,i)}),inn=decIds.filter(function(i){return !idx(planIds,i)});
-  var outNpv=sum(out,function(i){return by[i].npv}),inNpv=sum(inn,function(i){return by[i].npv});
-  var outCap=sum(out,function(i){return by[i].cap}),inCap=sum(inn,function(i){return by[i].cap});
-  var gain=S.dec.npv-S.base.npv,gainPct=gain/S.base.npv*100;
-  function npvAt(sc,pr){return S[sc].npv*(1+K[sc]*(pr-70))}
-  var low=sum(planIds.filter(function(i){return by[i].vpi<1}),function(i){return by[i].cap});
-  var weak=planIds.filter(function(i){return by[i].vpi<1}).sort(function(a,b){return by[a].vpi-by[b].vpi});
-  return {
-    id:'estrategico',tab:'Estratégico',short:'¿Qué proyectos financiamos?',
-    q:'¿Qué proyectos del portafolio financiamos este año con USD '+BUD+' MM?',
-    meta:B('Decide:')+' comité de inversiones · '+B('Frecuencia:')+' trimestral · '+B('Criterio:')+' VPN por dólar invertido (VPI) y sensibilidad al precio',
-    view:function(sc){var s=S[sc];return {
-      kpis:[
-        {l:'VPN del portafolio',f:f0,u:'MM USD',bn:S.base.npv,dn:S.dec.npv,good:'up',sub:'Con USD '+BUD+' MM de presupuesto'},
-        {l:'Capex comprometido',f:f0,u:'MM USD',bn:S.base.cap,dn:S.dec.cap,good:'none',sub:'Techo: '+BUD+' MM'},
-        {l:'VPI del portafolio',f:f2,u:'',bn:S.base.vpi,dn:S.dec.vpi,good:'up',sub:'VPN ÷ capex'},
-        {l:'Proyectos financiados',f:f0,u:'de '+P.length,bn:S.base.ids.length,dn:S.dec.ids.length,good:'none',sub:'Candidatos evaluados: '+P.length}],
-      charts:[
-        {title:'Qué rinde cada dólar invertido',sub:'VPI por proyecto, ordenado de mayor a menor. Azul: financiado en este escenario.',
-         legend:[{c:C.blue,t:'Financiado'},{c:C.gm,t:'Sin fondos'}],
-         draw:function(h,lb){V.barsH(h,{label:lb,rows:order.map(function(p){var on=idx(s.ids,p.id);return {label:p.n,value:p.vpi,color:on?C.blue:C.gm,text:f2(p.vpi),tip:[{k:'VPI',v:f2(p.vpi)},{k:'Capex',v:f0(p.cap)+' MM USD'},{k:'VPN',v:f0(p.npv)+' MM USD'},{k:'Estado',v:on?'Financiado':'Sin fondos'}]}}),max:2.4,d:2,unit:'VPI',ref:{value:1,label:'VPI = 1,0'},lw:150,r:40,tickFmt:f1})},
-         table:{head:['Proyecto','Capex (MM)','VPN (MM)','VPI','Estado'],rows:order.map(function(p){return [p.n,f0(p.cap),f0(p.npv),f2(p.vpi),idx(s.ids,p.id)?'Financiado':'Sin fondos']})}},
-        {title:'De dónde sale el cambio en VPN',sub:'Puente entre el plan actual y la reasignación, en MM USD.',
-         legend:[{c:C.blue,t:'Suma'},{c:C.red,t:'Resta'}],
-         draw:function(h,lb){var st=[{kind:'total',label:'Plan actual',short:'Plan',value:S.base.npv,text:f0(S.base.npv)}];
-           out.forEach(function(i){st.push({label:'Sale '+by[i].s,short:by[i].ss,value:-by[i].npv,text:sgn(-by[i].npv,0)})});
-           inn.forEach(function(i){st.push({label:'Entra '+by[i].s,short:by[i].ss,value:by[i].npv,text:sgn(by[i].npv,0)})});
-           st.push({kind:'total',label:'Con la decisión',short:'Final',value:S.dec.npv,text:f0(S.dec.npv)});
-           V.waterfall(h,{label:lb,steps:st,unit:'MM USD',h:270})},
-         table:{head:['Paso','VPN (MM USD)'],rows:[['Plan actual',f0(S.base.npv)]].concat(out.map(function(i){return ['Sale '+by[i].n,sgn(-by[i].npv,0)]})).concat(inn.map(function(i){return ['Entra '+by[i].n,sgn(by[i].npv,0)]})).concat([['Con la decisión',f0(S.dec.npv)]])}},
-        {title:'Qué mueve el resultado',sub:'Cambio en el VPN del escenario elegido, en MM USD.',
-         legend:[{c:C.red,t:'Caso desfavorable'},{c:C.blue,t:'Caso favorable'}],
-         draw:function(h,lb){var N=s.npv,k=K[sc];V.tornado(h,{label:lb,unit:'MM USD',d:0,rows:[
-           {label:'Precio del Brent, ±15 USD/bbl',low:-k*15*N,high:k*15*N},
-           {label:'Capex, ±15 %',low:-0.15*s.cap*0.9,high:0.15*s.cap*0.9},
-           {label:'Declinación de los pozos, ±10 %',low:-0.09*N,high:0.07*N},
-           {label:'Tasa de descuento, 13 % / 8 %',low:-0.08*N,high:0.10*N}]})},
-         table:{head:['Variable','Desfavorable','Favorable'],rows:(function(){var N=s.npv,k=K[sc];return [['Brent ±15 USD/bbl',sgn(-k*15*N,0),sgn(k*15*N,0)],['Capex ±15 %',sgn(-0.15*s.cap*0.9,0),sgn(0.15*s.cap*0.9,0)],['Declinación ±10 %',sgn(-0.09*N,0),sgn(0.07*N,0)],['Tasa 13 % / 8 %',sgn(-0.08*N,0),sgn(0.10*N,0)]]})()}},
-        {title:'Qué pasa si el petróleo baja',sub:'VPN del portafolio según el precio del Brent, en MM USD.',
-         legend:[{c:C.gd,t:'Plan actual',ln:1},{c:C.blue,t:'Con la decisión',ln:1}],
-         draw:function(h,lb){var x=[],a=[],d=[];for(var p=45;p<=90;p+=5){x.push(String(p));a.push(npvAt('base',p));d.push(npvAt('dec',p))}
-           V.line(h,{label:lb,x:x,xTicks:[0,2,4,6,8],xTitle:'Brent, USD/bbl',yMin:0,vlines:[{i:5,label:'Supuesto: 70'}],tipFmt:function(n){return f0(n)+' MM'},
-             series:[{name:'Plan actual',c:C.gd,w:sc==='base'?2.5:1.75,op:sc==='base'?1:.5,pts:a,end:f0(a[a.length-1]),endDy:16},{name:'Con la decisión',c:C.blue,w:sc==='dec'?2.5:1.75,op:sc==='dec'?1:.5,pts:d,end:f0(d[d.length-1])}],h:270,r:30})},
-         table:{head:['Brent (USD/bbl)','Plan actual','Con la decisión'],rows:[45,50,55,60,70,80,90].map(function(p){return [String(p),f0(npvAt('base',p)),f0(npvAt('dec',p))]})}}],
-      read:[
-        {n:1,h:'Dos proyectos financiados hoy rinden menos de 1,0 por cada dólar: '+B(by[weak[0]].n+' ('+f2(by[weak[0]].vpi)+')')+' y '+B(by[weak[1]].n+' ('+f2(by[weak[1]].vpi)+')')+'. Juntos usan '+B(f0(low)+' MM')+' del presupuesto.'},
-        {n:2,h:'Pasar esos '+f0(outCap)+' MM a '+inn.length+' proyectos de mayor VPI '+B('suma '+f0(inNpv)+' MM de VPN y quita '+f0(outNpv))+': neto '+B(sgn(gain,0)+' MM')+' con el mismo techo.'},
-        {n:3,h:'El resultado depende más del precio que del capex: ±15 USD de Brent mueven el VPN en '+B('±'+f0(K[sc]*15*s.npv)+' MM')+'. Por eso se mira el gráfico 4.'},
-        {n:4,h:'Con Brent a 55 USD el plan actual deja '+B(f0(npvAt('base',55))+' MM')+' de VPN y la decisión '+B(f0(npvAt('dec',55))+' MM')+'. A 50 USD: '+f0(npvAt('base',50))+' contra '+f0(npvAt('dec',50))+'.'}]}},
-    dec:{what:'Mover el presupuesto de '+out.map(function(i){return by[i].n}).join(' y ')+' hacia '+inn.map(function(i){return by[i].n}).join(', ')+'.',
-      big:sgn(gain,0),u:'MM USD de VPN ('+sgn(gainPct,0)+' %)',cap:'Con el mismo techo de USD '+BUD+' MM: el capex pasa de '+f0(S.base.cap)+' a '+f0(S.dec.cap)+' MM.',
-      gains:['VPI del portafolio: '+B(f2(S.base.vpi)+' → '+f2(S.dec.vpi))+' por dólar invertido.','Con Brent a 50 USD el VPN sigue en '+B(f0(npvAt('dec',50))+' MM')+' (plan actual: '+f0(npvAt('base',50))+' MM).','Cada proyecto queda ordenado por VPI, con sus supuestos a la vista para el comité.'],
-      note:'Datos de demostración. VPN a 10 %, Brent 70 USD/bbl.'},
-    agents:function(){return [
-      {who:'Vigía',t:'Detecté que '+weak.length+' de los '+planIds.length+' proyectos financiados rinden menos de 1,0 de VPI: '+weak.map(function(i){return by[i].n+' ('+f2(by[i].vpi)+')'}).join(' y ')+'.',src:'Fuente: plan de inversiones y flujos de caja por proyecto.'},
-      {who:'Analista',t:'Reordené los '+P.length+' candidatos por VPI dentro de USD '+BUD+' MM: salen '+out.length+', entran '+inn.length+'. VPN del portafolio de '+f0(S.base.npv)+' a '+f0(S.dec.npv)+' MM.',src:'Cálculo: VPN a 10 %, Brent 70 USD/bbl, sensibilidad a capex ±15 %.'},
-      {who:'Auditor',t:'Revisé sumas y supuestos. Marqué que el VPN de Exploración B7 está ponderado por riesgo geológico: conviene confirmar su probabilidad de éxito antes de descartarlo.',src:'Regla aplicada: todo proyecto descartado deja su justificación escrita.'},
-      {who:'Redactor',t:'Preparé la nota para el comité con la comparación, los supuestos, la sensibilidad y las fuentes. Falta su aprobación.',src:'Documento listo para exportar.'}]}
-  };
-}
-
-/* =====================================================================
-   2 · OPERATIVO — ¿Qué pozos intervenimos esta semana?
-   ===================================================================== */
-function board2(){
-  var NB=38,META=9000,P0=8300,DEC=0.0012,LIM=45;
-  var W=[
-    {id:'P-18',c:'elec',g:110,k:40,day:2},{id:'P-22',c:'elec',g:60,k:35,day:3},
-    {id:'P-12',c:'pump',g:95,k:85,day:5},{id:'P-07',c:'pump',g:80,k:85,day:7},{id:'P-31',c:'pump',g:60,k:70,day:9},
-    {id:'P-27',c:'stim',g:50,k:220,day:0},{id:'P-03',c:'comp',g:70,k:400,day:0}];
-  var CN={pump:'bombas',elec:'falla eléctrica',stim:'estimulación',comp:'compresión'};
-  W.forEach(function(w){w.pb=w.k*1000/(w.g*NB);w.sel=w.pb<=LIM});
-  var sel=W.filter(function(w){return w.sel}),G=sum(sel,function(w){return w.g}),K=sum(sel,function(w){return w.k});
-  var pbAll=K*1000/(G*NB),month=G*NB*30/1000,gap0=META-P0;
-  function base(d){return P0*(1-DEC*d)}
-  function dec(d){return base(d)+sum(sel,function(w){return d>=w.day?w.g:0})}
-  var b14=Math.round(base(14)),d14=Math.round(dec(14)),gB=META-b14,gD=META-d14;
-  var cause=function(c){return sum(W.filter(function(w){return w.c===c}),function(w){return w.g})},rec=function(c){return sum(sel.filter(function(w){return w.c===c}),function(w){return w.g})};
-  var loss=[['Bombas ineficientes','pump'],['Fallas eléctricas','elec'],['Restricción de compresión','comp'],['Estimulación pendiente','stim']].map(function(r){return {l:r[0],c:r[1],v:cause(r[1]),r:rec(r[1])}});
-  loss.push({l:'Declinación mayor a la esperada',c:'decl',v:gap0-sum(loss,function(r){return r.v}),r:0});
-  var real=[];for(var k=0;k<=14;k++){var v=8520-16*k+Math.round(12*Math.sin(k*1.7));v+=({9:-260,10:-340,11:-200,12:-60})[k]||0;real.push(k===14?P0:v)}
-  var xs=[],rPts=[],bPts=[],dPts=[],mPts=[];
-  for(var i=0;i<=28;i++){var d=i-14;xs.push(d<0?'−'+(-d)+' d':d===0?'Hoy':'+'+d+' d');rPts.push(i<=14?real[i]:null);bPts.push(i>=14?Math.round(base(d)):null);dPts.push(i>=14?Math.round(dec(d)):null);mPts.push(META)}
-  var pbSorted=W.slice().sort(function(a,b){return a.pb-b.pb}),maxPb=Math.max.apply(null,sel.map(function(w){return w.pb})),minSlow=Math.min.apply(null,W.filter(function(w){return !w.sel}).map(function(w){return w.pb}));
-  var restOther=loss[2].v+loss[3].v;
-  return {
-    id:'operativo',tab:'Operativo',short:'¿Qué pozos intervenimos?',
-    q:'¿Qué pozos intervenimos esta semana para acercar la producción a la meta?',
-    meta:B('Decide:')+' jefe de operaciones · '+B('Frecuencia:')+' diaria · '+B('Criterio:')+' días en recuperar la inversión (límite '+LIM+')',
-    view:function(sc){var on=sc==='dec';return {
-      kpis:[
-        {l:'Producción a 14 días',f:f0,u:'bopd',bn:b14,dn:d14,good:'up',sub:'Hoy: '+f0(P0)+' bopd'},
-        {l:'Brecha contra la meta',f:f0,u:'bopd',bn:gB,dn:gD,good:'down',sub:'Meta: '+f0(META)+' bopd'},
-        {l:'Inversión en intervenciones',f:f0,u:'mil USD',bn:0,dn:K,good:'none',sub:'Nada aprobado todavía'},
-        {l:'Recupera la inversión en',tb:'—',td:f0(pbAll)+' días',sub:'Si se aprueba, se calcula',dsub:'En conjunto, con netback de '+NB+' USD/bbl'}],
-      charts:[
-        {wide:1,title:'Producción del campo y qué pasa en los próximos 14 días',sub:'bopd. Las intervenciones suman su aporte desde el día en que se ejecutan.',
-         legend:[{c:C.ink,t:'Real',ln:1},{c:C.gd,t:'Plan actual',ln:1},{c:C.blue,t:'Con las intervenciones',ln:1},{c:C.gd,t:'Meta',ln:1,dash:1}],
-         draw:function(h,lb){V.line(h,{label:lb,x:xs,xTicks:[0,7,14,21,28],yMin:7900,yMax:9100,vlines:[{i:14,label:'Hoy'}],tipFmt:f0,h:270,r:46,
-           series:[{name:'Meta',c:C.gd,w:1.25,dash:'2 4',pts:mPts},{name:'Real',c:C.ink,w:2,pts:rPts},
-             {name:'Plan actual',c:C.gd,w:on?1.75:2.5,op:on?.55:1,dash:'6 4',pts:bPts,end:f0(b14),endDy:16,endAnchor:'start'},
-             {name:'Con las intervenciones',c:C.blue,w:on?2.5:1.75,op:on?1:.45,pts:dPts,end:f0(d14),endAnchor:'start'}]})},
-         table:{head:['Día','Plan actual (bopd)','Con intervenciones (bopd)'],rows:[0,3,5,7,9,14].map(function(d){return [d===0?'Hoy':'+'+d+' d',f0(base(d)),f0(dec(d))]})}},
-        {title:'De dónde viene la brecha',sub:'bopd perdidos contra la meta, según la causa.',
-         legend:[{c:C.blue,t:'Se recupera con la decisión'},{c:C.gm,t:'Sigue perdido'}],
-         draw:function(h,lb){V.stackH(h,{label:lb,rh:50,lw:120,r:70,max:260,totalFmt:function(t){return f0(t)+' bopd'},
-           rows:loss.map(function(r){var rc=on?r.r:0,segs=[];if(rc>0)segs.push({k:'Se recupera',v:rc,c:C.blue,text:f0(rc),tc:'#fff',tip:[{k:'Se recupera',v:f0(rc)+' bopd',c:C.blue},{k:'Causa',v:r.l}]});if(r.v-rc>0)segs.push({k:'Sigue perdido',v:r.v-rc,c:C.gm,text:f0(r.v-rc),tc:'#0E1A2B',tip:[{k:'Sigue perdido',v:f0(r.v-rc)+' bopd',c:C.gm},{k:'Causa',v:r.l}]});return {label:r.l,segs:segs}})})},
-         table:{head:['Causa','Perdido (bopd)','Se recupera'],rows:loss.map(function(r){return [r.l,f0(r.v),on?f0(r.r):'0']})}},
-        {title:'En cuánto tiempo se paga cada intervención',sub:'Días para recuperar la inversión, con netback de '+NB+' USD/bbl.',
-         legend:[{c:C.blue,t:'Entra: paga en '+LIM+' días o menos'},{c:C.gm,t:'Se difiere'}],
-         draw:function(h,lb){V.barsH(h,{label:lb,rows:pbSorted.map(function(w){return {label:w.id+' · '+CN[w.c],value:w.pb,color:w.sel?C.blue:C.gm,text:f0(w.pb)+' d',tip:[{k:'Recupera en',v:f0(w.pb)+' días'},{k:'Aporte',v:'+'+f0(w.g)+' bopd'},{k:'Inversión',v:f0(w.k)+' mil USD'}]}}),max:160,unit:'Días',ref:{value:LIM,label:'Límite: '+LIM+' días'},lw:130,r:44})},
-         table:{head:['Pozo','Causa','Aporte (bopd)','Inversión (mil USD)','Recupera en (días)'],rows:pbSorted.map(function(w){return [w.id,CN[w.c],'+'+f0(w.g),f0(w.k),f0(w.pb)]})}}],
-      read:[
-        {n:1,h:'Hoy se producen '+B(f0(P0)+' bopd')+', '+f0(gap0)+' por debajo de la meta. Sin intervenir, en 14 días la brecha sube a '+B(f0(gB))+'.'},
-        {n:2,h:'El '+f0(G/gap0*100)+' % de la brecha tiene causa y solución conocidas: '+B('bombas ('+loss[0].v+')')+' y '+B('fallas eléctricas ('+loss[1].v+')')+' suman '+B(f0(G)+' bopd')+'.'},
-        {n:3,h:'Esos '+sel.length+' pozos recuperan la inversión en '+B('menos de '+Math.ceil(maxPb)+' días')+' cada uno. Estimulación y compresión tardan más de '+Math.floor(minSlow/30)+' meses y no entran.'}]}},
-    dec:{what:'Programar esta semana las intervenciones en '+sel.length+' pozos (fallas eléctricas y bombas) y diferir estimulación y compresión.',
-      big:'+'+f0(G),u:'bopd en '+Math.max.apply(null,sel.map(function(w){return w.day}))+' días',cap:'Inversión de USD '+f0(K)+' mil. Ingreso neto adicional de unos USD '+f0(month)+' mil por mes.',
-      gains:['Recupera la inversión en '+B(f0(pbAll)+' días')+' en conjunto.','La brecha contra la meta baja de '+B(f0(gB))+' a '+B(f0(gD))+' bopd en 14 días.','Quedan '+f0(gap0-G)+' bopd de brecha: '+f0(restOther)+' tienen solución más cara y '+f0(loss[4].v)+' son declinación (se revisan en Reservas).'],
-      note:'Datos de demostración. Netback de '+NB+' USD/bbl.'},
-    agents:function(){return [
-      {who:'Vigía',t:'La producción de hoy es '+f0(P0)+' bopd, '+f0(gap0)+' bajo la meta. Hubo una caída de tres días en los pozos con falla eléctrica y no se recuperó.',src:'Fuente: SCADA, producción diaria por pozo.'},
-      {who:'Analista',t:'Calculé el tiempo de repago de '+W.length+' intervenciones. '+sel.length+' recuperan la inversión en '+LIM+' días o menos: suman +'+f0(G)+' bopd por USD '+f0(K)+' mil.',src:'Cálculo: netback '+NB+' USD/bbl, declinación base '+(DEC*100).toFixed(2).replace('.',',')+' % diario.'},
-      {who:'Auditor',t:'Verifiqué que ninguna intervención dependa de equipos ya asignados esta semana y que el cronograma entre en 9 días.',src:'Regla aplicada: máximo dos equipos de servicio por día.'},
-      {who:'Redactor',t:'Armé la orden de trabajo con prioridad, costo y ganancia esperada por pozo. Falta su aprobación.',src:'Documento listo para el supervisor de campo.'}]}
-  };
-}
-
-/* =====================================================================
-   3 · TÁCTICO — ¿Cómo cerramos el año dentro del presupuesto?
-   ===================================================================== */
-function board3(){
-  var BUD=96,MB=8,M=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
-  var real=[8.0,8.2,8.1,8.5,8.6,8.5,8.8,8.9,8.8],fc=[8.9,8.9,8.9],dc=[7.7,7.0,6.3];
-  var ytd=sum(real,function(x){return x}),totB=ytd+sum(fc,function(x){return x}),totD=ytd+sum(dc,function(x){return x});
-  var over=[{l:'Energía',s:'Ener.',v:2.9},{l:'Workover',s:'Work.',v:2.6},{l:'Contratos',s:'Contr.',v:2.1},{l:'Químicos',s:'Quím.',v:-0.5}];
-  var acts=[{l:'Contratos',s:'Contr.',v:1.5},{l:'Energía',s:'Ener.',v:2.0},{l:'Workover',s:'Work.',v:2.2}];
-  var ovB=sum(over,function(o){return o.v}),sv=sum(acts,function(a){return a.v}),ovD=ovB-sv;
-  var F=[{n:'Valle',b:19.6,d:16.9},{n:'Costa',b:17.9,d:15.1},{n:'Sur',b:15.8,d:13.9},{n:'Altiplano',b:13.1,d:13.1},{n:'Norte',b:12.4,d:12.4}],OBJ=14;
-  var avgB=sum(F,function(x){return x.b})/F.length,avgD=sum(F,function(x){return x.d})/F.length;
-  var budL=[],rL=[],pL=[],dL=[],bandLo=[],bandHi=[],wid=[0,.3,.5,.7];
-  for(var i=0;i<12;i++){budL.push(MB);rL.push(i<=8?real[i]:null);pL.push(i>=8?(i===8?real[8]:fc[i-9]):null);dL.push(i>=8?(i===8?real[8]:dc[i-9]):null);bandLo.push(i>=8?pL[i]-wid[i-8]:null);bandHi.push(i>=8?pL[i]+wid[i-8]:null)}
-  var above=F.filter(function(x){return x.b>OBJ});
-  return {
-    id:'tactico',tab:'Táctico',short:'¿Cómo cerramos el año?',
-    q:'¿Qué hacemos en el último trimestre para cerrar el año dentro del presupuesto operativo?',
-    meta:B('Decide:')+' gerencia de operaciones y finanzas · '+B('Frecuencia:')+' mensual · '+B('Criterio:')+' desvío contra presupuesto y costo de extracción por campo',
-    view:function(sc){var on=sc==='dec';return {
-      kpis:[
-        {l:'Cierre proyectado del año',f:f1,u:'MM USD',bn:totB,dn:totD,good:'down',sub:'Presupuesto: '+f1(BUD)+' MM'},
-        {l:'Desvío contra el presupuesto',f:function(n){return sgn(n,1)+' %'},u:'',bn:ovB/BUD*100,dn:ovD/BUD*100,good:'down',nopct:1,sub:'Sobre el presupuesto anual'},
-        {l:'Gasto evitado en el año',f:f1,u:'MM USD',bn:0,dn:sv,good:'none',sub:'Sin acciones aprobadas'},
-        {l:'Costo de extracción promedio',f:f1,u:'USD/bbl',bn:avgB,dn:avgD,good:'down',sub:'Objetivo: '+f1(OBJ)+' USD/bbl'}],
-      charts:[
-        {wide:1,title:'De dónde viene el desvío y qué lo corrige',sub:'MM USD sobre el presupuesto anual. Rojo: suma gasto. Azul: lo reduce.',
-         legend:[{c:C.red,t:'Desvío'},{c:C.blue,t:'Acción que lo reduce'}],
-         draw:function(h,lb){var st=over.map(function(o){return {label:o.l,short:o.s,value:o.v,text:sgn(o.v,1),color:o.v>0?C.red:C.blue}});
-           st.push({kind:'total',label:'Desvío proyectado',short:'Desv.',value:ovB,text:sgn(ovB,1)});
-           if(on){acts.forEach(function(a){st.push({label:a.l,short:a.s,value:-a.v,text:sgn(-a.v,1),color:C.blue,tip:[{k:'Ahorro',v:f1(a.v)+' MM USD'}]})});st.push({kind:'total',label:'Desvío con la decisión',short:'Final',value:ovD,text:sgn(ovD,1)})}
-           V.waterfall(h,{label:lb,steps:st,unit:'MM USD',h:250})},
-         table:{head:['Concepto','MM USD'],rows:over.map(function(o){return [o.l+' (desvío)',sgn(o.v,1)]}).concat([['Desvío proyectado',sgn(ovB,1)]]).concat(on?acts.map(function(a){return [a.l+' (acción)',sgn(-a.v,1)]}).concat([['Desvío con la decisión',sgn(ovD,1)]]):[])}},
-        {title:'Dónde cuesta más extraer',sub:'USD por barril, por campo. Naranja: sobre el objetivo.',
-         legend:[{c:C.blue,t:'En el objetivo o por debajo'},{c:C.orange,t:'Sobre el objetivo'}],
-         draw:function(h,lb){V.barsH(h,{label:lb,rows:F.map(function(x){var v=on?x.d:x.b;return {label:x.n,value:v,color:v>OBJ?C.orange:C.blue,text:f1(v),tip:[{k:'Hoy',v:f1(x.b)+' USD/bbl'},{k:'Con la decisión',v:f1(x.d)+' USD/bbl'}]}}),max:22,d:1,unit:'USD/bbl',ref:{value:OBJ,label:'Objetivo '+f1(OBJ)},lw:88,r:40})},
-         table:{head:['Campo','Hoy','Con la decisión'],rows:F.map(function(x){return [x.n,f1(x.b),f1(x.d)]})}},
-        {title:'Gasto mensual contra el presupuesto',sub:'MM USD por mes. La banda es el rango probable (P10–P90) si no se actúa.',
-         legend:[{c:C.gd,t:'Presupuesto',ln:1},{c:C.ink,t:'Real',ln:1},{c:C.orange,t:'Plan actual',ln:1},{c:C.blue,t:'Con la decisión',ln:1}],
-         draw:function(h,lb){V.line(h,{label:lb,x:M,xTicks:h.clientWidth<360?[0,2,4,6,8,10]:[0,1,2,3,4,5,6,7,8,9,10,11],yMin:5,yMax:10,tipFmt:f1,h:260,r:34,
-           bands:[{lo:bandLo,hi:bandHi,c:C.orange,op:on?.07:.16,name:'Rango probable'}],
-           series:[{name:'Presupuesto',c:C.gd,w:1.25,dash:'3 4',pts:budL},{name:'Real',c:C.ink,w:2,pts:rL},
-             {name:'Plan actual',c:C.orange,w:on?1.75:2.5,op:on?.6:1,dash:'6 4',pts:pL,end:f1(fc[2]),endDy:-10},
-             {name:'Con la decisión',c:C.blue,w:on?2.5:1.75,op:on?1:.45,pts:dL,end:f1(dc[2]),endDy:18}]})},
-         table:{head:['Mes','Presupuesto','Real','Plan actual','Con la decisión'],rows:M.map(function(m,i){return [m,f1(MB),rL[i]!=null?f1(rL[i]):'—',i>=9?f1(fc[i-9]):'—',i>=9?f1(dc[i-9]):'—']})}}],
-      read:[
-        {n:1,h:'El gasto va a cerrar en '+B(f1(totB)+' MM')+', '+B(f1(ovB)+' MM ('+f1(ovB/BUD*100)+' %)')+' sobre el presupuesto. Tres rubros explican casi todo: energía '+sgn(over[0].v,1)+', workover '+sgn(over[1].v,1)+' y contratos '+sgn(over[2].v,1)+'.'},
-        {n:2,h:above.length+' campos superan el objetivo de '+f1(OBJ)+' USD/bbl: '+B(above.map(function(x){return x.n+' '+f1(x.b)}).join(', '))+'. Ahí se concentran los contratos y la energía del gráfico 1.'},
-        {n:3,h:'El gasto mensual supera el presupuesto desde febrero. Sin cambios sigue en '+f1(fc[0])+' por mes; con las tres acciones baja a '+B(f1(dc[2])+' en diciembre')+'.'}]}},
-    dec:{what:'Aplicar tres acciones en el último trimestre: renegociar contratos de servicio, ajustar el consumo de energía y diferir el workover no crítico a 2027.',
-      big:sgn(-sv,1),u:'MM USD de gasto en el año',cap:'El desvío baja de '+sgn(ovB/BUD*100,1)+' % a '+sgn(ovD/BUD*100,1)+' % y el año cierra en '+f1(totD)+' MM.',
-      gains:['Contratos '+B(sgn(-acts[0].v,1)+' MM')+' · Energía '+B(sgn(-acts[1].v,1)+' MM')+' · Workover diferido '+B(sgn(-acts[2].v,1)+' MM')+'.','Sur llega al objetivo ('+f1(F[2].d)+' USD/bbl). Valle y Costa mejoran pero siguen sobre '+f1(OBJ)+'.','El workover diferido se retoma en el presupuesto 2027, priorizado por VPI (ver Estratégico).'],
-      note:'Datos de demostración. Cifras en MM USD.'},
-    agents:function(){return [
-      {who:'Vigía',t:'El gasto acumulado a septiembre es '+f1(ytd)+' MM, '+f1(ytd-MB*9)+' MM sobre lo previsto. Tres rubros concentran el desvío.',src:'Fuente: ERP, costos operativos por centro de costo.'},
-      {who:'Analista',t:'Proyecté octubre a diciembre con y sin acciones: sin cambios cierra en '+f1(totB)+' MM; con las tres acciones, en '+f1(totD)+' MM.',src:'Cálculo: promedio móvil de 3 meses y rango P10–P90.'},
-      {who:'Auditor',t:'Confirmé que el workover diferido no es crítico para la integridad de los pozos y que los contratos permiten renegociar sin penalidad antes de fin de año.',src:'Regla aplicada: ninguna acción puede afectar seguridad ni integridad.'},
-      {who:'Redactor',t:'Preparé el informe para finanzas con el puente del desvío, las acciones, los responsables y las fechas. Falta su aprobación.',src:'Documento listo para exportar.'}]}
-  };
-}
-
-/* =====================================================================
-   4 · RESERVAS — ¿Qué podemos reportar y qué falta para reclasificar?
-   ===================================================================== */
-function board4(){
-  var FL=[{n:'Norte',a:14.2,b:21.5,c:30.1},{n:'Sur',a:9.8,b:15.0,c:22.4},{n:'Costa',a:6.1,b:10.4,c:16.9},{n:'Altiplano',a:11.9,b:16.8,c:23.0}];
-  var CT=[{f:'Costa',n:'Costa · Fase 2',v:8.5,need:'falta FID',mv:true},{f:'Altiplano',n:'Altiplano · Infill',v:4.1,need:'falta FID',mv:true},{f:'Sur',n:'Sur · Piloto',v:3.2,need:'falta piloto',mv:false}];
-  var PROD=4.0;
-  function tot(k,sc){return sum(FL,function(x){return x[k]})+(sc==='dec'?sum(CT.filter(function(c){return c.mv}),function(c){return c.v}):0)}
-  var moved=sum(CT.filter(function(c){return c.mv}),function(c){return c.v}),cont=sum(CT,function(c){return c.v});
-  var p2b=tot('b','base'),p2d=tot('b','dec'),p1=tot('a','base'),p3b=tot('c','base');
-  /* declinación hiperbólica de Norte: mismo punto de partida, distinta velocidad de caída */
-  var Q0=6000,BE=0.8,HOR=20,STEP=0.5;
-  function q(D,t){return Q0/Math.pow(1+BE*D*t,1/BE)}
-  function remain(D){var s=0;for(var m=0;m<HOR*12;m++){s+=q(D,(m+.5)/12)*365/12}return s/1e6}
-  function solve(T){var lo=0.001,hi=3;for(var i=0;i<60;i++){var mid=(lo+hi)/2;if(remain(mid)>T)lo=mid;else hi=mid}return (lo+hi)/2}
-  var D1=solve(FL[0].a),D2=solve(FL[0].b),D3=solve(FL[0].c);
-  var xs=[],c1=[],c2=[],c3=[],hist=[];
-  for(var i=0;i<=46;i++){var t=-3+i*STEP;xs.push(t<0?'−'+(-t)+' a':t===0?'Hoy':'+'+t+' a');
-    if(t>=0){c1.push(q(D1,t));c2.push(q(D2,t));c3.push(q(D3,t))}else{c1.push(null);c2.push(null);c3.push(null)}
-    var hf={0:1.85,2:1.5,4:1.2,6:1}[i];hist.push(hf?Q0*hf*(1+0.015*Math.sin(i*2.3)):null)}
-  hist[6]=Q0;
-  return {
-    id:'reservas',tab:'Reservas',short:'¿Qué podemos reportar?',
-    q:'¿Cuántas reservas podemos reportar como 2P este año y qué falta para reclasificar los recursos contingentes?',
-    meta:B('Decide:')+' gerencia de reservas y dirección · '+B('Frecuencia:')+' anual, con revisión trimestral · '+B('Criterio:')+' SPE-PRMS: 1P, 2P, 3P y recursos contingentes (2C)',
-    view:function(sc){var on=sc==='dec';return {
-      kpis:[
-        {l:'Reservas 2P',f:f1,u:'MMbbl',bn:p2b,dn:p2d,good:'up',sub:'1P: '+f1(p1)+' · 3P: '+f1(p3b)},
-        {l:'Reservas 1P',tb:f1(p1),tu:'MMbbl',td:f1(p1),sub:'Con producción comprobada',dsub:'Sin cambio: 1P exige ver la respuesta de producción'},
-        {l:'Vida de reservas 2P',f:f1,u:'años',bn:p2b/PROD,dn:p2d/PROD,good:'up',sub:'Producción anual: '+f1(PROD)+' MMbbl'},
-        {l:'Contingentes pendientes',f:f1,u:'MMbbl',bn:cont,dn:cont-moved,good:'down',sub:'Esperan una decisión o un piloto'}],
-      charts:[
-        {title:'Reservas por campo y categoría',sub:'MMbbl. El total de cada barra es 3P.',
-         legend:[{c:C.o3,t:'1P probadas'},{c:C.o2,t:'2P: aumento sobre 1P'},{c:C.o1,t:'3P: aumento sobre 2P'}],
-         draw:function(h,lb){V.stackH(h,{label:lb,rh:56,lw:80,r:50,max:32,d:1,totalFmt:f1,rows:FL.map(function(x){var add=on?sum(CT.filter(function(c){return c.mv&&c.f===x.n}),function(c){return c.v}):0,b=x.b+add,c=x.c+add;
-           return {label:x.n,segs:[{k:'1P',v:x.a,c:C.o3,text:f1(x.a),tc:'#fff',tip:[{k:'1P',v:f1(x.a)+' MMbbl',c:C.o3},{k:'2P acumulado',v:f1(b)+' MMbbl'},{k:'3P acumulado',v:f1(c)+' MMbbl'}]},
-             {k:'2P',v:b-x.a,c:C.o2,text:f1(b-x.a),tc:'#0E1A2B',tip:[{k:'1P',v:f1(x.a)+' MMbbl'},{k:'2P acumulado',v:f1(b)+' MMbbl',c:C.o2},{k:'3P acumulado',v:f1(c)+' MMbbl'}]},
-             {k:'3P',v:c-b,c:C.o1,text:f1(c-b),tc:'#0E1A2B',tip:[{k:'1P',v:f1(x.a)+' MMbbl'},{k:'2P acumulado',v:f1(b)+' MMbbl'},{k:'3P acumulado',v:f1(c)+' MMbbl',c:C.o1}]}]}})})},
-         table:{head:['Campo','1P','2P','3P'],rows:FL.map(function(x){var add=on?sum(CT.filter(function(c){return c.mv&&c.f===x.n}),function(c){return c.v}):0;return [x.n,f1(x.a),f1(x.b+add),f1(x.c+add)]})}},
-        {title:'Qué falta para reportar cada contingente',sub:'MMbbl en categoría 2C, con la condición que los separa de 2P.',
-         legend:[{c:C.blue,t:'Depende de una decisión de inversión'},{c:C.gm,t:'Depende de un resultado técnico'}],
-         draw:function(h,lb){V.barsH(h,{label:lb,rows:CT.map(function(c){var gone=on&&c.mv;return {label:c.n,value:gone?0:c.v,color:c.mv?C.blue:C.gm,text:gone?'Pasa a 2P':f1(c.v)+' · '+c.need,tip:[{k:'Volumen 2C',v:f1(c.v)+' MMbbl'},{k:'Condición',v:c.mv?'FID, financiamiento y permisos':'Resultado del piloto'}]}}),max:9,d:1,unit:'MMbbl',lw:110,r:100})},
-         table:{head:['Contingente','Volumen (MMbbl)','Condición'],rows:CT.map(function(c){return [c.n,f1(c.v),on&&c.mv?'Aprobada: pasa a 2P':c.need]})}},
-        {wide:1,title:'Por qué 1P, 2P y 3P son distintos: la declinación de Norte',sub:'bopd. Mismo punto de partida y tres velocidades de caída; la banda va de 1P a 3P.',
-         legend:[{c:C.ink,t:'Producción real',dot:1},{c:C.o3,t:'1P',ln:1},{c:C.o2,t:'2P',ln:1},{c:C.o1,t:'3P',ln:1}],
-         draw:function(h,lb){V.line(h,{label:lb,x:xs,xTicks:[0,6,16,26,36,46],yMin:0,tipFmt:f0,h:270,r:20,vlines:[{i:6,label:'Hoy'}],
-           bands:[{lo:c1,hi:c3,c:C.o2,op:.14,name:'Rango 1P–3P'}],
-           series:[{name:'3P',c:C.o1,w:2,pts:c3},{name:'2P',c:C.o2,w:2.5,pts:c2},{name:'1P',c:C.o3,w:2,pts:c1}],
-           dots:[{name:'Real',c:C.ink,pts:hist,r:3.5}]})},
-         table:{head:['Año desde hoy','1P (bopd)','2P (bopd)','3P (bopd)'],rows:[0,1,2,5,10,20].map(function(t){return [t===0?'Hoy':'+'+t,f0(q(D1,t)),f0(q(D2,t)),f0(q(D3,t))]})}}],
-      read:[
-        {n:1,h:'Hoy se reportan '+B(f1(p2b)+' MMbbl en 2P')+' ('+f1(p1)+' en 1P). Costa tiene la mayor incertidumbre relativa: su 3P es '+B(f1(FL[2].c/FL[2].a)+' veces')+' su 1P.'},
-        {n:2,h:'Hay '+B(f1(cont)+' MMbbl contingentes')+'. '+B(f1(moved))+' (Costa Fase 2 y Altiplano infill) esperan una decisión de inversión, no más geología. Sur depende de un piloto.'},
-        {n:3,h:'En Norte, partiendo de '+f0(Q0)+' bopd, la declinación explica el rango: '+B(f1(FL[0].a)+' MMbbl')+' si cae rápido (1P) y '+B(f1(FL[0].c)+' MMbbl')+' si cae lento (3P) a '+HOR+' años. La mejor estimación es '+B(f1(FL[0].b))+'.'}]}},
-    dec:{what:'Aprobar la decisión final de inversión (FID) de Costa Fase 2 y Altiplano infill antes del cierre de reservas, para pasarlos de contingentes a probables (2P).',
-      big:'+'+f1(moved),u:'MMbbl de 2P (+'+f1(moved/p2b*100)+' %)',cap:'Las reservas 2P pasan de '+f1(p2b)+' a '+f1(p2d)+' MMbbl y la vida de reservas, de '+f1(p2b/PROD)+' a '+f1(p2d/PROD)+' años.',
-      gains:['La reclasificación exige '+B('FID, financiamiento comprometido y permisos')+'. El tablero lista qué falta para cada volumen.','Sur ('+f1(CT[2].v)+' MMbbl) '+B('no se reclasifica')+' hasta tener el resultado del piloto: no se reporta antes de tiempo.','Cada cambio queda con su fuente y la versión del cálculo para el auditor externo.'],
-      note:'Datos de demostración. La clasificación final la determina el evaluador competente.'},
-    agents:function(){return [
-      {who:'Vigía',t:'Detecté '+f1(cont)+' MMbbl en 2C. Dos proyectos ('+f1(moved)+' MMbbl) ya tienen ingeniería completa y solo esperan la decisión de inversión.',src:'Fuente: modelo de reservorios y plan de desarrollo por campo.'},
-      {who:'Analista',t:'Recalculé 1P, 2P y 3P por campo con el cambio: el 2P total pasa de '+f1(p2b)+' a '+f1(p2d)+' MMbbl y la vida de reservas, de '+f1(p2b/PROD)+' a '+f1(p2d/PROD)+' años.',src:'Cálculo: declinación hiperbólica (Arps), integrada a '+HOR+' años.'},
-      {who:'Auditor',t:'Comprobé las condiciones de SPE-PRMS: sin FID no hay reclasificación. Dejé fuera Sur porque falta el resultado del piloto.',src:'Regla aplicada: ningún volumen sube de categoría sin su condición cumplida.'},
-      {who:'Redactor',t:'Preparé el resumen para el comité de reservas con volúmenes, condiciones, fuentes y la versión del cálculo. Falta su aprobación.',src:'Documento listo para el evaluador externo.'}]}
-  };
-}
-
-/* =====================================================================
-   5 · TRANSICIÓN — ¿Con qué medidas cumplimos la meta de emisiones?
-   ===================================================================== */
-function board5(){
-  var PRICE=45,TARGET=400,BASE=1250;
-  var Mx=[{id:'M1',l:'Reparar fugas de metano',a:85,c:-18},{id:'M2',l:'Recuperar gas de venteo',a:120,c:-6},{id:'M3',l:'Eficiencia en motores y compresores',a:60,c:4},{id:'M4',l:'Electrificar el bombeo',a:95,c:22},{id:'M5',l:'Energía solar en campos',a:70,c:38},{id:'M6',l:'Captura de CO₂ en planta',a:140,c:74}];
-  var SET={base:['M4','M5','M6'],dec:['M1','M2','M3','M4','M5']};
-  function pick(sc){return Mx.filter(function(m){return idx(SET[sc],m.id)})}
-  function st(sc){var ms=pick(sc),a=sum(ms,function(m){return m.a}),cost=sum(ms,function(m){return m.a*m.c});return {a:a,cost:cost/1000,per:cost/a,t:[sum(ms.filter(function(m){return m.c<=0}),function(m){return m.a}),sum(ms.filter(function(m){return m.c>0&&m.c<=25}),function(m){return m.a}),sum(ms.filter(function(m){return m.c>25}),function(m){return m.a})]}}
-  var S={base:st('base'),dec:st('dec')};
-  var ramp=[0,.1,.3,.5,.75,.9,1],yrs=[2024,2025,2026,2027,2028,2029,2030];
-  function path(a){return ramp.map(function(r){return BASE-a*r})}
-  var save=S.base.cost-S.dec.cost,free=sum(Mx.filter(function(m){return m.c<=0}),function(m){return m.a}),freeSave=-sum(Mx.filter(function(m){return m.c<=0}),function(m){return m.a*m.c})/1000;
-  var m6=Mx[5];
-  return {
-    id:'transicion',tab:'Transición',short:'¿Cómo cumplimos la meta?',
-    q:'¿Con qué medidas cumplimos la meta de emisiones 2030 al menor costo?',
-    meta:B('Decide:')+' dirección de sostenibilidad y finanzas · '+B('Frecuencia:')+' semestral · '+B('Criterio:')+' costo por tonelada evitada contra el precio interno del carbono ('+PRICE+' USD/t)',
-    view:function(sc){var s=S[sc],on=sc==='dec';return {
-      kpis:[
-        {l:'Emisiones evitadas en 2030',f:f0,u:'kt CO₂e/año',bn:S.base.a,dn:S.dec.a,good:'up',sub:'Meta: '+f0(TARGET)+' kt/año'},
-        {l:'Cumple la meta',tb:S.base.a>=TARGET?'Sí':'No',td:S.dec.a>=TARGET?'Sí':'No',sub:'Faltan '+f0(TARGET-S.base.a)+' kt/año',dsub:'Supera la meta por '+f0(S.dec.a-TARGET)+' kt/año'},
-        {l:'Costo neto anual',f:f1,u:'MM USD',bn:S.base.cost,dn:S.dec.cost,good:'down',sub:'Costo de las medidas, neto de ahorros'},
-        {l:'Costo por tonelada evitada',f:f1,u:'USD/t',bn:S.base.per,dn:S.dec.per,good:'down',sub:'Precio interno del carbono: '+PRICE+' USD/t'}],
-      charts:[
-        {wide:1,title:'Cuánto cuesta evitar cada tonelada',sub:'Curva de costo marginal de abatimiento. Ancho: kt CO₂e evitadas por año. Alto: USD por tonelada. Azul: se ejecuta en este escenario.',
-         legend:[{c:C.blue,t:'Se ejecuta'},{c:C.gm,t:'No se ejecuta'}],
-         key:Mx.map(function(m){return m.id+' '+m.l}).join(' · '),
-         draw:function(h,lb){V.macc(h,{label:lb,price:PRICE,priceLabel:'Precio interno del carbono: '+PRICE+' USD/t',h:280,items:Mx.map(function(m){return {id:m.id,label:m.l,abate:m.a,cost:m.c,sel:idx(SET[sc],m.id)}})})},
-         table:{head:['Medida','Evita (kt/año)','Costo (USD/t)','Se ejecuta'],rows:Mx.map(function(m){return [m.id+' '+m.l,f0(m.a),sgn(m.c,0),idx(SET[sc],m.id)?'Sí':'No']})}},
-        {title:'Cuánto se avanza hacia la meta',sub:'kt CO₂e evitadas en 2030, según el costo de la medida.',
-         legend:[{c:C.o3,t:'Se paga sola (costo ≤ 0)'},{c:C.o2,t:'Costo hasta 25 USD/t'},{c:C.o1,t:'Costo mayor a 25 USD/t'}],
-         draw:function(h,lb){var nm={base:'Plan actual',dec:'Con la decisión'},kk=['Se paga sola','Hasta 25 USD/t','Más de 25 USD/t'],cc=[C.o3,C.o2,C.o1],tc=['#fff','#0E1A2B','#0E1A2B'];
-           V.stackH(h,{label:lb,rh:60,lw:84,r:62,max:460,ref:{value:TARGET,label:'Meta '+f0(TARGET)},totalFmt:function(t){return f0(t)+' kt'},rows:['base','dec'].map(function(k){return {label:nm[k],segs:S[k].t.map(function(v,i){return v>0?{k:kk[i],v:v,c:cc[i],text:f0(v),tc:tc[i],tip:[{k:kk[i],v:f0(v)+' kt/año',c:cc[i]},{k:'Total '+nm[k],v:f0(S[k].a)+' kt/año'}]}:null}).filter(Boolean)}})})},
-         table:{head:['Escenario','Se paga sola','Hasta 25 USD/t','Más de 25 USD/t','Total (kt)'],rows:['base','dec'].map(function(k){return [k==='base'?'Plan actual':'Con la decisión'].concat(S[k].t.map(f0)).concat([f0(S[k].a)])})}},
-        {title:'Emisiones hasta 2030',sub:'kt CO₂e por año, con producción estable.',
-         legend:[{c:C.gd,t:'Sin medidas',ln:1},{c:C.gd,t:'Plan actual',ln:1},{c:C.blue,t:'Con la decisión',ln:1},{c:C.ink,t:'Meta 2030',dot:1}],
-         draw:function(h,lb){var tg=yrs.map(function(y,i){return i===yrs.length-1?BASE-TARGET:null});
-           V.line(h,{label:lb,x:yrs.map(String),xTicks:h.clientWidth<360?[0,2,4,6]:[0,1,2,3,4,5,6],yMin:700,yMax:1300,tipFmt:f0,h:260,r:34,
-             series:[{name:'Sin medidas',c:C.gd,w:1.5,dash:'3 4',pts:yrs.map(function(){return BASE}),end:f0(BASE),endDy:-10},
-               {name:'Plan actual',c:C.gd,w:on?1.75:2.5,op:on?.55:1,pts:path(S.base.a),end:f0(BASE-S.base.a),endDy:-10},
-               {name:'Con la decisión',c:C.blue,w:on?2.5:1.75,op:on?1:.45,pts:path(S.dec.a),end:f0(BASE-S.dec.a),endDy:18}],
-             dots:[{name:'Meta 2030',c:C.ink,pts:tg,r:5}]})},
-         table:{head:['Año','Sin medidas','Plan actual','Con la decisión'],rows:yrs.map(function(y,i){return [String(y),f0(BASE),f0(path(S.base.a)[i]),f0(path(S.dec.a)[i])]})}}],
-      read:[
-        {n:1,h:'Dos medidas ya se pagan solas: '+B('fugas de metano (−18 USD/t)')+' y '+B('gas de venteo (−6)')+'. Juntas evitan '+B(f0(free)+' kt/año')+' y ahorran '+f1(freeSave)+' MM USD. El plan actual incluye la captura de CO₂, a '+f0(m6.c)+' USD/t, sobre el precio interno de '+PRICE+'.'},
-        {n:2,h:'El plan actual evita '+B(f0(S.base.a)+' kt')+' y no llega a la meta de '+f0(TARGET)+'. La combinación propuesta evita '+B(f0(S.dec.a)+' kt')+' y la supera.'},
-        {n:3,h:'Con el plan actual, 2030 cierra en '+B(f0(BASE-S.base.a)+' kt')+', '+f0(BASE-S.base.a-(BASE-TARGET))+' sobre la meta de '+f0(BASE-TARGET)+'. Con la decisión cierra en '+B(f0(BASE-S.dec.a)+' kt')+'.'}]}},
-    dec:{what:'Ejecutar primero las cinco medidas de menor costo y postergar la captura de CO₂ hasta que el precio interno del carbono supere los '+f0(m6.c)+' USD/t.',
-      big:f1(save),u:'MM USD menos por año, y se cumple la meta',cap:'El costo neto baja de '+f1(S.base.cost)+' a '+f1(S.dec.cost)+' MM USD por año; el costo por tonelada, de '+f1(S.base.per)+' a '+f1(S.dec.per)+' USD.',
-      gains:['Evita '+B(f0(S.dec.a)+' kt/año')+' de CO₂e en 2030 (meta: '+f0(TARGET)+').','Las dos primeras medidas tienen costo negativo: '+B('se pagan solas')+'.','Si el precio interno sube, el tablero recalcula la curva y avisa cuándo conviene la captura (M6).'],
-      note:'Datos de demostración. Producción estable y emisiones de referencia de '+f0(BASE)+' kt/año.'},
-    agents:function(){return [
-      {who:'Vigía',t:'Detecté que el plan actual evita '+f0(S.base.a)+' kt y no llega a la meta de '+f0(TARGET)+'. Incluye una medida a '+f0(m6.c)+' USD/t, sobre el precio interno de '+PRICE+'.',src:'Fuente: inventario de emisiones y plan de proyectos.'},
-      {who:'Analista',t:'Ordené las '+Mx.length+' medidas por costo por tonelada y sumé hasta superar la meta: '+f0(S.dec.a)+' kt por '+f1(S.dec.cost)+' MM USD al año, contra '+f1(S.base.cost)+' del plan actual.',src:'Cálculo: curva de costo marginal de abatimiento, USD/t.'},
-      {who:'Auditor',t:'Revisé que las reducciones no se cuenten dos veces entre electrificación y eficiencia, y que el factor de emisión de la red esté vigente.',src:'Regla aplicada: factores de emisión con fuente y fecha.'},
-      {who:'Redactor',t:'Escribí el resumen para sostenibilidad y finanzas, con la trayectoria hacia 2030 y las condiciones para sumar la captura de CO₂. Falta su aprobación.',src:'Documento listo para el reporte anual.'}]}
-  };
-}
-
-/* =====================================================================
-   Interfaz
-   ===================================================================== */
-var BOARDS=[board1(),board2(),board3(),board4(),board5()];
-var cur=0,sc='base',tblOn={},runTok=0,cards=[];
-var ROSTER=[['Vigía','Revisa los datos y avisa cuando algo se desvía.'],['Analista','Corre los cálculos y compara escenarios.'],['Auditor','Comprueba reglas, fuentes y que las cifras cierren.'],['Redactor','Escribe la recomendación y deja el registro.']];
-
-function kpiHTML(k){
-  var on=sc==='dec',v,u=k.u||'',sub;
-  if(k.tb!=null){v=on?k.td:k.tb;u=k.tu||'';sub=on?(k.dsub||''):k.sub}
-  else{var n=on?k.dn:k.bn;v=k.f(n);
-    if(!on)sub=k.sub;
-    else{sub='vs '+k.f(k.bn)+(u&&k.bn!==0&&!k.nopct?'':'')+' en el plan actual';
-      if(k.bn!==0&&!k.nopct){var p=(k.dn-k.bn)/Math.abs(k.bn)*100,good=k.good==='none'?'':((p>0)===(k.good==='up')?'up':'dn');sub+=' <span class="'+good+'">'+sgn(p,0)+' %</span>'}
-      else if(k.nopct){var gd=((k.dn-k.bn)>0)===(k.good==='up')?'up':'dn';sub+=' <span class="'+gd+'">'+sgn(k.dn-k.bn,1)+' pts</span>'}
-      else if(k.bn===0){sub=k.sub==='Sin acciones aprobadas'||k.sub==='Nada aprobado todavía'?'Antes: 0':'Antes: 0'}}}
-  return '<div class="l">'+k.l+'</div><div class="v">'+v+(u?'<small>'+u+'</small>':'')+'</div><div class="d">'+sub+'</div>';
-}
-function renderKpis(view){var box=$('kpis');box.textContent='';view.kpis.forEach(function(k){H('div',{'class':'kpi'},box).innerHTML=kpiHTML(k)})}
-
-function legendHTML(l){return l.map(function(x){return '<span><i'+(x.ln?' class="ln"':'')+' style="background:'+x.c+(x.dot?';border-radius:50%':'')+(x.dash?';opacity:.6':'')+'"></i>'+x.t+'</span>'}).join('')}
-function tableHTML(t){return '<table><thead><tr>'+t.head.map(function(x){return '<th scope="col">'+x+'</th>'}).join('')+'</tr></thead><tbody>'+t.rows.map(function(r){return '<tr>'+r.map(function(c,i){return (i===0?'<th scope="row" style="font-weight:600;color:var(--ink)">':'<td>')+c+(i===0?'</th>':'</td>')}).join('')+'</tr>'}).join('')+'</tbody></table>'}
-
-function drawCards(){
-  cards.forEach(function(c){
-    if(c.tbl.hidden===false)return;
-    try{c.spec.draw(c.plot,c.spec.title)}catch(e){c.plot.textContent='No se pudo dibujar este gráfico.';if(window.console)console.error(e)}
-  });
-}
-function renderCharts(view){
-  var box=$('charts');box.textContent='';cards=[];
-  view.charts.forEach(function(spec,i){
-    var card=H('article',{'class':'card'+(spec.wide?' wide':''),'data-n':i+1},box);
-    var ch=H('div',{'class':'ch'},card);
-    H('span',{'class':'badge','aria-hidden':'true'},ch,String(i+1));
-    var t=H('div',null,ch);H('h3',null,t,spec.title);H('p',null,t,spec.sub);
-    var tv=H('button',{'class':'tv',type:'button','aria-pressed':tblOn[i]?'true':'false'},ch,tblOn[i]?'Gráfico':'Tabla');
-    var plot=H('div',{'class':'plot'},card),tbl=H('div',{'class':'tbl'},card);tbl.innerHTML=tableHTML(spec.table);
-    var lg=H('div',{'class':'legend'},card);lg.innerHTML=legendHTML(spec.legend);
-    if(spec.key){var kd=H('div',{'class':'legend'},card);kd.textContent=spec.key}
-    var o={spec:spec,plot:plot,tbl:tbl,card:card,tv:tv};cards.push(o);
-    plot.hidden=!!tblOn[i];tbl.hidden=!tblOn[i];
-    tv.addEventListener('click',function(){tblOn[i]=!tblOn[i];plot.hidden=tbl.hidden=false;if(tblOn[i])plot.hidden=true;else tbl.hidden=true;tv.textContent=tblOn[i]?'Gráfico':'Tabla';tv.setAttribute('aria-pressed',tblOn[i]?'true':'false');V.hideTip();if(!tblOn[i])drawCards()});
-    card.addEventListener('mouseenter',function(){setHL(i+1,true)});card.addEventListener('mouseleave',function(){setHL(i+1,false)});
-  });
-  drawCards();
-}
-function setHL(n,on){
-  cards.forEach(function(c,i){c.card.classList.toggle('hl',on&&i+1===n)});
-  var lis=$('read').children;for(var i=0;i<lis.length;i++)lis[i].classList.toggle('hl',on&&+lis[i].getAttribute('data-n')===n);
-}
-function renderRead(view){
-  var ol=$('read');ol.textContent='';
-  view.read.forEach(function(r){var li=H('li',{'data-n':r.n,tabindex:'0'},ol);H('span',{'class':'badge','aria-hidden':'true'},li,String(r.n));var p=H('span',null,li);p.innerHTML=r.h;
-    li.addEventListener('mouseenter',function(){setHL(r.n,true)});li.addEventListener('mouseleave',function(){setHL(r.n,false)});
-    li.addEventListener('focus',function(){setHL(r.n,true)});li.addEventListener('blur',function(){setHL(r.n,false)})});
-}
-function renderDec(){
-  var d=BOARDS[cur].dec,el=$('dec');
-  el.innerHTML='<h3>Decisión que sugiere el tablero</h3><p class="what">'+d.what+'</p><div class="hero"><span class="big">'+d.big+'</span><span class="u">'+d.u+'</span></div><p class="cap">'+d.cap+'</p><ul class="gain">'+d.gains.map(function(g){return '<li>'+g+'</li>'}).join('')+'</ul><div class="row"><button type="button" class="btn lite" id="apply"></button></div><p class="note">'+d.note+'</p>';
-  var a=$('apply');a.textContent=sc==='dec'?'Volver al plan actual':'Ver el tablero con la decisión';
-  a.addEventListener('click',function(){setScenario(sc==='dec'?'base':'dec')});
-}
-function renderAll(){
-  var B_=BOARDS[cur],view=B_.view(sc);
-  $('bq').textContent=B_.q;$('bmeta').innerHTML=B_.meta;
-  renderKpis(view);renderCharts(view);renderRead(view);renderDec();
-  $('sc-base').setAttribute('aria-pressed',sc==='base');$('sc-dec').setAttribute('aria-pressed',sc==='dec');
-}
-function setScenario(s){if(s===sc)return;sc=s;V.hideTip();renderAll()}
-
-function renderTabs(){
-  var box=$('tabs');box.textContent='';
-  BOARDS.forEach(function(b,i){
-    var t=H('button',{type:'button',role:'tab',id:'tab-'+b.id,'aria-selected':i===cur?'true':'false','aria-controls':'main',tabindex:i===cur?'0':'-1','class':'tab'},box);
-    H('b',null,t,b.tab);H('span',null,t,b.short);
-    t.addEventListener('click',function(){selectBoard(i,true)});
-    t.addEventListener('keydown',function(e){var n=null;if(e.key==='ArrowRight')n=(i+1)%BOARDS.length;else if(e.key==='ArrowLeft')n=(i+BOARDS.length-1)%BOARDS.length;else if(e.key==='Home')n=0;else if(e.key==='End')n=BOARDS.length-1;if(n!=null){e.preventDefault();selectBoard(n,true);$('tab-'+BOARDS[n].id).focus()}});
-  });
-}
-function selectBoard(i,push){
-  cur=i;sc='base';tblOn={};resetAgents();renderTabs();renderAll();
-  if(push){try{history.replaceState(null,'','#'+BOARDS[i].id)}catch(e){}}
-  var t=$('tab-'+BOARDS[i].id);if(t&&t.scrollIntoView&&t.offsetParent){try{var box=$('tabs');if(box.scrollWidth>box.clientWidth)box.scrollLeft=t.offsetLeft-16}catch(e){}}
-}
-
-/* ---------------- agentes ---------------- */
-function resetAgents(){runTok++;$('log').textContent='';$('gate').className='';$('gate').textContent='';var r=$('run');r.disabled=false;r.textContent='Ejecutar agentes'}
-function renderRoster(){var box=$('roster');box.textContent='';ROSTER.forEach(function(r){var d=H('div',{'class':'ag'},box);H('b',null,d,r[0]);d.appendChild(document.createTextNode(r[1]))})}
-var RUNMSG={'Vigía':'Revisando datos y alertas…','Analista':'Calculando escenarios…','Auditor':'Verificando supuestos y fuentes…','Redactor':'Redactando la recomendación…'};
-function logLine(li,s,done){li.className=done?'':'run';li.innerHTML='<div class="who"><i class="st"></i>'+s.who+'</div><div>'+(done?s.t+'<em>'+s.src+'</em>':RUNMSG[s.who])+'</div>'}
-function runAgents(){
-  var tok=++runTok,steps=BOARDS[cur].agents(),log=$('log'),gate=$('gate'),btn=$('run'),i=0;
-  log.textContent='';gate.className='';gate.textContent='';btn.disabled=true;btn.textContent='Ejecutando…';
-  function next(){
-    if(tok!==runTok)return;
-    if(i>=steps.length){finish();return}
-    var s=steps[i],li=H('li',null,log);logLine(li,s,false);
-    setTimeout(function(){if(tok!==runTok)return;logLine(li,s,true);i++;next()},reduce?120:950);
-  }
-  function finish(){
-    btn.disabled=false;btn.textContent='Ejecutar de nuevo';
-    gate.className='gate';
-    gate.innerHTML='<span><b>Propuesta lista para decidir.</b> Los agentes no aprueban: la decisión es suya y queda registrada.</span><span style="display:flex;gap:10px;flex-wrap:wrap"><button type="button" class="btn pri" id="ok">Aprobar y aplicar al tablero</button><button type="button" class="btn ghost" id="no">Pedir cambios</button></span>';
-    $('ok').addEventListener('click',function(){
-      if(tok!==runTok)return;
-      var now=new Date(),stamp=now.toLocaleDateString('es-AR');
-      gate.innerHTML='<span><b>Decisión aprobada (demo).</b> Se registró: fecha '+stamp+', datos y fuentes usados, versión del cálculo y quién aprobó.</span>';
-      setScenario('dec');
-      var sec=$('charts');if(sec&&sec.scrollIntoView&&!reduce){try{$('main').scrollIntoView({behavior:'smooth',block:'start'})}catch(e){}}
-    });
-    $('no').addEventListener('click',function(){if(tok!==runTok)return;gate.innerHTML='<span><b>Devuelto a los agentes.</b> Indique qué cambiar (por ejemplo, otro presupuesto o criterio) y vuelva a ejecutarlos.</span>'});
-  }
-  next();
-}
-
-/* ---------------- arranque ---------------- */
-function init(){
-  renderRoster();
-  $('sc-base').addEventListener('click',function(){setScenario('base')});
-  $('sc-dec').addEventListener('click',function(){setScenario('dec')});
-  $('run').addEventListener('click',runAgents);
-  var h=(location.hash||'').replace('#',''),start=0;BOARDS.forEach(function(b,i){if(b.id===h)start=i});
-  selectBoard(start,false);
-  var lw=window.innerWidth,tm=null;
-  window.addEventListener('resize',function(){clearTimeout(tm);tm=setTimeout(function(){if(Math.abs(window.innerWidth-lw)<2)return;lw=window.innerWidth;V.hideTip();drawCards()},160)});
-  window.addEventListener('hashchange',function(){var h=(location.hash||'').replace('#','');BOARDS.forEach(function(b,i){if(b.id===h&&i!==cur)selectBoard(i,false)})});
-}
-init();
-window.H3LBoards={open:function(id){BOARDS.forEach(function(b,i){if(b.id===id)selectBoard(i,true)});var p=$('pick');if(p&&p.scrollIntoView){try{p.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'})}catch(e){}}}};
-})();
-</script>
+<script src="lang-dash.js"></script>
+<script src="lang-b12.js"></script>
+<script src="lang-b345.js"></script>
+<script src="lang-ask.js"></script>
+<script src="boards.js"></script>
 <script src="ask.js" defer></script>
 <script src="chat.js" defer></script>
 </body>

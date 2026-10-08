@@ -1,0 +1,121 @@
+/* H3L · textos de la página de tableros: estructura, gráficos e interfaz (es, en, fr, pt). Desarrollado por Leandro Collell. */
+(function(){'use strict';
+var o={es:{},en:{},fr:{},pt:{}};
+function A(k,es,en,fr,pt){o.es[k]=es;o.en[k]=en;o.fr[k]=fr;o.pt[k]=pt}
+
+/* ---- página ---- */
+A('d.title',"Tableros de decisión — H3L Global Energy","Decision boards — H3L Global Energy","Tableaux de décision — H3L Global Energy","Painéis de decisão — H3L Global Energy");
+A('d.desc',"Cómo H3L convierte datos, cálculos de ingeniería y agentes de IA en tableros que terminan en una decisión: estratégicos, operativos, tácticos, de reservas y de transición energética.","How H3L turns data, engineering calculations and AI agents into boards that end in a decision: strategic, operational, tactical, reserves and energy transition.","Comment H3L transforme données, calculs d’ingénierie et agents IA en tableaux qui débouchent sur une décision : stratégiques, opérationnels, tactiques, de réserves et de transition énergétique.","Como a H3L transforma dados, cálculos de engenharia e agentes de IA em painéis que terminam em uma decisão: estratégicos, operacionais, táticos, de reservas e de transição energética.");
+A('d.navDash',"Tableros","Dashboards","Tableaux","Painéis");
+A('d.demo',"Solicitar demostración","Request a demo","Demander une démo","Solicitar demonstração");
+A('d.h1',"Un tablero sirve si termina en una decisión.","A board is only useful if it ends in a decision.","Un tableau ne vaut que s’il débouche sur une décision.","Um painel só serve se terminar em uma decisão.");
+A('d.lead',"Cinco tableros de demostración muestran cómo H3L junta datos, cálculos de ingeniería y agentes de IA para que cada área sepa qué hacer y pueda justificarlo ante su comité, su auditor o su directorio.","Five demo boards show how H3L brings together data, engineering calculations and AI agents so every area knows what to do and can justify it to its committee, its auditor or its board.","Cinq tableaux de démonstration montrent comment H3L réunit données, calculs d’ingénierie et agents IA pour que chaque service sache quoi faire et puisse le justifier devant son comité, son auditeur ou son conseil.","Cinco painéis de demonstração mostram como a H3L reúne dados, cálculos de engenharia e agentes de IA para que cada área saiba o que fazer e possa justificar perante seu comitê, seu auditor ou sua diretoria.");
+A('d.mh',"Cómo se construye cada tablero","How each board is built","Comment chaque tableau est construit","Como cada painel é construído");
+A('d.m1b',"Se define la decisión.","The decision is defined.","On définit la décision.","Define-se a decisão.");
+A('d.m1t',"Quién decide, cada cuánto y con qué criterio.","Who decides, how often and by what criterion.","Qui décide, à quelle fréquence et selon quel critère.","Quem decide, com que frequência e com qual critério.");
+A('d.m2b',"Se validan los datos.","The data is validated.","On valide les données.","Validam-se os dados.");
+A('d.m2t',"Fuentes, calidad y reglas, como SPE-PRMS en reservas.","Sources, quality and rules, such as SPE-PRMS for reserves.","Sources, qualité et règles, comme SPE-PRMS pour les réserves.","Fontes, qualidade e regras, como a SPE-PRMS em reservas.");
+A('d.m3b',"Se modela con cálculos certificados.","It is modeled with certified calculations.","On modélise avec des calculs certifiés.","Modela-se com cálculos certificados.");
+A('d.m3t',"Las mismas calculadoras de ingeniería de H3L.","The same H3L engineering calculators.","Les mêmes calculateurs d’ingénierie de H3L.","As mesmas calculadoras de engenharia da H3L.");
+A('d.m4b',"Los agentes vigilan, explican y proponen.","Agents watch, explain and propose.","Les agents surveillent, expliquent et proposent.","Os agentes vigiam, explicam e propõem.");
+A('d.m4t',"Siempre con las fuentes a la vista.","Always with the sources in view.","Toujours avec les sources à la vue.","Sempre com as fontes à vista.");
+A('d.m5b',"La persona decide y queda registro.","A person decides and it is logged.","La personne décide et tout est consigné.","A pessoa decide e fica registrado.");
+A('d.m5t',"Qué se aprobó, con qué datos y qué versión del modelo.","What was approved, with which data and which model version.","Ce qui a été approuvé, avec quelles données et quelle version du modèle.","O que foi aprovado, com quais dados e qual versão do modelo.");
+A('d.tabsAria',"Tipo de decisión","Decision type","Type de décision","Tipo de decisão");
+A('d.scen',"Escenario","Scenario","Scénario","Cenário");
+A('d.asideAria',"Lectura integrada y decisión","Integrated reading and decision","Lecture intégrée et décision","Leitura integrada e decisão");
+A('d.read',"Lectura integrada","Integrated reading","Lecture intégrée","Leitura integrada");
+A('d.readSub',"Cada número remite al gráfico del mismo número.","Each number points to the chart with the same number.","Chaque numéro renvoie au graphique du même numéro.","Cada número remete ao gráfico de mesmo número.");
+A('d.agt',"Agentes sobre este tablero","Agents on this board","Agents sur ce tableau","Agentes neste painel");
+A('d.agp',"Cuatro agentes con funciones distintas revisan el tablero antes de que alguien decida. Ninguno aprueba por su cuenta: la decisión es de una persona.","Four agents with distinct roles review the board before anyone decides. None approves on its own: the decision belongs to a person.","Quatre agents aux fonctions distinctes examinent le tableau avant toute décision. Aucun n’approuve seul : la décision revient à une personne.","Quatro agentes com funções distintas revisam o painel antes que alguém decida. Nenhum aprova por conta própria: a decisão é de uma pessoa.");
+A('d.sim',"Simulación con datos de demostración. En un proyecto real los agentes consultan sus propias fuentes y guardan cada paso para auditoría.","Simulation with demo data. In a real project the agents query their own sources and save each step for audit.","Simulation avec des données de démonstration. Dans un projet réel, les agents consultent leurs propres sources et conservent chaque étape pour l’audit.","Simulação com dados de demonstração. Em um projeto real os agentes consultam suas próprias fontes e guardam cada passo para auditoria.");
+A('d.how',"Del primer tablero a decisiones con respaldo.","From the first board to decisions with backing.","Du premier tableau à des décisions étayées.","Do primeiro painel a decisões com respaldo.");
+A('d.howp',"No hace falta rehacer sus sistemas. Se empieza por una decisión concreta y se amplía a medida que el equipo confía en los resultados.","There is no need to rebuild your systems. You start with one concrete decision and expand as the team trusts the results.","Inutile de refaire vos systèmes. On commence par une décision concrète et on élargit à mesure que l’équipe fait confiance aux résultats.","Não é preciso refazer seus sistemas. Começa-se por uma decisão concreta e amplia-se à medida que a equipe confia nos resultados.");
+A('d.s1b',"Elegimos la decisión que más le pesa.","We pick the decision that weighs on you most.","Nous choisissons la décision qui vous pèse le plus.","Escolhemos a decisão que mais pesa para você.");
+A('d.s1t',"Una pregunta con dueño, frecuencia y consecuencias claras.","A question with an owner, a frequency and clear consequences.","Une question avec un responsable, une fréquence et des conséquences claires.","Uma pergunta com dono, frequência e consequências claras.");
+A('d.s2b',"Conectamos y validamos sus datos.","We connect and validate your data.","Nous connectons et validons vos données.","Conectamos e validamos seus dados.");
+A('d.s2t',"Se revisan fuentes, unidades y reglas antes de graficar nada.","Sources, units and rules are reviewed before anything is charted.","Sources, unités et règles sont vérifiées avant tout graphique.","Revisam-se fontes, unidades e regras antes de graficar qualquer coisa.");
+A('d.s3b',"Entregamos el tablero y los agentes.","We deliver the board and the agents.","Nous livrons le tableau et les agents.","Entregamos o painel e os agentes.");
+A('d.s3t',"Con supuestos visibles, sensibilidad y registro de cada decisión.","With visible assumptions, sensitivity and a log of each decision.","Avec hypothèses visibles, sensibilité et registre de chaque décision.","Com premissas visíveis, sensibilidade e registro de cada decisão.");
+A('d.ctaH',"Empecemos por la decisión que su equipo más necesita justificar.","Let’s start with the decision your team most needs to justify.","Commençons par la décision que votre équipe a le plus besoin de justifier.","Vamos começar pela decisão que sua equipe mais precisa justificar.");
+A('d.ctaP',"Traiga una pregunta y una muestra de datos. Le mostramos cómo quedaría su tablero y qué agentes lo acompañarían.","Bring a question and a data sample. We will show you what your board would look like and which agents would support it.","Apportez une question et un échantillon de données. Nous vous montrons à quoi ressemblerait votre tableau et quels agents l’accompagneraient.","Traga uma pergunta e uma amostra de dados. Mostramos como ficaria o seu painel e quais agentes o acompanhariam.");
+A('d.cta1',"Solicitar una demostración","Request a demo","Demander une démonstration","Solicitar uma demonstração");
+A('d.cta2',"Ver los agentes de H3L","See the H3L agents","Voir les agents H3L","Ver os agentes da H3L");
+A('d.foot1b',"Datos de demostración.","Demo data.","Données de démonstration.","Dados de demonstração.");
+A('d.foot1',"Los cinco tableros usan un portafolio ficticio para ilustrar el método. Las cifras no corresponden a un cliente ni a resultados garantizados.","The five boards use a fictional portfolio to illustrate the method. The figures do not correspond to any client or guaranteed results.","Les cinq tableaux utilisent un portefeuille fictif pour illustrer la méthode. Les chiffres ne correspondent ni à un client ni à des résultats garantis.","Os cinco painéis usam um portfólio fictício para ilustrar o método. Os números não correspondem a um cliente nem a resultados garantidos.");
+A('d.foot2',"H3L Global Energy · Desarrollado por Leandro Collell · <a href=\"index.html\">Volver al inicio</a>","H3L Global Energy · Developed by Leandro Collell · <a href=\"index.html\">Back to home</a>","H3L Global Energy · Développé par Leandro Collell · <a href=\"index.html\">Retour à l’accueil</a>","H3L Global Energy · Desenvolvido por Leandro Collell · <a href=\"index.html\">Voltar ao início</a>");
+
+/* ---- gráficos ---- */
+A('v.value',"Valor","Value","Valeur","Valor");
+A('v.low',"Caso bajo","Low case","Cas bas","Caso baixo");
+A('v.high',"Caso alto","High case","Cas haut","Caso alto");
+A('v.cost',"Costo","Cost","Coût","Custo");
+A('v.avoid',"Evita","Avoids","Évite","Evita");
+A('v.annual',"Resultado anual","Annual result","Résultat annuel","Resultado anual");
+A('v.ktyr',"kt/año","kt/yr","kt/an","kt/ano");
+A('v.kusd',"mil USD","k USD","k USD","mil USD");
+A('v.axis',"kt CO₂e evitadas por año (acumulado)","kt CO₂e avoided per year (cumulative)","kt CO₂e évitées par an (cumulé)","kt CO₂e evitadas por ano (acumulado)");
+A('v.arrows',"Use las flechas para recorrer los puntos.","Use the arrow keys to move between points.","Utilisez les flèches pour parcourir les points.","Use as setas para percorrer os pontos.");
+A('v.chart',"Gráfico","Chart","Graphique","Gráfico");
+A('v.to',"a","to","à","a");
+A('v.fail',"No se pudo dibujar este gráfico.","This chart could not be drawn.","Impossible de dessiner ce graphique.","Não foi possível desenhar este gráfico.");
+
+/* ---- comunes de los tableros ---- */
+A('c.today',"Hoy","Today","Auj.","Hoje");
+A('c.dayU',"d","d","j","d");
+A('c.yearU',"a","y","an","a");
+A('c.and'," y "," and "," et "," e ");
+A('c.months',"Ene|Feb|Mar|Abr|May|Jun|Jul|Ago|Sep|Oct|Nov|Dic","Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec","Jan|Fév|Mar|Avr|Mai|Juin|Juil|Aoû|Sep|Oct|Nov|Déc","Jan|Fev|Mar|Abr|Mai|Jun|Jul|Ago|Set|Out|Nov|Dez");
+A('c.plan',"Plan actual","Current plan","Plan actuel","Plano atual");
+A('c.planS',"Plan","Plan","Plan","Plano");
+A('c.dec',"Con la decisión","With the decision","Avec la décision","Com a decisão");
+A('c.final',"Final","Final","Final","Final");
+A('c.real',"Real","Actual","Réel","Real");
+A('c.target',"Meta","Target","Objectif","Meta");
+A('c.musd',"MM USD","MM USD","M USD","MM USD");
+A('c.mm',"MM","MM","M","MM");
+A('c.fund',"Financiado","Funded","Financé","Financiado");
+A('c.nofund',"Sin fondos","Unfunded","Non financé","Sem recursos");
+A('m.dec',"Decide:","Decides:","Décide :","Decide:");
+A('m.freq',"Frecuencia:","Frequency:","Fréquence :","Frequência:");
+A('m.crit',"Criterio:","Criterion:","Critère :","Critério:");
+A('x.npv',"VPN","NPV","VAN","VPL");
+A('x.pi',"VPI","PI","IP","IL");
+A('f.Norte',"Norte","North","Nord","Norte");
+A('f.Sur',"Sur","South","Sud","Sul");
+A('f.Costa',"Costa","Coast","Côte","Costa");
+A('f.Altiplano',"Altiplano","Highlands","Haut plateau","Altiplano");
+A('f.Valle',"Valle","Valley","Vallée","Vale");
+A('ag.vig',"Vigía","Watcher","Vigie","Vigia");
+A('ag.ana',"Analista","Analyst","Analyste","Analista");
+A('ag.aud',"Auditor","Auditor","Auditeur","Auditor");
+A('ag.red',"Redactor","Writer","Rédacteur","Redator");
+A('ag.vigR',"Revisa los datos y avisa cuando algo se desvía.","Reviews the data and warns when something drifts.","Examine les données et prévient en cas de dérive.","Revisa os dados e avisa quando algo se desvia.");
+A('ag.anaR',"Corre los cálculos y compara escenarios.","Runs the calculations and compares scenarios.","Exécute les calculs et compare les scénarios.","Roda os cálculos e compara cenários.");
+A('ag.audR',"Comprueba reglas, fuentes y que las cifras cierren.","Checks rules, sources and that the numbers add up.","Vérifie les règles, les sources et la cohérence des chiffres.","Confere regras, fontes e se os números fecham.");
+A('ag.redR',"Escribe la recomendación y deja el registro.","Writes the recommendation and keeps the record.","Rédige la recommandation et tient le registre.","Escreve a recomendação e deixa o registro.");
+A('ag.vigW',"Revisando datos y alertas…","Reviewing data and alerts…","Examen des données et des alertes…","Revisando dados e alertas…");
+A('ag.anaW',"Calculando escenarios…","Calculating scenarios…","Calcul des scénarios…","Calculando cenários…");
+A('ag.audW',"Verificando supuestos y fuentes…","Checking assumptions and sources…","Vérification des hypothèses et des sources…","Verificando premissas e fontes…");
+A('ag.redW',"Redactando la recomendación…","Drafting the recommendation…","Rédaction de la recommandation…","Redigindo a recomendação…");
+A('ag.doc',"Documento listo para exportar.","Document ready to export.","Document prêt à exporter.","Documento pronto para exportar.");
+
+/* ---- interfaz de los tableros ---- */
+A('u.table',"Tabla","Table","Tableau","Tabela");
+A('u.vs',"vs {v} en el plan actual","vs {v} in the current plan","vs {v} dans le plan actuel","vs {v} no plano atual");
+A('u.pts',"pts","pts","pts","pts");
+A('u.before0',"Antes: 0","Before: 0","Avant : 0","Antes: 0");
+A('u.decH',"Decisión que sugiere el tablero","Decision the board suggests","Décision suggérée par le tableau","Decisão que o painel sugere");
+A('u.back',"Volver al plan actual","Back to the current plan","Revenir au plan actuel","Voltar ao plano atual");
+A('u.see',"Ver el tablero con la decisión","See the board with the decision","Voir le tableau avec la décision","Ver o painel com a decisão");
+A('u.run',"Ejecutar agentes","Run agents","Lancer les agents","Executar agentes");
+A('u.running',"Ejecutando…","Running…","Exécution…","Executando…");
+A('u.again',"Ejecutar de nuevo","Run again","Relancer","Executar de novo");
+A('u.gate',"<b>Propuesta lista para decidir.</b> Los agentes no aprueban: la decisión es suya y queda registrada.","<b>Proposal ready for a decision.</b> The agents do not approve: the decision is yours and is logged.","<b>Proposition prête pour décision.</b> Les agents n’approuvent pas : la décision vous revient et elle est consignée.","<b>Proposta pronta para decidir.</b> Os agentes não aprovam: a decisão é sua e fica registrada.");
+A('u.ok',"Aprobar y aplicar al tablero","Approve and apply to the board","Approuver et appliquer au tableau","Aprovar e aplicar ao painel");
+A('u.no',"Pedir cambios","Request changes","Demander des modifications","Pedir alterações");
+A('u.approved',"<b>Decisión aprobada (demo).</b> Se registró: fecha {d}, datos y fuentes usados, versión del cálculo y quién aprobó.","<b>Decision approved (demo).</b> Logged: date {d}, data and sources used, calculation version and who approved.","<b>Décision approuvée (démo).</b> Consigné : date {d}, données et sources utilisées, version du calcul et approbateur.","<b>Decisão aprovada (demo).</b> Registrado: data {d}, dados e fontes usados, versão do cálculo e quem aprovou.");
+A('u.returned',"<b>Devuelto a los agentes.</b> Indique qué cambiar (por ejemplo, otro presupuesto o criterio) y vuelva a ejecutarlos.","<b>Returned to the agents.</b> Say what to change (for example, another budget or criterion) and run them again.","<b>Renvoyé aux agents.</b> Indiquez ce qu’il faut changer (par exemple un autre budget ou critère) et relancez-les.","<b>Devolvido aos agentes.</b> Indique o que mudar (por exemplo, outro orçamento ou critério) e execute-os novamente.");
+
+window.__H3L_DASH_A=A;window.__H3L_DASH_O=o;
+})();
