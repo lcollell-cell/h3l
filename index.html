@@ -325,15 +325,15 @@ input,select,textarea{font-family:var(--font-body);}
   overflow:hidden;
 }
 /* Animated slides */
-.hero-slides{position:absolute;inset:0;z-index:0;}
+.hero-slides{position:absolute;top:0;right:0;bottom:0;left:0;z-index:0;}
 .hero-slide{
-  position:absolute;inset:0;opacity:0;
+  position:absolute;top:0;right:0;bottom:0;left:0;opacity:0;
   transition:opacity 1.2s ease;
 }
 .hero-slide.active{opacity:1;}
 /* Overlay gradient */
 .hero-overlay{
-  position:absolute;inset:0;z-index:1;
+  position:absolute;top:0;right:0;bottom:0;left:0;z-index:1;
   background:linear-gradient(
     105deg,
     rgba(11,30,55,0.88) 0%,
@@ -410,7 +410,7 @@ input,select,textarea{font-family:var(--font-body);}
 .stats-row{
   display:flex;gap:0;
   border:1px solid rgba(255,255,255,.15);border-radius:4px;
-  overflow:hidden;backdrop-filter:blur(4px);
+  overflow:hidden;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);
   background:rgba(0,0,0,.20);
   animation:fadeInUp .8s ease .4s both;
   max-width:600px;
@@ -586,8 +586,8 @@ input,select,textarea{font-family:var(--font-body);}
 
 /* ── MODAL ── */
 .modal-overlay{
-  display:none;position:fixed;inset:0;z-index:2000;
-  background:rgba(0,0,0,0.5);backdrop-filter:blur(4px);
+  display:none;position:fixed;top:0;right:0;bottom:0;left:0;z-index:2000;
+  background:rgba(0,0,0,0.5);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);
   align-items:center;justify-content:center;padding:20px;
 }
 .modal-overlay.open{display:flex;}
@@ -3932,8 +3932,8 @@ tr:hover td{background:var(--blue-ghost);}
   </div>
 
   <!-- Demo modal overlay -->
-  <div id="og-modal-overlay" onclick="closeOGModal()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(3px);z-index:2000;"></div>
-  <div id="og-modal-wrap" style="display:none;position:fixed;inset:40px;z-index:2001;background:#fff;border-radius:12px;box-shadow:0 24px 64px rgba(0,0,0,.3);display:none;flex-direction:column;overflow:hidden;">
+  <div id="og-modal-overlay" onclick="closeOGModal()" style="display:none;position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(0,0,0,.55);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);z-index:2000;"></div>
+  <div id="og-modal-wrap" style="display:none;position:fixed;top:40px;right:40px;bottom:40px;left:40px;z-index:2001;background:#fff;border-radius:12px;box-shadow:0 24px 64px rgba(0,0,0,.3);display:none;flex-direction:column;overflow:hidden;">
     <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:var(--blue-dark);color:#fff;flex-shrink:0;">
       <div>
         <div id="og-modal-label" style="font-size:11px;font-family:var(--font-mono);opacity:.75;margin-bottom:2px;"></div>
@@ -4036,7 +4036,7 @@ tr:hover td{background:var(--blue-ghost);}
   </div>
 
   <!-- ET modal overlay -->
-  <div id="et-modal-overlay" onclick="closeETModal()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(3px);z-index:2000;"></div>
+  <div id="et-modal-overlay" onclick="closeETModal()" style="display:none;position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(0,0,0,.55);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);z-index:2000;"></div>
   <div id="et-modal-wrap" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:620px;max-width:95vw;max-height:90vh;overflow-y:auto;z-index:2001;background:#fff;border-radius:12px;box-shadow:0 24px 64px rgba(0,0,0,.3);">
     <div style="background:var(--blue-dark);color:#fff;padding:16px 20px;border-radius:12px 12px 0 0;display:flex;justify-content:space-between;align-items:flex-start;">
       <div>
@@ -5773,7 +5773,7 @@ function enviarContacto(){
   if(!mensaje){if(status)status.innerHTML='<span style="color:var(--danger)">Escribí tu consulta</span>';return;}
   const subject=encodeURIComponent('Consulta H3L — '+nombre+' '+apellido);
   const body=encodeURIComponent('Nombre: '+nombre+' '+apellido+'\nEmail: '+email+'\nEmpresa: '+empresa+'\n\n'+mensaje);
-  window.open('mailto:info@nexeraconsulting.com?subject='+subject+'&body='+body,'_blank');
+  window.location.href='mailto:info@nexeraconsulting.com?subject='+subject+'&body='+body; /* Safari bloquea window.open para mailto */
   if(status)status.innerHTML='<span style="color:var(--success)">Abriendo cliente de email...</span>';
   setTimeout(()=>{if(status)status.innerHTML='';},3000);
 }

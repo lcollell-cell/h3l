@@ -178,6 +178,44 @@ main{padding:32px 0 8px}
 .foot .wrap{border-top:1px solid rgba(255,255,255,.12);padding-top:20px}
 .foot a{color:#C9D3E6}
 
+
+/* ---------- Consulta en lenguaje natural y vigilancia ---------- */
+.ask{background:var(--surface);border-bottom:1px solid var(--line);padding:40px 0 36px}
+.ask-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:48px;align-items:start}
+.ask h2{font-size:clamp(24px,3vw,32px);font-weight:700;line-height:1.15;letter-spacing:-.015em;max-width:18em}
+.ask .lede{font-size:15px;color:var(--ink-2);margin-top:10px;max-width:34em}
+#ask-f{display:flex;gap:10px;margin-top:20px}
+#ask-q{flex:1;min-width:0;min-height:48px;border:1px solid #AEB8C7;border-radius:8px;padding:0 14px;font-family:inherit;font-size:16px;font-weight:500;background:#fff;color:var(--ink)}
+#ask-q::placeholder{color:var(--ink-3)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chips button{min-height:36px;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--paper);font-size:13px;font-weight:600;color:var(--ink)}
+.chips button:hover{background:var(--line-2)}
+.watch h3{font-size:16px;font-weight:700}
+.watch .sub{font-size:13px;color:var(--ink-2);margin-top:2px}
+.alist{list-style:none;margin-top:12px;border-top:1px solid var(--line)}
+.alist button.al{display:grid;grid-template-columns:12px minmax(0,1fr) auto;gap:12px;align-items:start;width:100%;text-align:left;padding:12px 4px;border-bottom:1px solid var(--line);font-size:14px;line-height:1.45}
+.alist button.al:hover{background:var(--paper)}
+.alist .dot{width:10px;height:10px;border-radius:50%;margin-top:6px;background:var(--red)}
+.alist .dot.mid{background:var(--orange)}
+.alist b{font-weight:700}
+.alist small{display:block;font-size:12.5px;color:var(--ink-2)}
+.alist .go{font-size:13px;font-weight:600;color:var(--blue-ink);white-space:nowrap}
+.watch .ok{font-size:14px;color:var(--ink-2);margin-top:12px}
+.out{margin-top:28px;padding-top:24px;border-top:1px solid var(--line);scroll-margin-top:90px}
+.out .tag{font-size:13px;font-weight:600;color:var(--blue-ink)}
+.out h3.q{font-size:clamp(20px,2.4vw,26px);font-weight:700;line-height:1.2;letter-spacing:-.01em;margin-top:4px}
+.out .understood{font-size:14px;color:var(--ink-2);margin-top:6px}
+.out .understood b{color:var(--ink)}
+.out .pipe{margin:14px 0 22px}
+.out .pipe .log{margin-top:0}
+.src{list-style:none;margin-top:10px;border-top:1px solid var(--line)}
+.src li{padding:10px 0;border-bottom:1px solid var(--line-2);font-size:13px;line-height:1.5;color:var(--ink-2)}
+.src li b{color:var(--ink);font-weight:700}
+.src li span.sc{float:right;font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin-left:12px}
+.srcs h3{font-size:16px;font-weight:700}
+.out .bad{color:#B23A3A;font-weight:700}
+@media (max-width:900px){.ask-grid{grid-template-columns:minmax(0,1fr);gap:28px}#ask-f{flex-direction:column}}
+
 /* ---------- Tooltip ---------- */
 #tip{position:fixed;z-index:50;pointer-events:none;background:var(--ink);color:#fff;border-radius:6px;padding:8px 10px;font-size:12.5px;line-height:1.45;max-width:260px;box-shadow:0 6px 20px rgba(0,0,0,.25);opacity:0;transition:opacity .1s}
 #tip.on{opacity:1}
@@ -253,6 +291,21 @@ main{padding:32px 0 8px}
     </div>
   </div>
 </header>
+
+<section class="ask" id="ask" aria-labelledby="ask-t">
+  <div class="wrap">
+    <div class="ask-grid">
+      <div>
+        <h2 id="ask-t">Pregunte en sus palabras y el tablero se arma solo.</h2>
+        <p class="lede">Escriba lo que quiere verificar. Un equipo de agentes busca en la documentación, calcula con los datos y dibuja los gráficos que hacen falta para responder.</p>
+        <form id="ask-f" autocomplete="off"><label class="sr" for="ask-q">Su consulta</label><input id="ask-q" type="text" maxlength="160" placeholder="Ej.: ¿Por qué bajó la producción de Costa?"><button class="btn pri" type="submit">Armar tablero</button></form>
+        <div class="chips" id="ask-chips"></div>
+      </div>
+      <div class="watch" id="watch" aria-live="polite"></div>
+    </div>
+    <div id="ask-out"></div>
+  </div>
+</section>
 
 <div class="pick" id="pick">
   <div class="wrap">
@@ -973,8 +1026,10 @@ function init(){
   window.addEventListener('hashchange',function(){var h=(location.hash||'').replace('#','');BOARDS.forEach(function(b,i){if(b.id===h&&i!==cur)selectBoard(i,false)})});
 }
 init();
+window.H3LBoards={open:function(id){BOARDS.forEach(function(b,i){if(b.id===id)selectBoard(i,true)});var p=$('pick');if(p&&p.scrollIntoView){try{p.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'})}catch(e){}}}};
 })();
 </script>
+<script src="ask.js" defer></script>
 <script src="chat.js" defer></script>
 </body>
 </html>
