@@ -555,6 +555,14 @@ input,select,textarea{font-family:var(--font-body);}
 .calc-cat-btn:hover,.calc-cat-btn.active{
   background:var(--blue-pale);border-color:var(--blue-core);color:var(--blue-core);
 }
+/* Calculadoras por flujo: pestañas y marcos incrustados */
+.calc-tab-btn{padding:8px 20px;border-radius:3px;border:1px solid var(--border);background:transparent;color:var(--text-secondary);font-family:var(--font-body);font-size:13px;font-weight:600;letter-spacing:.4px;cursor:pointer;transition:var(--transition);}
+.calc-tab-btn:hover,.calc-tab-btn.active{background:var(--blue-pale);border-color:var(--blue-core);color:var(--blue-core);}
+.calc-draft{max-width:1200px;margin:0 auto 14px;font-size:12px;color:var(--text-secondary);text-align:center;}
+.calc-panel{max-width:1200px;margin:0 auto;}
+.calc-panel[hidden]{display:none;}
+.calc-panel iframe{display:block;width:100%;height:calc(100vh - 230px);min-height:680px;border:1px solid var(--border);border-radius:var(--radius);background:#fff;}
+@media (max-width:700px){.calc-panel iframe{height:calc(100vh - 170px);min-height:560px;}}
 .calc-grid{
   display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));
   gap:18px;max-width:1200px;margin:0 auto;
@@ -1955,23 +1963,33 @@ tr:hover td{background:var(--blue-ghost);}
   <section id="section-calculators" class="section">
     <div class="section-header">
       <div class="section-eyebrow">Motor de Cálculo</div>
-      <h2 class="section-title">40 Calculadoras Especializadas</h2>
-      <p class="section-desc">Fórmulas certificadas para ingeniería de reservorio, ESG, transición energética y más</p>
+      <h2 class="section-title">Calculadoras por Flujo de Trabajo</h2>
+      <p class="section-desc">Del primer análisis al entregable, en orden de uso y según la estrategia de explotación (VCDE, equivalente a FEL)</p>
     </div>
-    <div class="calc-categories">
-      <button class="calc-cat-btn active" onclick="filterCalcs('all',this)">Todas</button>
-      <button class="calc-cat-btn" onclick="filterCalcs('reservoir',this)">🏗️ Reservorio</button>
-      <button class="calc-cat-btn" onclick="filterCalcs('energy',this)">🌱 Energy Transition</button>
-      <button class="calc-cat-btn" onclick="filterCalcs('ambiental',this)">🌍 Ambiental</button>
-      <button class="calc-cat-btn" onclick="filterCalcs('esg',this)">📊 ESG</button>
-      <button class="calc-cat-btn" onclick="filterCalcs('methane',this)">🔥 Metano & Flaring</button>
-      <button class="calc-cat-btn" onclick="filterCalcs('units',this)">🔄 Conversión</button>
-      <button class="calc-cat-btn" onclick="filterCalcs('drilling',this)">⚙️ Perforación</button>
-      <button class="calc-cat-btn" onclick="filterCalcs('economic',this)">💰 Económico</button>
-      <button class="calc-cat-btn" onclick="filterCalcs('integrity',this)">🛡️ Integridad</button>
+    <div class="calc-categories" id="calcTabs" role="tablist" aria-label="Vistas de calculadoras">
+      <button class="calc-tab-btn active" role="tab" data-ctab="flujo" onclick="calcTab('flujo')">Flujo por tema</button>
+      <button class="calc-tab-btn" role="tab" data-ctab="app" onclick="calcTab('app')">48 herramientas paso a paso</button>
+      <button class="calc-tab-btn" role="tab" data-ctab="clasicas" onclick="calcTab('clasicas')">Calculadoras clásicas (44)</button>
     </div>
-    <div class="calc-grid" id="calcGrid">
-      <!-- Populated by JS -->
+    <p class="calc-draft">Las herramientas paso a paso son <b>borradores pendientes de revisión técnica</b>: cada ficha declara método, fuente y límites. Validar con un revisor distinto del autor antes de usar en decisiones.</p>
+    <div id="calcPanelFlujo" class="calc-panel"><iframe id="calcFrameFlujo" title="Flujo de trabajo por tema" data-src="calculadoras/flujo.html?embed=1" loading="lazy"></iframe></div>
+    <div id="calcPanelApp" class="calc-panel" hidden><iframe id="calcFrameApp" title="Herramientas de cálculo paso a paso" data-src="calculadoras/app.html?embed=1" loading="lazy"></iframe></div>
+    <div id="calcPanelClasicas" class="calc-panel" hidden>
+      <div class="calc-categories">
+        <button class="calc-cat-btn active" onclick="filterCalcs('all',this)">Todas</button>
+        <button class="calc-cat-btn" onclick="filterCalcs('reservoir',this)">🏗️ Reservorio</button>
+        <button class="calc-cat-btn" onclick="filterCalcs('energy',this)">🌱 Energy Transition</button>
+        <button class="calc-cat-btn" onclick="filterCalcs('ambiental',this)">🌍 Ambiental</button>
+        <button class="calc-cat-btn" onclick="filterCalcs('esg',this)">📊 ESG</button>
+        <button class="calc-cat-btn" onclick="filterCalcs('methane',this)">🔥 Metano & Flaring</button>
+        <button class="calc-cat-btn" onclick="filterCalcs('units',this)">🔄 Conversión</button>
+        <button class="calc-cat-btn" onclick="filterCalcs('drilling',this)">⚙️ Perforación</button>
+        <button class="calc-cat-btn" onclick="filterCalcs('economic',this)">💰 Económico</button>
+        <button class="calc-cat-btn" onclick="filterCalcs('integrity',this)">🛡️ Integridad</button>
+      </div>
+      <div class="calc-grid" id="calcGrid">
+        <!-- Populated by JS -->
+      </div>
     </div>
   </section>
 
@@ -7261,5 +7279,42 @@ function processQCFile(input, type){
 
 <script>/* v2: permite abrir una sección con ?go=<seccion> (ej. ?go=calculators) */
 (function(){try{var g=new URLSearchParams(location.search).get('go');if(g&&/^[a-z-]+$/.test(g)){window.addEventListener('load',function(){setTimeout(function(){try{if(document.getElementById('section-'+g)&&typeof goSection==='function')goSection(g);}catch(e){}},200);});}}catch(e){}})();</script>
+<script>/* Calculadoras por flujo: pestañas, marcos incrustados y enlaces entre vistas */
+(function(){
+  function frame(t){return document.getElementById(t==='flujo'?'calcFrameFlujo':'calcFrameApp');}
+  window.calcTab=function(t,hash){
+    var tabs=['flujo','app','clasicas'];
+    if(tabs.indexOf(t)<0)t='flujo';
+    document.querySelectorAll('#calcTabs .calc-tab-btn').forEach(function(b){var on=b.getAttribute('data-ctab')===t;b.classList.toggle('active',on);b.setAttribute('aria-selected',on?'true':'false');});
+    document.getElementById('calcPanelFlujo').hidden=t!=='flujo';
+    document.getElementById('calcPanelApp').hidden=t!=='app';
+    document.getElementById('calcPanelClasicas').hidden=t!=='clasicas';
+    if(t==='flujo'||t==='app'){
+      var f=frame(t),src=f.getAttribute('data-src');
+      if(!f.getAttribute('src'))f.setAttribute('src',src+(t==='app'&&hash?'#'+hash:''));
+      else if(t==='app'&&hash){try{f.contentWindow.location.hash=hash;}catch(e){f.setAttribute('src',src+'#'+hash);}}
+    }
+  };
+  window.addEventListener('message',function(e){
+    if(e.origin!==location.origin||!e.data||!e.data.h3l)return;
+    var d=e.data;
+    if(d.h3l==='tool'&&/^[A-Za-z0-9._-]+$/.test(d.hash||''))calcTab('app',d.hash);
+    else if(d.h3l==='goto'){
+      var q=new URLSearchParams(d.query||''),g=q.get('go');
+      if(g&&/^[a-z-]+$/.test(g)&&document.getElementById('section-'+g)){
+        goSection(g);
+        if(g==='calculators')calcTab(q.get('tab')||'flujo');
+      }
+    }
+  });
+  /* ?go=calculators&tab=clasicas|app|flujo y entrada directa a la sección */
+  try{
+    var q=new URLSearchParams(location.search),t=q.get('tab');
+    if(t&&q.get('go')==='calculators')window.addEventListener('load',function(){setTimeout(function(){calcTab(t);},300);});
+  }catch(e){}
+  var orig=window.goSection;
+  if(typeof orig==='function'){window.goSection=function(id){orig.apply(this,arguments);if(id==='calculators'){var f=frame('flujo');if(!document.getElementById('calcPanelFlujo').hidden&&!f.getAttribute('src'))calcTab('flujo');}};}
+})();
+</script>
 </body>
 </html>

@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{color-scheme:light}html,body{margin:0}body{font-size:14px;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<script>try{if(/[?&]embed=1/.test(location.search))document.documentElement.setAttribute('data-theme','light')}catch(e){}</script>
+<title>Flujo VCDE H3L</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout: selector de tema arriba, 4 columnas VCDE con chevrón, calculadoras numeradas en orden de uso y entregable por etapa.
+   Sistema visual del sitio H3L: azul corporativo, Barlow Condensed + Inter. */
+:root{
+  --bg:#F4F8FD; --surface:#FFFFFF; --ink:#111827; --muted:#4A5568; --line:#D9E1EC;
+  --accent:#2E6BC4; --accent-ink:#1B3F7A; --accent-tint:#EBF2FB;
+  --s1:#3B7BCB; --s2:#2E6BC4; --s3:#2357A5; --s4:#1B3F7A; --on-stage:#FFFFFF;
+  --k-c:#2E6BC4; --k-q:#12766A; --k-d:#7A4FB0; --k-a:#B45F06; --k-n:#8A5A00; --n-bg:#FFF7E6; --n-line:#D9A441;
+  --ok:#1A7F5A;
+  --font-display:'Barlow Condensed','Arial Narrow',sans-serif;
+  --font-body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --tip:16px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D1626; --surface:#142238; --ink:#E8EEF7; --muted:#A6B3C6; --line:#263752;
+    --accent:#6CA4EA; --accent-ink:#A9C8F3; --accent-tint:#1B2D4A;
+    --s1:#3B7BCB; --s2:#2E6BC4; --s3:#2357A5; --s4:#1B4A93;
+    --k-c:#7CB0F0; --k-q:#4DC2B1; --k-d:#B79AE3; --k-a:#F0A95B; --k-n:#F0C26E; --n-bg:#2A2314; --n-line:#8A6B24;
+    --ok:#4CC596; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D1626; --surface:#142238; --ink:#E8EEF7; --muted:#A6B3C6; --line:#263752;
+  --accent:#6CA4EA; --accent-ink:#A9C8F3; --accent-tint:#1B2D4A;
+  --s1:#3B7BCB; --s2:#2E6BC4; --s3:#2357A5; --s4:#1B4A93;
+  --k-c:#7CB0F0; --k-q:#4DC2B1; --k-d:#B79AE3; --k-a:#F0A95B; --k-n:#F0C26E; --n-bg:#2A2314; --n-line:#8A6B24;
+  --ok:#4CC596; color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:14px;line-height:1.5;padding-inline:20px;padding-block:28px 40px}
+.wrap{max-width:1240px;margin-inline:auto}
+.eyebrow{font-family:var(--font-display);font-weight:600;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+h1{font-family:var(--font-display);font-weight:700;font-size:clamp(28px,4vw,40px);line-height:1.05;letter-spacing:.01em;text-transform:uppercase;margin:6px 0 8px;text-wrap:balance}
+.lead{max-width:68ch;color:var(--muted);margin:0 0 22px}
+.topics{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px;padding:0;list-style:none}
+.topics button{font:inherit;font-weight:500;font-size:13px;padding:7px 14px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;transition:background .15s,border-color .15s,color .15s}
+.topics button:hover{border-color:var(--accent);color:var(--accent)}
+.topics button[aria-selected="true"]{background:var(--accent-ink);border-color:var(--accent-ink);color:#fff}
+:root[data-theme="dark"] .topics button[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#0D1626}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .topics button[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#0D1626}}
+button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.estbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 14px}.estl{font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:600;margin-right:4px}
+.chip{padding:5px 13px;border-radius:99px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:500 13px var(--font-body);cursor:pointer}.chip:hover{border-color:var(--accent)}.chip.on{background:var(--accent-ink);border-color:var(--accent-ink);color:var(--bg)}
+.esth{flex-basis:100%;margin:2px 0 0;font-size:12.5px;color:var(--muted);max-width:78ch}
+.estp{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:12px 14px;margin:0 0 12px;font-size:13.5px}.estp h3{margin:0 0 4px;font-family:var(--font-display);text-transform:uppercase;font-size:18px;color:var(--accent-ink)}.estp p{margin:0 0 6px}
+.estcols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:4px 24px}.estcols ul{margin:4px 0 0;padding-left:18px}
+.lv{display:inline-block;margin-left:6px;padding:0 7px;border-radius:99px;font-size:10.5px;font-weight:600;border:1px solid var(--line);color:var(--muted)}.lv.n{border-color:var(--ok);color:var(--ok)}.lv.o{border-color:var(--k-a);color:var(--k-a)}
+.enote{font-size:12px;color:var(--ink);margin-top:4px;padding:4px 8px;background:var(--accent-tint);border-radius:4px}
+.head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 24px;margin:0 0 6px}
+.head h2{font-family:var(--font-display);font-weight:700;font-size:26px;text-transform:uppercase;letter-spacing:.01em;margin:0}
+.counts{color:var(--muted);font-size:13px}
+.counts b{color:var(--ink);font-weight:600}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin:0 0 20px;padding:0;list-style:none;font-size:12px;color:var(--muted)}
+.legend li{display:flex;align-items:center;gap:6px}
+.dot{width:10px;height:10px;border-radius:2px;background:currentColor}
+.dot.n{background:transparent;border:1.5px dashed currentColor}
+.stages{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin:0 0 18px}
+.stage{min-width:0;display:flex;flex-direction:column}
+.chev{position:relative;color:var(--on-stage);padding:12px calc(var(--tip) + 10px) 12px 20px;margin-right:calc(var(--tip) * -1);
+  clip-path:polygon(0 0,calc(100% - var(--tip)) 0,100% 50%,calc(100% - var(--tip)) 100%,0 100%,var(--tip) 50%);margin-bottom:12px}
+.stage:first-child .chev{clip-path:polygon(0 0,calc(100% - var(--tip)) 0,100% 50%,calc(100% - var(--tip)) 100%,0 100%);padding-left:16px}
+.stage:nth-child(1) .chev{background:var(--s1)}.stage:nth-child(2) .chev{background:var(--s2)}.stage:nth-child(3) .chev{background:var(--s3)}.stage:nth-child(4) .chev{background:var(--s4)}
+.chev .k{font-family:var(--font-display);font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;opacity:.92}
+.chev .n{font-family:var(--font-display);font-weight:700;font-size:21px;line-height:1.1;text-transform:uppercase;display:block}
+.goal{font-size:12.5px;color:var(--muted);margin:0 0 10px;min-height:2.6em}
+.items{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;flex:1}
+.item{display:grid;grid-template-columns:26px minmax(0,1fr);gap:10px;padding:10px 12px;background:var(--surface);border:1px solid var(--line);border-radius:6px}
+.item.n{background:var(--n-bg);border:1.5px dashed var(--n-line)}
+.num{width:24px;height:24px;border-radius:50%;background:var(--accent-tint);color:var(--accent-ink);font-weight:600;font-size:12px;display:grid;place-items:center;font-variant-numeric:tabular-nums}
+.item.n .num{background:transparent;border:1.5px dashed var(--n-line);color:var(--k-n)}
+.name{font-weight:600;font-size:13.5px;line-height:1.3;overflow-wrap:anywhere}
+.name a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.name a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+.note{font-size:12px;color:var(--muted);margin-top:2px}
+.tag{display:inline-block;margin-top:6px;font-size:10.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+.tag.c{color:var(--k-c)}.tag.q{color:var(--k-q)}.tag.d{color:var(--k-d)}.tag.a{color:var(--k-a)}.tag.n{color:var(--k-n)}
+.out{margin-top:10px;padding:10px 12px;border-radius:6px;background:var(--accent-tint);border:1px solid var(--line)}
+.out .l{font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink)}
+:root[data-theme="dark"] .out .l{color:var(--accent)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .out .l{color:var(--accent)}}
+.out p{margin:2px 0 0;font-weight:500;font-size:13px}
+.final{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;padding:14px 18px;border-radius:6px;background:var(--accent-ink);color:#fff}
+:root[data-theme="dark"] .final{background:#1B4A93}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .final{background:#1B4A93}}
+.final .l{font-family:var(--font-display);font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+.final .t{font-family:var(--font-display);font-weight:700;font-size:20px;text-transform:uppercase;letter-spacing:.01em}
+.util{margin-top:22px;border-top:1px solid var(--line,var(--muted));padding-top:14px;max-width:80ch}.util h2{font-size:13px;margin:0 0 4px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}.util p{margin:0 0 8px;font-size:12px;color:var(--muted)}.util .ul{display:flex;flex-wrap:wrap;gap:8px}.util a{padding:6px 12px;border:1px solid var(--muted);border-radius:999px;font-size:13px;text-decoration:none;color:inherit}.util a:hover{background:var(--accent-tint);color:var(--accent-ink)}
+.foot{margin-top:22px;color:var(--muted);font-size:12px;max-width:80ch}
+.foot p{margin:0 0 6px}
+@media (max-width:1020px){.stages{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 18px}}
+@media (max-width:640px){
+  .stages{grid-template-columns:minmax(0,1fr)}
+  .chev,.stage:first-child .chev{margin-right:0;padding:12px 16px 20px;clip-path:polygon(0 0,100% 0,100% calc(100% - 12px),50% 100%,0 calc(100% - 12px))}
+  .goal{min-height:0}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head><body>
+
+
+<div class="wrap">
+  <div class="eyebrow">H3L Global Energy · Calculadoras</div>
+  <h1>Flujo de trabajo por tema</h1>
+  <p class="lead">Elegí un tema para ver, en orden de uso, las herramientas de la plataforma que aplican en cada etapa de maduración del proyecto (VCDE, equivalente a FEL), desde el primer análisis hasta el entregable.</p>
+
+  <ul class="topics" role="tablist" id="topics" aria-label="Tema"></ul>
+
+  <div id="panel" role="tabpanel" aria-live="polite"></div>
+
+  <div class="util" id="util"><h2>Utilidades transversales</h2><p>Conversores de unidades de la plataforma; sirven en cualquier etapa y tema.</p><div class="ul"><a href="../index.html?go=calculators&tab=clasicas" target="_blank" rel="noopener">Volumen</a><a href="../index.html?go=calculators&tab=clasicas" target="_blank" rel="noopener">Temperatura</a><a href="../index.html?go=calculators&tab=clasicas" target="_blank" rel="noopener">Masa</a><a href="../index.html?go=calculators&tab=clasicas" target="_blank" rel="noopener">Longitud</a><a href="../index.html?go=calculators&tab=clasicas" target="_blank" rel="noopener">Concentración</a></div></div>
+
+  <div class="foot">
+    <p><b>Cómo leer el flujo.</b> Los números marcan el orden de uso a lo largo de todo el recorrido. Las herramientas con borde punteado todavía no existen en la plataforma: son las candidatas para construir en el grupo de estudio siguiendo el flujo de fichas, pruebas y revisión.</p>
+    <p>Desarrollo: Leandro Collell · H3L Global Energy. Los enlaces abren la plataforma en su sección correspondiente.</p>
+  </div>
+</div>
+
+<script>
+</script><script>
+/* H3L — guía por estrategia de explotación. Es un criterio editorial de H3L (no una norma): debe validarlo el revisor técnico. */
+window.H3L_ESTR = {
+  orden: ['primaria', 'secundaria', 'terciaria', 'tight', 'shale', 'offshore'],
+  estrategias: {
+    primaria: { n: 'Primaria', desc: 'Producción con la energía natural del reservorio: gas en solución, casquete de gas, acuífero y expansión de roca y fluidos. La presión cae y el pozo declina; no hay inyección.', cambia: ['El dato central es la historia de presión y producción: balance de materiales y declinación mandan.', 'El PVT define cuánta energía hay (Rs, Bo, z).', 'El factor de recuperación depende del mecanismo de empuje dominante.'], evitar: ['Herramientas de inyección (barrido, Hall, VRR) y de EOR no corresponden.'] },
+    secundaria: { n: 'Secundaria', desc: 'Inyección de agua (o de gas inmiscible) para mantener presión y desplazar petróleo. Se agrega un patrón de pozos inyectores y un seguimiento continuo.', cambia: ['Clave: eficiencia de barrido (areal, vertical, de desplazamiento), ruptura de agua y heterogeneidad.', 'Seguimiento con VRR e inyectividad (Hall).', 'La declinación del productor cambia al llegar el frente: ajustá solo períodos estables.'], evitar: ['Declinación de Arps sin separar los cambios por inyección o cambios de patrón.'] },
+    terciaria: { n: 'Terciaria (EOR)', desc: 'Recuperación mejorada tras la inyección de agua: polímeros, surfactantes, gas miscible, CO₂ o térmicos. Ataca el petróleo residual y la relación de movilidad.', cambia: ['Se trabaja sobre el petróleo móvil remanente, no sobre el original.', 'Control de movilidad (polímero) y número capilar (surfactante) definen la eficiencia.', 'Retención, degradación y corrosión (CO₂) son riesgos propios del método.', 'El cribado numérico de criterios (tabla de Taber et al., 1997) todavía no está en estas herramientas: se difiere hasta verificar la tabla contra la fuente.'], evitar: ['Usar el petróleo original (OOIP) como base de volumen.'] },
+    tight: { n: 'Tight', desc: 'Reservorios de muy baja permeabilidad que requieren fracturamiento para producir. Flujo lineal transitorio durante largo tiempo; declinación pronunciada al inicio.', cambia: ['Los cut-offs de porosidad y permeabilidad son críticos: calibrá con núcleo.', 'En pruebas de presión el flujo radial puede tardar mucho o no aparecer.', 'El EUR se pronostica con declinación modificada (límite terminal) o Duong, no con b ilimitado.', 'El espaciamiento entre pozos y la interferencia importan.'], evitar: ['Extrapolar b > 1 sin declinación terminal.', 'Interpretar skin de forma convencional en pozos fracturados.'] },
+    shale: { n: 'Shale', desc: 'La roca madre es también el reservorio. Se explota con pozos horizontales y fracturamiento por etapas. Hay porosidad orgánica y gas adsorbido.', cambia: ['La madurez y el COT definen la ventana de fluido y el sweet spot.', 'Gas en sitio = libre + adsorbido (Langmuir).', 'El riesgo es de productividad por pozo, no de presencia: Pg del play solo como riesgo de la zona.', 'EUR con declinación modificada y Duong; el espaciamiento y los pozos padre-hijo condicionan.', 'Archie/Simandoux son de uso limitado con materia orgánica y arcillas.'], evitar: ['Balance de materiales volumétrico clásico y p/z.', 'Extrapolar el transitorio como si fuera la declinación final.'] },
+    offshore: { n: 'Offshore', desc: 'Ambiente marino: pocos pozos, costo por día de equipo muy alto, instalaciones de superficie sobre plataforma o submarinas y, en aguas profundas, ventana de lodo estrecha.', cambia: ['La sobrecarga baja con el tirante de agua: no uses 1 psi/ft onshore.', 'Riser margin y volumen del riser entran en el diseño de lodo y control de pozo.', 'La decisión es de alto CAPEX con pocos pozos: valor de la información y cartera pesan.', 'Instalaciones: gasoductos, compresión y alivio con restricciones de peso y espacio.'], evitar: ['Planillas de control de pozo terrestres sin ajustar la línea de estrangulamiento y el riser.'] }
+  },
+  /* orden: primaria, secundaria, terciaria, tight, shale, offshore · n = núcleo, o = aplica con ajustes, - = no aplica. Sin entrada = transversal. */
+  mat: { ro: 'o--ono', rose: 'o--oon', bayes: 'o--oon', sello: 'noo--n', petro: 'nnnnon', vol: 'nnonnn', espac: 'onnnno', core: 'nnnnnn', pvt: 'nnnnnn', pz: 'n--o-n', dca: 'noonnn', horner: 'nnonon', mbe: 'nno--n', delgas: 'n--non', bl: '-nn--o', hall: '-nn--o', vrr: '-nn--o', barrido: '-nn--o', polim: '-on--o', capil: '-on---', arpsmod: 'o--nno', duong: '---on-', shalegas: '---on-', offshore: '-----n', eaton: 'noooon', kill: 'nnnnnn', volpozo: 'nnnnnn', co2: 'nnnoon', gasod: 'o--nnn', comp: 'ooonnn', limeco: 'nnnooo', cartera: 'ooonnn', voi: 'ooooon' },
+  notas: {
+    ro: { shale: 'Define la ventana (petróleo, condensado o gas seco) y con ello el fluido y el tipo de pozo; madurez y COT son criterios para elegir el sweet spot.', tight: 'Confirmá la generación si el reservorio es alimentado por una roca madre cercana.' },
+    rose: { shale: 'En recursos continuos el riesgo es de productividad y no de presencia: usá Pg solo como riesgo de la zona (play), no del pozo individual.', offshore: 'Con pocos pozos y costo alto, Pg y VME dominan la decisión: documentá cada factor.' },
+    sello: { terciaria: 'Con CO₂ o gas, la integridad del sello y de pozos viejos define el riesgo de fuga.', offshore: 'Usá un rango de muestras y no un valor único; en aguas profundas los datos de sello suelen ser escasos.' },
+    petro: { shale: 'Archie y Simandoux se comportan mal con porosidad orgánica y arcillas conductivas: calibrá con núcleo y pirólisis y tomá el resultado como indicativo.', tight: 'Los cut-offs de porosidad y Sw son críticos: verificalos contra la permeabilidad de núcleo.' },
+    vol: { shale: 'Trabajá por sección o por pozo sobre la zona objetivo e incluí el gas adsorbido (herramienta Gas en sitio en shale).', tight: 'Usá el espesor de la zona objetivo y no el total de la formación.', terciaria: 'Se aplica al petróleo móvil remanente (Soi − Sor) y no al original.' },
+    espac: { secundaria: 'Define el patrón de inyección: el área por pozo controla el barrido y la ruptura.', terciaria: 'El patrón y el espaciamiento definen el tiempo de respuesta y el volumen de químico.', tight: 'El espaciamiento y la interferencia entre fracturas condicionan el EUR: usá EUR de pozos con espaciamiento comparable.', shale: 'El espaciamiento entre laterales y los pozos padre-hijo condicionan el EUR: usá EUR de pozos con espaciamiento comparable.' },
+    dca: { shale: 'b > 1 es común en el transitorio: usá Arps modificada o Duong en vez de extrapolar b.', secundaria: 'Bajo inyección la declinación se altera: ajustá solo períodos con inyección estable.', terciaria: 'La respuesta al método puede romper la tendencia: separá antes y después.' },
+    horner: { tight: 'El flujo radial puede tardar mucho o no aparecer: verificá el tramo recto antes de interpretar k y skin.', shale: 'Con multifracturas el flujo radial rara vez se alcanza: no interpretes el skin de forma convencional.' },
+    mbe: { terciaria: 'Con inyección incluí los volúmenes inyectados; sin un balance confiable la recuperación incremental no puede atribuirse al método.' },
+    pz: { tight: 'Con permeabilidades muy bajas la presión promedio no equilibra: p/z puede subestimar el gas original si se usa una presión no estabilizada.' },
+    delgas: { tight: 'Presión al cuadrado es válida a baja presión; en tight gas a alta presión conviene pseudopresión (fuera de esta herramienta).', shale: 'Úsalo solo con datos estabilizados; el transitorio sesga n y C.' },
+    bl: { secundaria: 'Con petróleo viscoso M es alto: el modelo 1D sobrestima el barrido real.', terciaria: 'Para polímero usá la herramienta Polímero vs agua.', offshore: 'Con pocos inyectores y espaciamiento grande, el barrido real suele ser menor que el del modelo 1D.' },
+    hall: { secundaria: 'Cargá presión de fondo y no de cabeza si es posible: un cambio de pendiente indica daño o fractura.', terciaria: 'Con polímero la viscosidad cambia la presión de inyección: separá el efecto de la solución del daño.', offshore: 'Con pocos inyectores, el seguimiento de cada uno es crítico.' },
+    vrr: { terciaria: 'Con gas o WAG cargá Gi con su Bg y verificá cada fase por separado.' },
+    barrido: { terciaria: 'En EOR cambia E_D: usá el Sor medido para el agente y no el de la inyección de agua.' },
+    polim: { terciaria: 'La viscosidad efectiva, la retención y la degradación a condiciones de reservorio deben venir de laboratorio.' },
+    capil: { terciaria: 'Úsalo para estimar cuánta reducción de tensión interfacial requiere el surfactante.' },
+    arpsmod: { shale: 'Fijá la declinación terminal con analogías de la cuenca y documentala.', tight: 'Útil cuando el pozo sale del transitorio hacia la frontera.', primaria: 'Con b alto la cola larga sobrestima: la declinación terminal la limita.' },
+    duong: { shale: 'Requiere una pendiente clara de flujo lineal en q/Gp contra t (log–log).', tight: 'Sirve si el pozo mantiene flujo lineal; revisá R².' },
+    shalegas: { shale: 'La isoterma de Langmuir debe medirse a la temperatura de reservorio; sin ella el resultado es de orden de magnitud.', tight: 'En tight gas el adsorbido suele ser pequeño: puede dejarse en cero.' },
+    eaton: { offshore: 'Usá la sobrecarga calculada con el tirante de agua (herramienta Offshore) en lugar de 1 psi/ft.', shale: 'En shales sobrepresionados el sónico puede no seguir la tendencia por causas distintas a la subcompactación: verificá con mediciones directas.' },
+    kill: { offshore: 'En pozos submarinos la línea de estrangulamiento (choke line) agrega pérdidas de fricción y cambia el procedimiento: esta planilla no las incluye.' },
+    volpozo: { offshore: 'Sumá el volumen del riser y de las líneas de choke y kill al volumen anular y de sarta.' },
+    co2: { terciaria: 'La inyección de CO₂ sube la pCO₂ y la corrosión en inyectores y productores: evaluá con agua presente.', offshore: 'En instalaciones sobre plataforma, cualquier cambio de composición del gas requiere recalcular.' },
+    gasod: { shale: 'Líneas de recolección con caudal inicial alto y declinación rápida: dimensioná para el pico y verificá velocidad.' },
+    comp: { terciaria: 'La compresión de gas de reinyección suele ser un costo relevante.', shale: 'Al caer la presión de cabeza, la compresión de baja presión gana peso en la vida del pozo.' },
+    limeco: { shale: 'Aplicalo por pozo: vida corta y declinación alta hacen sensible el resultado al OPEX fijo.', tight: 'Aplicalo por pozo: el OPEX fijo define cuándo cerrar o intervenir.' },
+    cartera: { shale: 'Programas de múltiples pozos con riesgo geológico bajo: el VME es un cálculo de portafolio de locaciones.', tight: 'Programas de múltiples pozos con riesgo geológico bajo: el VME es un cálculo de portafolio de locaciones.', offshore: 'El costo del pozo es alto: el presupuesto es la restricción principal.' },
+    voi: { offshore: 'Con pozos costosos, pagar sísmica o un pozo de apreciación suele evaluarse con este cálculo.' }
+  },
+  /* ruta de trabajo en orden de uso: ids de estas herramientas o «c:» = calculadora de la plataforma H3L */
+  rutas: {
+    primaria: ['pvt', 'core', 'petro', 'vol', 'c:OOIP', 'mbe', 'pz', 'dca', 'horner', 'c:IPR / VLP Nodal', 'limeco', 'agreg', 'concil'],
+    secundaria: ['pvt', 'petro', 'vol', 'mbe', 'barrido', 'bl', 'espac', 'vrr', 'hall', 'dca', 'limeco', 'concil'],
+    terciaria: ['core', 'vol', 'barrido', 'bl', 'polim', 'capil', 'vrr', 'hall', 'co2', 'tornU', 'limeco', 'cartera'],
+    tight: ['core', 'petro', 'vol', 'delgas', 'horner', 'arpsmod', 'duong', 'espac', 'c:Proppant & Frac Design', 'limeco', 'agreg', 'cartera'],
+    shale: ['ro', 'core', 'petro', 'shalegas', 'vol', 'arpsmod', 'duong', 'espac', 'c:Proppant & Frac Design', 'gasod', 'limeco', 'agreg', 'tornU', 'cartera'],
+    offshore: ['rose', 'sello', 'vol', 'offshore', 'eaton', 'volpozo', 'kill', 'sep', 'gasod', 'comp', 'alivio', 'recip', 'co2', 'tornU', 'voi', 'cartera']
+  }
+};
+
+</script><script>
+var BASE='../index.html?go=';
+var KIND={c:{l:'Calculadora',go:'calculators'},q:{l:'App QC',go:'qcapps'},d:{l:'Demo',go:'demos-og'},a:{l:'Agente IA',go:'agentes'},n:{l:'Nueva · borrador',go:''}};
+var NEW='app.html#';
+var NID={'Conversión tiempo-profundidad':'tz','Madurez de roca madre':'ro','Riesgo geológico del play (Pg)':'rose','Petrofísica básica':'petro','Volumetría probabilística':'vol','Actualización de Pg y recurso':'bayes','Espaciamiento y recuperación por pozo':'espac','Análisis de NPT y curva tiempo-profundidad':'npt','Velocidad de corrosión y vida remanente':'corr','Intervalos de inspección (RBI)':'rbi','Dimensionamiento de separadores y tanques':'sep','Hidráulica de líneas de flujo':'linea','Sensibilidad tornado económica':'tornU','Margen de refinación (crack spread)':'crack','Sensibilidad de precios':'tornD','Calibración core–perfil y cut-offs':'core','PVT por correlaciones (petróleo y gas)':'pvt','Balance de materiales de gas (p/z)':'pz','Declinación de Arps: ajuste y EUR con incertidumbre':'dca','Restauración de presión (Horner)':'horner','Balance de materiales de petróleo (Havlena–Odeh)':'mbe','Capacidad de sello y altura de columna':'sello','Agregación de reservas y recursos':'agreg','Límite económico y reservas remanentes':'limeco','Conciliación de reservas y RRR':'concil','Planilla de control de pozo':'kill','Volúmenes de pozo, circulación y cementación':'volpozo','Presión de poros y gradiente de fractura (Eaton)':'eaton','Deliverabilidad de pozo de gas (back-pressure y LIT)':'delgas','Desplazamiento Buckley–Leverett y permeabilidad relativa':'bl','Gráfico de Hall de inyectores':'hall','Reposición de vacíos (VRR)':'vrr','Corrosión por CO₂ (de Waard–Milliams)':'co2','Espesor de recipientes y ductos, y prueba hidrostática':'recip','Flujo de gas en gasoductos (Weymouth y Panhandle B)':'gasod','Compresión de gas: etapas y potencia':'comp','Válvula de alivio para gas (API 520)':'alivio','Costo nivelado de energía (LCOE / LCOH)':'lcoe','Valor de la información (VPI y VOI)':'voi','Cartera de prospectos y presupuesto':'cartera','Mezcla de crudos y combustibles':'mezcla','Eficiencia de barrido y heterogeneidad (Dykstra–Parsons)':'barrido','Polímero vs. agua: control de movilidad':'polim','Número capilar y reducción de tensión interfacial':'capil','Declinación modificada para no convencionales (Arps con límite terminal)':'arpsmod','Declinación de Duong: ajuste y EUR':'duong','Gas en sitio en shale y tight: libre + adsorbido':'shalegas','Sobrecarga offshore y margen del riser':'offshore'};
+var STAGES=[{k:'V',n:'Visualización',f:'FEL 1 · Identificar'},{k:'C',n:'Conceptualización',f:'FEL 2 · Seleccionar'},{k:'D',n:'Definición',f:'FEL 3 · Definir'},{k:'E',n:'Ejecución',f:'Ejecutar y operar'}];
+var T=[
+{id:'explo',name:'Exploración Upstream',final:'Informe de prospecto y decisión de perforar',st:[
+ {g:'Identificar plays y leads',i:[['n','Conversión tiempo-profundidad','Velocidad media o de intervalo para llevar horizontes a profundidad'],['n','Madurez de roca madre','Ventana de generación con Ro, TOC y Rock-Eval'],['n','Riesgo geológico del play (Pg)','Método de Rose: reservorio × estructura × carga × trampa sellada, con chance comercial y VME']],o:'Inventario de leads con Pg preliminar'},
+ {g:'Evaluar el prospecto',i:[['n','Petrofísica básica','Porosidad, Vsh y Sw por Archie'],['n','Capacidad de sello y altura de columna','Columna que sostiene el sello (Pd) y comparación con el cierre'],['c','OOIP','Volumétrico determinístico'],['n','Volumetría probabilística','Monte Carlo P90, P50 y P10']],o:'Recurso prospectivo P90 / P50 / P10'},
+ {g:'Decidir la perforación',i:[['c','Factor de Recuperación','Recurso recuperable por correlaciones'],['c','Mud Weight Window','Ventana de lodo del pozo exploratorio'],['c','NPV / IRR / Payback','Valor del prospecto con su Pg'],['c','Break-even Price','Precio mínimo para que el prospecto pague'],['n','Valor de la información (VPI y VOI)','Si conviene pagar un estudio antes de decidir'],['n','Cartera de prospectos y presupuesto','Selección que maximiza el VME dentro del presupuesto']],o:'Paquete de decisión: valor esperado, presupuesto y diseño del pozo'},
+ {g:'Perforar y evaluar el resultado',i:[['c','ECD & Surge/Swab','Control de presiones durante la perforación'],['q','GEO-001 QC de registros de pozos','Valida las curvas antes de interpretar'],['n','Actualización de Pg y recurso','Recalcula con el resultado del pozo']],o:'Informe post-pozo y recursos reclasificados'}]},
+{id:'estudios',name:'Grupo de Estudios Upstream',final:'Informe técnico del estudio integrado',st:[
+ {g:'Plantear el estudio y validar datos',i:[['q','GEO-001 QC de registros de pozos','Spikes, gaps y normalización multi-pozo'],['q','GEO-005 QC de Core Data','Profundidad core vs log, porosidad, permeabilidad y SCAL'],['n','Petrofísica básica','Porosidad, Vsh y Sw por Archie'],['n','Calibración core–perfil y cut-offs','Relación φ–k, porosidad de corte y sesgo del perfil']],o:'Base de datos validada del estudio'},
+ {g:'Estimar volúmenes in situ',i:[['q','GEO-010 QC de interpretación petrofísica','Cut-offs y Sw contra core'],['n','PVT por correlaciones (petróleo y gas)','Pb, Rs, Bo, z y Bg cuando no hay análisis de laboratorio'],['c','OOIP','Volumétrico determinístico'],['n','Volumetría probabilística','Monte Carlo P90, P50 y P10'],['q','RES-002 Validador de STOIIP/GIIP','Sensibilidad y comparación de métodos'],['n','Gas en sitio en shale y tight: libre + adsorbido','Gas libre y adsorbido (Langmuir) por sección']],o:'Volumetría con rango de incertidumbre'},
+ {g:'Pronosticar y cuantificar incertidumbre',i:[['c','Factor de Recuperación','Recurso recuperable por correlaciones'],['c','Curvas de Declinación','Arps: exponencial, hiperbólica y armónica'],['n','Declinación de Arps: ajuste y EUR con incertidumbre','Ajuste a la historia y rango P90 / P50 / P10 del EUR'],['q','RND-002 Uncertainty Quantification QC','Monte Carlo, correlaciones y tornado'],['n','Desplazamiento Buckley–Leverett y permeabilidad relativa','Ruptura de agua y recuperación por inyección'],['n','Declinación modificada para no convencionales (Arps con límite terminal)','EUR con paso de hiperbólica a declinación terminal'],['n','Declinación de Duong: ajuste y EUR','Parámetros a y m y EUR en flujo lineal']],o:'Pronóstico P10 / P50 / P90'},
+ {g:'Integrar y recomendar',i:[['n','Restauración de presión (Horner)','Permeabilidad, skin y presión extrapolada del pozo'],['n','Balance de materiales de petróleo (Havlena–Odeh)','Petróleo original y mecanismos de empuje'],['n','Balance de materiales de gas (p/z)','Gas original y recuperación al abandono'],['q','RES-004 QC de modelos de simulación','Balance de materiales, PVT e history match'],['c','IPR / VLP Nodal','Vincula reservorio y pozo'],['n','Deliverabilidad de pozo de gas (back-pressure y LIT)','Caudal entregable y AOF del pozo de gas']],o:'Informe del estudio y recomendaciones para desarrollo'}]},
+{id:'desarrollo',name:'Desarrollo Operativo Upstream',final:'Plan de desarrollo del campo (FDP) con economía',st:[
+ {g:'Dimensionar la oportunidad',i:[['c','OOIP','Volumen original in situ'],['c','Factor de Recuperación','Recurso recuperable'],['c','Curvas de Declinación','Perfil de producción preliminar']],o:'Potencial del campo y perfil preliminar'},
+ {g:'Comparar esquemas de desarrollo',i:[['c','IPR / VLP Nodal','Productividad por pozo'],['n','Espaciamiento y recuperación por pozo','Pozos que entran en el área y aporte de cada uno'],['c','Proppant & Frac Design','Para desarrollo no convencional'],['n','Desplazamiento Buckley–Leverett y permeabilidad relativa','Ruptura de agua y recuperación por inyección'],['n','Eficiencia de barrido y heterogeneidad (Dykstra–Parsons)','Recuperación E_D·E_A·E_V y coeficiente V del reservorio'],['n','Polímero vs. agua: control de movilidad','Ganancia de recuperación al viscosificar el agua inyectada'],['n','Número capilar y reducción de tensión interfacial','Tensión interfacial necesaria para movilizar el residual']],o:'Alternativas de desarrollo comparadas'},
+ {g:'Definir y valorar el plan',i:[['c','Lifting Cost (LOE)','Costo de extracción en USD/BOE'],['c','NPV / IRR / Payback','Valor del plan de desarrollo'],['c','Break-even Price','Precio mínimo de rentabilidad'],['c','Government Take (PSA)','Términos fiscales']],o:'FDP con economía y términos fiscales'},
+ {g:'Ejecutar y seguir el desarrollo',i:[['c','Gas Lift Performance','Optimiza la inyección de gas'],['q','PRD-003 Well Performance QC','Valida IPR y VLP con datos reales'],['q','MGT-002 Cost Control QC (AFE vs Actual)','Sobrecostos y EAC'],['n','Reposición de vacíos (VRR)','Balance inyección–producción a condiciones de reservorio'],['n','Gráfico de Hall de inyectores','Tendencia de inyectividad y daño del inyector']],o:'Seguimiento: producción real vs plan y costo vs AFE'}]},
+{id:'perforacion',name:'Perforación y WO',final:'Informe final de pozo y lecciones aprendidas',st:[
+ {g:'Seleccionar pozo o intervención',i:[['c','Presión de Fondo','Estado de presión del candidato'],['c','IPR / VLP Nodal','Ganancia potencial de la intervención']],o:'Ranking de pozos candidatos'},
+ {g:'Diseño conceptual',i:[['n','Sobrecarga offshore y margen del riser','Sobrecarga con tirante de agua y densidad de margen del riser'],['n','Presión de poros y gradiente de fractura (Eaton)','Ventana de lodo desde el perfil sónico'],['c','Mud Weight Window','Densidad de lodo entre poro y fractura'],['c','ECD & Surge/Swab','Presiones por circulación y maniobras'],['q','DRL-004 Casing Design QC','Cargas y zapatos según API']],o:'Concepto de pozo o de workover'},
+ {g:'Programa y autorización',i:[['q','DRL-003 Directional Survey QC','Dogleg y anti-colisión'],['c','Proppant & Frac Design','Si la intervención incluye fractura'],['c','NPV / IRR / Payback','Rentabilidad de la intervención'],['q','MGT-002 Cost Control QC (AFE vs Actual)','Control del AFE'],['n','Volúmenes de pozo, circulación y cementación','Emboladas, tiempos de circulación y sacos de cemento']],o:'Programa aprobado y AFE'},
+ {g:'Ejecutar y cerrar',i:[['n','Planilla de control de pozo','Densidad de control, ICP/FCP y MAASP ante un influjo'],['q','DRL-001 QC RT de perforación','Anomalías y NPT en tiempo real'],['q','DRL-002 Mudlog Data QC','Shows de gas y cuttings'],['n','Análisis de NPT y curva tiempo-profundidad','Compara lo real contra el plan']],o:'Informe final de pozo y lecciones aprendidas'}]},
+{id:'monitoreo',name:'Monitoreo Upstream',final:'Tablero de monitoreo con pronóstico de referencia y alertas',st:[
+ {g:'Establecer la línea base',i:[['q','PRD-001 QC de datos de producción','Outliers, balance y allocations'],['c','Flujo','Caudales en unidades consistentes']],o:'Línea base de producción validada'},
+ {g:'Fijar el pronóstico de referencia',i:[['c','Curvas de Declinación','Pronóstico por pozo'],['q','PRD-002 Decline Curve Analysis QC','Ajuste Arps y Duong con incertidumbre']],o:'Pronóstico contra el que se compara el pozo'},
+ {g:'Diagnosticar y optimizar',i:[['c','IPR / VLP Nodal','Diagnóstico de afluencia'],['q','PRD-003 Well Performance QC','Valida IPR y VLP'],['c','Gas Lift Performance','Inyección óptima'],['n','Deliverabilidad de pozo de gas (back-pressure y LIT)','Caudal entregable y AOF del pozo de gas']],o:'Plan de optimización por pozo'},
+ {g:'Vigilar de forma continua',i:[['d','Demo 07 Detector de Anomalías','Desvíos contra pronóstico priorizados por USD'],['q','PRD-004 Gas Lift Optimization QC','Respuesta del pozo a la inyección'],['q','RES-007 QC de pruebas de presión','Calidad de datos de fondo'],['n','Gráfico de Hall de inyectores','Tendencia de inyectividad y daño del inyector'],['n','Reposición de vacíos (VRR)','Balance inyección–producción a condiciones de reservorio']],o:'Alertas y reporte mensual de desempeño'}]},
+{id:'reservas',name:'Reservas Upstream',final:'Informe de reservas certificable (SPE-PRMS)',st:[
+ {g:'Reunir y validar volúmenes',i:[['c','OOIP','Volumen original in situ'],['q','RES-002 Validador de STOIIP/GIIP','Inputs, sensibilidad y comparación de métodos']],o:'Volúmenes in situ validados'},
+ {g:'Estimar recuperables',i:[['c','Factor de Recuperación','Recuperable por correlaciones'],['c','Curvas de Declinación','EUR por pozo y por categoría']],o:'EUR por categoría'},
+ {g:'Clasificar con criterio PRMS',i:[['c','Break-even Price','Límite económico'],['c','NPV / IRR / Payback','Comercialidad del proyecto'],['q','RSV-001 SPE-PRMS Compliance QC','Categorías 1P, 2P y 3P y madurez'],['n','Límite económico y reservas remanentes','Caudal de abandono y reservas remanentes con sensibilidad al precio']],o:'Clasificación 1P / 2P / 3P con comercialidad'},
+ {g:'Reportar y auditar',i:[['n','Agregación de reservas y recursos','Suma aritmética vs estadística de P90 / P50 / P10 según PRMS'],['n','Conciliación de reservas y RRR','Balance anual, tasa de reemplazo, R/P y F&D'],['q','RSV-003 Reserves Reconciliation QC','Movimientos año a año'],['q','RSV-002 SEC Reserve Reporting QC','Reglas de precio SEC y límites PUD'],['q','RSV-004 Independent Audit Support QC','Checklist y data room'],['d','Demo 05 Auditoría PRMS Express','Certificación y roll-forward']],o:'Informe de reservas y paquete para auditoría independiente'}]},
+{id:'integridad',name:'Integridad Upstream',final:'Plan de integridad con indicadores de seguimiento',st:[
+ {g:'Identificar activos y riesgos',i:[['q','MGT-003 Risk Register QC','Probabilidad, impacto y mapa de calor']],o:'Registro de riesgos de integridad'},
+ {g:'Evaluar la condición',i:[['c','MAOP (ASME B31G)','Presión segura con anomalías de corrosión'],['n','Velocidad de corrosión y vida remanente','Cuánto tiempo le queda al activo'],['n','Corrosión por CO₂ (de Waard–Milliams)','Velocidad de corrosión en acero al carbono'],['n','Espesor de recipientes y ductos, y prueba hidrostática','ASME VIII-1, B31.8 y presión de prueba']],o:'Evaluación preliminar de integridad'},
+ {g:'Planificar inspección y barreras',i:[['n','Intervalos de inspección (RBI)','Frecuencia de inspección según riesgo'],['q','DRL-004 Casing Design QC','Integridad de las barreras del pozo']],o:'Plan de inspección y mantenimiento'},
+ {g:'Operar y medir',i:[['c','TRIR / LTIR Rate','Accidentabilidad y severidad'],['c','Gestión de Derrames','Volumen, área y remediación'],['q','MGT-004 KPI Dashboard Validation QC','Valida los indicadores del tablero']],o:'Tablero de integridad y HSE'}]},
+{id:'superficie',name:'Instalaciones de Superficie Upstream',final:'Ingeniería básica y control de CAPEX/OPEX de facilidades',st:[
+ {g:'Fijar las bases de diseño',i:[['c','Curvas de Declinación','Perfil de fluidos que dimensiona la planta'],['c','Flujo','Caudales en unidades consistentes'],['c','Presión','Presiones en unidades consistentes']],o:'Bases de diseño'},
+ {g:'Comparar esquemas de facilidades',i:[['n','Dimensionamiento de separadores y tanques','Capacidad según caudal y tiempo de residencia'],['n','Hidráulica de líneas de flujo','Caída de presión y diámetro'],['c','Tratamiento de Agua','Caudal, eficiencia y OPEX'],['n','Flujo de gas en gasoductos (Weymouth y Panhandle B)','Caudal según la caída de presión disponible'],['n','Compresión de gas: etapas y potencia','Etapas, temperatura de descarga y hp']],o:'Esquemas de facilidades comparados'},
+ {g:'Ingeniería básica',i:[['c','MAOP (ASME B31G)','Presión máxima de líneas'],['c','Flaring & Venting','Quema según API 521'],['c','Impacto Acústico','Ruido y atenuación según ISO 9613'],['c','Lifting Cost (LOE)','OPEX de la instalación'],['n','Válvula de alivio para gas (API 520)','Área de orificio para el caudal de relevo'],['n','Espesor de recipientes y ductos, y prueba hidrostática','ASME VIII-1, B31.8 y presión de prueba']],o:'Ingeniería básica con CAPEX y OPEX'},
+ {g:'Construir y operar',i:[['q','MGT-001 Project Schedule QC','Ruta crítica y recursos'],['q','MGT-002 Cost Control QC (AFE vs Actual)','Sobrecostos y EAC'],['d','Demo 09 Control CAPEX/OPEX','Curva S y CPI/SPI'],['c','Emisiones CO₂','Factor de emisión por fuente']],o:'Facilidades en operación con control de costo y emisiones'}]},
+{id:'transicion',name:'Transición Energética',final:'Informe ESG y de emisiones verificable',st:[
+ {g:'Medir la línea base',i:[['c','Huella de Carbono','Alcances 1, 2 y 3 según GHG Protocol'],['c','Carbon Intensity','Intensidad contra benchmarks'],['c','Metano Cuantificación','Fugas y venteos']],o:'Línea base de emisiones'},
+ {g:'Explorar alternativas',i:[['c','CO₂ Transición','Emisiones y equivalencias GWP'],['c','Dimensionamiento Solar','Capacidad y factor de planta'],['c','Hidrógeno Verde','Electrolizadores y costo por kg'],['c','Carbon Capture (CCS)','Capacidad de almacenamiento y costo'],['c','LCA Simplificado','Ciclo de vida well-to-wheel'],['n','Costo nivelado de energía (LCOE / LCOH)','Costo por unidad de energía o hidrógeno en la vida del proyecto']],o:'Alternativas de descarbonización'},
+ {g:'Definir el plan de reducción',i:[['c','Methane Intensity','Compatible con OGMP 2.0'],['c','Flaring Reduction','Gas recuperado y su valor'],['c','LDAR Program','Detección y reparación de fugas'],['c','NPV / IRR / Payback','Valor del plan'],['c','Carbon Offset','Créditos para neutralidad']],o:'Plan de reducción con costo y plazos'},
+ {g:'Operar y reportar',i:[['q','ENE-001 GHG Emissions QC','Valida el inventario'],['c','ESG Score','Puntuación E, S y G'],['c','Biodiversidad','Índice según TNFD'],['c','Economía Circular','Circularidad y valor recuperado']],o:'Informe ESG verificable'}]},
+{id:'evalup',name:'Evaluación de Proyectos Upstream',final:'Caso de negocio con riesgo y plan de seguimiento',st:[
+ {g:'Filtrar la oportunidad',i:[['c','Lifting Cost (LOE)','Costo de extracción en USD/BOE'],['c','Break-even Price','Precio mínimo de rentabilidad']],o:'Screening económico'},
+ {g:'Comparar casos',i:[['c','Curvas de Declinación','Perfil de producción de cada caso'],['c','NPV / IRR / Payback','Valor de cada caso'],['d','Demo 02 Modelo Económico VM','Escenarios y modelo fiscal']],o:'Casos económicos y ranking'},
+ {g:'Cerrar el caso de negocio',i:[['c','Government Take (PSA)','Términos fiscales'],['n','Sensibilidad tornado económica','Variables que más mueven el VAN'],['q','RND-002 Uncertainty Quantification QC','Monte Carlo y distribuciones'],['q','MGT-003 Risk Register QC','Riesgos y mitigaciones'],['n','Valor de la información (VPI y VOI)','Si conviene pagar un estudio antes de decidir'],['n','Cartera de prospectos y presupuesto','Selección que maximiza el VME dentro del presupuesto']],o:'Caso de negocio con riesgo'},
+ {g:'Seguir y auditar',i:[['q','MGT-002 Cost Control QC (AFE vs Actual)','Sobrecostos y EAC'],['q','MGT-001 Project Schedule QC','Cronograma y recursos'],['d','Demo 09 Control CAPEX/OPEX','Curva S y CPI/SPI']],o:'Seguimiento y post-auditoría del proyecto'}]},
+{id:'evaldown',name:'Evaluación de Proyectos Downstream',final:'Caso de negocio downstream con seguimiento',st:[
+ {g:'Filtrar por margen',i:[['c','Netback por Destino','Precio, flete y diferencial de calidad'],['c','Energía','Poder calorífico y equivalencias']],o:'Screening de margen por destino'},
+ {g:'Evaluar la configuración',i:[['a','RefineryCDU','Rendimientos y balances de la unidad'],['n','Margen de refinación (crack spread)','Margen por cesta de productos']],o:'Alternativas con margen estimado'},
+ {g:'Cerrar el caso de negocio',i:[['a','BlendingOptimizer','Mezclas a mínimo costo con especificaciones'],['c','Break-even Price','Precio mínimo de rentabilidad'],['c','NPV / IRR / Payback','Valor del proyecto'],['n','Sensibilidad de precios','Tornado sobre crudo y productos'],['c','Emisiones CO₂','Factor de emisión por fuente'],['n','Mezcla de crudos y combustibles','API, azufre y viscosidad de la mezcla']],o:'Caso de negocio downstream'},
+ {g:'Operar y medir',i:[['a','MaintenancePred','Alertas tempranas de falla'],['c','TRIR / LTIR Rate','Accidentabilidad'],['c','Carbon Intensity','Intensidad contra benchmarks']],o:'Seguimiento de desempeño de la planta'}]}
+];
+
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+var EST=[],CUR=null,E=window.H3L_ESTR;
+function lvl(id,e){var m=E.mat[id];if(!m)return 't';var c=m.charAt(E.orden.indexOf(e));return c==='n'||c==='o'?c:'-'}
+function visItem(it){if(!EST.length||it[0]!=='n')return true;var id=NID[it[1]];if(!id||!E.mat[id])return true;return EST.some(function(e){return lvl(id,e)!=='-'})}
+function estHash(){return EST.length?'.'+EST.join('-'):''}
+function estBar(){
+  var h='<div class="estbar" role="group" aria-label="Estrategia de explotación"><span class="estl">Estrategia</span><button class="chip'+(!EST.length?' on':'')+'" data-est="todas" aria-pressed="'+(!EST.length)+'">Todas</button>';
+  E.orden.forEach(function(e){h+='<button class="chip'+(EST.indexOf(e)>=0?' on':'')+'" data-est="'+e+'" aria-pressed="'+(EST.indexOf(e)>=0)+'">'+esc(E.estrategias[e].n)+'</button>'});
+  h+='<p class="esth">Elegí una o más estrategias para ocultar las herramientas nuevas que no aplican y ver cómo cambia el uso de cada una. Guía de H3L pendiente de validación técnica.</p></div>';
+  EST.forEach(function(e){var d=E.estrategias[e];h+='<section class="estp"><h3>'+esc(d.n)+'</h3><p>'+esc(d.desc)+'</p><div class="estcols"><div><b>Qué cambia</b><ul>'+d.cambia.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul></div><div><b>Evitar</b><ul>'+d.evitar.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul></div></div></section>'});
+  return h;
+}
+function render(id){
+  var t=T.filter(function(x){return x.id===id})[0]||T[0];CUR=t.id;
+  var counts={c:0,q:0,d:0,a:0,n:0},total=0,n=0;
+  t.st.forEach(function(s){s.i.forEach(function(it){if(!visItem(it))return;counts[it[0]]++;total++})});
+  var parts=[];
+  ['c','q','d','a','n'].forEach(function(k){if(counts[k])parts.push('<b>'+counts[k]+'</b> '+KIND[k].l.toLowerCase()+(counts[k]>1&&k!=='a'&&k!=='n'?'s':''))});
+  var html=estBar()+'<div class="head"><h2>'+esc(t.name)+'</h2><div class="counts">'+total+' herramientas en orden de uso: '+parts.join(' · ')+'</div></div>';
+  html+='<ul class="legend" aria-label="Tipos de herramienta">';
+  ['c','q','d','a','n'].forEach(function(k){html+='<li style="color:var(--k-'+k+')"><span class="dot'+(k==='n'?' n':'')+'"></span><span style="color:var(--muted)">'+KIND[k].l+'</span></li>'});
+  html+='</ul><div class="stages">';
+  t.st.forEach(function(s,si){
+    var S=STAGES[si];
+    html+='<section class="stage"><div class="chev"><span class="k">'+S.k+' · '+S.f+'</span><span class="n">'+S.n+'</span></div><p class="goal">'+esc(s.g)+'</p><ol class="items" style="list-style:none">';
+    var vis=s.i.filter(visItem);if(!vis.length)html+='<li class="item"><span class="num">–</span><div><div class="note">Sin herramientas nuevas específicas de esta estrategia en esta etapa; usá las de la plataforma.</div></div></li>';
+    vis.forEach(function(it){
+      n++;
+      var kd=KIND[it[0]];
+      var nm=it[0]==='n'?(NID[it[1]]?'<a href="'+NEW+NID[it[1]]+estHash()+'" target="_blank" rel="noopener">'+esc(it[1])+'</a>':esc(it[1])):'<a href="'+BASE+kd.go+'" target="_blank" rel="noopener">'+esc(it[1])+'</a>';
+      var extra='',bd='';
+      if(it[0]==='n'&&EST.length&&NID[it[1]]){var id2=NID[it[1]];EST.forEach(function(e){var l=lvl(id2,e),nt=(E.notas[id2]||{})[e];if(l==='n'||l==='o')bd+='<span class="lv '+l+'">'+esc(E.estrategias[e].n)+(l==='o'?' · con ajustes':'')+'</span>';if(nt)extra+='<div class="enote"><b>'+esc(E.estrategias[e].n)+':</b> '+esc(nt)+'</div>'})}
+      html+='<li class="item'+(it[0]==='n'?' n':'')+'"><span class="num">'+n+'</span><div><div class="name">'+nm+'</div><div class="note">'+esc(it[2])+'</div><span class="tag '+it[0]+'">'+kd.l+'</span>'+bd+extra+'</div></li>';
+    });
+    html+='</ol><div class="out"><div class="l">Entregable</div><p>'+esc(s.o)+'</p></div></section>';
+  });
+  html+='</div><div class="final"><span class="l">Entregable final</span><span class="t">'+esc(t.final)+'</span></div>';
+  document.getElementById('panel').innerHTML=html;
+  var btns=document.querySelectorAll('#topics button');
+  for(var i=0;i<btns.length;i++){btns[i].setAttribute('aria-selected',btns[i].getAttribute('data-id')===t.id?'true':'false')}
+  try{history.replaceState(null,'','#'+t.id+estHash())}catch(e){}
+}
+(function(){
+  var ul=document.getElementById('topics'),h='';
+  T.forEach(function(t){h+='<li role="presentation"><button role="tab" data-id="'+t.id+'" aria-selected="false">'+esc(t.name)+'</button></li>'});
+  ul.innerHTML=h;
+  ul.addEventListener('click',function(e){var b=e.target.closest('button');if(b)render(b.getAttribute('data-id'))});
+  document.getElementById('panel').addEventListener('click',function(e){var b=e.target.closest('[data-est]');if(!b)return;var v=b.getAttribute('data-est');if(v==='todas')EST=[];else{var i=EST.indexOf(v);if(i>=0)EST.splice(i,1);else EST.push(v);EST.sort(function(a,c){return E.orden.indexOf(a)-E.orden.indexOf(c)})}render(CUR)});
+  var hp=(location.hash||'').replace('#','').split('.');
+  if(hp[1])EST=hp[1].split('-').filter(function(x){return E.orden.indexOf(x)>=0});
+  render(hp[0]||T[0].id);
+})();
+</script>
+
+<script>
+/* integración con el sitio H3L: dentro de la sección, los enlaces cambian de pestaña sin recargar */
+(function(){
+  var emb=false;try{emb=window.parent!==window&&/[?&]embed=1/.test(location.search)}catch(e){}
+  if(!emb)return;
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a');if(!a)return;
+    var h=a.getAttribute('href')||'';
+    var m=h.match(/^app\.html#(.+)$/);
+    if(m){e.preventDefault();parent.postMessage({h3l:'tool',hash:m[1]},location.origin);return}
+    var g=h.match(/^(?:\.\.\/)?index\.html\?(.*)$/);
+    if(g){e.preventDefault();parent.postMessage({h3l:'goto',query:g[1]},location.origin)}
+  },true);
+})();
+</script>
+</body></html>
