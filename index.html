@@ -556,13 +556,30 @@ input,select,textarea{font-family:var(--font-body);}
   background:var(--blue-pale);border-color:var(--blue-core);color:var(--blue-core);
 }
 /* Calculadoras por flujo: pestañas y marcos incrustados */
-.calc-tab-btn{padding:8px 20px;border-radius:3px;border:1px solid var(--border);background:transparent;color:var(--text-secondary);font-family:var(--font-body);font-size:13px;font-weight:600;letter-spacing:.4px;cursor:pointer;transition:var(--transition);}
-.calc-tab-btn:hover,.calc-tab-btn.active{background:var(--blue-pale);border-color:var(--blue-core);color:var(--blue-core);}
-.calc-draft{max-width:1200px;margin:0 auto 14px;font-size:12px;color:var(--text-secondary);text-align:center;}
+#section-calculators .section-header{margin-bottom:22px;padding-bottom:30px;}
+#section-calculators .calc-categories{margin-bottom:12px;}
+.calc-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));max-width:640px;margin:0 auto 12px;border:1px solid var(--border);border-radius:6px;overflow:hidden;background:#fff;}
+.calc-tab-btn{padding:11px 10px;border:0;border-right:1px solid var(--border);background:transparent;color:var(--text-secondary);font-family:var(--font-body);font-size:13px;font-weight:600;letter-spacing:.2px;cursor:pointer;transition:var(--transition);line-height:1.2;}
+.calc-tab-btn:last-child{border-right:0;}
+.calc-tab-btn:hover{background:var(--blue-ghost);}
+.calc-tab-btn.active{background:var(--blue-core);color:#fff;}
+.calc-tab-btn .s{display:none;}
+.calc-draft{max-width:640px;margin:0 auto 16px;padding:7px 12px;font-size:12px;line-height:1.4;color:#7a4a00;background:#fff6e5;border:1px solid #f0d49a;border-radius:6px;text-align:left;}
 .calc-panel{max-width:1200px;margin:0 auto;}
 .calc-panel[hidden]{display:none;}
-.calc-panel iframe{display:block;width:100%;height:calc(100vh - 230px);min-height:680px;border:1px solid var(--border);border-radius:var(--radius);background:#fff;}
-@media (max-width:700px){.calc-panel iframe{height:calc(100vh - 170px);min-height:560px;}}
+.calc-panel iframe{display:block;width:100%;border:0;background:transparent;}
+#calcFrameFlujo{min-height:620px;}
+#calcFrameApp{height:calc(100vh - 190px);min-height:640px;}
+@media (max-width:600px){
+  #section-calculators .section-header{padding-top:72px;padding-bottom:20px;margin-bottom:16px;}
+  #section-calculators .section-desc{font-size:13px;}
+  .calc-tab-btn{font-size:12px;padding:10px 4px;}
+  .calc-tab-btn .l{display:none;}.calc-tab-btn .s{display:inline;}
+  .calc-draft{font-size:11.5px;}
+  #calcFrameApp{height:calc(100vh - 150px);min-height:560px;}
+}
+/* corrige el desborde horizontal del encabezado de sección en celular (margen -48px con relleno de 20px) */
+@media (max-width:600px){.section-header{margin-left:-20px;margin-right:-20px;padding-left:20px;padding-right:20px;}}
 .calc-grid{
   display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));
   gap:18px;max-width:1200px;margin:0 auto;
@@ -1966,12 +1983,12 @@ tr:hover td{background:var(--blue-ghost);}
       <h2 class="section-title">Calculadoras por Flujo de Trabajo</h2>
       <p class="section-desc">Del primer análisis al entregable, en orden de uso y según la estrategia de explotación (VCDE, equivalente a FEL)</p>
     </div>
-    <div class="calc-categories" id="calcTabs" role="tablist" aria-label="Vistas de calculadoras">
-      <button class="calc-tab-btn active" role="tab" data-ctab="flujo" onclick="calcTab('flujo')">Flujo por tema</button>
-      <button class="calc-tab-btn" role="tab" data-ctab="app" onclick="calcTab('app')">48 herramientas paso a paso</button>
-      <button class="calc-tab-btn" role="tab" data-ctab="clasicas" onclick="calcTab('clasicas')">Calculadoras clásicas (44)</button>
+    <div class="calc-tabs" id="calcTabs" role="tablist" aria-label="Vistas de calculadoras">
+      <button class="calc-tab-btn active" role="tab" data-ctab="flujo" onclick="calcTab('flujo')"><span class="l">Flujo por tema</span><span class="s">Flujo</span></button>
+      <button class="calc-tab-btn" role="tab" data-ctab="app" onclick="calcTab('app')"><span class="l">48 herramientas paso a paso</span><span class="s">Paso a paso</span></button>
+      <button class="calc-tab-btn" role="tab" data-ctab="clasicas" onclick="calcTab('clasicas')"><span class="l">Calculadoras clásicas (44)</span><span class="s">Clásicas (44)</span></button>
     </div>
-    <p class="calc-draft">Las herramientas paso a paso son <b>borradores pendientes de revisión técnica</b>: cada ficha declara método, fuente y límites. Validar con un revisor distinto del autor antes de usar en decisiones.</p>
+    <p class="calc-draft">ⓘ Las herramientas paso a paso son <b>borradores pendientes de revisión técnica</b>. Validar con un revisor distinto del autor antes de decidir con ellas.</p>
     <div id="calcPanelFlujo" class="calc-panel"><iframe id="calcFrameFlujo" title="Flujo de trabajo por tema" data-src="calculadoras/flujo.html?embed=1" loading="lazy"></iframe></div>
     <div id="calcPanelApp" class="calc-panel" hidden><iframe id="calcFrameApp" title="Herramientas de cálculo paso a paso" data-src="calculadoras/app.html?embed=1" loading="lazy"></iframe></div>
     <div id="calcPanelClasicas" class="calc-panel" hidden>
@@ -7298,6 +7315,7 @@ function processQCFile(input, type){
   window.addEventListener('message',function(e){
     if(e.origin!==location.origin||!e.data||!e.data.h3l)return;
     var d=e.data;
+    if(d.h3l==='height'&&d.frame==='flujo'&&typeof d.h==='number'&&d.h>0&&d.h<20000){document.getElementById('calcFrameFlujo').style.height=Math.max(d.h,400)+'px';return;}
     if(d.h3l==='tool'&&/^[A-Za-z0-9._-]+$/.test(d.hash||''))calcTab('app',d.hash);
     else if(d.h3l==='goto'){
       var q=new URLSearchParams(d.query||''),g=q.get('go');

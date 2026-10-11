@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <style>:root{color-scheme:light}html,body{margin:0}body{font-size:14px;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
-<script>try{if(/[?&]embed=1/.test(location.search))document.documentElement.setAttribute('data-theme','light')}catch(e){}</script>
+<script>try{if(/[?&]embed=1/.test(location.search))(document.documentElement.setAttribute('data-theme','light'),document.documentElement.setAttribute('data-embed','1'))}catch(e){}</script>
 <title>Calculadoras H3L</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
@@ -165,6 +165,13 @@ footer{max-width:1240px;margin:0 auto;padding-block:18px 28px;border-top:1px sol
  h2{font-size:22px}
  .hbr{grid-template-columns:minmax(0,1fr)}
 }
+</style>
+<style id="embed-css">
+html[data-embed] body{background:transparent;padding-inline:0}
+html[data-embed] .brand,html[data-embed] footer{display:none}
+html[data-embed] .top{padding-block:0 12px;border-bottom:0;justify-content:flex-start}
+html[data-embed] .shell{padding-block-start:0}
+@media (max-width:640px){html[data-embed] .hero h2{font-size:22px;line-height:1.2}html[data-embed] .hero .intro{font-size:13.5px}}
 </style>
 </head><body>
 

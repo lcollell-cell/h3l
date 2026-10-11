@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <style>:root{color-scheme:light}html,body{margin:0}body{font-size:14px;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
-<script>try{if(/[?&]embed=1/.test(location.search))document.documentElement.setAttribute('data-theme','light')}catch(e){}</script>
+<script>try{if(/[?&]embed=1/.test(location.search))(document.documentElement.setAttribute('data-theme','light'),document.documentElement.setAttribute('data-embed','1'))}catch(e){}</script>
 <title>Flujo VCDE H3L</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600&display=swap">
 <style>
@@ -102,6 +102,13 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-off
   .goal{min-height:0}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<style id="embed-css">
+html[data-embed] body{background:transparent;padding-inline:0;padding-block:0 12px}
+html[data-embed] .eyebrow,html[data-embed] h1,html[data-embed] .lead{display:none}
+html[data-embed] .topics{margin-top:0}
+html[data-embed] .foot{margin-top:16px}
+@media (max-width:640px){html[data-embed] .topics{flex-wrap:nowrap;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}html[data-embed] .topics li{flex:none;scroll-snap-align:start}html[data-embed] .topics button{padding:7px 12px;font-size:12.5px;white-space:nowrap}}
 </style>
 </head><body>
 
@@ -311,6 +318,17 @@ function render(id){
     var g=h.match(/^(?:\.\.\/)?index\.html\?(.*)$/);
     if(g){e.preventDefault();parent.postMessage({h3l:'goto',query:g[1]},location.origin)}
   },true);
+})();
+</script>
+<script>
+/* altura automática dentro del sitio: el marco crece con el contenido y la página se desplaza como un todo */
+(function(){
+  var emb=false;try{emb=window.parent!==window&&/[?&]embed=1/.test(location.search)}catch(e){}
+  if(!emb)return;
+  var last=0;
+  function send(){var h=Math.ceil(document.body.getBoundingClientRect().height);if(h&&h!==last){last=h;parent.postMessage({h3l:'height',h:h,frame:'flujo'},location.origin)}}
+  if(window.ResizeObserver)new ResizeObserver(send).observe(document.body);
+  window.addEventListener('load',send);setTimeout(send,300);
 })();
 </script>
 </body></html>
