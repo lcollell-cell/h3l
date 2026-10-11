@@ -1829,6 +1829,287 @@ html[data-embed] .shell{padding-block-start:0}
     return res;
   };
 
+
+  /* ---------- Caracterización: pruebas de pozo, producción, gradientes, petrofísica, roca ---------- */
+  function olsFull(xs, ys) {
+    var n = xs.length, mx = 0, my = 0, i;
+    if (n < 2) return null;
+    for (i = 0; i < n; i++) { mx += xs[i] / n; my += ys[i] / n; }
+    var sxx = 0, sxy = 0, syy = 0;
+    for (i = 0; i < n; i++) { sxx += Math.pow(xs[i] - mx, 2); sxy += (xs[i] - mx) * (ys[i] - my); syy += Math.pow(ys[i] - my, 2); }
+    if (sxx < 1e-18) return null;
+    var b = sxy / sxx, a = my - b * mx, r2 = syy > 0 ? sxy * sxy / (sxx * syy) : 1, sse = 0;
+    for (i = 0; i < n; i++) sse += Math.pow(ys[i] - (a + b * xs[i]), 2);
+    var s2 = n > 2 ? sse / (n - 2) : NaN;
+    return { n: n, b: b, a: a, r2: r2, mx: mx, sxx: sxx, seb: Math.sqrt(s2 / sxx), sea: Math.sqrt(s2 * (1 / n + mx * mx / sxx)), cov: -mx * s2 / sxx, rmse: Math.sqrt(sse / n) };
+  }
+  C._util.ols = olsFull;
+
+  /* 49. Pruebas de pozo: derivada de Bourdet, diagnóstico de régimen, k y daño */
+  C.ptaDeriv = function (p) {
+    var K0 = -(Math.log(0.0002637) + 0.80907);
+    var err = [], av = [], g = {};
+    ['q', 'B', 'mu', 'h', 'ct', 'phi', 'rw'].forEach(function (k) { g[k] = num(p[k]); });
+    var tp = isFinite(num(p.tp)) ? num(p.tp) : 0, L = isFinite(num(p.L)) ? num(p.L) : 0.1, tipo = p.tipo === 'dd' ? 'dd' : 'bu';
+    var w1 = num(p.tIni), w2 = num(p.tFin);
+    var f = rows(p.filas).map(function (r) { return { t: num(r.t), dp: num(r.dp) }; });
+    if (!(g.q > 0 && g.B > 0 && g.mu > 0 && g.h > 0 && g.ct > 0 && g.rw > 0)) err.push('Caudal, B, viscosidad, espesor, compresibilidad y radio del pozo deben ser positivos.');
+    if (!(g.phi > 0 && g.phi < 0.6)) err.push('La porosidad debe estar entre 0 y 0,6 (fracción).');
+    if (!(L >= 0 && L <= 0.5)) err.push('El suavizado L debe estar entre 0 y 0,5 (ciclos logarítmicos naturales).');
+    if (tipo === 'bu' && !(tp > 0)) err.push('En un cierre (build-up) cargá el tiempo de producción previo tp (> 0 h) para usar el tiempo equivalente de Agarwal.');
+    if (f.length < 8) err.push('Cargá al menos 8 puntos (Δt, Δp).');
+    f.forEach(function (r, i) { if (!(r.t > 0 && r.dp > 0)) err.push('Punto ' + (i + 1) + ': Δt y Δp deben ser positivos.'); });
+    for (var i = 1; i < f.length; i++) if (f[i].t <= f[i - 1].t) { err.push('Los tiempos Δt deben ser crecientes.'); break; }
+    if (err.length) return { errores: err };
+    var n = f.length, k;
+    f.forEach(function (r) { r.te = tipo === 'bu' ? r.t * tp / (tp + r.t) : r.t; r.x = Math.log(r.te); });
+    for (i = 1; i < n; i++) if (!(f[i].x > f[i - 1].x)) { err.push('El tiempo equivalente no es creciente: revisá tp o los Δt.'); break; }
+    if (err.length) return { errores: err };
+    /* derivada de Bourdet con suavizado L */
+    for (i = 0; i < n; i++) {
+      var il = -1, ir = -1, j;
+      for (j = i - 1; j >= 0; j--) { if (f[i].x - f[j].x >= L) { il = j; break; } }
+      if (il < 0 && i > 0) il = i - 1;
+      for (j = i + 1; j < n; j++) { if (f[j].x - f[i].x >= L) { ir = j; break; } }
+      if (ir < 0 && i < n - 1) ir = i + 1;
+      if (il < 0 || ir < 0) { f[i].der = null; continue; }
+      var dx1 = f[i].x - f[il].x, dx2 = f[ir].x - f[i].x, dp1 = f[i].dp - f[il].dp, dp2 = f[ir].dp - f[i].dp;
+      f[i].der = (dp1 / dx1 * dx2 + dp2 / dx2 * dx1) / (dx1 + dx2);
+    }
+    /* pendientes locales (log-log) */
+    var pd = f.filter(function (r) { return r.der != null && r.der > 0; });
+    for (i = 0; i < n; i++) { f[i].sDp = i > 0 ? Math.log(f[i].dp / f[i - 1].dp) / (f[i].x - f[i - 1].x) : null; }
+    for (i = 1; i < n; i++) { f[i].sDer = (f[i].der != null && f[i - 1].der != null && f[i].der > 0 && f[i - 1].der > 0) ? Math.log(f[i].der / f[i - 1].der) / (f[i].x - f[i - 1].x) : null; }
+    /* ventana de flujo radial: manual o plateau más largo de la derivada */
+    var win = null, ids = [];
+    for (i = 0; i < n; i++) if (f[i].der != null && f[i].der > 0) ids.push(i);
+    if (isFinite(w1) && isFinite(w2) && w2 > w1) {
+      var sel = ids.filter(function (ii) { return f[ii].t >= w1 && f[ii].t <= w2; });
+      if (sel.length >= 3) win = sel;
+      else av.push('La ventana de flujo radial manual tiene menos de 3 puntos con derivada; se usó la detección automática.');
+    }
+    if (!win) {
+      var best = null, a0, a1, mn, mxv, ok;
+      for (a0 = 0; a0 < ids.length; a0++) {
+        mn = Infinity; mxv = -Infinity; ok = a0;
+        for (a1 = a0; a1 < ids.length; a1++) {
+          var dv = f[ids[a1]].der; mn = Math.min(mn, dv); mxv = Math.max(mxv, dv);
+          if (mxv / mn <= 1.15) ok = a1; else break;
+        }
+        if (ok - a0 + 1 >= 4 && (!best || ok - a0 >= best[1] - best[0])) best = [a0, ok];
+      }
+      if (best) win = ids.slice(best[0], best[1] + 1);
+    }
+    var out = { errores: [], avisos: av, filas: f, tipo: tipo, tp: tp, L: L, g: g };
+    var wsC = [];
+    for (i = 0; i < n; i++) if (f[i].sDp != null && f[i].sDp > 0.9 && f[i].sDp < 1.1 && f[i].der != null && f[i].sDer != null && f[i].sDer > 0.8 && f[i].sDer < 1.2) wsC.push(g.q * g.B * f[i].t / (24 * f[i].dp));
+    if (wsC.length >= 2) { out.C = wsC.reduce(function (a, b) { return a + b; }, 0) / wsC.length; }
+    if (win) {
+      var mprime = 0; win.forEach(function (ii) { mprime += f[ii].der / win.length; });
+      var kk = 70.6 * g.q * g.B * g.mu / (g.h * mprime);
+      var sSum = 0; win.forEach(function (ii) { sSum += 0.5 * (f[ii].dp / f[ii].der - Math.log(kk * f[ii].te / (g.phi * g.mu * g.ct * g.rw * g.rw)) + K0); });
+      var skin = sSum / win.length, last = f[n - 1];
+      out.win = { t1: f[win[0]].t, t2: f[win[win.length - 1]].t, n: win.length };
+      out.mprime = mprime; out.k = kk; out.kh = kk * g.h; out.s = skin;
+      out.ri = Math.sqrt(kk * last.te / (948 * g.phi * g.mu * g.ct));
+      out.dpSkin = 141.2 * g.q * g.B * g.mu / (kk * g.h) * skin;
+      out.winIds = win;
+      if (win.length < 5) av.push('La ventana de flujo radial tiene pocos puntos (' + win.length + '): el k es sensible al ruido; ampliá el rango de tiempo o ajustá L.');
+      if (f[win[win.length - 1]].der / f[win[0]].der > 1.2 || f[win[win.length - 1]].der / f[win[0]].der < 0.83) av.push('La derivada no es plana dentro de la ventana elegida: revisá que realmente sea flujo radial.');
+      if (!isFinite(skin) || Math.abs(skin) > 50) av.push('El daño calculado es extremo (' + (isFinite(skin) ? skin.toFixed(1) : 'no definido') + '): revisá φ, ct, rw y el rango de la ventana.');
+      if (tipo === 'bu') av.push('En un cierre el daño calculado con tiempo equivalente es aproximado; para historias de caudal complejas usá superposición o un modelo numérico.');
+    } else {
+      av.push('No se detectó una meseta de la derivada (flujo radial): la prueba puede ser demasiado corta, estar dominada por almacenamiento o por límites. Indicá el rango de tiempo manualmente solo si el gráfico lo respalda.');
+    }
+    /* regímenes por pendiente de la derivada */
+    var reg = [];
+    for (i = 1; i < n; i++) { var s = f[i].sDer; if (s == null) continue; var r;
+      if (s > 0.85 && s < 1.15) r = 'almacenamiento'; else if (s > 0.4 && s < 0.6) r = 'lineal (½)'; else if (s > 0.15 && s < 0.35) r = 'bilineal (¼)'; else if (Math.abs(s) < 0.12) r = 'radial (0)'; else r = null;
+      if (r) f[i].reg = r; }
+    out.regimenes = f.filter(function (r) { return r.reg; }).map(function (r) { return r.reg; }).filter(function (v, i, a) { return a.indexOf(v) === i; });
+    av.push('Para cierres, Δt se transforma en tiempo equivalente de Agarwal (Δt·tp/(tp + Δt)); si tp es muy corto respecto de Δt la aproximación pierde exactitud. Esta herramienta diagnostica y estima k y daño; no reemplaza un ajuste con curvas tipo o un modelo.');
+    return out;
+  };
+
+  /* 50. Análisis de producción (RTA) para petróleo: balance de materia fluyente y flujo lineal */
+  C.rta = function (p) {
+    var err = [], av = [], g = {};
+    ['phi', 'ct', 'mu', 'B', 'h', 'pi', 'sw'].forEach(function (k) { g[k] = num(p[k]); });
+    var fb = isFinite(num(p.fBdf)) ? num(p.fBdf) : 0.4, fl = isFinite(num(p.fLin)) ? num(p.fLin) : 0.4;
+    var f = rows(p.filas).map(function (r) { return { t: num(r.t), q: num(r.q), pwf: num(r.pwf) }; });
+    if (!(g.phi > 0 && g.phi < 0.6 && g.ct > 0 && g.mu > 0 && g.B > 0 && g.h > 0)) err.push('φ (0–0,6), compresibilidad, viscosidad, B y espesor deben ser positivos.');
+    if (!(g.sw >= 0 && g.sw < 1)) err.push('La saturación de agua debe estar entre 0 y 1.');
+    if (!(g.pi > 0)) err.push('La presión inicial debe ser positiva.');
+    if (f.length < 10) err.push('Cargá al menos 10 puntos (t, q, pwf).');
+    f.forEach(function (r, i) { if (!(r.t > 0 && r.q > 0 && r.pwf > 0 && r.pwf < g.pi)) err.push('Punto ' + (i + 1) + ': t y q positivos y 0 < pwf < pi.'); });
+    for (var i = 1; i < f.length; i++) if (f[i].t <= f[i - 1].t) { err.push('Los tiempos deben ser crecientes.'); break; }
+    if (!(fb > 0.1 && fb <= 1) || !(fl > 0.1 && fl <= 1)) err.push('Las fracciones de puntos para los ajustes deben estar entre 0,1 y 1.');
+    if (err.length) return { errores: err };
+    var n = f.length, np = 0, tprev = 0, k;
+    f.forEach(function (r) { np += r.q * (r.t - tprev); tprev = r.t; r.np = np; r.dp = g.pi - r.pwf; r.qdp = r.q / r.dp; r.dpq = r.dp / r.q; r.tmb = r.np / r.q; });
+    /* balance de materia fluyente: Δp/q = m·t_mb + b en la cola */
+    var nb = Math.max(5, Math.round(n * fb)), tail = f.slice(n - nb), rb = olsFull(tail.map(function (r) { return r.tmb; }), tail.map(function (r) { return r.dpq; }));
+    var res = { errores: [], avisos: av, filas: f, g: g, nb: nb };
+    if (rb && rb.b > 0) {
+      var vp = g.B / (g.ct * rb.b), vpFt3 = vp * 5.615, area = vpFt3 / (g.phi * g.h * 43560), ooip = vp * (1 - g.sw) / g.B;
+      res.bdf = { m: rb.b, b: rb.a, r2: rb.r2, vp: vp, area: area, N: ooip, fr: f[n - 1].np / ooip, np: f[n - 1].np };
+      if (rb.r2 < 0.95) av.push('R² del ajuste de flujo dominado por los límites = ' + rb.r2.toFixed(3) + ': los últimos puntos no siguen una recta de Δp/q contra t_mb; el volumen no es confiable.');
+      if (res.bdf.fr > 1) av.push('La producción acumulada supera el volumen estimado: el pozo aún no entró en flujo dominado por los límites o hay aporte externo.');
+      if (rb.a < 0) av.push('La ordenada del ajuste es negativa: no es coherente con un pozo en flujo dominado por los límites (revisá la selección de puntos).');
+    } else av.push('La pendiente de Δp/q contra t_mb no es positiva en la cola: no se puede estimar volumen (aún en flujo transitorio o datos con ruido).');
+    /* flujo lineal: Δp/q = mL·√t en el comienzo */
+    var nl = Math.max(5, Math.round(n * fl)), head = f.slice(0, nl), rl = olsFull(head.map(function (r) { return Math.sqrt(r.t); }), head.map(function (r) { return r.dpq; }));
+    if (rl && rl.b > 0) {
+      var mu = g.mu * 1e-3, ct = g.ct / 6894.757, mSI = rl.b * 6894.757 * 86400 / 0.158987294928 / Math.sqrt(86400);
+      var acSqrtK = 2 * g.B * Math.sqrt(mu / (Math.PI * g.phi * ct)) / mSI;
+      acSqrtK = acSqrtK / (0.09290304 * Math.sqrt(9.869233e-16));
+      res.lin = { m: rl.b, b: rl.a, r2: rl.r2, acSqrtK: acSqrtK, n: nl };
+      var kmd = num(p.k);
+      if (kmd > 0) { res.lin.k = kmd; res.lin.ac = acSqrtK / Math.sqrt(kmd); res.lin.xf = res.lin.ac / (4 * g.h); }
+      if (rl.r2 < 0.95) av.push('R² del ajuste de flujo lineal = ' + rl.r2.toFixed(3) + ': el comienzo de la historia no es una recta contra √t (puede haber almacenamiento, choke o régimen distinto).');
+    } else av.push('No hay pendiente positiva de Δp/q contra √t en el comienzo de la historia: no se estima A_c·√k.');
+    av.push('Δp/q contra √t y Δp/q contra t_mb asumen un líquido de compresibilidad baja y constante, caudal razonablemente estable y pwf conocida; para gas hay que usar pseudo-presión y pseudo-tiempo, que esta herramienta no incluye.');
+    av.push('El volumen del flujo dominado por los límites (V_p = B/(c_t·m)) es el volumen poral drenado a la fecha: si el pozo aún no sintió los bordes, es un mínimo.');
+    res.curva = f.map(function (r) { return { tmb: r.tmb, qdp: r.qdp }; });
+    return res;
+  };
+
+  /* 51. Gradientes de presión y contactos de fluidos */
+  C.gradiente = function (p) {
+    var err = [], av = [], f = rows(p.filas).map(function (r) { return { z: num(r.z), p: num(r.p), f: String(r.f || '').trim().toLowerCase().charAt(0) }; });
+    var pd = isFinite(num(p.pe)) ? num(p.pe) : 0, ztop = num(p.ztop);
+    f.forEach(function (r, i) { if (!(isFinite(r.z) && r.p > 0)) err.push('Punto ' + (i + 1) + ': profundidad y presión válidas (psi > 0).'); if (['o', 'g', 'w'].indexOf(r.f) < 0) err.push('Punto ' + (i + 1) + ': fluido o, g o w.'); });
+    if (pd < 0) err.push('La presión de entrada no puede ser negativa.');
+    if (err.length) return { errores: err };
+    var lines = {}, names = { o: 'Petróleo', g: 'Gas', w: 'Agua' }, fl;
+    ['g', 'o', 'w'].forEach(function (c) {
+      var pts = f.filter(function (r) { return r.f === c; });
+      if (pts.length >= 2) {
+        var o = olsFull(pts.map(function (r) { return r.z; }), pts.map(function (r) { return r.p; }));
+        if (o) lines[c] = { c: c, n: pts.length, g: o.b, b: o.a, r2: o.r2, seg: o.seb, seb: o.sea, cov: o.cov, rmse: o.rmse, rho: o.b / 0.433, nombre: names[c] };
+      }
+    });
+    if (Object.keys(lines).length < 2) return { errores: ['Se necesitan al menos 2 fluidos con 2 o más puntos cada uno para intersecar gradientes.'] };
+    function inter(a, b) {
+      var D = b.g - a.g; if (!(Math.abs(D) > 1e-9)) return null;
+      var z = (a.b - b.b) / D, v = null;
+      if (isFinite(a.seg) && isFinite(b.seg)) {
+        var da = [1 / D, z / D], db = [-1 / D, -z / D];
+        v = da[0] * da[0] * a.seb * a.seb + da[1] * da[1] * a.seg * a.seg + 2 * da[0] * da[1] * a.cov + db[0] * db[0] * b.seb * b.seb + db[1] * db[1] * b.seg * b.seg + 2 * db[0] * db[1] * b.cov;
+      }
+      return { z: z, p: a.g * z + a.b, sd: v != null && v >= 0 ? Math.sqrt(v) : null };
+    }
+    var cont = [], H = lines;
+    if (H.g && H.o) { var go = inter(H.g, H.o); if (go) cont.push({ n: 'Contacto gas–petróleo (GOC)', z: go.z, p: go.p, sd: go.sd, tipo: 'goc' }); }
+    if (H.o && H.w) { var ow = inter(H.o, H.w); if (ow) { var obs = ow.z - (pd > 0 ? pd / (H.w.g - H.o.g) : 0); cont.push({ n: 'Nivel de agua libre (FWL), petróleo–agua', z: ow.z, p: ow.p, sd: ow.sd, tipo: 'fwl' }); if (pd > 0) cont.push({ n: 'Contacto petróleo–agua observado (OWC)', z: obs, p: null, sd: ow.sd, tipo: 'owc' }); } }
+    if (H.g && H.w && !H.o) { var gw = inter(H.g, H.w); if (gw) { var obs2 = gw.z - (pd > 0 ? pd / (H.w.g - H.g.g) : 0); cont.push({ n: 'Nivel de agua libre (FWL), gas–agua', z: gw.z, p: gw.p, sd: gw.sd, tipo: 'fwl' }); if (pd > 0) cont.push({ n: 'Contacto gas–agua observado (GWC)', z: obs2, p: null, sd: gw.sd, tipo: 'owc' }); } }
+    var res = { errores: [], avisos: av, lineas: ['g', 'o', 'w'].filter(function (c) { return lines[c]; }).map(function (c) { return lines[c]; }), contactos: cont, puntos: f, pe: pd };
+    if (isFinite(ztop)) {
+      var fwl = cont.filter(function (c) { return c.tipo === 'fwl'; })[0];
+      if (fwl) { res.columna = fwl.z - ztop; if (pd > 0) { var ob = cont.filter(function (c) { return c.tipo === 'owc'; })[0]; res.columnaObs = ob.z - ztop; } }
+    }
+    ['g', 'o', 'w'].forEach(function (c) {
+      var L = lines[c]; if (!L) return;
+      var rng = { g: [0.04, 0.2], o: [0.25, 0.41], w: [0.40, 0.52] }[c];
+      if (L.g < rng[0] || L.g > rng[1]) av.push('Gradiente de ' + L.nombre.toLowerCase() + ' = ' + L.g.toFixed(3) + ' psi/ft (' + L.rho.toFixed(2) + ' g/cc): fuera del rango habitual (' + rng[0] + '–' + rng[1] + ' psi/ft); revisá las unidades o el fluido asignado.');
+      if (L.n < 3) av.push(L.nombre + ': solo ' + L.n + ' puntos; con 2 el gradiente es exacto pero no hay estimación de incertidumbre del contacto. Usá 3 o más.');
+      else if (L.rmse > 3) av.push(L.nombre + ': el residuo del ajuste es de ' + L.rmse.toFixed(1) + ' psi (> 3): posible supercarga, deriva del manómetro o puntos de otro compartimento.');
+    });
+    if (cont.some(function (c) { return c.sd != null && c.sd > 50; })) av.push('La incertidumbre del contacto supera 50 ft: los datos son pocos o están muy cercanos en profundidad; no fijes el contacto con esta intersección sola.');
+    if (pd === 0 && H.o && H.w) av.push('Sin presión de entrada, el contacto calculado es el nivel de agua libre (presión capilar = 0), que queda por debajo del contacto observado en los registros. Cargá la presión de entrada de la roca para estimar la diferencia.');
+    av.push('La intersección supone el mismo sistema de presión (misma compartimentalización) para todos los puntos; presiones de pozos distintos deben compararse a la misma referencia y ajustarse por depleción si las tomas son de fechas distintas.');
+    return res;
+  };
+
+  /* 52. Petrofísica de arenas arcillosas y espesor neto */
+  C.petro2 = function (p) {
+    var err = [], av = [], g = {}, modelo = ['archie', 'sim', 'indo'].indexOf(p.modelo) >= 0 ? p.modelo : 'indo';
+    ['rw', 'rsh', 'a', 'm', 'n', 'dz', 'phic', 'vshc', 'swc'].forEach(function (k) { g[k] = num(p[k]); });
+    var f = rows(p.filas).map(function (r) { return { z: num(r.z), phi: num(r.phi), vsh: num(r.vsh), rt: num(r.rt) }; });
+    if (!(g.rw > 0 && g.rsh > 0 && g.a > 0 && g.m > 0 && g.n > 0)) err.push('Rw, Rsh, a, m y n deben ser positivos.');
+    if (!(g.dz > 0)) err.push('El paso de muestreo debe ser positivo (ft).');
+    if (!(g.phic >= 0 && g.phic < 0.4 && g.vshc > 0 && g.vshc <= 1 && g.swc > 0 && g.swc <= 1)) err.push('Cortes: φ entre 0 y 0,4, Vsh entre 0 y 1 y Sw entre 0 y 1.');
+    if (f.length < 3) err.push('Cargá al menos 3 muestras de perfil.');
+    f.forEach(function (r, i) { if (!(r.phi > 0 && r.phi < 0.6 && r.vsh >= 0 && r.vsh <= 1 && r.rt > 0)) err.push('Muestra ' + (i + 1) + ': φ (0–0,6), Vsh (0–1) y Rt (> 0).'); });
+    if (err.length) return { errores: err };
+    var nm = modelo, i;
+    if (modelo === 'sim' && g.n !== 2) { av.push('Simandoux requiere n = 2: se usó n = 2 en ese modelo.'); }
+    f.forEach(function (r) {
+      var sw;
+      if (nm === 'archie') sw = Math.pow(g.a * g.rw / (Math.pow(r.phi, g.m) * r.rt), 1 / g.n);
+      else if (nm === 'sim') { var c = r.vsh / g.rsh, d = Math.pow(r.phi, g.m) / (g.a * g.rw); sw = (-c + Math.sqrt(c * c + 4 * d / r.rt)) / (2 * d); }
+      else { var den = Math.pow(r.vsh, 1 - r.vsh / 2) / Math.sqrt(g.rsh) + Math.pow(r.phi, g.m / 2) / Math.sqrt(g.a * g.rw); sw = Math.pow((1 / Math.sqrt(r.rt)) / den, 2 / g.n); }
+      r.swRaw = sw; r.sw = Math.min(1, Math.max(0, sw));
+      r.net = r.phi >= g.phic && r.vsh <= g.vshc && r.sw <= g.swc;
+      r.res = r.phi >= g.phic && r.vsh <= g.vshc;
+    });
+    var gross = f.length * g.dz, hRes = 0, hNet = 0, pa = 0, pw = 0, va = 0, phih = 0, hcpv = 0;
+    f.forEach(function (r) {
+      if (r.res) hRes += g.dz;
+      if (r.net) { hNet += g.dz; pa += r.phi * g.dz; pw += r.phi * r.sw * g.dz; va += r.vsh * g.dz; hcpv += r.phi * (1 - r.sw) * g.dz; }
+    });
+    var res = { errores: [], avisos: av, modelo: nm, filas: f, gross: gross, hRes: hRes, hNet: hNet, ntg: hNet / gross, ntgRes: hRes / gross, phiAvg: hNet > 0 ? pa / hNet : null, swAvg: pa > 0 ? pw / pa : null, vshAvg: hNet > 0 ? va / hNet : null, hcpv: hcpv, g: g };
+    var clip = f.filter(function (r) { return r.swRaw > 1.0001; }).length;
+    if (clip) av.push(clip + ' muestra(s) dieron Sw > 1 y se recortaron a 1: revisá Rw, Rsh y el volumen de arcilla.');
+    if (hNet === 0) av.push('Ninguna muestra cumple los tres cortes: el espesor neto es cero.');
+    if (nm === 'archie' && f.some(function (r) { return r.vsh > 0.15; })) av.push('Archie con Vsh > 15 % sobreestima Sw: usá Indonesia o Simandoux.');
+    av.push('Los modelos de arena arcillosa tienen parámetros (Rsh, a, m, n) que deben venir de laboratorio o de la zona de agua; con parámetros genéricos el resultado es solo orientativo.');
+    av.push('Los cortes son decisiones del proyecto (permeabilidad mínima de producción, relación con la fractura, economía), no constantes universales: documentá su justificación.');
+    return res;
+  };
+
+  /* 53. Tipos de roca (FZI) y altura de saturación (función J de Leverett) */
+  C.rocas = function (p) {
+    var err = [], av = [], plugs = rows(p.plugs).map(function (r) { return { phi: num(r.phi), k: num(r.k) }; }), pcs = rows(p.pcs).map(function (r) { return { sw: num(r.sw), pc: num(r.pc) }; });
+    var nc = Math.round(num(p.nclases)) || 3;
+    plugs.forEach(function (r, i) { if (!(r.phi > 0 && r.phi < 0.5 && r.k > 0)) err.push('Plug ' + (i + 1) + ': φ (0–0,5) y k (> 0 mD).'); });
+    if (plugs.length < 6) err.push('Cargá al menos 6 plugs (φ, k).');
+    if (!(nc >= 1 && nc <= 6)) err.push('El número de clases debe estar entre 1 y 6.');
+    if (err.length) return { errores: err };
+    plugs.forEach(function (r) { r.rqi = 0.0314 * Math.sqrt(r.k / r.phi); r.phiz = r.phi / (1 - r.phi); r.fzi = r.rqi / r.phiz; r.lf = Math.log10(r.fzi); });
+    var lo = Math.min.apply(null, plugs.map(function (r) { return r.lf; })), hi = Math.max.apply(null, plugs.map(function (r) { return r.lf; })), w = (hi - lo) / nc || 1;
+    plugs.forEach(function (r) { r.cl = Math.min(nc - 1, Math.floor((r.lf - lo) / w)); });
+    var clases = [], c;
+    for (c = 0; c < nc; c++) {
+      var m = plugs.filter(function (r) { return r.cl === c; });
+      if (!m.length) { clases.push({ i: c + 1, n: 0 }); continue; }
+      var lm = m.reduce(function (a, r) { return a + r.lf / m.length; }, 0), fz = Math.pow(10, lm);
+      clases.push({ i: c + 1, n: m.length, fzi: fz, fziMin: Math.pow(10, Math.min.apply(null, m.map(function (r) { return r.lf; }))), fziMax: Math.pow(10, Math.max.apply(null, m.map(function (r) { return r.lf; }))), phi: m.reduce(function (a, r) { return a + r.phi / m.length; }, 0), k: Math.pow(10, m.reduce(function (a, r) { return a + Math.log10(r.k) / m.length; }, 0)) });
+    }
+    var res = { errores: [], avisos: av, plugs: plugs, clases: clases, nc: nc };
+    if (nc > plugs.length / 3) av.push('Hay pocas muestras por clase; usá menos clases.');
+    /* Pc → J */
+    var sig = num(p.sigmaLab), th = isFinite(num(p.thetaLab)) ? num(p.thetaLab) : 0, kL = num(p.kLab), phL = num(p.phiLab), swi = isFinite(num(p.swirr)) ? num(p.swirr) : 0;
+    if (pcs.length >= 4) {
+      if (!(sig > 0 && kL > 0 && phL > 0 && phL < 0.5 && th >= 0 && th < 90)) { err.push('Para la curva J: σ, k y φ del plug de Pc (σ > 0, k > 0, φ en 0–0,5) y ángulo entre 0 y 90°.'); }
+      pcs.forEach(function (r, i) { if (!(r.sw > swi && r.sw < 1 && r.pc > 0)) err.push('Punto de Pc ' + (i + 1) + ': Sw entre Swirr y 1, Pc > 0.'); });
+      if (err.length) return { errores: err };
+      var xs = [], ys = [];
+      pcs.forEach(function (r) { r.J = 0.2166 * r.pc / (sig * Math.cos(th * Math.PI / 180)) * Math.sqrt(kL / phL); r.sn = (r.sw - swi) / (1 - swi); xs.push(Math.log(r.sn)); ys.push(Math.log(r.J)); });
+      var o = olsFull(xs, ys);
+      if (o && o.b < 0) {
+        res.j = { a: Math.exp(o.a), b: -o.b, r2: o.r2, swi: swi, pts: pcs };
+        if (o.r2 < 0.95) av.push('R² del ajuste de J = ' + o.r2.toFixed(3) + ': la curva no sigue bien una ley de potencias; revisá Swirr o usá una función por tramos.');
+        /* altura de saturación */
+        var kr = num(p.kRes), pr = num(p.phiRes), sr = num(p.sigmaRes), tr = isFinite(num(p.thetaRes)) ? num(p.thetaRes) : 0, dr = num(p.drho), hm = num(p.hmax);
+        if (kr > 0 && pr > 0 && pr < 0.5 && sr > 0 && dr > 0 && hm > 0) {
+          var curva = [], hh, step = hm / 40;
+          for (hh = 0; hh <= hm + 1e-9; hh += step) {
+            var pcr = 0.433 * dr * hh, Jr = 0.2166 * pcr / (sr * Math.cos(tr * Math.PI / 180)) * Math.sqrt(kr / pr), sw;
+            if (hh === 0) sw = 1; else { var sn = Math.pow(Jr / res.j.a, -1 / res.j.b); sw = Math.min(1, swi + (1 - swi) * sn); }
+            curva.push({ h: hh, pc: pcr, sw: sw });
+          }
+          res.alt = { curva: curva, kRes: kr, phiRes: pr, drho: dr };
+          var hSw = num(p.hSw); if (hSw > 0) { var pcq = 0.433 * dr * hSw, Jq = 0.2166 * pcq / (sr * Math.cos(tr * Math.PI / 180)) * Math.sqrt(kr / pr); res.alt.hq = hSw; res.alt.swq = Math.min(1, swi + (1 - swi) * Math.pow(Jq / res.j.a, -1 / res.j.b)); }
+          if (tr >= 90) av.push('El ángulo de contacto de reservorio debe ser menor a 90°.');
+        }
+      } else av.push('El ajuste de J contra Sw no dio pendiente negativa: los datos de Pc no son consistentes con un drenaje (Pc debe subir cuando Sw baja).');
+    }
+    av.push('FZI agrupa por geometría de poros solo con φ y k de plugs; las clases deben contrastarse con petrografía o curvas de Pc antes de usarlas para propagar propiedades.');
+    av.push('La función J de Leverett supone que una sola curva normalizada describe la roca; con varios tipos de roca ajustá una curva por clase.');
+    return res;
+  };
+
   root.H3LCalc = C;
   if (typeof module !== 'undefined' && module.exports) module.exports = C;
 })(typeof globalThis !== 'undefined' ? globalThis : this);
@@ -2202,6 +2483,110 @@ html[data-embed] .shell{padding-block-start:0}
     cerca('Offshore: margen del riser = MWrm − MW', r.margen, mwRmT - 11, 1e-9);
     cond('Offshore: intervalos que no cubren la profundidad → error', C.offshore(Object.assign({}, of, { filas: [{ nombre: 'x', esp: 1000, rho: 16 }] })).errores.length > 0);
     cond('Offshore: el gradiente es menor que el onshore equivalente (1 psi/ft)', r.grad < 1);
+    // ===== Caracterización: pruebas de pozo, RTA, gradientes, petrofísica, tipos de roca =====
+    var K0t = -(Math.log(0.0002637) + 0.80907), pt = { q: 800, B: 1.2, mu: 0.8, h: 40, ct: 1.2e-5, phi: 0.18, rw: 0.3 }, k0 = 50, s0 = 3;
+    var mp0 = 70.6 * pt.q * pt.B * pt.mu / (k0 * pt.h);
+    function dpR(te) { return mp0 * (Math.log(te) + Math.log(k0 / (pt.phi * pt.mu * pt.ct * pt.rw * pt.rw)) - K0t + 2 * s0); }
+    function geo(n, a, b) { var o = [], i; for (i = 0; i < n; i++) o.push(a * Math.pow(b / a, i / (n - 1))); return o; }
+    var fdd = geo(25, 0.5, 500).map(function (t) { return { t: t, dp: dpR(t) }; });
+    r = C.ptaDeriv(Object.assign({}, pt, { tipo: 'dd', filas: fdd }));
+    cerca('Derivada de Bourdet: m′ = 70,6·q·B·μ/(k·h) en flujo radial', r.mprime, mp0, 1e-6);
+    cerca('Pruebas de pozo (drawdown): k recuperado = 50 mD', r.k, 50, 1e-6);
+    cerca('Pruebas de pozo (drawdown): daño recuperado s = 3', r.s, 3, 1e-6);
+    cerca('Pruebas de pozo: kh = k·h', r.kh, 50 * 40, 1e-4);
+    cerca('Radio de investigación = √(k·t/(948·φ·μ·ct))', r.ri, Math.sqrt(50 * 500 / (948 * pt.phi * pt.mu * pt.ct)), 1e-6);
+    cerca('Caída de presión por daño = 141,2·q·B·μ/(k·h)·s', r.dpSkin, 141.2 * pt.q * pt.B * pt.mu / (50 * 40) * 3, 1e-6);
+    var tpT = 100, fbu = geo(25, 0.1, 200).map(function (t) { return { t: t, dp: dpR(t * tpT / (tpT + t)) }; });
+    r = C.ptaDeriv(Object.assign({}, pt, { tipo: 'bu', tp: tpT, filas: fbu }));
+    cerca('Pruebas de pozo (cierre, tiempo equivalente de Agarwal): k = 50 mD', r.k, 50, 1e-6);
+    cerca('Pruebas de pozo (cierre): s = 3', r.s, 3, 1e-6);
+    var fws = geo(10, 0.01, 0.5).map(function (t) { return { t: t, dp: pt.q * pt.B * t / (24 * 0.01) }; });
+    r = C.ptaDeriv(Object.assign({}, pt, { tipo: 'dd', filas: fws }));
+    cerca('Almacenamiento: C = q·B·Δt/(24·Δp) = 0,01 bbl/psi sobre la pendiente unitaria', r.C, 0.01, 1e-6);
+    cond('Pruebas de pozo: sin meseta de derivada no se inventa k', r.k === undefined);
+    cond('Pruebas de pozo: tiempos no crecientes → error', C.ptaDeriv(Object.assign({}, pt, { tipo: 'dd', filas: [1, 2, 2, 3, 4, 5, 6, 7].map(function (t) { return { t: t, dp: 10 + t }; }) })).errores.length > 0);
+    cond('Pruebas de pozo: cierre sin tp → error', C.ptaDeriv(Object.assign({}, pt, { tipo: 'bu', filas: fbu })).errores.length > 0);
+    // RTA
+    var rt = { phi: 0.08, ct: 1.5e-5, mu: 0.8, B: 1.3, h: 100, pi: 4000, sw: 0.3 }, mT = 1.3 / (1.5e-5 * 5e6), bT = 0.5, ft = [], npT = 0, tpr = 0;
+    geo(40, 1, 400).forEach(function (t) { var q = 500 / (1 + t / 50); npT += q * (t - tpr); tpr = t; ft.push({ t: t, q: q, pwf: 4000 - mT * npT - q * bT }); });
+    r = C.rta(Object.assign({}, rt, { filas: ft }));
+    cerca('RTA: pendiente de Δp/q contra t_mb = B/(ct·Vp)', r.bdf.m, mT, 1e-9);
+    cerca('RTA: ordenada del ajuste de flujo dominado por límites', r.bdf.b, bT, 1e-7);
+    cerca('RTA: volumen poral drenado Vp = 5·10⁶ rb', r.bdf.vp, 5e6, 1e-2);
+    cerca('RTA: OOIP = Vp·(1 − Sw)/B', r.bdf.N, 5e6 * 0.7 / 1.3, 1e-2);
+    cerca('RTA: área = Vp·5,615/(φ·h·43560)', r.bdf.area, 5e6 * 5.615 / (0.08 * 100 * 43560), 1e-6);
+    var kT = 0.0006, AcT = 8e6, muS = 0.8e-3, ctS = 1.5e-5 / 6894.757, qS = 1000 * 0.158987294928 / 86400, fl = [];
+    geo(30, 1, 100).forEach(function (t) { var tS = t * 86400, dpP = 2 * (qS * 1.3 / (AcT * 0.09290304)) * Math.sqrt(muS * tS / (Math.PI * kT * 9.869233e-16 * 0.08 * ctS)); fl.push({ t: t, q: 1000, pwf: 5000 - dpP / 6894.757 }); });
+    r = C.rta(Object.assign({}, rt, { pi: 5000, filas: fl, k: kT }));
+    cerca('RTA flujo lineal: A_c·√k recuperado desde la fórmula en unidades SI', r.lin.acSqrtK, AcT * Math.sqrt(kT), AcT * Math.sqrt(kT) * 1e-6);
+    cerca('RTA flujo lineal: A_c = (A_c·√k)/√k', r.lin.ac, AcT, AcT * 1e-6);
+    cerca('RTA: Δp/q contra √t con R² = 1 en datos sintéticos lineales', r.lin.r2, 1, 1e-9);
+    cond('RTA: pwf mayor a la presión inicial → error', C.rta(Object.assign({}, rt, { filas: ft.map(function (x) { return { t: x.t, q: x.q, pwf: 4500 }; }) })).errores.length > 0);
+    // Gradientes y contactos
+    var gz = { filas: [], pe: 0 };
+    [8500, 8600, 8700, 8800].forEach(function (z) { gz.filas.push({ z: z, p: 0.35 * z + 950, f: 'o' }); });
+    [9100, 9200, 9300].forEach(function (z) { gz.filas.push({ z: z, p: 0.45 * z + 50, f: 'w' }); });
+    [8100, 8150, 8200].forEach(function (z) { gz.filas.push({ z: z, p: 0.10 * z + 3025, f: 'g' }); });
+    r = C.gradiente(gz);
+    var cFw = r.contactos.filter(function (c) { return c.tipo === 'fwl'; })[0], cGo = r.contactos.filter(function (c) { return c.tipo === 'goc'; })[0];
+    cerca('Gradientes: nivel de agua libre = 9000 ft', cFw.z, 9000, 1e-6);
+    cerca('Gradientes: presión en el FWL = 0,45·9000 + 50', cFw.p, 4100, 1e-6);
+    cerca('Gradientes: contacto gas–petróleo = 8300 ft', cGo.z, 8300, 1e-6);
+    cerca('Gradientes: densidad del petróleo = 0,35/0,433', r.lineas.filter(function (l) { return l.c === 'o'; })[0].rho, 0.35 / 0.433, 1e-9);
+    cond('Gradientes: con 3 o más puntos hay incertidumbre del contacto (≈ 0 en datos exactos)', cFw.sd != null && cFw.sd < 1e-3);
+    r = C.gradiente(Object.assign({}, gz, { pe: 5, ztop: 8100 }));
+    cerca('Gradientes: contacto observado = FWL − Pe/(γw − γo) = 8950 ft', r.contactos.filter(function (c) { return c.tipo === 'owc'; })[0].z, 8950, 1e-6);
+    cerca('Gradientes: columna sobre el FWL = 900 ft', r.columna, 900, 1e-6);
+    cerca('Gradientes: columna observada = 850 ft', r.columnaObs, 850, 1e-6);
+    r = C.gradiente({ filas: [{ z: 8500, p: 0.35 * 8500 + 950, f: 'o' }, { z: 8800, p: 0.35 * 8800 + 950, f: 'o' }, { z: 9100, p: 0.45 * 9100 + 50, f: 'w' }, { z: 9300, p: 0.45 * 9300 + 50, f: 'w' }] });
+    cerca('Gradientes con 2 puntos por fluido: el contacto sigue siendo exacto', r.contactos[0].z, 9000, 1e-6);
+    cond('Gradientes con 2 puntos por fluido: no se inventa incertidumbre', r.contactos[0].sd === null);
+    cond('Gradientes: un solo fluido → error', C.gradiente({ filas: gz.filas.filter(function (x) { return x.f === 'o'; }) }).errores.length > 0);
+    // Petrofísica avanzada
+    var pp = { rw: 0.05, rsh: 4, a: 1, m: 2, n: 2, dz: 0.5, phic: 0.08, vshc: 0.4, swc: 0.6 }, base = [{ z: 1, phi: 0.22, vsh: 0.05, sw: 0.25 }, { z: 2, phi: 0.18, vsh: 0.20, sw: 0.40 }, { z: 3, phi: 0.12, vsh: 0.35, sw: 0.55 }, { z: 4, phi: 0.06, vsh: 0.10, sw: 0.30 }, { z: 5, phi: 0.20, vsh: 0.55, sw: 0.45 }, { z: 6, phi: 0.25, vsh: 0.08, sw: 0.80 }];
+    function rtOf(b, mod) {
+      return base.map(function (x) {
+        var sw = x.sw, rtv;
+        if (mod === 'indo') { var den = Math.pow(x.vsh, 1 - x.vsh / 2) / Math.sqrt(pp.rsh) + Math.pow(x.phi, pp.m / 2) / Math.sqrt(pp.a * pp.rw); rtv = 1 / Math.pow(den * Math.pow(sw, pp.n / 2), 2); }
+        else if (mod === 'sim') rtv = 1 / (Math.pow(x.phi, pp.m) * sw * sw / (pp.a * pp.rw) + x.vsh * sw / pp.rsh);
+        else rtv = pp.a * pp.rw / (Math.pow(x.phi, pp.m) * Math.pow(sw, pp.n));
+        return { z: x.z, phi: x.phi, vsh: x.vsh, rt: rtv };
+      });
+    }
+    ['indo', 'sim', 'archie'].forEach(function (mod) {
+      var rr = C.petro2(Object.assign({}, pp, { modelo: mod, filas: rtOf(base, mod) })), maxe = 0;
+      rr.filas.forEach(function (x, i) { maxe = Math.max(maxe, Math.abs(x.sw - base[i].sw)); });
+      cerca('Petrofísica ' + { indo: 'Indonesia', sim: 'Simandoux', archie: 'Archie' }[mod] + ': Sw recuperada desde Rt (ida y vuelta)', maxe, 0, 1e-9);
+    });
+    var rn = C.petro2(Object.assign({}, pp, { modelo: 'indo', filas: rtOf(base, 'indo') })), netT = base.filter(function (x) { return x.phi >= 0.08 && x.vsh <= 0.4 && x.sw <= 0.6; });
+    cerca('Espesor neto = nº de muestras que cumplen los tres cortes × paso', rn.hNet, netT.length * 0.5, 1e-9);
+    cerca('Neto/bruto = espesor neto / (nº de muestras × paso)', rn.ntg, netT.length / 6, 1e-9);
+    var sphi = netT.reduce(function (a, x) { return a + x.phi; }, 0), sphisw = netT.reduce(function (a, x) { return a + x.phi * x.sw; }, 0);
+    cerca('Sw promedio ponderada por porosidad', rn.swAvg, sphisw / sphi, 1e-9);
+    cerca('Espesor poral de hidrocarburo Σφ(1 − Sw)·Δz', rn.hcpv, netT.reduce(function (a, x) { return a + x.phi * (1 - x.sw) * 0.5; }, 0), 1e-9);
+    var zeroV = [{ z: 1, phi: 0.2, vsh: 0, sw: 0.4 }, { z: 2, phi: 0.15, vsh: 0, sw: 0.6 }, { z: 3, phi: 0.1, vsh: 0, sw: 0.9 }].map(function (x) { return { z: x.z, phi: x.phi, vsh: 0, rt: pp.a * pp.rw / (Math.pow(x.phi, pp.m) * Math.pow(x.sw, pp.n)) }; });
+    var ra = C.petro2(Object.assign({}, pp, { modelo: 'archie', filas: zeroV })), ri2 = C.petro2(Object.assign({}, pp, { modelo: 'indo', filas: zeroV })), rs2 = C.petro2(Object.assign({}, pp, { modelo: 'sim', filas: zeroV }));
+    cerca('Con Vsh = 0, Indonesia coincide con Archie', Math.abs(ri2.filas[1].sw - ra.filas[1].sw), 0, 1e-12);
+    cerca('Con Vsh = 0, Simandoux coincide con Archie (n = 2)', Math.abs(rs2.filas[1].sw - ra.filas[1].sw), 0, 1e-12);
+    cond('Petrofísica: φ fuera de rango → error', C.petro2(Object.assign({}, pp, { filas: [{ phi: 0.9, vsh: 0.1, rt: 10 }, { phi: 0.1, vsh: 0.1, rt: 10 }, { phi: 0.1, vsh: 0.1, rt: 10 }] })).errores.length > 0);
+    // Tipos de roca y altura de saturación
+    function kFromFzi(f, phi) { var phz = phi / (1 - phi); return phi * Math.pow(f * phz / 0.0314, 2); }
+    var plugs = [[1, 0.08], [1, 0.12], [1, 0.16], [4, 0.10], [4, 0.14], [4, 0.20]].map(function (a) { return { phi: a[1], k: kFromFzi(a[0], a[1]) }; });
+    var ro = C.rocas({ plugs: plugs, nclases: 2 });
+    cerca('FZI de las muestras: RQI/φz recupera el FZI de generación', Math.abs(ro.plugs[0].fzi - 1) + Math.abs(ro.plugs[3].fzi - 4), 0, 1e-9);
+    cerca('Tipos de roca: clase 1 con FZI = 1', ro.clases[0].fzi, 1, 1e-9);
+    cerca('Tipos de roca: clase 2 con FZI = 4', ro.clases[1].fzi, 4, 1e-9);
+    cerca('Tipos de roca: 3 muestras por clase', ro.clases[0].n + ro.clases[1].n, 6, 0);
+    cerca('RQI = 0,0314·√(k/φ)', ro.plugs[0].rqi, 0.0314 * Math.sqrt(plugs[0].k / plugs[0].phi), 1e-12);
+    var aJ = 0.4, bJ = 2, swiJ = 0.15, kLt = 100, phLt = 0.2, sgL = 48, pcT = [0.1, 0.2, 0.35, 0.5, 0.7, 0.9].map(function (sn) { var J = aJ * Math.pow(sn, -bJ); return { sw: swiJ + (1 - swiJ) * sn, pc: J * sgL / (0.2166 * Math.sqrt(kLt / phLt)) }; });
+    var rj = C.rocas({ plugs: plugs, nclases: 2, pcs: pcT, sigmaLab: sgL, thetaLab: 0, kLab: kLt, phiLab: phLt, swirr: swiJ, kRes: 100, phiRes: 0.2, sigmaRes: 26, thetaRes: 30, drho: 0.25, hmax: 200, hSw: 80 });
+    cerca('Función J: coeficiente a recuperado', rj.j.a, aJ, 1e-9);
+    cerca('Función J: exponente b recuperado', rj.j.b, bJ, 1e-9);
+    var Jh = 0.2166 * (0.433 * 0.25 * 80) / (26 * Math.cos(30 * Math.PI / 180)) * Math.sqrt(100 / 0.2), swh = Math.min(1, swiJ + (1 - swiJ) * Math.pow(Jh / aJ, -1 / bJ));
+    cerca('Altura de saturación: Sw a 80 ft sobre el FWL', rj.alt.swq, swh, 1e-9);
+    cond('Altura de saturación: Sw decrece con la altura', rj.alt.curva.every(function (c, i, a) { return i === 0 || c.sw <= a[i - 1].sw + 1e-12; }));
+    cond('Altura de saturación: Sw = 1 en el FWL', rj.alt.curva[0].sw === 1);
+    cond('Tipos de roca: menos de 6 plugs → error', C.rocas({ plugs: plugs.slice(0, 4), nclases: 2 }).errores.length > 0);
     return out;
   }
   var P = { correr: correr };
@@ -2223,8 +2608,13 @@ window.H3L_ESTR = {
     offshore: { n: 'Offshore', desc: 'Ambiente marino: pocos pozos, costo por día de equipo muy alto, instalaciones de superficie sobre plataforma o submarinas y, en aguas profundas, ventana de lodo estrecha.', cambia: ['La sobrecarga baja con el tirante de agua: no uses 1 psi/ft onshore.', 'Riser margin y volumen del riser entran en el diseño de lodo y control de pozo.', 'La decisión es de alto CAPEX con pocos pozos: valor de la información y cartera pesan.', 'Instalaciones: gasoductos, compresión y alivio con restricciones de peso y espacio.'], evitar: ['Planillas de control de pozo terrestres sin ajustar la línea de estrangulamiento y el riser.'] }
   },
   /* orden: primaria, secundaria, terciaria, tight, shale, offshore · n = núcleo, o = aplica con ajustes, - = no aplica. Sin entrada = transversal. */
-  mat: { ro: 'o--ono', rose: 'o--oon', bayes: 'o--oon', sello: 'noo--n', petro: 'nnnnon', vol: 'nnonnn', espac: 'onnnno', core: 'nnnnnn', pvt: 'nnnnnn', pz: 'n--o-n', dca: 'noonnn', horner: 'nnonon', mbe: 'nno--n', delgas: 'n--non', bl: '-nn--o', hall: '-nn--o', vrr: '-nn--o', barrido: '-nn--o', polim: '-on--o', capil: '-on---', arpsmod: 'o--nno', duong: '---on-', shalegas: '---on-', offshore: '-----n', eaton: 'noooon', kill: 'nnnnnn', volpozo: 'nnnnnn', co2: 'nnnoon', gasod: 'o--nnn', comp: 'ooonnn', limeco: 'nnnooo', cartera: 'ooonnn', voi: 'ooooon' },
+  mat: { ro: 'o--ono', rose: 'o--oon', bayes: 'o--oon', sello: 'noo--n', petro: 'nnnnon', vol: 'nnonnn', espac: 'onnnno', core: 'nnnnnn', pvt: 'nnnnnn', pz: 'n--o-n', dca: 'noonnn', horner: 'nnonon', mbe: 'nno--n', delgas: 'n--non', bl: '-nn--o', hall: '-nn--o', vrr: '-nn--o', barrido: '-nn--o', polim: '-on--o', capil: '-on---', arpsmod: 'o--nno', duong: '---on-', shalegas: '---on-', offshore: '-----n', eaton: 'noooon', kill: 'nnnnnn', volpozo: 'nnnnnn', co2: 'nnnoon', gasod: 'o--nnn', comp: 'ooonnn', limeco: 'nnnooo', cartera: 'ooonnn', voi: 'ooooon', ptaderiv: 'nnonon', rta: 'oo-nno', gradiente: 'nno--n', petro2: 'nnonon', rocas: 'nnnnon' },
   notas: {
+    ptaderiv: { tight: 'El flujo radial puede tardar meses o no aparecer: usá la derivada para reconocer flujo lineal (½) y bilineal (¼) antes de interpretar k.', shale: 'Con multifracturas domina el flujo lineal; no se interpreta el daño de forma convencional y la ventana radial rara vez existe.', terciaria: 'Con inyección activa separá la prueba en períodos de caudal estable; la movilidad cambia con el frente de desplazamiento.', offshore: 'Las pruebas son pocas y caras: planificá la duración con el radio de investigación esperado.' },
+    rta: { tight: 'El flujo lineal transitorio puede durar años: A_c·√k es el resultado robusto; el volumen de los límites es un mínimo hasta que se vea el borde.', shale: 'Usalo como diagnóstico: el volumen de los límites sale del tramo final y suele ser un mínimo. Para gas hace falta pseudo-presión (no incluida).', secundaria: 'Bajo inyección el balance de materia fluyente se altera: ajustá solo períodos con inyección estable.', offshore: 'Con pocos pozos y producción mezclada, asegurá que pwf y q sean del mismo pozo y fecha.' },
+    gradiente: { terciaria: 'Un barrido previo (inyección de agua) altera las presiones: usá tomas previas al desarrollo o corregí por depleción.', offshore: 'Pocas tomas y de alto costo: priorizalas en los contactos y evitá datos con supercarga.' },
+    petro2: { shale: 'Los modelos de arena arcillosa no representan bien la porosidad orgánica ni la pirita: calibrá con núcleo y tomá el resultado como indicativo.', tight: 'Con arcilla dispersa y poca porosidad, los cortes mandan el espesor neto: justificalos con permeabilidad de núcleo.', terciaria: 'El corte de Sw define el petróleo móvil que se desplaza: usá Sor del agente.' },
+    rocas: { shale: 'Aplicalo por facies del intervalo objetivo; el FZI con plugs de roca madre es orientativo.', tight: 'Con k muy baja las mediciones de plug tienen error alto: usá permeabilidad bajo confinamiento.', offshore: 'Con pocos núcleos, cada plug pesa: no ajustes más de 2–3 clases.' },
     ro: { shale: 'Define la ventana (petróleo, condensado o gas seco) y con ello el fluido y el tipo de pozo; madurez y COT son criterios para elegir el sweet spot.', tight: 'Confirmá la generación si el reservorio es alimentado por una roca madre cercana.' },
     rose: { shale: 'En recursos continuos el riesgo es de productividad y no de presencia: usá Pg solo como riesgo de la zona (play), no del pozo individual.', offshore: 'Con pocos pozos y costo alto, Pg y VME dominan la decisión: documentá cada factor.' },
     sello: { terciaria: 'Con CO₂ o gas, la integridad del sello y de pozos viejos define el riesgo de fuga.', offshore: 'Usá un rango de muestras y no un valor único; en aguas profundas los datos de sello suelen ser escasos.' },
@@ -2257,12 +2647,12 @@ window.H3L_ESTR = {
   },
   /* ruta de trabajo en orden de uso: ids de estas herramientas o «c:» = calculadora de la plataforma H3L */
   rutas: {
-    primaria: ['pvt', 'core', 'petro', 'vol', 'c:OOIP', 'mbe', 'pz', 'dca', 'horner', 'c:IPR / VLP Nodal', 'limeco', 'agreg', 'concil'],
-    secundaria: ['pvt', 'petro', 'vol', 'mbe', 'barrido', 'bl', 'espac', 'vrr', 'hall', 'dca', 'limeco', 'concil'],
-    terciaria: ['core', 'vol', 'barrido', 'bl', 'polim', 'capil', 'vrr', 'hall', 'co2', 'tornU', 'limeco', 'cartera'],
-    tight: ['core', 'petro', 'vol', 'delgas', 'horner', 'arpsmod', 'duong', 'espac', 'c:Proppant & Frac Design', 'limeco', 'agreg', 'cartera'],
-    shale: ['ro', 'core', 'petro', 'shalegas', 'vol', 'arpsmod', 'duong', 'espac', 'c:Proppant & Frac Design', 'gasod', 'limeco', 'agreg', 'tornU', 'cartera'],
-    offshore: ['rose', 'sello', 'vol', 'offshore', 'eaton', 'volpozo', 'kill', 'sep', 'gasod', 'comp', 'alivio', 'recip', 'co2', 'tornU', 'voi', 'cartera']
+    primaria: ['pvt', 'core', 'rocas', 'petro', 'petro2', 'gradiente', 'vol', 'c:OOIP', 'mbe', 'pz', 'dca', 'rta', 'horner', 'ptaderiv', 'c:IPR / VLP Nodal', 'limeco', 'agreg', 'concil'],
+    secundaria: ['pvt', 'petro', 'petro2', 'rocas', 'gradiente', 'vol', 'mbe', 'barrido', 'bl', 'espac', 'vrr', 'hall', 'dca', 'rta', 'ptaderiv', 'limeco', 'concil'],
+    terciaria: ['core', 'rocas', 'gradiente', 'vol', 'barrido', 'bl', 'polim', 'capil', 'vrr', 'hall', 'co2', 'tornU', 'limeco', 'cartera'],
+    tight: ['core', 'rocas', 'petro', 'petro2', 'vol', 'delgas', 'horner', 'ptaderiv', 'arpsmod', 'duong', 'rta', 'espac', 'c:Proppant & Frac Design', 'limeco', 'agreg', 'cartera'],
+    shale: ['ro', 'core', 'rocas', 'petro', 'petro2', 'shalegas', 'vol', 'arpsmod', 'duong', 'rta', 'espac', 'c:Proppant & Frac Design', 'gasod', 'limeco', 'agreg', 'tornU', 'cartera'],
+    offshore: ['rose', 'sello', 'gradiente', 'vol', 'offshore', 'eaton', 'volpozo', 'kill', 'sep', 'gasod', 'comp', 'alivio', 'recip', 'co2', 'tornU', 'voi', 'cartera']
   }
 };
 
@@ -3257,6 +3647,152 @@ window.H3L_ESTR = {
     if (parts.length > 1) EST = parts[1].split('-').filter(function (x) { return ED.orden.indexOf(x) >= 0; });
     return id;
   }
+
+  /* ---------------- caracterización: gráfico log-log ---------------- */
+  function logChart(o) {
+    var W = 600, H = 320, m = { l: 58, r: 16, t: 14, b: 44 }, xs = [], ys = [];
+    o.series.forEach(function (s) { s.pts.forEach(function (p) { if (p[0] > 0 && p[1] > 0) { xs.push(p[0]); ys.push(p[1]); } }); });
+    if (!xs.length) return '';
+    function dec(a, b) { var lo = Math.floor(Math.log10(a) + 1e-9), hi = Math.ceil(Math.log10(b) - 1e-9); if (hi <= lo) hi = lo + 1; return { lo: lo, hi: hi }; }
+    var X = dec(Math.min.apply(null, xs), Math.max.apply(null, xs)), Y = dec(Math.min.apply(null, ys), Math.max.apply(null, ys));
+    function sx(x) { return m.l + (Math.log10(x) - X.lo) / (X.hi - X.lo) * (W - m.l - m.r); }
+    function sy(y) { return m.t + (Y.hi - Math.log10(y)) / (Y.hi - Y.lo) * (H - m.t - m.b); }
+    var g = '', e;
+    for (e = Y.lo; e <= Y.hi; e++) g += '<line class="grid" x1="' + m.l + '" x2="' + (W - m.r) + '" y1="' + sy(Math.pow(10, e)) + '" y2="' + sy(Math.pow(10, e)) + '"/><text class="tick" x="' + (m.l - 6) + '" y="' + (sy(Math.pow(10, e)) + 4) + '" text-anchor="end">' + fmt(Math.pow(10, e), 4) + '</text>';
+    for (e = X.lo; e <= X.hi; e++) g += '<line class="grid" y1="' + m.t + '" y2="' + (H - m.b) + '" x1="' + sx(Math.pow(10, e)) + '" x2="' + sx(Math.pow(10, e)) + '"/><text class="tick" y="' + (H - m.b + 16) + '" x="' + sx(Math.pow(10, e)) + '" text-anchor="middle">' + fmt(Math.pow(10, e), 4) + '</text>';
+    o.series.forEach(function (s, i) {
+      var pts = s.pts.filter(function (p) { return p[0] > 0 && p[1] > 0; }), c = s.c != null ? s.c : i;
+      if (!s.nl) g += '<polyline class="ln s' + c + '" fill="none" points="' + pts.map(function (p) { return sx(p[0]).toFixed(1) + ',' + sy(p[1]).toFixed(1); }).join(' ') + '"/>';
+      if (s.pt) pts.forEach(function (p) { g += '<circle class="pt s' + c + '" r="3" cx="' + sx(p[0]).toFixed(1) + '" cy="' + sy(p[1]).toFixed(1) + '"/>'; });
+    });
+    g += '<text class="axl" x="' + (m.l + (W - m.l - m.r) / 2) + '" y="' + (H - 6) + '" text-anchor="middle">' + esc(o.xl) + '</text><text class="axl" transform="rotate(-90)" x="' + (-(m.t + (H - m.t - m.b) / 2)) + '" y="12" text-anchor="middle">' + esc(o.yl) + '</text>';
+    var leg = '<div class="leg">' + o.series.map(function (s, i) { return '<span><i class="sw s' + (s.c != null ? s.c : i) + '"></i>' + esc(s.nombre) + '</span>'; }).join('') + '</div>';
+    return '<figure class="chart"><svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(o.alt || o.yl) + '">' + g + '</svg>' + leg + '</figure>';
+  }
+  function avisosHTML(r) { return (r.avisos && r.avisos.length) ? nota('<b>Avisos:</b> ' + r.avisos.map(esc).join(' · ')) : ''; }
+
+  /* 49. Pruebas de pozo: derivada de Bourdet */
+  tool({
+    id: 'ptaderiv', grupo: 'Grupo de Estudios', nombre: 'Pruebas de pozo: derivada y diagnóstico', etapas: 'D E', pregunta: '¿Qué régimen de flujo muestra la prueba y cuáles son k, daño y radio de investigación?',
+    ficha: { metodo: 'Derivada de presión de Bourdet (3 puntos con suavizado L en ln t) contra el tiempo, en ejes log-log. Almacenamiento: pendiente 1 (C = q·B·Δt/(24·Δp)); flujo radial: derivada plana, k = 70,6·q·B·μ/(h·m′) con m′ = Δt·dΔp/dΔt; daño s = ½[Δp/Δp′ − ln(k·t/(φ·μ·ct·rw²)) + 7,43]. En cierres se usa el tiempo equivalente de Agarwal te = Δt·tp/(tp + Δt). Radio de investigación ri = √(k·t/(948·φ·μ·ct)).', fuente: 'Bourdet, Ayoub & Pirard (1989), SPE Formation Evaluation 4(2), SPE 12777; Agarwal (1980), SPE 9289; Earlougher (1977), SPE Monograph 5; Lee, Rollins & Spivey (2003), SPE Textbook 9. Constantes (7,43 y 948) a confirmar por el revisor.', limites: ['Un solo fluido, pozo vertical, yacimiento homogéneo de acción infinita en la ventana radial.', 'Con historias de caudal complejas el tiempo equivalente es aproximado: usá superposición o un modelo.', 'Diagnostica y estima; no reemplaza el ajuste con curvas tipo o un simulador de pruebas.', 'La derivada amplifica el ruido: el suavizado L distorsiona si es muy grande.'], unidades: 'Campo (oilfield): q en STB/d, B en rb/STB, μ en cP, h en ft, ct en 1/psi, rw en ft, Δt en h, Δp en psi, k en mD, C en bbl/psi.' },
+    pasos: [
+      { titulo: 'Pozo, fluido y tipo de prueba', intro: 'Los datos de ejemplo son ilustrativos (un caso con almacenamiento, daño y flujo radial). Reemplazalos por los tuyos.', campos: [sel_('tipo', 'Tipo de prueba', [['dd', 'Producción a caudal constante (drawdown)'], ['bu', 'Cierre (build-up)']], 'dd'), num_('q', 'Caudal', 'STB/d', 800), num_('B', 'Bo', 'rb/STB', 1.2), num_('mu', 'Viscosidad', 'cP', 0.8), num_('h', 'Espesor neto', 'ft', 40), num_('phi', 'Porosidad', 'fracción', 0.18), num_('ct', 'Compresibilidad total', '1/psi', 0.000012), num_('rw', 'Radio del pozo', 'ft', 0.3), num_('tp', 'Tiempo de producción antes del cierre (solo cierre)', 'h', 100, null, { si: function (v) { return v.tipo === 'bu'; } })] },
+      { titulo: 'Datos de presión', intro: 'Δt desde el inicio de la prueba y Δp = |p − p al inicio|. Mínimo 8 puntos, con tiempos crecientes y repartidos en escala logarítmica.', campos: [{ id: 'filas', tipo: 'tabla', label: 'Δt y Δp', cols: [{ id: 't', label: 'Δt', unit: 'h' }, { id: 'dp', label: 'Δp', unit: 'psi' }], def: [{"t":0.05,"dp":80.43},{"t":0.073,"dp":108.41},{"t":0.107,"dp":142.64},{"t":0.156,"dp":182.53},{"t":0.227,"dp":226.51},{"t":0.331,"dp":272.33},{"t":0.484,"dp":317.47},{"t":0.706,"dp":359.79},{"t":1.031,"dp":397.89},{"t":1.504,"dp":431.19},{"t":2.196,"dp":459.8},{"t":3.206,"dp":484.26},{"t":4.679,"dp":505.24},{"t":6.83,"dp":523.47},{"t":9.97,"dp":539.58},{"t":14.554,"dp":554.09},{"t":21.245,"dp":567.41},{"t":31.011,"dp":579.87},{"t":45.267,"dp":591.71},{"t":66.077,"dp":603.09},{"t":96.454,"dp":614.15},{"t":140.795,"dp":624.97},{"t":205.52,"dp":635.63},{"t":300,"dp":646.18}] }] },
+      { titulo: 'Suavizado y ventana radial', intro: 'L = 0,1 es un valor habitual. Si dejás el rango vacío, la herramienta busca sola la meseta de la derivada; indicalo a mano solo si el gráfico lo respalda.', campos: [num_('L', 'Suavizado L', 'ciclos ln t', 0.1), num_('tIni', 'Inicio de la ventana radial (opcional)', 'h', ''), num_('tFin', 'Fin de la ventana radial (opcional)', 'h', '')] }
+    ],
+    calc: function (v) { return C.ptaDeriv(v); },
+    render: function (r, v) {
+      var k = [];
+      if (r.k != null) k = [kpi('Permeabilidad k', fmt(r.k, 1), 'mD', 'main'), kpi('kh', fmt(r.kh, 0), 'mD·ft'), kpi('Daño (skin)', fmt(r.s, 2), '', r.s > 0 ? '' : 'ok'), kpi('Caída por daño', fmt(r.dpSkin, 0), 'psi'), kpi('Radio de investigación', fmt(r.ri, 0), 'ft')];
+      if (r.C != null) k.push(kpi('Almacenamiento C', fmt(r.C, 4), 'bbl/psi'));
+      var out = k.length ? kpis(k) : nota('<b>No se identificó flujo radial.</b> Mirá el gráfico y los avisos.');
+      out += h3('Diagnóstico log-log') + logChart({ xl: 'Tiempo equivalente (h)', yl: 'Δp y derivada (psi)', alt: 'Diagnóstico log-log de la prueba de pozo', series: [{ nombre: 'Δp', pts: r.filas.map(function (x) { return [x.te, x.dp]; }), nl: true, pt: true }, { nombre: 'Derivada de Bourdet', c: 1, pts: r.filas.filter(function (x) { return x.der != null && x.der > 0; }).map(function (x) { return [x.te, x.der]; }), nl: true, pt: true }] });
+      if (r.win) out += nota('Ventana radial detectada: ' + fmt(r.win.t1, 2) + ' a ' + fmt(r.win.t2, 2) + ' h (' + r.win.n + ' puntos), m′ = ' + fmt(r.mprime, 2) + ' psi.');
+      out += nota('Regímenes con pendiente reconocible: ' + (r.regimenes.length ? r.regimenes.map(esc).join(', ') : 'ninguno') + '. Referencia: almacenamiento pendiente 1 · lineal ½ · bilineal ¼ · radial 0.');
+      out += tabla(['Δt (h)', 'te (h)', 'Δp (psi)', 'Derivada (psi)', 'Pendiente der.', 'Régimen'], r.filas.map(function (x) { return [fmt(x.t, 3), fmt(x.te, 3), fmt(x.dp, 1), fmt(x.der, 1), fmt(x.sDer, 2), x.reg ? esc(x.reg) : '—']; }));
+      out += avisosHTML(r);
+      var cs = [['Derivada', 'Δp′ = [Δ₁·δ₂/δ₁ + Δ₂·δ₁/δ₂]/(δ₁ + δ₂) en ln t, con suavizado L = ' + fmt(r.L, 2)]];
+      if (r.k != null) { cs.push(['k', 'k = 70,6·q·B·μ/(h·m′) = ' + fmt(r.k, 2) + ' mD']); cs.push(['Daño', 's = ½[Δp/Δp′ − ln(k·te/(φ·μ·ct·rw²)) + 7,43] = ' + fmt(r.s, 2)]); cs.push(['Radio', 'ri = √(k·te/(948·φ·μ·ct)) = ' + fmt(r.ri, 0) + ' ft']); }
+      return out + calcBlock(cs);
+    }
+  });
+
+  /* 50. Análisis de producción (RTA) */
+  tool({
+    id: 'rta', grupo: 'Grupo de Estudios', nombre: 'Análisis de producción (RTA) del petróleo', etapas: 'D E', pregunta: '¿Qué volumen poral y qué petróleo original drena el pozo, según su historia de producción?',
+    ficha: { metodo: 'Balance de materia fluyente (flujo dominado por los límites): Δp/q = m·t_mb + b, con t_mb = Np/q y m = B/(ct·Vp), de donde Vp = B/(ct·m), N = Vp·(1 − Sw)/B y área = Vp·5,615/(φ·h·43560). Flujo lineal transitorio: Δp/q = mL·√t, que entrega A_c·√k; con k conocida se obtiene A_c y la semilongitud de fractura xf = A_c/(4h).', fuente: 'Blasingame & Lee (1986), SPE 15019; Palacio & Blasingame (1993), SPE 25909; Wattenbarger et al. (1998), SPE 39931; Mattar & Anderson (2005), CIPC 2005-113. Fórmulas a confirmar por el revisor.', limites: ['Líquido de compresibilidad baja y constante, un solo pozo y caudal razonablemente estable. Para gas hace falta pseudo-presión y pseudo-tiempo (no incluidos).', 'Vp es el volumen drenado a la fecha: si el pozo no sintió los bordes, es un mínimo.', 'No reemplaza curvas tipo (Blasingame, NPI) ni un simulador; es un diagnóstico de primer orden.', 'Requiere pwf medida o calculada con confianza.'], unidades: 'Campo (oilfield): t en días, q en STB/d, pwf y pi en psi, ct en 1/psi, h en ft, k en mD; Vp en rb; área en acres.' },
+    pasos: [
+      { titulo: 'Roca y fluido', intro: 'Propiedades del yacimiento en el área de drenaje.', campos: [num_('phi', 'Porosidad', 'fracción', 0.08), num_('ct', 'Compresibilidad total', '1/psi', 0.000015), num_('mu', 'Viscosidad', 'cP', 0.8), num_('B', 'Bo', 'rb/STB', 1.3), num_('h', 'Espesor neto', 'ft', 100), num_('pi', 'Presión inicial', 'psi', 4000), num_('sw', 'Saturación de agua', 'fracción', 0.3)] },
+      { titulo: 'Historia de producción', intro: 'Los datos de ejemplo son sintéticos e ilustrativos. Mínimo 10 puntos con tiempo creciente (días desde el inicio), caudal y presión fluyente.', campos: [{ id: 'filas', tipo: 'tabla', label: 'Producción', cols: [{ id: 't', label: 't', unit: 'd' }, { id: 'q', label: 'q', unit: 'STB/d' }, { id: 'pwf', label: 'pwf', unit: 'psi' }], def: [{"t":2,"q":580.6,"pwf":3690},{"t":2.5,"q":576.5,"pwf":3687},{"t":3,"q":571.4,"pwf":3684},{"t":3.7,"q":565.4,"pwf":3681},{"t":4.5,"q":558.1,"pwf":3676},{"t":5.5,"q":549.5,"pwf":3671},{"t":6.8,"q":539.2,"pwf":3664},{"t":8.3,"q":527.2,"pwf":3657},{"t":10.1,"q":513.2,"pwf":3647},{"t":12.4,"q":497.1,"pwf":3635},{"t":15.2,"q":478.6,"pwf":3621},{"t":18.6,"q":457.7,"pwf":3605},{"t":22.8,"q":434.5,"pwf":3585},{"t":28,"q":409.2,"pwf":3561},{"t":34.3,"q":381.8,"pwf":3533},{"t":42,"q":352.9,"pwf":3500},{"t":51.5,"q":323,"pwf":3462},{"t":63,"q":292.6,"pwf":3419},{"t":77.2,"q":262.4,"pwf":3369},{"t":94.6,"q":232.9,"pwf":3314},{"t":115.9,"q":204.7,"pwf":3252},{"t":142,"q":178.3,"pwf":3185},{"t":173.9,"q":153.9,"pwf":3112},{"t":213,"q":131.9,"pwf":3034},{"t":261,"q":112.2,"pwf":2950},{"t":319.7,"q":94.8,"pwf":2862},{"t":391.6,"q":79.7,"pwf":2771},{"t":479.8,"q":66.7,"pwf":2675},{"t":587.7,"q":55.6,"pwf":2577},{"t":720,"q":46.2,"pwf":2476}] }] },
+      { titulo: 'Tramos de ajuste', intro: 'Fracción de los puntos finales (flujo dominado por los límites) y de los iniciales (flujo lineal) que se usan en los ajustes. La permeabilidad es opcional y solo sirve para estimar A_c y xf.', campos: [num_('fBdf', 'Fracción final para límites', 'fracción', 0.4), num_('fLin', 'Fracción inicial para flujo lineal', 'fracción', 0.4), num_('k', 'Permeabilidad de matriz (opcional)', 'mD', '')] }
+    ],
+    calc: function (v) { return C.rta(v); },
+    render: function (r, v) {
+      var k = [];
+      if (r.bdf) k = [kpi('Volumen poral drenado Vp', fmt(r.bdf.vp / 1e6, 2), 'MMrb', 'main'), kpi('Petróleo original en el área drenada', fmt(r.bdf.N / 1e6, 2), 'MMSTB', 'main'), kpi('Área de drenaje', fmt(r.bdf.area, 1), 'acres'), kpi('Producción acumulada', fmt(r.bdf.np / 1e6, 3), 'MMSTB'), kpi('Factor de recuperación a la fecha', fmt(r.bdf.fr * 100, 1), '%'), kpi('R² (límites)', fmt(r.bdf.r2, 4))];
+      if (r.lin) { k.push(kpi('A_c·√k', fmt(r.lin.acSqrtK, 0), 'ft²·√mD')); if (r.lin.ac != null) { k.push(kpi('Área de flujo A_c', fmt(r.lin.ac, 0), 'ft²')); k.push(kpi('Semilongitud xf', fmt(r.lin.xf, 1), 'ft')); } k.push(kpi('R² (lineal)', fmt(r.lin.r2, 4))); }
+      var out = k.length ? kpis(k) : nota('<b>No se pudo estimar ni el volumen ni el flujo lineal.</b> Revisá los avisos.');
+      if (r.bdf) {
+        var tail = r.filas.slice(r.filas.length - r.nb);
+        out += h3('Balance de materia fluyente') + lineChart({ xl: 't_mb = Np/q (d)', yl: 'Δp/q (psi/(STB/d))', alt: 'Δp/q contra tiempo de balance de materia', series: [{ nombre: 'Datos', pts: r.filas.map(function (x) { return [x.tmb, x.dpq]; }), nl: true, pt: true }, { nombre: 'Ajuste de la cola', c: 1, pts: [[tail[0].tmb, r.bdf.b + r.bdf.m * tail[0].tmb], [tail[tail.length - 1].tmb, r.bdf.b + r.bdf.m * tail[tail.length - 1].tmb]] }] });
+      }
+      if (r.lin) out += h3('Flujo lineal') + lineChart({ xl: '√t (d^½)', yl: 'Δp/q (psi/(STB/d))', alt: 'Δp/q contra raíz del tiempo', series: [{ nombre: 'Datos', pts: r.filas.map(function (x) { return [Math.sqrt(x.t), x.dpq]; }), nl: true, pt: true }, { nombre: 'Ajuste inicial', c: 1, pts: [[Math.sqrt(r.filas[0].t), r.lin.b + r.lin.m * Math.sqrt(r.filas[0].t)], [Math.sqrt(r.filas[r.lin.n - 1].t), r.lin.b + r.lin.m * Math.sqrt(r.filas[r.lin.n - 1].t)]] }] });
+      out += h3('Datos procesados') + tabla(['t (d)', 'q (STB/d)', 'Δp (psi)', 'Np (STB)', 't_mb (d)', 'Δp/q'], r.filas.map(function (x) { return [fmt(x.t, 1), fmt(x.q, 1), fmt(x.dp, 0), fmt(x.np, 0), fmt(x.tmb, 1), fmt(x.dpq, 3)]; }));
+      out += avisosHTML(r);
+      var cs = [['Np y t_mb', 'Np = Σ q·Δt ; t_mb = Np/q ; Δp = pi − pwf']];
+      if (r.bdf) { cs.push(['Pendiente', 'm = ' + fmt(r.bdf.m, 6) + ' psi/(STB/d)/d  →  Vp = B/(ct·m) = ' + fmt(r.bdf.vp, 0) + ' rb']); cs.push(['Petróleo original', 'N = Vp·(1 − Sw)/B = ' + fmt(r.bdf.N, 0) + ' STB']); cs.push(['Área', 'A = Vp·5,615/(φ·h·43560) = ' + fmt(r.bdf.area, 2) + ' acres']); }
+      if (r.lin) cs.push(['Flujo lineal', 'mL = ' + fmt(r.lin.m, 5) + ' → A_c·√k = ' + fmt(r.lin.acSqrtK, 0)]);
+      return out + calcBlock(cs);
+    }
+  });
+
+  /* 51. Gradientes de presión y contactos */
+  tool({
+    id: 'gradiente', grupo: 'Grupo de Estudios', nombre: 'Gradientes de presión y contactos de fluidos', etapas: 'C D', pregunta: '¿Dónde están los contactos y qué densidad tienen los fluidos, según las presiones medidas con probador de formación?',
+    ficha: { metodo: 'Para cada fluido se ajusta por mínimos cuadrados p = g·z + b contra la profundidad. El contacto (nivel de agua libre) es la intersección de dos rectas: z = (b₁ − b₂)/(g₂ − g₁), con incertidumbre por propagación de errores. Densidad ρ = g/0,433 (g/cm³). Si se carga la presión de entrada Pe de la roca, el contacto observado es z_FWL − Pe/(γw − γo).', fuente: 'Procedimiento estándar de interpretación de presiones de formación (p. ej. Dake, Fundamentals of Reservoir Engineering, 1978; Bradley, Petroleum Engineering Handbook, 1987). Fuente a confirmar por el revisor.', limites: ['Mismo sistema de presión (sin compartimentos) para todos los puntos.', 'Las presiones de pozos o fechas distintas deben llevarse a la misma referencia y ajustarse por depleción.', 'La supercarga, la deriva del manómetro y la mala asignación de fluido distorsionan el gradiente.', 'La intersección es el nivel de agua libre, no el contacto que se ve en los perfiles, salvo que se cargue Pe.'], unidades: 'Profundidad en ft (TVDSS positiva hacia abajo), presión en psi, gradientes en psi/ft, Pe en psi.' },
+    pasos: [
+      { titulo: 'Presiones medidas', intro: 'Una fila por toma: profundidad, presión y fluido (o = petróleo, g = gas, w = agua). Necesitás al menos dos fluidos con dos puntos cada uno.', campos: [{ id: 'filas', tipo: 'tabla', label: 'Tomas de presión', cols: [{ id: 'z', label: 'Profundidad', unit: 'ft' }, { id: 'p', label: 'Presión', unit: 'psi' }, { id: 'f', label: 'Fluido (o/g/w)', texto: true }], def: [[8500, 3925, 'o'], [8600, 3960, 'o'], [8700, 3995, 'o'], [8800, 4030, 'o'], [9100, 4145, 'w'], [9200, 4190, 'w'], [9300, 4235, 'w'], [8100, 3835, 'g'], [8150, 3840, 'g'], [8200, 3845, 'g']].map(function (a) { return { z: a[0], p: a[1], f: a[2] }; }) }] },
+      { titulo: 'Referencias opcionales', intro: 'La presión de entrada convierte el nivel de agua libre en el contacto observado; el tope de la estructura permite calcular la columna.', campos: [num_('pe', 'Presión de entrada de la roca (opcional)', 'psi', 0), num_('ztop', 'Profundidad del tope de la estructura (opcional)', 'ft', 8100)] }
+    ],
+    calc: function (v) { return C.gradiente(v); },
+    render: function (r) {
+      var out = kpis(r.contactos.map(function (c) { return kpi(c.n, fmt(c.z, 1), 'ft' + (c.sd != null ? ' ± ' + fmt(c.sd, 1) : ''), c.tipo === 'owc' || c.tipo === 'fwl' ? 'main' : ''); }).concat(r.columna != null ? [kpi('Columna hasta el nivel de agua libre', fmt(r.columna, 0), 'ft')] : []).concat(r.columnaObs != null ? [kpi('Columna hasta el contacto observado', fmt(r.columnaObs, 0), 'ft')] : []));
+      out += h3('Fluidos') + tabla(['Fluido', 'Puntos', 'Gradiente (psi/ft)', 'Densidad (g/cm³)', 'Residuo (psi)', 'R²'], r.lineas.map(function (l) { return [esc(l.nombre), l.n, fmt(l.g, 4), fmt(l.rho, 3), fmt(l.rmse, 2), fmt(l.r2, 5)]; }));
+      var col = ['', 's0', 's1', 's2'], zs = r.puntos.map(function (x) { return x.z; }), z0 = Math.min.apply(null, zs) - 100, z1 = Math.max.apply(null, zs) + 100;
+      out += lineChart({ xl: 'Presión (psi)', yl: 'Profundidad (ft)', invertY: true, alt: 'Presión contra profundidad con rectas de gradiente', series: r.lineas.map(function (l, i) { return { nombre: l.nombre, c: i, pts: [[l.g * z0 + l.b, z0], [l.g * z1 + l.b, z1]], nl: false }; }).concat([{ nombre: 'Tomas', c: 3, pts: r.puntos.map(function (x) { return [x.p, x.z]; }), nl: true, pt: true }]) });
+      out += avisosHTML(r);
+      return out + calcBlock([['Ajuste por fluido', 'p = g·z + b (mínimos cuadrados)'], ['Contacto', 'z = (b₁ − b₂)/(g₂ − g₁)'], ['Densidad', 'ρ = g/0,433']].concat(r.contactos.map(function (c) { return [c.n, 'z = ' + fmt(c.z, 1) + ' ft ; p = ' + fmt(c.p, 0) + ' psi']; })));
+    }
+  });
+
+  /* 52. Petrofísica de arenas arcillosas */
+  tool({
+    id: 'petro2', grupo: 'Desarrollo', nombre: 'Petrofísica de arenas arcillosas y espesor neto', etapas: 'C D', pregunta: '¿Cuánto espesor neto productivo hay cuando la arcilla distorsiona la resistividad?',
+    ficha: { metodo: 'Saturación de agua por tres modelos: Archie (Sw = (a·Rw/(φ^m·Rt))^(1/n)), Simandoux (cuadrática 1/Rt = φ^m·Sw²/(a·Rw) + Vsh·Sw/Rsh, con n = 2) e Indonesia (1/√Rt = [Vsh^(1−Vsh/2)/√Rsh + φ^(m/2)/√(a·Rw)]·Sw^(n/2)). Con cortes de φ, Vsh y Sw se obtienen espesor neto, relación neto/bruto, φ y Sw promedio ponderados y HCPV = Σ φ(1 − Sw)·Δz.', fuente: 'Archie (1942), Trans. AIME 146; Simandoux (1963), Rev. Inst. Fr. Pétrole; Poupon & Leveaux (1971), The Log Analyst 12(4). Cortes y parámetros: decisión del proyecto.', limites: ['Rw, Rsh, a, m y n deben venir de agua de formación y laboratorio; los valores genéricos son orientativos.', 'Los cortes no son universales: documentá su justificación.', 'Con Vsh alto (> 0,5) ningún modelo empírico es confiable sin calibración con núcleo.', 'Perfil muestreado a paso constante.'], unidades: 'Rw, Rsh y Rt en ohm·m; φ y Vsh en fracción; paso en ft; espesores en ft.' },
+    pasos: [
+      { titulo: 'Parámetros y modelo', intro: 'Elegí el modelo y cargá los parámetros petrofísicos.', campos: [sel_('modelo', 'Modelo de saturación', [['indo', 'Indonesia (Poupon–Leveaux)'], ['sim', 'Simandoux'], ['archie', 'Archie (arena limpia)']], 'indo'), num_('rw', 'Resistividad del agua Rw', 'ohm·m', 0.05), num_('rsh', 'Resistividad de la arcilla Rsh', 'ohm·m', 4), num_('a', 'a (tortuosidad)', '', 1), num_('m', 'm (cementación)', '', 2), num_('n', 'n (saturación)', '', 2), num_('dz', 'Paso de muestreo', 'ft', 0.5)] },
+      { titulo: 'Perfil', intro: 'Una fila por muestra: profundidad, porosidad efectiva, volumen de arcilla y resistividad verdadera. Mínimo 3.', campos: [{ id: 'filas', tipo: 'tabla', label: 'Perfil', cols: [{ id: 'z', label: 'Profundidad', unit: 'ft' }, { id: 'phi', label: 'φ', unit: 'frac.' }, { id: 'vsh', label: 'Vsh', unit: 'frac.' }, { id: 'rt', label: 'Rt', unit: 'ohm·m' }], def: [[8000, 0.22, 0.05, 40], [8000.5, 0.2, 0.12, 28], [8001, 0.18, 0.2, 18], [8001.5, 0.16, 0.28, 12], [8002, 0.12, 0.35, 9], [8002.5, 0.06, 0.1, 30], [8003, 0.2, 0.55, 6], [8003.5, 0.21, 0.08, 35], [8004, 0.19, 0.15, 3], [8004.5, 0.17, 0.12, 2.5]].map(function (a) { return { z: a[0], phi: a[1], vsh: a[2], rt: a[3] }; }) }] },
+      { titulo: 'Cortes', intro: 'Una muestra es neta si cumple los tres cortes.', campos: [num_('phic', 'Corte de porosidad (≥)', 'fracción', 0.08), num_('vshc', 'Corte de arcilla (≤)', 'fracción', 0.4), num_('swc', 'Corte de saturación de agua (≤)', 'fracción', 0.6)] }
+    ],
+    calc: function (v) { return C.petro2(v); },
+    render: function (r) {
+      var g = r.g, out = kpis([kpi('Espesor bruto', fmt(r.gross, 1), 'ft'), kpi('Espesor neto productivo', fmt(r.hNet, 1), 'ft', 'main'), kpi('Neto/bruto', fmt(r.ntg, 3), '', 'main'), kpi('φ promedio (neto)', fmt(r.phiAvg, 3)), kpi('Sw promedio (neto)', fmt(r.swAvg, 3)), kpi('Vsh promedio (neto)', fmt(r.vshAvg, 3)), kpi('HCPV', fmt(r.hcpv, 3), 'ft')]);
+      out += h3('Saturación de agua por muestra') + hbars(r.filas.map(function (x) { return { label: fmt(x.z, 1) + ' ft', val: x.sw * 100, txt: 'Sw ' + fmt(x.sw, 2) + (x.net ? ' · neta' : ''), cls: x.net ? 'ok' : '' }; }), 100);
+      out += tabla(['Prof. (ft)', 'φ', 'Vsh', 'Rt', 'Sw', 'Neta'], r.filas.map(function (x) { return [fmt(x.z, 1), fmt(x.phi, 3), fmt(x.vsh, 2), fmt(x.rt, 1), fmt(x.sw, 3), x.net ? badge('Sí', 'ok') : '—']; }));
+      out += avisosHTML(r);
+      var nom = { archie: 'Archie', sim: 'Simandoux', indo: 'Indonesia' }[r.modelo];
+      return out + calcBlock([['Modelo', nom + ' (a = ' + g.a + ', m = ' + g.m + ', n = ' + g.n + ', Rw = ' + g.rw + ', Rsh = ' + g.rsh + ')'], ['Muestra neta', 'φ ≥ ' + g.phic + ' y Vsh ≤ ' + g.vshc + ' y Sw ≤ ' + g.swc], ['Espesor neto', 'h_neto = (n.º de muestras netas) × Δz = ' + fmt(r.hNet, 2) + ' ft'], ['HCPV', 'Σ φ·(1 − Sw)·Δz (muestras netas) = ' + fmt(r.hcpv, 4) + ' ft']]);
+    }
+  });
+
+  /* 53. Tipos de roca y altura de saturación */
+  tool({
+    id: 'rocas', grupo: 'Grupo de Estudios', nombre: 'Tipos de roca (FZI) y altura de saturación', etapas: 'C D', pregunta: '¿Cuántos tipos de roca hay y cómo varía la saturación de agua con la altura sobre el agua libre?',
+    ficha: { metodo: 'RQI = 0,0314·√(k/φ), φz = φ/(1 − φ), FZI = RQI/φz; las muestras se agrupan por log FZI (k = 1014,2·FZI²·φ³/(1 − φ)²). Función J de Leverett: J = 0,2166·Pc/(σ·cosθ)·√(k/φ), ajustada como J = a·S*^(−b) con S* = (Sw − Swirr)/(1 − Swirr). Altura de saturación: Pc = 0,433·Δρ·h (psi, ft, g/cm³) y Sw a partir de J.', fuente: 'Amaefule et al. (1993), SPE 26436; Leverett (1941), Trans. AIME 142; Guo, Tao & Wheeler (2005), SPE 96768. Constantes a confirmar por el revisor.', limites: ['FZI agrupa por geometría de poros solo con φ y k de plug; contrastá con petrografía o Pc.', 'Una sola curva J supone una sola familia de roca: ajustá una por clase.', 'Se asume que el tipo de roca controla Pc; con fracturas o vúgulos no aplica.', 'La conversión de laboratorio a reservorio depende de σ y θ medidos o asumidos.'], unidades: 'k en mD, φ en fracción, Pc en psi, σ en dina/cm, θ en grados, Δρ en g/cm³, alturas en ft.' },
+    pasos: [
+      { titulo: 'Plugs de núcleo', intro: 'Porosidad y permeabilidad de al menos 6 plugs. Los de ejemplo son ilustrativos.', campos: [{ id: 'plugs', tipo: 'tabla', label: 'Plugs', cols: [{ id: 'phi', label: 'φ', unit: 'frac.' }, { id: 'k', label: 'k', unit: 'mD' }], def: [[0.08, 0.7], [0.12, 3.2], [0.16, 9], [0.1, 18], [0.14, 52], [0.2, 190]].map(function (a) { return { phi: a[0], k: a[1] }; }) }, num_('nclases', 'Número de clases', '', 2)] },
+      { titulo: 'Presión capilar de laboratorio (opcional)', intro: 'Con 4 o más puntos de drenaje se ajusta la función J. Dejá la tabla vacía para solo clasificar.', campos: [{ id: 'pcs', tipo: 'tabla', label: 'Curva de Pc (drenaje)', cols: [{ id: 'sw', label: 'Sw', unit: 'frac.' }, { id: 'pc', label: 'Pc', unit: 'psi' }], def: [[0.3, 60], [0.4, 18], [0.5, 10], [0.65, 6], [0.8, 3.8], [0.9, 2.8]].map(function (a) { return { sw: a[0], pc: a[1] }; }) }, num_('sigmaLab', 'Tensión interfacial de laboratorio', 'dina/cm', 48), num_('thetaLab', 'Ángulo de contacto de laboratorio', '°', 0), num_('kLab', 'k del plug de Pc', 'mD', 100), num_('phiLab', 'φ del plug de Pc', 'fracción', 0.2), num_('swirr', 'Saturación irreductible Swirr', 'fracción', 0.15)] },
+      { titulo: 'Reservorio y altura (opcional)', intro: 'Con el ajuste de J se obtiene Sw contra la altura sobre el agua libre en la roca del reservorio.', campos: [num_('kRes', 'k del reservorio', 'mD', 100), num_('phiRes', 'φ del reservorio', 'fracción', 0.2), num_('sigmaRes', 'Tensión interfacial en reservorio', 'dina/cm', 26), num_('thetaRes', 'Ángulo de contacto en reservorio', '°', 30), num_('drho', 'Diferencia de densidades agua − HC', 'g/cm³', 0.25), num_('hmax', 'Altura máxima a graficar', 'ft', 200), num_('hSw', 'Altura donde querés la Sw (opcional)', 'ft', 80)] }
+    ],
+    calc: function (v) { return C.rocas(v); },
+    render: function (r) {
+      var out = kpis(r.clases.filter(function (c) { return c.n; }).map(function (c) { return kpi('Clase ' + c.i + ' · FZI', fmt(c.fzi, 2), c.n + ' plugs'); }));
+      out += h3('Clases') + tabla(['Clase', 'Plugs', 'FZI medio', 'Rango FZI', 'φ medio', 'k medio (mD)'], r.clases.filter(function (c) { return c.n; }).map(function (c) { return [c.i, c.n, fmt(c.fzi, 2), fmt(c.fziMin, 2) + ' – ' + fmt(c.fziMax, 2), fmt(c.phi, 3), fmt(c.k, 1)]; }));
+      out += lineChart({ xl: 'Porosidad (fracción)', yl: 'Permeabilidad k (mD)', alt: 'Plugs por clase', series: r.clases.filter(function (c) { return c.n; }).map(function (c, i) { return { nombre: 'Clase ' + c.i, c: i, nl: true, pt: true, pts: r.plugs.filter(function (p) { return p.cl === c.i - 1; }).map(function (p) { return [p.phi, p.k]; }) }; }) });
+      if (r.j) {
+        out += h3('Función J de Leverett') + kpis([kpi('a', fmt(r.j.a, 3)), kpi('b', fmt(r.j.b, 3)), kpi('R²', fmt(r.j.r2, 4))]);
+        out += logChart({ xl: 'S* = (Sw − Swirr)/(1 − Swirr)', yl: 'J', alt: 'Función J contra saturación normalizada', series: [{ nombre: 'Datos', nl: true, pt: true, pts: r.j.pts.map(function (p) { return [p.sn, p.J]; }) }, { nombre: 'J = a·S*^(−b)', c: 1, pts: [0.05, 0.1, 0.2, 0.4, 0.7, 1].map(function (s) { return [s, r.j.a * Math.pow(s, -r.j.b)]; }) }] });
+      }
+      if (r.alt) {
+        out += h3('Saturación contra altura sobre el agua libre') + lineChart({ xl: 'Saturación de agua Sw', yl: 'Altura sobre el agua libre (ft)', alt: 'Altura de saturación', series: [{ nombre: 'Sw(h)', pts: r.alt.curva.map(function (c) { return [c.sw, c.h]; }) }] });
+        if (r.alt.swq != null) out += kpis([kpi('Sw a ' + fmt(r.alt.hq, 0) + ' ft', fmt(r.alt.swq, 3), '', 'main')]);
+      }
+      out += avisosHTML(r);
+      var cs = [['RQI y FZI', 'RQI = 0,0314·√(k/φ) ; φz = φ/(1 − φ) ; FZI = RQI/φz']];
+      if (r.j) { cs.push(['Función J', 'J = 0,2166·Pc/(σ·cosθ)·√(k/φ) ; J = ' + fmt(r.j.a, 3) + '·S*^(−' + fmt(r.j.b, 3) + ')']); if (r.alt) cs.push(['Altura', 'Pc = 0,433·Δρ·h ; Sw = Swirr + (1 − Swirr)·(J/a)^(−1/b)']); }
+      return out + calcBlock(cs);
+    }
+  });
 
   /* ---------------- estado y renderizado ---------------- */
   var ST = {}, cur = null, paso = 0, tab = 'calc';
