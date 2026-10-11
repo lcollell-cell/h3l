@@ -1070,6 +1070,32 @@ tr:hover td{background:var(--blue-ghost);}
 }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style id="h3l-resp-fixes">
+/* Ajustes de visualización (PC y móvil) */
+@media (min-width:901px) and (max-width:1180px){
+  .nav-link{padding:8px 9px;font-size:13px;}
+  .nav-actions{gap:6px;flex:none;}
+  .btn-nav-login,.btn-nav-register{padding:6px 10px;font-size:12px;white-space:nowrap;}
+  .nav-logo-img{height:34px;}
+}
+@media (max-width:900px){
+  .btn-nav-login,.btn-nav-register{white-space:nowrap;}
+}
+@media (max-width:400px){
+  .navbar{padding:0 10px;}
+  .nav-logo-img{height:30px;}
+  .nav-actions{gap:4px;}
+  .btn-nav-login,.btn-nav-register{padding:5px 7px;font-size:10.5px;}
+  .hamburger{padding:4px;}
+}
+#calcPanelClasicas .calc-badge{font-size:11px;}
+#section-calculators .calc-tab-btn:focus-visible,#section-calculators .calc-cat-btn:focus-visible{outline:2px solid var(--blue-core);outline-offset:2px;}
+@media (pointer:coarse){
+  .calc-tab-btn{min-height:44px;}
+  #calcPanelClasicas .calc-cat-btn{padding:10px 16px;}
+}
+@media (prefers-reduced-motion:reduce){.calc-tab-btn,.calc-card{transition:none;}}
+</style>
 </head>
 <body>
 
@@ -1985,13 +2011,13 @@ tr:hover td{background:var(--blue-ghost);}
     </div>
     <div class="calc-tabs" id="calcTabs" role="tablist" aria-label="Vistas de calculadoras">
       <button class="calc-tab-btn active" role="tab" data-ctab="flujo" onclick="calcTab('flujo')"><span class="l">Flujo por tema</span><span class="s">Flujo</span></button>
-      <button class="calc-tab-btn" role="tab" data-ctab="app" onclick="calcTab('app')"><span class="l">48 herramientas paso a paso</span><span class="s">Paso a paso</span></button>
-      <button class="calc-tab-btn" role="tab" data-ctab="clasicas" onclick="calcTab('clasicas')"><span class="l">Calculadoras clásicas (44)</span><span class="s">Clásicas (44)</span></button>
+      <button class="calc-tab-btn" role="tab" tabindex="-1" data-ctab="app" onclick="calcTab('app')"><span class="l">48 herramientas paso a paso</span><span class="s">Paso a paso</span></button>
+      <button class="calc-tab-btn" role="tab" tabindex="-1" data-ctab="clasicas" onclick="calcTab('clasicas')"><span class="l">Calculadoras clásicas (44)</span><span class="s">Clásicas (44)</span></button>
     </div>
     <p class="calc-draft">ⓘ Las herramientas paso a paso son <b>borradores pendientes de revisión técnica</b>. Validar con un revisor distinto del autor antes de decidir con ellas.</p>
-    <div id="calcPanelFlujo" class="calc-panel"><iframe id="calcFrameFlujo" title="Flujo de trabajo por tema" data-src="calculadoras/flujo.html?embed=1" loading="lazy"></iframe></div>
-    <div id="calcPanelApp" class="calc-panel" hidden><iframe id="calcFrameApp" title="Herramientas de cálculo paso a paso" data-src="calculadoras/app.html?embed=1" loading="lazy"></iframe></div>
-    <div id="calcPanelClasicas" class="calc-panel" hidden>
+    <div id="calcPanelFlujo" class="calc-panel" role="tabpanel"><iframe id="calcFrameFlujo" title="Flujo de trabajo por tema" data-src="calculadoras/flujo.html?embed=1" loading="lazy"></iframe></div>
+    <div id="calcPanelApp" class="calc-panel" role="tabpanel" hidden><iframe id="calcFrameApp" title="Herramientas de cálculo paso a paso" data-src="calculadoras/app.html?embed=1" loading="lazy"></iframe></div>
+    <div id="calcPanelClasicas" class="calc-panel" role="tabpanel" hidden>
       <div class="calc-categories">
         <button class="calc-cat-btn active" onclick="filterCalcs('all',this)">Todas</button>
         <button class="calc-cat-btn" onclick="filterCalcs('reservoir',this)">🏗️ Reservorio</button>
@@ -7302,7 +7328,7 @@ function processQCFile(input, type){
   window.calcTab=function(t,hash){
     var tabs=['flujo','app','clasicas'];
     if(tabs.indexOf(t)<0)t='flujo';
-    document.querySelectorAll('#calcTabs .calc-tab-btn').forEach(function(b){var on=b.getAttribute('data-ctab')===t;b.classList.toggle('active',on);b.setAttribute('aria-selected',on?'true':'false');});
+    document.querySelectorAll('#calcTabs .calc-tab-btn').forEach(function(b){var on=b.getAttribute('data-ctab')===t;b.classList.toggle('active',on);b.setAttribute('aria-selected',on?'true':'false');b.setAttribute('tabindex',on?'0':'-1');});
     document.getElementById('calcPanelFlujo').hidden=t!=='flujo';
     document.getElementById('calcPanelApp').hidden=t!=='app';
     document.getElementById('calcPanelClasicas').hidden=t!=='clasicas';
@@ -7312,6 +7338,13 @@ function processQCFile(input, type){
       else if(t==='app'&&hash){try{f.contentWindow.location.hash=hash;}catch(e){f.setAttribute('src',src+'#'+hash);}}
     }
   };
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'){var m=document.getElementById('calcModal');if(m&&m.classList.contains('open')&&typeof closeModal==='function')closeModal();}});
+  var tabsEl=document.getElementById('calcTabs');
+  if(tabsEl)tabsEl.addEventListener('keydown',function(e){
+    var order=['flujo','app','clasicas'],cur=document.querySelector('#calcTabs .calc-tab-btn.active'),i=order.indexOf(cur&&cur.getAttribute('data-ctab')),n=-1;
+    if(e.key==='ArrowRight')n=(i+1)%3;else if(e.key==='ArrowLeft')n=(i+2)%3;else if(e.key==='Home')n=0;else if(e.key==='End')n=2;
+    if(n<0)return;e.preventDefault();calcTab(order[n]);var b=document.querySelector('#calcTabs [data-ctab="'+order[n]+'"]');if(b)b.focus();
+  });
   window.addEventListener('message',function(e){
     if(e.origin!==location.origin||!e.data||!e.data.h3l)return;
     var d=e.data;
