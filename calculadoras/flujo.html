@@ -118,6 +118,18 @@ html[data-embed] .foot{margin-top:16px}
 @media (pointer:coarse){.name a{display:inline-block;padding-block:7px;border-bottom:0;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}}
 .lv{font-size:11px}
 </style>
+<style id="mob-css">
+@media (max-width:640px){
+ html .topics,html[data-embed] .topics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;overflow:visible;padding-bottom:0;scroll-snap-type:none}
+ html .topics li,html[data-embed] .topics li{min-width:0}
+ html .topics button,html[data-embed] .topics button{width:100%;min-height:46px;padding:8px 10px;text-align:left;line-height:1.25;white-space:normal;overflow-wrap:anywhere;font-size:13px}
+ .estbar{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+ .estbar .estl,.estbar .esth{grid-column:1/-1;margin:0}
+ .estbar .chip[data-est="todas"]{grid-column:1/-1}
+ .estbar .chip{padding:8px 6px;min-height:40px;text-align:center;white-space:normal;line-height:1.2;font-size:13px}
+ .estbar .esth{font-size:12px}
+}
+</style>
 </head><body>
 
 

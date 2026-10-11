@@ -565,6 +565,11 @@ input,select,textarea{font-family:var(--font-body);}
 .calc-tab-btn.active{background:var(--blue-core);color:#fff;}
 .calc-tab-btn .s{display:none;}
 .calc-draft{max-width:640px;margin:0 auto 16px;padding:7px 12px;font-size:12px;line-height:1.4;color:#7a4a00;background:#fff6e5;border:1px solid #f0d49a;border-radius:6px;text-align:left;}
+/* calculadoras: solo el flujo de trabajo es visible; las otras vistas se abren desde las herramientas del flujo */
+#calcTabs,.calc-draft{display:none;}
+.calc-back{max-width:1200px;margin:0 auto 12px;}
+.calc-back button{font-family:var(--font-body);font-size:13px;font-weight:600;padding:9px 14px;min-height:40px;border:1px solid var(--border);border-radius:6px;background:#fff;color:var(--blue-core);cursor:pointer;}
+.calc-back button:hover{background:var(--blue-ghost);}
 .calc-panel{max-width:1200px;margin:0 auto;}
 .calc-panel[hidden]{display:none;}
 .calc-panel iframe{display:block;width:100%;border:0;background:transparent;}
@@ -2016,8 +2021,8 @@ tr:hover td{background:var(--blue-ghost);}
     </div>
     <p class="calc-draft">ⓘ Las herramientas paso a paso son <b>borradores pendientes de revisión técnica</b>. Validar con un revisor distinto del autor antes de decidir con ellas.</p>
     <div id="calcPanelFlujo" class="calc-panel" role="tabpanel"><iframe id="calcFrameFlujo" title="Flujo de trabajo por tema" data-src="calculadoras/flujo.html?embed=1" loading="lazy"></iframe></div>
-    <div id="calcPanelApp" class="calc-panel" role="tabpanel" hidden><iframe id="calcFrameApp" title="Herramientas de cálculo paso a paso" data-src="calculadoras/app.html?embed=1" loading="lazy"></iframe></div>
-    <div id="calcPanelClasicas" class="calc-panel" role="tabpanel" hidden>
+    <div id="calcPanelApp" class="calc-panel" role="tabpanel" hidden><div class="calc-back"><button type="button" onclick="calcTab('flujo')">← Volver al flujo de trabajo</button></div><iframe id="calcFrameApp" title="Herramientas de cálculo paso a paso" data-src="calculadoras/app.html?embed=1" loading="lazy"></iframe></div>
+    <div id="calcPanelClasicas" class="calc-panel" role="tabpanel" hidden><div class="calc-back"><button type="button" onclick="calcTab('flujo')">← Volver al flujo de trabajo</button></div>
       <div class="calc-categories">
         <button class="calc-cat-btn active" onclick="filterCalcs('all',this)">Todas</button>
         <button class="calc-cat-btn" onclick="filterCalcs('reservoir',this)">🏗️ Reservorio</button>
