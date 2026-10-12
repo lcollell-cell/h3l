@@ -416,6 +416,10 @@ body{overflow-x:hidden}
 <script>
 const SW=1280,SH=720;
 const I=(k,v)=>H3L.t(k,v);
+H3L.add('es',{'v3.serv':'Servicios','v3.plans':'Accesos','v3.c1':'Ver servicios en acción'});
+H3L.add('en',{'v3.serv':'Services','v3.plans':'Plans','v3.c1':'See services in action'});
+H3L.add('fr',{'v3.serv':'Services','v3.plans':'Accès','v3.c1':'Voir les services en action'});
+H3L.add('pt',{'v3.serv':'Serviços','v3.plans':'Acessos','v3.c1':'Ver serviços em ação'});
 H3L.apply();
 const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
 const eo3=x=>1-Math.pow(1-x,3);
@@ -858,6 +862,8 @@ document.addEventListener('click',e=>{ if(!menu.contains(e.target)) closeMenu();
 /* =====================================================================
    V3 · servicios en acción, accesos por plan y reproductor con sonido
    ===================================================================== */
+/* Videos disponibles en v3/videos/. Al copiar un video, agregá acá su nombre (sin .mp4) para que la tarjeta lo use. */
+const VIDEOS=[];
 const SERVICES=[
   {n:1,slug:'reservas',     d:'Clasificación 1P, 2P y 3P bajo SPE-PRMS, con la incertidumbre a la vista.',                         tier:1,href:'../v2/reservas.html',      cta:'Abrir Reservas PD'},
   {n:2,slug:'quality-control',d:'Cartas de control con límites para detectar desvíos en la ingeniería de desarrollo.',            tier:0,href:'../index.html?go=qcapps',  cta:'Abrir Apps QC'},
@@ -878,7 +884,7 @@ SERVICES.forEach((s,i)=>{
   const tl=['Desde el registro','Plan Profesional','Plan Enterprise'][s.tier];
   el.innerHTML=
    '<div class="mmedia"><svg viewBox="0 18 544 340" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg>'+
-   '<video muted playsinline preload="metadata" src="videos/'+s.slug+'.mp4#t=1" aria-hidden="true"></video>'+
+   '<video muted playsinline preload="metadata" aria-hidden="true"></video>'+
    '<span class="live">VISTA EN VIVO</span>'+
    '<button class="mplay" type="button" aria-label="Ver video con sonido"><i><svg viewBox="0 0 24 24" fill="#fff"><path d="M6 4l14 8-14 8z"/></svg></i>Ver con sonido</button></div>'+
    '<div class="mbody"><span class="mcap"></span><h3></h3><p>'+s.d+'</p>'+
@@ -891,6 +897,7 @@ SERVICES.forEach((s,i)=>{
   card.fill(); cards.push(card);
   const v=el.querySelector('video');
   v.addEventListener('loadeddata',()=>el.classList.add('has'));
+  if(VIDEOS.includes(s.slug)) v.src='videos/'+s.slug+'.mp4#t=1';
   el.querySelector('.mplay').addEventListener('click',()=>openVideo('videos/'+s.slug+'.mp4',I('s'+s.n+'.lab')));
 });
 H3L.on(()=>cards.forEach(c=>c.fill()));
@@ -958,10 +965,6 @@ IO2.observe($('app'));
 $('h1a').setAttribute('aria-label','Upstream Oil & Gas & Energy Transition');
 $('langNav').appendChild(H3L.select({}));
 $('langGate').appendChild(H3L.select({dark:true,full:true,onchange:()=>{ if(!$('gate').hidden) location.reload(); }}));
-H3L.add('es',{'v3.serv':'Servicios','v3.plans':'Accesos','v3.c1':'Ver servicios en acción'});
-H3L.add('en',{'v3.serv':'Services','v3.plans':'Plans','v3.c1':'See services in action'});
-H3L.add('fr',{'v3.serv':'Services','v3.plans':'Accès','v3.c1':'Voir les services en action'});
-H3L.add('pt',{'v3.serv':'Serviços','v3.plans':'Acessos','v3.c1':'Ver serviços em ação'});
 H3L.apply();
 H3L.on(()=>{ refreshStages(); setLabel(); buildScene(); });
 let resizeT; addEventListener('resize',()=>{ clearTimeout(resizeT); resizeT=setTimeout(()=>{ layout(); if(MODE==='d') closeMenu(); },60); });
