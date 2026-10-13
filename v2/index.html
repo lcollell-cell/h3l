@@ -165,9 +165,9 @@ a:focus-visible,button:focus-visible{outline:2px solid #5BB0FF;outline-offset:3p
 [data-mode=m] #llogo{order:1}
 [data-mode=m] #llogo .lm{font-size:30px}
 [data-mode=m] #lhead{order:2;margin-top:18px;font-size:10.5px;letter-spacing:2px}
-[data-mode=m] #chart{order:4;width:100%;max-width:calc(var(--H,700px)*.26*1.36);height:auto;margin:6px auto 0 0;flex:none}
-[data-mode=m] #chart text{font-size:14.5px}
-[data-mode=m] #chart #scap{font-size:10.5px}
+[data-mode=m] #chart{order:4;width:100%;max-width:none;height:auto;flex:1 1 0;min-height:96px;margin:6px 0 0;align-self:stretch}
+[data-mode=m] #chart text{font-size:18px}
+[data-mode=m] #chart #scap{font-size:13px;letter-spacing:1px}
 [data-mode=m] #pctbox{order:5;margin-top:4px}
 [data-mode=m] #pct{font-size:46px;letter-spacing:-3px}
 [data-mode=m] #pctsym{font-size:20px;margin-top:5px}
@@ -182,7 +182,8 @@ a:focus-visible,button:focus-visible{outline:2px solid #5BB0FF;outline-offset:3p
 [data-mode=m] #foot1{order:9;font-size:14px}
 [data-mode=m] #foot2{display:none}
 @media (max-height:700px){[data-mode=m] #sub{display:none}}
-@media (max-height:790px){[data-mode=m] #chart{display:none}}
+@media (max-height:720px){[data-mode=m] #rows li{height:31px}[data-mode=m] .lab{font-size:12.5px}[data-mode=m] #lhead{margin-top:10px}[data-mode=m] #status{display:none}[data-mode=m] #pct{font-size:36px;letter-spacing:-2px}[data-mode=m] #pctsym{font-size:16px;margin-top:3px}[data-mode=m] #bar{padding-top:10px;padding-bottom:26px}}
+@media (max-height:560px){[data-mode=m] #chart{display:none}}
 @media (max-height:620px){[data-mode=m] #pctbox,[data-mode=m] #modcount{display:none}}
 @media (prefers-reduced-motion:reduce){#c2 svg,#navitems a::after{transition:none}}
 </style>
