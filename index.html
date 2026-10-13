@@ -1105,6 +1105,7 @@ tr:hover td{background:var(--blue-ghost);}
 </style>
 <link rel="stylesheet" href="assets/site.css">
 <script src="assets/site.js" defer></script>
+<script src="v2/chat.js" defer></script>
 </head>
 <body>
 
@@ -1856,15 +1857,15 @@ tr:hover td{background:var(--blue-ghost);}
   <!-- NOTICIAS O&G -->
   <section id="section-noticias" class="section">
     <div class="section-header">
-      <div class="section-eyebrow">Sector Energético</div>
-      <h2 class="section-title">Noticias OIL &amp; GAS</h2>
-      <p class="section-desc">Precios al momento y noticias nacionales e internacionales del sector</p>
+      <div class="section-eyebrow" data-t="w_n_eye">Sector Energético</div>
+      <h2 class="section-title" data-t="nav_noticias">Noticias OIL &amp; GAS</h2>
+      <p class="section-desc" data-t="w_n_d">Precios al momento y noticias nacionales e internacionales del sector</p>
     </div>
     <!-- News geographic filter -->
     <div style="display:flex;gap:0;margin-bottom:24px;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;max-width:480px;margin-left:auto;margin-right:auto;">
-      <button id="ntab-todas" onclick="switchNewsTab('todas')" style="flex:1;padding:9px;font-family:var(--font-body);font-size:12px;font-weight:700;border:none;cursor:pointer;background:var(--accent);color:#000;">Todas</button>
-      <button id="ntab-arg" onclick="switchNewsTab('arg')" style="flex:1;padding:9px;font-family:var(--font-body);font-size:12px;font-weight:600;border:none;cursor:pointer;background:var(--gray-50);color:var(--text-secondary);">Argentina</button>
-      <button id="ntab-int" onclick="switchNewsTab('int')" style="flex:1;padding:9px;font-family:var(--font-body);font-size:12px;font-weight:600;border:none;cursor:pointer;background:var(--gray-50);color:var(--text-secondary);">Internacional</button>
+      <button id="ntab-todas" onclick="switchNewsTab('todas')" style="flex:1;padding:9px;font-family:var(--font-body);font-size:12px;font-weight:700;border:none;cursor:pointer;background:var(--accent);color:#000;"><span data-t="w_all">Todas</span></button>
+      <button id="ntab-arg" onclick="switchNewsTab('arg')" style="flex:1;padding:9px;font-family:var(--font-body);font-size:12px;font-weight:600;border:none;cursor:pointer;background:var(--gray-50);color:var(--text-secondary);"><span data-t="w_arg">Argentina</span></button>
+      <button id="ntab-int" onclick="switchNewsTab('int')" style="flex:1;padding:9px;font-family:var(--font-body);font-size:12px;font-weight:600;border:none;cursor:pointer;background:var(--gray-50);color:var(--text-secondary);"><span data-t="w_int">Internacional</span></button>
     </div>
 
     <!-- PRECIOS EN TIEMPO REAL — Fuente: Financial Times Markets -->
@@ -1898,23 +1899,23 @@ tr:hover td{background:var(--blue-ghost);}
     <!-- BARRA DE ESTADO PRECIOS -->
     <div style="display:flex;align-items:center;justify-content:space-between;max-width:1100px;margin:0 auto 24px;padding:8px 14px;background:rgba(255,255,255,.03);border-radius:8px;border:1px solid rgba(255,255,255,.06);">
       <span style="font-size:10px;color:var(--text-muted);">
-        Precios en tiempo real · Actualizado: <span id="precio-ts">—</span>
-        · Fuente: <a href="https://markets.ft.com/data/commodities" target="_blank" style="color:var(--accent);font-weight:600;">Financial Times Markets</a>
+        <span data-t="w_rt">Precios en tiempo real · Actualizado:</span> <span id="precio-ts">—</span>
+        · <span data-t="w_srcl">Fuente:</span> <a href="https://markets.ft.com/data/commodities" target="_blank" style="color:var(--accent);font-weight:600;">Financial Times Markets</a>
         · <a href="https://spglobal.com/commodity-insights" target="_blank" style="color:var(--accent);">Platts / S&P Global</a>
         · <a href="https://www.eia.gov/naturalgas/weekly" target="_blank" style="color:var(--accent);">EIA</a>
       </span>
       <button onclick="loadPrices(true)" style="background:rgba(46,107,196,.10);border:1px solid rgba(46,107,196,.20);color:var(--accent);font-family:var(--font-body);font-size:10px;font-weight:600;padding:4px 12px;border-radius:5px;cursor:pointer;transition:background .2s;" onmouseover="this.style.background='rgba(46,107,196,.18)'" onmouseout="this.style.background='rgba(46,107,196,.10)'">
-        Actualizar precios
+        <span data-t="w_updp">Actualizar precios</span>
       </button>
     </div>
 
     <!-- BARRA NOTICIAS: estado + refresh -->
     <div style="display:flex;align-items:center;justify-content:space-between;max-width:1100px;margin:0 auto 18px;">
-      <h3 style="font-family:var(--font-body);font-size:16px;font-weight:700;">Últimas Noticias</h3>
+      <h3 style="font-family:var(--font-body);font-size:16px;font-weight:700;" data-t="w_latest">Últimas Noticias</h3>
       <div style="display:flex;align-items:center;gap:12px;">
         <span id="news-ts" style="font-size:10px;color:var(--text-muted);">—</span>
         <button onclick="refreshNoticias(true)" id="btn-refresh-news" style="background:rgba(46,107,196,.10);border:1px solid rgba(46,107,196,.20);color:var(--accent);font-family:var(--font-body);font-size:10px;font-weight:600;padding:4px 12px;border-radius:5px;cursor:pointer;transition:background .2s;" onmouseover="this.style.background='rgba(46,107,196,.18)'" onmouseout="this.style.background='rgba(46,107,196,.10)'">
-          Actualizar noticias
+          <span data-t="w_updn">Actualizar noticias</span>
         </button>
       </div>
     </div>
@@ -1922,7 +1923,7 @@ tr:hover td{background:var(--blue-ghost);}
     <!-- GRID NOTICIAS -->
     <div id="noticias-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:1100px;margin:0 auto;">
       <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px;grid-column:1/-1;text-align:center;color:var(--text-muted);font-size:13px;">
-        Cargando noticias...
+        <span data-t="w_loadn">Cargando noticias...</span>
       </div>
     </div>
   </section>
@@ -1930,36 +1931,36 @@ tr:hover td{background:var(--blue-ghost);}
   <!-- CONTACTO -->
   <section id="section-contacto" class="section">
     <div class="section-header">
-      <div class="section-eyebrow">Hablemos</div>
-      <h2 class="section-title">Contacto</h2>
-      <p class="section-desc">Completá el formulario y te respondemos a la brevedad</p>
+      <div class="section-eyebrow" data-t="w_ct_eye">Hablemos</div>
+      <h2 class="section-title" data-t="w_ct_h">Contacto</h2>
+      <p class="section-desc" data-t="w_ct_d">Completá el formulario y te respondemos a la brevedad</p>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;max-width:1000px;margin:0 auto;">
       <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px;">
-        <h4 style="font-family:var(--font-body);font-weight:700;margin-bottom:20px;font-size:16px;">Enviar Consulta</h4>
+        <h4 style="font-family:var(--font-body);font-weight:700;margin-bottom:20px;font-size:16px;" data-t="w_ct_form">Enviar Consulta</h4>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
-          <div><label class="form-label">NOMBRE *</label><input class="form-input" type="text" id="ctc-nombre" placeholder="Juan"></div>
-          <div><label class="form-label">APELLIDO *</label><input class="form-input" type="text" id="ctc-apellido" placeholder="García"></div>
+          <div><label class="form-label" data-t="w_ct_n">NOMBRE *</label><input class="form-input" type="text" id="ctc-nombre" placeholder="Juan" data-t-ph="w_ph_n"></div>
+          <div><label class="form-label" data-t="w_ct_a">APELLIDO *</label><input class="form-input" type="text" id="ctc-apellido" placeholder="García" data-t-ph="w_ph_a"></div>
         </div>
-        <div style="margin-bottom:12px;"><label class="form-label">EMAIL *</label><input class="form-input" type="email" id="ctc-email" placeholder="juan@empresa.com"></div>
-        <div style="margin-bottom:12px;"><label class="form-label">EMPRESA / OCUPACIÓN</label><input class="form-input" type="text" id="ctc-empresa" placeholder="Empresa SA"></div>
-        <div style="margin-bottom:16px;"><label class="form-label">CONSULTA *</label><textarea class="form-input" id="ctc-mensaje" rows="4" style="resize:vertical;">Buenas tardes, quiero información de sus servicios. Mi contacto es </textarea></div>
-        <button onclick="enviarContacto()" class="btn-calc" style="width:100%;">Enviar a info@h3l.com</button>
+        <div style="margin-bottom:12px;"><label class="form-label" data-t="w_ct_e">EMAIL *</label><input class="form-input" type="email" id="ctc-email" placeholder="juan@empresa.com"></div>
+        <div style="margin-bottom:12px;"><label class="form-label" data-t="w_ct_c">EMPRESA / OCUPACIÓN</label><input class="form-input" type="text" id="ctc-empresa" placeholder="Empresa SA" data-t-ph="w_ph_c"></div>
+        <div style="margin-bottom:16px;"><label class="form-label" data-t="w_ct_q">CONSULTA *</label><textarea class="form-input" id="ctc-mensaje" rows="4" style="resize:vertical;" data-t-val="w_ct_def">Buenas tardes, quiero información de sus servicios. Mi contacto es </textarea></div>
+        <button onclick="enviarContacto()" class="btn-calc" style="width:100%;" data-t="w_ct_send">Enviar a info@h3l.com</button>
         <div id="ctc-status" style="margin-top:10px;text-align:center;font-size:12px;min-height:18px;"></div>
       </div>
       <div style="display:flex;flex-direction:column;gap:16px;">
         <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;">
-          <h4 style="font-family:var(--font-body);font-weight:700;margin-bottom:16px;color:var(--accent);font-size:14px;">Información de Contacto</h4>
+          <h4 style="font-family:var(--font-body);font-weight:700;margin-bottom:16px;color:var(--accent);font-size:14px;" data-t="w_ct_info">Información de Contacto</h4>
           <div style="display:flex;flex-direction:column;gap:10px;">
-            <div style="display:flex;gap:10px;padding:10px;background:var(--gray-50);border-radius:var(--radius);"><span style="font-size:15px;">✉</span><div><div style="font-size:10px;color:var(--text-muted);margin-bottom:1px;">EMAIL</div><div style="font-size:13px;color:var(--accent);">info@h3l.com</div></div></div>
-            <div style="display:flex;gap:10px;padding:10px;background:var(--gray-50);border-radius:var(--radius);"><span style="font-size:15px;">☎</span><div><div style="font-size:10px;color:var(--text-muted);margin-bottom:1px;">ARGENTINA</div><div style="font-size:12px;">+54 2974 62 5804 / +54 911 2872 3272</div></div></div>
-            <div style="display:flex;gap:10px;padding:10px;background:var(--gray-50);border-radius:var(--radius);"><span style="font-size:15px;">☎</span><div><div style="font-size:10px;color:var(--text-muted);margin-bottom:1px;">ESPAÑA</div><div style="font-size:12px;">+34 672 22 0224</div></div></div>
+            <div style="display:flex;gap:10px;padding:10px;background:var(--gray-50);border-radius:var(--radius);"><span style="font-size:15px;">✉</span><div><div style="font-size:10px;color:var(--text-muted);margin-bottom:1px;" data-t="w_ct_email">EMAIL</div><div style="font-size:13px;color:var(--accent);">info@h3l.com</div></div></div>
+            <div style="display:flex;gap:10px;padding:10px;background:var(--gray-50);border-radius:var(--radius);"><span style="font-size:15px;">☎</span><div><div style="font-size:10px;color:var(--text-muted);margin-bottom:1px;" data-t="w_ct_arg">ARGENTINA</div><div style="font-size:12px;">+54 2974 62 5804 / +54 911 2872 3272</div></div></div>
+            <div style="display:flex;gap:10px;padding:10px;background:var(--gray-50);border-radius:var(--radius);"><span style="font-size:15px;">☎</span><div><div style="font-size:10px;color:var(--text-muted);margin-bottom:1px;" data-t="w_ct_es">ESPAÑA</div><div style="font-size:12px;">+34 672 22 0224</div></div></div>
           </div>
         </div>
         <div style="background:linear-gradient(135deg,rgba(46,107,196,.07),rgba(77,166,255,.08));border:1px solid rgba(46,107,196,.15);border-radius:var(--radius-lg);padding:24px;flex:1;">
-          <h5 style="font-weight:700;margin-bottom:6px;font-size:13px;">Respuesta Rápida</h5>
-          <p style="color:var(--text-secondary);font-size:12px;line-height:1.7;">Nuestro equipo responde en menos de 24 horas hábiles.</p>
-          <p style="color:var(--text-secondary);font-size:11px;margin-top:10px;"><strong>Presencia:</strong> LATAM y Europa</p>
+          <h5 style="font-weight:700;margin-bottom:6px;font-size:13px;" data-t="w_ct_fast">Respuesta Rápida</h5>
+          <p style="color:var(--text-secondary);font-size:12px;line-height:1.7;" data-t="w_ct_resp">Nuestro equipo responde en menos de 24 horas hábiles.</p>
+          <p style="color:var(--text-secondary);font-size:11px;margin-top:10px;"><strong data-t="w_ct_pres">Presencia:</strong> <span data-t="w_ct_presv">LATAM y Europa</span></p>
         </div>
       </div>
     </div>
@@ -2039,37 +2040,37 @@ tr:hover td{background:var(--blue-ghost);}
   <!-- ══════════ ETAPA 4: EVENTOS ══════════ -->
   <section id="section-eventos" class="section">
     <div class="section-header">
-      <div class="section-eyebrow">Industria Energética</div>
-      <h2 class="section-title">Eventos O&amp;G</h2>
-      <p class="section-desc">Conferencias, congresos y eventos relevantes del sector — SPE, SPEE, IEA y más</p>
+      <div class="section-eyebrow" data-t="w_e_eye">Industria Energética</div>
+      <h2 class="section-title" data-t="w_e_h">Eventos O&amp;G</h2>
+      <p class="section-desc" data-t="w_e_d">Conferencias, congresos y eventos relevantes del sector — SPE, SPEE, IEA y más</p>
     </div>
 
     <!-- Filter tabs -->
     <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:28px;">
-      <button class="calc-cat-btn active" onclick="filterEvents('all',this)">Todos</button>
+      <button class="calc-cat-btn active" onclick="filterEvents('all',this)" data-t="w_e_all">Todos</button>
       <button class="calc-cat-btn" onclick="filterEvents('spe',this)">SPE</button>
       <button class="calc-cat-btn" onclick="filterEvents('spee',this)">SPEE</button>
       <button class="calc-cat-btn" onclick="filterEvents('iea',this)">IEA</button>
       <button class="calc-cat-btn" onclick="filterEvents('latam',this)">LATAM</button>
-      <button class="calc-cat-btn" onclick="filterEvents('energia',this)">Transición</button>
+      <button class="calc-cat-btn" onclick="filterEvents('energia',this)" data-t="w_e_tr">Transición</button>
       <button style="display:flex;align-items:center;gap:6px;background:var(--accent);color:#000;border:none;border-radius:3px;padding:8px 18px;font-family:var(--font-body);font-size:12px;font-weight:700;cursor:pointer;" onclick="refreshEventos()">
-        Actualizar eventos
+        <span data-t="w_e_upd">Actualizar eventos</span>
       </button>
     </div>
 
     <div id="eventos-ts" style="text-align:center;font-size:10px;color:var(--text-muted);margin-bottom:18px;"></div>
 
     <div id="eventos-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:1100px;margin:0 auto;">
-      <div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--text-muted);font-size:13px;">Cargando eventos...</div>
+      <div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--text-muted);font-size:13px;" data-t="w_e_load">Cargando eventos...</div>
     </div>
 
     <!-- Suscripción events newsletter -->
     <div style="margin-top:40px;max-width:600px;margin-left:auto;margin-right:auto;padding:28px;background:linear-gradient(135deg,rgba(46,107,196,.07),rgba(77,166,255,.08));border:1px solid rgba(46,107,196,.15);border-radius:var(--radius-lg);text-align:center;">
-      <h4 style="font-family:var(--font-body);font-weight:700;margin-bottom:8px;">Recibí alertas de eventos en tu email</h4>
-      <p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px;">Suscribite a nuestro Newsletter y recibí noticias O&G + próximos eventos del sector</p>
+      <h4 style="font-family:var(--font-body);font-weight:700;margin-bottom:8px;" data-t="w_e_nlh">Recibí alertas de eventos en tu email</h4>
+      <p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px;" data-t="w_e_nlp">Suscribite a nuestro Newsletter y recibí noticias O&G + próximos eventos del sector</p>
       <div style="display:flex;gap:8px;max-width:400px;margin:0 auto;">
-        <input type="email" id="events-nl-email" placeholder="tu@email.com" class="form-input" style="flex:1;font-size:13px;">
-        <button onclick="suscribirEvento()" style="padding:10px 18px;background:var(--accent);color:#000;border:none;border-radius:var(--radius);font-family:var(--font-body);font-weight:700;font-size:13px;cursor:pointer;white-space:nowrap;">Suscribirme</button>
+        <input type="email" id="events-nl-email" placeholder="tu@email.com" data-t-ph="w_nl_ph_n" class="form-input" style="flex:1;font-size:13px;">
+        <button onclick="suscribirEvento()" style="padding:10px 18px;background:var(--accent);color:#000;border:none;border-radius:var(--radius);font-family:var(--font-body);font-weight:700;font-size:13px;cursor:pointer;white-space:nowrap;" data-t="w_e_nlb">Suscribirme</button>
       </div>
       <div id="events-nl-status" style="font-size:12px;margin-top:8px;min-height:16px;"></div>
     </div>
@@ -3390,9 +3391,9 @@ tr:hover td{background:var(--blue-ghost);}
 <!-- ══════════ 20 DEMOS TRANSICIÓN ENERGÉTICA ══════════ -->
 <section id="section-demos-et" class="section">
   <div class="section-header">
-    <div class="section-eyebrow" style="color:#047857;background:#ecfdf5;">Ecosistema 20 Módulos — Auditoría Dinámica</div>
-    <h2 class="section-title" style="color:var(--blue-dark);">Demos Transición Energética</h2>
-    <p class="section-desc" style="max-width:740px;margin:0 auto;">Simulador heurístico y motor de diagnóstico en tiempo real. Cada módulo contrasta telemetría SCADA del activo frente a líneas base regulatorias e ingenieriles.</p>
+    <div class="section-eyebrow" data-et="eyebrow" style="color:#047857;background:#ecfdf5;">Ecosistema 20 Módulos — Auditoría Dinámica</div>
+    <h2 class="section-title" data-et="h" style="color:var(--blue-dark);">Demos Transición Energética</h2>
+    <p class="section-desc" data-et="d" style="max-width:740px;margin:0 auto;">Simulador heurístico y motor de diagnóstico en tiempo real. Cada módulo contrasta telemetría SCADA del activo frente a líneas base regulatorias e ingenieriles.</p>
   </div>
 
   <!-- ET modal overlay -->
@@ -3408,7 +3409,7 @@ tr:hover td{background:var(--blue-ghost);}
     <div style="padding:24px;">
       <div id="et-m-query" style="background:var(--blue-pale);border-left:4px solid var(--blue-core);padding:12px 16px;border-radius:4px;font-size:13px;font-style:italic;color:var(--blue-dark);margin-bottom:20px;"></div>
       <div id="et-m-evidence" style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:16px;margin-bottom:16px;">
-        <div style="font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;">Evidencia del activo</div>
+        <div style="font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;" data-et="ev">Evidencia del activo</div>
         <div id="et-m-meta" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px;"></div>
       </div>
       <canvas id="et-modal-chart" height="180" style="margin-bottom:16px;"></canvas>
@@ -3422,10 +3423,10 @@ tr:hover td{background:var(--blue-ghost);}
     <!-- Contact strip ET -->
     <div style="margin-top:40px;background:linear-gradient(135deg,#064e3b,#047857);border-radius:10px;padding:28px 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
       <div>
-        <div style="color:#fff;font-size:16px;font-weight:700;">Auditoría técnica ESG & Transición Energética</div>
-        <div style="color:rgba(255,255,255,.75);font-size:13px;margin-top:4px;">Geociencias · Transición energética · Data &amp; Reservorios</div>
+        <div data-et="sh" style="color:#fff;font-size:16px;font-weight:700;">Auditoría técnica ESG & Transición Energética</div>
+        <div data-et="ss" style="color:rgba(255,255,255,.75);font-size:13px;margin-top:4px;">Geociencias · Transición energética · Data &amp; Reservorios</div>
       </div>
-      <button onclick="goSection('contacto')" style="background:#fff;color:#064e3b;border:none;padding:12px 24px;border-radius:8px;font-weight:700;font-size:14px;cursor:pointer;">Contactar →</button>
+      <button onclick="goSection('contacto')" style="background:#fff;color:#064e3b;border:none;padding:12px 24px;border-radius:8px;font-weight:700;font-size:14px;cursor:pointer;" data-et="sb">Contactar →</button>
     </div>
   </div>
 </section>
@@ -3527,14 +3528,25 @@ const ET_APPS = [
   {id:"ET-20",title:"Rastreador CapEx de Transición",query:"¿Los fondos etiquetados como verdes fueron aplicados a activos de ingeniería elegibles?",desc:"Gobernanza financiera de proyectos para asegurar que las inversiones verdes cumplan lineamientos técnicos corporativos.",status:"ok",metric:"98.4% Audit",val:"CapEx Green",vany:"Desembolso Certificado (MM$)",labels:['Ene','Feb','Mar','Abr','May','Jun','Jul'],base:[2.1,3.4,4.5,5.2,6.8,7.5,8.2],calcConclusion:(d)=>`Flujos de CapEx auditados corresponden a activos de descarbonización validados por la taxonomía verde corporativa.`}
 ];
 
+let _etOpenId=null;
 let _etChart = null;
 
+const ET_TR={"en": {"ET-01": ["Renewable Storage Modeler", "Does the real degradation rate of the BESS/H2 bank compromise the injected economic balance?", "Audits the efficiency curve of electrochemical storage systems and hydrogen vectors.", "94.2% Eff", "800 MWh", "Overall Efficiency (%)", "The BESS bank shows controlled degradation. The average deviation of {d}% does not compromise the projected IRR of the hybrid storage system."], "ET-02": ["Energy Sustainability Audit", "Do the mitigation indicators presented comply with the UA1 sustainable development taxonomy?", "Automated verification of energy correlation matrices against GHG reduction targets.", "100% Compl.", "UA1 Targets", "Mitigation Index (0-1)", "Successful UA1 validation. The correlation between capture investment and the abatement vector shows perfect coupling of environmental KPIs."], "ET-03": ["Electric Value Chain Map", "Are there unindexed losses at the grid transformation and transmission nodes?", "Flow monitoring and auditing under UA2 specifications for wholesale transmission and distribution.", "4.2% Loss", "UA2 Nodes", "Technical Losses (MW)", "Alert for anomalies at Node D and E. Actual losses exceed the UA2 protocol limits by {d}%."], "ET-04": ["Energy Security Tracker", "Does the asset reserve rate ensure operational continuity under climate contingencies?", "Mapping of criticality and energy resilience of isolated hybrid systems under demand peaks.", "1.8x Reserve", "UA3 Index", "Reserve Margin (MW)", "UA3 resilience indices are stable. The asset is robust against demand peaks caused by thermo-climatic variations."], "ET-05": ["Carbon Footprint Auditor", "Is the emission factor calculated per barrel equivalent properly certified?", "Calculation and cross-audit of CO2e intensity emitted by direct extraction processes (Scope 1 and 2).", "+12% CO2", "Emission F.", "gCO2 / bbl eq", "CRITICAL DEVIATION: The actual emission factor exceeds the corporate threshold by {d}%. Possible inefficient venting or failure in flare-gas recovery."], "ET-06": ["Distribution Big Data Analyst", "Does the data acquisition frequency at transformers validate the analytical models?", "Massive log auditing and SCADA data integration for early anomaly detection in smart grids.", "99.8% Data", "Active Logs", "Ingestion Rate (msg/sec)", "Packet integrity and Edge-to-Cloud latency meet the consistency criteria for massive analytical processing."], "ET-07": ["Renewable Integration Risk", "Does intermittent power penetration breach static stability limits?", "Dynamic analysis of electrical contingencies after massive injection of solar or wind power.", "Freq. Margin", "Grid Limit", "Frequency Deviation (Hz)", "Transient frequency micro-excursions outside the nominal dead band. Adjusting inverter droop for peak hours is suggested."], "ET-08": ["Grid Stability Forecast", "Do the predictive algorithms anticipate harmonic failures at the injection node?", "Probabilistic mathematical modeling of voltage stability under variable renewable generation profiles.", "0.02 Hz Dev", "Volt/Var", "Harmonic Distortion (%THD)", "THD below the 5% IEEE limit. Active filters operate with full effectiveness across the analyzed spectrum."], "ET-09": ["Decarbonization Roadmap", "Do the company’s physical investment milestones match the neutrality targets?", "Technical-financial tracking of the strategic decarbonization roadmap for industrial assets in producing basins.", "2026 Milestone OK", "Roadmap V5", "Cumulative Reduction (%)", "The carbon divestment curve aligns perfectly with the corporate baseline schedule for fiscal year-end 2026."], "ET-10": ["Green H2 Cost Monitor", "Does the levelized cost of hydrogen (LCOH) deviate from the Capex baseline parameters?", "Indexed financial and thermodynamic audit to assess the real competitiveness per kg of green hydrogen produced.", "$4.15 / kg", "LCOH Calc", "LCOH ($ / kg H2)", "Marginal LCOH increase due to volatility in the clean-energy spot rate. The impact is absorbable in the medium term."], "ET-11": ["ESG Compliance Board", "Does environmental data governance meet the required global standards?", "Verification and traceability of corporate ESG reports aimed at international financing bodies.", "Score AA+", "ESG Metrics", "Governance Score (pts)", "Outstanding rating. Immutable logs block greenwashing risk and ensure transparency before international committees."], "ET-12": ["Water Efficiency Audit", "Does the production-water recyclability index stay at optimal values?", "Volumetric balance of water used in industrial processes and hydraulic stimulation with clean recovery.", "88.3% Recycl.", "M3/Day", "Reuse Percentage (%)", "Efficient closed loop. Reverse-osmosis treatment reduces fresh-aquifer demand beyond the target."], "ET-13": ["Waste Traceability", "Do hazardous-waste transport manifests close the material balance?", "Auditable digital tracking of the chain of custody for environmental liabilities and well-workover byproducts.", "100% Traced", "Manifests", "Reconciled Manifests (%)", "Absolute closure of mass balances. No discrepancies or delays between the wellhead and approved disposal centers."], "ET-14": ["Electrification Impact", "Did replacing turbo-compressors with electric motors reduce the projected Opex?", "Audits the energy and operating ROI of full electrification plans for field blocks.", "-22% Maint", "Elect. ROI", "Energy Savings (MWh)", "Removing internal-combustion units in favor of electric drives shows sustained savings that validate the thermal-efficiency models."], "ET-15": ["Renewable Maintenance Auditor", "Is the availability factor of the photovoltaic inverters aligned with the SLA contract?", "Audit of predictive maintenance plans and cyclical mechanical failures in clean generation infrastructure.", "78% Avail.", "SLA Gaps", "Availability Factor (%)", "SYSTEMIC FAILURE: Availability collapsed {d}% below the contractual SLA. Immediate physical audit of IGBT module cooling."], "ET-16": ["Energy Efficiency Benchmark", "How much parasitic energy does the asset consume per barrel of fluid extracted?", "Benchmarking of specific electric power consumption between different blocks and operated facilities.", "12 kWh/bbl", "EE-Efficiency", "Specific Consumption (kWh/bbl)", "Optimizing ESP artificial-lift systems drastically reduced parasitic losses from hydraulic friction."], "ET-17": ["Regulatory Change Alert", "Do current operations violate any of the new transition regulations?", "AI engine to audit the legal compliance of assets against changes to the 2026 energy law.", "0 Penalties", "2026 Rules", "Exposure Risk (%)", "Regulatory risk minimized. Adjustments to custody-transfer metering systems neutralize potential environmental penalties."], "ET-18": ["Off-grid Energy Optimizer", "Does the dispatch of isolated generation optimally minimize diesel use?", "Algorithmic audit of the central microgrid controller at remote Patagonia locations.", "14% Diesel", "Fuel Sav.", "Diesel Consumption (m3/day)", "Diesel overconsumption of {d}% due to capacitor-bank drops during wind-ramp transitions."], "ET-19": ["Supply Chain Green Score", "Are critical contractors audited under the carbon scope 3 protocol?", "Classification and audit of the carbon footprint embedded by the logistics and service supplier chain.", "Rating: A", "Scope 3", "Supplier Compliance (%)", "92% of the critical contractor pool already reports emissions integrated in the approved government API. Excellent Scope 3 traceability."], "ET-20": ["Transition CapEx Tracker", "Were the funds labeled as green applied to eligible engineering assets?", "Financial governance of projects to ensure green investments meet corporate technical guidelines.", "98.4% Audit", "CapEx Green", "Certified Disbursement (MM$)", "The audited CapEx flows correspond to decarbonization assets validated by the corporate green taxonomy."]}, "fr": {"ET-01": ["Modélisateur de stockage renouvelable", "Le taux de dégradation réel du parc BESS/H2 compromet-il l’équilibre économique injecté ?", "Audite la courbe d’efficacité des systèmes de stockage électrochimique et des vecteurs hydrogène.", "94,2 % Eff", "800 MWh", "Efficacité globale (%)", "Le parc BESS présente une dégradation maîtrisée. L’écart moyen de {d} % ne compromet pas le TRI projeté du système de stockage hybride."], "ET-02": ["Audit de durabilité énergétique", "Les indicateurs d’atténuation présentés respectent-ils la taxonomie UA1 du développement durable ?", "Vérification automatisée des matrices de corrélation énergétique par rapport aux objectifs de réduction des GES.", "100 % Conf.", "Objectifs UA1", "Indice d’atténuation (0-1)", "Validation UA1 réussie. La corrélation entre l’investissement en captage et le vecteur d’abattement montre un couplage parfait des KPI environnementaux."], "ET-03": ["Carte de la chaîne de valeur électrique", "Existe-t-il des pertes non indexées aux nœuds de transformation et de transport du réseau ?", "Surveillance et audit des flux selon les spécifications UA2 pour le transport et la distribution de gros.", "4,2 % Pertes", "Nœuds UA2", "Pertes techniques (MW)", "Alerte pour anomalies aux nœuds D et E. Les pertes réelles dépassent de {d} % les limites du protocole UA2."], "ET-04": ["Suivi de la sécurité énergétique", "Le taux de réserve de l’actif garantit-il la continuité opérationnelle face aux aléas climatiques ?", "Cartographie de la criticité et de la résilience énergétique des systèmes hybrides isolés face aux pics de demande.", "1,8x Réserve", "Indice UA3", "Marge de réserve (MW)", "Les indices de résilience UA3 sont stables. L’actif est robuste face aux pics de demande dus aux variations thermo-climatiques."], "ET-05": ["Auditeur d’empreinte carbone", "Le facteur d’émission calculé par baril équivalent est-il dûment certifié ?", "Calcul et audit croisé de l’intensité de CO2e émise par les procédés d’extraction directe (Scope 1 et 2).", "+12 % CO2", "F-Émission", "gCO2 / bbl éq", "ÉCART CRITIQUE : Le facteur d’émission réel dépasse le seuil de l’entreprise de {d} %. Possible évent inefficace ou défaillance de la récupération des gaz de torche."], "ET-06": ["Analyste Big Data distribution", "La fréquence d’acquisition des données sur les transformateurs valide-t-elle les modèles analytiques ?", "Audit massif des journaux et intégration de données SCADA pour la détection précoce d’anomalies dans les réseaux intelligents.", "99,8 % Data", "Logs actifs", "Débit d’ingestion (msg/s)", "L’intégrité des paquets et la latence Edge-to-Cloud respectent les critères de cohérence pour un traitement analytique massif."], "ET-07": ["Risque d’intégration renouvelable", "La pénétration de puissance intermittente enfreint-elle les limites de stabilité statique ?", "Analyse dynamique des contingences électriques après injection massive de puissance photovoltaïque ou éolienne.", "Marge fréq.", "Limite réseau", "Écart de fréquence (Hz)", "Micro-excursions transitoires de fréquence hors de la bande morte nominale. Un ajustement du statisme des onduleurs en heures de pointe est suggéré."], "ET-08": ["Prévision de stabilité du réseau", "Les algorithmes prédictifs anticipent-ils les défaillances par harmoniques au nœud d’injection ?", "Modélisation mathématique probabiliste de la stabilité de tension sous des profils de production renouvelable variables.", "0,02 Hz Écart", "Volt/Var", "Distorsion harmonique (%THD)", "THD inférieur à la limite IEEE de 5 %. Les filtres actifs fonctionnent avec une efficacité totale sur le spectre analysé."], "ET-09": ["Feuille de route de décarbonation", "Les jalons d’investissement physique de l’entreprise correspondent-ils aux objectifs de neutralité ?", "Suivi technico-financier de la feuille de route stratégique de décarbonation des actifs industriels dans les bassins de production.", "Jalon 2026 OK", "Roadmap V5", "Réduction cumulée (%)", "La courbe de désinvestissement carbone s’aligne parfaitement avec le calendrier de référence de l’entreprise pour la clôture 2026."], "ET-10": ["Suivi des coûts de l’H2 vert", "Le coût actualisé de l’hydrogène (LCOH) s’écarte-t-il des paramètres de base du Capex ?", "Audit financier et thermodynamique indexé pour évaluer la compétitivité réelle par kg d’hydrogène vert produit.", "4,15 $ / kg", "Calc LCOH", "LCOH ($ / kg H2)", "Hausse marginale du LCOH due à la volatilité du tarif spot de l’énergie propre. L’impact est absorbable à moyen terme."], "ET-11": ["Tableau de conformité ESG", "La gouvernance des données environnementales respecte-t-elle les normes mondiales exigées ?", "Vérification et traçabilité des rapports ESG d’entreprise destinés aux organismes de financement internationaux.", "Score AA+", "Métriques ESG", "Score de gouvernance (pts)", "Note remarquable. Les journaux immuables bloquent le risque d’écoblanchiment et garantissent la transparence devant les comités internationaux."], "ET-12": ["Audit d’efficacité hydrique", "L’indice de recyclabilité de l’eau de production reste-t-il à des valeurs optimales ?", "Bilan volumétrique de l’eau utilisée dans les procédés industriels et les stimulations hydrauliques avec récupération propre.", "88,3 % Recycl.", "M3/jour", "Pourcentage de réutilisation (%)", "Circuit fermé efficace. Le traitement par osmose inverse réduit la demande en eau douce de l’aquifère au-delà de l’objectif."], "ET-13": ["Traçabilité des déchets", "Les manifestes de transport de déchets dangereux bouclent-ils le bilan matière ?", "Suivi numérique auditable de la chaîne de traçabilité des passifs environnementaux et des sous-produits de reconditionnement de puits.", "100 % Tracé", "Manifestes", "Manifestes rapprochés (%)", "Clôture absolue des bilans matière. Aucun écart ni retard entre la tête de puits et les centres d’élimination agréés."], "ET-14": ["Impact de l’électrification", "Le remplacement des turbo-compresseurs par des moteurs électriques a-t-il réduit l’Opex projeté ?", "Audite le ROI énergétique et opérationnel des plans d’électrification intégrale des blocs de champ.", "-22 % Maint", "ROI Élect.", "Économies d’énergie (MWh)", "Le retrait des unités à combustion interne au profit d’entraînements électriques reflète des économies durables qui valident les modèles d’efficacité thermique."], "ET-15": ["Auditeur de maintenance renouvelable", "Le facteur de disponibilité des onduleurs photovoltaïques est-il conforme au contrat SLA ?", "Audit des plans de maintenance prédictive et des défaillances mécaniques cycliques dans l’infrastructure de production propre.", "78 % Dispo.", "Écarts SLA", "Facteur de disponibilité (%)", "DÉFAILLANCE SYSTÉMIQUE : La disponibilité s’est effondrée de {d} % sous le SLA contractuel. Audit physique immédiat du refroidissement des modules IGBT."], "ET-16": ["Benchmark d’efficacité énergétique", "Quelle énergie parasite l’actif consomme-t-il par baril de fluide extrait ?", "Benchmark de la consommation spécifique d’énergie électrique entre différents blocs et installations exploitées.", "12 kWh/bbl", "IE-Efficacité", "Consommation spécifique (kWh/bbl)", "L’optimisation des systèmes de levage artificiel par pompes ESP a réduit drastiquement les pertes parasites par friction hydraulique."], "ET-17": ["Alerte de changements réglementaires", "Les opérations actuelles enfreignent-elles l’une des nouvelles réglementations de transition ?", "Moteur d’IA pour auditer la conformité légale des actifs face aux modifications de la loi sur l’énergie de 2026.", "0 Sanction", "Normes 2026", "Risque d’exposition (%)", "Risque réglementaire minimisé. Les adaptations des systèmes de comptage de transfert neutralisent les pénalités environnementales potentielles."], "ET-18": ["Optimiseur d’énergie hors réseau", "Le dispatch de production isolée minimise-t-il de façon optimale l’usage du diesel ?", "Audit algorithmique du contrôleur central de micro-réseaux sur des sites isolés de Patagonie.", "14 % Diesel", "Éco. carb.", "Consommation de diesel (m3/jour)", "Surconsommation de diesel de {d} % due aux chutes du banc de condensateurs lors des rampes éoliennes."], "ET-19": ["Score vert de la chaîne d’approvisionnement", "Les sous-traitants critiques sont-ils audités selon le protocole carbone scope 3 ?", "Classification et audit de l’empreinte carbone incorporée par la chaîne de fournisseurs logistiques et de services.", "Note : A", "Scope 3", "Conformité des fournisseurs (%)", "92 % du pool de sous-traitants critiques déclare déjà ses émissions intégrées dans l’API gouvernementale homologuée. Excellente traçabilité Scope 3."], "ET-20": ["Suivi du CapEx de transition", "Les fonds étiquetés verts ont-ils été appliqués à des actifs d’ingénierie éligibles ?", "Gouvernance financière des projets pour garantir que les investissements verts respectent les lignes directrices techniques de l’entreprise.", "98,4 % Audit", "CapEx vert", "Décaissement certifié (M$)", "Les flux de CapEx audités correspondent à des actifs de décarbonation validés par la taxonomie verte de l’entreprise."]}, "pt": {"ET-01": ["Modelador de Armazenamento Renovável", "A taxa de degradação real do banco BESS/H2 compromete o balanço econômico injetado?", "Audita a curva de eficiência em sistemas de armazenamento eletroquímico e vetores de hidrogênio.", "94,2% Efic.", "800 MWh", "Eficiência Global (%)", "O banco BESS apresenta degradação controlada. O desvio médio de {d}% não compromete a TIR projetada do sistema de armazenamento híbrido."], "ET-02": ["Auditoria de Sustentabilidade Energética", "Os indicadores de mitigação apresentados cumprem a taxonomia UA1 de desenvolvimento sustentável?", "Verificação automatizada de matrizes de correlação energética frente às metas de redução de GEE.", "100% Conf.", "Metas UA1", "Índice de Mitigação (0-1)", "Validação UA1 bem-sucedida. A correlação entre investimento em captura e vetor de abatimento mostra acoplamento perfeito dos KPIs ambientais."], "ET-03": ["Mapa da Cadeia de Valor Elétrica", "Existem perdas não indexadas nos nós de transformação e transporte da rede?", "Monitoramento e auditoria de fluxos segundo as especificações UA2 para transporte e distribuição atacadista.", "4,2% Perda", "Nós UA2", "Perdas Técnicas (MW)", "Alerta por anomalias nos Nós D e E. As perdas reais superam em {d}% os limites do protocolo UA2."], "ET-04": ["Rastreador de Segurança Energética", "A taxa de reserva do ativo garante a continuidade operacional diante de contingências climáticas?", "Mapeamento de criticidade e resiliência energética de sistemas híbridos isolados diante de picos de demanda.", "1,8x Reserva", "Índice UA3", "Margem de Reserva (MW)", "Índices de resiliência UA3 estáveis. O ativo é robusto diante de picos de demanda por variações termoclimáticas."], "ET-05": ["Auditor de Pegada de Carbono", "O fator de emissão calculado por barril equivalente está devidamente certificado?", "Cálculo e auditoria cruzada da intensidade de CO2e emitida por processos de extração direta (Scope 1 e 2).", "+12% CO2", "F-Emissão", "gCO2 / bbl eq", "DESVIO CRÍTICO: O fator de emissão real excede o limite corporativo em {d}%. Possível ventilação ineficiente ou falha na recuperação de gases de tocha."], "ET-06": ["Analista de Big Data de Distribuição", "A frequência de aquisição de dados nos transformadores valida os modelos analíticos?", "Auditoria massiva de logs e integração de dados SCADA para detecção precoce de anomalias em redes inteligentes.", "99,8% Dados", "Logs Ativos", "Taxa de Ingestão (msg/s)", "A integridade dos pacotes e a latência na camada Edge-to-Cloud atendem aos critérios de consistência para processamento analítico massivo."], "ET-07": ["Risco de Integração Renovável", "A penetração de potência intermitente viola os limites de estabilidade estática?", "Análise dinâmica de contingências elétricas após injeção massiva de potência fotovoltaica ou eólica.", "Margem Freq.", "Limite da Rede", "Desvio de Frequência (Hz)", "Microexcursões transitórias de frequência fora da banda morta nominal. Sugere-se ajustar o estatismo dos inversores nos horários de pico."], "ET-08": ["Previsão de Estabilidade da Rede", "Os algoritmos preditivos antecipam falhas por harmônicos no nó de injeção?", "Modelagem matemática probabilística da estabilidade de tensão sob perfis variáveis de geração renovável.", "0,02 Hz Desv.", "Volt/Var", "Distorção Harmônica (%THD)", "THD abaixo do limite de 5% do IEEE. Os filtros ativos operam com total eficácia no espectro analisado."], "ET-09": ["Roadmap de Descarbonização", "Os marcos de investimento físico da empresa coincidem com as metas de neutralidade?", "Acompanhamento técnico-financeiro do roadmap estratégico de descarbonização de ativos industriais em bacias de produção.", "Marco 2026 OK", "Roadmap V5", "Redução Acumulada (%)", "A curva de desinvestimento em carbono se alinha perfeitamente ao cronograma base corporativo para o fechamento fiscal de 2026."], "ET-10": ["Monitor de Custos do H2 Verde", "O custo nivelado do hidrogênio (LCOH) se desvia dos parâmetros base de Capex?", "Auditoria financeira e termodinâmica indexada para avaliar a competitividade real por kg de hidrogênio verde produzido.", "US$ 4,15 / kg", "Calc LCOH", "LCOH (US$ / kg H2)", "Aumento marginal do LCOH por volatilidade na tarifa spot de energia limpa. O impacto é absorvível no médio prazo."], "ET-11": ["Painel de Conformidade ESG", "A governança de dados ambientais cumpre os padrões globais exigidos?", "Verificação e rastreabilidade de relatórios corporativos ESG voltados a entidades de financiamento internacionais.", "Score AA+", "Métricas ESG", "Score de Governança (pts)", "Classificação excelente. Os registros imutáveis bloqueiam o risco de greenwashing e garantem transparência perante comitês internacionais."], "ET-12": ["Auditoria de Eficiência Hídrica", "O índice de reciclabilidade da água de produção se mantém nos valores ideais?", "Balanço volumétrico da água usada em processos industriais e estimulações hidráulicas com recuperação limpa.", "88,3% Recicl.", "M3/Dia", "Percentual de Reúso (%)", "Circuito fechado eficiente. O tratamento por osmose reversa reduz a demanda do aquífero de água doce acima da meta."], "ET-13": ["Rastreabilidade de Resíduos", "Os manifestos de transporte de resíduos perigosos fecham o balanço de materiais?", "Acompanhamento digital auditável da cadeia de custódia de passivos ambientais e subprodutos de recondicionamento de poços.", "100% Rastreado", "Manifestos", "Manifestos Conciliados (%)", "Fechamento absoluto dos balanços de massa. Sem discrepâncias nem atrasos entre a boca do poço e os centros de disposição homologados."], "ET-14": ["Impacto da Eletrificação", "A substituição de turbocompressores por motores elétricos reduziu o Opex projetado?", "Audita o ROI energético e operacional dos planos de eletrificação integral de blocos de campo.", "-22% Manut.", "ROI Elétr.", "Economia de Energia (MWh)", "A remoção de unidades de combustão interna por acionamentos elétricos reflete economia sustentada que valida os modelos de eficiência térmica."], "ET-15": ["Auditor de Manutenção Renovável", "O fator de disponibilidade dos inversores fotovoltaicos está alinhado ao contrato SLA?", "Auditoria sobre planos de manutenção preditiva e falhas mecânicas cíclicas em infraestrutura de geração limpa.", "78% Disp.", "Gaps de SLA", "Fator de Disponibilidade (%)", "FALHA SISTÊMICA: A disponibilidade caiu {d}% abaixo do SLA contratual. Auditoria física imediata na refrigeração dos módulos IGBT."], "ET-16": ["Benchmark de Eficiência Energética", "Quanta energia parasita o ativo consome por barril de fluido extraído?", "Benchmarking do consumo específico de potência elétrica entre diferentes blocos e instalações operadas.", "12 kWh/bbl", "IE-Eficiência", "Consumo Específico (kWh/bbl)", "A otimização dos sistemas de elevação artificial por BES reduziu drasticamente as perdas parasitas por atrito hidráulico."], "ET-17": ["Alerta de Mudanças Regulatórias", "As operações atuais violam alguma das novas normas de transição?", "Motor de IA para auditar a conformidade legal dos ativos frente às modificações na lei de energia de 2026.", "0 Sanções", "Normas 2026", "Risco de Exposição (%)", "Risco regulatório minimizado. Adaptações nos sistemas de medição de transferência neutralizam possíveis penalidades ambientais."], "ET-18": ["Otimizador de Energia Off-grid", "O despacho da geração isolada minimiza de forma ótima o uso de diesel?", "Auditoria algorítmica do controlador central de microrredes em locais remotos da Patagônia.", "14% Diesel", "Econ. Comb.", "Consumo de Diesel (m3/dia)", "Sobreconsumo de {d}% de diesel por quedas do banco de capacitores durante transições de rampa eólica."], "ET-19": ["Pontuação Verde da Cadeia de Suprimentos", "Os contratados críticos são auditados sob o protocolo de escopo 3 de carbono?", "Classificação e auditoria da pegada de carbono incorporada pela cadeia de fornecedores logísticos e de serviços.", "Rating: A", "Scope 3", "Conformidade de Fornecedores (%)", "92% do grupo de contratados críticos já reporta emissões integradas na API governamental homologada. Excelente rastreabilidade de Scope 3."], "ET-20": ["Rastreador de CapEx de Transição", "Os fundos rotulados como verdes foram aplicados a ativos de engenharia elegíveis?", "Governança financeira de projetos para garantir que os investimentos verdes cumpram as diretrizes técnicas corporativas.", "98,4% Audit", "CapEx Verde", "Desembolso Certificado (MM$)", "Os fluxos de CapEx auditados correspondem a ativos de descarbonização validados pela taxonomia verde corporativa."]}};
+const ET_UI={"es": {"badge_ok": "OK", "badge_warn": "ALERTA", "badge_crit": "CRÍTICO", "audit": "Auditar →", "m": "Métrica", "r": "Referencia", "e": "Estado", "dv": "Desviación", "ev": "Evidencia del activo", "real": "Real", "base": "Base", "eyebrow": "Ecosistema 20 Módulos — Auditoría Dinámica", "h": "Demos Transición Energética", "d": "Simulador heurístico y motor de diagnóstico en tiempo real. Cada módulo contrasta telemetría SCADA del activo frente a líneas base regulatorias e ingenieriles.", "sh": "Auditoría técnica ESG & Transición Energética", "ss": "Geociencias · Transición energética · Data & Reservorios", "sb": "Contactar →"}, "en": {"badge_ok": "OK", "badge_warn": "WARNING", "badge_crit": "CRITICAL", "audit": "Audit →", "m": "Metric", "r": "Reference", "e": "Status", "dv": "Deviation", "ev": "Asset evidence", "real": "Actual", "base": "Baseline", "eyebrow": "20-Module Ecosystem — Dynamic Audit", "h": "Energy Transition Demos", "d": "Heuristic simulator and real-time diagnostic engine. Each module contrasts the asset’s SCADA telemetry against regulatory and engineering baselines.", "sh": "ESG & Energy Transition technical audit", "ss": "Geosciences · Energy transition · Data & Reservoirs", "sb": "Contact →"}, "fr": {"badge_ok": "OK", "badge_warn": "ALERTE", "badge_crit": "CRITIQUE", "audit": "Auditer →", "m": "Métrique", "r": "Référence", "e": "État", "dv": "Écart", "ev": "Preuves de l’actif", "real": "Réel", "base": "Référence", "eyebrow": "Écosystème de 20 modules — Audit dynamique", "h": "Démos de transition énergétique", "d": "Simulateur heuristique et moteur de diagnostic en temps réel. Chaque module confronte la télémétrie SCADA de l’actif à des références réglementaires et d’ingénierie.", "sh": "Audit technique ESG et transition énergétique", "ss": "Géosciences · Transition énergétique · Données et réservoirs", "sb": "Contacter →"}, "pt": {"badge_ok": "OK", "badge_warn": "ALERTA", "badge_crit": "CRÍTICO", "audit": "Auditar →", "m": "Métrica", "r": "Referência", "e": "Estado", "dv": "Desvio", "ev": "Evidência do ativo", "real": "Real", "base": "Base", "eyebrow": "Ecossistema de 20 Módulos — Auditoria Dinâmica", "h": "Demos de Transição Energética", "d": "Simulador heurístico e motor de diagnóstico em tempo real. Cada módulo confronta a telemetria SCADA do ativo com linhas de base regulatórias e de engenharia.", "sh": "Auditoria técnica ESG e Transição Energética", "ss": "Geociências · Transição energética · Dados e Reservatórios", "sb": "Contatar →"}};
+const ET_LAB={"en": {"Ciclo": "Cycle", "Ene": "Jan", "Feb": "Feb", "Mar": "Mar", "Abr": "Apr", "May": "May", "Jun": "Jun", "Jul": "Jul", "Nodo": "Node", "Sem": "Wk", "Día": "Day", "Mes": "Month", "Bloque": "Block", "Pozo": "Well", "Logística": "Logistics", "Fluidos": "Fluids", "Catering": "Catering", "Mant.": "Maint.", "Obras": "Works", "Soporte": "Support", "Audit": "Audit"}, "fr": {"Ciclo": "Cycle", "Ene": "Janv", "Feb": "Févr", "Mar": "Mars", "Abr": "Avr", "May": "Mai", "Jun": "Juin", "Jul": "Juil", "Nodo": "Nœud", "Sem": "Sem", "Día": "Jour", "Mes": "Mois", "Bloque": "Bloc", "Pozo": "Puits", "Logística": "Logistique", "Fluidos": "Fluides", "Catering": "Restauration", "Mant.": "Maint.", "Obras": "Travaux", "Soporte": "Support", "Audit": "Audit"}, "pt": {"Ciclo": "Ciclo", "Ene": "Jan", "Feb": "Fev", "Mar": "Mar", "Abr": "Abr", "May": "Mai", "Jun": "Jun", "Jul": "Jul", "Nodo": "Nó", "Sem": "Sem", "Día": "Dia", "Mes": "Mês", "Bloque": "Bloco", "Pozo": "Poço", "Logística": "Logística", "Fluidos": "Fluidos", "Catering": "Catering", "Mant.": "Manut.", "Obras": "Obras", "Soporte": "Suporte", "Audit": "Audit"}};
+function etUI(k){ const lg=(typeof curLg==='function')?curLg():((window.H3LSite&&H3LSite.lang&&H3LSite.lang())||'es'); const u=ET_UI[lg]||ET_UI.es; return u[k]; }
+function etApp(a){ const lg=(window.H3LSite&&H3LSite.lang&&H3LSite.lang())||'es'; if(lg==='es'||!ET_TR[lg]||!ET_TR[lg][a.id]) return a; const t=ET_TR[lg][a.id];
+  return Object.assign({},a,{title:t[0],query:t[1],desc:t[2],metric:t[3],val:t[4],vany:t[5],calcConclusion:d=>t[6].replace('{d}',d)}); }
+function etLabel(l){ const lg=(window.H3LSite&&H3LSite.lang&&H3LSite.lang())||'es'; if(lg==='es') return l; const m=ET_LAB[lg]||{}; const mt=/^T(\d)-(\d\d)$/.exec(l); if(mt) return (lg==='en'?'Q':'T')+mt[1]+'-'+mt[2];
+  const p=String(l).split(' '); if(m[p[0]]!==undefined){ p[0]=m[p[0]]; return p.join(' '); } return l; }
+function etApplyStatic(){ document.querySelectorAll('[data-et]').forEach(e=>{ const v=etUI(e.getAttribute('data-et')); if(v!==undefined) e.textContent=v; }); }
 function buildETGrid(){
   const grid = document.getElementById('et-grid');
   if(!grid) return;
-  grid.innerHTML = ET_APPS.map(a=>{
+  etApplyStatic();
+  grid.innerHTML = ET_APPS.map(etApp).map(a=>{
     const badgeCls = a.status==='crit'?'et-badge-crit':a.status==='warn'?'et-badge-warn':'et-badge-ok';
-    const badgeLabel = a.status==='crit'?'CRÍTICO':a.status==='warn'?'ALERTA':'OK';
+    const badgeLabel = a.status==='crit'?etUI('badge_crit'):a.status==='warn'?etUI('badge_warn'):etUI('badge_ok');
     return `<div class="et-card">
       <span class="et-badge ${badgeCls}">${badgeLabel}</span>
       <div class="et-card-meta">${a.id}</div>
@@ -3542,15 +3554,17 @@ function buildETGrid(){
       <div class="et-card-desc">${a.desc}</div>
       <div class="et-card-footer">
         <span class="et-card-metric">${a.metric} · ${a.val}</span>
-        <button class="et-btn-demo" onclick="openETModal('${a.id}')">Auditar →</button>
+        <button class="et-btn-demo" onclick="openETModal('${a.id}')">${etUI('audit')}</button>
       </div>
     </div>`;
   }).join('');
 }
 
 function openETModal(id){
-  const app = ET_APPS.find(a=>a.id===id);
-  if(!app) return;
+  const app0 = ET_APPS.find(a=>a.id===id);
+  if(!app0) return;
+  const app = etApp(app0);
+  _etOpenId = id; etApplyStatic();
   document.getElementById('et-m-tag').textContent = app.id;
   document.getElementById('et-m-title').textContent = app.title;
   document.getElementById('et-m-query').textContent = app.query;
@@ -3561,10 +3575,10 @@ function openETModal(id){
   const dev = Math.abs(((realData[lastIdx]-app.base[lastIdx])/app.base[lastIdx])*100).toFixed(1);
 
   document.getElementById('et-m-meta').innerHTML = `
-    <div><div style="font-size:10px;color:#9ca3af;font-weight:600;text-transform:uppercase;">Métrica</div><div style="font-weight:700;font-family:monospace;margin-top:2px;">${app.metric}</div></div>
-    <div><div style="font-size:10px;color:#9ca3af;font-weight:600;text-transform:uppercase;">Referencia</div><div style="font-weight:700;font-family:monospace;margin-top:2px;">${app.val}</div></div>
-    <div><div style="font-size:10px;color:#9ca3af;font-weight:600;text-transform:uppercase;">Estado</div><div style="font-weight:700;margin-top:2px;color:${app.status==='ok'?'#047857':app.status==='warn'?'#b45309':'#b91c1c'}">${app.status.toUpperCase()}</div></div>
-    <div><div style="font-size:10px;color:#9ca3af;font-weight:600;text-transform:uppercase;">Desviación</div><div style="font-weight:700;font-family:monospace;margin-top:2px;">${dev}%</div></div>`;
+    <div><div style="font-size:10px;color:#9ca3af;font-weight:600;text-transform:uppercase;">${etUI('m')}</div><div style="font-weight:700;font-family:monospace;margin-top:2px;">${app.metric}</div></div>
+    <div><div style="font-size:10px;color:#9ca3af;font-weight:600;text-transform:uppercase;">${etUI('r')}</div><div style="font-weight:700;font-family:monospace;margin-top:2px;">${app.val}</div></div>
+    <div><div style="font-size:10px;color:#9ca3af;font-weight:600;text-transform:uppercase;">${etUI('e')}</div><div style="font-weight:700;margin-top:2px;color:${app.status==='ok'?'#047857':app.status==='warn'?'#b45309':'#b91c1c'}">${app.status.toUpperCase()}</div></div>
+    <div><div style="font-size:10px;color:#9ca3af;font-weight:600;text-transform:uppercase;">${etUI('dv')}</div><div style="font-weight:700;font-family:monospace;margin-top:2px;">${dev}%</div></div>`;
 
   document.getElementById('et-m-conclusion').innerHTML = app.calcConclusion(dev);
 
@@ -3576,10 +3590,10 @@ function openETModal(id){
   _etChart = new Chart(ctx,{
     type:'line',
     data:{
-      labels: app.labels,
+      labels: app.labels.map(etLabel),
       datasets:[
-        {label:'Base',data:app.base,borderColor:'#2357a5',borderDash:[5,3],backgroundColor:'transparent',pointRadius:0,borderWidth:1.5},
-        {label:'Real',data:realData,borderColor:app.status==='crit'?'#b91c1c':app.status==='warn'?'#b45309':'#047857',backgroundColor:app.status==='crit'?'rgba(185,28,28,.08)':app.status==='warn'?'rgba(180,83,9,.08)':'rgba(4,120,87,.08)',fill:true,pointRadius:3,borderWidth:2}
+        {label:etUI('base'),data:app.base,borderColor:'#2357a5',borderDash:[5,3],backgroundColor:'transparent',pointRadius:0,borderWidth:1.5},
+        {label:etUI('real'),data:realData,borderColor:app.status==='crit'?'#b91c1c':app.status==='warn'?'#b45309':'#047857',backgroundColor:app.status==='crit'?'rgba(185,28,28,.08)':app.status==='warn'?'rgba(180,83,9,.08)':'rgba(4,120,87,.08)',fill:true,pointRadius:3,borderWidth:2}
       ]
     },
     options:{responsive:true,plugins:{legend:{position:'top',labels:{font:{size:11}}}},scales:{y:{title:{display:true,text:app.vany,font:{size:10}},grid:{color:'#f3f4f6'}},x:{grid:{color:'#f3f4f6'}}}}
@@ -3615,37 +3629,6 @@ document.addEventListener('DOMContentLoaded', function(){
 </main>
 
 </main>
-
-<!-- CHATBOT -->
-<button class="chatbot-btn" onclick="toggleChat()" aria-label="Chat H3L Copilot">
-  💬
-  <span class="chatbot-badge" id="chatBadge">1</span>
-</button>
-<div class="chat-panel" id="chatPanel">
-  <div class="chat-header">
-    <div class="chat-avatar">🤖</div>
-    <div>
-      <div style="font-family:var(--font-condensed);font-weight:700;font-size:15px;color:#fff;">H3L Copilot</div>
-      <div class="chat-status">En línea · Asistente O&amp;G</div>
-    </div>
-    <button onclick="toggleChat()" style="margin-left:auto;background:rgba(255,255,255,.12);border:none;
-      color:#fff;width:28px;height:28px;border-radius:4px;cursor:pointer;font-size:16px;">×</button>
-  </div>
-  <div class="chat-messages" id="chatMsgs">
-    <div class="msg msg-bot">
-      <div class="msg-bubble">👋 Hola! Soy H3L Copilot. ¿En qué puedo ayudarte con O&amp;G, calculadoras o transición energética?</div>
-    </div>
-  </div>
-  <div class="chat-quick-btns">
-    <button class="quick-btn" onclick="quickChat('¿Qué calculadoras tienen?')">Calculadoras</button>
-    <button class="quick-btn" onclick="quickChat('¿Cómo accedo a los agentes IA?')">Agentes IA</button>
-    <button class="quick-btn" onclick="quickChat('Quiero solicitar una cotización')">Cotización</button>
-  </div>
-  <div class="chat-input-row">
-    <input class="chat-input" id="chatInput" type="text" placeholder="Escribe tu consulta..." onkeydown="if(event.key==='Enter')sendChat()">
-    <button class="chat-send" onclick="sendChat()">➤</button>
-  </div>
-</div>
 
 <!-- MODAL -->
 <div class="modal-overlay" id="calcModal">
@@ -4963,13 +4946,13 @@ function enviarContacto(){
   const empresa=document.getElementById('ctc-empresa')?.value?.trim()||'';
   const mensaje=document.getElementById('ctc-mensaje')?.value?.trim();
   const status=document.getElementById('ctc-status');
-  if(!nombre||!apellido){if(status)status.innerHTML='<span style="color:var(--danger)">Ingresá nombre y apellido</span>';return;}
-  if(!email||!email.includes('@')){if(status)status.innerHTML='<span style="color:var(--danger)">Email inválido</span>';return;}
-  if(!mensaje){if(status)status.innerHTML='<span style="color:var(--danger)">Escribí tu consulta</span>';return;}
-  const subject=encodeURIComponent('Consulta H3L — '+nombre+' '+apellido);
-  const body=encodeURIComponent('Nombre: '+nombre+' '+apellido+'\nEmail: '+email+'\nEmpresa: '+empresa+'\n\n'+mensaje);
+  if(!nombre||!apellido){if(status)status.innerHTML='<span style="color:var(--danger)">'+W('w_er_name')+'</span>';return;}
+  if(!email||!email.includes('@')){if(status)status.innerHTML='<span style="color:var(--danger)">'+W('w_bad')+'</span>';return;}
+  if(!mensaje){if(status)status.innerHTML='<span style="color:var(--danger)">'+W('w_er_msg')+'</span>';return;}
+  const subject=encodeURIComponent(W('w_mailsub')+' '+nombre+' '+apellido);
+  const body=encodeURIComponent(W('w_mn')+': '+nombre+' '+apellido+'\n'+W('w_me')+': '+email+'\n'+W('w_mc')+': '+empresa+'\n\n'+mensaje);
   window.location.href='mailto:info@h3l.com?subject='+subject+'&body='+body; /* Safari bloquea window.open para mailto */
-  if(status)status.innerHTML='<span style="color:var(--success)">Abriendo cliente de email...</span>';
+  if(status)status.innerHTML='<span style="color:var(--success)">'+W('w_opening')+'</span>';
   setTimeout(()=>{if(status)status.innerHTML='';},3000);
 }
 
@@ -5034,7 +5017,8 @@ const _arrow    = v => parseFloat(v) >= 0 ? '▲' : '▼';
 const _fmt      = v => (parseFloat(v) >= 0 ? '+' : '') + parseFloat(v).toFixed(2);
 const _$        = id => document.getElementById(id);
 
-function _renderPrices(prices, source, manual) {
+function _renderPrices(prices, source, manual, silent) {
+  _lastP=[prices,source];
   const { brent, wti, gas, gnl, chBrent, chWti, chGas, chGnl } = prices;
 
   if(_$('precio-brent')) _$('precio-brent').textContent = '$' + parseFloat(brent).toFixed(2);
@@ -5043,27 +5027,27 @@ function _renderPrices(prices, source, manual) {
   if(_$('precio-gnl'))   _$('precio-gnl').textContent   = '$' + parseFloat(gnl).toFixed(2);
 
   if(_$('brent-change'))
-    _$('brent-change').innerHTML = `<span style="color:${_colorVal(chBrent)}">${_arrow(chBrent)} ${_fmt(chBrent)}</span> USD/barril`;
+    _$('brent-change').innerHTML = `<span style="color:${_colorVal(chBrent)}">${_arrow(chBrent)} ${_fmt(chBrent)}</span> ${W('w_bbl')}`;
   if(_$('wti-change'))
-    _$('wti-change').innerHTML = `<span style="color:${_colorVal(chWti)}">${_arrow(chWti)} ${_fmt(chWti)}</span> USD/barril`;
+    _$('wti-change').innerHTML = `<span style="color:${_colorVal(chWti)}">${_arrow(chWti)} ${_fmt(chWti)}</span> ${W('w_bbl')}`;
   if(_$('gas-change'))
-    _$('gas-change').innerHTML = `<span style="color:${_colorVal(chGas)}">${_arrow(chGas)} ${_fmt(chGas)}</span> USD/MMBtu`;
+    _$('gas-change').innerHTML = `<span style="color:${_colorVal(chGas)}">${_arrow(chGas)} ${_fmt(chGas)}</span> ${W('w_mmbtu')}`;
   if(_$('gnl-change'))
-    _$('gnl-change').innerHTML = `<span style="color:${_colorVal(chGnl)}">${_arrow(chGnl)} ${_fmt(chGnl)}</span> USD/MMBtu`;
+    _$('gnl-change').innerHTML = `<span style="color:${_colorVal(chGnl)}">${_arrow(chGnl)} ${_fmt(chGnl)}</span> ${W('w_mmbtu')}`;
 
   const now = new Date();
-  const ts = now.toLocaleDateString('es-AR',{day:'2-digit',month:'2-digit',year:'numeric'})
-           + ' ' + now.toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'});
+  const ts = now.toLocaleDateString(curLoc(),{day:'2-digit',month:'2-digit',year:'numeric'})
+           + ' ' + now.toLocaleTimeString(curLoc(),{hour:'2-digit',minute:'2-digit'});
   if(_$('precio-ts')) _$('precio-ts').textContent = ts;
 
   // Actualizar etiqueta de fuente en cada tarjeta
-  const srcLabel = source === 'ft' ? 'Financial Times' : 'FT Markets / Platts';
+  const srcLabel = source === 'ft' ? W('w_srcft') : W('w_srcfb');
   ['precio-src-brent','precio-src-wti','precio-src-gas','precio-src-gnl'].forEach(id => {
-    if(_$(id)) _$(id).textContent = 'Fuente: ' + srcLabel;
+    if(_$(id)) _$(id).textContent = W('w_srcl') + ' ' + srcLabel;
   });
 
-  if(manual && typeof toast === 'function')
-    toast('success', `Precios actualizados desde ${srcLabel} — ${ts}`);
+  if(manual && !silent && typeof toast === 'function')
+    toast('success', `${W('w_priceok')} ${srcLabel} — ${ts}`);
 }
 
 async function _fetchPricesFromFT() {
@@ -5172,7 +5156,7 @@ async function loadPrices(manual = false) {
     _renderPrices(fallback, 'fallback', manual);
 
     if (manual && typeof toast === 'function')
-      toast('warning', 'Usando precios de referencia — FT Markets no disponible');
+      toast('warning', W('w_pricefb'));
   } finally {
     ['precio-brent','precio-wti','precio-gas','precio-gnl'].forEach(id => {
       if(_$(id)) _$(id).style.opacity = '1';
@@ -5189,6 +5173,7 @@ setInterval(() => loadPrices(false), 15 * 60 * 1000);
 // Usa Anthropic API (ya integrada en la plataforma)
 // ═══════════════════════════════════════════════════════════
 
+let _lastNews=null, _lastP=null, _lastNewsTs=null, _allEv=null, _filtering=false;
 const NEWS_CACHE_KEY   = 'h3l_news_cache';
 const NEWS_CACHE_TTL   = 24 * 60 * 60 * 1000; // 24 horas
 
@@ -5239,13 +5224,14 @@ const FALLBACK_NEWS = [
 ];
 
 function getTodayStr(){
-  return new Date().toLocaleDateString('es-AR',{day:'2-digit',month:'long',year:'numeric'});
+  return new Date().toLocaleDateString(curLoc(),{day:'2-digit',month:'long',year:'numeric'});
 }
 
 function renderNews(articles){
   const grid = document.getElementById('noticias-grid');
   if(!grid) return;
-  grid.innerHTML = articles.map(n => `
+  _lastNews = articles;
+  grid.innerHTML = articles.map(trNews).map(n => `
     <div style="background:var(--surface-2);border:1px solid var(--rule-light);border-radius:var(--radius-lg);padding:22px;display:flex;flex-direction:column;gap:6px;">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
         <span style="font-size:10px;color:${n.tagColor||'var(--accent)'};font-weight:700;letter-spacing:.5px;">${n.tag}</span>
@@ -5304,15 +5290,15 @@ async function refreshNoticias(manual=false){
       const cached = JSON.parse(localStorage.getItem(NEWS_CACHE_KEY)||'null');
       if(cached && (now - cached.ts) < NEWS_CACHE_TTL){
         renderNews(cached.articles);
-        if(tsEl) tsEl.textContent = 'Actualizado: ' + new Date(cached.ts).toLocaleDateString('es-AR',{day:'2-digit',month:'2-digit',year:'numeric'}) + ' ' + new Date(cached.ts).toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'});
+        _lastNewsTs = new Date(cached.ts); if(tsEl) tsEl.textContent = W('w_ts') + ' ' + _lastNewsTs.toLocaleDateString(curLoc(),{day:'2-digit',month:'2-digit',year:'numeric'}) + ' ' + _lastNewsTs.toLocaleTimeString(curLoc(),{hour:'2-digit',minute:'2-digit'});
         return;
       }
     } catch(e){}
   }
 
   // Show loading state
-  if(btn){ btn.textContent = 'Actualizando...'; btn.disabled = true; }
-  if(grid) grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--text-muted);font-size:13px;">Consultando fuentes energéticas...</div>';
+  if(btn){ btn.textContent = W('w_updating'); btn.disabled = true; }
+  if(grid) grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--text-muted);font-size:13px;">'+W('w_checkn')+'</div>';
 
   try {
     let articles;
@@ -5328,15 +5314,16 @@ async function refreshNoticias(manual=false){
     localStorage.setItem(NEWS_CACHE_KEY, JSON.stringify({ ts: now, articles }));
 
     renderNews(articles);
-    const tsStr = new Date(now).toLocaleDateString('es-AR',{day:'2-digit',month:'2-digit',year:'numeric'}) + ' ' + new Date(now).toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'});
-    if(tsEl) tsEl.textContent = 'Actualizado: ' + tsStr;
-    if(manual && typeof toast === 'function') toast('success','Noticias actualizadas — ' + tsStr);
+    _lastNewsTs = new Date(now);
+    const tsStr = _lastNewsTs.toLocaleDateString(curLoc(),{day:'2-digit',month:'2-digit',year:'numeric'}) + ' ' + _lastNewsTs.toLocaleTimeString(curLoc(),{hour:'2-digit',minute:'2-digit'});
+    if(tsEl) tsEl.textContent = W('w_ts') + ' ' + tsStr;
+    if(manual && typeof toast === 'function') toast('success',W('w_newstoast') + ' ' + tsStr);
 
   } catch(e){
     renderNews(FALLBACK_NEWS);
-    if(tsEl) tsEl.textContent = 'Fuente local · ' + getTodayStr();
+    if(tsEl) tsEl.textContent = W('w_local') + ' ' + getTodayStr();
   } finally {
-    if(btn){ btn.textContent = 'Actualizar noticias'; btn.disabled = false; }
+    if(btn){ btn.textContent = W('w_updn'); btn.disabled = false; }
   }
 }
 
@@ -5962,12 +5949,12 @@ let nlSubscribers = JSON.parse(localStorage.getItem('h3l_nl_subscribers')||'[]')
 function suscribirEvento(){
   const email = document.getElementById('events-nl-email')?.value?.trim();
   const status= document.getElementById('events-nl-status');
-  if(!email||!email.includes('@')){ if(status)status.innerHTML='<span style="color:var(--danger)">Email inválido</span>'; return; }
-  if(nlSubscribers.find(s=>s.email===email)){ if(status)status.innerHTML='<span style="color:var(--warning)">Ya estás suscripto</span>'; return; }
+  if(!email||!email.includes('@')){ if(status)status.innerHTML='<span style="color:var(--danger)">'+W('w_bad')+'</span>'; return; }
+  if(nlSubscribers.find(s=>s.email===email)){ if(status)status.innerHTML='<span style="color:var(--warning)">'+W('w_dup')+'</span>'; return; }
   nlSubscribers.push({email, fecha:new Date().toISOString()});
   localStorage.setItem('h3l_nl_subscribers', JSON.stringify(nlSubscribers));
-  if(status) status.innerHTML='<span style="color:var(--success)">✓ Suscripto exitosamente</span>';
-  toast('success','Suscripción confirmada — '+email);
+  if(status) status.innerHTML='<span style="color:var(--success)">'+W('w_subok')+'</span>';
+  toast('success',W('w_subtoast')+' '+email);
   const input = document.getElementById('events-nl-email');
   if(input) input.value='';
 }
@@ -5995,12 +5982,68 @@ const FALLBACK_EVENTOS = [
 ];
 
 let allEvents = [...FALLBACK_EVENTOS];
+/* ═══ i18n de contenido dinámico (noticias, eventos, precios) ═══ */
+function W(k){ return (window.H3LSite && H3LSite.tr ? H3LSite.tr(k) : k); }
+function curLg(){ return (window.H3LSite && H3LSite.lang && H3LSite.lang()) || 'es'; }
+function curLoc(){ return ({es:'es-AR',en:'en-US',fr:'fr-FR',pt:'pt-BR'})[curLg()] || 'es-AR'; }
+const NEWS_TR = {
+  en:[{tag:'OPEC+',title:'OPEC+ keeps production cuts to stabilize the global market',body:'The cartel extends voluntary production cuts amid uncertainty in Asian demand and pressure on crude prices.'},
+      {tag:'GNL / LNG',title:'Europe expands regasification terminals as Russian flows shrink',body:'LNG terminals in Europe are running close to maximum capacity. Qatar and the US consolidate their position as key exporters.'},
+      {tag:'LATAM',title:'Vaca Muerta attracts new investment and consolidates its regional position',body:'Argentina advances as a net hydrocarbon exporter. The unconventional formation receives USD 4 billion in new investment commitments.'},
+      {tag:'TRANSITION',title:'IEA: clean energy investment surpasses oil & gas for the first time',body:'Global capex in renewables, grids and storage reached USD 1.8 trillion, exceeding traditional hydrocarbon investment for the first time.'},
+      {tag:'MARKETS',title:'Volatility in energy markets amid geopolitical tensions',body:'Geopolitical factors in the Middle East and Chinese demand pressure cause swings in Brent and WTI crude futures.'},
+      {tag:'H₂ / GAS',title:'LATAM positioned as a future green hydrogen export powerhouse',body:'Chile, Argentina and Brazil advance green H₂ projects. The region holds 40% of global projects for the coming decade.'}],
+  fr:[{tag:'OPEP+',title:'L’OPEP+ maintient les réductions de production pour stabiliser le marché mondial',body:'Le cartel prolonge les réductions volontaires face à l’incertitude de la demande asiatique et à la pression sur les prix du brut.'},
+      {tag:'GNL / LNG',title:'L’Europe agrandit ses terminaux de regazéification face à la baisse des flux russes',body:'Les terminaux GNL européens tournent près de leur capacité maximale. Le Qatar et les États-Unis consolident leur position d’exportateurs clés.'},
+      {tag:'LATAM',title:'Vaca Muerta attire de nouveaux investissements et consolide sa position régionale',body:'L’Argentine progresse comme exportateur net d’hydrocarbures. La formation non conventionnelle reçoit 4 milliards USD d’engagements d’investissement.'},
+      {tag:'TRANSITION',title:'AIE : l’investissement dans l’énergie propre dépasse celui du pétrole et du gaz pour la première fois',body:'Les dépenses mondiales en renouvelables, réseaux et stockage ont atteint 1 800 milliards USD, dépassant pour la première fois l’investissement traditionnel dans les hydrocarbures.'},
+      {tag:'MARCHÉS',title:'Volatilité sur les marchés de l’énergie sous l’effet des tensions géopolitiques',body:'Les facteurs géopolitiques au Moyen-Orient et la pression de la demande chinoise provoquent des fluctuations des contrats à terme du Brent et du WTI.'},
+      {tag:'H₂ / GAZ',title:'L’Amérique latine, future superpuissance exportatrice d’hydrogène vert',body:'Le Chili, l’Argentine et le Brésil font avancer des projets d’H₂ vert. La région concentre 40 % des projets mondiaux de la prochaine décennie.'}],
+  pt:[{tag:'OPEP+',title:'OPEP+ mantém cortes de produção para estabilizar o mercado global',body:'O cartel prorroga os cortes voluntários diante da incerteza na demanda asiática e da pressão sobre os preços do petróleo.'},
+      {tag:'GNL / LNG',title:'Europa amplia terminais de regaseificação diante da redução dos fluxos russos',body:'Os terminais de GNL na Europa operam perto da capacidade máxima. Catar e EUA consolidam sua posição como exportadores-chave.'},
+      {tag:'LATAM',title:'Vaca Muerta recebe novos investimentos e consolida posição regional',body:'A Argentina avança como exportadora líquida de hidrocarbonetos. A formação não convencional recebe USD 4 bilhões em novos compromissos de investimento.'},
+      {tag:'TRANSIÇÃO',title:'AIE: investimento em energia limpa supera o de petróleo e gás pela primeira vez',body:'O capex global em renováveis, redes e armazenamento atingiu USD 1,8 trilhão, superando pela primeira vez o investimento tradicional em hidrocarbonetos.'},
+      {tag:'MERCADOS',title:'Volatilidade nos mercados de energia por tensões geopolíticas',body:'Fatores geopolíticos no Oriente Médio e a pressão da demanda chinesa geram oscilações nos futuros do Brent e do WTI.'},
+      {tag:'H₂ / GÁS',title:'América Latina posicionada como futura superpotência exportadora de hidrogênio verde',body:'Chile, Argentina e Brasil avançam em projetos de H₂ verde. A região concentra 40% dos projetos globais da próxima década.'}]
+};
+const EVENTS_TR = {
+  en:[{org:'SPE',fecha:'June 2026',lugar:'Dallas, Texas, USA',desc:'The most important annual technical conference of the Society of Petroleum Engineers. More than 10,000 industry professionals.'},
+      {org:'SPEE',fecha:'May 2026',lugar:'Denver, Colorado, USA',desc:'Annual meeting of the Society of Petroleum Evaluation Engineers. Evaluation of energy resources and reserves.'},
+      {org:'IEA',fecha:'April 2026',lugar:'Paris, France',desc:'Ministerial meeting of the International Energy Agency. Global energy transition agenda.'},
+      {org:'LATAM',fecha:'August 2026',titulo:'Latin American Hydrocarbons Congress',lugar:'Buenos Aires, Argentina',desc:'The main hydrocarbons industry congress in Latin America. Upstream, midstream, downstream and energy transition.'},
+      {org:'TRANSITION',fecha:'September 2026',lugar:'Bogotá, Colombia',desc:'Forum dedicated to the energy transition in LATAM. Green hydrogen, renewable energy and integration with O&G.'},
+      {org:'SPE',fecha:'October 2026',lugar:'Calgary, Canada',desc:'Conference specialized in unconventional resources: shale, tight gas and heavy oil. Drilling and completion technologies.'}],
+  fr:[{org:'SPE',fecha:'Juin 2026',lugar:'Dallas, Texas, États-Unis',desc:'La plus importante conférence technique annuelle de la Society of Petroleum Engineers. Plus de 10 000 professionnels du secteur.'},
+      {org:'SPEE',fecha:'Mai 2026',lugar:'Denver, Colorado, États-Unis',desc:'Réunion annuelle de la Society of Petroleum Evaluation Engineers. Évaluation des ressources et réserves énergétiques.'},
+      {org:'AIE',fecha:'Avril 2026',lugar:'Paris, France',desc:'Réunion ministérielle de l’Agence internationale de l’énergie. Agenda de la transition énergétique mondiale.'},
+      {org:'LATAM',fecha:'Août 2026',titulo:'Congrès latino-américain des hydrocarbures',lugar:'Buenos Aires, Argentine',desc:'Principal congrès de l’industrie des hydrocarbures en Amérique latine. Amont, intermédiaire, aval et transition énergétique.'},
+      {org:'TRANSITION',fecha:'Septembre 2026',lugar:'Bogotá, Colombie',desc:'Forum consacré à la transition énergétique en Amérique latine. Hydrogène vert, énergies renouvelables et intégration avec l’O&G.'},
+      {org:'SPE',fecha:'Octobre 2026',lugar:'Calgary, Canada',desc:'Conférence spécialisée sur les ressources non conventionnelles : shale, tight gas et huile lourde. Technologies de forage et de complétion.'}],
+  pt:[{org:'SPE',fecha:'Junho 2026',lugar:'Dallas, Texas, EUA',desc:'A mais importante conferência técnica anual da Society of Petroleum Engineers. Mais de 10.000 profissionais do setor.'},
+      {org:'SPEE',fecha:'Maio 2026',lugar:'Denver, Colorado, EUA',desc:'Reunião anual da Society of Petroleum Evaluation Engineers. Avaliação de recursos e reservas energéticas.'},
+      {org:'AIE',fecha:'Abril 2026',lugar:'Paris, França',desc:'Reunião ministerial da Agência Internacional de Energia. Agenda da transição energética global.'},
+      {org:'LATAM',fecha:'Agosto 2026',titulo:'Congresso Latino-Americano de Hidrocarbonetos',lugar:'Buenos Aires, Argentina',desc:'Principal congresso da indústria de hidrocarbonetos na América Latina. Upstream, midstream, downstream e transição energética.'},
+      {org:'TRANSIÇÃO',fecha:'Setembro 2026',lugar:'Bogotá, Colômbia',desc:'Fórum dedicado à transição energética na América Latina. Hidrogênio verde, energias renováveis e integração com O&G.'},
+      {org:'SPE',fecha:'Outubro 2026',lugar:'Calgary, Canadá',desc:'Conferência especializada em recursos não convencionais: shale, tight gas e óleo pesado. Tecnologias de perfuração e completação.'}]
+};
+function trNews(n){ const lg=curLg(); if(lg==='es') return n; const i=FALLBACK_NEWS.findIndex(f=>f.url===n.url&&f.title===n.title); return i<0?n:Object.assign({},n,NEWS_TR[lg][i]); }
+function trEvent(e){ const lg=curLg(); if(lg==='es') return e; const i=FALLBACK_EVENTOS.findIndex(f=>f.url===e.url&&f.titulo===e.titulo); return i<0?e:Object.assign({},e,EVENTS_TR[lg][i]); }
+function h3lRerender(){
+  try{ if(_lastNews) renderNews(_lastNews); }catch(e){}
+  try{ if(document.getElementById('eventos-grid') && allEvents && document.querySelector('#eventos-grid .ev-card')) _filtering=true; try{ renderEventos(allEvents); } finally { _filtering=false; } }catch(e){}
+  try{ if(_lastP) _renderPrices(_lastP[0],_lastP[1],false,true); }catch(e){}
+  try{ if(document.getElementById('et-grid')){ buildETGrid(); } }catch(e){}
+  try{ const ov=document.getElementById('et-modal-wrap'); if(ov && ov.style.display==='block' && _etOpenId) openETModal(_etOpenId); }catch(e){}
+  try{ const ts=document.getElementById('news-ts'); if(ts&&_lastNewsTs) ts.textContent=W('w_ts')+' '+_lastNewsTs.toLocaleDateString(curLoc(),{day:'2-digit',month:'2-digit',year:'numeric'})+' '+_lastNewsTs.toLocaleTimeString(curLoc(),{hour:'2-digit',minute:'2-digit'}); }catch(e){}
+}
+(function regLang(){ if(window.H3LSite&&H3LSite.onLang) H3LSite.onLang(h3lRerender); else setTimeout(regLang,50); })();
+
 
 function renderEventos(events){
   const grid = document.getElementById('eventos-grid');
   const ts   = document.getElementById('eventos-ts');
   if(!grid) return;
-  grid.innerHTML = events.map(e=>`
+  grid.innerHTML = events.map(trEvent).map(e=>`
     <div class="ev-card" data-tag="${e.tag}" style="background:var(--surface-2);border:1px solid var(--rule-light);border-radius:var(--radius-lg);padding:22px;display:flex;flex-direction:column;gap:8px;">
       <div style="display:flex;align-items:center;justify-content:space-between;">
         <span style="font-size:10px;font-weight:700;color:${e.color};letter-spacing:.8px;">${e.org}</span>
@@ -6009,23 +6052,25 @@ function renderEventos(events){
       <h5 style="font-weight:700;font-size:14px;line-height:1.4;margin:0;">${e.titulo}</h5>
       <div style="font-size:11px;color:var(--accent);font-weight:600;">📍 ${e.lugar}</div>
       <p style="font-size:12px;color:var(--text-secondary);line-height:1.6;flex:1;margin:0;">${e.desc}</p>
-      <a href="${e.url}" target="_blank" rel="noopener" style="display:inline-flex;color:var(--accent);font-size:11px;text-decoration:none;font-weight:600;margin-top:4px;">Más información →</a>
+      <a href="${e.url}" target="_blank" rel="noopener" style="display:inline-flex;color:var(--accent);font-size:11px;text-decoration:none;font-weight:600;margin-top:4px;">${W('w_e_more')} →</a>
     </div>
   `).join('');
-  if(ts) ts.textContent = 'Actualizado: ' + new Date().toLocaleDateString('es-AR');
+  if(ts) ts.textContent = W('w_ts') + ' ' + new Date().toLocaleDateString(curLoc());
   allEvents = events;
+  if(!_filtering) _allEv = events;
 }
 
 function filterEvents(tag, btn){
   document.querySelectorAll('.calc-cat-btn').forEach(b=>b.classList.remove('active'));
   if(btn) btn.classList.add('active');
-  if(tag==='all'){ renderEventos(allEvents); return; }
-  renderEventos(allEvents.filter(e=>e.tag===tag));
+  const base = _allEv || allEvents;
+  _filtering = true;
+  try{ renderEventos(tag==='all' ? base : base.filter(e=>e.tag===tag)); } finally { _filtering = false; }
 }
 
 async function refreshEventos(){
   const grid = document.getElementById('eventos-grid');
-  if(grid) grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--text-muted);">Buscando eventos...</div>';
+  if(grid) grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--text-muted);">'+W('w_e_search')+'</div>';
   try {
     const cached = JSON.parse(localStorage.getItem(EVENTOS_CACHE_KEY)||'null');
     if(cached && Date.now()-cached.ts < EVENTOS_TTL){ renderEventos(cached.events); return; }

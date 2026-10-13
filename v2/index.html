@@ -223,8 +223,8 @@ a:focus-visible,button:focus-visible{outline:2px solid #5BB0FF;outline-offset:3p
     </div>
 
     <div id="copy">
-      <div class="mask"><h1 id="h1a">Upstream Oil &amp; Gas</h1></div>
-      <div class="mask"><div id="h1b" aria-hidden="true">&amp; Energy Transition</div></div>
+      <div class="mask"><h1 id="h1a" lang="en" translate="no">Upstream Oil &amp; Gas</h1></div>
+      <div class="mask"><div id="h1b" lang="en" translate="no" aria-hidden="true">&amp; Energy Transition</div></div>
       <p id="sub" data-i18n="i.sub">Plataforma de ingeniería y data science para la industria energética.</p>
       <div id="kpi" data-i18n-html="i.kpi">Modelos predictivos &nbsp;·&nbsp; Detección de anomalías &nbsp;·&nbsp; ESG</div>
       <div id="ctas">
@@ -279,7 +279,7 @@ const reduce=!params.has('intro')&&window.matchMedia&&matchMedia('(prefers-reduc
 
 /* ---------- parámetros de la línea de tiempo (idénticos al video aprobado) ---------- */
 const T0=.3, DUR=.95;
-const AUD_END=14.2;
+const AUD_END=14.3;
 const HOLD=3, HOLD_AT=7.0; /* pausa de 3 s con los 7 servicios completos; el audio nuevo (h3l-intro.mp3) ya incluye esos 3 s */
 const te=x=>x<HOLD_AT?x:(x<HOLD_AT+HOLD?HOLD_AT:x-HOLD);
 const T_CURTAIN=7.05, T_CURTAIN_END=7.85;
