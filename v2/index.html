@@ -165,7 +165,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #5BB0FF;outline-offset:3p
 [data-mode=m] #llogo{order:1}
 [data-mode=m] #llogo .lm{font-size:30px}
 [data-mode=m] #lhead{order:2;margin-top:18px;font-size:10.5px;letter-spacing:2px}
-[data-mode=m] #chart{order:4;width:100%;max-width:none;height:auto;flex:1 1 0;min-height:96px;margin:6px 0 0;align-self:stretch}
+[data-mode=m] #chart{order:4;display:block;width:100%;max-width:none;height:0;flex:none;margin:6px 0 0}
 [data-mode=m] #chart text{font-size:18px}
 [data-mode=m] #chart #scap{font-size:13px;letter-spacing:1px}
 [data-mode=m] #pctbox{order:5;margin-top:4px}
@@ -183,7 +183,6 @@ a:focus-visible,button:focus-visible{outline:2px solid #5BB0FF;outline-offset:3p
 [data-mode=m] #foot2{display:none}
 @media (max-height:700px){[data-mode=m] #sub{display:none}}
 @media (max-height:720px){[data-mode=m] #rows li{height:31px}[data-mode=m] .lab{font-size:12.5px}[data-mode=m] #lhead{margin-top:10px}[data-mode=m] #status{display:none}[data-mode=m] #pct{font-size:36px;letter-spacing:-2px}[data-mode=m] #pctsym{font-size:16px;margin-top:3px}[data-mode=m] #bar{padding-top:10px;padding-bottom:26px}}
-@media (max-height:560px){[data-mode=m] #chart{display:none}}
 @media (max-height:620px){[data-mode=m] #pctbox,[data-mode=m] #modcount{display:none}}
 @media (prefers-reduced-motion:reduce){#c2 svg,#navitems a::after{transition:none}}
 </style>
@@ -293,6 +292,15 @@ const T_END=STAGES[6].b;
 /* ---------- layout responsive ---------- */
 let VW=innerWidth, VH=innerHeight, MODE='d', segW=100;
 const app=$('app'), svgEl=$('platSvg');
+function fitChart(){
+  const c=$('chart'); if(!c) return;
+  if(MODE!=='m'){ c.style.height=''; c.style.display=''; return; }
+  c.style.display='block'; c.style.height='0px';
+  const bar=$('bar').getBoundingClientRect(), top=c.getBoundingClientRect().top;
+  const free=Math.floor(bar.top-top-14);
+  if(free<84){ c.style.display='none'; return; }
+  c.style.height=Math.min(free,Math.round(c.getBoundingClientRect().width*400/544))+'px';
+}
 function layout(){
   VW=innerWidth; VH=innerHeight;
   MODE=(VW/VH<1.05||VW<540)?'m':'d';
@@ -319,6 +327,8 @@ function layout(){
   const dpr=Math.min(devicePixelRatio||1,2), cv=$('spark');
   cv.width=Math.round(VW*dpr); cv.height=Math.round(VH*dpr); cv.style.width=VW+'px'; cv.style.height=VH+'px'; cvDpr=dpr;
   segW=segEls.length?segEls[0].offsetWidth:100;
+  fitChart();
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fitChart);
   needsPaint=true;
 }
 let cvDpr=1, needsPaint=true;
