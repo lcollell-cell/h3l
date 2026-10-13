@@ -160,14 +160,14 @@ var S=[
     en:['Certification of reserves and resources under international standards (PRMS, SEC)','Economic evaluation under energy-transition scenarios','Integration of carbon and energy-intensity indicators','Reservoir simulation: efficiency, enhanced recovery and lower emissions'],
     fr:['Certification des réserves et ressources selon les normes internationales (PRMS, SEC)','Évaluation économique dans des scénarios de transition énergétique','Intégration d’indicateurs de carbone et d’intensité énergétique','Simulation de gisements : efficacité, récupération assistée et moins d’émissions'],
     pt:['Certificação de reservas e recursos sob padrões internacionais (PRMS, SEC)','Avaliação econômica em cenários de transição energética','Integração de indicadores de carbono e intensidade energética','Simulação de reservatórios: eficiência, recuperação melhorada e menos emissões']}},
-{id:'auditoria',go:'calculators',
+{id:'auditoria',
  t:{es:'Auditoría Energética y Diagnóstico de Descarbonización',en:'Energy Audit & Decarbonization Diagnostics',fr:'Audit énergétique et diagnostic de décarbonation',pt:'Auditoria Energética e Diagnóstico de Descarbonização'},
  tool:{es:'Calculadoras ESG y de huella de carbono',en:'ESG and carbon-footprint calculators',fr:'Calculateurs ESG et empreinte carbone',pt:'Calculadoras ESG e de pegada de carbono'},
  b:{es:['Evaluaciones energéticas de activos upstream, midstream y downstream','Medición y verificación de consumo energético y emisiones de GEI (GHG Protocol)','Identificación de oportunidades de eficiencia operativa','Recomendaciones de tecnologías limpias aplicables a campo'],
     en:['Energy assessments of upstream, midstream and downstream assets','Measurement and verification of energy use and GHG emissions (GHG Protocol)','Identification of operational efficiency opportunities','Clean-technology recommendations applicable in the field'],
     fr:['Évaluations énergétiques d’actifs amont, intermédiaires et aval','Mesure et vérification de la consommation d’énergie et des émissions de GES (GHG Protocol)','Identification d’opportunités d’efficacité opérationnelle','Recommandations de technologies propres applicables sur le terrain'],
     pt:['Avaliações energéticas de ativos upstream, midstream e downstream','Medição e verificação do consumo de energia e das emissões de GEE (GHG Protocol)','Identificação de oportunidades de eficiência operacional','Recomendações de tecnologias limpas aplicáveis em campo']}},
-{id:'emisiones',go:'calculators',
+{id:'emisiones',
  t:{es:'Gestión de Emisiones y Estrategias de Compensación',en:'Emissions Management & Offsetting Strategies',fr:'Gestion des émissions et stratégies de compensation',pt:'Gestão de Emissões e Estratégias de Compensação'},
  tool:{es:'Inventario de emisiones y planes de mitigación',en:'Emissions inventory and mitigation plans',fr:'Inventaire des émissions et plans d’atténuation',pt:'Inventário de emissões e planos de mitigação'},
  b:{es:['Inventario y análisis de emisiones (alcances 1, 2 y 3)','Planes de mitigación: flaring, fugas, combustión y transporte','Proyectos de compensación (REDD+, CCS, bonos de carbono)','Verificación y certificación de reducciones con estándares internacionales'],
@@ -229,7 +229,7 @@ function renderServicios(){
         '<div class="svc-cap">'+esc(tool)+'</div></div>'+
       '<div class="svc-body"><h3>'+esc(title)+'</h3><ul>'+s.b[lang].map(function(b){return '<li>'+esc(b)+'</li>'}).join('')+'</ul>'+
       '<div class="svc-act"><button type="button" class="btn-p" data-quote="'+i+'">'+esc(tr('sv_q'))+'</button>'+
-      '<button type="button" class="btn-s" data-go="'+esc(s.go)+'">'+esc(tr('sv_more'))+'</button></div></div></article>';
+      (s.go?'<button type="button" class="btn-s" data-go="'+esc(s.go)+'">'+esc(tr('sv_more'))+'</button>':'')+'</div></div></article>';
   });
   host.innerHTML=h;
   setupVideos();

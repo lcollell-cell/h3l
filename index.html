@@ -5540,8 +5540,8 @@ const _origGetResponse = typeof getResponse === 'function' ? getResponse : null;
 function getResponse(msg){
   const m = msg.toLowerCase();
   if(m.includes('herramienta')||m.includes('calculadora')||m.includes('servicio')){
-    setTimeout(()=>goSection('calculators'),1500);
-    return 'Te llevo a las Herramientas y Calculadoras ahora mismo. Tenemos 40 calculadoras especializadas en Reservorios, ESG, Energías y más. 🧮';
+    setTimeout(()=>goSection('servicios'),1500);
+    return 'Te llevo a Servicios, donde ves cada línea de trabajo de H3L con un video de la herramienta. 🛠️';
   }
   if(m.includes('visita')||m.includes('tour')||m.includes('recorrido')){
     setTimeout(()=>chatTour(), 500);
