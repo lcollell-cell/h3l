@@ -1,4 +1,4 @@
-/* H3L · textos de los tableros estratégico y operativo (es, en, fr, pt). Desarrollado por Leandro Collell. */
+/* H3L · textos de los tableros estratégico y operativo (es, en, fr, pt). H3L Global Energy. */
 (function(){'use strict';
 var A=window.__H3L_DASH_A;
 

@@ -1,6 +1,6 @@
 /* H3L · Revisión de reservas PD — datos, cálculo y controles de consistencia.
    Todo corre en el navegador: los archivos no se envían a ningún servidor.
-   Desarrollado por Leandro Collell. */
+   H3L Global Energy. */
 (function(){'use strict';
 var DAY=30.4;
 /* supuestos editables (el tablero los muestra y los guarda en el registro de evidencia) */

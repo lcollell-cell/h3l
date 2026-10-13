@@ -1,4 +1,4 @@
-/* H3L · biblioteca de gráficos SVG (compartida). Desarrollado por Leandro Collell. Requiere #tip, H3L (i18n.js) y las claves v.* */
+/* H3L · biblioteca de gráficos SVG (compartida). H3L Global Energy. Requiere #tip, H3L (i18n.js) y las claves v.* */
 (function(){'use strict';
 /* ====================== utilidades ====================== */
 var NS='http://www.w3.org/2000/svg';

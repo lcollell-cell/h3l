@@ -1,5 +1,5 @@
 /* H3L · los cinco tableros de decisión, con textos en es/en/fr/pt (ver lang-dash.js, lang-b12.js, lang-b345.js).
-   Desarrollado por Leandro Collell. */
+   H3L Global Energy. */
 (function(){'use strict';
 var V=window.VZ,$=V.$,H=V.H,fmt=V.fmt,sgn=V.sgn,reduce=V.reduce;
 var C={blue:'var(--blue)',orange:'var(--orange)',red:'var(--red)',gm:'var(--gray-mark)',gd:'var(--gray-dark)',ink:'var(--ink-2)',o1:'var(--ord-1)',o2:'var(--ord-2)',o3:'var(--ord-3)'};

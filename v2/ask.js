@@ -1,6 +1,6 @@
 /* Consulta en lenguaje natural + vigilancia de anomalías (motor local de demostración).
    Recuperación BM25 sobre documentos de ejemplo, ajuste de tendencia por regresión, detección de desvíos
-   y armado de tableros. Desarrollado por Leandro Collell. */
+   y armado de tableros. H3L Global Energy. */
 (function(){'use strict';
 var V=window.VZ;if(!V||!window.H3L)return;
 var $=V.$,H=V.H,fmt=V.fmt,sgn=V.sgn,reduce=V.reduce;

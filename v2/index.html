@@ -105,7 +105,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #5BB0FF;outline-offset:3p
 .seg .sh{position:absolute;top:0;left:0;width:60px;height:5px;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.65),rgba(255,255,255,0))}
 .seg .head{position:absolute;top:-6px;width:16px;height:16px;margin-left:-8px;border-radius:50%;background:radial-gradient(circle,rgba(111,212,154,.95) 0%,rgba(111,212,154,0) 70%);opacity:0}
 .seg .num{position:absolute;left:0;top:14px;font-family:'PlexMono',monospace;font-size:10px;color:#6f84ab;letter-spacing:.6px}
-#foot1{left:96px;top:672px;font-weight:500;font-size:11px;color:#6f84ab;letter-spacing:.4px}
+#foot1{left:96px;top:664px;font-weight:600;font-size:17px;color:#c9d3e6;letter-spacing:.6px}
 #foot2{right:96px;top:672px;font-weight:500;font-size:11px;color:#6f84ab;letter-spacing:.4px}
 #chart{left:650px;top:150px}
 #gate{position:fixed;top:0;right:0;bottom:0;left:0;z-index:15;display:flex;align-items:center;justify-content:center;background:rgba(5,13,22,.94);padding:24px}
@@ -179,7 +179,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #5BB0FF;outline-offset:3p
 [data-mode=m] .val{font-size:11.5px}
 [data-mode=m] .ico{width:20px;height:20px;margin-right:10px}
 [data-mode=m] #bar{order:8;width:100%;margin-top:auto;padding-top:18px;padding-bottom:30px}
-[data-mode=m] #foot1{order:9;font-size:10.5px}
+[data-mode=m] #foot1{order:9;font-size:14px}
 [data-mode=m] #foot2{display:none}
 @media (max-height:780px){[data-mode=m] #rows{display:none}[data-mode=m] #bar{margin-top:18px}}
 @media (max-height:700px){[data-mode=m] #sub{display:none}}
@@ -201,30 +201,25 @@ a:focus-visible,button:focus-visible{outline:2px solid #5BB0FF;outline-offset:3p
     <div id="wm" class="abs" aria-hidden="true"><span>H</span><span class="g">3</span><span>L</span></div>
 
     <nav id="nav" aria-label="Principal" data-i18n-attr="aria-label:c.main">
-      <a class="logo" href="../index.html" aria-label="H3L Global Energy — inicio" data-i18n-attr="aria-label:c.home"><div class="lm">H<span>3</span>L</div><div class="ls">Global Energy</div></a>
+      <a class="logo" href="index.html" aria-label="H3L Global Energy — inicio" data-i18n-attr="aria-label:c.home"><div class="lm">H<span>3</span>L</div><div class="ls">Global Energy</div></a>
       <div id="navitems">
-        <a href="../index.html?go=calculators" data-i18n="c.calc">Calculadoras</a>
-        <a href="../index.html?go=agentes" data-i18n="c.agents">Agentes IA</a>
-        <a href="../index.html?go=qcapps" data-i18n="c.qc">Apps QC</a>
-        <a href="../index.html?go=demos-et" data-i18n="c.trans">Transición</a>
-        <a href="dashboards.html" data-i18n="c.dash">Dashboard</a>
-        <a href="reservas.html" data-i18n="c.res">Reservas PD</a>
-        <a href="../index.html?go=somos" data-i18n="c.about">Nosotros</a>
+        <a href="../index.html?go=somos" data-i18n="c.somos">Quiénes somos</a>
+        <a href="../index.html?go=servicios" data-i18n="c.serv">Servicios</a>
+        <a href="../index.html?go=noticias" data-i18n="c.news">Noticias OIL &amp; GAS</a>
+        <a href="../index.html?go=eventos" data-i18n="c.events">Eventos</a>
+        <a href="../index.html?go=contacto" data-i18n="c.contact">Contactos</a>
       </div>
-      <span id="langNav"></span><a class="btn" id="b1" href="../index.html?go=auth" data-i18n="c.login">Iniciar sesión</a>
-      <a class="btn" id="b2" href="../index.html?go=registro" data-i18n="c.register">Registro</a>
+      <span id="langNav"></span><a class="btn" id="b2" href="../index.html?go=servicios" data-i18n="c.quote">Solicitar cotización</a>
       <button id="burger" aria-label="Abrir menú" data-i18n-attr="aria-label:c.menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
     </nav>
     <div id="menu" role="menu">
       <div id="langMenu"></div>
-      <a href="../index.html?go=calculators" data-i18n="c.calc">Calculadoras</a>
-      <a href="../index.html?go=agentes" data-i18n="c.agents">Agentes IA</a>
-      <a href="../index.html?go=qcapps" data-i18n="c.qc">Apps QC</a>
-      <a href="../index.html?go=demos-et" data-i18n="c.transFull">Transición energética</a>
-      <a href="dashboards.html" data-i18n="c.dash">Dashboard</a>
-      <a href="reservas.html" data-i18n="c.res">Reservas PD</a>
-      <a href="../index.html?go=somos" data-i18n="c.about">Nosotros</a>
-      <div class="mb"><a href="../index.html?go=auth" data-i18n="c.login">Iniciar sesión</a><a class="pri" href="../index.html?go=registro" data-i18n="c.register">Registro</a></div>
+      <a href="../index.html?go=somos" data-i18n="c.somos">Quiénes somos</a>
+      <a href="../index.html?go=servicios" data-i18n="c.serv">Servicios</a>
+      <a href="../index.html?go=noticias" data-i18n="c.news">Noticias OIL &amp; GAS</a>
+      <a href="../index.html?go=eventos" data-i18n="c.events">Eventos</a>
+      <a href="../index.html?go=contacto" data-i18n="c.contact">Contactos</a>
+      <div class="mb"><a class="pri" href="../index.html?go=servicios" data-i18n="c.quote">Solicitar cotización</a></div>
     </div>
 
     <div id="copy">
@@ -233,11 +228,11 @@ a:focus-visible,button:focus-visible{outline:2px solid #5BB0FF;outline-offset:3p
       <p id="sub" data-i18n="i.sub">Plataforma de ingeniería y data science para la industria energética.</p>
       <div id="kpi" data-i18n-html="i.kpi">40 calculadoras certificadas &nbsp;·&nbsp; 32 agentes IA &nbsp;·&nbsp; 87 apps de QC</div>
       <div id="ctas">
-        <a id="c1" href="../index.html?go=calculators" data-i18n="i.c1">Explorar calculadoras</a>
+        <a id="c1" href="../index.html?go=servicios" data-i18n="i.c1">Ver servicios</a>
         <a id="c2" href="dashboards.html"><span data-i18n="i.c2">Ver dashboard</span> <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
     </div>
-    <div id="legacy"><span data-i18n="i.v2">VERSIÓN 2 ·</span> <a href="../index.html" data-i18n="i.cur">Ir al sitio actual</a></div>
+    <div id="legacy">www.h3l.com</div>
   </div>
 
   <div id="loader" class="layer">
@@ -254,7 +249,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #5BB0FF;outline-offset:3p
       <div id="status" class="abs" aria-live="polite">Cargando módulo de reservas</div>
       <div id="modcount" class="abs">MÓDULO 1 DE 6</div>
       <div id="bar"></div>
-      <div id="foot1" class="abs" data-i18n="i.foot1">Desarrollado por Leandro Collell</div>
+      <div id="foot1" class="abs">www.h3l.com</div>
       <div id="foot2" class="abs" data-i18n="i.foot2">Ingeniería · Data Science · Transición energética</div>
     </div>
   </div>
@@ -284,6 +279,8 @@ const reduce=!params.has('intro')&&window.matchMedia&&matchMedia('(prefers-reduc
 
 /* ---------- parámetros de la línea de tiempo (idénticos al video aprobado) ---------- */
 const T0=.3, DUR=.95;
+const HOLD=3, HOLD_AT=6.0; /* pausa de 3 s con el listado completo de servicios; el audio tiene 3 s insertados en el mismo punto */
+const te=x=>x<HOLD_AT?x:(x<HOLD_AT+HOLD?HOLD_AT:x-HOLD);
 const T_CURTAIN=7.05, T_CURTAIN_END=7.85;
 const STAGES=[{},{},{},{},{},{}];
 function refreshStages(){ STAGES.forEach((s,i)=>{ s.lab=I('s'+(i+1)+'.lab'); s.cap=I('s'+(i+1)+'.cap'); s.st=I('s'+(i+1)+'.st'); if(s.el){ const l=s.el.querySelector('.lab'); if(l) l.textContent=s.lab; } }); }
@@ -608,8 +605,9 @@ function updScene(t){
 }
 /* ---------- render (función pura de t, igual que el video) ---------- */
 let loaderGone=false;
-function render(t){
-  drawSparks(t);
+function render(tr){
+  const t=te(tr);
+  drawSparks(tr);
   updScene(t);
   const zoom=1.07-.07*eo3(clamp((t-7.0)/4.0));
   $('plat').style.transform=`scale(${zoom.toFixed(4)})`;
@@ -653,6 +651,7 @@ function render(t){
     $('modcount').textContent=fin?I('i.modEnd'):I('i.mod',{n:idx+1});
     $('scap').textContent=STAGES[idx].cap;
     const stP=inP(.15,.5); ['pctbox','status','modcount','bar','foot1','foot2'].forEach(id=>{ $(id).style.opacity=stP; });
+    const hk=eo3(seg(tr,HOLD_AT+.15,HOLD_AT+.9)); $('foot1').style.color=hk>0?'#ffffff':''; $('foot1').style.textShadow=hk>0?'0 0 '+(14*hk).toFixed(1)+'px rgba(95,209,164,'+(.7*hk).toFixed(2)+')':'';
     scenes.forEach((sc,i)=>{ const st=STAGES[i]; const fi=seg(t,st.a-.05,st.a+.2), fo=(i<5)?seg(t,st.b-.05,st.b+.2):0;
       sc.g.setAttribute('opacity',(fi*(1-fo)).toFixed(3));
       if(fi>0&&fo<1) sc.upd(seg(t,st.a+.04,st.a+.82*DUR),t); });
@@ -676,9 +675,9 @@ const snd=$('snd'); let soundOn=false, t=0, frozen=false;
 let blocked=false, lastGo=0, holding=false, gateShown=false;
 function setLabel(){ $('btnSound').textContent=(soundOn&&blocked)?I('i.sndAct'):I(soundOn?'i.sndOn':'i.sndOff'); $('btnSound').setAttribute('aria-pressed',soundOn&&!blocked); }
 function tryPlay(){
-  try{ if(t<10.8) snd.currentTime=Math.max(0,t); }catch(e){}
+  try{ if(t<10.8+HOLD) snd.currentTime=Math.max(0,t); }catch(e){}
   const p=snd.play();
-  if(p&&p.then) p.then(()=>{ blocked=false; setLabel(); if(t<10.8&&Math.abs(snd.currentTime-t)>.5){ try{snd.currentTime=t;}catch(e){} } },()=>{ blocked=true; setLabel(); if(!gateShown&&!loaderGone&&t<1.5){ showGate(); } else armGesture(); });
+  if(p&&p.then) p.then(()=>{ blocked=false; setLabel(); if(t<10.8+HOLD&&Math.abs(snd.currentTime-t)>.5){ try{snd.currentTime=t;}catch(e){} } },()=>{ blocked=true; setLabel(); if(!gateShown&&!loaderGone&&t<1.5){ showGate(); } else armGesture(); });
 }
 function showGate(){ gateShown=true; holding=true; t=0; $('gate').hidden=false; try{$('gYes').focus({preventScroll:true});}catch(e){} }
 function closeGate(){ $('gate').hidden=true; holding=false; t=0; }
@@ -696,8 +695,8 @@ function setSound(on){
   if(on){ snd.preload='auto'; tryPlay(); } else snd.pause();
 }
 $('btnSound').addEventListener('click',()=>{ if(soundOn&&performance.now()-lastGo<700){ setLabel(); return; } if(soundOn&&blocked){ tryPlay(); return; } setSound(!soundOn); });
-$('btnSkip').addEventListener('click',()=>{ if(t<T_CURTAIN-.05){ t=T_CURTAIN-.05; if(soundOn){ try{snd.currentTime=t;}catch(e){} } } });
-addEventListener('keydown',e=>{ if(e.key==='Escape'&&!holding){ if(!loaderGone&&t<T_CURTAIN-.05) $('btnSkip').click(); closeMenu(); } });
+$('btnSkip').addEventListener('click',()=>{ if(t<T_CURTAIN+HOLD-.05){ t=T_CURTAIN+HOLD-.05; if(soundOn){ try{snd.currentTime=t;}catch(e){} } } });
+addEventListener('keydown',e=>{ if(e.key==='Escape'&&!holding){ if(!loaderGone&&t<T_CURTAIN+HOLD-.05) $('btnSkip').click(); closeMenu(); } });
 const burger=$('burger'), menu=$('menu');
 function closeMenu(){ burger.classList.remove('open'); menu.classList.remove('open'); burger.setAttribute('aria-expanded','false'); }
 burger.addEventListener('click',e=>{ e.stopPropagation(); const o=!menu.classList.contains('open'); burger.classList.toggle('open',o); menu.classList.toggle('open',o); burger.setAttribute('aria-expanded',o); });
@@ -713,8 +712,8 @@ let resizeT; addEventListener('resize',()=>{ clearTimeout(resizeT); resizeT=setT
 addEventListener('orientationchange',()=>setTimeout(layout,250));
 
 const fast=!!store.get('h3l_v2_seen') && !params.has('intro');
-if(reduce){ t=11; frozen=true; }
-else if(fast){ t=7.3; }
+if(reduce){ t=11+HOLD; frozen=true; }
+else if(fast){ t=7.3+HOLD; }
 
 function start(){
   layout();
@@ -724,7 +723,7 @@ function start(){
     const dt=Math.min(.1,(now-last)/1000); last=now;
     if(!frozen&&!holding) t+=dt;
     if(!frozen||needsPaint){ render(t); needsPaint=false; }
-    if(t>7.6) $('tools').style.display='none';
+    if(te(t)>7.6) $('tools').style.display='none';
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);

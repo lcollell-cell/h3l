@@ -1,6 +1,6 @@
 /* H3L · textos de la consulta en lenguaje natural y la vigilancia de anomalías (es, en, fr, pt).
    Incluye los documentos de demostración, las palabras clave de interpretación y las preguntas sugeridas.
-   Desarrollado por Leandro Collell. */
+   H3L Global Energy. */
 (function(){'use strict';
 var o={es:{},en:{},fr:{},pt:{}};
 function A(k,es,en,fr,pt){o.es[k]=es;o.en[k]=en;o.fr[k]=fr;o.pt[k]=pt}

@@ -1,4 +1,4 @@
-/* H3L · textos de la revisión de reservas PD en es, en, fr, pt. Desarrollado por Leandro Collell. */
+/* H3L · textos de la revisión de reservas PD en es, en, fr, pt. H3L Global Energy. */
 (function(){'use strict';
 var o={es:{},en:{},fr:{},pt:{}};
 function A(k,es,en,fr,pt){o.es[k]=es;o.en[k]=en;o.fr[k]=fr;o.pt[k]=pt}
@@ -334,7 +334,7 @@ A('tr.7.p',"Todo lo anterior en una página, con las cifras de este caso y los l
 /* ---- ficha de venta ---- */
 A('v.h1',"Revise sus reservas PD con evidencia, no con intuición","Review your PD reserves with evidence, not intuition","Revoyez vos réserves PD avec des preuves, pas à l’intuition","Revise suas reservas PD com evidências, não com intuição");
 A('v.p',"Un tablero a pantalla completa que contrasta lo registrado con el historial de cada pozo, responde preguntas en lenguaje natural y deja trazado de dónde sale cada cifra.","A full-screen dashboard that compares what is booked with each well’s history, answers questions in natural language and leaves a trail of where every figure comes from.","Un tableau plein écran qui confronte l’enregistré à l’historique de chaque puits, répond aux questions en langage naturel et garde la trace de l’origine de chaque chiffre.","Um painel em tela cheia que confronta o registrado com o histórico de cada poço, responde perguntas em linguagem natural e deixa o rastro de onde sai cada número.");
-A('v.who',"Leandro Collell · H3L Global Energy","Leandro Collell · H3L Global Energy","Leandro Collell · H3L Global Energy","Leandro Collell · H3L Global Energy");
+A('v.who',"H3L Global Energy","H3L Global Energy","H3L Global Energy","H3L Global Energy");
 A('v.p1',"MMbbl de PD sin respaldo, detectados en {n} de {t} pozos","MMbbl of PD without support, found in {n} of {t} wells","MMbbl de PD sans justificatif, repérés dans {n} puits sur {t}","MMbbl de PD sem comprovação, detectados em {n} de {t} poços");
 A('v.p2',"MMbbl recuperables reparando {n} pozos · VPN +{v} MMUSD","MMbbl recoverable by repairing {n} wells · NPV +{v} MMUSD","MMbbl récupérables en réparant {n} puits · VAN +{v} MMUSD","MMbbl recuperáveis reparando {n} poços · VPL +{v} MMUSD");
 A('v.p3',"controles automáticos de consistencia por archivo","automatic consistency checks per file","contrôles automatiques de cohérence par fichier","controles automáticos de consistência por arquivo");

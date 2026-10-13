@@ -1,5 +1,5 @@
 /* H3L · Revisión de reservas PD — interfaz: tablero, caso STAR, soportes, ficha de venta y recorrido guiado.
-   Desarrollado por Leandro Collell. */
+   H3L Global Energy. */
 (function(){'use strict';
 var R=window.RES,V=window.VZ,P=R.P,$=function(id){return document.getElementById(id)};
 var f=V.fmt,sg=V.sgn;

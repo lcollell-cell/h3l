@@ -1,6 +1,6 @@
 /* H3L · consulta en lenguaje natural sobre la revisión de reservas PD.
    Interpreta la pregunta (es/en/fr/pt, con o sin tildes), consulta el análisis actual y responde con cifras, evidencia y fuentes.
-   Es un intérprete de reglas que corre en el navegador (no un modelo de lenguaje). Desarrollado por Leandro Collell. */
+   Es un intérprete de reglas que corre en el navegador (no un modelo de lenguaje). H3L Global Energy. */
 (function(){'use strict';
 function nz(s){return String(s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'')}
 var RX={

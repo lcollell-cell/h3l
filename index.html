@@ -2,6 +2,8 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<script>/* El inicio es la portada con intro (v2/). Solo se queda aquí si se pide una sección con ?go= */
+(function(){try{if(!/[?&]go=/.test(location.search)&&!/[?&]stay/.test(location.search))location.replace('v2/'+location.hash)}catch(e){}})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>H3L Global Energy — Energy Transition & ESG Intelligence</title>
 <style>
@@ -1045,6 +1047,8 @@ tr:hover td{background:var(--blue-ghost);}
 }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="assets/site.css">
+<script src="assets/site.js" defer></script>
 </head>
 <body>
 
@@ -1052,529 +1056,36 @@ tr:hover td{background:var(--blue-ghost);}
 <div class="toast-container" id="toastContainer"></div>
 
 <!-- ═══ NAVBAR ═══ -->
-<nav class="navbar">
-  <div class="nav-logo">
-    <img src="LOGO_H3L.png" alt="H3L Global Energy" class="nav-logo-img" id="nav-logo-img"
-      style="height:42px;width:auto;object-fit:contain;">
-  </div>
-  <button class="hamburger" id="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Menú">
+<nav class="navbar" aria-label="Principal">
+  <a class="nav-logo" href="v2/" aria-label="H3L Global Energy — inicio">
+    <img src="LOGO_H3L.png" alt="H3L Global Energy" class="nav-logo-img" id="nav-logo-img" style="height:42px;width:auto;object-fit:contain;">
+  </a>
+  <button class="hamburger" id="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Menú" aria-expanded="false" aria-controls="nav-links-list">
     <span></span><span></span><span></span>
   </button>
   <div class="nav-links" id="nav-links-list">
-    <button class="nav-link active" id="nl-home"      onclick="goSection('home')"      >Inicio</button>
-    <button class="nav-link"        id="nl-somos"     onclick="goSection('somos')"     >Quiénes Somos</button>
-    <button class="nav-link"        id="nl-dashboard" onclick="goSection('dashboard')" >Dashboard</button>
-    <button class="nav-link"        id="nl-noticias"  onclick="goSection('noticias')"  >Noticias O&amp;G</button>
-    <button class="nav-link"        id="nl-contacto"  onclick="goSection('contacto')"  >Contacto</button>
-    <button class="nav-link"        id="nl-eventos"   onclick="goSection('eventos')"   >Eventos</button>
-    <button class="nav-link"        id="nl-confiaron" onclick="goSection('confiaron')" style="display:none;">Clientes</button>
-    <div class="nav-drop-wrap" id="nav-drop-wrap">
-      <button class="nav-link nav-drop-btn" id="nl-tools" onclick="toggleDrop(event)">
-        Herramientas <span id="drop-caret" style="font-size:9px;transition:transform .2s;display:inline-block;">▾</span>
-      </button>
-      <div class="nav-dropdown" id="nav-dropdown">
-        <button onclick="goSection('calculators')">Calculadoras</button>
-        <button id="dd-agentes" onclick="goSection('agentes')" style="color:var(--success);font-weight:700;">IA Agentes</button>
-        <button id="dd-qcapps"  onclick="goSection('qcapps')"  style="color:var(--blue-core);font-weight:700;">IA QC Apps</button>
-        <button id="dd-demos-og" onclick="goSection('demos-og')" style="color:var(--blue-dark);font-weight:700;">📦 19 Demos O&amp;G</button>
-        <button id="dd-demos-et" onclick="goSection('demos-et')" style="color:#047857;font-weight:700;">🌿 20 Demos E.T.</button>
-        <button onclick="goSection('papers')">Papers Técnicos</button>
-        <button onclick="goSection('files')">Entregables</button>
-        <button onclick="goSection('audit')">Auditoría</button>
-        <button onclick="goSection('features')">Funciones</button>
-        <button onclick="goSection('suscripcion')">Suscripción</button>
-      </div>
-    </div>
+    <button class="nav-link" id="nl-somos"     onclick="goSection('somos')"     data-t="nav_somos">Quiénes somos</button>
+    <button class="nav-link" id="nl-servicios" onclick="goSection('servicios')" data-t="nav_servicios">Servicios</button>
+    <button class="nav-link" id="nl-noticias"  onclick="goSection('noticias')"  data-t="nav_noticias">Noticias OIL &amp; GAS</button>
+    <button class="nav-link" id="nl-eventos"   onclick="goSection('eventos')"   data-t="nav_eventos">Eventos</button>
+    <button class="nav-link" id="nl-contacto"  onclick="goSection('contacto')"  data-t="nav_contacto">Contactos</button>
   </div>
   <div class="nav-actions">
-    <select class="lang-select" onchange="changeLang(this.value)" id="lang-desktop">
+    <select class="lang-select" onchange="changeLang(this.value)" id="lang-desktop" aria-label="Idioma / Language">
       <option value="es">ES</option>
       <option value="en">EN</option>
       <option value="fr">FR</option>
       <option value="pt">PT</option>
     </select>
-    <button class="btn-nav-login"    onclick="goSection('auth')">Iniciar Sesión</button>
-    <button class="btn-nav-register" onclick="goSection('registro')">Registro</button>
   </div>
 </nav>
 
-<!-- WELCOME BANNER -->
-<div id="welcome-banner" style="display:none;position:fixed;top:64px;left:0;right:0;z-index:997;
-  padding:8px 24px;display:flex;align-items:center;justify-content:space-between;
-  font-family:var(--font-body);font-size:13px;font-weight:600;">
-  <span id="welcome-text"></span>
-  <button onclick="doLogout()" style="background:transparent;border:1px solid var(--blue-core);
-    color:var(--blue-dark);font-family:var(--font-body);font-size:11px;font-weight:600;
-    padding:3px 12px;border-radius:3px;cursor:pointer;">Cerrar Sesión</button>
-</div>
+<button type="button" id="back-svc" class="btn-s back-svc" onclick="goSection('servicios')" style="display:none">← <span data-t="nav_servicios">Servicios</span></button>
 
 <!-- ═══ MAIN ═══ -->
 <main class="main">
 
 <!-- HOME — full-bleed hero -->
-<section id="section-home" class="section active" style="padding:0;min-height:100vh;">
-  <div class="hero-outer">
-    <!-- Slides -->
-    <div class="hero-slides">
-
-<div class="hero-slide active" id="slide-0">
-  <svg viewBox="0 0 1400 700" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;object-fit:cover;">
-  <defs>
-    <linearGradient id="sky1" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#0A1628"/>
-      <stop offset="60%" stop-color="#132240"/>
-      <stop offset="100%" stop-color="#1B3A6B"/>
-    </linearGradient>
-    <linearGradient id="sun1" cx="50%" cy="50%" r="50%" fx="50%" fy="50%" gradientUnits="objectBoundingBox" id="sunG">
-      <stop offset="0%" stop-color="#F5A623" stop-opacity=".9"/>
-      <stop offset="100%" stop-color="#E87722" stop-opacity="0"/>
-    </linearGradient>
-    <radialGradient id="sunG" cx="70%" cy="55%" r="25%">
-      <stop offset="0%" stop-color="#F5C842" stop-opacity=".9"/>
-      <stop offset="100%" stop-color="#E87722" stop-opacity="0"/>
-    </radialGradient>
-  </defs>
-  <!-- Sky -->
-  <rect width="1400" height="700" fill="url(#sky1)"/>
-  <!-- Sun glow -->
-  <ellipse cx="980" cy="320" rx="200" ry="160" fill="url(#sunG)"/>
-  <!-- Horizon water reflection -->
-  <rect x="0" y="500" width="1400" height="200" fill="#0D1E35" opacity=".9"/>
-  <path d="M0,500 Q350,490 700,502 T1400,498 L1400,510 Q1050,502 700,514 T0,512 Z" fill="#162B4A"/>
-  <!-- Platform structure -->
-  <g opacity=".95">
-    <!-- Main legs -->
-    <rect x="480" y="280" width="18" height="220" fill="#1A3A5C"/>
-    <rect x="680" y="300" width="18" height="200" fill="#1A3A5C"/>
-    <rect x="880" y="280" width="18" height="220" fill="#1A3A5C"/>
-    <!-- Cross bracing -->
-    <line x1="480" y1="350" x2="698" y2="400" stroke="#1D3F63" stroke-width="6"/>
-    <line x1="698" y1="350" x2="480" y2="400" stroke="#1D3F63" stroke-width="6"/>
-    <line x1="698" y1="360" x2="898" y2="400" stroke="#1D3F63" stroke-width="6"/>
-    <line x1="898" y1="360" x2="698" y2="400" stroke="#1D3F63" stroke-width="6"/>
-    <!-- Main deck -->
-    <rect x="440" y="270" width="500" height="28" rx="3" fill="#1E3F62"/>
-    <rect x="450" y="255" width="480" height="18" rx="2" fill="#24507A"/>
-    <!-- Derrick -->
-    <polygon points="680,80 710,270 650,270" fill="#2A567E"/>
-    <polygon points="680,80 700,270 660,270" fill="#1E3F62"/>
-    <!-- Cross members on derrick -->
-    <line x1="662" y1="140" x2="698" y2="140" stroke="#2A567E" stroke-width="4"/>
-    <line x1="656" y1="180" x2="704" y2="180" stroke="#2A567E" stroke-width="4"/>
-    <line x1="650" y1="220" x2="710" y2="220" stroke="#2A567E" stroke-width="4"/>
-    <!-- Helipad -->
-    <circle cx="530" cy="260" r="32" fill="#1A3A5C" stroke="#2E6BC4" stroke-width="2"/>
-    <text x="530" y="265" text-anchor="middle" fill="#4A88D8" font-size="18" font-weight="bold">H</text>
-    <!-- Flare boom -->
-    <line x1="900" y1="268" x2="980" y2="200" stroke="#1E3F62" stroke-width="7"/>
-    <ellipse cx="985" cy="193" rx="14" ry="22" fill="#FF6B1A" opacity=".9"/>
-    <ellipse cx="985" cy="185" rx="8" ry="14" fill="#FFB547" opacity=".8"/>
-    <!-- Crane -->
-    <rect x="820" y="200" width="8" height="70" fill="#1A3A5C"/>
-    <line x1="824" y1="200" x2="870" y2="195" stroke="#1A3A5C" stroke-width="6"/>
-    <line x1="870" y1="195" x2="870" y2="230" stroke="#1A3A5C" stroke-width="3" stroke-dasharray="5,3"/>
-    <!-- Module boxes -->
-    <rect x="470" y="235" width="80" height="22" rx="2" fill="#1C3D5E"/>
-    <rect x="560" y="233" width="100" height="24" rx="2" fill="#1C3D5E"/>
-    <rect x="670" y="235" width="70" height="22" rx="2" fill="#203F60"/>
-    <rect x="750" y="234" width="90" height="23" rx="2" fill="#1C3D5E"/>
-    <!-- Lights -->
-    <circle cx="488" cy="248" r="3" fill="#FFCC44"/>
-    <circle cx="570" cy="246" r="3" fill="#FFCC44"/>
-    <circle cx="760" cy="247" r="3" fill="#FFCC44"/>
-    <circle cx="850" cy="248" r="3" fill="#FF4444"/>
-  </g>
-  <!-- Water ripples -->
-  <ellipse cx="680" cy="520" rx="180" ry="12" fill="#1D3755" opacity=".6"/>
-  <ellipse cx="680" cy="540" rx="140" ry="8" fill="#1D3755" opacity=".4"/>
-  <!-- Stars -->
-  <circle cx="200" cy="80" r="1.5" fill="#fff" opacity=".7"/>
-  <circle cx="350" cy="50" r="1" fill="#fff" opacity=".6"/>
-  <circle cx="120" cy="140" r="1" fill="#fff" opacity=".5"/>
-  <circle cx="1100" cy="60" r="1.5" fill="#fff" opacity=".7"/>
-  <circle cx="1250" cy="100" r="1" fill="#fff" opacity=".5"/>
-  <!-- Pipeline -->
-  <path d="M0,540 Q400,530 700,545 T1400,538" stroke="#1A3A5C" stroke-width="12" fill="none"/>
-  <path d="M0,540 Q400,530 700,545 T1400,538" stroke="#24507A" stroke-width="8" fill="none"/>
-</svg>
-</div>
-<div class="hero-slide" id="slide-1">
-  <svg viewBox="0 0 1400 700" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;object-fit:cover;">
-  <defs>
-    <linearGradient id="sky2" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#0B1E3D"/>
-      <stop offset="45%" stop-color="#1B3A6B"/>
-      <stop offset="100%" stop-color="#2E6BC4"/>
-    </linearGradient>
-    <radialGradient id="sun2" cx="25%" cy="50%" r="30%">
-      <stop offset="0%" stop-color="#FFF5D0" stop-opacity=".95"/>
-      <stop offset="100%" stop-color="#FFA500" stop-opacity="0"/>
-    </radialGradient>
-  </defs>
-  <rect width="1400" height="700" fill="url(#sky2)"/>
-  <ellipse cx="350" cy="350" rx="280" ry="220" fill="url(#sun2)"/>
-  <!-- Ground -->
-  <rect x="0" y="540" width="1400" height="160" fill="#0D1E35"/>
-  <path d="M0,540 Q700,528 1400,542 L1400,560 Q700,548 0,560 Z" fill="#142234"/>
-  <!-- Wind turbines - large -->
-  <g>
-    <!-- T1 -->
-    <rect x="218" y="200" width="8" height="340" fill="#1A3A5C"/>
-    <line x1="222" y1="200" x2="222" y2="200" stroke="none"/>
-    <!-- blades -->
-    <line x1="222" y1="200" x2="180" y2="100" stroke="#1E4066" stroke-width="12" stroke-linecap="round"/>
-    <line x1="222" y1="200" x2="264" y2="100" stroke="#1E4066" stroke-width="12" stroke-linecap="round"/>
-    <line x1="222" y1="200" x2="222" y2="305" stroke="#1E4066" stroke-width="12" stroke-linecap="round"/>
-    <circle cx="222" cy="200" r="10" fill="#24507A"/>
-    <!-- T2 -->
-    <rect x="498" y="240" width="7" height="300" fill="#1A3A5C"/>
-    <line x1="501" y1="240" x2="465" y2="152" stroke="#1E4066" stroke-width="11" stroke-linecap="round"/>
-    <line x1="501" y1="240" x2="537" y2="152" stroke="#1E4066" stroke-width="11" stroke-linecap="round"/>
-    <line x1="501" y1="240" x2="501" y2="337" stroke="#1E4066" stroke-width="11" stroke-linecap="round"/>
-    <circle cx="501" cy="240" r="9" fill="#24507A"/>
-    <!-- T3 large -->
-    <rect x="800" y="160" width="10" height="380" fill="#1A3A5C"/>
-    <line x1="805" y1="160" x2="758" y2="50" stroke="#1E4066" stroke-width="14" stroke-linecap="round"/>
-    <line x1="805" y1="160" x2="852" y2="50" stroke="#1E4066" stroke-width="14" stroke-linecap="round"/>
-    <line x1="805" y1="160" x2="805" y2="272" stroke="#1E4066" stroke-width="14" stroke-linecap="round"/>
-    <circle cx="805" cy="160" r="12" fill="#24507A"/>
-    <!-- T4 -->
-    <rect x="1080" y="210" width="8" height="330" fill="#1A3A5C"/>
-    <line x1="1084" y1="210" x2="1048" y2="120" stroke="#1E4066" stroke-width="12" stroke-linecap="round"/>
-    <line x1="1084" y1="210" x2="1120" y2="120" stroke="#1E4066" stroke-width="12" stroke-linecap="round"/>
-    <line x1="1084" y1="210" x2="1084" y2="305" stroke="#1E4066" stroke-width="12" stroke-linecap="round"/>
-    <circle cx="1084" cy="210" r="10" fill="#24507A"/>
-    <!-- T5 small bg -->
-    <rect x="1280" y="280" width="5" height="260" fill="#1A3A5C" opacity=".7"/>
-    <line x1="1282" y1="280" x2="1260" y2="220" stroke="#1E4066" stroke-width="8" stroke-linecap="round" opacity=".7"/>
-    <line x1="1282" y1="280" x2="1304" y2="220" stroke="#1E4066" stroke-width="8" stroke-linecap="round" opacity=".7"/>
-    <line x1="1282" y1="280" x2="1282" y2="340" stroke="#1E4066" stroke-width="8" stroke-linecap="round" opacity=".7"/>
-    <circle cx="1282" cy="280" r="6" fill="#24507A" opacity=".7"/>
-  </g>
-  <!-- Solar panels ground-mount -->
-  <g>
-    <rect x="80" y="510" width="140" height="24" rx="3" fill="#1B3A6B" transform="rotate(-8,150,522)"/>
-    <rect x="82" y="510" width="136" height="22" rx="2" fill="none" stroke="#2E6BC4" stroke-width="1" transform="rotate(-8,150,522)"/>
-    <line x1="116" y1="505" x2="112" y2="532" stroke="#1A3A5C" stroke-width="3" transform="rotate(-8,150,522)"/>
-    <line x1="150" y1="505" x2="146" y2="532" stroke="#1A3A5C" stroke-width="3" transform="rotate(-8,150,522)"/>
-    <line x1="184" y1="505" x2="180" y2="532" stroke="#1A3A5C" stroke-width="3" transform="rotate(-8,150,522)"/>
-
-    <rect x="250" y="510" width="140" height="24" rx="3" fill="#1B3A6B" transform="rotate(-8,320,522)"/>
-    <rect x="252" y="510" width="136" height="22" rx="2" fill="none" stroke="#2E6BC4" stroke-width="1" transform="rotate(-8,320,522)"/>
-    
-    <rect x="1000" y="505" width="160" height="24" rx="3" fill="#1B3A6B" transform="rotate(-6,1080,517)"/>
-    <rect x="1002" y="505" width="156" height="22" rx="2" fill="none" stroke="#2E6BC4" stroke-width="1" transform="rotate(-6,1080,517)"/>
-    <rect x="1170" y="507" width="160" height="24" rx="3" fill="#1B3A6B" transform="rotate(-6,1250,519)"/>
-  </g>
-  <!-- Power lines -->
-  <line x1="200" y1="540" x2="500" y2="540" stroke="#1A3A5C" stroke-width="2"/>
-  <line x1="200" y1="540" x2="200" y2="510" stroke="#1A3A5C" stroke-width="2"/>
-  <line x1="500" y1="540" x2="500" y2="510" stroke="#1A3A5C" stroke-width="2"/>
-  <path d="M200,515 Q350,507 500,515" stroke="#2E6BC4" stroke-width="1.5" fill="none" opacity=".6"/>
-  <!-- Birds -->
-  <path d="M600,180 Q606,174 612,180" stroke="#fff" stroke-width="1.5" fill="none" opacity=".5"/>
-  <path d="M625,165 Q632,158 640,165" stroke="#fff" stroke-width="1.5" fill="none" opacity=".4"/>
-</svg>
-</div>
-<div class="hero-slide" id="slide-2">
-  <svg viewBox="0 0 1400 700" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;object-fit:cover;">
-  <defs>
-    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#060E1C"/>
-      <stop offset="50%" stop-color="#0B1E3D"/>
-      <stop offset="100%" stop-color="#111E35"/>
-    </linearGradient>
-    <linearGradient id="barG" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#2E6BC4"/>
-      <stop offset="100%" stop-color="#1B3F7A"/>
-    </linearGradient>
-    <linearGradient id="lineG" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#4A88D8"/>
-      <stop offset="50%" stop-color="#2E6BC4"/>
-      <stop offset="100%" stop-color="#6BAAFF"/>
-    </linearGradient>
-  </defs>
-  <rect width="1400" height="700" fill="url(#bg3)"/>
-  <!-- Grid lines -->
-  <g stroke="rgba(46,107,196,0.12)" stroke-width="1">
-    <line x1="0" y1="140" x2="1400" y2="140"/>
-    <line x1="0" y1="220" x2="1400" y2="220"/>
-    <line x1="0" y1="300" x2="1400" y2="300"/>
-    <line x1="0" y1="380" x2="1400" y2="380"/>
-    <line x1="0" y1="460" x2="1400" y2="460"/>
-    <line x1="180" y1="80" x2="180" y2="700"/>
-    <line x1="380" y1="80" x2="380" y2="700"/>
-    <line x1="580" y1="80" x2="580" y2="700"/>
-    <line x1="780" y1="80" x2="780" y2="700"/>
-    <line x1="980" y1="80" x2="980" y2="700"/>
-    <line x1="1180" y1="80" x2="1180" y2="700"/>
-  </g>
-  <!-- Main line chart -->
-  <path d="M80,420 C150,400 200,360 280,330 S380,280 460,260 S560,200 640,190 S740,185 820,170 S920,155 1000,145 S1100,140 1180,138 S1300,142 1380,140"
-    fill="none" stroke="url(#lineG)" stroke-width="3"/>
-  <!-- Area under line -->
-  <path d="M80,420 C150,400 200,360 280,330 S380,280 460,260 S560,200 640,190 S740,185 820,170 S920,155 1000,145 S1100,140 1180,138 S1300,142 1380,140 L1380,580 L80,580 Z"
-    fill="url(#barG)" opacity=".12"/>
-  <!-- Second line -->
-  <path d="M80,480 C180,470 250,450 350,440 S480,420 560,400 S660,370 740,350 S840,320 940,310 S1040,300 1140,295 S1280,290 1380,288"
-    fill="none" stroke="#4A88D8" stroke-width="2" stroke-dasharray="8,4" opacity=".6"/>
-  <!-- Bar chart background -->
-  <g opacity=".85">
-    <rect x="100" y="440" width="44" height="120" rx="2" fill="url(#barG)"/>
-    <rect x="180" y="400" width="44" height="160" rx="2" fill="url(#barG)"/>
-    <rect x="260" y="360" width="44" height="200" rx="2" fill="url(#barG)"/>
-    <rect x="340" y="320" width="44" height="240" rx="2" fill="url(#barG)"/>
-    <rect x="420" y="300" width="44" height="260" rx="2" fill="url(#barG)"/>
-    <rect x="500" y="270" width="44" height="290" rx="2" fill="url(#barG)"/>
-  </g>
-  <!-- Scatter dots -->
-  <g fill="#4DBBFF" opacity=".7">
-    <circle cx="700" cy="280" r="8"/>
-    <circle cx="780" cy="250" r="6"/>
-    <circle cx="860" cy="220" r="10"/>
-    <circle cx="940" cy="200" r="7"/>
-    <circle cx="1020" cy="180" r="9"/>
-    <circle cx="1100" cy="165" r="6"/>
-    <circle cx="1180" cy="155" r="8"/>
-    <circle cx="1260" cy="148" r="5"/>
-  </g>
-  <!-- Dashboard panel top right -->
-  <rect x="880" y="80" width="480" height="300" rx="6" fill="rgba(11,30,61,0.7)" stroke="rgba(46,107,196,0.25)" stroke-width="1"/>
-  <rect x="880" y="80" width="480" height="32" rx="6" fill="rgba(30,64,122,0.6)"/>
-  <rect x="880" y="95" width="480" height="17" fill="rgba(30,64,122,0.6)"/>
-  <text x="896" y="102" fill="rgba(255,255,255,0.7)" font-size="12" font-family="monospace">H3L Analytics — Upstream O&amp;G KPIs</text>
-  <!-- Mini KPIs inside panel -->
-  <g>
-    <rect x="896" y="124" width="130" height="56" rx="3" fill="rgba(46,107,196,0.15)" stroke="rgba(46,107,196,0.2)" stroke-width="1"/>
-    <text x="910" y="143" fill="rgba(255,255,255,0.5)" font-size="9" font-family="monospace">PRODUCCIÓN</text>
-    <text x="910" y="168" fill="#4DBBFF" font-size="22" font-family="monospace" font-weight="bold">12,450</text>
-    <text x="910" y="180" fill="rgba(255,255,255,0.4)" font-size="9" font-family="monospace">bbl/d · ▲ 3.2%</text>
-    
-    <rect x="1036" y="124" width="130" height="56" rx="3" fill="rgba(26,127,90,0.15)" stroke="rgba(26,127,90,0.2)" stroke-width="1"/>
-    <text x="1050" y="143" fill="rgba(255,255,255,0.5)" font-size="9" font-family="monospace">RESERVAS 1P</text>
-    <text x="1050" y="168" fill="#4AE0A0" font-size="22" font-family="monospace" font-weight="bold">48.3</text>
-    <text x="1050" y="180" fill="rgba(255,255,255,0.4)" font-size="9" font-family="monospace">MMbbl · estable</text>
-    
-    <rect x="1176" y="124" width="164" height="56" rx="3" fill="rgba(197,48,48,0.12)" stroke="rgba(197,48,48,0.2)" stroke-width="1"/>
-    <text x="1190" y="143" fill="rgba(255,255,255,0.5)" font-size="9" font-family="monospace">EMISIONES CO₂</text>
-    <text x="1190" y="168" fill="#FF8080" font-size="22" font-family="monospace" font-weight="bold">18.4</text>
-    <text x="1190" y="180" fill="rgba(255,255,255,0.4)" font-size="9" font-family="monospace">kgCO₂/bbl · ▼ 2.1%</text>
-  </g>
-  <!-- Mini bar chart in panel -->
-  <g>
-    <text x="896" y="206" fill="rgba(255,255,255,0.4)" font-size="9" font-family="monospace">PRODUCCIÓN MENSUAL (bbl/d × 1000)</text>
-    <rect x="896" y="212" width="30" height="50" rx="1" fill="rgba(46,107,196,0.4)"/>
-    <rect x="932" y="205" width="30" height="57" rx="1" fill="rgba(46,107,196,0.5)"/>
-    <rect x="968" y="198" width="30" height="64" rx="1" fill="rgba(46,107,196,0.6)"/>
-    <rect x="1004" y="192" width="30" height="70" rx="1" fill="rgba(46,107,196,0.7)"/>
-    <rect x="1040" y="185" width="30" height="77" rx="1" fill="rgba(46,107,196,0.8)"/>
-    <rect x="1076" y="178" width="30" height="84" rx="1" fill="rgba(46,107,196,0.9)"/>
-    <rect x="1112" y="170" width="30" height="92" rx="1" fill="#2E6BC4"/>
-    <rect x="1148" y="163" width="30" height="99" rx="1" fill="#2E6BC4"/>
-    <rect x="1184" y="175" width="30" height="87" rx="1" fill="rgba(46,107,196,0.8)"/>
-    <rect x="1220" y="168" width="30" height="94" rx="1" fill="#2E6BC4"/>
-    <rect x="1256" y="158" width="30" height="104" rx="1" fill="#4A88D8"/>
-    <rect x="1292" y="152" width="30" height="110" rx="1" fill="#4A88D8"/>
-    <!-- Axis -->
-    <line x1="896" y1="262" x2="1330" y2="262" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
-  </g>
-  <!-- Connection lines data flow -->
-  <g opacity=".25" stroke="#2E6BC4" stroke-width="1">
-    <path d="M400,300 Q550,250 640,190" fill="none" stroke-dasharray="4,4"/>
-    <path d="M460,260 Q580,220 640,190" fill="none" stroke-dasharray="4,4"/>
-  </g>
-  <!-- Data points highlights -->
-  <circle cx="640" cy="190" r="5" fill="#4DBBFF"/>
-  <circle cx="640" cy="190" r="12" fill="none" stroke="#4DBBFF" stroke-width="1.5" opacity=".4"/>
-  <circle cx="820" cy="170" r="4" fill="#6BAAFF"/>
-  <circle cx="1000" cy="145" r="4" fill="#6BAAFF"/>
-</svg>
-</div>
-
-    </div>
-    <!-- Overlay -->
-    <div class="hero-overlay"></div>
-    <!-- Content -->
-    <div class="hero-content">
-      <div class="hero-kicker">H3L Global Energy · CEE · LATAM</div>
-      <h1 class="hero-title">
-        Upstream<br>
-        <span>Oil &amp; Gas</span><br>
-        <em>&amp; Energy Transition</em>
-      </h1>
-      <p class="hero-sub">
-        Plataforma de ingeniería y data science para la industria energética. 40 calculadoras certificadas, 32 agentes IA, 87 apps de QC y auditoría técnica ESG — todo en una sola herramienta.
-      </p>
-      <div class="hero-ctas">
-        <button class="btn-hero btn-hero-primary" onclick="goSection('calculators')">Explorar Calculadoras</button>
-        <button class="btn-hero btn-hero-secondary" onclick="goSection('dashboard')">Ver Dashboard</button>
-        <a href="Brochure%20Empresarial_MOD.pdf" download class="btn-hero btn-hero-brochure" onclick="handleBrochureClick(event)">Descargar Brochure</a>
-      </div>
-      <div class="stats-row">
-        <div class="stat-item"><div class="stat-num">40</div><div class="stat-label">Calculadoras</div></div>
-        <div class="stat-item"><div class="stat-num">32</div><div class="stat-label">Agentes IA</div></div>
-        <div class="stat-item"><div class="stat-num">87</div><div class="stat-label">Apps QC</div></div>
-        <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">Idiomas</div></div>
-      </div>
-    </div>
-    <!-- Slide dots -->
-    <div class="slide-dots">
-      <button class="slide-dot active" onclick="heroGoSlide(0)"></button>
-      <button class="slide-dot" onclick="heroGoSlide(1)"></button>
-      <button class="slide-dot" onclick="heroGoSlide(2)"></button>
-    </div>
-  </div>
-  <!-- Feature cards -->
-  <div class="feature-cards-section" style="background:var(--white);padding:64px 48px;">
-    <div class="section-header" style="margin-bottom:36px;">
-      <div class="section-eyebrow">Soluciones</div>
-      <h2 class="section-title">Áreas de Especialización</h2>
-      <p class="section-desc">Herramientas de ingeniería, IA y analítica para cada desafío del sector energético</p>
-    </div>
-    <div class="feature-cards-grid">
-
-<div class="feat-card" onclick="goSection('calculators')">
-  <div class="feat-card-img">
-    <svg viewBox="0 0 420 200" xmlns="http://www.w3.org/2000/svg">
-      <rect width="420" height="200" fill="#0B1E35"/>
-      <!-- Offshore platform mini -->
-      <rect x="140" y="60" width="140" height="8" rx="1" fill="#1E4A70"/>
-      <rect x="170" y="68" width="8" height="80" fill="#1A3A5C"/>
-      <rect x="242" y="68" width="8" height="80" fill="#1A3A5C"/>
-      <polygon points="206,20 220,60 192,60" fill="#2357A5"/>
-      <line x1="198" y1="38" x2="214" y2="38" stroke="#2357A5" stroke-width="3"/>
-      <line x1="196" y1="50" x2="216" y2="50" stroke="#2357A5" stroke-width="3"/>
-      <ellipse cx="206" cy="150" r="80" ry="12" fill="#122638" opacity=".8"/>
-      <ellipse cx="206" cy="148" r="90" ry="8" fill="#1B3A6B" opacity=".5"/>
-      <!-- Flame -->
-      <ellipse cx="310" cy="65" rx="8" ry="13" fill="#FF6B1A" opacity=".9"/>
-      <ellipse cx="310" cy="60" rx="4" ry="8" fill="#FFB547"/>
-      <rect x="305" y="75" width="4" height="30" fill="#1A3A5C"/>
-      <!-- Pump jack -->
-      <rect x="58" y="120" width="4" height="40" fill="#1E4066"/>
-      <ellipse cx="60" cy="118" rx="12" ry="4" fill="#1E4066"/>
-      <path d="M48,108 Q60,90 72,108" stroke="#2357A5" stroke-width="4" fill="none"/>
-      <!-- Data overlay lines -->
-      <path d="M0,170 Q100,155 200,160 T420,155" stroke="#2E6BC4" stroke-width="1.5" fill="none" opacity=".5"/>
-      <path d="M0,180 Q100,168 200,172 T420,168" stroke="#4A88D8" stroke-width="1" fill="none" opacity=".35"/>
-    </svg>
-  </div>
-  <div class="feat-card-body">
-    <div class="feat-card-cat">Oil &amp; Gas · Upstream</div>
-    <div class="feat-card-title">Calculadoras de Reservorio</div>
-    <div class="feat-card-desc">40 calculadoras técnicas certificadas: OOIP, curvas de decline, IPR, balance material, PRMS 2018, Gas Lift y más para ingeniería de reservorio.</div>
-    <span class="feat-card-link">Explorar calculadoras</span>
-  </div>
-</div>
-<div class="feat-card" onclick="goSection('demos-et')">
-      <line x1="92" y1="80" x2="70" y2="32" stroke="#1E4066" stroke-width="7" stroke-linecap="round"/>
-      <line x1="92" y1="80" x2="114" y2="32" stroke="#1E4066" stroke-width="7" stroke-linecap="round"/>
-      <line x1="92" y1="80" x2="92" y2="128" stroke="#1E4066" stroke-width="7" stroke-linecap="round"/>
-      <circle cx="92" cy="80" r="6" fill="#2357A5"/>
-      <rect x="210" y="95" width="4" height="100" fill="#1A3A5C"/>
-      <line x1="212" y1="95" x2="195" y2="55" stroke="#1E4066" stroke-width="6" stroke-linecap="round"/>
-      <line x1="212" y1="95" x2="229" y2="55" stroke="#1E4066" stroke-width="6" stroke-linecap="round"/>
-      <line x1="212" y1="95" x2="212" y2="135" stroke="#1E4066" stroke-width="6" stroke-linecap="round"/>
-      <circle cx="212" cy="95" r="5" fill="#2357A5"/>
-      <!-- Solar panels -->
-      <rect x="300" y="140" width="110" height="20" rx="2" fill="#1B3A6B" transform="rotate(-5,355,150)"/>
-      <rect x="302" y="140" width="106" height="18" rx="1" fill="none" stroke="#2E6BC4" stroke-width="1" transform="rotate(-5,355,150)"/>
-      <!-- Sun glow -->
-      <circle cx="340" cy="45" r="30" fill="none" stroke="#4A88D8" stroke-width="1" opacity=".3"/>
-      <circle cx="340" cy="45" r="20" fill="rgba(74,136,216,0.15)"/>
-      <circle cx="340" cy="45" r="10" fill="rgba(74,136,216,0.3)"/>
-      <!-- CO2 arrow down -->
-      <text x="355" y="100" fill="#4AE0A0" font-size="22" font-family="monospace" font-weight="bold" opacity=".8">CO₂↓</text>
-      <!-- Ground -->
-      <rect x="0" y="165" width="420" height="35" fill="#0D1E2D"/>
-    </svg>
-  </div>
-  <div class="feat-card-body">
-    <div class="feat-card-cat">Transición Energética · ESG</div>
-    <div class="feat-card-title">20 Demos Transición Energética</div>
-    <div class="feat-card-desc">20 módulos de auditoría dinámica ESG: BESS/H2, huella de carbono, cumplimiento regulatorio, eficiencia hídrica, CapEx verde y más.</div>
-    <span class="feat-card-link">Ver 20 Demos E.T.</span>
-  </div>
-</div>
-<div class="feat-card" onclick="goSection('dashboard')">
-  <div class="feat-card-img">
-    <svg viewBox="0 0 420 200" xmlns="http://www.w3.org/2000/svg">
-      <rect width="420" height="200" fill="#06101E"/>
-      <!-- Grid -->
-      <g stroke="rgba(46,107,196,0.12)" stroke-width="1">
-        <line x1="0" y1="50" x2="420" y2="50"/>
-        <line x1="0" y1="100" x2="420" y2="100"/>
-        <line x1="0" y1="150" x2="420" y2="150"/>
-        <line x1="80" y1="0" x2="80" y2="200"/>
-        <line x1="180" y1="0" x2="180" y2="200"/>
-        <line x1="280" y1="0" x2="280" y2="200"/>
-        <line x1="380" y1="0" x2="380" y2="200"/>
-      </g>
-      <!-- Line chart -->
-      <path d="M10,160 C50,150 80,130 120,110 S180,80 220,68 S290,52 340,45 S390,43 420,42"
-        fill="none" stroke="#2E6BC4" stroke-width="2.5"/>
-      <path d="M10,160 C50,150 80,130 120,110 S180,80 220,68 S290,52 340,45 S390,43 420,42 L420,200 L10,200 Z"
-        fill="rgba(46,107,196,0.10)"/>
-      <!-- Second line -->
-      <path d="M10,175 C60,168 110,158 160,148 S240,130 300,120 S360,112 420,110"
-        fill="none" stroke="#4A88D8" stroke-width="1.5" stroke-dasharray="6,3" opacity=".7"/>
-      <!-- Bars -->
-      <rect x="20" y="140" width="18" height="45" rx="1" fill="rgba(46,107,196,0.5)"/>
-      <rect x="44" y="128" width="18" height="57" rx="1" fill="rgba(46,107,196,0.6)"/>
-      <rect x="68" y="115" width="18" height="70" rx="1" fill="rgba(46,107,196,0.7)"/>
-      <rect x="92" y="105" width="18" height="80" rx="1" fill="rgba(46,107,196,0.75)"/>
-      <!-- Highlight point -->
-      <circle cx="220" cy="68" r="5" fill="#4DBBFF"/>
-      <circle cx="220" cy="68" r="10" fill="none" stroke="#4DBBFF" stroke-width="1.5" opacity=".5"/>
-      <!-- Mini cards -->
-      <rect x="270" y="108" width="140" height="38" rx="3" fill="rgba(11,30,61,0.85)" stroke="rgba(46,107,196,0.3)" stroke-width="1"/>
-      <text x="280" y="123" fill="rgba(255,255,255,0.5)" font-size="8" font-family="monospace">PROD · bbl/d</text>
-      <text x="280" y="140" fill="#4DBBFF" font-size="16" font-family="monospace" font-weight="bold">12,450</text>
-      <rect x="270" y="152" width="140" height="38" rx="3" fill="rgba(11,30,61,0.85)" stroke="rgba(26,127,90,0.3)" stroke-width="1"/>
-      <text x="280" y="167" fill="rgba(255,255,255,0.5)" font-size="8" font-family="monospace">ML PRED · bbl/d</text>
-      <text x="280" y="184" fill="#4AE0A0" font-size="16" font-family="monospace" font-weight="bold">11,820</text>
-    </svg>
-  </div>
-  <div class="feat-card-body">
-    <div class="feat-card-cat">Data Science · Analytics</div>
-    <div class="feat-card-title">Dashboard Analítico O&amp;G</div>
-    <div class="feat-card-desc">Dashboard KPI interactivo con producción, decline curves, ML predictivo LSTM, carbon intensity, QC apps y análisis de datos para campos upstream.</div>
-    <span class="feat-card-link">Abrir Dashboard</span>
-  </div>
-</div>
-    </div>
-  </div>
-  <!-- Capabilities bar -->
-
-<div class="capabilities-bar">
-  <div class="cap-item" onclick="goSection('calculators')">
-    <span class="cap-icon">⚙️</span>
-    <div class="cap-title">Reservorios</div>
-    <div class="cap-desc">OOIP, Decline, IPR, PRMS 2018, Gas Lift</div>
-  </div>
-  <div class="cap-item" onclick="goSection('demos-og')">
-    <span class="cap-icon">📦</span>
-    <div class="cap-title">19 Demos O&amp;G</div>
-    <div class="cap-desc">DCA, M&amp;A, PRMS, ESP, EOR, ML, BI</div>
-  </div>
-  <div class="cap-item" onclick="goSection('qcapps')">
-    <span class="cap-icon">📊</span>
-    <div class="cap-title">QC &amp; Analytics</div>
-    <div class="cap-desc">87 apps de control de calidad de datos</div>
-  </div>
-  <div class="cap-item" onclick="goSection('demos-et')">
-    <span class="cap-icon">🌱</span>
-    <div class="cap-title">20 Demos E.T.</div>
-    <div class="cap-desc">BESS/H₂, CO₂, ESG, Off-grid, CapEx verde</div>
-  </div>
-  <div class="cap-item" onclick="goSection('audit')">
-    <span class="cap-icon">🔐</span>
-    <div class="cap-title">Auditoría</div>
-    <div class="cap-desc">30+ eventos, roles, trazabilidad completa</div>
-  </div>
-</div>
-
-</section>
 
 <!-- DASHBOARD -->
   <section id="section-dashboard" class="section">
@@ -2191,142 +1702,88 @@ tr:hover td{background:var(--blue-ghost);}
   </section>
 
   <!-- AUTH -->
-  <section id="section-auth" class="section" style="padding:0">
-    <div class="auth-container">
-      <div class="auth-card" style="max-width:460px;">
-        <!-- Logo -->
-        <div class="auth-logo" style="text-align:center;margin-bottom:24px;">
-          <div class="nav-logo" style="justify-content:center;gap:10px;">
-            <img src="LOGO_H3L_icon.png" alt="H3L" style="width:36px;height:36px;object-fit:contain;border-radius:6px;">
-            <span style="font-family:var(--font-body);font-weight:800;font-size:20px;">H3L <span style="color:var(--accent)">Global Energy</span></span>
-          </div>
-        </div>
 
-        <!-- Tabs Login / Registro -->
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;margin-bottom:24px;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
-          <button id="tab-login" onclick="authTab('login')"
-            style="padding:10px;font-family:var(--font-body);font-size:13px;font-weight:700;border:none;cursor:pointer;background:var(--accent);color:#000;transition:all .2s;">
-            Iniciar Sesión
-          </button>
-          <button id="tab-registro" onclick="authTab('registro')"
-            style="padding:10px;font-family:var(--font-body);font-size:13px;font-weight:600;border:none;cursor:pointer;background:var(--gray-50);color:var(--text-secondary);transition:all .2s;">
-            Registro Gratis
-          </button>
-        </div>
+  <!-- SOMOS H3L -->
 
-        <!-- ── PANEL LOGIN ── -->
-        <div id="panel-login">
-          <div class="form-group">
-            <label class="form-label">Nombre o Correo Electrónico</label>
-            <input class="form-input" type="text" id="authEmail" placeholder="Leandro Collell o usuario@empresa.com"
-              autocomplete="username" onkeydown="if(event.key==='Enter')doLogin()">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Contraseña</label>
-            <input class="form-input" type="password" id="authPass" placeholder="••••••••"
-              onkeydown="if(event.key==='Enter')doLogin()">
-          </div>
-          <div id="login-error" style="color:var(--danger);font-size:12px;margin-bottom:10px;min-height:16px;text-align:center;"></div>
-          <button class="btn-calc" onclick="doLogin()" style="width:100%;">Iniciar Sesión</button>
-          <p style="text-align:center;font-size:12px;color:var(--text-muted);margin-top:14px;">
-            ¿No tenés cuenta?
-            <button onclick="authTab('registro')" style="background:none;border:none;color:var(--accent);font-weight:600;cursor:pointer;font-size:12px;padding:0;">Registrate gratis →</button>
-          </p>
-        </div>
 
-        <!-- ── PANEL REGISTRO ── -->
-        <div id="panel-registro" style="display:none;">
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
-            <div><label class="form-label">NOMBRE *</label><input class="form-input" type="text" id="rn-nombre" placeholder="Juan"></div>
-            <div><label class="form-label">APELLIDO *</label><input class="form-input" type="text" id="rn-apellido" placeholder="García"></div>
+  <!-- QUIÉNES SOMOS -->
+  <section id="section-somos" class="section">
+    <div class="wrap">
+      <h2 class="sec-label" data-t="s_eyebrow">Quiénes somos</h2>
+      <div class="about-top">
+        <div>
+          <span class="about-badge" data-t="s_badge">Consultora energética especializada</span>
+          <h2 class="about-h" data-t="s_h">Firma independiente de asesoría energética</h2>
+          <p class="about-p" data-t="s_p1">Somos una firma independiente que ofrece asesoría técnica y estratégica especializada para afrontar los retos actuales del sector energético. Integramos innovación, eficiencia y sostenibilidad.</p>
+          <p class="about-p" data-t="s_p2">Nuestro enfoque se adapta a los nuevos modelos de negocio, cumpliendo con marcos regulatorios y estándares internacionales.</p>
+          <div class="about-cta">
+            <a class="btn-p" href="Brochure_H3L_Global_Energy_2026.pdf" download="Brochure_H3L_Global_Energy_2026.pdf" data-t="s_dl">Descargar brochure</a>
+            <button type="button" class="btn-s" onclick="goSection('contacto')" data-t="s_ct">Contáctanos</button>
           </div>
-          <div class="form-group" style="margin-bottom:12px;">
-            <label class="form-label">EMAIL *</label>
-            <input class="form-input" type="email" id="rn-email" placeholder="juan@empresa.com">
-          </div>
-          <div class="form-group" style="margin-bottom:12px;">
-            <label class="form-label">EMPRESA / ORGANIZACIÓN</label>
-            <input class="form-input" type="text" id="rn-empresa" placeholder="Empresa SA">
-          </div>
-          <div class="form-group" style="margin-bottom:12px;">
-            <label class="form-label">ROL *</label>
-            <select class="form-input" id="rn-rol">
-              <option value="">Seleccionar rol...</option>
-              <option value="Gerente">Gerente</option>
-              <option value="Analista">Analista</option>
-              <option value="Cliente">Cliente</option>
-              <option value="Auditor">Auditor</option>
-            </select>
-          </div>
-          <div class="form-group" style="margin-bottom:12px;">
-            <label class="form-label">CONTRASEÑA *</label>
-            <input class="form-input" type="password" id="rn-pass" placeholder="Mínimo 6 caracteres">
-          </div>
-          <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:16px;padding:10px;background:var(--gray-50);border-radius:var(--radius);">
-            <input type="checkbox" id="rn-nl" style="accent-color:var(--accent);margin-top:2px;" checked>
-            <label for="rn-nl" style="font-size:11px;color:var(--text-secondary);cursor:pointer;line-height:1.5;">
-              Suscribirme al <strong style="color:var(--accent);">Newsletter H3L</strong> — noticias O&amp;G y eventos del sector
-            </label>
-          </div>
-          <div id="registro-error" style="color:var(--danger);font-size:12px;margin-bottom:10px;min-height:16px;text-align:center;"></div>
-          <button class="btn-calc" onclick="doRegisterNew()" style="width:100%;">Crear Cuenta Gratis</button>
-          <p style="text-align:center;font-size:12px;color:var(--text-muted);margin-top:12px;">
-            ¿Ya tenés cuenta?
-            <button onclick="authTab('login')" style="background:none;border:none;color:var(--accent);font-weight:600;cursor:pointer;font-size:12px;padding:0;">Iniciar sesión →</button>
-          </p>
         </div>
+        <div class="facts">
+          <div class="fact"><svg class="fact-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.8 4 5.8 4 9s-1.4 6.2-4 9c-2.6-2.8-4-5.8-4-9s1.4-6.2 4-9z"/></svg><div class="fact-k" data-t="c1k">Presencia</div><div class="fact-v" data-t="c1v">LATAM y Europa</div><div class="fact-s" data-t="c1s">Equipos y proyectos en dos regiones</div></div>
+          <div class="fact"><svg class="fact-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.5 4.2 6 7.2 6 10.3A6 6 0 0 1 6 13.3C6 10.2 8.5 7.2 12 3z"/><path d="M9.5 14a2.6 2.6 0 0 0 2.5 2.4"/></svg><div class="fact-k" data-t="c2k">Especialidad</div><div class="fact-v" data-t="c2v">Oil &amp; Gas</div><div class="fact-s" data-t="c2s">Upstream, midstream y downstream, con foco en energía</div></div>
+          <div class="fact"><svg class="fact-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/><circle cx="16" cy="8" r="2"/></svg><div class="fact-k" data-t="c3k">Data Science</div><div class="fact-v" data-t="c3v">IA y analítica avanzada</div><div class="fact-s" data-t="c3s">Modelos predictivos, tableros y automatización</div></div>
+          <div class="fact"><svg class="fact-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6l8-3z"/><path d="M8.5 12l2.4 2.4 4.6-4.8"/></svg><div class="fact-k" data-t="c4k">Independiente</div><div class="fact-v" data-t="c4v">Sin conflicto de interés</div><div class="fact-s" data-t="c4s">Evaluaciones con trazabilidad y transparencia</div></div>
+        </div>
+      </div>
+
+      <div class="xp">
+        <div class="xp-n" aria-hidden="true"><b><span data-t="xp_big">+20</span></b><span data-t="xp_unit">años</span></div>
+        <div><h3 data-t="xp_h">Más de 20 años de experiencia en la industria energética</h3>
+        <p data-t="xp_p">Nuestro equipo reúne profesionales con trayectoria en distintas empresas multinacionales del sector, y pone esa experiencia al servicio de cada proyecto.</p></div>
+      </div>
+
+      <div class="mv">
+        <div class="mv-c"><h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></svg><span data-t="mv_m">Misión</span></h4><p data-t="mv_mp">Transformamos la evaluación y gestión de los recursos energéticos con soluciones integrales sostenibles, técnicas y data science avanzada.</p></div>
+        <div class="mv-c"><h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 12S5.5 5 12 5s10.5 7 10.5 7-4 7-10.5 7S1.5 12 1.5 12z"/><circle cx="12" cy="12" r="3"/></svg><span data-t="mv_v">Visión</span></h4><p data-t="mv_vp">Ser aliados estratégicos para optimizar Recursos y Reservas y liderar la transición energética con eficiencia.</p></div>
+      </div>
+
+      <h4 class="sub-h" data-t="mt_h">Nuestras metas</h4>
+      <div class="goals">
+        <div class="goal"><b>1</b><p data-t="mt1">Optimizar la gestión técnica de Recursos y Reservas energéticos.</p></div>
+        <div class="goal"><b>2</b><p data-t="mt2">Acelerar la transformación digital en la industria energética.</p></div>
+        <div class="goal"><b>3</b><p data-t="mt3">Impulsar la transición energética con enfoque técnico y estratégico.</p></div>
+      </div>
+
+      <div class="pv">
+        <div><h4 class="sub-h" data-t="pv_h">Propuesta de valor</h4>
+          <ul>
+            <li data-t="pv1">Evaluaciones técnicas y económicas con trazabilidad y transparencia.</li>
+            <li data-t="pv2">Enfoque independiente y libre de conflictos de interés.</li>
+            <li data-t="pv3">Soluciones innovadoras apoyadas en Data Science.</li>
+            <li data-t="pv4">Visión estratégica que integra sostenibilidad, normativa y gestión de riesgos.</li>
+            <li data-t="pv5">Flexibilidad para adaptarnos a marcos regulatorios en distintas jurisdicciones.</li>
+          </ul></div>
+        <div class="appr"><h4 class="sub-h" data-t="en_h">Nuestro enfoque</h4><p data-t="en_p">Sinergia · Sostenibilidad · Viabilidad</p></div>
       </div>
     </div>
   </section>
 
-  <!-- SOMOS H3L -->
-  <section id="section-somos" class="section">
-    <div class="section-header">
-      <div class="section-eyebrow">Quiénes Somos</div>
-      <h2 class="section-title">H3L Global Energy</h2>
-      <p class="section-desc">Consultora especializada en Recursos Energéticos — Soluciones energéticas integrales</p>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;max-width:1100px;margin:0 auto 40px;">
-      <div>
-        <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(46,107,196,.08);border:1px solid rgba(46,107,196,.20);border-radius:3px;padding:5px 14px;font-size:11px;color:var(--accent);font-weight:600;letter-spacing:.8px;margin-bottom:18px;">CONSULTORA ENERGÉTICA ESPECIALIZADA</div>
-        <h3 style="font-family:var(--font-body);font-size:28px;font-weight:800;line-height:1.2;margin-bottom:14px;">Firma independiente de<br><span style="color:var(--accent);">asesoría energética</span></h3>
-        <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:14px;">Somos una firma independiente que ofrece asesoría técnica y estratégica especializada para afrontar los retos actuales del sector energético. Integramos Innovación, eficiencia y sostenibilidad.</p>
-        <p style="color:var(--text-secondary);line-height:1.8;">Nuestro enfoque se adapta a los nuevos modelos de negocio, cumpliendo con marcos regulatorios y estándares internacionales.</p>
-        <div style="margin-top:22px;display:flex;gap:10px;flex-wrap:wrap;">
-          <a href="Brochure%20Empresarial_MOD.pdf" download style="display:inline-flex;align-items:center;gap:6px;background:var(--accent);color:#000;padding:10px 20px;border-radius:8px;font-weight:700;font-size:13px;text-decoration:none;font-family:var(--font-body);" onclick="handleBrochureClick(event)">Descargar Brochure</a>
-          <button onclick="goSection('contacto')" style="display:inline-flex;align-items:center;gap:6px;background:transparent;border:1px solid var(--border);color:var(--gray-900);padding:10px 20px;border-radius:8px;font-weight:600;font-size:13px;cursor:pointer;">Contáctanos</button>
+  <!-- SERVICIOS -->
+  <section id="section-servicios" class="section">
+    <div class="wrap">
+      <div class="svc-head">
+        <div class="svc-intro">
+          <h2 class="sec-label" data-t="sv_eyebrow">Servicios</h2>
+          <h3 class="svc-title" data-t="sv_title">Gestión integral de recursos energéticos</h3>
+          <p class="svc-desc" data-t="sv_desc">Siete líneas de servicio, cada una con la herramienta que usamos en el trabajo. Mirá el video y pedí tu cotización.</p>
+        </div>
+        <div class="svc-top-act">
+          <a class="btn-s" href="Brochure_H3L_Global_Energy_2026.pdf" download="Brochure_H3L_Global_Energy_2026.pdf" data-t="sv_dl">Descargar brochure</a>
+          <button type="button" class="btn-p" onclick="h3lQuote()" data-t="sv_q">Solicitar cotización</button>
         </div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
-        <div style="background:var(--gray-50);border:1px solid var(--border);border-radius:var(--radius);padding:18px;text-align:center;"><div style="font-size:11px;font-weight:700;color:var(--accent);margin-bottom:4px;">Presencia</div><div style="font-size:12px;color:var(--text-secondary);">LATAM y Europa</div></div>
-        <div style="background:var(--gray-50);border:1px solid var(--border);border-radius:var(--radius);padding:18px;text-align:center;"><div style="font-size:11px;font-weight:700;color:var(--accent);margin-bottom:4px;">Especialidad</div><div style="font-size:12px;color:var(--text-secondary);">OIL &amp; GAS / Energía</div></div>
-        <div style="background:var(--gray-50);border:1px solid var(--border);border-radius:var(--radius);padding:18px;text-align:center;"><div style="font-size:11px;font-weight:700;color:var(--accent);margin-bottom:4px;">Data Science</div><div style="font-size:12px;color:var(--text-secondary);">IA &amp; Analítica avanzada</div></div>
-        <div style="background:var(--gray-50);border:1px solid var(--border);border-radius:var(--radius);padding:18px;text-align:center;"><div style="font-size:11px;font-weight:700;color:var(--accent);margin-bottom:4px;">Independiente</div><div style="font-size:12px;color:var(--text-secondary);">Sin conflicto de interés</div></div>
-      </div>
-    </div>
-    <!-- Socios -->
-    <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px;max-width:1100px;margin:0 auto;">
-      <h4 style="font-family:var(--font-body);font-weight:700;margin-bottom:20px;font-size:18px;">Socios Fundadores</h4>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;">
-        <div style="text-align:center;padding:20px;background:var(--gray-50);border:1px solid var(--border);border-radius:var(--radius);">
-          <div style="width:54px;height:54px;background:linear-gradient(135deg,var(--accent),var(--info));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:#000;margin:0 auto 12px;">LC</div>
-          <div style="font-weight:700;margin-bottom:3px;font-size:13px;">Collell, Leandro</div>
-          <div style="font-size:11px;color:var(--accent);margin-bottom:2px;">Ingeniero Industrial</div>
-          <div style="font-size:10px;color:var(--text-secondary);">Especialista en Ciencia de Datos</div>
-        </div>
-        <div style="text-align:center;padding:20px;background:var(--gray-50);border:1px solid var(--border);border-radius:var(--radius);">
-          <div style="width:54px;height:54px;background:linear-gradient(135deg,#ffa657,#e84855);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:#000;margin:0 auto 12px;">HE</div>
-          <div style="font-weight:700;margin-bottom:3px;font-size:13px;">Escamilla, Hernando</div>
-          <div style="font-size:11px;color:var(--accent);margin-bottom:2px;">Ingeniero Geólogo</div>
-          <div style="font-size:10px;color:var(--text-secondary);">Especialista en Geociencias</div>
-        </div>
-        <div style="text-align:center;padding:20px;background:var(--gray-50);border:1px solid var(--border);border-radius:var(--radius);">
-          <div style="width:54px;height:54px;background:linear-gradient(135deg,var(--info),var(--accent));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:#000;margin:0 auto 12px;">LP</div>
-          <div style="font-weight:700;margin-bottom:3px;font-size:13px;">Perdomo, Lilibeth</div>
-          <div style="font-size:11px;color:var(--accent);margin-bottom:2px;">Ingeniero Químico</div>
-          <div style="font-size:10px;color:var(--text-secondary);">Especialista en Recursos y Transición Energética</div>
+      <div class="svc-list" id="svc-list"></div>
+      <div class="svc-end">
+        <p data-t="sv_end">¿Necesitás una propuesta para tu activo o proyecto?</p>
+        <div class="svc-top-act">
+          <a class="btn-s" href="Brochure_H3L_Global_Energy_2026.pdf" download="Brochure_H3L_Global_Energy_2026.pdf" data-t="sv_dl">Descargar brochure</a>
+          <button type="button" class="btn-p" onclick="h3lQuote()" data-t="sv_q">Solicitar cotización</button>
         </div>
       </div>
+      <p class="svc-note" data-t="sv_note">Los videos muestran la plataforma H3L con datos de ejemplo.</p>
     </div>
   </section>
 
@@ -2421,14 +1878,14 @@ tr:hover td{background:var(--blue-ghost);}
         <div style="margin-bottom:12px;"><label class="form-label">EMAIL *</label><input class="form-input" type="email" id="ctc-email" placeholder="juan@empresa.com"></div>
         <div style="margin-bottom:12px;"><label class="form-label">EMPRESA / OCUPACIÓN</label><input class="form-input" type="text" id="ctc-empresa" placeholder="Empresa SA"></div>
         <div style="margin-bottom:16px;"><label class="form-label">CONSULTA *</label><textarea class="form-input" id="ctc-mensaje" rows="4" style="resize:vertical;">Buenas tardes, quiero información de sus servicios. Mi contacto es </textarea></div>
-        <button onclick="enviarContacto()" class="btn-calc" style="width:100%;">Enviar a <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1970777f7659777c617c6b787a76776a6c756d70777e377a7674">[email&#160;protected]</a></button>
+        <button onclick="enviarContacto()" class="btn-calc" style="width:100%;">Enviar a info@h3l.com</button>
         <div id="ctc-status" style="margin-top:10px;text-align:center;font-size:12px;min-height:18px;"></div>
       </div>
       <div style="display:flex;flex-direction:column;gap:16px;">
         <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;">
           <h4 style="font-family:var(--font-body);font-weight:700;margin-bottom:16px;color:var(--accent);font-size:14px;">Información de Contacto</h4>
           <div style="display:flex;flex-direction:column;gap:10px;">
-            <div style="display:flex;gap:10px;padding:10px;background:var(--gray-50);border-radius:var(--radius);"><span style="font-size:15px;">✉</span><div><div style="font-size:10px;color:var(--text-muted);margin-bottom:1px;">EMAIL</div><div style="font-size:13px;color:var(--accent);"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8ae3e4ece5cae4eff2eff8ebe9e5e4f9ffe6fee3e4eda4e9e5e7">[email&#160;protected]</a></div></div></div>
+            <div style="display:flex;gap:10px;padding:10px;background:var(--gray-50);border-radius:var(--radius);"><span style="font-size:15px;">✉</span><div><div style="font-size:10px;color:var(--text-muted);margin-bottom:1px;">EMAIL</div><div style="font-size:13px;color:var(--accent);">info@h3l.com</div></div></div>
             <div style="display:flex;gap:10px;padding:10px;background:var(--gray-50);border-radius:var(--radius);"><span style="font-size:15px;">☎</span><div><div style="font-size:10px;color:var(--text-muted);margin-bottom:1px;">ARGENTINA</div><div style="font-size:12px;">+54 2974 62 5804 / +54 911 2872 3272</div></div></div>
             <div style="display:flex;gap:10px;padding:10px;background:var(--gray-50);border-radius:var(--radius);"><span style="font-size:15px;">☎</span><div><div style="font-size:10px;color:var(--text-muted);margin-bottom:1px;">ESPAÑA</div><div style="font-size:12px;">+34 672 22 0224</div></div></div>
           </div>
@@ -2443,109 +1900,9 @@ tr:hover td{background:var(--blue-ghost);}
   </section>
 
   <!-- REGISTRO -->
-  <section id="section-registro" class="section" style="padding:0">
-    <div class="auth-container">
-      <div class="auth-card" style="max-width:500px;">
-        <div class="auth-logo"><div class="nav-logo" style="justify-content:center"><img src="LOGO_H3L_icon.png" alt="H3L" style="width:36px;height:36px;object-fit:contain;border-radius:6px;"><div class="logo-text">H3L <span style="color:var(--accent)">Global Energy</span></div></div></div>
-        <h2 class="auth-title" style="margin-bottom:4px;">Crear Cuenta</h2>
-        <p class="auth-sub">Completá tus datos para registrarte</p>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-          <div class="form-group" style="margin-bottom:12px;"><label class="form-label">NOMBRE *</label><input class="form-input" type="text" id="reg-nombre" placeholder="Juan"></div>
-          <div class="form-group" style="margin-bottom:12px;"><label class="form-label">APELLIDO *</label><input class="form-input" type="text" id="reg-apellido" placeholder="García"></div>
-        </div>
-        <div class="form-group" style="margin-bottom:12px;"><label class="form-label">EMAIL *</label><input class="form-input" type="email" id="reg-email" placeholder="juan@empresa.com"></div>
-        <div class="form-group" style="margin-bottom:12px;"><label class="form-label">EMPRESA / OCUPACIÓN</label><input class="form-input" type="text" id="reg-empresa" placeholder="Empresa SA"></div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-          <div class="form-group" style="margin-bottom:12px;"><label class="form-label">CONTRASEÑA *</label><input class="form-input" type="password" id="reg-pass" placeholder="Mín. 8 caracteres"></div>
-          <div class="form-group" style="margin-bottom:12px;"><label class="form-label">CONFIRMAR *</label><input class="form-input" type="password" id="reg-pass2" placeholder="Repetir"></div>
-        </div>
-        <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:16px;padding:10px;background:var(--gray-50);border-radius:var(--radius);">
-          <input type="checkbox" id="reg-terms" style="margin-top:3px;accent-color:var(--accent);">
-          <label for="reg-terms" style="font-size:11px;color:var(--text-secondary);cursor:pointer;">Acepto los <span style="color:var(--accent);">Términos y Condiciones</span> de H3L Global Energy.</label>
-        </div>
-        <button onclick="doRegistro()" class="btn-calc" style="width:100%;margin-bottom:6px;">Crear Cuenta</button>
-        <p style="text-align:center;font-size:10px;color:var(--text-muted);margin-bottom:12px;">Los datos quedan almacenados para gestión interna.</p>
-        <div id="reg-status" style="text-align:center;font-size:12px;min-height:18px;margin-bottom:10px;"></div>
-        <hr style="border-color:var(--border);margin:12px 0;">
-        <button onclick="goSection('auth')" class="btn-outline" style="width:100%;font-size:12px;padding:9px;">Volver a Iniciar Sesión</button>
-      </div>
-    </div>
-  </section>
 
 
   <!-- ══════════════════ MODO ADMINISTRADOR ══════════════════ -->
-  <section id="section-admin" class="section">
-    <div class="section-header">
-      <div class="section-eyebrow">Solo visible para Administradores</div>
-      <h2 class="section-title" style="color:var(--success);">Panel de Administración</h2>
-      <p class="section-desc">Configuración avanzada de H3L Global Energy</p>
-    </div>
-
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1100px;margin:0 auto 32px;">
-      <!-- GESTIÓN DE ROLES -->
-      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;">
-        <h4 style="font-family:var(--font-body);font-weight:700;margin-bottom:16px;font-size:15px;color:var(--accent);">Gestión de Roles y Accesos</h4>
-        <div id="admin-roles-list" style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px;"></div>
-        <p style="font-size:11px;color:var(--text-muted);">Los usuarios registrados aparecen aquí con su rol asignado.</p>
-      </div>
-
-      <!-- HABILITAR CALCULADORAS -->
-      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;">
-        <h4 style="font-family:var(--font-body);font-weight:700;margin-bottom:16px;font-size:15px;color:var(--accent);">Calculadoras Activas</h4>
-        <div id="admin-calcs-list" style="display:flex;flex-direction:column;gap:6px;max-height:240px;overflow-y:auto;"></div>
-        <button onclick="saveCalcConfig()" style="margin-top:12px;width:100%;padding:8px;background:var(--accent);color:#000;border:none;border-radius:var(--radius);font-family:var(--font-body);font-weight:700;font-size:12px;cursor:pointer;">Guardar configuración</button>
-      </div>
-
-      <!-- TEMA DE FONDO -->
-      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;">
-        <h4 style="font-family:var(--font-body);font-weight:700;margin-bottom:16px;font-size:15px;color:var(--accent);">Tema de Fondo</h4>
-        <div style="display:flex;flex-direction:column;gap:8px;">
-          <button onclick="applyThemePreset('dark')"    class="theme-preset-btn" style="background:#0A2540;color:#fff;">Oscuro (default)</button>
-          <button onclick="applyThemePreset('light')"   class="theme-preset-btn" style="background:#F0F4F8;color:#0A2540;">Blanco corporativo</button>
-          <button onclick="applyThemePreset('navy')"    class="theme-preset-btn" style="background:#0D1B2A;color:var(--accent);">Navy Dark</button>
-          <button onclick="applyThemePreset('forest')"  class="theme-preset-btn" style="background:#1A2E1A;color:#4CAF50;">Forest Green</button>
-          <button onclick="applyThemePreset('energy')"  class="theme-preset-btn" style="background:#1C1C2E;color:#F5A623;">Energy Orange</button>
-        </div>
-      </div>
-
-      <!-- EDITAR NOTICIAS -->
-      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;grid-column:1/-1;">
-        <h4 style="font-family:var(--font-body);font-weight:700;margin-bottom:12px;font-size:15px;color:var(--accent);">Editar Noticias O&amp;G</h4>
-        <p style="font-size:12px;color:var(--text-muted);margin-bottom:12px;">Modificá el contenido de las noticias mostradas. Los cambios se guardan localmente.</p>
-        <div id="admin-news-editor" style="display:flex;flex-direction:column;gap:10px;max-height:320px;overflow-y:auto;"></div>
-        <button onclick="saveNewsEdits()" style="margin-top:12px;padding:8px 20px;background:var(--accent);color:#000;border:none;border-radius:var(--radius);font-family:var(--font-body);font-weight:700;font-size:12px;cursor:pointer;">Guardar noticias</button>
-      </div>
-
-      <!-- FOTO DE INICIO -->
-      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;">
-        <h4 style="font-family:var(--font-body);font-weight:700;margin-bottom:12px;font-size:15px;color:var(--accent);">Foto de Presentación (Inicio)</h4>
-        <p style="font-size:11px;color:var(--text-muted);margin-bottom:12px;">Se mostrará en la sección Inicio debajo del hero.</p>
-        <input type="file" id="admin-hero-img" accept="image/*" onchange="previewHeroImg(this)" style="font-size:12px;color:var(--text-secondary);width:100%;margin-bottom:10px;">
-        <img id="admin-hero-preview" src="" alt="" style="display:none;width:100%;border-radius:var(--radius);max-height:120px;object-fit:cover;margin-bottom:10px;">
-        <button onclick="applyHeroImg()" style="width:100%;padding:8px;background:var(--accent);color:#000;border:none;border-radius:var(--radius);font-family:var(--font-body);font-weight:700;font-size:12px;cursor:pointer;">Aplicar foto</button>
-      </div>
-
-      <!-- EDITAR FUNCIONES -->
-      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;grid-column:2/4;">
-        <h4 style="font-family:var(--font-body);font-weight:700;margin-bottom:12px;font-size:15px;color:var(--accent);">Editar Funciones y Textos</h4>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-          <div>
-            <label class="form-label">Texto Hero — Línea 1</label>
-            <input class="form-input" id="edit-hero1" value="La plataforma líder para" style="font-size:12px;">
-          </div>
-          <div>
-            <label class="form-label">Texto Hero — Línea 2</label>
-            <input class="form-input" id="edit-hero2" value="OIL &amp; GAS y Transición Energética" style="font-size:12px;">
-          </div>
-          <div style="grid-column:1/-1;">
-            <label class="form-label">Subtítulo Hero</label>
-            <textarea class="form-input" id="edit-herosub" rows="2" style="font-size:12px;resize:none;">Inteligencia de datos al servicio de la industria energética.</textarea>
-          </div>
-        </div>
-        <button onclick="applyHeroEdits()" style="margin-top:12px;padding:8px 20px;background:var(--accent);color:#000;border:none;border-radius:var(--radius);font-family:var(--font-body);font-weight:700;font-size:12px;cursor:pointer;">Aplicar cambios</button>
-      </div>
-    </div>
-  </section>
 
 
   <!-- ══════════ ETAPA 5: CONFIARON EN NOSOTROS ══════════ -->
@@ -2666,7 +2023,7 @@ tr:hover td{background:var(--blue-ghost);}
         <h5 style="font-weight:700;font-size:14px;line-height:1.4;">Metodología integrada para evaluación de recursos no convencionales bajo estándares PRMS 2024</h5>
         <p style="font-size:12px;color:var(--text-secondary);line-height:1.6;flex:1;">Análisis comparativo de metodologías volumétricas y de decline para clasificación de recursos en formaciones tight y shale.</p>
         <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;">
-          <span style="font-size:10px;color:var(--text-muted);">Collell, L. — 2024</span>
+          <span style="font-size:10px;color:var(--text-muted);">Equipo H3L — 2024</span>
           <span style="font-size:10px;background:rgba(46,107,196,.10);color:var(--accent);padding:2px 8px;border-radius:4px;">SPE</span>
         </div>
       </div>
@@ -2675,7 +2032,7 @@ tr:hover td{background:var(--blue-ghost);}
         <h5 style="font-weight:700;font-size:14px;line-height:1.4;">Machine Learning aplicado a la predicción de producción en yacimientos maduros de Vaca Muerta</h5>
         <p style="font-size:12px;color:var(--text-secondary);line-height:1.6;flex:1;">Modelos de regresión avanzada y redes neuronales para pronóstico de producción con incertidumbre probabilística.</p>
         <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;">
-          <span style="font-size:10px;color:var(--text-muted);">Collell, L. — 2024</span>
+          <span style="font-size:10px;color:var(--text-muted);">Equipo H3L — 2024</span>
           <span style="font-size:10px;background:rgba(77,166,255,.12);color:var(--info);padding:2px 8px;border-radius:4px;">SPEE</span>
         </div>
       </div>
@@ -2684,7 +2041,7 @@ tr:hover td{background:var(--blue-ghost);}
         <h5 style="font-weight:700;font-size:14px;line-height:1.4;">Descarbonización en upstream O&amp;G: métricas de intensidad de carbono y estrategias de mitigación</h5>
         <p style="font-size:12px;color:var(--text-secondary);line-height:1.6;flex:1;">Framework para cálculo de huella de carbono en activos upstream, midstream y downstream bajo GHG Protocol.</p>
         <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;">
-          <span style="font-size:10px;color:var(--text-muted);">Perdomo, L. — 2024</span>
+          <span style="font-size:10px;color:var(--text-muted);">Equipo H3L — 2024</span>
           <span style="font-size:10px;background:rgba(45,212,160,.12);color:var(--success);padding:2px 8px;border-radius:4px;">IEA</span>
         </div>
       </div>
@@ -2693,7 +2050,7 @@ tr:hover td{background:var(--blue-ghost);}
         <h5 style="font-weight:700;font-size:14px;line-height:1.4;">Interpretación petrofísica integrada en formaciones carbonáticas: caso de estudio Venezuela</h5>
         <p style="font-size:12px;color:var(--text-secondary);line-height:1.6;flex:1;">Metodología de análisis multipozo con integración de registros eléctricos, sónicos y nucleares para delimitación de zonas productivas.</p>
         <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;">
-          <span style="font-size:10px;color:var(--text-muted);">Escamilla, H. — 2023</span>
+          <span style="font-size:10px;color:var(--text-muted);">Equipo H3L — 2023</span>
           <span style="font-size:10px;background:rgba(245,166,35,.12);color:var(--warning);padding:2px 8px;border-radius:4px;">SPE</span>
         </div>
       </div>
@@ -2716,74 +2073,6 @@ tr:hover td{background:var(--blue-ghost);}
   </section>
 
   <!-- ══════════ ETAPA 10: SUSCRIPCIÓN PREMIUM ══════════ -->
-  <section id="section-suscripcion" class="section">
-    <div class="section-header">
-      <div class="section-eyebrow">Planes</div>
-      <h2 class="section-title">Suscripción</h2>
-      <p class="section-desc">Accedé a funcionalidades premium y servicios exclusivos de H3L</p>
-    </div>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;max-width:1100px;margin:0 auto 40px;align-items:start;">
-      <!-- FREE -->
-      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px;text-align:center;">
-        <div style="font-size:10px;font-weight:700;letter-spacing:2px;color:var(--text-muted);margin-bottom:12px;">GRATIS</div>
-        <div style="font-family:var(--font-body);font-size:36px;font-weight:900;margin-bottom:4px;">$0</div>
-        <div style="font-size:12px;color:var(--text-muted);margin-bottom:20px;">para siempre</div>
-        <ul style="list-style:none;text-align:left;font-size:13px;line-height:2;color:var(--text-secondary);margin-bottom:24px;">
-          <li style="display:flex;gap:8px;"><span style="color:var(--success);">✓</span> Calculadoras básicas (10)</li>
-          <li style="display:flex;gap:8px;"><span style="color:var(--success);">✓</span> Noticias O&amp;G diarias</li>
-          <li style="display:flex;gap:8px;"><span style="color:var(--success);">✓</span> Newsletter mensual</li>
-          <li style="display:flex;gap:8px;"><span style="color:var(--success);">✓</span> Eventos del sector</li>
-          <li style="display:flex;gap:8px;"><span style="color:var(--success);">✓</span> Dashboard básico</li>
-          <li style="display:flex;gap:8px;"><span style="color:rgba(139,164,190,.4);">✗</span> <span style="opacity:.5">Calculadoras avanzadas</span></li>
-          <li style="display:flex;gap:8px;"><span style="color:rgba(139,164,190,.4);">✗</span> <span style="opacity:.5">Papers técnicos</span></li>
-        </ul>
-        <button onclick="goSection('auth')" style="width:100%;padding:11px;background:transparent;border:1px solid var(--border);color:var(--gray-900);border-radius:var(--radius);font-family:var(--font-body);font-weight:700;font-size:13px;cursor:pointer;">Crear cuenta gratis</button>
-      </div>
-
-      <!-- PROFESSIONAL -->
-      <div style="background:linear-gradient(135deg,var(--gray-50),var(--gray-100));border:2px solid var(--accent);border-radius:var(--radius-lg);padding:28px;text-align:center;position:relative;">
-        <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--accent);color:#000;font-family:var(--font-body);font-size:10px;font-weight:800;padding:4px 14px;border-radius:3px;letter-spacing:1px;">MÁS POPULAR</div>
-        <div style="font-size:10px;font-weight:700;letter-spacing:2px;color:var(--accent);margin-bottom:12px;">PROFESIONAL</div>
-        <div style="font-family:var(--font-body);font-size:36px;font-weight:900;margin-bottom:4px;">$49<span style="font-size:16px;font-weight:400;">/mes</span></div>
-        <div style="font-size:12px;color:var(--text-muted);margin-bottom:20px;">USD · cancelá cuando quieras</div>
-        <ul style="list-style:none;text-align:left;font-size:13px;line-height:2;color:var(--text-secondary);margin-bottom:24px;">
-          <li style="display:flex;gap:8px;"><span style="color:var(--success);">✓</span> Todo lo del plan Gratis</li>
-          <li style="display:flex;gap:8px;"><span style="color:var(--success);">✓</span> 40 calculadoras especializadas</li>
-          <li style="display:flex;gap:8px;"><span style="color:var(--success);">✓</span> Papers técnicos completos</li>
-          <li style="display:flex;gap:8px;"><span style="color:var(--success);">✓</span> Dashboards avanzados</li>
-          <li style="display:flex;gap:8px;"><span style="color:var(--success);">✓</span> Newsletter semanal premium</li>
-          <li style="display:flex;gap:8px;"><span style="color:var(--success);">✓</span> Agentes IA especializados</li>
-          <li style="display:flex;gap:8px;"><span style="color:var(--success);">✓</span> Gestión de entregables</li>
-        </ul>
-        <button onclick="subscribeClick('pro')" style="width:100%;padding:11px;background:var(--accent);color:#000;border:none;border-radius:var(--radius);font-family:var(--font-body);font-weight:700;font-size:13px;cursor:pointer;">Suscribirme — Profesional</button>
-      </div>
-
-      <!-- ENTERPRISE -->
-      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px;text-align:center;">
-        <div style="font-size:10px;font-weight:700;letter-spacing:2px;color:var(--info);margin-bottom:12px;">ENTERPRISE</div>
-        <div style="font-family:var(--font-body);font-size:36px;font-weight:900;margin-bottom:4px;">A consultar</div>
-        <div style="font-size:12px;color:var(--text-muted);margin-bottom:20px;">precio por volumen</div>
-        <ul style="list-style:none;text-align:left;font-size:13px;line-height:2;color:var(--text-secondary);margin-bottom:24px;">
-          <li style="display:flex;gap:8px;"><span style="color:var(--success);">✓</span> Todo lo del plan Profesional</li>
-          <li style="display:flex;gap:8px;"><span style="color:var(--success);">✓</span> Usuarios ilimitados</li>
-          <li style="display:flex;gap:8px;"><span style="color:var(--success);">✓</span> API access</li>
-          <li style="display:flex;gap:8px;"><span style="color:var(--success);">✓</span> Auditoría completa con exportes</li>
-          <li style="display:flex;gap:8px;"><span style="color:var(--success);">✓</span> Soporte dedicado 24/7</li>
-          <li style="display:flex;gap:8px;"><span style="color:var(--success);">✓</span> Integración con sistemas propios</li>
-          <li style="display:flex;gap:8px;"><span style="color:var(--success);">✓</span> Capacitación para equipos</li>
-        </ul>
-        <button onclick="subscribeClick('enterprise')" style="width:100%;padding:11px;background:transparent;border:1px solid var(--info);color:var(--info);border-radius:var(--radius);font-family:var(--font-body);font-weight:700;font-size:13px;cursor:pointer;">Consultar precio →</button>
-      </div>
-    </div>
-
-    <!-- Comparison note -->
-    <p style="text-align:center;font-size:11px;color:var(--text-muted);max-width:600px;margin:0 auto;">
-      Todos los precios en USD. Los planes de pago incluyen 14 días de prueba gratuita. 
-      Para facturación anual aplicar 20% de descuento. Contactanos en 
-      <a href="/cdn-cgi/l/email-protection#345d5a525b745a514c514655575b5a474158405d5a531a575b59" style="color:var(--accent);"><span class="__cf_email__" data-cfemail="f29b9c949db29c978a978093919d9c81879e869b9c95dc919d9f">[email&#160;protected]</span></a>
-    </p>
-  </section>
 
 
   <!-- ══════════ ETAPA 6-7: AGENTES IA (solo admin) ══════════ -->
@@ -4068,7 +3357,7 @@ tr:hover td{background:var(--blue-ghost);}
     <div style="margin-top:40px;background:linear-gradient(135deg,#064e3b,#047857);border-radius:10px;padding:28px 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
       <div>
         <div style="color:#fff;font-size:16px;font-weight:700;">Auditoría técnica ESG & Transición Energética</div>
-        <div style="color:rgba(255,255,255,.75);font-size:13px;margin-top:4px;">Hernando Escamilla (Geociencias) · Lilibeth Perdomo (E. Transition) · Leandro Collell (Data & Reservorios)</div>
+        <div style="color:rgba(255,255,255,.75);font-size:13px;margin-top:4px;">Geociencias · Transición energética · Data &amp; Reservorios</div>
       </div>
       <button onclick="goSection('contacto')" style="background:#fff;color:#064e3b;border:none;padding:12px 24px;border-radius:8px;font-weight:700;font-size:14px;cursor:pointer;">Contactar →</button>
     </div>
@@ -4284,7 +3573,7 @@ document.addEventListener('DOMContentLoaded', function(){
   <div class="chat-quick-btns">
     <button class="quick-btn" onclick="quickChat('¿Qué calculadoras tienen?')">Calculadoras</button>
     <button class="quick-btn" onclick="quickChat('¿Cómo accedo a los agentes IA?')">Agentes IA</button>
-    <button class="quick-btn" onclick="quickChat('¿Cómo registro mi empresa?')">Registro</button>
+    <button class="quick-btn" onclick="quickChat('Quiero solicitar una cotización')">Cotización</button>
   </div>
   <div class="chat-input-row">
     <input class="chat-input" id="chatInput" type="text" placeholder="Escribe tu consulta..." onkeydown="if(event.key==='Enter')sendChat()">
@@ -4398,10 +3687,10 @@ function goSection(id){
   if(nl) nl.classList.add('active');
   // Herramientas active when in tool section
   const tools = ['calculators','files','audit','features','papers','agentes','qcapps','demos-og','demos-et'];
-  const nlTools = document.getElementById('nl-tools');
-  if(nlTools) nlTools.classList.toggle('active', tools.includes(id));
-  // Close dropdown
   closeDrop();
+  if(typeof closeMobileMenu==='function') closeMobileMenu();
+  const _back=document.getElementById('back-svc');
+  if(_back) _back.style.display=tools.includes(id)?'inline-flex':'none';
   // Noticias: refresh prices + news
   // Dashboard: init charts when section opens
   if(id === 'dashboard'){
@@ -4442,30 +3731,19 @@ document.addEventListener('click', e => {
 
 // ═══ MOBILE MENU ═══
 function toggleMobileMenu(){
-  const d = document.getElementById('mob-drawer');
-  const o = document.getElementById('mob-overlay');
-  const b = document.getElementById('hamburger-btn');
-  if(!d) return;
-  const open = d.style.left==='0px'||d.style.left==='0%'||d.style.left==='0';
-  if(open){ d.style.left='-100%'; if(o)o.style.display='none'; if(b)b.classList.remove('open'); document.body.style.overflow=''; }
-  else    { d.style.left='0';     if(o)o.style.display='block'; if(b)b.classList.add('open');    document.body.style.overflow='hidden'; }
+  const l=document.getElementById('nav-links-list'), b=document.getElementById('hamburger-btn');
+  if(!l) return;
+  const open=!l.classList.contains('open');
+  l.classList.toggle('open',open);
+  if(b){ b.classList.toggle('open',open); b.setAttribute('aria-expanded',open?'true':'false'); }
 }
 function closeMobileMenu(){
-  const d=document.getElementById('mob-drawer');
-  const o=document.getElementById('mob-overlay');
-  const b=document.getElementById('hamburger-btn');
-  if(d)d.style.left='-100%';if(o)o.style.display='none';if(b)b.classList.remove('open');
-  document.body.style.overflow='';
+  const l=document.getElementById('nav-links-list'), b=document.getElementById('hamburger-btn');
+  if(l) l.classList.remove('open');
+  if(b){ b.classList.remove('open'); b.setAttribute('aria-expanded','false'); }
 }
-function mobileGoSection(id){
-  closeMobileMenu();
-  setTimeout(()=>goSection(id),55);
-  // Mark active
-  document.querySelectorAll('.mob-btn').forEach(b=>{b.style.color='';b.style.borderLeftColor='transparent';b.style.background='';});
-  const a=document.getElementById('mob-btn-'+id);
-  if(a){a.style.color='var(--accent)';a.style.borderLeftColor='var(--accent)';a.style.background='rgba(46,107,196,.05)';}
-}
-window.addEventListener('resize',()=>{ if(window.innerWidth>768)closeMobileMenu(); });
+function mobileGoSection(id){ closeMobileMenu(); goSection(id); }
+window.addEventListener('resize',()=>{ if(window.innerWidth>900)closeMobileMenu(); });
 
 
 // ═══════════════════════════════════════════════════════════
@@ -5067,6 +4345,7 @@ function calcRF(){
   document.getElementById('rf_result').classList.add('show');
   toast('success','Factor de recuperación calculado');
 }
+function updateFE(){ /* el factor se lee del selector al calcular */ }
 function calcCO2Em(){
   const vol=+document.getElementById('em_vol').value,
         fe=+document.getElementById('em_fuel').value;
@@ -5384,167 +4663,12 @@ function selectRole(role, btn){
 // AUTH SYSTEM
 // ═══════════════════════════════════════════════════════════
 
-// Admin credentials (hashed approach for client-side demo)
-const ADMIN_EMAIL = 'leandro.collell@nexeraconsulting.com';
-const ADMIN_PASS  = '27822352lca';
-const ADMIN_NAME  = 'Leandro Collell';
-const ADMIN_ROLE  = 'Administrador';
-
 // Current session
 let currentUser = null;
 
 // Users store (localStorage)
 function getUsers(){ return JSON.parse(localStorage.getItem('h3l_users')||'[]'); }
 function saveUsers(u){ localStorage.setItem('h3l_users', JSON.stringify(u)); }
-
-// Auth tab switcher
-function authTab(tab){
-  const isLogin = tab === 'login';
-  document.getElementById('panel-login').style.display    = isLogin ? 'block' : 'none';
-  document.getElementById('panel-registro').style.display = isLogin ? 'none'  : 'block';
-  document.getElementById('tab-login').style.background   = isLogin ? 'var(--accent)' : 'var(--glass)';
-  document.getElementById('tab-login').style.color        = isLogin ? '#000' : 'var(--text-secondary)';
-  document.getElementById('tab-registro').style.background= isLogin ? 'var(--glass)' : 'var(--accent)';
-  document.getElementById('tab-registro').style.color     = isLogin ? 'var(--text-secondary)' : '#000';
-}
-
-// LOGIN
-function doLogin(){
-  const raw   = (document.getElementById('authEmail')?.value||'').trim();
-  const input = raw.toLowerCase();
-  const pass  = (document.getElementById('authPass')?.value||'');
-  const err   = document.getElementById('login-error');
-  if(!raw||!pass){ if(err)err.textContent='Completá todos los campos'; return; }
-
-  // Admin check — accepts name OR email (case-insensitive)
-  const isAdminByEmail = input === ADMIN_EMAIL.toLowerCase();
-  const isAdminByName  = input === ADMIN_NAME.toLowerCase() ||
-                         input === 'leandro collell' ||
-                         input === 'leandro.collell' ||
-                         input === 'lcollell';
-  if((isAdminByEmail || isAdminByName) && pass === ADMIN_PASS){
-    loginSuccess({ nombre:ADMIN_NAME, rol:ADMIN_ROLE, email:ADMIN_EMAIL, isAdmin:true });
-    return;
-  }
-
-  // Wrong password for admin user
-  if((isAdminByEmail || isAdminByName) && pass !== ADMIN_PASS){
-    if(err) err.textContent = 'Contraseña incorrecta';
-    return;
-  }
-
-  // Registered users — match by email OR name
-  const users = getUsers();
-  const user  = users.find(u =>
-    (u.email.toLowerCase()===input || (u.nombre+' '+u.apellido).toLowerCase()===input) &&
-    u.pass===pass
-  );
-  if(!user){ if(err)err.textContent='Usuario o contraseña incorrectos'; return; }
-  loginSuccess({ nombre:user.nombre+' '+user.apellido, rol:user.rol, email:user.email, isAdmin:false });
-}
-
-// REGISTER NEW USER
-function doRegisterNew(){
-  const nombre   = (document.getElementById('rn-nombre')?.value||'').trim();
-  const apellido = (document.getElementById('rn-apellido')?.value||'').trim();
-  const email    = (document.getElementById('rn-email')?.value||'').trim().toLowerCase();
-  const empresa  = (document.getElementById('rn-empresa')?.value||'').trim();
-  const rol      = (document.getElementById('rn-rol')?.value||'');
-  const pass     = (document.getElementById('rn-pass')?.value||'');
-  const nl       = document.getElementById('rn-nl')?.checked||false;
-  const err      = document.getElementById('registro-error');
-
-  if(!nombre||!apellido){if(err)err.textContent='Nombre y apellido requeridos';return;}
-  if(!email||!email.includes('@')){if(err)err.textContent='Email inválido';return;}
-  if(!rol){if(err)err.textContent='Seleccioná un rol';return;}
-  if(pass.length<6){if(err)err.textContent='Contraseña mínimo 6 caracteres';return;}
-
-  const users = getUsers();
-  if(users.find(u=>u.email.toLowerCase()===email)){if(err)err.textContent='Este email ya está registrado';return;}
-
-  const newUser = {nombre,apellido,email,empresa,rol,pass,nl,fecha:new Date().toISOString()};
-  users.push(newUser);
-  saveUsers(users);
-
-  // CSV download if newsletter
-  if(nl) descargarCSV(users);
-
-  loginSuccess({ nombre:nombre+' '+apellido, rol, email, isAdmin:false });
-  toast('success','Cuenta creada exitosamente');
-}
-
-// SET SESSION & SHOW WELCOME
-function loginSuccess(user){
-  currentUser = user;
-  localStorage.setItem('h3l_session', JSON.stringify(user));
-
-  // Welcome banner
-  const banner = document.getElementById('welcome-banner');
-  const wtext  = document.getElementById('welcome-text');
-  if(banner && wtext){
-    banner.style.display = 'flex';
-    if(user.isAdmin){
-      wtext.textContent = 'Bienvenido ' + user.nombre + ' (Modo Administrador)';
-      banner.className  = 'admin-banner';
-    } else {
-      wtext.textContent = 'Bienvenido ' + user.nombre + ' (' + user.rol + ')';
-      banner.className  = 'user-banner';
-    }
-  }
-
-  // Add admin link to nav if admin
-  updateNavForUser(user);
-
-  // Navigate to dashboard
-  setTimeout(()=>goSection(user.isAdmin ? 'dashboard' : 'dashboard'), 300);
-  toast('success','¡Bienvenido/a ' + user.nombre + '!');
-
-  // Init admin panel data if admin
-  if(user.isAdmin) setTimeout(initAdminPanel, 500);
-}
-
-function doLogout(){
-  currentUser = null;
-  localStorage.removeItem('h3l_session');
-  const banner = document.getElementById('welcome-banner');
-  if(banner) banner.style.display = 'none';
-  updateNavForUser(null);
-  // Clear auth inputs
-  ['authEmail','authPass'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
-  const err = document.getElementById('login-error');
-  if(err) err.textContent = '';
-  toast('info','Sesión cerrada');
-  goSection('home');
-}
-
-function updateNavForUser(user){
-  // Add/remove Admin link in dropdown
-  const dd = document.getElementById('nav-dropdown');
-  if(!dd) return;
-  // Remove existing admin button
-  const old = document.getElementById('nav-admin-btn');
-  if(old) old.remove();
-  if(user?.isAdmin){
-    const btn = document.createElement('button');
-    btn.id        = 'nav-admin-btn';
-    btn.textContent = 'Admin Panel';
-    btn.style.cssText = 'display:block;width:100%;padding:8px 13px;border-radius:5px;background:rgba(45,212,160,.12);border:none;color:var(--success);font-family:var(--font-body);font-size:12px;font-weight:700;cursor:pointer;text-align:left;';
-    btn.onclick   = ()=>{ goSection('admin'); };
-    // Insert at top of dropdown
-    dd.insertBefore(btn, dd.firstChild);
-  }
-  // Update nav login button text
-  const loginBtn = document.querySelector('.btn-nav-login');
-  if(loginBtn){
-    if(user){
-      loginBtn.textContent = user.nombre.split(' ')[0];
-      loginBtn.onclick = ()=>goSection(user.isAdmin?'admin':'dashboard');
-    } else {
-      loginBtn.textContent = 'Iniciar Sesión';
-      loginBtn.onclick = ()=>goSection('auth');
-    }
-  }
-}
 
 // ═══ ADMIN PANEL FUNCTIONS ═══
 function initAdminPanel(){
@@ -5778,7 +4902,7 @@ function enviarContacto(){
   if(!mensaje){if(status)status.innerHTML='<span style="color:var(--danger)">Escribí tu consulta</span>';return;}
   const subject=encodeURIComponent('Consulta H3L — '+nombre+' '+apellido);
   const body=encodeURIComponent('Nombre: '+nombre+' '+apellido+'\nEmail: '+email+'\nEmpresa: '+empresa+'\n\n'+mensaje);
-  window.location.href='mailto:info@nexeraconsulting.com?subject='+subject+'&body='+body; /* Safari bloquea window.open para mailto */
+  window.location.href='mailto:info@h3l.com?subject='+subject+'&body='+body; /* Safari bloquea window.open para mailto */
   if(status)status.innerHTML='<span style="color:var(--success)">Abriendo cliente de email...</span>';
   setTimeout(()=>{if(status)status.innerHTML='';},3000);
 }
@@ -6257,6 +5381,7 @@ function applyTranslations(lang){
   if(h2) h2.textContent = t.hero_title2 || h2.textContent;
   if(hs) hs.textContent = t.hero_sub    || hs.textContent;
   if(hb) hb.textContent = t.hero_badge  || hb.textContent;
+  if(window.H3LSite) H3LSite.setLang(lang);
   // Nav buttons
   document.querySelectorAll('[data-i18n]').forEach(el=>{
     const key = el.getAttribute('data-i18n');
@@ -6312,11 +5437,11 @@ function chatTour(){
   const steps = [
     '🗺️ <strong>Visita Guiada H3L</strong><br><br>Te muestro las secciones principales:',
     '1️⃣ <strong>Inicio</strong> — Resumen de la plataforma y acceso rápido a todas las funciones.',
-    '2️⃣ <strong>Somos H3L</strong> — Conocé nuestra firma, misión, visión y socios fundadores.',
-    '3️⃣ <strong>Dashboard</strong> — KPIs en tiempo real, métricas de sostenibilidad y actividad reciente.',
+    '2️⃣ <strong>Quiénes somos</strong> — Conocé nuestra firma, su misión y su visión.',
+    '3️⃣ <strong>Servicios</strong> — Las siete líneas de servicio, cada una con un video de la herramienta.',
     '4️⃣ <strong>Noticias O&G</strong> — Precios BRENT/WTI/GAS/GNL actualizados y noticias del sector.',
-    '5️⃣ <strong>Herramientas</strong> — 40 calculadoras especializadas: OOIP, ESG, CO₂, H₂, Reservorios y más.',
-    '6️⃣ <strong>Registro gratuito</strong> — Creá tu cuenta para mejor experiencia personalizada y acceso a nuestro Newsletter.<br><br><button onclick="goSection(&quot;auth&quot;);toggleChat();" style="background:var(--accent);color:#000;border:none;padding:6px 14px;border-radius:6px;font-weight:700;font-size:12px;cursor:pointer;margin-top:6px;">Registrarme gratis &rarr;</button>'
+    '5️⃣ <strong>Eventos y Contacto</strong> — Agenda del sector y formulario de cotización.',
+    '6️⃣ <strong>Contacto</strong> — Escribinos a info@h3l.com o pedí una cotización desde Servicios.<br><br><button onclick="goSection(&quot;servicios&quot;);toggleChat();" style="background:var(--accent);color:#000;border:none;padding:6px 14px;border-radius:6px;font-weight:700;font-size:12px;cursor:pointer;margin-top:6px;">Ver servicios &rarr;</button>'
   ];
   steps.forEach((msg, i) => {
     setTimeout(() => addBotMessage(msg), i * 1200);
@@ -6324,11 +5449,11 @@ function chatTour(){
 }
 
 function chatLogin(){
-  addBotMessage('Para una mejor experiencia en H3L te recomiendo crear tu cuenta gratuita.<br><br>Con tu cuenta podés:<br>• Guardar tus cálculos favoritos<br>• Recibir nuestro <strong>Newsletter</strong> con noticias O&G y eventos<br>• Acceder a funciones avanzadas según tu rol<br><br><button onclick="goSection(&quot;auth&quot;);toggleChat();" style="background:var(--accent);color:#000;border:none;padding:6px 14px;border-radius:6px;font-weight:700;font-size:12px;cursor:pointer;">Crear cuenta gratis &rarr;</button>');
+  addBotMessage('Para pedir una cotización, escribinos a <strong>info@h3l.com</strong> o completá el formulario de contacto.<br><br><button onclick="goSection(&quot;contacto&quot;);toggleChat();" style="background:var(--accent);color:#000;border:none;padding:6px 14px;border-radius:6px;font-weight:700;font-size:12px;cursor:pointer;">Ir a Contacto &rarr;</button>');
 }
 
 function chatNewsletter(){
-  addBotMessage('📧 <strong>Newsletter H3L</strong><br><br>Suscribite para recibir:<br>• Noticias semanales del sector OIL &amp; GAS<br>• Precios de commodities energéticas<br>• Eventos SPE, SPEE, IAE y más<br>• Tendencias en Data Science aplicada a energía<br><br>Es gratis. Solo creá tu cuenta:<br><button onclick="goSection(&quot;auth&quot;);authTab(&quot;registro&quot;);toggleChat();" style="background:var(--accent);color:#000;border:none;padding:6px 14px;border-radius:6px;font-weight:700;font-size:12px;cursor:pointer;">Suscribirme &rarr;</button>');
+  addBotMessage('📧 <strong>Newsletter H3L</strong><br><br>Suscribite para recibir:<br>• Noticias semanales del sector OIL &amp; GAS<br>• Precios de commodities energéticas<br>• Eventos SPE, SPEE, IAE y más<br>• Tendencias en Data Science aplicada a energía<br><br>Escribinos a info@h3l.com para recibirlo:<br><button onclick="goSection(&quot;contacto&quot;);toggleChat();" style="background:var(--accent);color:#000;border:none;padding:6px 14px;border-radius:6px;font-weight:700;font-size:12px;cursor:pointer;">Contactar &rarr;</button>');
 }
 
 function addBotMessage(html){
@@ -6360,9 +5485,9 @@ function getResponse(msg){
     setTimeout(()=>chatNewsletter(), 400);
     return 'Te cuento sobre nuestro Newsletter...';
   }
-  if(m.includes('login')||m.includes('sesión')||m.includes('cuenta')||m.includes('registr')){
+  if(m.includes('cotiz')||m.includes('presupuesto')||m.includes('precio')){
     setTimeout(()=>chatLogin(), 400);
-    return 'Te ayudo con el acceso...';
+    return 'Te ayudo con la cotización...';
   }
   // Fall through to original
   if(_origGetResponse) return _origGetResponse(msg);
@@ -6786,7 +5911,7 @@ function subscribeClick(plan){
     goSection('contacto');
     toast('info','Te dirigimos a Contacto para consultar el plan Enterprise');
   } else {
-    toast('info','Plan '+plan+' — próximamente disponible. Contactanos en info@nexeraconsulting.com');
+    toast('info','Plan '+plan+' — próximamente disponible. Contactanos en info@h3l.com');
   }
 }
 
@@ -6872,11 +5997,7 @@ function onSectionOpen(id){
       else refreshEventos();
     }, 100);
   }
-  if(id==='admin' && !currentUser?.isAdmin){
-    goSection('home');
-    toast('warning','Acceso restringido — solo para administradores');
-    return false;
-  }
+  if(id==='admin'||id==='auth'||id==='registro'||id==='home'){ if(id==='home') location.href='v2/'; return false; }
   // Agentes & QC Apps now open to all users
   return true;
 }
@@ -6930,48 +6051,6 @@ function loadAgentsCatalog(input){
   if(!file) return;
   toast('info','Catálogo de agentes cargado: '+file.name);
 }
-
-// Admin: show/hide Agentes button
-function updateNavForUser(user){
-  const dd = document.getElementById('nav-dropdown');
-  if(!dd) return;
-  const old = document.getElementById('nav-admin-btn');
-  if(old) old.remove();
-  const ddAgentes = document.getElementById('dd-agentes');
-  const mobAgentes = document.getElementById('mob-btn-agentes');
-  if(user?.isAdmin){
-    const btn = document.createElement('button');
-    btn.id = 'nav-admin-btn';
-    btn.textContent = 'Admin Panel';
-    btn.style.cssText = 'display:block;width:100%;padding:8px 13px;border-radius:5px;background:rgba(45,212,160,.12);border:none;color:var(--success);font-family:var(--font-body);font-size:12px;font-weight:700;cursor:pointer;text-align:left;';
-    btn.onclick = ()=>{ goSection('admin'); };
-    dd.insertBefore(btn, dd.firstChild);
-    if(ddAgentes) ddAgentes.style.display='block';
-    if(mobAgentes) mobAgentes.style.display='block';
-    const ddQC = document.getElementById('dd-qcapps');
-    const mobQC = document.getElementById('mob-btn-qcapps');
-    if(ddQC) ddQC.style.display='block';
-    if(mobQC) mobQC.style.display='block';
-  } else {
-    if(ddAgentes) ddAgentes.style.display='none';
-    if(mobAgentes) mobAgentes.style.display='none';
-    const ddQC2 = document.getElementById('dd-qcapps');
-    const mobQC2 = document.getElementById('mob-btn-qcapps');
-    if(ddQC2) ddQC2.style.display='none';
-    if(mobQC2) mobQC2.style.display='none';
-  }
-  const loginBtn = document.querySelector('.btn-nav-login');
-  if(loginBtn){
-    if(user){
-      loginBtn.textContent = user.nombre.split(' ')[0];
-      loginBtn.onclick = ()=>goSection(user.isAdmin?'admin':'dashboard');
-    } else {
-      loginBtn.textContent = 'Iniciar Sesión';
-      loginBtn.onclick = ()=>goSection('auth');
-    }
-  }
-}
-
 
 // ═══ AGENT FILTER & UPDATED LAUNCH ═══
 let activeAgentName = '';
@@ -7180,11 +6259,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   const lang = localStorage.getItem('h3l_lang')||'es';
   ['lang-desktop','mob-lang'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=lang;});
   setTimeout(()=>{ try{ applyTranslations(lang); }catch(e){console.warn('i18n',e);} }, 200);
-  // Restore session
-  try{
-    const sess = JSON.parse(localStorage.getItem('h3l_session')||'null');
-    if(sess) setTimeout(()=>loginSuccess(sess), 350);
-  }catch(e){}
+  try{localStorage.removeItem('h3l_session')}catch(e){}
 });
 
 
@@ -7241,23 +6316,7 @@ function processQCFile(input, type){
 
 </script>
 
-<script>
-(function(){
-  var slides = document.querySelectorAll('.hero-slide');
-  var dots = document.querySelectorAll('.slide-dot');
-  var cur = 0;
-  function goSlide(n){
-    slides[cur].classList.remove('active');
-    dots[cur].classList.remove('active');
-    cur = (n + slides.length) % slides.length;
-    slides[cur].classList.add('active');
-    dots[cur].classList.add('active');
-  }
-  dots.forEach(function(d,i){ d.addEventListener('click', function(){ goSlide(i); clearInterval(timer); }); });
-  var timer = setInterval(function(){ goSlide(cur+1); }, 6000);
-  window.heroGoSlide = goSlide;
-})();
-</script>
+
 
 <script>/* v2: permite abrir una sección con ?go=<seccion> (ej. ?go=calculators) */
 (function(){try{var g=new URLSearchParams(location.search).get('go');if(g&&/^[a-z-]+$/.test(g)){window.addEventListener('load',function(){setTimeout(function(){try{if(document.getElementById('section-'+g)&&typeof goSection==='function')goSection(g);}catch(e){}},200);});}}catch(e){}})();</script>
