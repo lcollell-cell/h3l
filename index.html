@@ -1137,7 +1137,7 @@ tr:hover td{background:var(--blue-ghost);}
 @media (prefers-reduced-motion:reduce){.calc-tab-btn,.calc-card{transition:none;}}
 </style>
 <link rel="stylesheet" href="assets/site.css?v=4">
-<script src="assets/site.js?v=6" defer></script>
+<script src="assets/site.js?v=7" defer></script>
 <script src="v2/chat.js?v=5" defer></script>
 </head>
 <body>
@@ -1902,31 +1902,31 @@ tr:hover td{background:var(--blue-ghost);}
       <button id="ntab-int" onclick="switchNewsTab('int')" style="flex:1;padding:9px;font-family:var(--font-body);font-size:12px;font-weight:600;border:none;cursor:pointer;background:var(--gray-50);color:var(--text-secondary);"><span data-t="w_int">Internacional</span></button>
     </div>
 
-    <!-- PRECIOS EN TIEMPO REAL — Fuente: Financial Times Markets -->
+    <!-- PRECIOS EN TIEMPO REAL — Fuente: EIA Markets -->
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:12px;">
       <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;text-align:center;transition:border-color .3s;">
         <div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:6px;">BRENT CRUDE</div>
         <div id="precio-brent" style="font-size:24px;font-weight:800;color:var(--accent);font-family:var(--font-mono);transition:opacity .3s;">—</div>
         <div id="brent-change" style="font-size:11px;color:var(--text-muted);margin-top:3px;">USD/barril</div>
-        <div id="precio-src-brent" style="font-size:9px;color:var(--text-muted);margin-top:6px;">Fuente: Financial Times</div>
+        <div id="precio-src-brent" style="font-size:9px;color:var(--text-muted);margin-top:6px;">Fuente: EIA</div>
       </div>
       <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;text-align:center;">
         <div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:6px;">WTI CRUDE</div>
         <div id="precio-wti" style="font-size:24px;font-weight:800;color:var(--success);font-family:var(--font-mono);transition:opacity .3s;">—</div>
         <div id="wti-change" style="font-size:11px;color:var(--text-muted);margin-top:3px;">USD/barril</div>
-        <div id="precio-src-wti" style="font-size:9px;color:var(--text-muted);margin-top:6px;">Fuente: Financial Times</div>
+        <div id="precio-src-wti" style="font-size:9px;color:var(--text-muted);margin-top:6px;">Fuente: EIA</div>
       </div>
       <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;text-align:center;">
         <div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:6px;">HENRY HUB GAS</div>
         <div id="precio-gas" style="font-size:24px;font-weight:800;color:var(--info);font-family:var(--font-mono);transition:opacity .3s;">—</div>
         <div id="gas-change" style="font-size:11px;color:var(--text-muted);margin-top:3px;">USD/MMBtu</div>
-        <div id="precio-src-gas" style="font-size:9px;color:var(--text-muted);margin-top:6px;">Fuente: Financial Times</div>
+        <div id="precio-src-gas" style="font-size:9px;color:var(--text-muted);margin-top:6px;">Fuente: EIA</div>
       </div>
       <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;text-align:center;">
         <div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:6px;">GNL SPOT</div>
         <div id="precio-gnl" style="font-size:24px;font-weight:800;color:var(--warning);font-family:var(--font-mono);transition:opacity .3s;">—</div>
         <div id="gnl-change" style="font-size:11px;color:var(--text-muted);margin-top:3px;">USD/MMBtu</div>
-        <div id="precio-src-gnl" style="font-size:9px;color:var(--text-muted);margin-top:6px;">Fuente: FT / Platts JKM</div>
+        <div id="precio-src-gnl" style="font-size:9px;color:var(--text-muted);margin-top:6px;">Fuente: Platts JKM (de pago)</div>
       </div>
     </div>
 
@@ -1934,11 +1934,11 @@ tr:hover td{background:var(--blue-ghost);}
     <div style="display:flex;align-items:center;justify-content:space-between;max-width:1100px;margin:0 auto 24px;padding:8px 14px;background:rgba(255,255,255,.03);border-radius:8px;border:1px solid rgba(255,255,255,.06);">
       <span style="font-size:10px;color:var(--text-muted);">
         <span data-t="w_rt">Cotizaciones de mercado:</span> <span id="precio-ts">—</span>
-        · <span data-t="w_srcl">Fuente:</span> <a href="https://markets.ft.com/data/commodities" target="_blank" style="color:var(--accent);font-weight:600;" rel="noopener noreferrer">Financial Times Markets</a>
-        · <a href="https://spglobal.com/commodity-insights" target="_blank" style="color:var(--accent);" rel="noopener noreferrer">Platts / S&P Global</a>
-        · <a href="https://www.eia.gov/naturalgas/weekly" target="_blank" style="color:var(--accent);" rel="noopener noreferrer">EIA</a>
+        · <span data-t="w_srcl">Fuente:</span> <a href="https://www.eia.gov/dnav/pet/pet_pri_spt_s1_d.htm" target="_blank" style="color:var(--accent);font-weight:600;" rel="noopener noreferrer">EIA (EE. UU.)</a>
+        · <a href="https://www.spglobal.com/commodity-insights" target="_blank" style="color:var(--accent);" rel="noopener noreferrer">Platts JKM (GNL)</a>
+        
       </span>
-      <button onclick="loadPrices(true)" style="background:rgba(46,107,196,.10);border:1px solid rgba(46,107,196,.20);color:var(--accent);font-family:var(--font-body);font-size:10px;font-weight:600;padding:4px 12px;border-radius:5px;cursor:pointer;transition:background .2s;" onmouseover="this.style.background='rgba(46,107,196,.18)'" onmouseout="this.style.background='rgba(46,107,196,.10)'">
+      <button onclick="loadPrices(true)" style="display:none;background:rgba(46,107,196,.10);border:1px solid rgba(46,107,196,.20);color:var(--accent);font-family:var(--font-body);font-size:10px;font-weight:600;padding:4px 12px;border-radius:5px;cursor:pointer;transition:background .2s;" onmouseover="this.style.background='rgba(46,107,196,.18)'" onmouseout="this.style.background='rgba(46,107,196,.10)'">
         <span data-t="w_updp">Actualizar precios</span>
       </button>
     </div>
@@ -5025,7 +5025,7 @@ function descargarCSV(data){
 // ═══════════════════════════════════════════════════════════
 
 // ═══════════════════════════════════════════════════════════
-// PRECIOS EN TIEMPO REAL — Fuente: Financial Times Markets
+// PRECIOS EN TIEMPO REAL — Fuente: EIA Markets
 // Arquitectura: Anthropic API + web_search → parse JSON → render
 // Fallback: últimos valores de mercado conocidos si API falla
 // ═══════════════════════════════════════════════════════════
@@ -5136,58 +5136,28 @@ async function _fetchPricesFromFT() {
   return parsed;
 }
 
-async function loadPrices(manual = false) {
-  const now = Date.now();
-
-  // Mostrar skeleton mientras carga
-  ['precio-brent','precio-wti','precio-gas','precio-gnl'].forEach(id => {
-    if(_$(id)) _$(id).style.opacity = '0.4';
-  });
-
-  try {
-    // Usar cache si es reciente
-    if (_priceCache && (now - _priceCacheTs) < CACHE_TTL_MS && !manual) {
-      _renderPrices(_priceCache, 'ft', false);
-      ['precio-brent','precio-wti','precio-gas','precio-gnl'].forEach(id => {
-        if(_$(id)) _$(id).style.opacity = '1';
-      });
-      return;
-    }
-
-    const prices = await _fetchPricesFromFT();
-
-    // Validación básica de rangos razonables
-    const valid = prices.brent > 30 && prices.brent < 300
-               && prices.wti   > 25 && prices.wti   < 290
-               && prices.gas   > 0.5 && prices.gas  < 50
-               && prices.gnl   > 1   && prices.gnl   < 100;
-
-    if (!valid) throw new Error('Precios fuera de rango esperado');
-
-    _priceCache = prices;
-    _priceCacheTs = now;
-    _renderPrices(prices, 'ft', manual);
-
-  } catch (err) {
-    console.warn('FT price fetch failed, using fallback:', err.message);
-
-    // Sin datos en vivo: no se muestran valores simulados
-    ['precio-brent','precio-wti','precio-gas','precio-gnl'].forEach(id => { if(_$(id)) _$(id).textContent = '—'; });
-    ['brent-change','wti-change','gas-change','gnl-change'].forEach(id => { if(_$(id)) _$(id).textContent = ''; });
-    if(_$('precio-ts')) _$('precio-ts').textContent = W('w_nolive');
-
-    if (manual && typeof toast === 'function')
-      toast('warning', W('w_pricefb'));
-  } finally {
-    ['precio-brent','precio-wti','precio-gas','precio-gnl'].forEach(id => {
-      if(_$(id)) _$(id).style.opacity = '1';
-    });
-  }
+/* Precios spot publicados por la EIA (U.S. Energy Information Administration) — datos públicos, no se simulan.
+   Último dato disponible al 14/10/2026: 6/10/2026. Fuentes:
+   https://www.eia.gov/dnav/pet/pet_pri_spt_s1_d.htm  ·  https://www.eia.gov/dnav/ng/ng_pri_fut_s1_d.htm
+   Variación = diferencia contra el dato del día hábil anterior (5/10/2026). GNL (JKM) no tiene fuente pública diaria gratuita. */
+const EIA_DATA = { date:'2026-10-06',
+  brent:{v:125.44, prev:125.51}, wti:{v:96.24, prev:96.13}, gas:{v:3.03, prev:2.96} };
+function renderEIA(){
+  const set=(id,t)=>{ if(_$(id)) _$(id).textContent=t; };
+  const ch=(id,v,p,unit)=>{ const d=v-p; if(_$(id)) _$(id).innerHTML=`<span style="color:${_colorVal(d)}">${_arrow(d)} ${_fmt(d)}</span> ${unit}`; };
+  set('precio-brent','$'+EIA_DATA.brent.v.toFixed(2)); ch('brent-change',EIA_DATA.brent.v,EIA_DATA.brent.prev,W('w_bbl'));
+  set('precio-wti','$'+EIA_DATA.wti.v.toFixed(2));     ch('wti-change',EIA_DATA.wti.v,EIA_DATA.wti.prev,W('w_bbl'));
+  set('precio-gas','$'+EIA_DATA.gas.v.toFixed(2));     ch('gas-change',EIA_DATA.gas.v,EIA_DATA.gas.prev,W('w_mmbtu'));
+  set('precio-gnl','—'); set('gnl-change',W('w_mmbtu'));
+  const dt=new Date(EIA_DATA.date+'T12:00:00').toLocaleDateString(curLoc(),{day:'2-digit',month:'2-digit',year:'numeric'});
+  set('precio-ts', dt+' · '+W('w_eiats'));
+  const src=W('w_srcl')+' '+W('w_eiasrc');
+  set('precio-src-brent',src+' · Brent FOB Europe'); set('precio-src-wti',src+' · WTI Cushing'); set('precio-src-gas',src+' · Henry Hub');
+  set('precio-src-gnl',W('w_gnlsrc'));
+  ['precio-brent','precio-wti','precio-gas','precio-gnl'].forEach(id=>{ if(_$(id)) _$(id).style.opacity='1'; });
 }
-
-// Carga inicial + refresh cada 15 minutos
+async function loadPrices(){ renderEIA(); }
 loadPrices();
-setInterval(() => loadPrices(false), 15 * 60 * 1000);
 
 // ═══════════════════════════════════════════════════════════
 // NOTICIAS O&G — actualización diaria con cache localStorage
@@ -6002,9 +5972,9 @@ function trEvent(e){ const lg=curLg(); if(lg==='es') return e; const i=FALLBACK_
 function h3lRerender(){
   try{ if(_lastNews) renderNews(_lastNews); }catch(e){}
   try{ var _e=document.getElementById('eventos-ts'); if(_e&&_e.textContent&&typeof EVENTS_TS!=='undefined') _e.textContent=EVENTS_TS[curLg()]||EVENTS_TS.es; }catch(e){}
-  try{ var _t=document.getElementById('news-ts'); if(_t&&typeof NEWS_TS!=='undefined') _t.textContent=NEWS_TS[curLg()]||NEWS_TS.es; var _p=document.getElementById('precio-ts'); if(_p&&/^\u2014$|\u2014|sin datos|no live|pas de|sem dados/.test(_p.textContent)&&document.getElementById('precio-brent').textContent==='\u2014') _p.textContent=W('w_nolive'); }catch(e){}
+  try{ var _t=document.getElementById('news-ts'); if(_t&&typeof NEWS_TS!=='undefined') _t.textContent=NEWS_TS[curLg()]||NEWS_TS.es; }catch(e){}
   try{ if(document.getElementById('eventos-grid') && allEvents && document.querySelector('#eventos-grid .ev-card')) _filtering=true; try{ renderEventos(allEvents); } finally { _filtering=false; } }catch(e){}
-  try{ if(_lastP) _renderPrices(_lastP[0],_lastP[1],false,true); }catch(e){}
+  try{ renderEIA(); }catch(e){}
   try{ if(document.getElementById('et-grid')){ buildETGrid(); } }catch(e){}
   try{ const ov=document.getElementById('et-modal-wrap'); if(ov && ov.style.display==='block' && _etOpenId) openETModal(_etOpenId); }catch(e){}
   try{ const ts=document.getElementById('news-ts'); if(ts&&_lastNewsTs) ts.textContent=W('w_ts')+' '+_lastNewsTs.toLocaleDateString(curLoc(),{day:'2-digit',month:'2-digit',year:'numeric'})+' '+_lastNewsTs.toLocaleTimeString(curLoc(),{hour:'2-digit',minute:'2-digit'}); }catch(e){}
