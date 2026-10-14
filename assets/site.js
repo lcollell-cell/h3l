@@ -31,7 +31,7 @@ es:{
  pv5:'Flexibilidad para adaptarnos a marcos regulatorios en distintas jurisdicciones.',
  en_h:'Nuestro enfoque',en_p:'Sinergia · Sostenibilidad · Viabilidad',
  sv_eyebrow:'Servicios',sv_title:'Gestión integral de recursos energéticos',
- sv_desc:'Siete líneas de servicio, cada una con la herramienta que usamos en el trabajo. Mirá el video y pedí tu cotización.',
+ sv_desc:'Ocho líneas de servicio, cada una con la herramienta que usamos en el trabajo. Mirá el video y pedí tu cotización.',
  sv_end:'¿Necesitás una propuesta para tu activo o proyecto?',
  sv_dl:'Descargar brochure',sv_q:'Solicitar cotización',sv_qall:'Solicitar cotización',sv_more:'Probar la herramienta',sv_tool:'Herramienta',
  sv_vid:'Video demostrativo de la herramienta',sv_play:'Reproducir',sv_pause:'Pausar',
@@ -137,7 +137,7 @@ en:{
  pv5:'Flexibility to adapt to regulatory frameworks in different jurisdictions.',
  en_h:'Our approach',en_p:'Synergy · Sustainability · Viability',
  sv_eyebrow:'Services',sv_title:'Integrated energy resources management',
- sv_desc:'Seven service lines, each with the tool we use on the job. Watch the video and request your quote.',
+ sv_desc:'Eight service lines, each with the tool we use on the job. Watch the video and request your quote.',
  sv_end:'Need a proposal for your asset or project?',
  sv_dl:'Download brochure',sv_q:'Request a quote',sv_qall:'Request a quote',sv_more:'Try the tool',sv_tool:'Tool',
  sv_vid:'Tool demo video',sv_play:'Play',sv_pause:'Pause',
@@ -243,7 +243,7 @@ fr:{
  pv5:'Flexibilité pour s’adapter aux cadres réglementaires de différentes juridictions.',
  en_h:'Notre approche',en_p:'Synergie · Durabilité · Viabilité',
  sv_eyebrow:'Services',sv_title:'Gestion intégrale des ressources énergétiques',
- sv_desc:'Sept lignes de services, chacune avec l’outil que nous utilisons sur le terrain. Regardez la vidéo et demandez votre devis.',
+ sv_desc:'Huit lignes de services, chacune avec l’outil que nous utilisons sur le terrain. Regardez la vidéo et demandez votre devis.',
  sv_end:'Besoin d’une proposition pour votre actif ou projet ?',
  sv_dl:'Télécharger la brochure',sv_q:'Demander un devis',sv_qall:'Demander un devis',sv_more:'Essayer l’outil',sv_tool:'Outil',
  sv_vid:'Vidéo de démonstration de l’outil',sv_play:'Lire',sv_pause:'Pause',
@@ -349,7 +349,7 @@ pt:{
  pv5:'Flexibilidade para nos adaptarmos a marcos regulatórios em diferentes jurisdições.',
  en_h:'Nosso enfoque',en_p:'Sinergia · Sustentabilidade · Viabilidade',
  sv_eyebrow:'Serviços',sv_title:'Gestão integral de recursos energéticos',
- sv_desc:'Sete linhas de serviço, cada uma com a ferramenta que usamos no trabalho. Veja o vídeo e solicite seu orçamento.',
+ sv_desc:'Oito linhas de serviço, cada uma com a ferramenta que usamos no trabalho. Veja o vídeo e solicite seu orçamento.',
  sv_end:'Precisa de uma proposta para seu ativo ou projeto?',
  sv_dl:'Baixar brochure',sv_q:'Solicitar orçamento',sv_qall:'Solicitar orçamento',sv_more:'Testar a ferramenta',sv_tool:'Ferramenta',
  sv_vid:'Vídeo de demonstração da ferramenta',sv_play:'Reproduzir',sv_pause:'Pausar',
@@ -427,7 +427,7 @@ pt:{
  w_nl_ph_n:'voce@email.com'
 }};
 
-/* Servicios: 7 líneas del brochure. go = sección/página de la herramienta mostrada en el video */
+/* Servicios: 8 líneas del brochure (en su orden). go = sección/página de la herramienta mostrada en el video */
 var S=[
 {id:'reservas',go:'page:v2/reservas.html',
  t:{es:'Evaluación de Recursos y Reservas',en:'Resources & Reserves Evaluation',fr:'Évaluation des Ressources et Réserves',pt:'Avaliação de Recursos e Reservas'},
@@ -471,6 +471,13 @@ var S=[
     en:['Dashboards for reserves, energy consumption and carbon footprint','Digital twins of assets with technical and environmental parameters','Real-time monitoring (SCADA + IoT + AI)','KPIs for integration with corporate and regulatory tools'],
     fr:['Tableaux de bord pour réserves, consommation d’énergie et empreinte carbone','Jumeaux numériques d’actifs avec paramètres techniques et environnementaux','Surveillance en temps réel (SCADA + IoT + IA)','KPI pour l’intégration avec les outils d’entreprise et réglementaires'],
     pt:['Dashboards para reservas, consumo de energia e pegada de carbono','Gêmeos digitais de ativos com parâmetros técnicos e ambientais','Monitoramento em tempo real (SCADA + IoT + IA)','KPIs para integração com ferramentas corporativas e regulatórias']}},
+{id:'geociencias',
+ t:{es:'Geociencias',en:'Geosciences',fr:'Géosciences',pt:'Geociências'},
+ tool:{es:'Estudio integrado: geología, reservorio, economía y pozos',en:'Integrated study: geology, reservoir, economics and wells',fr:'Étude intégrée : géologie, réservoir, économie et puits',pt:'Estudo integrado: geologia, reservatório, economia e poços'},
+ b:{es:['Ingeniería de Reservorios: modelado de reservorios, pronósticos de producción, análisis de sensibilidad y optimización del factor de recuperación','Estudios Geológicos y Petrofísicos: interpretación integrada de datos para identificar oportunidades y delimitar áreas prospectivas','Modelado Económico de Activos: valoración técnica-económica de proyectos, análisis de rentabilidad, riesgos y sensibilidad a precios','Diseño, presupuestación y seguimiento de construcción de pozos: Drilling, Completion & Workover y abandono de pozo'],
+    en:['Reservoir Engineering: reservoir modeling, production forecasts, sensitivity analysis and recovery-factor optimization','Geological and Petrophysical Studies: integrated data interpretation to identify opportunities and delimit prospective areas','Asset Economic Modeling: technical-economic valuation of projects, profitability, risk and price-sensitivity analysis','Design, budgeting and follow-up of well construction: Drilling, Completion & Workover and well abandonment'],
+    fr:['Ingénierie de réservoir : modélisation de réservoirs, prévisions de production, analyse de sensibilité et optimisation du facteur de récupération','Études géologiques et pétrophysiques : interprétation intégrée des données pour identifier des opportunités et délimiter des zones prospectives','Modélisation économique des actifs : évaluation technico-économique de projets, analyse de rentabilité, des risques et de la sensibilité aux prix','Conception, budgétisation et suivi de la construction de puits : Drilling, Completion & Workover et abandon de puits'],
+    pt:['Engenharia de Reservatórios: modelagem de reservatórios, previsões de produção, análise de sensibilidade e otimização do fator de recuperação','Estudos Geológicos e Petrofísicos: interpretação integrada de dados para identificar oportunidades e delimitar áreas prospectivas','Modelagem Econômica de Ativos: valoração técnico-econômica de projetos, análise de rentabilidade, riscos e sensibilidade a preços','Projeto, orçamentação e acompanhamento da construção de poços: Drilling, Completion & Workover e abandono de poço']}},
 {id:'capacitacion',go:'page:v2/reservas.html',
  t:{es:'Capacitación y Formación Especializada',en:'Specialized Training',fr:'Formation spécialisée',pt:'Capacitação e Formação Especializada'},
  tool:{es:'Recorrido guiado y práctica con casos',en:'Guided tour and case practice',fr:'Parcours guidé et pratique sur cas',pt:'Percurso guiado e prática com casos'},
