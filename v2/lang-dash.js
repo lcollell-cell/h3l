@@ -43,7 +43,7 @@ A('d.cta1',"Solicitar una demostración","Request a demo","Demander une démonst
 A('d.cta2',"Ver los agentes de H3L","See the H3L agents","Voir les agents H3L","Ver os agentes da H3L");
 A('d.foot1b',"Datos de demostración.","Demo data.","Données de démonstration.","Dados de demonstração.");
 A('d.foot1',"Los cinco tableros usan un portafolio ficticio para ilustrar el método. Las cifras no corresponden a un cliente ni a resultados garantizados.","The five boards use a fictional portfolio to illustrate the method. The figures do not correspond to any client or guaranteed results.","Les cinq tableaux utilisent un portefeuille fictif pour illustrer la méthode. Les chiffres ne correspondent ni à un client ni à des résultats garantis.","Os cinco painéis usam um portfólio fictício para ilustrar o método. Os números não correspondem a um cliente nem a resultados garantidos.");
-A('d.foot2',"H3L Global Energy · www.h3l.com · <a href=\"index.html\">Volver al inicio</a>","H3L Global Energy · www.h3l.com · <a href=\"index.html\">Back to home</a>","H3L Global Energy · www.h3l.com · <a href=\"index.html\">Retour à l’accueil</a>","H3L Global Energy · www.h3l.com · <a href=\"index.html\">Voltar ao início</a>");
+A('d.foot2',"H3L Global Energy · www.h3lglobalenergy.com · <a href=\"index.html\">Volver al inicio</a>","H3L Global Energy · www.h3lglobalenergy.com · <a href=\"index.html\">Back to home</a>","H3L Global Energy · www.h3lglobalenergy.com · <a href=\"index.html\">Retour à l’accueil</a>","H3L Global Energy · www.h3lglobalenergy.com · <a href=\"index.html\">Voltar ao início</a>");
 
 /* ---- gráficos ---- */
 A('v.value',"Valor","Value","Valeur","Valor");

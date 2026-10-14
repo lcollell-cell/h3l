@@ -1945,14 +1945,14 @@ tr:hover td{background:var(--blue-ghost);}
         <div style="margin-bottom:12px;"><label class="form-label" data-t="w_ct_e">EMAIL *</label><input class="form-input" type="email" id="ctc-email" placeholder="juan@empresa.com"></div>
         <div style="margin-bottom:12px;"><label class="form-label" data-t="w_ct_c">EMPRESA / OCUPACIÓN</label><input class="form-input" type="text" id="ctc-empresa" placeholder="Empresa SA" data-t-ph="w_ph_c"></div>
         <div style="margin-bottom:16px;"><label class="form-label" data-t="w_ct_q">CONSULTA *</label><textarea class="form-input" id="ctc-mensaje" rows="4" style="resize:vertical;" data-t-val="w_ct_def">Buenas tardes, quiero información de sus servicios. Mi contacto es </textarea></div>
-        <button onclick="enviarContacto()" class="btn-calc" style="width:100%;" data-t="w_ct_send">Enviar a info@h3l.com</button>
+        <button onclick="enviarContacto()" class="btn-calc" style="width:100%;" data-t="w_ct_send">Enviar a info@h3lglobalenergy.com</button>
         <div id="ctc-status" style="margin-top:10px;text-align:center;font-size:12px;min-height:18px;"></div>
       </div>
       <div style="display:flex;flex-direction:column;gap:16px;">
         <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;">
           <h4 style="font-family:var(--font-body);font-weight:700;margin-bottom:16px;color:var(--accent);font-size:14px;" data-t="w_ct_info">Información de Contacto</h4>
           <div style="display:flex;flex-direction:column;gap:10px;">
-            <div style="display:flex;gap:10px;padding:10px;background:var(--gray-50);border-radius:var(--radius);"><span style="font-size:15px;">✉</span><div><div style="font-size:10px;color:var(--text-muted);margin-bottom:1px;" data-t="w_ct_email">EMAIL</div><div style="font-size:13px;color:var(--accent);">info@h3l.com</div></div></div>
+            <div style="display:flex;gap:10px;padding:10px;background:var(--gray-50);border-radius:var(--radius);"><span style="font-size:15px;">✉</span><div><div style="font-size:10px;color:var(--text-muted);margin-bottom:1px;" data-t="w_ct_email">EMAIL</div><div style="font-size:13px;color:var(--accent);">info@h3lglobalenergy.com</div></div></div>
             <div style="display:flex;gap:10px;padding:10px;background:var(--gray-50);border-radius:var(--radius);"><span style="font-size:15px;">☎</span><div><div style="font-size:10px;color:var(--text-muted);margin-bottom:1px;" data-t="w_ct_arg">ARGENTINA</div><div style="font-size:12px;">+54 2974 62 5804 / +54 911 2872 3272</div></div></div>
             <div style="display:flex;gap:10px;padding:10px;background:var(--gray-50);border-radius:var(--radius);"><span style="font-size:15px;">☎</span><div><div style="font-size:10px;color:var(--text-muted);margin-bottom:1px;" data-t="w_ct_es">ESPAÑA</div><div style="font-size:12px;">+34 672 22 0224</div></div></div>
           </div>
@@ -4951,7 +4951,7 @@ function enviarContacto(){
   if(!mensaje){if(status)status.innerHTML='<span style="color:var(--danger)">'+W('w_er_msg')+'</span>';return;}
   const subject=encodeURIComponent(W('w_mailsub')+' '+nombre+' '+apellido);
   const body=encodeURIComponent(W('w_mn')+': '+nombre+' '+apellido+'\n'+W('w_me')+': '+email+'\n'+W('w_mc')+': '+empresa+'\n\n'+mensaje);
-  window.location.href='mailto:info@h3l.com?subject='+subject+'&body='+body; /* Safari bloquea window.open para mailto */
+  window.location.href='mailto:info@h3lglobalenergy.com?subject='+subject+'&body='+body; /* Safari bloquea window.open para mailto */
   if(status)status.innerHTML='<span style="color:var(--success)">'+W('w_opening')+'</span>';
   setTimeout(()=>{if(status)status.innerHTML='';},3000);
 }
@@ -5494,7 +5494,7 @@ function chatTour(){
     '3️⃣ <strong>Servicios</strong> — Las ocho líneas de servicio, cada una con un video de la herramienta.',
     '4️⃣ <strong>Noticias O&G</strong> — Precios BRENT/WTI/GAS/GNL actualizados y noticias del sector.',
     '5️⃣ <strong>Eventos y Contacto</strong> — Agenda del sector y formulario de cotización.',
-    '6️⃣ <strong>Contacto</strong> — Escribinos a info@h3l.com o pedí una cotización desde Servicios.<br><br><button onclick="goSection(&quot;servicios&quot;);toggleChat();" style="background:var(--accent);color:#000;border:none;padding:6px 14px;border-radius:6px;font-weight:700;font-size:12px;cursor:pointer;margin-top:6px;">Ver servicios &rarr;</button>'
+    '6️⃣ <strong>Contacto</strong> — Escribinos a info@h3lglobalenergy.com o pedí una cotización desde Servicios.<br><br><button onclick="goSection(&quot;servicios&quot;);toggleChat();" style="background:var(--accent);color:#000;border:none;padding:6px 14px;border-radius:6px;font-weight:700;font-size:12px;cursor:pointer;margin-top:6px;">Ver servicios &rarr;</button>'
   ];
   steps.forEach((msg, i) => {
     setTimeout(() => addBotMessage(msg), i * 1200);
@@ -5502,11 +5502,11 @@ function chatTour(){
 }
 
 function chatLogin(){
-  addBotMessage('Para pedir una cotización, escribinos a <strong>info@h3l.com</strong> o completá el formulario de contacto.<br><br><button onclick="goSection(&quot;contacto&quot;);toggleChat();" style="background:var(--accent);color:#000;border:none;padding:6px 14px;border-radius:6px;font-weight:700;font-size:12px;cursor:pointer;">Ir a Contacto &rarr;</button>');
+  addBotMessage('Para pedir una cotización, escribinos a <strong>info@h3lglobalenergy.com</strong> o completá el formulario de contacto.<br><br><button onclick="goSection(&quot;contacto&quot;);toggleChat();" style="background:var(--accent);color:#000;border:none;padding:6px 14px;border-radius:6px;font-weight:700;font-size:12px;cursor:pointer;">Ir a Contacto &rarr;</button>');
 }
 
 function chatNewsletter(){
-  addBotMessage('📧 <strong>Newsletter H3L</strong><br><br>Suscribite para recibir:<br>• Noticias semanales del sector OIL &amp; GAS<br>• Precios de commodities energéticas<br>• Eventos SPE, SPEE, IAE y más<br>• Tendencias en Data Science aplicada a energía<br><br>Escribinos a info@h3l.com para recibirlo:<br><button onclick="goSection(&quot;contacto&quot;);toggleChat();" style="background:var(--accent);color:#000;border:none;padding:6px 14px;border-radius:6px;font-weight:700;font-size:12px;cursor:pointer;">Contactar &rarr;</button>');
+  addBotMessage('📧 <strong>Newsletter H3L</strong><br><br>Suscribite para recibir:<br>• Noticias semanales del sector OIL &amp; GAS<br>• Precios de commodities energéticas<br>• Eventos SPE, SPEE, IAE y más<br>• Tendencias en Data Science aplicada a energía<br><br>Escribinos a info@h3lglobalenergy.com para recibirlo:<br><button onclick="goSection(&quot;contacto&quot;);toggleChat();" style="background:var(--accent);color:#000;border:none;padding:6px 14px;border-radius:6px;font-weight:700;font-size:12px;cursor:pointer;">Contactar &rarr;</button>');
 }
 
 function addBotMessage(html){
@@ -5964,7 +5964,7 @@ function subscribeClick(plan){
     goSection('contacto');
     toast('info','Te dirigimos a Contacto para consultar el plan Enterprise');
   } else {
-    toast('info','Plan '+plan+' — próximamente disponible. Contactanos en info@h3l.com');
+    toast('info','Plan '+plan+' — próximamente disponible. Contactanos en info@h3lglobalenergy.com');
   }
 }
 
