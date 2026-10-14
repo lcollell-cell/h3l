@@ -280,14 +280,14 @@ const reduce=!params.has('intro')&&window.matchMedia&&matchMedia('(prefers-reduc
 /* ---------- parámetros de la línea de tiempo (idénticos al video aprobado) ---------- */
 const T0=.3, DUR=.95;
 const AUD_END=11.0;
-const HOLD=2, HOLD_AT=7.0; /* pausa de 2 s con los 5 servicios completos; sonido original de la intro (11 s) */
+const HOLD=-1.05, HOLD_AT=6.0; /* sin espera: la cortina abre en el acento de los 6 s del sonido original y las dos últimas notas (6 s y 7,05 s) suenan dentro del Hero; HOLD<0 adelanta el Hero respecto del sonido */
 const te=x=>x<HOLD_AT?x:(x<HOLD_AT+HOLD?HOLD_AT:x-HOLD);
 const T_CURTAIN=7.05, T_CURTAIN_END=7.85;
 const STAGES=[{},{},{},{},{}]; /* 5 etapas */
 function refreshStages(){ STAGES.forEach((s,i)=>{ s.lab=I('s'+(i+1)+'.lab'); s.cap=I('s'+(i+1)+'.cap'); s.st=I('s'+(i+1)+'.st'); if(s.el){ const l=s.el.querySelector('.lab'); if(l) l.textContent=s.lab; } }); }
 refreshStages();
-const ST_A=[.3,2.2,4.1,5.05,6.0];
-STAGES.forEach((s,i)=>{ s.a=ST_A[i]; s.b=i<4?ST_A[i+1]:7.0; });
+const ST_A=[.3,1.25,2.2,3.15,4.1];
+STAGES.forEach((s,i)=>{ s.a=ST_A[i]; s.b=i<4?ST_A[i+1]:5.05; });
 const T_END=STAGES[4].b;
 
 /* ---------- layout responsive ---------- */
@@ -595,7 +595,7 @@ const scenesG=$('scenes'); const scenes=[];
 
 /* 5 etapas · 11 paneles: [escena, inicio, fin] alineados a los acentos del sonido original (1.25 · 2.2 · 3.15 · 4.1 · 5.05 · 6.0) */
 const SCN=scenes.slice(); scenes.length=0;
-const PANELS=[[8,.3,2.2],[2,2.2,4.1],[4,4.1,5.05],[10,5.05,6.0],[5,6.0,7.0]] /* un gráfico por etapa */
+const PANELS=[[8,.3,1.25],[2,1.25,2.2],[4,2.2,3.15],[10,3.15,4.1],[5,4.1,5.05]] /* un gráfico por etapa */
   .map(([i,a,b])=>({sc:SCN[i],a,b}));
 SCN.forEach(sc=>{ if(!PANELS.some(pn=>pn.sc===sc)) sc.g.remove(); });
 /* ---------- watermark original: emerge + brillo sobrio ---------- */
