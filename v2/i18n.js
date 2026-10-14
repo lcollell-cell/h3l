@@ -29,7 +29,7 @@ H3L.set=function(l,silent){if(L.indexOf(l)<0||l===H3L.lang)return;H3L.lang=l;H3L
   H3L.apply();if(!silent)cbs.forEach(function(f){try{f(l)}catch(e){if(window.console)console.error(e)}})};
 /* selector de idioma: un <select> nativo, el más compatible en todos los sistemas y teléfonos */
 H3L.select=function(opts){opts=opts||{};
-  var w=document.createElement('label');w.className='h3lang'+(opts.dark?' dk':'')+(opts.cls?' '+opts.cls:'');
+  var w=document.createElement('label');w.setAttribute('translate','no');w.className='notranslate h3lang'+(opts.dark?' dk':'')+(opts.cls?' '+opts.cls:'');
   w.innerHTML='<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.7 4 5.7 4 9s-1.4 6.3-4 9c-2.6-2.7-4-5.7-4-9s1.4-6.3 4-9z"/></svg>';
   var s=document.createElement('select');s.className='h3lang-sel';s.setAttribute('data-i18n-attr','aria-label:c.lang');
   L.forEach(function(l){var o=document.createElement('option');o.value=l;o.textContent=opts.full?NAMES[l]:l.toUpperCase();o.setAttribute('lang',l);if(!opts.full)o.title=NAMES[l];s.appendChild(o)});

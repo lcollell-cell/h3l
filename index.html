@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<meta name="google" content="notranslate">
 <meta charset="UTF-8">
 <script>/* El inicio es la portada con intro (v2/). Solo se queda aquí si se pide una sección con ?go= */
 (function(){try{if(!/[?&]go=/.test(location.search)&&!/[?&]stay/.test(location.search))location.replace('v2/'+location.hash)}catch(e){}})();</script>
@@ -1128,7 +1129,7 @@ tr:hover td{background:var(--blue-ghost);}
     <button class="nav-link" id="nl-contacto"  onclick="goSection('contacto')"  data-t="nav_contacto">Contactos</button>
   </div>
   <div class="nav-actions">
-    <select class="lang-select" onchange="changeLang(this.value)" id="lang-desktop" aria-label="Idioma / Language">
+    <select class="lang-select notranslate" translate="no" onchange="changeLang(this.value)" id="lang-desktop" aria-label="Idioma / Language">
       <option value="es">ES</option>
       <option value="en">EN</option>
       <option value="fr">FR</option>
