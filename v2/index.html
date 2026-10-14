@@ -257,7 +257,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #5BB0FF;outline-offset:3p
   <div id="gate" role="dialog" aria-label="Entrar al sitio" data-i18n-attr="aria-label:i.gAria" hidden><div class="gbox"><div class="gl">H<span>3</span>L</div><div class="gs">Global Energy</div><button id="gYes" type="button" data-i18n="i.gYes">ENTRAR CON SONIDO</button><button id="gNo" type="button" data-i18n="i.gNo">ENTRAR SIN SONIDO</button><div id="langGate"></div></div></div>
   <div id="edge"></div>
   <div id="fade" class="layer"></div>
-  <audio id="snd" src="h3l-intro.mp3?v=2" preload="auto"></audio>
+  <audio id="snd" src="h3l-intro.mp3?v=3" preload="auto"></audio>
 </div>
 <script>
 const SW=1280,SH=720;
@@ -280,10 +280,14 @@ const reduce=!params.has('intro')&&window.matchMedia&&matchMedia('(prefers-reduc
 /* ---------- parámetros de la línea de tiempo (idénticos al video aprobado) ---------- */
 const T0=.3, DUR=.95;
 const GAP=1.5; /* pausa de lectura entre el listado y el Hero: el audio trae 1,5 s insertados en 5,6 s (relleno del pad + swell de transición); las notas no cambian, solo se desplazan */
-const AUD_END=11.0+GAP;
-const HOLD=-1.05+GAP, HOLD_AT=6.0, HERO_AT=HOLD_AT+GAP; /* sin espera: la cortina abre en el acento de los 6 s del sonido original y las dos últimas notas (6 s y 7,05 s) suenan dentro del Hero; HOLD<0 adelanta el Hero respecto del sonido */
+const SP=.5; /* separación extra entre una nota del listado y la siguiente (el audio trae 0,5 s de relleno entre cada par; las notas no cambian) */
+const SD=4*SP;
+const AUD_END=11.0+GAP+SD;
+const HOLD=-1.05+GAP+SD, HERO_AT=6.0+GAP+SD; /* sin espera: la cortina abre en el acento de los 6 s del sonido original y las dos últimas notas (6 s y 7,05 s) suenan dentro del Hero; HOLD<0 adelanta el Hero respecto del sonido */
 const HK=1.35; /* el Hero corre 1,35x más rápido para quedar completo en el pico del acorde final (7,75 s del sonido) */
-const te=x=>x<HOLD_AT?x:(x<HERO_AT?HOLD_AT+(x-HOLD_AT)*(7.05-HOLD_AT)/GAP:7.05+(x-HERO_AT)*HK); /* durante la pausa el listado queda completo en pantalla y el reloj visual avanza lento hasta 7,05 (cortina) */
+/* reloj visual: cada nota-pop del audio (1,25 · 2,70 · 4,15 · 5,60 · 7,05 s) confirma su servicio justo en su golpe; luego el listado completo queda fijo hasta el acento que abre el Hero */
+const KN=[[0,0],[1.25,1.25],[2.2+SP,2.2],[3.15+2*SP,3.15],[4.1+3*SP,4.1],[5.05+4*SP,5.05],[HERO_AT,7.05]];
+const te=x=>{ if(x>=HERO_AT) return 7.05+(x-HERO_AT)*HK; for(let k=1;k<KN.length;k++){ if(x<KN[k][0]){ const a=KN[k-1],b=KN[k]; return a[1]+(x-a[0])*(b[1]-a[1])/(b[0]-a[0]); } } return 7.05; };
 const T_CURTAIN=7.05, T_CURTAIN_END=7.85;
 const STAGES=[{},{},{},{},{}]; /* 5 etapas */
 function refreshStages(){ STAGES.forEach((s,i)=>{ s.lab=I('s'+(i+1)+'.lab'); s.cap=I('s'+(i+1)+'.cap'); s.st=I('s'+(i+1)+'.st'); if(s.el){ const l=s.el.querySelector('.lab'); if(l) l.textContent=s.lab; } }); }
