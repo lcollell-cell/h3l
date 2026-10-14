@@ -1933,7 +1933,7 @@ tr:hover td{background:var(--blue-ghost);}
     <!-- BARRA DE ESTADO PRECIOS -->
     <div style="display:flex;align-items:center;justify-content:space-between;max-width:1100px;margin:0 auto 24px;padding:8px 14px;background:rgba(255,255,255,.03);border-radius:8px;border:1px solid rgba(255,255,255,.06);">
       <span style="font-size:10px;color:var(--text-muted);">
-        <span data-t="w_rt">Precios en tiempo real · Actualizado:</span> <span id="precio-ts">—</span>
+        <span data-t="w_rt">Cotizaciones de mercado:</span> <span id="precio-ts">—</span>
         · <span data-t="w_srcl">Fuente:</span> <a href="https://markets.ft.com/data/commodities" target="_blank" style="color:var(--accent);font-weight:600;" rel="noopener noreferrer">Financial Times Markets</a>
         · <a href="https://spglobal.com/commodity-insights" target="_blank" style="color:var(--accent);" rel="noopener noreferrer">Platts / S&P Global</a>
         · <a href="https://www.eia.gov/naturalgas/weekly" target="_blank" style="color:var(--accent);" rel="noopener noreferrer">EIA</a>
@@ -5173,21 +5173,10 @@ async function loadPrices(manual = false) {
   } catch (err) {
     console.warn('FT price fetch failed, using fallback:', err.message);
 
-    // Fallback: valores reales de mercado + variación aleatoria pequeña
-    const rnd = (v, pct) => +(v * (1 + (Math.random()-0.5)*pct)).toFixed(2);
-    const rndCh = (max) => +((Math.random()-0.5)*2*max).toFixed(2);
-
-    const fallback = {
-      brent:   rnd(FALLBACK_PRICES.brent, 0.008),
-      wti:     rnd(FALLBACK_PRICES.wti,   0.008),
-      gas:     rnd(FALLBACK_PRICES.gas,   0.012),
-      gnl:     rnd(FALLBACK_PRICES.gnl,   0.010),
-      chBrent: rndCh(1.20),
-      chWti:   rndCh(1.00),
-      chGas:   rndCh(0.06),
-      chGnl:   rndCh(0.25)
-    };
-    _renderPrices(fallback, 'fallback', manual);
+    // Sin datos en vivo: no se muestran valores simulados
+    ['precio-brent','precio-wti','precio-gas','precio-gnl'].forEach(id => { if(_$(id)) _$(id).textContent = '—'; });
+    ['brent-change','wti-change','gas-change','gnl-change'].forEach(id => { if(_$(id)) _$(id).textContent = ''; });
+    if(_$('precio-ts')) _$('precio-ts').textContent = W('w_nolive');
 
     if (manual && typeof toast === 'function')
       toast('warning', W('w_pricefb'));
@@ -5213,48 +5202,60 @@ const NEWS_CACHE_TTL   = 24 * 60 * 60 * 1000; // 24 horas
 
 // Noticias de respaldo (se muestran si no hay API key o falla la red)
 const FALLBACK_NEWS = [
-  {
-    tag:'OPEC+', tagColor:'var(--accent)',
-    date: getTodayStr(),
-    title:'OPEC+ mantiene recortes de producción para estabilizar el mercado global',
-    body:'El cartel extiende los recortes voluntarios de producción ante la incertidumbre en la demanda asiática y presión sobre los precios del crudo.',
-    source:'Reuters Energy', url:'https://www.reuters.com/business/energy/'
-  },
-  {
-    tag:'GNL / LNG', tagColor:'var(--info)',
-    date: getTodayStr(),
-    title:'Europa amplía terminales de regasificación ante reducción de flujos rusos',
-    body:'Los terminales de GNL en Europa operan cerca de su capacidad máxima. Qatar y EE.UU. consolidan su posición como exportadores clave.',
-    source:'Bloomberg Energy', url:'https://www.bloomberg.com/energy'
-  },
-  {
-    tag:'LATAM', tagColor:'var(--warning)',
-    date: getTodayStr(),
-    title:'Vaca Muerta suma nuevas inversiones y consolida posición regional',
-    body:'Argentina avanza como exportador neto de hidrocarburos. La formación no convencional recibe USD 4.000M en nuevos compromisos de inversión.',
-    source:'Oil & Gas Journal', url:'https://www.ogj.com'
-  },
-  {
-    tag:'TRANSICIÓN', tagColor:'var(--success)',
-    date: getTodayStr(),
-    title:'IEA: inversión en energía limpia supera al oil & gas por primera vez',
-    body:'El capex global en renovables, redes y almacenamiento alcanzó USD 1.8 billones, superando por primera vez a la inversión tradicional en hidrocarburos.',
-    source:'IEA', url:'https://www.iea.org/news'
-  },
-  {
-    tag:'MERCADOS', tagColor:'var(--info)',
-    date: getTodayStr(),
-    title:'Volatilidad en mercados energéticos por tensiones geopolíticas',
-    body:'Factores geopolíticos en Medio Oriente y presión de demanda china generan fluctuaciones en los futuros del crudo Brent y WTI.',
-    source:'Financial Times', url:'https://www.ft.com/companies/energy'
-  },
-  {
-    tag:'H₂ / GAS', tagColor:'var(--accent)',
-    date: getTodayStr(),
-    title:'LATAM posicionada como futura superpotencia exportadora de hidrógeno verde',
-    body:'Chile, Argentina y Brasil avanzan en proyectos de H₂ verde. La región concentra el 40% de los proyectos globales para la próxima década.',
-    source:'World Energy Council', url:'https://www.worldenergy.org'
-  }
+ {
+  "tag": "COMUNICADO",
+  "tagColor": "var(--success)",
+  "date": "13 de octubre de 2026",
+  "title": "Alemania y la IEA coorganizarán en París las reuniones ministeriales de 2027: Clean Energy Ministerial y Mission Innovation",
+  "body": "Comunicado publicado por la IEA.",
+  "source": "IEA",
+  "url": "https://www.iea.org/news/germany-and-iea-to-co-host-2027-clean-energy-ministerial-and-mission-innovation-ministerial-in-paris"
+ },
+ {
+  "tag": "COMUNICADO",
+  "tagColor": "var(--success)",
+  "date": "11 de octubre de 2026",
+  "title": "Declaración de la IEA sobre la respuesta a la situación del mercado mundial de diésel",
+  "body": "Comunicado publicado por la IEA.",
+  "source": "IEA",
+  "url": "https://www.iea.org/news/iea-statement-on-responding-to-the-global-diesel-market-situation"
+ },
+ {
+  "tag": "COMENTARIO",
+  "tagColor": "var(--success)",
+  "date": "8 de octubre de 2026",
+  "title": "¿Podrá la fuerza laboral de América Latina y el Caribe seguir el ritmo del auge energético?",
+  "body": "Comentario publicado por la IEA.",
+  "source": "IEA",
+  "url": "https://www.iea.org/commentaries/can-latin-america-and-the-caribbeans-workforce-keep-pace-with-the-energy-boom"
+ },
+ {
+  "tag": "COMUNICADO",
+  "tagColor": "var(--success)",
+  "date": "7 de octubre de 2026",
+  "title": "Declaración de la dirección ejecutiva de la IEA sobre la reunión de los gobiernos miembros del 7 de octubre de 2026",
+  "body": "Comunicado publicado por la IEA.",
+  "source": "IEA",
+  "url": "https://www.iea.org/news/statement-by-iea-executive-director-on-meeting-of-iea-member-governments-on-7-october-2026"
+ },
+ {
+  "tag": "COMENTARIO",
+  "tagColor": "var(--success)",
+  "date": "7 de octubre de 2026",
+  "title": "Cómo pueden los sistemas eléctricos de América Latina reforzar su preparación ante El Niño",
+  "body": "Comentario publicado por la IEA.",
+  "source": "IEA",
+  "url": "https://www.iea.org/commentaries/how-electricity-systems-across-latin-america-can-strengthen-preparedness-for-el-nino"
+ },
+ {
+  "tag": "COMUNICADO",
+  "tagColor": "var(--success)",
+  "date": "5 de octubre de 2026",
+  "title": "La electrificación y la diversificación pueden ayudar a afrontar los crecientes desafíos de seguridad energética del Sudeste Asiático",
+  "body": "Comunicado publicado por la IEA.",
+  "source": "IEA",
+  "url": "https://www.iea.org/news/electrification-and-diversification-can-help-address-southeast-asias-growing-energy-security-challenges"
+ }
 ];
 
 function getTodayStr(){
@@ -5280,108 +5281,21 @@ function renderNews(articles){
   `).join('');
 }
 
-async function fetchNewsFromAI(){
-  const today = new Date().toLocaleDateString('es-AR',{weekday:'long',day:'2-digit',month:'long',year:'numeric'});
-  const prompt = `Eres un analista del sector energético. Genera 6 noticias breves y realistas del sector OIL & GAS para la fecha ${today}.
-Responde ÚNICAMENTE con un array JSON válido. Cada noticia debe tener:
-- tag: categoría en mayúsculas (ej: OPEC+, GNL/LNG, LATAM, TRANSICIÓN, MERCADOS, UPSTREAM, GEOPOLÍTICA)
-- tagColor: uno de estos valores exactos: "var(--accent)", "var(--info)", "var(--warning)", "var(--success)", "var(--danger)"
-- date: fecha de hoy en español (${today})
-- title: titular impactante y realista (máx 90 chars)
-- body: resumen en 2 oraciones (máx 160 chars total)
-- source: nombre de medio reconocido (Reuters, Bloomberg, OGJ, IEA, Platts, S&P Global, etc.)
-- url: URL real del medio (solo dominio + sección energía)
-
-Enfócate en: precios del crudo, decisiones OPEC+, gas natural, GNL, transición energética, upstream, LATAM, Vaca Muerta, mercados.
-Solo el array JSON, sin texto adicional ni backticks.`;
-
-  const response = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'anthropic-dangerous-direct-browser-access': 'true' },
-    body: JSON.stringify({
-      model: 'claude-sonnet-4-6',
-      max_tokens: 1500,
-      messages: [{ role: 'user', content: prompt }]
-    })
-  });
-  if(!response.ok) throw new Error('API error ' + response.status);
-  const data = await response.json();
-  const text = data.content?.[0]?.text || '';
-  // Strip any markdown fences
-  const clean = text.replace('```json','').replace('```','').trim();
-  return JSON.parse(clean);
-}
-
+const NEWS_TS = {"es": "Titulares de la IEA · consultados el 14/10/2026 · ver iea.org/news para lo último", "en": "IEA headlines · checked on 14/10/2026 · see iea.org/news for the latest", "fr": "Titres de l’AIE · consultés le 14/10/2026 · voir iea.org/news pour les dernières nouvelles", "pt": "Manchetes da AIE · consultadas em 14/10/2026 · veja iea.org/news para as últimas"};
+/* Titulares reales de la IEA (https://www.iea.org/news). No se generan noticias con IA ni se inventan resúmenes. */
 async function refreshNoticias(manual=false){
-  const btn = document.getElementById('btn-refresh-news');
-  const tsEl = document.getElementById('news-ts');
-  const grid = document.getElementById('noticias-grid');
-  const now  = Date.now();
-
-  // Check cache (skip if manual refresh requested)
-  if(!manual){
-    try {
-      const cached = JSON.parse(localStorage.getItem(NEWS_CACHE_KEY)||'null');
-      if(cached && (now - cached.ts) < NEWS_CACHE_TTL){
-        renderNews(cached.articles);
-        _lastNewsTs = new Date(cached.ts); if(tsEl) tsEl.textContent = W('w_ts') + ' ' + _lastNewsTs.toLocaleDateString(curLoc(),{day:'2-digit',month:'2-digit',year:'numeric'}) + ' ' + _lastNewsTs.toLocaleTimeString(curLoc(),{hour:'2-digit',minute:'2-digit'});
-        return;
-      }
-    } catch(e){}
-  }
-
-  // Show loading state
-  if(btn){ btn.textContent = W('w_updating'); btn.disabled = true; }
-  if(grid) grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--text-muted);font-size:13px;">'+W('w_checkn')+'</div>';
-
-  try {
-    let articles;
-    try {
-      articles = await fetchNewsFromAI();
-      if(!Array.isArray(articles) || articles.length === 0) throw new Error('empty');
-    } catch(apiErr){
-      // Fallback to static news with today's date
-      articles = FALLBACK_NEWS.map(n => ({...n, date: getTodayStr()}));
-    }
-
-    // Save to cache
-    localStorage.setItem(NEWS_CACHE_KEY, JSON.stringify({ ts: now, articles }));
-
-    renderNews(articles);
-    _lastNewsTs = new Date(now);
-    const tsStr = _lastNewsTs.toLocaleDateString(curLoc(),{day:'2-digit',month:'2-digit',year:'numeric'}) + ' ' + _lastNewsTs.toLocaleTimeString(curLoc(),{hour:'2-digit',minute:'2-digit'});
-    if(tsEl) tsEl.textContent = W('w_ts') + ' ' + tsStr;
-    if(manual && typeof toast === 'function') toast('success',W('w_newstoast') + ' ' + tsStr);
-
-  } catch(e){
-    renderNews(FALLBACK_NEWS);
-    if(tsEl) tsEl.textContent = W('w_local') + ' ' + getTodayStr();
-  } finally {
-    if(btn){ btn.textContent = W('w_updn'); btn.disabled = false; }
-  }
+  try{ localStorage.removeItem(NEWS_CACHE_KEY); }catch(e){}
+  renderNews(FALLBACK_NEWS);
+  const tsEl=document.getElementById('news-ts'); if(tsEl) tsEl.textContent=NEWS_TS[curLg()]||NEWS_TS.es;
+  const btn=document.getElementById('btn-refresh-news'); if(btn) btn.style.display='none';
 }
-
-// Check once per day in background
-setInterval(() => {
-  try {
-    const cached = JSON.parse(localStorage.getItem(NEWS_CACHE_KEY)||'null');
-    if(!cached || (Date.now() - cached.ts) >= NEWS_CACHE_TTL) refreshNoticias(false);
-  } catch(e){}
-}, 60 * 60 * 1000); // check every hour
 
 // ═══ INIT ═══
 const savedLang=localStorage.getItem('h3l_lang')||'es';
 const lsel=document.getElementById('lang-desktop');
 if(lsel)lsel.value=savedLang;
 setTimeout(()=>{ try{applyTranslations(savedLang);}catch(e){} },120);
-// Pre-load news on first visit (background, no spinner shown to user)
-setTimeout(()=>{
-  try{
-    const cached = JSON.parse(localStorage.getItem('h3l_news_cache')||'null');
-    if(!cached || (Date.now()-cached.ts) >= 24*60*60*1000) refreshNoticias(false);
-    else renderNews(cached.articles);
-  }catch(e){ if(typeof renderNews==='function') renderNews(FALLBACK_NEWS); }
-}, 800);
+setTimeout(()=>{ try{ refreshNoticias(false); }catch(e){} }, 300);
 
 // Alt+T theme shortcut
 document.addEventListener('keydown',e=>{ if(e.altKey&&e.key==='t')toggleTheme(); });
@@ -6021,24 +5935,9 @@ function W(k){ return (window.H3LSite && H3LSite.tr ? H3LSite.tr(k) : k); }
 function curLg(){ return (window.H3LSite && H3LSite.lang && H3LSite.lang()) || 'es'; }
 function curLoc(){ return ({es:'es-AR',en:'en-US',fr:'fr-FR',pt:'pt-BR'})[curLg()] || 'es-AR'; }
 const NEWS_TR = {
-  en:[{tag:'OPEC+',title:'OPEC+ keeps production cuts to stabilize the global market',body:'The cartel extends voluntary production cuts amid uncertainty in Asian demand and pressure on crude prices.'},
-      {tag:'GNL / LNG',title:'Europe expands regasification terminals as Russian flows shrink',body:'LNG terminals in Europe are running close to maximum capacity. Qatar and the US consolidate their position as key exporters.'},
-      {tag:'LATAM',title:'Vaca Muerta attracts new investment and consolidates its regional position',body:'Argentina advances as a net hydrocarbon exporter. The unconventional formation receives USD 4 billion in new investment commitments.'},
-      {tag:'TRANSITION',title:'IEA: clean energy investment surpasses oil & gas for the first time',body:'Global capex in renewables, grids and storage reached USD 1.8 trillion, exceeding traditional hydrocarbon investment for the first time.'},
-      {tag:'MARKETS',title:'Volatility in energy markets amid geopolitical tensions',body:'Geopolitical factors in the Middle East and Chinese demand pressure cause swings in Brent and WTI crude futures.'},
-      {tag:'H₂ / GAS',title:'LATAM positioned as a future green hydrogen export powerhouse',body:'Chile, Argentina and Brazil advance green H₂ projects. The region holds 40% of global projects for the coming decade.'}],
-  fr:[{tag:'OPEP+',title:'L’OPEP+ maintient les réductions de production pour stabiliser le marché mondial',body:'Le cartel prolonge les réductions volontaires face à l’incertitude de la demande asiatique et à la pression sur les prix du brut.'},
-      {tag:'GNL / LNG',title:'L’Europe agrandit ses terminaux de regazéification face à la baisse des flux russes',body:'Les terminaux GNL européens tournent près de leur capacité maximale. Le Qatar et les États-Unis consolident leur position d’exportateurs clés.'},
-      {tag:'LATAM',title:'Vaca Muerta attire de nouveaux investissements et consolide sa position régionale',body:'L’Argentine progresse comme exportateur net d’hydrocarbures. La formation non conventionnelle reçoit 4 milliards USD d’engagements d’investissement.'},
-      {tag:'TRANSITION',title:'AIE : l’investissement dans l’énergie propre dépasse celui du pétrole et du gaz pour la première fois',body:'Les dépenses mondiales en renouvelables, réseaux et stockage ont atteint 1 800 milliards USD, dépassant pour la première fois l’investissement traditionnel dans les hydrocarbures.'},
-      {tag:'MARCHÉS',title:'Volatilité sur les marchés de l’énergie sous l’effet des tensions géopolitiques',body:'Les facteurs géopolitiques au Moyen-Orient et la pression de la demande chinoise provoquent des fluctuations des contrats à terme du Brent et du WTI.'},
-      {tag:'H₂ / GAZ',title:'L’Amérique latine, future superpuissance exportatrice d’hydrogène vert',body:'Le Chili, l’Argentine et le Brésil font avancer des projets d’H₂ vert. La région concentre 40 % des projets mondiaux de la prochaine décennie.'}],
-  pt:[{tag:'OPEP+',title:'OPEP+ mantém cortes de produção para estabilizar o mercado global',body:'O cartel prorroga os cortes voluntários diante da incerteza na demanda asiática e da pressão sobre os preços do petróleo.'},
-      {tag:'GNL / LNG',title:'Europa amplia terminais de regaseificação diante da redução dos fluxos russos',body:'Os terminais de GNL na Europa operam perto da capacidade máxima. Catar e EUA consolidam sua posição como exportadores-chave.'},
-      {tag:'LATAM',title:'Vaca Muerta recebe novos investimentos e consolida posição regional',body:'A Argentina avança como exportadora líquida de hidrocarbonetos. A formação não convencional recebe USD 4 bilhões em novos compromissos de investimento.'},
-      {tag:'TRANSIÇÃO',title:'AIE: investimento em energia limpa supera o de petróleo e gás pela primeira vez',body:'O capex global em renováveis, redes e armazenamento atingiu USD 1,8 trilhão, superando pela primeira vez o investimento tradicional em hidrocarbonetos.'},
-      {tag:'MERCADOS',title:'Volatilidade nos mercados de energia por tensões geopolíticas',body:'Fatores geopolíticos no Oriente Médio e a pressão da demanda chinesa geram oscilações nos futuros do Brent e do WTI.'},
-      {tag:'H₂ / GÁS',title:'América Latina posicionada como futura superpotência exportadora de hidrogênio verde',body:'Chile, Argentina e Brasil avançam em projetos de H₂ verde. A região concentra 40% dos projetos globais da próxima década.'}]
+ en:[{"tag": "NEWS RELEASE", "date": "13 October 2026", "title": "Germany and IEA to co-host 2027 Clean Energy Ministerial and Mission Innovation Ministerial in Paris", "body": "News release published by the IEA."}, {"tag": "NEWS RELEASE", "date": "11 October 2026", "title": "IEA statement on responding to the global diesel market situation", "body": "News release published by the IEA."}, {"tag": "COMMENTARY", "date": "08 October 2026", "title": "Can Latin America and the Caribbean's workforce keep pace with the energy boom?", "body": "Commentary published by the IEA."}, {"tag": "NEWS RELEASE", "date": "07 October 2026", "title": "Statement by IEA Executive Director on meeting of IEA Member governments on 7 October 2026", "body": "News release published by the IEA."}, {"tag": "COMMENTARY", "date": "07 October 2026", "title": "How electricity systems across Latin America can strengthen preparedness for El Niño", "body": "Commentary published by the IEA."}, {"tag": "NEWS RELEASE", "date": "05 October 2026", "title": "Electrification and diversification can help address Southeast Asia's growing energy security challenges", "body": "News release published by the IEA."}],
+ fr:[{"tag": "COMMUNIQUÉ", "date": "13 octobre 2026", "title": "L’Allemagne et l’AIE coorganiseront à Paris les réunions ministérielles de 2027 : Clean Energy Ministerial et Mission Innovation", "body": "Communiqué publié par l’AIE."}, {"tag": "COMMUNIQUÉ", "date": "11 octobre 2026", "title": "Déclaration de l’AIE sur la réponse à la situation du marché mondial du diesel", "body": "Communiqué publié par l’AIE."}, {"tag": "COMMENTAIRE", "date": "8 octobre 2026", "title": "La main-d’œuvre d’Amérique latine et des Caraïbes peut-elle suivre le rythme du boom énergétique ?", "body": "Commentaire publié par l’AIE."}, {"tag": "COMMUNIQUÉ", "date": "7 octobre 2026", "title": "Déclaration de la direction exécutive de l’AIE sur la réunion des gouvernements membres du 7 octobre 2026", "body": "Communiqué publié par l’AIE."}, {"tag": "COMMENTAIRE", "date": "7 octobre 2026", "title": "Comment les systèmes électriques d’Amérique latine peuvent renforcer leur préparation à El Niño", "body": "Commentaire publié par l’AIE."}, {"tag": "COMMUNIQUÉ", "date": "5 octobre 2026", "title": "L’électrification et la diversification peuvent aider à relever les défis croissants de sécurité énergétique de l’Asie du Sud-Est", "body": "Communiqué publié par l’AIE."}],
+ pt:[{"tag": "COMUNICADO", "date": "13 de outubro de 2026", "title": "Alemanha e AIE sediarão em Paris as reuniões ministeriais de 2027: Clean Energy Ministerial e Mission Innovation", "body": "Comunicado publicado pela AIE."}, {"tag": "COMUNICADO", "date": "11 de outubro de 2026", "title": "Declaração da AIE sobre a resposta à situação do mercado global de diesel", "body": "Comunicado publicado pela AIE."}, {"tag": "COMENTÁRIO", "date": "8 de outubro de 2026", "title": "A força de trabalho da América Latina e do Caribe consegue acompanhar o boom energético?", "body": "Comentário publicado pela AIE."}, {"tag": "COMUNICADO", "date": "7 de outubro de 2026", "title": "Declaração da direção executiva da AIE sobre a reunião dos governos membros de 7 de outubro de 2026", "body": "Comunicado publicado pela AIE."}, {"tag": "COMENTÁRIO", "date": "7 de outubro de 2026", "title": "Como os sistemas elétricos da América Latina podem reforçar o preparo para o El Niño", "body": "Comentário publicado pela AIE."}, {"tag": "COMUNICADO", "date": "5 de outubro de 2026", "title": "Eletrificação e diversificação podem ajudar a enfrentar os crescentes desafios de segurança energética do Sudeste Asiático", "body": "Comunicado publicado pela AIE."}]
 };
 const EVENTS_TR = {
   en:[{org:'SPE',fecha:'June 2026',lugar:'Dallas, Texas, USA',desc:'The most important annual technical conference of the Society of Petroleum Engineers. More than 10,000 industry professionals.'},
@@ -6064,6 +5963,7 @@ function trNews(n){ const lg=curLg(); if(lg==='es') return n; const i=FALLBACK_N
 function trEvent(e){ const lg=curLg(); if(lg==='es') return e; const i=FALLBACK_EVENTOS.findIndex(f=>f.url===e.url&&f.titulo===e.titulo); return i<0?e:Object.assign({},e,EVENTS_TR[lg][i]); }
 function h3lRerender(){
   try{ if(_lastNews) renderNews(_lastNews); }catch(e){}
+  try{ var _t=document.getElementById('news-ts'); if(_t&&typeof NEWS_TS!=='undefined') _t.textContent=NEWS_TS[curLg()]||NEWS_TS.es; var _p=document.getElementById('precio-ts'); if(_p&&/^\u2014$|\u2014|sin datos|no live|pas de|sem dados/.test(_p.textContent)&&document.getElementById('precio-brent').textContent==='\u2014') _p.textContent=W('w_nolive'); }catch(e){}
   try{ if(document.getElementById('eventos-grid') && allEvents && document.querySelector('#eventos-grid .ev-card')) _filtering=true; try{ renderEventos(allEvents); } finally { _filtering=false; } }catch(e){}
   try{ if(_lastP) _renderPrices(_lastP[0],_lastP[1],false,true); }catch(e){}
   try{ if(document.getElementById('et-grid')){ buildETGrid(); } }catch(e){}
