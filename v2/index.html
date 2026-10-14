@@ -258,7 +258,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #5BB0FF;outline-offset:3p
   <div id="gate" role="dialog" aria-label="Entrar al sitio" data-i18n-attr="aria-label:i.gAria" hidden><div class="gbox"><div class="gl">H<span>3</span>L</div><div class="gs">Global Energy</div><button id="gYes" type="button" data-i18n="i.gYes">ENTRAR CON SONIDO</button><button id="gNo" type="button" data-i18n="i.gNo">ENTRAR SIN SONIDO</button><div id="langGate"></div></div></div>
   <div id="edge"></div>
   <div id="fade" class="layer"></div>
-  <audio id="snd" src="h3l-intro.mp3?v=3" preload="auto"></audio>
+  <audio id="snd" src="h3l-intro.mp3?v=4" preload="auto"></audio>
 </div>
 <script>
 const SW=1280,SH=720;
@@ -280,8 +280,8 @@ const reduce=false; /* la intro se muestra siempre (también en equipos con "red
 
 /* ---------- parámetros de la línea de tiempo (idénticos al video aprobado) ---------- */
 const T0=.3, DUR=.95;
-const GAP=1.5; /* pausa de lectura entre el listado y el Hero: el audio trae 1,5 s insertados en 5,6 s (relleno del pad + swell de transición); las notas no cambian, solo se desplazan */
-const SP=.5; /* separación extra entre una nota del listado y la siguiente (el audio trae 0,5 s de relleno entre cada par; las notas no cambian) */
+const GAP=1.0; /* pausa de lectura entre el listado y el Hero: el audio trae 1,0 s insertados en 5,6 s (relleno del pad + swell de transición); las notas no cambian, solo se desplazan */
+const SP=.25; /* separación extra entre una nota del listado y la siguiente (el audio trae 0,25 s de relleno entre cada par; las notas no cambian) */
 const SD=4*SP;
 const AUD_END=11.0+GAP+SD;
 const HOLD=-1.05+GAP+SD, HERO_AT=6.0+GAP+SD; /* sin espera: la cortina abre en el acento de los 6 s del sonido original y las dos últimas notas (6 s y 7,05 s) suenan dentro del Hero; HOLD<0 adelanta el Hero respecto del sonido */
