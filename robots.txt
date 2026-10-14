@@ -1,7 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /devdeploy-manager.html
-Disallow: /server.js
 
 Sitemap: https://www.h3lglobalenergy.com/sitemap.xml
 
