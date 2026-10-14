@@ -280,7 +280,7 @@ const reduce=!params.has('intro')&&window.matchMedia&&matchMedia('(prefers-reduc
 /* ---------- parámetros de la línea de tiempo (idénticos al video aprobado) ---------- */
 const T0=.3, DUR=.95;
 const AUD_END=11.0;
-const HOLD=3, HOLD_AT=7.0; /* pausa de 3 s con los 5 servicios completos; sonido original de la intro (11 s) */
+const HOLD=2, HOLD_AT=7.0; /* pausa de 2 s con los 5 servicios completos; sonido original de la intro (11 s) */
 const te=x=>x<HOLD_AT?x:(x<HOLD_AT+HOLD?HOLD_AT:x-HOLD);
 const T_CURTAIN=7.05, T_CURTAIN_END=7.85;
 const STAGES=[{},{},{},{},{}]; /* 5 etapas */
