@@ -423,7 +423,7 @@ const scenesG=$('scenes'); const scenes=[];
   mk('circle',{cx:mx,cy:my,r:5,fill:'#fff'},mg);
   txt(mg,mx+10,my-12,I('sc.cross'),{fill:'#dbe4f0'});
   mk('path',{d:'M20 330H42',stroke:'#5BB0FF','stroke-width':2.6},g); txt(g,50,334,I('sc.emis'));
-  mk('path',{d:'M150 330H172',stroke:'#4FB27C','stroke-width':2.6},g); txt(g,180,334,I('sc.low'));
+  mk('path',{d:'M200 330H222',stroke:'#4FB27C','stroke-width':2.6},g); txt(g,230,334,I('sc.low'));
   scenes.push({g,upd(sp){ const q=eio3(seg(sp,.04,.9)); cr.setAttribute('width',(PW*q+2).toFixed(1)); mg.setAttribute('opacity',q>uc+.02?1:0); }});
 })();
 
@@ -533,10 +533,11 @@ const scenesG=$('scenes'); const scenes=[];
   const td=mk('circle',{cx:wx,cy:wy1,r:5,fill:'#fff',opacity:0},g), ring=mk('circle',{cx:wx,cy:wy1,r:8,fill:'none',stroke:'#fff','stroke-width':1.2,opacity:0},g);
   const lb=[[I('sc.g1'),104],[I('sc.g2'),206],[I('sc.g3'),284]].map(a=>{ const e=txt(g,28,a[1],a[0],{fill:'#e8eef9','font-size':12,'font-weight':600}); e.setAttribute('opacity',0); return e; });
   const wl=txt(g,wx+14,wy0+4,I('sc.g4'),{fill:'#fff','font-size':12}); wl.setAttribute('opacity',0);
+  const un=txt(g,20,336,I('sc.unc'),{fill:'#8fa3c8'}); un.setAttribute('opacity',0);
   scenes.push({g,upd(sp,t){ cr.setAttribute('height',(300*eio3(seg(sp,.02,.55))).toFixed(1));
     const q=eio3(seg(sp,.4,.8)); well.setAttribute('y2',(wy0+(wy1-wy0)*q).toFixed(1));
     const on=sp>.78, rp=(t*1.4)%1; td.setAttribute('opacity',on?1:0); ring.setAttribute('opacity',on?(.9*(1-rp)).toFixed(2):0); ring.setAttribute('r',(6+14*rp).toFixed(1));
-    lb.forEach((e,i)=>e.setAttribute('opacity',eo3(seg(sp,.2+i*.14,.34+i*.14)).toFixed(2))); wl.setAttribute('opacity',eo3(seg(sp,.45,.6)).toFixed(2)); }});
+    lb.forEach((e,i)=>e.setAttribute('opacity',eo3(seg(sp,.2+i*.14,.34+i*.14)).toFixed(2))); wl.setAttribute('opacity',eo3(seg(sp,.45,.6)).toFixed(2)); un.setAttribute('opacity',eo3(seg(sp,.8,.95)).toFixed(2)); }});
 })();
 
 /* 10 · Ciencia de datos: histórico + pronóstico con banda y anomalías, ESG */
@@ -594,8 +595,9 @@ const scenesG=$('scenes'); const scenes=[];
 
 /* 5 etapas · 11 paneles: [escena, inicio, fin] alineados a los acentos del sonido original (1.25 · 2.2 · 3.15 · 4.1 · 5.05 · 6.0) */
 const SCN=scenes.slice(); scenes.length=0;
-const PANELS=[[8,.3,1.25],[0,1.25,2.2],[1,2.2,2.85],[6,2.85,3.5],[2,3.5,4.1],[4,4.1,4.6],[9,4.6,5.05],[3,5.05,5.55],[10,5.55,6.0],[5,6.0,6.5],[7,6.5,7.0]]
+const PANELS=[[8,.3,2.2],[2,2.2,4.1],[4,4.1,5.05],[10,5.05,6.0],[5,6.0,7.0]] /* un gráfico por etapa */
   .map(([i,a,b])=>({sc:SCN[i],a,b}));
+SCN.forEach(sc=>{ if(!PANELS.some(pn=>pn.sc===sc)) sc.g.remove(); });
 /* ---------- watermark original: emerge + brillo sobrio ---------- */
 const WMSP=[...document.querySelectorAll('#wm span')];
 function updWM(t){
