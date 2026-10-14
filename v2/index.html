@@ -281,7 +281,8 @@ const reduce=!params.has('intro')&&window.matchMedia&&matchMedia('(prefers-reduc
 const T0=.3, DUR=.95;
 const AUD_END=11.0;
 const HOLD=-1.05, HOLD_AT=6.0; /* sin espera: la cortina abre en el acento de los 6 s del sonido original y las dos últimas notas (6 s y 7,05 s) suenan dentro del Hero; HOLD<0 adelanta el Hero respecto del sonido */
-const te=x=>x<HOLD_AT?x:(x<HOLD_AT+HOLD?HOLD_AT:x-HOLD);
+const HK=1.35; /* el Hero corre 1,35x más rápido para quedar completo en el pico del acorde final (7,75 s del sonido) */
+const te=x=>x<HOLD_AT?x:7.05+(x-HOLD_AT)*HK;
 const T_CURTAIN=7.05, T_CURTAIN_END=7.85;
 const STAGES=[{},{},{},{},{}]; /* 5 etapas */
 function refreshStages(){ STAGES.forEach((s,i)=>{ s.lab=I('s'+(i+1)+'.lab'); s.cap=I('s'+(i+1)+'.cap'); s.st=I('s'+(i+1)+'.st'); if(s.el){ const l=s.el.querySelector('.lab'); if(l) l.textContent=s.lab; } }); }
@@ -758,7 +759,7 @@ function render(tr){
       el.style.transform=`translateX(${(-14*(1-appear)).toFixed(2)}px)`;
       const arc=el.querySelector('.arc'), chk=el.querySelector('.chk'), val=el.querySelector('.val');
       arc.setAttribute('opacity',active?1:0); arc.setAttribute('transform',`rotate(${(t*420)%360} 13 13)`);
-      chk.setAttribute('opacity',done?1:0);
+      chk.setAttribute('opacity',done?1:0); { const pq=eo3(seg(t,s.b,s.b+.22)), k=1+.55*(1-pq); chk.setAttribute('transform',`translate(13 13) scale(${k.toFixed(3)}) translate(-13 -13)`); }
       if(done){ val.style.color='#6fd49a'; val.textContent=I('i.done'); }
       else if(active){ val.style.color='#ffffff'; val.textContent=I('i.loading'); }
       else { val.style.color='#8fa3c8'; val.textContent=I('i.queue'); }
@@ -839,13 +840,16 @@ const fast=!!store.get('h3l_v2_seen') && !params.has('intro');
 if(reduce){ t=11+HOLD; frozen=true; }
 else if(fast){ t=7.3+HOLD; }
 
+let aLast=-1, aAt=0;
 function start(){
   layout();
   if(fast||reduce){ endLoader(); $('tools').style.display='none'; }
   let last=performance.now();
   function frame(now){
     const dt=Math.min(.1,(now-last)/1000); last=now;
-    if(!frozen&&!holding) t+=dt;
+    if(!frozen&&!holding){ t+=dt;
+      /* las tildes y escenas se enganchan al reloj del audio para que caigan justo en cada nota */
+      if(soundOn&&!blocked&&!snd.paused&&t<AUD_END){ const ct=snd.currentTime; if(ct!==aLast){ aLast=ct; aAt=now; } const est=aLast+Math.min(.25,(now-aAt)/1000), d=est-t; if(Math.abs(d)<.6) t+=d*.12; } }
     if(!frozen||needsPaint){ render(t); needsPaint=false; }
     if(te(t)>7.6) $('tools').style.display='none';
     requestAnimationFrame(frame);
