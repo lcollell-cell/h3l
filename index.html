@@ -1137,7 +1137,7 @@ tr:hover td{background:var(--blue-ghost);}
 @media (prefers-reduced-motion:reduce){.calc-tab-btn,.calc-card{transition:none;}}
 </style>
 <link rel="stylesheet" href="assets/site.css?v=4">
-<script src="assets/site.js?v=5" defer></script>
+<script src="assets/site.js?v=6" defer></script>
 <script src="v2/chat.js?v=5" defer></script>
 </head>
 <body>
@@ -2082,12 +2082,10 @@ tr:hover td{background:var(--blue-ghost);}
     <!-- Filter tabs -->
     <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:28px;">
       <button class="calc-cat-btn active" onclick="filterEvents('all',this)" data-t="w_e_all">Todos</button>
-      <button class="calc-cat-btn" onclick="filterEvents('spe',this)">SPE</button>
-      <button class="calc-cat-btn" onclick="filterEvents('spee',this)">SPEE</button>
-      <button class="calc-cat-btn" onclick="filterEvents('iea',this)">IEA</button>
       <button class="calc-cat-btn" onclick="filterEvents('latam',this)">LATAM</button>
-      <button class="calc-cat-btn" onclick="filterEvents('energia',this)" data-t="w_e_tr">Transición</button>
-      <button style="display:flex;align-items:center;gap:6px;background:var(--accent);color:#000;border:none;border-radius:3px;padding:8px 18px;font-family:var(--font-body);font-size:12px;font-weight:700;cursor:pointer;" onclick="refreshEventos()">
+      <button class="calc-cat-btn" onclick="filterEvents('iea',this)">IEA</button>
+      <button class="calc-cat-btn" onclick="filterEvents('global',this)">Global</button>
+      <button style="display:flex;align-items:center;gap:6px;background:var(--accent);color:#000;border:none;border-radius:3px;padding:8px 18px;font-family:var(--font-body);font-size:12px;font-weight:700;cursor:pointer;display:none" onclick="refreshEventos()">
         <span data-t="w_e_upd">Actualizar eventos</span>
       </button>
     </div>
@@ -5207,54 +5205,54 @@ const FALLBACK_NEWS = [
   "tagColor": "var(--success)",
   "date": "13 de octubre de 2026",
   "title": "Alemania y la IEA coorganizarán en París las reuniones ministeriales de 2027: Clean Energy Ministerial y Mission Innovation",
-  "body": "Comunicado publicado por la IEA.",
+  "body": "Publicado por la IEA.",
   "source": "IEA",
   "url": "https://www.iea.org/news/germany-and-iea-to-co-host-2027-clean-energy-ministerial-and-mission-innovation-ministerial-in-paris"
  },
  {
-  "tag": "COMUNICADO",
-  "tagColor": "var(--success)",
-  "date": "11 de octubre de 2026",
-  "title": "Declaración de la IEA sobre la respuesta a la situación del mercado mundial de diésel",
-  "body": "Comunicado publicado por la IEA.",
-  "source": "IEA",
-  "url": "https://www.iea.org/news/iea-statement-on-responding-to-the-global-diesel-market-situation"
+  "tag": "MERCADOS",
+  "tagColor": "var(--info)",
+  "date": "12 de octubre de 2026",
+  "title": "Los riesgos de suministro en Medio Oriente eclipsan el acuerdo ruso sobre el diésel",
+  "body": "Titular publicado por Oil & Gas Journal.",
+  "source": "Oil & Gas Journal",
+  "url": "https://www.ogj.com/general-interest/economics-markets/news/55411164/middle-east-supply-risks-overshadow-russian-diesel-deal"
+ },
+ {
+  "tag": "UPSTREAM",
+  "tagColor": "var(--info)",
+  "date": "9 de octubre de 2026",
+  "title": "Shell acuerda adquirir una participación en el proyecto Bay du Nord",
+  "body": "Titular publicado por Oil & Gas Journal.",
+  "source": "Oil & Gas Journal",
+  "url": "https://www.ogj.com/exploration-development/news/55410911/shell-agrees-to-acquire-interest-in-bay-du-nord-project"
+ },
+ {
+  "tag": "CORPORATIVO",
+  "tagColor": "var(--info)",
+  "date": "8 de octubre de 2026",
+  "title": "Crescent Energy adquirirá activos de Eagle Ford de Devon por USD 4.200 millones",
+  "body": "Titular publicado por Oil & Gas Journal.",
+  "source": "Oil & Gas Journal",
+  "url": "https://www.ogj.com/general-interest/companies/news/55410522/crescent-energy-to-acquire-eagle-ford-assets-from-devon-for-42-billion"
+ },
+ {
+  "tag": "MERCADOS",
+  "tagColor": "var(--info)",
+  "date": "8 de octubre de 2026",
+  "title": "El petróleo sube 5% por la escalada de ataques a petroleros en Ormuz y el cierre de producción en el Golfo de EE. UU. por un huracán",
+  "body": "Titular publicado por Oil & Gas Journal.",
+  "source": "Oil & Gas Journal",
+  "url": "https://www.ogj.com/general-interest/economics-markets/news/55410621/oil-jumps-5-as-hormuz-tanker-attacks-escalate-us-gulf-hurricane-shuts-in-production"
  },
  {
   "tag": "COMENTARIO",
   "tagColor": "var(--success)",
   "date": "8 de octubre de 2026",
   "title": "¿Podrá la fuerza laboral de América Latina y el Caribe seguir el ritmo del auge energético?",
-  "body": "Comentario publicado por la IEA.",
+  "body": "Publicado por la IEA.",
   "source": "IEA",
   "url": "https://www.iea.org/commentaries/can-latin-america-and-the-caribbeans-workforce-keep-pace-with-the-energy-boom"
- },
- {
-  "tag": "COMUNICADO",
-  "tagColor": "var(--success)",
-  "date": "7 de octubre de 2026",
-  "title": "Declaración de la dirección ejecutiva de la IEA sobre la reunión de los gobiernos miembros del 7 de octubre de 2026",
-  "body": "Comunicado publicado por la IEA.",
-  "source": "IEA",
-  "url": "https://www.iea.org/news/statement-by-iea-executive-director-on-meeting-of-iea-member-governments-on-7-october-2026"
- },
- {
-  "tag": "COMENTARIO",
-  "tagColor": "var(--success)",
-  "date": "7 de octubre de 2026",
-  "title": "Cómo pueden los sistemas eléctricos de América Latina reforzar su preparación ante El Niño",
-  "body": "Comentario publicado por la IEA.",
-  "source": "IEA",
-  "url": "https://www.iea.org/commentaries/how-electricity-systems-across-latin-america-can-strengthen-preparedness-for-el-nino"
- },
- {
-  "tag": "COMUNICADO",
-  "tagColor": "var(--success)",
-  "date": "5 de octubre de 2026",
-  "title": "La electrificación y la diversificación pueden ayudar a afrontar los crecientes desafíos de seguridad energética del Sudeste Asiático",
-  "body": "Comunicado publicado por la IEA.",
-  "source": "IEA",
-  "url": "https://www.iea.org/news/electrification-and-diversification-can-help-address-southeast-asias-growing-energy-security-challenges"
  }
 ];
 
@@ -5281,8 +5279,8 @@ function renderNews(articles){
   `).join('');
 }
 
-const NEWS_TS = {"es": "Titulares de la IEA · consultados el 14/10/2026 · ver iea.org/news para lo último", "en": "IEA headlines · checked on 14/10/2026 · see iea.org/news for the latest", "fr": "Titres de l’AIE · consultés le 14/10/2026 · voir iea.org/news pour les dernières nouvelles", "pt": "Manchetes da AIE · consultadas em 14/10/2026 · veja iea.org/news para as últimas"};
-/* Titulares reales de la IEA (https://www.iea.org/news). No se generan noticias con IA ni se inventan resúmenes. */
+const NEWS_TS = {"es": "Titulares de Oil & Gas Journal e IEA · consultados el 14/10/2026", "en": "Headlines from Oil & Gas Journal and IEA · checked on 14/10/2026", "fr": "Titres d’Oil & Gas Journal et de l’AIE · consultés le 14/10/2026", "pt": "Manchetes da Oil & Gas Journal e da AIE · consultadas em 14/10/2026"};
+/* Titulares reales de IEA y Oil & Gas Journal. No se generan noticias con IA ni se inventan resúmenes. */
 async function refreshNoticias(manual=false){
   try{ localStorage.removeItem(NEWS_CACHE_KEY); }catch(e){}
   renderNews(FALLBACK_NEWS);
@@ -5920,13 +5918,68 @@ function subscribeClick(plan){
 const EVENTOS_CACHE_KEY = 'h3l_eventos_cache';
 const EVENTOS_TTL = 12*60*60*1000; // 12 horas
 
+/* Eventos verificados en las páginas oficiales (IAPG, AOG Patagonia, ADIPEC, IEA) el 14/10/2026. No se inventan eventos. */
 const FALLBACK_EVENTOS = [
-  {org:'SPE',tag:'spe',color:'var(--accent)',fecha:'Junio 2026',titulo:'SPE Annual Technical Conference & Exhibition',lugar:'Dallas, Texas, EE.UU.',desc:'La conferencia técnica anual más importante de la Society of Petroleum Engineers. Más de 10.000 profesionales del sector.',url:'https://www.spe.org/en/atce/'},
-  {org:'SPEE',tag:'spee',color:'var(--info)',fecha:'Mayo 2026',titulo:'SPEE Annual Meeting',lugar:'Denver, Colorado, EE.UU.',desc:'Reunión anual de la Society of Petroleum Evaluation Engineers. Evaluación de recursos y reservas energéticas.',url:'https://www.spee.org'},
-  {org:'IEA',tag:'iea',color:'var(--success)',fecha:'Abril 2026',titulo:'IEA Ministerial Meeting & Clean Energy Transitions',lugar:'París, Francia',desc:'Reunión ministerial de la Agencia Internacional de Energía. Agenda de transición energética global.',url:'https://www.iea.org/events'},
-  {org:'LATAM',tag:'latam',color:'var(--warning)',fecha:'Agosto 2026',titulo:'Congreso Latinoamericano de Hidrocarburos',lugar:'Buenos Aires, Argentina',desc:'Principal congreso de la industria de hidrocarburos en América Latina. Upstream, midstream, downstream y transición energética.',url:'https://www.iapg.org.ar'},
-  {org:'TRANSICIÓN',tag:'energia',color:'var(--success)',fecha:'Septiembre 2026',titulo:'Energy Transition Forum LATAM',lugar:'Bogotá, Colombia',desc:'Foro dedicado a la transición energética en LATAM. Hidrógeno verde, energías renovables e integración con O&G.',url:'https://www.worldenergy.org'},
-  {org:'SPE',tag:'spe',color:'var(--accent)',fecha:'Octubre 2026',titulo:'SPE Unconventional Resources Conference',lugar:'Calgary, Canadá',desc:'Conferencia especializada en recursos no convencionales: shale, tight gas y heavy oil. Tecnologías de perforación y completación.',url:'https://www.spe.org'},
+ {
+  "org": "AOG / IAPG",
+  "tag": "latam",
+  "color": "var(--warning)",
+  "fecha": "19 al 22 de octubre de 2026",
+  "titulo": "AOG Patagonia",
+  "lugar": "Espacio DUAM, Neuquén, Argentina",
+  "desc": "Evento del sector de petróleo y gas en la Patagonia, incluido en la agenda de eventos 2026 del IAPG.",
+  "url": "https://aogpatagonia.com.ar/"
+ },
+ {
+  "org": "ADIPEC",
+  "tag": "global",
+  "color": "var(--accent)",
+  "fecha": "2 al 5 de noviembre de 2026",
+  "titulo": "ADIPEC 2026 Exhibition & Conference",
+  "lugar": "ADNEC, Abu Dhabi, Emiratos Árabes Unidos",
+  "desc": "Exposición y conferencia de la industria energética en Abu Dhabi.",
+  "url": "https://www.adipec.com/"
+ },
+ {
+  "org": "IAPG",
+  "tag": "latam",
+  "color": "var(--warning)",
+  "fecha": "12 de noviembre de 2026",
+  "titulo": "4.ª Jornada de Petróleo 2026",
+  "lugar": "Sede: ver sitio del IAPG",
+  "desc": "Jornada del Instituto Argentino del Petróleo y del Gas, listada en su agenda de eventos 2026.",
+  "url": "http://iapg.org.ar/congresos-2026/"
+ },
+ {
+  "org": "IAPG",
+  "tag": "latam",
+  "color": "var(--warning)",
+  "fecha": "16 y 17 de noviembre de 2026",
+  "titulo": "Jornadas de Medición en Upstream y Downstream de Petróleo y Gas",
+  "lugar": "Sede: ver sitio del evento",
+  "desc": "Jornadas del Instituto Argentino del Petróleo y del Gas sobre medición en upstream y downstream.",
+  "url": "https://medicion.iapg.org.ar/"
+ },
+ {
+  "org": "IEA",
+  "tag": "iea",
+  "color": "var(--success)",
+  "fecha": "Noviembre de 2026 (día a confirmar)",
+  "titulo": "World Energy Outlook 2026",
+  "lugar": "Lanzamiento del informe",
+  "desc": "Presentación del informe anual de la IEA sobre perspectivas energéticas mundiales.",
+  "url": "https://www.iea.org/events/world-energy-outlook-2026"
+ },
+ {
+  "org": "IEA",
+  "tag": "iea",
+  "color": "var(--success)",
+  "fecha": "1 de diciembre de 2026",
+  "titulo": "26th Annual IEA-IETA-EPRI Workshop on Greenhouse Gas Emissions Trading",
+  "lugar": "París, Francia",
+  "desc": "Taller anual sobre mercados de emisiones de gases de efecto invernadero, organizado con IETA y EPRI.",
+  "url": "https://www.iea.org/events/26th-annual-iea-ieta-epri-workshop-on-greenhouse-gas-emissions-trading"
+ }
 ];
 
 let allEvents = [...FALLBACK_EVENTOS];
@@ -5935,34 +5988,20 @@ function W(k){ return (window.H3LSite && H3LSite.tr ? H3LSite.tr(k) : k); }
 function curLg(){ return (window.H3LSite && H3LSite.lang && H3LSite.lang()) || 'es'; }
 function curLoc(){ return ({es:'es-AR',en:'en-US',fr:'fr-FR',pt:'pt-BR'})[curLg()] || 'es-AR'; }
 const NEWS_TR = {
- en:[{"tag": "NEWS RELEASE", "date": "13 October 2026", "title": "Germany and IEA to co-host 2027 Clean Energy Ministerial and Mission Innovation Ministerial in Paris", "body": "News release published by the IEA."}, {"tag": "NEWS RELEASE", "date": "11 October 2026", "title": "IEA statement on responding to the global diesel market situation", "body": "News release published by the IEA."}, {"tag": "COMMENTARY", "date": "08 October 2026", "title": "Can Latin America and the Caribbean's workforce keep pace with the energy boom?", "body": "Commentary published by the IEA."}, {"tag": "NEWS RELEASE", "date": "07 October 2026", "title": "Statement by IEA Executive Director on meeting of IEA Member governments on 7 October 2026", "body": "News release published by the IEA."}, {"tag": "COMMENTARY", "date": "07 October 2026", "title": "How electricity systems across Latin America can strengthen preparedness for El Niño", "body": "Commentary published by the IEA."}, {"tag": "NEWS RELEASE", "date": "05 October 2026", "title": "Electrification and diversification can help address Southeast Asia's growing energy security challenges", "body": "News release published by the IEA."}],
- fr:[{"tag": "COMMUNIQUÉ", "date": "13 octobre 2026", "title": "L’Allemagne et l’AIE coorganiseront à Paris les réunions ministérielles de 2027 : Clean Energy Ministerial et Mission Innovation", "body": "Communiqué publié par l’AIE."}, {"tag": "COMMUNIQUÉ", "date": "11 octobre 2026", "title": "Déclaration de l’AIE sur la réponse à la situation du marché mondial du diesel", "body": "Communiqué publié par l’AIE."}, {"tag": "COMMENTAIRE", "date": "8 octobre 2026", "title": "La main-d’œuvre d’Amérique latine et des Caraïbes peut-elle suivre le rythme du boom énergétique ?", "body": "Commentaire publié par l’AIE."}, {"tag": "COMMUNIQUÉ", "date": "7 octobre 2026", "title": "Déclaration de la direction exécutive de l’AIE sur la réunion des gouvernements membres du 7 octobre 2026", "body": "Communiqué publié par l’AIE."}, {"tag": "COMMENTAIRE", "date": "7 octobre 2026", "title": "Comment les systèmes électriques d’Amérique latine peuvent renforcer leur préparation à El Niño", "body": "Commentaire publié par l’AIE."}, {"tag": "COMMUNIQUÉ", "date": "5 octobre 2026", "title": "L’électrification et la diversification peuvent aider à relever les défis croissants de sécurité énergétique de l’Asie du Sud-Est", "body": "Communiqué publié par l’AIE."}],
- pt:[{"tag": "COMUNICADO", "date": "13 de outubro de 2026", "title": "Alemanha e AIE sediarão em Paris as reuniões ministeriais de 2027: Clean Energy Ministerial e Mission Innovation", "body": "Comunicado publicado pela AIE."}, {"tag": "COMUNICADO", "date": "11 de outubro de 2026", "title": "Declaração da AIE sobre a resposta à situação do mercado global de diesel", "body": "Comunicado publicado pela AIE."}, {"tag": "COMENTÁRIO", "date": "8 de outubro de 2026", "title": "A força de trabalho da América Latina e do Caribe consegue acompanhar o boom energético?", "body": "Comentário publicado pela AIE."}, {"tag": "COMUNICADO", "date": "7 de outubro de 2026", "title": "Declaração da direção executiva da AIE sobre a reunião dos governos membros de 7 de outubro de 2026", "body": "Comunicado publicado pela AIE."}, {"tag": "COMENTÁRIO", "date": "7 de outubro de 2026", "title": "Como os sistemas elétricos da América Latina podem reforçar o preparo para o El Niño", "body": "Comentário publicado pela AIE."}, {"tag": "COMUNICADO", "date": "5 de outubro de 2026", "title": "Eletrificação e diversificação podem ajudar a enfrentar os crescentes desafios de segurança energética do Sudeste Asiático", "body": "Comunicado publicado pela AIE."}]
+ en:[{"tag": "NEWS RELEASE", "date": "13 October 2026", "title": "Germany and IEA to co-host 2027 Clean Energy Ministerial and Mission Innovation Ministerial in Paris", "body": "Published by the IEA."}, {"tag": "MARKETS", "date": "12 October 2026", "title": "Middle East supply risks overshadow Russian diesel deal", "body": "Headline published by Oil & Gas Journal."}, {"tag": "UPSTREAM", "date": "09 October 2026", "title": "Shell agrees to acquire interest in Bay du Nord project", "body": "Headline published by Oil & Gas Journal."}, {"tag": "CORPORATE", "date": "08 October 2026", "title": "Crescent Energy to acquire Eagle Ford assets from Devon for $4.2 billion", "body": "Headline published by Oil & Gas Journal."}, {"tag": "MARKETS", "date": "08 October 2026", "title": "Oil jumps 5% as Hormuz tanker attacks escalate, US Gulf hurricane shuts in production", "body": "Headline published by Oil & Gas Journal."}, {"tag": "COMMENTARY", "date": "08 October 2026", "title": "Can Latin America and the Caribbean's workforce keep pace with the energy boom?", "body": "Published by the IEA."}],
+ fr:[{"tag": "COMMUNIQUÉ", "date": "13 octobre 2026", "title": "L’Allemagne et l’AIE coorganiseront à Paris les réunions ministérielles de 2027 : Clean Energy Ministerial et Mission Innovation", "body": "Publié par l’AIE."}, {"tag": "MARCHÉS", "date": "12 octobre 2026", "title": "Les risques d’approvisionnement au Moyen-Orient éclipsent l’accord russe sur le diesel", "body": "Titre publié par Oil & Gas Journal."}, {"tag": "AMONT", "date": "9 octobre 2026", "title": "Shell accepte d’acquérir une participation dans le projet Bay du Nord", "body": "Titre publié par Oil & Gas Journal."}, {"tag": "ENTREPRISES", "date": "8 octobre 2026", "title": "Crescent Energy rachètera des actifs d’Eagle Ford à Devon pour 4,2 milliards de dollars", "body": "Titre publié par Oil & Gas Journal."}, {"tag": "MARCHÉS", "date": "8 octobre 2026", "title": "Le pétrole bondit de 5 % avec l’escalade des attaques de pétroliers à Ormuz et l’arrêt de production dans le golfe des États-Unis dû à un ouragan", "body": "Titre publié par Oil & Gas Journal."}, {"tag": "COMMENTAIRE", "date": "8 octobre 2026", "title": "La main-d’œuvre d’Amérique latine et des Caraïbes peut-elle suivre le rythme du boom énergétique ?", "body": "Publié par l’AIE."}],
+ pt:[{"tag": "COMUNICADO", "date": "13 de outubro de 2026", "title": "Alemanha e AIE sediarão em Paris as reuniões ministeriais de 2027: Clean Energy Ministerial e Mission Innovation", "body": "Publicado pela AIE."}, {"tag": "MERCADOS", "date": "12 de outubro de 2026", "title": "Riscos de oferta no Oriente Médio ofuscam acordo russo sobre diesel", "body": "Manchete publicada pela Oil & Gas Journal."}, {"tag": "UPSTREAM", "date": "9 de outubro de 2026", "title": "Shell concorda em adquirir participação no projeto Bay du Nord", "body": "Manchete publicada pela Oil & Gas Journal."}, {"tag": "CORPORATIVO", "date": "8 de outubro de 2026", "title": "Crescent Energy comprará ativos de Eagle Ford da Devon por US$ 4,2 bilhões", "body": "Manchete publicada pela Oil & Gas Journal."}, {"tag": "MERCADOS", "date": "8 de outubro de 2026", "title": "Petróleo sobe 5% com escalada de ataques a petroleiros em Ormuz e paralisação da produção no Golfo dos EUA por furacão", "body": "Manchete publicada pela Oil & Gas Journal."}, {"tag": "COMENTÁRIO", "date": "8 de outubro de 2026", "title": "A força de trabalho da América Latina e do Caribe consegue acompanhar o boom energético?", "body": "Publicado pela AIE."}]
 };
 const EVENTS_TR = {
-  en:[{org:'SPE',fecha:'June 2026',lugar:'Dallas, Texas, USA',desc:'The most important annual technical conference of the Society of Petroleum Engineers. More than 10,000 industry professionals.'},
-      {org:'SPEE',fecha:'May 2026',lugar:'Denver, Colorado, USA',desc:'Annual meeting of the Society of Petroleum Evaluation Engineers. Evaluation of energy resources and reserves.'},
-      {org:'IEA',fecha:'April 2026',lugar:'Paris, France',desc:'Ministerial meeting of the International Energy Agency. Global energy transition agenda.'},
-      {org:'LATAM',fecha:'August 2026',titulo:'Latin American Hydrocarbons Congress',lugar:'Buenos Aires, Argentina',desc:'The main hydrocarbons industry congress in Latin America. Upstream, midstream, downstream and energy transition.'},
-      {org:'TRANSITION',fecha:'September 2026',lugar:'Bogotá, Colombia',desc:'Forum dedicated to the energy transition in LATAM. Green hydrogen, renewable energy and integration with O&G.'},
-      {org:'SPE',fecha:'October 2026',lugar:'Calgary, Canada',desc:'Conference specialized in unconventional resources: shale, tight gas and heavy oil. Drilling and completion technologies.'}],
-  fr:[{org:'SPE',fecha:'Juin 2026',lugar:'Dallas, Texas, États-Unis',desc:'La plus importante conférence technique annuelle de la Society of Petroleum Engineers. Plus de 10 000 professionnels du secteur.'},
-      {org:'SPEE',fecha:'Mai 2026',lugar:'Denver, Colorado, États-Unis',desc:'Réunion annuelle de la Society of Petroleum Evaluation Engineers. Évaluation des ressources et réserves énergétiques.'},
-      {org:'AIE',fecha:'Avril 2026',lugar:'Paris, France',desc:'Réunion ministérielle de l’Agence internationale de l’énergie. Agenda de la transition énergétique mondiale.'},
-      {org:'LATAM',fecha:'Août 2026',titulo:'Congrès latino-américain des hydrocarbures',lugar:'Buenos Aires, Argentine',desc:'Principal congrès de l’industrie des hydrocarbures en Amérique latine. Amont, intermédiaire, aval et transition énergétique.'},
-      {org:'TRANSITION',fecha:'Septembre 2026',lugar:'Bogotá, Colombie',desc:'Forum consacré à la transition énergétique en Amérique latine. Hydrogène vert, énergies renouvelables et intégration avec l’O&G.'},
-      {org:'SPE',fecha:'Octobre 2026',lugar:'Calgary, Canada',desc:'Conférence spécialisée sur les ressources non conventionnelles : shale, tight gas et huile lourde. Technologies de forage et de complétion.'}],
-  pt:[{org:'SPE',fecha:'Junho 2026',lugar:'Dallas, Texas, EUA',desc:'A mais importante conferência técnica anual da Society of Petroleum Engineers. Mais de 10.000 profissionais do setor.'},
-      {org:'SPEE',fecha:'Maio 2026',lugar:'Denver, Colorado, EUA',desc:'Reunião anual da Society of Petroleum Evaluation Engineers. Avaliação de recursos e reservas energéticas.'},
-      {org:'AIE',fecha:'Abril 2026',lugar:'Paris, França',desc:'Reunião ministerial da Agência Internacional de Energia. Agenda da transição energética global.'},
-      {org:'LATAM',fecha:'Agosto 2026',titulo:'Congresso Latino-Americano de Hidrocarbonetos',lugar:'Buenos Aires, Argentina',desc:'Principal congresso da indústria de hidrocarbonetos na América Latina. Upstream, midstream, downstream e transição energética.'},
-      {org:'TRANSIÇÃO',fecha:'Setembro 2026',lugar:'Bogotá, Colômbia',desc:'Fórum dedicado à transição energética na América Latina. Hidrogênio verde, energias renováveis e integração com O&G.'},
-      {org:'SPE',fecha:'Outubro 2026',lugar:'Calgary, Canadá',desc:'Conferência especializada em recursos não convencionais: shale, tight gas e óleo pesado. Tecnologias de perfuração e completação.'}]
+ en:[{"org": "AOG / IAPG", "fecha": "19–22 October 2026", "titulo": "AOG Patagonia", "lugar": "Espacio DUAM, Neuquén, Argentina", "desc": "Oil and gas industry event in Patagonia, listed in the IAPG 2026 events calendar."}, {"org": "ADIPEC", "fecha": "2–5 November 2026", "titulo": "ADIPEC 2026 Exhibition & Conference", "lugar": "ADNEC, Abu Dhabi, United Arab Emirates", "desc": "Energy industry exhibition and conference in Abu Dhabi."}, {"org": "IAPG", "fecha": "12 November 2026", "titulo": "4th Oil Conference 2026", "lugar": "Venue: see the IAPG website", "desc": "Event of the Argentine Institute of Oil and Gas, listed in its 2026 events calendar."}, {"org": "IAPG", "fecha": "16–17 November 2026", "titulo": "Upstream and Downstream Oil & Gas Measurement Conference", "lugar": "Venue: see the event website", "desc": "Argentine Institute of Oil and Gas conference on upstream and downstream measurement."}, {"org": "IEA", "fecha": "November 2026 (day to be confirmed)", "titulo": "World Energy Outlook 2026", "lugar": "Report launch", "desc": "Launch of the IEA annual report on the global energy outlook."}, {"org": "IEA", "fecha": "1 December 2026", "titulo": "26th Annual IEA-IETA-EPRI Workshop on Greenhouse Gas Emissions Trading", "lugar": "Paris, France", "desc": "Annual workshop on greenhouse gas emissions trading, run with IETA and EPRI."}],
+ fr:[{"org": "AOG / IAPG", "fecha": "19 au 22 octobre 2026", "titulo": "AOG Patagonia", "lugar": "Espacio DUAM, Neuquén, Argentine", "desc": "Événement du secteur pétrolier et gazier en Patagonie, inscrit au calendrier 2026 de l’IAPG."}, {"org": "ADIPEC", "fecha": "2 au 5 novembre 2026", "titulo": "ADIPEC 2026 Exhibition & Conference", "lugar": "ADNEC, Abou Dabi, Émirats arabes unis", "desc": "Exposition et conférence de l’industrie énergétique à Abou Dabi."}, {"org": "IAPG", "fecha": "12 novembre 2026", "titulo": "4e Journée du Pétrole 2026", "lugar": "Lieu : voir le site de l’IAPG", "desc": "Journée de l’Institut argentin du pétrole et du gaz, inscrite à son calendrier 2026."}, {"org": "IAPG", "fecha": "16 et 17 novembre 2026", "titulo": "Journées de mesure en amont et en aval du pétrole et du gaz", "lugar": "Lieu : voir le site de l’événement", "desc": "Journées de l’Institut argentin du pétrole et du gaz sur la mesure en amont et en aval."}, {"org": "AIE", "fecha": "Novembre 2026 (jour à confirmer)", "titulo": "World Energy Outlook 2026", "lugar": "Lancement du rapport", "desc": "Présentation du rapport annuel de l’AIE sur les perspectives énergétiques mondiales."}, {"org": "AIE", "fecha": "1er décembre 2026", "titulo": "26th Annual IEA-IETA-EPRI Workshop on Greenhouse Gas Emissions Trading", "lugar": "Paris, France", "desc": "Atelier annuel sur l’échange de quotas d’émission de gaz à effet de serre, avec IETA et EPRI."}],
+ pt:[{"org": "AOG / IAPG", "fecha": "19 a 22 de outubro de 2026", "titulo": "AOG Patagonia", "lugar": "Espacio DUAM, Neuquén, Argentina", "desc": "Evento do setor de petróleo e gás na Patagônia, incluído na agenda de eventos 2026 do IAPG."}, {"org": "ADIPEC", "fecha": "2 a 5 de novembro de 2026", "titulo": "ADIPEC 2026 Exhibition & Conference", "lugar": "ADNEC, Abu Dhabi, Emirados Árabes Unidos", "desc": "Exposição e conferência da indústria de energia em Abu Dhabi."}, {"org": "IAPG", "fecha": "12 de novembro de 2026", "titulo": "4ª Jornada de Petróleo 2026", "lugar": "Local: ver site do IAPG", "desc": "Jornada do Instituto Argentino do Petróleo e do Gás, listada em sua agenda de eventos 2026."}, {"org": "IAPG", "fecha": "16 e 17 de novembro de 2026", "titulo": "Jornadas de Medição em Upstream e Downstream de Petróleo e Gás", "lugar": "Local: ver site do evento", "desc": "Jornadas do Instituto Argentino do Petróleo e do Gás sobre medição em upstream e downstream."}, {"org": "AIE", "fecha": "Novembro de 2026 (dia a confirmar)", "titulo": "World Energy Outlook 2026", "lugar": "Lançamento do relatório", "desc": "Lançamento do relatório anual da AIE sobre as perspectivas energéticas mundiais."}, {"org": "AIE", "fecha": "1º de dezembro de 2026", "titulo": "26th Annual IEA-IETA-EPRI Workshop on Greenhouse Gas Emissions Trading", "lugar": "Paris, França", "desc": "Workshop anual sobre comércio de emissões de gases de efeito estufa, com IETA e EPRI."}]
 };
 function trNews(n){ const lg=curLg(); if(lg==='es') return n; const i=FALLBACK_NEWS.findIndex(f=>f.url===n.url&&f.title===n.title); return i<0?n:Object.assign({},n,NEWS_TR[lg][i]); }
 function trEvent(e){ const lg=curLg(); if(lg==='es') return e; const i=FALLBACK_EVENTOS.findIndex(f=>f.url===e.url&&f.titulo===e.titulo); return i<0?e:Object.assign({},e,EVENTS_TR[lg][i]); }
 function h3lRerender(){
   try{ if(_lastNews) renderNews(_lastNews); }catch(e){}
+  try{ var _e=document.getElementById('eventos-ts'); if(_e&&_e.textContent&&typeof EVENTS_TS!=='undefined') _e.textContent=EVENTS_TS[curLg()]||EVENTS_TS.es; }catch(e){}
   try{ var _t=document.getElementById('news-ts'); if(_t&&typeof NEWS_TS!=='undefined') _t.textContent=NEWS_TS[curLg()]||NEWS_TS.es; var _p=document.getElementById('precio-ts'); if(_p&&/^\u2014$|\u2014|sin datos|no live|pas de|sem dados/.test(_p.textContent)&&document.getElementById('precio-brent').textContent==='\u2014') _p.textContent=W('w_nolive'); }catch(e){}
   try{ if(document.getElementById('eventos-grid') && allEvents && document.querySelector('#eventos-grid .ev-card')) _filtering=true; try{ renderEventos(allEvents); } finally { _filtering=false; } }catch(e){}
   try{ if(_lastP) _renderPrices(_lastP[0],_lastP[1],false,true); }catch(e){}
@@ -5989,7 +6028,7 @@ function renderEventos(events){
       <a href="${e.url}" target="_blank" rel="noopener" style="display:inline-flex;color:var(--accent);font-size:11px;text-decoration:none;font-weight:600;margin-top:4px;">${W('w_e_more')} →</a>
     </div>
   `).join('');
-  if(ts) ts.textContent = W('w_ts') + ' ' + new Date().toLocaleDateString(curLoc());
+  if(ts) ts.textContent = (typeof EVENTS_TS!=='undefined' && (EVENTS_TS[curLg()]||EVENTS_TS.es)) || '';
   allEvents = events;
   if(!_filtering) _allEv = events;
 }
@@ -6003,43 +6042,17 @@ function filterEvents(tag, btn){
 }
 
 async function refreshEventos(){
-  const grid = document.getElementById('eventos-grid');
-  if(grid) grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--text-muted);">'+W('w_e_search')+'</div>';
-  try {
-    const cached = JSON.parse(localStorage.getItem(EVENTOS_CACHE_KEY)||'null');
-    if(cached && Date.now()-cached.ts < EVENTOS_TTL){ renderEventos(cached.events); return; }
-    // Try AI
-    const resp = await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','anthropic-dangerous-direct-browser-access':'true'},
-      body:JSON.stringify({
-        model:'claude-sonnet-4-6',max_tokens:1500,
-        messages:[{role:'user',content:`Genera un array JSON de 6 eventos reales y próximos del sector OIL & GAS para el año 2026, incluyendo eventos de SPE, SPEE, IEA y organizaciones LATAM.
-Cada evento debe tener: org (organización), tag (spe/spee/iea/latam/energia), color (var(--accent)/var(--info)/var(--success)/var(--warning)), fecha (mes y año), titulo, lugar (ciudad y país), desc (2 oraciones), url (URL real).
-Responde SOLO el array JSON sin texto adicional.`}]
-      })
-    });
-    if(resp.ok){
-      const data = await resp.json();
-      const text = data.content?.[0]?.text||'';
-      const clean = text.replace('```json','').replace('```','').trim();
-      const events = JSON.parse(clean);
-      localStorage.setItem(EVENTOS_CACHE_KEY, JSON.stringify({ts:Date.now(),events}));
-      renderEventos(events);
-    } else throw new Error();
-  } catch(e){
-    renderEventos(FALLBACK_EVENTOS);
-    localStorage.setItem(EVENTOS_CACHE_KEY, JSON.stringify({ts:Date.now(),events:FALLBACK_EVENTOS}));
-  }
+  try{ localStorage.removeItem(EVENTOS_CACHE_KEY); }catch(e){}
+  renderEventos(FALLBACK_EVENTOS);
+  const ts=document.getElementById('eventos-ts'); if(ts) ts.textContent=EVENTS_TS[curLg()]||EVENTS_TS.es;
 }
+const EVENTS_TS={es:'Agenda verificada en los sitios oficiales de cada evento · 14/10/2026',en:'Calendar checked on each event’s official website · 14/10/2026',fr:'Agenda vérifié sur les sites officiels de chaque événement · 14/10/2026',pt:'Agenda verificada nos sites oficiais de cada evento · 14/10/2026'};
 
 // Section-specific hooks (no redefinition — uses the onSectionOpen pattern)
 function onSectionOpen(id){
   if(id==='eventos'){
     setTimeout(()=>{
-      const cached = JSON.parse(localStorage.getItem(EVENTOS_CACHE_KEY)||'null');
-      if(cached && Date.now()-cached.ts < EVENTOS_TTL) renderEventos(cached.events);
-      else refreshEventos();
+      refreshEventos();
     }, 100);
   }
   if(id==='admin'||id==='auth'||id==='registro'||id==='home'){ if(id==='home') location.href='v2/'; return false; }
