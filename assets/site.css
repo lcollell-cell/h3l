@@ -63,11 +63,14 @@
 .svc-media{position:relative;background:#0c1626;aspect-ratio:16/9;align-self:stretch;min-height:220px}
 .svc-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .svc-play{position:absolute;right:14px;bottom:14px;width:40px;height:40px;border-radius:50%;border:0;background:rgba(15,27,46,.78);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.svc-snd{position:absolute;right:62px;bottom:14px;width:40px;height:40px;border-radius:50%;border:0;background:rgba(15,27,46,.78);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.svc-snd:hover{background:var(--h-green)}.svc-snd:focus-visible{outline:3px solid var(--blue-light);outline-offset:2px}
+.svc-snd svg{width:20px;height:20px;fill:#fff}.svc-snd .on{display:none}.svc-snd.sound-on .on{display:inline}.svc-snd.sound-on .off{display:none}
 .svc-play svg{width:20px;height:20px;fill:#fff}
 .svc-play.playing svg{display:none}
 .svc-play.playing::before,.svc-play.playing::after{content:"";width:4px;height:14px;background:#fff;border-radius:1px;margin:0 2px}
 .svc-play:hover{background:var(--h-green)}
-.svc-cap{position:absolute;left:0;bottom:0;right:64px;padding:26px 16px 12px;background:linear-gradient(transparent,rgba(8,15,28,.85));color:#fff;font:600 12.5px/1.3 var(--font-body);pointer-events:none}
+.svc-cap{position:absolute;left:0;bottom:0;right:110px;padding:26px 16px 12px;background:linear-gradient(transparent,rgba(8,15,28,.85));color:#fff;font:600 12.5px/1.3 var(--font-body);pointer-events:none}
 .svc-body{padding:26px 28px;display:flex;flex-direction:column;justify-content:center}
 .svc-body h3{font:800 clamp(18px,2vw,22px)/1.25 var(--font-body);color:var(--h-navy);margin:0 0 14px}
 .svc-body ul{list-style:none;margin:0 0 20px;padding:0;display:grid;gap:8px}

@@ -34,7 +34,7 @@ es:{
  sv_desc:'Ocho líneas de servicio, cada una con la herramienta que usamos en el trabajo. Mirá el video y pedí tu cotización.',
  sv_end:'¿Necesitás una propuesta para tu activo o proyecto?',
  sv_dl:'Descargar brochure',sv_q:'Solicitar cotización',sv_qall:'Solicitar cotización',sv_more:'Probar la herramienta',sv_tool:'Herramienta',
- sv_vid:'Video demostrativo de la herramienta',sv_play:'Reproducir',sv_pause:'Pausar',
+ sv_vid:'Video demostrativo de la herramienta',sv_snd:'Activar sonido',sv_mute:'Silenciar',sv_play:'Reproducir',sv_pause:'Pausar',
  sv_note:'Los videos muestran la plataforma H3L con datos de ejemplo.',
  q_msg:'Hola, quiero solicitar una cotización del servicio: ',
  ct_mail:'Escribinos a info@h3l.com',
@@ -140,7 +140,7 @@ en:{
  sv_desc:'Eight service lines, each with the tool we use on the job. Watch the video and request your quote.',
  sv_end:'Need a proposal for your asset or project?',
  sv_dl:'Download brochure',sv_q:'Request a quote',sv_qall:'Request a quote',sv_more:'Try the tool',sv_tool:'Tool',
- sv_vid:'Tool demo video',sv_play:'Play',sv_pause:'Pause',
+ sv_vid:'Tool demo video',sv_snd:'Turn sound on',sv_mute:'Mute',sv_play:'Play',sv_pause:'Pause',
  sv_note:'The videos show the H3L platform with sample data.',
  q_msg:'Hello, I would like to request a quote for the service: ',
  ct_mail:'Write to us at info@h3l.com',
@@ -246,7 +246,7 @@ fr:{
  sv_desc:'Huit lignes de services, chacune avec l’outil que nous utilisons sur le terrain. Regardez la vidéo et demandez votre devis.',
  sv_end:'Besoin d’une proposition pour votre actif ou projet ?',
  sv_dl:'Télécharger la brochure',sv_q:'Demander un devis',sv_qall:'Demander un devis',sv_more:'Essayer l’outil',sv_tool:'Outil',
- sv_vid:'Vidéo de démonstration de l’outil',sv_play:'Lire',sv_pause:'Pause',
+ sv_vid:'Vidéo de démonstration de l’outil',sv_snd:'Activer le son',sv_mute:'Couper le son',sv_play:'Lire',sv_pause:'Pause',
  sv_note:'Les vidéos montrent la plateforme H3L avec des données d’exemple.',
  q_msg:'Bonjour, je souhaite demander un devis pour le service : ',
  ct_mail:'Écrivez-nous à info@h3l.com',
@@ -352,7 +352,7 @@ pt:{
  sv_desc:'Oito linhas de serviço, cada uma com a ferramenta que usamos no trabalho. Veja o vídeo e solicite seu orçamento.',
  sv_end:'Precisa de uma proposta para seu ativo ou projeto?',
  sv_dl:'Baixar brochure',sv_q:'Solicitar orçamento',sv_qall:'Solicitar orçamento',sv_more:'Testar a ferramenta',sv_tool:'Ferramenta',
- sv_vid:'Vídeo de demonstração da ferramenta',sv_play:'Reproduzir',sv_pause:'Pausar',
+ sv_vid:'Vídeo de demonstração da ferramenta',sv_snd:'Ativar som',sv_mute:'Silenciar',sv_play:'Reproduzir',sv_pause:'Pausar',
  sv_note:'Os vídeos mostram a plataforma H3L com dados de exemplo.',
  q_msg:'Olá, gostaria de solicitar um orçamento do serviço: ',
  ct_mail:'Escreva para info@h3l.com',
@@ -515,6 +515,7 @@ function renderServicios(){
       '<div class="svc-media"><video class="svc-video" muted loop playsinline preload="none" poster="media/svc-'+s.id+'.jpg" aria-label="'+esc(tr('sv_vid')+': '+tool)+'">'+
         '<source src="media/svc-'+s.id+'.mp4" type="video/mp4"><source src="media/svc-'+s.id+'.webm" type="video/webm"></video>'+
         '<button type="button" class="svc-play" data-svc="'+s.id+'" aria-label="'+esc(tr('sv_play'))+'"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>'+
+        '<button type="button" class="svc-snd" aria-label="'+esc(tr('sv_snd'))+'"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="on" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 8v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/><path class="off" d="M3 9v6h4l5 5V4L7 9H3zm16.6 3 2.4-2.4-1.4-1.4-2.4 2.4-2.4-2.4-1.4 1.4 2.4 2.4-2.4 2.4 1.4 1.4 2.4-2.4 2.4 2.4 1.4-1.4z"/></svg></button>'+
         '<div class="svc-cap">'+esc(tool)+'</div></div>'+
       '<div class="svc-body"><h3>'+esc(title)+'</h3><ul>'+s.b[lang].map(function(b){return '<li>'+esc(b)+'</li>'}).join('')+'</ul>'+
       '<div class="svc-act"><button type="button" class="btn-p" data-quote="'+i+'">'+esc(tr('sv_q'))+'</button>'+
@@ -541,12 +542,22 @@ function setupVideos(){
     var b=v.parentNode.querySelector('.svc-play');
     function sync(){b.classList.toggle('playing',!v.paused);b.setAttribute('aria-label',v.paused?tr('sv_play'):tr('sv_pause'))}
     v.addEventListener('play',sync);v.addEventListener('pause',sync);
+    var sb=v.parentNode.querySelector('.svc-snd');
+    function syncSnd(){sb.classList.toggle('sound-on',!v.muted);sb.setAttribute('aria-label',v.muted?tr('sv_snd'):tr('sv_mute'))}
+    v.addEventListener('volumechange',syncSnd);syncSnd();
+    v.volume=.8;
+    sb.addEventListener('click',function(){v.muted=!v.muted});
     b.addEventListener('click',function(){
-      if(v.paused){v._manualPause=false;safePlay(v)}else{v._manualPause=true;v.pause()}
+      /* el clic del usuario habilita el sonido; el autoplay por scroll sigue silenciado (política del navegador) */
+      if(v.paused){v._manualPause=false;v.muted=false;safePlay(v)}else{v._manualPause=true;v.pause()}
     });
   });
 }
 function safePlay(v){var p=v.play();if(p&&p.catch)p.catch(function(){})}
+document.addEventListener('play',function(e){
+  if(!e.target.classList||!e.target.classList.contains('svc-video'))return;
+  document.querySelectorAll('.svc-video').forEach(function(o){if(o!==e.target)o.muted=true});
+},true);
 function pauseAll(){document.querySelectorAll('.svc-video').forEach(function(v){v.pause()})}
 
 function quote(name){
