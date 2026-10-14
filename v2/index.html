@@ -257,7 +257,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #5BB0FF;outline-offset:3p
   <div id="gate" role="dialog" aria-label="Entrar al sitio" data-i18n-attr="aria-label:i.gAria" hidden><div class="gbox"><div class="gl">H<span>3</span>L</div><div class="gs">Global Energy</div><button id="gYes" type="button" data-i18n="i.gYes">ENTRAR CON SONIDO</button><button id="gNo" type="button" data-i18n="i.gNo">ENTRAR SIN SONIDO</button><div id="langGate"></div></div></div>
   <div id="edge"></div>
   <div id="fade" class="layer"></div>
-  <audio id="snd" src="h3l-intro.mp3" preload="auto"></audio>
+  <audio id="snd" src="h3l-intro.mp3?v=2" preload="auto"></audio>
 </div>
 <script>
 const SW=1280,SH=720;
@@ -279,10 +279,11 @@ const reduce=!params.has('intro')&&window.matchMedia&&matchMedia('(prefers-reduc
 
 /* ---------- parámetros de la línea de tiempo (idénticos al video aprobado) ---------- */
 const T0=.3, DUR=.95;
-const AUD_END=11.0;
-const HOLD=-1.05, HOLD_AT=6.0; /* sin espera: la cortina abre en el acento de los 6 s del sonido original y las dos últimas notas (6 s y 7,05 s) suenan dentro del Hero; HOLD<0 adelanta el Hero respecto del sonido */
+const GAP=1.5; /* pausa de lectura entre el listado y el Hero: el audio trae 1,5 s insertados en 5,6 s (relleno del pad + swell de transición); las notas no cambian, solo se desplazan */
+const AUD_END=11.0+GAP;
+const HOLD=-1.05+GAP, HOLD_AT=6.0, HERO_AT=HOLD_AT+GAP; /* sin espera: la cortina abre en el acento de los 6 s del sonido original y las dos últimas notas (6 s y 7,05 s) suenan dentro del Hero; HOLD<0 adelanta el Hero respecto del sonido */
 const HK=1.35; /* el Hero corre 1,35x más rápido para quedar completo en el pico del acorde final (7,75 s del sonido) */
-const te=x=>x<HOLD_AT?x:7.05+(x-HOLD_AT)*HK;
+const te=x=>x<HOLD_AT?x:(x<HERO_AT?HOLD_AT+(x-HOLD_AT)*(7.05-HOLD_AT)/GAP:7.05+(x-HERO_AT)*HK); /* durante la pausa el listado queda completo en pantalla y el reloj visual avanza lento hasta 7,05 (cortina) */
 const T_CURTAIN=7.05, T_CURTAIN_END=7.85;
 const STAGES=[{},{},{},{},{}]; /* 5 etapas */
 function refreshStages(){ STAGES.forEach((s,i)=>{ s.lab=I('s'+(i+1)+'.lab'); s.cap=I('s'+(i+1)+'.cap'); s.st=I('s'+(i+1)+'.st'); if(s.el){ const l=s.el.querySelector('.lab'); if(l) l.textContent=s.lab; } }); }
@@ -776,7 +777,7 @@ function render(tr){
     $('modcount').textContent=fin?I('i.modEnd'):I('i.mod',{n:idx+1});
     $('scap').textContent=STAGES[idx].cap;
     const stP=inP(.15,.5); ['pctbox','status','modcount','bar','foot1','foot2'].forEach(id=>{ $(id).style.opacity=stP; });
-    const hk=eo3(seg(tr,HOLD_AT+.15,HOLD_AT+.9)); $('foot1').style.color=hk>0?'#ffffff':''; $('foot1').style.textShadow=hk>0?'0 0 '+(14*hk).toFixed(1)+'px rgba(95,209,164,'+(.7*hk).toFixed(2)+')':'';
+    const hk=eo3(seg(tr,HERO_AT+.15,HERO_AT+.9)); $('foot1').style.color=hk>0?'#ffffff':''; $('foot1').style.textShadow=hk>0?'0 0 '+(14*hk).toFixed(1)+'px rgba(95,209,164,'+(.7*hk).toFixed(2)+')':'';
     PANELS.forEach((pn,i)=>{ const fi=seg(t,pn.a-.04,pn.a+.1), fo=(i<PANELS.length-1)?seg(t,pn.b-.05,pn.b+.08):0, L=pn.b-pn.a;
       pn.sc.g.setAttribute('opacity',(fi*(1-fo)).toFixed(3));
       if(fi>0&&fo<1) pn.sc.upd(seg(t,pn.a+.03,pn.a+.88*L),t); });
