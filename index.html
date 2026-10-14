@@ -1137,7 +1137,7 @@ tr:hover td{background:var(--blue-ghost);}
 @media (prefers-reduced-motion:reduce){.calc-tab-btn,.calc-card{transition:none;}}
 </style>
 <link rel="stylesheet" href="assets/site.css?v=4">
-<script src="assets/site.js?v=7" defer></script>
+<script src="assets/site.js?v=8" defer></script>
 <script src="v2/chat.js?v=5" defer></script>
 </head>
 <body>
@@ -5140,7 +5140,7 @@ async function _fetchPricesFromFT() {
    Último dato disponible al 14/10/2026: 6/10/2026. Fuentes:
    https://www.eia.gov/dnav/pet/pet_pri_spt_s1_d.htm  ·  https://www.eia.gov/dnav/ng/ng_pri_fut_s1_d.htm
    Variación = diferencia contra el dato del día hábil anterior (5/10/2026). GNL (JKM) no tiene fuente pública diaria gratuita. */
-const EIA_DATA = { date:'2026-10-06',
+let EIA_DATA = { date:'2026-10-06',
   brent:{v:125.44, prev:125.51}, wti:{v:96.24, prev:96.13}, gas:{v:3.03, prev:2.96} };
 function renderEIA(){
   const set=(id,t)=>{ if(_$(id)) _$(id).textContent=t; };
@@ -5156,7 +5156,17 @@ function renderEIA(){
   set('precio-src-gnl',W('w_gnlsrc'));
   ['precio-brent','precio-wti','precio-gas','precio-gnl'].forEach(id=>{ if(_$(id)) _$(id).style.opacity='1'; });
 }
-async function loadPrices(){ renderEIA(); }
+async function loadPrices(){
+  renderEIA();
+  /* Datos frescos: data/market.json lo actualiza cada día de semana una tarea de GitHub Actions (scripts/update_data.py) */
+  try{
+    const r=await fetch('data/market.json?'+Date.now(),{cache:'no-store'}); if(!r.ok) return;
+    const j=await r.json(); const ok=k=>j[k]&&isFinite(j[k].v)&&isFinite(j[k].prev)&&j[k].v>1&&j[k].v<400;
+    if(ok('brent')&&ok('wti')&&ok('gas')&&/^\d{4}-\d{2}-\d{2}$/.test(j.date||'')){
+      EIA_DATA={date:j.date,brent:j.brent,wti:j.wti,gas:j.gas}; renderEIA();
+    }
+  }catch(e){}
+}
 loadPrices();
 
 // ═══════════════════════════════════════════════════════════
@@ -5251,10 +5261,37 @@ function renderNews(articles){
 
 const NEWS_TS = {"es": "Titulares de Oil & Gas Journal e IEA · consultados el 14/10/2026", "en": "Headlines from Oil & Gas Journal and IEA · checked on 14/10/2026", "fr": "Titres d’Oil & Gas Journal et de l’AIE · consultés le 14/10/2026", "pt": "Manchetes da Oil & Gas Journal e da AIE · consultadas em 14/10/2026"};
 /* Titulares reales de IEA y Oil & Gas Journal. No se generan noticias con IA ni se inventan resúmenes. */
+let NEWS_DYN=null, NEWS_CHECKED=null;
+const NEWS_TS_PRE={es:'Titulares de IEA y Oil & Gas Journal · actualizado el ',en:'Headlines from IEA and Oil & Gas Journal · updated ',fr:'Titres de l’AIE et d’Oil & Gas Journal · mis à jour le ',pt:'Manchetes da AIE e da Oil & Gas Journal · atualizadas em '};
+function fmtISO(iso){ return new Date(iso+'T12:00:00').toLocaleDateString(curLoc(),{day:'numeric',month:'long',year:'numeric'}); }
+function dynArticles(){
+  const lg=curLg(), BODY={es:'Publicado por ',en:'Published by ',fr:'Publié par ',pt:'Publicado por '}[lg]||'Publicado por ';
+  return NEWS_DYN.map(it=>{
+    const i=FALLBACK_NEWS.findIndex(f=>f.url===it.url);
+    const title = i<0 ? it.title : (lg==='es'||!NEWS_TR[lg] ? FALLBACK_NEWS[i].title : NEWS_TR[lg][i].title);
+    const iea = it.source==='IEA';
+    return {tag: iea?'IEA':'OGJ', tagColor: iea?'var(--success)':'var(--info)', date: fmtISO(it.date), title, body: BODY+it.source+'.', source: it.source, url: it.url};
+  });
+}
+function setNewsTs(){
+  const el=document.getElementById('news-ts'); if(!el) return;
+  if(NEWS_DYN&&NEWS_CHECKED) el.textContent=(NEWS_TS_PRE[curLg()]||NEWS_TS_PRE.es)+fmtISO(NEWS_CHECKED);
+  else el.textContent=NEWS_TS[curLg()]||NEWS_TS.es;
+}
+/* Titulares reales de IEA y Oil & Gas Journal. data/news.json lo actualiza una tarea diaria de GitHub Actions.
+   No se generan noticias con IA ni se inventan resúmenes. */
 async function refreshNoticias(manual=false){
   try{ localStorage.removeItem(NEWS_CACHE_KEY); }catch(e){}
-  renderNews(FALLBACK_NEWS);
-  const tsEl=document.getElementById('news-ts'); if(tsEl) tsEl.textContent=NEWS_TS[curLg()]||NEWS_TS.es;
+  if(!NEWS_DYN){
+    try{
+      const r=await fetch('data/news.json?'+Date.now(),{cache:'no-store'});
+      if(r.ok){ const j=await r.json();
+        const ok=Array.isArray(j.items)&&j.items.length>=4&&j.items.every(x=>x&&x.title&&/^https:\/\//.test(x.url)&&/^\d{4}-\d{2}-\d{2}$/.test(x.date));
+        if(ok){ NEWS_DYN=j.items; NEWS_CHECKED=(j.checked||'').slice(0,10)||j.items[0].date; } }
+    }catch(e){}
+  }
+  renderNews(NEWS_DYN?dynArticles():FALLBACK_NEWS);
+  setNewsTs();
   const btn=document.getElementById('btn-refresh-news'); if(btn) btn.style.display='none';
 }
 
@@ -5972,9 +6009,10 @@ function trEvent(e){ const lg=curLg(); if(lg==='es') return e; const i=FALLBACK_
 function h3lRerender(){
   try{ if(_lastNews) renderNews(_lastNews); }catch(e){}
   try{ var _e=document.getElementById('eventos-ts'); if(_e&&_e.textContent&&typeof EVENTS_TS!=='undefined') _e.textContent=EVENTS_TS[curLg()]||EVENTS_TS.es; }catch(e){}
-  try{ var _t=document.getElementById('news-ts'); if(_t&&typeof NEWS_TS!=='undefined') _t.textContent=NEWS_TS[curLg()]||NEWS_TS.es; }catch(e){}
+  try{ setNewsTs(); }catch(e){}
   try{ if(document.getElementById('eventos-grid') && allEvents && document.querySelector('#eventos-grid .ev-card')) _filtering=true; try{ renderEventos(allEvents); } finally { _filtering=false; } }catch(e){}
   try{ renderEIA(); }catch(e){}
+  try{ if(NEWS_DYN) renderNews(dynArticles()); }catch(e){}
   try{ if(document.getElementById('et-grid')){ buildETGrid(); } }catch(e){}
   try{ const ov=document.getElementById('et-modal-wrap'); if(ov && ov.style.display==='block' && _etOpenId) openETModal(_etOpenId); }catch(e){}
   try{ const ts=document.getElementById('news-ts'); if(ts&&_lastNewsTs) ts.textContent=W('w_ts')+' '+_lastNewsTs.toLocaleDateString(curLoc(),{day:'2-digit',month:'2-digit',year:'numeric'})+' '+_lastNewsTs.toLocaleTimeString(curLoc(),{hour:'2-digit',minute:'2-digit'}); }catch(e){}

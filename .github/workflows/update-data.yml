@@ -1,0 +1,36 @@
+name: Actualizar precios y noticias
+
+on:
+  schedule:
+    - cron: '17 11 * * 1-5'   # 08:17 hora de Argentina, de lunes a viernes
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Descargar precios (EIA) y titulares (IEA, OGJ)
+        env:
+          EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
+        run: python scripts/update_data.py
+      - name: Guardar cambios
+        run: |
+          git config user.name "h3l-data-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/
+          if git diff --cached --quiet; then echo "Sin cambios"; else
+            git commit -m "Datos: actualización automática de precios y noticias"
+            git pull --rebase -q
+            git push
+          fi
