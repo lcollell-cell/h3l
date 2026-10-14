@@ -3,6 +3,11 @@
 <head>
 <meta name="google" content="notranslate">
 <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; media-src 'self' blob: data:; connect-src 'self' https://api.anthropic.com; frame-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self' mailto:">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<script>/* anti-clickjacking: solo se permite incrustar desde el mismo sitio */
+try{if(window.top!==window.self){var _h=window.top.location.hostname;}}catch(e){try{window.top.location=window.self.location}catch(_){document.documentElement.style.display='none'}}</script>
+
 <script>/* El inicio es la portada con intro (v2/). Solo se queda aquí si se pide una sección con ?go= */
 (function(){try{if(!/[?&]go=/.test(location.search)&&!/[?&]stay/.test(location.search))location.replace('v2/'+location.hash)}catch(e){}})();</script>
 <link rel="icon" href="LOGO_H3L_icon.png">
@@ -1104,7 +1109,7 @@ tr:hover td{background:var(--blue-ghost);}
   .dash-chart-title{font-size:12px !important;}
 }
 </style>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="assets/vendor/chart.umd.min.js"></script>
 <style id="h3l-resp-fixes">
 /* Ajustes de visualización (PC y móvil) */
 @media (min-width:901px) and (max-width:1180px){
@@ -1929,9 +1934,9 @@ tr:hover td{background:var(--blue-ghost);}
     <div style="display:flex;align-items:center;justify-content:space-between;max-width:1100px;margin:0 auto 24px;padding:8px 14px;background:rgba(255,255,255,.03);border-radius:8px;border:1px solid rgba(255,255,255,.06);">
       <span style="font-size:10px;color:var(--text-muted);">
         <span data-t="w_rt">Precios en tiempo real · Actualizado:</span> <span id="precio-ts">—</span>
-        · <span data-t="w_srcl">Fuente:</span> <a href="https://markets.ft.com/data/commodities" target="_blank" style="color:var(--accent);font-weight:600;">Financial Times Markets</a>
-        · <a href="https://spglobal.com/commodity-insights" target="_blank" style="color:var(--accent);">Platts / S&P Global</a>
-        · <a href="https://www.eia.gov/naturalgas/weekly" target="_blank" style="color:var(--accent);">EIA</a>
+        · <span data-t="w_srcl">Fuente:</span> <a href="https://markets.ft.com/data/commodities" target="_blank" style="color:var(--accent);font-weight:600;" rel="noopener noreferrer">Financial Times Markets</a>
+        · <a href="https://spglobal.com/commodity-insights" target="_blank" style="color:var(--accent);" rel="noopener noreferrer">Platts / S&P Global</a>
+        · <a href="https://www.eia.gov/naturalgas/weekly" target="_blank" style="color:var(--accent);" rel="noopener noreferrer">EIA</a>
       </span>
       <button onclick="loadPrices(true)" style="background:rgba(46,107,196,.10);border:1px solid rgba(46,107,196,.20);color:var(--accent);font-family:var(--font-body);font-size:10px;font-weight:600;padding:4px 12px;border-radius:5px;cursor:pointer;transition:background .2s;" onmouseover="this.style.background='rgba(46,107,196,.18)'" onmouseout="this.style.background='rgba(46,107,196,.10)'">
         <span data-t="w_updp">Actualizar precios</span>
@@ -3644,7 +3649,7 @@ document.addEventListener('DOMContentLoaded', function(){
 (function(){
   if(!window.Chart){
     const s=document.createElement('script');
-    s.src='https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js';
+    s.src='assets/vendor/chart.umd.min.js';
     s.onload=function(){ buildETGrid(); };
     document.head.appendChild(s);
   }
