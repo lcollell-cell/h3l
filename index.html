@@ -3,7 +3,7 @@
 <head>
 <meta name="google" content="notranslate">
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; media-src 'self' blob: data:; connect-src 'self' https://api.anthropic.com; frame-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self' mailto:">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob: https:; media-src 'self' blob: data:; connect-src 'self'; frame-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self' mailto:">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <script>/* anti-clickjacking: solo se permite incrustar desde el mismo sitio */
 try{if(window.top!==window.self){var _h=window.top.location.hostname;}}catch(e){try{window.top.location=window.self.location}catch(_){document.documentElement.style.display='none'}}</script>
@@ -46,7 +46,6 @@ try{if(window.top!==window.self){var _h=window.top.location.hostname;}}catch(e){
    Paleta: Azul H3L #1B3F7A + variaciones · Fondo blanco
    Inspirado en: slb.com | Principios: Tufte, Bertin, Cairo
 ═══════════════════════════════════════════════════════════ */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Barlow+Condensed:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
 :root {
   /* ── Paleta H3L Azul (extraída del logo) ── */
@@ -1136,6 +1135,7 @@ tr:hover td{background:var(--blue-ghost);}
 }
 @media (prefers-reduced-motion:reduce){.calc-tab-btn,.calc-card{transition:none;}}
 </style>
+<link rel="stylesheet" href="assets/fonts.css?v=1">
 <link rel="stylesheet" href="assets/site.css?v=7">
 <script src="assets/site.js?v=11" defer></script>
 <script src="assets/calc-i18n.js?v=1" defer></script>
@@ -5085,60 +5085,6 @@ function _renderPrices(prices, source, manual, silent) {
     toast('success', `${W('w_priceok')} ${srcLabel} — ${ts}`);
 }
 
-async function _fetchPricesFromFT() {
-  // Prompt estricto: sin signo + en números, sin placeholders de texto
-  const prompt = [
-    'Search for today commodity prices: Brent Crude Oil (ICE, USD/barrel), WTI Crude Oil (NYMEX, USD/barrel),',
-    'Henry Hub Natural Gas spot (NYMEX, USD/MMBtu), LNG spot JKM Asia (USD/MMBtu).',
-    'Use Financial Times markets.ft.com or Platts/S&P Global.',
-    'Reply ONLY with one JSON object — no markdown, no code fences, no explanation.',
-    'All values must be plain decimal numbers (no + prefix, no strings).',
-    'Format exactly: {"brent":96.5,"wti":94.2,"gas":3.22,"gnl":11.9,',
-    '"chBrent":-0.45,"chWti":-0.30,"chGas":0.06,"chGnl":-0.20}'
-  ].join(' ');
-
-  const response = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 400,
-      tools: [{ type: 'web_search_20250305', name: 'web_search' }],
-      messages: [{ role: 'user', content: prompt }]
-    })
-  });
-
-  if (!response.ok) throw new Error('API ' + response.status);
-  const data = await response.json();
-
-  // Reunir todos los bloques de texto (el JSON puede venir en el último text block)
-  const rawText = (data.content || [])
-    .filter(b => b.type === 'text')
-    .map(b => b.text)
-    .join('\n');
-
-  // Sanitizar: quitar signos + al inicio de valores numéricos antes de parsear
-  // Esto maneja casos como {"chBrent": +1.23} → {"chBrent": 1.23}
-  const sanitized = rawText
-    .replace(/:\s*\+([0-9])/g, ': $1')   // : +1.23  → : 1.23
-    .replace(/,\s*\+([0-9])/g, ', $1')   // , +1.23  → , 1.23
-    .replace(/```[a-z]*\n?/gi, '')         // quitar code fences
-    .replace(/```/g, '');
-
-  // Extraer el primer objeto JSON completo (greedy para capturar todo)
-  const jsonMatch = sanitized.match(/\{[^{}]*\}/);
-  if (!jsonMatch) throw new Error('No JSON en respuesta');
-
-  const parsed = JSON.parse(jsonMatch[0]);
-
-  // Asegurar que todos los campos numéricos sean Number
-  ['brent','wti','gas','gnl','chBrent','chWti','chGas','chGnl'].forEach(k => {
-    if (parsed[k] !== undefined) parsed[k] = parseFloat(parsed[k]) || 0;
-  });
-
-  return parsed;
-}
-
 /* Precios spot publicados por la EIA (U.S. Energy Information Administration) — datos públicos, no se simulan.
    Último dato disponible al 14/10/2026: 6/10/2026. Fuentes:
    https://www.eia.gov/dnav/pet/pet_pri_spt_s1_d.htm  ·  https://www.eia.gov/dnav/ng/ng_pri_fut_s1_d.htm
@@ -6103,12 +6049,7 @@ async function sendAgentMsg(){
   try {
     const agentNames = {reservoir:'especialista en reservorios y evaluación de recursos',esg:'especialista en ESG y emisiones de carbono',data:'especialista en Data Science aplicada a energía',econ:'especialista en economía energética y valoración de activos',drill:'especialista en perforación y completación de pozos'};
     const sysPrompt = `Eres ${agentNames[activeAgent]||'especialista energético'} de H3L. Respondés en español, de forma técnica y concisa.`;
-    const resp = await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','anthropic-dangerous-direct-browser-access':'true'},
-      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:600,system:sysPrompt,messages:[{role:'user',content:text}]})
-    });
-    const data = await resp.json();
+    const data = {content:[{text:'El asistente de IA no está habilitado en esta versión del sitio. Para consultas técnicas escribinos a info@h3lglobalenergy.com.'}]};
     const reply = data.content?.[0]?.text || 'No pude procesar la consulta.';
     document.getElementById('agent-typing')?.remove();
     msgs.innerHTML += `<div style="background:var(--surface-3);padding:10px 14px;border-radius:var(--radius);font-size:13px;color:var(--text-secondary);max-width:90%;">${reply}</div>`;
@@ -6221,12 +6162,7 @@ async function sendAgentMsg(){
   msgs.scrollTop = msgs.scrollHeight;
   const sysPrompt = activeAgentSysPrompt || `Sos un especialista en Oil & Gas de H3L. Respondés en español, de forma técnica y concisa.`;
   try {
-    const resp = await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','anthropic-dangerous-direct-browser-access':'true'},
-      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:700,system:sysPrompt,messages:[{role:'user',content:text}]})
-    });
-    const data = await resp.json();
+    const data = {content:[{text:'El asistente de IA no está habilitado en esta versión del sitio. Para consultas técnicas escribinos a info@h3lglobalenergy.com.'}]};
     const reply = data.content?.[0]?.text || 'No pude procesar la consulta.';
     document.getElementById('agent-typing')?.remove();
     const replyFormatted = reply.replace(/\*\*(.*?)\*\*/g,'<strong style="color:var(--accent)">$1</strong>').replace(/\n/g,'<br>');
@@ -6308,12 +6244,7 @@ async function sendQCAppAI(){
   msgs.scrollTop = msgs.scrollHeight;
   const sysPrompt = `Sos un experto en Quality Control de datos para la aplicación ${activeQCApp} de la plataforma H3L Oil & Gas. Ayudás al usuario a interpretar resultados de QC, identificar anomalías, entender métricas de calidad y recomendar acciones correctivas. Respondés en español, con precisión técnica y concisión. Mencionás valores típicos de la industria cuando sea útil.`;
   try {
-    const resp = await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','anthropic-dangerous-direct-browser-access':'true'},
-      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:500,system:sysPrompt,messages:qcAppConvHistory})
-    });
-    const data = await resp.json();
+    const data = {content:[{text:'El asistente de IA no está habilitado en esta versión del sitio. Para consultas técnicas escribinos a info@h3lglobalenergy.com.'}]};
     const reply = data.content?.[0]?.text || 'No pude procesar.';
     qcAppConvHistory.push({role:'assistant',content:reply});
     document.getElementById('qcai-typing')?.remove();
