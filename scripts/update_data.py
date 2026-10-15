@@ -106,9 +106,15 @@ def parse_html(html_text, base, source, link_re, limit=6):
         url = urllib.parse.urljoin(base, href)
         if not re.search(link_re, url) or url in seen: continue
         title = unescape(re.sub(r'<[^>]+>', ' ', inner)); title = re.sub(r'\s+', ' ', title).strip()
+        # fecha dentro del propio enlace (p. ej. IEA: "News <titular> 13 October 2026")
+        iso = to_iso(title)
+        if iso:
+            title = re.sub(r'\s*\d{1,2}\s+[A-Za-z]{3,9}\.?\s+\d{4}\s*$', '', title).strip()
+        title = re.sub(r'^(News|Commentary|Report|Reports|Speech|Statement|Event|Analysis|Article)\s+(?=[A-Z])', '', title).strip()
         if len(title) < 25: continue
-        ctx = html_text[m.end(): m.end() + 400] + html_text[max(0, m.start() - 400): m.start()]
-        iso = to_iso(unescape(re.sub(r'<[^>]+>', ' ', ctx)))
+        if not iso:
+            ctx = html_text[m.end(): m.end() + 400] + html_text[max(0, m.start() - 400): m.start()]
+            iso = to_iso(unescape(re.sub(r'<[^>]+>', ' ', ctx)))
         if not iso or iso.endswith('-00'): continue
         seen.add(url); items.append({'source': source, 'title': title, 'url': url, 'date': iso})
     return items[:limit]
