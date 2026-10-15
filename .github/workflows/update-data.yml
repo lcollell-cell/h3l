@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: '17 11 * * 1-5'   # 08:17 hora de Argentina, de lunes a viernes
   workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/update_data.py'
+      - '.github/workflows/update-data.yml'
 
 permissions:
   contents: write
