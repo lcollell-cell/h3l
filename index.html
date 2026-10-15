@@ -1137,7 +1137,7 @@ tr:hover td{background:var(--blue-ghost);}
 @media (prefers-reduced-motion:reduce){.calc-tab-btn,.calc-card{transition:none;}}
 </style>
 <link rel="stylesheet" href="assets/site.css?v=4">
-<script src="assets/site.js?v=8" defer></script>
+<script src="assets/site.js?v=9" defer></script>
 <script src="v2/chat.js?v=5" defer></script>
 </head>
 <body>
@@ -1903,6 +1903,7 @@ tr:hover td{background:var(--blue-ghost);}
     </div>
 
     <!-- PRECIOS EN TIEMPO REAL — Fuente: EIA Markets -->
+    <div id="precios-wrap" style="display:none">
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:12px;">
       <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;text-align:center;transition:border-color .3s;">
         <div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:6px;">BRENT CRUDE</div>
@@ -1943,6 +1944,7 @@ tr:hover td{background:var(--blue-ghost);}
       </button>
     </div>
 
+    </div>
     <!-- BARRA NOTICIAS: estado + refresh -->
     <div style="display:flex;align-items:center;justify-content:space-between;max-width:1100px;margin:0 auto 18px;">
       <h3 style="font-family:var(--font-body);font-size:16px;font-weight:700;" data-t="w_latest">Últimas Noticias</h3>
@@ -5156,15 +5158,18 @@ function renderEIA(){
   set('precio-src-gnl',W('w_gnlsrc'));
   ['precio-brent','precio-wti','precio-gas','precio-gnl'].forEach(id=>{ if(_$(id)) _$(id).style.opacity='1'; });
 }
+/* Las cotizaciones permanecen ocultas hasta que data/market.json traiga un dato de la EIA de los últimos 7 días. */
+const PRICE_MAX_AGE_DAYS = 7;
+function showPrices(on){ const w=document.getElementById('precios-wrap'); if(w) w.style.display=on?'':'none'; }
 async function loadPrices(){
-  renderEIA();
-  /* Datos frescos: data/market.json lo actualiza cada día de semana una tarea de GitHub Actions (scripts/update_data.py) */
+  showPrices(false);
   try{
     const r=await fetch('data/market.json?'+Date.now(),{cache:'no-store'}); if(!r.ok) return;
     const j=await r.json(); const ok=k=>j[k]&&isFinite(j[k].v)&&isFinite(j[k].prev)&&j[k].v>1&&j[k].v<400;
-    if(ok('brent')&&ok('wti')&&ok('gas')&&/^\d{4}-\d{2}-\d{2}$/.test(j.date||'')){
-      EIA_DATA={date:j.date,brent:j.brent,wti:j.wti,gas:j.gas}; renderEIA();
-    }
+    if(!(ok('brent')&&ok('wti')&&ok('gas')&&/^\d{4}-\d{2}-\d{2}$/.test(j.date||''))) return;
+    const age=(Date.now()-new Date(j.date+'T12:00:00').getTime())/86400000;
+    if(age>PRICE_MAX_AGE_DAYS || age<-1) return;          // dato viejo o fecha inválida: no mostrar
+    EIA_DATA={date:j.date,brent:j.brent,wti:j.wti,gas:j.gas}; renderEIA(); showPrices(true);
   }catch(e){}
 }
 loadPrices();
@@ -6011,7 +6016,7 @@ function h3lRerender(){
   try{ var _e=document.getElementById('eventos-ts'); if(_e&&_e.textContent&&typeof EVENTS_TS!=='undefined') _e.textContent=EVENTS_TS[curLg()]||EVENTS_TS.es; }catch(e){}
   try{ setNewsTs(); }catch(e){}
   try{ if(document.getElementById('eventos-grid') && allEvents && document.querySelector('#eventos-grid .ev-card')) _filtering=true; try{ renderEventos(allEvents); } finally { _filtering=false; } }catch(e){}
-  try{ renderEIA(); }catch(e){}
+  try{ if(document.getElementById('precios-wrap').style.display!=='none') renderEIA(); }catch(e){}
   try{ if(NEWS_DYN) renderNews(dynArticles()); }catch(e){}
   try{ if(document.getElementById('et-grid')){ buildETGrid(); } }catch(e){}
   try{ const ov=document.getElementById('et-modal-wrap'); if(ov && ov.style.display==='block' && _etOpenId) openETModal(_etOpenId); }catch(e){}
