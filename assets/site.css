@@ -135,4 +135,10 @@ html.svc-lock main.main{z-index:2147483001}
 .svc-seek:focus-visible{outline:3px solid var(--blue-light);outline-offset:2px}
 .svc-media.svc-full .svc-bar,.svc-media:fullscreen .svc-bar{left:max(22px,env(safe-area-inset-left));right:calc(max(22px,env(safe-area-inset-right)) + 174px);bottom:max(30px,env(safe-area-inset-bottom));font-size:13px}
 .svc-media.svc-full .svc-cap,.svc-media:fullscreen .svc-cap{bottom:84px}
-@media(max-width:520px){.svc-t,.svc-d{min-width:26px;font-size:10px}.svc-bar{gap:5px;right:160px}}
+@media(max-width:620px){
+ .svc-bar{position:relative;left:auto;right:auto;bottom:auto;height:36px;padding:0 12px;background:#0c1626;gap:8px}
+ .svc-t,.svc-d{min-width:30px;font-size:11px}
+ .svc-cap{display:none}
+ .svc-play,.svc-snd,.svc-fs{bottom:42px}
+ .svc-media.svc-full .svc-bar,.svc-media:fullscreen .svc-bar{position:absolute;height:20px;padding:0;background:transparent;left:max(16px,env(safe-area-inset-left));right:max(16px,env(safe-area-inset-right));bottom:calc(max(22px,env(safe-area-inset-bottom)) + 62px)}
+}
