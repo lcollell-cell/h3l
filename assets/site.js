@@ -508,12 +508,12 @@ function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').repl
 
 function renderServicios(){
   var host=document.getElementById('svc-list');if(!host)return;
-  var h='';
+  var h='',sfx=(lang==='en'||lang==='fr'||lang==='pt')?'-'+lang:'';
   S.forEach(function(s,i){
     var title=s.t[lang],tool=s.tool[lang];
     h+='<article class="svc" id="svc-'+s.id+'">'+
-      '<div class="svc-media"><video class="svc-video" muted loop playsinline preload="none" poster="media/svc-'+s.id+'.jpg" aria-label="'+esc(tr('sv_vid')+': '+tool)+'">'+
-        '<source src="media/svc-'+s.id+'.mp4" type="video/mp4"><source src="media/svc-'+s.id+'.webm" type="video/webm"></video>'+
+      '<div class="svc-media"><video class="svc-video" muted loop playsinline preload="none" poster="media/svc-'+s.id+sfx+'.jpg" aria-label="'+esc(tr('sv_vid')+': '+tool)+'">'+
+        '<source src="media/svc-'+s.id+sfx+'.mp4" type="video/mp4">'+(sfx?'':'<source src="media/svc-'+s.id+'.webm" type="video/webm">')+'</video>'+
         '<button type="button" class="svc-play" data-svc="'+s.id+'" aria-label="'+esc(tr('sv_play'))+'"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>'+
         '<button type="button" class="svc-fs" aria-label="'+esc(tr('sv_fs'))+'"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="en" d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/><path class="ex" d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/></svg></button>'+
         '<button type="button" class="svc-snd" aria-label="'+esc(tr('sv_snd'))+'"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="on" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 8v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/><path class="off" d="M3 9v6h4l5 5V4L7 9H3zm16.6 3 2.4-2.4-1.4-1.4-2.4 2.4-2.4-2.4-1.4 1.4 2.4 2.4-2.4 2.4 1.4 1.4 2.4-2.4 2.4 2.4 1.4-1.4z"/></svg></button>'+
