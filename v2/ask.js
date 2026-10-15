@@ -197,7 +197,7 @@ function renderBoard(R,animated){
   var tk=++token,i=0;(function next(){if(tk!==token)return;if(i>=steps.length){mount();return}var s=steps[i],li=line(s,false);setTimeout(function(){if(tk!==token)return;li.className='';li.innerHTML='<div class="who"><i class="st"></i>'+s.who+'</div><div>'+s.t+'<em>'+s.src+'</em></div>';i++;next()},420)})()}
 function renderBody(box,R){
   var k=H('div',{'class':'kpis'},box);R.kpis.forEach(function(x){var d=H('div',{'class':'kpi'},k);d.innerHTML='<div class="l">'+x.l+'</div><div class="v">'+x.v+(x.u?'<small>'+x.u+'</small>':'')+'</div><div class="d">'+x.d+'</div>'});
-  var bd=H('div',{'class':'board'},box),ch=H('div',{'class':'charts'},bd),aside=H('aside',{'class':'aside','aria-label':I('d.asideAria')},bd),cardEls=[];
+  var bd=H('div',{'class':'board'},box),ch=H('div',{'class':'charts'},bd),aside=H('div',{'class':'aside',role:'group','aria-label':I('d.asideAria')},bd),cardEls=[];
   R.cards.forEach(function(c,i){var card=H('article',{'class':'card'+(c.wide?' wide':'')},ch),h=H('div',{'class':'ch'},card);H('span',{'class':'badge','aria-hidden':'true'},h,String(i+1));var t=H('div',null,h);H('h3',null,t,c.title);H('p',null,t,c.sub);
     var tv=H('button',{'class':'tv',type:'button','aria-pressed':'false'},h,I('u.table')),plot=H('div',{'class':'plot'},card),tb=H('div',{'class':'tbl'},card);tb.innerHTML=tableHTML(c.table);tb.hidden=true;
     var lg=H('div',{'class':'legend'},card);lg.innerHTML=legendHTML(c.legend);

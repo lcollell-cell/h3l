@@ -63,7 +63,7 @@ button{font:inherit;color:inherit;-webkit-appearance:none;appearance:none;backgr
 .nav .links a:hover{border-bottom-color:var(--blue)}
 .nav .links a[aria-current]{border-bottom-color:var(--ink)}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 22px;border-radius:8px;font-weight:600;font-size:14px;text-decoration:none;white-space:nowrap;border:1px solid transparent;transition:background .2s}
-.btn.pri{background:var(--blue);color:#fff}.btn.pri:hover{background:#3a86e4}
+.btn.pri{background:#2468C2;color:#fff}.btn.pri:hover{background:#2C72CE}
 .btn.sec{border-color:rgba(255,255,255,.4);color:#fff}.btn.sec:hover{background:rgba(255,255,255,.1)}
 .btn.lite{background:#fff;color:var(--ink)}.btn.lite:hover{background:#eef2f8}
 .btn.ghost{border-color:var(--line);color:var(--ink)}.btn.ghost:hover{background:var(--line-2)}
@@ -351,10 +351,10 @@ main{padding:32px 0 8px}
   <div class="kpis" id="kpis" aria-live="polite"></div>
   <div class="board">
     <div class="charts" id="charts"></div>
-    <aside class="aside" data-i18n-attr="aria-label:d.asideAria" aria-label="Lectura integrada y decisión">
+    <div class="aside" role="group" data-i18n-attr="aria-label:d.asideAria" aria-label="Lectura integrada y decisión">
       <section class="read"><h3 data-i18n="d.read">Lectura integrada</h3><p class="sub" data-i18n="d.readSub">Cada número remite al gráfico del mismo número.</p><ol id="read"></ol></section>
       <section class="dec" id="dec"></section>
-    </aside>
+    </div>
   </div>
 
   <section class="agents" aria-labelledby="agt">
@@ -402,7 +402,7 @@ main{padding:32px 0 8px}
     <p data-i18n-html="d.foot2">H3L Global Energy · www.h3lglobalenergy.com · <a href="index.html">Volver al inicio</a></p>
   </div>
 </footer>
-<div id="tip" role="tooltip"></div>
+<div id="tip" role="tooltip" aria-hidden="true"></div>
 <script>
 (function(){'use strict';
 /* ====================== utilidades ====================== */
@@ -431,7 +431,7 @@ function bindTip(node,title,rows){
   node.addEventListener('pointerleave',hideTip);
   node.addEventListener('focus',function(){var r=node.getBoundingClientRect();showTip({clientX:r.left+r.width/2,clientY:r.top},title,rows)});
   node.addEventListener('blur',hideTip);
-  node.setAttribute('tabindex','0');
+  node.setAttribute('tabindex','0');node.setAttribute('role','img');
   node.setAttribute('aria-label',[title].concat(rows.map(function(r){return r.k+': '+r.v})).join('. '));
   node.setAttribute('class',(node.getAttribute('class')||'')+' mk');
 }
@@ -439,7 +439,7 @@ document.addEventListener('pointerdown',function(e){if(!e.target.closest||!e.tar
 window.addEventListener('scroll',hideTip,{passive:true});
 
 /* ====================== marcos y primitivas ====================== */
-function frame(host,h,m,label){host.textContent='';var W=Math.max(240,Math.floor(host.clientWidth||320));var svg=S('svg',{width:W,height:h,viewBox:'0 0 '+W+' '+h,role:'img','aria-label':label||''},host);return {svg:svg,W:W,H:h,m:m,iw:W-m.l-m.r,ih:h-m.t-m.b}}
+function frame(host,h,m,label){host.textContent='';var W=Math.max(240,Math.floor(host.clientWidth||320));var svg=S('svg',{width:W,height:h,viewBox:'0 0 '+W+' '+h,role:'group','aria-label':label||''},host);return {svg:svg,W:W,H:h,m:m,iw:W-m.l-m.r,ih:h-m.t-m.b}}
 /* barra horizontal: base cuadrada, extremo de datos redondeado 4px */
 function hbar(p,x,y,w,h,col,r){r=Math.min(r==null?4:r,Math.max(w,0),h/2);var e=S('path',{fill:col},p);if(w<=0.5)return e;e.setAttribute('d','M'+x+' '+y+'h'+Math.max(0,w-r)+'a'+r+' '+r+' 0 0 1 '+r+' '+r+'v'+(h-2*r)+'a'+r+' '+r+' 0 0 1 '+(-r)+' '+r+'h'+(-Math.max(0,w-r))+'z');return e}
 function hbarL(p,x,y,w,h,col,r){r=Math.min(r==null?4:r,Math.max(w,0),h/2);var e=S('path',{fill:col},p);if(w<=0.5)return e;e.setAttribute('d','M'+(x+w)+' '+y+'h'+(-Math.max(0,w-r))+'a'+r+' '+r+' 0 0 0 '+(-r)+' '+r+'v'+(h-2*r)+'a'+r+' '+r+' 0 0 0 '+r+' '+r+'h'+Math.max(0,w-r)+'z');return e}
@@ -584,7 +584,7 @@ window.VZ={$:$,H:H,S:S,fmt:fmt,sgn:sgn,reduce:reduce,barsH:barsH,waterfall:water
 <script src="lang-b345.js"></script>
 <script src="lang-ask.js"></script>
 <script src="boards.js"></script>
-<script src="ask.js" defer></script>
+<script src="ask.js?v=2" defer></script>
 <script src="chat.js?v=5" defer></script>
 </body>
 </html>
