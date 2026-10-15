@@ -7,7 +7,7 @@ Variable de entorno requerida para precios: EIA_API_KEY (gratis en https://www.e
 """
 import json, os, re, sys, urllib.request, urllib.parse
 import xml.etree.ElementTree as ET
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from email.utils import parsedate_to_datetime
 from html import unescape
 
@@ -77,7 +77,7 @@ def parse_feed(xml_text, source, limit=6):
             link = le.get('href') if le is not None else ''
         raw = t('pubDate') or t('updated') or t('published')
         try:
-            dt = parsedate_to_datetime(raw) if 'T' not in raw else datetime.fromisoformat(raw.replace('Z', '+00:00'))
+            dt = parsedate_to_datetime(raw) if not re.match(r'\d{4}-\d{2}-\d{2}', raw) else datetime.fromisoformat(raw.replace('Z', '+00:00'))
         except Exception:
             continue
         if title and link:
@@ -135,6 +135,26 @@ def fetch_source(name, url, link_re):
         items = parse_html(html_text, url, name, link_re)
     return items
 
+# Argentina: Google News RSS (público) con búsqueda sectorial; cada titular enlaza al medio original
+GN = 'https://news.google.com/rss/search?q=%s&hl=es-419&gl=AR&ceid=AR:es-419'
+AR_QUERY = '("Vaca Muerta" OR YPF OR "petróleo" OR "gas natural" OR hidrocarburos OR "oil and gas") Argentina when:3d'
+
+def update_news_ar():
+    xml_text = get(GN % urllib.parse.quote(AR_QUERY))
+    raw = parse_feed(xml_text, 'Argentina', limit=40)
+    out, seen = [], set()
+    cutoff = (datetime.now(timezone.utc) - timedelta(days=5)).date().isoformat()
+    for it in raw:
+        title, medio = it['title'], ''
+        if ' - ' in title:
+            title, medio = title.rsplit(' - ', 1)
+        title = title.strip(); medio = medio.strip()
+        key = re.sub(r'\W+', '', title.lower())[:60]
+        if len(title) < 25 or key in seen or it['date'] < cutoff or not it['url'].startswith('https://'): continue
+        seen.add(key)
+        out.append({'source': medio or 'Google News', 'title': title, 'url': it['url'], 'date': it['date'], 'region': 'AR'})
+    return out
+
 def update_news():
     allitems = []
     for name, url, link_re in SOURCES:
@@ -145,7 +165,13 @@ def update_news():
             print(name, 'falló:', e)
     allitems = [i for i in allitems if re.match(r'\d{4}-\d{2}-\d{2}$', i['date'])]
     allitems.sort(key=lambda i: i['date'], reverse=True)
-    allitems = allitems[:6]
+    allitems = allitems[:4]
+    try:
+        ar = update_news_ar(); print('Argentina :', len(ar), 'titulares')
+        allitems += ar[:6]
+    except Exception as e:
+        print('Argentina falló:', e)
+    allitems.sort(key=lambda i: i['date'], reverse=True)
     if len(allitems) < 4:
         print('Menos de 4 titulares válidos: se conservan las noticias anteriores'); return
     save('news.json', {'items': allitems,

@@ -5267,15 +5267,16 @@ function renderNews(articles){
 const NEWS_TS = {"es": "Titulares de Oil & Gas Journal e IEA · consultados el 14/10/2026", "en": "Headlines from Oil & Gas Journal and IEA · checked on 14/10/2026", "fr": "Titres d’Oil & Gas Journal et de l’AIE · consultés le 14/10/2026", "pt": "Manchetes da Oil & Gas Journal e da AIE · consultadas em 14/10/2026"};
 /* Titulares reales de IEA y Oil & Gas Journal. No se generan noticias con IA ni se inventan resúmenes. */
 let NEWS_DYN=null, NEWS_CHECKED=null;
-const NEWS_TS_PRE={es:'Titulares de IEA y Oil & Gas Journal · actualizado el ',en:'Headlines from IEA and Oil & Gas Journal · updated ',fr:'Titres de l’AIE et d’Oil & Gas Journal · mis à jour le ',pt:'Manchetes da AIE e da Oil & Gas Journal · atualizadas em '};
+const NEWS_TS_PRE={es:'Titulares de Argentina e internacionales (medios originales) · actualizado el ',en:'Argentine and international headlines (original outlets) · updated ',fr:'Titres argentins et internationaux (médias d’origine) · mis à jour le ',pt:'Manchetes argentinas e internacionais (veículos originais) · atualizadas em '};
 function fmtISO(iso){ return new Date(iso+'T12:00:00').toLocaleDateString(curLoc(),{day:'numeric',month:'long',year:'numeric'}); }
+const escH=x=>String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function dynArticles(){
   const lg=curLg(), BODY={es:'Publicado por ',en:'Published by ',fr:'Publié par ',pt:'Publicado por '}[lg]||'Publicado por ';
   return NEWS_DYN.map(it=>{
     const i=FALLBACK_NEWS.findIndex(f=>f.url===it.url);
     const title = i<0 ? it.title : (lg==='es'||!NEWS_TR[lg] ? FALLBACK_NEWS[i].title : NEWS_TR[lg][i].title);
-    const iea = it.source==='IEA';
-    return {tag: iea?'IEA':'OGJ', tagColor: iea?'var(--success)':'var(--info)', date: fmtISO(it.date), title, body: BODY+it.source+'.', source: it.source, url: it.url};
+    const iea = it.source==='IEA', ar = it.region==='AR';
+    return {tag: ar?'ARGENTINA':(iea?'IEA':'OGJ'), tagColor: ar?'var(--warning, #d9a441)':(iea?'var(--success)':'var(--info)'), date: fmtISO(it.date), title: escH(title), body: BODY+escH(it.source)+'.', source: escH(it.source), url: escH(it.url)};
   });
 }
 function setNewsTs(){
