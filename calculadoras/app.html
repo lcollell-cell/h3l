@@ -2274,6 +2274,236 @@ html[data-embed] .shell{padding-block-start:0}
     return { errores: [], avisos: av, op: op, alt: alt, motivos: why, info: MV_OPC, ficha: MV_OPC[op] };
   };
 
+  /* =====================================================
+     57–59. GEOQUÍMICA
+     ===================================================== */
+  function nz(x) { return isFinite(x) ? x : 0; }
+
+  /* 57. Transformación del querógeno, hidrocarburo generado y expulsado (balance de masa)
+     TR = 1 − [HI·(1200 − HIo·(1 − PIo))] / [HIo·(1200 − HI·(1 − PI))]  (Jarvie et al., 2007) */
+  C.generacion = function (p) {
+    var err = [], av = [];
+    var toc = num(p.toc), hi = num(p.hi), pi = isFinite(num(p.pi)) ? num(p.pi) : 0.1, hio = num(p.hio), pio = isFinite(num(p.pio)) ? num(p.pio) : 0.02;
+    var tocO = num(p.tocO), h = num(p.h), rho = num(p.rho), A = num(p.area), ee = isFinite(num(p.ee)) ? num(p.ee) : 0.5, rhoO = isFinite(num(p.rhoO)) ? num(p.rhoO) : 850;
+    if (!(toc > 0)) err.push('Ingresá el COT actual (mayor que 0).');
+    if (!isFinite(tocO)) { tocO = toc; av.push('Sin COT original: se usa el COT actual, lo que subestima el hidrocarburo generado en rocas maduras (el COT original es mayor).'); }
+    if (isFinite(toc) && tocO < toc) err.push('El COT original no puede ser menor que el actual.');
+    if (!(hio > 0 && hio < 1200)) err.push('El HI original debe estar entre 0 y 1200 mg HC/g COT.');
+    if (!(hi >= 0)) err.push('Ingresá el HI actual (0 o más).');
+    else if (hio > 0 && hi > hio) err.push('El HI actual no puede superar el HI original: no hay transformación; revisá el HI original.');
+    if (!(pi >= 0 && pi < 1) || !(pio >= 0 && pio < 1)) err.push('Los índices de producción (PI) deben estar entre 0 y 1 (sin incluir 1).');
+    if (!(h > 0)) err.push('El espesor de roca madre debe ser mayor que 0.');
+    if (!(rho > 0)) err.push('La densidad de la roca debe ser mayor que 0.');
+    if (!(A > 0)) err.push('El área de cocina debe ser mayor que 0.');
+    if (!(ee >= 0 && ee <= 1)) err.push('La eficiencia de expulsión debe ser una fracción entre 0 y 1.');
+    if (!(rhoO > 0)) err.push('La densidad del petróleo debe ser mayor que 0.');
+    if (err.length) return { errores: err };
+    var tr = 1 - (hi * (1200 - hio * (1 - pio))) / (hio * (1200 - hi * (1 - pi)));
+    if (tr < 0) { av.push('La relación de transformación resulta negativa con estos PI: se toma 0.'); tr = 0; }
+    if (tr > 1) tr = 1;
+    var s2o = hio * tocO / 100, gen = tr * s2o, kgm2 = gen * rho * h, kg = kgm2 * A * 1e6, m3 = kg / rhoO, mmbbl = m3 * 6.2898 / 1e6;
+    var clase = tr < 0.1 ? 'poco transformado' : tr < 0.5 ? 'generación activa' : tr < 0.9 ? 'generación avanzada' : 'querógeno casi agotado';
+    av.push('Es un balance de masa de primer orden: el HI original y el COT original se asumen (o se estiman de muestras inmaduras equivalentes). La expulsión efectiva depende de la saturación de retención, y la cantidad migrada acumulada puede ser mucho menor.');
+    return { errores: [], avisos: av, tr: tr, clase: clase, s2o: s2o, gen: gen, kgm2: kgm2, mt: kg / 1e9, mmbbl: mmbbl, mmbblExp: mmbbl * ee, ee: ee, tocO: tocO, kgExp: kgm2 * ee };
+  };
+
+  /* 58. Biomarcadores: relaciones de ambiente y madurez */
+  C.biomarcadores = function (p) {
+    var err = [], av = [], filas = [];
+    var pr = num(p.pr), ph = num(p.ph), ts = num(p.ts), tm = num(p.tm), s20 = num(p.s20), r20 = num(p.r20), bb = num(p.bb), aa = num(p.aa), c27 = num(p.c27), c28 = num(p.c28), c29 = num(p.c29);
+    if (isFinite(pr) && isFinite(ph)) {
+      if (!(pr >= 0 && ph > 0)) err.push('Pristano debe ser 0 o más y fitano mayor que 0.');
+      else { var v = pr / ph; filas.push({ n: 'Pr/Ph', v: v, tipo: 'ambiente', t: v < 0.8 ? 'Ambiente anóxico o hipersalino (típico de carbonatos y evaporitas)' : v <= 3 ? 'Condiciones intermedias (marino con aporte mixto)' : 'Ambiente oxidante con aporte terrestre (querógeno tipo III)' }); }
+    }
+    if (isFinite(ts) && isFinite(tm)) {
+      if (!(ts >= 0 && tm >= 0 && ts + tm > 0)) err.push('Ts y Tm deben ser 0 o más y sumar más que 0.');
+      else filas.push({ n: 'Ts/(Ts + Tm)', v: ts / (ts + tm), tipo: 'madurez', t: 'Aumenta con la madurez, pero también depende de la litología y la facies: usalo para comparar muestras del mismo sistema, no como valor absoluto.' });
+    }
+    if (isFinite(s20) && isFinite(r20)) {
+      if (!(s20 >= 0 && r20 >= 0 && s20 + r20 > 0)) err.push('20S y 20R deben ser 0 o más y sumar más que 0.');
+      else { var q = s20 / (s20 + r20); filas.push({ n: 'Esteranos C29 20S/(20S + 20R)', v: q, tipo: 'madurez', t: q < 0.2 ? 'Inmaduro' : q < 0.5 ? 'Madurez en progreso (temprana a media)' : 'Cerca del equilibrio (0,52–0,55): al menos inicio de la ventana de petróleo; no distingue madurez mayor' }); }
+    }
+    if (isFinite(bb) && isFinite(aa)) {
+      if (!(bb >= 0 && aa >= 0 && bb + aa > 0)) err.push('ββ y αα deben ser 0 o más y sumar más que 0.');
+      else { var q2 = bb / (bb + aa); filas.push({ n: 'Esteranos C29 ββ/(ββ + αα)', v: q2, tipo: 'madurez', t: q2 < 0.3 ? 'Inmaduro' : q2 < 0.65 ? 'Madurez en progreso' : 'Cerca del equilibrio (≈ 0,67–0,71): madurez de la ventana de petróleo o mayor' }); }
+    }
+    if (isFinite(c27) && isFinite(c28) && isFinite(c29)) {
+      var s = c27 + c28 + c29;
+      if (!(c27 >= 0 && c28 >= 0 && c29 >= 0 && s > 0)) err.push('Los esteranos C27, C28 y C29 deben ser 0 o más y sumar más que 0.');
+      else {
+        var p27 = c27 / s * 100, p28 = c28 / s * 100, p29 = c29 / s * 100;
+        var dom = p27 >= 45 && p27 > p29 ? 'Dominio de C27: aporte de fitoplancton marino' : p29 >= 45 && p29 > p27 ? 'Dominio de C29: aporte de plantas superiores (o algas verdes)' : 'Aporte mixto';
+        filas.push({ n: 'Esteranos C27 / C28 / C29 (%)', v: null, txt: p27.toFixed(0) + ' / ' + p28.toFixed(0) + ' / ' + p29.toFixed(0), tipo: 'fuente', t: dom, p27: p27, p28: p28, p29: p29 });
+      }
+    }
+    if (!filas.length && !err.length) err.push('Cargá al menos un grupo de datos completo (por ejemplo, pristano y fitano).');
+    if (err.length) return { errores: err };
+    var mad = filas.filter(function (f) { return f.tipo === 'madurez' && f.v != null && f.n.indexOf('Ts') < 0; });
+    var sint = mad.length ? (mad.every(function (f) { return f.v >= 0.5; }) ? 'Los indicadores de esteranos llegaron al equilibrio: madurez de al menos inicio de la ventana de petróleo.' : mad.every(function (f) { return f.v < 0.3; }) ? 'Los indicadores de esteranos indican material inmaduro.' : 'Los indicadores de esteranos indican madurez en progreso.') : '';
+    av.push('Los límites son referencias usuales (Peters, Walters y Moldowan, The Biomarker Guide): se calibran con Ro y Tmax de la misma cuenca. Los valores de equilibrio de los esteranos se saturan en la ventana de petróleo y no sirven para madureces mayores.');
+    return { errores: [], avisos: av, filas: filas, sintesis: sint };
+  };
+
+  /* 59. Geoquímica del gas: humedad, parámetro de Bernard e isótopos de carbono */
+  C.gasGeoq = function (p) {
+    var err = [], av = [];
+    var c1 = num(p.c1), c2 = nz(num(p.c2)), c3 = nz(num(p.c3)), ic4 = nz(num(p.ic4)), nc4 = nz(num(p.nc4)), ic5 = nz(num(p.ic5)), nc5 = nz(num(p.nc5)), d1 = num(p.d1), d2 = num(p.d2);
+    if (!(c1 > 0)) err.push('Ingresá el metano (C1) en % molar (mayor que 0).');
+    if ([c2, c3, ic4, nc4, ic5, nc5].some(function (x) { return x < 0; })) err.push('Las concentraciones no pueden ser negativas.');
+    if (err.length) return { errores: err };
+    var tot = c1 + c2 + c3 + ic4 + nc4 + ic5 + nc5, wet = (tot - c1) / tot * 100, den = c2 + c3, bern = den > 0 ? c1 / den : Infinity;
+    var humedad = wet < 5 ? 'Gas seco' : wet < 15 ? 'Gas húmedo' : 'Gas muy húmedo (asociado a líquidos o condensado)';
+    var bg = bern > 1000 ? 'Biogénico probable' : bern < 100 ? 'Termogénico' : 'Mezcla o ambiguo';
+    var res = { errores: [], avisos: av, wet: wet, humedad: humedad, bern: bern, bernClase: bg, ratioC4: nc4 > 0 ? ic4 / nc4 : NaN, c2c3: c3 > 0 ? c2 / c3 : NaN, tot: tot };
+    if (isFinite(d1)) {
+      res.d1 = d1; res.isoClase = d1 < -60 ? 'Microbiano (biogénico)' : d1 <= -50 ? 'Mezcla o termogénico temprano' : 'Termogénico';
+      if (d1 > -50) { res.roSap = Math.pow(10, (d1 + 42) / 17); res.roHum = Math.pow(10, (d1 + 28) / 8.1); }
+      else av.push('Con δ¹³C₁ por debajo de −50 ‰ la relación con Ro no aplica (gas biogénico o mezcla).');
+    }
+    if (isFinite(d1) && isFinite(d2)) { res.d2 = d2; res.inversion = d1 > d2; if (d1 > d2) av.push('Inversión isotópica (δ¹³C₁ > δ¹³C₂): suele indicar sobremadurez, mezcla de gases o procesos secundarios; la interpretación de madurez se complica.'); }
+    if (res.isoClase && ((bern > 1000 && d1 >= -50) || (bern < 100 && d1 < -60))) av.push('El parámetro de Bernard y el isótopo apuntan a orígenes distintos: puede haber mezcla o alteración (biodegradación, migración, oxidación).');
+    av.push('Los límites son aproximados (Bernard, 1978; Schoell, 1983; Whiticar, 1999) y las rectas δ¹³C₁–Ro (Stahl, 1977) dependen de la cuenca: calibralas con datos locales.');
+    return res;
+  };
+
+  /* =====================================================
+     60–64. INTERPRETACIÓN SÍSMICA
+     ===================================================== */
+  function ricker(t, f) { var a = Math.pow(Math.PI * f * t, 2); return (1 - 2 * a) * Math.exp(-a); }
+  C._util.ricker = ricker;
+
+  /* 60. Resolución sísmica y espesor de sintonía */
+  C.resolucionSismica = function (p) {
+    var err = [], av = [];
+    var v = num(p.v), f = num(p.f), vm = isFinite(num(p.vm)) ? num(p.vm) : v, twt = num(p.twt), h = num(p.h);
+    if (!(v > 0)) err.push('Ingresá la velocidad intervalar del objetivo (mayor que 0).');
+    if (!(f > 0)) err.push('Ingresá la frecuencia dominante (mayor que 0).');
+    if (!(vm > 0)) err.push('La velocidad media debe ser mayor que 0.');
+    if (err.length) return { errores: err };
+    var lam = v / f, res = { errores: [], avisos: av, lam: lam, cuarto: lam / 4, octavo: lam / 8, deteccion: lam / 30, v: v, f: f };
+    // Cuña con ondícula de Ricker: dos reflectores de igual magnitud y signo opuesto
+    var curva = [], best = { h: 0, a: 0 }, dtS = 1 / (f * 400), N = 60;
+    for (var i = 1; i <= N; i++) {
+      var hh = i * 1.5 * lam / N, dtau = 2 * hh / v, mx = 0, k0 = Math.floor(-0.12 / dtS), k1 = Math.ceil((dtau + 0.12 / 1) / dtS);
+      for (var k = k0; k <= k1; k++) { var tt = k * dtS, aa = Math.abs(ricker(tt, f) - ricker(tt - dtau, f)); if (aa > mx) mx = aa; }
+      curva.push([hh, mx]); if (mx > best.a) best = { h: hh, a: mx };
+    }
+    res.curva = curva; res.tuning = best.h; res.tuningAmp = best.a;
+    if (isFinite(twt) && twt > 0) { res.fresnel = vm / 2 * Math.sqrt(twt / 1000 / f); res.twt = twt; res.vm = vm; res.profundidad = vm * twt / 2000; }
+    if (isFinite(h) && h > 0) {
+      res.h = h;
+      res.clase = h >= lam / 4 ? 'Resoluble: tope y base se distinguen' : h >= lam / 8 ? 'Zona de sintonía: tope y base interfieren y no se separan; la amplitud es la de la interferencia' : h >= lam / 30 ? 'Bajo el límite de resolución: la amplitud es proporcional al espesor (no hay dos eventos); espesor estimable solo con calibración' : 'Bajo el límite de detección: no se espera ver la capa';
+    }
+    av.push('La longitud de onda se calcula con la frecuencia dominante en el objetivo, que baja con la profundidad por atenuación. Los límites λ/4, λ/8 y λ/30 son criterios clásicos; el espesor de sintonía de la curva se calcula con una ondícula de Ricker y reflectores de igual magnitud y signo opuesto, sin ruido ni dispersión.');
+    return res;
+  };
+
+  /* 61. Impedancia, reflectividad y AVO (Shuey de tres términos, Aki–Richards) */
+  C.avo = function (p) {
+    var err = [], av = [];
+    var a1 = { vp: num(p.vp1), vs: num(p.vs1), r: num(p.r1) }, a2 = { vp: num(p.vp2), vs: num(p.vs2), r: num(p.r2) }, am = isFinite(num(p.angmax)) ? num(p.angmax) : 40;
+    [a1, a2].forEach(function (a, i) { if (!(a.vp > 0 && a.vs > 0 && a.r > 0)) err.push('Capa ' + (i + 1) + ': Vp, Vs y densidad deben ser mayores que 0.'); else if (a.vs >= a.vp / Math.sqrt(4 / 3)) err.push('Capa ' + (i + 1) + ': Vs es demasiado alta para esa Vp (Vp/Vs debe superar 1,155).'); });
+    if (!(am > 0 && am <= 60)) err.push('El ángulo máximo debe estar entre 0 y 60 grados.');
+    if (err.length) return { errores: err };
+    var vp = (a1.vp + a2.vp) / 2, vs = (a1.vs + a2.vs) / 2, r = (a1.r + a2.r) / 2, dvp = a2.vp - a1.vp, dvs = a2.vs - a1.vs, dr = a2.r - a1.r;
+    var A = 0.5 * (dvp / vp + dr / r), B = 0.5 * dvp / vp - 2 * Math.pow(vs / vp, 2) * (dr / r + 2 * dvs / vs), Cc = 0.5 * dvp / vp;
+    var z1 = a1.vp * a1.r, z2 = a2.vp * a2.r, r0 = (z2 - z1) / (z2 + z1), curva = [];
+    for (var th = 0; th <= am + 1e-9; th += 1) { var rad = th * Math.PI / 180, s2 = Math.pow(Math.sin(rad), 2), t2 = Math.pow(Math.tan(rad), 2); curva.push([th, A + B * s2 + Cc * (t2 - s2)]); }
+    var clase = A > 0.03 ? (B < 0 ? 'I' : 'Ninguna clase estándar (aumenta con el ángulo)') : A >= -0.03 ? 'II' : (B < 0 ? 'III' : 'IV');
+    var texto = { I: 'Clase I: impedancia alta, amplitud positiva que decrece con el ángulo (por ejemplo, arenas compactas bajo lutitas).', II: 'Clase II: impedancia casi igual; la amplitud en offset cero es débil y puede cambiar de polaridad.', III: 'Clase III: impedancia baja, amplitud negativa que aumenta con el ángulo (típica de arenas con gas poco compactadas).', IV: 'Clase IV: impedancia baja con amplitud negativa que disminuye con el ángulo (arenas con gas bajo lutitas rápidas o silíceas).' }[clase] || 'Combinación atípica de intercepto y gradiente positivos: revisá los datos.';
+    if (am > 30) av.push('Sobre 30–35° la aproximación pierde exactitud y puede fallar cerca del ángulo crítico: contrastá con Zoeppritz completo.');
+    if (Math.abs(dvp / vp) > 0.3 || Math.abs(dr / r) > 0.3) av.push('Contrastes elásticos grandes (más de 30 %): las aproximaciones de contraste débil subestiman o sobreestiman la reflectividad.');
+    av.push('Convención: la reflectividad positiva es un aumento de impedancia hacia abajo. Los límites de clase (|A| ≤ 0,03 para la Clase II) son orientativos.');
+    return { errores: [], avisos: av, z1: z1, z2: z2, r0: r0, A: A, B: B, Cc: Cc, curva: curva, clase: clase, texto: texto, vpvs1: a1.vp / a1.vs, vpvs2: a2.vp / a2.vs, nu1: (Math.pow(a1.vp / a1.vs, 2) - 2) / (2 * (Math.pow(a1.vp / a1.vs, 2) - 1)), nu2: (Math.pow(a2.vp / a2.vs, 2) - 2) / (2 * (Math.pow(a2.vp / a2.vs, 2) - 1)) };
+  };
+
+  /* 62. Sustitución de fluidos de Gassmann */
+  C.gassmann = function (p) {
+    var err = [], av = [];
+    var vp = num(p.vp), vs = num(p.vs), rho = num(p.rho), phi = num(p.phi), km = num(p.km);
+    var K = [num(p.kw), num(p.ko), num(p.kg)], R = [num(p.rw), num(p.ro), num(p.rg)];
+    var s1 = [num(p.sw1), nz(num(p.so1)), nz(num(p.sg1))], s2 = [num(p.sw2), nz(num(p.so2)), nz(num(p.sg2))];
+    if (!(vp > 0 && vs > 0 && rho > 0)) err.push('Ingresá Vp, Vs y densidad de la roca (mayores que 0).');
+    else if (vs >= vp / Math.sqrt(4 / 3)) err.push('Vs es demasiado alta para esa Vp (Vp/Vs debe superar 1,155).');
+    if (!(phi > 0 && phi < 0.6)) err.push('La porosidad debe ser una fracción entre 0 y 0,6.');
+    if (!(km > 0)) err.push('El módulo del mineral debe ser mayor que 0.');
+    if (K.some(function (x) { return !(x > 0); }) || R.some(function (x) { return !(x > 0); })) err.push('Los módulos y densidades de los fluidos deben ser mayores que 0.');
+    [s1, s2].forEach(function (s, i) { if (!isFinite(s[0]) || Math.abs(s[0] + s[1] + s[2] - 1) > 0.01 || s.some(function (x) { return x < 0; })) err.push('Las saturaciones ' + (i ? 'finales' : 'iniciales') + ' deben ser 0 o más y sumar 1.'); });
+    if (err.length) return { errores: err };
+    function fl(s) { var inv = 0, d = 0; for (var i = 0; i < 3; i++) { inv += s[i] / K[i]; d += s[i] * R[i]; } return { K: 1 / inv, rho: d }; }
+    var f1 = fl(s1), f2 = fl(s2), rhoB = rho * 1000, mu = rhoB * vs * vs, kSat1 = (rhoB * vp * vp - 4 / 3 * mu) / 1e9;
+    var kDry = (kSat1 * (phi * km / f1.K + 1 - phi) - km) / (phi * km / f1.K + kSat1 / km - 1 - phi);
+    if (!(kDry > 0) || !(kDry < km) || !(kDry < kSat1)) return { errores: ['Datos inconsistentes: el módulo de la roca seca no es físico. Revisá la porosidad, el mineral, el fluido inicial o las velocidades.'] };
+    var kSat2 = kDry + Math.pow(1 - kDry / km, 2) / (phi / f2.K + (1 - phi) / km - kDry / (km * km));
+    var rho2 = rho + phi * (f2.rho - f1.rho), vp2 = Math.sqrt((kSat2 * 1e9 + 4 / 3 * mu) / (rho2 * 1000)), vs2 = Math.sqrt(mu / (rho2 * 1000));
+    if (kDry / km > 0.9) av.push('La roca seca resulta casi tan rígida como el mineral: la sustitución casi no cambia Vp. Revisá los datos.');
+    av.push('Gassmann supone roca isótropa, homogénea, poros conectados, equilibrio de presión de poro (frecuencias sísmicas) y mineral único. La mezcla de fluidos usa la ley de Wood (mezcla uniforme); con saturación parchada el resultado cambia.');
+    return { errores: [], avisos: av, kDry: kDry, kSat1: kSat1, kSat2: kSat2, mu: mu / 1e9, kf1: f1.K, kf2: f2.K, rf1: f1.rho, rf2: f2.rho, rho1: rho, rho2: rho2, vp1: vp, vs1: vs, vp2: vp2, vs2: vs2, z1: vp * rho, z2: vp2 * rho2, vpvs1: vp / vs, vpvs2: vp2 / vs2 };
+  };
+
+  /* 63. Sismograma sintético 1D con ondícula de Ricker (reflectividad de incidencia normal, solo primarias) */
+  C.sismograma = function (p) {
+    var err = [], av = [];
+    var capas = rows(p.filas).map(function (r) { return { h: num(r.h), v: num(r.v), rho: num(r.rho) }; });
+    var f = num(p.f), dt = num(p.dt), pol = p.pol === 'rev' ? -1 : 1;
+    if (capas.length < 2) err.push('Cargá al menos 2 capas (la última es el semiespacio inferior).');
+    capas.forEach(function (c, i) { if (!(c.v > 0 && c.rho > 0)) err.push('Capa ' + (i + 1) + ': velocidad y densidad deben ser mayores que 0.'); if (i < capas.length - 1 && !(c.h > 0)) err.push('Capa ' + (i + 1) + ': el espesor debe ser mayor que 0.'); });
+    if (!(f >= 5 && f <= 150)) err.push('La frecuencia debe estar entre 5 y 150 Hz.');
+    if (!(dt >= 0.25 && dt <= 4)) err.push('El muestreo debe estar entre 0,25 y 4 ms.');
+    if (err.length) return { errores: err };
+    var t = 0, z = 0, ints = [], i;
+    for (i = 0; i < capas.length - 1; i++) {
+      t += 2 * capas[i].h / capas[i].v * 1000; z += capas[i].h;
+      var z1 = capas[i].v * capas[i].rho, z2 = capas[i + 1].v * capas[i + 1].rho;
+      ints.push({ n: i + 1, z: z, t: t, z1: z1, z2: z2, r: (z2 - z1) / (z2 + z1) });
+    }
+    var half = Math.ceil(1500 / f / dt), n = Math.ceil(t / dt) + 2 * half + 1;
+    if (n > 8000) return { errores: ['La traza resultante tiene demasiadas muestras: aumentá el muestreo o reducí el espesor total.'] };
+    var refl = new Array(n).fill(0), trace = new Array(n).fill(0);
+    ints.forEach(function (x) { refl[Math.round(x.t / dt) + half] += x.r; });
+    var w = []; for (i = -half; i <= half; i++) w.push(ricker(i * dt / 1000, f));
+    for (var k = 0; k < n; k++) { if (refl[k] === 0) continue; for (var j = -half; j <= half; j++) { var idx = k + j; if (idx >= 0 && idx < n) trace[idx] += pol * refl[k] * w[j + half]; } }
+    var pts = [], amax = 0;
+    for (k = 0; k < n; k++) { var tm = (k - half) * dt; if (tm >= 0) { pts.push([trace[k], tm]); } if (Math.abs(trace[k]) > amax) amax = Math.abs(trace[k]); }
+    av.push('Modelo de incidencia normal con reflexiones primarias: no incluye múltiples, pérdidas de transmisión, atenuación ni dispersión. Para amarrar con sísmica real hace falta la ondícula estimada de los datos y el registro sónico y de densidad calibrado con el tiro de verificación.');
+    return { errores: [], avisos: av, ints: ints, pts: pts, tmax: t, amax: amax, half: half, dt: dt, f: f, pol: pol };
+  };
+
+  /* 64. Volumen bruto de roca (GRV) de una trampa desde áreas de contornos en profundidad */
+  C.grv = function (p) {
+    var err = [], av = [];
+    var f = rows(p.filas).map(function (r) { return { z: num(r.z), a: num(r.a) }; }).filter(function (r) { return isFinite(r.z) && isFinite(r.a); }).sort(function (a, b) { return a.z - b.z; });
+    var met = p.metodo === 'trap' || p.metodo === 'piram' ? p.metodo : 'comb';
+    if (f.length < 2) err.push('Cargá al menos 2 contornos (profundidad y área).');
+    for (var i = 0; i < f.length; i++) {
+      if (f[i].a < 0) err.push('Las áreas no pueden ser negativas.');
+      if (i > 0 && !(f[i].z > f[i - 1].z)) err.push('Las profundidades de los contornos deben ser distintas.');
+      if (i > 0 && f[i].a < f[i - 1].a) err.push('El área debe crecer o mantenerse con la profundidad (contornos cada vez más grandes).');
+    }
+    if (err.length) return { errores: err };
+    var z0 = f[0].z, zl = f[f.length - 1].z, zc = isFinite(num(p.zc)) ? num(p.zc) : zl;
+    if (!(zc > z0 && zc <= zl)) return { errores: ['El contacto debe estar por debajo de la cresta y no más profundo que el último contorno (' + z0 + ' a ' + zl + ' m).'] };
+    function vol(a1, a2, h) {
+      var m = met;
+      if (m === 'comb') m = (a2 > 0 && a1 / a2 <= 0.5) ? 'piram' : 'trap';
+      return m === 'piram' ? h / 3 * (a1 + a2 + Math.sqrt(a1 * a2)) : h / 2 * (a1 + a2);
+    }
+    var tabla = [], acum = 0, grv = 0, aCont = f[0].a, hecho = false;
+    for (i = 1; i < f.length; i++) {
+      var s = vol(f[i - 1].a, f[i].a, f[i].z - f[i - 1].z); acum += s;
+      tabla.push({ z: f[i].z, a: f[i].a, slice: s, acum: acum });
+      if (!hecho && zc <= f[i].z) {
+        var a2e = f[i - 1].a + (f[i].a - f[i - 1].a) * (zc - f[i - 1].z) / (f[i].z - f[i - 1].z);
+        grv = (acum - s) + vol(f[i - 1].a, a2e, zc - f[i - 1].z); aCont = a2e; hecho = true;
+      }
+    }
+    var curva = [[0, z0]].concat(tabla.map(function (r) { return [r.acum, r.z]; }));
+    if (f[0].a > 0) av.push('El primer contorno tiene área mayor que 0: no se cuenta el volumen sobre él. Agregá la cresta como primer punto con área 0.');
+    if (met === 'comb') av.push('Regla combinada: pirámide si el cociente de áreas consecutivas es 0,5 o menos y trapecio si es mayor.');
+    av.push('El volumen de la cresta a un contacto depende de la calidad del mapa en profundidad y de la conversión tiempo-profundidad: la incertidumbre de la profundidad de la cresta y del cierre suele dominar sobre el método de integración. Áreas intermedias por interpolación lineal.');
+    return { errores: [], avisos: av, grv: grv, mmbbl: grv * 1e6 * 6.2898 / 1e6, cierre: zc - z0, aCont: aCont, zc: zc, z0: z0, zl: zl, llenado: (zc - z0) / (zl - z0), tabla: tabla, curva: curva, metodo: met, total: acum };
+  };
+
   root.H3LCalc = C;
   if (typeof module !== 'undefined' && module.exports) module.exports = C;
 })(typeof globalThis !== 'undefined' ? globalThis : this);
@@ -2810,6 +3040,109 @@ html[data-embed] .shell{padding-block-start:0}
     cond('Opción: no aislable con ahorro < 10 % → D', op({ aisla: 'no', fraccion: 5 }).op === 'D');
     cond('Opción: no aislable con ahorro ≥ 10 % → C', op({ aisla: 'no', cambios: 'muchos' }).op === 'C');
     cond('Opción: medidor general sin porcentaje válido → error', op({ fraccion: 0 }).errores.length > 0);
+    // ===== Geoquímica =====
+    var gn = { toc: 3, tocO: 4, hi: 300, hio: 600, pi: 0.1, pio: 0.05, h: 50, rho: 2.5, area: 100, ee: 0.5, rhoO: 850 };
+    r = C.generacion(gn);
+    cerca('Generación: TR = 1 − 300·630/(600·930)', r.tr, 0.66129032, 1e-7);
+    cerca('Generación: S2 original = HIo·COTo/100', r.s2o, 24, 1e-9);
+    cerca('Generación: hidrocarburo generado (mg/g roca)', r.gen, 15.8709677, 1e-6);
+    cerca('Generación: masa por área (kg/m²)', r.kgm2, 1983.87097, 1e-4);
+    cerca('Generación: masa total (Mt)', r.mt, 198.387097, 1e-4);
+    cerca('Generación: volumen generado (MMbbl)', r.mmbbl, 1468.01784, 1e-3);
+    cerca('Generación: volumen expulsado con 50 %', r.mmbblExp, 734.00892, 1e-3);
+    cerca('Generación: sin transformación (HI = HIo, PI = PIo) → TR = 0', C.generacion(Object.assign({}, gn, { hi: 600, pi: 0.05 })).tr, 0, 1e-12);
+    cerca('Generación: HI = 0 → TR = 1', C.generacion(Object.assign({}, gn, { hi: 0 })).tr, 1, 1e-12);
+    cond('Generación: HI actual mayor que HI original → error', C.generacion(Object.assign({}, gn, { hi: 700 })).errores.length > 0);
+    cond('Generación: COT original menor que el actual → error', C.generacion(Object.assign({}, gn, { tocO: 2 })).errores.length > 0);
+    r = C.biomarcadores({ pr: 2, ph: 1, ts: 40, tm: 60, s20: 45, r20: 55, bb: 60, aa: 40, c27: 20, c28: 25, c29: 55 });
+    cerca('Biomarcadores: Pr/Ph = 2', r.filas[0].v, 2, 1e-12);
+    cond('Biomarcadores: Pr/Ph = 2 es condición intermedia', r.filas[0].t.indexOf('intermedias') >= 0);
+    cerca('Biomarcadores: Ts/(Ts + Tm)', r.filas[1].v, 0.4, 1e-12);
+    cerca('Biomarcadores: 20S/(20S + 20R)', r.filas[2].v, 0.45, 1e-12);
+    cond('Biomarcadores: 0,45 es madurez en progreso', r.filas[2].t.indexOf('en progreso') >= 0);
+    cerca('Biomarcadores: ββ/(ββ + αα)', r.filas[3].v, 0.6, 1e-12);
+    cond('Biomarcadores: C29 de 55 % → plantas superiores', r.filas[4].t.indexOf('plantas superiores') >= 0);
+    cond('Biomarcadores: Pr/Ph = 0,5 → anóxico', C.biomarcadores({ pr: 1, ph: 2 }).filas[0].t.indexOf('anóxico') >= 0);
+    cond('Biomarcadores: Pr/Ph = 4 → terrestre oxidante', C.biomarcadores({ pr: 4, ph: 1 }).filas[0].t.indexOf('terrestre') >= 0);
+    cond('Biomarcadores: sin datos → error', C.biomarcadores({}).errores.length > 0);
+    var gs = { c1: 90, c2: 6, c3: 2, ic4: 0.5, nc4: 1, ic5: 0.2, nc5: 0.3, d1: -45, d2: -30 };
+    r = C.gasGeoq(gs);
+    cerca('Gas: humedad = (C2 a C5)/(C1 a C5)', r.wet, 10, 1e-9);
+    cond('Gas: 10 % de humedad es gas húmedo', r.humedad === 'Gas húmedo');
+    cerca('Gas: Bernard C1/(C2 + C3) = 90/8', r.bern, 11.25, 1e-12);
+    cond('Gas: Bernard bajo es termogénico', r.bernClase === 'Termogénico');
+    cerca('Gas: Ro sapropélico = 10^((δ + 42)/17)', r.roSap, 0.66608463, 1e-7);
+    cond('Gas: δ13C1 = −45 es termogénico', r.isoClase === 'Termogénico');
+    cond('Gas: sin inversión isotópica con δ1 < δ2', r.inversion === false);
+    cond('Gas: inversión isotópica con δ1 > δ2', C.gasGeoq(Object.assign({}, gs, { d2: -50 })).inversion === true);
+    cond('Gas: δ13C1 = −70 es microbiano', C.gasGeoq(Object.assign({}, gs, { d1: -70 })).isoClase.indexOf('Microbiano') >= 0);
+    cond('Gas: solo metano da Bernard infinito y gas seco', C.gasGeoq({ c1: 98 }).humedad === 'Gas seco' && C.gasGeoq({ c1: 98 }).bern === Infinity);
+    cond('Gas: sin metano → error', C.gasGeoq({ c1: 0 }).errores.length > 0);
+    // ===== Interpretación sísmica =====
+    r = C.resolucionSismica({ v: 3000, f: 30, twt: 2000, h: 10 });
+    cerca('Resolución: λ = v/f', r.lam, 100, 1e-9);
+    cerca('Resolución: λ/4', r.cuarto, 25, 1e-9);
+    cerca('Resolución: λ/8 (Widess)', r.octavo, 12.5, 1e-9);
+    cerca('Resolución: zona de Fresnel = (v/2)·√(t/f)', r.fresnel, 387.29833, 1e-4);
+    cerca('Resolución: profundidad al objetivo', r.profundidad, 3000, 1e-9);
+    cond('Resolución: espesor de sintonía de Ricker entre 0,15 y 0,25 λ', r.tuning > 15 && r.tuning < 25, 'sintonía = ' + r.tuning.toFixed(1) + ' m');
+    cond('Resolución: la amplitud de sintonía supera la de un reflector aislado', r.tuningAmp > 1.3 && r.tuningAmp < 1.55, 'amplitud = ' + r.tuningAmp.toFixed(3));
+    cond('Resolución: capa gruesa → amplitud tiende a 1', Math.abs(r.curva[r.curva.length - 1][1] - 1) < 0.02);
+    cond('Resolución: 10 m con λ = 100 m queda bajo la resolución', r.clase.indexOf('proporcional') >= 0);
+    cond('Resolución: 40 m con λ = 100 m es resoluble', C.resolucionSismica({ v: 3000, f: 30, h: 40 }).clase.indexOf('Resoluble') >= 0);
+    cond('Resolución: sin frecuencia → error', C.resolucionSismica({ v: 3000 }).errores.length > 0);
+    var shale = { vp1: 2700, vs1: 1300, r1: 2.4 };
+    r = C.avo(Object.assign({}, shale, { vp2: 2200, vs2: 1400, r2: 2.1 }));
+    cerca('AVO gas: intercepto A', r.A, -0.1687075, 1e-6);
+    cerca('AVO gas: gradiente B', r.B, -0.1110371, 1e-6);
+    cerca('AVO gas: reflectividad normal exacta (Z2 − Z1)/(Z2 + Z1)', r.r0, -0.1675676, 1e-6);
+    cond('AVO gas: Clase III', r.clase === 'III');
+    cerca('AVO: la curva a 0° es el intercepto', r.curva[0][1], r.A, 1e-12);
+    cond('AVO: la amplitud negativa crece con el ángulo en Clase III', r.curva[30][1] < r.curva[0][1]);
+    cond('AVO arena dura: Clase I', C.avo(Object.assign({}, shale, { vp2: 4000, vs2: 2300, r2: 2.55 })).clase === 'I');
+    cond('AVO impedancia similar: Clase II', C.avo(Object.assign({}, shale, { vp2: 2750, vs2: 1650, r2: 2.28 })).clase === 'II');
+    cond('AVO: Clase IV con gradiente positivo', C.avo({ vp1: 3200, vs1: 1900, r1: 2.4, vp2: 2800, vs2: 1750, r2: 2.25 }).clase === 'IV');
+    cond('AVO: Vs demasiado alta → error', C.avo(Object.assign({}, shale, { vp2: 2200, vs2: 2100, r2: 2.1 })).errores.length > 0);
+    var gz = { vp: 3200, vs: 1600, rho: 2.3, phi: 0.22, km: 37, kw: 2.8, ko: 1.0, kg: 0.05, rw: 1.05, ro: 0.8, rg: 0.2, sw1: 1, so1: 0, sg1: 0, sw2: 0.2, so2: 0, sg2: 0.8 };
+    r = C.gassmann(gz);
+    cerca('Gassmann: módulo de roca seca (GPa)', r.kDry, 9.894874, 1e-5);
+    cerca('Gassmann: módulo saturado inicial (GPa)', r.kSat1, 15.701333, 1e-5);
+    cerca('Gassmann: módulo saturado final (GPa)', r.kSat2, 10.046065, 1e-5);
+    cerca('Gassmann: densidad final', r.rho2, 2.1504, 1e-9);
+    cerca('Gassmann: Vp con gas', r.vp2, 2884.8766, 1e-3);
+    cerca('Gassmann: Vs con gas', r.vs2, 1654.7191, 1e-3);
+    cerca('Gassmann: el cizallamiento no cambia (ρVs² constante)', r.rho2 * r.vs2 * r.vs2, 2.3 * 1600 * 1600, 1e-3);
+    cond('Gassmann: el gas baja Vp', r.vp2 < r.vp1);
+    var gb = C.gassmann(Object.assign({}, gz, { vp: r.vp2, vs: r.vs2, rho: r.rho2, sw1: 0.2, sg1: 0.8, sw2: 1, sg2: 0 }));
+    cerca('Gassmann: ida y vuelta recupera Vp', gb.vp2, 3200, 1e-6);
+    cerca('Gassmann: mismo fluido no cambia Vp', C.gassmann(Object.assign({}, gz, { sw2: 1, sg2: 0 })).vp2, 3200, 1e-9);
+    cond('Gassmann: saturaciones que no suman 1 → error', C.gassmann(Object.assign({}, gz, { sw2: 0.5 })).errores.length > 0);
+    var sy = [{ h: 1000, v: 2000, rho: 2.0 }, { h: 0, v: 3000, rho: 2.4 }];
+    r = C.sismograma({ filas: sy, f: 25, dt: 1 });
+    cerca('Sintético: tiempo doble de viaje = 2h/v', r.ints[0].t, 1000, 1e-9);
+    cerca('Sintético: R = (7200 − 4000)/(7200 + 4000)', r.ints[0].r, 0.2857143, 1e-7);
+    var pk = r.pts.filter(function (q) { return Math.abs(q[1] - 1000) < 1e-9; })[0], pk2 = r.pts.filter(function (q) { return Math.abs(q[1] - 1010) < 1e-9; })[0];
+    cerca('Sintético: amplitud en el reflector = R·w(0)', pk[0], 0.2857143, 1e-6);
+    cerca('Sintético: amplitud a 10 ms = R·Ricker(10 ms)', pk2[0], -0.0360327, 1e-6);
+    cerca('Sintético: polaridad invertida cambia el signo', C.sismograma({ filas: sy, f: 25, dt: 1, pol: 'rev' }).pts.filter(function (q) { return Math.abs(q[1] - 1000) < 1e-9; })[0][0], -0.2857143, 1e-6);
+    r = C.sismograma({ filas: [{ h: 500, v: 2000, rho: 2 }, { h: 600, v: 2500, rho: 2.2 }, { h: 0, v: 3200, rho: 2.5 }], f: 30, dt: 2 });
+    cerca('Sintético: segundo reflector a 500 + 480 ms', r.ints[1].t, 980, 1e-9);
+    cerca('Sintético: profundidad del segundo reflector', r.ints[1].z, 1100, 1e-9);
+    cond('Sintético: una sola capa → error', C.sismograma({ filas: [{ h: 0, v: 2000, rho: 2 }], f: 30, dt: 1 }).errores.length > 0);
+    var gr = [{ z: 2000, a: 0 }, { z: 2100, a: 10 }, { z: 2200, a: 40 }];
+    r = C.grv({ filas: gr, metodo: 'comb' });
+    cerca('GRV combinado: pirámide (cociente 0 y 0,25) = 2666,67', r.grv, 2666.6667, 1e-3);
+    cerca('GRV trapezoidal = 500 + 2500', C.grv({ filas: gr, metodo: 'trap' }).grv, 3000, 1e-9);
+    cerca('GRV piramidal = 333,33 + 2333,33', C.grv({ filas: gr, metodo: 'piram' }).grv, 2666.6667, 1e-3);
+    r = C.grv({ filas: gr, metodo: 'comb', zc: 2150 });
+    cerca('GRV con contacto a 2150 m', r.grv, 1180.18981, 1e-3);
+    cerca('GRV: área en el contacto (interpolada)', r.aCont, 25, 1e-9);
+    cerca('GRV: cierre = contacto − cresta', r.cierre, 150, 1e-9);
+    cerca('GRV: fracción de llenado', r.llenado, 0.75, 1e-9);
+    cerca('GRV: cono (cresta con área 0) = h·A/3', C.grv({ filas: [{ z: 0, a: 0 }, { z: 30, a: 12 }], metodo: 'piram' }).grv, 120, 1e-9);
+    cond('GRV: contacto fuera del rango → error', C.grv({ filas: gr, zc: 2500 }).errores.length > 0);
+    cond('GRV: área decreciente → error', C.grv({ filas: [{ z: 2000, a: 5 }, { z: 2100, a: 3 }] }).errores.length > 0);
+    cond('GRV: los contornos desordenados se ordenan por profundidad', C.grv({ filas: [gr[2], gr[0], gr[1]], metodo: 'trap' }).grv === 3000);
     return out;
   }
   var P = { correr: correr };
@@ -4082,6 +4415,154 @@ window.H3L_ESTR = {
       out += h3('Por qué') + '<ul>' + r.motivos.map(function (m) { return '<li>' + esc(m) + '</li>'; }).join('') + '</ul>';
       out += h3('Las cuatro opciones') + tabla(['Opción', 'Qué hace', 'Costo de M&V', 'Requisitos'], ['A', 'B', 'C', 'D'].map(function (k) { var o = r.info[k]; return [(k === r.op ? badge('Recomendada', 'ok') + ' ' : '') + esc(o.nombre), esc(o.que), esc(o.costo), esc(o.req)]; }));
       return out + calcBlock([['Criterio', 'D si no hay línea base medida · C si hay medidor general y ahorro ≥ 10 % con pocos cambios · A o B si se puede aislar · C o D en los demás casos']]);
+    }
+  });
+
+  /* 57. Generación y expulsión de hidrocarburos (geoquímica) */
+  tool({
+    id: 'generacion', grupo: 'Geoquímica', nombre: 'Generación y expulsión de hidrocarburos (balance de masa)', etapas: 'V C', pregunta: '¿Cuánto hidrocarburo generó y pudo expulsar la roca madre en la cocina?',
+    ficha: { metodo: 'Relación de transformación del querógeno a partir de la pirólisis (Jarvie et al., 2007): TR = 1 − [HI·(1200 − HIo·(1 − PIo))]/[HIo·(1200 − HI·(1 − PI))]. Hidrocarburo generado = TR·S2o, con S2o = HIo·COTo/100 (mg HC/g roca = kg/t). Masa por área = generado·ρ_roca·espesor. Volumen = masa/ρ_petróleo (1 m³ = 6,2898 bbl). Expulsado = generado·eficiencia de expulsión.', fuente: 'Jarvie, D.M. et al. (2007), AAPG Bulletin 91(4), shale-gas de Barnett; Peters, K.E. y Cassa, M.R. (1994), AAPG Memoir 60; Magoon y Dow (1994), sistema petrolero.', limites: ['El HI original y el COT original no se miden en la roca madura: se asumen o se toman de muestras inmaduras equivalentes.', 'La eficiencia de expulsión depende de la saturación de retención y de la riqueza orgánica; no es un parámetro universal.', 'No incluye migración, pérdidas ni entrampamiento: es un techo de lo disponible, no de lo acumulado.', 'Una sola roca madre, con propiedades promedio en el espesor y el área.'], unidades: 'COT en %, HI en mg HC/g COT, PI como fracción S1/(S1 + S2), espesor en m, densidad de roca en g/cm³, área en km², densidad del petróleo en kg/m³.' },
+    pasos: [
+      { titulo: 'Pirólisis actual', intro: 'Datos Rock-Eval de la roca madre tal como está hoy. Los valores de ejemplo son ilustrativos.', campos: [num_('toc', 'COT actual', '%', 3), num_('hi', 'Índice de hidrógeno actual', 'mg HC/g COT', 300), num_('pi', 'Índice de producción actual', 'S1/(S1+S2)', 0.1)] },
+      { titulo: 'Estado original', intro: 'Propiedades antes de generar: de muestras inmaduras del mismo intervalo o de un valor típico para el tipo de querógeno.', campos: [num_('hio', 'Índice de hidrógeno original', 'mg HC/g COT', 600), num_('pio', 'Índice de producción original', 'S1/(S1+S2)', 0.02), num_('tocO', 'COT original (opcional)', '%', 4, 'Si queda vacío se usa el COT actual y se subestima lo generado.')] },
+      { titulo: 'Cocina de generación', intro: 'Volumen de roca madre efectivamente madura y eficiencia de expulsión.', campos: [num_('h', 'Espesor de roca madre', 'm', 50), num_('rho', 'Densidad de la roca', 'g/cm³', 2.5), num_('area', 'Área de la cocina', 'km²', 100), num_('ee', 'Eficiencia de expulsión', 'fracción', 0.5), num_('rhoO', 'Densidad del petróleo', 'kg/m³', 850)] }
+    ],
+    calc: function (v) { return C.generacion(v); },
+    render: function (r) {
+      var out = kpis([kpi('Transformación (TR)', fmt(r.tr * 100, 1), '%', 'main'), kpi('Estado', esc(r.clase)), kpi('Generado', fmt(r.gen, 1), 'mg HC/g roca'), kpi('Masa por área', fmt(r.kgm2, 0), 'kg/m²'), kpi('Volumen generado', fmt(r.mmbbl, 0), 'MMbbl', 'main'), kpi('Volumen expulsado', fmt(r.mmbblExp, 0), 'MMbbl', 'main')]);
+      out += hbars([{ label: 'Potencial original (S2o)', val: r.s2o, txt: fmt(r.s2o, 1) + ' mg/g' }, { label: 'Generado', val: r.gen, txt: fmt(r.gen, 1) + ' mg/g', cls: 'ok' }, { label: 'Expulsado', val: r.gen * r.ee, txt: fmt(r.gen * r.ee, 1) + ' mg/g', cls: 'warn' }], r.s2o);
+      return out + calcBlock([['Transformación', 'TR = 1 − HI·(1200 − HIo·(1 − PIo))/(HIo·(1200 − HI·(1 − PI))) = ' + fmt(r.tr, 4)], ['Potencial original', 'S2o = HIo·COTo/100 = ' + fmt(r.s2o, 2) + ' mg HC/g roca'], ['Generado', 'S2o·TR = ' + fmt(r.gen, 2) + ' mg HC/g roca = ' + fmt(r.gen, 2) + ' kg/t'], ['Por área', 'kg/m² = generado·ρ·h = ' + fmt(r.kgm2, 0)], ['Volumen', 'm³ = kg/ρ_petróleo; bbl = m³·6,2898 → ' + fmt(r.mmbbl, 0) + ' MMbbl (' + fmt(r.mt, 0) + ' Mt)'], ['Expulsado', 'generado·eficiencia = ' + fmt(r.mmbblExp, 0) + ' MMbbl']]);
+    }
+  });
+
+  /* 58. Biomarcadores */
+  tool({
+    id: 'biomarcadores', grupo: 'Geoquímica', nombre: 'Biomarcadores: ambiente, fuente y madurez', etapas: 'V C', pregunta: '¿Qué ambiente, qué materia orgánica y qué madurez indican los biomarcadores de un petróleo o extracto?',
+    ficha: { metodo: 'Relaciones entre áreas de picos de cromatografía de gases y espectrometría de masas: Pr/Ph (ambiente redox), Ts/(Ts + Tm) (madurez y facies), esteranos C29 20S/(20S + 20R) y ββ/(ββ + αα) (madurez) y distribución C27, C28 y C29 en porcentaje (fuente de materia orgánica). Cada relación se compara con rangos usuales de interpretación.', fuente: 'Peters, K.E., Walters, C.C. y Moldowan, J.M. (2005), The Biomarker Guide, 2.ª ed.; Didyk et al. (1978), Nature 272.', limites: ['Los rangos son referencias generales y dependen de la cuenca y del tipo de roca madre; calibralos con Ro y Tmax locales.', 'Los esteranos C29 alcanzan el equilibrio en la ventana de petróleo y no distinguen madureces mayores.', 'Pr/Ph se afecta por la madurez y por la biodegradación; usalo con otros indicadores.', 'Una sola relación no define el ambiente: el valor está en la consistencia entre varias.'], unidades: 'Áreas de pico o concentraciones relativas, en la misma unidad dentro de cada relación.' },
+    pasos: [
+      { titulo: 'Isoprenoides', intro: 'Pristano y fitano (cromatografía de gases). Dejá vacío lo que no tengas. Los valores de ejemplo son ilustrativos.', campos: [num_('pr', 'Pristano', 'área', 12), num_('ph', 'Fitano', 'área', 8)] },
+      { titulo: 'Terpanos y esteranos de madurez', intro: 'Picos de los cromatogramas de masa m/z 191 y 217.', campos: [num_('ts', 'Ts (18α-trisnorneohopano)', 'área', 45), num_('tm', 'Tm (17α-trisnorhopano)', 'área', 55), num_('s20', 'Esterano C29 20S', 'área', 48), num_('r20', 'Esterano C29 20R', 'área', 52), num_('bb', 'Esterano C29 ββ', 'área', 58), num_('aa', 'Esterano C29 αα', 'área', 42)] },
+      { titulo: 'Fuente de materia orgánica', intro: 'Esteranos regulares C27, C28 y C29 (m/z 217).', campos: [num_('c27', 'C27', 'área', 38), num_('c28', 'C28', 'área', 27), num_('c29', 'C29', 'área', 35)] }
+    ],
+    calc: function (v) { return C.biomarcadores(v); },
+    render: function (r) {
+      var out = tabla(['Relación', 'Valor', 'Lectura'], r.filas.map(function (f) { return [esc(f.n), f.v != null ? fmt(f.v, 2) : esc(f.txt), esc(f.t)]; }));
+      var e = r.filas.filter(function (f) { return f.p27 != null; })[0];
+      if (e) out += h3('Esteranos regulares (%)') + hbars([{ label: 'C27', val: e.p27, txt: fmt(e.p27, 0) + ' %' }, { label: 'C28', val: e.p28, txt: fmt(e.p28, 0) + ' %' }, { label: 'C29', val: e.p29, txt: fmt(e.p29, 0) + ' %' }], 100);
+      if (r.sintesis) out += nota('<b>Madurez:</b> ' + esc(r.sintesis));
+      return out + calcBlock(r.filas.filter(function (f) { return f.v != null; }).map(function (f) { return [f.n, fmt(f.v, 3)]; }));
+    }
+  });
+
+  /* 59. Geoquímica del gas */
+  tool({
+    id: 'gasgeoq', grupo: 'Geoquímica', nombre: 'Geoquímica del gas: humedad, Bernard e isótopos', etapas: 'V C D', pregunta: '¿El gas es biogénico o termogénico, qué tan húmedo es y qué madurez sugiere?',
+    ficha: { metodo: 'Humedad = (C2 a C5)/(C1 a C5)·100. Parámetro de Bernard = C1/(C2 + C3): > 1000 sugiere gas biogénico y < 100 termogénico. Con δ¹³C₁: por debajo de −60 ‰ microbiano, de −60 a −50 ‰ mezcla o termogénico temprano, y sobre −50 ‰ termogénico. Madurez equivalente con las rectas de Stahl (1977): δ¹³C₁ = 17·log Ro − 42 (querógeno sapropélico) y δ¹³C₁ = 8,1·log Ro − 28 (húmico). La inversión δ¹³C₁ > δ¹³C₂ se marca como señal de sobremadurez o mezcla.', fuente: 'Bernard, B.B. et al. (1978); Schoell, M. (1983), AAPG Bulletin 67(12); Stahl, W.J. (1977), Chemical Geology 20; Whiticar, M.J. (1999), Chemical Geology 161.', limites: ['Rangos aproximados: las rectas δ¹³C₁–Ro cambian entre cuencas y tipos de querógeno.', 'La biodegradación, la migración y la mezcla alteran las relaciones; con orígenes mixtos los límites no separan bien.', 'El Ro equivalente solo tiene sentido para gas termogénico y dentro de 0,3 a 4 %.', 'Los gases no hidrocarburos (CO₂, N₂, H₂S) no se usan aquí.'], unidades: 'Composición en % molar; isótopos en ‰ respecto de VPDB.' },
+    pasos: [
+      { titulo: 'Composición del gas', intro: 'Hidrocarburos en % molar (cromatografía). Los valores de ejemplo son ilustrativos.', campos: [num_('c1', 'Metano (C1)', '% mol', 90), num_('c2', 'Etano (C2)', '% mol', 6), num_('c3', 'Propano (C3)', '% mol', 2), num_('ic4', 'iso-Butano (iC4)', '% mol', 0.5), num_('nc4', 'n-Butano (nC4)', '% mol', 1), num_('ic5', 'iso-Pentano (iC5)', '% mol', 0.2), num_('nc5', 'n-Pentano (nC5)', '% mol', 0.3)] },
+      { titulo: 'Isótopos de carbono (opcional)', intro: 'δ¹³C respecto de VPDB, en ‰ (valores negativos).', campos: [num_('d1', 'δ¹³C del metano', '‰', -45), num_('d2', 'δ¹³C del etano', '‰', -30)] }
+    ],
+    calc: function (v) { return C.gasGeoq(v); },
+    render: function (r) {
+      var out = kpis([kpi('Humedad', fmt(r.wet, 1), '%', 'main'), kpi('Tipo', esc(r.humedad)), kpi('Bernard C1/(C2+C3)', r.bern === Infinity ? 'sin C2 ni C3' : fmt(r.bern, 1)), kpi('Por Bernard', esc(r.bernClase))]);
+      if (r.d1 != null) {
+        out += h3('Isótopos') + kpis([kpi('δ¹³C₁', fmt(r.d1, 1), '‰'), kpi('Origen por isótopo', esc(r.isoClase), '', 'main')].concat(r.roSap != null ? [kpi('Ro equivalente (sapropélico)', r.roSap >= 0.3 && r.roSap <= 4 ? fmt(r.roSap, 2) : 'fuera de rango', r.roSap >= 0.3 && r.roSap <= 4 ? '%' : ''), kpi('Ro equivalente (húmico)', r.roHum >= 0.3 && r.roHum <= 4 ? fmt(r.roHum, 2) : 'fuera de rango', r.roHum >= 0.3 && r.roHum <= 4 ? '%' : '')] : []));
+        if (r.inversion != null) out += nota('<b>Tendencia isotópica:</b> ' + (r.inversion ? 'invertida (δ¹³C₁ > δ¹³C₂).' : 'normal (δ¹³C₁ < δ¹³C₂).'));
+      }
+      if (!isNaN(r.ratioC4)) out += nota('iC4/nC4 = ' + fmt(r.ratioC4, 2) + ' · C2/C3 = ' + (isNaN(r.c2c3) ? '—' : fmt(r.c2c3, 2)) + '. Estas relaciones se usan para comparar gases entre sí y detectar biodegradación.');
+      var cs = [['Humedad', '(C2 + C3 + iC4 + nC4 + iC5 + nC5)/total·100 = ' + fmt(r.wet, 2) + ' %'], ['Bernard', 'C1/(C2 + C3) = ' + (r.bern === Infinity ? 'indefinido' : fmt(r.bern, 2))]];
+      if (r.roSap != null) { cs.push(['Ro sapropélico', 'Ro = 10^((δ¹³C₁ + 42)/17) = ' + fmt(r.roSap, 2)]); cs.push(['Ro húmico', 'Ro = 10^((δ¹³C₁ + 28)/8,1) = ' + fmt(r.roHum, 3)]); }
+      return out + calcBlock(cs);
+    }
+  });
+
+  /* 60. Resolución sísmica */
+  tool({
+    id: 'resolsis', grupo: 'Interpretación sísmica', nombre: 'Resolución sísmica y espesor de sintonía', etapas: 'V C', pregunta: '¿Qué espesor mínimo se resuelve en la sísmica y qué tan grande es el área de la que sale cada traza?',
+    ficha: { metodo: 'Longitud de onda λ = v/f. Resolución vertical clásica λ/4 (Rayleigh), límite de resolución λ/8 (Widess) y límite de detección aproximado λ/30. Zona de Fresnel sin migrar: r = (v/2)·√(t/f), con t el tiempo doble de viaje en s y v la velocidad media. La curva de sintonía se calcula con una ondícula de Ricker y dos reflectores de igual magnitud y signo opuesto (cuña): amplitud compuesta máxima contra espesor.', fuente: 'Widess, M.B. (1973), Geophysics 38(6); Sheriff, R.E. y Geldart, L.P. (1995), Exploration Seismology, 2.ª ed.; Kallweit y Wood (1982), Geophysics 47(10).', limites: ['La frecuencia dominante baja con la profundidad por atenuación: usá el valor medido en el objetivo.', 'La curva de cuña es teórica: sin ruido, sin dispersión y con reflectores de igual magnitud y signo opuesto.', 'La resolución lateral tras migración depende del ángulo de apertura y de la velocidad; la cifra de λ/4 es un valor ideal en 3D.', 'No reemplaza el modelado con la ondícula real del dato.'], unidades: 'Velocidad en m/s, frecuencia en Hz, tiempo doble de viaje en ms, espesores y distancias en m.' },
+    pasos: [
+      { titulo: 'Datos sísmicos', intro: 'Velocidad y frecuencia en el objetivo. Los valores de ejemplo son ilustrativos.', campos: [num_('v', 'Velocidad intervalar en el objetivo', 'm/s', 3200), num_('f', 'Frecuencia dominante en el objetivo', 'Hz', 30), num_('twt', 'Tiempo doble de viaje al objetivo (opcional)', 'ms', 2000), num_('vm', 'Velocidad media al objetivo (opcional)', 'm/s', 2800, 'Para la zona de Fresnel; si queda vacía se usa la intervalar.'), num_('h', 'Espesor de la capa a evaluar (opcional)', 'm', 15)] }
+    ],
+    calc: function (v) { return C.resolucionSismica(v); },
+    render: function (r) {
+      var out = kpis([kpi('Longitud de onda', fmt(r.lam, 1), 'm'), kpi('Resolución λ/4', fmt(r.cuarto, 1), 'm', 'main'), kpi('Límite λ/8 (Widess)', fmt(r.octavo, 1), 'm'), kpi('Sintonía (Ricker)', fmt(r.tuning, 1), 'm', 'main')].concat(r.fresnel != null ? [kpi('Zona de Fresnel (radio)', fmt(r.fresnel, 0), 'm')] : []));
+      if (r.clase) out += nota('<b>Capa de ' + fmt(r.h, 1) + ' m:</b> ' + esc(r.clase) + '.');
+      out += h3('Amplitud contra espesor (cuña)') + lineChart({ series: [{ pts: r.curva, nombre: 'Amplitud relativa' }], hlines: [{ y: 1, label: 'reflector aislado' }], xl: 'Espesor (m)', yl: 'Amplitud relativa', alt: 'Curva de sintonía de la cuña' });
+      out += nota('La amplitud máxima, de ' + fmt(r.tuningAmp, 2) + ' veces la de un reflector aislado, se da cerca de ' + fmt(r.tuning, 1) + ' m. Por debajo, la amplitud cae casi en proporción al espesor.');
+      var cs = [['Longitud de onda', 'λ = v/f = ' + fmt(r.v, 0) + '/' + fmt(r.f, 0) + ' = ' + fmt(r.lam, 1) + ' m'], ['Resolución', 'λ/4 = ' + fmt(r.cuarto, 1) + ' m ; λ/8 = ' + fmt(r.octavo, 1) + ' m ; λ/30 = ' + fmt(r.deteccion, 1) + ' m']];
+      if (r.fresnel != null) cs.push(['Zona de Fresnel', 'r = (v/2)·√(t/f) = (' + fmt(r.vm, 0) + '/2)·√(' + fmt(r.twt / 1000, 3) + '/' + fmt(r.f, 0) + ') = ' + fmt(r.fresnel, 0) + ' m (profundidad ≈ ' + fmt(r.profundidad, 0) + ' m)']);
+      return out + calcBlock(cs);
+    }
+  });
+
+  /* 61. AVO */
+  tool({
+    id: 'avo', grupo: 'Interpretación sísmica', nombre: 'Impedancia, reflectividad y AVO (Shuey)', etapas: 'C D', pregunta: '¿Cómo cambia la amplitud con el ángulo en este contacto y a qué clase de AVO corresponde?',
+    ficha: { metodo: 'Impedancia acústica Z = ρ·Vp y reflectividad normal R₀ = (Z₂ − Z₁)/(Z₂ + Z₁). Con la aproximación de Aki–Richards en la forma de Shuey: R(θ) = A + B·sen²θ + C·(tan²θ − sen²θ), donde A = ½(ΔVp/Vp + Δρ/ρ), B = ½·ΔVp/Vp − 2(Vs/Vp)²·(Δρ/ρ + 2ΔVs/Vs) y C = ½·ΔVp/Vp, con valores medios de ambas capas. Clases de Rutherford y Williams según el signo de A y B.', fuente: 'Shuey, R.T. (1985), Geophysics 50(4); Aki, K. y Richards, P.G. (1980); Rutherford, S.R. y Williams, R.H. (1989), Geophysics 54(6); Castagna et al. (1998), The Leading Edge.', limites: ['Contrastes elásticos pequeños y ángulos hasta 30–35°.', 'Capas homogéneas e isótropas; sin anisotropía, atenuación ni efectos de sintonía.', 'Los límites de clase (|A| ≤ 0,03 para la Clase II) son orientativos.', 'La reflectividad positiva es un aumento de impedancia hacia abajo.'], unidades: 'Velocidades en m/s, densidad en g/cm³, ángulos en grados.' },
+    pasos: [
+      { titulo: 'Capa superior', intro: 'Propiedades de la capa por encima del contacto (sello). Los valores de ejemplo son ilustrativos.', campos: [num_('vp1', 'Vp', 'm/s', 2700), num_('vs1', 'Vs', 'm/s', 1300), num_('r1', 'Densidad', 'g/cm³', 2.4)] },
+      { titulo: 'Capa inferior', intro: 'Propiedades de la capa por debajo (reservorio) y ángulo máximo de la curva.', campos: [num_('vp2', 'Vp', 'm/s', 2200), num_('vs2', 'Vs', 'm/s', 1400), num_('r2', 'Densidad', 'g/cm³', 2.1), num_('angmax', 'Ángulo máximo', 'grados', 40)] }
+    ],
+    calc: function (v) { return C.avo(v); },
+    render: function (r) {
+      var out = kpis([kpi('R₀ (incidencia normal)', fmt(r.r0, 3), '', 'main'), kpi('Intercepto A', fmt(r.A, 3)), kpi('Gradiente B', fmt(r.B, 3)), kpi('Clase de AVO', esc(r.clase), '', 'main'), kpi('Z superior', fmt(r.z1, 0)), kpi('Z inferior', fmt(r.z2, 0))]);
+      out += nota('<b>Lectura:</b> ' + esc(r.texto));
+      out += lineChart({ series: [{ pts: r.curva, nombre: 'R(θ)' }], hlines: [{ y: 0, label: 'cero' }], xl: 'Ángulo de incidencia (°)', yl: 'Reflectividad', alt: 'Curva de reflectividad contra ángulo' });
+      out += tabla(['Capa', 'Vp/Vs', 'Poisson'], [['Superior', fmt(r.vpvs1, 2), fmt(r.nu1, 3)], ['Inferior', fmt(r.vpvs2, 2), fmt(r.nu2, 3)]]);
+      return out + calcBlock([['Impedancias', 'Z = ρ·Vp → ' + fmt(r.z1, 0) + ' y ' + fmt(r.z2, 0)], ['Incidencia normal', 'R₀ = (Z₂ − Z₁)/(Z₂ + Z₁) = ' + fmt(r.r0, 4)], ['Intercepto', 'A = ½(ΔVp/Vp + Δρ/ρ) = ' + fmt(r.A, 4)], ['Gradiente', 'B = ½ΔVp/Vp − 2(Vs/Vp)²(Δρ/ρ + 2ΔVs/Vs) = ' + fmt(r.B, 4)], ['Curvatura', 'C = ½ΔVp/Vp = ' + fmt(r.Cc, 4)]]);
+    }
+  });
+
+  /* 62. Gassmann */
+  tool({
+    id: 'gassmann', grupo: 'Interpretación sísmica', nombre: 'Sustitución de fluidos (Gassmann)', etapas: 'C D', pregunta: '¿Cómo cambian Vp, Vs y la densidad del reservorio si cambia el fluido de los poros?',
+    ficha: { metodo: 'Del módulo saturado inicial K_sat = ρ·Vp² − 4/3·μ (con μ = ρ·Vs²) se obtiene el módulo de la roca seca K_dry invirtiendo la ecuación de Gassmann. Con el fluido nuevo: K_sat2 = K_dry + (1 − K_dry/K_min)²/(φ/K_fl + (1 − φ)/K_min − K_dry/K_min²). El módulo de corte no cambia. Densidad: ρ₂ = ρ₁ + φ(ρ_fl2 − ρ_fl1). Fluidos mezclados con la ley de Wood: 1/K_fl = Σ S_i/K_i.', fuente: 'Gassmann, F. (1951); Smith, T.M., Sondergeld, C.H. y Rai, C.S. (2003), Geophysics 68(2); Mavko, G., Mukerji, T. y Dvorkin, J., The Rock Physics Handbook.', limites: ['Roca isótropa, mineral único, poros conectados y equilibrio de presión de poro (frecuencias sísmicas, no de laboratorio).', 'La ley de Wood supone mezcla uniforme del fluido; con saturación parchada el efecto es menor.', 'Los módulos de los fluidos dependen de presión, temperatura, salinidad y GOR: los valores de ejemplo son orientativos.', 'Si el módulo seco resulta no físico, hay inconsistencia en los datos de entrada.'], unidades: 'Velocidades en m/s, densidades en g/cm³, módulos en GPa, saturaciones en fracción.' },
+    pasos: [
+      { titulo: 'Roca con el fluido inicial', intro: 'Velocidades, densidad y porosidad de la roca tal como está medida. Los valores de ejemplo son ilustrativos.', campos: [num_('vp', 'Vp', 'm/s', 3200), num_('vs', 'Vs', 'm/s', 1600), num_('rho', 'Densidad total', 'g/cm³', 2.3), num_('phi', 'Porosidad', 'fracción', 0.22), num_('km', 'Módulo del mineral', 'GPa', 37, 'Cuarzo ≈ 37, calcita ≈ 70, dolomía ≈ 95.')] },
+      { titulo: 'Propiedades de los fluidos', intro: 'Módulo volumétrico y densidad a condiciones de reservorio.', campos: [num_('kw', 'Módulo del agua', 'GPa', 2.8), num_('rw', 'Densidad del agua', 'g/cm³', 1.05), num_('ko', 'Módulo del petróleo', 'GPa', 1.0), num_('ro', 'Densidad del petróleo', 'g/cm³', 0.8), num_('kg', 'Módulo del gas', 'GPa', 0.05), num_('rg', 'Densidad del gas', 'g/cm³', 0.2)] },
+      { titulo: 'Saturaciones', intro: 'Cada conjunto debe sumar 1.', campos: [num_('sw1', 'Agua inicial', 'fracción', 1), num_('so1', 'Petróleo inicial', 'fracción', 0), num_('sg1', 'Gas inicial', 'fracción', 0), num_('sw2', 'Agua final', 'fracción', 0.2), num_('so2', 'Petróleo final', 'fracción', 0), num_('sg2', 'Gas final', 'fracción', 0.8)] }
+    ],
+    calc: function (v) { return C.gassmann(v); },
+    render: function (r) {
+      function pc(a, b) { return fmt((b / a - 1) * 100, 1) + ' %'; }
+      var out = kpis([kpi('Vp final', fmt(r.vp2, 0), 'm/s', 'main'), kpi('Vs final', fmt(r.vs2, 0), 'm/s'), kpi('Densidad final', fmt(r.rho2, 3), 'g/cm³'), kpi('Vp/Vs final', fmt(r.vpvs2, 2))]);
+      out += tabla(['Propiedad', 'Inicial', 'Final', 'Cambio'], [['Vp (m/s)', fmt(r.vp1, 0), fmt(r.vp2, 0), pc(r.vp1, r.vp2)], ['Vs (m/s)', fmt(r.vs1, 0), fmt(r.vs2, 0), pc(r.vs1, r.vs2)], ['Densidad (g/cm³)', fmt(r.rho1, 3), fmt(r.rho2, 3), pc(r.rho1, r.rho2)], ['Vp/Vs', fmt(r.vpvs1, 2), fmt(r.vpvs2, 2), pc(r.vpvs1, r.vpvs2)], ['Impedancia acústica', fmt(r.z1, 0), fmt(r.z2, 0), pc(r.z1, r.z2)], ['K del fluido (GPa)', fmt(r.kf1, 3), fmt(r.kf2, 3), ''], ['K saturado (GPa)', fmt(r.kSat1, 2), fmt(r.kSat2, 2), pc(r.kSat1, r.kSat2)]]);
+      return out + calcBlock([['Módulo de corte', 'μ = ρ·Vs² = ' + fmt(r.mu, 2) + ' GPa (no cambia)'], ['Módulo seco', 'K_dry = ' + fmt(r.kDry, 2) + ' GPa (invirtiendo Gassmann)'], ['Módulo saturado final', 'K_sat2 = K_dry + (1 − K_dry/K_min)²/(φ/K_fl + (1 − φ)/K_min − K_dry/K_min²) = ' + fmt(r.kSat2, 2) + ' GPa'], ['Densidad', 'ρ₂ = ρ₁ + φ(ρ_fl2 − ρ_fl1) = ' + fmt(r.rho2, 3) + ' g/cm³'], ['Velocidades', 'Vp = √((K_sat2 + 4μ/3)/ρ₂) = ' + fmt(r.vp2, 0) + ' m/s ; Vs = √(μ/ρ₂) = ' + fmt(r.vs2, 0) + ' m/s']]);
+    }
+  });
+
+  /* 63. Sismograma sintético */
+  tool({
+    id: 'sismograma', grupo: 'Interpretación sísmica', nombre: 'Sismograma sintético 1D (ondícula de Ricker)', etapas: 'C D', pregunta: '¿Qué traza sísmica daría esta secuencia de capas y dónde cae cada reflector en tiempo?',
+    ficha: { metodo: 'Impedancia Z = ρ·Vp de cada capa; reflectividad de incidencia normal en cada interfaz R = (Z₂ − Z₁)/(Z₂ + Z₁); tiempo doble de viaje acumulado t = Σ 2h/v. La traza es la convolución de la serie de reflectividad con una ondícula de Ricker de frecuencia dominante f: w(t) = (1 − 2π²f²t²)·exp(−π²f²t²).', fuente: 'Ricker, N. (1953), Geophysics 18(1); Sheriff, R.E. y Geldart, L.P. (1995), Exploration Seismology; Simm, R. y Bacon, M. (2014), Seismic Amplitude: An Interpreter\'s Handbook.', limites: ['Solo reflexiones primarias de incidencia normal: sin múltiples, sin pérdidas de transmisión, sin atenuación ni dispersión.', 'La ondícula de Ricker es una aproximación de fase cero; en un amarre real se estima la ondícula del dato.', 'Los registros reales requieren calibración con el tiro de verificación y corrección de profundidad.', 'La última capa es el semiespacio inferior (su espesor se ignora).'], unidades: 'Espesor en m, velocidad en m/s, densidad en g/cm³, frecuencia en Hz, muestreo en ms.' },
+    pasos: [
+      { titulo: 'Secuencia de capas', intro: 'Desde la superficie hacia abajo. La última fila es el semiespacio inferior. Los datos de ejemplo son sintéticos e ilustrativos (la tercera capa simula una arena con gas).', campos: [{ id: 'filas', tipo: 'tabla', label: 'Capas', cols: [{ id: 'h', label: 'Espesor', unit: 'm' }, { id: 'v', label: 'Vp', unit: 'm/s' }, { id: 'rho', label: 'Densidad', unit: 'g/cm³' }], def: [[500, 2000, 2.0], [400, 2600, 2.25], [30, 2200, 2.05], [600, 3000, 2.45], ['', 3400, 2.6]].map(function (a) { return { h: a[0], v: a[1], rho: a[2] }; }) }] },
+      { titulo: 'Ondícula', intro: 'Frecuencia dominante, muestreo y polaridad.', campos: [num_('f', 'Frecuencia dominante', 'Hz', 30), num_('dt', 'Muestreo', 'ms', 1), sel_('pol', 'Polaridad', [['norm', 'Normal: aumento de impedancia = pico'], ['rev', 'Inversa: aumento de impedancia = valle']], 'norm')] }
+    ],
+    calc: function (v) { return C.sismograma(v); },
+    render: function (r) {
+      var out = kpis([kpi('Interfaces', String(r.ints.length)), kpi('Tiempo al último reflector', fmt(r.tmax, 0), 'ms'), kpi('Amplitud máxima', fmt(r.amax, 3))]);
+      out += lineChart({ series: [{ pts: r.pts, nombre: 'Traza sintética' }], hlines: [], xl: 'Amplitud', yl: 'Tiempo doble de viaje (ms)', invertY: true, h: 380, alt: 'Traza sísmica sintética contra tiempo' });
+      out += tabla(['Interfaz', 'Profundidad (m)', 'TWT (ms)', 'Z superior', 'Z inferior', 'R'], r.ints.map(function (x) { return [x.n, fmt(x.z, 0), fmt(x.t, 1), fmt(x.z1, 0), fmt(x.z2, 0), fmt(x.r, 3)]; }));
+      var x0 = r.ints[0];
+      return out + calcBlock([['Reflectividad', 'R = (Z₂ − Z₁)/(Z₂ + Z₁) → interfaz 1: (' + fmt(x0.z2, 0) + ' − ' + fmt(x0.z1, 0) + ')/(' + fmt(x0.z2, 0) + ' + ' + fmt(x0.z1, 0) + ') = ' + fmt(x0.r, 3)], ['Tiempo', 't = Σ 2h/v → interfaz 1 a ' + fmt(x0.t, 1) + ' ms'], ['Ondícula', 'w(t) = (1 − 2π²f²t²)·exp(−π²f²t²), f = ' + fmt(r.f, 0) + ' Hz'], ['Traza', 'Convolución de la serie de reflectividad con w(t), polaridad ' + (r.pol === 1 ? 'normal' : 'inversa')]]);
+    }
+  });
+
+  /* 64. Volumen de roca de la trampa (GRV) */
+  tool({
+    id: 'grv', grupo: 'Interpretación sísmica', nombre: 'Volumen de roca de la trampa (GRV) desde el mapa en profundidad', etapas: 'C D', pregunta: '¿Cuánto volumen de roca contiene la trampa por encima del contacto, a partir de las áreas de los contornos?',
+    ficha: { metodo: 'Con el área encerrada por cada contorno estructural: trapecio V = h/2·(A₁ + A₂); pirámide V = h/3·(A₁ + A₂ + √(A₁·A₂)). Regla combinada: pirámide si A₁/A₂ ≤ 0,5 y trapecio si es mayor. La primera rebanada desde la cresta (área 0) es un cono. El área en el contacto se interpola linealmente entre contornos. Volumen en 10⁶ m³ (km² × m).', fuente: 'Práctica estándar de cálculo volumétrico (SPE-PRMS, Guidelines for Application of the PRMS); Cronquist, C. (2001), Estimation and Classification of Reserves of Crude Oil, Natural Gas, and Condensate.', limites: ['La calidad del resultado la fija el mapa en profundidad: la conversión tiempo-profundidad y la posición de la cresta y del cierre pesan más que el método de integración.', 'Áreas desde contornos cerrados y crecientes; no maneja fallas que cortan la trampa ni contactos inclinados.', 'Es volumen bruto de roca por encima del contacto: falta neto/bruto, porosidad y saturación (ver Volumetría probabilística).', 'Los contornos intermedios se interpolan linealmente.'], unidades: 'Profundidad en m (TVDSS, creciente hacia abajo), área en km², volumen en 10⁶ m³.' },
+    pasos: [
+      { titulo: 'Contornos de la estructura', intro: 'Profundidad de cada contorno y área que encierra, desde la cresta (área 0) hacia abajo. Los datos de ejemplo son ilustrativos.', campos: [{ id: 'filas', tipo: 'tabla', label: 'Contornos', cols: [{ id: 'z', label: 'Profundidad', unit: 'm' }, { id: 'a', label: 'Área', unit: 'km²' }], def: [[2000, 0], [2020, 2], [2040, 6], [2060, 12], [2080, 20], [2100, 30]].map(function (a) { return { z: a[0], a: a[1] }; }) }] },
+      { titulo: 'Contacto y método', intro: 'Profundidad del contacto de fluidos (si queda vacía se usa el último contorno, el punto de derrame) y método de integración.', campos: [num_('zc', 'Contacto de fluidos', 'm', 2075), sel_('metodo', 'Método', [['comb', 'Combinado (pirámide si A₁/A₂ ≤ 0,5, si no trapecio)'], ['trap', 'Trapecio'], ['piram', 'Pirámide']], 'comb')] }
+    ],
+    calc: function (v) { return C.grv(v); },
+    render: function (r) {
+      var out = kpis([kpi('GRV hasta el contacto', fmt(r.grv, 1), '10⁶ m³', 'main'), kpi('Equivalente', fmt(r.mmbbl, 0), 'MMbbl de roca'), kpi('Cierre', fmt(r.cierre, 0), 'm'), kpi('Área en el contacto', fmt(r.aCont, 1), 'km²'), kpi('Llenado del cierre', fmt(r.llenado * 100, 0), '%')]);
+      out += lineChart({ series: [{ pts: r.curva, nombre: 'GRV acumulado', pt: true }], hlines: [{ y: r.zc, label: 'contacto' }], xl: 'GRV acumulado (10⁶ m³)', yl: 'Profundidad (m)', invertY: true, alt: 'Volumen acumulado contra profundidad' });
+      out += tabla(['Contorno (m)', 'Área (km²)', 'Rebanada (10⁶ m³)', 'Acumulado (10⁶ m³)'], r.tabla.map(function (x) { return [fmt(x.z, 0), fmt(x.a, 1), fmt(x.slice, 1), fmt(x.acum, 1)]; }));
+      return out + calcBlock([['Método', r.metodo === 'comb' ? 'combinado: pirámide si A₁/A₂ ≤ 0,5; trapecio en otro caso' : r.metodo === 'trap' ? 'trapecio: V = h/2·(A₁ + A₂)' : 'pirámide: V = h/3·(A₁ + A₂ + √(A₁·A₂))'], ['Contacto', 'cierre = ' + fmt(r.zc, 0) + ' − ' + fmt(r.z0, 0) + ' = ' + fmt(r.cierre, 0) + ' m ; área interpolada = ' + fmt(r.aCont, 2) + ' km²'], ['Volumen', 'GRV = Σ rebanadas hasta el contacto = ' + fmt(r.grv, 2) + ' × 10⁶ m³']]);
     }
   });
 
