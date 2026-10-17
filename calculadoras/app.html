@@ -2130,6 +2130,150 @@ html[data-embed] .shell{padding-block-start:0}
     return res;
   };
 
+  /* =====================================================
+     54–56. MEDICIÓN Y VERIFICACIÓN (M&V) SEGÚN IPMVP
+     Ahorro = energía de línea base ajustada − energía del período de reporte
+     Línea base ajustada = modelo(condiciones del período de reporte) ± ajustes no rutinarios
+     ===================================================== */
+  function tInv(p, nu) { // cuantil t de Student por expansión de Cornish–Fisher; error < 0,5 % con nu ≥ 4
+    var z = normInv(p), z2 = z * z;
+    return z + (z * z2 + z) / (4 * nu) + (5 * z2 * z2 * z + 16 * z * z2 + 3 * z) / (96 * nu * nu) + (3 * z2 * z2 * z2 * z + 19 * z2 * z2 * z + 17 * z * z2 - 15 * z) / (384 * nu * nu * nu);
+  }
+  C._util.tInv = tInv;
+
+  /* 54. Ahorro verificado: ahorro evitado y ahorro normalizado */
+  C.mvAhorro = function (p) {
+    var err = [], av = [];
+    var norm = p.modo === 'normalizado', lin = p.modelo === 'lineal';
+    var eB = num(p.eBase), eR = num(p.eRep), xB = num(p.xBase), xR = num(p.xRep), xN = num(p.xNorm);
+    var a = num(p.a), b = num(p.b), aR = num(p.aRep), bR = num(p.bRep);
+    var nr = isFinite(num(p.ajNR)) ? num(p.ajNR) : 0, tarifa = isFinite(num(p.tarifa)) ? num(p.tarifa) : 0, fe = isFinite(num(p.fe)) ? num(p.fe) : 0;
+    if (!(eB > 0)) err.push('Ingresá la energía medida en el período de línea base (mayor que 0).');
+    if (!(eR > 0)) err.push('Ingresá la energía medida en el período de reporte (mayor que 0).');
+    if (lin) { if (!isFinite(a) || !isFinite(b)) err.push('Ingresá la constante y la pendiente del modelo de línea base (por ejemplo, de la calculadora de línea base por regresión).'); }
+    else if (!(xB > 0)) err.push('Con el modelo proporcional necesitás la variable independiente del período de línea base (mayor que 0).');
+    if (norm) {
+      if (!(xN >= 0)) err.push('Ingresá la variable independiente en condiciones normales (0 o más).');
+      if (lin) { if (!isFinite(aR) || !isFinite(bR)) err.push('Ingresá la constante y la pendiente del modelo del período de reporte.'); }
+      else if (!(xR > 0)) err.push('Con el modelo proporcional necesitás la variable independiente del período de reporte (mayor que 0).');
+    } else if (!(xR >= 0)) err.push('Ingresá la variable independiente del período de reporte (0 o más).');
+    if (tarifa < 0 || fe < 0) err.push('La tarifa y el factor de emisión no pueden ser negativos.');
+    if (err.length) return { errores: err };
+    var bb = lin ? b : eB / xB, aa = lin ? a : 0, baseAj, repRef, res = { errores: [], avisos: av, modo: norm ? 'normalizado' : 'evitado' };
+    if (norm) {
+      var bRr = lin ? bR : eR / xR, aRr = lin ? aR : 0;
+      baseAj = aa + bb * xN + nr; repRef = aRr + bRr * xN;
+      res.aRep = aRr; res.bRep = bRr; res.xN = xN;
+    } else {
+      baseAj = aa + bb * xR + nr; repRef = eR;
+      res.desglose = { dif: eB - eR, rut: aa + bb * xR - eB, nr: nr };
+    }
+    if (!(baseAj > 0)) return { errores: ['La energía de línea base ajustada resulta 0 o negativa: revisá la constante, la pendiente y los ajustes.'] };
+    var ahorro = baseAj - repRef;
+    res.baseAj = baseAj; res.repRef = repRef; res.ahorro = ahorro; res.pct = ahorro / baseAj; res.usd = ahorro * tarifa; res.tco2 = ahorro * fe; res.a = aa; res.b = bb; res.nr = nr; res.eB = eB; res.eR = eR;
+    if (lin && isFinite(xB) && xB >= 0) {
+      var mB = aa + bb * xB;
+      if (Math.abs(mB - eB) / eB > 0.05) av.push('El modelo estima ' + mB.toFixed(1) + ' en el período de línea base y se midieron ' + eB.toFixed(1) + ' (diferencia de ' + (100 * (mB - eB) / eB).toFixed(1) + ' %): revisá que el modelo corresponda a ese período.');
+    }
+    if (res.desglose && res.desglose.dif * ahorro < 0) av.push(ahorro > 0 ? 'Sin ajustes parecería que el consumo aumentó; al llevar la línea base a las condiciones del período de reporte aparece un ahorro. Documentá el ajuste.' : 'Sin ajustes parecería que hubo ahorro; al llevar la línea base a las condiciones del período de reporte el consumo resulta mayor al esperado.');
+    if (ahorro < 0) av.push('Ahorro negativo: el consumo del período de reporte supera la línea base ajustada.');
+    av.push('Resultado puntual. El IPMVP pide informar también la incertidumbre del ahorro (modelo, medición, muestreo): para el modelo, usá la calculadora de línea base por regresión (intervalo de predicción).');
+    return res;
+  };
+
+  /* 55. Línea base por regresión lineal simple: E = a + b·X, con estadísticos de validación */
+  C.mvLineaBase = function (p) {
+    var err = [], av = [];
+    var todas = rows(p.filas).map(function (r) { return { x: num(r.x), y: num(r.y) }; });
+    var f = todas.filter(function (r) { return isFinite(r.x) && isFinite(r.y); });
+    var vacias = todas.filter(function (r) { return !isFinite(r.x) && !isFinite(r.y); }).length;
+    if (todas.length - f.length - vacias > 0) err.push('Hay filas con solo uno de los dos valores: completalas o quitalas.');
+    if (f.length < 6) err.push('Cargá al menos 6 pares de datos (idealmente 12 o más, que cubran un ciclo operativo completo).');
+    if (err.length) return { errores: err };
+    var n = f.length, i, mx = 0, my = 0;
+    f.forEach(function (r) { mx += r.x / n; my += r.y / n; });
+    var sxx = 0, sxy = 0, syy = 0, xmin = Infinity, xmax = -Infinity;
+    f.forEach(function (r) { sxx += Math.pow(r.x - mx, 2); sxy += (r.x - mx) * (r.y - my); syy += Math.pow(r.y - my, 2); if (r.x < xmin) xmin = r.x; if (r.x > xmax) xmax = r.x; });
+    if (!(sxx > 0)) return { errores: ['La variable independiente no varía: no se puede ajustar una recta.'] };
+    if (!(my > 0)) return { errores: ['La energía media debe ser positiva.'] };
+    var b = sxy / sxx, a = my - b * mx, nu = n - 2, sse = 0, sumRes = 0, res = [];
+    f.forEach(function (r) { var e = r.y - (a + b * r.x); res.push(e); sse += e * e; sumRes += e; });
+    var s = Math.sqrt(sse / nu), r2 = syy > 0 ? sxy * sxy / (sxx * syy) : NaN;
+    var perfecto = s < 1e-9 * my;
+    var cv = s / my, nmbe = sumRes / (nu * my); if (Math.abs(nmbe) < 1e-12) nmbe = 0;
+    var seB = s / Math.sqrt(sxx), seA = s * Math.sqrt(1 / n + mx * mx / sxx);
+    var tB = perfecto ? NaN : b / seB, tA = perfecto ? NaN : a / seA, tcrit = tInv(0.975, nu);
+    var dw = NaN; if (sse > 0) { var num2 = 0; for (i = 1; i < n; i++) num2 += Math.pow(res[i] - res[i - 1], 2); dw = num2 / sse; }
+    var outl = [];
+    if (!perfecto) f.forEach(function (r, k) { var h = 1 / n + Math.pow(r.x - mx, 2) / sxx; if (Math.abs(res[k] / (s * Math.sqrt(1 - h))) > 2.5) outl.push(k + 1); });
+    var horaria = p.frec === 'horaria', uCV = horaria ? 0.30 : 0.15, uNM = horaria ? 0.10 : 0.05;
+    var checks = [
+      { n: 'R²', v: r2, crit: '≥ 0,75', ok: r2 >= 0.75 },
+      { n: 'Estadístico t de la pendiente', v: tB, crit: '|t| > ' + tcrit.toFixed(2) + ' (95 %)', ok: perfecto ? true : Math.abs(tB) > tcrit },
+      { n: 'CV(RMSE)', v: cv, crit: '≤ ' + (uCV * 100).toFixed(0) + ' %', ok: cv <= uCV, pct: true },
+      { n: 'NMBE', v: nmbe, crit: '|NMBE| ≤ ' + (uNM * 100).toFixed(0) + ' %', ok: Math.abs(nmbe) <= uNM, pct: true }
+    ];
+    var cumple = checks.every(function (c) { return c.ok; });
+    var out = { errores: [], avisos: av, n: n, nu: nu, a: a, b: b, r2: r2, r2aj: 1 - (1 - r2) * (n - 1) / nu, s: s, cv: cv, nmbe: nmbe, seA: seA, seB: seB, tA: tA, tB: tB, tcrit: tcrit, dw: dw, outl: outl, checks: checks, cumple: cumple, uCV: uCV, uNM: uNM, media: my, mediaX: mx, datos: f, recta: [[xmin, a + b * xmin], [xmax, a + b * xmax]], xmin: xmin, xmax: xmax, pred: null };
+    var xR = num(p.xRep);
+    if (isFinite(xR)) {
+      var yh = a + b * xR, half = tcrit * s * Math.sqrt(1 + 1 / n + Math.pow(xR - mx, 2) / sxx);
+      out.pred = { x: xR, y: yh, lo: yh - half, hi: yh + half, half: half };
+      if (xR < xmin || xR > xmax) av.push('La condición del período de reporte está fuera del rango de la línea base (' + xmin + ' a ' + xmax + '): es una extrapolación y el IPMVP desaconseja usarla sin respaldo.');
+    }
+    if (vacias > 0) av.push('Se ignoraron ' + vacias + ' filas vacías.');
+    if (!horaria && n < 12) av.push('Con datos mensuales el IPMVP recomienda que la línea base cubra un ciclo operativo completo (por ejemplo, 12 meses); con ' + n + ' datos el modelo puede no representar todas las condiciones.');
+    if (perfecto) av.push('Ajuste casi perfecto (datos sintéticos o duplicados): los estadísticos t no son informativos.');
+    if (outl.length) av.push('Posibles datos atípicos (residuo estudentizado > 2,5) en las filas ' + outl.join(', ') + ': revisalos antes de aceptar el modelo.');
+    if (isFinite(dw) && (dw < 1.5 || dw > 2.5)) av.push('Durbin–Watson = ' + dw.toFixed(2) + ' (cerca de 2 indica residuos sin autocorrelación; se asume que las filas están en orden cronológico): ' + (dw < 1.5 ? 'posible autocorrelación positiva, que subestima la incertidumbre.' : 'posible autocorrelación negativa.'));
+    av.push('Con ajuste por mínimos cuadrados con ordenada, el NMBE del período de ajuste es cero por construcción; es informativo cuando se evalúa el modelo con datos que no se usaron para ajustarlo. Los umbrales son referencias usuales (ASHRAE Guideline 14): confirmalos con la edición vigente y con lo que exija tu contrato.');
+    return out;
+  };
+
+  /* 56. Selector de opción de M&V del IPMVP (A, B, C o D) */
+  var MV_OPC = {
+    A: { nombre: 'A · Aislamiento de la mejora: medición de parámetros clave', que: 'Se mide el parámetro clave (por ejemplo, potencia) y el resto (horas de uso, carga) se estipula con justificación.', costo: 'Bajo a medio', req: 'Frontera de medición definida; los valores estipulados se justifican y su incertidumbre se informa.' },
+    B: { nombre: 'B · Aislamiento de la mejora: medición de todos los parámetros', que: 'Se mide en forma continua o periódica todo lo que define el consumo del sistema dentro de la frontera.', costo: 'Medio a alto', req: 'Medidores en la frontera durante la línea base y todo el período de reporte; registro de operación.' },
+    C: { nombre: 'C · Toda la instalación', que: 'Se usa el medidor general de la instalación y se ajusta la línea base por regresión con variables como producción o clima.', costo: 'Bajo a medio (si ya hay medidor con historial)', req: 'Historial de línea base (por ejemplo, 12 meses), modelo de regresión validado y ahorro esperado suficientemente grande frente a la variación natural del consumo.' },
+    D: { nombre: 'D · Simulación calibrada', que: 'Se reconstruye el consumo con un modelo de simulación calibrado con datos medidos; sirve cuando no hay línea base medida.', costo: 'Medio a alto (modelado y calibración)', req: 'Modelo calibrado con datos reales; ASHRAE 14 usa CV(RMSE) ≤ 15 % y NMBE ≤ ±5 % con datos mensuales.' }
+  };
+  C.mvOpcion = function (p) {
+    var err = [], av = [], why = [];
+    var base = p.baseDatos === 'si', aisla = p.aisla === 'si', gen = p.medidorGen === 'si', carga = p.carga === 'const', pocos = p.cambios !== 'muchos', estip = p.estip === 'alto';
+    var frac = num(p.fraccion);
+    if (base && gen && !(frac > 0 && frac <= 100)) err.push('Indicá el ahorro esperado como porcentaje del consumo del medidor general (mayor que 0 y hasta 100).');
+    if (err.length) return { errores: err };
+    var cViable = gen && frac >= 10, op, alt = [];
+    if (!base) {
+      op = 'D';
+      why.push('No hay datos medidos de línea base confiables (instalación nueva o datos inutilizables): no se puede comparar antes y después con mediciones, y la opción D reconstruye la línea base con un modelo calibrado.');
+      if (aisla) av.push('Si todavía se puede medir antes de intervenir, medí la línea base en la frontera del sistema: eso habilita las opciones A o B, que suelen ser más simples de auditar.');
+    } else if (cViable && pocos) {
+      op = 'C';
+      why.push('Hay medidor general con historial y se espera un ahorro de ' + frac + ' % de su consumo, suficiente para distinguirlo de la variación normal.');
+      why.push('Se esperan pocos cambios ajenos a la mejora, de modo que los ajustes quedan a cargo de la regresión.');
+      if (aisla) alt.push(carga && estip ? 'A' : 'B');
+    } else if (aisla) {
+      op = carga && estip ? 'A' : 'B';
+      why.push('La mejora puede aislarse con una frontera de medición.');
+      why.push(op === 'A' ? 'La carga es constante o previsible y los parámetros no medidos se pueden estipular con confianza, así que alcanza con medir el parámetro clave.' : 'La carga varía o los parámetros no medidos son difíciles de estipular, por lo que conviene medir todos los parámetros dentro de la frontera.');
+      if (gen && frac < 10) why.push('Con un ahorro esperado de ' + frac + ' % del medidor general, la opción C no distinguiría el ahorro de la variación del consumo.');
+      if (cViable && !pocos) { alt.push('C'); av.push('La opción C quedaría expuesta a los muchos cambios esperados en la instalación (habría que cuantificar ajustes no rutinarios).'); }
+    } else if (cViable) {
+      op = 'C';
+      why.push('La mejora no puede aislarse con medición, pero el medidor general tiene historial y el ahorro esperado (' + frac + ' %) es detectable.');
+      av.push('Con muchos cambios en la instalación, cada uno requerirá un ajuste no rutinario documentado; evaluá instalar submedidores para pasar a B.');
+    } else {
+      op = 'D';
+      why.push('La mejora no puede aislarse con medición' + (gen ? ' y el ahorro esperado (' + frac + ' %) es demasiado pequeño para verlo en el medidor general.' : ' y no hay medidor general con historial.'));
+      av.push('Antes de ir a simulación calibrada, evaluá instalar submedidores en la frontera de la mejora: habilitaría la opción B.');
+    }
+    if (op === 'C') av.push('La opción C requiere un modelo de regresión validado (calculadora de línea base por regresión) y medir durante todo el período de reporte.');
+    if (op === 'A') av.push('En la opción A, la incertidumbre de los parámetros estipulados debe analizarse y declararse en el plan de M&V.');
+    av.push('El plan de M&V debe documentar la frontera de medición, el período de línea base, las variables independientes, los ajustes y la incertidumbre. El costo de M&V debe ser razonable frente al ahorro esperado.');
+    return { errores: [], avisos: av, op: op, alt: alt, motivos: why, info: MV_OPC, ficha: MV_OPC[op] };
+  };
+
   root.H3LCalc = C;
   if (typeof module !== 'undefined' && module.exports) module.exports = C;
 })(typeof globalThis !== 'undefined' ? globalThis : this);
@@ -2607,6 +2751,65 @@ html[data-embed] .shell{padding-block-start:0}
     cond('Altura de saturación: Sw decrece con la altura', rj.alt.curva.every(function (c, i, a) { return i === 0 || c.sw <= a[i - 1].sw + 1e-12; }));
     cond('Altura de saturación: Sw = 1 en el FWL', rj.alt.curva[0].sw === 1);
     cond('Tipos de roca: menos de 6 plugs → error', C.rocas({ plugs: plugs.slice(0, 4), nclases: 2 }).errores.length > 0);
+    // ===== M&V según IPMVP =====
+    cerca('t de Student: t(0,975; 4 gl) = 2,7764', C._util.tInv(0.975, 4), 2.7764, 0.01);
+    cerca('t de Student: t(0,975; 10 gl) = 2,2281', C._util.tInv(0.975, 10), 2.2281, 0.005);
+    cerca('t de Student: t(0,975; 30 gl) = 2,0423', C._util.tInv(0.975, 30), 2.0423, 0.003);
+    var mvA = { modo: 'evitado', modelo: 'prop', eBase: 1000, xBase: 100, eRep: 1100, xRep: 130, ajNR: 0, tarifa: 80, fe: 0.35 };
+    r = C.mvAhorro(mvA);
+    cerca('Ahorro evitado: línea base ajustada = 1000/100·130 = 1300', r.baseAj, 1300, 1e-9);
+    cerca('Ahorro evitado: ahorro = 1300 − 1100 = 200', r.ahorro, 200, 1e-9);
+    cerca('Ahorro evitado: fracción = 200/1300', r.pct, 200 / 1300, 1e-12);
+    cerca('Ahorro evitado: la diferencia simple (−100) cambia de signo al ajustar', r.desglose.dif, -100, 1e-9);
+    cerca('Ahorro evitado: diferencia simple + ajuste rutinario + ajuste no rutinario = ahorro', r.desglose.dif + r.desglose.rut + r.desglose.nr, r.ahorro, 1e-9);
+    cerca('Ahorro evitado: costo evitado = 200·80', r.usd, 16000, 1e-9);
+    cerca('Ahorro evitado: emisiones evitadas = 200·0,35', r.tco2, 70, 1e-9);
+    r = C.mvAhorro(Object.assign({}, mvA, { ajNR: 50 }));
+    cerca('Ajuste no rutinario de +50 en la línea base suma 50 al ahorro', r.ahorro, 250, 1e-9);
+    r = C.mvAhorro({ modo: 'evitado', modelo: 'lineal', a: 200, b: 8, xBase: 100, eBase: 1000, eRep: 1100, xRep: 130 });
+    cerca('Ahorro con modelo lineal: 200 + 8·130 − 1100 = 140', r.ahorro, 140, 1e-9);
+    r = C.mvAhorro({ modo: 'normalizado', modelo: 'prop', eBase: 1000, xBase: 100, eRep: 1100, xRep: 130, xNorm: 120 });
+    cerca('Ahorro normalizado: 1000/100·120 − 1100/130·120', r.ahorro, 1200 - 1100 / 130 * 120, 1e-9);
+    cond('Ahorro: línea base sin energía → error', C.mvAhorro(Object.assign({}, mvA, { eBase: 0 })).errores.length > 0);
+    cond('Ahorro: modelo proporcional sin variable de línea base → error', C.mvAhorro(Object.assign({}, mvA, { xBase: '' })).errores.length > 0);
+    var mvX = [82, 95, 110, 120, 104, 98, 90, 115, 125, 100, 88, 108], mvY = [870, 956, 1072, 1157, 1038, 981, 918, 1114, 1194, 995, 913, 1058];
+    var mvF = mvX.map(function (x, i) { return { x: x, y: mvY[i] }; });
+    r = C.mvLineaBase({ filas: mvF, frec: 'mensual', xRep: 130 });
+    cerca('Línea base: pendiente b', r.b, 7.64820988, 1e-6);
+    cerca('Línea base: constante a', r.a, 235.03839993, 1e-5);
+    cerca('Línea base: R²', r.r2, 0.99740064, 1e-7);
+    cerca('Línea base: error estándar s (n − 2 gl)', r.s, 5.41706676, 1e-6);
+    cerca('Línea base: CV(RMSE) = s/media', r.cv, 0.00529959, 1e-7);
+    cerca('Línea base: t de la pendiente', r.tB, 61.9443, 1e-3);
+    cerca('Línea base: Durbin–Watson', r.dw, 2.20735, 1e-4);
+    cerca('Línea base: NMBE ≈ 0 con mínimos cuadrados', r.nmbe, 0, 1e-12);
+    cerca('Línea base: t crítico con 10 gl', r.tcrit, 2.2281, 0.005);
+    cerca('Línea base: predicción en x = 130', r.pred.y, 1229.30568, 1e-4);
+    cerca('Línea base: semiancho del intervalo de predicción 95 %', r.pred.half, 14.606, 0.05);
+    cond('Línea base: el modelo de ejemplo cumple los cuatro criterios mensuales', r.cumple === true);
+    r = C.mvLineaBase({ filas: [1, 2, 3, 4, 5, 6].map(function (x, i) { return { x: x, y: [2.1, 3.9, 6.2, 7.8, 10.1, 12.2][i] }; }), frec: 'mensual' });
+    cerca('Línea base (6 puntos): b = 2,02', r.b, 2.02, 1e-9);
+    cerca('Línea base (6 puntos): R² = 0,998211', r.r2, 0.99821067, 1e-7);
+    cond('Línea base: con menos de 12 datos mensuales avisa', r.avisos.some(function (a) { return a.indexOf('ciclo operativo') >= 0; }));
+    r = C.mvLineaBase({ filas: mvF.map(function (d) { return { x: d.x, y: 3 + 2 * d.x }; }), frec: 'mensual' });
+    cerca('Línea base: datos exactos dan R² = 1', r.r2, 1, 1e-12);
+    cond('Línea base: menos de 6 datos → error', C.mvLineaBase({ filas: mvF.slice(0, 5), frec: 'mensual' }).errores.length > 0);
+    cond('Línea base: X constante → error', C.mvLineaBase({ filas: mvF.map(function (d) { return { x: 5, y: d.y }; }), frec: 'mensual' }).errores.length > 0);
+    cond('Línea base: extrapolar fuera del rango avisa', C.mvLineaBase({ filas: mvF, frec: 'mensual', xRep: 200 }).avisos.some(function (a) { return a.indexOf('extrapolación') >= 0; }));
+    var mvNoisy = mvF.map(function (d, i) { return { x: d.x, y: d.y + (i === 4 ? 140 : 0) }; });
+    cond('Línea base: un dato muy desviado se marca como atípico', C.mvLineaBase({ filas: mvNoisy, frec: 'mensual' }).outl.indexOf(5) >= 0);
+    cond('Línea base: criterio horario más laxo (30 % y 10 %)', C.mvLineaBase({ filas: mvF, frec: 'horaria' }).uCV === 0.30);
+    var op = function (o) { return C.mvOpcion(Object.assign({ baseDatos: 'si', medidorGen: 'si', fraccion: 20, aisla: 'si', carga: 'const', estip: 'alto', cambios: 'pocos' }, o)); };
+    cond('Opción: sin línea base medida → D', op({ baseDatos: 'no' }).op === 'D');
+    cond('Opción: medidor general, ahorro ≥ 10 % y pocos cambios → C', op({}).op === 'C');
+    cond('Opción: ahorro < 10 %, aislable, carga constante y estipulable → A', op({ fraccion: 5 }).op === 'A');
+    cond('Opción: aislable con carga variable → B', op({ fraccion: 5, carga: 'var' }).op === 'B');
+    cond('Opción: aislable, parámetros difíciles de estipular → B', op({ fraccion: 5, estip: 'bajo' }).op === 'B');
+    cond('Opción: muchos cambios y aislable → B con C como alternativa', op({ cambios: 'muchos', carga: 'var' }).op === 'B' && op({ cambios: 'muchos', carga: 'var' }).alt.indexOf('C') >= 0);
+    cond('Opción: no aislable y sin medidor general → D', op({ aisla: 'no', medidorGen: 'no' }).op === 'D');
+    cond('Opción: no aislable con ahorro < 10 % → D', op({ aisla: 'no', fraccion: 5 }).op === 'D');
+    cond('Opción: no aislable con ahorro ≥ 10 % → C', op({ aisla: 'no', cambios: 'muchos' }).op === 'C');
+    cond('Opción: medidor general sin porcentaje válido → error', op({ fraccion: 0 }).errores.length > 0);
     return out;
   }
   var P = { correr: correr };
@@ -3814,6 +4017,74 @@ window.H3L_ESTR = {
     }
   });
 
+  /* 54. Ahorro verificado de energía (IPMVP) */
+  tool({
+    id: 'mvahorro', grupo: 'Transición energética', nombre: 'Ahorro verificado de energía (IPMVP)', etapas: 'D E', pregunta: '¿Cuánta energía, costo y CO₂ se ahorró de verdad, una vez ajustadas las condiciones de operación?',
+    ficha: { metodo: 'Ecuación básica del IPMVP: ahorro = energía de la línea base − energía del período de reporte ± ajustes. Ahorro evitado: la línea base se lleva a las condiciones del período de reporte con el modelo (E = a + b·X, o proporcional a X con a = 0 y b = E_base/X_base) y se suma el ajuste no rutinario. Ahorro normalizado: línea base y período de reporte se llevan a un mismo conjunto de condiciones normales. El costo y las emisiones evitadas se obtienen multiplicando el ahorro por la tarifa y el factor de emisión.', fuente: 'EVO, International Performance Measurement and Verification Protocol (IPMVP), Core Concepts: ecuación básica de M&V, ajustes rutinarios y no rutinarios, ahorro evitado y normalizado.', limites: ['Una sola variable independiente; para varias (producción y clima, por ejemplo) ajustá antes el modelo y cargá a y b.', 'Resultado puntual: no incluye la incertidumbre del modelo, de la medición ni de los valores estipulados.', 'El ajuste no rutinario lo cuantificás vos (cambio de alcance, de horario, de equipos); la herramienta solo lo suma a la línea base.', 'Los factores de emisión y la tarifa deben tener fuente y año; los valores por defecto son de ejemplo.'], unidades: 'Energía en MWh por período (la misma duración en línea base y reporte), variable independiente en la unidad que uses (producción, grados-día), tarifa en USD/MWh, factor de emisión en tCO₂e/MWh.' },
+    pasos: [
+      { titulo: 'Enfoque y modelo', intro: 'Elegí cómo comparar los períodos y cómo se relaciona el consumo con la variable de operación.', campos: [sel_('modo', 'Tipo de ahorro', [['evitado', 'Ahorro evitado: línea base llevada a las condiciones del período de reporte'], ['normalizado', 'Ahorro normalizado: ambos períodos llevados a condiciones normales']], 'evitado'), sel_('modelo', 'Modelo del consumo', [['prop', 'Proporcional a la variable (intensidad energética)'], ['lineal', 'Lineal: E = a + b·X (parte fija más parte variable)']], 'prop')] },
+      { titulo: 'Datos medidos', intro: 'Energía medida en cada período y valor de la variable de operación. Los datos de ejemplo son ilustrativos.', campos: [num_('eBase', 'Energía medida en la línea base', 'MWh', 1000), num_('xBase', 'Variable de operación en la línea base', 'unidades', 100, 'Obligatoria con el modelo proporcional; opcional con el lineal (sirve para chequear el modelo).'), num_('a', 'Constante del modelo de línea base (a)', 'MWh/período', 200, 'Por ejemplo, de la calculadora de línea base por regresión.', { si: function (v) { return v.modelo === 'lineal'; } }), num_('b', 'Pendiente del modelo de línea base (b)', 'MWh/unidad', 8, null, { si: function (v) { return v.modelo === 'lineal'; } }), num_('eRep', 'Energía medida en el período de reporte', 'MWh', 1100), num_('xRep', 'Variable de operación en el período de reporte', 'unidades', 130), num_('xNorm', 'Variable de operación en condiciones normales', 'unidades', 120, 'Condición típica elegida y justificada en el plan de M&V.', { si: function (v) { return v.modo === 'normalizado'; } }), num_('aRep', 'Constante del modelo del período de reporte (a)', 'MWh/período', 150, null, { si: function (v) { return v.modo === 'normalizado' && v.modelo === 'lineal'; } }), num_('bRep', 'Pendiente del modelo del período de reporte (b)', 'MWh/unidad', 7, null, { si: function (v) { return v.modo === 'normalizado' && v.modelo === 'lineal'; } })] },
+      { titulo: 'Ajustes, costo y emisiones', intro: 'El ajuste no rutinario es la energía que hay que sumar (o restar, si es negativo) a la línea base por cambios de alcance durante el reporte. Costo y emisiones son opcionales.', campos: [num_('ajNR', 'Ajuste no rutinario sobre la línea base', 'MWh', 0, 'Positivo si en el reporte se agregó carga que no estaba en la línea base.'), num_('tarifa', 'Tarifa de la energía', 'USD/MWh', 80), num_('fe', 'Factor de emisión', 'tCO₂e/MWh', 0.35, 'Valor de ejemplo: usá el factor de tu red o combustible con fuente y año.')] }
+    ],
+    calc: function (v) { return C.mvAhorro(v); },
+    render: function (r, v) {
+      var out = kpis([kpi('Ahorro de energía', fmt(r.ahorro, 1), 'MWh', 'main'), kpi('Sobre la línea base ajustada', fmt(r.pct * 100, 1), '%'), kpi('Costo evitado', fmt(r.usd, 0), 'USD'), kpi('Emisiones evitadas', fmt(r.tco2, 1), 'tCO₂e')]);
+      out += hbars([{ label: 'Línea base ajustada', val: r.baseAj, txt: fmt(r.baseAj, 1) + ' MWh' }, { label: r.modo === 'evitado' ? 'Medido en reporte' : 'Reporte normalizado', val: r.repRef, txt: fmt(r.repRef, 1) + ' MWh', cls: 'ok' }], Math.max(r.baseAj, r.repRef));
+      if (r.desglose) {
+        var d = r.desglose;
+        out += h3('De dónde sale el ahorro') + tabla(['Concepto', 'MWh'], [['Diferencia simple (línea base medida − reporte medido)', fmt(d.dif, 1)], ['Ajuste rutinario (llevar la línea base a las condiciones del reporte)', fmt(d.rut, 1)], ['Ajuste no rutinario', fmt(d.nr, 1)], ['<b>Ahorro</b>', '<b>' + fmt(r.ahorro, 1) + '</b>']]);
+      }
+      var pasos = r.modo === 'evitado'
+        ? [['Línea base ajustada', 'E_base,aj = a + b·X_reporte + ajuste no rutinario = ' + fmt(r.a, 2) + ' + ' + fmt(r.b, 4) + ' × ' + fmt(num(v.xRep), 1) + ' + ' + fmt(r.nr, 1) + ' = ' + fmt(r.baseAj, 1) + ' MWh'], ['Ahorro', 'Ahorro = E_base,aj − E_reporte = ' + fmt(r.baseAj, 1) + ' − ' + fmt(r.eR, 1) + ' = ' + fmt(r.ahorro, 1) + ' MWh']]
+        : [['Línea base normalizada', 'E_base,norm = a + b·X_normal + ajuste = ' + fmt(r.baseAj, 1) + ' MWh'], ['Reporte normalizado', 'E_rep,norm = a_rep + b_rep·X_normal = ' + fmt(r.repRef, 1) + ' MWh'], ['Ahorro', 'Ahorro = E_base,norm − E_rep,norm = ' + fmt(r.ahorro, 1) + ' MWh']];
+      pasos.push(['Costo y emisiones', 'USD = ahorro × tarifa = ' + fmt(r.usd, 0) + ' ; tCO₂e = ahorro × factor de emisión = ' + fmt(r.tco2, 1)]);
+      return out + calcBlock(pasos);
+    }
+  });
+
+  /* 55. Línea base de energía por regresión (IPMVP) */
+  tool({
+    id: 'mvbase', grupo: 'Transición energética', nombre: 'Línea base de energía por regresión (IPMVP)', etapas: 'D E', pregunta: '¿Es válido el modelo de consumo de la línea base y qué energía habría consumido la instalación en las condiciones del reporte?',
+    ficha: { metodo: 'Regresión lineal simple por mínimos cuadrados E = a + b·X. Estadísticos: R², error estándar s = √(SSE/(n − 2)), CV(RMSE) = s/Ē, NMBE = Σ(E − Ê)/((n − 2)·Ē), estadístico t de la pendiente contra el t crítico del 95 % (n − 2 grados de libertad, aproximación de Cornish–Fisher), Durbin–Watson de los residuos y residuos estudentizados. Intervalo de predicción del 95 % para una condición dada: Ê ± t·s·√(1 + 1/n + (X − X̄)²/Sxx).', fuente: 'EVO, IPMVP Core Concepts (modelos de regresión y estadísticos de validación); ASHRAE Guideline 14, Measurement of Energy, Demand and Water Savings (CV(RMSE) y NMBE).', limites: ['Una sola variable independiente. Si el consumo depende de varias, hace falta una regresión múltiple.', 'Umbrales de referencia (R² ≥ 0,75; CV(RMSE) ≤ 15 % y NMBE ≤ ±5 % mensual; 30 % y 10 % horario): confirmalos con la edición vigente y con lo que pida tu contrato.', 'Los datos deben estar en orden cronológico para que Durbin–Watson tenga sentido, y cubrir un ciclo operativo completo.', 'No reemplaza el criterio del profesional: un modelo que cumple los estadísticos puede no tener sentido físico.'], unidades: 'Energía y variable independiente en las unidades que uses, con el mismo intervalo de tiempo (mensual, diario u horario) en todas las filas.' },
+    pasos: [
+      { titulo: 'Datos de la línea base', intro: 'Un par por período (variable de operación y energía medida), en orden cronológico. Los datos de ejemplo son sintéticos e ilustrativos.', campos: [sel_('frec', 'Intervalo de los datos', [['mensual', 'Mensual (criterio CV(RMSE) ≤ 15 %, NMBE ≤ ±5 %)'], ['horaria', 'Horario o diario (criterio CV(RMSE) ≤ 30 %, NMBE ≤ ±10 %)']], 'mensual'), { id: 'filas', tipo: 'tabla', label: 'Datos', cols: [{ id: 'x', label: 'Variable X', unit: 'unidades' }, { id: 'y', label: 'Energía', unit: 'MWh' }], def: [[82, 870], [95, 956], [110, 1072], [120, 1157], [104, 1038], [98, 981], [90, 918], [115, 1114], [125, 1194], [100, 995], [88, 913], [108, 1058]].map(function (a) { return { x: a[0], y: a[1] }; }) }] },
+      { titulo: 'Condición del período de reporte (opcional)', intro: 'Con la variable del período de reporte se calcula la energía de línea base ajustada, con su intervalo de predicción del 95 %. Dejalo vacío para solo validar el modelo.', campos: [num_('xRep', 'Variable de operación en el período de reporte', 'unidades', 118)] }
+    ],
+    calc: function (v) { return C.mvLineaBase(v); },
+    render: function (r) {
+      var out = kpis([kpi('R²', fmt(r.r2, 4)), kpi('CV(RMSE)', fmt(r.cv * 100, 2), '%'), kpi('NMBE', fmt(r.nmbe * 100, 2), '%'), kpi('t de la pendiente', fmt(r.tB, 1)), kpi('Modelo', r.cumple ? 'Cumple los criterios' : 'No cumple todos', '', r.cumple ? 'main' : '')]);
+      if (r.pred) out += kpis([kpi('Línea base ajustada', fmt(r.pred.y, 1), 'MWh', 'main'), kpi('Intervalo de predicción 95 %', fmt(r.pred.lo, 1) + ' a ' + fmt(r.pred.hi, 1), 'MWh'), kpi('Semiancho', fmt(r.pred.half / r.pred.y * 100, 2), '% de la línea base')]);
+      out += h3('Chequeo del modelo') + tabla(['Criterio', 'Valor', 'Referencia', 'Resultado'], r.checks.map(function (c) { return [esc(c.n), c.pct ? fmt(c.v * 100, 2) + ' %' : fmt(c.v, 3), esc(c.crit), badge(c.ok ? 'Cumple' : 'No cumple', c.ok ? 'ok' : 'bad')]; }));
+      var series = [{ pts: r.datos.map(function (d) { return [d.x, d.y]; }), nombre: 'Datos', nl: true, pt: true }, { pts: r.recta, nombre: 'Modelo', c: 1 }];
+      if (r.pred) series.push({ pts: [[r.pred.x, r.pred.y]], nombre: 'Línea base ajustada', nl: true, pt: true, c: 2 });
+      out += lineChart({ series: series, xl: 'Variable de operación X', yl: 'Energía (MWh)', alt: 'Datos de línea base y recta de regresión' });
+      out += tabla(['Parámetro', 'Valor', 'Error estándar', 't'], [['Constante a', fmt(r.a, 3), fmt(r.seA, 3), fmt(r.tA, 2)], ['Pendiente b', fmt(r.b, 4), fmt(r.seB, 4), fmt(r.tB, 2)]]);
+      out += nota('n = ' + r.n + ' datos · ' + r.nu + ' grados de libertad · t crítico (95 %) = ' + fmt(r.tcrit, 3) + ' · Durbin–Watson = ' + fmt(r.dw, 2) + ' · R² ajustado = ' + fmt(r.r2aj, 4));
+      out += go('Usar este modelo en el ahorro verificado', 'useMV');
+      var cs = [['Modelo', 'E = a + b·X = ' + fmt(r.a, 3) + ' + ' + fmt(r.b, 4) + '·X'], ['Error estándar', 's = √(SSE/(n − 2)) = ' + fmt(r.s, 3) + ' MWh'], ['CV(RMSE)', 's/Ē = ' + fmt(r.s, 3) + '/' + fmt(r.media, 1) + ' = ' + fmt(r.cv * 100, 2) + ' %'], ['t de la pendiente', 'b/EE(b) = ' + fmt(r.b, 4) + '/' + fmt(r.seB, 4) + ' = ' + fmt(r.tB, 2)]];
+      if (r.pred) cs.push(['Predicción', 'Ê = a + b·X_reporte = ' + fmt(r.pred.y, 1) + ' ± ' + fmt(r.pred.half, 1) + ' MWh (95 %)']);
+      return out + calcBlock(cs);
+    }
+  });
+
+  /* 56. Opción de M&V según IPMVP */
+  tool({
+    id: 'mvopc', grupo: 'Transición energética', nombre: 'Opción de M&V según IPMVP (A, B, C o D)', etapas: 'V C D', pregunta: '¿Qué opción de medición y verificación conviene para esta mejora de eficiencia energética?',
+    ficha: { metodo: 'Árbol de decisión sobre las cuatro opciones del IPMVP: D si no hay línea base medida; C si hay medidor general con historial, el ahorro esperado es al menos 10 % de su consumo y se esperan pocos cambios ajenos a la mejora; A o B si la mejora puede aislarse con una frontera de medición (A si la carga es constante y los parámetros no medidos se pueden estipular con respaldo, B en caso contrario); si no se puede aislar, C con ajustes no rutinarios cuando el ahorro es detectable y D en caso contrario.', fuente: 'EVO, IPMVP Core Concepts: opciones A, B, C y D y criterios de selección.', limites: ['Es una guía de apoyo: la elección final depende de la frontera, el presupuesto y la incertidumbre aceptable, y debe quedar en el plan de M&V.', 'El umbral de 10 % para la opción C es una regla práctica: con ahorros menores es difícil distinguirlos de la variación natural del consumo.', 'Los costos de M&V son cualitativos y orientativos.', 'Un proyecto puede combinar opciones en distintas fronteras.'], unidades: 'Porcentaje del consumo del medidor general; el resto son respuestas de selección.' },
+    pasos: [
+      { titulo: 'Situación de partida', intro: 'Qué datos y medidores existen antes de intervenir.', campos: [sel_('baseDatos', '¿Hay datos medidos de la situación previa a la mejora?', [['si', 'Sí, hay datos medidos confiables'], ['no', 'No (instalación nueva o datos no confiables)']], 'si'), sel_('medidorGen', '¿Hay un medidor general de la instalación con historial?', [['si', 'Sí'], ['no', 'No']], 'si'), (function (f) { f.si = function (v) { return v.medidorGen === 'si' && v.baseDatos === 'si'; }; return f; })(num_('fraccion', 'Ahorro esperado sobre el consumo del medidor general', '%', 15, 'Ahorro esperado de la mejora dividido por el consumo que mide ese medidor.')), sel_('aisla', '¿La mejora puede aislarse con una frontera de medición?', [['si', 'Sí, se puede medir solo ese sistema o equipo'], ['no', 'No, comparte consumo con otros sistemas']], 'si')] },
+      { titulo: 'Características de la mejora', intro: 'Cómo se comporta la carga y qué otros cambios se esperan.', campos: [sel_('carga', 'Carga del sistema mejorado', [['const', 'Constante o previsible'], ['var', 'Variable']], 'const'), sel_('estip', '¿Se pueden estipular con respaldo los parámetros que no se miden?', [['alto', 'Sí, con datos de placa, ensayos o registros'], ['bajo', 'No, hay mucha incertidumbre']], 'alto'), sel_('cambios', 'Cambios en la instalación ajenos a la mejora durante el reporte', [['pocos', 'Pocos o ninguno'], ['muchos', 'Muchos (producción, equipos, uso del edificio)']], 'pocos')] }
+    ],
+    calc: function (v) { return C.mvOpcion(v); },
+    render: function (r) {
+      var f = r.ficha, out = kpis([kpi('Opción recomendada', r.op, '', 'main'), kpi('Costo de M&V (orientativo)', esc(f.costo))].concat(r.alt.length ? [kpi('Alternativa a evaluar', r.alt.join(', '))] : []));
+      out += h3(f.nombre) + nota(esc(f.que) + ' <b>Requisitos:</b> ' + esc(f.req));
+      out += h3('Por qué') + '<ul>' + r.motivos.map(function (m) { return '<li>' + esc(m) + '</li>'; }).join('') + '</ul>';
+      out += h3('Las cuatro opciones') + tabla(['Opción', 'Qué hace', 'Costo de M&V', 'Requisitos'], ['A', 'B', 'C', 'D'].map(function (k) { var o = r.info[k]; return [(k === r.op ? badge('Recomendada', 'ok') + ' ' : '') + esc(o.nombre), esc(o.que), esc(o.costo), esc(o.req)]; }));
+      return out + calcBlock([['Criterio', 'D si no hay línea base medida · C si hay medidor general y ahorro ≥ 10 % con pocos cambios · A o B si se puede aislar · C o D en los demás casos']]);
+    }
+  });
+
   /* ---------------- estado y renderizado ---------------- */
   var ST = {}, cur = null, paso = 0, tab = 'calc';
   function campos(t) { var a = []; t.pasos.forEach(function (p) { p.campos.forEach(function (f) { a.push(f); }); }); return a; }
@@ -3972,6 +4243,7 @@ window.H3L_ESTR = {
       try { history.replaceState(null, '', '#' + (cur ? cur.id : 'inicio') + estHash()); } catch (e) { }
       renderNav(); renderMain();
     }
+    else if (act === 'useMV') { var rm = C.mvLineaBase(paraCalc(cur)); if (!rm.errores.length) { var vm = vals(tByid('mvahorro')); vm.modelo = 'lineal'; vm.a = String(+rm.a.toPrecision(6)); vm.b = String(+rm.b.toPrecision(6)); if (rm.pred) vm.xRep = String(rm.pred.x); abrir('mvahorro', 1); } }
     else if (act === 'useObg') { var ro = C.offshore(paraCalc(cur)); if (!ro.errores.length) { vals(tByid('eaton')).obg = String(+ro.grad.toPrecision(4)); abrir('eaton', 0); } }
     else if (act === 'pruebas') mostrarPruebas();
     else if (act === 'navtoggle') $('#shell').classList.toggle('navopen');
