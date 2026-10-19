@@ -3,7 +3,6 @@ wrangler.jsonc
 .github
 scripts
 CLAUDE.md
-CNAME
 .nojekyll
 .gitignore
 .git
