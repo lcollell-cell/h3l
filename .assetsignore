@@ -1,0 +1,8 @@
+wrangler.jsonc
+.assetsignore
+.github
+scripts
+CLAUDE.md
+CNAME
+.nojekyll
+.gitignore

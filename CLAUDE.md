@@ -1,0 +1,21 @@
+# H3L Global Energy: reglas de trabajo del repositorio
+
+## Ambientes
+
+- **Desarrollo y prueba: GitHub.** Todo cambio se hace en la rama `develop`. Esa rama se publica en GitHub Pages (URL de prueba) para que el dueño la revise.
+- **Produccion: Cloudflare.** Cloudflare despliega solo desde la rama `main` en https://www.h3lglobalenergy.com. El dominio no se sirve desde GitHub Pages.
+
+## Reglas
+
+1. Nunca hacer commit ni push directo a `main` sin que el dueño lo apruebe en el chat. Los cambios pasan por `develop` y luego por merge (o pull request) a `main`.
+2. El workflow `.github/workflows/update-data.yml` actualiza `data/` en `main` todos los dias habiles. Es la unica excepcion permitida. Antes de trabajar, traer esos cambios a `develop` con `git merge origin/main`.
+3. No tocar `CNAME` ni la configuracion de dominio sin instruccion expresa.
+4. No incluir nombres de los socios en el sitio ni en el brochure.
+5. El contenido (noticias, eventos, precios, cifras) debe ser real y verificado. No inventar ni simular. Lo que sea demo debe decir que es ejemplo.
+6. Los textos del sitio estan en 4 idiomas (es, en, fr, pt): todo cambio de texto se hace en los cuatro.
+7. Al cerrar una version para registro (INPI o DNDA), crear un tag con fecha en `main` (por ejemplo `registro-AAAA-MM`).
+
+## Archivos de infraestructura
+
+- `wrangler.jsonc` y `.assetsignore`: configuracion del despliegue en Cloudflare.
+- `_headers`: encabezados de seguridad de produccion. Mantener la CSP alineada con las etiquetas meta de las paginas.

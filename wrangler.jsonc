@@ -1,0 +1,8 @@
+{
+  // Produccion: Cloudflare Workers con Static Assets. Se despliega solo desde la rama main.
+  "name": "h3l-site",
+  "compatibility_date": "2026-10-19",
+  "assets": {
+    "directory": "./"
+  }
+}
