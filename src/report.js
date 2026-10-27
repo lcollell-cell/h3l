@@ -58,7 +58,7 @@ function delta(cur, prev) {
   return ` <span style="color:${d > 0 ? '#1a7f4b' : '#b42318'}">${d > 0 ? '▲' : '▼'} ${Math.abs(d)} %</span>`;
 }
 
-export async function buildReport(db, day, hosts, env) {
+export async function buildReport(db, day, hosts, env, opts = {}) {
   const ph = hosts.map(() => '?').join(',');
   const rows = (await db.prepare(`SELECT ts, type, path, sid, vid, country, lang, dev, label, svc, n, ref FROM events WHERE day=? AND host IN (${ph})`).bind(day, ...hosts).all()).results || [];
   const trend = (await db.prepare(
@@ -158,82 +158,132 @@ export async function buildReport(db, day, hosts, env) {
     if (contact) hl.push(`Intentos de contacto: ${contact}.`);
   }
 
-  /* ---- HTML ---- */
-  const th = 'padding:6px 8px;background:#0b2545;color:#fff;font-size:12px;text-align:left;font-weight:600';
-  const td = 'padding:6px 8px;border-bottom:1px solid #e5e7eb;font-size:13px;color:#111827;vertical-align:top';
-  const table = (heads, body, widths) => body.length
-    ? `<table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;margin:6px 0 4px"><tr>${heads.map((h, i) => `<th style="${th}${i ? ';text-align:right' : ''}"${widths ? ` width="${widths[i]}"` : ''}>${h}</th>`).join('')}</tr>${body.map((r) => `<tr>${r.map((c, i) => `<td style="${td}${i ? ';text-align:right' : ''}">${c}</td>`).join('')}</tr>`).join('')}</table>`
-    : '<p style="margin:6px 0;color:#6b7280;font-size:13px">Sin datos.</p>';
-  const h2 = (t) => `<h2 style="margin:22px 0 4px;font-size:15px;color:#0b2545;border-bottom:2px solid #14b8a6;padding-bottom:3px">${t}</h2>`;
-  const kpi = (label, val, sub) => `<td style="padding:10px 8px;background:#f3f6fa;border-radius:6px;text-align:center" width="25%"><div style="font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:.4px">${label}</div><div style="font-size:22px;font-weight:700;color:#0b2545;margin-top:2px">${val}</div><div style="font-size:11px;color:#6b7280;margin-top:2px">${sub || '&nbsp;'}</div></td>`;
+  /* ---- HTML con gráficos (tablas y divs con estilos en línea: se ven igual en Gmail, Outlook y Apple Mail) ---- */
+  const C = { navy: '#0B2545', ink: '#1B2A41', mute: '#6B7A90', track: '#E8EDF4', bg: '#F5F7FB', teal: '#12B5A6', blue: '#3D7BFF', coral: '#FF6B57', amber: '#FFB020', violet: '#8B5CF6' };
+  const PAL = [C.blue, C.teal, C.coral, C.amber, C.violet, '#94A3B8'];
+  const nf = (n) => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  const none = `<p style="margin:6px 0;font-size:13px;color:${C.mute}">Sin datos todavía.</p>`;
+  const h2 = (t, sub) => `<div style="margin:34px 0 12px"><div style="font-size:21px;line-height:1.25;font-weight:800;color:${C.navy}">${t}</div>${sub ? `<div style="font-size:13px;line-height:1.4;color:${C.mute};margin-top:3px">${sub}</div>` : ''}</div>`;
+  const note = (t) => `<p style="margin:8px 0 0;font-size:12px;line-height:1.45;color:${C.mute}">${t}</p>`;
 
-  const kpis = `<table role="presentation" cellpadding="0" cellspacing="6" width="100%" style="margin:10px -6px 0"><tr>
-    ${kpi('Vistas', pvTotal, prev ? `ayer ${prev.pv || 0}${delta(pvTotal, prev.pv || 0)}` : '')}
-    ${kpi('Visitantes', visitors, prev ? `ayer ${prev.vis || 0}${delta(visitors, prev.vis || 0)}` : '')}
-    ${kpi('Sesiones', nS, prev ? `ayer ${prev.ses || 0}${delta(nS, prev.ses || 0)}` : '')}
-    ${kpi('Tiempo medio', fmtT(avgTime), `mediana ${fmtT(median(times))}`)}
+  const hbars = (items) => {
+    if (!items.length) return none;
+    const max = Math.max(1, ...items.map((i) => i.v));
+    return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0">${items.map((i, k) => {
+      const w = i.v ? Math.max(3, Math.round((i.v / max) * 100)) : 0;
+      return `<tr><td width="36%" valign="middle" style="padding:6px 10px 6px 0;font-size:13px;line-height:1.3;color:${C.ink};font-weight:600">${i.label}${i.sub ? `<div style="font-size:11px;font-weight:400;color:${C.mute}">${i.sub}</div>` : ''}</td>
+      <td valign="middle" style="padding:6px 0"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td style="background:${C.track};border-radius:7px"><div style="width:${w}%;background:${i.color || PAL[k % PAL.length]};border-radius:7px;height:22px;line-height:22px;font-size:1px">&nbsp;</div></td>
+        <td width="70" style="padding-left:9px;font-size:14px;font-weight:800;color:${C.navy};white-space:nowrap">${i.fmt || nf(i.v)}</td></tr></table></td></tr>`;
+    }).join('')}</table>`;
+  };
+
+  const colbars = (items, o = {}) => {
+    const H = o.h || 120, max = Math.max(1, ...items.map((i) => i.v));
+    return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="table-layout:fixed"><tr>${items.map((i) => {
+      const bh = i.v ? Math.max(4, Math.round((i.v / max) * H)) : 2;
+      return `<td valign="bottom" align="center" style="padding:0 ${o.gap == null ? 4 : o.gap}px;height:${H + 20}px"><div style="font-size:${o.vs || 12}px;font-weight:800;color:${C.navy};line-height:18px">${i.v || o.zero === false ? (i.v ? nf(i.v) : '') : nf(i.v)}</div><div style="height:${bh}px;line-height:${bh}px;font-size:1px;background:${i.hl ? (o.hl || C.coral) : (o.color || C.blue)};border-radius:5px 5px 0 0">&nbsp;</div></td>`;
+    }).join('')}</tr><tr>${items.map((i) => `<td align="center" style="padding-top:6px;font-size:${o.ls || 11}px;color:${i.hl ? C.navy : C.mute};font-weight:${i.hl ? 800 : 400}">${i.label}</td>`).join('')}</tr></table>`;
+  };
+
+  const stack = (items) => {
+    const tot = items.reduce((a, i) => a + i.v, 0);
+    if (!tot) return none;
+    const parts = items.filter((i) => i.v > 0);
+    const bar = `<div style="border-radius:8px;overflow:hidden"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>${parts.map((i, k) => {
+      const p = Math.round((i.v / tot) * 100);
+      return `<td width="${Math.max(p, 1)}%" align="center" style="background:${i.color || PAL[k % PAL.length]};height:30px;font-size:12px;font-weight:800;color:#fff">${p >= 10 ? p + ' %' : '&nbsp;'}</td>`;
+    }).join('')}</tr></table></div>`;
+    const legend = `<div style="margin-top:7px;font-size:12px;line-height:1.7;color:${C.ink}">${parts.map((i, k) => `<span style="white-space:nowrap;margin-right:12px"><span style="color:${i.color || PAL[k % PAL.length]};font-size:14px">●</span> ${i.label} <b>${nf(i.v)}</b></span>`).join(' ')}</div>`;
+    return bar + legend;
+  };
+
+  const kpi = (label, val, sub, color) => `<td width="25%" valign="top" style="padding:0 4px"><div style="background:${C.bg};border-radius:12px;border-top:4px solid ${color};padding:12px 10px 10px;text-align:left"><div style="font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:${C.mute}">${label}</div><div style="font-size:28px;line-height:1.15;font-weight:800;color:${C.navy};margin-top:4px">${val}</div><div style="font-size:11px;color:${C.mute};margin-top:3px">${sub || '&nbsp;'}</div></div></td>`;
+
+  const kpis = `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:18px -4px 0;width:calc(100% + 8px)"><tr>
+    ${kpi('Vistas', nf(pvTotal), prev ? `ayer ${prev.pv || 0}${delta(pvTotal, prev.pv || 0)}` : '', C.blue)}
+    ${kpi('Visitantes', nf(visitors), prev ? `ayer ${prev.vis || 0}${delta(visitors, prev.vis || 0)}` : '', C.teal)}
+    ${kpi('Sesiones', nf(nS), prev ? `ayer ${prev.ses || 0}${delta(nS, prev.ses || 0)}` : '', C.coral)}
+    ${kpi('Tiempo medio', fmtT(avgTime).replace(' min ', 'm ').replace(' s', 's').replace(' h ', 'h '), `mediana ${fmtT(median(times))}`, C.amber)}
   </tr></table>`;
 
-  const hlHtml = `<ul style="margin:8px 0 0;padding-left:18px;font-size:14px;color:#111827;line-height:1.5">${hl.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>`;
+  const lead = !pvTotal && !nS
+    ? 'No se registraron visitas este día.'
+    : `${nf(pvTotal)} ${pvTotal === 1 ? 'vista' : 'vistas'} de ${nf(visitors)} ${visitors === 1 ? 'visitante' : 'visitantes'}${topC ? `, con ${countryName(topC[0])} a la cabeza` : ''}.`;
+  const hlHtml = `<div style="font-size:19px;line-height:1.35;font-weight:800;color:${C.navy};margin-top:20px">${esc(lead)}</div>
+    <ul style="margin:10px 0 0;padding-left:18px;font-size:14px;line-height:1.55;color:${C.ink}">${hl.slice(1).map((x) => `<li>${esc(x)}</li>`).join('')}</ul>`;
 
-  const buckets = [['menos de 10 s', 0, 10], ['10 – 30 s', 10, 30], ['30 s – 1 min', 30, 60], ['1 – 3 min', 60, 180], ['más de 3 min', 180, Infinity]]
-    .map(([l, a, b]) => [l, times.filter((t) => t >= a && t < b).length]);
-  const timeBlock = nS ? table(['Tiempo navegando por sesión', 'Sesiones', '%'],
-    buckets.map(([l, n]) => [l, n, pct(n, nS)])) +
-    `<p style="margin:4px 0;font-size:12px;color:#6b7280">Tiempo activo (pestaña visible y con actividad o video en reproducción). Rebote: ${bounce} sesiones (${pct(bounce, nS)}) con una sola página, sin clics y menos de 10 s.</p>` : '';
-
-  const countryBlock = table(['País', 'Sesiones', 'Vistas', 'Tiempo medio'],
-    countries.slice(0, 12).map(([c, o]) => [esc(countryLabel(c)), o.ses, pvByCountry.get(c) || 0, fmtT(avg(o.eng))]));
-
-  const svcBlock = table(['Servicio / video', 'Visitantes con clic', 'Reprod. por clic', 'Reprod. auto', 'Tiempo visto', 'Cotiz.', 'Ver más', 'Países (clic)'],
-    svSorted.map((s) => [
-      `<b>${esc(s.name)}</b>${s.langs.size ? `<br><span style="font-size:11px;color:#6b7280">${top(s.langs).map(([l, v]) => `${esc(LANG_NAME[l] || l)} ${v}`).join(' · ')}</span>` : ''}`,
-      s.people, s.manual, s.auto, s.secs ? fmtT(s.secs) : '—', s.quote, s.more,
-      `<span style="font-size:12px">${listStr(s.countries)}</span>`,
-    ]));
-  const svcNote = `<p style="margin:4px 0;font-size:12px;color:#6b7280">“Clic” = play, pantalla completa, sonido, “Pedir cotización” o “Ver más”. “Reprod. auto” = el video arrancó solo al llegar a él con el scroll. Cada cifra cuenta una vez por visita de página.${totClicks ? '' : ' Hoy nadie hizo clic en los videos.'}</p>`;
-  const autoCountries = svRows.some((s) => s.autoCountries.size)
-    ? `<p style="margin:4px 0;font-size:12px;color:#374151"><b>Países con reproducción automática:</b> ${svRows.filter((s) => s.autoCountries.size).map((s) => `${esc(s.name)}: ${listStr(s.autoCountries, 3)}`).join(' &nbsp;|&nbsp; ')}</p>` : '';
-
-  const actBlock = act.size ? table(['Acción', 'Veces', 'Países'],
-    top(act).map(([n, v]) => [esc(n), v, `<span style="font-size:12px">${listStr(actC.get(n), 4)}</span>`])) : '';
-  const introNote = introPv ? `<p style="margin:4px 0;font-size:12px;color:#6b7280">Intro de la portada: ${introSkip} de ${introPv} visitas la omitieron (${pct(introSkip, introPv)}).</p>` : '';
-
-  const hmax = Math.max(1, ...hours);
-  const bars = '▁▂▃▄▅▆▇█';
-  const hoursStr = hours.map((h) => (h ? bars[Math.min(7, Math.ceil((h / hmax) * 8) - 1)] : '·')).join('');
-  const hoursBlock = pvTotal ? `<p style="margin:6px 0 2px;font-family:Consolas,monospace;font-size:15px;letter-spacing:1px;color:#0b2545">${hoursStr}</p><p style="margin:0;font-size:11px;color:#6b7280">De 0 h (izquierda) a 23 h (derecha), hora de Argentina.</p>` : '';
-
-  const small = (title, map, name) => `<td valign="top" width="33%" style="padding-right:8px">${table([title, ''], top(map, 6).map(([k, v]) => [esc(name ? (name[k] || k) : k), v]))}</td>`;
-  const origin = new Map(refs); if (directo > 0) origin.set('Directo / sin origen', directo);
-  const trio = `<table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>${small('Idioma', langs, { ...LANG_NAME, '?': 'Sin dato' })}${small('Dispositivo', devs, { ...DEV_NAME, '?': 'Sin dato' })}${small('Origen', origin)}</tr></table>`;
-  const pagesBlock = `<table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>${small('Página', pages)}${small('Sección del sitio', secs)}<td></td></tr></table>`;
-
+  /* tendencia 7 días */
   const days7 = []; for (let i = 6; i >= 0; i--) { const d = shiftDay(day, -i); days7.push([d, tmap.get(d)]); }
-  const trendBlock = table(['Día', 'Vistas', 'Visitantes', 'Sesiones', 'Tiempo medio'],
-    days7.map(([d, t]) => [`${esc(weekday(d).slice(0, 3))} ${dmy(d).slice(0, 5)}${d === day ? ' ◀' : ''}`, t ? t.pv : 0, t ? t.vis : 0, t ? t.ses : 0, t && t.ses ? fmtT(t.eng / t.ses) : '—']));
   const sumPv = days7.reduce((a, [, t]) => a + (t ? t.pv : 0), 0);
-  const histNote = hist && hist.pv ? `Desde el ${dmy(hist.first)} hay ${hist.pv} vistas registradas (se conservan 90 días).` : '';
+  const trendChart = colbars(days7.map(([d, t]) => ({ label: `${esc(weekday(d).slice(0, 3))}<br>${dmy(d).slice(0, 5)}`, v: t ? t.pv : 0, hl: d === day })), { h: 120, gap: 6, vs: 13, ls: 11 });
+  const histNote = hist && hist.pv ? ` Desde el ${dmy(hist.first)} hay ${nf(hist.pv)} vistas registradas (se conservan 90 días).` : '';
+
+  /* países */
+  const countryChart = hbars(countries.slice(0, 8).map(([c, o], k) => ({
+    label: esc(countryLabel(c)), v: o.ses, color: k === 0 ? C.coral : C.blue,
+    sub: `${pvByCountry.get(c) || 0} ${(pvByCountry.get(c) || 0) === 1 ? 'vista' : 'vistas'} · ${fmtT(avg(o.eng))}`, fmt: `${o.ses} ses.`,
+  })));
+
+  /* servicios y videos */
+  const svcChart = hbars(svSorted.map((s, k) => ({
+    label: esc(s.name), v: s.people, color: s.people ? (k === 0 ? C.coral : C.teal) : C.track,
+    sub: s.people ? `${listStr(s.countries, 3)}${s.langs.size ? ` · ${top(s.langs).map(([l, v]) => `${esc(LANG_NAME[l] || l)} ${v}`).join(', ')}` : ''}` : 'sin clics',
+    fmt: `${s.people} ${s.people === 1 ? 'visitante' : 'visitantes'}`,
+  })));
+  const watchChart = svRows.some((s) => s.secs) ? hbars([...svRows].filter((s) => s.secs).sort((a, b) => b.secs - a.secs).map((s) => ({
+    label: esc(s.name), v: s.secs, color: C.violet, fmt: fmtT(s.secs), sub: `${s.manual} por clic · ${s.auto} automáticas · ${s.end} completaron`,
+  }))) : none;
+  const quotes = svRows.filter((s) => s.quote || s.more);
+  const quoteLine = quotes.length ? note(`<b>Cotizaciones y “Ver más”:</b> ${quotes.map((s) => `${esc(s.name)} (${s.quote} cotiz., ${s.more} ver más)`).join(' · ')}`) : '';
+  const autoTotal = svRows.reduce((a, s) => a + s.auto, 0);
+
+  /* tiempo */
+  const buckets = [['Menos de 10 s', 0, 10], ['10 – 30 s', 10, 30], ['30 s – 1 min', 30, 60], ['1 – 3 min', 60, 180], ['Más de 3 min', 180, Infinity]]
+    .map(([l, a, b]) => [l, times.filter((t) => t >= a && t < b).length]);
+  const timeChart = nS ? hbars(buckets.map(([l, n], k) => ({ label: l, v: n, color: ['#9DB8FF', '#6F98FF', C.blue, '#2A5FD6', C.navy][k], fmt: `${n} (${pct(n, nS)})` }))) : none;
+
+  /* horas */
+  const hmax = Math.max(...hours);
+  const hoursChart = pvTotal ? colbars(hours.map((h, i) => ({ label: i % 3 === 0 ? String(i) : '', v: h, hl: h > 0 && h === hmax })), { h: 90, gap: 1, vs: 10, ls: 10, zero: false, color: C.teal, hl: C.coral }) : none;
+
+  /* audiencia */
+  const origin = new Map(refs); if (directo > 0) origin.set('Directo / sin origen', directo);
+  const langStack = stack(top(langs).map(([k, v], i) => ({ label: esc(LANG_NAME[k] || 'Sin dato'), v, color: PAL[i % PAL.length] })));
+  const devStack = stack(top(devs).map(([k, v], i) => ({ label: esc(DEV_NAME[k] || 'Sin dato'), v, color: PAL[(i + 1) % PAL.length] })));
+  const originStack = stack(top(origin, 6).map(([k, v], i) => ({ label: esc(k), v, color: PAL[(i + 2) % PAL.length] })));
+  const sub3 = (t) => `<div style="font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:${C.mute};margin:16px 0 6px">${t}</div>`;
+
+  /* acciones */
+  const actChart = act.size ? hbars(top(act).map(([n, v]) => ({ label: esc(n), v, color: C.amber, sub: listStr(actC.get(n), 3) }))) : none;
+  const introNote = introPv ? note(`Intro de la portada: ${introSkip} de ${introPv} visitas la omitieron (${pct(introSkip, introPv)}).`) : '';
+
+  /* páginas y secciones */
+  const pagesChart = hbars(top(pages, 6).map(([k, v]) => ({ label: esc(k), v, color: C.blue })));
+  const secsChart = secs.size ? hbars(top(secs, 6).map(([k, v]) => ({ label: esc(k), v, color: C.violet }))) : none;
 
   const title = `${weekday(day)} ${dmy(day)}`;
-  const html = `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
-<body style="margin:0;padding:0;background:#eef1f5;font-family:Arial,Helvetica,sans-serif">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#eef1f5"><tr><td align="center" style="padding:16px 8px">
-<table role="presentation" width="680" cellpadding="0" cellspacing="0" style="max-width:680px;width:100%;background:#ffffff;border-radius:8px;overflow:hidden">
-<tr><td style="background:#0b2545;padding:18px 22px"><div style="font-size:20px;font-weight:700;color:#fff;letter-spacing:1px">H<span style="color:#14b8a6">3</span>L <span style="font-weight:400;font-size:13px;color:#9fb3c8">Global Energy</span></div>
-<div style="font-size:13px;color:#cfe3f1;margin-top:4px">Reporte diario del sitio · ${esc(title)}</div></td></tr>
-<tr><td style="padding:6px 22px 22px">
-${kpis}
+  const banner = opts.banner ? `<tr><td style="background:${C.amber};padding:9px 24px;font-size:13px;font-weight:800;color:#3B2A00">${esc(opts.banner)}</td></tr>` : '';
+  const html = `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"></head>
+<body style="margin:0;padding:0;background:#EAEFF6;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;-webkit-text-size-adjust:100%">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#EAEFF6"><tr><td align="center" style="padding:18px 8px">
+<table role="presentation" width="680" cellpadding="0" cellspacing="0" style="max-width:680px;width:100%;background:#FFFFFF;border-radius:14px;overflow:hidden">
+<tr><td style="background:${C.navy};padding:22px 24px 20px"><div style="font-size:22px;font-weight:800;color:#fff;letter-spacing:1.5px">H<span style="color:#2DD4BF">3</span>L <span style="font-weight:400;font-size:13px;letter-spacing:0;color:#9FB3C8">Global Energy</span></div>
+<div style="font-size:15px;font-weight:700;color:#fff;margin-top:12px">Reporte diario del sitio</div><div style="font-size:13px;color:#BCD0E3;margin-top:2px">${esc(title)}</div></td></tr>
+${banner}
+<tr><td style="padding:6px 24px 26px">
 ${hlHtml}
-${h2('Visitas por país')}${countryBlock}
-${h2('Videos y servicios: qué se clickeó y desde dónde')}${svcBlock}${svcNote}${autoCountries}
-${h2('Tiempo navegando')}${timeBlock || '<p style="margin:6px 0;color:#6b7280;font-size:13px">Sin datos.</p>'}
-${h2('Contacto y otras acciones')}${actBlock || '<p style="margin:6px 0;color:#6b7280;font-size:13px">Sin acciones registradas.</p>'}${introNote}
-${h2('Páginas y secciones')}${pagesBlock}
-${h2('Audiencia')}${trio}
-${h2('Visitas por hora')}${hoursBlock || '<p style="margin:6px 0;color:#6b7280;font-size:13px">Sin datos.</p>'}
-${h2('Últimos 7 días')}${trendBlock}<p style="margin:4px 0;font-size:12px;color:#6b7280">Total de la semana: ${sumPv} vistas. ${esc(histNote)}</p>
-<p style="margin:18px 0 0;font-size:11px;color:#9ca3af;line-height:1.4">Medición propia de www.h3lglobalenergy.com, sin cookies ni datos personales (no se guarda la IP; el país lo informa Cloudflare). Los visitantes se estiman por día y no incluyen bots ni navegadores con “No rastrear”. Día calculado en hora de Argentina (00:00 a 23:59).</p>
+${kpis}
+${h2('Vistas de los últimos 7 días', `Hoy: ${nf(pvTotal)} · total de la semana: ${nf(sumPv)}.${histNote}`)}${trendChart}
+${h2(topC ? `${esc(countryName(topC[0]))} lidera las visitas` : 'Visitas por país', 'Sesiones por país (con vistas y tiempo medio)')}${countryChart}
+${h2(best ? `${esc(best.name)} es el servicio que más interesa` : 'Videos y servicios', 'Visitantes que hicieron clic (play, pantalla completa, sonido, cotizar o “Ver más”), con su país e idioma')}${svcChart}${quoteLine}
+${h2('Tiempo visto de video', 'Segundos reproducidos por servicio')}${watchChart}${note(`${nf(autoTotal)} reproducciones arrancaron solas al llegar con el scroll; no cuentan como clic. Cada cifra cuenta una vez por visita de página.`)}
+${h2('Tiempo navegando', `Tiempo activo por sesión. Rebote: ${bounce} sesiones (${pct(bounce, nS)}) con una sola página, sin clics y menos de 10 s.`)}${timeChart}
+${h2(pvTotal ? `Hora pico: ${String(hours.indexOf(hmax)).padStart(2, '0')}:00` : 'Visitas por hora', 'Vistas por hora del día, hora de Argentina')}${hoursChart}
+${h2('Contacto y otras acciones')}${actChart}${introNote}
+${h2('Quién nos visita')}${sub3('Idioma')}${langStack}${sub3('Dispositivo')}${devStack}${sub3('Origen')}${originStack}
+${h2('Páginas y secciones del sitio')}${sub3('Páginas')}${pagesChart}${sub3('Secciones del sitio principal')}${secsChart}
+<p style="margin:30px 0 0;font-size:11px;color:#9AA7B8;line-height:1.5">Medición propia de www.h3lglobalenergy.com, sin cookies ni datos personales (no se guarda la IP; el país lo informa Cloudflare). Los visitantes se estiman por día y no incluyen bots ni navegadores con “No rastrear”. Día calculado en hora de Argentina (00:00 a 23:59).</p>
 </td></tr></table></td></tr></table></body></html>`;
 
   /* ---- texto plano ---- */

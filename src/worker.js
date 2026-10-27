@@ -119,9 +119,9 @@ async function store(request, env, host, events) {
 /* ---------- reporte ---------- */
 function hostsOf(env) { return String(env.REPORT_HOSTS || 'www.h3lglobalenergy.com,h3lglobalenergy.com').split(',').map((s) => s.trim()).filter(Boolean); }
 
-async function sendReport(env, day, { test = false } = {}) {
+async function sendReport(env, day, { test = false, banner = '' } = {}) {
   await ensureSchema(env);
-  const rep = await buildReport(env.DB, day, hostsOf(env), env);
+  const rep = await buildReport(env.DB, day, hostsOf(env), env, { banner: test ? (banner || 'Envío de prueba') : '' });
   const subject = `${test ? '[PRUEBA] ' : ''}${rep.subject}`;
   await env.EMAIL.send({
     to: env.REPORT_TO,
@@ -172,11 +172,11 @@ async function reportTest(request, env) {
   const day = /^\d{4}-\d{2}-\d{2}$/.test(url.searchParams.get('day') || '') ? url.searchParams.get('day') : shiftDay(today, -1);
   if (url.searchParams.get('preview') === '1') {
     await ensureSchema(env);
-    const rep = await buildReport(env.DB, day, hostsOf(env), env);
+    const rep = await buildReport(env.DB, day, hostsOf(env), env, { banner: (url.searchParams.get('banner') || '').slice(0, 160) });
     return new Response(rep.html, { headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store' } });
   }
   try {
-    const rep = await sendReport(env, day, { test: true });
+    const rep = await sendReport(env, day, { test: true, banner: (url.searchParams.get('banner') || '').slice(0, 160) });
     return Response.json({ ok: true, day, subject: rep.subject, to: env.REPORT_TO });
   } catch (e) {
     return Response.json({ ok: false, day, error: String((e && (e.code || e.message)) || e) }, { status: 500 });
