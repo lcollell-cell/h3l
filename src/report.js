@@ -158,6 +158,40 @@ export async function buildReport(db, day, hosts, env, opts = {}) {
     if (contact) hl.push(`Intentos de contacto: ${contact}.`);
   }
 
+  /* ---- métricas en formato largo: alimentan el CSV adjunto, la base histórica (D1) y la base local ---- */
+  const M = [];
+  const m = (metrica, dim1, dim2, valor) => { if (Number.isFinite(valor)) M.push([day, metrica, dim1 == null ? '' : String(dim1), dim2 == null ? '' : String(dim2), Math.round(valor * 100) / 100]); };
+  m('vistas', '', '', pvTotal); m('visitantes', '', '', visitors); m('sesiones', '', '', nS);
+  m('tiempo_medio_s', '', '', avgTime); m('tiempo_mediano_s', '', '', median(times)); m('rebote_sesiones', '', '', bounce);
+  for (const [c, o] of countries) { m('pais_sesiones', c, '', o.ses); m('pais_vistas', c, '', pvByCountry.get(c) || 0); m('pais_tiempo_medio_s', c, '', avg(o.eng)); }
+  for (const s of svRows) {
+    m('servicio_visitantes_clic', s.id, '', s.people); m('servicio_repro_clic', s.id, '', s.manual); m('servicio_repro_auto', s.id, '', s.auto);
+    m('servicio_segundos_vistos', s.id, '', s.secs); m('servicio_completados', s.id, '', s.end); m('servicio_cotizaciones', s.id, '', s.quote); m('servicio_ver_mas', s.id, '', s.more);
+    for (const [c, v] of s.countries) m('servicio_visitantes_clic_pais', s.id, c, v);
+    for (const [l, v] of s.langs) m('servicio_visitantes_clic_idioma', s.id, l === '?' ? 'sin_dato' : l, v);
+    for (const [c, v] of s.autoCountries) m('servicio_repro_auto_pais', s.id, c, v);
+  }
+  const rawAct = new Map(), rawActC = new Map(), rawPages = new Map(), rawSecs = new Map(), refSes = new Map();
+  for (const r of rows) {
+    if (r.type === 'click' && r.label !== 'quote' && r.label !== 'more') { tally(rawAct, r.label); tally(rawActC, `${r.label}\t${r.country || 'XX'}`); }
+    else if (r.type === 'pv') { tally(rawPages, r.path); if (r.ref && !refSes.has(r.sid)) refSes.set(r.sid, r.ref); }
+    else if (r.type === 'sec') tally(rawSecs, r.label);
+  }
+  const originS = new Map(); for (const h of refSes.values()) tally(originS, h);
+  const directoS = sessions.filter((s) => s.pv > 0 && !refSes.has(s.sid)).length;
+  if (directoS) originS.set('Directo / sin origen', directoS);
+  for (const [k, v] of rawAct) m('accion_veces', k, '', v);
+  for (const [k, v] of rawActC) { const [a, c] = k.split('\t'); m('accion_pais', a, c, v); }
+  hours.forEach((v, h) => { if (v) m('hora_vistas', h, '', v); });
+  for (const [k, v] of langs) m('idioma_sesiones', k === '?' ? 'sin_dato' : k, '', v);
+  for (const [k, v] of devs) m('dispositivo_sesiones', k === '?' ? 'sin_dato' : k, '', v);
+  for (const [k, v] of originS) m('origen_sesiones', k === 'Directo / sin origen' ? 'directo' : k, '', v);
+  for (const [k, v] of rawPages) m('pagina_vistas', k, '', v);
+  for (const [k, v] of rawSecs) m('seccion_vistas', k, '', v);
+  [['lt10', 0, 10], ['10-30', 10, 30], ['30-60', 30, 60], ['60-180', 60, 180], ['gt180', 180, Infinity]].forEach(([k, a, b]) => m('tiempo_sesiones_rango', k, '', times.filter((t) => t >= a && t < b).length));
+  const csvCell = (v) => (/[",\n\r]/.test(String(v)) ? `"${String(v).replace(/"/g, '""')}"` : String(v));
+  const csv = ['fecha,metrica,dim1,dim2,valor', ...M.map((r) => r.map(csvCell).join(','))].join('\n') + '\n';
+
   /* ---- HTML con gráficos (tablas y divs con estilos en línea: se ven igual en Gmail, Outlook y Apple Mail) ---- */
   const C = { navy: '#0B2545', ink: '#1B2A41', mute: '#6B7A90', track: '#E8EDF4', bg: '#F5F7FB', teal: '#12B5A6', blue: '#3D7BFF', coral: '#FF6B57', amber: '#FFB020', violet: '#8B5CF6' };
   const PAL = [C.blue, C.teal, C.coral, C.amber, C.violet, '#94A3B8'];
@@ -248,7 +282,7 @@ export async function buildReport(db, day, hosts, env, opts = {}) {
   const hoursChart = pvTotal ? colbars(hours.map((h, i) => ({ label: i % 3 === 0 ? String(i) : '', v: h, hl: h > 0 && h === hmax })), { h: 90, gap: 1, vs: 10, ls: 10, zero: false, color: C.teal, hl: C.coral }) : none;
 
   /* audiencia */
-  const origin = new Map(refs); if (directo > 0) origin.set('Directo / sin origen', directo);
+  const origin = originS;
   const langStack = stack(top(langs).map(([k, v], i) => ({ label: esc(LANG_NAME[k] || 'Sin dato'), v, color: PAL[i % PAL.length] })));
   const devStack = stack(top(devs).map(([k, v], i) => ({ label: esc(DEV_NAME[k] || 'Sin dato'), v, color: PAL[(i + 1) % PAL.length] })));
   const originStack = stack(top(origin, 6).map(([k, v], i) => ({ label: esc(k), v, color: PAL[(i + 2) % PAL.length] })));
@@ -298,5 +332,5 @@ ${h2('Páginas y secciones del sitio')}${sub3('Páginas')}${pagesChart}${sub3('S
   const text = L.join('\n');
 
   const subject = `H3L · Reporte diario ${weekday(day)} ${dmy(day)}: ${pvTotal} ${pvTotal === 1 ? 'vista' : 'vistas'}, ${visitors} ${visitors === 1 ? 'visitante' : 'visitantes'}`;
-  return { subject, html, text };
+  return { subject, html, text, csv, metrics: M, csvName: `h3l_metricas_${day}.csv` };
 }

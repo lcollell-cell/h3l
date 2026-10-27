@@ -21,6 +21,7 @@ const SCHEMA = [
   `CREATE INDEX IF NOT EXISTS events_vid ON events (day, vid)`,
   `CREATE TABLE IF NOT EXISTS meta (k TEXT PRIMARY KEY, v TEXT)`,
   `CREATE TABLE IF NOT EXISTS reports (day TEXT PRIMARY KEY, sent_at INTEGER, error TEXT)`,
+  `CREATE TABLE IF NOT EXISTS metrics (day TEXT NOT NULL, metric TEXT NOT NULL, dim1 TEXT NOT NULL DEFAULT '', dim2 TEXT NOT NULL DEFAULT '', value REAL NOT NULL, PRIMARY KEY (day, metric, dim1, dim2))`,
 ];
 
 let schemaReady = null;
@@ -119,9 +120,20 @@ async function store(request, env, host, events) {
 /* ---------- reporte ---------- */
 function hostsOf(env) { return String(env.REPORT_HOSTS || 'www.h3lglobalenergy.com,h3lglobalenergy.com').split(',').map((s) => s.trim()).filter(Boolean); }
 
+async function saveMetrics(env, day, rows) {
+  const db = env.DB;
+  await db.prepare(`DELETE FROM metrics WHERE day=?`).bind(day).run();
+  const ins = `INSERT OR REPLACE INTO metrics (day, metric, dim1, dim2, value) VALUES (?,?,?,?,?)`;
+  for (let k = 0; k < rows.length; k += 50) {
+    await db.batch(rows.slice(k, k + 50).map((r) => db.prepare(ins).bind(...r)));
+  }
+}
+
 async function sendReport(env, day, { test = false, banner = '' } = {}) {
   await ensureSchema(env);
   const rep = await buildReport(env.DB, day, hostsOf(env), env, { banner: test ? (banner || 'Envío de prueba') : '' });
+  /* el historial de métricas se guarda siempre (no vence a los 90 días como los eventos) y antes de enviar el mail */
+  await saveMetrics(env, day, rep.metrics);
   const subject = `${test ? '[PRUEBA] ' : ''}${rep.subject}`;
   await env.EMAIL.send({
     to: env.REPORT_TO,
@@ -129,6 +141,12 @@ async function sendReport(env, day, { test = false, banner = '' } = {}) {
     subject,
     html: rep.html,
     text: rep.text,
+    attachments: [{
+      filename: rep.csvName,
+      content: new TextEncoder().encode('\ufeff' + rep.csv).buffer,
+      type: 'text/csv',
+      disposition: 'attachment',
+    }],
   });
   return rep;
 }
@@ -170,6 +188,11 @@ async function reportTest(request, env) {
   const url = new URL(request.url);
   const today = dayOf(Math.floor(Date.now() / 1000), env);
   const day = /^\d{4}-\d{2}-\d{2}$/.test(url.searchParams.get('day') || '') ? url.searchParams.get('day') : shiftDay(today, -1);
+  if (url.searchParams.get('format') === 'csv') {
+    await ensureSchema(env);
+    const rep = await buildReport(env.DB, day, hostsOf(env), env);
+    return new Response(rep.csv, { headers: { 'content-type': 'text/csv; charset=utf-8', 'content-disposition': `attachment; filename="${rep.csvName}"`, 'cache-control': 'no-store' } });
+  }
   if (url.searchParams.get('preview') === '1') {
     await ensureSchema(env);
     const rep = await buildReport(env.DB, day, hostsOf(env), env, { banner: (url.searchParams.get('banner') || '').slice(0, 160) });
@@ -183,11 +206,27 @@ async function reportTest(request, env) {
   }
 }
 
+/* GET /api/export?from=AAAA-MM-DD&to=AAAA-MM-DD  (con el encabezado x-report-key): historial de métricas en CSV para la base local */
+async function exportMetrics(request, env) {
+  if (!env.REPORT_KEY) return new Response('Not found', { status: 404 });
+  if (!timingSafeEqual(request.headers.get('x-report-key') || '', env.REPORT_KEY)) return new Response('Unauthorized', { status: 401 });
+  await ensureSchema(env);
+  const url = new URL(request.url);
+  const ok = (v) => /^\d{4}-\d{2}-\d{2}$/.test(v || '');
+  const from = ok(url.searchParams.get('from')) ? url.searchParams.get('from') : '2000-01-01';
+  const to = ok(url.searchParams.get('to')) ? url.searchParams.get('to') : '2999-12-31';
+  const rows = (await env.DB.prepare(`SELECT day, metric, dim1, dim2, value FROM metrics WHERE day BETWEEN ? AND ? ORDER BY day, metric, dim1, dim2`).bind(from, to).all()).results || [];
+  const cell = (v) => (/[",\n\r]/.test(String(v)) ? `"${String(v).replace(/"/g, '""')}"` : String(v));
+  const csv = ['fecha,metrica,dim1,dim2,valor', ...rows.map((r) => [r.day, r.metric, r.dim1, r.dim2, r.value].map(cell).join(','))].join('\n') + '\n';
+  return new Response(csv, { headers: { 'content-type': 'text/csv; charset=utf-8', 'cache-control': 'no-store' } });
+}
+
 export default {
   async fetch(request, env, ctx) {
     const { pathname } = new URL(request.url);
     if (pathname === '/api/collect' && request.method === 'POST') return collect(request, env, ctx);
     if (pathname === '/api/report-test' && request.method === 'POST') return reportTest(request, env);
+    if (pathname === '/api/export' && request.method === 'GET') return exportMetrics(request, env);
     if (pathname.startsWith('/api/')) return new Response('Not found', { status: 404 });
     return env.ASSETS.fetch(request);
   },
