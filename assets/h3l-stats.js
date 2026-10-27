@@ -2,7 +2,9 @@
    Envía eventos anónimos a /api/collect (Worker propio). No guarda IP, ni datos personales, ni identificadores persistentes:
    el identificador de visita vive en sessionStorage (se borra al cerrar la pestaña).
    No mide si el navegador envía Do Not Track / Global Privacy Control, ni en la copia de prueba de GitHub Pages.
-   Para excluir tu propio navegador: abrir una vez cualquier página del sitio con ?h3l-notrack=1 (y ?h3l-notrack=0 para volver a medir). */
+   Para excluir tu propio navegador: abrir una vez cualquier página del sitio con ?h3l-notrack=1 (y ?h3l-notrack=0 para volver a medir).
+   Para marcar un navegador del equipo: abrir una vez con ?h3l-equipo=1 (y ?h3l-equipo=0 para quitar la marca). Sus visitas se miden aparte
+   y el reporte las muestra en una sección propia, sin mezclarlas con las del público. */
 (function(){
 'use strict';
 if(window.top!==window.self)return;                       /* no medir marcos incrustados (evita contar dos veces) */
@@ -12,6 +14,12 @@ try{
   var q=/[?&]h3l-notrack=([01])/.exec(location.search);
   if(q){if(q[1]==='1')localStorage.setItem('h3l_notrack','1');else localStorage.removeItem('h3l_notrack')}
   if(localStorage.getItem('h3l_notrack')==='1')return;
+}catch(e){}
+var team=false;
+try{
+  var qe=/[?&]h3l-equipo=([01])/.exec(location.search);
+  if(qe){if(qe[1]==='1')localStorage.setItem('h3l_team','1');else localStorage.removeItem('h3l_team')}
+  team=localStorage.getItem('h3l_team')==='1';
 }catch(e){}
 if(navigator.doNotTrack==='1'||window.doNotTrack==='1'||navigator.globalPrivacyControl)return;
 if(/\.github\.io$/.test(location.hostname))return;        /* la copia de prueba no mide */
@@ -33,6 +41,7 @@ function refHost(){try{if(!document.referrer)return '';var h=new URL(document.re
 var queue=[],seen={},timer=null;
 function add(ev,once){
   if(once){var k=ev.t+'|'+(ev.k||'')+'|'+(ev.s||'');if(seen[k])return;seen[k]=1}
+  if(team)ev.i=1;
   ev.sid=sid;ev.pv=pvid;ev.l=lang();ev.p=location.pathname.slice(0,120);
   queue.push(ev);
   if(!timer)timer=setTimeout(flush,1500);
