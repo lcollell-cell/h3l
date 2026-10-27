@@ -66,6 +66,18 @@ export async function buildReport(db, day, hosts, env, opts = {}) {
      FROM events WHERE day BETWEEN ? AND ? AND host IN (${ph}) GROUP BY day`).bind(shiftDay(day, -6), day, ...hosts).all()).results || [];
   const hist = await db.prepare(`SELECT COUNT(*) pv, MIN(day) first FROM events WHERE type='pv' AND host IN (${ph})`).bind(...hosts).first();
 
+  /* ---- tráfico del equipo (navegadores marcados con ?h3l-equipo=1): se guarda aparte y no entra en las cifras públicas ---- */
+  const th = hosts.map((h) => `interno|${h}`), tph = th.map(() => '?').join(',');
+  const trows = (await db.prepare(`SELECT type, label, sid, country, n FROM events WHERE day=? AND host IN (${tph})`).bind(day, ...th).all()).results || [];
+  const T = { pv: 0, ses: new Set(), eng: new Map(), clicks: 0, countries: new Map() };
+  for (const r of trows) {
+    T.ses.add(r.sid);
+    if (r.type === 'pv') { T.pv++; tally(T.countries, r.country || 'XX'); }
+    else if (r.type === 'eng') T.eng.set(r.sid, (T.eng.get(r.sid) || 0) + (r.n || 0));
+    else if (r.type === 'vclick' || r.type === 'click' || (r.type === 'vplay' && r.label === 'manual')) T.clicks++;
+  }
+  const tEng = avg([...T.ses].map((sid) => T.eng.get(sid) || 0));
+
   /* ---- sesiones ---- */
   const S = new Map();
   const sess = (r) => { let s = S.get(r.sid); if (!s) { s = { sid: r.sid, pv: 0, eng: 0, inter: 0, country: r.country, lang: '', dev: '', vid: r.vid }; S.set(r.sid, s); } return s; };
@@ -163,6 +175,7 @@ export async function buildReport(db, day, hosts, env, opts = {}) {
   const m = (metrica, dim1, dim2, valor) => { if (Number.isFinite(valor)) M.push([day, metrica, dim1 == null ? '' : String(dim1), dim2 == null ? '' : String(dim2), Math.round(valor * 100) / 100]); };
   m('vistas', '', '', pvTotal); m('visitantes', '', '', visitors); m('sesiones', '', '', nS);
   m('tiempo_medio_s', '', '', avgTime); m('tiempo_mediano_s', '', '', median(times)); m('rebote_sesiones', '', '', bounce);
+  if (T.ses.size) { m('interno_vistas', '', '', T.pv); m('interno_sesiones', '', '', T.ses.size); m('interno_clics', '', '', T.clicks); m('interno_tiempo_medio_s', '', '', tEng); }
   for (const [c, o] of countries) { m('pais_sesiones', c, '', o.ses); m('pais_vistas', c, '', pvByCountry.get(c) || 0); m('pais_tiempo_medio_s', c, '', avg(o.eng)); }
   for (const s of svRows) {
     m('servicio_visitantes_clic', s.id, '', s.people); m('servicio_repro_clic', s.id, '', s.manual); m('servicio_repro_auto', s.id, '', s.auto);
@@ -297,6 +310,9 @@ export async function buildReport(db, day, hosts, env, opts = {}) {
   const pagesChart = hbars(top(pages, 6).map(([k, v]) => ({ label: esc(k), v, color: C.blue })));
   const secsChart = secs.size ? hbars(top(secs, 6).map(([k, v]) => ({ label: esc(k), v, color: C.violet }))) : none;
 
+  const teamHtml = T.ses.size
+    ? `${h2('Tráfico del equipo', 'Navegadores marcados como internos. No están incluidos en ninguna cifra de arriba.')}<p style="margin:6px 0;font-size:14px;line-height:1.6;color:${C.ink}">${nf(T.pv)} ${T.pv === 1 ? 'vista' : 'vistas'} · ${nf(T.ses.size)} ${T.ses.size === 1 ? 'sesión' : 'sesiones'} · tiempo medio ${fmtT(tEng)} · ${nf(T.clicks)} ${T.clicks === 1 ? 'clic' : 'clics'}${T.countries.size ? ` · ${listStr(T.countries, 3)}` : ''}</p>`
+    : '';
   const title = `${weekday(day)} ${dmy(day)}`;
   const banner = opts.banner ? `<tr><td style="background:${C.amber};padding:9px 24px;font-size:13px;font-weight:800;color:#3B2A00">${esc(opts.banner)}</td></tr>` : '';
   const html = `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"></head>
@@ -319,6 +335,7 @@ ${h2(pvTotal ? `Hora pico: ${String(hours.indexOf(hmax)).padStart(2, '0')}:00` :
 ${h2('Contacto y otras acciones')}${actChart}${introNote}
 ${h2('Quién nos visita')}${sub3('Idioma')}${langStack}${sub3('Dispositivo')}${devStack}${sub3('Origen')}${originStack}
 ${h2('Páginas y secciones del sitio')}${sub3('Páginas')}${pagesChart}${sub3('Secciones del sitio principal')}${secsChart}
+${teamHtml}
 <p style="margin:30px 0 0;font-size:11px;color:#9AA7B8;line-height:1.5">Medición propia de www.h3lglobalenergy.com, sin cookies ni datos personales (no se guarda la IP; el país lo informa Cloudflare). Los visitantes se estiman por día y no incluyen bots ni navegadores con “No rastrear”. Día calculado en hora de Argentina (00:00 a 23:59).</p>
 </td></tr></table></td></tr></table></body></html>`;
 
@@ -330,6 +347,7 @@ ${h2('Páginas y secciones del sitio')}${sub3('Páginas')}${pagesChart}${sub3('S
   L.push('VIDEOS Y SERVICIOS (clic = play, pantalla completa, sonido, cotización o ver más)');
   svSorted.forEach((s) => L.push(`  ${s.name}: ${s.people} visitantes con clic, ${s.manual} reprod. por clic, ${s.auto} auto, tiempo visto ${s.secs ? fmtT(s.secs) : '—'}, ${s.quote} cotizaciones | ${[...s.countries.entries()].map(([c, v]) => `${countryName(c)} ${v}`).join(', ') || '—'}`));
   if (act.size) { L.push('', 'ACCIONES'); top(act).forEach(([n, v]) => L.push(`  ${n}: ${v}`)); }
+  if (T.ses.size) L.push('', `TRÁFICO DEL EQUIPO (aparte, no incluido arriba): ${T.pv} vista(s), ${T.ses.size} sesión(es), ${T.clicks} clic(s), tiempo medio ${fmtT(tEng)}`);
   L.push('', 'ÚLTIMOS 7 DÍAS'); days7.forEach(([d, t]) => L.push(`  ${dmy(d)}: ${t ? t.pv : 0} vistas, ${t ? t.vis : 0} visitantes`));
   const text = L.join('\n');
 

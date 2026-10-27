@@ -61,11 +61,15 @@ function sanitize(ev, ownHost) {
     svc: SERVICES.has(ev.s) ? ev.s : '',
     n: Math.min(86400, Math.max(0, Number.isFinite(+ev.n) ? Math.round(+ev.n) : 0)),
     ref: clean(ev.ref, /^[a-z0-9.-]{3,80}$/i, 80).toLowerCase(),
+    team: ev.i === 1,
   };
   if (!out.sid || !out.pvid) return null;
   if (out.ref === ownHost || out.ref === ownHost.replace(/^www\./, '')) out.ref = '';
   return out;
 }
+
+/* Las visitas marcadas como del equipo se guardan con este prefijo en host: el reporte público las excluye y las resume aparte. */
+const TEAM_PREFIX = 'interno|';
 
 /* Clave de unicidad: eng/vsec se actualizan (valor acumulado); el resto cuenta una sola vez por visita de página. */
 function keyOf(e) {
@@ -113,7 +117,7 @@ async function store(request, env, host, events) {
     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
     ON CONFLICT(ukey) DO UPDATE SET n = MAX(COALESCE(events.n,0), COALESCE(excluded.n,0)), ts = excluded.ts`;
   await env.DB.batch(events.map((e) => env.DB.prepare(upsert).bind(
-    now, day, host, e.type, e.path, e.sid, e.pvid, vid, country, e.lang, e.dev, e.label, e.svc, e.n, e.ref, keyOf(e),
+    now, day, e.team ? `${TEAM_PREFIX}${host}` : host, e.type, e.path, e.sid, e.pvid, vid, country, e.lang, e.dev, e.label, e.svc, e.n, e.ref, keyOf(e),
   )));
 }
 
