@@ -8,3 +8,5 @@ CLAUDE.md
 .git
 node_modules
 .wrangler
+src
+tools

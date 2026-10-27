@@ -1,1 +1,6 @@
 __pycache__/
+.dev.vars
+*.sqlite
+metricas_csv/
+.wrangler/
+node_modules/
