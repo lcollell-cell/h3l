@@ -193,8 +193,9 @@ export async function buildReport(db, day, hosts, env, opts = {}) {
   const csv = ['fecha,metrica,dim1,dim2,valor', ...M.map((r) => r.map(csvCell).join(','))].join('\n') + '\n';
 
   /* ---- HTML con gráficos (tablas y divs con estilos en línea: se ven igual en Gmail, Outlook y Apple Mail) ---- */
-  const C = { navy: '#0B2545', ink: '#1B2A41', mute: '#6B7A90', track: '#E8EDF4', bg: '#F5F7FB', teal: '#12B5A6', blue: '#3D7BFF', coral: '#FF6B57', amber: '#FFB020', violet: '#8B5CF6' };
-  const PAL = [C.blue, C.teal, C.coral, C.amber, C.violet, '#94A3B8'];
+  /* paleta del Hero y del logo: azul noche (#091A2D → #233F58), verde del “3” (#4FB27C), ámbar del atardecer (#E8A15A) y azul del resplandor (#6EB4FF) */
+  const C = { navy: '#0F2A42', ink: '#1B2A41', mute: '#6B7A90', track: '#E6ECF3', bg: '#F3F6FA', teal: '#4FB27C', blue: '#6EB4FF', coral: '#E8A15A', amber: '#E8A15A', violet: '#233F58' };
+  const PAL = [C.teal, C.blue, C.coral, C.violet, '#12735A', '#94A3B8'];
   const nf = (n) => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
   const none = `<p style="margin:6px 0;font-size:13px;color:${C.mute}">Sin datos todavía.</p>`;
   const h2 = (t, sub) => `<div style="margin:34px 0 12px"><div style="font-size:21px;line-height:1.25;font-weight:800;color:${C.navy}">${t}</div>${sub ? `<div style="font-size:13px;line-height:1.4;color:${C.mute};margin-top:3px">${sub}</div>` : ''}</div>`;
@@ -238,7 +239,7 @@ export async function buildReport(db, day, hosts, env, opts = {}) {
     ${kpi('Vistas', nf(pvTotal), prev ? `ayer ${prev.pv || 0}${delta(pvTotal, prev.pv || 0)}` : '', C.blue)}
     ${kpi('Visitantes', nf(visitors), prev ? `ayer ${prev.vis || 0}${delta(visitors, prev.vis || 0)}` : '', C.teal)}
     ${kpi('Sesiones', nf(nS), prev ? `ayer ${prev.ses || 0}${delta(nS, prev.ses || 0)}` : '', C.coral)}
-    ${kpi('Tiempo medio', fmtT(avgTime).replace(' min ', 'm ').replace(' s', 's').replace(' h ', 'h '), `mediana ${fmtT(median(times))}`, C.amber)}
+    ${kpi('Tiempo medio', fmtT(avgTime).replace(' min ', 'm ').replace(' s', 's').replace(' h ', 'h '), `mediana ${fmtT(median(times))}`, C.violet)}
   </tr></table>`;
 
   const lead = !pvTotal && !nS
@@ -275,7 +276,7 @@ export async function buildReport(db, day, hosts, env, opts = {}) {
   /* tiempo */
   const buckets = [['Menos de 10 s', 0, 10], ['10 – 30 s', 10, 30], ['30 s – 1 min', 30, 60], ['1 – 3 min', 60, 180], ['Más de 3 min', 180, Infinity]]
     .map(([l, a, b]) => [l, times.filter((t) => t >= a && t < b).length]);
-  const timeChart = nS ? hbars(buckets.map(([l, n], k) => ({ label: l, v: n, color: ['#9DB8FF', '#6F98FF', C.blue, '#2A5FD6', C.navy][k], fmt: `${n} (${pct(n, nS)})` }))) : none;
+  const timeChart = nS ? hbars(buckets.map(([l, n], k) => ({ label: l, v: n, color: ['#B9D5F3', C.blue, '#3D8FE0', C.violet, '#091A2D'][k], fmt: `${n} (${pct(n, nS)})` }))) : none;
 
   /* horas */
   const hmax = Math.max(...hours);
@@ -299,11 +300,12 @@ export async function buildReport(db, day, hosts, env, opts = {}) {
   const title = `${weekday(day)} ${dmy(day)}`;
   const banner = opts.banner ? `<tr><td style="background:${C.amber};padding:9px 24px;font-size:13px;font-weight:800;color:#3B2A00">${esc(opts.banner)}</td></tr>` : '';
   const html = `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"></head>
-<body style="margin:0;padding:0;background:#EAEFF6;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;-webkit-text-size-adjust:100%">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#EAEFF6"><tr><td align="center" style="padding:18px 8px">
+<body style="margin:0;padding:0;background:#E9EEF4;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;-webkit-text-size-adjust:100%">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#E9EEF4"><tr><td align="center" style="padding:18px 8px">
 <table role="presentation" width="680" cellpadding="0" cellspacing="0" style="max-width:680px;width:100%;background:#FFFFFF;border-radius:14px;overflow:hidden">
-<tr><td style="background:${C.navy};padding:22px 24px 20px"><div style="font-size:22px;font-weight:800;color:#fff;letter-spacing:1.5px">H<span style="color:#2DD4BF">3</span>L <span style="font-weight:400;font-size:13px;letter-spacing:0;color:#9FB3C8">Global Energy</span></div>
-<div style="font-size:15px;font-weight:700;color:#fff;margin-top:12px">Reporte diario del sitio</div><div style="font-size:13px;color:#BCD0E3;margin-top:2px">${esc(title)}</div></td></tr>
+<tr><td style="background:#091A2D;background-image:linear-gradient(180deg,#050C18 0%,#0F2A42 70%,#233F58 100%);padding:24px 24px 22px"><div style="font-size:24px;font-weight:700;color:#FFFFFF;letter-spacing:2px">H<span style="color:#4FB27C">3</span>L</div><div style="font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:#C9D3E6;margin-top:2px">Global Energy</div>
+<div style="font-size:16px;font-weight:700;color:#FFFFFF;margin-top:16px">Reporte diario del sitio</div><div style="font-size:13px;color:#C9D3E6;margin-top:2px">${esc(title)}</div></td></tr>
+<tr><td style="background:#E8A15A;height:4px;line-height:4px;font-size:1px">&nbsp;</td></tr>
 ${banner}
 <tr><td style="padding:6px 24px 26px">
 ${hlHtml}
