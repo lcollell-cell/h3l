@@ -19,3 +19,6 @@
 
 - `wrangler.jsonc` y `.assetsignore`: configuracion del despliegue en Cloudflare.
 - `_headers`: encabezados de seguridad de produccion. Mantener la CSP alineada con las etiquetas meta de las paginas.
+- `src/worker.js` y `src/report.js`: Worker de estadisticas. Recibe eventos anonimos en `/api/collect` (los envia `assets/h3l-stats.js`, sin cookies), los guarda en D1 (`h3l-stats`) y cada dia a las 08:00 (Argentina) manda por mail el reporte del dia anterior. Destinatario y remitente: variables `REPORT_TO` y `REPORT_FROM` en `wrangler.jsonc` (mantener `allowed_destination_addresses` igual a `REPORT_TO`).
+- `assets/h3l-stats.js` esta incluido en `index.html`, `v2/index.html`, `v2/reservas.html` y `v2/dashboards.html`. Para excluir un navegador propio: abrir el sitio con `?h3l-notrack=1`.
+- Prueba del reporte en produccion: definir el secreto `REPORT_KEY` y hacer `POST /api/report-test` con el encabezado `x-report-key` (agregar `?preview=1` para ver el HTML sin enviar).

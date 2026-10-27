@@ -1,8 +1,29 @@
 {
   // Produccion: Cloudflare Workers con Static Assets. Se despliega solo desde la rama main.
   "name": "h3l",
+  "main": "src/worker.js",
   "compatibility_date": "2026-10-19",
   "assets": {
-    "directory": "./"
+    "directory": "./",
+    "binding": "ASSETS",
+    // El Worker solo atiende /api/*; todo lo demas se sirve como archivo estatico, sin pasar por el Worker.
+    "run_worker_first": ["/api/*"]
+  },
+
+  // Estadisticas propias (ver CLAUDE.md): eventos en D1, reporte diario por mail.
+  // La base se crea sola en el primer deploy (aprovisionamiento automatico de wrangler).
+  "d1_databases": [{ "binding": "DB", "database_name": "h3l-stats" }],
+
+  // Envio del reporte con Cloudflare Email Service. El destino queda restringido a la direccion de REPORT_TO.
+  "send_email": [{ "name": "EMAIL", "allowed_destination_addresses": ["lcollell@h3lglobalenergy.com"] }],
+
+  // 11:00 UTC = 08:00 hora de Argentina. Reporta el dia anterior completo (00:00 a 23:59, hora de Argentina).
+  "triggers": { "crons": ["0 11 * * *"] },
+
+  "vars": {
+    "REPORT_TO": "lcollell@h3lglobalenergy.com",
+    "REPORT_FROM": "reportes@h3lglobalenergy.com",
+    "REPORT_HOSTS": "www.h3lglobalenergy.com,h3lglobalenergy.com",
+    "TZ_OFFSET_MIN": "-180"
   }
 }
