@@ -48,9 +48,9 @@ H3L.add('es',{'c.lang':'Idioma','c.calc':'Calculadoras','c.agents':'Agentes IA',
 H3L.add('en',{'c.lang':'Language','c.calc':'Calculators','c.agents':'AI Agents','c.qc':'QC Apps','c.trans':'Transition','c.transFull':'Energy transition','c.dash':'Dashboards','c.about':'About us','c.login':'Log in','c.register':'Sign up','c.menu':'Open menu','c.home':'H3L Global Energy — home','c.main':'Main','c.res':'PD reserves'});
 H3L.add('fr',{'c.lang':'Langue','c.calc':'Calculateurs','c.agents':'Agents IA','c.qc':'Apps QC','c.trans':'Transition','c.transFull':'Transition énergétique','c.dash':'Tableaux','c.about':'À propos','c.login':'Connexion','c.register':'Inscription','c.menu':'Ouvrir le menu','c.home':'H3L Global Energy — accueil','c.main':'Principal','c.res':'Réserves PD'});
 H3L.add('pt',{'c.lang':'Idioma','c.calc':'Calculadoras','c.agents':'Agentes de IA','c.qc':'Apps QC','c.trans':'Transição','c.transFull':'Transição energética','c.dash':'Painéis','c.about':'Sobre nós','c.login':'Entrar','c.register':'Cadastro','c.menu':'Abrir menu','c.home':'H3L Global Energy — início','c.main':'Principal','c.res':'Reservas PD'});
-H3L.add('es',{'c.somos':'Quiénes somos','c.serv':'Servicios','c.news':'Noticias OIL & GAS','c.events':'Eventos','c.contact':'Contactos','c.quote':'Solicitar cotización'});
-H3L.add('en',{'c.somos':'About us','c.serv':'Services','c.news':'OIL & GAS News','c.events':'Events','c.contact':'Contact','c.quote':'Request a quote'});
-H3L.add('fr',{'c.somos':'Qui sommes-nous','c.serv':'Services','c.news':'Actualités OIL & GAS','c.events':'Événements','c.contact':'Contacts','c.quote':'Demander un devis'});
-H3L.add('pt',{'c.somos':'Quem somos','c.serv':'Serviços','c.news':'Notícias OIL & GAS','c.events':'Eventos','c.contact':'Contatos','c.quote':'Solicitar orçamento'});
+H3L.add('es',{'c.priv':'Privacidad y cookies','c.somos':'Quiénes somos','c.serv':'Servicios','c.news':'Noticias OIL & GAS','c.events':'Eventos','c.contact':'Contactos','c.quote':'Solicitar cotización'});
+H3L.add('en',{'c.priv':'Privacy and cookies','c.somos':'About us','c.serv':'Services','c.news':'OIL & GAS News','c.events':'Events','c.contact':'Contact','c.quote':'Request a quote'});
+H3L.add('fr',{'c.priv':'Confidentialité et cookies','c.somos':'Qui sommes-nous','c.serv':'Services','c.news':'Actualités OIL & GAS','c.events':'Événements','c.contact':'Contacts','c.quote':'Demander un devis'});
+H3L.add('pt',{'c.priv':'Privacidade e cookies','c.somos':'Quem somos','c.serv':'Serviços','c.news':'Notícias OIL & GAS','c.events':'Eventos','c.contact':'Contatos','c.quote':'Solicitar orçamento'});
 window.H3L=H3L;
 })();

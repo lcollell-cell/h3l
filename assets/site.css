@@ -149,3 +149,5 @@ html.svc-lock main.main{z-index:2147483001}
 
 .site-legal{padding:18px 16px calc(28px + env(safe-area-inset-bottom));text-align:center;font:400 12px/1.5 var(--font-body);color:var(--text-secondary);border-top:1px solid var(--rule-light,#d8e0ea);position:relative;z-index:1}
 .site-legal p{margin:0;max-width:760px;margin-inline:auto}
+.site-legal .site-priv{margin-top:6px}
+.site-legal .site-priv a{color:inherit;text-decoration:underline}
