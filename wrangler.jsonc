@@ -14,8 +14,7 @@
   // La base se crea sola en el primer deploy (aprovisionamiento automatico de wrangler).
   "d1_databases": [{ "binding": "DB", "database_name": "h3l-stats" }],
 
-  // Envio del reporte con Cloudflare Email Service. El destino queda restringido a la direccion de REPORT_TO.
-  "send_email": [{ "name": "EMAIL", "allowed_destination_addresses": ["info_sitio@h3lglobalenergy.com"] }],
+  // Envio del reporte: Resend (plan gratuito) con el secreto RESEND_API_KEY. Remitente y destinatario: vars REPORT_FROM y REPORT_TO.
 
   // 11:00 UTC = 08:00 hora de Argentina. Reporta el dia anterior completo (00:00 a 23:59, hora de Argentina).
   "triggers": { "crons": ["0 11 * * *"] },

@@ -139,19 +139,33 @@ async function sendReport(env, day, { test = false, banner = '' } = {}) {
   /* el historial de métricas se guarda siempre (no vence a los 90 días como los eventos) y antes de enviar el mail */
   await saveMetrics(env, day, rep.metrics);
   const subject = `${test ? '[PRUEBA] ' : ''}${rep.subject}`;
-  await env.EMAIL.send({
-    to: env.REPORT_TO,
-    from: { email: env.REPORT_FROM, name: 'H3L Global Energy · Reportes' },
-    subject,
-    html: rep.html,
-    text: rep.text,
-    attachments: [{
-      filename: rep.csvName,
-      content: new TextEncoder().encode('\ufeff' + rep.csv).buffer,
-      type: 'text/csv',
-      disposition: 'attachment',
-    }],
-  });
+  const csvBytes = new TextEncoder().encode('\ufeff' + rep.csv);
+  if (env.RESEND_API_KEY) {
+    /* Resend (plan gratuito: 100 mails por dia, 3.000 por mes). El mail sale desde REPORT_FROM, dominio verificado en Resend. */
+    let bin = ''; for (const b of csvBytes) bin += String.fromCharCode(b);
+    const headers = { Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json' };
+    if (!test) headers['Idempotency-Key'] = `h3l-reporte-${day}`;
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST', headers,
+      body: JSON.stringify({
+        from: `H3L Global Energy · Reportes <${env.REPORT_FROM}>`,
+        to: [env.REPORT_TO],
+        subject, html: rep.html, text: rep.text,
+        attachments: [{ filename: rep.csvName, content: btoa(bin) }],
+      }),
+    });
+    if (!res.ok) throw new Error(`resend ${res.status} ${(await res.text()).slice(0, 150)}`);
+  } else if (env.EMAIL) {
+    /* alternativa: Cloudflare Email Service (requiere Workers Paid y el binding send_email en wrangler.jsonc) */
+    await env.EMAIL.send({
+      to: env.REPORT_TO,
+      from: { email: env.REPORT_FROM, name: 'H3L Global Energy · Reportes' },
+      subject, html: rep.html, text: rep.text,
+      attachments: [{ filename: rep.csvName, content: csvBytes.buffer, type: 'text/csv', disposition: 'attachment' }],
+    });
+  } else {
+    throw new Error('sin servicio de envio: definir el secreto RESEND_API_KEY');
+  }
   return rep;
 }
 
