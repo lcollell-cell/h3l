@@ -214,9 +214,10 @@ a:focus-visible,button:focus-visible{outline:2px solid #5BB0FF;outline-offset:3p
 @media (max-height:720px){[data-mode=m] #rows li{height:31px}[data-mode=m] .lab{font-size:12.5px}[data-mode=m] #lhead{margin-top:10px}[data-mode=m] #status{display:none}[data-mode=m] #pct{font-size:36px;letter-spacing:-2px}[data-mode=m] #pctsym{font-size:16px;margin-top:3px}[data-mode=m] #bar{padding-top:10px;padding-bottom:26px}}
 @media (max-height:620px){[data-mode=m] #pctbox,[data-mode=m] #modcount{display:none}}
 @media (prefers-reduced-motion:reduce){#c2 svg,#navitems a::after{transition:none}}
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 </style>
 <noscript><style>#loader,#fade,#tools{display:none}#nav,#sub,#kpi,#ctas,#legacy{opacity:1!important}#wm span{opacity:1!important}</style></noscript>
-<script src="i18n.js?v=7"></script><script src="lang-index.js?v=5"></script>
+<script src="i18n.js?v=7"></script><script src="lang-index.js?v=6"></script>
 </head>
 <body>
 <div id="app">
@@ -288,6 +289,33 @@ a:focus-visible,button:focus-visible{outline:2px solid #5BB0FF;outline-offset:3p
   <div id="fade" class="layer"></div>
   <audio id="snd" src="h3l-intro.mp3?v=4" preload="auto"></audio>
 </div>
+<section id="resumen" class="sr-only" aria-labelledby="resumen-h">
+  <h2 id="resumen-h" data-i18n="r.h">H3L Global Energy: consultoría en Oil &amp; Gas y transición energética</h2>
+  <p data-i18n="r.p">Consultora independiente en upstream oil &amp; gas y transición energética. Ofrecemos evaluación de recursos y reservas (SPE-PRMS), auditoría energética, gestión de emisiones, ciencia de datos, geociencias, estrategias de transición energética, desarrollo de plataformas digitales y capacitación.</p>
+  <h3 data-i18n="r.sh">Servicios</h3>
+  <ul>
+    <li><a tabindex="-1" href="../index.html?go=servicios" data-i18n="r.s1">Evaluación de Recursos y Reservas</a></li>
+    <li><a tabindex="-1" href="../index.html?go=servicios" data-i18n="r.s2">Auditoría Energética y Diagnóstico de Descarbonización</a></li>
+    <li><a tabindex="-1" href="../index.html?go=servicios" data-i18n="r.s3">Gestión de Emisiones y Estrategias de Compensación</a></li>
+    <li><a tabindex="-1" href="../index.html?go=servicios" data-i18n="r.s4">Ciencia de Datos Aplicada a Energía</a></li>
+    <li><a tabindex="-1" href="../index.html?go=servicios" data-i18n="r.s5">Estrategias para la Transición Energética</a></li>
+    <li><a tabindex="-1" href="../index.html?go=servicios" data-i18n="r.s6">Desarrollo de Plataformas Digitales Propias</a></li>
+    <li><a tabindex="-1" href="../index.html?go=servicios" data-i18n="r.s7">Geociencias</a></li>
+    <li><a tabindex="-1" href="../index.html?go=servicios" data-i18n="r.s8">Capacitación y Formación Especializada</a></li>
+  </ul>
+  <h3 data-i18n="r.lh">Secciones del sitio</h3>
+  <ul>
+    <li><a tabindex="-1" href="../index.html?go=somos" data-i18n="c.somos">Quiénes somos</a></li>
+    <li><a tabindex="-1" href="../index.html?go=servicios" data-i18n="c.serv">Servicios</a></li>
+    <li><a tabindex="-1" href="reservas.html" data-i18n="r.res">Revisión de reservas</a></li>
+    <li><a tabindex="-1" href="dashboards.html" data-i18n="i.c2">Ver dashboard</a></li>
+    <li><a tabindex="-1" href="../calculadoras/app.html" data-i18n="c.calc">Calculadoras</a></li>
+    <li><a tabindex="-1" href="../index.html?go=noticias" data-i18n="c.news">Noticias OIL &amp; GAS</a></li>
+    <li><a tabindex="-1" href="../index.html?go=eventos" data-i18n="c.events">Eventos</a></li>
+    <li><a tabindex="-1" href="../index.html?go=contacto" data-i18n="c.contact">Contactos</a></li>
+    <li><a tabindex="-1" href="../privacidad.html" data-i18n="c.priv">Privacidad y cookies</a></li>
+  </ul>
+</section>
 <script src="../assets/inline/index.f12251d8.js"></script>
 <script src="chat.js?v=5" defer></script>
 <script src="../assets/h3l-stats.js?v=2" defer></script>
