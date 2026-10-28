@@ -1,0 +1,2 @@
+/* El inicio es la portada por idioma (/es/, /en/, /fr/, /pt/). Solo se queda aqui si se pide una seccion con ?go= */
+(function(){try{if(!/[?&]go=/.test(location.search)&&!/[?&]stay/.test(location.search)){var l=null,ok=/^(es|en|fr|pt)$/;try{l=localStorage.getItem('h3l_lang')}catch(e){}if(!ok.test(l||'')){l=String((navigator.languages&&navigator.languages[0])||navigator.language||'es').slice(0,2).toLowerCase();if(!ok.test(l))l='es'}location.replace(l+'/'+location.hash)}}catch(e){}})();

@@ -6,7 +6,8 @@ var L=['es','en','fr','pt'],NAMES={es:'Español',en:'English',fr:'Français',pt:
 var NF={es:{th:'.',dec:',',pct:' %'},en:{th:',',dec:'.',pct:'%'},fr:{th:' ',dec:',',pct:' %'},pt:{th:'.',dec:',',pct:'%'}};
 var D={es:{},en:{},fr:{},pt:{}},cbs=[],warned={};
 function store(k,v){try{if(v==null)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
-function pathLang(){var m=/^\/(es|en|fr|pt)(\/|$)/.exec(location.pathname);return m?m[1]:null}
+var LRE=/\/(es|en|fr|pt)\/(?:index\.html)?$/;
+function pathLang(){var m=LRE.exec(location.pathname);return m?m[1]:null}
 function detect(){
   var pl=pathLang();if(pl){store('h3l_lang',pl);return pl}
   var q=null;try{q=(new URLSearchParams(location.search)).get('lang')}catch(e){}
@@ -27,7 +28,7 @@ H3L.apply=function(root){root=root||document;var i,el,a,n,p;
   document.documentElement.lang=H3L.lang;
   var sel=document.querySelectorAll('select.h3lang-sel');for(i=0;i<sel.length;i++)sel[i].value=H3L.lang};
 H3L.set=function(l,silent){if(L.indexOf(l)<0||l===H3L.lang)return;H3L.lang=l;H3L.loc=LOC[l];H3L.nf=NF[l];store('h3l_lang',l);
-  try{var pl=pathLang();if(pl&&pl!==l)history.replaceState(null,'',location.pathname.replace(/^\/(es|en|fr|pt)/,'/'+l)+location.search+location.hash)}catch(e){}
+  try{var pl=pathLang();if(pl&&pl!==l)history.replaceState(null,'',location.pathname.replace(LRE,'/'+l+'/')+location.search+location.hash)}catch(e){}
   try{var u=new URL(location.href);if(u.searchParams.has('lang')){u.searchParams.set('lang',l);history.replaceState(null,'',u.toString())}}catch(e){}
   H3L.apply();if(!silent)cbs.forEach(function(f){try{f(l)}catch(e){if(window.console)console.error(e)}})};
 /* selector de idioma: un <select> nativo, el más compatible en todos los sistemas y teléfonos */

@@ -15,6 +15,7 @@ from bs4 import BeautifulSoup
 ROOT = Path(__file__).resolve().parent.parent
 SITE = 'https://www.h3lglobalenergy.com'
 LANGS = ['es', 'en', 'fr', 'pt']
+ABS = re.compile(r'^(?:[a-z][a-z0-9+.-]*:|//|/|#|\.{1,2}/|\?)', re.I)
 OG_LOCALE = {'es': 'es_ES', 'en': 'en_US', 'fr': 'fr_FR', 'pt': 'pt_BR'}
 
 
@@ -41,9 +42,16 @@ def build(lang, src_html, D):
     d = D[lang]
     soup = BeautifulSoup(src_html, 'html.parser')
     soup.html['lang'] = lang
-    # Las rutas relativas de la plantilla (v2/...) siguen funcionando desde /xx/ gracias a <base>.
-    base = soup.new_tag('base', href='/v2/')
-    soup.find('meta', charset=True).insert_after(base)
+    for a_ in soup.select('a.logo[href="index.html"]'):
+        a_['href'] = './'
+    # Las rutas relativas de la plantilla (v2/...) se reescriben para /xx/ (sin <base>: asi tambien andan bajo /h3l/ en GitHub Pages).
+    for tag in soup.find_all(True):
+        for attr in ('href', 'src', 'poster'):
+            if tag.get(attr) and not ABS.match(tag[attr]):
+                tag[attr] = '../v2/' + tag[attr]
+    for st in soup.find_all('style'):
+        if st.string:
+            st.string = re.sub(r"url\((?!['\"]?(?:data:|https?:|/|#|\.\./))", 'url(../v2/', st.string)
     for el in soup.select('[data-i18n]'):
         el.string = d[el['data-i18n']]
     for el in soup.select('[data-i18n-html]'):
@@ -54,8 +62,6 @@ def build(lang, src_html, D):
             if ':' in pair:
                 a, k = pair.split(':', 1)
                 el[a] = d[k]
-    for a_ in soup.select('a.logo[href="index.html"]'):
-        a_['href'] = f'/{lang}/'
     title, desc = d['i.title'], d['i.desc']
     for sel, attr in [('meta[property="og:title"]', 'content'), ('meta[name="twitter:title"]', 'content')]:
         t = soup.select_one(sel)
