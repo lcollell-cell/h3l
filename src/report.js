@@ -11,7 +11,7 @@ const SERVICES = [
   ['capacitacion', 'Capacitación'],
 ];
 const SVC_NAME = Object.fromEntries(SERVICES);
-const PAGES = { '/': 'Sitio principal', '/index.html': 'Sitio principal', '/v2/': 'Portada con intro', '/v2/index.html': 'Portada con intro', '/v2/reservas.html': 'Sala de reservas', '/v2/dashboards.html': 'Tableros' };
+const PAGES = { '/': 'Sitio principal', '/index.html': 'Sitio principal', '/v2/': 'Portada con intro', '/v2/index.html': 'Portada con intro', '/es/': 'Portada con intro', '/en/': 'Portada con intro', '/fr/': 'Portada con intro', '/pt/': 'Portada con intro', '/v2/reservas.html': 'Sala de reservas', '/v2/dashboards.html': 'Tableros' };
 const SECTIONS = { somos: 'Quiénes somos', servicios: 'Servicios', noticias: 'Noticias Oil & Gas', eventos: 'Eventos', contacto: 'Contactos' };
 const ACTIONS = { mailto: 'Clic en el mail', tel: 'Clic en el teléfono', linkedin: 'Clic en LinkedIn', brochure: 'Descarga del brochure', contact_send: 'Formulario de contacto (Enviar)', chat_open: 'Abrió el chat Copilot', intro_skip: 'Omitió la intro' };
 const LANG_NAME = { es: 'Español', en: 'English', fr: 'Français', pt: 'Português' };
@@ -144,7 +144,7 @@ export async function buildReport(db, day, hosts, env, opts = {}) {
     tally(act, name);
     const m = actC.get(name) || new Map(); tally(m, r.country || 'XX'); actC.set(name, m);
   }
-  const introPv = rows.filter((r) => r.type === 'pv' && (r.path === '/v2/' || r.path === '/v2/index.html')).length;
+  const introPv = rows.filter((r) => r.type === 'pv' && (r.path === '/v2/' || r.path === '/v2/index.html' || /^\/(es|en|fr|pt)\/?$/.test(r.path))).length;
   const introSkip = rows.filter((r) => r.type === 'click' && r.label === 'intro_skip').length;
 
   /* ---- tendencia y comparaciones ---- */

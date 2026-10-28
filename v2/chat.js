@@ -1,7 +1,7 @@
 /* H3L Copilot · asistente de la v2. Respuestas guiadas, sin servidor. H3L Global Energy. */
 (function(){'use strict';
 var NAME='H3L Copilot';
-var V2=location.pathname.indexOf('/v2/')>=0;
+var V2=location.pathname.indexOf('/v2/')>=0||/^\/(es|en|fr|pt)(\/|$)/.test(location.pathname);
 var LK={srv:(V2?'../':'')+'index.html?go=servicios',tab:(V2?'':'v2/')+'dashboards.html',con:(V2?'../':'')+'index.html?go=contacto',nos:(V2?'../':'')+'index.html?go=somos'};
 function goTo(h){var m=/[?&]go=([a-z]+)/.exec(h);return !V2&&m&&window.goSection?m[1]:null}
 /* textos por idioma: ui, enlaces, base de respuestas (k = palabras clave sin acentos), respuesta por defecto y botones */
