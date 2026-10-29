@@ -2,70 +2,70 @@
  "items": [
   {
    "source": "Oil & Gas Journal",
+   "title": "Shell's third-quarter earnings rise on record refining margins, stronger gas results",
+   "url": "https://www.ogj.com/general-interest/companies/news/55415305/shells-third-quarter-earnings-rise-on-record-refining-margins-stronger-gas-results",
+   "date": "2026-10-29"
+  },
+  {
+   "source": "Oil & Gas Journal",
+   "title": "QatarEnergy continues LNG supply diversification effort with new Woodside deal",
+   "url": "https://www.ogj.com/pipelines-transportation/lng/news/55415278/qatarenergy-continues-lng-supply-diversification-effort-with-new-woodside-deal",
+   "date": "2026-10-29"
+  },
+  {
+   "source": "TradingView",
+   "title": "Argentina YPF en camino a producir 250.000 barriles de petróleo 'shale' en diciembre: presidente ejecutivo",
+   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE85NTFHcGpTS2V0T1Z2TnlsM3NyYk5mdmhpUnYtajZ5TzQwZk9lS3BsbDR3Nk9CcVhGZlJMb3ZjSWs1amI4Vk1uTjZsX2dBOHFnVHpOVzFFSi1vVWdoUWxyd2N6VFR2OERoVy16UmM0cVRDUEh3d0dz?oc=5",
+   "date": "2026-10-29",
+   "region": "AR"
+  },
+  {
+   "source": "Yahoo",
+   "title": "De Vaca Muerta al Atlántico: Argentina se apresta a dar un salto como exportador petrolero",
+   "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOLU1uc0lCamcxcGpyZWUwaTZRLURWWENEUXpkSFRUcE5oZ2YwS1RjZEVCLTB0VVJIdDVqejhHaVQ0R3FFRGtQdFk5NDV2cmVzWkhMZ0lfWGJ1NWRvRFZpcXZwOHE1aGZybnQ0ZzFoY0VzNG12aGkyMmZPd0paYjZmc1BiQlh1UDdud1ZxYXp4aWxsSmdsUXZ3?oc=5",
+   "date": "2026-10-29",
+   "region": "AR"
+  },
+  {
+   "source": "Diario Río Negro",
+   "title": "SerPI ajusta su engranaje para la nueva escala de Vaca Muerta",
+   "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQYlV1dWRvTUNtWm9DdnF5WWR5M0doM0gyVGRIVF9ic2ZLQUE3YmFxZ3phSS1YRzJmMzQ3UzQ2cllVMjlIdkg5c19OOWkzRG1mbFdCaFZycUJnQmxyRTRKR3hmUXBmeWw5SjRUT2M0eE5FRGhSemNnRHdPeFg1cWUxYmRIZHhYVm1MTFUxX0E3YjRJN3A0VUNpU3kzbjhERFNVZ05PZ3hFdXI1VFHSAbMBQVVfeXFMUHU1RmZtYUJtYzgzaGZpUUZQY1FySDBaZVpoNGlESzd3dmdTay1sTXJMcWZBcTVsY3lhOGJxYWNOOEFoZmsxcUdwOVBHN2ZTQ1N1N0hUU2ZzbEE2ejhfR2lwbkloc0lLSnJaWEVFdmhoR0RTSTdoaHloSFJWM2JOMXMzUFJiZWZlMkJ6U0ptMzZ1T1RFQWJnR1pPNWVobVAxbVViOTJBUHU4aFlDc3pDd21lUlE?oc=5",
+   "date": "2026-10-29",
+   "region": "AR"
+  },
+  {
+   "source": "Lmneuquen.com",
+   "title": "Logística: ¿Cuál es la hoja de ruta para Vaca Muerta y la minería?",
+   "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxONGZrZmlIbXJxYkJwLXRscnZzVUlnNmQ4UklqNm1oVGNvWmNXUFRhRUdsckd3S3lwNGlLSDRDX01HaTBlYVpuU1I3QjFyLVg4Z3N4TTJEbl9HekljM2ZHYUo3V0dWZFRwTXJJSkRGUHVvUHM1SWxpSnJjRHNsQ2FtUFRUY1pleDNXVjlmNTlyV3VsenFhYko2X3FIcW9kSDh1cnJUdnFR0gGrAUFVX3lxTE5RaThEM25IRWtZN0NibUxjV2d3VkdEOUNsNy02Wlp1V1NFcEpUUWtla0JtTkNtWm5RVEktX1FGMTA4ZHRRWUhBMEk3aml2Vi1IeXRpMTVzSGlZN05DcThqSnBoUmhLVTZQMHhUZ3ZLTGdxZFZRSVhaY2RmR0JQdGJ1ZTVyZEk5SGxIejhYNHBsbmNqRmJYUFVxcnpMY1JGZ3Z5OVd6N2hKdGJicw?oc=5",
+   "date": "2026-10-29",
+   "region": "AR"
+  },
+  {
+   "source": "Ambito",
+   "title": "Cuenta regresiva para una obra clave: el VMOS se prepara para llevar el petróleo de Vaca Muerta al mundo",
+   "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPLTdPM0FIMGJlUUdhM0FydHhJRTVKTWpVVGU3Y3hwWV9KNUhSYjFVVjVpU0g3amxzMzFiM3pxMVMwZTR3ZS1HaDdacjdESjJXaklnVTRLZXpBaGtOMmRiRGliUXlkOW9KX0NFbVZvVG56cWY0RkZyd0xDZ213TmdQYVdkS2VJUUtlbllQZkxmSXpndlg3WWVKYmJoRXNCQndsM21IMEw3TGNYWWVxMm9QVWxaVjNiMWVMX0ZnWWFGQW9aMnNUeE1sNzFB?oc=5",
+   "date": "2026-10-29",
+   "region": "AR"
+  },
+  {
+   "source": "Oil & Gas Journal",
+   "title": "Expand curtailing some production ‘in direct acknowledgement that the market is weakening’",
+   "url": "https://www.ogj.com/general-interest/companies/news/55415086/expand-curtailing-some-production-in-direct-acknowledgement-that-the-market-is-weakening",
+   "date": "2026-10-28"
+  },
+  {
+   "source": "Oil & Gas Journal",
    "title": "EIA: US crude oil inventories down 1.9 million bbl",
    "url": "https://www.ogj.com/general-interest/economics-markets/news/55415055/eia-us-crude-oil-inventories-down-19-million-bbl",
    "date": "2026-10-28"
   },
   {
-   "source": "Oil & Gas Journal",
-   "title": "Equinor nearly doubles third-quarter earnings on higher commodity prices, production gains",
-   "url": "https://www.ogj.com/general-interest/companies/news/55415015/equinor-nearly-doubles-third-quarter-earnings-on-higher-commodity-prices-production-gains",
-   "date": "2026-10-28"
-  },
-  {
-   "source": "Oil & Gas Journal",
-   "title": "Chevron adds operated Gulf of Mexico positions in interest swap with TotalEnergies",
-   "url": "https://www.ogj.com/general-interest/news/55414931/chevron-adds-operated-gulf-of-mexico-positions-in-interest-swap-with-totalenergies",
-   "date": "2026-10-28"
-  },
-  {
-   "source": "Bloomberg Línea",
-   "title": "YPF presentará tres proyectos para adherirse al RIGI por US$44.000 millones",
-   "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQZnowc2UtajdFZUdGUVNNd0JWc2pmQ1dxdExUZWdvcUkyaTBrb0psTlZNNUlJN0hGYXFqQ29YSTFwS1Q0a05ZN1RZWWY0TU5zQTIzQlVMRGVRY3Z5R09FVkVVUERWcTc2WTVaQUVuRHBwR0xvQU1hU0p0OUZCYUJiTGo4am9ZVzYzNGF0ZFo5dHpEUVdxZmxqakJFaWlKanpGaVdpT2NuQTFXeVVPdXlpU09JdVdkamVyWXZOTm9Dem8tSHFYVzRDb9IB3AFBVV95cUxNa0hiSWJGSU1zYkZ2bGlscU8yaGpvWjBvX1VtM2V5VnFISFpYUjd5VG5rejdPMEMyeTQtQjFLSUFjcFVMbjFlbnJfSy13b1RJaUgxVE9CbGlvbXNzYnNUU2NQcGNqanhwSGFXa1M1akIxRjZwN1U0Qk9ETVZWSzY3LWh6TWl6c1pFQ0xFbFFxZmlRRjl5a1ZJb3NIM1BFMW9saXlTSXBQVlJnckRmeDZzV0Y3Qlo3SVQ4MnFSRU42Rzdsd1hya0NhbkFfdkRTSGlRWUZJRUtMUFJpTVFN?oc=5",
+   "source": "TN",
+   "title": "Haciendo Argentina: Vaca Muerta y la apuesta de YPF para convertir el potencial energético en dólares y empleo",
+   "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxPcTA0OTVicTR6bTJTWUtMb2ppV0trQ214ei1lTlU2YW1MdUs2SHRLeGRLVkt1b21CWkJyV2R2NlpoUjcwdDhpaUFiNXdnLXZlNl9kUTRsaG1ENFZxdmlRYThsZnVRU0JJellrUTREYkMzQUM0WmdHVGlmVzZ3RTNiLU1QMDR2VmtSaGlFNzd5NTdfd1hoWTlKUnpzZUFyOVppZi16TGxKX1hyU3NPendodGtYSGx5Y0E5Mk5TN3NyVVhmdS1QZEw4SERodWZ4eHdoR0xVczBwZE5ZQWZqNUHSAfIBQVVfeXFMTTlPTE1DLVJqalRJUm9NaUZBcDMxUGNvS21ubVN1bm5tMTdoRloyZFJma2tOdHVySXJwNl9ST0ZrYUJoQWdEMFF0QUZmalpoZklXR014cmJjc2x2STFsRE9zLTBZendiTnJhNGlhdm1Qd3ZDc3oyUnRWVGZxUGp2N2M1M0NueUdXR1Z1YmswYjliN3hXTnVVdmxNajdCTHV2WFA1bndreS1GSXF0VjdWcHBHdU5xNDlkV3ZCanlNNFZIOG1rdDhkMUlDN3ZXY29vY0cxdHJzNktOMGZNSzQ1aGp4LTYwcV9CV0kyc1c5M2c2X1E?oc=5",
    "date": "2026-10-28",
    "region": "AR"
-  },
-  {
-   "source": "Lmneuquen.com",
-   "title": "Vaca Muerta: hay 43 equipos de perforación activos y proyectan llegar a 50 en 2027",
-   "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNLXlRN1p6aG8xVVl4bld3NWdNa1VfY2t0WGFmb1RvLXA4cWFtQll6S1RkMlRHQmJNZkNrR1pMZGt1dXpmeDFRb3dDUl93T0xzZ2wxUlhGUVJORWRSMVNGRHhNT3pwQUlTZVhlbXE0N253MmVBTkNnb1RqM2plMEpSZFNVNEkxYkpmaVhiSkozcGNDRFc3VVpialFGRnAyMlJ3UExRLXlEemVvSWlzOWtBZXF1b1JGdU45c2Nrb05n0gHDAUFVX3lxTE5CbVJWRG4xVWNvSDFuMjUzbHBvbEhRY2FTODVKUllVNHd5RnduU0hsUlQ2MmtFeWNJdWJlMEtwdlczRGczcXdqV3VmU2JibFd2QmhQbTVFbVpVdnZyQnNqS3NzN3c5OVUybXlXRU5qS1ZnYmhTbkdZbjEzR2R4Q0xRVENvNGpUWGVtQXBWdHdIV3ZYQ3hIUzRRMHJfZjZjNjh4S3BMV3VzM3pQYlRRMGVMN3M4X3EtSFdqUWFDUjFOVVVYdw?oc=5",
-   "date": "2026-10-28",
-   "region": "AR"
-  },
-  {
-   "source": "Forbes Argentina",
-   "title": "Horacio Marín: \"Vaca Muerta no tiene vuelta atrás, nadie se va a tirar un tiro en los pies\"",
-   "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPM2NqYURiRUllNWJEQ2NqVGwwQUdjcXZLMVVfVDBNM0FGeUpQWkUwN3hJN1QtYnJzV2pha2YxakZsQ3JQYVM0bE81STQ0Z3RQU0VXMWhMUUFtOG1SQVpqc1NabGRGQ1BoeG41b2xMbGl2TmlKUjBYdldGcVBfMk55TnZmcTNtdkMtRndXQkRSZ3RQUmI4ZVY4RDRaRU9uUEZMSUdCNmVfZTVWT0g3Ykk2NE5UNVNRRW04V0HSAb8BQVVfeXFMTVpacXNuOUozdUk2VUZpQjlrSldLVTdIcDRRY08zYUNzZHFRRGRkbnpoc3RnQ3ktNDJmV3R3S3dNcThSUU1WQktmWFYzODJ3S3NnYmx4S0EtTnc1Z1MtbWlYTkN1OU1YWE5qbno1T1ZOa3Rpb29CUEhuSXc2cE5JVk9RTEJEcjZZM1NnN1BrMWRNT3NmX0RkNHYyVFllS2otTjd4Vml6RW9SMXhhV3BwWjNQbVNFeVQxZnB0aTFtbk0?oc=5",
-   "date": "2026-10-28",
-   "region": "AR"
-  },
-  {
-   "source": "Argentinisches Tageblatt",
-   "title": "AHK Forum 2026: de Vaca Muerta al desarrollo industrial, así fue el evento que debatió sobre las oportunidades de Argentina",
-   "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQRnR6T1BiSEJ3b1dOVFhFUjVBR2lVREJWV2diZnUzR2VPUXhMRzNjdENIQkxQOWgwd1I2MUY4bXBiT0ZPVC1FZk9TU250Z0dJSlpvdjhHSzdCZmdvZ05HT1U0N3plSUhWblBFdVlQck9WTmdFRW9NUjhvS1hYV0sxMUdrZDJjbTU5T3VYU28wbGN6NGpfVXROZWVNaW5BZmlTUUtaZGk0UXI?oc=5",
-   "date": "2026-10-28",
-   "region": "AR"
-  },
-  {
-   "source": "Diario Río Negro",
-   "title": "Cambio de era: Bolivia pasa de exportador a autorizar la importación de gas y mira a Vaca Muerta",
-   "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxQUHdfZ3FqZ2VJbDZLWXpFWmp6Vk5aSUptb052ajljZlZtS3FDcTlfQldHYno0b0ZkQjcwaHJZOXo0V04tVjd2Vk9idHJMR2k0YV9oS1NtNjdxaUE4SlJCbEVETG9rdWtiVUZlWG9QZUNiUVVHdWliR2FlNUtKMTB2V2I0MDhLRlhXV0o1TjZ2SlN5T25mMTUtbi1kT3F0YkNkNTF4bXNicThpUkpELXRqLURLT1FaQUF1WVg3d3ExZ0c2cFBnOFpDMlBaeUzSAdQBQVVfeXFMTkozRkd3Ny1idFJ5Q3diOU4zSTlsSEJIb3Bwem5McENhT3pXMVlOdUdDU3UwQ0FZNVRmZnNYSnIwM3FDZXA3M0ltb29Salk1R3hUVGhNMWZmdm5mYV9Dd2JsS2ZGdi0yR0pFTlVmRWtwVVRreVVBVDliVWVaMUR4cnlvaG12M3l5WG5EZWZBbzJKanBrRGNTdDBkTTNjaFRoOGwtMUFoN0pNQ0t6cTAwTzF0SjEtR1Q0bFB0d1lOVC0tbFlrX1AzTTVabkhJbFdvSXQ2RWs?oc=5",
-   "date": "2026-10-28",
-   "region": "AR"
-  },
-  {
-   "source": "Edición YPF Agro",
-   "title": "La maquinaria agrícola argentina se prepara para EIMA 2026 - Expoagro",
-   "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNMHB0amx1NjFCcU5GX2xaMnJDVExMNE5YandwOVYyUXl6WWlSdnZ3TVdFUVZ6T0VyQU5iZ0lOVmVWOUVmTXRTcTdodXpSUHdXNXpGRnlnX0VIWktZc0lhWHZweXYzSG1nNTFPZldRTWxWSFgybEc2ZEZxMkJ6M0hQZW45T2RxbkdJalJVM24zNEw?oc=5",
-   "date": "2026-10-28",
-   "region": "AR"
-  },
-  {
-   "source": "Oil & Gas Journal",
-   "title": "Neuquén awards eight blocks to expand Vaca Muerta exploration",
-   "url": "https://www.ogj.com/exploration-development/news/55414743/neuquen-awards-eight-blocks-to-expand-vaca-muerta-exploration",
-   "date": "2026-10-27"
   }
  ],
- "checked": "2026-10-28T17:11Z"
+ "checked": "2026-10-29T17:27Z"
 }
