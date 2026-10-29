@@ -571,7 +571,7 @@ burger.addEventListener('click',e=>{ e.stopPropagation(); const o=!menu.classLis
 document.addEventListener('click',e=>{ if(!menu.contains(e.target)) closeMenu(); });
 
 /* ---------- arranque ---------- */
-$('h1a').setAttribute('aria-label','Upstream Oil & Gas & Energy Transition');
+$('h1a').setAttribute('aria-label','OIL & GAS Consulting & Energy Transition');
 $('langNav').appendChild(H3L.select({}));
 $('langGate').appendChild(H3L.select({dark:true,full:true,onchange:()=>{ if(!$('gate').hidden) location.reload(); }}));
 H3L.apply();
