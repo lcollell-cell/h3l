@@ -488,7 +488,7 @@ var S=[
 ];
 
 /* Videos: VIDEO_BASE vacio = se sirven desde media/ (este sitio). Con la direccion del bucket R2 (la fija scripts/configurar_videos.py) salen de ahi. VIDEO_VER cambia al reemplazar un video. Los posters (jpg) siempre salen de media/. */
-var VIDEO_BASE='',VIDEO_VER='1';
+var VIDEO_BASE='https://media.h3lglobalenergy.com/',VIDEO_VER='1';
 function vurl(f){return VIDEO_BASE?VIDEO_BASE+f+'?v='+VIDEO_VER:'media/'+f}
 
 var lang='es';

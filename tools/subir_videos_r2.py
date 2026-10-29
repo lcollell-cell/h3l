@@ -31,7 +31,8 @@ def verificar(base):
     base = base.rstrip('/') + '/'
     mal = 0
     for f in sorted(MEDIA.glob('svc-*.mp4')):
-        req = urllib.request.Request(base + f.name, headers={'Range': 'bytes=0-1023'})
+        # Cloudflare bloquea con 403 el User-Agent por defecto de urllib: se identifica como un navegador.
+        req = urllib.request.Request(base + f.name, headers={'Range': 'bytes=0-1023', 'User-Agent': 'Mozilla/5.0 (verificacion H3L)'})
         try:
             with urllib.request.urlopen(req, timeout=20) as r:
                 ok = r.status in (200, 206) and r.headers.get('Content-Type', '').startswith('video/')
