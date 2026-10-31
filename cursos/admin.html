@@ -14,7 +14,7 @@
 <meta property="og:title" content="Administración de cursos — H3L">
 <meta property="og:description" content="Administración de cursos H3L.">
 <meta property="og:image" content="https://www.h3lglobalenergy.com/assets/og-image.png">
-<link rel="stylesheet" href="cursos.css?v=1">
+<link rel="stylesheet" href="cursos.css?v=2">
 </head>
 <body>
 <header class="top">
@@ -32,8 +32,13 @@
 <div class="kpis" id="kp"></div>
 <div class="tools" style="margin:10px 0"><button class="btn" id="exp" data-t="adm_exp"></button><button class="btn o" id="rst" data-t="adm_rst"></button></div>
 <div id="ad" style="overflow:auto"></div>
+<section id="props" style="margin-top:34px"><h2 style="font:800 20px var(--font);color:var(--navy)" id="pp-h"></h2><p class="note-s" style="max-width:90ch;margin:6px 0" id="pp-p"></p>
+<div class="tools" style="margin:10px 0"><label class="btn" for="pp-f" id="pp-l"></label><input type="file" id="pp-f" accept=".json,application/json" hidden> <a class="btn o" href="tutor.html" id="pp-ed"></a></div><div id="pp-out" class="tu-ed"></div></section>
 </div></main>
 <footer class="foot"><div class="wrap"><div>© H3L Global Energy · info@h3lglobalenergy.com · www.h3lglobalenergy.com</div><div data-t="demo">Los datos numéricos de los laboratorios y de los Excel son ejemplos didácticos, no datos de campos reales.</div></div></footer>
-<script src="core.js?v=1"></script>
+<script src="core.js?v=2"></script>
+<script src="widgets.js?v=3"></script>
+<script src="validate.js?v=1"></script>
 <script src="admin.js?v=1"></script>
+<script src="admin-propuestas.js?v=1"></script>
 </body></html>
