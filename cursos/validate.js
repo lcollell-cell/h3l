@@ -15,7 +15,7 @@ HV.validate=function(c,orig){var E=[],W=[];function e(p,m){E.push({p:p,m:m})}fun
   var I=c.intro||{};if(!isS(I.hook))e('intro.hook','req');
   if(!Array.isArray(I.questions)||I.questions.length!==3||!I.questions.every(isS))e('intro.questions','three');
   ['caso','S','T','A','R'].forEach(function(k){if(!I.star||!isS(I.star[k]))e('intro.star.'+k,'req')});
-  var O=c.outro||{};if(!isS(O.phrase))e('outro.phrase','req');if(!Array.isArray(O.recap)||!O.recap.length||!O.recap.every(isS))e('outro.recap','req');
+  var O=c.outro||{};if(!Array.isArray(O.can)||O.can.length<3||!O.can.every(isS))w('outro.can','nocan');if(!isS(O.phrase))e('outro.phrase','req');if(!Array.isArray(O.recap)||!O.recap.length||!O.recap.every(isS))e('outro.recap','req');
   var ids={},all=[];var WN=HV.widgets();
   if(!Array.isArray(c.modules)||!c.modules.length)e('modules','req');
   (c.modules||[]).forEach(function(m,mi){var mp='modules.'+mi;if(!isS(m.id))e(mp+'.id','req');if(!isS(m.title))e(mp+'.title','req');

@@ -1,86 +1,698 @@
 {
- "id":"res",
- "title":"Recursos y Reservas SPE-PRMS",
- "subtitle":"Clasificación, incertidumbre, declinación, economía y gobernanza de reservas.",
- "desc":"Cómo se clasifica, estima, justifica y audita un volumen de hidrocarburos según el sistema SPE-PRMS, con laboratorios de incertidumbre, curvas de declinación y límite económico, y un caso real de recategorización de reservas.",
- "objectives":["Ubicar un volumen dentro del marco PRMS según madurez del proyecto e incertidumbre.","Combinar pozos o proyectos con criterio probabilístico y explicar por qué no se suman los P90.","Pronosticar con declinación tipo Arps y calcular el EUR hasta el límite económico.","Distinguir PRMS y SEC y documentar una estimación de modo auditable."],
- "labs":["marco PRMS clickeable","Monte Carlo de portafolio de pozos","declinación de Arps","límite económico y categoría"],
- "practiceMin":90,
- "competencies":[
-  {"name":"Determinación y administración de reservas","lessons":["r1","r5","r6"]},
-  {"name":"Incertidumbre del desarrollo del campo y análisis de riesgo","lessons":["r2"]},
-  {"name":"Pronóstico de la producción y economía","lessons":["r3","r4"]},
-  {"name":"Administración y vigilancia de reservorios","lessons":["r4","r6"]}],
- "intro":{"hook":"Vamos a aprender a clasificar, estimar y defender un volumen de hidrocarburos de modo que resista una auditoría.",
-  "questions":["¿Cuántas reservas puedo reportar con respaldo?","¿Qué pozos o proyectos están sobrerregistrados?","¿Qué pasa con las reservas si el precio del crudo baja?"],
-  "star":{"caso":"Recategorización de reservas de una petrolera integrada, 2004","S":"La compañía tenía reservas probadas registradas entre 1996 y 2002, parte de ellas en proyectos que no avanzaron como estaba previsto.","T":"Determinar qué volumen realmente cumplía los criterios de reserva probada.","A":"Revisar la madurez de los proyectos y reclasificar volúmenes que no cumplían los criterios.","R":"El 9 de enero de 2004 la compañía recategorizó 3,9 miles de millones de barriles equivalentes, un 20 % de sus reservas probadas."}},
- "modules":[
-  {"id":"rm1","title":"Módulo 1 · Marco PRMS e incertidumbre","lessons":[
-   {"id":"r1","title":"El mapa de clasificación PRMS","comp":"Determinación de reservas","cues":[
-    {"say":"El sistema de gestión de recursos petroleros, PRMS, lo publica la Sociedad de Ingenieros de Petróleo junto con otras entidades técnicas. Su última edición es de 2018. Ordena todo el hidrocarburo en una sola estructura.","scene":{"t":"bul","k":"SPE-PRMS 2018","h":"Para que sea reserva, el volumen debe ser:","items":["Descubierto","Recuperable","Comercial","Remanente a la fecha de evaluación","Basado en un proyecto de desarrollo definido"]},"hl":0},
-    {"say":"Estos criterios se cumplen todos a la vez. Falta uno, por ejemplo la comercialidad, y el volumen pasa a recursos contingentes. Un volumen sin descubrir se llama recurso prospectivo.","hl":4},
-    {"say":"Laboratorio. Explorá el marco. Tocá cada bloque y leé su definición. Fijate que la clasificación tiene dos ejes: madurez del proyecto, y rango de incertidumbre baja, mejor o alta.","scene":{"t":"viz","w":"prms","h":"Marco de clasificación de recursos","p":{}},"lab":true},
-    {"say":"Pregunta rápida.","q":{"q":"Una acumulación descubierta cuyo proyecto todavía no es comercial, por ejemplo por falta de mercado, se clasifica como:","o":["Reserva probada","Recurso contingente","Recurso prospectivo","Irrecuperable"],"a":1,"e":"Descubierta pero no comercial es recurso contingente. Si se resuelve la limitación y el proyecto se justifica, puede pasar a reserva."}}]},
-   {"id":"r2","title":"Incertidumbre: 1P, 2P, 3P y combinación de pozos","comp":"Incertidumbre y riesgo","cues":[
-    {"say":"Toda estimación tiene incertidumbre, y PRMS pide declararla con tres escenarios: baja, mejor y alta estimación. Con métodos probabilísticos corresponden a P90, P50 y P10.","scene":{"t":"tbl","k":"Categorías","h":"Estimaciones y probabilidades","cols":["Reservas","Contingentes","Probabilidad de igualar o superar"],"rows":[["1P · Probadas","1C","al menos 90 % (P90)"],["2P · Probadas + Probables","2C","al menos 50 % (P50)"],["3P · Probadas + Probables + Posibles","3C","al menos 10 % (P10)"]],"n":"Los métodos determinísticos expresan la misma idea con juicio técnico y un alto grado de confianza."}},
-    {"say":"Un error clásico es sumar los P90 de cada pozo para obtener el P90 del conjunto. Como es muy improbable que todos los pozos salgan mal a la vez, el P90 real del portafolio es mayor que la suma aritmética de los P90.","hl":0},
-    {"say":"Laboratorio. Cada pozo tiene un EUR incierto. Aumentá la cantidad de pozos y mirá cómo el rango relativo del portafolio se cierra. Después subí la dispersión de cada pozo y compará con la suma de P90.","scene":{"t":"viz","w":"mc","h":"Portafolio de pozos: efecto de agregación","p":{"mode":"wells"}},"lab":true},
-    {"say":"La regla práctica: la suma aritmética sirve para 1P a nivel de estados contables, que se agregan por separado. Para el análisis de riesgo de un portafolio, se usa agregación probabilística, con sus dependencias explícitas.","hl":0},
-    {"say":"Pregunta rápida.","q":{"q":"Si se suman aritméticamente los P90 de 20 pozos independientes, el resultado respecto del P90 probabilístico del conjunto es:","o":["Igual","Menor: subestima el P90 del portafolio","Mayor: lo sobreestima","Depende solo del precio"],"a":1,"e":"La diversificación reduce el riesgo relativo; el P90 del conjunto es mayor que la suma de los P90 individuales."}}]}],
-   "quiz":[
-    {"q":"¿Cuál NO es un criterio de reservas en PRMS?","o":["Descubierto","Comercial","Probabilidad de éxito exploratorio","Remanente"],"a":2,"e":"La probabilidad de éxito exploratorio corresponde a los recursos prospectivos, no a las reservas."},
-    {"q":"2P equivale, con métodos probabilísticos, a:","o":["P90","P50","P10","P1"],"a":1,"e":"La mejor estimación se asocia al P50: 50 % de probabilidad de ser igualada o superada."},
-    {"q":"Un volumen contingente se convierte en reserva cuando:","o":["Sube la volatilidad","El proyecto pasa a cumplir los criterios de comercialidad y se aprueba su desarrollo","Se imprime el informe","Se agrega otro pozo de observación"],"a":1,"e":"Hay que resolver la contingencia y justificar el proyecto de desarrollo."}]},
-  {"id":"rm2","title":"Módulo 2 · Pronóstico y economía","lessons":[
-   {"id":"r3","title":"Curvas de declinación de Arps y EUR","comp":"Pronóstico y economía","cues":[
-    {"say":"El análisis de declinación proyecta la producción futura a partir del comportamiento histórico. El modelo clásico es el de Arps, de 1945, con tres parámetros: caudal inicial, declinación inicial y exponente b.","scene":{"t":"fm","k":"Concepto clave","h":"Declinación hiperbólica de Arps","f":"q(t) = qi / (1 + b · Di · t)^(1/b)\n\nb = 0  → exponencial\n0 < b < 1 → hiperbólica\nb = 1  → armónica","n":"EUR = producción acumulada desde el inicio hasta que el caudal cae al límite económico."}},
-    {"say":"El exponente b describe cómo cambia la declinación en el tiempo. Con b igual a cero, la declinación es constante. A mayor b, la cola de producción es más larga y el EUR aumenta, a veces de modo muy fuerte.","hl":0},
-    {"say":"Laboratorio. Cambiá qi, Di y b. Mirá el EUR y compará con las curvas de referencia exponencial y armónica. Fijate cuánto se mueve el resultado solo con el valor de b.","scene":{"t":"viz","w":"decline","h":"Declinación de Arps y EUR","p":{"qi":600,"di":60,"b":0.8}},"lab":true},
-    {"say":"En pozos de no convencionales, durante el flujo transitorio aparecen valores de b mayores que uno. Para evitar sobreestimar, se usa una declinación terminal: al llegar a una declinación mínima, la curva pasa a exponencial. Duong, en 2011, propuso un modelo específico para pozos fracturados.","hl":0},
-    {"say":"Pregunta rápida.","q":{"q":"Si aumentás b manteniendo qi y Di, el EUR hasta el mismo límite económico:","o":["Disminuye","Aumenta","No cambia","Se vuelve negativo"],"a":1,"e":"Un b mayor produce una cola más larga: el caudal cae más lento y se acumula más producción antes de llegar al límite."}}]},
-   {"id":"r4","title":"Límite económico: cuando el precio decide la categoría","comp":"Pronóstico y economía","cues":[
-    {"say":"Una reserva es comercial, por definición. Por eso el volumen que se puede reportar depende del límite económico: el caudal por debajo del cual el pozo deja de dar margen operativo positivo.","scene":{"t":"fm","k":"Concepto clave","h":"Caudal límite económico","f":"q_lím = Costo fijo / ((Precio × (1 − regalías) − Costo variable) × 30,4)","n":"Si el precio baja o el costo sube, el límite sube y el EUR económico cae: parte de las reservas se vuelve recurso contingente."}},
-    {"say":"Laboratorio. Bajá el precio del crudo y mirá cuándo el límite económico supera el caudal inicial. En ese punto el pozo deja de ser económico y el volumen pasa a recurso contingente.","scene":{"t":"viz","w":"decline","h":"Precio, límite económico y categoría","p":{"qi":400,"di":55,"b":0.6,"econ":true,"pr":65,"ox":9000,"ro":12}},"lab":true},
-    {"say":"Esto es lo que pasa en una caída de precios: las reservas no desaparecen físicamente, pero dejan de cumplir el criterio de comercialidad. Por eso toda auditoría exige declarar el escenario de precios y costos usado.","hl":0},
-    {"say":"Pregunta rápida.","q":{"q":"Si el costo fijo por pozo sube y el precio no cambia, el límite económico:","o":["Baja","Sube","No cambia","Se anula"],"a":1,"e":"Mayor costo fijo exige un caudal mínimo más alto para cubrirlo, entonces el límite sube y el EUR económico disminuye."}}]}],
-   "quiz":[
-    {"q":"En la declinación de Arps, b = 0 corresponde a una declinación:","o":["Armónica","Exponencial","Lineal","Logarítmica"],"a":1,"e":"Con b = 0 la tasa de declinación es constante: exponencial."},
-    {"q":"El EUR es:","o":["La producción de un mes","La producción acumulada hasta el límite económico más la ya producida","El caudal inicial","La reserva probada del campo"],"a":1,"e":"EUR significa recuperación final estimada de un pozo o proyecto."},
-    {"q":"Con precios más bajos, las reservas económicas de un pozo marginal:","o":["Aumentan","Pueden disminuir o pasar a contingentes","No se ven afectadas","Se duplican"],"a":1,"e":"El límite económico sube y el volumen deja de ser comercial."}]},
-  {"id":"rm3","title":"Módulo 3 · Gobernanza y caso real","lessons":[
-   {"id":"r5","title":"PRMS vs SEC y buenas prácticas de auditoría","comp":"Determinación de reservas","cues":[
-    {"say":"Las empresas que cotizan en la bolsa de Estados Unidos reportan reservas con las reglas de la SEC, que son más estrictas en varios puntos que PRMS. Conviene conocer las diferencias para no mezclar volúmenes.","scene":{"t":"tbl","k":"Comparativo","h":"PRMS y SEC (reglas vigentes desde 2010)","cols":["Tema","PRMS","SEC"],"rows":[["Precio","Escenarios de previsión del evaluador","Promedio de 12 meses del primer día de cada mes"],["Certeza de probadas","Alta confianza; 90 % si es probabilístico","Certeza razonable; 90 % si es probabilístico"],["Probadas no desarrolladas","Sujetas a un plan de desarrollo aprobado","Deben desarrollarse en general dentro de 5 años"],["Probables y posibles","Siempre se estiman","Su divulgación es opcional"]]}},
-    {"say":"La regla de los cinco años es una de las que más mueve los números: un volumen probado no desarrollado que no se perforará en ese plazo, salvo circunstancias específicas, no puede seguir como reserva probada ante la SEC.","hl":0},
-    {"say":"Buenas prácticas de auditoría: documentar el método, las hipótesis y las fuentes; conciliar los cambios año a año; aplicar criterios homogéneos entre proyectos; e involucrar evaluadores independientes y competentes.","scene":{"t":"bul","k":"Gobernanza","h":"Checklist de una estimación auditable","items":["Hipótesis de precio, costo y tecnología explícitas","Soporte técnico de cada análogo y de cada b","Conciliación anual: producción, revisiones, extensiones, compras, ventas","Trazabilidad entre el modelo y el reporte","Evaluadores competentes e independientes de quien reporta"]},"hl":0},
-    {"say":"Pregunta rápida.","q":{"q":"Un volumen probado no desarrollado sin plan para perforarse en cinco años, bajo las reglas de la SEC:","o":["Se mantiene indefinidamente","Debe recategorizarse, salvo circunstancias específicas justificadas","Pasa automáticamente a 3P","Se duplica"],"a":1,"e":"La norma exige desarrollo normalmente dentro de cinco años; de lo contrario se reclasifica."}}]},
-   {"id":"r6","title":"Caso real: la recategorización de reservas de 2004","comp":"Administración de reservas","cues":[
-    {"say":"El 9 de enero de 2004 una petrolera integrada anunció que recategorizaba 3,9 miles de millones de barriles equivalentes de petróleo, alrededor del 20 % de sus reservas probadas. Es uno de los casos más estudiados en la industria.","scene":{"t":"case","h":"Recategorización de reservas probadas","src":"SEC Form 6-K, 2004; Oil & Gas Journal","S":"Reservas probadas registradas sobre todo entre 1996 y 2002. Cerca de la mitad del ajuste se asociaba con Nigeria y con los campos Gorgon, en Australia.","T":"Verificar qué volúmenes cumplían los criterios de reserva probada y cuáles no.","A":"Reclasificación de 3,9 miles de millones de boe, más del 90 % en la categoría probadas no desarrolladas; 2,7 miles de millones de barriles de crudo y líquidos y 1,2 miles de millones de boe de gas.","R":"La compañía indicó que el cambio no alteraba los hidrocarburos totales in situ ni los volúmenes finalmente recuperables, sino su estado de madurez como reservas probadas."},"hl":0},
-    {"say":"Las reservas de Gorgon se habían empezado a registrar en 1997, apoyadas en cartas de intención y cronogramas de desarrollo que no se concretaron como se esperaba. Es un ejemplo de reserva sin proyecto firme.","hl":1},
-    {"say":"La lección técnica: la categoría de una reserva depende del volumen, pero también de la madurez del proyecto, del compromiso de capital y del plazo. Una estimación geológica buena no alcanza si el proyecto no se aprueba.","hl":2},
-    {"say":"Y la lección de gobernanza: controles independientes, criterios homogéneos y conciliación anual habrían detectado antes la brecha entre lo registrado y lo realmente justificable.","hl":3},
-    {"say":"Pregunta rápida.","q":{"q":"En este caso, la recategorización principalmente reflejó que:","o":["Desapareció el hidrocarburo del subsuelo","Los volúmenes no cumplían la madurez de proyecto exigida para reservas probadas","El precio del crudo subió","Se perforaron demasiados pozos"],"a":1,"e":"La compañía indicó que no cambiaban los volúmenes totales in situ ni los recuperables finales, sino el estado de madurez como probadas."}}]}],
-   "quiz":[
-    {"q":"Según la SEC (desde 2010), el precio para estimar reservas es:","o":["El pronóstico del evaluador","El promedio de 12 meses del primer día de cada mes","El precio máximo del año","El precio spot de hoy"],"a":1,"e":"La regla busca un criterio objetivo y reproducible."},
-    {"q":"El mayor porcentaje del ajuste de reservas de 2004 estuvo en:","o":["Probadas desarrolladas","Probadas no desarrolladas","Recursos prospectivos","Gas no convencional"],"a":1,"e":"Más del 90 % del cambio fue en probadas no desarrolladas."},
-    {"q":"¿Qué práctica ayuda a que una estimación sea auditable?","o":["Cambiar de método todos los años sin explicar","Documentar hipótesis y conciliar los cambios anuales","No registrar fuentes","Usar un único pozo análogo sin justificar"],"a":1,"e":"La trazabilidad de hipótesis y la conciliación son la base de la auditabilidad."}]}],
- "exam":[
-  {"q":"Una acumulación descubierta sin mercado aún definido es:","o":["Reserva","Recurso contingente","Recurso prospectivo","Irrecuperable"],"a":1,"e":"Descubierta y no comercial: recurso contingente."},
-  {"q":"Con métodos probabilísticos, 1P corresponde a:","o":["P10","P50","P90","P99"],"a":2,"e":"1P: al menos 90 % de probabilidad de ser igualada o superada."},
-  {"q":"Sumar P90 de pozos individuales para obtener el P90 del conjunto:","o":["Es lo correcto","Subestima el P90 del conjunto si los pozos son independientes","Siempre lo sobreestima","Es irrelevante"],"a":1,"e":"El efecto de portafolio hace que el P90 del conjunto sea mayor que la suma de P90."},
-  {"q":"Un valor de b mayor en la declinación de Arps, con el mismo límite económico, tiende a:","o":["Reducir el EUR","Aumentar el EUR","No afectar el EUR","Anular la declinación"],"a":1,"e":"La cola de producción se alarga."},
-  {"q":"Cuando el precio baja y el límite económico supera el caudal inicial del pozo, el volumen:","o":["Sigue siendo reserva","Deja de ser comercial y pasa a recurso contingente","Se convierte en probado desarrollado","Se vuelve prospectivo"],"a":1,"e":"Pierde el criterio de comercialidad."},
-  {"q":"La principal enseñanza del caso de recategorización de 2004 es que:","o":["Las reservas dependen solo de la geología","La categoría depende también de la madurez del proyecto y requiere control independiente","La SEC no audita","El gas nunca es reserva"],"a":1,"e":"Madurez de proyecto y gobernanza son tan importantes como el volumen."}],
- "outro":{"phrase":"Reservas con respaldo, decisiones con confianza.","recap":["La reserva es descubierta, recuperable, comercial y remanente, y se declara con su incertidumbre.","El EUR depende del exponente b y del límite económico; el precio cambia la categoría.","La madurez del proyecto y la gobernanza importan tanto como la geología."]},
- "downloads":[{"file":"xlsx/H3L_Reservas_Declinacion_y_Economia.xlsx","title":"Declinación de Arps, EUR y límite económico (Excel)","desc":"Pronóstico mensual con parámetros editables, límite económico, EUR, flujo de caja y escenarios baja/mejor/alta.","task":"Calculá el EUR para b = 0,4, 0,8 y 1,2. Después bajá el precio de 65 a 45 USD/bbl y observá qué escenario deja de ser económico."}],
- "cases":[{"title":"Recategorización de reservas (9 de enero de 2004)","text":"la compañía recategorizó 3,9 miles de millones de boe, aproximadamente 20 % de sus reservas probadas; más del 90 % era probadas no desarrolladas y cerca de la mitad del ajuste involucraba Nigeria y los campos Gorgon. Gorgon se empezó a registrar en 1997 sobre cartas de intención y cronogramas que no se cumplieron. La compañía señaló que no cambiaban los hidrocarburos in situ ni los volúmenes finalmente recuperables.","src":"Oil & Gas Journal (2004); SEC Form 6-K (2004) de la sociedad controlante"}],
- "refs":[
-  {"tag":"Estándar","cite":"SPE/WPC/AAPG/SPEE/SEG/SPWLA/EAGE (2018). Petroleum Resources Management System (PRMS).","why":"definiciones y clasificación vigentes"},
-  {"tag":"Estándar","cite":"SPE et al. Guidelines for Application of the Petroleum Resources Management System (guía de aplicación del PRMS).","why":"criterios de aplicación y ejemplos"},
-  {"tag":"Norma","cite":"U.S. SEC. Modernization of Oil and Gas Reporting, Regulation S-X Rule 4-10 (vigente desde el 1.º de enero de 2010).","why":"definiciones SEC, regla de 5 años y precio promedio"},
-  {"tag":"Paper","cite":"Arps, J. J. (1945). Analysis of decline curves. Trans. AIME 160(1), 228–247.","why":"modelo de declinación exponencial, hiperbólica y armónica"},
-  {"tag":"Paper","cite":"Fetkovich, M. J. (1980). Decline curve analysis using type curves. JPT 32(6), 1065–1077 (SPE-4629-PA).","why":"curvas tipo y flujo transitorio"},
-  {"tag":"Paper","cite":"Duong, A. N. (2011). Rate-decline analysis for fracture-dominated shale reservoirs. SPE Reservoir Evaluation & Engineering 14(3) (SPE-137748-PA).","why":"declinación de pozos fracturados en shale"},
-  {"tag":"Paper","cite":"Capen, E. C. (1976). The difficulty of assessing uncertainty. JPT 28(8), 843–850 (SPE-5579-PA).","why":"sesgo de exceso de confianza en rangos"},
-  {"tag":"Libro","cite":"Rose, P. R. (2001). Risk Analysis and Management of Petroleum Exploration Ventures. AAPG Methods in Exploration Series 12.","why":"análisis de riesgo y decisiones"},
-  {"tag":"Informe","cite":"SEC (2004). Formulario 6-K sobre la recategorización de reservas, presentado por las sociedades controlantes de una petrolera integrada.","why":"fuente primaria del caso"}]
+ "id": "res",
+ "title": "Recursos y Reservas SPE-PRMS",
+ "subtitle": "Clasificación, incertidumbre, declinación, economía y gobernanza de reservas.",
+ "desc": "Cómo se clasifica, estima, justifica y audita un volumen de hidrocarburos según el sistema SPE-PRMS, con laboratorios de incertidumbre, curvas de declinación y límite económico, y un caso real de recategorización de reservas.",
+ "objectives": [
+  "Ubicar un volumen dentro del marco PRMS según madurez del proyecto e incertidumbre.",
+  "Combinar pozos o proyectos con criterio probabilístico y explicar por qué no se suman los P90.",
+  "Pronosticar con declinación tipo Arps y calcular el EUR hasta el límite económico.",
+  "Distinguir PRMS y SEC y documentar una estimación de modo auditable."
+ ],
+ "labs": [
+  "marco PRMS clickeable",
+  "Monte Carlo de portafolio de pozos",
+  "declinación de Arps",
+  "límite económico y categoría"
+ ],
+ "practiceMin": 90,
+ "competencies": [
+  {
+   "name": "Determinación y administración de reservas",
+   "lessons": [
+    "r1",
+    "r5",
+    "r6"
+   ]
+  },
+  {
+   "name": "Incertidumbre del desarrollo del campo y análisis de riesgo",
+   "lessons": [
+    "r2"
+   ]
+  },
+  {
+   "name": "Pronóstico de la producción y economía",
+   "lessons": [
+    "r3",
+    "r4"
+   ]
+  },
+  {
+   "name": "Administración y vigilancia de reservorios",
+   "lessons": [
+    "r4",
+    "r6"
+   ]
+  }
+ ],
+ "intro": {
+  "hook": "Vamos a aprender a clasificar, estimar y defender un volumen de hidrocarburos de modo que resista una auditoría.",
+  "questions": [
+   "¿Cuántas reservas puedo reportar con respaldo?",
+   "¿Qué pozos o proyectos están sobrerregistrados?",
+   "¿Qué pasa con las reservas si el precio del crudo baja?"
+  ],
+  "star": {
+   "caso": "Recategorización de reservas de una petrolera integrada, 2004",
+   "S": "La compañía tenía reservas probadas registradas entre 1996 y 2002, parte de ellas en proyectos que no avanzaron como estaba previsto.",
+   "T": "Determinar qué volumen realmente cumplía los criterios de reserva probada.",
+   "A": "Revisar la madurez de los proyectos y reclasificar volúmenes que no cumplían los criterios.",
+   "R": "El 9 de enero de 2004 la compañía recategorizó 3,9 miles de millones de barriles equivalentes, un 20 % de sus reservas probadas."
+  }
+ },
+ "modules": [
+  {
+   "id": "rm1",
+   "title": "Módulo 1 · Marco PRMS e incertidumbre",
+   "lessons": [
+    {
+     "id": "r1",
+     "title": "El mapa de clasificación PRMS",
+     "comp": "Determinación de reservas",
+     "cues": [
+      {
+       "say": "El sistema de gestión de recursos petroleros, PRMS, lo publica la Sociedad de Ingenieros de Petróleo junto con otras entidades técnicas. Su última edición es de 2018. Ordena todo el hidrocarburo en una sola estructura.",
+       "scene": {
+        "t": "bul",
+        "k": "SPE-PRMS 2018",
+        "h": "Para que sea reserva, el volumen debe ser:",
+        "items": [
+         "Descubierto",
+         "Recuperable",
+         "Comercial",
+         "Remanente a la fecha de evaluación",
+         "Basado en un proyecto de desarrollo definido"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Estos criterios se cumplen todos a la vez. Falta uno, por ejemplo la comercialidad, y el volumen pasa a recursos contingentes. Un volumen sin descubrir se llama recurso prospectivo.",
+       "hl": 4
+      },
+      {
+       "say": "Laboratorio. Explorá el marco. Tocá cada bloque y leé su definición. Fijate que la clasificación tiene dos ejes: madurez del proyecto, y rango de incertidumbre baja, mejor o alta.",
+       "scene": {
+        "t": "viz",
+        "w": "prms",
+        "h": "Marco de clasificación de recursos",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Una acumulación descubierta cuyo proyecto todavía no es comercial, por ejemplo por falta de mercado, se clasifica como:",
+        "o": [
+         "Reserva probada",
+         "Recurso contingente",
+         "Recurso prospectivo",
+         "Irrecuperable"
+        ],
+        "a": 1,
+        "e": "Descubierta pero no comercial es recurso contingente. Si se resuelve la limitación y el proyecto se justifica, puede pasar a reserva."
+       }
+      }
+     ]
+    },
+    {
+     "id": "r2",
+     "title": "Incertidumbre: 1P, 2P, 3P y combinación de pozos",
+     "comp": "Incertidumbre y riesgo",
+     "cues": [
+      {
+       "say": "Toda estimación tiene incertidumbre, y PRMS pide declararla con tres escenarios: baja, mejor y alta estimación. Con métodos probabilísticos corresponden a P90, P50 y P10.",
+       "scene": {
+        "t": "tbl",
+        "k": "Categorías",
+        "h": "Estimaciones y probabilidades",
+        "cols": [
+         "Reservas",
+         "Contingentes",
+         "Probabilidad de igualar o superar"
+        ],
+        "rows": [
+         [
+          "1P · Probadas",
+          "1C",
+          "al menos 90 % (P90)"
+         ],
+         [
+          "2P · Probadas + Probables",
+          "2C",
+          "al menos 50 % (P50)"
+         ],
+         [
+          "3P · Probadas + Probables + Posibles",
+          "3C",
+          "al menos 10 % (P10)"
+         ]
+        ],
+        "n": "Los métodos determinísticos expresan la misma idea con juicio técnico y un alto grado de confianza."
+       }
+      },
+      {
+       "say": "Un error clásico es sumar los P90 de cada pozo para obtener el P90 del conjunto. Como es muy improbable que todos los pozos salgan mal a la vez, el P90 real del portafolio es mayor que la suma aritmética de los P90.",
+       "hl": 0
+      },
+      {
+       "say": "Laboratorio. Cada pozo tiene un EUR incierto. Aumentá la cantidad de pozos y mirá cómo el rango relativo del portafolio se cierra. Después subí la dispersión de cada pozo y compará con la suma de P90.",
+       "scene": {
+        "t": "viz",
+        "w": "mc",
+        "h": "Portafolio de pozos: efecto de agregación",
+        "p": {
+         "mode": "wells"
+        }
+       },
+       "lab": true
+      },
+      {
+       "say": "La regla práctica: la suma aritmética sirve para 1P a nivel de estados contables, que se agregan por separado. Para el análisis de riesgo de un portafolio, se usa agregación probabilística, con sus dependencias explícitas.",
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Si se suman aritméticamente los P90 de 20 pozos independientes, el resultado respecto del P90 probabilístico del conjunto es:",
+        "o": [
+         "Igual",
+         "Menor: subestima el P90 del portafolio",
+         "Mayor: lo sobreestima",
+         "Depende solo del precio"
+        ],
+        "a": 1,
+        "e": "La diversificación reduce el riesgo relativo; el P90 del conjunto es mayor que la suma de los P90 individuales."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "¿Cuál NO es un criterio de reservas en PRMS?",
+     "o": [
+      "Descubierto",
+      "Comercial",
+      "Probabilidad de éxito exploratorio",
+      "Remanente"
+     ],
+     "a": 2,
+     "e": "La probabilidad de éxito exploratorio corresponde a los recursos prospectivos, no a las reservas."
+    },
+    {
+     "q": "2P equivale, con métodos probabilísticos, a:",
+     "o": [
+      "P90",
+      "P50",
+      "P10",
+      "P1"
+     ],
+     "a": 1,
+     "e": "La mejor estimación se asocia al P50: 50 % de probabilidad de ser igualada o superada."
+    },
+    {
+     "q": "Un volumen contingente se convierte en reserva cuando:",
+     "o": [
+      "Sube la volatilidad",
+      "El proyecto pasa a cumplir los criterios de comercialidad y se aprueba su desarrollo",
+      "Se imprime el informe",
+      "Se agrega otro pozo de observación"
+     ],
+     "a": 1,
+     "e": "Hay que resolver la contingencia y justificar el proyecto de desarrollo."
+    }
+   ]
+  },
+  {
+   "id": "rm2",
+   "title": "Módulo 2 · Pronóstico y economía",
+   "lessons": [
+    {
+     "id": "r3",
+     "title": "Curvas de declinación de Arps y EUR",
+     "comp": "Pronóstico y economía",
+     "cues": [
+      {
+       "say": "El análisis de declinación proyecta la producción futura a partir del comportamiento histórico. El modelo clásico es el de Arps, de 1945, con tres parámetros: caudal inicial, declinación inicial y exponente b.",
+       "scene": {
+        "t": "fm",
+        "k": "Concepto clave",
+        "h": "Declinación hiperbólica de Arps",
+        "f": "q(t) = qi / (1 + b · Di · t)^(1/b)\n\nb = 0  → exponencial\n0 < b < 1 → hiperbólica\nb = 1  → armónica",
+        "n": "EUR = producción acumulada desde el inicio hasta que el caudal cae al límite económico."
+       }
+      },
+      {
+       "say": "El exponente b describe cómo cambia la declinación en el tiempo. Con b igual a cero, la declinación es constante. A mayor b, la cola de producción es más larga y el EUR aumenta, a veces de modo muy fuerte.",
+       "hl": 0
+      },
+      {
+       "say": "Laboratorio. Cambiá qi, Di y b. Mirá el EUR y compará con las curvas de referencia exponencial y armónica. Fijate cuánto se mueve el resultado solo con el valor de b.",
+       "scene": {
+        "t": "viz",
+        "w": "decline",
+        "h": "Declinación de Arps y EUR",
+        "p": {
+         "qi": 600,
+         "di": 60,
+         "b": 0.8
+        }
+       },
+       "lab": true
+      },
+      {
+       "say": "En pozos de no convencionales, durante el flujo transitorio aparecen valores de b mayores que uno. Para evitar sobreestimar, se usa una declinación terminal: al llegar a una declinación mínima, la curva pasa a exponencial. Duong, en 2011, propuso un modelo específico para pozos fracturados.",
+       "hl": 0
+      },
+      {
+       "say": "Arps extrapola la historia de producción. Cuando hay datos de presión, el balance de materiales da el volumen original en sitio de forma independiente y permite contrastar el resultado. Donde no hay historia, PRMS admite análogos, siempre que estén documentados y sean comparables.",
+       "scene": {
+        "t": "bul",
+        "k": "Contraste de métodos",
+        "h": "Más de un método, más confianza",
+        "items": [
+         "Declinación: extrapola el comportamiento observado",
+         "Balance de materiales: volumen en sitio con presión y producción",
+         "Análogos documentados cuando no hay historia",
+         "Diferencias grandes entre métodos son una alerta"
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Si aumentás b manteniendo qi y Di, el EUR hasta el mismo límite económico:",
+        "o": [
+         "Disminuye",
+         "Aumenta",
+         "No cambia",
+         "Se vuelve negativo"
+        ],
+        "a": 1,
+        "e": "Un b mayor produce una cola más larga: el caudal cae más lento y se acumula más producción antes de llegar al límite."
+       }
+      }
+     ]
+    },
+    {
+     "id": "r4",
+     "title": "Límite económico: cuando el precio decide la categoría",
+     "comp": "Pronóstico y economía",
+     "cues": [
+      {
+       "say": "Una reserva es comercial, por definición. Por eso el volumen que se puede reportar depende del límite económico: el caudal por debajo del cual el pozo deja de dar margen operativo positivo.",
+       "scene": {
+        "t": "fm",
+        "k": "Concepto clave",
+        "h": "Caudal límite económico",
+        "f": "q_lím = Costo fijo / ((Precio × (1 − regalías) − Costo variable) × 30,4)",
+        "n": "Si el precio baja o el costo sube, el límite sube y el EUR económico cae: parte de las reservas se vuelve recurso contingente."
+       }
+      },
+      {
+       "say": "Laboratorio. Bajá el precio del crudo y mirá cuándo el límite económico supera el caudal inicial. En ese punto el pozo deja de ser económico y el volumen pasa a recurso contingente.",
+       "scene": {
+        "t": "viz",
+        "w": "decline",
+        "h": "Precio, límite económico y categoría",
+        "p": {
+         "qi": 400,
+         "di": 55,
+         "b": 0.6,
+         "econ": true,
+         "pr": 65,
+         "ox": 9000,
+         "ro": 12
+        }
+       },
+       "lab": true
+      },
+      {
+       "say": "Esto es lo que pasa en una caída de precios: las reservas no desaparecen físicamente, pero dejan de cumplir el criterio de comercialidad. Por eso toda auditoría exige declarar el escenario de precios y costos usado.",
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Si el costo fijo por pozo sube y el precio no cambia, el límite económico:",
+        "o": [
+         "Baja",
+         "Sube",
+         "No cambia",
+         "Se anula"
+        ],
+        "a": 1,
+        "e": "Mayor costo fijo exige un caudal mínimo más alto para cubrirlo, entonces el límite sube y el EUR económico disminuye."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "En la declinación de Arps, b = 0 corresponde a una declinación:",
+     "o": [
+      "Armónica",
+      "Exponencial",
+      "Lineal",
+      "Logarítmica"
+     ],
+     "a": 1,
+     "e": "Con b = 0 la tasa de declinación es constante: exponencial."
+    },
+    {
+     "q": "El EUR es:",
+     "o": [
+      "La producción de un mes",
+      "La producción acumulada hasta el límite económico más la ya producida",
+      "El caudal inicial",
+      "La reserva probada del campo"
+     ],
+     "a": 1,
+     "e": "EUR significa recuperación final estimada de un pozo o proyecto."
+    },
+    {
+     "q": "Con precios más bajos, las reservas económicas de un pozo marginal:",
+     "o": [
+      "Aumentan",
+      "Pueden disminuir o pasar a contingentes",
+      "No se ven afectadas",
+      "Se duplican"
+     ],
+     "a": 1,
+     "e": "El límite económico sube y el volumen deja de ser comercial."
+    }
+   ]
+  },
+  {
+   "id": "rm3",
+   "title": "Módulo 3 · Gobernanza y caso real",
+   "lessons": [
+    {
+     "id": "r5",
+     "title": "PRMS vs SEC y buenas prácticas de auditoría",
+     "comp": "Determinación de reservas",
+     "cues": [
+      {
+       "say": "Las empresas que cotizan en la bolsa de Estados Unidos reportan reservas con las reglas de la SEC, que son más estrictas en varios puntos que PRMS. Conviene conocer las diferencias para no mezclar volúmenes.",
+       "scene": {
+        "t": "tbl",
+        "k": "Comparativo",
+        "h": "PRMS y SEC (reglas vigentes desde 2010)",
+        "cols": [
+         "Tema",
+         "PRMS",
+         "SEC"
+        ],
+        "rows": [
+         [
+          "Precio",
+          "Escenarios de previsión del evaluador",
+          "Promedio de 12 meses del primer día de cada mes"
+         ],
+         [
+          "Certeza de probadas",
+          "Alta confianza; 90 % si es probabilístico",
+          "Certeza razonable; 90 % si es probabilístico"
+         ],
+         [
+          "Probadas no desarrolladas",
+          "Sujetas a un plan de desarrollo aprobado",
+          "Deben desarrollarse en general dentro de 5 años"
+         ],
+         [
+          "Probables y posibles",
+          "Siempre se estiman",
+          "Su divulgación es opcional"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "La regla de los cinco años es una de las que más mueve los números: un volumen probado no desarrollado que no se perforará en ese plazo, salvo circunstancias específicas, no puede seguir como reserva probada ante la SEC.",
+       "hl": 0
+      },
+      {
+       "say": "Buenas prácticas de auditoría: documentar el método, las hipótesis y las fuentes; conciliar los cambios año a año; aplicar criterios homogéneos entre proyectos; e involucrar evaluadores independientes y competentes.",
+       "scene": {
+        "t": "bul",
+        "k": "Gobernanza",
+        "h": "Checklist de una estimación auditable",
+        "items": [
+         "Hipótesis de precio, costo y tecnología explícitas",
+         "Soporte técnico de cada análogo y de cada b",
+         "Conciliación anual: producción, revisiones, extensiones, compras, ventas",
+         "Trazabilidad entre el modelo y el reporte",
+         "Evaluadores competentes e independientes de quien reporta"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Un volumen probado no desarrollado sin plan para perforarse en cinco años, bajo las reglas de la SEC:",
+        "o": [
+         "Se mantiene indefinidamente",
+         "Debe recategorizarse, salvo circunstancias específicas justificadas",
+         "Pasa automáticamente a 3P",
+         "Se duplica"
+        ],
+        "a": 1,
+        "e": "La norma exige desarrollo normalmente dentro de cinco años; de lo contrario se reclasifica."
+       }
+      }
+     ]
+    },
+    {
+     "id": "r6",
+     "title": "Caso real: la recategorización de reservas de 2004",
+     "comp": "Administración de reservas",
+     "cues": [
+      {
+       "say": "El 9 de enero de 2004 una petrolera integrada anunció que recategorizaba 3,9 miles de millones de barriles equivalentes de petróleo, alrededor del 20 % de sus reservas probadas. Es uno de los casos más estudiados en la industria.",
+       "scene": {
+        "t": "case",
+        "h": "Recategorización de reservas probadas",
+        "src": "SEC Form 6-K, 2004; Oil & Gas Journal",
+        "S": "Reservas probadas registradas sobre todo entre 1996 y 2002. Cerca de la mitad del ajuste se asociaba con Nigeria y con los campos Gorgon, en Australia.",
+        "T": "Verificar qué volúmenes cumplían los criterios de reserva probada y cuáles no.",
+        "A": "Reclasificación de 3,9 miles de millones de boe, más del 90 % en la categoría probadas no desarrolladas; 2,7 miles de millones de barriles de crudo y líquidos y 1,2 miles de millones de boe de gas.",
+        "R": "La compañía indicó que el cambio no alteraba los hidrocarburos totales in situ ni los volúmenes finalmente recuperables, sino su estado de madurez como reservas probadas."
+       },
+       "hl": 0
+      },
+      {
+       "say": "Las reservas de Gorgon se habían empezado a registrar en 1997, apoyadas en cartas de intención y cronogramas de desarrollo que no se concretaron como se esperaba. Es un ejemplo de reserva sin proyecto firme.",
+       "hl": 1
+      },
+      {
+       "say": "La lección técnica: la categoría de una reserva depende del volumen, pero también de la madurez del proyecto, del compromiso de capital y del plazo. Una estimación geológica buena no alcanza si el proyecto no se aprueba.",
+       "hl": 2
+      },
+      {
+       "say": "Y la lección de gobernanza: controles independientes, criterios homogéneos y conciliación anual habrían detectado antes la brecha entre lo registrado y lo realmente justificable.",
+       "hl": 3
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "En este caso, la recategorización principalmente reflejó que:",
+        "o": [
+         "Desapareció el hidrocarburo del subsuelo",
+         "Los volúmenes no cumplían la madurez de proyecto exigida para reservas probadas",
+         "El precio del crudo subió",
+         "Se perforaron demasiados pozos"
+        ],
+        "a": 1,
+        "e": "La compañía indicó que no cambiaban los volúmenes totales in situ ni los recuperables finales, sino el estado de madurez como probadas."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "Según la SEC (desde 2010), el precio para estimar reservas es:",
+     "o": [
+      "El pronóstico del evaluador",
+      "El promedio de 12 meses del primer día de cada mes",
+      "El precio máximo del año",
+      "El precio spot de hoy"
+     ],
+     "a": 1,
+     "e": "La regla busca un criterio objetivo y reproducible."
+    },
+    {
+     "q": "El mayor porcentaje del ajuste de reservas de 2004 estuvo en:",
+     "o": [
+      "Probadas desarrolladas",
+      "Probadas no desarrolladas",
+      "Recursos prospectivos",
+      "Gas no convencional"
+     ],
+     "a": 1,
+     "e": "Más del 90 % del cambio fue en probadas no desarrolladas."
+    },
+    {
+     "q": "¿Qué práctica ayuda a que una estimación sea auditable?",
+     "o": [
+      "Cambiar de método todos los años sin explicar",
+      "Documentar hipótesis y conciliar los cambios anuales",
+      "No registrar fuentes",
+      "Usar un único pozo análogo sin justificar"
+     ],
+     "a": 1,
+     "e": "La trazabilidad de hipótesis y la conciliación son la base de la auditabilidad."
+    }
+   ]
+  }
+ ],
+ "exam": [
+  {
+   "q": "Una acumulación descubierta sin mercado aún definido es:",
+   "o": [
+    "Reserva",
+    "Recurso contingente",
+    "Recurso prospectivo",
+    "Irrecuperable"
+   ],
+   "a": 1,
+   "e": "Descubierta y no comercial: recurso contingente."
+  },
+  {
+   "q": "Con métodos probabilísticos, 1P corresponde a:",
+   "o": [
+    "P10",
+    "P50",
+    "P90",
+    "P99"
+   ],
+   "a": 2,
+   "e": "1P: al menos 90 % de probabilidad de ser igualada o superada."
+  },
+  {
+   "q": "Sumar P90 de pozos individuales para obtener el P90 del conjunto:",
+   "o": [
+    "Es lo correcto",
+    "Subestima el P90 del conjunto si los pozos son independientes",
+    "Siempre lo sobreestima",
+    "Es irrelevante"
+   ],
+   "a": 1,
+   "e": "El efecto de portafolio hace que el P90 del conjunto sea mayor que la suma de P90."
+  },
+  {
+   "q": "Un valor de b mayor en la declinación de Arps, con el mismo límite económico, tiende a:",
+   "o": [
+    "Reducir el EUR",
+    "Aumentar el EUR",
+    "No afectar el EUR",
+    "Anular la declinación"
+   ],
+   "a": 1,
+   "e": "La cola de producción se alarga."
+  },
+  {
+   "q": "Cuando el precio baja y el límite económico supera el caudal inicial del pozo, el volumen:",
+   "o": [
+    "Sigue siendo reserva",
+    "Deja de ser comercial y pasa a recurso contingente",
+    "Se convierte en probado desarrollado",
+    "Se vuelve prospectivo"
+   ],
+   "a": 1,
+   "e": "Pierde el criterio de comercialidad."
+  },
+  {
+   "q": "La principal enseñanza del caso de recategorización de 2004 es que:",
+   "o": [
+    "Las reservas dependen solo de la geología",
+    "La categoría depende también de la madurez del proyecto y requiere control independiente",
+    "La SEC no audita",
+    "El gas nunca es reserva"
+   ],
+   "a": 1,
+   "e": "Madurez de proyecto y gobernanza son tan importantes como el volumen."
+  }
+ ],
+ "outro": {
+  "can": [
+   "la clasificación de recursos y reservas según el mapa PRMS",
+   "rangos 1P, 2P y 3P y la combinación de pozos",
+   "el EUR con curvas de Arps y el efecto del límite económico",
+   "la diferencia entre PRMS y SEC, y su soporte para una auditoría"
+  ],
+  "phrase": "Reservas con respaldo, decisiones con confianza.",
+  "recap": [
+   "La reserva es descubierta, recuperable, comercial y remanente, y se declara con su incertidumbre.",
+   "El EUR depende del exponente b y del límite económico; el precio cambia la categoría.",
+   "La madurez del proyecto y la gobernanza importan tanto como la geología."
+  ]
+ },
+ "downloads": [
+  {
+   "file": "xlsx/H3L_Reservas_Declinacion_y_Economia.xlsx",
+   "title": "Declinación de Arps, EUR y límite económico (Excel)",
+   "desc": "Pronóstico mensual con parámetros editables, límite económico, EUR, flujo de caja y escenarios baja/mejor/alta.",
+   "task": "Calculá el EUR para b = 0,4, 0,8 y 1,2. Después bajá el precio de 65 a 45 USD/bbl y observá qué escenario deja de ser económico."
+  }
+ ],
+ "cases": [
+  {
+   "title": "Recategorización de reservas (9 de enero de 2004)",
+   "text": "la compañía recategorizó 3,9 miles de millones de boe, aproximadamente 20 % de sus reservas probadas; más del 90 % era probadas no desarrolladas y cerca de la mitad del ajuste involucraba Nigeria y los campos Gorgon. Gorgon se empezó a registrar en 1997 sobre cartas de intención y cronogramas que no se cumplieron. La compañía señaló que no cambiaban los hidrocarburos in situ ni los volúmenes finalmente recuperables.",
+   "src": "Oil & Gas Journal (2004); SEC Form 6-K (2004) de la sociedad controlante"
+  }
+ ],
+ "refs": [
+  {
+   "tag": "Estándar",
+   "cite": "SPE/WPC/AAPG/SPEE/SEG/SPWLA/EAGE (2018). Petroleum Resources Management System (PRMS).",
+   "why": "definiciones y clasificación vigentes"
+  },
+  {
+   "tag": "Estándar",
+   "cite": "SPE et al. Guidelines for Application of the Petroleum Resources Management System (guía de aplicación del PRMS).",
+   "why": "criterios de aplicación y ejemplos"
+  },
+  {
+   "tag": "Norma",
+   "cite": "U.S. SEC. Modernization of Oil and Gas Reporting, Regulation S-X Rule 4-10 (vigente desde el 1.º de enero de 2010).",
+   "why": "definiciones SEC, regla de 5 años y precio promedio"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Arps, J. J. (1945). Analysis of decline curves. Trans. AIME 160(1), 228–247.",
+   "why": "modelo de declinación exponencial, hiperbólica y armónica"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Fetkovich, M. J. (1980). Decline curve analysis using type curves. JPT 32(6), 1065–1077 (SPE-4629-PA).",
+   "why": "curvas tipo y flujo transitorio"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Duong, A. N. (2011). Rate-decline analysis for fracture-dominated shale reservoirs. SPE Reservoir Evaluation & Engineering 14(3) (SPE-137748-PA).",
+   "why": "declinación de pozos fracturados en shale"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Capen, E. C. (1976). The difficulty of assessing uncertainty. JPT 28(8), 843–850 (SPE-5579-PA).",
+   "why": "sesgo de exceso de confianza en rangos"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Rose, P. R. (2001). Risk Analysis and Management of Petroleum Exploration Ventures. AAPG Methods in Exploration Series 12.",
+   "why": "análisis de riesgo y decisiones"
+  },
+  {
+   "tag": "Informe",
+   "cite": "SEC (2004). Formulario 6-K sobre la recategorización de reservas, presentado por las sociedades controlantes de una petrolera integrada.",
+   "why": "fuente primaria del caso"
+  }
+ ]
 }

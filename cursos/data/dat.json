@@ -236,6 +236,20 @@
        "hl": 0
       },
       {
+       "say": "Una serie de producción mezcla tendencia, ciclos operativos y ruido. Descomponerla en tendencia, estacionalidad y resto, por ejemplo con el método STL, ayuda a separar la declinación natural de las paradas y los cambios operativos antes de ajustar modelos.",
+       "scene": {
+        "t": "bul",
+        "k": "Series de tiempo",
+        "h": "Separar tendencia, ciclo y ruido",
+        "items": [
+         "Tendencia: declinación del pozo",
+         "Estacionalidad: ciclos operativos o de demanda",
+         "Resto: ruido y eventos",
+         "Marcar paradas antes de ajustar"
+        ]
+       }
+      },
+      {
        "say": "Pregunta rápida.",
        "q": {
         "q": "El z-score clásico puede fallar en presencia de errores grandes porque:",
@@ -374,6 +388,20 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Los valores de Shapley, usados por el método SHAP, reparten una predicción entre las variables que la produjeron. Sirven para auditar un modelo y detectar comportamientos extraños. No prueban causalidad: una variable importante en el modelo no es necesariamente una causa en el campo.",
+       "scene": {
+        "t": "bul",
+        "k": "Interpretabilidad",
+        "h": "Explicar sin sobreinterpretar",
+        "items": [
+         "SHAP: contribución de cada variable",
+         "Útil para auditar y depurar",
+         "No demuestra causalidad",
+         "Contrastar con el criterio de ingeniería"
+        ]
+       }
       },
       {
        "say": "Pregunta rápida.",
@@ -734,6 +762,20 @@
        }
       },
       {
+       "say": "Los datos deben ser localizables, accesibles, interoperables y reutilizables, los principios FAIR. Y cada modelo merece una ficha que diga para qué sirve, con qué datos se entrenó, cómo se midió y dónde no debe usarse: es la idea de las tarjetas de modelo.",
+       "scene": {
+        "t": "bul",
+        "k": "Gobernanza",
+        "h": "FAIR y fichas de modelo",
+        "items": [
+         "FAIR: localizable, accesible, interoperable, reutilizable",
+         "Ficha del modelo: uso previsto y límites",
+         "Datos de entrenamiento y métricas",
+         "Responsable y fecha de revisión"
+        ]
+       }
+      },
+      {
        "say": "Pregunta rápida.",
        "q": {
         "q": "Un modelo de lenguaje que se usa para ingeniería debe:",
@@ -856,6 +898,12 @@
   }
  ],
  "outro": {
+  "can": [
+   "la calidad y la consistencia de las series de producción",
+   "un modelo de aprendizaje automático con métricas y validación apropiadas",
+   "un modelo híbrido que combina física y datos",
+   "los riesgos de gobernanza y de operación de un modelo en producción"
+  ],
   "phrase": "Los datos no reemplazan al ingeniero: le dan más alcance.",
   "recap": [
    "Primero se entienden y se limpian los datos, sin borrar los eventos reales.",
@@ -928,6 +976,16 @@
    "tag": "Fuente",
    "cite": "OilIT (2018). El operador del campo releases massive data set from decommissioned Volve oilfield.",
    "why": "descripción de la publicación de Volve"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Wilkinson, M. D. et al. (2016). The FAIR Guiding Principles for scientific data management and stewardship. Scientific Data 3, 160018.",
+   "why": "principios FAIR"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Mitchell, M. et al. (2019). Model cards for model reporting. Proceedings of the Conference on Fairness, Accountability, and Transparency (FAT*).",
+   "why": "fichas de modelo"
   }
  ]
 }

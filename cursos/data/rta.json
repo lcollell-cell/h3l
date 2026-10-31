@@ -298,6 +298,20 @@
        "hl": 0
       },
       {
+       "say": "Además de la raíz de tiempo, el análisis usa curvas tipo como Fetkovich, Blasingame y Agarwal y Gardner. Trabajan con el tiempo de balance de materiales y con el caudal normalizado por la caída de presión, de modo que los cambios de presión de fondo no se confunden con declinación. En gas, el pseudotiempo corrige las propiedades.",
+       "scene": {
+        "t": "bul",
+        "k": "Curvas tipo",
+        "h": "De Fetkovich a Blasingame",
+        "items": [
+         "Caudal normalizado por la caída de presión",
+         "Tiempo de balance de materiales",
+         "Pseudotiempo para gas, por la variación de propiedades",
+         "Integral y derivada de caudal para afinar el ajuste"
+        ]
+       }
+      },
+      {
        "say": "Pregunta rápida.",
        "q": {
         "q": "El tiempo de balance de materiales se usa para:",
@@ -354,6 +368,20 @@
         ]
        },
        "hl": 1
+      },
+      {
+       "say": "Para lutitas se usan modelos empíricos que respetan el régimen lineal prolongado, como la declinación de Duong y la exponencial extendida. Ayudan a pronosticar, pero se contrastan con la hiperbólica modificada y con el método físico. Un EUR razonable surge de la coincidencia entre varios.",
+       "scene": {
+        "t": "bul",
+        "k": "Modelos empíricos",
+        "h": "Más allá de Arps",
+        "items": [
+         "Duong: flujo lineal prolongado",
+         "Exponencial extendida: ritmo de declinación que evoluciona",
+         "Hiperbólica modificada con declinación límite",
+         "Comparar varios y reportar el rango"
+        ]
+       }
       },
       {
        "say": "Pregunta rápida.",
@@ -651,6 +679,12 @@
   }
  ],
  "outro": {
+  "can": [
+   "los regímenes de flujo de un pozo fracturado con la raíz de tiempo",
+   "la calidad y la normalización de los datos de producción",
+   "el EUR con declinación hiperbólica modificada y su incertidumbre",
+   "el espaciamiento entre pozos y su efecto sobre las reservas"
+  ],
   "phrase": "En los pozos de lutitas, el pronóstico es una conversación entre los datos, el método y el criterio.",
   "recap": [
    "El flujo lineal domina años y se reconoce en raíz de tiempo; la ventana de ajuste es la decisión crítica.",
@@ -693,6 +727,31 @@
    "tag": "Fuente",
    "cite": "Infobae (9 de agosto de 2026). Los récords de Vaca Muerta acercan a la Argentina al 1 % de la producción petrolera mundial.",
    "why": "caso Vaca Muerta"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Blasingame, T. A., McCray, T. L. y Lee, W. J. (1991). Decline curve analysis for variable pressure drop/variable flowrate systems. SPE 21513.",
+   "why": "tiempo de balance de materiales y curvas tipo"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Palacio, J. C. y Blasingame, T. A. (1993). Decline-curve analysis using type curves: analysis of gas well production data. SPE 25909.",
+   "why": "curvas tipo para gas y pseudotiempo"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Agarwal, R. G., Gardner, D. C., Kleinsteiber, S. W. y Fussell, D. D. (1998). Analyzing well production data using combined type-curve and decline-curve analysis concepts. SPE 57916.",
+   "why": "curvas tipo de Agarwal y Gardner"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Anderson, D. M., Stotts, G. W. J., Mattar, L., Ilk, D. y Blasingame, T. A. (2006). Production data analysis: challenges, pitfalls, diagnostics. SPE 102048.",
+   "why": "diagnóstico y errores frecuentes"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Mattar, L., Gault, B., Morad, K., Clarkson, C. R., Freeman, C. M., Ilk, D. y Blasingame, T. A. (2008). Production analysis and forecasting of shale gas reservoirs: case history-based approach. SPE 119897.",
+   "why": "casos de análisis en lutitas"
   }
  ]
 }

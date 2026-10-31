@@ -249,6 +249,20 @@
        }
       },
       {
+       "say": "En pozos horizontales, el índice de productividad se calcula con la longitud del tramo, el espesor y la relación de permeabilidades vertical y horizontal. Joshi extendió el concepto de radio equivalente. Un tramo más largo ayuda, pero con retornos decrecientes por la caída de presión dentro del pozo.",
+       "scene": {
+        "t": "bul",
+        "k": "Pozos horizontales",
+        "h": "Productividad con tramo lateral",
+        "items": [
+         "Entra la longitud del tramo y el espesor",
+         "Importa la anisotropía vertical-horizontal",
+         "Retornos decrecientes con la longitud",
+         "La caída de presión en el lateral limita el aporte"
+        ]
+       }
+      },
+      {
        "say": "Pregunta rápida.",
        "q": {
         "q": "La IPR de Vogel se usa principalmente cuando:",
@@ -378,6 +392,20 @@
         ]
        },
        "hl": 2
+      },
+      {
+       "say": "No hay una correlación de flujo multifásico válida para todos los casos. Duns y Ros, Hagedorn y Brown, Orkiszewski, Beggs y Brill, y Mukherjee y Brill para tramos inclinados tienen rangos distintos. Se elige y se calibra con gradientes de presión medidos en el pozo.",
+       "scene": {
+        "t": "bul",
+        "k": "Correlaciones de flujo",
+        "h": "Elegir y calibrar",
+        "items": [
+         "Pozos verticales: Duns–Ros, Hagedorn–Brown, Orkiszewski",
+         "Tuberías y pozos inclinados: Beggs–Brill, Mukherjee–Brill",
+         "Modelos mecanicistas como alternativa",
+         "Calibrar con gradientes medidos antes de optimizar"
+        ]
+       }
       },
       {
        "say": "Pregunta rápida.",
@@ -789,6 +817,12 @@
   }
  ],
  "outro": {
+  "can": [
+   "el sistema de producción completo con análisis nodal",
+   "la afluencia del reservorio con modelos IPR y la curva de tubing (VLP)",
+   "el efecto de tubing, choke y presión de boca sobre el caudal",
+   "un diseño de gas lift y la selección del levantamiento artificial"
+  ],
   "phrase": "El pozo es un sistema: se optimiza entero o se traslada el problema.",
   "recap": [
    "El análisis nodal ubica el caudal en el cruce de la afluencia con la curva de tubing.",

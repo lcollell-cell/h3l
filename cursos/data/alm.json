@@ -197,6 +197,20 @@
        "lab": true
       },
       {
+       "say": "La capacidad efectiva se calcula como volumen poral multiplicado por un factor de eficiencia de almacenamiento. Ese factor depende de la geometría del sitio, la heterogeneidad, la flotabilidad y el límite de presión. La literatura distingue capacidad teórica, efectiva, práctica y compatible con el sitio, con incertidumbre creciente.",
+       "scene": {
+        "t": "bul",
+        "k": "Capacidad de almacenamiento",
+        "h": "Del volumen poral a la capacidad efectiva",
+        "items": [
+         "Capacidad = volumen poral × factor de eficiencia",
+         "El factor refleja flotabilidad y heterogeneidad",
+         "Teórica, efectiva, práctica y de sitio",
+         "Límite de presión: margen bajo la presión de fractura"
+        ]
+       }
+      },
+      {
        "say": "Pregunta rápida.",
        "q": {
         "q": "El factor de eficiencia de almacenamiento representa:",
@@ -299,6 +313,20 @@
         ]
        },
        "hl": 1
+      },
+      {
+       "say": "La histéresis explica el entrampamiento residual: cuando el agua desplaza al CO₂, parte queda atrapada en los poros. Land relacionó la saturación residual con la saturación inicial. Es la razón por la que el CO₂ migrante se inmoviliza con el tiempo, y por la que importa el diseño de la inyección.",
+       "scene": {
+        "t": "bul",
+        "k": "Entrampamiento residual",
+        "h": "Histéresis y saturación residual",
+        "items": [
+         "El agua desplaza al CO₂ y deja gotas atrapadas",
+         "Relación de Land entre saturación inicial y residual",
+         "Reduce la migración con el tiempo",
+         "Un buen diseño aprovecha este efecto"
+        ]
+       }
       },
       {
        "say": "Pregunta rápida.",
@@ -699,6 +727,12 @@
   }
  ],
  "outro": {
+  "can": [
+   "la cadena de captura, transporte y almacenamiento de CO₂",
+   "los criterios de sitio y la capacidad volumétrica de almacenamiento",
+   "los mecanismos de entrampamiento de CO₂",
+   "el sistema SRMS de recursos de almacenamiento y el plan de monitoreo"
+  ],
   "phrase": "Almacenar bien es demostrarlo con datos, durante mucho tiempo.",
   "recap": [
    "La cadena CCS suma captura, transporte y almacenamiento; el sitio se elige por reservorio, sello, profundidad y presión.",
@@ -751,6 +785,31 @@
    "tag": "Fuente",
    "cite": "Carbon Storage Initiative. Quest.",
    "why": "caso Quest"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Bachu, S., Bonijoly, D., Bradshaw, J., Burruss, R., Holloway, S., Christensen, N. P. y Mathiassen, O. M. (2007). CO2 storage capacity estimation: methodology and gaps. International Journal of Greenhouse Gas Control 1(4).",
+   "why": "metodología de capacidad"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Bradshaw, J. et al. (2007). CO2 storage capacity estimation: issues and development of standards. International Journal of Greenhouse Gas Control 1(1).",
+   "why": "pirámide de capacidad y estándares"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Szulczewski, M. L., MacMinn, C. W., Herzog, H. J. y Juanes, R. (2012). Lifetime of carbon capture and storage as a climate-change mitigation technology. PNAS 109(14), 5185–5189.",
+   "why": "escala y vida útil del almacenamiento"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Nordbotten, J. M., Celia, M. A. y Bachu, S. (2005). Injection and storage of CO2 in deep saline aquifers: analytical solution for CO2 plume evolution during injection. Transport in Porous Media 58.",
+   "why": "solución analítica de la pluma"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Land, C. S. (1968). Calculation of imbibition relative permeability for two- and three-phase flow from rock properties. SPE Journal 8(2).",
+   "why": "entrampamiento residual e histéresis"
   }
  ]
 }

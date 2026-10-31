@@ -293,3 +293,10 @@ details.cue[open]>summary{border-bottom:1px solid var(--line);background:#f4f8fb
 .df>div{border-bottom:1px solid var(--line);padding:6px 0;font-size:13px;overflow-wrap:anywhere}.df code{display:block;color:#33475f;font-size:12px}.df del{display:block;background:#fdecec;color:#7a1f28;text-decoration:none;padding:2px 6px;border-radius:4px;margin-top:3px}.df ins{display:block;background:#e6f6ee;color:#14573f;text-decoration:none;padding:2px 6px;border-radius:4px;margin-top:3px}
 .vl{list-style:none;padding:0;margin:6px 0}.vl li{padding:5px 8px;border-radius:6px;margin:3px 0;font-size:13px}.vl .er{background:#fdecec;color:#7a1f28}.vl .wr{background:#fff7e3;color:#7a5600}.okm{background:#e6f6ee;color:#14573f;padding:8px 10px;border-radius:8px;font-weight:600}
 @media(max-width:860px){.tu{grid-template-columns:1fr}.tu-nav{position:static;max-height:240px}.tu-bar{grid-template-columns:1fr}}
+
+.seen{display:grid;grid-template-columns:repeat(auto-fit,minmax(24cqw,1fr));gap:1.4cqw 2cqw;margin-top:1.4cqw;overflow:auto}
+.seen b{display:block;font:700 1.55cqw/1.3 var(--font);color:var(--green2);margin-bottom:.5cqw}
+.seen ul{list-style:none;margin:0;padding:0}
+.seen li{font:500 1.4cqw/1.35 var(--font);color:rgba(255,255,255,.7);padding-left:2.2cqw;position:relative;margin:.3cqw 0}
+.seen li:before{content:"○";position:absolute;left:0;color:rgba(255,255,255,.4)}
+.seen li.ok{color:#fff}.seen li.ok:before{content:"✓";color:var(--green2)}

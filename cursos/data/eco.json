@@ -310,6 +310,20 @@
        "hl": 0
       },
       {
+       "say": "El valor de la información compara la decisión con y sin un dato nuevo, como un pozo de delineación o una prueba. Howard lo formalizó en 1966. Las opciones reales amplían la idea: esperar, expandir o abandonar tiene valor, y un VPN estático lo ignora.",
+       "scene": {
+        "t": "bul",
+        "k": "Decisión bajo incertidumbre",
+        "h": "Información y flexibilidad",
+        "items": [
+         "VOI: valor esperado con información menos sin información",
+         "Solo conviene pagar por información si cambia la decisión",
+         "Opciones reales: esperar, expandir, abandonar",
+         "El VPN estático ignora la flexibilidad"
+        ]
+       }
+      },
+      {
        "say": "Pregunta rápida.",
        "q": {
         "q": "Con probabilidad de éxito igual a la de equilibrio, el VME es:",
@@ -499,6 +513,20 @@
        "lab": true
       },
       {
+       "say": "Con capital limitado, no alcanza con ordenar por VPN. La eficiencia de inversión, el VPN dividido por la inversión, ayuda a elegir. Y desde Markowitz, en 1952, sabemos que un portafolio se evalúa por su combinación de riesgo y retorno, no proyecto por proyecto.",
+       "scene": {
+        "t": "bul",
+        "k": "Portafolio",
+        "h": "Ordenar con restricción de capital",
+        "items": [
+         "Eficiencia de inversión: VPN / inversión",
+         "Restricción de capital y proyectos indivisibles",
+         "Riesgo y retorno del portafolio, no solo del proyecto",
+         "Correlación entre proyectos"
+        ]
+       }
+      },
+      {
        "say": "Pregunta rápida.",
        "q": {
         "q": "Cuando el precio cae y el límite económico sube, parte de las reservas:",
@@ -681,6 +709,12 @@
   }
  ],
  "outro": {
+  "can": [
+   "el flujo de caja y los indicadores de un proyecto upstream",
+   "sensibilidades y escenarios con el diagrama tornado",
+   "el valor esperado, los árboles de decisión y el valor de la información",
+   "el efecto del régimen fiscal y del límite económico sobre el valor del proyecto"
+  ],
   "phrase": "Decidir bien no es acertar: es entender qué puede salir mal.",
   "recap": [
    "El VPN y los indicadores resumen el flujo de caja, y el tornado muestra qué variable cuidar.",

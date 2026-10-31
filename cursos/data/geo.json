@@ -1,89 +1,789 @@
 {
- "id":"geo",
- "title":"Geociencias: sistema petrolero y caracterización estática",
- "subtitle":"De la cuenca al modelo estático del reservorio, con Vaca Muerta como hilo conductor.",
- "desc":"Recorrido práctico desde el análisis de cuenca hasta la volumetría con incertidumbre: sistema petrolero, madurez térmica, estratigrafía de secuencias, registros y cortes, geomodelado y cálculo probabilístico del petróleo in situ.",
- "objectives":["Evaluar si existen los elementos y procesos de un sistema petrolero y si están sincronizados en el tiempo.","Interpretar una historia de enterramiento y ubicar las ventanas de generación.","Correlacionar con criterio cronoestratigráfico y definir cortes de roca neta y net pay.","Construir el flujo de trabajo de un modelo estático y estimar el STOIIP con P90, P50 y P10."],
- "labs":["mapa de cuenca con ventanas de madurez","eventos del sistema petrolero","historia de enterramiento","perfil con cortes","Monte Carlo de STOIIP"],
- "practiceMin":75,
- "competencies":[
-  {"name":"Análisis de cuenca y sistema petrolero","lessons":["g1","g2"]},
-  {"name":"Análisis estratigráfico","lessons":["g3"]},
-  {"name":"Caracterización estática del reservorio","lessons":["g4","g5"]},
-  {"name":"Geomodelado del reservorio","lessons":["g5","g6"]},
-  {"name":"Volumetría y determinación de riesgos","lessons":["g6"]}],
- "intro":{"hook":"Vamos a recorrer, paso a paso, cómo se pasa de una cuenca sedimentaria a un modelo estático que sostiene decisiones de inversión, con Vaca Muerta, en la cuenca Neuquina, como hilo conductor.",
-  "questions":["¿Existen realmente todos los elementos y procesos para que haya hidrocarburos acumulados?","¿Qué parte de la roca es neta y cuánto petróleo hay en sitio?","¿Qué tan incierto es ese volumen y qué dato lo reduciría?"],
-  "star":{"caso":"Vaca Muerta, cuenca Neuquina","S":"Una formación marina del Jurásico Superior al Cretácico Inferior, rica en materia orgánica, que es a la vez generadora y reservorio no convencional.","T":"Identificar dónde está la mejor roca y cuánto hidrocarburo contiene antes de desarrollar a escala.","A":"Integrar geoquímica, registros, núcleos y sísmica en un modelo estático y cuantificar su incertidumbre.","R":"Un modelo que sostiene la priorización de áreas piloto. En julio de 2013 dos compañías firmaron un acuerdo de desarrollo en Vaca Muerta."}},
- "modules":[
-  {"id":"gm1","title":"Módulo 1 · Cuenca y sistema petrolero","lessons":[
-   {"id":"g1","title":"Elementos y procesos del sistema petrolero","comp":"Análisis de cuenca","cues":[
-    {"say":"Un sistema petrolero reúne una roca generadora madura y todos los elementos y procesos geológicos necesarios para que exista una acumulación. La definición clásica es de Magoon y Dow, de 1994.","scene":{"t":"bul","k":"Sistema petrolero","h":"Elementos y procesos","items":["Roca generadora: aporta la materia orgánica que se transforma en hidrocarburo","Roca reservorio: almacena y deja fluir","Roca sello: impide el escape","Sobrecarga: entierra la generadora hasta madurarla","Trampa: la geometría que retiene","Procesos: generación, migración, acumulación y preservación"]},"hl":0},
-    {"say":"Los elementos son roles de roca: generadora, reservorio, sello y sobrecarga. Una misma formación puede cumplir dos roles, como Vaca Muerta, que genera y además almacena.","hl":3},
-    {"say":"La trampa es la geometría que retiene el hidrocarburo, estructural, estratigráfica o combinada. En los reservorios no convencionales la trampa pierde peso y ganan importancia la calidad de la roca y la presión.","hl":4},
-    {"say":"Y los procesos son cuatro: generación, migración, acumulación y preservación. Basta que uno falle, o que ocurra en mal orden, para que no haya campo.","hl":5},
-    {"say":"Laboratorio. Movés el momento geológico y ves qué elementos están activos. Activá el escenario donde la trampa se forma después de la migración y mirá qué pasa con la sincronía.","scene":{"t":"viz","w":"syst","h":"Eventos de un sistema petrolero","p":{}},"lab":true},
-    {"say":"Pregunta rápida. Pensá en el momento crítico del sistema y en la sincronía entre trampa y migración.","q":{"q":"Una trampa se formó después de que el petróleo ya había migrado y se había perdido. ¿Qué concluís?","o":["El prospecto sigue siendo igual de atractivo","Falla la sincronía trampa–migración: probablemente no hay acumulación","El sello compensa cualquier problema de timing","Solo importa la porosidad del reservorio"],"a":1,"e":"El petróleo necesita una trampa ya formada cuando migra. Si la trampa llega tarde, el hidrocarburo se pierde aunque existan todos los elementos."}}]},
-   {"id":"g2","title":"Historia de enterramiento y madurez térmica","comp":"Análisis de cuenca","cues":[
-    {"say":"La materia orgánica se transforma en hidrocarburo por temperatura y tiempo. Por eso la historia de enterramiento, cuánto y cuándo se hundió la generadora, decide si hay petróleo, gas o nada.","scene":{"t":"bul","k":"Madurez térmica","h":"Ventanas de generación (aprox.)","items":["Inmadura: menos de 0,6 % Ro, por debajo de unos 60 °C","Petróleo: aproximadamente de 0,6 a 1,3 % Ro","Gas húmedo y condensado: de 1,3 a 2,0 % Ro","Gas seco: por encima de 2,0 % Ro"]},"hl":0},
-    {"say":"La reflectancia de vitrinita, Ro, es el indicador más usado de madurez. Los límites varían con el tipo de querógeno, y las temperaturas son solo una referencia. La obra clásica es la de Tissot y Welte, de 1984.","hl":3},
-    {"say":"Laboratorio. Cambiá el gradiente geotérmico y el factor de enterramiento. Observá cuándo empieza la generación de petróleo y en qué ventana está hoy la roca generadora.","scene":{"t":"viz","w":"burial","h":"Curva de enterramiento y ventanas","p":{}},"lab":true},
-    {"say":"Ahora llevemos esa idea al mapa. A mayor enterramiento, la ventana de petróleo, luego la de gas húmedo y la de gas seco, avanzan hacia el antepaís. Es un esquema conceptual, no un mapa real.","scene":{"t":"viz","w":"basin","h":"Mapa conceptual de madurez","p":{}},"lab":true},
-    {"say":"Pregunta rápida.","q":{"q":"Si el gradiente geotérmico de una cuenca es mayor, manteniendo igual la historia de enterramiento, ¿qué ocurre con la generación?","o":["Se retrasa","Se adelanta: la roca alcanza antes las temperaturas de generación","No cambia","Solo cambia la porosidad"],"a":1,"e":"Mayor gradiente significa mayor temperatura a igual profundidad, así que la roca entra antes en la ventana de generación."}}]}],
-   "quiz":[
-    {"q":"¿Cuál de estas opciones NO es un elemento de un sistema petrolero?","o":["Roca sello","Roca generadora","Precio del crudo","Roca reservorio"],"a":2,"e":"El precio es un factor económico. Los elementos son generadora, reservorio, sello y sobrecarga; la trampa es la geometría."},
-    {"q":"¿Qué indica la reflectancia de vitrinita (Ro)?","o":["La permeabilidad","El grado de madurez térmica de la materia orgánica","La salinidad del agua","El espesor del sello"],"a":1,"e":"Ro mide la madurez térmica y permite ubicar las ventanas de petróleo y gas."},
-    {"q":"Un sistema donde el sello se depositó sobre el reservorio, pero la generación terminó hace mucho antes de que existiera la trampa, es un caso de:","o":["Excelente sincronía","Mala sincronía de eventos","Sobrepresión","Falla de la sísmica"],"a":1,"e":"La trampa debe existir antes o durante la migración; si no, el hidrocarburo no se acumula."}]},
-  {"id":"gm2","title":"Módulo 2 · Estratigrafía y caracterización estática","lessons":[
-   {"id":"g3","title":"Estratigrafía de secuencias y correlación","comp":"Análisis estratigráfico","cues":[
-    {"say":"La estratigrafía de secuencias divide el registro sedimentario en paquetes limitados por superficies de discordancia o sus equivalentes. Es el marco que usan los geólogos para predecir dónde están reservorios, sellos y generadoras. El trabajo fundacional es de Vail y colaboradores, de 1977.","scene":{"t":"bul","k":"Estratigrafía","h":"Secuencias y superficies clave","items":["Secuencia: paquete de estratos genéticamente relacionados, limitado por discordancias","Tractos de sistemas: lowstand, transgresivo y highstand","Superficie de máxima inundación: gran marcador, suele coincidir con generadoras","Parasecuencias: ciclos menores de somerización"]},"hl":0},
-    {"say":"Los tractos de sistemas ordenan las facies en el tiempo. La superficie de máxima inundación suele ser un marcador regional confiable y, con frecuencia, es donde se concentra la mejor roca generadora.","hl":3},
-    {"say":"La regla de oro es correlacionar por superficies de tiempo y no por litología. Una arenisca puede ser de edades distintas en dos pozos: si las uní por parecerse, construyo un modelo equivocado.","scene":{"t":"tbl","k":"Buena práctica","h":"Litoestratigrafía vs. cronoestratigrafía","cols":["Criterio","Litoestratigrafía","Cronoestratigrafía"],"rows":[["Une por","Parecido de la roca","Superficies de igual edad"],["Riesgo","Cruza líneas de tiempo","Requiere más datos (bioestratigrafía, sísmica)"],["Resultado","Cuerpos continuos supuestos","Geometría real de los reservorios"]],"n":"Las clinoformas de la unidad Vaca Muerta–Quintuco, descriptas con sísmica por Mitchum y Uliana (1985), son un caso donde correlacionar por litología engaña."},"hl":2},
-    {"say":"Pregunta rápida.","q":{"q":"¿Con qué criterio conviene correlacionar pozos para construir un modelo estático?","o":["Por parecido litológico de la roca","Por superficies cronoestratigráficas, apoyadas en sísmica y bioestratigrafía","Por la profundidad de los topes","Por el orden en que se perforaron los pozos"],"a":1,"e":"Las superficies de tiempo preservan la geometría real. La litología puede cruzar líneas de tiempo y conducir a conectividad falsa."}}]},
-   {"id":"g4","title":"Registros y cortes: del dato a la roca neta","comp":"Caracterización estática","cues":[
-    {"say":"Los registros de pozo convierten mediciones físicas en propiedades de roca. Con rayos gamma estimamos arcillosidad, con densidad y neutrón la porosidad, y con resistividad la saturación de agua.","scene":{"t":"fm","k":"Concepto clave","h":"Ecuación de Archie (1942)","f":"Sw = ( a · Rw / ( φ^m · Rt ) ) ^ (1/n)","n":"Rw: resistividad del agua de formación · Rt: resistividad verdadera · φ: porosidad · a, m, n: parámetros de cementación y saturación, que deben calibrarse con núcleos."}},
-    {"say":"Archie funciona bien en arenas limpias. En rocas arcillosas y en lutitas orgánicas hay que usar modelos con corrección por arcilla y por materia orgánica, y calibrar con núcleos. Nunca se aplica con parámetros por defecto.","hl":0},
-    {"say":"Después viene una decisión de ingeniería: los cortes. Se definen valores máximos de arcillosidad y de Sw, y un mínimo de porosidad, para distinguir roca neta, roca reservorio y net pay.","scene":{"t":"bul","k":"Cortes","h":"Jerarquía de espesores","items":["Bruto: todo el intervalo","Neto: roca que supera el corte de arcillosidad","Neto reservorio: además supera el corte de porosidad","Net pay: además supera el corte de saturación de agua"]},"hl":3},
-    {"say":"Laboratorio. Este es un perfil sintético. Movés los tres cortes y observás cómo cambian el espesor útil y el volumen de petróleo en sitio. Un corte más exigente reduce el volumen: es una decisión, no un dato.","scene":{"t":"viz","w":"cutoffs","h":"Cortes sobre un perfil sintético","p":{}},"lab":true},
-    {"say":"Pregunta rápida.","q":{"q":"Al endurecer el corte de porosidad mínima, ¿qué ocurre con el net pay y el volumen calculado?","o":["Aumentan","Disminuyen","No cambian","Aumenta la saturación de agua"],"a":1,"e":"Un corte más exigente excluye intervalos marginales, así que disminuyen el espesor útil y el volumen."}}]}],
-   "quiz":[
-    {"q":"¿Qué mide principalmente el registro de rayos gamma?","o":["La saturación de petróleo","El contenido de arcilla (radioactividad natural)","La temperatura","La permeabilidad absoluta"],"a":1,"e":"Rayos gamma responde a minerales radioactivos asociados a arcillas, por eso se usa para estimar arcillosidad."},
-    {"q":"La superficie de máxima inundación suele ser útil porque:","o":["Es siempre una falla","Es un marcador regional de correlación","Indica la presencia de agua dulce","Define la ventana de gas"],"a":1,"e":"Marca la máxima profundización y es un horizonte de correlación confiable."},
-    {"q":"Los parámetros a, m y n de Archie se deben:","o":["Tomar siempre como 1, 2 y 2","Calibrar con núcleos y laboratorio","Elegir al azar","Ignorar en lutitas"],"a":1,"e":"Los valores por defecto pueden dar saturaciones muy erróneas; deben calibrarse."}]},
-  {"id":"gm3","title":"Módulo 3 · Modelo estático e incertidumbre","lessons":[
-   {"id":"g5","title":"Geomodelado: del dato al modelo estático","comp":"Geomodelado","cues":[
-    {"say":"Un geomodelo estático es una representación numérica 3D del reservorio. Se construye en capas de decisión: primero el marco estructural, luego el estratigráfico, después las facies y por último las propiedades.","scene":{"t":"viz","w":"concept","h":"Flujo de trabajo del modelo estático","p":{"nodes":[{"l":"Datos|sísmica · pozos · núcleos","x":12,"y":50,"c":"#8ea2bd","n":"Todo modelo empieza por el control de calidad de los datos: sin QC, el modelo hereda los errores."},{"l":"Marco|estructural","x":34,"y":18,"c":"#3A6BD0","n":"Fallas y horizontes: define la geometría. Se valida con secciones restaurables."},{"l":"Marco|estratigráfico","x":34,"y":50,"c":"#3A6BD0","n":"Zonas y capas según las superficies de tiempo."},{"l":"Facies","x":58,"y":34,"c":"#17755A","n":"Distribución de litofacies: por píxel o por objetos, condicionada a pozos."},{"l":"Propiedades|φ · k · Sw","x":58,"y":72,"c":"#17755A","n":"Se simulan con geoestadística, condicionadas a facies y a los pozos."},{"l":"Escalado|(upscaling)","x":82,"y":50,"c":"#b7791f","n":"Se pasa a una malla de simulación más gruesa conservando el comportamiento de flujo."}],"edges":[[0,1],[0,2],[1,3],[2,3],[3,4],[4,5]],"hint":"Tocá un bloque para ver su descripción.","nw":130}},"hl":0},
-    {"say":"Cada capa se condiciona a la anterior. Las facies controlan la porosidad y la permeabilidad, y no al revés. Por eso un error en el marco estratigráfico se propaga a todo el modelo.","hl":3},
-    {"say":"Las propiedades se distribuyen con geoestadística. El kriging, desarrollado a partir del trabajo de Matheron de 1963, da la estimación más suave. La simulación secuencial gaussiana genera muchas realizaciones equiprobables que permiten medir incertidumbre.","hl":4},
-    {"say":"Y siempre hay que escalar. Un modelo geológico puede tener decenas de millones de celdas, y el simulador necesita menos. El upscaling debe preservar la conectividad, o el modelo dinámico ya no representa al reservorio.","hl":5},
-    {"say":"Pregunta rápida.","q":{"q":"¿Para qué sirve generar muchas realizaciones equiprobables con simulación estocástica?","o":["Para obtener un único modelo exacto","Para medir la incertidumbre del volumen y de la conectividad","Para evitar el control de calidad","Para eliminar los pozos del modelo"],"a":1,"e":"Cada realización respeta los datos pero difiere donde no hay información. La dispersión entre ellas cuantifica la incertidumbre."}}]},
-   {"id":"g6","title":"Volumetría, incertidumbre y caso Vaca Muerta","comp":"Volumetría y riesgos","cues":[
-    {"say":"El petróleo original en sitio, el STOIIP, se calcula con una fórmula simple, cuyo peso está en cada parámetro. En unidades de campo, el factor 7758 convierte acre-pie en barriles.","scene":{"t":"fm","k":"Concepto clave","h":"Volumetría de petróleo in situ","f":"STOIIP = 7758 · A · h · φ · (1 − Sw) / Bo\n\nA: acres · h: pies · Bo: bbl/STB","n":"Cada parámetro tiene incertidumbre propia. La respuesta honesta es un rango, no un número."}},
-    {"say":"Laboratorio. Es una simulación Monte Carlo con área, espesor, porosidad y saturación de agua. Subí la incertidumbre de los parámetros y observá cómo se abren P90, P50 y P10 sin ningún dato nuevo.","scene":{"t":"viz","w":"mc","h":"Monte Carlo de STOIIP","p":{"mode":"stoiip"}},"lab":true},
-    {"say":"Ahora el caso real. Vaca Muerta es una formación marina del Jurásico Superior y Cretácico Inferior, con lutitas bituminosas y calizas intercaladas, y alto contenido orgánico en su sección basal.","scene":{"t":"case","h":"Vaca Muerta, cuenca Neuquina","src":"Hart Energy; Oil & Gas Journal, julio de 2013","S":"Formación generadora y a la vez reservorio no convencional, de edad Jurásico Superior–Cretácico Inferior, en una cuenca de antepaís.","T":"Ubicar la mejor roca y estimar el hidrocarburo contenido antes de comprometer un desarrollo masivo.","A":"Combinar geoquímica, registros, núcleos y sísmica en un modelo estático y trabajar proyectos piloto para reducir incertidumbre.","R":"Un modelo que sostiene la priorización de áreas. En julio de 2013 dos compañías firmaron un acuerdo de desarrollo para Vaca Muerta."},"hl":0},
-    {"say":"La aplicación es la que vimos: sistema petrolero con generadora madura, correlación por superficies de tiempo, cortes definidos con núcleos y un volumen siempre acompañado de su rango de incertidumbre.","hl":3},
-    {"say":"Pregunta rápida.","q":{"q":"¿Qué dato nuevo reduce con más certeza el rango P90–P10 del STOIIP?","o":["Repetir la misma simulación","Un pozo adicional o un núcleo que ajuste espesor, porosidad o saturación","Cambiar el color del mapa","Aumentar el número de decimales"],"a":1,"e":"La incertidumbre baja con información nueva, no con cálculo adicional sobre los mismos datos."}}]}],
-   "quiz":[
-    {"q":"En la fórmula del STOIIP, ¿qué representa Bo?","o":["El factor volumétrico del petróleo","El espesor bruto","La saturación de agua","La presión de burbuja"],"a":0,"e":"Bo convierte volumen en condiciones de reservorio a condiciones de superficie."},
-    {"q":"¿Qué diferencia al kriging de la simulación gaussiana secuencial?","o":["El kriging da una estimación suave; la simulación da realizaciones equiprobables","No hay diferencia","El kriging no usa datos","La simulación solo sirve para fallas"],"a":0,"e":"El kriging minimiza la varianza del error y suaviza; la simulación reproduce la variabilidad y mide incertidumbre."},
-    {"q":"Si aumenta la incertidumbre de cada parámetro y no hay datos nuevos, el rango P10/P90 del STOIIP:","o":["Se reduce","Se abre","Queda igual","Desaparece"],"a":1,"e":"Mayor incertidumbre de entrada se traduce en mayor dispersión de la salida."}]}],
- "exam":[
-  {"q":"Un sistema petrolero exige:","o":["Solo roca generadora","Elementos y procesos, correctamente sincronizados","Solo trampa estructural","Solo reservorio con alta porosidad"],"a":1,"e":"Los elementos y los procesos deben existir y ocurrir en el orden correcto."},
-  {"q":"Una cuenca tiene un gradiente geotérmico alto. En igual historia de enterramiento, la ventana de petróleo se alcanza:","o":["Más tarde","Antes","Nunca","Igual"],"a":1,"e":"Más temperatura a igual profundidad adelanta la generación."},
-  {"q":"El criterio correcto de correlación para un modelo estático es:","o":["Litológico","Cronoestratigráfico","Por distancia entre pozos","Por producción"],"a":1,"e":"Las superficies de tiempo preservan la geometría real de los cuerpos."},
-  {"q":"Si se aplica Archie con parámetros por defecto en una lutita orgánica sin calibrar:","o":["La Sw es siempre correcta","Se puede obtener una Sw muy errónea","El resultado es más conservador","No importa"],"a":1,"e":"Hay que calibrar a, m y n con núcleos y usar modelos adecuados para rocas arcillosas y orgánicas."},
-  {"q":"El upscaling debe cuidar especialmente:","o":["La estética del modelo","La conectividad y el comportamiento de flujo","El número de colores","El nombre de las zonas"],"a":1,"e":"Un escalado que destruye la conectividad invalida el modelo dinámico."},
-  {"q":"¿Cuál es la forma correcta de reportar un volumen in situ?","o":["Un único número sin contexto","Un rango con P90, P50 y P10 y los supuestos de corte","Solo el P10","Solo el máximo"],"a":1,"e":"El volumen es incierto; el rango y los supuestos hacen la estimación auditable."}],
- "outro":{"phrase":"Del dato a la roca, de la roca al volumen.","recap":["Un sistema petrolero exige elementos y procesos sincronizados en el tiempo.","La madurez depende de la historia de enterramiento y del gradiente geotérmico.","Los cortes y el modelo estático son decisiones de ingeniería: se reportan siempre con su incertidumbre."]},
- "downloads":[{"file":"xlsx/H3L_Geo_Volumetria_y_Cortes.xlsx","title":"Volumetría, cortes y Monte Carlo (Excel)","desc":"Perfil sintético con cortes de Vsh, porosidad y Sw, net pay y STOIIP determinístico y por escenarios P90/P50/P10.","task":"Endurecé el corte de Sw de 0,60 a 0,45 y anotá cuánto cae el STOIIP. Armá una tabla con tres escenarios de cortes."}],
- "cases":[{"title":"Vaca Muerta (cuenca Neuquina)","text":"Formación marina del Jurásico Superior–Cretácico Inferior, con lutitas bituminosas y calizas intercaladas y alto contenido orgánico en la base; actúa como generadora y reservorio no convencional. En julio de 2013 dos compañías firmaron un acuerdo de desarrollo.","src":"Hart Energy; Oil & Gas Journal, jul. 2013"}],
- "refs":[
-  {"tag":"Paper","cite":"Magoon, L. B. y Dow, W. G. (eds.) (1994). The Petroleum System—From Source to Trap. AAPG Memoir 60.","why":"definición de sistema petrolero y carta de eventos"},
-  {"tag":"Libro","cite":"Tissot, B. P. y Welte, D. H. (1984). Petroleum Formation and Occurrence. Springer.","why":"madurez, querógeno y ventanas de generación"},
-  {"tag":"Paper","cite":"Archie, G. E. (1942). The electrical resistivity log as an aid in determining some reservoir characteristics. Trans. AIME 146, 54–62.","why":"saturación de agua desde resistividad"},
-  {"tag":"Libro","cite":"Vail, P. R. et al. (1977). Seismic stratigraphy and global changes of sea level. AAPG Memoir 26.","why":"fundamentos de estratigrafía de secuencias"},
-  {"tag":"Paper","cite":"Mitchum, R. M. y Uliana, M. A. (1985). Seismic stratigraphy of carbonate depositional sequences, Upper Jurassic–Lower Cretaceous, Neuquén Basin, Argentina. AAPG Memoir 39.","why":"geometría de clinoformas Vaca Muerta–Quintuco"},
-  {"tag":"Paper","cite":"Howell, J. A. et al. (2005). The Neuquén Basin: an overview. Geological Society, London, Special Publications 252.","why":"marco regional de la cuenca"},
-  {"tag":"Informe","cite":"U.S. EIA / Advanced Resources International (2013). Technically Recoverable Shale Oil and Shale Gas Resources: An Assessment of 137 Shale Formations in 41 Countries Outside the United States.","why":"evaluación regional de recursos"},
-  {"tag":"Libro","cite":"Matheron, G. (1963). Principles of geostatistics. Economic Geology 58, 1246–1266.","why":"base del kriging"}]
+ "id": "geo",
+ "title": "Geociencias: sistema petrolero y caracterización estática",
+ "subtitle": "De la cuenca al modelo estático del reservorio, con Vaca Muerta como hilo conductor.",
+ "desc": "Recorrido práctico desde el análisis de cuenca hasta la volumetría con incertidumbre: sistema petrolero, madurez térmica, estratigrafía de secuencias, registros y cortes, geomodelado y cálculo probabilístico del petróleo in situ.",
+ "objectives": [
+  "Evaluar si existen los elementos y procesos de un sistema petrolero y si están sincronizados en el tiempo.",
+  "Interpretar una historia de enterramiento y ubicar las ventanas de generación.",
+  "Correlacionar con criterio cronoestratigráfico y definir cortes de roca neta y net pay.",
+  "Construir el flujo de trabajo de un modelo estático y estimar el STOIIP con P90, P50 y P10."
+ ],
+ "labs": [
+  "mapa de cuenca con ventanas de madurez",
+  "eventos del sistema petrolero",
+  "historia de enterramiento",
+  "perfil con cortes",
+  "Monte Carlo de STOIIP"
+ ],
+ "practiceMin": 75,
+ "competencies": [
+  {
+   "name": "Análisis de cuenca y sistema petrolero",
+   "lessons": [
+    "g1",
+    "g2"
+   ]
+  },
+  {
+   "name": "Análisis estratigráfico",
+   "lessons": [
+    "g3"
+   ]
+  },
+  {
+   "name": "Caracterización estática del reservorio",
+   "lessons": [
+    "g4",
+    "g5"
+   ]
+  },
+  {
+   "name": "Geomodelado del reservorio",
+   "lessons": [
+    "g5",
+    "g6"
+   ]
+  },
+  {
+   "name": "Volumetría y determinación de riesgos",
+   "lessons": [
+    "g6"
+   ]
+  }
+ ],
+ "intro": {
+  "hook": "Vamos a recorrer, paso a paso, cómo se pasa de una cuenca sedimentaria a un modelo estático que sostiene decisiones de inversión, con Vaca Muerta, en la cuenca Neuquina, como hilo conductor.",
+  "questions": [
+   "¿Existen realmente todos los elementos y procesos para que haya hidrocarburos acumulados?",
+   "¿Qué parte de la roca es neta y cuánto petróleo hay en sitio?",
+   "¿Qué tan incierto es ese volumen y qué dato lo reduciría?"
+  ],
+  "star": {
+   "caso": "Vaca Muerta, cuenca Neuquina",
+   "S": "Una formación marina del Jurásico Superior al Cretácico Inferior, rica en materia orgánica, que es a la vez generadora y reservorio no convencional.",
+   "T": "Identificar dónde está la mejor roca y cuánto hidrocarburo contiene antes de desarrollar a escala.",
+   "A": "Integrar geoquímica, registros, núcleos y sísmica en un modelo estático y cuantificar su incertidumbre.",
+   "R": "Un modelo que sostiene la priorización de áreas piloto. En julio de 2013 dos compañías firmaron un acuerdo de desarrollo en Vaca Muerta."
+  }
+ },
+ "modules": [
+  {
+   "id": "gm1",
+   "title": "Módulo 1 · Cuenca y sistema petrolero",
+   "lessons": [
+    {
+     "id": "g1",
+     "title": "Elementos y procesos del sistema petrolero",
+     "comp": "Análisis de cuenca",
+     "cues": [
+      {
+       "say": "Un sistema petrolero reúne una roca generadora madura y todos los elementos y procesos geológicos necesarios para que exista una acumulación. La definición clásica es de Magoon y Dow, de 1994.",
+       "scene": {
+        "t": "bul",
+        "k": "Sistema petrolero",
+        "h": "Elementos y procesos",
+        "items": [
+         "Roca generadora: aporta la materia orgánica que se transforma en hidrocarburo",
+         "Roca reservorio: almacena y deja fluir",
+         "Roca sello: impide el escape",
+         "Sobrecarga: entierra la generadora hasta madurarla",
+         "Trampa: la geometría que retiene",
+         "Procesos: generación, migración, acumulación y preservación"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Los elementos son roles de roca: generadora, reservorio, sello y sobrecarga. Una misma formación puede cumplir dos roles, como Vaca Muerta, que genera y además almacena.",
+       "hl": 3
+      },
+      {
+       "say": "La trampa es la geometría que retiene el hidrocarburo, estructural, estratigráfica o combinada. En los reservorios no convencionales la trampa pierde peso y ganan importancia la calidad de la roca y la presión.",
+       "hl": 4
+      },
+      {
+       "say": "Y los procesos son cuatro: generación, migración, acumulación y preservación. Basta que uno falle, o que ocurra en mal orden, para que no haya campo.",
+       "hl": 5
+      },
+      {
+       "say": "Laboratorio. Movés el momento geológico y ves qué elementos están activos. Activá el escenario donde la trampa se forma después de la migración y mirá qué pasa con la sincronía.",
+       "scene": {
+        "t": "viz",
+        "w": "syst",
+        "h": "Eventos de un sistema petrolero",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "Pregunta rápida. Pensá en el momento crítico del sistema y en la sincronía entre trampa y migración.",
+       "q": {
+        "q": "Una trampa se formó después de que el petróleo ya había migrado y se había perdido. ¿Qué concluís?",
+        "o": [
+         "El prospecto sigue siendo igual de atractivo",
+         "Falla la sincronía trampa–migración: probablemente no hay acumulación",
+         "El sello compensa cualquier problema de timing",
+         "Solo importa la porosidad del reservorio"
+        ],
+        "a": 1,
+        "e": "El petróleo necesita una trampa ya formada cuando migra. Si la trampa llega tarde, el hidrocarburo se pierde aunque existan todos los elementos."
+       }
+      }
+     ]
+    },
+    {
+     "id": "g2",
+     "title": "Historia de enterramiento y madurez térmica",
+     "comp": "Análisis de cuenca",
+     "cues": [
+      {
+       "say": "La materia orgánica se transforma en hidrocarburo por temperatura y tiempo. Por eso la historia de enterramiento, cuánto y cuándo se hundió la generadora, decide si hay petróleo, gas o nada.",
+       "scene": {
+        "t": "bul",
+        "k": "Madurez térmica",
+        "h": "Ventanas de generación (aprox.)",
+        "items": [
+         "Inmadura: menos de 0,6 % Ro, por debajo de unos 60 °C",
+         "Petróleo: aproximadamente de 0,6 a 1,3 % Ro",
+         "Gas húmedo y condensado: de 1,3 a 2,0 % Ro",
+         "Gas seco: por encima de 2,0 % Ro"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "La reflectancia de vitrinita, Ro, es el indicador más usado de madurez. Los límites varían con el tipo de querógeno, y las temperaturas son solo una referencia. La obra clásica es la de Tissot y Welte, de 1984.",
+       "hl": 3
+      },
+      {
+       "say": "Laboratorio. Cambiá el gradiente geotérmico y el factor de enterramiento. Observá cuándo empieza la generación de petróleo y en qué ventana está hoy la roca generadora.",
+       "scene": {
+        "t": "viz",
+        "w": "burial",
+        "h": "Curva de enterramiento y ventanas",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "Ahora llevemos esa idea al mapa. A mayor enterramiento, la ventana de petróleo, luego la de gas húmedo y la de gas seco, avanzan hacia el antepaís. Es un esquema conceptual, no un mapa real.",
+       "scene": {
+        "t": "viz",
+        "w": "basin",
+        "h": "Mapa conceptual de madurez",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Si el gradiente geotérmico de una cuenca es mayor, manteniendo igual la historia de enterramiento, ¿qué ocurre con la generación?",
+        "o": [
+         "Se retrasa",
+         "Se adelanta: la roca alcanza antes las temperaturas de generación",
+         "No cambia",
+         "Solo cambia la porosidad"
+        ],
+        "a": 1,
+        "e": "Mayor gradiente significa mayor temperatura a igual profundidad, así que la roca entra antes en la ventana de generación."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "¿Cuál de estas opciones NO es un elemento de un sistema petrolero?",
+     "o": [
+      "Roca sello",
+      "Roca generadora",
+      "Precio del crudo",
+      "Roca reservorio"
+     ],
+     "a": 2,
+     "e": "El precio es un factor económico. Los elementos son generadora, reservorio, sello y sobrecarga; la trampa es la geometría."
+    },
+    {
+     "q": "¿Qué indica la reflectancia de vitrinita (Ro)?",
+     "o": [
+      "La permeabilidad",
+      "El grado de madurez térmica de la materia orgánica",
+      "La salinidad del agua",
+      "El espesor del sello"
+     ],
+     "a": 1,
+     "e": "Ro mide la madurez térmica y permite ubicar las ventanas de petróleo y gas."
+    },
+    {
+     "q": "Un sistema donde el sello se depositó sobre el reservorio, pero la generación terminó hace mucho antes de que existiera la trampa, es un caso de:",
+     "o": [
+      "Excelente sincronía",
+      "Mala sincronía de eventos",
+      "Sobrepresión",
+      "Falla de la sísmica"
+     ],
+     "a": 1,
+     "e": "La trampa debe existir antes o durante la migración; si no, el hidrocarburo no se acumula."
+    }
+   ]
+  },
+  {
+   "id": "gm2",
+   "title": "Módulo 2 · Estratigrafía y caracterización estática",
+   "lessons": [
+    {
+     "id": "g3",
+     "title": "Estratigrafía de secuencias y correlación",
+     "comp": "Análisis estratigráfico",
+     "cues": [
+      {
+       "say": "La estratigrafía de secuencias divide el registro sedimentario en paquetes limitados por superficies de discordancia o sus equivalentes. Es el marco que usan los geólogos para predecir dónde están reservorios, sellos y generadoras. El trabajo fundacional es de Vail y colaboradores, de 1977.",
+       "scene": {
+        "t": "bul",
+        "k": "Estratigrafía",
+        "h": "Secuencias y superficies clave",
+        "items": [
+         "Secuencia: paquete de estratos genéticamente relacionados, limitado por discordancias",
+         "Tractos de sistemas: lowstand, transgresivo y highstand",
+         "Superficie de máxima inundación: gran marcador, suele coincidir con generadoras",
+         "Parasecuencias: ciclos menores de somerización"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Los tractos de sistemas ordenan las facies en el tiempo. La superficie de máxima inundación suele ser un marcador regional confiable y, con frecuencia, es donde se concentra la mejor roca generadora.",
+       "hl": 3
+      },
+      {
+       "say": "La regla de oro es correlacionar por superficies de tiempo y no por litología. Una arenisca puede ser de edades distintas en dos pozos: si las uní por parecerse, construyo un modelo equivocado.",
+       "scene": {
+        "t": "tbl",
+        "k": "Buena práctica",
+        "h": "Litoestratigrafía vs. cronoestratigrafía",
+        "cols": [
+         "Criterio",
+         "Litoestratigrafía",
+         "Cronoestratigrafía"
+        ],
+        "rows": [
+         [
+          "Une por",
+          "Parecido de la roca",
+          "Superficies de igual edad"
+         ],
+         [
+          "Riesgo",
+          "Cruza líneas de tiempo",
+          "Requiere más datos (bioestratigrafía, sísmica)"
+         ],
+         [
+          "Resultado",
+          "Cuerpos continuos supuestos",
+          "Geometría real de los reservorios"
+         ]
+        ],
+        "n": "Las clinoformas de la unidad Vaca Muerta–Quintuco, descriptas con sísmica por Mitchum y Uliana (1985), son un caso donde correlacionar por litología engaña."
+       },
+       "hl": 2
+      },
+      {
+       "say": "La ley de Walther dice que las facies que se ven una al lado de la otra en el espacio se superponen en vertical en una sucesión continua. Con ella se ordenan los tractos de sistemas, de nivel bajo, transgresivo y de nivel alto, entre superficies clave que sirven para correlacionar.",
+       "scene": {
+        "t": "bul",
+        "k": "Estratigrafía de secuencias",
+        "h": "Cómo se ordena una sucesión",
+        "items": [
+         "Ley de Walther: lo lateral se apila en vertical",
+         "Límite de secuencia y superficie transgresiva",
+         "Superficie de máxima inundación",
+         "Tractos: nivel bajo, transgresivo y nivel alto"
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "¿Con qué criterio conviene correlacionar pozos para construir un modelo estático?",
+        "o": [
+         "Por parecido litológico de la roca",
+         "Por superficies cronoestratigráficas, apoyadas en sísmica y bioestratigrafía",
+         "Por la profundidad de los topes",
+         "Por el orden en que se perforaron los pozos"
+        ],
+        "a": 1,
+        "e": "Las superficies de tiempo preservan la geometría real. La litología puede cruzar líneas de tiempo y conducir a conectividad falsa."
+       }
+      }
+     ]
+    },
+    {
+     "id": "g4",
+     "title": "Registros y cortes: del dato a la roca neta",
+     "comp": "Caracterización estática",
+     "cues": [
+      {
+       "say": "Los registros de pozo convierten mediciones físicas en propiedades de roca. Con rayos gamma estimamos arcillosidad, con densidad y neutrón la porosidad, y con resistividad la saturación de agua.",
+       "scene": {
+        "t": "fm",
+        "k": "Concepto clave",
+        "h": "Ecuación de Archie (1942)",
+        "f": "Sw = ( a · Rw / ( φ^m · Rt ) ) ^ (1/n)",
+        "n": "Rw: resistividad del agua de formación · Rt: resistividad verdadera · φ: porosidad · a, m, n: parámetros de cementación y saturación, que deben calibrarse con núcleos."
+       }
+      },
+      {
+       "say": "Archie funciona bien en arenas limpias. En rocas arcillosas y en lutitas orgánicas hay que usar modelos con corrección por arcilla y por materia orgánica, y calibrar con núcleos. Nunca se aplica con parámetros por defecto.",
+       "hl": 0
+      },
+      {
+       "say": "Después viene una decisión de ingeniería: los cortes. Se definen valores máximos de arcillosidad y de Sw, y un mínimo de porosidad, para distinguir roca neta, roca reservorio y net pay.",
+       "scene": {
+        "t": "bul",
+        "k": "Cortes",
+        "h": "Jerarquía de espesores",
+        "items": [
+         "Bruto: todo el intervalo",
+         "Neto: roca que supera el corte de arcillosidad",
+         "Neto reservorio: además supera el corte de porosidad",
+         "Net pay: además supera el corte de saturación de agua"
+        ]
+       },
+       "hl": 3
+      },
+      {
+       "say": "Laboratorio. Este es un perfil sintético. Movés los tres cortes y observás cómo cambian el espesor útil y el volumen de petróleo en sitio. Un corte más exigente reduce el volumen: es una decisión, no un dato.",
+       "scene": {
+        "t": "viz",
+        "w": "cutoffs",
+        "h": "Cortes sobre un perfil sintético",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "En una roca generadora, el carbono orgánico total se estima con registros. El método de Passey superpone la curva de resistividad y la de porosidad en escalas compatibles. La separación entre ambas, llamada delta log R, crece con la materia orgánica y se calibra con análisis de laboratorio.",
+       "scene": {
+        "t": "bul",
+        "k": "Roca generadora",
+        "h": "TOC a partir de registros",
+        "items": [
+         "Superponer resistividad y porosidad (sónico)",
+         "La separación entre curvas, delta log R, indica materia orgánica",
+         "Depende de la madurez térmica",
+         "Siempre se calibra con TOC medido en laboratorio"
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Al endurecer el corte de porosidad mínima, ¿qué ocurre con el net pay y el volumen calculado?",
+        "o": [
+         "Aumentan",
+         "Disminuyen",
+         "No cambian",
+         "Aumenta la saturación de agua"
+        ],
+        "a": 1,
+        "e": "Un corte más exigente excluye intervalos marginales, así que disminuyen el espesor útil y el volumen."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "¿Qué mide principalmente el registro de rayos gamma?",
+     "o": [
+      "La saturación de petróleo",
+      "El contenido de arcilla (radioactividad natural)",
+      "La temperatura",
+      "La permeabilidad absoluta"
+     ],
+     "a": 1,
+     "e": "Rayos gamma responde a minerales radioactivos asociados a arcillas, por eso se usa para estimar arcillosidad."
+    },
+    {
+     "q": "La superficie de máxima inundación suele ser útil porque:",
+     "o": [
+      "Es siempre una falla",
+      "Es un marcador regional de correlación",
+      "Indica la presencia de agua dulce",
+      "Define la ventana de gas"
+     ],
+     "a": 1,
+     "e": "Marca la máxima profundización y es un horizonte de correlación confiable."
+    },
+    {
+     "q": "Los parámetros a, m y n de Archie se deben:",
+     "o": [
+      "Tomar siempre como 1, 2 y 2",
+      "Calibrar con núcleos y laboratorio",
+      "Elegir al azar",
+      "Ignorar en lutitas"
+     ],
+     "a": 1,
+     "e": "Los valores por defecto pueden dar saturaciones muy erróneas; deben calibrarse."
+    }
+   ]
+  },
+  {
+   "id": "gm3",
+   "title": "Módulo 3 · Modelo estático e incertidumbre",
+   "lessons": [
+    {
+     "id": "g5",
+     "title": "Geomodelado: del dato al modelo estático",
+     "comp": "Geomodelado",
+     "cues": [
+      {
+       "say": "Un geomodelo estático es una representación numérica 3D del reservorio. Se construye en capas de decisión: primero el marco estructural, luego el estratigráfico, después las facies y por último las propiedades.",
+       "scene": {
+        "t": "viz",
+        "w": "concept",
+        "h": "Flujo de trabajo del modelo estático",
+        "p": {
+         "nodes": [
+          {
+           "l": "Datos|sísmica · pozos · núcleos",
+           "x": 12,
+           "y": 50,
+           "c": "#8ea2bd",
+           "n": "Todo modelo empieza por el control de calidad de los datos: sin QC, el modelo hereda los errores."
+          },
+          {
+           "l": "Marco|estructural",
+           "x": 34,
+           "y": 18,
+           "c": "#3A6BD0",
+           "n": "Fallas y horizontes: define la geometría. Se valida con secciones restaurables."
+          },
+          {
+           "l": "Marco|estratigráfico",
+           "x": 34,
+           "y": 50,
+           "c": "#3A6BD0",
+           "n": "Zonas y capas según las superficies de tiempo."
+          },
+          {
+           "l": "Facies",
+           "x": 58,
+           "y": 34,
+           "c": "#17755A",
+           "n": "Distribución de litofacies: por píxel o por objetos, condicionada a pozos."
+          },
+          {
+           "l": "Propiedades|φ · k · Sw",
+           "x": 58,
+           "y": 72,
+           "c": "#17755A",
+           "n": "Se simulan con geoestadística, condicionadas a facies y a los pozos."
+          },
+          {
+           "l": "Escalado|(upscaling)",
+           "x": 82,
+           "y": 50,
+           "c": "#b7791f",
+           "n": "Se pasa a una malla de simulación más gruesa conservando el comportamiento de flujo."
+          }
+         ],
+         "edges": [
+          [
+           0,
+           1
+          ],
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           3
+          ],
+          [
+           2,
+           3
+          ],
+          [
+           3,
+           4
+          ],
+          [
+           4,
+           5
+          ]
+         ],
+         "hint": "Tocá un bloque para ver su descripción.",
+         "nw": 130
+        }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Cada capa se condiciona a la anterior. Las facies controlan la porosidad y la permeabilidad, y no al revés. Por eso un error en el marco estratigráfico se propaga a todo el modelo.",
+       "hl": 3
+      },
+      {
+       "say": "Las propiedades se distribuyen con geoestadística. El kriging, desarrollado a partir del trabajo de Matheron de 1963, da la estimación más suave. La simulación secuencial gaussiana genera muchas realizaciones equiprobables que permiten medir incertidumbre.",
+       "hl": 4
+      },
+      {
+       "say": "Y siempre hay que escalar. Un modelo geológico puede tener decenas de millones de celdas, y el simulador necesita menos. El upscaling debe preservar la conectividad, o el modelo dinámico ya no representa al reservorio.",
+       "hl": 5
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "¿Para qué sirve generar muchas realizaciones equiprobables con simulación estocástica?",
+        "o": [
+         "Para obtener un único modelo exacto",
+         "Para medir la incertidumbre del volumen y de la conectividad",
+         "Para evitar el control de calidad",
+         "Para eliminar los pozos del modelo"
+        ],
+        "a": 1,
+        "e": "Cada realización respeta los datos pero difiere donde no hay información. La dispersión entre ellas cuantifica la incertidumbre."
+       }
+      }
+     ]
+    },
+    {
+     "id": "g6",
+     "title": "Volumetría, incertidumbre y caso Vaca Muerta",
+     "comp": "Volumetría y riesgos",
+     "cues": [
+      {
+       "say": "El petróleo original en sitio, el STOIIP, se calcula con una fórmula simple, cuyo peso está en cada parámetro. En unidades de campo, el factor 7758 convierte acre-pie en barriles.",
+       "scene": {
+        "t": "fm",
+        "k": "Concepto clave",
+        "h": "Volumetría de petróleo in situ",
+        "f": "STOIIP = 7758 · A · h · φ · (1 − Sw) / Bo\n\nA: acres · h: pies · Bo: bbl/STB",
+        "n": "Cada parámetro tiene incertidumbre propia. La respuesta honesta es un rango, no un número."
+       }
+      },
+      {
+       "say": "Laboratorio. Es una simulación Monte Carlo con área, espesor, porosidad y saturación de agua. Subí la incertidumbre de los parámetros y observá cómo se abren P90, P50 y P10 sin ningún dato nuevo.",
+       "scene": {
+        "t": "viz",
+        "w": "mc",
+        "h": "Monte Carlo de STOIIP",
+        "p": {
+         "mode": "stoiip"
+        }
+       },
+       "lab": true
+      },
+      {
+       "say": "Ahora el caso real. Vaca Muerta es una formación marina del Jurásico Superior y Cretácico Inferior, con lutitas bituminosas y calizas intercaladas, y alto contenido orgánico en su sección basal.",
+       "scene": {
+        "t": "case",
+        "h": "Vaca Muerta, cuenca Neuquina",
+        "src": "Hart Energy; Oil & Gas Journal, julio de 2013",
+        "S": "Formación generadora y a la vez reservorio no convencional, de edad Jurásico Superior–Cretácico Inferior, en una cuenca de antepaís.",
+        "T": "Ubicar la mejor roca y estimar el hidrocarburo contenido antes de comprometer un desarrollo masivo.",
+        "A": "Combinar geoquímica, registros, núcleos y sísmica en un modelo estático y trabajar proyectos piloto para reducir incertidumbre.",
+        "R": "Un modelo que sostiene la priorización de áreas. En julio de 2013 dos compañías firmaron un acuerdo de desarrollo para Vaca Muerta."
+       },
+       "hl": 0
+      },
+      {
+       "say": "La aplicación es la que vimos: sistema petrolero con generadora madura, correlación por superficies de tiempo, cortes definidos con núcleos y un volumen siempre acompañado de su rango de incertidumbre.",
+       "hl": 3
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "¿Qué dato nuevo reduce con más certeza el rango P90–P10 del STOIIP?",
+        "o": [
+         "Repetir la misma simulación",
+         "Un pozo adicional o un núcleo que ajuste espesor, porosidad o saturación",
+         "Cambiar el color del mapa",
+         "Aumentar el número de decimales"
+        ],
+        "a": 1,
+        "e": "La incertidumbre baja con información nueva, no con cálculo adicional sobre los mismos datos."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "En la fórmula del STOIIP, ¿qué representa Bo?",
+     "o": [
+      "El factor volumétrico del petróleo",
+      "El espesor bruto",
+      "La saturación de agua",
+      "La presión de burbuja"
+     ],
+     "a": 0,
+     "e": "Bo convierte volumen en condiciones de reservorio a condiciones de superficie."
+    },
+    {
+     "q": "¿Qué diferencia al kriging de la simulación gaussiana secuencial?",
+     "o": [
+      "El kriging da una estimación suave; la simulación da realizaciones equiprobables",
+      "No hay diferencia",
+      "El kriging no usa datos",
+      "La simulación solo sirve para fallas"
+     ],
+     "a": 0,
+     "e": "El kriging minimiza la varianza del error y suaviza; la simulación reproduce la variabilidad y mide incertidumbre."
+    },
+    {
+     "q": "Si aumenta la incertidumbre de cada parámetro y no hay datos nuevos, el rango P10/P90 del STOIIP:",
+     "o": [
+      "Se reduce",
+      "Se abre",
+      "Queda igual",
+      "Desaparece"
+     ],
+     "a": 1,
+     "e": "Mayor incertidumbre de entrada se traduce en mayor dispersión de la salida."
+    }
+   ]
+  }
+ ],
+ "exam": [
+  {
+   "q": "Un sistema petrolero exige:",
+   "o": [
+    "Solo roca generadora",
+    "Elementos y procesos, correctamente sincronizados",
+    "Solo trampa estructural",
+    "Solo reservorio con alta porosidad"
+   ],
+   "a": 1,
+   "e": "Los elementos y los procesos deben existir y ocurrir en el orden correcto."
+  },
+  {
+   "q": "Una cuenca tiene un gradiente geotérmico alto. En igual historia de enterramiento, la ventana de petróleo se alcanza:",
+   "o": [
+    "Más tarde",
+    "Antes",
+    "Nunca",
+    "Igual"
+   ],
+   "a": 1,
+   "e": "Más temperatura a igual profundidad adelanta la generación."
+  },
+  {
+   "q": "El criterio correcto de correlación para un modelo estático es:",
+   "o": [
+    "Litológico",
+    "Cronoestratigráfico",
+    "Por distancia entre pozos",
+    "Por producción"
+   ],
+   "a": 1,
+   "e": "Las superficies de tiempo preservan la geometría real de los cuerpos."
+  },
+  {
+   "q": "Si se aplica Archie con parámetros por defecto en una lutita orgánica sin calibrar:",
+   "o": [
+    "La Sw es siempre correcta",
+    "Se puede obtener una Sw muy errónea",
+    "El resultado es más conservador",
+    "No importa"
+   ],
+   "a": 1,
+   "e": "Hay que calibrar a, m y n con núcleos y usar modelos adecuados para rocas arcillosas y orgánicas."
+  },
+  {
+   "q": "El upscaling debe cuidar especialmente:",
+   "o": [
+    "La estética del modelo",
+    "La conectividad y el comportamiento de flujo",
+    "El número de colores",
+    "El nombre de las zonas"
+   ],
+   "a": 1,
+   "e": "Un escalado que destruye la conectividad invalida el modelo dinámico."
+  },
+  {
+   "q": "¿Cuál es la forma correcta de reportar un volumen in situ?",
+   "o": [
+    "Un único número sin contexto",
+    "Un rango con P90, P50 y P10 y los supuestos de corte",
+    "Solo el P10",
+    "Solo el máximo"
+   ],
+   "a": 1,
+   "e": "El volumen es incierto; el rango y los supuestos hacen la estimación auditable."
+  }
+ ],
+ "outro": {
+  "can": [
+   "el sistema petrolero y la historia de enterramiento y madurez de una cuenca",
+   "la correlación estratigráfica y la roca neta a partir de registros y cortes",
+   "un modelo estático y su volumetría con rangos de incertidumbre"
+  ],
+  "phrase": "Del dato a la roca, de la roca al volumen.",
+  "recap": [
+   "Un sistema petrolero exige elementos y procesos sincronizados en el tiempo.",
+   "La madurez depende de la historia de enterramiento y del gradiente geotérmico.",
+   "Los cortes y el modelo estático son decisiones de ingeniería: se reportan siempre con su incertidumbre."
+  ]
+ },
+ "downloads": [
+  {
+   "file": "xlsx/H3L_Geo_Volumetria_y_Cortes.xlsx",
+   "title": "Volumetría, cortes y Monte Carlo (Excel)",
+   "desc": "Perfil sintético con cortes de Vsh, porosidad y Sw, net pay y STOIIP determinístico y por escenarios P90/P50/P10.",
+   "task": "Endurecé el corte de Sw de 0,60 a 0,45 y anotá cuánto cae el STOIIP. Armá una tabla con tres escenarios de cortes."
+  }
+ ],
+ "cases": [
+  {
+   "title": "Vaca Muerta (cuenca Neuquina)",
+   "text": "Formación marina del Jurásico Superior–Cretácico Inferior, con lutitas bituminosas y calizas intercaladas y alto contenido orgánico en la base; actúa como generadora y reservorio no convencional. En julio de 2013 dos compañías firmaron un acuerdo de desarrollo.",
+   "src": "Hart Energy; Oil & Gas Journal, jul. 2013"
+  }
+ ],
+ "refs": [
+  {
+   "tag": "Paper",
+   "cite": "Magoon, L. B. y Dow, W. G. (eds.) (1994). The Petroleum System—From Source to Trap. AAPG Memoir 60.",
+   "why": "definición de sistema petrolero y carta de eventos"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Tissot, B. P. y Welte, D. H. (1984). Petroleum Formation and Occurrence. Springer.",
+   "why": "madurez, querógeno y ventanas de generación"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Archie, G. E. (1942). The electrical resistivity log as an aid in determining some reservoir characteristics. Trans. AIME 146, 54–62.",
+   "why": "saturación de agua desde resistividad"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Vail, P. R. et al. (1977). Seismic stratigraphy and global changes of sea level. AAPG Memoir 26.",
+   "why": "fundamentos de estratigrafía de secuencias"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Mitchum, R. M. y Uliana, M. A. (1985). Seismic stratigraphy of carbonate depositional sequences, Upper Jurassic–Lower Cretaceous, Neuquén Basin, Argentina. AAPG Memoir 39.",
+   "why": "geometría de clinoformas Vaca Muerta–Quintuco"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Howell, J. A. et al. (2005). The Neuquén Basin: an overview. Geological Society, London, Special Publications 252.",
+   "why": "marco regional de la cuenca"
+  },
+  {
+   "tag": "Informe",
+   "cite": "U.S. EIA / Advanced Resources International (2013). Technically Recoverable Shale Oil and Shale Gas Resources: An Assessment of 137 Shale Formations in 41 Countries Outside the United States.",
+   "why": "evaluación regional de recursos"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Matheron, G. (1963). Principles of geostatistics. Economic Geology 58, 1246–1266.",
+   "why": "base del kriging"
+  }
+ ]
 }

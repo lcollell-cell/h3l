@@ -186,7 +186,12 @@ function bumpers(c){var I=c.intro,O=c.outro,q=I.questions,st=I.star,mods=c.modul
    {say:'Este curso responde tres preguntas que agregan valor a cualquier equipo técnico. Primera: '+q[0],hl:0},{say:'Segunda: '+q[1],hl:1},{say:'Y tercera: '+q[2],hl:2},
    {say:'Todo se aplica con la metodología STAR sobre un caso real: '+st.caso+'. Primero, la situación. '+st.S,scene:{t:'star'},hl:0},{say:'La tarea. '+st.T,hl:1},{say:'La acción. '+st.A,hl:2},{say:'Y el resultado. '+st.R,hl:3},
    {say:'El curso tiene '+c.modules.length+' módulos. Cada uno termina con un quiz, hay planillas Excel para practicar y un examen final. Al aprobar, obtenés tu certificado H3L, publicable en LinkedIn.',scene:{t:'bul',k:'Ruta del curso',h:'Cómo está organizado',items:mods.concat(['Excel de práctica','Examen final y certificado H3L'])}}];
+  var can=(O.can&&O.can.length)?O.can:c.competencies.map(function(x){return x.name});
+  var nl=0,nlab=0;c.modules.forEach(function(m){m.lessons.forEach(function(l){nl++;l.cues.forEach(function(q){if(q.lab)nlab++})})});
+  var nx=(c.downloads||[]).length;
   if(!O.cues){O.cues=O.recap.map(function(r,i){var o={say:r,hl:i};if(!i){o.say='Repasemos lo esencial. '+r;o.scene={t:'bul',k:'Para llevarte',h:'Ideas clave',items:O.recap}}return o});
+   O.cues.push({say:'Al terminar este curso, usted ahora puede analizar y validar: '+can.join('; ')+'.',scene:{t:'can',k:'Al finalizar el curso',h:'Usted ahora puede analizar y validar',items:can}});
+   O.cues.push({say:'Ítems vistos: '+nl+' lecciones en '+c.modules.length+' módulos'+(nlab?', '+nlab+' laboratorios interactivos':'')+(nx?', '+nx+(nx===1?' planilla Excel':' planillas Excel'):'')+', y un quiz por módulo más el examen final.',scene:{t:'seen'}});
    O.cues.push({say:O.phrase+' Gracias por aprender con H3L Global Energy. Contacto: info@h3lglobalenergy.com',tts:O.phrase+' Gracias por aprender con H3L Global Energy. Escribinos a info, arroba, h3l global energy, punto com.',scene:{t:'bout'}})}}
 HC.loadCourse=function(id){if(HC.courseCache[id])return Promise.resolve(HC.courseCache[id]);return fetch('data/'+id+'.json').then(function(r){if(!r.ok)throw new Error(r.status);return r.json()}).then(function(c){
   bumpers(c);var n=0;c.modules.forEach(function(m){m.lessons.forEach(function(l){l.dur=l.cues.reduce(function(a,q){return a+HC.cueDur(q)},0);n+=l.dur})});

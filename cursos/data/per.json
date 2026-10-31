@@ -1,87 +1,762 @@
 {
- "id":"per",
- "title":"Perforación: ventana de lodo, límite técnico y control de pozo",
- "subtitle":"Arquitectura de pozo, eficiencia operativa y barreras de seguridad.",
- "desc":"Curso de diseño y operación de pozos: ventana operativa de lodo, selección de cañerías, metodología de límite técnico, KPIs y NPT, control de pozo y barreras, con el análisis del accidente real de Macondo.",
- "objectives":["Determinar la ventana de lodo y decidir dónde asentar cañerías.","Aplicar la metodología de límite técnico y cuantificar el valor de reducir NPT.","Calcular y seguir KPIs de perforación y capturar lecciones aprendidas.","Explicar el principio de barreras y el procedimiento ante un influjo, y analizar el caso Macondo."],
- "labs":["ventana de lodo","esquema de pozo y barreras","curva de rendimiento y límite técnico","mapa de respuesta ante un influjo"],
- "practiceMin":90,
- "competencies":[
-  {"name":"Arquitectura de pozos (diseño del pozo)","lessons":["p1","p2"]},
-  {"name":"Metodología de límite técnico en perforación","lessons":["p3","p4"]},
-  {"name":"Control del pozo","lessons":["p5","p6"]},
-  {"name":"Cementación y barreras","lessons":["p2","p6"]}],
- "intro":{"hook":"Vamos a aprender a diseñar un pozo seguro, medir su eficiencia contra un límite técnico y entender qué falla cuando falla el control.",
-  "questions":["¿Dónde asentar las cañerías para perforar de modo seguro?","¿Cuántos días y cuánto dinero perdemos por tiempo no productivo?","¿Qué barreras protegen al pozo y cómo se verifican?"],
-  "star":{"caso":"Macondo, Golfo de México, 2010","S":"Operación de abandono temporal del pozo Macondo, con el equipo Deepwater Horizon, el 20 de abril de 2010.","T":"Sellar la zona productiva con barreras verificadas antes de retirar el equipo.","A":"El cemento no selló la zona, la prueba de presión negativa se interpretó mal y el influjo no se detectó a tiempo.","R":"Murieron 11 personas y se liberaron unos 4 millones de barriles. La investigación de la CSB dejó 57 hallazgos y 15 recomendaciones."}},
- "modules":[
-  {"id":"pm1","title":"Módulo 1 · Diseño del pozo","lessons":[
-   {"id":"p1","title":"Ventana de lodo: presión de poro y fractura","comp":"Arquitectura de pozos","cues":[
-    {"say":"Perforar es un balance de presiones. El lodo debe pesar lo suficiente para contener los fluidos de formación, pero no tanto como para fracturar la roca. Esa franja se llama ventana operativa.","scene":{"t":"bul","k":"Diseño de pozo","h":"Los límites de la ventana de lodo","items":["Presión de poro: el piso. Por debajo hay influjo o kick","Gradiente de fractura: el techo. Por encima hay pérdidas de circulación","Margen de seguridad: protege durante los viajes de herramienta","ECD: la densidad equivalente de circulación suma pérdidas de fricción en el anular"]},"hl":0},
-    {"say":"El lodo en circulación ejerce más presión que el lodo estático, por la fricción en el anular. Esa densidad equivalente de circulación, o ECD, es la que no debe superar el gradiente de fractura.","hl":3},
-    {"say":"Laboratorio. Este es un perfil de ejemplo. Movés la densidad del lodo y el ECD, y cambiás la profundidad. Mirá dónde aparece un riesgo de kick y dónde un riesgo de pérdidas, y qué intervalo cabe con un solo peso de lodo.","scene":{"t":"viz","w":"mudwin","h":"Ventana de lodo","p":{"mw":1.35,"td":3000}},"lab":true},
-    {"say":"Cuando la ventana se cierra, no se puede llegar al objetivo con un solo peso de lodo. Entonces se asienta una cañería: se cementa el tramo perforado, y se continúa con otra densidad y un diámetro menor.","hl":3},
-    {"say":"Pregunta rápida.","q":{"q":"Si el lodo pesa menos que la presión de poro más el margen en un intervalo, el riesgo principal es:","o":["Pérdida de circulación","Influjo de fluidos de formación (kick)","Pega por presión diferencial únicamente","Mayor ROP sin riesgo"],"a":1,"e":"Con presión del pozo menor que la de formación, los fluidos entran al pozo: es un influjo, que puede escalar a un reventón."}}]},
-   {"id":"p2","title":"Cañerías, puntos de asentamiento y cemento","comp":"Arquitectura de pozos","cues":[
-    {"say":"La arquitectura del pozo es la secuencia de cañerías: conductor, superficial, intermedias y de producción. Cada una tiene un propósito, y los puntos de asentamiento se eligen a partir de la ventana de lodo.","scene":{"t":"viz","w":"well","h":"Arquitectura de pozo y barreras","p":{"bar":true}},"hl":0,"lab":true},
-    {"say":"El método de diseño parte desde el fondo: se define la densidad de lodo necesaria en el objetivo y se va subiendo para ver dónde la ventana obliga a asentar. La tolerancia al influjo, o kick tolerance, es un criterio clave.","hl":0},
-    {"say":"El cemento es una barrera del pozo. Su diseño exige conocer el volumen, la altura, la compatibilidad con el lodo y el reservorio, y su verificación con registros de adherencia y pruebas. Un cemento sin verificar no es una barrera confiable.","hl":0},
-    {"say":"El principio rector es contar con al menos dos barreras independientes y verificadas. La norma noruega NORSOK D-010 lo formaliza para la integridad de pozos.","hl":0},
-    {"say":"Pregunta rápida.","q":{"q":"La tolerancia al influjo (kick tolerance) sirve para:","o":["Decidir el color del lodo","Definir cuánto volumen de influjo se puede controlar sin fracturar en el zapato","Elegir el diámetro del trépano","Calcular el costo de alquiler"],"a":1,"e":"Es el máximo influjo que se puede circular de manera segura sin superar la presión de fractura en el zapato."}}]}],
-   "quiz":[
-    {"q":"¿Qué representa el ECD?","o":["Un tipo de cemento","La densidad equivalente de circulación, que incluye las pérdidas de fricción","El costo diario","La presión de burbuja"],"a":1,"e":"En circulación, la presión en el fondo es mayor que en estático."},
-    {"q":"Se asienta una cañería principalmente para:","o":["Aumentar la ROP","Aislar un tramo y poder cambiar la densidad de lodo dentro de una nueva ventana","Decorar el pozo","Reducir el número de trépanos"],"a":1,"e":"Cuando la ventana se cierra, una cañería cementada permite continuar con otro peso."},
-    {"q":"¿Cuántas barreras independientes y verificadas se espera tener?","o":["Una","Al menos dos","Ninguna si hay BOP","Cinco"],"a":1,"e":"El principio de doble barrera es base de las normas de integridad."}]},
-  {"id":"pm2","title":"Módulo 2 · Eficiencia operativa","lessons":[
-   {"id":"p3","title":"Límite técnico y curva de rendimiento","comp":"Límite técnico","cues":[
-    {"say":"El límite técnico es el mejor tiempo que se podría lograr en un pozo si todo funcionara sin fallas ni esperas. No es un récord, es un valor de referencia construido con el mejor desempeño demostrado, operación por operación.","scene":{"t":"bul","k":"Límite técnico","h":"Componentes del tiempo de un pozo","items":["Tiempo productivo: perforar, conectar, viajar","Tiempo perdido invisible: se trabaja más lento que lo posible, pero sin falla","NPT: fallas, esperas y problemas que detienen la operación","Límite técnico: el pozo sin NPT y con el mejor desempeño operación por operación"]},"hl":0},
-    {"say":"La curva de rendimiento de perforación, descripta por Brett y Millheim en 1986, grafica profundidad contra tiempo. Los tramos horizontales son NPT, y la diferencia de pendiente respecto del límite técnico es tiempo invisible.","hl":3},
-    {"say":"Laboratorio. Movés cuánto NPT eliminás, cuánto tiempo invisible recuperás y cuánto mejorás la velocidad de penetración. Mirá cuántos días y cuánto dinero se ahorran, con el costo diario del equipo.","scene":{"t":"viz","w":"perfcurve","h":"Curva de rendimiento y límite técnico","p":{}},"lab":true},
-    {"say":"El mayor ahorro suele estar en el tiempo invisible, porque no figura como falla en ningún reporte. Medirlo exige desglosar cada operación contra su mejor valor demostrado.","hl":1},
-    {"say":"Pregunta rápida.","q":{"q":"En una curva profundidad–tiempo, los tramos horizontales corresponden a:","o":["Perforación a máxima velocidad","Tiempo sin avance: NPT o esperas","Cementación terminada","El límite técnico"],"a":1,"e":"Sin avance en profundidad, el tiempo corre sin producir: son pérdidas por fallas o esperas."}}]},
-   {"id":"p4","title":"KPIs, NPT y lecciones aprendidas","comp":"Límite técnico","cues":[
-    {"say":"Lo que no se mide no se mejora. Los indicadores de perforación deben ser pocos, claros y comparables entre pozos de la misma clase.","scene":{"t":"tbl","k":"Indicadores","h":"KPIs frecuentes de perforación","cols":["KPI","Qué mide","Uso"],"rows":[["Días por 1000 m","Velocidad global del pozo","Comparar pozos y campañas"],["ROP media","Velocidad de penetración","Evaluar trépanos y parámetros"],["NPT %","Tiempo no productivo sobre el total","Priorizar causas raíz"],["Tiempo de conexión","Duración de cada conexión","Detectar tiempo invisible"],["Costo por metro","Eficiencia económica","Comparar alternativas"]]}},
-    {"say":"El NPT se clasifica por causa: equipo de superficie, fondo de pozo, geología, logística, clima y factores humanos. Un diagrama de Pareto muestra cuáles pocas causas explican la mayor parte del tiempo perdido.","hl":0},
-    {"say":"Y el conocimiento debe capturarse. Después de cada pozo, una revisión de lecciones aprendidas, con causa raíz, acción y responsable, alimenta el programa del próximo. Sin eso, el mismo problema se repite.","hl":0},
-    {"say":"Pregunta rápida.","q":{"q":"Un diagrama de Pareto del NPT sirve para:","o":["Dibujar el pozo","Identificar las pocas causas que concentran la mayor parte del tiempo perdido","Calcular el ECD","Medir la porosidad"],"a":1,"e":"Prioriza dónde atacar primero, donde el impacto es mayor."}}]}],
-   "quiz":[
-    {"q":"El tiempo perdido invisible es:","o":["Una falla de equipo declarada","Trabajar más lento que el mejor valor demostrado sin que haya falla","El tiempo de cementación","El clima"],"a":1,"e":"No aparece como evento, pero consume días."},
-    {"q":"¿Qué KPI relaciona el tiempo no productivo con el total?","o":["NPT %","ROP","Costo por metro","Gradiente de fractura"],"a":0,"e":"Se calcula dividiendo el tiempo no productivo por el tiempo total."},
-    {"q":"El límite técnico se construye:","o":["Con el peor desempeño","Con el mejor desempeño demostrado por operación, sin NPT","Con el promedio","Al azar"],"a":1,"e":"Es una referencia de lo posible con las tecnologías y prácticas disponibles."}]},
-  {"id":"pm3","title":"Módulo 3 · Control de pozo y caso real","lessons":[
-   {"id":"p5","title":"Control de pozo: barreras y respuesta ante un influjo","comp":"Control del pozo","cues":[
-    {"say":"Un influjo se detecta con indicadores de superficie. Los primarios son el aumento del caudal de retorno con las bombas constantes y la ganancia de volumen en piletas. Los secundarios incluyen el aumento de la velocidad de perforación y el lodo cortado por gas.","scene":{"t":"bul","k":"Control de pozo","h":"Indicadores de un influjo","items":["Primario: aumento del caudal de retorno con bombas constantes","Primario: ganancia en el volumen de piletas","Secundario: aumento brusco de la ROP, o drilling break","Secundario: lodo cortado por gas o aumento de gas de fondo"]},"hl":0},
-    {"say":"Ante un indicador, la respuesta es cerrar el pozo. Se detiene la perforación, se levanta la herramienta, se verifica flujo y se cierra con el preventor. Es mejor un cierre de más que un influjo que crece.","hl":3},
-    {"say":"Este mapa muestra la secuencia: detectar, cerrar, registrar presiones, calcular, circular y restaurar el control. Tocá cada paso para ver qué se hace y por qué.","scene":{"t":"viz","w":"concept","h":"Respuesta ante un influjo","p":{"nodes":[{"l":"1 · Detectar|flujo / piletas","x":12,"y":30,"c":"#b7791f","n":"Verificar flujo y ganancia. Ante la duda, tratar el indicador como un influjo real."},{"l":"2 · Cerrar|el pozo","x":38,"y":30,"c":"#b3414a","n":"Cierre con el preventor (BOP). El cierre rápido limita el volumen de influjo."},{"l":"3 · Registrar|SIDPP, SICP, ganancia","x":64,"y":30,"c":"#3A6BD0","n":"Se estabilizan las presiones de cierre en tubería y en anular y se mide la ganancia de piletas."},{"l":"4 · Calcular|peso de lodo de control","x":64,"y":70,"c":"#3A6BD0","n":"Con la presión de cierre en tubería se calcula la densidad que equilibra la formación."},{"l":"5 · Circular|método del perforador / del ingeniero","x":38,"y":70,"c":"#17755A","n":"Se circula el influjo manteniendo la presión de fondo constante."},{"l":"6 · Verificar|y restaurar","x":12,"y":70,"c":"#17755A","n":"Se comprueba que el pozo quede estático y se restablecen las barreras antes de reanudar."}],"edges":[[0,1],[1,2],[2,3],[3,4],[4,5]],"hint":"Tocá cada paso para ver el detalle.","nw":150,"nh":50}},"hl":0},
-    {"say":"La capacitación y la certificación de control de pozo, como el programa IADC WellSharp, y los simulacros de cierre, entrenan al equipo para responder sin dudar. La norma API 53 regula el equipo de preventores y sus pruebas.","hl":5},
-    {"say":"Pregunta rápida.","q":{"q":"Ante un indicador claro de influjo, la primera acción es:","o":["Seguir perforando para terminar la sección","Cerrar el pozo con el preventor","Cambiar el trépano","Avisar al final del turno"],"a":1,"e":"Cerrar el pozo lo antes posible limita el volumen del influjo y las presiones resultantes."}}]},
-   {"id":"p6","title":"Caso real: Macondo (2010)","comp":"Control del pozo","cues":[
-    {"say":"El 20 de abril de 2010, durante el abandono temporal del pozo Macondo, en el bloque Mississippi Canyon 252, a unas cincuenta millas de la costa de Luisiana, se produjo un reventón en el equipo Deepwater Horizon. La Junta de Seguridad Química de Estados Unidos, la CSB, publicó su informe final en abril de 2016.","scene":{"t":"case","h":"Macondo: pérdida de control del pozo","src":"CSB, Informe 2010-10-I-OS, resumen ejecutivo (abril de 2016)","S":"Equipo Deepwater Horizon, operando en el Golfo de México, en abandono temporal. 20 de abril de 2010.","T":"Sellar la zona productiva con barreras verificadas antes de desmontar los equipos de superficie.","A":"La barrera de cemento del fondo no se instaló con eficacia; la prueba de presión negativa se interpretó mal; el influjo fluyó casi una hora sin ser detectado ni cerrado.","R":"11 muertos, 17 heridos hospitalizados, 115 evacuados y unos 4 millones de barriles liberados, según lo informado. La CSB concluyó con 57 hallazgos y 15 recomendaciones."},"hl":0},
-    {"say":"Técnicamente, el cemento no selló la zona de hidrocarburos. Al retirar el lodo, los hidrocarburos pasaron por el cemento fallido. El preventor era la única barrera física restante, y dependía de que alguien detectara el flujo a tiempo.","hl":1},
-    {"say":"Falló también la última defensa. De los dos sistemas de cierre automático, solo funcionaba uno, y el ariete ciego de corte probablemente se accionó pero no selló: la tubería, pandeada y descentrada, impidió el cierre completo.","hl":2},
-    {"say":"Las lecciones: verificar cada barrera de modo independiente; interpretar las pruebas con criterios de aceptación escritos; detectar el influjo con instrumentos y no solo con atención humana; y gestionar los factores humanos y la gobernanza, no solo el equipo.","hl":3},
-    {"say":"Pregunta rápida.","q":{"q":"Según la CSB, una de las fallas técnicas centrales en Macondo fue:","o":["Un trépano defectuoso","Una prueba de presión negativa mal interpretada, que llevó a creer que el pozo estaba sellado","Exceso de cemento","Falta de lodo en pileta"],"a":1,"e":"La CSB señala que se concluyó erróneamente que la zona estaba sellada, y que luego el retiro de lodo permitió el paso de hidrocarburos."}}]}],
-   "quiz":[
-    {"q":"Un indicador primario de influjo es:","o":["Cambio de color del lodo","Aumento del caudal de retorno con bombas constantes","Ruido del top drive","Una baja de temperatura"],"a":1,"e":"Es una señal directa de que el pozo está entregando más fluido del que se bombea."},
-    {"q":"En Macondo, ¿cuántas personas murieron?","o":["3","11","27","115"],"a":1,"e":"Murieron 11 personas; 115 fueron evacuadas."},
-    {"q":"El principio de barreras indica que se debe:","o":["Confiar en una sola barrera robusta","Contar con al menos dos barreras independientes y verificadas","Evitar probar las barreras","Retirar el BOP antes de cementar"],"a":1,"e":"Una sola barrera sin verificación es un punto único de falla."}]}],
- "exam":[
-  {"q":"La ventana operativa de lodo está limitada por:","o":["Presión de poro y gradiente de fractura","ROP y torque","Costo y clima","Cemento y trépano"],"a":0,"e":"Por debajo de la presión de poro hay influjo; por encima de la fractura, pérdidas."},
-  {"q":"El ECD siempre es:","o":["Menor que el peso del lodo","Mayor o igual que el peso estático del lodo","Cero","Independiente del caudal"],"a":1,"e":"En circulación se suman pérdidas de fricción en el anular."},
-  {"q":"El tiempo perdido invisible se diferencia del NPT en que:","o":["No existe","No es una falla declarada: se trabaja más lento que lo posible","Es siempre clima","Es siempre equipo"],"a":1,"e":"Es una ineficiencia no registrada como evento."},
-  {"q":"Un diagrama de Pareto del NPT se usa para:","o":["Priorizar causas","Calcular la presión de poro","Dimensionar el cemento","Elegir el color del lodo"],"a":0,"e":"Muestra qué pocas causas concentran la mayor parte del tiempo perdido."},
-  {"q":"Ante un influjo confirmado, el método de control busca:","o":["Aumentar la ROP","Mantener la presión de fondo constante mientras se circula el influjo","Detener las bombas indefinidamente","Perforar más rápido"],"a":1,"e":"Los métodos del perforador y del ingeniero mantienen la presión de fondo por encima de la de formación."},
-  {"q":"La enseñanza organizacional más importante de Macondo es que:","o":["Basta con tener un BOP","Las barreras deben verificarse y los factores humanos y la gobernanza forman parte del control","El clima fue la única causa","La cementación no importa"],"a":1,"e":"La CSB identificó hallazgos técnicos, humanos, de gobernanza y regulatorios."}],
- "outro":{"phrase":"Perforar bien es perforar seguro, y medir para mejorar.","recap":["La ventana de lodo define dónde asentar cañerías: presión de poro abajo, fractura arriba.","El límite técnico muestra cuánto valen el NPT y el tiempo invisible.","Dos barreras independientes y verificadas, y respuesta inmediata ante un influjo."]},
- "downloads":[{"file":"xlsx/H3L_Perforacion_Limite_Tecnico.xlsx","title":"Límite técnico, KPIs y ventana de lodo (Excel)","desc":"Desglose de tiempos por operación (real vs. mejor demostrado), NPT por causa con Pareto, KPIs por pozo y verificación de ventana de lodo por profundidad.","task":"Calculá el tiempo invisible y el NPT de los tres pozos de ejemplo. Armá el Pareto y proponé la acción para la causa principal."}],
- "cases":[{"title":"Macondo / Deepwater Horizon (20 de abril de 2010)","text":"Reventón durante el abandono temporal. El cemento del fondo no selló la zona; la prueba de presión negativa se interpretó mal; el influjo fluyó casi una hora sin detección. Solo funcionó uno de los dos sistemas de cierre automático y el ariete ciego de corte probablemente se accionó pero no selló. 11 muertos, 17 heridos hospitalizados, 115 evacuados, unos 4 millones de barriles liberados. La CSB emitió 57 hallazgos y 15 recomendaciones.","src":"U.S. Chemical Safety Board, Informe final Macondo, 2010-10-I-OS (12 de abril de 2016)"}],
- "refs":[
-  {"tag":"Paper","cite":"Brett, J. F. y Millheim, K. K. (1986). The Drilling Performance Curve: A Yardstick for Judging Drilling Performance. SPE 15362.","why":"origen de la curva de rendimiento y del límite técnico"},
-  {"tag":"Norma","cite":"NORSOK D-010. Well integrity in drilling and well operations.","why":"principio de dos barreras y criterios de verificación"},
-  {"tag":"Norma","cite":"API Standard 53. Blowout Prevention Equipment Systems for Drilling Wells.","why":"equipo de BOP y pruebas"},
-  {"tag":"Norma","cite":"API RP 65-2. Isolating Potential Flow Zones During Well Construction.","why":"cementación y aislamiento de zonas"},
-  {"tag":"Estándar","cite":"IADC WellSharp. Programa de capacitación y certificación en control de pozo.","why":"entrenamiento y evaluación"},
-  {"tag":"Informe","cite":"U.S. Chemical Safety Board (2016). Investigation Report: Explosion and Fire at the Macondo Well, Report 2010-10-I-OS, resumen ejecutivo y volúmenes 1 a 4.","why":"hallazgos técnicos, humanos y regulatorios"},
-  {"tag":"Informe","cite":"Informe de investigación del accidente de Deepwater Horizon (informe de la operadora del pozo). Septiembre de 2010.","why":"análisis del operador"},
-  {"tag":"Informe","cite":"National Commission on the Deepwater Horizon Oil Spill and Offshore Drilling (2011). Deep Water: The Gulf Oil Disaster and the Future of Offshore Drilling.","why":"informe de la comisión presidencial"}]
+ "id": "per",
+ "title": "Perforación: ventana de lodo, límite técnico y control de pozo",
+ "subtitle": "Arquitectura de pozo, eficiencia operativa y barreras de seguridad.",
+ "desc": "Curso de diseño y operación de pozos: ventana operativa de lodo, selección de cañerías, metodología de límite técnico, KPIs y NPT, control de pozo y barreras, con el análisis del accidente real de Macondo.",
+ "objectives": [
+  "Determinar la ventana de lodo y decidir dónde asentar cañerías.",
+  "Aplicar la metodología de límite técnico y cuantificar el valor de reducir NPT.",
+  "Calcular y seguir KPIs de perforación y capturar lecciones aprendidas.",
+  "Explicar el principio de barreras y el procedimiento ante un influjo, y analizar el caso Macondo."
+ ],
+ "labs": [
+  "ventana de lodo",
+  "esquema de pozo y barreras",
+  "curva de rendimiento y límite técnico",
+  "mapa de respuesta ante un influjo"
+ ],
+ "practiceMin": 90,
+ "competencies": [
+  {
+   "name": "Arquitectura de pozos (diseño del pozo)",
+   "lessons": [
+    "p1",
+    "p2"
+   ]
+  },
+  {
+   "name": "Metodología de límite técnico en perforación",
+   "lessons": [
+    "p3",
+    "p4"
+   ]
+  },
+  {
+   "name": "Control del pozo",
+   "lessons": [
+    "p5",
+    "p6"
+   ]
+  },
+  {
+   "name": "Cementación y barreras",
+   "lessons": [
+    "p2",
+    "p6"
+   ]
+  }
+ ],
+ "intro": {
+  "hook": "Vamos a aprender a diseñar un pozo seguro, medir su eficiencia contra un límite técnico y entender qué falla cuando falla el control.",
+  "questions": [
+   "¿Dónde asentar las cañerías para perforar de modo seguro?",
+   "¿Cuántos días y cuánto dinero perdemos por tiempo no productivo?",
+   "¿Qué barreras protegen al pozo y cómo se verifican?"
+  ],
+  "star": {
+   "caso": "Macondo, Golfo de México, 2010",
+   "S": "Operación de abandono temporal del pozo Macondo, con el equipo Deepwater Horizon, el 20 de abril de 2010.",
+   "T": "Sellar la zona productiva con barreras verificadas antes de retirar el equipo.",
+   "A": "El cemento no selló la zona, la prueba de presión negativa se interpretó mal y el influjo no se detectó a tiempo.",
+   "R": "Murieron 11 personas y se liberaron unos 4 millones de barriles. La investigación de la CSB dejó 57 hallazgos y 15 recomendaciones."
+  }
+ },
+ "modules": [
+  {
+   "id": "pm1",
+   "title": "Módulo 1 · Diseño del pozo",
+   "lessons": [
+    {
+     "id": "p1",
+     "title": "Ventana de lodo: presión de poro y fractura",
+     "comp": "Arquitectura de pozos",
+     "cues": [
+      {
+       "say": "Perforar es un balance de presiones. El lodo debe pesar lo suficiente para contener los fluidos de formación, pero no tanto como para fracturar la roca. Esa franja se llama ventana operativa.",
+       "scene": {
+        "t": "bul",
+        "k": "Diseño de pozo",
+        "h": "Los límites de la ventana de lodo",
+        "items": [
+         "Presión de poro: el piso. Por debajo hay influjo o kick",
+         "Gradiente de fractura: el techo. Por encima hay pérdidas de circulación",
+         "Margen de seguridad: protege durante los viajes de herramienta",
+         "ECD: la densidad equivalente de circulación suma pérdidas de fricción en el anular"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "El lodo en circulación ejerce más presión que el lodo estático, por la fricción en el anular. Esa densidad equivalente de circulación, o ECD, es la que no debe superar el gradiente de fractura.",
+       "hl": 3
+      },
+      {
+       "say": "Laboratorio. Este es un perfil de ejemplo. Movés la densidad del lodo y el ECD, y cambiás la profundidad. Mirá dónde aparece un riesgo de kick y dónde un riesgo de pérdidas, y qué intervalo cabe con un solo peso de lodo.",
+       "scene": {
+        "t": "viz",
+        "w": "mudwin",
+        "h": "Ventana de lodo",
+        "p": {
+         "mw": 1.35,
+         "td": 3000
+        }
+       },
+       "lab": true
+      },
+      {
+       "say": "Cuando la ventana se cierra, no se puede llegar al objetivo con un solo peso de lodo. Entonces se asienta una cañería: se cementa el tramo perforado, y se continúa con otra densidad y un diámetro menor.",
+       "hl": 3
+      },
+      {
+       "say": "La presión de poro se estima con registros comparando el valor medido de sónico o resistividad con la tendencia normal de compactación, como en el método de Eaton. La presión de fractura también tiene métodos empíricos, pero se mide en el zapato con una prueba de integridad o una prueba de leak-off.",
+       "scene": {
+        "t": "bul",
+        "k": "Presión de poro y fractura",
+        "h": "Estimar, y después medir",
+        "items": [
+         "Poro: desvío respecto de la tendencia normal de compactación",
+         "Fractura: métodos empíricos, como Eaton y Matthews–Kelly",
+         "FIT: confirma que el zapato resiste una presión dada",
+         "LOT: se llega al inicio de la pérdida y se registra"
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Si el lodo pesa menos que la presión de poro más el margen en un intervalo, el riesgo principal es:",
+        "o": [
+         "Pérdida de circulación",
+         "Influjo de fluidos de formación (kick)",
+         "Pega por presión diferencial únicamente",
+         "Mayor ROP sin riesgo"
+        ],
+        "a": 1,
+        "e": "Con presión del pozo menor que la de formación, los fluidos entran al pozo: es un influjo, que puede escalar a un reventón."
+       }
+      }
+     ]
+    },
+    {
+     "id": "p2",
+     "title": "Cañerías, puntos de asentamiento y cemento",
+     "comp": "Arquitectura de pozos",
+     "cues": [
+      {
+       "say": "La arquitectura del pozo es la secuencia de cañerías: conductor, superficial, intermedias y de producción. Cada una tiene un propósito, y los puntos de asentamiento se eligen a partir de la ventana de lodo.",
+       "scene": {
+        "t": "viz",
+        "w": "well",
+        "h": "Arquitectura de pozo y barreras",
+        "p": {
+         "bar": true
+        }
+       },
+       "hl": 0,
+       "lab": true
+      },
+      {
+       "say": "El método de diseño parte desde el fondo: se define la densidad de lodo necesaria en el objetivo y se va subiendo para ver dónde la ventana obliga a asentar. La tolerancia al influjo, o kick tolerance, es un criterio clave.",
+       "hl": 0
+      },
+      {
+       "say": "El cemento es una barrera del pozo. Su diseño exige conocer el volumen, la altura, la compatibilidad con el lodo y el reservorio, y su verificación con registros de adherencia y pruebas. Un cemento sin verificar no es una barrera confiable.",
+       "hl": 0
+      },
+      {
+       "say": "El principio rector es contar con al menos dos barreras independientes y verificadas. La norma noruega NORSOK D-010 lo formaliza para la integridad de pozos.",
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "La tolerancia al influjo (kick tolerance) sirve para:",
+        "o": [
+         "Decidir el color del lodo",
+         "Definir cuánto volumen de influjo se puede controlar sin fracturar en el zapato",
+         "Elegir el diámetro del trépano",
+         "Calcular el costo de alquiler"
+        ],
+        "a": 1,
+        "e": "Es el máximo influjo que se puede circular de manera segura sin superar la presión de fractura en el zapato."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "¿Qué representa el ECD?",
+     "o": [
+      "Un tipo de cemento",
+      "La densidad equivalente de circulación, que incluye las pérdidas de fricción",
+      "El costo diario",
+      "La presión de burbuja"
+     ],
+     "a": 1,
+     "e": "En circulación, la presión en el fondo es mayor que en estático."
+    },
+    {
+     "q": "Se asienta una cañería principalmente para:",
+     "o": [
+      "Aumentar la ROP",
+      "Aislar un tramo y poder cambiar la densidad de lodo dentro de una nueva ventana",
+      "Decorar el pozo",
+      "Reducir el número de trépanos"
+     ],
+     "a": 1,
+     "e": "Cuando la ventana se cierra, una cañería cementada permite continuar con otro peso."
+    },
+    {
+     "q": "¿Cuántas barreras independientes y verificadas se espera tener?",
+     "o": [
+      "Una",
+      "Al menos dos",
+      "Ninguna si hay BOP",
+      "Cinco"
+     ],
+     "a": 1,
+     "e": "El principio de doble barrera es base de las normas de integridad."
+    }
+   ]
+  },
+  {
+   "id": "pm2",
+   "title": "Módulo 2 · Eficiencia operativa",
+   "lessons": [
+    {
+     "id": "p3",
+     "title": "Límite técnico y curva de rendimiento",
+     "comp": "Límite técnico",
+     "cues": [
+      {
+       "say": "El límite técnico es el mejor tiempo que se podría lograr en un pozo si todo funcionara sin fallas ni esperas. No es un récord, es un valor de referencia construido con el mejor desempeño demostrado, operación por operación.",
+       "scene": {
+        "t": "bul",
+        "k": "Límite técnico",
+        "h": "Componentes del tiempo de un pozo",
+        "items": [
+         "Tiempo productivo: perforar, conectar, viajar",
+         "Tiempo perdido invisible: se trabaja más lento que lo posible, pero sin falla",
+         "NPT: fallas, esperas y problemas que detienen la operación",
+         "Límite técnico: el pozo sin NPT y con el mejor desempeño operación por operación"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "La curva de rendimiento de perforación, descripta por Brett y Millheim en 1986, grafica profundidad contra tiempo. Los tramos horizontales son NPT, y la diferencia de pendiente respecto del límite técnico es tiempo invisible.",
+       "hl": 3
+      },
+      {
+       "say": "Laboratorio. Movés cuánto NPT eliminás, cuánto tiempo invisible recuperás y cuánto mejorás la velocidad de penetración. Mirá cuántos días y cuánto dinero se ahorran, con el costo diario del equipo.",
+       "scene": {
+        "t": "viz",
+        "w": "perfcurve",
+        "h": "Curva de rendimiento y límite técnico",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "El mayor ahorro suele estar en el tiempo invisible, porque no figura como falla en ningún reporte. Medirlo exige desglosar cada operación contra su mejor valor demostrado.",
+       "hl": 1
+      },
+      {
+       "say": "La energía específica mecánica, MSE, mide la energía que se gasta para destruir un volumen de roca. Si el MSE sube sin que cambie la roca, hay ineficiencia, como vibración o embolamiento de la barrena. Con vigilancia en tiempo real se corrige el parámetro antes de perder metros.",
+       "scene": {
+        "t": "bul",
+        "k": "Eficiencia de perforación",
+        "h": "MSE: energía por volumen de roca",
+        "items": [
+         "Concepto de Teale (1965): energía específica en la roca",
+         "MSE alto sin cambio de formación: buscar la causa",
+         "Vibración, embolamiento, parámetros inadecuados",
+         "Se usa en tiempo real junto con la curva de límite técnico"
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "En una curva profundidad–tiempo, los tramos horizontales corresponden a:",
+        "o": [
+         "Perforación a máxima velocidad",
+         "Tiempo sin avance: NPT o esperas",
+         "Cementación terminada",
+         "El límite técnico"
+        ],
+        "a": 1,
+        "e": "Sin avance en profundidad, el tiempo corre sin producir: son pérdidas por fallas o esperas."
+       }
+      }
+     ]
+    },
+    {
+     "id": "p4",
+     "title": "KPIs, NPT y lecciones aprendidas",
+     "comp": "Límite técnico",
+     "cues": [
+      {
+       "say": "Lo que no se mide no se mejora. Los indicadores de perforación deben ser pocos, claros y comparables entre pozos de la misma clase.",
+       "scene": {
+        "t": "tbl",
+        "k": "Indicadores",
+        "h": "KPIs frecuentes de perforación",
+        "cols": [
+         "KPI",
+         "Qué mide",
+         "Uso"
+        ],
+        "rows": [
+         [
+          "Días por 1000 m",
+          "Velocidad global del pozo",
+          "Comparar pozos y campañas"
+         ],
+         [
+          "ROP media",
+          "Velocidad de penetración",
+          "Evaluar trépanos y parámetros"
+         ],
+         [
+          "NPT %",
+          "Tiempo no productivo sobre el total",
+          "Priorizar causas raíz"
+         ],
+         [
+          "Tiempo de conexión",
+          "Duración de cada conexión",
+          "Detectar tiempo invisible"
+         ],
+         [
+          "Costo por metro",
+          "Eficiencia económica",
+          "Comparar alternativas"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "El NPT se clasifica por causa: equipo de superficie, fondo de pozo, geología, logística, clima y factores humanos. Un diagrama de Pareto muestra cuáles pocas causas explican la mayor parte del tiempo perdido.",
+       "hl": 0
+      },
+      {
+       "say": "Y el conocimiento debe capturarse. Después de cada pozo, una revisión de lecciones aprendidas, con causa raíz, acción y responsable, alimenta el programa del próximo. Sin eso, el mismo problema se repite.",
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Un diagrama de Pareto del NPT sirve para:",
+        "o": [
+         "Dibujar el pozo",
+         "Identificar las pocas causas que concentran la mayor parte del tiempo perdido",
+         "Calcular el ECD",
+         "Medir la porosidad"
+        ],
+        "a": 1,
+        "e": "Prioriza dónde atacar primero, donde el impacto es mayor."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "El tiempo perdido invisible es:",
+     "o": [
+      "Una falla de equipo declarada",
+      "Trabajar más lento que el mejor valor demostrado sin que haya falla",
+      "El tiempo de cementación",
+      "El clima"
+     ],
+     "a": 1,
+     "e": "No aparece como evento, pero consume días."
+    },
+    {
+     "q": "¿Qué KPI relaciona el tiempo no productivo con el total?",
+     "o": [
+      "NPT %",
+      "ROP",
+      "Costo por metro",
+      "Gradiente de fractura"
+     ],
+     "a": 0,
+     "e": "Se calcula dividiendo el tiempo no productivo por el tiempo total."
+    },
+    {
+     "q": "El límite técnico se construye:",
+     "o": [
+      "Con el peor desempeño",
+      "Con el mejor desempeño demostrado por operación, sin NPT",
+      "Con el promedio",
+      "Al azar"
+     ],
+     "a": 1,
+     "e": "Es una referencia de lo posible con las tecnologías y prácticas disponibles."
+    }
+   ]
+  },
+  {
+   "id": "pm3",
+   "title": "Módulo 3 · Control de pozo y caso real",
+   "lessons": [
+    {
+     "id": "p5",
+     "title": "Control de pozo: barreras y respuesta ante un influjo",
+     "comp": "Control del pozo",
+     "cues": [
+      {
+       "say": "Un influjo se detecta con indicadores de superficie. Los primarios son el aumento del caudal de retorno con las bombas constantes y la ganancia de volumen en piletas. Los secundarios incluyen el aumento de la velocidad de perforación y el lodo cortado por gas.",
+       "scene": {
+        "t": "bul",
+        "k": "Control de pozo",
+        "h": "Indicadores de un influjo",
+        "items": [
+         "Primario: aumento del caudal de retorno con bombas constantes",
+         "Primario: ganancia en el volumen de piletas",
+         "Secundario: aumento brusco de la ROP, o drilling break",
+         "Secundario: lodo cortado por gas o aumento de gas de fondo"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Ante un indicador, la respuesta es cerrar el pozo. Se detiene la perforación, se levanta la herramienta, se verifica flujo y se cierra con el preventor. Es mejor un cierre de más que un influjo que crece.",
+       "hl": 3
+      },
+      {
+       "say": "Este mapa muestra la secuencia: detectar, cerrar, registrar presiones, calcular, circular y restaurar el control. Tocá cada paso para ver qué se hace y por qué.",
+       "scene": {
+        "t": "viz",
+        "w": "concept",
+        "h": "Respuesta ante un influjo",
+        "p": {
+         "nodes": [
+          {
+           "l": "1 · Detectar|flujo / piletas",
+           "x": 12,
+           "y": 30,
+           "c": "#b7791f",
+           "n": "Verificar flujo y ganancia. Ante la duda, tratar el indicador como un influjo real."
+          },
+          {
+           "l": "2 · Cerrar|el pozo",
+           "x": 38,
+           "y": 30,
+           "c": "#b3414a",
+           "n": "Cierre con el preventor (BOP). El cierre rápido limita el volumen de influjo."
+          },
+          {
+           "l": "3 · Registrar|SIDPP, SICP, ganancia",
+           "x": 64,
+           "y": 30,
+           "c": "#3A6BD0",
+           "n": "Se estabilizan las presiones de cierre en tubería y en anular y se mide la ganancia de piletas."
+          },
+          {
+           "l": "4 · Calcular|peso de lodo de control",
+           "x": 64,
+           "y": 70,
+           "c": "#3A6BD0",
+           "n": "Con la presión de cierre en tubería se calcula la densidad que equilibra la formación."
+          },
+          {
+           "l": "5 · Circular|método del perforador / del ingeniero",
+           "x": 38,
+           "y": 70,
+           "c": "#17755A",
+           "n": "Se circula el influjo manteniendo la presión de fondo constante."
+          },
+          {
+           "l": "6 · Verificar|y restaurar",
+           "x": 12,
+           "y": 70,
+           "c": "#17755A",
+           "n": "Se comprueba que el pozo quede estático y se restablecen las barreras antes de reanudar."
+          }
+         ],
+         "edges": [
+          [
+           0,
+           1
+          ],
+          [
+           1,
+           2
+          ],
+          [
+           2,
+           3
+          ],
+          [
+           3,
+           4
+          ],
+          [
+           4,
+           5
+          ]
+         ],
+         "hint": "Tocá cada paso para ver el detalle.",
+         "nw": 150,
+         "nh": 50
+        }
+       },
+       "hl": 0
+      },
+      {
+       "say": "La capacitación y la certificación de control de pozo, como el programa IADC WellSharp, y los simulacros de cierre, entrenan al equipo para responder sin dudar. La norma API 53 regula el equipo de preventores y sus pruebas.",
+       "hl": 5
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Ante un indicador claro de influjo, la primera acción es:",
+        "o": [
+         "Seguir perforando para terminar la sección",
+         "Cerrar el pozo con el preventor",
+         "Cambiar el trépano",
+         "Avisar al final del turno"
+        ],
+        "a": 1,
+        "e": "Cerrar el pozo lo antes posible limita el volumen del influjo y las presiones resultantes."
+       }
+      }
+     ]
+    },
+    {
+     "id": "p6",
+     "title": "Caso real: Macondo (2010)",
+     "comp": "Control del pozo",
+     "cues": [
+      {
+       "say": "El 20 de abril de 2010, durante el abandono temporal del pozo Macondo, en el bloque Mississippi Canyon 252, a unas cincuenta millas de la costa de Luisiana, se produjo un reventón en el equipo Deepwater Horizon. La Junta de Seguridad Química de Estados Unidos, la CSB, publicó su informe final en abril de 2016.",
+       "scene": {
+        "t": "case",
+        "h": "Macondo: pérdida de control del pozo",
+        "src": "CSB, Informe 2010-10-I-OS, resumen ejecutivo (abril de 2016)",
+        "S": "Equipo Deepwater Horizon, operando en el Golfo de México, en abandono temporal. 20 de abril de 2010.",
+        "T": "Sellar la zona productiva con barreras verificadas antes de desmontar los equipos de superficie.",
+        "A": "La barrera de cemento del fondo no se instaló con eficacia; la prueba de presión negativa se interpretó mal; el influjo fluyó casi una hora sin ser detectado ni cerrado.",
+        "R": "11 muertos, 17 heridos hospitalizados, 115 evacuados y unos 4 millones de barriles liberados, según lo informado. La CSB concluyó con 57 hallazgos y 15 recomendaciones."
+       },
+       "hl": 0
+      },
+      {
+       "say": "Técnicamente, el cemento no selló la zona de hidrocarburos. Al retirar el lodo, los hidrocarburos pasaron por el cemento fallido. El preventor era la única barrera física restante, y dependía de que alguien detectara el flujo a tiempo.",
+       "hl": 1
+      },
+      {
+       "say": "Falló también la última defensa. De los dos sistemas de cierre automático, solo funcionaba uno, y el ariete ciego de corte probablemente se accionó pero no selló: la tubería, pandeada y descentrada, impidió el cierre completo.",
+       "hl": 2
+      },
+      {
+       "say": "Las lecciones: verificar cada barrera de modo independiente; interpretar las pruebas con criterios de aceptación escritos; detectar el influjo con instrumentos y no solo con atención humana; y gestionar los factores humanos y la gobernanza, no solo el equipo.",
+       "hl": 3
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Según la CSB, una de las fallas técnicas centrales en Macondo fue:",
+        "o": [
+         "Un trépano defectuoso",
+         "Una prueba de presión negativa mal interpretada, que llevó a creer que el pozo estaba sellado",
+         "Exceso de cemento",
+         "Falta de lodo en pileta"
+        ],
+        "a": 1,
+        "e": "La CSB señala que se concluyó erróneamente que la zona estaba sellada, y que luego el retiro de lodo permitió el paso de hidrocarburos."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "Un indicador primario de influjo es:",
+     "o": [
+      "Cambio de color del lodo",
+      "Aumento del caudal de retorno con bombas constantes",
+      "Ruido del top drive",
+      "Una baja de temperatura"
+     ],
+     "a": 1,
+     "e": "Es una señal directa de que el pozo está entregando más fluido del que se bombea."
+    },
+    {
+     "q": "En Macondo, ¿cuántas personas murieron?",
+     "o": [
+      "3",
+      "11",
+      "27",
+      "115"
+     ],
+     "a": 1,
+     "e": "Murieron 11 personas; 115 fueron evacuadas."
+    },
+    {
+     "q": "El principio de barreras indica que se debe:",
+     "o": [
+      "Confiar en una sola barrera robusta",
+      "Contar con al menos dos barreras independientes y verificadas",
+      "Evitar probar las barreras",
+      "Retirar el BOP antes de cementar"
+     ],
+     "a": 1,
+     "e": "Una sola barrera sin verificación es un punto único de falla."
+    }
+   ]
+  }
+ ],
+ "exam": [
+  {
+   "q": "La ventana operativa de lodo está limitada por:",
+   "o": [
+    "Presión de poro y gradiente de fractura",
+    "ROP y torque",
+    "Costo y clima",
+    "Cemento y trépano"
+   ],
+   "a": 0,
+   "e": "Por debajo de la presión de poro hay influjo; por encima de la fractura, pérdidas."
+  },
+  {
+   "q": "El ECD siempre es:",
+   "o": [
+    "Menor que el peso del lodo",
+    "Mayor o igual que el peso estático del lodo",
+    "Cero",
+    "Independiente del caudal"
+   ],
+   "a": 1,
+   "e": "En circulación se suman pérdidas de fricción en el anular."
+  },
+  {
+   "q": "El tiempo perdido invisible se diferencia del NPT en que:",
+   "o": [
+    "No existe",
+    "No es una falla declarada: se trabaja más lento que lo posible",
+    "Es siempre clima",
+    "Es siempre equipo"
+   ],
+   "a": 1,
+   "e": "Es una ineficiencia no registrada como evento."
+  },
+  {
+   "q": "Un diagrama de Pareto del NPT se usa para:",
+   "o": [
+    "Priorizar causas",
+    "Calcular la presión de poro",
+    "Dimensionar el cemento",
+    "Elegir el color del lodo"
+   ],
+   "a": 0,
+   "e": "Muestra qué pocas causas concentran la mayor parte del tiempo perdido."
+  },
+  {
+   "q": "Ante un influjo confirmado, el método de control busca:",
+   "o": [
+    "Aumentar la ROP",
+    "Mantener la presión de fondo constante mientras se circula el influjo",
+    "Detener las bombas indefinidamente",
+    "Perforar más rápido"
+   ],
+   "a": 1,
+   "e": "Los métodos del perforador y del ingeniero mantienen la presión de fondo por encima de la de formación."
+  },
+  {
+   "q": "La enseñanza organizacional más importante de Macondo es que:",
+   "o": [
+    "Basta con tener un BOP",
+    "Las barreras deben verificarse y los factores humanos y la gobernanza forman parte del control",
+    "El clima fue la única causa",
+    "La cementación no importa"
+   ],
+   "a": 1,
+   "e": "La CSB identificó hallazgos técnicos, humanos, de gobernanza y regulatorios."
+  }
+ ],
+ "outro": {
+  "can": [
+   "la ventana de lodo entre presión de poro y fractura",
+   "el diseño de cañerías, los puntos de asentamiento y el cemento",
+   "la curva de límite técnico, los KPI y el tiempo no productivo",
+   "las barreras y la respuesta ante un influjo"
+  ],
+  "phrase": "Perforar bien es perforar seguro, y medir para mejorar.",
+  "recap": [
+   "La ventana de lodo define dónde asentar cañerías: presión de poro abajo, fractura arriba.",
+   "El límite técnico muestra cuánto valen el NPT y el tiempo invisible.",
+   "Dos barreras independientes y verificadas, y respuesta inmediata ante un influjo."
+  ]
+ },
+ "downloads": [
+  {
+   "file": "xlsx/H3L_Perforacion_Limite_Tecnico.xlsx",
+   "title": "Límite técnico, KPIs y ventana de lodo (Excel)",
+   "desc": "Desglose de tiempos por operación (real vs. mejor demostrado), NPT por causa con Pareto, KPIs por pozo y verificación de ventana de lodo por profundidad.",
+   "task": "Calculá el tiempo invisible y el NPT de los tres pozos de ejemplo. Armá el Pareto y proponé la acción para la causa principal."
+  }
+ ],
+ "cases": [
+  {
+   "title": "Macondo / Deepwater Horizon (20 de abril de 2010)",
+   "text": "Reventón durante el abandono temporal. El cemento del fondo no selló la zona; la prueba de presión negativa se interpretó mal; el influjo fluyó casi una hora sin detección. Solo funcionó uno de los dos sistemas de cierre automático y el ariete ciego de corte probablemente se accionó pero no selló. 11 muertos, 17 heridos hospitalizados, 115 evacuados, unos 4 millones de barriles liberados. La CSB emitió 57 hallazgos y 15 recomendaciones.",
+   "src": "U.S. Chemical Safety Board, Informe final Macondo, 2010-10-I-OS (12 de abril de 2016)"
+  }
+ ],
+ "refs": [
+  {
+   "tag": "Paper",
+   "cite": "Brett, J. F. y Millheim, K. K. (1986). The Drilling Performance Curve: A Yardstick for Judging Drilling Performance. SPE 15362.",
+   "why": "origen de la curva de rendimiento y del límite técnico"
+  },
+  {
+   "tag": "Norma",
+   "cite": "NORSOK D-010. Well integrity in drilling and well operations.",
+   "why": "principio de dos barreras y criterios de verificación"
+  },
+  {
+   "tag": "Norma",
+   "cite": "API Standard 53. Blowout Prevention Equipment Systems for Drilling Wells.",
+   "why": "equipo de BOP y pruebas"
+  },
+  {
+   "tag": "Norma",
+   "cite": "API RP 65-2. Isolating Potential Flow Zones During Well Construction.",
+   "why": "cementación y aislamiento de zonas"
+  },
+  {
+   "tag": "Estándar",
+   "cite": "IADC WellSharp. Programa de capacitación y certificación en control de pozo.",
+   "why": "entrenamiento y evaluación"
+  },
+  {
+   "tag": "Informe",
+   "cite": "U.S. Chemical Safety Board (2016). Investigation Report: Explosion and Fire at the Macondo Well, Report 2010-10-I-OS, resumen ejecutivo y volúmenes 1 a 4.",
+   "why": "hallazgos técnicos, humanos y regulatorios"
+  },
+  {
+   "tag": "Informe",
+   "cite": "Informe de investigación del accidente de Deepwater Horizon (informe de la operadora del pozo). Septiembre de 2010.",
+   "why": "análisis del operador"
+  },
+  {
+   "tag": "Informe",
+   "cite": "National Commission on the Deepwater Horizon Oil Spill and Offshore Drilling (2011). Deep Water: The Gulf Oil Disaster and the Future of Offshore Drilling.",
+   "why": "informe de la comisión presidencial"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Eaton, B. A. (1969). Fracture gradient prediction and its application in oilfield operations. Journal of Petroleum Technology 21(10).",
+   "why": "gradiente de fractura"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Dupriest, F. E. y Koederitz, W. L. (2005). Maximizing drill rates with real-time surveillance of mechanical specific energy. SPE/IADC 92194.",
+   "why": "MSE en tiempo real"
+  }
+ ]
 }

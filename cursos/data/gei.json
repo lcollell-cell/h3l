@@ -1,88 +1,724 @@
 {
- "id":"gei",
- "title":"Gestión de emisiones y transición energética en oil & gas",
- "subtitle":"Inventarios GEI, metano, curvas MACC y captura y almacenamiento de CO₂.",
- "desc":"Curso aplicado de gestión de emisiones para operaciones de petróleo y gas: inventario por alcances, tratamiento del metano, priorización económica de medidas, eficiencia y electrificación, y captura y almacenamiento de CO₂, con el caso real de Sleipner.",
- "objectives":["Construir un inventario de gases de efecto invernadero por alcances 1, 2 y 3.","Explicar el peso del metano y cómo cambia con el potencial de calentamiento elegido.","Priorizar medidas de reducción con una curva de costo marginal de abatimiento.","Describir la cadena de captura y almacenamiento de CO₂ y sus mecanismos de entrampamiento."],
- "labs":["inventario de emisiones con GWP100 y GWP20","curva MACC con precio de carbono y de gas","cadena CCS con entrampamiento en el tiempo","mapa de eficiencia y electrificación"],
- "practiceMin":90,
- "competencies":[
-  {"name":"Inventario y reporte de emisiones","lessons":["e1"]},
-  {"name":"Gestión de metano","lessons":["e2"]},
-  {"name":"Priorización de abatimiento y economía","lessons":["e3","e4"]},
-  {"name":"Captura y almacenamiento de CO₂","lessons":["e5","e6"]}],
- "intro":{"hook":"Vamos a aprender a medir, priorizar y reducir las emisiones de una operación de petróleo y gas, y a entender qué papel juega la captura de CO₂.",
-  "questions":["¿Cuánto emitimos realmente y de dónde viene?","¿Qué medidas de reducción conviene hacer primero y con qué costo?","¿Es técnicamente seguro almacenar el CO₂ bajo tierra?"],
-  "star":{"caso":"Sleipner, Mar del Norte (Noruega)","S":"El gas del campo Sleipner West contiene CO₂ que debe separarse para su comercialización.","T":"Almacenar ese CO₂ en el subsuelo en lugar de emitirlo a la atmósfera.","A":"Inyección desde 1996 en la Formación Utsira, un acuífero salino a unos 1000 metros bajo el lecho marino, con monitoreo del subsuelo.","R":"Aproximadamente un millón de toneladas de CO₂ por año y más de 20 millones de toneladas almacenadas desde el inicio."}},
- "modules":[
-  {"id":"em1","title":"Módulo 1 · Inventario y metano","lessons":[
-   {"id":"e1","title":"Alcances 1, 2 y 3: cómo se arma un inventario","comp":"Inventario","cues":[
-    {"say":"Un inventario de gases de efecto invernadero ordena las emisiones en tres alcances. Es el esquema del Protocolo de GEI, que usan casi todas las empresas y los estándares de reporte.","scene":{"t":"bul","k":"GHG Protocol","h":"Los tres alcances","items":["Alcance 1: emisiones directas de fuentes propias. Combustión, antorcha, venteos y fugitivas","Alcance 2: emisiones indirectas por la electricidad, el vapor o el calor comprados","Alcance 3: el resto de la cadena de valor. En petróleo y gas, el uso de los productos vendidos pesa mucho"]},"hl":0},
-    {"say":"Para cada fuente, la emisión es un dato de actividad por un factor de emisión. Los factores salen de guías como las del IPCC, de 2006 con su actualización de 2019, o de compendios sectoriales como el del Instituto Americano del Petróleo.","hl":2},
-    {"say":"Laboratorio. Es un inventario de ejemplo. Movés el gas quemado en antorcha, el combustible, las fugas de metano y la electricidad comprada. Observá qué fuente domina y cómo cambia cuando incluís el alcance 3.","scene":{"t":"viz","w":"ghg","h":"Inventario de emisiones de ejemplo","p":{}},"lab":true},
-    {"say":"Una buena práctica es fijar los límites organizacionales, por control operativo o por participación accionaria, y mantenerlos constantes. La norma ISO 14064 establece cómo cuantificar, informar y verificar un inventario.","hl":2},
-    {"say":"Pregunta rápida.","q":{"q":"La electricidad que una instalación compra de la red es parte del:","o":["Alcance 1","Alcance 2","Alcance 3 exclusivamente","No se inventaría"],"a":1,"e":"Son emisiones indirectas por energía comprada: alcance 2."}}]},
-   {"id":"e2","title":"Metano: potencial de calentamiento, venteo y OGMP 2.0","comp":"Gestión de metano","cues":[
-    {"say":"El metano es el principal gas de efecto invernadero que emite la industria, además del CO₂. Su efecto depende del horizonte temporal que se elija para compararlo: a veinte años pesa mucho más que a cien.","scene":{"t":"tbl","k":"IPCC AR6","h":"Potenciales de calentamiento global (GWP)","cols":["Gas","GWP a 100 años","GWP a 20 años"],"rows":[["CO₂","1","1"],["Metano de origen fósil (CH₄)","29,8","82,5"],["Óxido nitroso (N₂O)","273","273"]],"n":"Valores del Sexto Informe de Evaluación del IPCC (AR6). El metano dura pocos años en la atmósfera: por eso el horizonte de 20 años exagera su peso relativo y el de 100 lo suaviza."}},
-    {"say":"En el upstream las fuentes principales de metano son las fugas de equipos, los venteos de proceso, los neumáticos de control y la combustión incompleta en antorchas. Una antorcha mal operada puede emitir metano sin quemar.","scene":{"t":"bul","k":"Fuentes","h":"De dónde viene el metano en el upstream","items":["Fugitivas: válvulas, bridas, compresores, tanques","Venteos de proceso y de mantenimiento","Neumáticos y dispositivos de control con gas","Antorchas con baja eficiencia de combustión","Eventos anómalos y de gran emisión"]},"hl":0},
-    {"say":"El marco de reporte de la Asociación de Petróleo y Gas de ONU Ambiente, OGMP 2.0, define cinco niveles. El más alto, el nivel cinco, exige mediciones a nivel de fuente y de sitio, y su conciliación.","hl":4},
-    {"say":"Y la iniciativa del Banco Mundial para eliminar la quema rutinaria de gas hacia 2030 es otra referencia. Recuperar el gas que se quema, además de reducir emisiones, lo convierte en un producto vendible.","hl":4},
-    {"say":"Pregunta rápida.","q":{"q":"Pasar de GWP a 100 años a GWP a 20 años para el metano:","o":["Reduce su peso en el inventario","Aumenta su peso relativo en el inventario","No cambia","Elimina el metano"],"a":1,"e":"El GWP20 del metano fósil es 82,5 frente a 29,8 del GWP100, así que su contribución en CO₂ equivalente sube con el horizonte corto."}}]}],
-   "quiz":[
-    {"q":"Las emisiones por combustión de gas en una planta propia son:","o":["Alcance 1","Alcance 2","Alcance 3","Ninguno"],"a":0,"e":"Son directas, de fuentes que controla la empresa."},
-    {"q":"El GWP a 100 años del metano fósil (AR6) es de aproximadamente:","o":["1","29,8","273","1000"],"a":1,"e":"AR6 informa 29,8 para el metano de origen fósil a 100 años."},
-    {"q":"OGMP 2.0 se refiere a:","o":["Un tipo de antorcha","El marco de reporte de metano de ONU Ambiente para petróleo y gas","Un catalizador","Una norma de cementación"],"a":1,"e":"Es el marco de reporte y mejora de metano de ONU Ambiente."}]},
-  {"id":"em2","title":"Módulo 2 · Reducción y priorización","lessons":[
-   {"id":"e3","title":"Curva de costo marginal de abatimiento (MACC)","comp":"Priorización","cues":[
-    {"say":"Una curva MACC ordena las medidas de reducción de menor a mayor costo por tonelada evitada. El ancho de cada barra es cuánto se reduce, y la altura, cuánto cuesta cada tonelada.","scene":{"t":"fm","k":"Concepto clave","h":"Costo marginal de abatimiento","f":"Costo (USD/tCO₂e) = ( Costo anualizado − Ahorros anuales ) / tCO₂e evitadas por año","n":"Los ahorros incluyen el gas recuperado y vendido o evitado de comprar. Una medida con ahorros mayores que su costo tiene costo negativo."}},
-    {"say":"Laboratorio. Es una curva de ejemplo. Subí el precio del carbono y mirá cuántas medidas resultan viables. Después subí el precio del gas: las medidas que recuperan gas se abaratan, y algunas pasan a costo negativo.","scene":{"t":"viz","w":"macc","h":"Curva MACC de ejemplo","p":{}},"lab":true},
-    {"say":"La herramienta es útil para priorizar, pero tiene límites. No capta interacciones entre medidas, barreras no económicas ni el riesgo de ejecución. Se usa como guía y se completa con análisis de proyecto.","hl":0},
-    {"say":"Pregunta rápida.","q":{"q":"Una medida con costo negativo en la MACC significa que:","o":["Cuesta más de lo que ahorra","Sus ahorros superan su costo anualizado","No reduce emisiones","Es ilegal"],"a":1,"e":"Genera ahorros netos: por ejemplo, el gas recuperado vale más que el costo de la medida."}}]},
-   {"id":"e4","title":"Eficiencia energética y electrificación","comp":"Priorización","cues":[
-    {"say":"Antes de pensar en tecnologías nuevas, conviene medir. La eficiencia energética parte de una línea de base, una auditoría, un plan de medidas y una verificación de ahorros. La norma ISO 50001 ordena ese ciclo de gestión de la energía.","scene":{"t":"viz","w":"concept","h":"Ciclo de eficiencia y electrificación","p":{"nodes":[{"l":"Línea de base|energía y emisiones","x":12,"y":50,"c":"#8ea2bd","n":"Sin una línea de base medida no se pueden demostrar ahorros."},{"l":"Auditoría|energética","x":34,"y":50,"c":"#3A6BD0","n":"Identifica pérdidas: compresores, bombas, calentadores, aire de instrumentos, gas combustible."},{"l":"Eficiencia|operativa","x":58,"y":22,"c":"#17755A","n":"Optimizar puntos de operación, reducir recirculaciones y recuperar calor. Suele ser lo más barato."},{"l":"Electrificación|de equipos","x":58,"y":50,"c":"#17755A","n":"Reemplazar turbinas o motores a gas por motores eléctricos. Su beneficio depende de la intensidad de emisiones de la red."},{"l":"Renovables|y almacenamiento","x":58,"y":78,"c":"#17755A","n":"Generación solar o eólica para cargas locales, con respaldo."},{"l":"Medición y|verificación","x":82,"y":50,"c":"#b7791f","n":"Se verifican los ahorros contra la línea de base y se reportan."}],"edges":[[0,1],[1,2],[1,3],[1,4],[2,5],[3,5],[4,5]],"hint":"Tocá cada bloque para ver su aporte.","nw":140}},"hl":0},
-    {"say":"La electrificación solo reduce emisiones netas si la electricidad es de baja intensidad. Si la red usa combustibles fósiles, hay que comparar la intensidad de emisiones de la red con la del equipo reemplazado.","hl":3},
-    {"say":"Una referencia: en Noruega, instalaciones offshore como Johan Sverdrup se alimentan con electricidad de tierra, lo que evita generar la energía con turbinas a gas en la plataforma.","hl":3},
-    {"say":"Pregunta rápida.","q":{"q":"La electrificación de un compresor reduce emisiones netas cuando:","o":["La red es siempre de carbón","La electricidad tiene menor intensidad de emisiones que la combustión del equipo reemplazado","El motor es más pesado","Se instala sin medir"],"a":1,"e":"El beneficio depende de comparar intensidades de emisión: la de la red contra la del equipo actual."}}]}],
-   "quiz":[
-    {"q":"En una MACC, el ancho de cada barra representa:","o":["El costo por tonelada","El volumen de emisiones evitadas por la medida","La inversión inicial","El precio del gas"],"a":1,"e":"El eje horizontal acumula el potencial de abatimiento."},
-    {"q":"Para demostrar ahorros energéticos se necesita primero:","o":["Instalar tecnología","Una línea de base medida","Aumentar la producción","Un nuevo contrato"],"a":1,"e":"Sin línea de base no hay forma de comparar."},
-    {"q":"Recuperar gas de antorcha puede tener costo negativo porque:","o":["Es gratis","El gas recuperado se puede vender o usar","Se vende CO₂","Disminuye el precio del carbono"],"a":1,"e":"El ahorro o ingreso por el gas puede compensar el costo."}]},
-  {"id":"em3","title":"Módulo 3 · Captura y almacenamiento de CO₂","lessons":[
-   {"id":"e5","title":"CCUS: cadena de valor y mecanismos de entrampamiento","comp":"Captura y almacenamiento","cues":[
-    {"say":"La captura y almacenamiento de CO₂ es una cadena de cuatro eslabones: captura en la fuente, compresión y acondicionamiento, transporte por ducto o buque, e inyección en una formación geológica.","scene":{"t":"viz","w":"ccs","h":"Cadena CCS y entrampamiento en el tiempo","p":{"t":100}},"hl":0,"lab":true},
-    {"say":"El almacenamiento seguro exige un reservorio con capacidad e inyectividad, y un sello que lo contenga. Típicamente se buscan acuíferos salinos profundos, a más de ochocientos metros, donde el CO₂ está en estado denso.","hl":0},
-    {"say":"Con el tiempo, el CO₂ se inmoviliza por cuatro mecanismos: entrampamiento estructural, residual por capilaridad, por disolución en el agua y, mucho más lento, por mineralización. El Informe Especial del IPCC de 2005 los describe.","hl":0},
-    {"say":"Mové el control de tiempo del laboratorio. Observá cómo el CO₂ pasa de estar libre bajo el sello a estar disuelto o atrapado en los poros. Las proporciones son ilustrativas: dependen de cada formación.","hl":0,"lab":true},
-    {"say":"Pregunta rápida.","q":{"q":"¿Por qué un acuífero salino profundo es adecuado para almacenar CO₂?","o":["Porque está vacío","Porque combina capacidad, un sello superior y condiciones en que el CO₂ queda denso","Porque tiene gas natural","Porque no tiene sello"],"a":1,"e":"Se requiere capacidad de almacenamiento, un sello eficaz y profundidad suficiente para mantener el CO₂ denso."}}]},
-   {"id":"e6","title":"Caso real: Sleipner (Noruega, desde 1996)","comp":"Captura y almacenamiento","cues":[
-    {"say":"Sleipner es el primer proyecto comercial de almacenamiento de CO₂ en un acuífero salino. Opera desde 1996 en el Mar del Norte, a cargo del operador de la licencia, en nombre de los socios de la licencia.","scene":{"t":"case","h":"Sleipner: almacenamiento de CO₂ en la Formación Utsira","src":"CO2RE, base de datos de instalaciones de almacenamiento","S":"El gas producido en el campo Sleipner West contiene CO₂ que debe separarse antes de su comercialización.","T":"Almacenar ese CO₂ separado en lugar de liberarlo a la atmósfera.","A":"Inyección en la Formación Utsira, un acuífero salino a unos 1000 metros bajo el lecho marino, con monitoreo del subsuelo.","R":"Cerca de un millón de toneladas por año de CO₂ inyectadas, y más de 20 millones de toneladas almacenadas desde el inicio."},"hl":0},
-    {"say":"El monitoreo con sísmica repetida de alta resolución permitió seguir la pluma de CO₂ en el acuífero. Esa información es la base de la confianza técnica en el almacenamiento geológico.","hl":1},
-    {"say":"La lección: el almacenamiento seguro es un problema de geociencias, y se sostiene en caracterización, monitoreo y verificación. Los mismos conceptos de sistema petrolero y de modelo estático que vimos en otros cursos, aplicados a otro fin.","hl":2},
-    {"say":"Y una buena práctica de reporte: las cifras de inyección se verifican con la fuente del operador y con auditorías independientes, y se informan con su metodología.","hl":3},
-    {"say":"Pregunta rápida.","q":{"q":"¿Qué herramienta permitió seguir la pluma de CO₂ en Sleipner?","o":["Análisis de lodo","Sísmica repetida de alta resolución","Un trépano especial","Cromatografía de gases en superficie"],"a":1,"e":"El monitoreo sísmico repetido permite ver cómo se propaga el CO₂ en el reservorio."}}]}],
-   "quiz":[
-    {"q":"¿Cuál es el orden correcto de la cadena CCS?","o":["Inyección, captura, transporte, compresión","Captura, compresión, transporte, inyección","Transporte, captura, inyección, compresión","Compresión, inyección, captura, transporte"],"a":1,"e":"Se captura, se comprime, se transporta y se inyecta."},
-    {"q":"¿Qué mecanismo de entrampamiento es el más lento?","o":["Estructural","Residual","Disolución","Mineralización"],"a":3,"e":"La mineralización actúa en escalas de cientos a miles de años."},
-    {"q":"Sleipner inyecta CO₂ en:","o":["Un yacimiento agotado de gas","Un acuífero salino, la Formación Utsira","Una mina de carbón","El océano"],"a":1,"e":"La Formación Utsira es un acuífero salino profundo."}]}],
- "exam":[
-  {"q":"El gas quemado en una antorcha propia es una emisión de:","o":["Alcance 1","Alcance 2","Alcance 3","Ninguno"],"a":0,"e":"Son emisiones directas de combustión en fuentes de la empresa."},
-  {"q":"El uso de los productos vendidos pertenece al:","o":["Alcance 1","Alcance 2","Alcance 3","Es una emisión evitada"],"a":2,"e":"Es una categoría del alcance 3."},
-  {"q":"Con GWP a 20 años, el metano en el inventario:","o":["Pesa menos","Pesa más","Pesa igual","Desaparece"],"a":1,"e":"82,5 frente a 29,8 de GWP100 (AR6, metano fósil)."},
-  {"q":"Una medida con costo negativo en una MACC:","o":["No cuesta nada","Tiene ahorros que superan su costo","No reduce emisiones","Aumenta emisiones"],"a":1,"e":"Genera un beneficio económico neto."},
-  {"q":"La electrificación reduce emisiones netas si:","o":["Siempre","La intensidad de emisión de la electricidad es menor que la del equipo reemplazado","Nunca","Solo en tierra"],"a":1,"e":"Hay que comparar intensidades."},
-  {"q":"El almacenamiento geológico de CO₂ requiere, entre otros elementos:","o":["Un sello eficaz y un programa de monitoreo","Ninguna evaluación geológica","Presiones nulas","Un pozo de agua dulce"],"a":0,"e":"Sello, capacidad, inyectividad y monitoreo son condiciones del almacenamiento seguro."}],
- "outro":{"phrase":"Medir, priorizar y reducir: la transición también es ingeniería.","recap":["El inventario ordena las emisiones por alcances y el metano cambia de peso según el GWP elegido.","La MACC prioriza medidas por costo, y el precio del gas puede volver negativo el costo de algunas.","El almacenamiento de CO₂ es seguro cuando hay capacidad, sello y monitoreo, como en Sleipner."]},
- "downloads":[{"file":"xlsx/H3L_Emisiones_Inventario_y_MACC.xlsx","title":"Inventario GEI y curva MACC (Excel)","desc":"Inventario de ejemplo por alcances con GWP100 y GWP20 de AR6 y curva MACC ordenada con precio de carbono y de gas editables.","task":"Pasá el GWP de 100 a 20 años y calculá cuánto sube el peso del metano. Después subí el precio del carbono a 80 USD/t y listá las medidas viables."}],
- "cases":[{"title":"Sleipner (Mar del Norte, Noruega)","text":"Almacenamiento de CO₂ separado del gas de Sleipner West en la Formación Utsira, acuífero salino a unos 1000 m bajo el lecho marino. Opera desde 1996 (operador de la licencia), con alrededor de 1 millón de toneladas por año y más de 20 millones de toneladas almacenadas desde el inicio. Se monitorea con sísmica repetida. Las cifras acumuladas se actualizan: consultar la fuente del operador.","src":"CO2RE, base de datos de instalaciones de almacenamiento (carbonstorage.io)"}],
- "refs":[
-  {"tag":"Estándar","cite":"WRI/WBCSD. The Greenhouse Gas Protocol: A Corporate Accounting and Reporting Standard (Revised Edition) y Corporate Value Chain (Scope 3) Standard.","why":"alcances 1, 2 y 3"},
-  {"tag":"Estándar","cite":"ISO 14064-1/2/3. Gases de efecto invernadero: cuantificación e informe, proyectos y verificación.","why":"inventario y verificación"},
-  {"tag":"Estándar","cite":"ISO 50001. Sistemas de gestión de la energía.","why":"ciclo de eficiencia energética"},
-  {"tag":"Informe","cite":"IPCC (2021). Climate Change 2021: The Physical Science Basis. Contribución del Grupo de Trabajo I al AR6, capítulo 7, tabla 7.15.","why":"valores de GWP"},
-  {"tag":"Informe","cite":"IPCC (2006). Guidelines for National Greenhouse Gas Inventories y 2019 Refinement.","why":"factores y metodologías"},
-  {"tag":"Informe","cite":"IPCC (2005). Special Report on Carbon Dioxide Capture and Storage.","why":"mecanismos de entrampamiento y riesgos"},
-  {"tag":"Estándar","cite":"UNEP. Oil & Gas Methane Partnership 2.0 (OGMP 2.0), marco de reporte.","why":"niveles de reporte de metano"},
-  {"tag":"Informe","cite":"IEA. Global Methane Tracker.","why":"emisiones de metano del sector y opciones de reducción"},
-  {"tag":"Compendio","cite":"API (2021). Compendium of Greenhouse Gas Emissions Methodologies for the Oil and Natural Gas Industry.","why":"factores y métodos sectoriales"},
-  {"tag":"Informe","cite":"McKinsey & Company (2009). Pathways to a Low-Carbon Economy, Version 2 of the Global GHG Abatement Cost Curve.","why":"origen de la curva MACC"}]
+ "id": "gei",
+ "title": "Gestión de emisiones y transición energética en oil & gas",
+ "subtitle": "Inventarios GEI, metano, curvas MACC y captura y almacenamiento de CO₂.",
+ "desc": "Curso aplicado de gestión de emisiones para operaciones de petróleo y gas: inventario por alcances, tratamiento del metano, priorización económica de medidas, eficiencia y electrificación, y captura y almacenamiento de CO₂, con el caso real de Sleipner.",
+ "objectives": [
+  "Construir un inventario de gases de efecto invernadero por alcances 1, 2 y 3.",
+  "Explicar el peso del metano y cómo cambia con el potencial de calentamiento elegido.",
+  "Priorizar medidas de reducción con una curva de costo marginal de abatimiento.",
+  "Describir la cadena de captura y almacenamiento de CO₂ y sus mecanismos de entrampamiento."
+ ],
+ "labs": [
+  "inventario de emisiones con GWP100 y GWP20",
+  "curva MACC con precio de carbono y de gas",
+  "cadena CCS con entrampamiento en el tiempo",
+  "mapa de eficiencia y electrificación"
+ ],
+ "practiceMin": 90,
+ "competencies": [
+  {
+   "name": "Inventario y reporte de emisiones",
+   "lessons": [
+    "e1"
+   ]
+  },
+  {
+   "name": "Gestión de metano",
+   "lessons": [
+    "e2"
+   ]
+  },
+  {
+   "name": "Priorización de abatimiento y economía",
+   "lessons": [
+    "e3",
+    "e4"
+   ]
+  },
+  {
+   "name": "Captura y almacenamiento de CO₂",
+   "lessons": [
+    "e5",
+    "e6"
+   ]
+  }
+ ],
+ "intro": {
+  "hook": "Vamos a aprender a medir, priorizar y reducir las emisiones de una operación de petróleo y gas, y a entender qué papel juega la captura de CO₂.",
+  "questions": [
+   "¿Cuánto emitimos realmente y de dónde viene?",
+   "¿Qué medidas de reducción conviene hacer primero y con qué costo?",
+   "¿Es técnicamente seguro almacenar el CO₂ bajo tierra?"
+  ],
+  "star": {
+   "caso": "Sleipner, Mar del Norte (Noruega)",
+   "S": "El gas del campo Sleipner West contiene CO₂ que debe separarse para su comercialización.",
+   "T": "Almacenar ese CO₂ en el subsuelo en lugar de emitirlo a la atmósfera.",
+   "A": "Inyección desde 1996 en la Formación Utsira, un acuífero salino a unos 1000 metros bajo el lecho marino, con monitoreo del subsuelo.",
+   "R": "Aproximadamente un millón de toneladas de CO₂ por año y más de 20 millones de toneladas almacenadas desde el inicio."
+  }
+ },
+ "modules": [
+  {
+   "id": "em1",
+   "title": "Módulo 1 · Inventario y metano",
+   "lessons": [
+    {
+     "id": "e1",
+     "title": "Alcances 1, 2 y 3: cómo se arma un inventario",
+     "comp": "Inventario",
+     "cues": [
+      {
+       "say": "Un inventario de gases de efecto invernadero ordena las emisiones en tres alcances. Es el esquema del Protocolo de GEI, que usan casi todas las empresas y los estándares de reporte.",
+       "scene": {
+        "t": "bul",
+        "k": "GHG Protocol",
+        "h": "Los tres alcances",
+        "items": [
+         "Alcance 1: emisiones directas de fuentes propias. Combustión, antorcha, venteos y fugitivas",
+         "Alcance 2: emisiones indirectas por la electricidad, el vapor o el calor comprados",
+         "Alcance 3: el resto de la cadena de valor. En petróleo y gas, el uso de los productos vendidos pesa mucho"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Para cada fuente, la emisión es un dato de actividad por un factor de emisión. Los factores salen de guías como las del IPCC, de 2006 con su actualización de 2019, o de compendios sectoriales como el del Instituto Americano del Petróleo.",
+       "hl": 2
+      },
+      {
+       "say": "Laboratorio. Es un inventario de ejemplo. Movés el gas quemado en antorcha, el combustible, las fugas de metano y la electricidad comprada. Observá qué fuente domina y cómo cambia cuando incluís el alcance 3.",
+       "scene": {
+        "t": "viz",
+        "w": "ghg",
+        "h": "Inventario de emisiones de ejemplo",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "Una buena práctica es fijar los límites organizacionales, por control operativo o por participación accionaria, y mantenerlos constantes. La norma ISO 14064 establece cómo cuantificar, informar y verificar un inventario.",
+       "hl": 2
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "La electricidad que una instalación compra de la red es parte del:",
+        "o": [
+         "Alcance 1",
+         "Alcance 2",
+         "Alcance 3 exclusivamente",
+         "No se inventaría"
+        ],
+        "a": 1,
+        "e": "Son emisiones indirectas por energía comprada: alcance 2."
+       }
+      }
+     ]
+    },
+    {
+     "id": "e2",
+     "title": "Metano: potencial de calentamiento, venteo y OGMP 2.0",
+     "comp": "Gestión de metano",
+     "cues": [
+      {
+       "say": "El metano es el principal gas de efecto invernadero que emite la industria, además del CO₂. Su efecto depende del horizonte temporal que se elija para compararlo: a veinte años pesa mucho más que a cien.",
+       "scene": {
+        "t": "tbl",
+        "k": "IPCC AR6",
+        "h": "Potenciales de calentamiento global (GWP)",
+        "cols": [
+         "Gas",
+         "GWP a 100 años",
+         "GWP a 20 años"
+        ],
+        "rows": [
+         [
+          "CO₂",
+          "1",
+          "1"
+         ],
+         [
+          "Metano de origen fósil (CH₄)",
+          "29,8",
+          "82,5"
+         ],
+         [
+          "Óxido nitroso (N₂O)",
+          "273",
+          "273"
+         ]
+        ],
+        "n": "Valores del Sexto Informe de Evaluación del IPCC (AR6). El metano dura pocos años en la atmósfera: por eso el horizonte de 20 años exagera su peso relativo y el de 100 lo suaviza."
+       }
+      },
+      {
+       "say": "En el upstream las fuentes principales de metano son las fugas de equipos, los venteos de proceso, los neumáticos de control y la combustión incompleta en antorchas. Una antorcha mal operada puede emitir metano sin quemar.",
+       "scene": {
+        "t": "bul",
+        "k": "Fuentes",
+        "h": "De dónde viene el metano en el upstream",
+        "items": [
+         "Fugitivas: válvulas, bridas, compresores, tanques",
+         "Venteos de proceso y de mantenimiento",
+         "Neumáticos y dispositivos de control con gas",
+         "Antorchas con baja eficiencia de combustión",
+         "Eventos anómalos y de gran emisión"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "El marco de reporte de la Asociación de Petróleo y Gas de ONU Ambiente, OGMP 2.0, define cinco niveles. El más alto, el nivel cinco, exige mediciones a nivel de fuente y de sitio, y su conciliación.",
+       "hl": 4
+      },
+      {
+       "say": "Y la iniciativa del Banco Mundial para eliminar la quema rutinaria de gas hacia 2030 es otra referencia. Recuperar el gas que se quema, además de reducir emisiones, lo convierte en un producto vendible.",
+       "hl": 4
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Pasar de GWP a 100 años a GWP a 20 años para el metano:",
+        "o": [
+         "Reduce su peso en el inventario",
+         "Aumenta su peso relativo en el inventario",
+         "No cambia",
+         "Elimina el metano"
+        ],
+        "a": 1,
+        "e": "El GWP20 del metano fósil es 82,5 frente a 29,8 del GWP100, así que su contribución en CO₂ equivalente sube con el horizonte corto."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "Las emisiones por combustión de gas en una planta propia son:",
+     "o": [
+      "Alcance 1",
+      "Alcance 2",
+      "Alcance 3",
+      "Ninguno"
+     ],
+     "a": 0,
+     "e": "Son directas, de fuentes que controla la empresa."
+    },
+    {
+     "q": "El GWP a 100 años del metano fósil (AR6) es de aproximadamente:",
+     "o": [
+      "1",
+      "29,8",
+      "273",
+      "1000"
+     ],
+     "a": 1,
+     "e": "AR6 informa 29,8 para el metano de origen fósil a 100 años."
+    },
+    {
+     "q": "OGMP 2.0 se refiere a:",
+     "o": [
+      "Un tipo de antorcha",
+      "El marco de reporte de metano de ONU Ambiente para petróleo y gas",
+      "Un catalizador",
+      "Una norma de cementación"
+     ],
+     "a": 1,
+     "e": "Es el marco de reporte y mejora de metano de ONU Ambiente."
+    }
+   ]
+  },
+  {
+   "id": "em2",
+   "title": "Módulo 2 · Reducción y priorización",
+   "lessons": [
+    {
+     "id": "e3",
+     "title": "Curva de costo marginal de abatimiento (MACC)",
+     "comp": "Priorización",
+     "cues": [
+      {
+       "say": "Una curva MACC ordena las medidas de reducción de menor a mayor costo por tonelada evitada. El ancho de cada barra es cuánto se reduce, y la altura, cuánto cuesta cada tonelada.",
+       "scene": {
+        "t": "fm",
+        "k": "Concepto clave",
+        "h": "Costo marginal de abatimiento",
+        "f": "Costo (USD/tCO₂e) = ( Costo anualizado − Ahorros anuales ) / tCO₂e evitadas por año",
+        "n": "Los ahorros incluyen el gas recuperado y vendido o evitado de comprar. Una medida con ahorros mayores que su costo tiene costo negativo."
+       }
+      },
+      {
+       "say": "Laboratorio. Es una curva de ejemplo. Subí el precio del carbono y mirá cuántas medidas resultan viables. Después subí el precio del gas: las medidas que recuperan gas se abaratan, y algunas pasan a costo negativo.",
+       "scene": {
+        "t": "viz",
+        "w": "macc",
+        "h": "Curva MACC de ejemplo",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "La herramienta es útil para priorizar, pero tiene límites. No capta interacciones entre medidas, barreras no económicas ni el riesgo de ejecución. Se usa como guía y se completa con análisis de proyecto.",
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Una medida con costo negativo en la MACC significa que:",
+        "o": [
+         "Cuesta más de lo que ahorra",
+         "Sus ahorros superan su costo anualizado",
+         "No reduce emisiones",
+         "Es ilegal"
+        ],
+        "a": 1,
+        "e": "Genera ahorros netos: por ejemplo, el gas recuperado vale más que el costo de la medida."
+       }
+      }
+     ]
+    },
+    {
+     "id": "e4",
+     "title": "Eficiencia energética y electrificación",
+     "comp": "Priorización",
+     "cues": [
+      {
+       "say": "Antes de pensar en tecnologías nuevas, conviene medir. La eficiencia energética parte de una línea de base, una auditoría, un plan de medidas y una verificación de ahorros. La norma ISO 50001 ordena ese ciclo de gestión de la energía.",
+       "scene": {
+        "t": "viz",
+        "w": "concept",
+        "h": "Ciclo de eficiencia y electrificación",
+        "p": {
+         "nodes": [
+          {
+           "l": "Línea de base|energía y emisiones",
+           "x": 12,
+           "y": 50,
+           "c": "#8ea2bd",
+           "n": "Sin una línea de base medida no se pueden demostrar ahorros."
+          },
+          {
+           "l": "Auditoría|energética",
+           "x": 34,
+           "y": 50,
+           "c": "#3A6BD0",
+           "n": "Identifica pérdidas: compresores, bombas, calentadores, aire de instrumentos, gas combustible."
+          },
+          {
+           "l": "Eficiencia|operativa",
+           "x": 58,
+           "y": 22,
+           "c": "#17755A",
+           "n": "Optimizar puntos de operación, reducir recirculaciones y recuperar calor. Suele ser lo más barato."
+          },
+          {
+           "l": "Electrificación|de equipos",
+           "x": 58,
+           "y": 50,
+           "c": "#17755A",
+           "n": "Reemplazar turbinas o motores a gas por motores eléctricos. Su beneficio depende de la intensidad de emisiones de la red."
+          },
+          {
+           "l": "Renovables|y almacenamiento",
+           "x": 58,
+           "y": 78,
+           "c": "#17755A",
+           "n": "Generación solar o eólica para cargas locales, con respaldo."
+          },
+          {
+           "l": "Medición y|verificación",
+           "x": 82,
+           "y": 50,
+           "c": "#b7791f",
+           "n": "Se verifican los ahorros contra la línea de base y se reportan."
+          }
+         ],
+         "edges": [
+          [
+           0,
+           1
+          ],
+          [
+           1,
+           2
+          ],
+          [
+           1,
+           3
+          ],
+          [
+           1,
+           4
+          ],
+          [
+           2,
+           5
+          ],
+          [
+           3,
+           5
+          ],
+          [
+           4,
+           5
+          ]
+         ],
+         "hint": "Tocá cada bloque para ver su aporte.",
+         "nw": 140
+        }
+       },
+       "hl": 0
+      },
+      {
+       "say": "La electrificación solo reduce emisiones netas si la electricidad es de baja intensidad. Si la red usa combustibles fósiles, hay que comparar la intensidad de emisiones de la red con la del equipo reemplazado.",
+       "hl": 3
+      },
+      {
+       "say": "Una referencia: en Noruega, instalaciones offshore como Johan Sverdrup se alimentan con electricidad de tierra, lo que evita generar la energía con turbinas a gas en la plataforma.",
+       "hl": 3
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "La electrificación de un compresor reduce emisiones netas cuando:",
+        "o": [
+         "La red es siempre de carbón",
+         "La electricidad tiene menor intensidad de emisiones que la combustión del equipo reemplazado",
+         "El motor es más pesado",
+         "Se instala sin medir"
+        ],
+        "a": 1,
+        "e": "El beneficio depende de comparar intensidades de emisión: la de la red contra la del equipo actual."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "En una MACC, el ancho de cada barra representa:",
+     "o": [
+      "El costo por tonelada",
+      "El volumen de emisiones evitadas por la medida",
+      "La inversión inicial",
+      "El precio del gas"
+     ],
+     "a": 1,
+     "e": "El eje horizontal acumula el potencial de abatimiento."
+    },
+    {
+     "q": "Para demostrar ahorros energéticos se necesita primero:",
+     "o": [
+      "Instalar tecnología",
+      "Una línea de base medida",
+      "Aumentar la producción",
+      "Un nuevo contrato"
+     ],
+     "a": 1,
+     "e": "Sin línea de base no hay forma de comparar."
+    },
+    {
+     "q": "Recuperar gas de antorcha puede tener costo negativo porque:",
+     "o": [
+      "Es gratis",
+      "El gas recuperado se puede vender o usar",
+      "Se vende CO₂",
+      "Disminuye el precio del carbono"
+     ],
+     "a": 1,
+     "e": "El ahorro o ingreso por el gas puede compensar el costo."
+    }
+   ]
+  },
+  {
+   "id": "em3",
+   "title": "Módulo 3 · Captura y almacenamiento de CO₂",
+   "lessons": [
+    {
+     "id": "e5",
+     "title": "CCUS: cadena de valor y mecanismos de entrampamiento",
+     "comp": "Captura y almacenamiento",
+     "cues": [
+      {
+       "say": "La captura y almacenamiento de CO₂ es una cadena de cuatro eslabones: captura en la fuente, compresión y acondicionamiento, transporte por ducto o buque, e inyección en una formación geológica.",
+       "scene": {
+        "t": "viz",
+        "w": "ccs",
+        "h": "Cadena CCS y entrampamiento en el tiempo",
+        "p": {
+         "t": 100
+        }
+       },
+       "hl": 0,
+       "lab": true
+      },
+      {
+       "say": "El almacenamiento seguro exige un reservorio con capacidad e inyectividad, y un sello que lo contenga. Típicamente se buscan acuíferos salinos profundos, a más de ochocientos metros, donde el CO₂ está en estado denso.",
+       "hl": 0
+      },
+      {
+       "say": "Con el tiempo, el CO₂ se inmoviliza por cuatro mecanismos: entrampamiento estructural, residual por capilaridad, por disolución en el agua y, mucho más lento, por mineralización. El Informe Especial del IPCC de 2005 los describe.",
+       "hl": 0
+      },
+      {
+       "say": "Mové el control de tiempo del laboratorio. Observá cómo el CO₂ pasa de estar libre bajo el sello a estar disuelto o atrapado en los poros. Las proporciones son ilustrativas: dependen de cada formación.",
+       "hl": 0,
+       "lab": true
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "¿Por qué un acuífero salino profundo es adecuado para almacenar CO₂?",
+        "o": [
+         "Porque está vacío",
+         "Porque combina capacidad, un sello superior y condiciones en que el CO₂ queda denso",
+         "Porque tiene gas natural",
+         "Porque no tiene sello"
+        ],
+        "a": 1,
+        "e": "Se requiere capacidad de almacenamiento, un sello eficaz y profundidad suficiente para mantener el CO₂ denso."
+       }
+      }
+     ]
+    },
+    {
+     "id": "e6",
+     "title": "Caso real: Sleipner (Noruega, desde 1996)",
+     "comp": "Captura y almacenamiento",
+     "cues": [
+      {
+       "say": "Sleipner es el primer proyecto comercial de almacenamiento de CO₂ en un acuífero salino. Opera desde 1996 en el Mar del Norte, a cargo del operador de la licencia, en nombre de los socios de la licencia.",
+       "scene": {
+        "t": "case",
+        "h": "Sleipner: almacenamiento de CO₂ en la Formación Utsira",
+        "src": "CO2RE, base de datos de instalaciones de almacenamiento",
+        "S": "El gas producido en el campo Sleipner West contiene CO₂ que debe separarse antes de su comercialización.",
+        "T": "Almacenar ese CO₂ separado en lugar de liberarlo a la atmósfera.",
+        "A": "Inyección en la Formación Utsira, un acuífero salino a unos 1000 metros bajo el lecho marino, con monitoreo del subsuelo.",
+        "R": "Cerca de un millón de toneladas por año de CO₂ inyectadas, y más de 20 millones de toneladas almacenadas desde el inicio."
+       },
+       "hl": 0
+      },
+      {
+       "say": "El monitoreo con sísmica repetida de alta resolución permitió seguir la pluma de CO₂ en el acuífero. Esa información es la base de la confianza técnica en el almacenamiento geológico.",
+       "hl": 1
+      },
+      {
+       "say": "La lección: el almacenamiento seguro es un problema de geociencias, y se sostiene en caracterización, monitoreo y verificación. Los mismos conceptos de sistema petrolero y de modelo estático que vimos en otros cursos, aplicados a otro fin.",
+       "hl": 2
+      },
+      {
+       "say": "Y una buena práctica de reporte: las cifras de inyección se verifican con la fuente del operador y con auditorías independientes, y se informan con su metodología.",
+       "hl": 3
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "¿Qué herramienta permitió seguir la pluma de CO₂ en Sleipner?",
+        "o": [
+         "Análisis de lodo",
+         "Sísmica repetida de alta resolución",
+         "Un trépano especial",
+         "Cromatografía de gases en superficie"
+        ],
+        "a": 1,
+        "e": "El monitoreo sísmico repetido permite ver cómo se propaga el CO₂ en el reservorio."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "¿Cuál es el orden correcto de la cadena CCS?",
+     "o": [
+      "Inyección, captura, transporte, compresión",
+      "Captura, compresión, transporte, inyección",
+      "Transporte, captura, inyección, compresión",
+      "Compresión, inyección, captura, transporte"
+     ],
+     "a": 1,
+     "e": "Se captura, se comprime, se transporta y se inyecta."
+    },
+    {
+     "q": "¿Qué mecanismo de entrampamiento es el más lento?",
+     "o": [
+      "Estructural",
+      "Residual",
+      "Disolución",
+      "Mineralización"
+     ],
+     "a": 3,
+     "e": "La mineralización actúa en escalas de cientos a miles de años."
+    },
+    {
+     "q": "Sleipner inyecta CO₂ en:",
+     "o": [
+      "Un yacimiento agotado de gas",
+      "Un acuífero salino, la Formación Utsira",
+      "Una mina de carbón",
+      "El océano"
+     ],
+     "a": 1,
+     "e": "La Formación Utsira es un acuífero salino profundo."
+    }
+   ]
+  }
+ ],
+ "exam": [
+  {
+   "q": "El gas quemado en una antorcha propia es una emisión de:",
+   "o": [
+    "Alcance 1",
+    "Alcance 2",
+    "Alcance 3",
+    "Ninguno"
+   ],
+   "a": 0,
+   "e": "Son emisiones directas de combustión en fuentes de la empresa."
+  },
+  {
+   "q": "El uso de los productos vendidos pertenece al:",
+   "o": [
+    "Alcance 1",
+    "Alcance 2",
+    "Alcance 3",
+    "Es una emisión evitada"
+   ],
+   "a": 2,
+   "e": "Es una categoría del alcance 3."
+  },
+  {
+   "q": "Con GWP a 20 años, el metano en el inventario:",
+   "o": [
+    "Pesa menos",
+    "Pesa más",
+    "Pesa igual",
+    "Desaparece"
+   ],
+   "a": 1,
+   "e": "82,5 frente a 29,8 de GWP100 (AR6, metano fósil)."
+  },
+  {
+   "q": "Una medida con costo negativo en una MACC:",
+   "o": [
+    "No cuesta nada",
+    "Tiene ahorros que superan su costo",
+    "No reduce emisiones",
+    "Aumenta emisiones"
+   ],
+   "a": 1,
+   "e": "Genera un beneficio económico neto."
+  },
+  {
+   "q": "La electrificación reduce emisiones netas si:",
+   "o": [
+    "Siempre",
+    "La intensidad de emisión de la electricidad es menor que la del equipo reemplazado",
+    "Nunca",
+    "Solo en tierra"
+   ],
+   "a": 1,
+   "e": "Hay que comparar intensidades."
+  },
+  {
+   "q": "El almacenamiento geológico de CO₂ requiere, entre otros elementos:",
+   "o": [
+    "Un sello eficaz y un programa de monitoreo",
+    "Ninguna evaluación geológica",
+    "Presiones nulas",
+    "Un pozo de agua dulce"
+   ],
+   "a": 0,
+   "e": "Sello, capacidad, inyectividad y monitoreo son condiciones del almacenamiento seguro."
+  }
+ ],
+ "outro": {
+  "can": [
+   "un inventario de emisiones de alcances 1, 2 y 3",
+   "las emisiones de metano y su reporte bajo OGMP 2.0",
+   "una curva de costo marginal de abatimiento para priorizar medidas",
+   "la cadena de valor de CCUS y sus mecanismos de entrampamiento"
+  ],
+  "phrase": "Medir, priorizar y reducir: la transición también es ingeniería.",
+  "recap": [
+   "El inventario ordena las emisiones por alcances y el metano cambia de peso según el GWP elegido.",
+   "La MACC prioriza medidas por costo, y el precio del gas puede volver negativo el costo de algunas.",
+   "El almacenamiento de CO₂ es seguro cuando hay capacidad, sello y monitoreo, como en Sleipner."
+  ]
+ },
+ "downloads": [
+  {
+   "file": "xlsx/H3L_Emisiones_Inventario_y_MACC.xlsx",
+   "title": "Inventario GEI y curva MACC (Excel)",
+   "desc": "Inventario de ejemplo por alcances con GWP100 y GWP20 de AR6 y curva MACC ordenada con precio de carbono y de gas editables.",
+   "task": "Pasá el GWP de 100 a 20 años y calculá cuánto sube el peso del metano. Después subí el precio del carbono a 80 USD/t y listá las medidas viables."
+  }
+ ],
+ "cases": [
+  {
+   "title": "Sleipner (Mar del Norte, Noruega)",
+   "text": "Almacenamiento de CO₂ separado del gas de Sleipner West en la Formación Utsira, acuífero salino a unos 1000 m bajo el lecho marino. Opera desde 1996 (operador de la licencia), con alrededor de 1 millón de toneladas por año y más de 20 millones de toneladas almacenadas desde el inicio. Se monitorea con sísmica repetida. Las cifras acumuladas se actualizan: consultar la fuente del operador.",
+   "src": "CO2RE, base de datos de instalaciones de almacenamiento (carbonstorage.io)"
+  }
+ ],
+ "refs": [
+  {
+   "tag": "Estándar",
+   "cite": "WRI/WBCSD. The Greenhouse Gas Protocol: A Corporate Accounting and Reporting Standard (Revised Edition) y Corporate Value Chain (Scope 3) Standard.",
+   "why": "alcances 1, 2 y 3"
+  },
+  {
+   "tag": "Estándar",
+   "cite": "ISO 14064-1/2/3. Gases de efecto invernadero: cuantificación e informe, proyectos y verificación.",
+   "why": "inventario y verificación"
+  },
+  {
+   "tag": "Estándar",
+   "cite": "ISO 50001. Sistemas de gestión de la energía.",
+   "why": "ciclo de eficiencia energética"
+  },
+  {
+   "tag": "Informe",
+   "cite": "IPCC (2021). Climate Change 2021: The Physical Science Basis. Contribución del Grupo de Trabajo I al AR6, capítulo 7, tabla 7.15.",
+   "why": "valores de GWP"
+  },
+  {
+   "tag": "Informe",
+   "cite": "IPCC (2006). Guidelines for National Greenhouse Gas Inventories y 2019 Refinement.",
+   "why": "factores y metodologías"
+  },
+  {
+   "tag": "Informe",
+   "cite": "IPCC (2005). Special Report on Carbon Dioxide Capture and Storage.",
+   "why": "mecanismos de entrampamiento y riesgos"
+  },
+  {
+   "tag": "Estándar",
+   "cite": "UNEP. Oil & Gas Methane Partnership 2.0 (OGMP 2.0), marco de reporte.",
+   "why": "niveles de reporte de metano"
+  },
+  {
+   "tag": "Informe",
+   "cite": "IEA. Global Methane Tracker.",
+   "why": "emisiones de metano del sector y opciones de reducción"
+  },
+  {
+   "tag": "Compendio",
+   "cite": "API (2021). Compendium of Greenhouse Gas Emissions Methodologies for the Oil and Natural Gas Industry.",
+   "why": "factores y métodos sectoriales"
+  },
+  {
+   "tag": "Informe",
+   "cite": "McKinsey & Company (2009). Pathways to a Low-Carbon Economy, Version 2 of the Global GHG Abatement Cost Curve.",
+   "why": "origen de la curva MACC"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Alvarez, R. A. et al. (2018). Assessment of methane emissions from the U.S. oil and gas supply chain. Science 361(6398), 186–188.",
+   "why": "mediciones frente a inventarios de metano"
+  }
+ ]
 }

@@ -313,6 +313,20 @@
        "hl": 3
       },
       {
+       "say": "En desplazamientos miscibles, la inestabilidad viscosa produce dedos que reducen el barrido. Koval propuso en 1963 un factor que combina la heterogeneidad y la razón de viscosidades efectiva, y Todd y Longstaff, un modelo de mezcla parcial para simulación. Son aproximaciones útiles para el cribado, no sustituyen al estudio detallado.",
+       "scene": {
+        "t": "bul",
+        "k": "Gases miscibles",
+        "h": "Dedos viscosos y su modelado",
+        "items": [
+         "Dedos viscosos: menor barrido",
+         "Factor de Koval: heterogeneidad y viscosidades efectivas",
+         "Todd–Longstaff: mezcla parcial en simulación",
+         "Útiles para cribar, no para reemplazar el estudio"
+        ]
+       }
+      },
+      {
        "say": "Pregunta rápida.",
        "q": {
         "q": "La inyección alternada de agua y gas (WAG) se usa para:",
@@ -719,6 +733,12 @@
   }
  ],
  "outro": {
+  "can": [
+   "las eficiencias de barrido y de desplazamiento que limitan el recobro",
+   "métodos químicos, de gas y térmicos de EOR",
+   "los criterios de selección de un método EOR para un yacimiento",
+   "el diseño y la escala de un piloto de EOR"
+  ],
   "phrase": "Primero entender qué eficiencia limita; después elegir la palanca.",
   "recap": [
    "La recuperación es el producto de tres eficiencias, y cada método mueve una palanca distinta.",
@@ -766,6 +786,16 @@
    "tag": "Fuente",
    "cite": "iProfesional. Nota sobre la producción más alta de la historia de Manantiales Behr.",
    "why": "caso Manantiales Behr"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Koval, E. J. (1963). A method for predicting the performance of unstable miscible displacement in heterogeneous media. SPE Journal 3(2), 145–154.",
+   "why": "factor de Koval"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Hirasaki, G. J., Miller, C. A. y Puerto, M. (2011). Recent advances in surfactant EOR. SPE Journal 16(4) (SPE 115386).",
+   "why": "tensioactivos y diseño de mezclas"
   }
  ]
 }

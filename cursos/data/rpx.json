@@ -666,7 +666,7 @@
    "e": "Es una buena práctica de control independiente."
   }
  ],
- "outro": {
+ "outro": {"can":["las precisiones de PRMS 2018 en la práctica", "los rangos P90, P50 y P10 y la agregación de portafolios", "el efecto del precio y del límite económico sobre las reservas", "la conciliación anual, la tasa de reposición y el soporte para una auditoría"],
   "phrase": "Una reserva defendible es la que se puede explicar, auditar y reconciliar.",
   "recap": [
    "PRMS 2018 clasifica por proyecto y ordena la incertidumbre en categorías.",

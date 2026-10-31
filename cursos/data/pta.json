@@ -750,6 +750,20 @@
        "hl": 2
       },
       {
+       "say": "La deconvolución convierte los datos de varios períodos de flujo y cierre en la respuesta equivalente a un único caudal constante. Así se ve una ventana de tiempo más larga que la de un solo cierre. Es sensible al ruido y a la calidad de los datos de caudal, y se usa como complemento.",
+       "scene": {
+        "t": "bul",
+        "k": "Técnicas avanzadas",
+        "h": "Deconvolución de la presión",
+        "items": [
+         "Combina varios períodos en una sola respuesta",
+         "Amplía el tiempo de investigación",
+         "Exige datos de caudal confiables",
+         "Se interpreta junto con el análisis convencional"
+        ]
+       }
+      },
+      {
        "say": "Pregunta rápida.",
        "q": {
         "q": "Para poder interpretar bien una restauración de presión, el historial de caudales debe:",
@@ -872,6 +886,12 @@
   }
  ],
  "outro": {
+  "can": [
+   "los regímenes de flujo con la derivada de presión",
+   "el daño, el almacenamiento y la permeabilidad con Horner",
+   "heterogeneidades, límites y el problema de la no unicidad",
+   "la calidad de una prueba de pozo antes de usar sus resultados"
+  ],
   "phrase": "La presión cuenta lo que el pozo no puede mostrar.",
   "recap": [
    "La derivada hace visibles los regímenes de flujo: almacenamiento, radial, límites y heterogeneidades.",

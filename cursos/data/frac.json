@@ -227,6 +227,20 @@
        "hl": 2
       },
       {
+       "say": "La conductividad adimensional de fractura relaciona la capacidad de la fractura con la de la formación: permeabilidad de la fractura por ancho, dividido por la permeabilidad de la roca y la longitud. Si es alta, la fractura casi no limita el flujo. Si es baja, el cuello de botella está en la fractura. Prats la introdujo en 1961.",
+       "scene": {
+        "t": "bul",
+        "k": "Conductividad",
+        "h": "Conductividad adimensional de fractura",
+        "items": [
+         "FCD = kf·w / (k·xf)",
+         "FCD alta: la formación es el límite",
+         "FCD baja: la fractura es el límite",
+         "Valores de referencia que se discuten en la literatura, no una receta fija"
+        ]
+       }
+      },
+      {
        "say": "Pregunta rápida.",
        "q": {
         "q": "Un fluido de baja viscosidad con alto caudal, para fracturas largas y complejas, es:",
@@ -492,6 +506,20 @@
         ]
        },
        "hl": 1
+      },
+      {
+       "say": "El volumen estimulado, SRV, se estima con microsísmica como la roca alcanzada por fracturas. No es lo mismo que el volumen drenado ni garantiza conectividad con el pozo. Se contrasta con producción, trazadores y diagnósticos de presión antes de usarlo para pronosticar.",
+       "scene": {
+        "t": "bul",
+        "k": "Diagnóstico",
+        "h": "Qué dice y qué no dice el SRV",
+        "items": [
+         "Estima la región estimulada con microsísmica",
+         "No equivale al volumen drenado",
+         "Contrastar con producción y trazadores",
+         "Uso cuidadoso en el pronóstico"
+        ]
+       }
       },
       {
        "say": "Pregunta rápida.",
@@ -816,6 +844,12 @@
   }
  ],
  "outro": {
+  "can": [
+   "los esfuerzos y la fracturabilidad de la formación",
+   "la geometría de la fractura, el fluido y el apuntalante",
+   "el diseño de etapas y clústeres en un pozo horizontal",
+   "el diagnóstico de la fractura y el pronóstico con declinación modificada"
+  ],
   "phrase": "Fracturar es ingeniería de detalle: cada etapa cuenta.",
   "recap": [
    "Los esfuerzos de la roca fijan la presión, la dirección y la altura de la fractura.",

@@ -141,6 +141,20 @@
        }
       },
       {
+       "say": "En desplazamientos miscibles, el modelo de Todd y Longstaff mezcla viscosidades y densidades con un parámetro de mezcla entre cero y uno, para representar la inestabilidad viscosa sin resolver cada dedo. Es una aproximación: el parámetro se calibra, no se mide.",
+       "scene": {
+        "t": "bul",
+        "k": "Modelos miscibles",
+        "h": "Mezcla parcial de Todd y Longstaff",
+        "items": [
+         "Parámetro de mezcla entre 0 y 1",
+         "Representa la inestabilidad sin malla fina",
+         "Se calibra con laboratorio o historia",
+         "Es una aproximación, no una medición"
+        ]
+       }
+      },
+      {
        "say": "Pregunta rápida.",
        "q": {
         "q": "La regla práctica para elegir el tipo de simulador es:",
@@ -340,6 +354,20 @@
         "h": "Relación caudal–presión",
         "f": "q = IP · ( p celda − p fondo )\n\nIP = 2π k h / ( μ · [ ln( r e / r w ) + S ] )",
         "n": "r e es el radio equivalente de la celda del pozo y S el daño. Se verifica que el índice sea coherente con las pruebas de pozo."
+       }
+      },
+      {
+       "say": "En el pozo, la presión del bloque de la malla no es la presión de fondo. Peaceman propuso una relación entre ambas con un radio equivalente que depende del tamaño de celda: es el índice del pozo. En roca-fluido, las curvas de permeabilidad relativa pueden tener histéresis, como en la inyección de gas.",
+       "scene": {
+        "t": "bul",
+        "k": "Pozos y roca-fluido",
+        "h": "Índice del pozo e histéresis",
+        "items": [
+         "Presión de bloque distinta de presión de fondo",
+         "Radio equivalente de Peaceman en función de la celda",
+         "Histéresis: el camino de saturación importa",
+         "Relevante en inyección alternada y almacenamiento de gas"
+        ]
        }
       },
       {
@@ -720,6 +748,12 @@
   }
  ],
  "outro": {
+  "can": [
+   "el tipo de simulador y la malla adecuados para un problema",
+   "los efectos de la dispersión numérica y del escalado",
+   "un ajuste histórico y su no unicidad",
+   "el pronóstico de un modelo y su gobernanza"
+  ],
   "phrase": "Un modelo no es la verdad: es una hipótesis que se pone a prueba contra los datos.",
   "recap": [
    "El simulador resuelve balances de masa discretizados, y la malla y el paso de tiempo condicionan el resultado.",
