@@ -22,6 +22,7 @@ const SCHEMA = [
   `CREATE TABLE IF NOT EXISTS meta (k TEXT PRIMARY KEY, v TEXT)`,
   `CREATE TABLE IF NOT EXISTS reports (day TEXT PRIMARY KEY, sent_at INTEGER, error TEXT)`,
   `CREATE TABLE IF NOT EXISTS metrics (day TEXT NOT NULL, metric TEXT NOT NULL, dim1 TEXT NOT NULL DEFAULT '', dim2 TEXT NOT NULL DEFAULT '', value REAL NOT NULL, PRIMARY KEY (day, metric, dim1, dim2))`,
+  `CREATE TABLE IF NOT EXISTS tutor_fail (k TEXT NOT NULL, hr INTEGER NOT NULL, n INTEGER NOT NULL DEFAULT 0, PRIMARY KEY (k, hr))`,
 ];
 
 let schemaReady = null;
@@ -239,11 +240,70 @@ async function exportMetrics(request, env) {
   return new Response(csv, { headers: { 'content-type': 'text/csv; charset=utf-8', 'cache-control': 'no-store' } });
 }
 
+/* ---- Acceso de tutores (editor de cursos) ----
+   Secretos: TUTOR_CODES = JSON {"idcurso":"sha256 hex de la clave"} y TUTOR_SECRET = clave para firmar las sesiones (ver tools/generar_claves_tutor.py).
+   POST /api/tutor-login  {code}   -> {token, course, exp}  (la clave identifica el curso; sin datos si falla)
+   POST /api/tutor-verify {token}  -> {valid, course, iat}   (lo usa el panel de administración para comprobar el origen de una propuesta) */
+const TUTOR_TTL = 8 * 3600;
+const TUTOR_MAX_FAIL = 8;
+const b64u = (buf) => btoa(String.fromCharCode(...new Uint8Array(buf))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+async function hmac(env, text) {
+  const key = await crypto.subtle.importKey('raw', new TextEncoder().encode(env.TUTOR_SECRET), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+  return b64u(await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(text)));
+}
+const nostore = { 'cache-control': 'no-store' };
+async function readJson(request) {
+  try { const t = await request.text(); return t.length < 4000 ? JSON.parse(t) : null; } catch { return null; }
+}
+async function tutorLogin(request, env) {
+  if (!env.TUTOR_CODES || !env.TUTOR_SECRET) return new Response('Not found', { status: 404 });
+  const body = await readJson(request);
+  const code = body && typeof body.code === 'string' ? body.code.trim() : '';
+  const fail = async () => { await new Promise((r) => setTimeout(r, 700)); return Response.json({ ok: false }, { status: 401, headers: nostore }); };
+  if (!code || code.length > 100) return fail();
+  let k = '', hr = 0;
+  if (env.DB) {
+    await ensureSchema(env);
+    hr = Math.floor(Date.now() / 3600000);
+    k = (await sha(`${request.headers.get('cf-connecting-ip') || 'x'}|${await getSalt(env)}`)).slice(0, 24);
+    const row = await env.DB.prepare(`SELECT n FROM tutor_fail WHERE k=? AND hr=?`).bind(k, hr).first();
+    if (row && row.n >= TUTOR_MAX_FAIL) return Response.json({ ok: false }, { status: 429, headers: nostore });
+  }
+  let map = {};
+  try { map = JSON.parse(env.TUTOR_CODES); } catch { return new Response('Not found', { status: 404 }); }
+  const h = await sha(code);
+  let course = '';
+  for (const [id, want] of Object.entries(map)) if (timingSafeEqual(h, String(want).toLowerCase())) course = id;
+  if (!course) {
+    if (env.DB) {
+      await env.DB.prepare(`INSERT INTO tutor_fail (k, hr, n) VALUES (?, ?, 1) ON CONFLICT(k, hr) DO UPDATE SET n=n+1`).bind(k, hr).run();
+      await env.DB.prepare(`DELETE FROM tutor_fail WHERE hr < ?`).bind(hr - 48).run();
+    }
+    return fail();
+  }
+  const iat = Math.floor(Date.now() / 1000), exp = iat + TUTOR_TTL;
+  const payload = b64u(new TextEncoder().encode(JSON.stringify({ c: course, iat, exp })));
+  return Response.json({ ok: true, course, exp, token: `${payload}.${await hmac(env, payload)}` }, { headers: nostore });
+}
+async function tutorVerify(request, env) {
+  if (!env.TUTOR_SECRET) return new Response('Not found', { status: 404 });
+  const body = await readJson(request);
+  const tok = body && typeof body.token === 'string' ? body.token : '';
+  const [payload, sig] = tok.split('.');
+  if (!payload || !sig || !timingSafeEqual(sig, await hmac(env, payload))) return Response.json({ valid: false }, { headers: nostore });
+  try {
+    const p = JSON.parse(atob(payload.replace(/-/g, '+').replace(/_/g, '/')));
+    return Response.json({ valid: true, course: p.c, iat: p.iat }, { headers: nostore });
+  } catch { return Response.json({ valid: false }, { headers: nostore }); }
+}
+
 export default {
   async fetch(request, env, ctx) {
     const { pathname } = new URL(request.url);
     if (pathname === '/api/collect' && request.method === 'POST') return collect(request, env, ctx);
     if (pathname === '/api/report-test' && request.method === 'POST') return reportTest(request, env);
+    if (pathname === '/api/tutor-login' && request.method === 'POST') return tutorLogin(request, env);
+    if (pathname === '/api/tutor-verify' && request.method === 'POST') return tutorVerify(request, env);
     if (pathname === '/api/export' && request.method === 'GET') return exportMetrics(request, env);
     if (pathname.startsWith('/api/')) return new Response('Not found', { status: 404 });
     return env.ASSETS.fetch(request);

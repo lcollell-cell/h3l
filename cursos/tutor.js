@@ -3,6 +3,7 @@
 (function(){'use strict';var HC=window.HC,HV=window.HV,$=HC.$,esc=HC.esc;HC.adminMode=true;
 /* ---------- textos de la interfaz (es|en|fr|pt) ---------- */
 var T={
+lg_h:'Acceso|Access|Accès|Acesso',lg_c:'Clave|Access code|Code d’accès|Código de acesso',lg_b:'Ingresar|Enter|Entrer|Entrar',lg_e:'Clave incorrecta o acceso no disponible.|Incorrect code or access unavailable.|Code incorrect ou accès indisponible.|Código incorreto ou acesso indisponível.',lg_x:'Salir|Sign out|Quitter|Sair',lg_w:'Verificando…|Checking…|Vérification…|Verificando…',
 h:'Editor de cursos para tutores|Course editor for tutors|Éditeur de cours pour tuteurs|Editor de cursos para tutores',
 p:'Editá el contenido de un curso en tu navegador, validalo y descargá una propuesta. La propuesta no cambia el sitio: la revisa y la aprueba el administrador antes de pasar a producción.|Edit a course in your browser, validate it and download a proposal. The proposal does not change the site: the administrator reviews and approves it before it goes to production.|Modifiez un cours dans votre navigateur, validez-le et téléchargez une proposition. Elle ne modifie pas le site : l’administrateur la révise et l’approuve avant la mise en production.|Edite um curso no navegador, valide e baixe uma proposta. Ela não altera o site: o administrador revisa e aprova antes da produção.',
 course:'Curso|Course|Cours|Curso',tname:'Tu nombre|Your name|Votre nom|Seu nome',tmail:'Tu correo|Your email|Votre e-mail|Seu e-mail',
@@ -46,7 +47,7 @@ var LI={es:0,en:1,fr:2,pt:3};
 function tt(k){var s=T[k];if(!s)return k;var i=LI[HC.lang]||0;return Array.isArray(s)?s[i]:s.split('|')[i]}
 /* ---------- estado ---------- */
 var S={cat:null,id:null,orig:null,w:null,nav:'meta',open:{},tut:{name:'',email:'',note:'',decl:false},msg:'',prev:null};
-var DK='h3l-tutor-draft-',TK='h3l-tutor-id';
+var DK='h3l-tutor-draft-',TK='h3l-tutor-id',AK='h3l-tutor-auth';
 function clone(x){return JSON.parse(JSON.stringify(x))}
 function get(o,p){return p.split('.').reduce(function(a,k){return a==null?a:a[k]},o)}
 function set(o,p,v){var ks=p.split('.'),l=ks.pop(),t=ks.reduce(function(a,k){return a[k]},o);t[l]=v}
@@ -119,7 +120,7 @@ function review(){var r=HV.validate(S.w,S.orig),d=HV.diff(S.orig,S.w),ok=!r.erro
 function save(name,obj){var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(obj,null,1)],{type:'application/json'}));a.download=name;document.body.appendChild(a);a.click();a.remove()}
 function download(){var r=HV.validate(S.w,S.orig),t=S.tut;if(r.errors.length||!t.name.trim()||!/^\S+@\S+\.\S+$/.test(t.email)||!t.decl){$('#tneed').textContent=tt('need');return}
   Promise.all([HV.hash(S.orig),HV.hash(S.w)]).then(function(h){var d=new Date().toISOString();
-    save('propuesta_'+S.id+'_'+d.slice(0,10)+'.json',{format:'h3l-propuesta',version:1,course:S.id,created:d,tutor:{name:t.name.trim(),email:t.email.trim()},note:t.note,declaration:true,base:h[0],hash:h[1],data:S.w});$('#tneed').textContent=''})}
+    save('propuesta_'+S.id+'_'+d.slice(0,10)+'.json',{format:'h3l-propuesta',version:1,course:S.id,created:d,tutor:{name:t.name.trim(),email:t.email.trim()},note:t.note,declaration:true,auth:S.auth.token,base:h[0],hash:h[1],data:S.w});$('#tneed').textContent=''})}
 /* ---------- eventos ---------- */
 function applyField(el){var p=el.getAttribute('data-p'),k=el.getAttribute('data-k'),v=el.value;if(!p)return;
   if(k==='num')v=v===''?0:parseFloat(v);else if(k==='int'){v=v===''?null:parseInt(v,10);if(v==null||isNaN(v)){set(S.w,p,undefined);persist();return}}
@@ -156,10 +157,10 @@ function bind(){var ed=$('#ted');
   ed.addEventListener('toggle',function(e){var d=e.target;if(d.matches&&d.matches('details.cue'))S.open[d.getAttribute('data-key')]=d.open},true);
   $('#tnav').addEventListener('click',function(e){var b=e.target.closest('[data-nav]');if(b){S.nav=b.getAttribute('data-nav');view();window.scrollTo(0,0)}})}
 /* ---------- barra superior y carga ---------- */
-function bar(){var cs=S.cat.courses;$('#tbar').innerHTML='<label class="fl"><span>'+tt('course')+'</span><select id="csel">'+cs.map(function(c){return '<option value="'+c.id+'"'+(c.id===S.id?' selected':'')+'>'+esc(c.title)+'</option>'}).join('')+'</select></label>'+
+function bar(){var cs=S.cat.courses.filter(function(c){return c.id===S.id});$('#tbar').innerHTML='<label class="fl"><span>'+tt('course')+'</span><b>'+esc(cs.length?cs[0].title:S.id)+'</b></label>'+
   '<label class="fl"><span>'+tt('tname')+'</span><input type="text" id="tn" value="'+esc(S.tut.name)+'" autocomplete="name"></label><label class="fl"><span>'+tt('tmail')+'</span><input type="email" id="tm" value="'+esc(S.tut.email)+'" autocomplete="email"></label>'+
-  '<div class="tools"><button type="button" class="btn o" id="tdis">'+tt('discard')+'</button><span class="note-s" id="sv"></span></div>';
-  $('#csel').addEventListener('change',function(e){load(e.target.value)});
+  '<div class="tools"><button type="button" class="btn o" id="tdis">'+tt('discard')+'</button><span class="note-s" id="sv"></span><button class="btn o" id="tx" type="button">'+tt('lg_x')+'</button></div>';
+  $('#tx').addEventListener('click',function(){try{sessionStorage.removeItem(AK)}catch(e){}location.reload()});
   $('#tn').addEventListener('input',function(e){S.tut.name=e.target.value;persist();ident()});$('#tm').addEventListener('input',function(e){S.tut.email=e.target.value;persist();ident()});
   $('#tdis').addEventListener('click',function(){if(!confirm(tt('discard_q')))return;try{localStorage.removeItem(DK+S.id)}catch(e){}load(S.id,true)})}
 function ident(){lsset('h3l-tutor-who',JSON.stringify({name:S.tut.name,email:S.tut.email}))}
@@ -168,7 +169,16 @@ function load(id,fresh){S.id=id;lsset(TK,id);fetch('data/'+id+'.json').then(func
   var d=!fresh&&lsget(DK+id);if(d){try{var j=JSON.parse(d);if(j.w){S.w=j.w;S.tut=Object.assign(S.tut,j.tut||{});S.msg=tt('loaded')}}catch(e){}}
   bar();view();if(S.msg){var s=$('#sv');if(s)s.textContent=S.msg;S.msg=''}})}
 function head(){$('#tt-h').textContent=tt('h');$('#tt-p').textContent=tt('p')}
-HC.langSelect($('#lang'));HC.apply();head();bind();
+HC.langSelect($('#lang'));HC.apply();bind();
 HC.onlang=function(){HC.apply();head();if(S.cat){bar();view()}};
-HC.loadCatalog().then(function(c){S.cat=c;var id=new URLSearchParams(location.search).get('c')||lsget(TK)||c.courses[0].id;if(!c.courses.some(function(x){return x.id===id}))id=c.courses[0].id;load(id)});
+function sess(){try{var a=JSON.parse(sessionStorage.getItem(AK)||'null');if(a&&a.token&&a.course&&a.exp*1000>Date.now())return a}catch(e){}return null}
+function gate(){document.title='H3L';$('#tt-h').textContent=tt('lg_h');$('#tt-p').textContent='';$('#tbar').innerHTML='';$('#tnav').style.display='none';$('#tapp').style.display='block';
+  $('#ted').innerHTML='<form id="lgf" style="max-width:340px" autocomplete="off"><label class="fl"><span>'+tt('lg_c')+'</span><input type="password" id="lgc" autocomplete="off" autocapitalize="off" spellcheck="false" required></label><div class="tools" style="margin:12px 0"><button class="btn" type="submit">'+tt('lg_b')+'</button></div><p class="vl" id="lge" role="alert"></p></form>';
+  $('#lgf').addEventListener('submit',function(e){e.preventDefault();var code=$('#lgc').value.trim(),m=$('#lge');if(!code)return;m.textContent=tt('lg_w');
+   fetch('/api/tutor-login',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({code:code})}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(a){
+    try{sessionStorage.setItem(AK,JSON.stringify(a))}catch(x){}location.reload()}).catch(function(){m.textContent=tt('lg_e')})})}
+var au=sess();
+if(!au){gate();HC.onlang=function(){HC.apply();gate()}}
+else{S.auth=au;$('#tnav').style.display='';head();
+HC.loadCatalog().then(function(c){S.cat=c;if(!c.courses.some(function(x){return x.id===au.course})){gate();return}load(au.course)})}
 })();

@@ -24,6 +24,11 @@
 - Prueba del reporte en produccion: definir el secreto `REPORT_KEY` y hacer `POST /api/report-test` con el encabezado `x-report-key` (agregar `?preview=1` para ver el HTML sin enviar).
 - Historial y base local: cada reporte guarda sus metricas en la tabla `metrics` de D1 (no vence a los 90 dias), adjunta el CSV `h3l_metricas_AAAA-MM-DD.csv` al mail y se puede bajar con `GET /api/export?from=&to=` (encabezado `x-report-key`, igual que `report-test`). `tools/importar_metricas.py` arma la base SQLite en la computadora del dueño (desde los CSV o con `--descargar`). Los `.sqlite` y los CSV no se suben al repo.
 
+## Editor de tutores (cursos)
+
+- `cursos/tutor.html` (sin enlaces publicos, noindex) pide una clave por curso. El Worker la valida en `/api/tutor-login` y devuelve una sesion firmada de 8 h; el tutor solo ve su curso. Secretos de Cloudflare: `TUTOR_CODES` (JSON id de curso -> sha256 de la clave) y `TUTOR_SECRET`. Generarlos con `python3 tools/generar_claves_tutor.py [ids]` (imprime las claves una sola vez; no se guardan en el repo). Sin esos secretos el acceso queda cerrado. En GitHub Pages (prueba) el login no funciona porque no hay Worker.
+- El tutor solo descarga una propuesta firmada (hash); no publica nada. El administrador la carga en `cursos/admin.html`, revisa diferencias y validacion, y al aprobar aplica el JSON en `develop`. El pase a `main` sigue requiriendo la aprobacion del dueño.
+
 ## Idiomas y videos
 
 - **Portadas por idioma:** `/es/`, `/en/`, `/fr/` y `/pt/` son archivos generados (no editar a mano). Salen de `v2/index.html` y de los textos de `v2/lang-index.js` con `python3 scripts/build_idiomas.py` (necesita Node y `pip install beautifulsoup4`). Correrlo cada vez que cambie alguno de esos dos archivos y subir tambien las carpetas generadas y `sitemap.xml`. Cada una lleva canonical propio y hreflang es/en/fr/pt y x-default (`/es/`); la raiz y `v2/` tienen canonical `/es/`. `python3 scripts/build_idiomas.py --check` verifica que las portadas esten al dia (correrlo antes de pasar a main). `index.html` (raiz) redirige a `/{idioma}/` segun el idioma guardado o del navegador, salvo con `?go=` o `?stay`. `v2/` queda como plantilla (su canonical apunta a `/es/`).
