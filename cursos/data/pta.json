@@ -1,0 +1,954 @@
+{
+ "id": "pta",
+ "title": "Pruebas de pozo y análisis de transitorios de presión",
+ "subtitle": "Del cierre del pozo a la permeabilidad, el daño y los límites del reservorio, con la derivada de presión.",
+ "desc": "Curso aplicado de pruebas de pozo: diseño de la prueba, regímenes de flujo, análisis con la derivada de Bourdet y con Horner, daño y almacenamiento, heterogeneidades y límites, pruebas en no convencionales y control de calidad de los datos.",
+ "objectives": [
+  "Diseñar una prueba de pozo con un objetivo claro y una duración suficiente.",
+  "Identificar los regímenes de flujo en un gráfico log-log de presión y derivada.",
+  "Calcular permeabilidad, daño y presión extrapolada con el método de Horner.",
+  "Reconocer heterogeneidades y límites, y la no unicidad de la interpretación."
+ ],
+ "labs": [
+  "diagnóstico con presión y derivada (k, daño y almacenamiento)",
+  "lectura de la meseta radial y estimación de k",
+  "pozo dañado con gran almacenamiento",
+  "flujo de trabajo de interpretación"
+ ],
+ "practiceMin": 90,
+ "competencies": [
+  {
+   "name": "Diseño y ejecución de pruebas",
+   "lessons": [
+    "t1",
+    "t6"
+   ]
+  },
+  {
+   "name": "Interpretación con derivada de presión",
+   "lessons": [
+    "t2",
+    "t4"
+   ]
+  },
+  {
+   "name": "Análisis clásico: Horner, daño y almacenamiento",
+   "lessons": [
+    "t3"
+   ]
+  },
+  {
+   "name": "Pruebas en no convencionales y gas",
+   "lessons": [
+    "t5"
+   ]
+  }
+ ],
+ "intro": {
+  "hook": "Vamos a aprender a leer un pozo desde su presión: cuánto fluye el reservorio, si el pozo está dañado y qué hay lejos del pozo.",
+  "questions": [
+   "¿Qué nos dice la presión de un pozo cerrado sobre el reservorio?",
+   "¿Cómo se distingue el daño del pozo de la baja permeabilidad de la roca?",
+   "¿Qué es la derivada de presión y por qué cambió la interpretación?"
+  ],
+  "star": {
+   "caso": "La derivada de presión (Bourdet et al., 1983)",
+   "S": "Hasta comienzos de los años ochenta se interpretaba la presión con curvas tipo en las que combinaciones muy distintas de parámetros se parecían.",
+   "T": "Contar con una firma más sensible para reconocer el modelo del reservorio.",
+   "A": "En 1983, Bourdet y colaboradores graficaron también la derivada del cambio de presión respecto del logaritmo del tiempo, algo posible con los sensores electrónicos de fondo.",
+   "R": "Las curvas tipo con derivada dieron ajustes únicos y bien diferenciados, y la derivada pasó a ser estándar en el software de interpretación."
+  }
+ },
+ "modules": [
+  {
+   "id": "tm1",
+   "title": "Módulo 1 · Fundamentos de la prueba",
+   "lessons": [
+    {
+     "id": "t1",
+     "title": "Para qué y cómo se hace una prueba de pozo",
+     "comp": "Diseño y ejecución de pruebas",
+     "cues": [
+      {
+       "say": "Una prueba de pozo perturba el caudal y registra cómo responde la presión. Esa respuesta depende del reservorio, y por eso permite conocerlo sin necesidad de recuperar una muestra.",
+       "scene": {
+        "t": "bul",
+        "k": "Concepto",
+        "h": "Qué se obtiene de una prueba",
+        "items": [
+         "Permeabilidad y capacidad de flujo del reservorio, k·h",
+         "Daño o estimulación alrededor del pozo, el factor de daño S",
+         "Presión inicial o presión media del reservorio",
+         "Heterogeneidades y límites: fallas, fracturas, cierres",
+         "Volumen conectado, en pruebas largas"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Hay varios tipos de prueba. La más usada es la de restauración de presión, o build-up: se produce el pozo y luego se lo cierra mientras se mide la presión de fondo.",
+       "scene": {
+        "t": "tbl",
+        "k": "Tipos de prueba",
+        "h": "Qué se hace y qué aporta",
+        "cols": [
+         "Prueba",
+         "Qué se hace",
+         "Qué aporta"
+        ],
+        "rows": [
+         [
+          "Restauración (build-up)",
+          "Cierre luego de producir",
+          "k, S, presión extrapolada"
+         ],
+         [
+          "Caída (drawdown)",
+          "Apertura a caudal constante",
+          "k, S y, si es larga, volumen"
+         ],
+         [
+          "Inyección y cierre (falloff)",
+          "Cierre luego de inyectar",
+          "k, daño, posición del frente"
+         ],
+         [
+          "Interferencia",
+          "Un pozo activo, otro observa",
+          "Conectividad entre pozos"
+         ],
+         [
+          "DST",
+          "Prueba en pozo abierto con herramienta",
+          "Primera evaluación de fluidos y presión"
+         ]
+        ],
+        "n": "Todas se interpretan con la misma teoría: la ecuación de difusividad. Cambia cómo se perturba el pozo."
+       }
+      },
+      {
+       "say": "En unidades de campo, el cambio de presión es 141,2 por q, B y mu, dividido por k por h, y todo por una presión adimensional que depende del tiempo, del almacenamiento y del daño.",
+       "scene": {
+        "t": "fm",
+        "k": "Relación fundamental",
+        "h": "Presión adimensional",
+        "f": "Δp = 141,2 · q · B · μ / (k · h) · pD(tD, CD, S)\n\ntD = 0,0002637 · k · t / (φ · μ · ct · rw²)\nCD = 0,8936 · C / (φ · ct · h · rw²)",
+        "n": "q en stb/d, B en rb/stb, μ en cP, k en md, h en pies, t en horas, ct en 1/psi, rw en pies, C en bbl/psi."
+       }
+      },
+      {
+       "say": "Una buena prueba se diseña antes de hacerla. Hay que fijar el objetivo, simular la respuesta para estimar cuánto tiempo hace falta, calibrar los sensores y acordar el historial de caudales que se va a registrar.",
+       "scene": {
+        "t": "bul",
+        "k": "Mejores prácticas",
+        "h": "Antes de la prueba",
+        "items": [
+         "Objetivo claro: qué decisión depende del resultado",
+         "Simulación previa para estimar la duración necesaria",
+         "Sensor de fondo calibrado, con resolución y deriva conocidas",
+         "Historial de caudales completo y sincronizado con la presión",
+         "Cierre de fondo cuando sea posible, para reducir el almacenamiento",
+         "Seguridad y manejo de fluidos acordados con operaciones"
+        ]
+       },
+       "hl": 4
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Un cierre de fondo, con la válvula en el fondo del pozo, sirve sobre todo para:",
+        "o": [
+         "Reducir el almacenamiento del pozo",
+         "Aumentar la permeabilidad",
+         "Eliminar el daño",
+         "Cambiar el fluido producido"
+        ],
+        "a": 0,
+        "e": "Al cerrar en el fondo el volumen de fluido que sigue acumulándose es mucho menor, y el efecto de almacenamiento termina antes."
+       }
+      }
+     ]
+    },
+    {
+     "id": "t2",
+     "title": "Regímenes de flujo y la derivada de presión",
+     "comp": "Interpretación con derivada de presión",
+     "cues": [
+      {
+       "say": "Después de la perturbación el pozo atraviesa regímenes de flujo, y cada uno tiene una firma. Para verlas se grafica, en escala doble logarítmica, el cambio de presión y su derivada respecto del logaritmo del tiempo.",
+       "scene": {
+        "t": "tbl",
+        "k": "Firmas en la derivada",
+        "h": "Qué se ve y qué significa",
+        "cols": [
+         "Régimen",
+         "Derivada en log-log",
+         "Qué indica"
+        ],
+        "rows": [
+         [
+          "Almacenamiento",
+          "Pendiente 1",
+          "Volumen de fluido en el pozo"
+         ],
+         [
+          "Flujo radial infinito",
+          "Meseta horizontal",
+          "Capacidad de flujo k·h"
+         ],
+         [
+          "Flujo lineal, fractura",
+          "Pendiente 1/2",
+          "Fractura hidráulica o canal"
+         ],
+         [
+          "Falla sellante",
+          "Meseta que se duplica",
+          "Límite a cierta distancia"
+         ],
+         [
+          "Límite cerrado",
+          "Pendiente unitaria al final",
+          "Pseudo-estacionario, volumen"
+         ],
+         [
+          "Doble porosidad",
+          "Valle antes de la meseta",
+          "Reservorio naturalmente fracturado"
+         ]
+        ],
+        "n": "En flujo radial infinito la derivada vale 70,6·q·B·μ/(k·h), en unidades de campo."
+       }
+      },
+      {
+       "say": "Laboratorio. Es un reservorio homogéneo infinito con almacenamiento y daño, calculado con la solución analítica real. Cambiá la permeabilidad, el daño y el almacenamiento y mirá cómo se mueven la presión y la derivada.",
+       "scene": {
+        "t": "viz",
+        "w": "pta",
+        "h": "Presión y derivada de un pozo",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "Dos cosas para fijarse. El daño separa la curva de presión de la derivada, y el almacenamiento tapa el comienzo. Con mucho almacenamiento puede que la meseta no aparezca en la duración de la prueba.",
+       "scene": {
+        "t": "bul",
+        "k": "Qué observar",
+        "h": "Lectura del laboratorio",
+        "items": [
+         "Subí S: la curva de presión se despega de la derivada",
+         "Subí C: la pendiente unitaria dura más y la meseta tarda",
+         "Bajá k: la meseta sube, porque Δp aumenta",
+         "Cuando no hay meseta, no se puede leer k de ella"
+        ]
+       },
+       "hl": 1
+      },
+      {
+       "say": "Cuando la derivada llega a la meseta, la permeabilidad sale directo: k es 70,6 por q, B y mu, dividido por el espesor y por el valor de la meseta.",
+       "scene": {
+        "t": "fm",
+        "k": "Lectura rápida",
+        "h": "Permeabilidad desde la meseta",
+        "f": "k = 70,6 · q · B · μ / ( h · meseta de la derivada )",
+        "n": "Es una estimación inicial. El ajuste con un modelo completo la refina."
+       }
+      },
+      {
+       "say": "Este es el caso de la derivada. La publicación de Bourdet y colaboradores de 1983 cambió la práctica.",
+       "scene": {
+        "t": "case",
+        "h": "La derivada de presión (1983)",
+        "src": "D. Bourdet, T. M. Whittle, A. A. Douglas y V. M. Pirard. A new set of type curves simplifies well test analysis. World Oil, mayo de 1983.",
+        "S": "Se interpretaba con curvas tipo del cambio de presión, donde combinaciones distintas de parámetros se parecían.",
+        "T": "Obtener una firma más sensible y menos ambigua del modelo de reservorio.",
+        "A": "Graficar la derivada de la presión respecto del logaritmo del tiempo, medible con sensores electrónicos de fondo, junto con curvas tipo de derivada.",
+        "R": "Los ajustes resultaron únicos y bien diferenciados, con líneas rectas en tiempos cortos y largos, y de una misma gráfica salían la presión, el tiempo y el daño."
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "En un gráfico log-log, una derivada horizontal indica:",
+        "o": [
+         "Almacenamiento del pozo",
+         "Flujo radial infinito",
+         "Límite cerrado",
+         "Fractura hidráulica"
+        ],
+        "a": 1,
+        "e": "La meseta es la firma del flujo radial infinito, y su valor da la capacidad de flujo."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "La derivada de presión que se grafica es la derivada respecto de:",
+     "o": [
+      "El tiempo lineal",
+      "El logaritmo del tiempo",
+      "La profundidad",
+      "El caudal"
+     ],
+     "a": 1,
+     "e": "Se usa dΔp/d ln t, que en flujo radial infinito es constante."
+    },
+    {
+     "q": "Una prueba de restauración o build-up consiste en:",
+     "o": [
+      "Producir a caudal constante sin cerrar",
+      "Cerrar el pozo luego de producir y medir la presión",
+      "Inyectar sin medir",
+      "Cambiar el choke cada hora"
+     ],
+     "a": 1,
+     "e": "Se cierra el pozo luego de un período de producción y se registra la recuperación de la presión."
+    },
+    {
+     "q": "Antes de la prueba, la simulación sirve para:",
+     "o": [
+      "Elegir el color del informe",
+      "Estimar cuánto tiempo hace falta para ver el régimen buscado",
+      "Reemplazar al sensor",
+      "Evitar el cierre"
+     ],
+     "a": 1,
+     "e": "Permite estimar cuándo se alcanzan el flujo radial o los límites."
+    }
+   ]
+  },
+  {
+   "id": "tm2",
+   "title": "Módulo 2 · Análisis clásico y modelos",
+   "lessons": [
+    {
+     "id": "t3",
+     "title": "Horner, daño y almacenamiento",
+     "comp": "Análisis clásico: Horner, daño y almacenamiento",
+     "cues": [
+      {
+       "say": "Antes de las curvas tipo se usaba el gráfico de Horner, de 1951. Se grafica la presión de cierre contra el logaritmo de tiempo de producción más tiempo de cierre, sobre tiempo de cierre. En flujo radial es una recta.",
+       "scene": {
+        "t": "fm",
+        "k": "Método de Horner",
+        "h": "Pendiente, permeabilidad y daño",
+        "f": "pws = p* − m · log[(tp + Δt) / Δt]\nm = 162,6 · q · B · μ / (k · h)\nS = 1,151 · [ (p1h − pwf)/m − log( k / (φ · μ · ct · rw²) ) + 3,23 ]",
+        "n": "La recta se extrapola a Δt infinito para obtener p*. Solo se usa el tramo de flujo radial."
+       }
+      },
+      {
+       "say": "Un ejemplo con datos sintéticos. Con un caudal de 500, B de 1,2, viscosidad de 1 y 50 pies de espesor, una pendiente de 97,6 psi por ciclo da una permeabilidad de 20 milidarcies.",
+       "scene": {
+        "t": "fm",
+        "k": "Ejemplo numérico",
+        "h": "Datos de ejemplo",
+        "f": "k = 162,6 · 500 · 1,2 · 1 / ( 97,6 · 50 )\nk ≈ 20 md",
+        "n": "Es el mismo pozo del laboratorio y del Excel del curso."
+       }
+      },
+      {
+       "say": "El factor de daño S resume cuánta caída de presión adicional hay cerca del pozo. Positivo indica daño o restricción. Negativo indica estimulación, por ejemplo una fractura.",
+       "scene": {
+        "t": "bul",
+        "k": "Daño",
+        "h": "Qué hay detrás del factor S",
+        "items": [
+         "Daño de formación: invasión de lodo, finos, incrustaciones",
+         "Penetración parcial o cañoneo insuficiente",
+         "Desviación del pozo y flujo convergente",
+         "S negativo: acidificación o fractura hidráulica",
+         "Caída adicional de presión: 0,87 · m · S"
+        ]
+       },
+       "hl": 4
+      },
+      {
+       "say": "La eficiencia de flujo compara el caudal real con el que tendría un pozo sin daño. Una eficiencia menor que uno sugiere que remover el daño agrega producción, y se evalúa contra el costo de intervenir.",
+       "scene": {
+        "t": "bul",
+        "k": "Uso del resultado",
+        "h": "Del dato a la decisión",
+        "items": [
+         "Eficiencia de flujo: (p* − pwf − Δps) / (p* − pwf)",
+         "Daño alto: evaluar acidificación o limpieza",
+         "Daño bajo y k baja: la producción la limita el reservorio",
+         "La decisión depende del costo de la intervención"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Un factor de daño positivo indica:",
+        "o": [
+         "Caída de presión adicional cerca del pozo",
+         "Un pozo fracturado",
+         "Mayor permeabilidad",
+         "Un reservorio infinito"
+        ],
+        "a": 0,
+        "e": "S positivo es una restricción al flujo cerca del pozo, que agrega caída de presión."
+       }
+      }
+     ]
+    },
+    {
+     "id": "t4",
+     "title": "Heterogeneidades, límites y no unicidad",
+     "comp": "Interpretación con derivada de presión",
+     "cues": [
+      {
+       "say": "Un modelo de interpretación tiene tres capas. El pozo, que puede ser vertical, fracturado u horizontal. El reservorio, homogéneo, de doble porosidad o compuesto. Y los límites, infinitos, con una falla o cerrados.",
+       "scene": {
+        "t": "tbl",
+        "k": "Capas del modelo",
+        "h": "Se combinan para explicar la derivada",
+        "cols": [
+         "Capa",
+         "Opciones",
+         "Parámetros"
+        ],
+        "rows": [
+         [
+          "Pozo",
+          "Vertical, fracturado, horizontal, penetración parcial",
+          "S, longitud de fractura, longitud lateral"
+         ],
+         [
+          "Reservorio",
+          "Homogéneo, doble porosidad, compuesto",
+          "k, ω, λ, razón de movilidad"
+         ],
+         [
+          "Límites",
+          "Infinito, falla sellante, canal, cerrado",
+          "Distancia a la falla, área"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Un reservorio naturalmente fracturado se modela como dos medios, la matriz y las fracturas. Es el modelo de Warren y Root, de 1963. Deja un valle en la derivada, cuya profundidad y posición dependen de dos parámetros.",
+       "scene": {
+        "t": "bul",
+        "k": "Doble porosidad",
+        "h": "Warren y Root (1963)",
+        "items": [
+         "ω: fracción de capacidad de almacenamiento en las fracturas",
+         "λ: coeficiente de transferencia matriz-fractura",
+         "Se ve como un valle en la derivada antes de la meseta final",
+         "Es frecuente en carbonatos y rocas fracturadas"
+        ]
+       },
+       "hl": 2
+      },
+      {
+       "say": "El flujo de trabajo de la interpretación es iterativo. Se controla la calidad, se identifican los regímenes con la derivada, se propone un modelo, se ajusta por regresión y se valida con información independiente.",
+       "scene": {
+        "t": "viz",
+        "w": "concept",
+        "h": "Flujo de trabajo de interpretación",
+        "p": {
+         "nodes": [
+          {
+           "l": "Datos de presión|y caudal",
+           "x": 10,
+           "y": 30,
+           "c": "#8ea2bd",
+           "n": "Presión, temperatura y el historial completo de caudales, sincronizados."
+          },
+          {
+           "l": "Control de|calidad",
+           "x": 32,
+           "y": 30,
+           "c": "#3A6BD0",
+           "n": "Elimina saltos, deriva y errores de unidades antes de interpretar."
+          },
+          {
+           "l": "Regímenes|con la derivada",
+           "x": 54,
+           "y": 30,
+           "c": "#3A6BD0",
+           "n": "Identifica almacenamiento, radial, límites y heterogeneidades."
+          },
+          {
+           "l": "Modelo|candidato",
+           "x": 76,
+           "y": 30,
+           "c": "#17755A",
+           "n": "Elige pozo, reservorio y límites coherentes con la geología."
+          },
+          {
+           "l": "Ajuste|por regresión",
+           "x": 32,
+           "y": 72,
+           "c": "#17755A",
+           "n": "Ajusta parámetros del modelo a presión y derivada a la vez."
+          },
+          {
+           "l": "Validación",
+           "x": 76,
+           "y": 72,
+           "c": "#b7791f",
+           "n": "Compara con sísmica, perfiles y otras pruebas. Sin esto el modelo es solo una hipótesis."
+          }
+         ],
+         "edges": [
+          [
+           0,
+           1
+          ],
+          [
+           1,
+           2
+          ],
+          [
+           2,
+           3
+          ],
+          [
+           3,
+           4
+          ],
+          [
+           4,
+           5
+          ]
+         ],
+         "hint": "Tocá cada bloque para ver el detalle."
+        }
+       },
+       "hl": 5
+      },
+      {
+       "say": "Un punto central es la no unicidad. Distintos modelos pueden ajustar los mismos datos. La interpretación es creíble solo cuando el modelo es coherente con la geología y con otras mediciones.",
+       "scene": {
+        "t": "bul",
+        "k": "No unicidad",
+        "h": "Cómo cuidarse",
+        "items": [
+         "Probar más de un modelo y comparar el ajuste",
+         "Pedir coherencia con sísmica, perfiles y testigos",
+         "Reportar rangos y no solo un valor",
+         "Registrar los supuestos junto con el resultado"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "La no unicidad de la interpretación significa que:",
+        "o": [
+         "Distintos modelos pueden ajustar los mismos datos y hay que validar con información independiente",
+         "Un único modelo es siempre el correcto",
+         "La derivada no sirve",
+         "El ajuste es siempre único"
+        ],
+        "a": 0,
+        "e": "Por eso se valida con geología y otras mediciones, y se informan rangos."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "El método de Horner usa:",
+     "o": [
+      "El tramo de flujo radial",
+      "El tramo de almacenamiento",
+      "Cualquier tramo",
+      "Solo el primer dato"
+     ],
+     "a": 0,
+     "e": "La recta de Horner solo es válida en flujo radial."
+    },
+    {
+     "q": "Con una pendiente de Horner mayor, para el mismo caudal, la permeabilidad es:",
+     "o": [
+      "Mayor",
+      "Menor",
+      "Igual",
+      "Indeterminada"
+     ],
+     "a": 1,
+     "e": "k es inversamente proporcional a la pendiente m."
+    },
+    {
+     "q": "Un valle en la derivada antes de la meseta sugiere:",
+     "o": [
+      "Almacenamiento",
+      "Doble porosidad",
+      "Falla sellante",
+      "Pozo horizontal"
+     ],
+     "a": 1,
+     "e": "Es la firma del reservorio naturalmente fracturado."
+    }
+   ]
+  },
+  {
+   "id": "tm3",
+   "title": "Módulo 3 · Casos especiales y calidad",
+   "lessons": [
+    {
+     "id": "t5",
+     "title": "Pruebas en no convencionales y en pozos de gas",
+     "comp": "Pruebas en no convencionales y gas",
+     "cues": [
+      {
+       "say": "En roca de permeabilidad ultra baja el flujo radial puede tardar meses o años en aparecer. Domina el flujo lineal hacia la fractura. Por eso se complementa con el análisis de datos de producción, o RTA.",
+       "scene": {
+        "t": "bul",
+        "k": "No convencionales",
+        "h": "Por qué cambia la prueba",
+        "items": [
+         "Flujo lineal durante mucho tiempo: pendiente 1/2 en la derivada",
+         "Cierres largos son caros por la producción diferida",
+         "Se usa la producción misma, el análisis RTA, para estimar k·Ac",
+         "Se aprovechan las pruebas cortas de fractura, como el DFIT"
+        ]
+       },
+       "hl": 1
+      },
+      {
+       "say": "El DFIT, o prueba de inyección diagnóstica de fractura, es una minifractura seguida de cierre. Se analiza con la función G de Nolte, de 1979, para estimar la presión de cierre de la fractura y la presión de reservorio.",
+       "scene": {
+        "t": "tbl",
+        "k": "Pruebas útiles",
+        "h": "Duración y dato clave típicos",
+        "cols": [
+         "Prueba",
+         "Duración típica",
+         "Dato clave"
+        ],
+        "rows": [
+         [
+          "Build-up convencional",
+          "Horas a días",
+          "k, S, presión extrapolada"
+         ],
+         [
+          "DFIT",
+          "Horas a días",
+          "Presión de cierre, presión de poro, permeabilidad aparente"
+         ],
+         [
+          "RTA con producción",
+          "Meses a años",
+          "Producto de k por área de fractura"
+         ],
+         [
+          "Interferencia",
+          "Semanas",
+          "Conectividad entre pozos"
+         ]
+        ],
+        "n": "Las duraciones son típicas y dependen de la formación y del diseño."
+       }
+      },
+      {
+       "say": "En pozos de gas hay dos ajustes. La compresibilidad y la viscosidad dependen de la presión, y se usa una pseudo-presión del gas real. Y a caudales altos aparece un daño aparente que crece con el caudal, por el flujo no Darcy.",
+       "scene": {
+        "t": "bul",
+        "k": "Gas",
+        "h": "Dos ajustes necesarios",
+        "items": [
+         "Pseudo-presión del gas real, de Al-Hussainy, Ramey y Crawford, 1966",
+         "Daño aparente S′ = S + D·q: se separa con pruebas a varios caudales",
+         "El Excel del curso trabaja con petróleo y propiedades constantes"
+        ]
+       },
+       "hl": 1
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "El DFIT sirve principalmente para estimar:",
+        "o": [
+         "La presión de cierre de la fractura y la presión de reservorio",
+         "La saturación de agua",
+         "La porosidad",
+         "El peso del lodo"
+        ],
+        "a": 0,
+        "e": "Es una minifractura que se analiza durante el cierre, y de ella salen la presión de cierre y la presión de poro."
+       }
+      }
+     ]
+    },
+    {
+     "id": "t6",
+     "title": "Control de calidad y buenas prácticas",
+     "comp": "Diseño y ejecución de pruebas",
+     "cues": [
+      {
+       "say": "La interpretación es tan buena como los datos. Hay que revisar deriva y resolución del sensor, sincronizar tiempos, y confirmar que el historial de caudales tiene todos los cambios, porque la superposición los necesita.",
+       "scene": {
+        "t": "bul",
+        "k": "Calidad de datos",
+        "h": "Revisiones mínimas",
+        "items": [
+         "Calibración y deriva del sensor de fondo",
+         "Resolución suficiente para la derivada: el ruido la arruina",
+         "Tiempos sincronizados entre presión y caudal",
+         "Historial de caudales completo, con cambios de choke",
+         "Efectos de fase en el pozo, como la segregación de fluidos"
+        ]
+       },
+       "hl": 1
+      },
+      {
+       "say": "Hay errores que se repiten. Usar un tramo con almacenamiento para la recta de Horner, suponer un reservorio infinito cuando hay un límite, o cerrar el pozo poco tiempo y no alcanzar el régimen buscado.",
+       "scene": {
+        "t": "bul",
+        "k": "Errores comunes",
+        "h": "Qué evitar",
+        "items": [
+         "Ajustar la recta en el tramo equivocado",
+         "Ignorar el historial previo de caudales",
+         "Cierre demasiado corto para el objetivo",
+         "Suponer un reservorio infinito",
+         "Reportar un solo valor sin rango"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Laboratorio. Es un pozo dañado, de baja permeabilidad y con mucho almacenamiento. Probá si en las mil horas de la prueba se llega a ver el flujo radial, y qué cambia si se hace un cierre de fondo para reducir el almacenamiento.",
+       "scene": {
+        "t": "viz",
+        "w": "pta",
+        "h": "Pozo dañado con gran almacenamiento",
+        "p": {
+         "k": 5,
+         "s": 8,
+         "c": 0.12
+        }
+       },
+       "lab": true
+      },
+      {
+       "say": "El informe final debe dejar todo trazable. Objetivo, datos y su calidad, modelo y supuestos, parámetros con rangos, y las recomendaciones. Con eso otra persona puede repetir el análisis.",
+       "scene": {
+        "t": "bul",
+        "k": "Informe",
+        "h": "Contenido mínimo",
+        "items": [
+         "Objetivo y decisión que apoya",
+         "Datos, calidad y correcciones aplicadas",
+         "Modelo, supuestos y ajuste",
+         "Parámetros con su incertidumbre",
+         "Recomendaciones y próximos pasos"
+        ]
+       },
+       "hl": 2
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Para poder interpretar bien una restauración de presión, el historial de caudales debe:",
+        "o": [
+         "Estar completo y sincronizado con la presión",
+         "Omitirse",
+         "Ser aproximado",
+         "Descartarse"
+        ],
+        "a": 0,
+        "e": "La superposición necesita todos los cambios de caudal que ocurrieron antes del cierre."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "Un sensor con deriva afecta sobre todo a:",
+     "o": [
+      "La lectura de presión a lo largo del tiempo",
+      "El color del informe",
+      "El caudal",
+      "El nombre del pozo"
+     ],
+     "a": 0,
+     "e": "La deriva distorsiona las presiones, y con ellas la derivada y la interpretación."
+    },
+    {
+     "q": "Si en el laboratorio no aparece la meseta de la derivada, lo correcto es:",
+     "o": [
+      "Leer k igual",
+      "Concluir que no se alcanzó el flujo radial y que hace falta más tiempo o menos almacenamiento",
+      "Eliminar el dato",
+      "Usar el último punto"
+     ],
+     "a": 1,
+     "e": "Sin meseta no se puede leer la capacidad de flujo de ese régimen."
+    },
+    {
+     "q": "El análisis RTA usa:",
+     "o": [
+      "Datos de producción",
+      "Solo registros eléctricos",
+      "Solo sísmica",
+      "Solo análisis de fluidos"
+     ],
+     "a": 0,
+     "e": "Aprovecha los caudales y presiones de producción para estimar parámetros del reservorio."
+    }
+   ]
+  }
+ ],
+ "exam": [
+  {
+   "q": "La permeabilidad se obtiene de la pendiente de Horner mediante:",
+   "o": [
+    "k = 162,6 · q · B · μ / (m · h)",
+    "k = m · h",
+    "k = q / m",
+    "k = μ · h"
+   ],
+   "a": 0,
+   "e": "Esa es la relación de campo para la pendiente semilogarítmica."
+  },
+  {
+   "q": "La derivada de presión se calcula respecto de:",
+   "o": [
+    "t",
+    "ln t",
+    "p",
+    "q"
+   ],
+   "a": 1,
+   "e": "dΔp/d ln t."
+  },
+  {
+   "q": "El flujo lineal hacia una fractura aparece con una derivada de pendiente:",
+   "o": [
+    "1",
+    "1/2",
+    "0",
+    "−1"
+   ],
+   "a": 1,
+   "e": "La pendiente 1/2 es la firma del flujo lineal."
+  },
+  {
+   "q": "El almacenamiento del pozo se reconoce por:",
+   "o": [
+    "Pendiente unitaria al inicio",
+    "Una meseta",
+    "Un valle",
+    "Pendiente negativa"
+   ],
+   "a": 0,
+   "e": "En el inicio, presión y derivada siguen una recta de pendiente 1."
+  },
+  {
+   "q": "Una falla sellante a cierta distancia produce:",
+   "o": [
+    "Una meseta que se duplica",
+    "Un valle",
+    "Una pendiente 1/2 al inicio",
+    "Ningún cambio"
+   ],
+   "a": 0,
+   "e": "El segundo nivel de la meseta vale el doble del primero."
+  },
+  {
+   "q": "Un buen informe de prueba debe incluir:",
+   "o": [
+    "Parámetros con incertidumbre y supuestos",
+    "Solo un número",
+    "Solo gráficos",
+    "Nada de los datos"
+   ],
+   "a": 0,
+   "e": "Trazabilidad y rangos hacen que el resultado sea utilizable."
+  }
+ ],
+ "outro": {
+  "phrase": "La presión cuenta lo que el pozo no puede mostrar.",
+  "recap": [
+   "La derivada hace visibles los regímenes de flujo: almacenamiento, radial, límites y heterogeneidades.",
+   "Horner da la permeabilidad y el daño del tramo radial, y la validación con otra información evita interpretaciones forzadas.",
+   "Con calidad de datos y trazabilidad, una prueba de pozo se convierte en una decisión."
+  ]
+ },
+ "downloads": [
+  {
+   "file": "xlsx/H3L_Pruebas_de_Pozo_Horner_y_Derivada.xlsx",
+   "title": "Horner, derivada y daño (Excel)",
+   "desc": "Datos sintéticos de un cierre de pozo: tiempo de Horner, recta semilogarítmica con ventana editable, permeabilidad, daño, eficiencia de flujo, presión extrapolada y derivada de Bourdet.",
+   "task": "Cambiá la ventana de la recta de Horner para incluir el almacenamiento y observá cómo se ensucia la permeabilidad. Después ubicá el inicio de la meseta en la derivada."
+  }
+ ],
+ "cases": [
+  {
+   "title": "La derivada de presión (Bourdet et al., 1983)",
+   "text": "Bourdet y colaboradores, de Flopetrol, propusieron en World Oil (mayo de 1983) graficar la derivada del cambio de presión respecto del logaritmo del tiempo, aprovechando los sensores electrónicos de fondo. Con curvas tipo de derivada, el ajuste resultaba único y bien diferenciado, y de una misma gráfica salían presión, tiempo y daño.",
+   "src": "World Oil, mayo de 1983"
+  },
+  {
+   "title": "Horner (1951)",
+   "text": "D. R. Horner presentó en 1951 el gráfico que lleva su nombre para interpretar la restauración de presión, en el Tercer Congreso Mundial del Petróleo. Sigue siendo la primera herramienta de lectura rápida de una prueba de cierre.",
+   "src": "Horner, D. R. (1951). Pressure build-up in wells. Proc. 3rd World Petroleum Congress, Sec. II"
+  }
+ ],
+ "refs": [
+  {
+   "tag": "Paper",
+   "cite": "Horner, D. R. (1951). Pressure build-up in wells. Proc. Third World Petroleum Congress, The Hague, Sec. II, 503–521.",
+   "why": "gráfico semilogarítmico del cierre"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Matthews, C. S., Brons, F. y Hazebroek, P. (1954). A method for determination of average pressure in a bounded reservoir. Trans. AIME 201, 182–191.",
+   "why": "presión media en reservorio cerrado"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Ramey, H. J., Jr. (1970). Short-time well test data interpretation in the presence of skin effect and wellbore storage. JPT, enero de 1970, 97–104 (SPE 2336).",
+   "why": "almacenamiento y daño"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Gringarten, A. C., Bourdet, D. P., Landel, P. A. y Kniazeff, V. J. (1979). A comparison between different skin and wellbore storage type-curves for early-time transient analysis. SPE 8205.",
+   "why": "curvas tipo"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Bourdet, D., Whittle, T. M., Douglas, A. A. y Pirard, V. M. (1983). A new set of type curves simplifies well test analysis. World Oil, mayo de 1983, 95–106.",
+   "why": "derivada de presión"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Bourdet, D., Ayoub, J. A. y Pirard, Y. M. (1989). Use of pressure derivative in well-test interpretation. SPE Formation Evaluation, junio de 1989, 293–302 (SPE 12777).",
+   "why": "uso de la derivada en la interpretación"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Warren, J. E. y Root, P. J. (1963). The behavior of naturally fractured reservoirs. SPE Journal, septiembre de 1963, 245–255 (SPE 426).",
+   "why": "doble porosidad"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Al-Hussainy, R., Ramey, H. J., Jr. y Crawford, P. B. (1966). The flow of real gases through porous media. JPT, mayo de 1966, 624–636 (SPE 1243-A).",
+   "why": "pseudo-presión del gas"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Nolte, K. G. (1979). Determination of fracture parameters from fracturing pressure decline. SPE 8341.",
+   "why": "análisis de cierre de fractura, DFIT"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Lee, J., Rollins, J. B. y Spivey, J. P. (2003). Pressure Transient Testing. SPE Textbook Series, Vol. 9.",
+   "why": "texto de referencia"
+  }
+ ]
+}

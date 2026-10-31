@@ -1,0 +1,933 @@
+{
+ "id": "dat",
+ "title": "Ciencia de datos e IA aplicada al upstream",
+ "subtitle": "Calidad de datos, aprendizaje automático, modelos híbridos, MLOps y gobernanza, con el caso Volve.",
+ "desc": "Curso aplicado de datos para ingeniería de petróleo y gas: tipos y formatos de datos, calidad y limpieza de series de producción, aprendizaje automático y sobreajuste, modelos que combinan física y datos, MLOps y monitoreo, y gobernanza y uso responsable de la IA.",
+ "objectives": [
+  "Reconocer los tipos y formatos de datos del upstream y evaluar su calidad.",
+  "Detectar valores atípicos en series de producción sin eliminar eventos reales.",
+  "Distinguir sobreajuste de buen ajuste y validar un modelo con datos no vistos.",
+  "Describir el ciclo de MLOps y los criterios de gobernanza para llevar un modelo a producción."
+ ],
+ "labs": [
+  "detección de valores atípicos con tres métodos",
+  "sobreajuste y regularización",
+  "flujo de un modelo híbrido",
+  "ciclo de MLOps"
+ ],
+ "practiceMin": 90,
+ "competencies": [
+  {
+   "name": "Datos del upstream y su calidad",
+   "lessons": [
+    "d1",
+    "d2"
+   ]
+  },
+  {
+   "name": "Aprendizaje automático y validación",
+   "lessons": [
+    "d3"
+   ]
+  },
+  {
+   "name": "Modelos híbridos y MLOps",
+   "lessons": [
+    "d4",
+    "d5"
+   ]
+  },
+  {
+   "name": "Gobernanza y uso responsable",
+   "lessons": [
+    "d6"
+   ]
+  }
+ ],
+ "intro": {
+  "hook": "Vamos a aprender a trabajar con los datos de un campo petrolero: limpiarlos, modelarlos y llevar un modelo a producción sin perder el criterio de ingeniería.",
+  "questions": [
+   "¿Cuánto de un proyecto de datos es limpiar y entender los datos?",
+   "¿Cómo sabemos que un modelo funciona con datos que nunca vio?",
+   "¿Qué hay que cuidar para que un modelo siga funcionando en producción?"
+  ],
+  "star": {
+   "caso": "Volve: datos abiertos de un campo real (Equinor, 2018)",
+   "S": "La industria tenía pocos conjuntos de datos reales y completos de un campo para investigar y para enseñar.",
+   "T": "Facilitar la investigación y el aprendizaje con datos reales de subsuelo y de producción.",
+   "A": "En junio de 2018 Equinor, con los socios de la licencia del campo, compartió los datos del campo Volve, ya fuera de servicio, con datos de producción, pozos, sísmica, registros y modelos.",
+   "R": "Son alrededor de 40.000 archivos, disponibles bajo la licencia de datos abiertos de Equinor, que se usan en investigación y en formación."
+  }
+ },
+ "modules": [
+  {
+   "id": "dm1",
+   "title": "Módulo 1 · Los datos y su calidad",
+   "lessons": [
+    {
+     "id": "d1",
+     "title": "Datos del upstream, formatos y calidad",
+     "comp": "Datos del upstream y su calidad",
+     "cues": [
+      {
+       "say": "El upstream produce datos muy distintos. Series de tiempo de producción y de sensores. Registros de pozo. Sísmica. Reportes en PDF. Modelos de reservorio. Y eventos de perforación en tiempo real.",
+       "scene": {
+        "t": "bul",
+        "k": "Fuentes",
+        "h": "Tipos de datos",
+        "items": [
+         "Series de tiempo: producción, presión, SCADA",
+         "Registros de pozo y perfiles",
+         "Sísmica en grandes volúmenes",
+         "Reportes, informes y planos en PDF o imagen",
+         "Modelos estáticos y dinámicos de reservorio",
+         "Datos de perforación en tiempo real"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Para cada tipo hay formatos y estándares conocidos. Registros en LAS y DLIS. Sísmica en SEG-Y. Datos de perforación en WITSML y de producción en PRODML, ambos de Energistics. Conocerlos evita reconstruir lo que ya está resuelto.",
+       "scene": {
+        "t": "tbl",
+        "k": "Formatos",
+        "h": "Estándares frecuentes",
+        "cols": [
+         "Dato",
+         "Formato o estándar",
+         "Observación"
+        ],
+        "rows": [
+         [
+          "Registros de pozo",
+          "LAS, DLIS",
+          "LAS es texto; DLIS, binario y con más información"
+         ],
+         [
+          "Sísmica",
+          "SEG-Y",
+          "Volúmenes grandes: se procesa por trazas o por bloques"
+         ],
+         [
+          "Perforación en tiempo real",
+          "WITSML",
+          "Estándar de Energistics"
+         ],
+         [
+          "Producción",
+          "PRODML",
+          "Estándar de Energistics"
+         ],
+         [
+          "Modelos de subsuelo",
+          "RESQML",
+          "Intercambio de modelos entre programas"
+         ]
+        ],
+        "n": "Muchos conjuntos reales llegan además como PDF, imágenes escaneadas o planillas sin estructura."
+       }
+      },
+      {
+       "say": "La calidad se evalúa en varias dimensiones. Completitud, exactitud, consistencia, oportunidad y unicidad. Un dato puede estar completo y ser inexacto, o exacto y llegar tarde.",
+       "scene": {
+        "t": "bul",
+        "k": "Calidad",
+        "h": "Dimensiones",
+        "items": [
+         "Completitud: no faltan datos clave",
+         "Exactitud: refleja la realidad medida",
+         "Consistencia: las unidades y los nombres coinciden",
+         "Oportunidad: llega cuando se necesita",
+         "Unicidad: sin duplicados"
+        ]
+       },
+       "hl": 2
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Un dato que está completo pero con unidades mezcladas tiene problema de:",
+        "o": [
+         "Consistencia",
+         "Completitud",
+         "Oportunidad",
+         "Unicidad"
+        ],
+        "a": 0,
+        "e": "Las unidades distintas rompen la consistencia entre registros."
+       }
+      }
+     ]
+    },
+    {
+     "id": "d2",
+     "title": "Limpieza y control de calidad de series de producción",
+     "comp": "Datos del upstream y su calidad",
+     "cues": [
+      {
+       "say": "Una serie de producción diaria tiene huecos, ceros por cierres y picos de error. Antes de modelar hay que distinguir lo que es un error de lo que es un evento real. Un cierre programado no se borra: se marca.",
+       "scene": {
+        "t": "bul",
+        "k": "Reglas",
+        "h": "Limpieza sin perder información",
+        "items": [
+         "Verificar unidades y fechas antes que nada",
+         "Marcar los cierres y eventos reales con su causa",
+         "Separar errores de medición de comportamientos reales",
+         "Documentar toda corrección aplicada",
+         "Conservar el dato original junto al corregido"
+        ]
+       },
+       "hl": 1
+      },
+      {
+       "say": "Hay varios métodos para detectar valores atípicos. El z-score usa la media y el desvío, pero los propios errores los distorsionan. Con la mediana y el desvío absoluto mediano, o MAD, se resisten mejor. Y una mediana móvil descuenta la tendencia.",
+       "scene": {
+        "t": "tbl",
+        "k": "Métodos",
+        "h": "Cuándo sirve cada uno",
+        "cols": [
+         "Método",
+         "Idea",
+         "Debilidad"
+        ],
+        "rows": [
+         [
+          "Z-score",
+          "Distancia a la media en desvíos",
+          "Los errores inflan el desvío y se enmascaran"
+         ],
+         [
+          "Mediana y MAD",
+          "Distancia a la mediana en desvíos robustos",
+          "La tendencia aparece como falsa alarma"
+         ],
+         [
+          "Mediana móvil + MAD",
+          "Residuo respecto de una mediana local",
+          "Parámetro: tamaño de la ventana"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Laboratorio. Es una serie sintética de noventa días con siete datos erróneos. Probá los tres métodos y cambiá el umbral. Mirá cuántos errores detecta cada uno y cuántas falsas alarmas genera.",
+       "scene": {
+        "t": "viz",
+        "w": "qcout",
+        "h": "Detección de atípicos",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "Una conclusión práctica. El mejor método depende del dato. Para series con tendencia, la mediana móvil es una opción sólida. Y siempre hay que revisar los casos marcados con criterio de ingeniería, porque un pico puede ser real.",
+       "scene": {
+        "t": "bul",
+        "k": "En la práctica",
+        "h": "Detección con criterio",
+        "items": [
+         "Usar métodos robustos a los propios errores",
+         "Descontar la tendencia antes de buscar atípicos",
+         "Revisar cada caso marcado: un pico puede ser real",
+         "Medir falsas alarmas y errores no detectados"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "El z-score clásico puede fallar en presencia de errores grandes porque:",
+        "o": [
+         "Los errores inflan la media y el desvío, y se enmascaran",
+         "Es muy lento",
+         "Solo sirve con agua",
+         "Elimina la tendencia"
+        ],
+        "a": 0,
+        "e": "Los propios valores erróneos agrandan el desvío y hacen que parezcan normales."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "Un cierre programado de un pozo debe:",
+     "o": [
+      "Marcarse con su causa y no borrarse",
+      "Borrarse",
+      "Reemplazarse por la media",
+      "Ignorarse"
+     ],
+     "a": 0,
+     "e": "Es un evento real, que conviene conservar con su causa."
+    },
+    {
+     "q": "DLIS es un formato de:",
+     "o": [
+      "Registros de pozo",
+      "Sísmica",
+      "Contratos",
+      "Facturas"
+     ],
+     "a": 0,
+     "e": "Es un formato binario usado en registros de pozo."
+    },
+    {
+     "q": "Una mediana móvil es útil porque:",
+     "o": [
+      "Descuenta la tendencia local",
+      "Elimina todo ruido",
+      "Sustituye al sensor",
+      "Reemplaza al experto"
+     ],
+     "a": 0,
+     "e": "Permite buscar atípicos respecto de un nivel local en lugar de uno global."
+    }
+   ]
+  },
+  {
+   "id": "dm2",
+   "title": "Módulo 2 · Modelos y su validación",
+   "lessons": [
+    {
+     "id": "d3",
+     "title": "Aprendizaje automático: del problema al modelo",
+     "comp": "Aprendizaje automático y validación",
+     "cues": [
+      {
+       "say": "El aprendizaje automático aprende relaciones a partir de datos. Según el problema, se plantea como clasificación, regresión, series de tiempo, detección de anomalías o agrupamiento.",
+       "scene": {
+        "t": "tbl",
+        "k": "Tareas",
+        "h": "Ejemplos en el upstream",
+        "cols": [
+         "Tarea",
+         "Ejemplo",
+         "Método frecuente"
+        ],
+        "rows": [
+         [
+          "Clasificación",
+          "Litofacies a partir de registros",
+          "Bosques aleatorios, gradient boosting"
+         ],
+         [
+          "Regresión",
+          "EUR a partir de parámetros de completación",
+          "Boosting, redes, modelos lineales regularizados"
+         ],
+         [
+          "Series de tiempo",
+          "Pronóstico de caudal",
+          "Modelos de series, redes recurrentes"
+         ],
+         [
+          "Anomalías",
+          "Fallas de una bomba ESP",
+          "Aislamiento, residuos de un modelo"
+         ],
+         [
+          "Agrupamiento",
+          "Electrofacies",
+          "K-medias, jerárquico"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "La pregunta central es si el modelo funciona con datos que no vio. El error de entrenamiento siempre baja al aumentar la complejidad. Lo que importa es el error en datos de prueba, que cae y luego sube cuando el modelo empieza a memorizar el ruido.",
+       "scene": {
+        "t": "fm",
+        "k": "Error de generalización",
+        "h": "Sesgo, varianza y ruido",
+        "f": "Error esperado = sesgo² + varianza + ruido\n\nModelo simple: alto sesgo, baja varianza (subajuste)\nModelo complejo: bajo sesgo, alta varianza (sobreajuste)",
+        "n": "La regularización reduce la varianza a cambio de un poco de sesgo."
+       }
+      },
+      {
+       "say": "Laboratorio. Son catorce puntos de entrenamiento y cuarenta de prueba. Subí el grado del polinomio y mirá cómo el error de entrenamiento baja mientras el de prueba sube. Después agregá regularización.",
+       "scene": {
+        "t": "viz",
+        "w": "mlfit",
+        "h": "Sobreajuste y regularización",
+        "p": {
+         "dg": 3
+        }
+       },
+       "lab": true
+      },
+      {
+       "say": "En datos de pozos hay una trampa frecuente, la fuga de información. Si se mezclan datos de un mismo pozo entre entrenamiento y prueba, el modelo parece mejor de lo que es. Hay que validar por pozo, o por campo, y siempre comparar con un modelo simple de referencia.",
+       "scene": {
+        "t": "bul",
+        "k": "Validación",
+        "h": "Evitar conclusiones engañosas",
+        "items": [
+         "Separar por pozo o por campo, no por filas",
+         "Comparar con una línea de base simple",
+         "Usar validación cruzada con grupos",
+         "Evaluar con el criterio de uso real: a futuro, no al azar",
+         "Informar incertidumbre y no solo un número"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Si el error de entrenamiento es muy bajo y el de prueba alto, el modelo sufre:",
+        "o": [
+         "Sobreajuste",
+         "Subajuste",
+         "Buen ajuste",
+         "Falta de datos de entrada"
+        ],
+        "a": 0,
+        "e": "Memoriza el entrenamiento y generaliza mal."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "La fuga de información ocurre cuando:",
+     "o": [
+      "Datos de la prueba influyen en el entrenamiento",
+      "Hay un error de tipeo",
+      "Se pierde un archivo",
+      "Se borra un modelo"
+     ],
+     "a": 0,
+     "e": "Por ejemplo, filas del mismo pozo en entrenamiento y prueba."
+    },
+    {
+     "q": "Una forma de reducir el sobreajuste es:",
+     "o": [
+      "Regularizar o simplificar el modelo",
+      "Agregar más parámetros",
+      "Evaluar solo con el entrenamiento",
+      "Quitar la prueba"
+     ],
+     "a": 0,
+     "e": "La regularización controla la complejidad."
+    },
+    {
+     "q": "El modelo de referencia (baseline) sirve para:",
+     "o": [
+      "Saber si el modelo complejo realmente mejora",
+      "Dar nombre al proyecto",
+      "Reemplazar los datos",
+      "Evitar la validación"
+     ],
+     "a": 0,
+     "e": "Permite medir el aporte real de un modelo más complejo."
+    }
+   ]
+  },
+  {
+   "id": "dm3",
+   "title": "Módulo 3 · Producción, gobernanza y casos",
+   "lessons": [
+    {
+     "id": "d4",
+     "title": "Física y datos: modelos híbridos",
+     "comp": "Modelos híbridos y MLOps",
+     "cues": [
+      {
+       "say": "Los modelos puramente estadísticos pueden violar la física. Por eso se combinan con modelos de ingeniería. Una declinación con restricciones, un modelo proxy de simulación, o redes neuronales informadas por física, como las de Raissi y colaboradores, de 2019.",
+       "scene": {
+        "t": "viz",
+        "w": "concept",
+        "h": "Modelo híbrido",
+        "p": {
+         "nodes": [
+          {
+           "l": "Datos|medidos",
+           "x": 10,
+           "y": 30,
+           "c": "#8ea2bd",
+           "n": "Producción, presiones y parámetros de completación de los pozos."
+          },
+          {
+           "l": "Física|ecuaciones y reglas",
+           "x": 10,
+           "y": 72,
+           "c": "#3A6BD0",
+           "n": "Balance de materiales, declinación, leyes de conservación."
+          },
+          {
+           "l": "Modelo|con restricciones",
+           "x": 46,
+           "y": 50,
+           "c": "#17755A",
+           "n": "Aprende de los datos, pero se limita a soluciones físicamente posibles."
+          },
+          {
+           "l": "Validación|con el experto",
+           "x": 74,
+           "y": 30,
+           "c": "#b7791f",
+           "n": "El criterio de ingeniería revisa si los resultados tienen sentido."
+          },
+          {
+           "l": "Uso|en decisiones",
+           "x": 88,
+           "y": 72,
+           "c": "#8ea2bd",
+           "n": "Pronósticos con incertidumbre, escenarios y alertas."
+          }
+         ],
+         "edges": [
+          [
+           0,
+           2
+          ],
+          [
+           1,
+           2
+          ],
+          [
+           2,
+           3
+          ],
+          [
+           3,
+           4
+          ]
+         ],
+         "hint": "Tocá cada bloque para ver el detalle."
+        }
+       },
+       "hl": 2
+      },
+      {
+       "say": "Para entender qué hace un modelo se usan técnicas de interpretabilidad. Por ejemplo, los valores de Shapley, que reparten la contribución de cada variable a una predicción. Sirven para detectar si el modelo aprendió algo razonable o un artefacto de los datos.",
+       "scene": {
+        "t": "bul",
+        "k": "Interpretabilidad",
+        "h": "Más allá de la caja negra",
+        "items": [
+         "Importancia de variables y valores de Shapley",
+         "Gráficos de dependencia parcial",
+         "Revisión de casos mal predichos",
+         "Coherencia con la física y con la experiencia de campo"
+        ]
+       },
+       "hl": 1
+      },
+      {
+       "say": "Y siempre se comunica la incertidumbre. Un pronóstico sin rango no sirve para decidir. Se usan intervalos, escenarios o modelos probabilísticos, y se explica qué tan lejos de los datos de entrenamiento se está extrapolando.",
+       "scene": {
+        "t": "bul",
+        "k": "Incertidumbre",
+        "h": "Qué incluir en un resultado",
+        "items": [
+         "Rango o intervalo de la predicción",
+         "Escenarios alternativos",
+         "Aviso cuando se extrapola fuera del rango de datos",
+         "Supuestos y limitaciones del modelo"
+        ]
+       },
+       "hl": 2
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Un modelo híbrido combina:",
+        "o": [
+         "Datos y restricciones físicas",
+         "Solo datos",
+         "Solo física sin datos",
+         "Dos bases de datos"
+        ],
+        "a": 0,
+        "e": "Busca aprender de los datos sin violar la física."
+       }
+      }
+     ]
+    },
+    {
+     "id": "d5",
+     "title": "MLOps: llevar el modelo a producción",
+     "comp": "Modelos híbridos y MLOps",
+     "cues": [
+      {
+       "say": "Un modelo útil en un cuaderno no es un modelo en producción. MLOps es el conjunto de prácticas para entrenar, validar, desplegar y monitorear modelos de manera repetible. Parte de la idea de que el código es una parte chica del sistema.",
+       "scene": {
+        "t": "viz",
+        "w": "concept",
+        "h": "Ciclo de MLOps",
+        "p": {
+         "nodes": [
+          {
+           "l": "Datos|y variables",
+           "x": 8,
+           "y": 30,
+           "c": "#8ea2bd",
+           "n": "Datos versionados, con control de calidad y definición clara de variables."
+          },
+          {
+           "l": "Entrenar|y validar",
+           "x": 30,
+           "y": 30,
+           "c": "#3A6BD0",
+           "n": "Entrenamiento reproducible, con validación por pozo o campo."
+          },
+          {
+           "l": "Registrar|el modelo",
+           "x": 52,
+           "y": 30,
+           "c": "#17755A",
+           "n": "Versión del modelo, datos usados, métricas y responsable."
+          },
+          {
+           "l": "Desplegar",
+           "x": 74,
+           "y": 30,
+           "c": "#17755A",
+           "n": "Entrega en un servicio o en un proceso automático."
+          },
+          {
+           "l": "Monitorear",
+           "x": 86,
+           "y": 72,
+           "c": "#b7791f",
+           "n": "Seguimiento de calidad de datos, deriva y desempeño."
+          },
+          {
+           "l": "Reentrenar|o retirar",
+           "x": 40,
+           "y": 72,
+           "c": "#8ea2bd",
+           "n": "Si el desempeño cae, se corrige, reentrena o retira el modelo."
+          }
+         ],
+         "edges": [
+          [
+           0,
+           1
+          ],
+          [
+           1,
+           2
+          ],
+          [
+           2,
+           3
+          ],
+          [
+           3,
+           4
+          ],
+          [
+           4,
+           5
+          ],
+          [
+           5,
+           1
+          ]
+         ],
+         "hint": "Tocá cada bloque para ver el detalle."
+        }
+       },
+       "hl": 4
+      },
+      {
+       "say": "El mayor riesgo en producción es la deriva. Los datos de entrada cambian, por ejemplo por un nuevo diseño de completación, o cambia la relación entre variables y resultado. El modelo envejece aunque no se toque. Hay que monitorear ambas.",
+       "scene": {
+        "t": "bul",
+        "k": "Deriva",
+        "h": "Por qué los modelos envejecen",
+        "items": [
+         "De datos: cambia la distribución de las variables de entrada",
+         "De concepto: cambia la relación entre entrada y resultado",
+         "Cambios de sensores, de procesos o de diseño la provocan",
+         "Se detecta con monitoreo y alertas de desempeño"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Sculley y colaboradores, en 2015, describieron la deuda técnica de los sistemas de aprendizaje automático: dependencias de datos, configuración y pruebas insuficientes. Versionar datos y modelos, y automatizar las pruebas, reduce esa deuda.",
+       "scene": {
+        "t": "bul",
+        "k": "Buenas prácticas",
+        "h": "Para reducir la deuda técnica",
+        "items": [
+         "Versionar datos, código y modelos",
+         "Reproducir un resultado con un solo comando",
+         "Pruebas automáticas de datos y de modelos",
+         "Registrar quién aprobó qué y cuándo",
+         "Un plan para retirar un modelo"
+        ]
+       },
+       "hl": 3
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Se llama deriva de datos a:",
+        "o": [
+         "El cambio en la distribución de las variables de entrada",
+         "Un error de tipeo",
+         "Un tipo de sensor",
+         "La pérdida de un archivo"
+        ],
+        "a": 0,
+        "e": "Los datos de entrada cambian respecto de los de entrenamiento."
+       }
+      }
+     ]
+    },
+    {
+     "id": "d6",
+     "title": "Gobernanza, uso responsable y el caso Volve",
+     "comp": "Gobernanza y uso responsable",
+     "cues": [
+      {
+       "say": "Los datos tienen dueño, responsable de calidad, permisos y ciclo de vida. La gobernanza define quién puede ver qué, cómo se documenta el origen de cada dato, y cómo se garantiza su seguridad, tanto en la red de oficina como en la de operaciones.",
+       "scene": {
+        "t": "bul",
+        "k": "Gobernanza",
+        "h": "Elementos básicos",
+        "items": [
+         "Propietario y responsable de cada conjunto de datos",
+         "Catálogo y trazabilidad del origen y las transformaciones",
+         "Permisos de acceso mínimos necesarios",
+         "Seguridad de las redes de oficina y de operaciones",
+         "Datos de terceros: respetar contratos y confidencialidad"
+        ]
+       },
+       "hl": 1
+      },
+      {
+       "say": "El uso de la inteligencia artificial en ingeniería necesita reglas. Un resultado debe poder revisarse, con fuentes y supuestos. Los modelos de lenguaje pueden inventar datos, así que se los usa con fuentes recuperadas y revisión humana, y no como autoridad.",
+       "scene": {
+        "t": "bul",
+        "k": "Uso responsable",
+        "h": "Reglas prácticas",
+        "items": [
+         "Revisión humana de decisiones de impacto",
+         "Fuentes citadas y verificables",
+         "Registro del modelo, versión y datos usados",
+         "No cargar información confidencial en servicios no autorizados",
+         "Pruebas de sesgos y de casos límite"
+        ]
+       },
+       "hl": 2
+      },
+      {
+       "say": "El caso Volve muestra el valor de los datos abiertos. En junio de 2018 Equinor compartió los datos del campo Volve, con los socios de la licencia.",
+       "scene": {
+        "t": "case",
+        "h": "Volve: datos reales de un campo",
+        "src": "Equinor, Volve data village; OilIT (2018)",
+        "S": "Pocos conjuntos reales y completos de un campo estaban disponibles para investigar o para enseñar.",
+        "T": "Facilitar la investigación y la formación con datos de subsuelo y de producción.",
+        "A": "En junio de 2018 Equinor, con los socios de la licencia, compartió los datos del campo Volve, ya fuera de servicio: producción, pozos y completaciones, sísmica, registros, geología y modelos estáticos y dinámicos. Los datos están disponibles bajo la licencia de datos abiertos de Equinor.",
+        "R": "Un conjunto de unos 40.000 archivos, en formatos heterogéneos como Eclipse, OpenWorks, RMS, PDF y datos de perforación en WITSML, usado en investigación y formación. Conviene leer los términos de la licencia antes de usar los datos."
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Un modelo de lenguaje que se usa para ingeniería debe:",
+        "o": [
+         "Citar fuentes y pasar por revisión humana",
+         "Reemplazar al ingeniero",
+         "Usar datos confidenciales sin control",
+         "Dar siempre una sola respuesta"
+        ],
+        "a": 0,
+        "e": "Así se controla el riesgo de respuestas inventadas y se mantiene la responsabilidad."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "La deriva de concepto es:",
+     "o": [
+      "Un cambio en la relación entre entrada y resultado",
+      "Un cambio de nombre",
+      "Un archivo corrupto",
+      "Una variable faltante"
+     ],
+     "a": 0,
+     "e": "El modelo ya no refleja cómo funciona el proceso."
+    },
+    {
+     "q": "El conjunto de datos del campo Volve fue compartido por:",
+     "o": [
+      "Equinor",
+      "Una universidad",
+      "Un proveedor de software",
+      "Un regulador"
+     ],
+     "a": 0,
+     "e": "Equinor, con los socios de la licencia, lo publicó en 2018."
+    },
+    {
+     "q": "Una práctica de buen MLOps es:",
+     "o": [
+      "Versionar datos, código y modelos",
+      "Entrenar sin registro",
+      "Desplegar sin pruebas",
+      "Borrar los datos viejos"
+     ],
+     "a": 0,
+     "e": "Permite reproducir y auditar los resultados."
+    }
+   ]
+  }
+ ],
+ "exam": [
+  {
+   "q": "Para detectar atípicos en una serie con tendencia, conviene:",
+   "o": [
+    "Descontar la tendencia, por ejemplo con una mediana móvil",
+    "Usar la media global",
+    "Ignorar los datos",
+    "Borrar la serie"
+   ],
+   "a": 0,
+   "e": "Se busca respecto de un nivel local."
+  },
+  {
+   "q": "El sobreajuste se reconoce por:",
+   "o": [
+    "Bajo error de entrenamiento y alto error de prueba",
+    "Alto error en ambos",
+    "Bajo error en ambos",
+    "Error cero en la prueba"
+   ],
+   "a": 0,
+   "e": "El modelo memoriza ruido y generaliza mal."
+  },
+  {
+   "q": "La validación por pozo evita:",
+   "o": [
+    "La fuga de información entre entrenamiento y prueba",
+    "El uso de datos",
+    "El costo del entrenamiento",
+    "La visualización"
+   ],
+   "a": 0,
+   "e": "Los datos de un mismo pozo se mantienen juntos."
+  },
+  {
+   "q": "Un modelo híbrido sirve para:",
+   "o": [
+    "Respetar la física y aprender de los datos",
+    "Evitar los datos",
+    "Evitar la física",
+    "Reemplazar al ingeniero"
+   ],
+   "a": 0,
+   "e": "Combina las dos fuentes de conocimiento."
+  },
+  {
+   "q": "La deriva de datos se vigila con:",
+   "o": [
+    "Monitoreo de la distribución de las entradas",
+    "Un cambio de color",
+    "Un nuevo sensor",
+    "Más preguntas"
+   ],
+   "a": 0,
+   "e": "Se comparan los datos de producción con los de entrenamiento."
+  },
+  {
+   "q": "Los modelos de lenguaje en ingeniería deben usarse:",
+   "o": [
+    "Con fuentes verificables y revisión humana",
+    "Sin fuentes",
+    "Como única autoridad",
+    "Con datos confidenciales"
+   ],
+   "a": 0,
+   "e": "Pueden generar información inexacta."
+  }
+ ],
+ "outro": {
+  "phrase": "Los datos no reemplazan al ingeniero: le dan más alcance.",
+  "recap": [
+   "Primero se entienden y se limpian los datos, sin borrar los eventos reales.",
+   "Un modelo vale por lo que hace con datos que no vio, y se mejora con física y con criterio.",
+   "En producción, el monitoreo, la gobernanza y la revisión humana mantienen vivo y confiable al modelo."
+  ]
+ },
+ "downloads": [
+  {
+   "file": "xlsx/H3L_Datos_QC_y_Modelo_Declinacion.xlsx",
+   "title": "Control de calidad y declinación (Excel)",
+   "desc": "Serie sintética con errores insertados, detección con mediana móvil y MAD con umbral editable, precisión y recall contra la verdad conocida, y ajuste exponencial con y sin los datos marcados, con métricas de error en datos de prueba.",
+   "task": "Variá el umbral de 3 a 5 y observá qué pasa con la precisión y con los errores no detectados. Después compará el ajuste de declinación con y sin los datos marcados."
+  }
+ ],
+ "cases": [
+  {
+   "title": "Volve: datos abiertos de un campo real",
+   "text": "En junio de 2018 Equinor, con los socios de la licencia del campo, compartió los datos del campo Volve, ya fuera de servicio: producción, pozos y completaciones, sísmica, registros, geología y modelos. Son alrededor de 40.000 archivos, disponibles bajo la licencia de datos abiertos de Equinor.",
+   "src": "Equinor, Volve data village; OilIT (2018)"
+  }
+ ],
+ "refs": [
+  {
+   "tag": "Libro",
+   "cite": "Hastie, T., Tibshirani, R. y Friedman, J. (2009). The Elements of Statistical Learning, 2.ª ed. Springer.",
+   "why": "fundamentos de aprendizaje estadístico"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Breiman, L. (2001). Random forests. Machine Learning 45, 5–32.",
+   "why": "bosques aleatorios"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Chen, T. y Guestrin, C. (2016). XGBoost: a scalable tree boosting system. Proc. 22nd ACM SIGKDD.",
+   "why": "gradient boosting"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Lundberg, S. M. y Lee, S.-I. (2017). A unified approach to interpreting model predictions. NeurIPS 30.",
+   "why": "valores de Shapley"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Raissi, M., Perdikaris, P. y Karniadakis, G. E. (2019). Physics-informed neural networks: a deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations. Journal of Computational Physics 378, 686–707.",
+   "why": "redes informadas por física"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Sculley, D. et al. (2015). Hidden technical debt in machine learning systems. NeurIPS 28.",
+   "why": "deuda técnica y MLOps"
+  },
+  {
+   "tag": "Libro",
+   "cite": "DAMA International. DAMA-DMBOK: Data Management Body of Knowledge, 2.ª ed. (2017).",
+   "why": "gestión y calidad de datos"
+  },
+  {
+   "tag": "Estándar",
+   "cite": "Energistics. Estándares WITSML, PRODML y RESQML.",
+   "why": "intercambio de datos de perforación, producción y modelos"
+  },
+  {
+   "tag": "Fuente",
+   "cite": "Equinor. Volve field data village (datos abiertos del campo Volve), 2018.",
+   "why": "caso de datos abiertos"
+  },
+  {
+   "tag": "Fuente",
+   "cite": "OilIT (2018). Equinor releases massive data set from decommissioned Volve oilfield.",
+   "why": "descripción de la publicación de Volve"
+  }
+ ]
+}

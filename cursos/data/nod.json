@@ -1,0 +1,871 @@
+{
+ "id": "nod",
+ "title": "Análisis nodal y levantamiento artificial",
+ "subtitle": "Del reservorio a la batería: IPR, curva de tubing, optimización y selección del método de extracción.",
+ "desc": "Curso aplicado de ingeniería de producción: análisis nodal del sistema pozo-reservorio, curvas de afluencia IPR, flujo multifásico y curva de tubing, optimización de tubing y choke, gas lift y selección y vigilancia de métodos de levantamiento artificial.",
+ "objectives": [
+  "Plantear el análisis nodal e identificar el punto de operación de un pozo.",
+  "Construir una curva de afluencia IPR con los modelos de índice de productividad y de Vogel.",
+  "Explicar cómo influyen tubing, agua, presión de boca y gas inyectado en el caudal.",
+  "Seleccionar y vigilar un método de levantamiento artificial."
+ ],
+ "labs": [
+  "punto de operación con IPR y VLP",
+  "efecto de la presión de reservorio y del índice de productividad",
+  "efecto del agua y del diámetro de tubing",
+  "efecto del gas inyectado en gas lift"
+ ],
+ "practiceMin": 90,
+ "competencies": [
+  {
+   "name": "Sistema de producción y análisis nodal",
+   "lessons": [
+    "n1"
+   ]
+  },
+  {
+   "name": "Afluencia del reservorio (IPR)",
+   "lessons": [
+    "n2"
+   ]
+  },
+  {
+   "name": "Flujo en tubería y optimización",
+   "lessons": [
+    "n3",
+    "n4"
+   ]
+  },
+  {
+   "name": "Levantamiento artificial",
+   "lessons": [
+    "n5",
+    "n6"
+   ]
+  }
+ ],
+ "intro": {
+  "hook": "Vamos a aprender a ver un pozo como un sistema: el reservorio entrega, el tubing levanta, y el caudal sale del equilibrio entre ambos.",
+  "questions": [
+   "¿Cuánto produce realmente un pozo y qué lo limita?",
+   "¿Qué cambia si se agranda el tubing, se baja la presión de boca o se inyecta gas?",
+   "¿Cómo se elige el método de levantamiento artificial adecuado?"
+  ],
+  "star": {
+   "caso": "La curva de Vogel (1968)",
+   "S": "Con la presión de fondo por debajo de la de burbuja, el índice de productividad constante sobreestima el caudal de un pozo.",
+   "T": "Disponer de una curva de afluencia simple que se pudiera armar con una sola prueba de producción.",
+   "A": "J. V. Vogel simuló numéricamente reservorios con empuje por gas en solución y encontró una curva adimensional común a distintos casos.",
+   "R": "La relación q/qmáx = 1 − 0,2·(p/pr) − 0,8·(p/pr)² se sigue usando, sabiendo que no considera el daño del pozo."
+  }
+ },
+ "modules": [
+  {
+   "id": "nm1",
+   "title": "Módulo 1 · El pozo como sistema",
+   "lessons": [
+    {
+     "id": "n1",
+     "title": "El sistema de producción y el análisis nodal",
+     "comp": "Sistema de producción y análisis nodal",
+     "cues": [
+      {
+       "say": "Un pozo es un sistema que va del reservorio hasta el separador. El fluido atraviesa la roca, la completación, el tubing, el choke y la línea, y en cada tramo se pierde presión.",
+       "scene": {
+        "t": "viz",
+        "w": "concept",
+        "h": "Sistema de producción",
+        "p": {
+         "nodes": [
+          {
+           "l": "Reservorio|presión media",
+           "x": 8,
+           "y": 50,
+           "c": "#8ea2bd",
+           "n": "Aporta la energía. La presión cae al aproximarse al pozo."
+          },
+          {
+           "l": "Completación|cañoneo, grava",
+           "x": 27,
+           "y": 50,
+           "c": "#3A6BD0",
+           "n": "Pérdida de presión por cañoneo, empaque de grava y daño."
+          },
+          {
+           "l": "Tubing|columna vertical",
+           "x": 46,
+           "y": 50,
+           "c": "#17755A",
+           "n": "Pérdida por la columna de fluido y por fricción. Es la mayor en pozos profundos."
+          },
+          {
+           "l": "Choke|boca de pozo",
+           "x": 65,
+           "y": 50,
+           "c": "#b7791f",
+           "n": "Restringe el caudal. En flujo crítico desacopla el pozo de la línea."
+          },
+          {
+           "l": "Línea y|separador",
+           "x": 86,
+           "y": 50,
+           "c": "#8ea2bd",
+           "n": "Fija la presión de llegada. Condiciona el caudal de todos los pozos conectados."
+          }
+         ],
+         "edges": [
+          [
+           0,
+           1
+          ],
+          [
+           1,
+           2
+          ],
+          [
+           2,
+           3
+          ],
+          [
+           3,
+           4
+          ]
+         ],
+         "hint": "Tocá cada bloque para ver el detalle."
+        }
+       },
+       "hl": 2
+      },
+      {
+       "say": "La idea del análisis nodal es separar el sistema en un nodo. Hacia el nodo, la presión que aporta el reservorio, que es la afluencia. Desde el nodo, la presión que necesita la tubería hasta el separador, que es la demanda. Donde se cruzan está el punto de operación.",
+       "scene": {
+        "t": "fm",
+        "k": "Balance de presiones",
+        "h": "Entrada y salida del nodo",
+        "f": "p reservorio − Σ Δp aguas arriba = p nodo = p separador + Σ Δp aguas abajo",
+        "n": "En el fondo del pozo: afluencia IPR contra curva de tubing VLP. El cruce da caudal y presión de fondo fluyente."
+       }
+      },
+      {
+       "say": "El enfoque viene de Gilbert, de 1954, y se difundió con el trabajo de Mach, Proaño y Brown, de 1979. Permite ver el efecto de cada componente y decidir dónde conviene intervenir.",
+       "scene": {
+        "t": "bul",
+        "k": "Para qué sirve",
+        "h": "Preguntas que responde",
+        "items": [
+         "Cuánto produce el pozo con la completación actual",
+         "Qué ganancia da un tubing mayor o una presión de boca menor",
+         "Cuándo el pozo deja de surgir y necesita levantamiento",
+         "Dónde está el cuello de botella del sistema",
+         "Cuánto vale una estimulación para el caudal"
+        ]
+       },
+       "hl": 3
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "El punto de operación de un pozo está en:",
+        "o": [
+         "El cruce de la curva de afluencia con la curva de tubing",
+         "El máximo de la IPR",
+         "El máximo del tubing",
+         "La presión de reservorio"
+        ],
+        "a": 0,
+        "e": "Allí coinciden la presión que da el reservorio y la que necesita la tubería."
+       }
+      }
+     ]
+    },
+    {
+     "id": "n2",
+     "title": "Afluencia del reservorio: modelos IPR",
+     "comp": "Afluencia del reservorio (IPR)",
+     "cues": [
+      {
+       "say": "El modelo más simple es el índice de productividad. El caudal es J por la diferencia entre la presión de reservorio y la de fondo. Vale por encima de la presión de burbuja, donde el fluido es monofásico.",
+       "scene": {
+        "t": "fm",
+        "k": "IPR lineal",
+        "h": "Índice de productividad",
+        "f": "q = J · ( pr − pwf )",
+        "n": "Es una recta. Si pwf cae por debajo de la presión de burbuja aparece gas libre y la curva se dobla."
+       }
+      },
+      {
+       "say": "Por debajo del punto de burbuja la IPR se curva. Vogel propuso una relación adimensional. Con una prueba de producción se calcula el caudal máximo, y con él toda la curva.",
+       "scene": {
+        "t": "fm",
+        "k": "IPR de Vogel",
+        "h": "Empuje por gas en solución",
+        "f": "q / qmáx = 1 − 0,2·( pwf / pr ) − 0,8·( pwf / pr )²",
+        "n": "Fetkovich propuso una forma con exponente y varios puntos de prueba. Standing la extendió a pozos dañados."
+       }
+      },
+      {
+       "say": "Laboratorio. Es un modelo didáctico con IPR de Vogel y una curva de tubing. Cambiá la presión de reservorio y el índice de productividad y mirá cómo se mueve el punto de operación.",
+       "scene": {
+        "t": "viz",
+        "w": "nodal",
+        "h": "IPR y curva de tubing",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "Cada modelo tiene límites. Hay que mirar el mecanismo de producción, la saturación de gas, el daño y la calidad de la prueba que se usa para calibrar.",
+       "scene": {
+        "t": "tbl",
+        "k": "Modelos IPR",
+        "h": "Cuándo usar cada uno",
+        "cols": [
+         "Modelo",
+         "Cuándo",
+         "Limitación"
+        ],
+        "rows": [
+         [
+          "Lineal (J)",
+          "Por encima del punto de burbuja",
+          "No sirve con gas libre en el reservorio"
+         ],
+         [
+          "Vogel",
+          "Gas en solución, debajo del burbuja",
+          "No contempla daño"
+         ],
+         [
+          "Fetkovich",
+          "Varias pruebas a distintos caudales",
+          "Requiere pruebas isócronas"
+         ],
+         [
+          "Standing",
+          "Pozos con daño",
+          "Parte de Vogel con ajuste de daño"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "La IPR de Vogel se usa principalmente cuando:",
+        "o": [
+         "El pozo produce por debajo de la presión de burbuja",
+         "Hay solo agua",
+         "El pozo es de gas seco",
+         "El pozo está cerrado"
+        ],
+        "a": 0,
+        "e": "Es el caso de empuje por gas en solución, con gas libre en el reservorio."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "En el análisis nodal, la afluencia es:",
+     "o": [
+      "La presión que da el reservorio",
+      "La demanda de la tubería",
+      "La presión del separador",
+      "El nivel de líquido"
+     ],
+     "a": 0,
+     "e": "La IPR describe cuánto caudal entrega el reservorio para cada presión de fondo."
+    },
+    {
+     "q": "Si baja la presión de reservorio, la curva IPR:",
+     "o": [
+      "Se desplaza hacia menor caudal",
+      "Se desplaza hacia mayor caudal",
+      "No cambia",
+      "Se vuelve vertical"
+     ],
+     "a": 0,
+     "e": "Con menos presión disponible, el pozo entrega menos caudal."
+    },
+    {
+     "q": "El índice de productividad lineal es válido:",
+     "o": [
+      "Por encima de la presión de burbuja",
+      "En todo momento",
+      "Solo en pozos de gas",
+      "Solo en pozos inyectores"
+     ],
+     "a": 0,
+     "e": "Con flujo monofásico en el reservorio la relación caudal-presión es una recta."
+    }
+   ]
+  },
+  {
+   "id": "nm2",
+   "title": "Módulo 2 · Flujo en la tubería y optimización",
+   "lessons": [
+    {
+     "id": "n3",
+     "title": "Flujo multifásico y la curva de tubing (VLP)",
+     "comp": "Flujo en tubería y optimización",
+     "cues": [
+      {
+       "say": "La curva de tubing, o VLP, dice qué presión se necesita en el fondo para llevar cada caudal hasta la boca. Suma el peso de la columna, la fricción y, en menor medida, la aceleración del fluido.",
+       "scene": {
+        "t": "fm",
+        "k": "Gradiente de presión",
+        "h": "Tres términos",
+        "f": "dp/dz = ρ·g·senθ + f·ρ·v² / (2·d) + ρ·v·dv/dz",
+        "n": "Hidrostático, fricción y aceleración. En pozos verticales profundos domina el hidrostático."
+       }
+      },
+      {
+       "say": "Para flujo multifásico se usan correlaciones. Las clásicas son las de Duns y Ros, de 1963, Hagedorn y Brown, de 1965, y Beggs y Brill, de 1973, que sirve para tuberías inclinadas. Cada una fue calibrada con ensayos particulares.",
+       "scene": {
+        "t": "tbl",
+        "k": "Correlaciones",
+        "h": "Origen y uso típico",
+        "cols": [
+         "Correlación",
+         "Origen",
+         "Uso típico"
+        ],
+        "rows": [
+         [
+          "Duns y Ros (1963)",
+          "Ensayos de laboratorio de gas y líquido en vertical",
+          "Pozos verticales, alta relación gas-líquido"
+         ],
+         [
+          "Hagedorn y Brown (1965)",
+          "Pozo experimental, tubing de diámetro chico",
+          "Pozos verticales de petróleo"
+         ],
+         [
+          "Beggs y Brill (1973)",
+          "Laboratorio, inclinaciones de −90° a 90°",
+          "Pozos desviados y líneas"
+         ]
+        ],
+        "n": "Ninguna es universal. Se calibran con gradientes medidos, por ejemplo con registros de presión y temperatura fluyentes."
+       }
+      },
+      {
+       "say": "Laboratorio. Subí el corte de agua y mirá cómo el pozo produce menos, porque el agua pesa más. Después inyectá gas, que aligera la columna, y mirá cuánto se recupera.",
+       "scene": {
+        "t": "viz",
+        "w": "nodal",
+        "h": "Efecto del agua y del gas en la columna",
+        "p": {
+         "wc": 40,
+         "gl": 100
+        }
+       },
+       "lab": true
+      },
+      {
+       "say": "Una conclusión práctica. A mayor corte de agua, la columna es más pesada y el caudal cae. Por eso el levantamiento artificial se vuelve necesario a medida que el pozo madura.",
+       "scene": {
+        "t": "bul",
+        "k": "Lección",
+        "h": "Qué cambia con la madurez",
+        "items": [
+         "El agua aumenta el peso de la columna",
+         "La presión del reservorio baja con la extracción",
+         "El pozo deja de surgir y necesita levantamiento",
+         "Las curvas se actualizan con datos medidos"
+        ]
+       },
+       "hl": 2
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Al aumentar el corte de agua, manteniendo lo demás, la presión de fondo necesaria para levantar el fluido:",
+        "o": [
+         "Aumenta",
+         "Disminuye",
+         "No cambia",
+         "Se vuelve cero"
+        ],
+        "a": 0,
+        "e": "La mezcla es más densa y la columna hidrostática pesa más."
+       }
+      }
+     ]
+    },
+    {
+     "id": "n4",
+     "title": "Optimización: tubing, choke y presión de boca",
+     "comp": "Flujo en tubería y optimización",
+     "cues": [
+      {
+       "say": "El diámetro del tubing tiene un óptimo. Si es muy chico, la fricción crece. Si es muy grande, la velocidad baja y en pozos con gas o con agua el líquido puede acumularse y cargar el pozo.",
+       "scene": {
+        "t": "bul",
+        "k": "Tubing",
+        "h": "Dos riesgos opuestos",
+        "items": [
+         "Muy chico: fricción alta, límite al caudal",
+         "Muy grande: velocidad baja, deslizamiento y carga de líquido",
+         "El óptimo cambia con el caudal y con el tiempo",
+         "Se verifica con la curva de tubing de cada diámetro"
+        ]
+       },
+       "hl": 1
+      },
+      {
+       "say": "En pozos de gas la carga de líquido es un problema conocido. Turner y colaboradores, en 1969, propusieron una velocidad crítica del gas para arrastrar las gotas, que crece con la tensión superficial y la diferencia de densidades.",
+       "scene": {
+        "t": "bul",
+        "k": "Carga de líquido",
+        "h": "Velocidad crítica de Turner",
+        "items": [
+         "El gas debe superar una velocidad crítica para arrastrar el líquido",
+         "Si no lo hace, el líquido se acumula y la producción cae",
+         "Soluciones: tubing menor, espuma, plunger, bombeo",
+         "Se verifica con la velocidad real contra la crítica"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Laboratorio. Cambiá el diámetro del tubing y la presión en boca de pozo. Observá cuánto cambia el caudal y notá que más tubing no siempre mejora.",
+       "scene": {
+        "t": "viz",
+        "w": "nodal",
+        "h": "Tubing y presión de boca",
+        "p": {
+         "d": "4.5"
+        }
+       },
+       "lab": true
+      },
+      {
+       "say": "Bajar la presión de boca suele ser la mejora más barata, porque reduce la contrapresión sobre todo el sistema. Pero depende de la red de superficie, y lo que se gana en un pozo puede perderse en otro.",
+       "scene": {
+        "t": "bul",
+        "k": "Presión de boca",
+        "h": "Mirar el sistema completo",
+        "items": [
+         "Menor presión de boca: mayor caudal en el pozo",
+         "Compresión en cabeza o en batería: cuesta energía",
+         "El choke fija el caudal en flujo crítico",
+         "Optimizar el pozo sin mirar la red puede trasladar el problema"
+        ]
+       },
+       "hl": 1
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "El flujo crítico en el choke se caracteriza por:",
+        "o": [
+         "Que la presión aguas abajo ya no influye en el caudal",
+         "Que el caudal es cero",
+         "Que no hay gas",
+         "Que la línea está cerrada"
+        ],
+        "a": 0,
+        "e": "En flujo crítico las perturbaciones de aguas abajo no se transmiten hacia el pozo."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "Un tubing muy grande puede causar:",
+     "o": [
+      "Menor fricción pero riesgo de carga de líquido",
+      "Siempre más caudal",
+      "Pozo cerrado",
+      "Corrosión inmediata"
+     ],
+     "a": 0,
+     "e": "La baja velocidad favorece el deslizamiento del líquido."
+    },
+    {
+     "q": "En los pozos de gas, la velocidad crítica de Turner sirve para:",
+     "o": [
+      "Saber si el gas arrastra el líquido",
+      "Medir la porosidad",
+      "Calcular la permeabilidad",
+      "Elegir el choke"
+     ],
+     "a": 0,
+     "e": "Compara la velocidad real del gas con la necesaria para arrastrar gotas."
+    },
+    {
+     "q": "Las correlaciones de flujo multifásico:",
+     "o": [
+      "Se calibran con datos medidos del pozo",
+      "Son universales",
+      "Se usan sin calibrar",
+      "Son iguales entre sí"
+     ],
+     "a": 0,
+     "e": "Se comparan con gradientes medidos y se ajustan."
+    }
+   ]
+  },
+  {
+   "id": "nm3",
+   "title": "Módulo 3 · Levantamiento artificial",
+   "lessons": [
+    {
+     "id": "n5",
+     "title": "Gas lift: diseño y optimización",
+     "comp": "Levantamiento artificial",
+     "cues": [
+      {
+       "say": "En gas lift se inyecta gas a alta presión en el espacio anular. El gas entra al tubing por una válvula y aligera la columna. Puede ser continuo, con inyección permanente, o intermitente, en ciclos.",
+       "scene": {
+        "t": "bul",
+        "k": "Gas lift",
+        "h": "Qué es y cómo funciona",
+        "items": [
+         "Continuo: inyección permanente, para pozos de caudal medio a alto",
+         "Intermitente: ciclos, para pozos de bajo caudal",
+         "Válvulas de descarga para arrancar el pozo",
+         "Una válvula operadora en el punto de inyección",
+         "No tiene partes móviles en el fondo, pero requiere gas y compresión"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "El caudal no crece siempre con el gas. Al comienzo cada metro cúbico inyectado aligera la columna y suma producción. Pasado un punto, la fricción crece más que el beneficio y el caudal baja.",
+       "scene": {
+        "t": "fm",
+        "k": "Curva de rendimiento",
+        "h": "Caudal contra gas inyectado",
+        "f": "q = f( Qgas inyectado ), con un máximo",
+        "n": "Cuando el gas es limitado, se reparte entre pozos igualando la ganancia marginal de caudal por unidad de gas."
+       }
+      },
+      {
+       "say": "Laboratorio. Subí el gas inyectado de a poco y registrá el caudal. Buscá el punto en que más gas deja de ayudar, y mirá qué pasa con la presión de fondo.",
+       "scene": {
+        "t": "viz",
+        "w": "nodal",
+        "h": "Rendimiento del gas lift",
+        "p": {
+         "wc": 50,
+         "gl": 200
+        }
+       },
+       "lab": true
+      },
+      {
+       "say": "En campos con muchos pozos, el problema es la red. El gas es limitado y la presión de la red condiciona la inyección. Reordenar la red de gas puede aumentar la producción sin consumir más gas.",
+       "scene": {
+        "t": "bul",
+        "k": "Optimización",
+        "h": "Del pozo a la red",
+        "items": [
+         "Asignar el gas donde da más ganancia marginal",
+         "Evitar caídas de presión en la red de inyección",
+         "Mantener las válvulas calibradas y los pozos estables",
+         "Vigilar con datos medidos, no solo con modelos"
+        ]
+       },
+       "hl": 2
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Cuando el gas disponible es limitado, conviene repartirlo:",
+        "o": [
+         "Igualando la ganancia marginal de caudal entre pozos",
+         "En partes iguales",
+         "Al pozo de mayor caudal",
+         "Al azar"
+        ],
+        "a": 0,
+        "e": "Así se obtiene la mayor producción total con el mismo gas."
+       }
+      }
+     ]
+    },
+    {
+     "id": "n6",
+     "title": "Selección y vigilancia del levantamiento artificial",
+     "comp": "Levantamiento artificial",
+     "cues": [
+      {
+       "say": "No hay un método mejor en general. La elección depende del caudal, la profundidad, los fluidos, los sólidos, el gas libre, la desviación, la energía disponible y el costo de intervención.",
+       "scene": {
+        "t": "tbl",
+        "k": "Métodos",
+        "h": "Fortalezas y limitaciones",
+        "cols": [
+         "Método",
+         "Fortalezas",
+         "Limitaciones"
+        ],
+        "rows": [
+         [
+          "Bombeo mecánico",
+          "Simple, bajo costo, pozos terrestres de caudal bajo a medio",
+          "Gas libre, desvíos, arena"
+         ],
+         [
+          "ESP (bomba sumergible)",
+          "Gran capacidad de caudal",
+          "Temperatura, gas y sólidos; intervención costosa"
+         ],
+         [
+          "PCP (cavidades progresivas)",
+          "Fluidos viscosos y con sólidos",
+          "Temperatura y profundidad limitadas"
+         ],
+         [
+          "Gas lift",
+          "Flexible, tolera desviación y arena",
+          "Requiere gas y compresión"
+         ],
+         [
+          "Plunger lift",
+          "Pozos de gas con carga de líquido",
+          "Caudales bajos"
+         ]
+        ],
+        "n": "Los rangos de aplicación dependen del equipo y de la tecnología. Se verifican con el proveedor y con el diseño del pozo."
+       }
+      },
+      {
+       "say": "Vigilar el levantamiento artificial es parte del trabajo. En bombeo mecánico se leen las cartas dinamométricas. En ESP, el amperaje y la presión de entrada. En gas lift, la presión de inyección y la estabilidad del pozo.",
+       "scene": {
+        "t": "bul",
+        "k": "Vigilancia",
+        "h": "Qué se mira en cada método",
+        "items": [
+         "Bombeo mecánico: carta dinamométrica, llenado de bomba, nivel",
+         "ESP: amperaje, frecuencia, presión y temperatura de entrada",
+         "PCP: torque y velocidad",
+         "Gas lift: presión y caudal de inyección, estabilidad",
+         "Todos: caudal, corte de agua y consumo de energía"
+        ]
+       },
+       "hl": 1
+      },
+      {
+       "say": "Y una decisión económica. Se compara el aumento de producción con el costo de capital, de energía y de intervención, durante la vida del pozo. Un método más caro puede ser el mejor si produce más durante más tiempo.",
+       "scene": {
+        "t": "bul",
+        "k": "Decisión",
+        "h": "Criterios económicos",
+        "items": [
+         "Producción incremental durante la vida del pozo",
+         "Capital, energía y mantenimiento",
+         "Frecuencia y costo de las intervenciones",
+         "Flexibilidad para cambiar de método si cambian las condiciones"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "El amperaje de una ESP se vigila porque:",
+        "o": [
+         "Refleja la carga del motor y ayuda a detectar problemas de bomba o de gas",
+         "Mide la porosidad",
+         "Define el tubing",
+         "No sirve"
+        ],
+        "a": 0,
+        "e": "Variaciones del amperaje alertan sobre gas, bloqueo o desgaste."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "El plunger lift se aplica sobre todo a:",
+     "o": [
+      "Pozos de gas con carga de líquido",
+      "Pozos inyectores",
+      "Pozos de agua",
+      "Pozos exploratorios"
+     ],
+     "a": 0,
+     "e": "Usa la energía del gas del propio pozo para elevar el líquido acumulado."
+    },
+    {
+     "q": "En gas lift continuo, más gas inyectado siempre aumenta el caudal:",
+     "o": [
+      "Falso: después de un punto la fricción lo reduce",
+      "Verdadero",
+      "Solo con agua",
+      "Solo con petróleo"
+     ],
+     "a": 0,
+     "e": "La curva de rendimiento tiene un máximo."
+    },
+    {
+     "q": "Una carta dinamométrica se usa en:",
+     "o": [
+      "Bombeo mecánico",
+      "ESP",
+      "Gas lift",
+      "Plunger lift"
+     ],
+     "a": 0,
+     "e": "Muestra la carga contra el recorrido de la varilla pulida."
+    }
+   ]
+  }
+ ],
+ "exam": [
+  {
+   "q": "El punto de operación se ubica en:",
+   "o": [
+    "El cruce de IPR y VLP",
+    "El máximo de la IPR",
+    "El inicio del tubing",
+    "El separador"
+   ],
+   "a": 0,
+   "e": "Allí el reservorio entrega lo que la tubería necesita."
+  },
+  {
+   "q": "Una IPR de Vogel se usa por debajo de:",
+   "o": [
+    "La presión de burbuja",
+    "La presión de rocío",
+    "La presión atmosférica",
+    "La presión de fractura"
+   ],
+   "a": 0,
+   "e": "Hay gas libre en el reservorio."
+  },
+  {
+   "q": "Aumentar el corte de agua en el pozo:",
+   "o": [
+    "Reduce el caudal por mayor peso de columna",
+    "Aumenta el caudal",
+    "No tiene efecto",
+    "Elimina la fricción"
+   ],
+   "a": 0,
+   "e": "La mezcla es más pesada."
+  },
+  {
+   "q": "Una presión de boca menor suele:",
+   "o": [
+    "Aumentar el caudal",
+    "Reducir el caudal",
+    "Cerrar el pozo",
+    "Aumentar el agua"
+   ],
+   "a": 0,
+   "e": "Reduce la contrapresión del sistema."
+  },
+  {
+   "q": "La carga de líquido en pozos de gas aparece cuando:",
+   "o": [
+    "La velocidad del gas es menor que la crítica",
+    "La velocidad es muy alta",
+    "No hay agua",
+    "El pozo es nuevo"
+   ],
+   "a": 0,
+   "e": "El gas ya no arrastra las gotas."
+  },
+  {
+   "q": "Para elegir un método de levantamiento se considera:",
+   "o": [
+    "Caudal, fluidos, sólidos, gas, desvío y costo",
+    "Solo el color",
+    "Solo el diámetro",
+    "Solo la profundidad"
+   ],
+   "a": 0,
+   "e": "Es una decisión de varios criterios técnicos y económicos."
+  }
+ ],
+ "outro": {
+  "phrase": "El pozo es un sistema: se optimiza entero o se traslada el problema.",
+  "recap": [
+   "El análisis nodal ubica el caudal en el cruce de la afluencia con la curva de tubing.",
+   "Agua, presión de boca, tubing y gas cambian el cruce, y el modelo debe calibrarse con datos medidos.",
+   "El método de levantamiento se elige por caudal, fluidos, sólidos y economía, y se vigila durante toda su vida."
+  ]
+ },
+ "downloads": [
+  {
+   "file": "xlsx/H3L_Analisis_Nodal_IPR_VLP.xlsx",
+   "title": "IPR, VLP y rendimiento del gas lift (Excel)",
+   "desc": "Curvas IPR de Vogel y VLP simplificada con corte de agua, presión de boca, tubing y gas inyectado editables. Calcula el punto de operación y la curva de rendimiento del gas lift.",
+   "task": "Subí el corte de agua al 60 % y calculá cuánto cae el caudal. Después encontrá la cantidad de gas inyectado que da el mayor caudal."
+  }
+ ],
+ "cases": [
+  {
+   "title": "La curva de Vogel (1968)",
+   "text": "J. V. Vogel construyó su relación adimensional a partir de simulaciones numéricas de reservorios con empuje por gas en solución, y la publicó en el Journal of Petroleum Technology en 1968. Permite armar la IPR con una sola prueba de producción, aunque no considera el daño del pozo.",
+   "src": "Vogel, J. V. (1968). Inflow performance relationships for solution-gas drive wells. JPT, enero de 1968 (SPE 1476)"
+  },
+  {
+   "title": "Optimización de una red de gas lift (JPT, 2015)",
+   "text": "Un artículo de JPT describe un campo anónimo, con 17 grupos de más de 100 pozos, donde se propuso reordenar las líneas de gas de levantamiento para aumentar la presión y el caudal de gas sin sumar consumo. El texto de acceso libre no identifica el campo ni publica los resultados.",
+   "src": "JPT (2015), Gas lift nodal analysis model provides economical approach to optimization"
+  }
+ ],
+ "refs": [
+  {
+   "tag": "Paper",
+   "cite": "Gilbert, W. E. (1954). Flowing and gas-lift well performance. API Drilling and Production Practice, 126–157.",
+   "why": "origen del enfoque nodal"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Vogel, J. V. (1968). Inflow performance relationships for solution-gas drive wells. JPT 20(1), 83–92 (SPE 1476).",
+   "why": "IPR de Vogel"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Duns, H., Jr. y Ros, N. C. J. (1963). Vertical flow of gas and liquid mixtures in wells. Proc. 6th World Petroleum Congress.",
+   "why": "flujo multifásico vertical"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Hagedorn, A. R. y Brown, K. E. (1965). Experimental study of pressure gradients occurring during continuous two-phase flow in small-diameter vertical conduits. JPT 17(4), 475–484.",
+   "why": "correlación de gradientes"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Beggs, H. D. y Brill, J. P. (1973). A study of two-phase flow in inclined pipes. JPT 25(5), 607–617 (SPE 4007).",
+   "why": "tuberías inclinadas"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Fetkovich, M. J. (1973). The isochronal testing of oil wells. SPE 4529.",
+   "why": "IPR con varias pruebas"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Mach, J., Proaño, E. y Brown, K. E. (1979). A nodal approach for applying systems analysis to the flowing and artificial lift oil or gas well. SPE 8025.",
+   "why": "difusión del análisis nodal"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Turner, R. G., Hubbard, M. G. y Dukler, A. E. (1969). Analysis and prediction of minimum flow rate for the continuous removal of liquids from gas wells. JPT 21(11), 1475–1482 (SPE 2198).",
+   "why": "carga de líquido en pozos de gas"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Economides, M. J., Hill, A. D., Ehlig-Economides, C. y Zhu, D. (2013). Petroleum Production Systems, 2.ª ed. Prentice Hall.",
+   "why": "texto general de producción"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Takács, G. (2005). Gas Lift Manual. PennWell. Y Brown, K. E. (1977–1984). The Technology of Artificial Lift Methods. PennWell.",
+   "why": "diseño de levantamiento artificial"
+  }
+ ]
+}

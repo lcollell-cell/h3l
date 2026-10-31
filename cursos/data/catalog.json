@@ -1,15 +1,145 @@
 {
  "version": 1,
  "sections": [
-  {"id":"subsuelo","title":"Subsuelo y reservas","desc":"Geociencias, reservorios y reservas.","courses":["geo","res"]},
-  {"id":"produccion","title":"Producción y operaciones","desc":"Recuperación secundaria y construcción de pozos.","courses":["wf","per"]},
-  {"id":"energia","title":"Energía y transición","desc":"Emisiones, metano y captura de CO₂.","courses":["gei"]}
+  {
+   "id": "subsuelo",
+   "title": "Subsuelo y reservas",
+   "desc": "Geociencias, reservorios, reservas y pruebas de pozo.",
+   "courses": [
+    "geo",
+    "res",
+    "pta"
+   ]
+  },
+  {
+   "id": "produccion",
+   "title": "Producción y operaciones",
+   "desc": "Recuperación secundaria, construcción de pozos, producción y no convencionales.",
+   "courses": [
+    "wf",
+    "per",
+    "nod",
+    "frac"
+   ]
+  },
+  {
+   "id": "energia",
+   "title": "Energía y transición",
+   "desc": "Emisiones, metano y captura de CO₂.",
+   "courses": [
+    "gei"
+   ]
+  },
+  {
+   "id": "negocio",
+   "title": "Economía, datos e IA",
+   "desc": "Evaluación económica, decisión bajo incertidumbre y ciencia de datos aplicada.",
+   "courses": [
+    "eco",
+    "dat"
+   ]
+  }
  ],
  "courses": [
-  {"id":"geo","n":1,"title":"Geociencias: sistema petrolero y caracterización estática","short":"De la cuenca al modelo estático, con Vaca Muerta como hilo conductor.","level":"Intermedio","color":"#3A6BD0","icon":"geo","tag":"Geociencias"},
-  {"id":"res","n":2,"title":"Recursos y Reservas SPE-PRMS","short":"Clasificación, incertidumbre, declinación, economía y gobernanza de reservas.","level":"Intermedio–Avanzado","color":"#17755A","icon":"res","tag":"Reservas"},
-  {"id":"wf","n":3,"title":"Waterflooding y vigilancia de yacimientos","short":"Del flujo fraccional al Hall plot: diseñar, operar y diagnosticar la inyección de agua.","level":"Avanzado","color":"#1d7fa8","icon":"wf","tag":"Reservorios"},
-  {"id":"per","n":4,"title":"Perforación: ventana de lodo, límite técnico y control de pozo","short":"Arquitectura de pozo, eficiencia operativa y barreras de seguridad.","level":"Intermedio","color":"#c2680a","icon":"per","tag":"Perforación"},
-  {"id":"gei","n":5,"title":"Gestión de emisiones y transición energética en oil & gas","short":"Inventarios GEI, metano, curvas MACC y captura y almacenamiento de CO₂.","level":"Intermedio","color":"#5fa83a","icon":"gei","tag":"Transición energética"}
+  {
+   "id": "geo",
+   "n": 1,
+   "title": "Geociencias: sistema petrolero y caracterización estática",
+   "short": "De la cuenca al modelo estático, con Vaca Muerta como hilo conductor.",
+   "level": "Intermedio",
+   "color": "#3A6BD0",
+   "icon": "geo",
+   "tag": "Geociencias"
+  },
+  {
+   "id": "res",
+   "n": 2,
+   "title": "Recursos y Reservas SPE-PRMS",
+   "short": "Clasificación, incertidumbre, declinación, economía y gobernanza de reservas.",
+   "level": "Intermedio–Avanzado",
+   "color": "#17755A",
+   "icon": "res",
+   "tag": "Reservas"
+  },
+  {
+   "id": "wf",
+   "n": 3,
+   "title": "Waterflooding y vigilancia de yacimientos",
+   "short": "Del flujo fraccional al Hall plot: diseñar, operar y diagnosticar la inyección de agua.",
+   "level": "Avanzado",
+   "color": "#1d7fa8",
+   "icon": "wf",
+   "tag": "Reservorios"
+  },
+  {
+   "id": "per",
+   "n": 4,
+   "title": "Perforación: ventana de lodo, límite técnico y control de pozo",
+   "short": "Arquitectura de pozo, eficiencia operativa y barreras de seguridad.",
+   "level": "Intermedio",
+   "color": "#c2680a",
+   "icon": "per",
+   "tag": "Perforación"
+  },
+  {
+   "id": "gei",
+   "n": 5,
+   "title": "Gestión de emisiones y transición energética en oil & gas",
+   "short": "Inventarios GEI, metano, curvas MACC y captura y almacenamiento de CO₂.",
+   "level": "Intermedio",
+   "color": "#5fa83a",
+   "icon": "gei",
+   "tag": "Transición energética"
+  },
+  {
+   "id": "pta",
+   "n": 6,
+   "title": "Pruebas de pozo y análisis de transitorios de presión",
+   "short": "Del cierre del pozo a la permeabilidad, el daño y los límites, con la derivada de presión.",
+   "level": "Avanzado",
+   "color": "#6b5bd6",
+   "icon": "pta",
+   "tag": "Reservorios"
+  },
+  {
+   "id": "nod",
+   "n": 7,
+   "title": "Análisis nodal y levantamiento artificial",
+   "short": "IPR, curva de tubing, optimización y selección del método de extracción.",
+   "level": "Intermedio",
+   "color": "#0f8b8d",
+   "icon": "nod",
+   "tag": "Producción"
+  },
+  {
+   "id": "frac",
+   "n": 8,
+   "title": "Fractura hidráulica y completación de pozos no convencionales",
+   "short": "Esfuerzos, diseño de etapas, diagnóstico y pronóstico con declinación modificada.",
+   "level": "Intermedio–Avanzado",
+   "color": "#b3414a",
+   "icon": "frac",
+   "tag": "No convencionales"
+  },
+  {
+   "id": "eco",
+   "n": 9,
+   "title": "Economía petrolera y decisión bajo incertidumbre",
+   "short": "Flujo de caja, tornado, valor esperado, portafolio y lecciones de megaproyectos.",
+   "level": "Intermedio",
+   "color": "#a8801f",
+   "icon": "eco",
+   "tag": "Economía"
+  },
+  {
+   "id": "dat",
+   "n": 10,
+   "title": "Ciencia de datos e IA aplicada al upstream",
+   "short": "Calidad de datos, aprendizaje automático, MLOps y gobernanza, con el caso Volve.",
+   "level": "Intermedio",
+   "color": "#2b6cb0",
+   "icon": "dat",
+   "tag": "Datos e IA"
+  }
  ]
 }

@@ -309,6 +309,122 @@ W.ccs=function(box,p,api){var h=mkui(box,[{k:'t',l:'Tiempo desde el inicio de la
     h.out('A los <strong>'+nf(t)+' años</strong>: estructural '+nf(st*100,0)+' % · residual '+nf(re*100,0)+' % · disolución '+nf(so*100,0)+' % · mineral '+nf(mi*100,0)+' %. La seguridad <strong>mejora con el tiempo</strong> a medida que el CO₂ pasa de estar "libre" a inmovilizado. Proporciones cualitativas (IPCC, 2005): dependen de cada formación.')}
   draw(h.V)};
 
+
+/* ===== PRUEBAS DE POZO: solución analítica radial con almacenamiento y daño (Laplace + Stehfest) ===== */
+function fact(n){var r=1;for(var i=2;i<=n;i++)r*=i;return r}
+var SV=(function(N){var v=[],i,k,s;for(i=1;i<=N;i++){s=0;for(k=Math.floor((i+1)/2);k<=Math.min(i,N/2);k++)s+=Math.pow(k,N/2)*fact(2*k)/(fact(N/2-k)*fact(k)*fact(k-1)*fact(i-k)*fact(2*k-i));v[i]=Math.pow(-1,i+N/2)*s}return v})(12);
+function bk(x){var y,t,z,I0,I1,K0,K1;if(x<=2){y=x*x/4;t=x/3.75;t*=t;I0=1+3.5156229*t+3.0899424*t*t+1.2067492*Math.pow(t,3)+.2659732*Math.pow(t,4)+.0360768*Math.pow(t,5)+.0045813*Math.pow(t,6);I1=x*(.5+.87890594*t+.51498869*t*t+.15084934*Math.pow(t,3)+.02658733*Math.pow(t,4)+.00301532*Math.pow(t,5)+.00032411*Math.pow(t,6));
+  K0=-Math.log(x/2)*I0+(-.57721566+.4227842*y+.23069756*y*y+.0348859*Math.pow(y,3)+.00262698*Math.pow(y,4)+.0001075*Math.pow(y,5)+.0000074*Math.pow(y,6));
+  K1=Math.log(x/2)*I1+(1/x)*(1+.15443144*y-.67278579*y*y-.18156897*Math.pow(y,3)-.01919402*Math.pow(y,4)-.00110404*Math.pow(y,5)-.00004686*Math.pow(y,6))}
+ else{z=2/x;var e=Math.exp(-x)/Math.sqrt(x);K0=e*(1.25331414-.07832358*z+.02189568*z*z-.01062446*Math.pow(z,3)+.00587872*Math.pow(z,4)-.0025154*Math.pow(z,5)+.00053208*Math.pow(z,6));
+  K1=e*(1.25331414+.23498619*z-.0365562*z*z+.01504268*Math.pow(z,3)-.00780353*Math.pow(z,4)+.00325614*Math.pow(z,5)-.00068245*Math.pow(z,6))}
+ return[K0,K1]}
+function pD(td,cd,S){var s,r,b,a,n=0,i,ln2=Math.LN2/td;for(i=1;i<=12;i++){s=i*ln2;r=Math.sqrt(s);b=bk(r);a=(b[0]+S*r*b[1])/(s*(r*b[1]+cd*s*(b[0]+S*r*b[1])));n+=SV[i]*a}return n*ln2}
+W.pta=function(box,p,api){var h=mkui(box,[{k:'k',l:'Permeabilidad k',min:1,max:200,step:1,v:p.k||20,f:function(v){return nf(v)+' md'}},{k:'s',l:'Daño (skin) S',min:-3,max:15,step:.5,v:p.s!=null?p.s:3,f:function(v){return nf(v,1)}},{k:'c',l:'Almacenamiento C',min:.001,max:.2,step:.001,v:p.c||.02,f:function(v){return nf(v,3)+' bbl/psi'}}],draw,{side:true,w:640,h:360,touch:api.touch}),svg=h.svg;
+  var q=500,B=1.2,mu=1,H=50,phi=.15,ct=1e-5,rw=.3;
+  function draw(V){svg.innerHTML='';var cd=.8936*V.c/(phi*ct*H*rw*rw),f=141.2*q*B*mu/(V.k*H),a=[],d=[],i,t,td,x=.0002637*V.k/(phi*mu*ct*rw*rw),e=.02,ymin=1e9,ymax=0;
+    for(i=0;i<=60;i++){t=Math.pow(10,-2+5*i/60);td=x*t;var p0=pD(td,cd,V.s),dd=(pD(td*Math.exp(e),cd,V.s)-pD(td*Math.exp(-e),cd,V.s))/(2*e);a.push([Math.log10(t),f*p0]);d.push([Math.log10(t),Math.max(f*dd,1e-6)])}
+    a.concat(d).forEach(function(z){var y=z[1];if(y>1e-3&&y<ymin)ymin=y;if(y>ymax)ymax=y});
+    var lo=Math.floor(Math.log10(Math.max(ymin,1e-2))),hi=Math.ceil(Math.log10(ymax));if(hi-lo<2)hi=lo+2;
+    var P=plot(svg,640,360,{l:56,r:16,t:20,b:44},[-2,3],[lo,hi],{nx:5,ny:hi-lo,xl:'Tiempo (h)',yl:'Δp y derivada (psi)',xf:function(v){var z=Math.pow(10,v);return z<1?nf(z,2):nf(z)},yf:function(v){var z=Math.pow(10,v);return z<1?nf(z,2):nf(z)}});
+    var Y=function(v){return P.Y(Math.log10(Math.max(v,Math.pow(10,lo))))};
+    path(svg,a,P.X,Y,BL,2.4);path(svg,d,P.X,Y,AM,2.4);
+    var m=f*.5;sv('line',{x1:P.m.l,x2:P.m.l+P.w,y1:Y(m),y2:Y(m),stroke:GN,'stroke-width':1.2,'stroke-dasharray':'5 4'},svg);lbl(svg,P.m.l+P.w-4,Y(m)-5,'meseta radial = 70,6·q·B·μ/(k·h)',GN,10,'end');
+    sv('rect',{x:P.m.l+8,y:P.m.t+6,width:10,height:3,fill:BL},svg);lbl(svg,P.m.l+22,P.m.t+11,'Δp (cambio de presión)',TX,10);sv('rect',{x:P.m.l+8,y:P.m.t+20,width:10,height:3,fill:AM},svg);lbl(svg,P.m.l+22,P.m.t+25,'derivada (dΔp / d ln t)',TX,10);
+    var tend=1000,pe=f*pD(x*tend,cd,V.s),de=f*(pD(x*tend*Math.exp(e),cd,V.s)-pD(x*tend*Math.exp(-e),cd,V.s))/(2*e),kest=70.6*q*B*mu/(H*de),ts=(60+3.5*V.s)*cd/x;
+    var okr=Math.abs(de/m-1)<.06;
+    h.out('Almacenamiento: la pendiente unitaria del inicio dura unas <strong>'+nf(ts<1000?ts:1000,1)+' h</strong> (efecto del almacenamiento del pozo). '+(okr?'La derivada llegó a la <strong>meseta de flujo radial</strong>: k leída = <strong>'+nf(kest,1)+' md</strong> (real '+V.k+').':'<strong style="color:'+RD+'">No se alcanzó el flujo radial</strong> en 1000 h: no se puede leer k de la meseta. Hace falta una prueba más larga o menos almacenamiento.')+' El <strong>daño</strong> separa la curva de Δp de la derivada: a mayor S, más distancia entre ambas. (Modelo homogéneo radial infinito, datos de ejemplo.)')}
+  draw(h.V)};
+
+/* ===== ANÁLISIS NODAL: IPR (Vogel) + VLP simplificada ===== */
+W.nodal=function(box,p,api){var h=mkui(box,[{k:'pr',l:'Presión de reservorio',min:120,max:350,step:5,v:p.pr||250,f:function(v){return v+' bar'}},{k:'j',l:'Índice de productividad J',min:.3,max:4,step:.1,v:p.j||1.5,f:function(v){return nf(v,1)+' m³/d/bar'}},{k:'wc',l:'Corte de agua',min:0,max:95,step:5,v:p.wc||0,f:function(v){return v+' %'}},{k:'pw',l:'Presión en boca de pozo',min:5,max:40,step:1,v:p.pw||10,f:function(v){return v+' bar'}},{k:'gl',l:'Gas inyectado (gas lift)',min:0,max:400,step:10,v:p.gl||0,f:function(v){return v+' m³/m³'}},{k:'d',l:'Diámetro de tubing',t:'sel',o:[['2.375','2⅜"'],['2.875','2⅞"'],['3.5','3½"'],['4.5','4½"']],v:p.d||'3.5'}],draw,{side:true,w:640,h:360,touch:api.touch}),svg=h.svg;
+  var HH=2000;
+  function ipr(V,qq){var qm=V.j*V.pr/1.8,r=qq/qm;if(r>=1)return 0;return V.pr*(-.2+Math.sqrt(.04+3.2*(1-r)))/1.6}
+  function vlp(V,qq){var rl=800*(1-V.wc/100)+1030*V.wc/100,fg=1-.55*V.gl/(V.gl+150),hs=rl*fg*9.81*HH/1e5,fr=5*Math.pow(qq/200,1.8)*Math.pow(3.5/+V.d,4.8);return V.pw+hs+fr}
+  function draw(V){svg.innerHTML='';var qm=V.j*V.pr/1.8,xr=[0,Math.max(100,Math.ceil(qm/50)*50)],P=plot(svg,640,360,{l:52,r:16,t:20,b:44},xr,[0,Math.ceil(V.pr/50)*50],{nx:5,ny:5,xl:'Caudal de líquido (m³/d)',yl:'Presión de fondo fluyente (bar)'}),a=[],b=[],q;
+    for(q=0;q<=qm;q+=qm/60)a.push([q,ipr(V,q)]);for(q=0;q<=xr[1];q+=xr[1]/60)b.push([q,Math.min(vlp(V,q),xr[1]>0?Math.ceil(V.pr/50)*50:1)]);
+    path(svg,a,P.X,P.Y,GN,2.8);path(svg,b,P.X,P.Y,AM,2.8);lbl(svg,P.X(qm*.2),P.Y(ipr(V,qm*.2))-8,'IPR (Vogel)',GN,10.5);lbl(svg,P.X(xr[1]*.8),P.Y(Math.min(vlp(V,xr[1]*.8),V.pr))-8,'VLP (tubing)',AM,10.5);
+    var op=null,prev=null;for(q=0;q<=qm;q+=qm/600){var df=ipr(V,q)-vlp(V,q);if(prev!==null&&prev>=0&&df<0){op=q;break}prev=df}
+    if(op!=null){var pf=ipr(V,op);sv('circle',{cx:P.X(op),cy:P.Y(pf),r:6,fill:'#fff',stroke:RD,'stroke-width':2.4},svg);lbl(svg,P.X(op)+9,P.Y(pf)+20,'operación: '+nf(op)+' m³/d',RD,10.5);
+      h.out('Punto de operación: <strong>'+nf(op)+' m³/d</strong> con Pwf = <strong>'+nf(pf)+' bar</strong> ('+nf(op*(1-V.wc/100))+' m³/d de petróleo). Más gas baja el gradiente y sube el caudal hasta que domina la fricción; el agua hace lo contrario. (Modelo didáctico, no reemplaza a un simulador multifásico.)')}
+    else h.out('<strong style="color:'+RD+'">El pozo no surge</strong>: la presión necesaria en el fondo para levantar la columna supera la que da el reservorio. Hace falta <strong>levantamiento artificial</strong> (gas lift, bombeo mecánico, ESP) o reducir la columna de fluido. Probá inyectar gas o bajar el agua.')}
+  draw(h.V)};
+
+/* ===== NO CONVENCIONALES: declinación hiperbólica modificada ===== */
+W.shale=function(box,p,api){var h=mkui(box,[{k:'qi',l:'Caudal inicial qi',min:300,max:3000,step:50,v:p.qi||1200,f:function(v){return nf(v)+' bbl/d'}},{k:'di',l:'Declinación inicial Di',min:50,max:95,step:1,v:p.di||75,f:function(v){return v+' %/año'}},{k:'b',l:'Exponente b',min:.6,max:2,step:.05,v:p.b!=null?p.b:1.5,f:function(v){return nf(v,2)}},{k:'dm',l:'Declinación terminal Dmin',min:3,max:15,step:1,v:p.dm||6,f:function(v){return v+' %/año'}}],draw,{side:true,w:640,h:360,touch:api.touch}),svg=h.svg;
+  function draw(V){svg.innerHTML='';var di=V.di/100,dm=V.dm/100,b=V.b,ts=Math.max(0,(di/dm-1)/(b*di)),T=30;
+    function qh(t){return V.qi/Math.pow(1+b*di*t,1/b)}function qm(t){if(t<=ts)return qh(t);var qs=qh(ts);return qs*Math.exp(-dm*(t-ts))}
+    var P=plot(svg,640,360,{l:52,r:16,t:20,b:44},[0,T],[Math.log10(5),Math.log10(Math.max(V.qi*1.2,20))],{nx:6,ny:3,xl:'Tiempo (años)',yl:'Caudal (bbl/d), escala log',yf:function(v){return nf(Math.pow(10,v))},xf:function(v){return v}}),a=[],c=[],t,eh=0,em=0,dt=1/12;
+    for(t=0;t<=T;t+=dt){var y1=qh(t),y2=qm(t);a.push([t,Math.log10(Math.max(y1,5))]);c.push([t,Math.log10(Math.max(y2,5))]);eh+=y1*30.4*dt*12/12;em+=y2*30.4*dt*12/12}
+    eh=0;em=0;for(t=0;t<T;t+=dt){eh+=qh(t)*30.4;em+=qm(t)*30.4}
+    path(svg,a,P.X,P.Y,BL,1.6,'5 4');path(svg,c,P.X,P.Y,AM,3);sv('rect',{x:P.m.l+8,y:P.m.t+6,width:10,height:3,fill:AM},svg);lbl(svg,P.m.l+22,P.m.t+11,'hiperbólica modificada (con Dmin)',TX,10);sv('rect',{x:P.m.l+8,y:P.m.t+20,width:10,height:3,fill:BL},svg);lbl(svg,P.m.l+22,P.m.t+25,'hiperbólica pura (sin Dmin)',TX,10);
+    if(ts<T){sv('line',{x1:P.X(ts),x2:P.X(ts),y1:P.m.t,y2:P.m.t+P.h,stroke:GN,'stroke-width':1.2,'stroke-dasharray':'4 4'},svg);lbl(svg,P.X(ts)+4,P.m.t+P.h-8,'pasa a declinación terminal: '+nf(ts,1)+' años',GN,10)}
+    h.out('EUR a '+T+' años: <strong>'+nf(em/1000,0)+' Mbbl</strong> con declinación terminal vs. <strong>'+nf(eh/1000,0)+' Mbbl</strong> con la hiperbólica pura ('+nf((eh/em-1)*100,0)+' % más). Con <strong>b &gt; 1</strong> y sin una declinación mínima, el pronóstico sobreestima el volumen: por eso la práctica de reservas usa el modelo modificado. (Ejemplo didáctico, no un pozo real.)')}
+  draw(h.V)};
+
+/* ===== ECONOMÍA: tornado de sensibilidades ===== */
+W.tornado=function(box,p,api){var h=mkui(box,[{k:'r',l:'Variación de cada variable (±)',min:5,max:40,step:5,v:p.r||20,f:function(v){return '±'+v+' %'}},{k:'pr',l:'Precio base del crudo',min:35,max:110,step:5,v:p.pr||65,f:function(v){return v+' USD/bbl'}}],draw,{side:true,w:640,h:360,touch:api.touch}),svg=h.svg;
+  function npv(o){var s=0,m,t,q;for(m=1;m<=120;m++){t=m/12;q=o.qi/(1+o.di*t);var ml=q*30.4*(o.pr*(1-.12)-o.ov)-o.of;s+=ml/Math.pow(1+o.rt,t)}return(s-o.cx)/1e6}
+  function draw(V){svg.innerHTML='';var base={qi:900,di:.7,pr:V.pr,ov:8,of:8000,cx:9e6,rt:.1},n0=npv(base),r=V.r/100,items=[['Precio',function(k){var o=Object.assign({},base);o.pr*=1+k;return o}],['Producción inicial (qi)',function(k){var o=Object.assign({},base);o.qi*=1+k;return o}],['CAPEX',function(k){var o=Object.assign({},base);o.cx*=1+k;return o}],['Costos operativos',function(k){var o=Object.assign({},base);o.ov*=1+k;o.of*=1+k;return o}],['Declinación (Di)',function(k){var o=Object.assign({},base);o.di*=1+k;return o}],['Tasa de descuento',function(k){var o=Object.assign({},base);o.rt*=1+k;return o}]],
+      rows=items.map(function(it){var a=npv(it[1](-r)),b=npv(it[1](r));return{n:it[0],lo:Math.min(a,b),hi:Math.max(a,b),sw:Math.abs(a-b)}}).sort(function(x,y){return y.sw-x.sw}),mn=Math.min.apply(null,rows.map(function(x){return x.lo}).concat([n0])),mx=Math.max.apply(null,rows.map(function(x){return x.hi}).concat([n0])),pad=(mx-mn)*.08,xr=[mn-pad,mx+pad];
+    var P=plot(svg,640,360,{l:150,r:20,t:20,b:44},xr,[0,1],{nx:5,ny:0,xl:'VPN (MUSD)',xf:function(v){return nf(v,0)}}),bh=P.h/rows.length*.62;
+    rows.forEach(function(r0,i){var y=P.m.t+i*P.h/rows.length+(P.h/rows.length-bh)/2;sv('rect',{x:P.X(r0.lo),y:y,width:Math.max(1,P.X(r0.hi)-P.X(r0.lo)),height:bh,fill:i===0?AM:BL,'fill-opacity':.85},svg);lbl(svg,P.m.l-8,y+bh/2+4,r0.n,TX,11,'end');lbl(svg,P.X(r0.lo)-3,y+bh/2+4,nf(r0.lo,1),TX,9.5,'end');lbl(svg,P.X(r0.hi)+3,y+bh/2+4,nf(r0.hi,1),TX,9.5)});
+    sv('line',{x1:P.X(n0),x2:P.X(n0),y1:P.m.t,y2:P.m.t+P.h,stroke:GN,'stroke-width':1.6},svg);lbl(svg,P.X(n0)+4,P.m.t+12,'caso base '+nf(n0,1),GN,10.5);
+    var neg=rows.filter(function(x){return x.lo<0});
+    h.out('VPN base (10 %): <strong>'+nf(n0,1)+' MUSD</strong>. La variable que más mueve el resultado es <strong>'+rows[0].n.toLowerCase()+'</strong> (rango de '+nf(rows[0].sw,1)+' MUSD). '+(neg.length?'<strong style="color:'+RD+'">'+neg.map(function(x){return x.n.toLowerCase()}).join(', ')+'</strong>: con esa variación el proyecto deja de ser rentable.':'Con esta variación el proyecto sigue siendo rentable en todos los casos.')+' (Pozo de ejemplo: 120 meses, regalías 12 %.)')}
+  draw(h.V)};
+
+/* ===== ECONOMÍA: decisión bajo incertidumbre (VME) y portafolio ===== */
+W.emv=function(box,p,api){var h=mkui(box,[{k:'pg',l:'Probabilidad de éxito',min:5,max:80,step:1,v:p.pg||25,f:function(v){return v+' %'}},{k:'v',l:'VPN si hay éxito',min:20,max:300,step:5,v:p.v||120,f:function(v){return v+' MUSD'}},{k:'c',l:'Costo si es seco',min:5,max:60,step:1,v:p.c||20,f:function(v){return v+' MUSD'}},{k:'n',l:'Pozos del portafolio',min:1,max:30,step:1,v:p.n||1,f:function(v){return v}}],draw,{side:true,w:640,h:360,touch:api.touch}),svg=h.svg;
+  function binom(n,k){var r=1,i;for(i=1;i<=k;i++)r=r*(n-k+i)/i;return r}
+  function draw(V){svg.innerHTML='';var pg=V.pg/100,emv=pg*V.v-(1-pg)*V.c,be=V.c/(V.v+V.c),pl=0,k;
+    for(k=0;k<=V.n;k++){if(k*V.v-(V.n-k)*V.c<0)pl+=binom(V.n,k)*Math.pow(pg,k)*Math.pow(1-pg,V.n-k)}
+    sv('rect',{x:0,y:0,width:640,height:360,fill:'rgba(10,30,50,.5)'},svg);
+    sv('circle',{cx:60,cy:110,r:16,fill:AM},svg);lbl(svg,60,114,'D',' #0b1a30'.trim(),12,'middle');lbl(svg,60,140,'Perforar',TX,10.5,'middle');
+    [[0,'Éxito',pg,V.v,GN],[1,'Seco',1-pg,-V.c,RD]].forEach(function(b){var y=60+b[0]*100;sv('line',{x1:76,y1:110,x2:200,y2:y,stroke:b[4],'stroke-width':2},svg);lbl(svg,138,(110+y)/2-6,nf(b[2]*100,0)+' %',b[4],11,'middle');sv('rect',{x:200,y:y-18,width:130,height:36,rx:7,fill:b[4],'fill-opacity':.3,stroke:b[4]},svg);lbl(svg,265,y-2,b[1],'#fff',11,'middle');lbl(svg,265,y+12,(b[3]>0?'+':'')+nf(b[3])+' MUSD','#fff',11,'middle')});
+    lbl(svg,20,196,'VME = P·VPN − (1−P)·Costo = '+nf(emv,1)+' MUSD',emv>=0?GN:RD,12);lbl(svg,20,214,'Probabilidad de equilibrio (VME = 0): '+nf(be*100,1)+' %',TX,11);
+    var P=plot(svg,640,360,{l:380,r:16,t:30,b:60},[0,80],[-V.c*1.1,Math.max(V.v*.8,10)],{nx:4,ny:4,xl:'Probabilidad de éxito (%)',yl:'VME (MUSD)',xf:function(v){return nf(v)}});
+    path(svg,[[0,-V.c],[80,.8*V.v-.2*V.c]],P.X,P.Y,BL,2.4);sv('line',{x1:P.m.l,x2:P.m.l+P.w,y1:P.Y(0),y2:P.Y(0),stroke:'#fff','stroke-opacity':.5},svg);sv('circle',{cx:P.X(V.pg),cy:P.Y(emv),r:6,fill:'#fff',stroke:AM,'stroke-width':2.4},svg);
+    h.out('Un pozo: <strong>VME = '+nf(emv,1)+' MUSD</strong>. Pero un solo pozo se gana o se pierde entero: con <strong>'+V.n+'</strong> pozo'+(V.n>1?'s':'')+' independientes la probabilidad de terminar con pérdida es <strong>'+nf(pl*100,0)+' %</strong>. El VME vale como regla para un <strong>portafolio</strong>; para el pozo individual hay que mirar también cuánto se puede perder. (Ejemplo con pozos independientes e igual probabilidad.)')}
+  draw(h.V)};
+
+/* ===== DATOS: detección de valores atípicos en series de producción ===== */
+W.qcout=function(box,p,api){var h=mkui(box,[{k:'m',l:'Método',t:'sel',o:[['z','Z-score clásico (media y desvío)'],['mad','Mediana y MAD global'],['rol','Mediana móvil de 7 días + MAD']],v:p.m||'z'},{k:'k',l:'Umbral (en desvíos robustos)',min:1.5,max:6,step:.5,v:p.k||3,f:function(v){return nf(v,1)}}],draw,{side:true,w:640,h:360,touch:api.touch}),svg=h.svg;
+  var r=rng(11),N=90,x=[],y=[],bad={12:0,27:1650,40:0,55:1700,61:210,70:1500,83:0},i;
+  for(i=0;i<N;i++){x.push(i);y.push(850*Math.exp(-.012*i)+gauss(r)*14)}Object.keys(bad).forEach(function(k){y[+k]=bad[k]});
+  function med(a){var s=a.slice().sort(function(u,v){return u-v}),m=Math.floor(s.length/2);return s.length%2?s[m]:(s[m-1]+s[m])/2}
+  function draw(V){svg.innerHTML='';var fl=[],sc=[],i,res=[];
+    if(V.m==='z'){var mu=y.reduce(function(a,b){return a+b},0)/N,sd=Math.sqrt(y.reduce(function(a,b){return a+(b-mu)*(b-mu)},0)/N);y.forEach(function(v,i){sc[i]=Math.abs(v-mu)/sd})}
+    else if(V.m==='mad'){var m0=med(y),mad=1.4826*med(y.map(function(v){return Math.abs(v-m0)}));y.forEach(function(v,i){sc[i]=Math.abs(v-m0)/mad})}
+    else{for(i=0;i<N;i++){var w=y.slice(Math.max(0,i-3),Math.min(N,i+4));res[i]=y[i]-med(w)}var r0=med(res),sm=1.4826*med(res.map(function(v){return Math.abs(v-r0)}));res.forEach(function(v,i){sc[i]=Math.abs(v-r0)/sm})}
+    for(i=0;i<N;i++)fl[i]=sc[i]>V.k;
+    var P=plot(svg,640,360,{l:52,r:16,t:20,b:44},[0,N],[0,1900],{nx:6,ny:4,xl:'Día',yl:'Caudal (bbl/d)'}),tp=0,fp=0,fn=0;
+    for(i=0;i<N;i++){var isb=bad.hasOwnProperty(i),f=fl[i];if(f&&isb)tp++;else if(f)fp++;else if(isb)fn++;
+      sv('circle',{cx:P.X(i),cy:P.Y(y[i]),r:f?5:3,fill:f?RD:BL,'fill-opacity':f?1:.8,stroke:isb?'#fff':'none','stroke-width':1.2},svg)}
+    lbl(svg,P.m.l+8,P.m.t+14,'rojo = marcado como atípico · borde blanco = dato erróneo real',TX,10);
+    h.out('Detectó <strong>'+tp+' de 7</strong> datos erróneos, con <strong>'+fp+'</strong> falsas alarmas y <strong>'+fn+'</strong> sin detectar. '+(V.m==='z'?'El z-score usa la media y el desvío, que los propios errores inflan: <strong>los enmascaran</strong> y marca la declinación normal.':V.m==='mad'?'La mediana y el MAD resisten a los errores, pero la <strong>tendencia</strong> de declinación sigue sobrando: marca los extremos de la curva.':'Al comparar con la mediana móvil se <strong>descuenta la tendencia</strong> y solo queda el ruido y los errores: es lo que se usa en la práctica.')+' (Serie sintética de ejemplo.)')}
+  draw(h.V)};
+
+/* ===== DATOS: sobreajuste (polinomios) ===== */
+W.mlfit=function(box,p,api){var h=mkui(box,[{k:'dg',l:'Complejidad del modelo (grado)',min:1,max:10,step:1,v:p.dg||3,f:function(v){return v}},{k:'lm',l:'Regularización (ridge)',min:0,max:.05,step:.001,v:p.lm||0,f:function(v){return nf(v,3)}}],draw,{side:true,w:640,h:360,touch:api.touch}),svg=h.svg;
+  var r=rng(5),tr=[],te=[],i,fx=function(x){return .5+.35*Math.sin(2*Math.PI*x*.9)};
+  for(i=0;i<14;i++){var x=r();tr.push([x,fx(x)+gauss(r)*.07])}for(i=0;i<40;i++){var x2=r();te.push([x2,fx(x2)+gauss(r)*.07])}
+  function fit(d,lm){var n=d+1,A=[],b=[],i,j,k;for(i=0;i<n;i++){A[i]=[];b[i]=0;for(j=0;j<n;j++)A[i][j]=0}
+    tr.forEach(function(pt){var u=2*pt[0]-1,pw=[],k2;for(k2=0;k2<n;k2++)pw[k2]=Math.pow(u,k2);for(i=0;i<n;i++){b[i]+=pw[i]*pt[1];for(j=0;j<n;j++)A[i][j]+=pw[i]*pw[j]}});
+    for(i=1;i<n;i++)A[i][i]+=lm*tr.length;
+    for(i=0;i<n;i++){var mx=i;for(k=i+1;k<n;k++)if(Math.abs(A[k][i])>Math.abs(A[mx][i]))mx=k;var t=A[i];A[i]=A[mx];A[mx]=t;t=b[i];b[i]=b[mx];b[mx]=t;if(Math.abs(A[i][i])<1e-12)A[i][i]=1e-12;for(k=i+1;k<n;k++){var f=A[k][i]/A[i][i];for(j=i;j<n;j++)A[k][j]-=f*A[i][j];b[k]-=f*b[i]}}
+    var c=[];for(i=n-1;i>=0;i--){var s=b[i];for(j=i+1;j<n;j++)s-=A[i][j]*c[j];c[i]=s/A[i][i]}return c}
+  function ev(c,x){var u=2*x-1,s=0,k;for(k=0;k<c.length;k++)s+=c[k]*Math.pow(u,k);return s}
+  function rm(c,set){return Math.sqrt(set.reduce(function(a,p2){var e=ev(c,p2[0])-p2[1];return a+e*e},0)/set.length)}
+  function draw(V){svg.innerHTML='';var c=fit(V.dg,V.lm),P=plot(svg,640,360,{l:46,r:16,t:20,b:44},[0,1],[-.2,1.3],{nx:5,ny:5,xl:'Variable de entrada (normalizada)',yl:'Salida'}),a=[],u,bestD=1,bestE=1e9,d;
+    for(u=0;u<=1.0001;u+=.01)a.push([u,Math.max(-.2,Math.min(1.3,ev(c,u)))]);path(svg,a.map(function(z){return[z[0],fx(z[0])]}),P.X,P.Y,GN,1.4,'5 4');
+    te.forEach(function(q){sv('circle',{cx:P.X(q[0]),cy:P.Y(q[1]),r:2.2,fill:'#fff','fill-opacity':.35},svg)});tr.forEach(function(q){sv('circle',{cx:P.X(q[0]),cy:P.Y(q[1]),r:4.2,fill:AM,stroke:'#0b1a30'},svg)});path(svg,a,P.X,P.Y,BL,2.8);
+    for(d=1;d<=10;d++){var e=rm(fit(d,V.lm),te);if(e<bestE){bestE=e;bestD=d}}
+    var etr=rm(c,tr),ete=rm(c,te);
+    lbl(svg,P.m.l+8,P.m.t+14,'naranja = entrenamiento · blanco = prueba (datos no vistos) · verde = relación real',TX,10);
+    h.out('Error de <strong>entrenamiento</strong>: '+nf(etr,3)+' · error en <strong>prueba</strong>: <strong>'+nf(ete,3)+'</strong>. '+(ete>etr*1.8&&V.dg>4?'<strong style="color:'+RD+'">Sobreajuste</strong>: el modelo memoriza el ruido de los 14 puntos y falla con datos nuevos. ':V.dg<3?'<strong style="color:'+RD+'">Subajuste</strong>: el modelo es demasiado simple para la relación. ':'')+'Con esta regularización, el mejor grado en prueba es <strong>'+bestD+'</strong>. Subí el grado y después la regularización: el error de entrenamiento nunca avisa del sobreajuste. (Datos sintéticos.)')}
+  draw(h.V)};
+
 /* ===== MAPA DE COMPETENCIAS (curso) se dibuja en player.js ===== */
 W.build=function(name,box,p,api){if(!W[name]){box.innerHTML='<div class="out">Laboratorio no disponible: '+name+'</div>';return{}}return W[name](box,p||{},api||{touch:function(){}})||{}};
 })();

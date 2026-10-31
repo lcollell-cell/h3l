@@ -1,0 +1,893 @@
+{
+ "id": "frac",
+ "title": "Fractura hidráulica y completación de pozos no convencionales",
+ "subtitle": "De los esfuerzos de la roca al diseño de etapas, al diagnóstico y al pronóstico de producción.",
+ "desc": "Curso aplicado de estimulación en reservorios no convencionales: esfuerzos y fracturabilidad, geometría y fluidos, completación horizontal por etapas, diagnóstico con presiones y monitoreo, pronóstico con declinación hiperbólica modificada y operación responsable.",
+ "objectives": [
+  "Explicar por qué se necesita fracturar un reservorio de permeabilidad ultra baja.",
+  "Relacionar esfuerzos y propiedades de la roca con la geometría de la fractura.",
+  "Describir el diseño de una completación horizontal por etapas y clústeres.",
+  "Pronosticar la producción con declinación hiperbólica modificada y reconocer sus límites."
+ ],
+ "labs": [
+  "declinación hiperbólica modificada con declinación terminal",
+  "sensibilidad del EUR al exponente b",
+  "flujo de trabajo de una etapa de fractura",
+  "indicadores de eficiencia de completación"
+ ],
+ "practiceMin": 90,
+ "competencies": [
+  {
+   "name": "Geomecánica y fracturabilidad",
+   "lessons": [
+    "f1"
+   ]
+  },
+  {
+   "name": "Diseño de fractura y fluidos",
+   "lessons": [
+    "f2"
+   ]
+  },
+  {
+   "name": "Completación y diagnóstico",
+   "lessons": [
+    "f3",
+    "f4"
+   ]
+  },
+  {
+   "name": "Producción y operación",
+   "lessons": [
+    "f5",
+    "f6"
+   ]
+  }
+ ],
+ "intro": {
+  "hook": "Vamos a entender cómo se hace producir una roca casi impermeable: con una red de fracturas diseñada etapa por etapa.",
+  "questions": [
+   "¿Por qué una lutita no produce sin estimulación?",
+   "¿Qué decide cuánto crece una fractura y hacia dónde?",
+   "¿Cuánto produce un pozo no convencional a lo largo de su vida?"
+  ],
+  "star": {
+   "caso": "Barnett Shale: Mitchell Energy y la fractura con slickwater",
+   "S": "Mitchell Energy trabajó el Barnett desde comienzos de los años ochenta y, según fuentes secundarias, hacia 1997 había gastado unos 250 millones de dólares sin recuperar el gasto.",
+   "T": "Bajar el costo de las completaciones y aumentar la recuperación de gas.",
+   "A": "En 1997 el ingeniero Nick Steinsberger propuso usar fractura con agua de baja viscosidad, o slickwater, ya empleada en el este de Texas, en lugar de geles.",
+   "R": "El pozo S.H. Griffin N.º 3 superó en sus primeros noventa días a los anteriores de la compañía, y la completación costaba entre 75.000 y 100.000 dólares menos."
+  }
+ },
+ "modules": [
+  {
+   "id": "fm1",
+   "title": "Módulo 1 · La roca y la fractura",
+   "lessons": [
+    {
+     "id": "f1",
+     "title": "Esfuerzos y fracturabilidad",
+     "comp": "Geomecánica y fracturabilidad",
+     "cues": [
+      {
+       "say": "En una lutita la permeabilidad se mide en nanodarcies. El petróleo y el gas están en poros diminutos, y no llegan al pozo con un caudal útil. La fractura crea una superficie de contacto enorme y un camino de alta conductividad.",
+       "scene": {
+        "t": "bul",
+        "k": "Por qué se fractura",
+        "h": "El problema del no convencional",
+        "items": [
+         "Permeabilidad de matriz de nanodarcies",
+         "Poros pequeños con hidrocarburo almacenado",
+         "Sin estimulación el caudal es casi nulo",
+         "La fractura multiplica el área de contacto",
+         "Se necesita un pozo horizontal con muchas etapas"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "La fractura se abre cuando la presión del fluido supera el esfuerzo mínimo de la roca. Y se propaga perpendicular a ese esfuerzo mínimo, que suele ser horizontal. Por eso los pozos se perforan en la dirección del esfuerzo mínimo, y las fracturas resultan transversales.",
+       "scene": {
+        "t": "fm",
+        "k": "Condición de apertura",
+        "h": "Presión neta",
+        "f": "p neta = p fluido en la fractura − σ mínimo\n\nLa fractura crece si p neta > 0",
+        "n": "La presión neta controla el ancho. Las barreras de esfuerzo en las capas vecinas controlan la altura."
+       }
+      },
+      {
+       "say": "Qué hace fracturable a una roca. Contraste de esfuerzos con las capas vecinas, módulo de Young y relación de Poisson, presión de poro, contenido de arcilla y de materia orgánica, y fracturas naturales.",
+       "scene": {
+        "t": "tbl",
+        "k": "Fracturabilidad",
+        "h": "Propiedades y su efecto",
+        "cols": [
+         "Propiedad",
+         "Por qué importa"
+        ],
+        "rows": [
+         [
+          "Esfuerzo mínimo",
+          "Fija la presión de apertura y la dirección"
+         ],
+         [
+          "Contraste con capas vecinas",
+          "Limita el crecimiento en altura"
+         ],
+         [
+          "Módulo de Young y Poisson",
+          "Ancho de la fractura y confinamiento"
+         ],
+         [
+          "Presión de poro",
+          "La sobrepresión favorece la producción"
+         ],
+         [
+          "Fracturas naturales",
+          "Pueden aumentar la complejidad de la red"
+         ],
+         [
+          "Arcilla y materia orgánica",
+          "Afectan fragilidad y almacenamiento"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "La fractura hidráulica se propaga en dirección perpendicular a:",
+        "o": [
+         "El esfuerzo mínimo",
+         "El esfuerzo máximo",
+         "La gravedad",
+         "La estratificación"
+        ],
+        "a": 0,
+        "e": "Se abre contra la dirección de menor resistencia: perpendicular al esfuerzo mínimo."
+       }
+      }
+     ]
+    },
+    {
+     "id": "f2",
+     "title": "Geometría, fluidos y apuntalante",
+     "comp": "Diseño de fractura y fluidos",
+     "cues": [
+      {
+       "say": "Para estimar la geometría hay modelos clásicos. El PKN, de Perkins y Kern, de 1961, supone fracturas más largas que altas. El KGD, de Khristianovic, Geertsma y de Klerk, supone lo contrario. Los modelos modernos son pseudo-tridimensionales o planares tridimensionales.",
+       "scene": {
+        "t": "bul",
+        "k": "Modelos",
+        "h": "De PKN a 3D planar",
+        "items": [
+         "PKN: longitud mucho mayor que altura, ancho dependiente de la altura",
+         "KGD: altura mayor que longitud, ancho dependiente de la longitud",
+         "Pseudo-3D y planar 3D: altura variable según las capas",
+         "Siempre se calibran con presiones de tratamiento y diagnósticos"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Los fluidos se eligen por viscosidad. El slickwater es agua con reductor de fricción: baja viscosidad, caudales altos, fracturas largas. Los geles de alta viscosidad transportan más apuntalante y abren mayor ancho. Los sistemas híbridos combinan ambos.",
+       "scene": {
+        "t": "tbl",
+        "k": "Sistemas de fluido",
+        "h": "Características",
+        "cols": [
+         "Sistema",
+         "Características",
+         "Cuándo se usa"
+        ],
+        "rows": [
+         [
+          "Slickwater",
+          "Baja viscosidad, alto caudal, fracturas largas y complejas",
+          "Lutitas frágiles de baja permeabilidad"
+         ],
+         [
+          "Gel entrecruzado",
+          "Alta viscosidad, transporta más apuntalante, más ancho",
+          "Formaciones de mayor permeabilidad o dúctiles"
+         ],
+         [
+          "Híbrido",
+          "Slickwater con barridos de gel",
+          "Compromiso de costo y transporte"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Este es el caso que mostró que el fluido importa. En el Barnett, Mitchell Energy pasó de geles a fractura con slickwater a fines de los años noventa.",
+       "scene": {
+        "t": "case",
+        "h": "Barnett: de geles a slickwater",
+        "src": "Barnett Shale (Wikipedia) y fuentes secundarias. Conviene verificar las cifras con fuentes primarias.",
+        "S": "Mitchell Energy trabajaba el Barnett desde 1981. Según fuentes secundarias, había gastado unos 250 millones de dólares hacia 1997 sin recuperarlos.",
+        "T": "Reducir el costo de completación y aumentar la recuperación de gas.",
+        "A": "En 1997 Nick Steinsberger propuso usar slickwater, ya empleado en el este de Texas, en lugar de geles. En 1998, el pozo S.H. Griffin N.º 3 fue la primera prueba.",
+        "R": "Superó a los pozos anteriores de la compañía en sus primeros 90 días, y redujo el costo de completación en 75.000 a 100.000 dólares. Luego se sumaron los pozos horizontales: en 2008 se completaron 2.901 horizontales frente a 183 verticales."
+       }
+      },
+      {
+       "say": "El apuntalante mantiene abierta la fractura. Lo más usado es arena. Hay que cuidar la granulometría, la resistencia al esfuerzo de cierre y el transporte, porque la conductividad depende de él. La arena de producción regional reduce costos logísticos.",
+       "scene": {
+        "t": "bul",
+        "k": "Apuntalante",
+        "h": "Qué se cuida",
+        "items": [
+         "Resistencia al esfuerzo de cierre de la fractura",
+         "Granulometría y transporte en el fluido elegido",
+         "Conductividad a lo largo de la vida del pozo",
+         "Logística: la arena es una parte grande del costo"
+        ]
+       },
+       "hl": 2
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Un fluido de baja viscosidad con alto caudal, para fracturas largas y complejas, es:",
+        "o": [
+         "Slickwater",
+         "Gel entrecruzado",
+         "Aire",
+         "Salmuera pesada"
+        ],
+        "a": 0,
+        "e": "El slickwater es agua con reductor de fricción, de baja viscosidad."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "La presión neta de la fractura es:",
+     "o": [
+      "La presión del fluido menos el esfuerzo mínimo",
+      "La presión de poro",
+      "El esfuerzo máximo",
+      "El peso del lodo"
+     ],
+     "a": 0,
+     "e": "La fractura crece si esa diferencia es positiva."
+    },
+    {
+     "q": "Los pozos horizontales para fracturas transversales se perforan:",
+     "o": [
+      "En la dirección del esfuerzo mínimo",
+      "En la del esfuerzo máximo",
+      "Verticalmente",
+      "Al azar"
+     ],
+     "a": 0,
+     "e": "Así las fracturas, perpendiculares al esfuerzo mínimo, cortan el pozo en forma transversal."
+    },
+    {
+     "q": "El apuntalante se usa para:",
+     "o": [
+      "Mantener abierta la fractura",
+      "Aumentar el esfuerzo",
+      "Reducir la presión de poro",
+      "Bajar la viscosidad"
+     ],
+     "a": 0,
+     "e": "Sostiene la fractura abierta luego de que baja la presión."
+    }
+   ]
+  },
+  {
+   "id": "fm2",
+   "title": "Módulo 2 · Completación y diagnóstico",
+   "lessons": [
+    {
+     "id": "f3",
+     "title": "Completación horizontal: etapas y clústeres",
+     "comp": "Completación y diagnóstico",
+     "cues": [
+      {
+       "say": "Un pozo horizontal se completa en etapas. En cada una se cañonean varios clústeres, se bombea la fractura y se aísla la etapa con un tapón antes de pasar a la siguiente. El método más difundido es el de tapón y cañoneo, o plug and perf.",
+       "scene": {
+        "t": "viz",
+        "w": "concept",
+        "h": "Secuencia de una etapa",
+        "p": {
+         "nodes": [
+          {
+           "l": "Bajar tapón|y cañones",
+           "x": 10,
+           "y": 30,
+           "c": "#8ea2bd",
+           "n": "El conjunto se bombea hasta la posición de la etapa."
+          },
+          {
+           "l": "Cañonear|los clústeres",
+           "x": 36,
+           "y": 30,
+           "c": "#3A6BD0",
+           "n": "Se abren los canales de entrada en cada clúster."
+          },
+          {
+           "l": "Bombear|fractura",
+           "x": 62,
+           "y": 30,
+           "c": "#17755A",
+           "n": "Colchón, rampa de arena y barrido a caudal alto."
+          },
+          {
+           "l": "Aislar|con tapón",
+           "x": 86,
+           "y": 30,
+           "c": "#b7791f",
+           "n": "El tapón separa esta etapa de la siguiente."
+          },
+          {
+           "l": "Repetir|etapa siguiente",
+           "x": 48,
+           "y": 72,
+           "c": "#8ea2bd",
+           "n": "Se repite el ciclo hasta completar el lateral. Luego se fresan los tapones."
+          }
+         ],
+         "edges": [
+          [
+           0,
+           1
+          ],
+          [
+           1,
+           2
+          ],
+          [
+           2,
+           3
+          ],
+          [
+           3,
+           4
+          ]
+         ],
+         "hint": "Tocá cada bloque para ver el detalle."
+        }
+       },
+       "hl": 2
+      },
+      {
+       "say": "Los parámetros de diseño son la longitud de etapa, el número de clústeres por etapa, el espaciamiento entre clústeres, el volumen de fluido y de apuntalante por pie lateral y el caudal de bombeo.",
+       "scene": {
+        "t": "tbl",
+        "k": "Diseño de etapas",
+        "h": "Parámetros y su efecto",
+        "cols": [
+         "Parámetro",
+         "Efecto principal",
+         "Cuidado"
+        ],
+        "rows": [
+         [
+          "Espaciamiento de clústeres",
+          "Densidad de fracturas",
+          "Muy cerca: interferencia entre fracturas"
+         ],
+         [
+          "Apuntalante por pie",
+          "Conductividad y área",
+          "Costo y riesgo de arenamiento"
+         ],
+         [
+          "Caudal de bombeo",
+          "Ancho y distribución",
+          "Limitado por potencia y presión"
+         ],
+         [
+          "Orificios por clúster",
+          "Distribución del fluido",
+          "Pocos orificios mejoran la distribución, con mayor presión"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Un problema conocido es la eficiencia de los clústeres. En muchas etapas no todos los clústeres reciben fluido de manera pareja. Por eso se diagnostica con fibra óptica, trazadores y registros de producción, y se ajusta el diseño.",
+       "scene": {
+        "t": "bul",
+        "k": "Eficiencia",
+        "h": "Distribución desigual entre clústeres",
+        "items": [
+         "No todos los clústeres aportan lo mismo",
+         "Se mide con fibra óptica, trazadores y registros",
+         "Técnicas de desvío y diseño de cañoneo mejoran el reparto",
+         "El objetivo es más producción por dólar, no más etapas"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "El tapón entre etapas sirve para:",
+        "o": [
+         "Aislar la etapa ya fracturada de la siguiente",
+         "Aumentar la presión de poro",
+         "Medir el caudal",
+         "Cementar el pozo"
+        ],
+        "a": 0,
+        "e": "Permite fracturar cada etapa por separado."
+       }
+      }
+     ]
+    },
+    {
+     "id": "f4",
+     "title": "Diagnóstico y monitoreo de la fractura",
+     "comp": "Completación y diagnóstico",
+     "cues": [
+      {
+       "say": "La presión de tratamiento durante el bombeo es una fuente de información. Nolte y Smith, en 1981, propusieron interpretar la presión neta contra el tiempo en escala doble logarítmica y reconocer cuatro modos de propagación.",
+       "scene": {
+        "t": "tbl",
+        "k": "Gráfico de Nolte y Smith",
+        "h": "Modos de propagación",
+        "cols": [
+         "Modo",
+         "Pendiente de la presión neta",
+         "Interpretación"
+        ],
+        "rows": [
+         [
+          "I",
+          "Positiva, baja",
+          "Propagación estable en longitud"
+         ],
+         [
+          "II",
+          "Cercana a cero",
+          "Crecimiento de altura o filtrado dependiente de presión"
+         ],
+         [
+          "III",
+          "Positiva, unitaria",
+          "Restricción: arenamiento en la punta"
+         ],
+         [
+          "IV",
+          "Negativa",
+          "Crecimiento de altura sin control"
+         ]
+        ],
+        "n": "Es una interpretación cualitativa y se combina con otros diagnósticos."
+       }
+      },
+      {
+       "say": "Además de la presión hay otras herramientas. La microsísmica ubica eventos de ruptura. La fibra óptica registra deformación y temperatura. Los trazadores indican qué clústeres aportan. Y las pruebas de interferencia muestran conexiones entre pozos.",
+       "scene": {
+        "t": "bul",
+        "k": "Monitoreo",
+        "h": "Herramientas y para qué sirven",
+        "items": [
+         "Microsísmica: ubicación de eventos y extensión aproximada",
+         "Fibra óptica: distribución del fluido y producción por clúster",
+         "Trazadores: aporte de cada zona",
+         "Presiones en pozos vecinos: interferencia y golpes de fractura",
+         "DFIT: presión de poro y de cierre"
+        ]
+       },
+       "hl": 2
+      },
+      {
+       "say": "Un fenómeno importante es el efecto padre-hijo. Un pozo nuevo, o hijo, fracturado cerca de uno en producción, o padre, puede comunicarse con él, y perjudicar a ambos. Se maneja con el espaciamiento, el orden de fractura y el diseño.",
+       "scene": {
+        "t": "bul",
+        "k": "Padre e hijo",
+        "h": "Interferencia entre pozos",
+        "items": [
+         "El pozo hijo puede conectarse con el padre",
+         "La producción del padre puede caer temporalmente",
+         "El diseño y el espaciamiento deben considerarlo",
+         "Se vigila con presiones y datos de producción"
+        ]
+       },
+       "hl": 1
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "En el gráfico de Nolte y Smith, una pendiente positiva y unitaria sugiere:",
+        "o": [
+         "Restricción en la punta, riesgo de arenamiento",
+         "Crecimiento estable",
+         "Crecimiento de altura sin control",
+         "Fractura cerrada"
+        ],
+        "a": 0,
+        "e": "Es el modo III, de extensión restringida."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "El plug and perf consiste en:",
+     "o": [
+      "Cañonear, fracturar y aislar con tapón cada etapa",
+      "Perforar sin cañoneo",
+      "Cementar con gel",
+      "Cerrar el pozo"
+     ],
+     "a": 0,
+     "e": "Es el método de completación por etapas más usado."
+    },
+    {
+     "q": "Los golpes de fractura entre pozos vecinos se llaman efecto:",
+     "o": [
+      "Padre-hijo",
+      "Skin",
+      "Coning",
+      "Venturi"
+     ],
+     "a": 0,
+     "e": "Un pozo nuevo se comunica con uno viejo."
+    },
+    {
+     "q": "La fibra óptica permite:",
+     "o": [
+      "Ver cómo se reparte el fluido entre clústeres",
+      "Medir la porosidad",
+      "Calcular el peso del lodo",
+      "Medir el pH del agua"
+     ],
+     "a": 0,
+     "e": "Registra distribución de deformación y temperatura a lo largo del pozo."
+    }
+   ]
+  },
+  {
+   "id": "fm3",
+   "title": "Módulo 3 · Producción y operación",
+   "lessons": [
+    {
+     "id": "f5",
+     "title": "Pronóstico de producción: declinación modificada",
+     "comp": "Producción y operación",
+     "cues": [
+      {
+       "say": "Los pozos no convencionales tienen una declinación inicial muy fuerte, con flujo lineal prolongado. Con el modelo hiperbólico de Arps, el exponente b suele superar uno, y la curva decrece cada vez más despacio.",
+       "scene": {
+        "t": "bul",
+        "k": "Comportamiento",
+        "h": "Declinación de un pozo no convencional",
+        "items": [
+         "Declinación inicial alta, de decenas por ciento por año",
+         "Flujo lineal de largo plazo: b mayor que uno en el ajuste",
+         "Con b mayor que uno, la hiperbólica sobreestima la cola",
+         "Se corrige con una declinación terminal mínima"
+        ]
+       },
+       "hl": 2
+      },
+      {
+       "say": "La práctica habitual es la hiperbólica modificada. Se usa la hiperbólica hasta que la declinación instantánea baja a un valor mínimo, y desde ahí se pasa a una exponencial con esa declinación terminal.",
+       "scene": {
+        "t": "fm",
+        "k": "Hiperbólica modificada",
+        "h": "Cambio a declinación terminal",
+        "f": "q(t) = qi / (1 + b · Di · t)^(1/b)     para t ≤ ts\nq(t) = q(ts) · exp( −Dmin · (t − ts) )   para t > ts\n\nts = ( Di / Dmin − 1 ) / ( b · Di )",
+        "n": "Dmin es una hipótesis que se justifica con análogos y con el comportamiento de los pozos más antiguos."
+       }
+      },
+      {
+       "say": "Laboratorio. Es un pozo de ejemplo. Mové el exponente b y la declinación terminal, y compará el volumen a treinta años con el de la hiperbólica pura. Mirá cuándo pasa a declinación terminal.",
+       "scene": {
+        "t": "viz",
+        "w": "shale",
+        "h": "Hiperbólica modificada y EUR",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "Hay otros modelos para no convencionales, como el de exponencial estirada de Valkó, el de potencia con exponencial de Ilk y el de Duong. Se prueban con datos y se comparan con análogos. En reservas se exige además razonabilidad de los volúmenes.",
+       "scene": {
+        "t": "bul",
+        "k": "Otros modelos",
+        "h": "Alternativas a Arps",
+        "items": [
+         "Exponencial estirada, de Valkó",
+         "Potencia y exponencial, de Ilk y colaboradores",
+         "Duong, para fracturas dominantes",
+         "Análisis RTA con presiones de producción",
+         "Siempre contrastados con análogos y datos"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Con un exponente b mayor que uno, sin una declinación terminal, el volumen a largo plazo:",
+        "o": [
+         "Se sobreestima",
+         "Se subestima",
+         "No cambia",
+         "Es cero"
+        ],
+        "a": 0,
+        "e": "La hiperbólica con b > 1 decrece muy lentamente en la cola y acumula volumen irreal."
+       }
+      }
+     ]
+    },
+    {
+     "id": "f6",
+     "title": "Eficiencia, costos y operación responsable",
+     "comp": "Producción y operación",
+     "cues": [
+      {
+       "say": "Para vigilar una campaña se siguen indicadores simples. Etapas por día, costo por pie lateral, producción por pie lateral y relación entre el costo de la completación y el EUR. Sin ellos es difícil distinguir lo que mejora de lo que solo cambia.",
+       "scene": {
+        "t": "tbl",
+        "k": "Indicadores",
+        "h": "Qué mide cada uno",
+        "cols": [
+         "Indicador",
+         "Qué mide",
+         "Cuidado"
+        ],
+        "rows": [
+         [
+          "Etapas por día",
+          "Eficiencia operativa",
+          "Más rápido no es mejor si baja la calidad"
+         ],
+         [
+          "USD por pie lateral",
+          "Costo de completación",
+          "Comparar con el mismo diseño"
+         ],
+         [
+          "EUR por pie lateral",
+          "Productividad",
+          "Depende de la calidad de roca"
+         ],
+         [
+          "USD por barril de EUR",
+          "Eficiencia de capital",
+          "Sensible a la hipótesis de b y Dmin"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "La operación debe ser responsable. El agua se maneja con reutilización y tratamiento. Se vigila la sismicidad inducida con monitoreo. Se cuida la integridad de los pozos y se reducen las emisiones de metano y de la combustión de equipos.",
+       "scene": {
+        "t": "bul",
+        "k": "Operación responsable",
+        "h": "Riesgos y prácticas",
+        "items": [
+         "Agua: reutilizar el flowback y cuidar fuentes",
+         "Sismicidad inducida: monitoreo y protocolos de reducción",
+         "Integridad del pozo: cementación y pruebas",
+         "Emisiones: terminaciones con captura, bombas y motores eficientes",
+         "Comunicación y cumplimiento con las autoridades"
+        ]
+       },
+       "hl": 1
+      },
+      {
+       "say": "Una mejora real es tratar la completación como un proceso que se aprende. Se prueban variantes, se miden resultados con indicadores comparables, y se escala lo que funciona. Es la historia del Barnett y de los desarrollos posteriores.",
+       "scene": {
+        "t": "bul",
+        "k": "Mejora continua",
+        "h": "Cómo aprender de la campaña",
+        "items": [
+         "Variar un parámetro por vez cuando sea posible",
+         "Usar un pozo tipo como referencia",
+         "Registrar el diseño y las condiciones de cada pozo",
+         "Revisar los resultados con estadística y no con casos aislados"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Para comparar la productividad de dos pozos conviene mirar:",
+        "o": [
+         "EUR por pie lateral con el mismo diseño y calidad de roca",
+         "Solo el caudal del primer día",
+         "Solo el costo total",
+         "El número de etapas"
+        ],
+        "a": 0,
+        "e": "Normalizar por longitud y comparar bajo las mismas condiciones evita conclusiones engañosas."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "La hiperbólica modificada agrega a la de Arps:",
+     "o": [
+      "Una declinación terminal mínima",
+      "Más agua",
+      "Un choke",
+      "Una corrección de temperatura"
+     ],
+     "a": 0,
+     "e": "Desde cierto punto se pasa a una exponencial con declinación mínima."
+    },
+    {
+     "q": "El tiempo de cambio ts aumenta cuando:",
+     "o": [
+      "Dmin baja",
+      "Dmin sube",
+      "b es cero",
+      "Di es cero"
+     ],
+     "a": 0,
+     "e": "Con una declinación terminal menor, la hiperbólica dura más tiempo."
+    },
+    {
+     "q": "Una buena práctica en la operación es:",
+     "o": [
+      "Reutilizar el agua de retorno",
+      "Ignorar la sismicidad",
+      "No medir emisiones",
+      "No registrar diseño"
+     ],
+     "a": 0,
+     "e": "Reduce el consumo de agua fresca y el pasivo ambiental."
+    }
+   ]
+  }
+ ],
+ "exam": [
+  {
+   "q": "La fractura se abre cuando:",
+   "o": [
+    "La presión del fluido supera el esfuerzo mínimo",
+    "La presión cae a cero",
+    "La arena es fina",
+    "El pozo está cerrado"
+   ],
+   "a": 0,
+   "e": "La presión neta debe ser positiva."
+  },
+  {
+   "q": "Una fractura con altura limitada se explica por:",
+   "o": [
+    "Barreras de esfuerzo en las capas vecinas",
+    "El peso del lodo",
+    "La temperatura",
+    "El diámetro del tubing"
+   ],
+   "a": 0,
+   "e": "El contraste de esfuerzos frena el crecimiento vertical."
+  },
+  {
+   "q": "El slickwater se caracteriza por:",
+   "o": [
+    "Baja viscosidad y alto caudal",
+    "Alta viscosidad",
+    "No contiene agua",
+    "Solo transporta arena fina"
+   ],
+   "a": 0,
+   "e": "Es agua con reductor de fricción."
+  },
+  {
+   "q": "Una pendiente positiva y unitaria en Nolte y Smith sugiere:",
+   "o": [
+    "Arenamiento en la punta",
+    "Crecimiento estable",
+    "Fractura cerrada",
+    "Sin presión"
+   ],
+   "a": 0,
+   "e": "Es el modo III, de extensión restringida."
+  },
+  {
+   "q": "La hiperbólica con b > 1 sin declinación mínima:",
+   "o": [
+    "Sobreestima el volumen",
+    "Subestima el volumen",
+    "Es exacta",
+    "Da volumen cero"
+   ],
+   "a": 0,
+   "e": "La cola decrece muy lentamente."
+  },
+  {
+   "q": "El efecto padre-hijo es:",
+   "o": [
+    "Interferencia entre un pozo nuevo y uno vecino",
+    "Un tipo de apuntalante",
+    "Un fluido",
+    "Una válvula"
+   ],
+   "a": 0,
+   "e": "Los pozos se comunican por las fracturas."
+  }
+ ],
+ "outro": {
+  "phrase": "Fracturar es ingeniería de detalle: cada etapa cuenta.",
+  "recap": [
+   "Los esfuerzos de la roca fijan la presión, la dirección y la altura de la fractura.",
+   "El diseño de etapas y fluidos se ajusta con diagnósticos y con indicadores comparables.",
+   "La declinación modificada evita sobreestimar el volumen, y la operación responsable es parte del diseño."
+  ]
+ },
+ "downloads": [
+  {
+   "file": "xlsx/H3L_Fractura_y_Pronostico_No_Convencional.xlsx",
+   "title": "Pronóstico, etapas y Nolte-Smith (Excel)",
+   "desc": "Declinación hiperbólica modificada mensual con EUR y economía simple, tabla de etapas con costo por pie lateral y clasificación de modos de Nolte y Smith a partir de presión neta.",
+   "task": "Pasá el exponente b de 1,2 a 1,8 y calculá cuánto sube el EUR con y sin declinación terminal. Después identificá en qué etapa la presión neta indica arenamiento."
+  }
+ ],
+ "cases": [
+  {
+   "title": "Barnett Shale: Mitchell Energy y el slickwater",
+   "text": "Según las fuentes secundarias consultadas, Mitchell Energy trabajó el Barnett desde 1981 y hacia 1997 había gastado unos 250 millones de dólares sin recuperar el gasto. En 1997 Nick Steinsberger propuso fracturar con slickwater, y en 1998 el pozo S.H. Griffin N.º 3 superó a los anteriores en sus primeros 90 días. En 2002 Devon Energy adquirió Mitchell Energy. En 2008 se completaron 2.901 pozos horizontales y 183 verticales. Las cifras provienen de fuentes secundarias, y conviene verificarlas con fuentes primarias.",
+   "src": "Barnett Shale (Wikipedia); Zuckerman, G. (2013). The Frackers"
+  }
+ ],
+ "refs": [
+  {
+   "tag": "Paper",
+   "cite": "Perkins, T. K. y Kern, L. R. (1961). Widths of hydraulic fractures. JPT 13(9), 937–949 (SPE 89).",
+   "why": "modelo PKN"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Nordgren, R. P. (1972). Propagation of a vertical hydraulic fracture. SPE Journal 12(4), 306–314 (SPE 3009).",
+   "why": "modelo PKN con filtrado"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Nolte, K. G. y Smith, M. B. (1981). Interpretation of fracturing pressures. JPT 33(9), 1767–1775 (SPE 8297).",
+   "why": "diagnóstico con presión neta"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Nolte, K. G. (1979). Determination of fracture parameters from fracturing pressure decline. SPE 8341.",
+   "why": "análisis de cierre, DFIT"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Valkó, P. P. (2009). Assigning value to stimulation in the Barnett Shale: a simultaneous analysis of 7000 plus production histories and well completion records. SPE 119369.",
+   "why": "exponencial estirada"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Ilk, D., Rushing, J. A., Perego, A. D. y Blasingame, T. A. (2008). Exponential vs. hyperbolic decline in tight gas sands. SPE 116731.",
+   "why": "declinación en reservorios de baja permeabilidad"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Duong, A. N. (2011). Rate-decline analysis for fracture-dominated shale reservoirs. SPE Reservoir Evaluation & Engineering 14(3), 377–387.",
+   "why": "modelo de Duong"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Economides, M. J. y Nolte, K. G. (2000). Reservoir Stimulation, 3.ª ed. Wiley.",
+   "why": "texto de estimulación"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Zuckerman, G. (2013). The Frackers. Portfolio/Penguin.",
+   "why": "historia del Barnett y de Mitchell Energy"
+  },
+  {
+   "tag": "Estándar",
+   "cite": "SPE, AAPG, WPC, SPEE, SEG y EAGE (2018). Petroleum Resources Management System (PRMS), actualización 2018.",
+   "why": "clasificación de recursos y reservas"
+  }
+ ]
+}

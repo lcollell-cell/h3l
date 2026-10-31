@@ -1,0 +1,763 @@
+{
+ "id": "eco",
+ "title": "Economía petrolera y decisión bajo incertidumbre",
+ "subtitle": "Flujo de caja, sensibilidades, valor esperado, valor de la información y lecciones de megaproyectos.",
+ "desc": "Curso aplicado de evaluación económica en el upstream: flujo de caja y VPN, sensibilidades con tornado, decisiones con valor monetario esperado y árboles, regímenes fiscales, portafolio, límite económico y casos reales de sobrecostos y de precios extremos.",
+ "objectives": [
+  "Armar el flujo de caja de un proyecto upstream y calcular VPN, TIR y payback.",
+  "Construir un análisis de sensibilidad con tornado e identificar las variables críticas.",
+  "Decidir con valor monetario esperado y reconocer el efecto de la probabilidad y del portafolio.",
+  "Explicar cómo los precios y los costos afectan el límite económico y las reservas."
+ ],
+ "labs": [
+  "tornado de sensibilidades sobre el VPN",
+  "árbol de decisión con valor esperado",
+  "portafolio de pozos y probabilidad de pérdida",
+  "efecto del precio sobre el proyecto"
+ ],
+ "practiceMin": 90,
+ "competencies": [
+  {
+   "name": "Flujo de caja e indicadores",
+   "lessons": [
+    "c1"
+   ]
+  },
+  {
+   "name": "Sensibilidades y escenarios",
+   "lessons": [
+    "c2"
+   ]
+  },
+  {
+   "name": "Decisión bajo incertidumbre",
+   "lessons": [
+    "c3"
+   ]
+  },
+  {
+   "name": "Fiscalidad, portafolio y casos",
+   "lessons": [
+    "c4",
+    "c5",
+    "c6"
+   ]
+  }
+ ],
+ "intro": {
+  "hook": "Vamos a aprender a decidir con números cuando casi todo es incierto: el precio, el volumen, el costo y hasta el resultado del pozo.",
+  "questions": [
+   "¿Cómo se sabe si un proyecto upstream vale la pena?",
+   "¿Qué variable mueve más el resultado y cuál conviene cuidar?",
+   "¿Por qué un pozo con valor esperado positivo puede ser mala idea, y un portafolio no?"
+  ],
+  "star": {
+   "caso": "Kashagan (Kazajistán): tiempos y costos de un megaproyecto",
+   "S": "El campo Kashagan, en el Mar Caspio norte, fue desarrollado con islas artificiales y gas con alto contenido de azufre.",
+   "T": "Iniciar la producción y recuperar la inversión en los plazos del plan original.",
+   "A": "La producción comenzó en septiembre de 2013, más de una década después de lo previsto, y se detuvo semanas después por la corrosión de cañerías por gas sulfuroso.",
+   "R": "Un presupuesto de 38.000 millones de dólares en 2008 subió a 53.000 millones hacia fines de 2015, y la producción se reinició en octubre de 2016."
+  }
+ },
+ "modules": [
+  {
+   "id": "cm1",
+   "title": "Módulo 1 · Evaluación económica",
+   "lessons": [
+    {
+     "id": "c1",
+     "title": "Flujo de caja e indicadores de un proyecto upstream",
+     "comp": "Flujo de caja e indicadores",
+     "cues": [
+      {
+       "say": "El flujo de caja de un proyecto upstream parte del ingreso por la producción, resta regalías, costos operativos, impuestos e inversiones, y se descuenta en el tiempo. Su valor presente neto es la medida central.",
+       "scene": {
+        "t": "fm",
+        "k": "Valor presente neto",
+        "h": "Definición",
+        "f": "FC(t) = Ingresos − Regalías − Opex − Impuestos − Capex\n\nVPN = Σ FC(t) / (1 + r)^t",
+        "n": "El flujo se calcula por período y se descuenta a la tasa r. Un VPN positivo indica que el proyecto rinde más que la tasa exigida."
+       }
+      },
+      {
+       "say": "Además del VPN se usan otros indicadores. La TIR es la tasa que anula el VPN. El payback es el tiempo para recuperar la inversión. Y el índice de eficiencia de la inversión compara el VPN con el capital invertido.",
+       "scene": {
+        "t": "tbl",
+        "k": "Indicadores",
+        "h": "Qué dicen y qué no dicen",
+        "cols": [
+         "Indicador",
+         "Qué dice",
+         "Límite"
+        ],
+        "rows": [
+         [
+          "VPN",
+          "Valor creado a la tasa elegida",
+          "Depende de la tasa y de los supuestos"
+         ],
+         [
+          "TIR",
+          "Tasa de retorno del proyecto",
+          "Puede ser engañosa con flujos mixtos"
+         ],
+         [
+          "Payback",
+          "Rapidez de recuperación",
+          "Ignora lo que ocurre después"
+         ],
+         [
+          "VPN / inversión",
+          "Eficiencia del capital",
+          "Útil para ordenar proyectos con capital limitado"
+         ],
+         [
+          "Costo de desarrollo",
+          "USD por barril equivalente",
+          "No incluye el valor temporal sin descuento"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "El ingreso depende del precio y del perfil de producción. Los costos se dividen en variables, que crecen con el volumen, y fijos, que se pagan aunque el pozo produzca poco. Esta diferencia determina el límite económico.",
+       "scene": {
+        "t": "bul",
+        "k": "Estructura",
+        "h": "Qué entra en el flujo",
+        "items": [
+         "Ingreso neto de regalías según el contrato",
+         "Opex variable, por barril, y opex fijo, por mes",
+         "Capex de perforación, completación e instalaciones",
+         "Impuestos con depreciación de las inversiones",
+         "Abandono al final de la vida del proyecto"
+        ]
+       },
+       "hl": 1
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Un VPN positivo a la tasa de descuento elegida significa que el proyecto:",
+        "o": [
+         "Rinde más que la tasa exigida",
+         "Rinde menos que la tasa",
+         "No tiene costos",
+         "Es seguro"
+        ],
+        "a": 0,
+        "e": "El VPN positivo indica un rendimiento superior al exigido, sujeto a los supuestos."
+       }
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "title": "Sensibilidades y escenarios: el tornado",
+     "comp": "Sensibilidades y escenarios",
+     "cues": [
+      {
+       "say": "Todo flujo de caja descansa en supuestos inciertos. Un análisis de sensibilidad cambia una variable por vez dentro de un rango, y muestra cuánto se mueve el VPN. El gráfico que ordena los resultados se llama tornado.",
+       "scene": {
+        "t": "bul",
+        "k": "Sensibilidad",
+        "h": "Cómo se hace",
+        "items": [
+         "Fijar un caso base consistente",
+         "Elegir un rango razonable para cada variable",
+         "Cambiar una por vez y registrar el VPN",
+         "Ordenar por el rango de resultado, de mayor a menor",
+         "Detectar las variables críticas y las que casi no importan"
+        ]
+       },
+       "hl": 2
+      },
+      {
+       "say": "Laboratorio. Es un pozo de ejemplo con 120 meses. Cambiá el rango de variación y el precio base. Mirá qué variable domina y cuándo el proyecto pasa a dar pérdida.",
+       "scene": {
+        "t": "viz",
+        "w": "tornado",
+        "h": "Tornado de sensibilidades",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "El tornado tiene límites. Cambia una variable por vez, y en la realidad se mueven juntas. Los costos suelen subir cuando sube el precio. Para eso se usan escenarios consistentes, y simulaciones que consideran las correlaciones.",
+       "scene": {
+        "t": "bul",
+        "k": "Límites",
+        "h": "Qué no muestra el tornado",
+        "items": [
+         "Variables correlacionadas: precio y costos",
+         "Rangos que dependen del criterio de quien los define",
+         "Eventos discretos, como un pozo seco",
+         "No da probabilidades: para eso se usa Monte Carlo"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Un tornado se ordena de arriba hacia abajo por:",
+        "o": [
+         "El rango de resultado de cada variable",
+         "El orden alfabético",
+         "El caso base",
+         "El valor de la inversión"
+        ],
+        "a": 0,
+        "e": "La variable con mayor efecto sobre el VPN queda arriba."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "El VPN se calcula:",
+     "o": [
+      "Descontando los flujos de caja a una tasa",
+      "Sumando precios",
+      "Restando regalías solamente",
+      "Multiplicando por la TIR"
+     ],
+     "a": 0,
+     "e": "Cada flujo futuro se descuenta a valor presente."
+    },
+    {
+     "q": "Un costo fijo, a diferencia de uno variable:",
+     "o": [
+      "Se paga aunque la producción sea baja",
+      "Crece con el volumen",
+      "Se anula al cerrar el pozo",
+      "No afecta el límite económico"
+     ],
+     "a": 0,
+     "e": "Por eso fija el caudal mínimo económico."
+    },
+    {
+     "q": "En un análisis de tornado, se cambia:",
+     "o": [
+      "Una variable por vez",
+      "Todas a la vez",
+      "Ninguna",
+      "Solo el precio"
+     ],
+     "a": 0,
+     "e": "Cada barra representa el efecto de una variable."
+    }
+   ]
+  },
+  {
+   "id": "cm2",
+   "title": "Módulo 2 · Decisión bajo incertidumbre",
+   "lessons": [
+    {
+     "id": "c3",
+     "title": "Valor esperado, árboles y valor de la información",
+     "comp": "Decisión bajo incertidumbre",
+     "cues": [
+      {
+       "say": "Para una decisión con resultados inciertos se arma un árbol. Cada rama tiene una probabilidad y un valor. El valor monetario esperado, o VME, es el promedio ponderado de los resultados.",
+       "scene": {
+        "t": "fm",
+        "k": "Valor monetario esperado",
+        "h": "Un pozo con dos resultados",
+        "f": "VME = P · VPN éxito − ( 1 − P ) · Costo del pozo seco\n\nProbabilidad de equilibrio: P* = C / ( V + C )",
+        "n": "Si P es mayor que P*, el VME es positivo."
+       }
+      },
+      {
+       "say": "Laboratorio. Es un pozo exploratorio de ejemplo. Cambiá la probabilidad de éxito, el valor y el costo, y mirá el VME. Después subí el número de pozos del portafolio y mirá cómo baja la probabilidad de terminar con pérdida.",
+       "scene": {
+        "t": "viz",
+        "w": "emv",
+        "h": "Árbol de decisión y portafolio",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "Hay una diferencia importante. El VME es una regla para el largo plazo y los portafolios. Un pozo solo se gana o se pierde entero. Por eso se mira además cuánto se puede perder y qué tolerancia tiene la compañía al riesgo.",
+       "scene": {
+        "t": "bul",
+        "k": "Riesgo",
+        "h": "Más allá del promedio",
+        "items": [
+         "El VME promedia: un solo pozo no se promedia",
+         "Con más pozos independientes, baja la probabilidad de pérdida",
+         "La exposición máxima debe caber en el presupuesto",
+         "Las probabilidades de éxito suelen ser optimistas"
+        ]
+       },
+       "hl": 1
+      },
+      {
+       "say": "Y está el valor de la información. Una sísmica, una prueba o un pozo piloto cuestan, pero pueden cambiar la decisión. Se justifican si el valor esperado de lo que permiten decidir mejor supera su costo.",
+       "scene": {
+        "t": "bul",
+        "k": "Información",
+        "h": "Cuándo vale pagar por saber más",
+        "items": [
+         "Información perfecta: valor máximo teórico, igual a lo que se evita perder",
+         "La información real es imperfecta y vale menos",
+         "Se compara con su costo y con el tiempo que consume",
+         "Es útil cuando la decisión se puede cambiar según lo que se aprenda"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Con probabilidad de éxito igual a la de equilibrio, el VME es:",
+        "o": [
+         "Cero",
+         "Positivo",
+         "Negativo",
+         "Infinito"
+        ],
+        "a": 0,
+        "e": "Es la probabilidad para la cual lo que se gana en promedio es igual a lo que se pierde."
+       }
+      }
+     ]
+    },
+    {
+     "id": "c4",
+     "title": "Regímenes fiscales, contratos y financiamiento",
+     "comp": "Fiscalidad, portafolio y casos",
+     "cues": [
+      {
+       "say": "El resultado económico depende del régimen fiscal y contractual. Hay regalías sobre la producción, impuestos sobre las ganancias, y contratos que reparten producción y costos entre el Estado y las empresas.",
+       "scene": {
+        "t": "tbl",
+        "k": "Regímenes",
+        "h": "Cómo se reparte el valor",
+        "cols": [
+         "Régimen",
+         "Cómo funciona",
+         "Efecto típico"
+        ],
+        "rows": [
+         [
+          "Concesión",
+          "La empresa tiene el recurso y paga regalías e impuestos",
+          "La empresa asume el riesgo y el costo"
+         ],
+         [
+          "Producción compartida",
+          "El Estado recibe una parte de la producción luego de recuperar costos",
+          "Hay recuperación de costos y reparto de ganancia"
+         ],
+         [
+          "Contrato de servicio",
+          "Se paga un honorario por el servicio prestado",
+          "El riesgo de precio recae sobre el Estado"
+         ]
+        ],
+        "n": "Los detalles dependen de cada país y cada contrato. Se verifica siempre la normativa y las cláusulas vigentes."
+       }
+      },
+      {
+       "say": "Un indicador de síntesis es la participación del Estado, o government take. Es la porción del valor total del proyecto que va al Estado por regalías, impuestos y reparto de producción. Sirve para comparar regímenes.",
+       "scene": {
+        "t": "bul",
+        "k": "Participación del Estado",
+        "h": "Qué se compara",
+        "items": [
+         "Regalías, impuestos y reparto de producción",
+         "Se mide sobre el valor total del proyecto",
+         "Regímenes progresivos sacan más cuando el precio sube",
+         "Un régimen que castiga el éxito reduce la inversión"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "También hay que pensar el financiamiento. La estructura de capital, el costo de la deuda, las coberturas de precio y las garantías afectan el riesgo y la tasa de descuento. Se evalúan junto al proyecto y no por separado.",
+       "scene": {
+        "t": "bul",
+        "k": "Financiamiento",
+        "h": "Variables relevantes",
+        "items": [
+         "Deuda y capital propio: costo de cada uno",
+         "Coberturas de precio para estabilizar el flujo",
+         "Garantías y condiciones del financiamiento",
+         "Impacto sobre la tasa de descuento del proyecto"
+        ]
+       },
+       "hl": 1
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "La participación del Estado resume:",
+        "o": [
+         "La porción del valor del proyecto que recibe el Estado",
+         "El costo del pozo",
+         "El precio del crudo",
+         "La tasa de descuento"
+        ],
+        "a": 0,
+        "e": "Incluye regalías, impuestos y reparto de producción."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "El valor monetario esperado se obtiene:",
+     "o": [
+      "Ponderando los resultados por su probabilidad",
+      "Sumando los costos",
+      "Multiplicando por el precio",
+      "Dividiendo por la TIR"
+     ],
+     "a": 0,
+     "e": "Es el promedio ponderado de los resultados posibles."
+    },
+    {
+     "q": "Un portafolio de pozos independientes, frente a un solo pozo, tiene:",
+     "o": [
+      "Menor probabilidad de pérdida total",
+      "Mayor probabilidad de pérdida",
+      "El mismo VME",
+      "Ningún riesgo"
+     ],
+     "a": 0,
+     "e": "El efecto de agregación reduce la dispersión del resultado."
+    },
+    {
+     "q": "En contratos de producción compartida, el Estado recibe:",
+     "o": [
+      "Una parte de la producción luego de la recuperación de costos",
+      "Solo regalías",
+      "Nada",
+      "El precio completo"
+     ],
+     "a": 0,
+     "e": "Hay un reparto después de recuperar costos."
+    }
+   ]
+  },
+  {
+   "id": "cm3",
+   "title": "Módulo 3 · Portafolio, reservas y lecciones",
+   "lessons": [
+    {
+     "id": "c5",
+     "title": "Portafolio, límite económico y reservas",
+     "comp": "Fiscalidad, portafolio y casos",
+     "cues": [
+      {
+       "say": "El capital es limitado. Para elegir entre proyectos se ordenan por el índice de eficiencia, el VPN dividido por el capital, y se financian de arriba hacia abajo hasta agotar el presupuesto. Se revisa además el riesgo del conjunto.",
+       "scene": {
+        "t": "bul",
+        "k": "Portafolio",
+        "h": "Cómo se arma",
+        "items": [
+         "Calcular VPN e inversión de cada proyecto",
+         "Ordenar por VPN sobre inversión",
+         "Financiar hasta agotar el presupuesto",
+         "Revisar riesgo y concentración del conjunto"
+        ]
+       },
+       "hl": 1
+      },
+      {
+       "say": "Los precios también definen las reservas. Un volumen solo es reserva si es económico. Si baja el precio, el límite económico sube, y parte de las reservas pasa a recurso contingente. En la regla de la SEC se usa el promedio de los doce últimos meses.",
+       "scene": {
+        "t": "bul",
+        "k": "Reservas y precio",
+        "h": "Un vínculo directo",
+        "items": [
+         "Reserva exige un proyecto económico con precio razonable",
+         "Con precios más bajos, el límite económico sube",
+         "Parte de las reservas puede reclasificarse",
+         "En la regla de la SEC se usa el promedio de doce meses de los precios del primer día de cada mes"
+        ]
+       },
+       "hl": 3
+      },
+      {
+       "say": "Laboratorio. Mirá de nuevo el efecto del número de pozos sobre la probabilidad de pérdida. Un portafolio con un número razonable de pozos de igual esperanza reduce mucho el riesgo de resultar con pérdida.",
+       "scene": {
+        "t": "viz",
+        "w": "emv",
+        "h": "Efecto del portafolio",
+        "p": {
+         "n": 10,
+         "pg": 30,
+         "v": 100,
+         "c": 20
+        }
+       },
+       "lab": true
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Cuando el precio cae y el límite económico sube, parte de las reservas:",
+        "o": [
+         "Puede pasar a recursos contingentes",
+         "Se duplica",
+         "Pasa a prospectivos con certeza",
+         "No cambia"
+        ],
+        "a": 0,
+        "e": "El volumen deja de ser económico bajo esas condiciones."
+       }
+      }
+     ]
+    },
+    {
+     "id": "c6",
+     "title": "Casos reales y lecciones de megaproyectos",
+     "comp": "Fiscalidad, portafolio y casos",
+     "cues": [
+      {
+       "say": "Kashagan es un caso conocido de sobrecosto y retraso. La producción empezó en septiembre de 2013, mucho después de lo previsto, y se detuvo semanas después porque el gas sulfuroso corroyó las cañerías.",
+       "scene": {
+        "t": "case",
+        "h": "Kashagan, Kazajistán",
+        "src": "World Oil (2016), Oil from $50-billion Kashagan field starts flowing to export",
+        "S": "Campo en el norte del Mar Caspio, con islas artificiales y gas con alto contenido de azufre.",
+        "T": "Iniciar la producción y recuperar la inversión en los plazos del plan original.",
+        "A": "Producción inicial en septiembre de 2013, más de una década después de lo previsto, y detención semanas después por la corrosión de cañerías.",
+        "R": "El presupuesto de 2008, de 38.000 millones de dólares, subió a 53.000 millones hacia fines de 2015. En octubre de 2016 se cargó el primer crudo para exportación y la producción estable llevó más tiempo."
+       }
+      },
+      {
+       "say": "Otro caso: el 20 de abril de 2020 el contrato de futuros de WTI de mayo liquidó a menos 37,63 dólares por barril, según la CFTC, el día antes de su vencimiento. Una señal de que los escenarios deben incluir eventos extremos.",
+       "scene": {
+        "t": "case",
+        "h": "Precio negativo del WTI, abril de 2020",
+        "src": "CFTC, comunicado 8315-20 (2020)",
+        "S": "Demanda deprimida por la pandemia y capacidad de almacenamiento limitada.",
+        "T": "Entender por qué el contrato de futuros más cercano llegó a un precio negativo.",
+        "A": "El contrato de mayo de 2020 de WTI cayó de 17,73 dólares y liquidó a −37,63 dólares por barril el 20 de abril, un día antes de su vencimiento.",
+        "R": "Mostró que un escenario de precios bajos no es solo una versión suave del caso base: se incluyen eventos extremos y se prueba la resistencia del proyecto."
+       }
+      },
+      {
+       "say": "Las lecciones: preparar bien el proyecto antes de comprometer el capital, incluir contingencia realista, probar los escenarios de precio bajo y de costos altos, y reconocer el sesgo de optimismo al estimar probabilidades y plazos.",
+       "scene": {
+        "t": "bul",
+        "k": "Lecciones",
+        "h": "Qué se aprende",
+        "items": [
+         "Definir bien el alcance antes de la decisión final de inversión",
+         "Incluir contingencia y escenarios adversos",
+         "Revisar con ojos externos las probabilidades y los plazos",
+         "Los megaproyectos tienden a superar costos y plazos previstos"
+        ]
+       },
+       "hl": 2
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Una lección de los megaproyectos es:",
+        "o": [
+         "Definir bien el alcance y probar escenarios adversos antes de comprometer el capital",
+         "Ignorar el riesgo",
+         "Fijar el plazo por decreto",
+         "Evitar toda contingencia"
+        ],
+        "a": 0,
+        "e": "La preparación previa y la contingencia realista reducen los sobrecostos."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "Para probar la resistencia de un proyecto conviene:",
+     "o": [
+      "Incluir escenarios adversos y extremos",
+      "Usar solo el caso base",
+      "Quitar los costos",
+      "Ignorar el precio"
+     ],
+     "a": 0,
+     "e": "Un proyecto robusto se evalúa con escenarios malos además de los esperados."
+    },
+    {
+     "q": "El índice VPN sobre inversión sirve para:",
+     "o": [
+      "Ordenar proyectos cuando el capital es limitado",
+      "Calcular el precio",
+      "Medir la porosidad",
+      "Definir el contrato"
+     ],
+     "a": 0,
+     "e": "Prioriza los proyectos con mayor valor por unidad de capital."
+    },
+    {
+     "q": "En Kashagan, la producción:",
+     "o": [
+      "Comenzó en 2013 y se detuvo semanas después por corrosión",
+      "Comenzó en 1990",
+      "Nunca se detuvo",
+      "No tuvo costos"
+     ],
+     "a": 0,
+     "e": "El gas sulfuroso corroyó las cañerías y obligó a parar."
+    }
+   ]
+  }
+ ],
+ "exam": [
+  {
+   "q": "El VPN positivo indica:",
+   "o": [
+    "Rendimiento mayor que la tasa exigida",
+    "Rendimiento menor",
+    "Pérdida segura",
+    "Ausencia de costos"
+   ],
+   "a": 0,
+   "e": "El proyecto agrega valor a la tasa elegida."
+  },
+  {
+   "q": "El tornado muestra:",
+   "o": [
+    "El efecto de cada variable sobre el VPN",
+    "La probabilidad de éxito",
+    "El volumen",
+    "El precio histórico"
+   ],
+   "a": 0,
+   "e": "Ordena las variables por su efecto sobre el resultado."
+  },
+  {
+   "q": "La probabilidad de equilibrio es:",
+   "o": [
+    "C / (V + C)",
+    "V / C",
+    "C · V",
+    "V + C"
+   ],
+   "a": 0,
+   "e": "Es la probabilidad con la cual el VME es cero."
+  },
+  {
+   "q": "Un portafolio de pozos independientes reduce:",
+   "o": [
+    "La probabilidad de pérdida total",
+    "El VME",
+    "El capital",
+    "El costo de cada pozo"
+   ],
+   "a": 0,
+   "e": "La diversificación disminuye la dispersión."
+  },
+  {
+   "q": "Si el precio baja, el límite económico:",
+   "o": [
+    "Sube",
+    "Baja",
+    "No cambia",
+    "Desaparece"
+   ],
+   "a": 0,
+   "e": "Se necesita un caudal mayor para cubrir los costos fijos."
+  },
+  {
+   "q": "La lección principal de los megaproyectos es:",
+   "o": [
+    "Preparar bien y considerar escenarios adversos",
+    "Evitar el análisis",
+    "Reducir el alcance al azar",
+    "Ignorar el cronograma"
+   ],
+   "a": 0,
+   "e": "La preparación previa y la contingencia son claves."
+  }
+ ],
+ "outro": {
+  "phrase": "Decidir bien no es acertar: es entender qué puede salir mal.",
+  "recap": [
+   "El VPN y los indicadores resumen el flujo de caja, y el tornado muestra qué variable cuidar.",
+   "El valor esperado guía decisiones de portafolio, y un pozo solo exige mirar también la pérdida posible.",
+   "Los casos de Kashagan y del WTI muestran que los escenarios adversos deben formar parte del análisis."
+  ]
+ },
+ "downloads": [
+  {
+   "file": "xlsx/H3L_Economia_Proyecto_y_Decision.xlsx",
+   "title": "Flujo de caja, tornado y decisión (Excel)",
+   "desc": "Pozo de ejemplo con pronóstico mensual, VPN, TIR y payback; tabla de tornado con variaciones editables; y árbol de decisión con VME, probabilidad de equilibrio y probabilidad de pérdida del portafolio.",
+   "task": "Bajá el precio de 65 a 45 USD/bbl y calculá si el VPN sigue siendo positivo. Después aumentá el número de pozos y registrá cuánto baja la probabilidad de pérdida."
+  }
+ ],
+ "cases": [
+  {
+   "title": "Kashagan (Kazajistán)",
+   "text": "La producción empezó en septiembre de 2013, más de una década después de lo previsto, y se detuvo semanas más tarde porque el gas sulfuroso corroyó las cañerías. Un presupuesto de 2008 de 38.000 millones de dólares subió a 53.000 millones hacia fines de 2015. En octubre de 2016 se cargó el primer crudo para exportación.",
+   "src": "World Oil (14 de octubre de 2016), Oil from $50-billion Kashagan field starts flowing to export"
+  },
+  {
+   "title": "WTI negativo (20 de abril de 2020)",
+   "text": "El contrato de futuros de WTI de mayo de 2020 cayó de 17,73 dólares y liquidó a −37,63 dólares por barril el 20 de abril, el día antes de su vencimiento. La CFTC publicó un informe de su personal sobre estos hechos.",
+   "src": "CFTC, comunicado de prensa 8315-20"
+  }
+ ],
+ "refs": [
+  {
+   "tag": "Libro",
+   "cite": "Newendorp, P. D. y Schuyler, J. R. (2000). Decision Analysis for Petroleum Exploration, 2.ª ed. Planning Press.",
+   "why": "decisión bajo incertidumbre"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Rose, P. R. (2001). Risk Analysis and Management of Petroleum Exploration Ventures. AAPG Methods in Exploration Series 12.",
+   "why": "riesgo en exploración"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Rose, P. R. (1987). Dealing with risk and uncertainty in exploration: how can we improve? AAPG Bulletin 71(1), 1–16.",
+   "why": "sesgos y probabilidades de éxito"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Capen, E. C. (1976). The difficulty of assessing uncertainty. JPT 28(8), 843–850 (SPE 5579).",
+   "why": "exceso de confianza en estimaciones"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Merrow, E. W. (2011). Industrial Megaprojects: Concepts, Strategies, and Practices for Success. Wiley.",
+   "why": "sobrecostos en megaproyectos"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Johnston, D. (1994). International Petroleum Fiscal Systems and Production Sharing Contracts. PennWell.",
+   "why": "regímenes fiscales"
+  },
+  {
+   "tag": "Estándar",
+   "cite": "SPE, AAPG, WPC, SPEE, SEG y EAGE (2018). Petroleum Resources Management System (PRMS), actualización 2018.",
+   "why": "reservas y economía"
+  },
+  {
+   "tag": "Normativa",
+   "cite": "SEC (2009). Modernization of Oil and Gas Reporting, Release Nos. 33-8995 y 34-59192.",
+   "why": "precio de promedio de doce meses"
+  },
+  {
+   "tag": "Fuente",
+   "cite": "World Oil (2016). Oil from $50-billion Kashagan field starts flowing to export.",
+   "why": "caso Kashagan"
+  },
+  {
+   "tag": "Fuente",
+   "cite": "CFTC (2020). Comunicado de prensa 8315-20 sobre el contrato de WTI de mayo de 2020.",
+   "why": "precio negativo del WTI"
+  }
+ ]
+}
