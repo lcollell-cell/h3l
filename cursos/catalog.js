@@ -9,7 +9,7 @@ function card(m){var c=courses[m.id],cs=HC.cs(m.id),p=c?HC.progress(c):{pct:0,ce
   '<div class="cb"><p>'+esc(m.short)+'</p><div class="meta"><span>'+nl+' '+HC.t('lessons')+'</span><span>≈ '+mins+' '+HC.t('min')+' + Excel</span><span>'+nq+' '+HC.t('exams')+'</span><span>'+HC.t('level')+': '+esc(lvTxt(m))+'</span></div>'+
   '<div class="bar" role="progressbar" aria-valuenow="'+p.pct+'" aria-valuemin="0" aria-valuemax="100"><i style="width:'+p.pct+'%"></i></div>'+
   '<div class="acts"><a class="btn g s" href="curso.html?c='+esc(m.id)+'">'+st+'</a>'+(p.pct>0?'<span class="badge">'+p.pct+' % '+HC.t('done')+'</span>':'')+(p.cert?'<span class="badge">'+HC.t('certok')+'</span>':'')+'</div></div></article>'}
-var VKEY='h3l-cursos-vista',TKEY='h3l-cursos-arbol',FKEY='h3l-cursos-filtros',view='cards',q='',open_={},F={sec:'',lv:'',tp:''};
+var VKEY='h3l-cursos-vista',TKEY='h3l-cursos-arbol',FKEY='h3l-cursos-filtros',view='tree',q='',open_={},F={sec:'',lv:'',tp:''};
 try{var v0=localStorage.getItem(VKEY);if(v0==='cards'||v0==='list'||v0==='tree')view=v0;open_=JSON.parse(localStorage.getItem(TKEY)||'{}')||{};var f0=JSON.parse(localStorage.getItem(FKEY)||'{}')||{};['sec','lv','tp'].forEach(function(k){if(typeof f0[k]==='string')F[k]=f0[k]})}catch(e){}
 function sv(){try{localStorage.setItem(VKEY,view);localStorage.setItem(TKEY,JSON.stringify(open_));localStorage.setItem(FKEY,JSON.stringify(F))}catch(e){}}
 function lvTxt(m){return m.levels&&m.levels.length?m.levels.map(function(l){return HC.t('lv_'+l)}).join('–'):m.level}
