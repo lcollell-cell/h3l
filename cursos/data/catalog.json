@@ -12,7 +12,8 @@
     "sim",
     "rpx",
     "pvt",
-    "gas"
+    "gas",
+    "frr"
    ]
   },
   {
@@ -411,6 +412,25 @@
    "topics": [
     "com",
     "eco"
+   ]
+  },
+  {
+   "id": "frr",
+   "n": 22,
+   "title": "Factores de recobro y reservas PRMS",
+   "short": "Recobro por yacimiento y estrategia, métodos de EOR y su factibilidad, factor actual y final, y clasificación SPE-PRMS.",
+   "level": "Intermedio–Avanzado",
+   "color": "#a4472f",
+   "icon": "frr",
+   "tag": "Reservas",
+   "levels": [
+    "i",
+    "a"
+   ],
+   "topics": [
+    "reservas",
+    "eor",
+    "res"
    ]
   }
  ],

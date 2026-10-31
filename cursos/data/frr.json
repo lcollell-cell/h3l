@@ -1,0 +1,900 @@
+{
+ "id": "frr",
+ "title": "Factores de recobro y reservas PRMS",
+ "subtitle": "Recobro por tipo de yacimiento y estrategia, métodos de EOR y dónde son factibles, factor actual y final, y clasificación de recursos según SPE-PRMS.",
+ "desc": "Curso que une reservorios y reservas: qué factor de recobro se espera según el mecanismo de empuje y el tipo de yacimiento, cómo cambia con la estrategia de explotación primaria, secundaria y terciaria, qué método de EOR corresponde a cada yacimiento, cómo se calculan y se usan el factor de recobro actual y el final, y cómo el uso de recursos y la madurez del proyecto determinan si un incremento es reserva o recurso contingente según PRMS.",
+ "objectives": [
+  "Estimar un rango de factor de recobro según el mecanismo de empuje y el tipo de yacimiento.",
+  "Distinguir recuperación primaria, secundaria y terciaria, y mejorada (IOR) de asistida (EOR).",
+  "Diferenciar los métodos de EOR por mecanismo y decidir en qué yacimiento es factible cada uno.",
+  "Calcular el factor de recobro actual, el final y el remanente, y clasificar el incremento por EOR como reserva o recurso contingente según PRMS."
+ ],
+ "labs": [
+  "factor de recobro actual, final y recurso EOR",
+  "eficiencia de barrido en capas y efecto de la movilidad"
+ ],
+ "practiceMin": 85,
+ "competencies": [
+  {
+   "name": "Factor de recobro actual y final",
+   "lessons": [
+    "r1"
+   ]
+  },
+  {
+   "name": "Recobro por tipo de yacimiento",
+   "lessons": [
+    "r2"
+   ]
+  },
+  {
+   "name": "Estrategias de explotación",
+   "lessons": [
+    "r3"
+   ]
+  },
+  {
+   "name": "Métodos de EOR",
+   "lessons": [
+    "r4"
+   ]
+  },
+  {
+   "name": "Selección de EOR por yacimiento",
+   "lessons": [
+    "r5"
+   ]
+  },
+  {
+   "name": "PRMS y uso de recursos",
+   "lessons": [
+    "r6"
+   ]
+  }
+ ],
+ "intro": {
+  "hook": "El factor de recobro es la cifra que resume cuánto del petróleo en sitio se convierte en producción. Cambiarlo unos puntos vale más que muchos pozos nuevos, pero solo cuenta como reserva si el proyecto cumple las reglas de PRMS.",
+  "questions": [
+   "¿Qué factor de recobro es razonable según el tipo de yacimiento y el mecanismo de empuje?",
+   "¿Qué método de EOR conviene en cada yacimiento?",
+   "¿Cuándo el incremento por EOR es reserva y cuándo recurso contingente?"
+  ],
+  "star": {
+   "caso": "Ejemplo didáctico: el incremento que todavía no es reserva",
+   "S": "Un campo maduro con 22 % de recobro actual y 35 % de recobro final esperado con la inyección de agua en curso evalúa un proyecto de inyección de gas miscible.",
+   "T": "Decidir cuánto del incremento esperado, de unos 10 puntos de recobro, puede informarse como reservas.",
+   "A": "El prototipo funciona en el laboratorio y en un piloto, pero el proyecto aún no tiene aprobación de inversión ni compromiso de desarrollo. Se informa el incremento como recurso contingente y las reservas se mantienen en el 35 % final.",
+   "R": "Cuando se apruebe la inversión y se cumplan los criterios de comercialidad, el incremento podrá pasar a reservas. Es un ejemplo didáctico ilustrativo, no un caso real."
+  }
+ },
+ "modules": [
+  {
+   "id": "rm1",
+   "title": "Módulo 1 · Qué mide el factor de recobro",
+   "lessons": [
+    {
+     "id": "r1",
+     "title": "Factor de recobro actual, final y remanente",
+     "comp": "Factor de recobro actual y final",
+     "cues": [
+      {
+       "say": "El factor de recobro es la fracción del petróleo original en sitio que se produce. Hay tres formas de mirarlo. El factor actual es lo producido hasta hoy sobre el petróleo original. El factor final es lo que se espera producir al final de la vida del proyecto. Y la diferencia entre ambos es lo que falta recuperar.",
+       "scene": {
+        "t": "fm",
+        "k": "Tres factores",
+        "h": "Definiciones",
+        "f": "RF actual = Np / N\nRF final = EUR / N = (Np + reservas remanentes) / N\nRF remanente = RF final − RF actual",
+        "n": "Np: producción acumulada. N: petróleo original en sitio. EUR: recuperación final estimada."
+       }
+      },
+      {
+       "say": "El factor final se descompone en dos eficiencias. La de desplazamiento, que es cuánto petróleo suelta la roca que el fluido barre. Y la de barrido, que es qué fracción del volumen del reservorio llega a barrer. Las estrategias de explotación actúan sobre una o sobre otra: el agua mejora el barrido, los métodos de EOR bajan el petróleo residual.",
+       "scene": {
+        "t": "fm",
+        "k": "Descomposición",
+        "h": "Eficiencias",
+        "f": "RF = ED × EV\nED = 1 − Sor / (1 − Swi)   (eficiencia de desplazamiento)\nEV = EA × EI   (barrido areal por vertical)",
+        "n": "Sor: petróleo residual. Swi: agua inicial."
+       }
+      },
+      {
+       "say": "Para usarlos bien hay una regla de coherencia. El factor actual nunca puede superar al final. El final de las reservas no debe incluir lo que todavía no es reserva. Y el final debe poder explicarse con un mecanismo físico, con una curva de declinación o con un pronóstico de simulación, y no con una cifra tomada de otro campo.",
+       "scene": {
+        "t": "bul",
+        "k": "Reglas de coherencia",
+        "h": "Al informar un factor de recobro",
+        "items": [
+         "El actual no puede superar al final",
+         "El final de reservas incluye solo proyectos que cumplen los criterios de reservas",
+         "El incremento de proyectos aún no comprometidos se informa aparte, como recurso contingente",
+         "Cada factor se acompaña de su método: declinación, balance de materiales o simulación",
+         "Se compara con análogos como control y no como justificación"
+        ]
+       },
+       "hl": 2
+      },
+      {
+       "say": "Laboratorio. Es un campo de ejemplo. Cambiá el factor de recobro actual, el final sin EOR y el incremento esperado por EOR, y activá o no el compromiso del proyecto. Mirá cómo el mismo incremento pasa de recurso contingente a reservas y cómo cambia el factor final de reservas.",
+       "scene": {
+        "t": "viz",
+        "w": "rfx",
+        "h": "Factor de recobro actual, final y recurso EOR",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "El factor de recobro actual se calcula como:",
+        "o": [
+         "Petróleo residual sobre porosidad",
+         "Reservas sobre caudal",
+         "Caudal sobre presión",
+         "Producción acumulada sobre petróleo original en sitio"
+        ],
+        "a": 3,
+        "e": "RF actual = Np / N."
+       }
+      }
+     ]
+    },
+    {
+     "id": "r2",
+     "title": "Recobro por tipo de yacimiento y mecanismo de empuje",
+     "comp": "Recobro por tipo de yacimiento",
+     "cues": [
+      {
+       "say": "El mecanismo de empuje determina el factor de recobro esperado. Según la compilación de Sills en el manual de geología de desarrollo de la AAPG, el recobro típico es de 5 a 30 % del petróleo original en gas en solución, de 20 a 40 % con casquete de gas y de 35 a 75 % con empuje de agua. Son rangos de orientación y no valores de diseño.",
+       "scene": {
+        "t": "tbl",
+        "k": "Mecanismos",
+        "h": "Recobro típico del petróleo original",
+        "cols": [
+         "Mecanismo",
+         "Recobro típico",
+         "Por qué"
+        ],
+        "rows": [
+         [
+          "Gas en solución",
+          "5 a 30 %",
+          "La energía es la expansión del gas disuelto, que sale de solución y se produce rápido"
+         ],
+         [
+          "Casquete de gas",
+          "20 a 40 %",
+          "El casquete se expande y sostiene la presión, pero el gas puede irrumpir en los pozos"
+         ],
+         [
+          "Empuje de agua",
+          "35 a 75 %",
+          "El acuífero desplaza al petróleo y mantiene la presión"
+         ],
+         [
+          "Drenaje gravitacional",
+          "5 a 30 % incremental",
+          "Depende de la altura de la columna y de la permeabilidad vertical"
+         ]
+        ],
+        "n": "Fuente: Sills, AAPG Wiki, Drive mechanisms and recovery. Los valores son rangos típicos de la bibliografía, no valores para un campo en particular."
+       }
+      },
+      {
+       "say": "El tipo de yacimiento condiciona el recobro más allá del empuje. En areniscas homogéneas el barrido es bueno y el recobro es mayor. En yacimientos con capas de muy distinta permeabilidad o con fracturas naturales, el agua o el gas pasan por los caminos rápidos y el barrido es peor. Los crudos viscosos recuperan poco por métodos primarios. Los no convencionales tienen recobros primarios bajos y mucha incertidumbre.",
+       "scene": {
+        "t": "tbl",
+        "k": "Tipos de yacimiento",
+        "h": "Qué esperar",
+        "cols": [
+         "Yacimiento",
+         "Efecto sobre el recobro",
+         "Estrategia típica"
+        ],
+        "rows": [
+         [
+          "Arenisca homogénea",
+          "Buen barrido",
+          "Inyección de agua con pozos de relleno"
+         ],
+         [
+          "Capas heterogéneas",
+          "Barrido irregular por capas rápidas",
+          "Control de perfil y mejora de conformance"
+         ],
+         [
+          "Carbonato fracturado",
+          "Canalización por fracturas",
+          "Estudios de doble porosidad y control de agua"
+         ],
+         [
+          "Crudo pesado",
+          "Recobro primario bajo",
+          "Métodos térmicos"
+         ],
+         [
+          "No convencional",
+          "Recobro bajo y mucha incertidumbre",
+          "Refractura y recuperación asistida en estudio"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "En gas el razonamiento es distinto. Un yacimiento volumétrico, sin acuífero, recupera una fracción alta, limitada por la presión de abandono. Con empuje de agua queda gas atrapado detrás del frente y la recuperación es menor, como se vio en el curso de yacimientos de gas. La presión de abandono es una decisión económica que mueve las reservas.",
+       "scene": {
+        "t": "bul",
+        "k": "Gas",
+        "h": "Dos casos",
+        "items": [
+         "Volumétrico: la recuperación depende de la presión de abandono",
+         "Empuje de agua: gas atrapado y menor recuperación",
+         "La compresión baja la presión de abandono y sube el recobro",
+         "El factor de recobro de gas se calcula con p/z"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Entre los mecanismos de empuje, el rango de recobro típico más alto corresponde a:",
+        "o": [
+         "El casquete de gas pequeño",
+         "El gas en solución",
+         "El empuje de agua",
+         "Ninguno, todos son iguales"
+        ],
+        "a": 2,
+        "e": "Según la compilación de la AAPG, 35 a 75 %."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "El factor de recobro final es:",
+     "o": [
+      "La producción de hoy",
+      "La recuperación final estimada sobre el petróleo original en sitio",
+      "El caudal inicial",
+      "El precio de equilibrio"
+     ],
+     "a": 1,
+     "e": "RF final = EUR / N."
+    },
+    {
+     "q": "Dentro de la eficiencia de desplazamiento, un petróleo residual más bajo significa:",
+     "o": [
+      "Ningún efecto",
+      "Menor recobro",
+      "Mayor recobro",
+      "Mayor viscosidad"
+     ],
+     "a": 2,
+     "e": "ED = 1 − Sor / (1 − Swi)."
+    },
+    {
+     "q": "Con empuje de gas en solución, el recobro típico es:",
+     "o": [
+      "Mayor al 90 %",
+      "Entre 35 y 75 %",
+      "Entre 5 y 30 % del petróleo original",
+      "Cero"
+     ],
+     "a": 2,
+     "e": "Rango típico compilado por Sills (AAPG Wiki)."
+    }
+   ]
+  },
+  {
+   "id": "rm2",
+   "title": "Módulo 2 · Estrategia de explotación y métodos de EOR",
+   "lessons": [
+    {
+     "id": "r3",
+     "title": "Recuperación primaria, secundaria y terciaria",
+     "comp": "Estrategias de explotación",
+     "cues": [
+      {
+       "say": "La explotación se organiza en etapas. La primaria usa la energía natural del yacimiento. La secundaria agrega energía de afuera, con inyección de agua o de gas, para mantener presión y desplazar petróleo. La terciaria, o recuperación asistida, EOR, cambia las propiedades del fluido o de la interacción con la roca, para recuperar petróleo que el barrido convencional deja.",
+       "scene": {
+        "t": "bul",
+        "k": "Etapas",
+        "h": "De la energía natural a la modificada",
+        "items": [
+         "Primaria: energía natural, es decir gas en solución, acuífero o casquete",
+         "Secundaria: inyección de agua o de gas para mantener la presión y desplazar",
+         "Terciaria o EOR: térmica, de gas miscible o química, que cambia el petróleo residual",
+         "Una misma cuenca puede combinar etapas, y algunas se aplican desde el inicio"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Hay que distinguir EOR de recuperación mejorada, IOR. La IOR es más amplia: incluye perforación de relleno, control de conformance, mejoras de pozo y también EOR. La EOR actúa sobre el petróleo residual y no sobre el barrido. Para el evaluador la diferencia importa, porque el riesgo, el costo y la madurez tecnológica son distintos.",
+       "scene": {
+        "t": "tbl",
+        "k": "IOR y EOR",
+        "h": "Alcance",
+        "cols": [
+         "Término",
+         "Qué incluye",
+         "Ejemplo"
+        ],
+        "rows": [
+         [
+          "IOR",
+          "Todo lo que mejora el recobro",
+          "Pozos de relleno, control de agua, reparaciones"
+         ],
+         [
+          "EOR",
+          "Métodos que cambian el fluido o su interacción con la roca",
+          "Vapor, CO₂, polímeros"
+         ],
+         [
+          "Secundaria",
+          "Inyección para mantener presión y desplazar",
+          "Inyección de agua"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Laboratorio. Es una arena de ejemplo con capas de distinta permeabilidad. Cambiá la heterogeneidad, la viscosidad del agua inyectada y el volumen poral inyectado. Mirá cómo el barrido por capas limita el recobro de la inyección de agua, y por qué mejorar la movilidad o el perfil puede valer más que más agua.",
+       "scene": {
+        "t": "viz",
+        "w": "eor",
+        "h": "Barrido en capas y movilidad",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "La EOR se diferencia de la IOR porque:",
+        "o": [
+         "Siempre es más barata",
+         "Cambia las propiedades del fluido o su interacción con la roca",
+         "Solo aplica a gas",
+         "Se hace antes de perforar"
+        ],
+        "a": 1,
+        "e": "La IOR es el término más amplio."
+       }
+      }
+     ]
+    },
+    {
+     "id": "r4",
+     "title": "Métodos de EOR: térmicos, de gas y químicos",
+     "comp": "Métodos de EOR",
+     "cues": [
+      {
+       "say": "Los métodos de EOR se agrupan por mecanismo. Los térmicos calientan el petróleo viscoso para bajar su viscosidad, con vapor continuo, vapor cíclico, drenaje gravitacional asistido por vapor o combustión in situ. Los de gas inyectan CO₂, hidrocarburos o nitrógeno, que pueden ser miscibles o inmiscibles. Los químicos usan polímeros, surfactantes o álcalis.",
+       "scene": {
+        "t": "tbl",
+        "k": "Familias",
+        "h": "Mecanismo y objetivo",
+        "cols": [
+         "Familia",
+         "Mecanismo principal",
+         "Actúa sobre"
+        ],
+        "rows": [
+         [
+          "Térmica",
+          "Calor: baja la viscosidad del petróleo",
+          "Eficiencia de desplazamiento y movilidad de crudos viscosos"
+         ],
+         [
+          "Gas miscible",
+          "Miscibilidad: elimina la tensión interfacial y expande el petróleo",
+          "Petróleo residual"
+         ],
+         [
+          "Gas inmiscible",
+          "Mantiene presión y empuje, con efecto limitado",
+          "Barrido y gravedad"
+         ],
+         [
+          "Polímeros",
+          "Aumentan la viscosidad del agua",
+          "Eficiencia de barrido"
+         ],
+         [
+          "Surfactantes y álcalis",
+          "Bajan la tensión interfacial",
+          "Petróleo residual"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Cada método ataca una limitación distinta. El polímero mejora la razón de movilidad y, por lo tanto, el barrido, pero no baja el petróleo residual. El surfactante y el gas miscible bajan el petróleo residual, pero necesitan buen barrido para llegar a la roca. El calor actúa sobre la viscosidad. Por eso a veces se combinan y no se comparan solo por costo.",
+       "scene": {
+        "t": "bul",
+        "k": "Qué ataca cada método",
+        "h": "Barrido o desplazamiento",
+        "items": [
+         "Polímero: mejora el barrido al reducir la razón de movilidad",
+         "Surfactante y álcali: bajan el petróleo residual",
+         "Gas miscible: baja el petróleo residual y expande el petróleo",
+         "Vapor: baja la viscosidad del petróleo pesado",
+         "Combinaciones, como álcali, surfactante y polímero, atacan ambos factores"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "El recurso que consume cada método es una variable de diseño y de economía. El vapor consume combustible y agua tratada, y se mide con la relación vapor-petróleo. El CO₂ consume gas, y se mide en volumen inyectado por barril incremental. Los polímeros y surfactantes consumen producto químico. Esos consumos entran en el costo operativo y fijan el límite económico del proyecto.",
+       "scene": {
+        "t": "tbl",
+        "k": "Uso de recursos",
+        "h": "Insumo principal",
+        "cols": [
+         "Método",
+         "Insumo",
+         "Indicador"
+        ],
+        "rows": [
+         [
+          "Vapor",
+          "Combustible y agua",
+          "Relación vapor-petróleo"
+         ],
+         [
+          "CO₂ u otro gas",
+          "Gas de inyección y su reciclado",
+          "Gas inyectado por barril incremental"
+         ],
+         [
+          "Polímero",
+          "Producto químico y agua de buena calidad",
+          "Kilos de polímero por barril incremental"
+         ],
+         [
+          "Surfactante o álcali",
+          "Producto químico",
+          "Costo químico por barril incremental"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "El polímero se usa en EOR sobre todo para:",
+        "o": [
+         "Disolver el CO₂",
+         "Calentar el petróleo",
+         "Mejorar el barrido al reducir la razón de movilidad",
+         "Aumentar el agua inicial"
+        ],
+        "a": 2,
+        "e": "Aumenta la viscosidad del agua inyectada."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "La recuperación terciaria o EOR se caracteriza por:",
+     "o": [
+      "Cambiar las propiedades del fluido o la interacción con la roca",
+      "Mantener solo la presión",
+      "Perforar pozos de relleno",
+      "Cerrar pozos"
+     ],
+     "a": 0,
+     "e": "La secundaria mantiene presión y desplaza."
+    },
+    {
+     "q": "Un polímero inyectado actúa principalmente sobre:",
+     "o": [
+      "La porosidad",
+      "El petróleo residual en los poros barridos",
+      "La temperatura del yacimiento",
+      "El barrido, por menor razón de movilidad"
+     ],
+     "a": 3,
+     "e": "No baja el petróleo residual por sí solo."
+    },
+    {
+     "q": "La relación vapor-petróleo mide:",
+     "o": [
+      "La presión del yacimiento",
+      "El consumo de vapor por barril de petróleo producido",
+      "La densidad API",
+      "La permeabilidad"
+     ],
+     "a": 1,
+     "e": "Es el principal indicador de uso de recursos en un método térmico."
+    }
+   ]
+  },
+  {
+   "id": "rm3",
+   "title": "Módulo 3 · Selección de EOR y clasificación PRMS",
+   "lessons": [
+    {
+     "id": "r5",
+     "title": "Qué método de EOR conviene según el yacimiento",
+     "comp": "Selección de EOR por yacimiento",
+     "cues": [
+      {
+       "say": "Los criterios de selección, o screening, son rangos de propiedades del petróleo y del yacimiento donde cada método tiene antecedentes de éxito. Los compilaron Taber, Martin y Seright en 1997 a partir de proyectos de campo. Sirven para descartar métodos y armar una lista corta, pero no reemplazan el estudio de laboratorio, de simulación y el piloto.",
+       "scene": {
+        "t": "bul",
+        "k": "Screening",
+        "h": "Cómo usarlo",
+        "items": [
+         "Es una primera selección y no una decisión",
+         "Se compara el yacimiento con los rangos de cada método",
+         "Los límites cambian con el precio, la tecnología y la experiencia de campo",
+         "Se confirma con laboratorio, simulación y piloto",
+         "Conviene consultar las versiones actualizadas"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Como orientación, los rangos habituales indican lo siguiente. Los métodos térmicos se aplican a crudos pesados y viscosos, a profundidades moderadas y con buena permeabilidad. Los de gas miscible requieren petróleos livianos y profundidad suficiente para alcanzar la presión de miscibilidad. Los químicos requieren permeabilidad suficiente, temperatura y salinidad no extremas y viscosidad moderada.",
+       "scene": {
+        "t": "tbl",
+        "k": "Rangos orientativos",
+        "h": "Petróleo y yacimiento",
+        "cols": [
+         "Método",
+         "Petróleo",
+         "Yacimiento y límites"
+        ],
+        "rows": [
+         [
+          "Vapor",
+          "Pesado y viscoso",
+          "Profundidad moderada y buena permeabilidad"
+         ],
+         [
+          "Combustión in situ",
+          "Pesado a mediano",
+          "Permeabilidad suficiente para el frente"
+         ],
+         [
+          "CO₂ miscible",
+          "Mediano a liviano",
+          "Profundidad para superar la presión mínima de miscibilidad"
+         ],
+         [
+          "Hidrocarburo o N₂",
+          "Liviano a muy liviano",
+          "Mayor profundidad y presión"
+         ],
+         [
+          "Polímero",
+          "Viscosidad moderada",
+          "Temperatura y salinidad no extremas"
+         ],
+         [
+          "Surfactante y álcali",
+          "Viscosidad baja a moderada",
+          "Arenisca permeable y agua compatible"
+         ]
+        ],
+        "n": "Rangos cualitativos de orientación a partir de Taber, Martin y Seright (1997). Los valores numéricos deben tomarse del trabajo original o de revisiones actuales."
+       }
+      },
+      {
+       "say": "Se decide mejor con preguntas. ¿El petróleo es pesado? Térmico. ¿Es liviano y el yacimiento profundo? Gas miscible. ¿Barre mal la inyección de agua por heterogeneidad? Polímero. ¿Queda mucho petróleo residual en roca permeable? Surfactante. Todo cambia si hay fracturas, carbonatos o salinidad extrema.",
+       "scene": {
+        "t": "bul",
+        "k": "Preguntas de decisión",
+        "h": "Camino de selección",
+        "items": [
+         "Viscosidad y densidad del petróleo",
+         "Profundidad y presión frente a la miscibilidad",
+         "Heterogeneidad y capas ladronas",
+         "Temperatura y salinidad del yacimiento",
+         "Disponibilidad de insumos: gas, agua, vapor, químicos",
+         "Infraestructura existente y proximidad de la fuente de CO₂"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Una regla para maximizar el recobro. Empezar por el factor que más limita. Si el barrido es malo, mejorar el barrido antes de bajar el petróleo residual. Si el petróleo residual es alto y el barrido es bueno, atacar el residual. Y evaluar siempre la ganancia en puntos de recobro frente al costo y al consumo de recursos de cada método.",
+       "scene": {
+        "t": "bul",
+        "k": "Regla práctica",
+        "h": "Para maximizar el recobro",
+        "items": [
+         "Diagnosticar si limita el barrido o el desplazamiento",
+         "Elegir el método que ataca el factor limitante",
+         "Estimar el incremento en puntos de recobro y su incertidumbre",
+         "Comparar costo por barril incremental y uso de insumos",
+         "Pilotar antes de comprometer el campo"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Un crudo pesado y viscoso, con buena permeabilidad y profundidad moderada, suele orientar hacia:",
+        "o": [
+         "Solo inyección de agua",
+         "Gas miscible de nitrógeno",
+         "Un método térmico",
+         "Surfactante en alta salinidad"
+        ],
+        "a": 2,
+        "e": "El calor baja la viscosidad."
+       }
+      }
+     ]
+    },
+    {
+     "id": "r6",
+     "title": "PRMS: del recurso contingente a la reserva, y el uso de recursos",
+     "comp": "PRMS y uso de recursos",
+     "cues": [
+      {
+       "say": "PRMS clasifica las cantidades según su madurez. Un EOR puede estar en recursos contingentes, si depende de condiciones pendientes, o en reservas, si es comercial. Según las guías de aplicación de la SPE, un recurso contingente puede pasar a reservas cuando la entidad muestra intención firme de desarrollarlo y se cumplen los criterios de comercialidad.",
+       "scene": {
+        "t": "bul",
+        "k": "Reservas y contingentes",
+        "h": "Qué cambia entre uno y otro",
+        "items": [
+         "Reservas: cantidades comerciales, descubiertas y remanentes bajo un proyecto aplicado",
+         "Recursos contingentes: potencialmente recuperables, pero con condiciones pendientes",
+         "El paso exige un plan de desarrollo técnicamente maduro, financiamiento y economía positiva",
+         "La intención firme de desarrollar es parte de la comercialidad",
+         "Reservas con proyecto aprobado pasan a la subclase aprobada para desarrollo"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Dos reglas conectan con el recobro. Primero, la economía. La producción debe ser económica para ser reserva, y el límite económico se calcula con el flujo neto acumulado, sin contar los costos de abandono. Segundo, la tecnología. Los recursos contingentes pueden incluir proyectos cuya recuperación comercial depende de tecnología en desarrollo, mientras que las reservas requieren tecnología establecida. Un EOR sin piloto exitoso suele estar en contingentes.",
+       "scene": {
+        "t": "tbl",
+        "k": "Criterios",
+        "h": "Cómo se aplican al EOR",
+        "cols": [
+         "Criterio",
+         "Para reservas",
+         "Efecto en un EOR"
+        ],
+        "rows": [
+         [
+          "Tecnología",
+          "Establecida",
+          "Un método sin piloto probado queda en contingentes"
+         ],
+         [
+          "Economía",
+          "Producción económica con el uso de recursos real",
+          "Los consumos de vapor, gas y químicos fijan el límite económico"
+         ],
+         [
+          "Compromiso",
+          "Intención firme y financiamiento",
+          "Sin aprobación de inversión, el incremento no es reserva"
+         ],
+         [
+          "Plazo",
+          "Desarrollo iniciado dentro de un período razonable",
+          "Las reservas no desarrolladas deben comenzar en cinco años desde su clasificación"
+         ]
+        ],
+        "n": "Resumen de las guías de aplicación y de los cambios de PRMS 2018. El texto oficial vigente de PRMS manda."
+       }
+      },
+      {
+       "say": "En un informe, el factor actual muestra el avance. El final de reservas combina lo producido con las reservas remanentes de proyectos aprobados. El incremento de un EOR que aún no cumple los criterios es recurso contingente, con categorías incrementales C1, C2 y C3 en PRMS 2018, y no se suma al final de reservas. Al madurar, se reclasifica.",
+       "scene": {
+        "t": "fm",
+        "k": "Informe",
+        "h": "Dos cifras separadas",
+        "f": "RF final de reservas = (Np + reservas remanentes) / N\nIncremento EOR no comprometido → recurso contingente (C1, C2, C3)",
+        "n": "No se suman reservas y recursos contingentes sin dejar clara su categoría y su riesgo."
+       }
+      },
+      {
+       "say": "El uso de recursos influye en lo que se puede clasificar. Si sube el consumo de vapor, gas o químicos, sube el costo por barril incremental, el límite económico se adelanta y las reservas del proyecto bajan. Con un precio menor pasa lo mismo.",
+       "scene": {
+        "t": "bul",
+        "k": "Uso de recursos",
+        "h": "Y reservas",
+        "items": [
+         "Más insumo por barril incremental sube el costo operativo",
+         "El límite económico se adelanta y las reservas bajan",
+         "Las reservas se verifican en los escenarios bajo y alto de precio",
+         "Los consumos reales del piloto reemplazan a los supuestos del diseño",
+         "Un análisis de sensibilidad muestra cuándo el incremento deja de ser reserva"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Un incremento de recobro por un EOR sin aprobación de inversión se informa como:",
+        "o": [
+         "Producción acumulada",
+         "Reserva probada desarrollada",
+         "Recurso prospectivo",
+         "Recurso contingente"
+        ],
+        "a": 3,
+        "e": "Todavía le falta cumplir criterios de comercialidad."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "Según PRMS, para que un recurso contingente sea reserva debe:",
+     "o": [
+      "Tener un recobro mayor al 50 %",
+      "Haber sido producido",
+      "Cumplir criterios de comercialidad con intención firme de desarrollar",
+      "Estar en otro país"
+     ],
+     "a": 2,
+     "e": "Guías de aplicación de PRMS."
+    },
+    {
+     "q": "Un método de EOR cuya recuperación comercial depende de tecnología en desarrollo suele clasificarse como:",
+     "o": [
+      "Recurso prospectivo en exploración",
+      "Reserva desarrollada en producción",
+      "Producción acumulada",
+      "Recurso contingente"
+     ],
+     "a": 3,
+     "e": "Las reservas requieren tecnología establecida."
+    },
+    {
+     "q": "Si sube el consumo de insumo por barril incremental:",
+     "o": [
+      "Las reservas aumentan",
+      "Sube el costo, el límite económico se adelanta y bajan las reservas",
+      "Nada cambia",
+      "El factor actual aumenta"
+     ],
+     "a": 1,
+     "e": "La economía es parte de la clasificación."
+    }
+   ]
+  }
+ ],
+ "exam": [
+  {
+   "q": "Si Np = 22 MMbbl y N = 100 MMbbl, el factor de recobro actual es:",
+   "o": [
+    "100 %",
+    "78 %",
+    "2,2 %",
+    "22 %"
+   ],
+   "a": 3,
+   "e": "Np dividido por N."
+  },
+  {
+   "q": "El factor de recobro final de reservas se calcula con:",
+   "o": [
+    "N / Np",
+    "Reservas / precio",
+    "Np / reservas",
+    "(Np + reservas remanentes) / N"
+   ],
+   "a": 3,
+   "e": "Combina lo producido y lo que falta de proyectos de reservas."
+  },
+  {
+   "q": "Con un casquete de gas, el recobro típico de la compilación AAPG es:",
+   "o": [
+    "0 %",
+    "5 a 30 % de incremento",
+    "80 a 100 %",
+    "20 a 40 % del petróleo original"
+   ],
+   "a": 3,
+   "e": "Sills, AAPG Wiki."
+  },
+  {
+   "q": "Un yacimiento con capas de permeabilidades muy distintas recupera mal con inyección de agua porque:",
+   "o": [
+    "El agua pasa por las capas rápidas y el barrido vertical es malo",
+    "El agua es más liviana que el petróleo",
+    "No hay presión",
+    "La roca no tiene porosidad"
+   ],
+   "a": 0,
+   "e": "La eficiencia de barrido vertical es baja."
+  },
+  {
+   "q": "El método de EOR que ataca el barrido por mayor viscosidad del agua es:",
+   "o": [
+    "El polímero",
+    "El vapor",
+    "El CO₂ miscible",
+    "La combustión in situ"
+   ],
+   "a": 0,
+   "e": "Reduce la razón de movilidad."
+  },
+  {
+   "q": "Un proyecto de EOR en piloto, sin aprobación de inversión, tiene su incremento de recobro en:",
+   "o": [
+    "Recursos prospectivos",
+    "Reservas probadas desarrolladas en producción",
+    "Producción acumulada",
+    "Recursos contingentes"
+   ],
+   "a": 3,
+   "e": "Falta cumplir los criterios de comercialidad."
+  }
+ ],
+ "outro": {
+  "can": [
+   "estimar rangos de recobro según el yacimiento y el mecanismo, y calcular el factor actual, el final y el remanente",
+   "seleccionar el método de EOR que corresponde a cada tipo de yacimiento y justificarlo",
+   "clasificar un incremento por EOR como reserva o recurso contingente según PRMS y explicar el efecto del uso de recursos"
+  ],
+  "phrase": "Un punto de recobro vale lo que su clasificación y su economía permiten informar.",
+  "recap": [
+   "El factor actual mide el avance y el final combina lo producido con las reservas remanentes.",
+   "El método de EOR se elige por el factor que limita el recobro y por las propiedades del yacimiento, y se confirma con piloto.",
+   "Solo el incremento de proyectos que cumplen los criterios de PRMS es reserva, y el uso de recursos mueve el límite económico."
+  ]
+ },
+ "downloads": [
+  {
+   "file": "xlsx/H3L_Recobro_Actual_Final_y_PRMS.xlsx",
+   "title": "Recobro actual, final y clasificación PRMS (Excel)",
+   "desc": "Cálculo del factor de recobro actual, final y remanente, con el incremento por EOR clasificado como reserva o recurso contingente según criterios editables, y un análisis de sensibilidad del consumo de insumos sobre el límite económico.",
+   "task": "Con N = 100 MMbbl, Np = 22, reservas remanentes de 13 y un incremento EOR de 10 MMbbl sin aprobación de inversión, calculá los factores y decidí en qué categoría se informa el incremento."
+  }
+ ],
+ "cases": [
+  {
+   "title": "Ejemplo didáctico: el incremento que todavía no es reserva",
+   "text": "Un campo maduro con 22 % de recobro actual y 35 % esperado con la inyección de agua en curso evalúa gas miscible para sumar unos 10 puntos. Hasta que no haya compromiso de inversión y se cumplan los criterios de comercialidad, ese incremento se informa como recurso contingente y las reservas se mantienen en 35 %. Es un ejemplo ilustrativo, no un caso real.",
+   "src": "Ejemplo didáctico de H3L, no es un caso real"
+  }
+ ],
+ "refs": [
+  {
+   "tag": "Norma",
+   "cite": "SPE, AAPG, WPC, SPEE, SEG, SPWLA y EAGE (2018). Petroleum Resources Management System (PRMS), versión 2018.",
+   "why": "clasificación de reservas y recursos contingentes"
+  },
+  {
+   "tag": "Guía",
+   "cite": "SPE (2011). Guidelines for Application of the Petroleum Resources Management System, y material de introducción a las guías de aplicación de PRMS.",
+   "why": "criterios de comercialidad, madurez del proyecto y economía"
+  },
+  {
+   "tag": "Fuente",
+   "cite": "Sills, S. R. Drive mechanisms and recovery. AAPG Wiki, Development Geology Reference Manual.",
+   "why": "rangos típicos de recobro por mecanismo de empuje"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Taber, J. J., Martin, F. D. y Seright, R. S. (1997). EOR screening criteria revisited. Parte 1 y Parte 2. SPE Reservoir Engineering 12(3), 189–205.",
+   "why": "criterios de selección de métodos de EOR"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Green, D. W. y Willhite, G. P. (1998). Enhanced Oil Recovery. SPE Textbook Series, Vol. 6.",
+   "why": "métodos de EOR y eficiencias de desplazamiento y barrido"
+  }
+ ]
+}

@@ -656,5 +656,17 @@ W.rmx=function(box,p,api){var h=mkui(box,[{k:'s',l:'Severidad de la consecuencia
     h.out('Riesgo inicial <strong>'+r0+'</strong> → con barreras <strong>'+r1+'</strong>. La matriz ordena prioridades, no mide el riesgo: cada organización define sus categorías y qué nivel es tolerable, y las barreras deben ser independientes, estar vigentes y verificarse. Ejemplo didáctico.')}
   draw(h.V)};
 
+/* ===== RECOBRO: factor actual, final y recurso EOR ===== */
+W.rfx=function(box,p,api){var h=mkui(box,[{k:'rc',l:'Factor de recobro actual (Np / N)',min:0,max:60,step:1,v:p.rc||22,f:function(v){return nf(v)+' %'}},{k:'ru',l:'Factor de recobro final sin EOR (reservas remanentes incluidas)',min:5,max:70,step:1,v:p.ru||35,f:function(v){return nf(v)+' %'}},{k:'inc',l:'Incremento esperado por EOR',min:0,max:25,step:1,v:p.inc!=null?p.inc:10,f:function(v){return '+'+nf(v)+' pts'}},{k:'com',t:'chk',l:'Proyecto EOR comprometido, económico y con tecnología probada',v:!!p.com}],draw,{side:true,w:700,h:340,touch:api.touch}),svg=h.svg;
+  function draw(V){svg.innerHTML='';var rc=Math.min(V.rc,V.ru),ru=V.ru,inc=Math.min(V.inc,100-ru),rem=ru-rc,X0=40,Wd=620,sx=function(v){return X0+v/100*Wd},y=110,hh=60;
+    var segs=[[0,rc,BL,'Producido (RF actual) '+nf(rc,0)+' %'],[rc,ru,GN,'Reservas remanentes '+nf(rem,0)+' %'],[ru,ru+inc,V.com?GN:AM,(V.com?'Reservas EOR ':'Recurso contingente EOR ')+'+'+nf(inc,0)+' pts'],[ru+inc,100,'rgba(255,255,255,.12)','No recuperado']];
+    lbl(svg,X0,34,'Petróleo original en sitio N = 100 %',TX,12);
+    segs.forEach(function(s,i){if(s[1]-s[0]<=0)return;sv('rect',{x:sx(s[0]),y:y,width:sx(s[1])-sx(s[0]),height:hh,fill:s[2],'fill-opacity':.9,stroke:'#0b1a30'},svg)});
+    [[rc,'RF actual'],[ru,'RF final reservas']].forEach(function(m,i){sv('line',{x1:sx(m[0]),x2:sx(m[0]),y1:y-18,y2:y+hh+22,stroke:'#fff','stroke-width':1.4,'stroke-dasharray':'4 3'},svg);lbl(svg,sx(m[0])+4,i?y+hh+34:y-24,m[1]+' '+nf(m[0],0)+' %',TX,10.5,'start')});
+    segs.forEach(function(s,i){lbl(svg,X0,246+i*21,'■',s[2],12);lbl(svg,X0+18,246+i*21,s[3],TX,11)});
+    var tot=ru+(V.com?inc:0);
+    h.out('RF actual <strong>'+nf(rc,0)+' %</strong>. RF final de reservas (Np + remanentes) <strong>'+nf(tot,0)+' %</strong>'+(V.com?'' :' ; si el EOR no está comprometido, su incremento de +'+nf(inc,0)+' pts es <strong>recurso contingente</strong> y el RF final de reservas queda en '+nf(ru,0)+' %')+'. Reservas remanentes: <strong>'+nf(tot-rc,0)+' % de N</strong>. Es un esquema didáctico: la clasificación real depende de los criterios de comercialidad de PRMS. Ejemplo didáctico.')}
+  draw(h.V)};
+
 W.build=function(name,box,p,api){if(!W[name]){box.innerHTML='<div class="out">Laboratorio no disponible: '+name+'</div>';return{}}return W[name](box,p||{},api||{touch:function(){}})||{}};
 })();
