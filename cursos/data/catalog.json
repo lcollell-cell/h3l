@@ -1,0 +1,15 @@
+{
+ "version": 1,
+ "sections": [
+  {"id":"subsuelo","title":"Subsuelo y reservas","desc":"Geociencias, reservorios y reservas.","courses":["geo","res"]},
+  {"id":"produccion","title":"Producción y operaciones","desc":"Recuperación secundaria y construcción de pozos.","courses":["wf","per"]},
+  {"id":"energia","title":"Energía y transición","desc":"Emisiones, metano y captura de CO₂.","courses":["gei"]}
+ ],
+ "courses": [
+  {"id":"geo","n":1,"title":"Geociencias: sistema petrolero y caracterización estática","short":"De la cuenca al modelo estático, con Vaca Muerta como hilo conductor.","level":"Intermedio","color":"#3A6BD0","icon":"geo","tag":"Geociencias"},
+  {"id":"res","n":2,"title":"Recursos y Reservas SPE-PRMS","short":"Clasificación, incertidumbre, declinación, economía y gobernanza de reservas.","level":"Intermedio–Avanzado","color":"#17755A","icon":"res","tag":"Reservas"},
+  {"id":"wf","n":3,"title":"Waterflooding y vigilancia de yacimientos","short":"Del flujo fraccional al Hall plot: diseñar, operar y diagnosticar la inyección de agua.","level":"Avanzado","color":"#1d7fa8","icon":"wf","tag":"Reservorios"},
+  {"id":"per","n":4,"title":"Perforación: ventana de lodo, límite técnico y control de pozo","short":"Arquitectura de pozo, eficiencia operativa y barreras de seguridad.","level":"Intermedio","color":"#c2680a","icon":"per","tag":"Perforación"},
+  {"id":"gei","n":5,"title":"Gestión de emisiones y transición energética en oil & gas","short":"Inventarios GEI, metano, curvas MACC y captura y almacenamiento de CO₂.","level":"Intermedio","color":"#5fa83a","icon":"gei","tag":"Transición energética"}
+ ]
+}

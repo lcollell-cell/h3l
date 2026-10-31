@@ -83,7 +83,7 @@ def build(lang, src_html, D):
 
 
 def sitemap():
-    pages = ['v2/reservas.html', 'v2/dashboards.html', 'calculadoras/app.html', 'calculadoras/flujo.html', 'privacidad.html']
+    pages = ['v2/reservas.html', 'v2/dashboards.html', 'calculadoras/app.html', 'calculadoras/flujo.html', 'cursos/index.html', 'privacidad.html']
     old = (ROOT / 'sitemap.xml').read_text(encoding='utf-8')
     dates = dict(re.findall(r'<loc>https://www\.h3lglobalenergy\.com/([^<]*)</loc><lastmod>([^<]*)</lastmod>', old))
     def git_date(*files):

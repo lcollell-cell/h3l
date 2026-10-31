@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-<url><loc>https://www.h3lglobalenergy.com/es/</loc><lastmod>2026-10-28</lastmod>
+<url><loc>https://www.h3lglobalenergy.com/es/</loc><lastmod>2026-10-30</lastmod>
 <xhtml:link rel="alternate" hreflang="es" href="https://www.h3lglobalenergy.com/es/"/>
 <xhtml:link rel="alternate" hreflang="en" href="https://www.h3lglobalenergy.com/en/"/>
 <xhtml:link rel="alternate" hreflang="fr" href="https://www.h3lglobalenergy.com/fr/"/>
 <xhtml:link rel="alternate" hreflang="pt" href="https://www.h3lglobalenergy.com/pt/"/>
 <xhtml:link rel="alternate" hreflang="x-default" href="https://www.h3lglobalenergy.com/es/"/></url>
-<url><loc>https://www.h3lglobalenergy.com/en/</loc><lastmod>2026-10-28</lastmod>
+<url><loc>https://www.h3lglobalenergy.com/en/</loc><lastmod>2026-10-30</lastmod>
 <xhtml:link rel="alternate" hreflang="es" href="https://www.h3lglobalenergy.com/es/"/>
 <xhtml:link rel="alternate" hreflang="en" href="https://www.h3lglobalenergy.com/en/"/>
 <xhtml:link rel="alternate" hreflang="fr" href="https://www.h3lglobalenergy.com/fr/"/>
 <xhtml:link rel="alternate" hreflang="pt" href="https://www.h3lglobalenergy.com/pt/"/>
 <xhtml:link rel="alternate" hreflang="x-default" href="https://www.h3lglobalenergy.com/es/"/></url>
-<url><loc>https://www.h3lglobalenergy.com/fr/</loc><lastmod>2026-10-28</lastmod>
+<url><loc>https://www.h3lglobalenergy.com/fr/</loc><lastmod>2026-10-30</lastmod>
 <xhtml:link rel="alternate" hreflang="es" href="https://www.h3lglobalenergy.com/es/"/>
 <xhtml:link rel="alternate" hreflang="en" href="https://www.h3lglobalenergy.com/en/"/>
 <xhtml:link rel="alternate" hreflang="fr" href="https://www.h3lglobalenergy.com/fr/"/>
 <xhtml:link rel="alternate" hreflang="pt" href="https://www.h3lglobalenergy.com/pt/"/>
 <xhtml:link rel="alternate" hreflang="x-default" href="https://www.h3lglobalenergy.com/es/"/></url>
-<url><loc>https://www.h3lglobalenergy.com/pt/</loc><lastmod>2026-10-28</lastmod>
+<url><loc>https://www.h3lglobalenergy.com/pt/</loc><lastmod>2026-10-30</lastmod>
 <xhtml:link rel="alternate" hreflang="es" href="https://www.h3lglobalenergy.com/es/"/>
 <xhtml:link rel="alternate" hreflang="en" href="https://www.h3lglobalenergy.com/en/"/>
 <xhtml:link rel="alternate" hreflang="fr" href="https://www.h3lglobalenergy.com/fr/"/>
@@ -28,5 +28,6 @@
 <url><loc>https://www.h3lglobalenergy.com/v2/dashboards.html</loc><lastmod>2026-10-19</lastmod></url>
 <url><loc>https://www.h3lglobalenergy.com/calculadoras/app.html</loc><lastmod>2026-10-19</lastmod></url>
 <url><loc>https://www.h3lglobalenergy.com/calculadoras/flujo.html</loc><lastmod>2026-10-19</lastmod></url>
+<url><loc>https://www.h3lglobalenergy.com/cursos/index.html</loc><lastmod>2026-10-30</lastmod></url>
 <url><loc>https://www.h3lglobalenergy.com/privacidad.html</loc><lastmod>2026-10-27</lastmod></url>
 </urlset>
