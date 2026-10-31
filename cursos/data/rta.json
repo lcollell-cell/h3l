@@ -1,0 +1,698 @@
+{
+ "id": "rta",
+ "title": "Análisis de producción y RTA en pozos no convencionales",
+ "subtitle": "Flujo lineal, raíz de tiempo, ventana de ajuste y pronóstico de pozos de lutitas.",
+ "desc": "Curso de análisis de datos de producción: regímenes de flujo en pozos fracturados de lutitas, gráfico de raíz de tiempo y su pendiente, balance de materiales de flujo, curvas tipo, declinación y EUR, espaciamiento entre pozos y casos de Vaca Muerta.",
+ "objectives": [
+  "Identificar los regímenes de flujo de un pozo no convencional en los datos de producción.",
+  "Usar el gráfico de raíz de tiempo para estimar el producto entre el área de flujo y la raíz de la permeabilidad.",
+  "Reconocer el efecto de la ventana de ajuste, del daño y del fin del flujo lineal sobre el pronóstico.",
+  "Relacionar el análisis de producción con el pronóstico de EUR y con el espaciamiento entre pozos."
+ ],
+ "labs": [
+  "raíz de tiempo y ventana de ajuste",
+  "pronóstico lineal frente a declinación hiperbólica",
+  "efecto de b y de la declinación terminal"
+ ],
+ "practiceMin": 80,
+ "competencies": [
+  {
+   "name": "Regímenes de flujo",
+   "lessons": [
+    "r1"
+   ]
+  },
+  {
+   "name": "Raíz de tiempo",
+   "lessons": [
+    "r2"
+   ]
+  },
+  {
+   "name": "Calidad de los datos",
+   "lessons": [
+    "r3"
+   ]
+  },
+  {
+   "name": "Pronóstico y EUR",
+   "lessons": [
+    "r4",
+    "r5"
+   ]
+  },
+  {
+   "name": "Espaciamiento y casos",
+   "lessons": [
+    "r6"
+   ]
+  }
+ ],
+ "intro": {
+  "hook": "Un pozo de lutitas produce mucho al principio y declina rápido. Los datos de producción, bien leídos, dicen más del pozo de lo que parece.",
+  "questions": [
+   "¿Qué regímenes de flujo aparecen en un pozo fracturado de lutitas?",
+   "¿Qué se puede estimar con un gráfico de raíz de tiempo y qué no?",
+   "¿Cómo se pasa del análisis al pronóstico y al espaciamiento entre pozos?"
+  ],
+  "star": {
+   "caso": "Vaca Muerta: el no convencional, cerca del 70 % del petróleo argentino",
+   "S": "Argentina cerró junio de 2026 con una producción récord de 914.900 barriles por día, según datos del Monitor Oil & Gas citados por Infobae.",
+   "T": "Sostener el crecimiento con pozos que declinan rápido y deben pronosticarse con pocos meses de historia.",
+   "A": "La Cuenca Neuquina aportó 715.105 barriles por día, 79 % del total nacional, y según la nota, el no convencional representó cerca del 70 % de la producción en el acumulado del año.",
+   "R": "Vaca Muerta agregó 157.486 barriles por día en doce meses: el pronóstico de cada pozo nuevo es la base de ese crecimiento y de sus reservas."
+  }
+ },
+ "modules": [
+  {
+   "id": "rm1",
+   "title": "Módulo 1 · Leer los datos de producción",
+   "lessons": [
+    {
+     "id": "r1",
+     "title": "Regímenes de flujo en pozos fracturados",
+     "comp": "Regímenes de flujo",
+     "cues": [
+      {
+       "say": "En un pozo con fracturas hidráulicas muy conductivas, el flujo evoluciona por regímenes. Primero un flujo lineal transitorio hacia las fracturas, que domina durante años. Después, cuando se siente el límite del volumen drenado, el flujo dominado por los límites.",
+       "scene": {
+        "t": "bul",
+        "k": "Regímenes",
+        "h": "Evolución típica",
+        "items": [
+         "Flujo en la fractura y efectos de la completación, al inicio",
+         "Flujo lineal transitorio desde la matriz hacia las fracturas",
+         "Flujo dominado por los límites, cuando se alcanzan los bordes drenados",
+         "En lutitas, el lineal puede ser el único régimen observado"
+        ]
+       },
+       "hl": 1
+      },
+      {
+       "say": "Cada régimen tiene una firma. En un gráfico de caudal contra tiempo en escala logarítmica, el flujo lineal muestra una pendiente de menos un medio. El flujo límite, una declinación más pronunciada. Reconocerlos permite elegir el método de análisis y de pronóstico.",
+       "scene": {
+        "t": "tbl",
+        "k": "Firmas",
+        "h": "Cómo se reconoce cada régimen",
+        "cols": [
+         "Régimen",
+         "Firma en los datos",
+         "Método"
+        ],
+        "rows": [
+         [
+          "Lineal transitorio",
+          "Pendiente −1/2 en log-log; recta en raíz de tiempo",
+          "Gráfico de raíz de tiempo"
+         ],
+         [
+          "Dominado por los límites",
+          "Declinación más rápida; tendencia exponencial",
+          "Declinación y balance de materiales de flujo"
+         ],
+         [
+          "Efectos tempranos",
+          "Caídas bruscas por limpieza y cierres",
+          "Se excluyen del ajuste"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "La condición de operación importa. Si el pozo produce con presión de fondo variable, hay que normalizar el caudal por la caída de presión. Un análisis con caudal sin normalizar puede confundir un cambio de choque con un cambio de régimen.",
+       "scene": {
+        "t": "bul",
+        "k": "Normalización",
+        "h": "Cuidados",
+        "items": [
+         "Usar caudal normalizado por la caída de presión cuando varía la presión de fondo",
+         "Separar los cierres y los cambios de choque",
+         "Excluir los datos de limpieza inicial",
+         "Trabajar con datos diarios y revisar los atípicos"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "El flujo lineal transitorio se reconoce por:",
+        "o": [
+         "Una recta en el gráfico de raíz de tiempo",
+         "Un caudal constante",
+         "Un salto de presión",
+         "Una declinación exponencial"
+        ],
+        "a": 0,
+        "e": "La inversa del caudal contra la raíz del tiempo forma una recta."
+       }
+      }
+     ]
+    },
+    {
+     "id": "r2",
+     "title": "Raíz de tiempo, pendiente y ventana de ajuste",
+     "comp": "Raíz de tiempo",
+     "cues": [
+      {
+       "say": "En el gráfico de raíz de tiempo se dibuja la inversa del caudal contra la raíz del tiempo. Si el flujo es lineal, los puntos forman una recta. Su pendiente está relacionada con el producto del área de flujo por la raíz de la permeabilidad, y la ordenada refleja el daño y la conductividad finita.",
+       "scene": {
+        "t": "fm",
+        "k": "Flujo lineal",
+        "h": "Gráfico de raíz de tiempo",
+        "f": "1 / q = b + m · √t\n\nm ∝ 1 / ( A · √k )",
+        "n": "A es el área de flujo hacia las fracturas. A y k no se pueden separar si no se conoce uno de los dos: por ejemplo la longitud de fractura."
+       }
+      },
+      {
+       "say": "Laboratorio. Es un pozo sintético con ruido. Elegí la ventana de ajuste. Si la ventana incluye datos después del fin del flujo lineal, la pendiente sube y el producto estimado baja. Mirá también cómo el pronóstico lineal sobreestima el caudal.",
+       "scene": {
+        "t": "viz",
+        "w": "rta",
+        "h": "Raíz de tiempo y ventana de ajuste",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "La ventana es la decisión crítica. Hay que elegirla donde los puntos forman una recta y estimar el fin del flujo lineal. Un método habitual es combinarlo con el balance de materiales de flujo, que da el volumen drenado, y compararlo con el espaciamiento de pozos vecinos.",
+       "scene": {
+        "t": "bul",
+        "k": "Ventana",
+        "h": "Cómo elegirla",
+        "items": [
+         "Excluir los datos tempranos con efectos de limpieza",
+         "Terminar antes de que la recta se curve",
+         "Verificar contra el volumen drenado del balance de materiales de flujo",
+         "Repetir con distintas ventanas y reportar el rango"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Si la ventana de ajuste incluye flujo dominado por los límites, el producto A·√k estimado:",
+        "o": [
+         "Resulta subestimado",
+         "Resulta sobreestimado",
+         "No cambia",
+         "No se puede calcular"
+        ],
+        "a": 0,
+        "e": "La pendiente aparente aumenta."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "La inversa del caudal contra la raíz del tiempo es una recta si el flujo es:",
+     "o": [
+      "Lineal transitorio",
+      "Radial",
+      "Dominado por los límites",
+      "Esférico"
+     ],
+     "a": 0,
+     "e": "Es la firma del flujo lineal."
+    },
+    {
+     "q": "Con presión de fondo variable se debe:",
+     "o": [
+      "Normalizar el caudal por la caída de presión",
+      "Ignorar la presión",
+      "Usar el precio",
+      "Aumentar la ventana"
+     ],
+     "a": 0,
+     "e": "Así el análisis no confunde cambios de operación con cambios de régimen."
+    },
+    {
+     "q": "Del gráfico de raíz de tiempo se obtiene directamente:",
+     "o": [
+      "El producto del área por la raíz de la permeabilidad",
+      "La permeabilidad sola",
+      "La porosidad",
+      "El precio"
+     ],
+     "a": 0,
+     "e": "Para separar A y k hay que conocer uno de los dos."
+    }
+   ]
+  },
+  {
+   "id": "rm2",
+   "title": "Módulo 2 · Pronóstico y EUR",
+   "lessons": [
+    {
+     "id": "r3",
+     "title": "Calidad de datos y normalización",
+     "comp": "Calidad de los datos",
+     "cues": [
+      {
+       "say": "Antes de ajustar se revisan los datos. Los caudales diarios de pozos de lutitas suelen tener cierres, restricciones y errores de medición. Una limpieza sistemática evita pronósticos que reflejan cambios de operación y no del reservorio.",
+       "scene": {
+        "t": "bul",
+        "k": "Limpieza",
+        "h": "Pasos",
+        "items": [
+         "Revisar días sin producción y reasignaciones",
+         "Identificar cambios de choque y de método",
+         "Marcar los atípicos con criterios robustos",
+         "Alinear el tiempo cero con el inicio de producción",
+         "Documentar cada exclusión"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "El tiempo cero y el tiempo de balance de materiales son otra fuente de error. En pozos con caudal variable, el tiempo se corrige para tener en cuenta el historial de caudales, y así la comparación entre pozos es justa.",
+       "scene": {
+        "t": "bul",
+        "k": "Tiempo equivalente",
+        "h": "Por qué",
+        "items": [
+         "El caudal variable distorsiona el gráfico en tiempo calendario",
+         "El tiempo de balance de materiales lo compensa",
+         "Permite comparar pozos con operación distinta",
+         "Es la base de las curvas tipo"
+        ]
+       },
+       "hl": 1
+      },
+      {
+       "say": "Las curvas tipo comparan el pozo con soluciones teóricas, como las de Wattenbarger y colaboradores de 1998 para flujo lineal en pozos fracturados de gas de baja permeabilidad. El método dibuja el caudal normalizado contra el tiempo adimensional y ajusta por desplazamiento.",
+       "scene": {
+        "t": "bul",
+        "k": "Curvas tipo",
+        "h": "Qué se grafica",
+        "items": [
+         "Caudal normalizado contra tiempo de balance de materiales",
+         "Se ajusta el desplazamiento horizontal y vertical",
+         "De ahí salen parámetros relacionados con área y permeabilidad",
+         "Es un método de referencia: debe verificarse con otros"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "El tiempo de balance de materiales se usa para:",
+        "o": [
+         "Compensar el efecto de un caudal variable",
+         "Medir la porosidad",
+         "Contar los pozos",
+         "Determinar el precio"
+        ],
+        "a": 0,
+        "e": "Permite comparar pozos con historiales distintos."
+       }
+      }
+     ]
+    },
+    {
+     "id": "r4",
+     "title": "Declinación y EUR: hiperbólica modificada",
+     "comp": "Pronóstico y EUR",
+     "cues": [
+      {
+       "say": "Para pronosticar el caudal futuro se usa una declinación hiperbólica, con un exponente b. En el flujo lineal, b es cercano a dos. Si se extrapola esa curva sin límite, el pozo produce de más a largo plazo.",
+       "scene": {
+        "t": "fm",
+        "k": "Arps",
+        "h": "Declinación hiperbólica",
+        "f": "q(t) = qi / ( 1 + b · Di · t )^(1/b)\n\nEUR = ∫ q(t) dt hasta el límite económico",
+        "n": "Con b mayor que uno, el volumen acumulado crece sin límite: por eso se necesita una declinación terminal."
+       }
+      },
+      {
+       "say": "Laboratorio. Es una declinación hiperbólica con una declinación terminal mínima. Cambiá el exponente b y la declinación terminal. Mirá cuánto sobreestima el EUR la hiperbólica pura frente a la modificada.",
+       "scene": {
+        "t": "viz",
+        "w": "shale",
+        "h": "Hiperbólica modificada y EUR",
+        "p": {
+         "b": 1.5
+        }
+       },
+       "lab": true
+      },
+      {
+       "say": "La práctica estándar es pasar a una declinación exponencial cuando la declinación instantánea baja a un valor mínimo. Ese mínimo, y la decisión de cuándo empezar, dependen del análisis de analogías y del criterio del evaluador, y deben documentarse.",
+       "scene": {
+        "t": "bul",
+        "k": "Declinación terminal",
+        "h": "Buenas prácticas",
+        "items": [
+         "Fijar una declinación mínima con base en analogías",
+         "Documentar cuándo y por qué se pasa a la terminal",
+         "Comparar el EUR con el de pozos vecinos de más historia",
+         "Usar rangos y no solo un valor"
+        ]
+       },
+       "hl": 1
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Con b mayor que uno y sin declinación terminal, el pronóstico:",
+        "o": [
+         "Sobreestima el volumen a largo plazo",
+         "Subestima el volumen",
+         "Da exactamente el volumen real",
+         "No se puede calcular"
+        ],
+        "a": 0,
+        "e": "El volumen acumulado no converge."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "La ventana de ajuste incorrecta en raíz de tiempo produce:",
+     "o": [
+      "Un valor sesgado de A·√k",
+      "Mayor porosidad",
+      "Cambio del precio",
+      "Un pozo nuevo"
+     ],
+     "a": 0,
+     "e": "Hay que elegirla dentro del flujo lineal."
+    },
+    {
+     "q": "El tiempo de balance de materiales:",
+     "o": [
+      "Compensa un caudal variable",
+      "Reemplaza la presión",
+      "Calcula el costo",
+      "Mide la permeabilidad"
+     ],
+     "a": 0,
+     "e": "Hace comparables pozos con operación distinta."
+    },
+    {
+     "q": "Una declinación terminal se usa para:",
+     "o": [
+      "Evitar sobreestimar el EUR",
+      "Aumentar la producción",
+      "Cambiar el pozo",
+      "Medir el área"
+     ],
+     "a": 0,
+     "e": "Impone una declinación mínima a largo plazo."
+    }
+   ]
+  },
+  {
+   "id": "rm3",
+   "title": "Módulo 3 · De un pozo al desarrollo",
+   "lessons": [
+    {
+     "id": "r5",
+     "title": "Incertidumbre del pronóstico y reservas",
+     "comp": "Pronóstico y EUR",
+     "cues": [
+      {
+       "say": "Con pocos meses de historia, el pronóstico tiene mucha incertidumbre. Dos ajustes razonables pueden diferir en el EUR. Por eso se pronostica con rangos, y los pozos con poca historia se evalúan con analogías de pozos más antiguos de la misma zona.",
+       "scene": {
+        "t": "bul",
+        "k": "Incertidumbre",
+        "h": "Fuentes",
+        "items": [
+         "Poca historia de producción",
+         "Elección de b y de la declinación terminal",
+         "Variación entre pozos de un mismo pad",
+         "Cambios de diseño de fractura entre campañas",
+         "Nuevas condiciones de operación"
+        ]
+       },
+       "hl": 2
+      },
+      {
+       "say": "En reservas, PRMS 2018 aclara que el EUR debe referirse a sus condiciones técnicas y comerciales. Y que los recursos no convencionales de lutitas se tratan como un subtipo de petróleo y gas de baja permeabilidad. Esto obliga a documentar el método y el límite económico.",
+       "scene": {
+        "t": "bul",
+        "k": "PRMS 2018",
+        "h": "Puntos relevantes",
+        "items": [
+         "El EUR se refiere a sus condiciones técnicas y comerciales",
+         "Las reservas requieren tecnología establecida",
+         "Las reservas no desarrolladas deben iniciar su desarrollo en un plazo de cinco años",
+         "Shale oil y shale gas son subtipos de tight oil y tight gas"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Una práctica sólida es mantener un sistema de seguimiento. Cada pozo nuevo se compara con el pronóstico de analogía, y el desvío sistemático, para arriba o para abajo, se usa para recalibrar las curvas tipo antes de calcular reservas.",
+       "scene": {
+        "t": "bul",
+        "k": "Seguimiento",
+        "h": "Cómo se hace",
+        "items": [
+         "Comparar cada pozo nuevo con la curva tipo de su zona",
+         "Medir el desvío acumulado y su tendencia",
+         "Recalibrar la curva cuando el sesgo es sistemático",
+         "Informar la revisión de reservas con su causa"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "En reservas de lutitas, el EUR debe documentarse:",
+        "o": [
+         "Con sus condiciones técnicas y comerciales",
+         "Sin supuestos",
+         "Solo con el precio",
+         "Sin método"
+        ],
+        "a": 0,
+        "e": "Es una aclaración de PRMS 2018."
+       }
+      }
+     ]
+    },
+    {
+     "id": "r6",
+     "title": "Espaciamiento entre pozos y el caso de Vaca Muerta",
+     "comp": "Espaciamiento y casos",
+     "cues": [
+      {
+       "say": "El espaciamiento define cuánto volumen drena cada pozo. Si es muy grande, queda petróleo sin drenar. Si es muy chico, los pozos interfieren y cada uno produce menos. El análisis de producción ayuda a estimar el volumen drenado y a detectar la interferencia entre pozos.",
+       "scene": {
+        "t": "bul",
+        "k": "Espaciamiento",
+        "h": "Qué se evalúa",
+        "items": [
+         "Volumen drenado de cada pozo con balance de materiales de flujo",
+         "Interferencia entre pozos vecinos y pozos nuevos",
+         "Efecto sobre el EUR por pozo y por sección",
+         "Economía por pozo y por área",
+         "Datos de presión y de trazadores si existen"
+        ]
+       },
+       "hl": 2
+      },
+      {
+       "say": "El caso de Vaca Muerta muestra la escala de lo que está en juego. En junio de 2026 la producción nacional llegó a 914.900 barriles por día, y la Cuenca Neuquina aportó 715.105, el 79 %. Según la nota, el no convencional representó cerca del 70 % del total en el acumulado del año.",
+       "scene": {
+        "t": "case",
+        "h": "Vaca Muerta, junio de 2026",
+        "src": "Infobae (9 de agosto de 2026), con datos de Monitor Oil & Gas",
+        "S": "Cuenca Neuquina, con pozos horizontales de lutitas y fractura hidráulica.",
+        "T": "Sostener el crecimiento de producción con pozos que declinan rápido.",
+        "A": "Récord nacional de 914.900 barriles por día en junio de 2026; la cuenca aportó 715.105, el 79 %.",
+        "R": "Vaca Muerta agregó 157.486 barriles por día en 12 meses: el análisis de producción de cada pozo sostiene el pronóstico."
+       }
+      },
+      {
+       "say": "Todo el curso se resume en una disciplina. Limpiar los datos, reconocer el régimen, elegir bien la ventana, pronosticar con rangos y contrastar con analogías y con el volumen drenado. Un pozo se pronostica con un método, pero se valida con varios.",
+       "scene": {
+        "t": "bul",
+        "k": "Resumen",
+        "h": "Disciplina de análisis",
+        "items": [
+         "Datos limpios y normalizados",
+         "Régimen identificado",
+         "Ventana elegida y justificada",
+         "Pronóstico con rango y declinación terminal",
+         "Contraste con analogías y balance de materiales"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Un espaciamiento muy chico entre pozos puede provocar:",
+        "o": [
+         "Interferencia y menor EUR por pozo",
+         "Mayor porosidad",
+         "Menor costo por pozo siempre",
+         "Ninguna consecuencia"
+        ],
+        "a": 0,
+        "e": "Los pozos compiten por el mismo volumen."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "El análisis de producción sirve para estimar:",
+     "o": [
+      "Volumen drenado e interferencia",
+      "El precio",
+      "La profundidad",
+      "El diámetro"
+     ],
+     "a": 0,
+     "e": "Con el balance de materiales de flujo."
+    },
+    {
+     "q": "Las reservas no desarrolladas bajo PRMS 2018 deben comenzar su desarrollo en:",
+     "o": [
+      "Cinco años desde su clasificación inicial",
+      "Un mes",
+      "Cincuenta años",
+      "Sin plazo"
+     ],
+     "a": 0,
+     "e": "Es una de las precisiones del documento de 2018."
+    },
+    {
+     "q": "En junio de 2026, la Cuenca Neuquina aportó cerca de:",
+     "o": [
+      "El 79 % de la producción nacional",
+      "El 5 %",
+      "El 20 %",
+      "El 100 %"
+     ],
+     "a": 0,
+     "e": "715.105 barriles por día sobre 914.900."
+    }
+   ]
+  }
+ ],
+ "exam": [
+  {
+   "q": "La pendiente en raíz de tiempo permite estimar:",
+   "o": [
+    "El producto del área de flujo por la raíz de k",
+    "Solo el precio",
+    "La porosidad",
+    "El diámetro del pozo"
+   ],
+   "a": 0,
+   "e": "A y k no se separan sin otra información."
+  },
+  {
+   "q": "Si la ventana de ajuste incluye flujo dominado por los límites:",
+   "o": [
+    "A·√k se subestima",
+    "A·√k se sobreestima",
+    "No cambia",
+    "Se anula"
+   ],
+   "a": 0,
+   "e": "La pendiente aparente aumenta."
+  },
+  {
+   "q": "El flujo lineal transitorio en log-log muestra una pendiente de:",
+   "o": [
+    "Menos un medio",
+    "Cero",
+    "Uno",
+    "Menos dos"
+   ],
+   "a": 0,
+   "e": "Es su firma característica."
+  },
+  {
+   "q": "Con b = 1,5 sin declinación terminal, el EUR extrapolado:",
+   "o": [
+    "Puede estar sobreestimado",
+    "Es exacto",
+    "Es cero",
+    "Es el mínimo posible"
+   ],
+   "a": 0,
+   "e": "La hiperbólica pura produce de más a largo plazo."
+  },
+  {
+   "q": "El tiempo de balance de materiales:",
+   "o": [
+    "Hace comparables pozos con caudal variable",
+    "Fija el precio",
+    "Reemplaza el análisis",
+    "Mide la presión"
+   ],
+   "a": 0,
+   "e": "Compensa la historia de caudales."
+  },
+  {
+   "q": "Para calibrar el pronóstico de pozos nuevos conviene:",
+   "o": [
+    "Compararlos con la curva tipo de su zona y recalibrar",
+    "Ignorar los pozos vecinos",
+    "Usar un único valor",
+    "Eliminar los datos"
+   ],
+   "a": 0,
+   "e": "Es una práctica de seguimiento."
+  }
+ ],
+ "outro": {
+  "phrase": "En los pozos de lutitas, el pronóstico es una conversación entre los datos, el método y el criterio.",
+  "recap": [
+   "El flujo lineal domina años y se reconoce en raíz de tiempo; la ventana de ajuste es la decisión crítica.",
+   "El pronóstico necesita declinación terminal y rangos, y se calibra con analogías.",
+   "El análisis de producción también informa el espaciamiento y la interferencia entre pozos."
+  ]
+ },
+ "downloads": [
+  {
+   "file": "xlsx/H3L_RTA_Raiz_de_Tiempo_y_EUR.xlsx",
+   "title": "Raíz de tiempo, ventana y EUR (Excel)",
+   "desc": "Pozo sintético de ejemplo con ruido, regresión en la ventana elegida por el usuario para pendiente y ordenada, pronóstico lineal y declinación hiperbólica modificada con EUR, y comparación entre ventanas.",
+   "task": "Ajustá una ventana dentro del flujo lineal y otra que incluya flujo límite, y anotá cuánto cambia la pendiente y el EUR."
+  }
+ ],
+ "cases": [
+  {
+   "title": "Vaca Muerta (Argentina), junio de 2026",
+   "text": "Según Infobae, con datos de Monitor Oil & Gas, la producción nacional de petróleo cerró junio de 2026 con un récord de 914.900 barriles por día, 17,1 % más que en junio de 2025. La Cuenca Neuquina aportó 715.105 barriles por día, el 79 % del total, y Vaca Muerta agregó 157.486 barriles por día en doce meses.",
+   "src": "Infobae, 9 de agosto de 2026"
+  }
+ ],
+ "refs": [
+  {
+   "tag": "Paper",
+   "cite": "Wattenbarger, R. A., El-Banbi, A. H., Villegas, M. E. y Maggard, J. B. (1998). Production analysis of linear flow into fractured tight gas wells. SPE 39931.",
+   "why": "curvas tipo de flujo lineal"
+  },
+  {
+   "tag": "Estándar",
+   "cite": "SPE, AAPG, WPC, SPEE, SEG y EAGE (2018). Petroleum Resources Management System (PRMS), versión 1.03.",
+   "why": "EUR y reservas"
+  },
+  {
+   "tag": "Documentación",
+   "cite": "IHS Markit, Harmony: Unconventional reservoir theory (referencias: Anderson et al., 2010; Behmanesh et al., 2015; Stalgorova y Mattar, 2016).",
+   "why": "raíz de tiempo y balance de materiales de flujo"
+  },
+  {
+   "tag": "Fuente",
+   "cite": "Infobae (9 de agosto de 2026). Los récords de Vaca Muerta acercan a la Argentina al 1 % de la producción petrolera mundial.",
+   "why": "caso Vaca Muerta"
+  }
+ ]
+}

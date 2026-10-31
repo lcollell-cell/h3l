@@ -8,7 +8,9 @@
    "courses": [
     "geo",
     "res",
-    "pta"
+    "pta",
+    "sim",
+    "rpx"
    ]
   },
   {
@@ -19,7 +21,9 @@
     "wf",
     "per",
     "nod",
-    "frac"
+    "frac",
+    "eor",
+    "rta"
    ]
   },
   {
@@ -27,7 +31,8 @@
    "title": "Energía y transición",
    "desc": "Emisiones, metano y captura de CO₂.",
    "courses": [
-    "gei"
+    "gei",
+    "alm"
    ]
   },
   {
@@ -140,6 +145,56 @@
    "color": "#2b6cb0",
    "icon": "dat",
    "tag": "Datos e IA"
+  },
+  {
+   "id": "sim",
+   "n": 11,
+   "title": "Simulación numérica de reservorios e history matching",
+   "short": "De las ecuaciones a la malla, y del ajuste histórico a la incertidumbre del pronóstico.",
+   "level": "Avanzado",
+   "color": "#3b82c4",
+   "icon": "sim",
+   "tag": "Reservorios"
+  },
+  {
+   "id": "eor",
+   "n": 12,
+   "title": "Recuperación mejorada (EOR): química, gas y térmica",
+   "short": "Eficiencias de barrido y desplazamiento, métodos, selección y piloto, con Manantiales Behr.",
+   "level": "Avanzado",
+   "color": "#c26a2e",
+   "icon": "eor",
+   "tag": "Reservorios"
+  },
+  {
+   "id": "rta",
+   "n": 13,
+   "title": "Análisis de producción y RTA en pozos no convencionales",
+   "short": "Flujo lineal, raíz de tiempo, ventana de ajuste y pronóstico, con Vaca Muerta.",
+   "level": "Avanzado",
+   "color": "#2e9c8f",
+   "icon": "rta",
+   "tag": "Producción"
+  },
+  {
+   "id": "alm",
+   "n": 14,
+   "title": "Almacenamiento geológico de CO₂ (CCS)",
+   "short": "Sitio, capacidad, entrampamiento, monitoreo y estándares, con Sleipner y Quest.",
+   "level": "Intermedio",
+   "color": "#6aa84f",
+   "icon": "alm",
+   "tag": "Transición energética"
+  },
+  {
+   "id": "rpx",
+   "n": 15,
+   "title": "Reservas avanzadas: incertidumbre, agregación y auditoría",
+   "short": "Percentiles, suma de portafolios, conciliación y el caso Shell 2004.",
+   "level": "Avanzado",
+   "color": "#8a5fb4",
+   "icon": "rpx",
+   "tag": "Reservas"
   }
  ]
 }

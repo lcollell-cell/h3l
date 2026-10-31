@@ -426,5 +426,109 @@ W.mlfit=function(box,p,api){var h=mkui(box,[{k:'dg',l:'Complejidad del modelo (g
   draw(h.V)};
 
 /* ===== MAPA DE COMPETENCIAS (curso) se dibuja en player.js ===== */
+/* ===== AJUSTE HISTÓRICO: balance de materiales con acuífero (no unicidad) ===== */
+W.hm=function(box,p,api){var h=mkui(box,[{k:'N',l:'Petróleo original N',min:100,max:800,step:10,v:p.N||250,f:function(v){return nf(v)+' MMbbl'}},{k:'Ca',l:'Fuerza del acuífero Ca',min:0,max:8,step:.1,v:p.Ca!=null?p.Ca:5,f:function(v){return nf(v,1)+' Mbbl/psi'}},{k:'w',t:'chk',l:'Incluir el agua producida en el ajuste',v:false}],draw,{side:true,w:700,h:340,touch:api.touch}),svg=h.svg;
+  var ct=1.2e-5,pi=4500,NT=400,CT=3.2,r=rng(5),yrs=[],i,pob=[],wob=[];/* verdad: N=400 MMbbl, Ca=3,2 Mbbl/psi */
+  var neffT=NT*ct*1000+CT;/* Mbbl/psi */
+  for(i=0;i<=10;i++){var np=1.2*i;yrs.push(i);pob.push(pi-np*1000/neffT+25*gauss(r));wob.push(Math.max(0,CT*(np*1000/neffT)/1000+.12*gauss(r)))}
+  function mod(N,Ca,t){var np=1.2*t,ne=N*ct*1000+Ca,dp=np*1000/ne;return{p:pi-dp,w:Ca*dp/1000}}
+  function mis(N,Ca,uw){var s=0,i,m;for(i=0;i<=10;i++){m=mod(N,Ca,i);s+=Math.pow((m.p-pob[i])/25,2);if(uw)s+=Math.pow((m.w-wob[i])/.12,2)}return Math.sqrt(s/(uw?22:11))}
+  function draw(V){svg.innerHTML='';var uw=V.w,Ng=[],Cg=[],gi,gj,ok=[],cur=mis(V.N,V.Ca,uw);
+    var P=plot(svg,700,340,{l:50,r:360,t:22,b:42},[0,20],[2000,4600],{nx:4,ny:4,xl:'Tiempo (años)',yl:'Presión (psi)',xf:function(v){return nf(v)},yf:function(v){return nf(v)}});
+    for(gi=0;gi<=10;gi++){sv('rect',{x:P.X(gi)-3,y:P.Y(pob[gi])-3,width:6,height:6,fill:'#fff'},svg)}
+    var a=[],b=[],t;for(t=0;t<=20;t+=.5){var m=mod(V.N,V.Ca,t);m.p=Math.max(2000,m.p);(t<=10?a:b).push([t,m.p]);if(t===10)b.push([10,m.p])}path(svg,a,P.X,P.Y,AM,3);path(svg,b,P.X,P.Y,AM,2.4,'6 4');lbl(svg,P.X(10)+6,P.m.t+14,'pronóstico →',TX,10);
+    sv('rect',{x:P.m.l+8,y:P.m.t+8,width:6,height:6,fill:'#fff'},svg);lbl(svg,P.m.l+20,P.m.t+14,'datos',TX,10);
+    var HX=400,HY=22,HW=280,HH=276,gx=24,gy=20,cw=HW/gx,chh=HH/gy,w20=[];
+    for(gi=0;gi<gx;gi++)for(gj=0;gj<gy;gj++){var N=100+(gi+.5)*700/gx,Ca=8*(gj+.5)/gy,e=mis(N,Ca,uw),acc=e<1.5,c;if(acc){var m2=mod(N,Ca,20);w20.push(m2.w)}
+      c=acc?'rgba(95,209,164,'+(.9-e/1.8*.5)+')':'rgba(255,255,255,'+Math.max(.04,.28-e*.03)+')';sv('rect',{x:HX+gi*cw,y:HY+HH-(gj+1)*chh,width:cw-.6,height:chh-.6,fill:c},svg)}
+    sv('rect',{x:HX,y:HY,width:HW,height:HH,fill:'none',stroke:'rgba(255,255,255,.35)'},svg);
+    sv('circle',{cx:HX+(V.N-100)/700*HW,cy:HY+HH-V.Ca/8*HH,r:6,fill:'#fff',stroke:RD,'stroke-width':2.4},svg);
+    sv('circle',{cx:HX+(NT-100)/700*HW,cy:HY+HH-CT/8*HH,r:5,fill:'none',stroke:AM,'stroke-width':2,'stroke-dasharray':'3 2'},svg);
+    lbl(svg,HX+HW/2,HY+HH+16,'Petróleo original N (MMbbl)',TX,10.5,'middle');lbl(svg,HX,HY-6,'Verde = ajusta · ◌ = valor real del ejemplo',TX,10);
+    sv('text',{transform:'rotate(-90)',x:-(HY+HH/2),y:HX-8,'text-anchor':'middle',fill:TX,'font-size':10.5,'font-weight':600},svg,'Fuerza del acuífero Ca');
+    var mn=w20.length?Math.min.apply(null,w20):0,mx=w20.length?Math.max.apply(null,w20):0,cm=mod(V.N,V.Ca,20);
+    h.out('Error de ajuste (σ): <strong>'+nf(cur,2)+'</strong>'+(cur<1.5?' — este modelo ajusta.':' — no ajusta todavía.')+' Con solo presión, los modelos buenos forman un <strong>valle diagonal</strong>: N y acuífero se compensan, y el agua acumulada pronosticada a 20 años va de <strong>'+nf(mn,1)+'</strong> a <strong>'+nf(mx,1)+' MMbbl</strong> entre modelos que "ajustan igual". '+(uw?'Con el agua producida el valle se cierra.':'Marcá la casilla del agua producida y mirá cómo se cierra.')+' (Datos sintéticos de ejemplo.)')}
+  draw(h.V)};
+
+/* ===== EOR: barrido vertical en capas (Dykstra-Parsons, sin flujo cruzado) y eficiencia de desplazamiento ===== */
+function zinv(p){var q=p<.5?p:1-p,t=Math.sqrt(-2*Math.log(q)),x=t-(2.515517+.802853*t+.010328*t*t)/(1+1.432788*t+.189269*t*t+.001308*t*t*t);return p<.5?-x:x}
+W.eor=function(box,p,api){var h=mkui(box,[{k:'V',l:'Heterogeneidad (Dykstra-Parsons V)',min:0,max:.9,step:.05,v:p.V!=null?p.V:.7,f:function(v){return nf(v,2)}},{k:'mu',l:'Viscosidad del agua inyectada',min:.5,max:30,step:.5,v:p.mu||.5,f:function(v){return nf(v,1)+' cP'}},{k:'sor',l:'Saturación de petróleo residual Sor',min:.05,max:.35,step:.01,v:p.sor||.3,f:function(v){return nf(v*100,0)+' %'}}],draw,{side:true,w:700,h:340,touch:api.touch}),svg=h.svg;
+  var N=20,swc=.2,muo=6;
+  function draw(V){svg.innerHTML='';var M=.389*muo/V.mu,sg=V.V>0?-Math.log(1-V.V):0,k=[],i;for(i=0;i<N;i++)k.push(Math.exp(sg*zinv((i+.5)/N)));
+    function xs(t,ki,m){var tb=(m+1)/(2*ki);if(t>=tb)return 1;var x=Math.abs(m-1)<1e-6?ki*t:(-1+Math.sqrt(1+2*(m-1)*ki*t))/(m-1);return Math.min(1,Math.max(0,x))}
+    function wc(t,m){var a=0,b=0,j,x;for(j=0;j<N;j++){x=xs(t,k[j],m);if(x>=1)a+=k[j]/m;else b+=k[j]/(m*x+1-x)}return a/(a+b+1e-12)}
+    var lo=0,hi=1e4,mid;for(i=0;i<60;i++){mid=(lo+hi)/2;if(wc(mid,M)<.95)lo=mid;else hi=mid}var t95=hi,x95=k.map(function(ki){return xs(t95,ki,M)}),Ev=x95.reduce(function(a,b){return a+b},0)/N,Ed=(1-swc-V.sor)/(1-swc),RF=Ev*Ed;
+    var P=plot(svg,700,340,{l:56,r:330,t:22,b:42},[0,1],[0,N],{nx:2,ny:0,xl:'Posición del frente (inyector → productor)',xf:function(v){return nf(v,1)}});
+    for(i=0;i<N;i++){var y=P.Y(i+1),hh=P.h/N-1.5;sv('rect',{x:P.X(0),y:y,width:P.w,height:hh,fill:'rgba(255,255,255,.06)'},svg);sv('rect',{x:P.X(0),y:y,width:Math.max(1,P.w*x95[i]),height:hh,fill:x95[i]>=1?BL:GN,'fill-opacity':.85},svg)}
+    lbl(svg,P.m.l,P.m.t-6,'Capas (arriba: la más permeable)',TX,10);lbl(svg,P.m.l+P.w,P.m.t-6,'Al 95 % de corte de agua',TX,10,'end');
+    var bx=400,by=60,bw=270;lbl(svg,bx,by-22,'Recuperación del petróleo original',TX,11);
+    function bar(y,l,v,c){lbl(svg,bx,y-6,l,TX,10.5);sv('rect',{x:bx,y:y,width:bw,height:14,fill:'rgba(255,255,255,.1)'},svg);sv('rect',{x:bx,y:y,width:bw*v,height:14,fill:c},svg);lbl(svg,bx+bw*v-4,y+11,nf(v*100,0)+' %','#0b1a30',10.5,'end')}
+    bar(by+10,'Barrido vertical (capas)',Ev,GN);bar(by+52,'Desplazamiento en la roca barrida',Ed,BL);bar(by+94,'Recuperación = barrido × desplazamiento',RF,AM);
+    lbl(svg,bx,by+142,'Razón de movilidad M = '+nf(M,2)+(M>1?'  (desfavorable)':'  (favorable)'),M>1?RD:GN,11);
+    h.out('Con <strong>V = '+nf(V.V,2)+'</strong> y <strong>M = '+nf(M,2)+'</strong>: barrido vertical <strong>'+nf(Ev*100,0)+' %</strong>, desplazamiento <strong>'+nf(Ed*100,0)+' %</strong> (Sor '+nf(V.sor*100,0)+' %). El polímero sube la viscosidad del agua y mejora el barrido; un tensioactivo o un gas miscible bajan Sor. (Capas con pistón, sin flujo cruzado: ejemplo.)')}
+  draw(h.V)};
+
+/* ===== RTA: gráfico de raíz de tiempo (flujo lineal) y ventana de ajuste ===== */
+W.rta=function(box,p,api){var h=mkui(box,[{k:'m',l:'Pendiente real m (∝ 1/(A√k))',min:1,max:8,step:.5,v:p.m||3,f:function(v){return nf(v,1)+' ×10⁻⁵'}},{k:'b',l:'Ordenada b (daño / conductividad)',min:0,max:40,step:2,v:p.b!=null?p.b:16,f:function(v){return nf(v)+' ×10⁻⁵'}},{k:'te',l:'Fin del flujo lineal',min:150,max:1200,step:25,v:p.te||500,f:function(v){return nf(v)+' d'}},{k:'t1',l:'Ventana de ajuste: desde',min:20,max:1000,step:10,v:60,f:function(v){return nf(v)+' d'}},{k:'t2',l:'Ventana de ajuste: hasta',min:100,max:1800,step:10,v:400,f:function(v){return nf(v)+' d'}}],draw,{side:true,w:700,h:340,touch:api.touch}),svg=h.svg;
+  var r0=rng(9),ns=[],i;for(i=0;i<80;i++)ns.push(1+.03*gauss(r0));
+  function qm(t,m,b,te){var ir=function(x){return b*1e-5+m*1e-5*Math.sqrt(x)};if(t<=te)return 1/ir(t);var D=m*1e-5/(2*Math.sqrt(te))/ir(te);return(1/ir(te))*Math.exp(-D*(t-te))}
+  function draw(V){svg.innerHTML='';var d=[],i,T=1800,t;for(i=0;i<80;i++){t=10+(T-10)*i/79;d.push([t,qm(t,V.m,V.b,V.te)*ns[i]])}
+    var P=plot(svg,700,340,{l:56,r:370,t:22,b:42},[0,Math.sqrt(T)],[0,Math.max.apply(null,d.map(function(q){return 1/q[1]}))*1e5*1.05],{nx:4,ny:4,xl:'Raíz del tiempo (√d)',yl:'1/q (×10⁻⁵ d/bbl)',xf:function(v){return nf(v)},yf:function(v){return nf(v)}});
+    d.forEach(function(q){var inw=q[0]>=V.t1&&q[0]<=V.t2;sv('circle',{cx:P.X(Math.sqrt(q[0])),cy:P.Y(1e5/q[1]),r:3,fill:inw?AM:'rgba(255,255,255,.55)'},svg)});
+    var sx=0,sy=0,sxx=0,sxy=0,n=0;d.forEach(function(q){if(q[0]>=V.t1&&q[0]<=V.t2){var x=Math.sqrt(q[0]),y=1e5/q[1];sx+=x;sy+=y;sxx+=x*x;sxy+=x*y;n++}});
+    var mf=null,bf=0;if(n>=3){mf=(n*sxy-sx*sy)/(n*sxx-sx*sx);bf=(sy-mf*sx)/n}
+    if(mf!=null){path(svg,[[0,bf],[Math.sqrt(T),bf+mf*Math.sqrt(T)]].map(function(a){return[a[0],a[1]]}),P.X,P.Y,AM,2,'6 4')}
+    sv('line',{x1:P.X(Math.sqrt(V.te)),x2:P.X(Math.sqrt(V.te)),y1:P.m.t,y2:P.m.t+P.h,stroke:GN,'stroke-width':1.2,'stroke-dasharray':'4 4'},svg);lbl(svg,P.X(Math.sqrt(V.te))+4,P.m.t+14,'fin del flujo lineal',GN,10);
+    var Q=plot(svg,700,340,{l:392,r:14,t:22,b:42},[0,T],[0,Math.max.apply(null,d.map(function(q){return q[1]}))*1.05],{nx:3,ny:4,xl:'Tiempo (d)',xf:function(v){return nf(v)},yf:function(v){return nf(v)}});sv('text',{transform:'rotate(-90)',x:-(Q.m.t+Q.h/2),y:Q.m.l-44,'text-anchor':'middle',fill:TX,'font-size':11,'font-weight':600},svg,'Caudal q (bbl/d)');
+    d.forEach(function(q){sv('circle',{cx:Q.X(q[0]),cy:Q.Y(q[1]),r:2.6,fill:'rgba(255,255,255,.6)'},svg)});
+    if(mf!=null&&mf>0){var f=[];for(t=10;t<=T;t+=20)f.push([t,1e5/(bf+mf*Math.sqrt(t))]);path(svg,f,Q.X,Q.Y,AM,2.4,'6 4');lbl(svg,Q.m.l+Q.w-4,Q.m.t+14,'pronóstico lineal (naranja)',AM,10,'end')}
+    var inc=V.t2>V.te,est=mf?V.m/mf*100:null;
+    h.out(mf==null?'Ampliá la ventana de ajuste.':'Pendiente ajustada <strong>'+nf(mf,2)+'</strong> vs. real '+nf(V.m,1)+'. El producto A·√k estimado es <strong>'+nf(est,0)+' %</strong> del real. '+(inc?'La ventana <strong>incluye flujo límite</strong>: la pendiente sube y A·√k se subestima.':'La ventana está dentro del flujo lineal: el ajuste es confiable.')+' El pronóstico lineal sobreestima el caudal una vez que termina el flujo lineal. (Datos sintéticos con ruido de ejemplo.)')}
+  draw(h.V)};
+
+/* ===== SIMULACIÓN: dispersión numérica de Buckley-Leverett ===== */
+W.sim=function(box,p,api){var h=mkui(box,[{k:'n',l:'Celdas de la malla',min:10,max:300,step:10,v:p.n||40,f:function(v){return nf(v)}},{k:'c',l:'Número de Courant (paso de tiempo)',min:.1,max:1.3,step:.05,v:p.c||.8,f:function(v){return nf(v,2)}},{k:'M',l:'Razón de movilidad M',min:.3,max:10,step:.1,v:p.M||2,f:function(v){return nf(v,1)}},{k:'td',l:'Volúmenes porales inyectados',min:.1,max:1,step:.05,v:.4,f:function(v){return nf(v,2)}}],draw,{side:true,w:700,h:340,touch:api.touch}),svg=h.svg;
+  function draw(V){svg.innerHTML='';var M=V.M,f=function(s){s=Math.max(0,Math.min(1,s));return s*s/(s*s+(1-s)*(1-s)/M)},df=function(s){return(f(Math.min(1,s+.0005))-f(Math.max(0,s-.0005)))/(Math.min(1,s+.0005)-Math.max(0,s-.0005))},i,sf=.01,sl=0,fmax=0;
+    for(i=1;i<=1000;i++){var s=i/1000,q=f(s)/s;if(q>sl){sl=q;sf=s}fmax=Math.max(fmax,df(s))}
+    var N=V.n,dx=1/N,dt=V.c*dx/fmax,S=[],j,t=0;for(j=0;j<N;j++)S.push(0);
+    var steps=Math.ceil(V.td/dt),ok=true;dt=V.td/steps;
+    for(i=0;i<steps;i++){var nw=S.slice();for(j=0;j<N;j++){var up=j===0?1:S[j-1];nw[j]=S[j]-dt/dx*(f(S[j])-f(up))}S=nw;if(S.some(function(x){return!isFinite(x)||Math.abs(x)>1e3})){ok=false;break}}
+    var P=plot(svg,700,340,{l:50,r:300,t:22,b:42},[0,1],[-.2,1.2],{nx:5,ny:7,xl:'Posición (inyector → productor)',yl:'Saturación de agua normalizada',xf:function(v){return nf(v,1)},yf:function(v){return nf(v,1)}});
+    var an=[[0,1]],xf=V.td*sl;for(i=0;i<=400;i++){var s2=1-(1-sf)*i/400,x=V.td*df(s2);if(x<xf&&x>0)an.push([x,s2])}an.push([Math.min(1,xf),sf],[Math.min(1,xf),0],[1,0]);
+    path(svg,an.filter(function(a){return a[0]<=1}),P.X,P.Y,'#fff',2.6);
+    if(ok){var pts=[];S.forEach(function(v,k){pts.push([(k+.5)*dx,Math.max(-.2,Math.min(1.2,v))])});path(svg,pts,P.X,P.Y,AM,2.8);S.forEach(function(v,k){sv('circle',{cx:P.X((k+.5)*dx),cy:P.Y(Math.max(-.2,Math.min(1.2,v))),r:N<=80?2.6:1.4,fill:AM},svg)})}
+    sv('rect',{x:P.m.l+10,y:P.m.t+8,width:14,height:3,fill:'#fff'},svg);lbl(svg,P.m.l+30,P.m.t+13,'solución analítica',TX,10);sv('rect',{x:P.m.l+10,y:P.m.t+22,width:14,height:3,fill:AM},svg);lbl(svg,P.m.l+30,P.m.t+27,'simulación (upwind explícito)',TX,10);
+    var xh=-1,xa=Math.min(1,xf);if(ok){for(i=0;i<N;i++)if(S[i]<.5*sf){xh=(i+.5)*dx;break}}
+    var width=0;if(ok){var a1=-1,a2=-1;for(i=0;i<N;i++){if(a1<0&&S[i]<.9*sf)a1=i;if(a2<0&&S[i]<.1*sf)a2=i}width=a1>=0&&a2>=0?(a2-a1)*dx:0}
+    h.out(ok?'Frente analítico en <strong>'+nf(xa,2)+'</strong>; el simulado (S = Sf/2) en <strong>'+nf(xh<0?1:xh,2)+'</strong>. Ancho del frente numérico: <strong>'+nf(width*100,0)+' %</strong> del largo (en la realidad es un choque casi abrupto). Refiná la malla y el frente se afila; con Courant &gt; 1 el esquema explícito se vuelve inestable. (Flujo fraccional de Corey cuadrático, ejemplo didáctico.)':'<strong>Inestable</strong>: con Courant &gt; 1 el esquema explícito diverge. Bajá el número de Courant o el paso de tiempo.')}
+  draw(h.V)};
+
+/* ===== CCS: capacidad volumétrica de almacenamiento ===== */
+W.ccsc=function(box,p,api){var h=mkui(box,[{k:'A',l:'Área del acuífero',min:10,max:500,step:10,v:p.A||100,f:function(v){return nf(v)+' km²'}},{k:'h',l:'Espesor neto',min:10,max:200,step:5,v:p.h||50,f:function(v){return nf(v)+' m'}},{k:'phi',l:'Porosidad',min:.05,max:.3,step:.01,v:p.phi||.2,f:function(v){return nf(v*100,0)+' %'}},{k:'rho',l:'Densidad del CO₂ en reservorio',min:400,max:800,step:10,v:p.rho||700,f:function(v){return nf(v)+' kg/m³'}},{k:'E',l:'Factor de eficiencia de almacenamiento E',min:.5,max:6,step:.5,v:p.E||2,f:function(v){return nf(v,1)+' %'}},{k:'q',l:'Emisión a inyectar',min:.5,max:10,step:.5,v:p.q||1,f:function(v){return nf(v,1)+' Mt/año'}}],draw,{side:true,w:700,h:340,touch:api.touch}),svg=h.svg;
+  function draw(V){svg.innerHTML='';var pv=V.A*1e6*V.h*V.phi,mpv=pv*V.rho/1e9,M=mpv*V.E/100,yrs=M/V.q;
+    sv('rect',{x:20,y:40,width:300,height:70,fill:'#4a3b27'},svg);lbl(svg,28,60,'Sello',TX,10.5);sv('rect',{x:20,y:110,width:300,height:110,fill:'#1a4a6e'},svg);lbl(svg,28,130,'Acuífero salino: A × h × φ',TX,10.5);
+    var fill=Math.min(1,Math.sqrt(V.E/6));sv('ellipse',{cx:170,cy:165,rx:20+120*fill,ry:12+34*fill,fill:AM,'fill-opacity':.7},svg);lbl(svg,170,169,'CO₂ almacenado',  '#0b1a30',10.5,'middle');
+    lbl(svg,20,252,'M = A · h · φ · ρ · E',GN,12);lbl(svg,20,272,'Volumen poral: '+nf(pv/1e9,1)+' mil millones de m³',TX,10.5);lbl(svg,20,288,'CO₂ que cabría si se llenara todo el poro: '+nf(mpv,0)+' Mt',TX,10.5);
+    var X0=360,W0=300,mx=Math.max(40,yrs*1.1);
+    lbl(svg,X0,48,'Años de inyección que alcanza',TX,11);sv('rect',{x:X0,y:58,width:W0,height:22,fill:'rgba(255,255,255,.1)'},svg);sv('rect',{x:X0,y:58,width:W0*Math.min(1,yrs/mx),height:22,fill:yrs>=30?GN:AM},svg);lbl(svg,X0+W0*Math.min(1,yrs/mx)-6,74,nf(yrs,0)+' años','#0b1a30',11,'end');
+    sv('line',{x1:X0+W0*30/mx,x2:X0+W0*30/mx,y1:52,y2:86,stroke:'#fff','stroke-width':1.4,'stroke-dasharray':'4 3'},svg);lbl(svg,X0+W0*30/mx,100,'30 años',TX,10,'middle');
+    lbl(svg,X0,140,'Capacidad efectiva',TX,11);lbl(svg,X0,162,nf(M,0)+' Mt de CO₂',GN,18);lbl(svg,X0,184,'= '+nf(V.E,1)+' % del CO₂ que cabría en el poro',TX,10.5);
+    h.out('Capacidad <strong>'+nf(M,0)+' Mt</strong>: alcanza <strong>'+nf(yrs,0)+' años</strong> a '+nf(V.q,1)+' Mt/año'+(yrs<30?' (no cubre 30 años).':'.')+' E es la variable más incierta: resume cuánto del poro se puede ocupar de verdad. (Valores de ejemplo.)')}
+  draw(h.V)};
+
+/* ===== RESERVAS: conciliación (movimiento) y tasa de reposición ===== */
+W.rrp=function(box,p,api){var h=mkui(box,[{k:'prod',l:'Producción del año',min:10,max:80,step:1,v:p.prod||35,f:function(v){return nf(v)+' MMboe'}},{k:'rev',l:'Revisiones (precio, comportamiento)',min:-40,max:40,step:1,v:p.rev!=null?p.rev:6,f:function(v){return(v>0?'+':'')+nf(v)+' MMboe'}},{k:'ext',l:'Extensiones y descubrimientos',min:0,max:60,step:1,v:p.ext!=null?p.ext:18,f:function(v){return nf(v)+' MMboe'}},{k:'acq',l:'Compras',min:0,max:40,step:1,v:0,f:function(v){return nf(v)+' MMboe'}},{k:'dev',l:'Ventas',min:0,max:40,step:1,v:0,f:function(v){return nf(v)+' MMboe'}}],draw,{side:true,w:700,h:340,touch:api.touch}),svg=h.svg,R0=400;
+  function draw(V){svg.innerHTML='';var st=[['Inicio',R0,0,'#8ea2bd'],['Prod.',-V.prod,0,RD],['Rev.',V.rev,0,V.rev>=0?GN:RD],['Ext.',V.ext,0,GN],['Comp.',V.acq,0,BL],['Vtas.',-V.dev,0,AM]],run=0,i,rows=[],end;
+    st.forEach(function(s,k){if(k===0){rows.push([s[0],0,s[1],s[3]]);run=s[1]}else{rows.push([s[0],run,run+s[1],s[3]]);run+=s[1]}});end=run;rows.push(['Cierre',0,end,'#8ea2bd']);
+    var mnv=Math.min.apply(null,rows.map(function(r){return Math.min(r[1],r[2])}).filter(function(v,k){return k>0&&k<rows.length-1}).concat([R0,end])),lo=Math.floor(mnv*.8/10)*10,hi=Math.max(R0,end,R0+V.ext+V.acq+V.rev)*1.06,P=plot(svg,700,340,{l:56,r:330,t:22,b:46},[0,rows.length],[lo,hi],{nx:1,ny:4,xf:function(){return ''},yl:'Reservas (MMboe, eje truncado)',yf:function(v){return nf(v)}});
+    rows.forEach(function(r,k){var a=Math.min(r[1],r[2]),b=Math.max(r[1],r[2]),w=P.w/rows.length*.7,x=P.X(k)+(P.w/rows.length-w)/2;sv('rect',{x:x,y:P.Y(b),width:w,height:Math.max(1.5,P.Y(Math.max(a,lo))-P.Y(b)),fill:r[3],'fill-opacity':.85},svg);lbl(svg,x+w/2,P.m.t+P.h+14,r[0],TX,9.5,'middle')});
+    var add=V.rev+V.ext+V.acq-V.dev,rr=add/V.prod,rp=end/V.prod;
+    var bx=400,by=60;lbl(svg,bx,by-24,'Indicadores',TX,11);
+    lbl(svg,bx,by+6,'Reservas de cierre',TX,10.5);lbl(svg,bx,by+28,nf(end)+' MMboe',GN,18);
+    lbl(svg,bx,by+58,'Tasa de reposición',TX,10.5);lbl(svg,bx,by+80,nf(rr*100,0)+' %',rr>=1?GN:RD,18);
+    lbl(svg,bx,by+110,'Relación reservas / producción',TX,10.5);lbl(svg,bx,by+132,nf(rp,1)+' años',AM,18);
+    h.out('<strong>Tasa de reposición '+nf(rr*100,0)+' %</strong> (adiciones netas / producción; cada empresa define su versión). Por debajo de 100 % se consumen reservas. Una revisión negativa por precio bajo puede borrar una buena campaña de extensiones. (Cifras de ejemplo.)')}
+  draw(h.V)};
+
 W.build=function(name,box,p,api){if(!W[name]){box.innerHTML='<div class="out">Laboratorio no disponible: '+name+'</div>';return{}}return W[name](box,p||{},api||{touch:function(){}})||{}};
 })();

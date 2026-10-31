@@ -1,0 +1,719 @@
+{
+ "id": "rpx",
+ "title": "Reservas avanzadas: incertidumbre, agregación y auditoría",
+ "subtitle": "Rangos probabilistas, suma de portafolios, conciliación anual y lecciones del caso Shell 2004.",
+ "desc": "Curso que continúa Recursos y Reservas SPE-PRMS: precisiones de la actualización 2018, incertidumbre probabilista y P90/P50/P10, agregación de portafolios, influencia del precio y del límite económico, conciliación y tasa de reposición, auditoría y control interno, y el caso de la recategorización de Shell.",
+ "objectives": [
+  "Aplicar las precisiones de PRMS 2018 sobre reservas, recursos contingentes y recursos prospectivos.",
+  "Interpretar los percentiles P90, P50 y P10 y su relación con 1P, 2P y 3P.",
+  "Explicar por qué sumar categorías no equivale a agregar probabilísticamente un portafolio.",
+  "Armar y leer una conciliación de reservas con su tasa de reposición, y describir controles de auditoría."
+ ],
+ "labs": [
+  "rango de incertidumbre del volumen",
+  "portafolio: suma de pozos frente a la suma de P90",
+  "límite económico y precio",
+  "conciliación y tasa de reposición"
+ ],
+ "practiceMin": 85,
+ "competencies": [
+  {
+   "name": "PRMS 2018 en la práctica",
+   "lessons": [
+    "v1"
+   ]
+  },
+  {
+   "name": "Incertidumbre probabilista",
+   "lessons": [
+    "v2"
+   ]
+  },
+  {
+   "name": "Agregación de portafolios",
+   "lessons": [
+    "v3"
+   ]
+  },
+  {
+   "name": "Economía de las reservas",
+   "lessons": [
+    "v4"
+   ]
+  },
+  {
+   "name": "Conciliación y auditoría",
+   "lessons": [
+    "v5"
+   ]
+  },
+  {
+   "name": "Casos y lecciones",
+   "lessons": [
+    "v6"
+   ]
+  }
+ ],
+ "intro": {
+  "hook": "Una reserva es una promesa verificable. Vamos a ver cómo se declara con un rango, cómo se suma y cómo se controla, y qué pasa cuando falla ese control.",
+  "questions": [
+   "¿Qué significa realmente un P90?",
+   "¿Por qué la suma de los P90 de cada pozo no es el P90 del portafolio?",
+   "¿Qué controles evitan una sobreestimación de reservas?"
+  ],
+  "star": {
+   "caso": "Shell 2004: la recategorización de reservas",
+   "S": "En agosto de 2004, la SEC anunció un acuerdo con Royal Dutch Petroleum y Shell Transport and Trading, que habían informado reservas probadas de más en su Formulario 20-F de 2002.",
+   "T": "Entender cómo reservas declaradas como probadas pueden no cumplir los criterios exigidos, y qué controles faltaron.",
+   "A": "La SEC halló una sobreestimación de 4.470 millones de barriles de reservas probadas, cerca del 23 % medido en barriles equivalentes de petróleo, y también una sobreestimación de unos 6.600 millones de dólares en la medida estandarizada de flujos de caja futuros.",
+   "R": "Las empresas aceptaron una multa de 120 millones de dólares y se comprometieron a invertir 5 millones más en un programa de cumplimiento, sin admitir ni negar los hallazgos."
+  }
+ },
+ "modules": [
+  {
+   "id": "vm1",
+   "title": "Módulo 1 · Marco e incertidumbre",
+   "lessons": [
+    {
+     "id": "v1",
+     "title": "PRMS 2018 en la práctica",
+     "comp": "PRMS 2018 en la práctica",
+     "cues": [
+      {
+       "say": "La actualización de 2018 de PRMS mantiene su fundamento: se clasifica por proyecto. Un recurso es reserva si el proyecto es comercial. Es recurso contingente si está descubierto pero todavía no es comercial. Y es prospectivo si aún no se descubrió.",
+       "scene": {
+        "t": "tbl",
+        "k": "Clasificación",
+        "h": "Por madurez del proyecto",
+        "cols": [
+         "Clase",
+         "Condición",
+         "Categorías de incertidumbre"
+        ],
+        "rows": [
+         [
+          "Reservas",
+          "Proyecto comercial",
+          "1P, 2P, 3P"
+         ],
+         [
+          "Recursos contingentes",
+          "Descubiertos, aún no comerciales",
+          "1C, 2C, 3C"
+         ],
+         [
+          "Recursos prospectivos",
+          "Aún no descubiertos",
+          "1U, 2U, 3U"
+         ]
+        ],
+        "n": "Las categorías de incertidumbre se refieren al rango del volumen recuperable; la clase, a la probabilidad de que el proyecto sea comercial."
+       }
+      },
+      {
+       "say": "Entre los cambios de 2018 hay varios muy prácticos. Las reservas posibles no pueden existir solas, salvo como extensión de un proyecto vecino de reservas probables. Las reservas no desarrolladas deben iniciar su desarrollo dentro de cinco años. Y los costos de abandono forman parte de la economía.",
+       "scene": {
+        "t": "bul",
+        "k": "Precisiones de 2018",
+        "h": "Lo que más se aplica",
+        "items": [
+         "Las reservas posibles solas no se admiten, salvo como extensión de un proyecto 2P vecino",
+         "Desarrollo de las reservas no desarrolladas dentro de cinco años de su clasificación inicial",
+         "Los costos de abandono y restauración se incluyen en la economía",
+         "Las reservas exigen tecnología establecida; los contingentes pueden depender de tecnología en desarrollo",
+         "Se agregó el concepto de recursos técnicamente recuperables"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Otras precisiones tocan los recursos contingentes. Los subtipos \"marginal\" y \"no marginal\" pasaron a llamarse económicamente viable y económicamente no viable. Y el EUR debe expresarse con sus condiciones técnicas y comerciales, por ejemplo, el EUR probado es la reserva 1P más lo producido.",
+       "scene": {
+        "t": "bul",
+        "k": "Más precisiones",
+        "h": "Lenguaje y reporte",
+        "items": [
+         "Contingentes: económicamente viables o no viables",
+         "El EUR se refiere a sus condiciones técnicas y comerciales",
+         "No se permiten condiciones ni clasificaciones divididas dentro de un mismo proyecto",
+         "Se agregaron calificaciones para evaluadores y auditores de reservas",
+         "Las reservas netas se asignan según el derecho contractual"
+        ]
+       },
+       "hl": 1
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Una reserva posible sin un proyecto 2P vecino:",
+        "o": [
+         "No se admite como reserva independiente",
+         "Siempre es válida",
+         "Es una reserva probada",
+         "Se clasifica como 1P"
+        ],
+        "a": 0,
+        "e": "La actualización de 2018 lo precisó así."
+       }
+      }
+     ]
+    },
+    {
+     "id": "v2",
+     "title": "Incertidumbre probabilista: P90, P50 y P10",
+     "comp": "Incertidumbre probabilista",
+     "cues": [
+      {
+       "say": "En el enfoque probabilista, el volumen es una distribución. El valor bajo, o P90, es el que tiene al menos un 90 % de probabilidad de ser igualado o superado. El P50 es el mejor estimado, y el P10, el valor alto, con solo un 10 % de probabilidad de ser superado.",
+       "scene": {
+        "t": "bul",
+        "k": "Percentiles",
+        "h": "Cómo se leen",
+        "items": [
+         "P90: al menos 90 % de probabilidad de ser igualado o superado",
+         "P50: mediana, mejor estimado",
+         "P10: solo 10 % de probabilidad de ser superado",
+         "Se asocian a 1P, 2P y 3P, o a 1C, 2C y 3C",
+         "El rango P10 sobre P90 mide cuán abierta es la incertidumbre"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Laboratorio. Es un petróleo original estimado por simulación de Monte Carlo a partir de cuatro parámetros: área, espesor, porosidad y saturación de agua. Subí la incertidumbre de los parámetros y mirá cómo se abre el rango entre P90 y P10.",
+       "scene": {
+        "t": "viz",
+        "w": "mc",
+        "h": "Petróleo original y percentiles",
+        "p": {
+         "mode": "stoiip"
+        }
+       },
+       "lab": true
+      },
+      {
+       "say": "Los cálculos tienen supuestos que conviene hacer explícitos. Las distribuciones de entrada y sus correlaciones determinan el resultado. Si dos parámetros están correlacionados y se los trata como independientes, el rango queda subestimado.",
+       "scene": {
+        "t": "bul",
+        "k": "Supuestos",
+        "h": "Cuidados",
+        "items": [
+         "Distribuciones de entrada justificadas con datos o analogías",
+         "Correlaciones entre parámetros bien tratadas",
+         "Un rango estrecho puede reflejar exceso de confianza y no certeza",
+         "Contrastar con un cálculo determinista de control",
+         "Documentar qué se supuso y por qué"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "El P90 de un volumen es:",
+        "o": [
+         "El valor con al menos 90 % de probabilidad de ser igualado o superado",
+         "El valor con 90 % de probabilidad de no ser superado",
+         "El promedio",
+         "El valor máximo posible"
+        ],
+        "a": 0,
+        "e": "Es el estimado bajo, asociado a 1P."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "Las reservas se distinguen de los recursos contingentes porque:",
+     "o": [
+      "El proyecto es comercial",
+      "Tienen más petróleo",
+      "Están más lejos",
+      "Se miden en otras unidades"
+     ],
+     "a": 0,
+     "e": "La clase depende de la comercialidad del proyecto."
+    },
+    {
+     "q": "En una distribución de volúmenes recuperables, el P10 es:",
+     "o": [
+      "Mayor que el P90",
+      "Menor que el P90",
+      "Igual al P90",
+      "No existe"
+     ],
+     "a": 0,
+     "e": "El P90 es el estimado bajo y el P10 el alto."
+    },
+    {
+     "q": "Las reservas no desarrolladas deben iniciar su desarrollo en:",
+     "o": [
+      "Cinco años desde su clasificación inicial",
+      "Un año",
+      "Veinte años",
+      "No hay plazo"
+     ],
+     "a": 0,
+     "e": "Es una precisión de PRMS 2018."
+    }
+   ]
+  },
+  {
+   "id": "vm2",
+   "title": "Módulo 2 · Portafolios y economía",
+   "lessons": [
+    {
+     "id": "v3",
+     "title": "Agregación: por qué no se suman los P90",
+     "comp": "Agregación de portafolios",
+     "cues": [
+      {
+       "say": "Cuando se suman varios pozos o campos, hay dos formas de hacerlo. La aritmética suma cada categoría: todos los 1P, todos los 2P. La probabilista combina las distribuciones. Con muchos elementos independientes, el resultado de ambas difiere.",
+       "scene": {
+        "t": "bul",
+        "k": "Dos formas de sumar",
+        "h": "Qué cambia",
+        "items": [
+         "Suma aritmética: simple y transparente, fija en cada categoría",
+         "Agregación probabilista: combina distribuciones",
+         "Con elementos independientes, el rango del portafolio es más estrecho que la suma de rangos",
+         "Por eso la suma de P90 subestima el P90 del portafolio"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Laboratorio. Es un portafolio de pozos con EUR lognormal. Subí la cantidad de pozos y mirá cómo se estrecha el rango relativo del portafolio, y cómo se aleja la suma de los P90 individuales del P90 del total.",
+       "scene": {
+        "t": "viz",
+        "w": "mc",
+        "h": "Portafolio: suma frente a agregación",
+        "p": {
+         "mode": "wells"
+        }
+       },
+       "lab": true
+      },
+      {
+       "say": "PRMS indica que el método de agregación depende del propósito. Para el reporte, aclara que no se debe incorporar agregación estadística más allá del nivel de campo, propiedad o proyecto. Y la SEC pide en su Ítem 1202 sumas aritméticas simples de las estimaciones por categoría.",
+       "scene": {
+        "t": "bul",
+        "k": "Reglas de reporte",
+        "h": "Qué dicen las fuentes",
+        "items": [
+         "PRMS, sección 4.2.1: el método depende del propósito",
+         "Para el reporte: sin agregación estadística más allá del proyecto, campo o propiedad",
+         "SEC, Regulación S-K, Ítem 1202: sumas aritméticas simples por categoría",
+         "La agregación probabilista sirve para planificar y para valuar portafolios"
+        ]
+       },
+       "hl": 1
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Con muchos pozos independientes, la suma aritmética de los P90 individuales:",
+        "o": [
+         "Subestima el P90 del portafolio",
+         "Sobreestima el P90 del portafolio",
+         "Es exactamente igual",
+         "No se puede calcular"
+        ],
+        "a": 0,
+        "e": "La diversificación estrecha el rango del total."
+       }
+      }
+     ]
+    },
+    {
+     "id": "v4",
+     "title": "Precio, costos y límite económico",
+     "comp": "Economía de las reservas",
+     "cues": [
+      {
+       "say": "Una reserva debe ser comercialmente recuperable. Eso depende de la economía, y por eso del precio y del costo. Un precio más bajo acorta la vida de los pozos y puede quitar volúmenes de la categoría de reservas, que pasan a recursos contingentes.",
+       "scene": {
+        "t": "bul",
+        "k": "Economía",
+        "h": "Cómo entra en las reservas",
+        "items": [
+         "Se produce hasta el límite económico del pozo o del proyecto",
+         "Un precio menor acorta la vida económica",
+         "Los volúmenes que dejan de ser rentables salen de reservas",
+         "Los costos de abandono se incluyen en la economía",
+         "Las inversiones futuras necesarias deben estar contempladas"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Laboratorio. Es un pozo de ejemplo con declinación. Cambiá el precio, el costo fijo y las regalías, y mirá cómo se mueve el límite económico y el volumen recuperable.",
+       "scene": {
+        "t": "viz",
+        "w": "decline",
+        "h": "Límite económico y volumen",
+        "p": {
+         "qi": 400,
+         "di": 55,
+         "b": 0.6,
+         "econ": true,
+         "pr": 65,
+         "ox": 9000,
+         "ro": 12
+        }
+       },
+       "lab": true
+      },
+      {
+       "say": "Para la información regulada de la SEC se usa un precio promedio de doce meses y no el precio del día. Eso evita que un pico o una caída puntual cambie las reservas. Los resultados deben documentar la fuente del precio y el método de promedio.",
+       "scene": {
+        "t": "bul",
+        "k": "Precio de referencia",
+        "h": "Buenas prácticas",
+        "items": [
+         "Precio promedio de doce meses para reservas bajo normas de la SEC",
+         "Escenarios de precio para planificación interna",
+         "Sensibilidad de las reservas al precio",
+         "Documentar fuente y método"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Una caída de precio puede provocar que:",
+        "o": [
+         "Algunos volúmenes salgan de la categoría de reservas",
+         "Aumente la porosidad",
+         "Se multipliquen las reservas",
+         "Se cierre el mercado"
+        ],
+        "a": 0,
+        "e": "Pasan a ser recursos contingentes si ya no son rentables."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "La agregación probabilista de pozos independientes:",
+     "o": [
+      "Estrecha el rango relativo del portafolio",
+      "Ensancha el rango",
+      "No cambia nada",
+      "Elimina la incertidumbre"
+     ],
+     "a": 0,
+     "e": "Es la diversificación."
+    },
+    {
+     "q": "La regla de la SEC para reporte pide:",
+     "o": [
+      "Sumas aritméticas simples por categoría",
+      "Agregación estadística total",
+      "Solo P50",
+      "Ningún método"
+     ],
+     "a": 0,
+     "e": "Está en el Ítem 1202 de la Regulación S-K."
+    },
+    {
+     "q": "Los costos de abandono en PRMS 2018:",
+     "o": [
+      "Se incluyen en la economía",
+      "No se consideran",
+      "Solo se informan",
+      "Los paga el Estado siempre"
+     ],
+     "a": 0,
+     "e": "Es una precisión de 2018."
+    }
+   ]
+  },
+  {
+   "id": "vm3",
+   "title": "Módulo 3 · Control y lecciones",
+   "lessons": [
+    {
+     "id": "v5",
+     "title": "Conciliación, tasa de reposición y auditoría",
+     "comp": "Conciliación y auditoría",
+     "cues": [
+      {
+       "say": "Cada año se concilian las reservas. Se parte de las reservas iniciales, se resta la producción y se suman revisiones, extensiones y descubrimientos, y compras, y se restan las ventas. El resultado debe coincidir con las reservas de cierre, y cada movimiento se explica.",
+       "scene": {
+        "t": "fm",
+        "k": "Conciliación",
+        "h": "Movimiento de reservas",
+        "f": "Cierre = Inicio − Prod. + Revisiones + Ext. y desc. + Compras − Ventas\nTasa de reposición = Adiciones netas / Producción",
+        "n": "Cada empresa define su tasa de reposición: aclarar cuál se usa."
+       }
+      },
+      {
+       "say": "Laboratorio. Es una conciliación de ejemplo. Cambiá la producción, las revisiones y las extensiones, y mirá la tasa de reposición y la relación entre reservas y producción. Probá una revisión negativa por precio bajo.",
+       "scene": {
+        "t": "viz",
+        "w": "rrp",
+        "h": "Conciliación y tasa de reposición",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "La auditoría y el control interno protegen la calidad de las cifras. PRMS 2018 incorporó calificaciones para evaluadores y auditores de reservas. Una buena práctica es separar quien estima de quien aprueba, documentar cada decisión y revisar los desvíos sistemáticos.",
+       "scene": {
+        "t": "bul",
+        "k": "Control",
+        "h": "Qué se exige",
+        "items": [
+         "Evaluadores y auditores calificados",
+         "Separación entre quien estima y quien aprueba",
+         "Documentación de datos, método y supuestos",
+         "Revisión independiente periódica",
+         "Análisis de los desvíos: las revisiones sistemáticas negativas son una señal"
+        ]
+       },
+       "hl": 1
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Una tasa de reposición menor al 100 % significa que:",
+        "o": [
+         "La empresa produjo más de lo que repuso",
+         "Las reservas aumentaron",
+         "No hubo producción",
+         "Hubo descubrimientos extraordinarios"
+        ],
+        "a": 0,
+        "e": "Las adiciones netas no cubren la producción del año."
+       }
+      }
+     ]
+    },
+    {
+     "id": "v6",
+     "title": "El caso Shell 2004 y sus lecciones",
+     "comp": "Casos y lecciones",
+     "cues": [
+      {
+       "say": "El 24 de agosto de 2004, la SEC anunció que Royal Dutch Petroleum y Shell Transport and Trading habían sobreestimado en 4.470 millones de barriles sus reservas probadas informadas en el Formulario 20-F de 2002. Equivalía a cerca del 23 % de sus reservas medidas en barriles equivalentes.",
+       "scene": {
+        "t": "case",
+        "h": "Shell, 2004",
+        "src": "SEC, comunicado 2004-116 (24 de agosto de 2004)",
+        "S": "Reservas probadas informadas en el Formulario 20-F de 2002 por Royal Dutch Petroleum y Shell Transport and Trading.",
+        "T": "Entender qué reservas no cumplían los criterios de reservas probadas y qué controles fallaron.",
+        "A": "La SEC halló una sobreestimación de 4.470 millones de barriles, cerca del 23 %, y de unos 6.600 millones de dólares en la medida estandarizada de flujos futuros.",
+        "R": "Multa de 120 millones de dólares, más un compromiso de 5 millones en un programa de cumplimiento, sin admitir ni negar los hallazgos."
+       }
+      },
+      {
+       "say": "El caso muestra tres lecciones. Las reservas probadas tienen una definición estricta, y no cumplirla tiene consecuencias financieras y reputacionales. El control interno debe ser independiente de la presión por cumplir metas. Y las revisiones a la baja deben reconocerse a tiempo.",
+       "scene": {
+        "t": "bul",
+        "k": "Lecciones",
+        "h": "Qué enseña el caso",
+        "items": [
+         "La definición de reservas probadas se aplica con rigor y se audita",
+         "El control independiente protege contra la presión por metas de reposición",
+         "Las revisiones negativas se reconocen a tiempo y se explican",
+         "Las cifras de reservas afectan otras medidas financieras, como los flujos futuros descontados"
+        ]
+       },
+       "hl": 2
+      },
+      {
+       "say": "Para cerrar el curso, una lista de verificación. Clasificación por proyecto, volumen con rango y método explícito, agregación acorde al propósito, economía con precio de referencia, conciliación explicada y control independiente. Con esos seis puntos, una cifra de reservas es defendible.",
+       "scene": {
+        "t": "bul",
+        "k": "Checklist",
+        "h": "Una cifra defendible",
+        "items": [
+         "Clasificación por proyecto y madurez",
+         "Rango con método y supuestos explícitos",
+         "Agregación acorde al propósito",
+         "Economía con precio de referencia y abandono",
+         "Conciliación anual explicada",
+         "Control interno independiente"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "El comunicado de la SEC sobre Shell en 2004 habló de:",
+        "o": [
+         "Una sobreestimación de reservas probadas",
+         "Un descubrimiento récord",
+         "Un cambio de precio",
+         "Una fusión"
+        ],
+        "a": 0,
+        "e": "Fue de 4.470 millones de barriles, según la SEC."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "La conciliación de reservas incluye:",
+     "o": [
+      "Producción, revisiones, extensiones, compras y ventas",
+      "Solo la producción",
+      "Solo el precio",
+      "Solo el pozo más grande"
+     ],
+     "a": 0,
+     "e": "Se parte del inicio y se llega al cierre."
+    },
+    {
+     "q": "El caso Shell 2004 terminó con una multa de:",
+     "o": [
+      "120 millones de dólares",
+      "1 millón de dólares",
+      "12 mil millones",
+      "Sin multa"
+     ],
+     "a": 0,
+     "e": "Más 5 millones para cumplimiento, según la SEC."
+    },
+    {
+     "q": "Una revisión sistemática negativa debe:",
+     "o": [
+      "Analizarse y reconocerse",
+      "Ocultarse",
+      "Compensarse con compras",
+      "Ignorarse"
+     ],
+     "a": 0,
+     "e": "Es una señal de sesgo en las estimaciones."
+    }
+   ]
+  }
+ ],
+ "exam": [
+  {
+   "q": "En PRMS 2018, la diferencia entre reservas y recursos contingentes es:",
+   "o": [
+    "La comercialidad del proyecto",
+    "El color del petróleo",
+    "La cantidad de pozos",
+    "El país"
+   ],
+   "a": 0,
+   "e": "Las reservas son de proyectos comerciales."
+  },
+  {
+   "q": "Con N pozos independientes, la suma de los P90 individuales frente al P90 del total:",
+   "o": [
+    "Es menor que el P90 del total",
+    "Es mayor",
+    "Es igual siempre",
+    "No tiene relación"
+   ],
+   "a": 0,
+   "e": "Se diversifica el riesgo."
+  },
+  {
+   "q": "Para reportar a la SEC, las categorías se suman:",
+   "o": [
+    "Aritméticamente",
+    "Con Monte Carlo del portafolio",
+    "Solo con P50",
+    "No se suman"
+   ],
+   "a": 0,
+   "e": "El Ítem 1202 pide sumas aritméticas simples."
+  },
+  {
+   "q": "Una tasa de reposición del 70 % indica que:",
+   "o": [
+    "Las adiciones netas cubren el 70 % de la producción",
+    "Se repuso el 170 %",
+    "No hubo producción",
+    "Hay descubrimientos extraordinarios"
+   ],
+   "a": 0,
+   "e": "Las reservas de la empresa disminuyen."
+  },
+  {
+   "q": "Una caída sostenida de precios puede:",
+   "o": [
+    "Reducir las reservas por límite económico",
+    "Aumentarlas siempre",
+    "No afectarlas",
+    "Eliminar la necesidad de auditoría"
+   ],
+   "a": 0,
+   "e": "Algunos volúmenes dejan de ser comerciales."
+  },
+  {
+   "q": "Qué control reduce el riesgo de sobreestimar reservas:",
+   "o": [
+    "Separar quien estima de quien aprueba",
+    "Eliminar la documentación",
+    "Fijar metas sin revisión",
+    "Usar solo un método"
+   ],
+   "a": 0,
+   "e": "Es una buena práctica de control independiente."
+  }
+ ],
+ "outro": {
+  "phrase": "Una reserva defendible es la que se puede explicar, auditar y reconciliar.",
+  "recap": [
+   "PRMS 2018 clasifica por proyecto y ordena la incertidumbre en categorías.",
+   "Los percentiles y la agregación dependen del propósito: planificar no es lo mismo que reportar.",
+   "La conciliación, la auditoría y el control independiente sostienen la confianza en las cifras, como mostró el caso Shell."
+  ]
+ },
+ "downloads": [
+  {
+   "file": "xlsx/H3L_Reservas_Agregacion_y_Conciliacion.xlsx",
+   "title": "Agregación y conciliación de reservas (Excel)",
+   "desc": "Simulación de portafolio con EUR lognormal para comparar la suma de P90 con el P90 del total, y una conciliación anual con tasa de reposición y relación reservas/producción, con celdas editables.",
+   "task": "Con 20 pozos y dispersión 0,6, calculá cuánto se aleja la suma de P90 individuales del P90 del portafolio, y qué tasa de reposición da una revisión de −15 MMboe."
+  }
+ ],
+ "cases": [
+  {
+   "title": "Shell (2004)",
+   "text": "La SEC anunció el 24 de agosto de 2004 un acuerdo por el cual Royal Dutch Petroleum y Shell Transport and Trading pagaron 120 millones de dólares por haber sobreestimado en 4.470 millones de barriles, cerca del 23 %, sus reservas probadas informadas en el Formulario 20-F de 2002; la medida estandarizada de flujos de caja futuros también estaba sobreestimada en unos 6.600 millones de dólares.",
+   "src": "SEC, comunicado 2004-116 (24 de agosto de 2004)"
+  }
+ ],
+ "refs": [
+  {
+   "tag": "Estándar",
+   "cite": "SPE, AAPG, WPC, SPEE, SEG y EAGE (2018). Petroleum Resources Management System (PRMS), versión 1.03. SPE, resumen de cambios clave 2018.",
+   "why": "clasificación y precisiones de 2018"
+  },
+  {
+   "tag": "Guía",
+   "cite": "SPE (2011). Guidelines for Application of the Petroleum Resources Management System; nueva edición aprobada en julio de 2022.",
+   "why": "aplicación práctica"
+  },
+  {
+   "tag": "Normativa",
+   "cite": "SEC. Regulación S-K, Ítem 1202; y Modernization of Oil and Gas Reporting (2009), Release Nos. 33-8995 y 34-59192.",
+   "why": "reporte y precio promedio de doce meses"
+  },
+  {
+   "tag": "Presentación",
+   "cite": "Acuña (2012). Presentación sobre agregación en la Ryder Scott Reserves Conference 2012.",
+   "why": "agregación y reporte (PRMS 4.2.1 y SEC)"
+  },
+  {
+   "tag": "Fuente",
+   "cite": "SEC (2004). Comunicado de prensa 2004-116, 24 de agosto de 2004, sobre Royal Dutch Petroleum y Shell Transport and Trading.",
+   "why": "caso Shell"
+  }
+ ]
+}

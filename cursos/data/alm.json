@@ -1,0 +1,756 @@
+{
+ "id": "alm",
+ "title": "Almacenamiento geológico de CO₂ (CCS)",
+ "subtitle": "Selección de sitios, capacidad, entrampamiento, monitoreo y gestión del riesgo, con Sleipner y Quest.",
+ "desc": "Curso que continúa Gestión de emisiones: la cadena de captura y almacenamiento, criterios de un buen sitio, estimación de capacidad con el factor de eficiencia, mecanismos de entrampamiento, el sistema de gestión de recursos de almacenamiento de la SPE, monitoreo y casos de Sleipner y Quest.",
+ "objectives": [
+  "Describir la cadena de captura, transporte y almacenamiento y el lugar del almacenamiento geológico.",
+  "Evaluar un sitio por reservorio, sello, inyectividad y profundidad.",
+  "Estimar una capacidad con el método volumétrico y entender el rol del factor de eficiencia.",
+  "Explicar los mecanismos de entrampamiento y el plan de monitoreo, medición y verificación."
+ ],
+ "labs": [
+  "capacidad volumétrica y años de inyección",
+  "mecanismos de entrampamiento en el tiempo",
+  "efecto del factor de eficiencia"
+ ],
+ "practiceMin": 75,
+ "competencies": [
+  {
+   "name": "Cadena CCS",
+   "lessons": [
+    "a1"
+   ]
+  },
+  {
+   "name": "Selección de sitios y capacidad",
+   "lessons": [
+    "a2"
+   ]
+  },
+  {
+   "name": "Entrampamiento",
+   "lessons": [
+    "a3"
+   ]
+  },
+  {
+   "name": "Recursos y estándares",
+   "lessons": [
+    "a4"
+   ]
+  },
+  {
+   "name": "Monitoreo y riesgo",
+   "lessons": [
+    "a5"
+   ]
+  },
+  {
+   "name": "Proyectos reales",
+   "lessons": [
+    "a6"
+   ]
+  }
+ ],
+ "intro": {
+  "hook": "Capturar el CO₂ es la mitad del problema. La otra mitad es guardarlo, durante siglos, en una roca profunda. Vamos a ver cómo se elige, se mide y se vigila ese sitio.",
+  "questions": [
+   "¿Qué hace que una formación sea un buen sitio de almacenamiento?",
+   "¿Cómo se estima cuánto CO₂ cabe y cuánto es realmente utilizable?",
+   "¿Cómo se demuestra que el CO₂ se queda donde se lo puso?"
+  ],
+  "star": {
+   "caso": "Sleipner: almacenamiento desde 1996",
+   "S": "Sleipner, en el Mar del Norte, separa el CO₂ del gas natural, que tenía alrededor de un 9 % de CO₂, y lo inyecta en la Formación Utsira, una arenisca porosa bajo un sello de lutitas, a más de 800 metros bajo el fondo marino.",
+   "T": "Evitar emitir el CO₂, un incentivo creado por el impuesto noruego al CO₂, y demostrar que puede almacenarse de forma segura.",
+   "A": "La inyección comenzó en 1996. La normativa europea exige monitoreo cuidadoso y demostrar la seguridad a lo largo del tiempo, y el proyecto liberó sus datos a investigadores.",
+   "R": "En febrero de 2024 se informaban más de 19 millones de toneladas de CO₂ almacenadas, y el proyecto es referencia mundial del almacenamiento en acuíferos salinos."
+  }
+ },
+ "modules": [
+  {
+   "id": "am1",
+   "title": "Módulo 1 · Sitio y capacidad",
+   "lessons": [
+    {
+     "id": "a1",
+     "title": "La cadena de captura, transporte y almacenamiento",
+     "comp": "Cadena CCS",
+     "cues": [
+      {
+       "say": "La captura y el almacenamiento de carbono es una cadena. Se separa el CO₂ de una fuente, se comprime, se transporta por ducto o por buque y se inyecta en una formación profunda. Cada eslabón tiene su costo, su riesgo y sus reglas.",
+       "scene": {
+        "t": "bul",
+        "k": "Cadena",
+        "h": "Eslabones",
+        "items": [
+         "Captura en la fuente: gas natural, hidrógeno, cemento, electricidad",
+         "Compresión y deshidratación",
+         "Transporte por ducto o buque",
+         "Inyección en un pozo",
+         "Almacenamiento y monitoreo posteriores"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "El almacenamiento geológico usa tres tipos de sitio. Acuíferos salinos profundos, que son los de mayor capacidad. Yacimientos de petróleo y gas agotados, que ya demostraron que retienen fluidos. Y reservorios en producción con recuperación mejorada con CO₂.",
+       "scene": {
+        "t": "tbl",
+        "k": "Tipos de sitio",
+        "h": "Ventajas y límites",
+        "cols": [
+         "Sitio",
+         "Ventaja",
+         "Límite"
+        ],
+        "rows": [
+         [
+          "Acuífero salino",
+          "Gran capacidad y amplia distribución",
+          "Menos datos del subsuelo"
+         ],
+         [
+          "Yacimiento agotado",
+          "Sello demostrado e infraestructura existente",
+          "Pozos viejos como posibles vías de fuga"
+         ],
+         [
+          "Yacimiento con EOR",
+          "Genera ingreso por petróleo adicional",
+          "El almacenamiento no es el objetivo del diseño"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Las dos ideas que ordenan el curso son capacidad y seguridad. Capacidad es cuánto CO₂ cabe y se puede inyectar a un ritmo sostenido. Seguridad es la demostración de que permanece confinado, y se apoya en tres pilares: sello, monitoreo y gestión de pozos.",
+       "scene": {
+        "t": "bul",
+        "k": "Capacidad y seguridad",
+        "h": "Las dos preguntas",
+        "items": [
+         "¿Cuánto cabe y a qué ritmo se puede inyectar?",
+         "¿Cómo se demuestra que queda confinado?",
+         "Sello, monitoreo y pozos son los tres pilares de la seguridad",
+         "Ambas preguntas se responden con datos del sitio y no por analogía"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Los acuíferos salinos profundos se destacan por:",
+        "o": [
+         "Su gran capacidad de almacenamiento",
+         "Producir petróleo",
+         "Tener pozos viejos",
+         "Estar siempre cerca de la costa"
+        ],
+        "a": 0,
+        "e": "Son los sitios de mayor capacidad disponible."
+       }
+      }
+     ]
+    },
+    {
+     "id": "a2",
+     "title": "Criterios de sitio y capacidad volumétrica",
+     "comp": "Selección de sitios y capacidad",
+     "cues": [
+      {
+       "say": "Un buen sitio tiene cuatro rasgos. Un reservorio con porosidad y permeabilidad suficientes, un sello de baja permeabilidad por encima, una profundidad donde el CO₂ está en estado denso, y condiciones de presión y de estructura que permitan inyectar sin fracturar la roca.",
+       "scene": {
+        "t": "bul",
+        "k": "Criterios",
+        "h": "Qué se pide",
+        "items": [
+         "Reservorio con porosidad y permeabilidad suficientes",
+         "Sello continuo y de baja permeabilidad",
+         "Profundidad mayor a unos 800 metros para mantener el CO₂ denso",
+         "Presión de inyección por debajo de la de fractura",
+         "Pocas fallas y pozos antiguos bien controlados"
+        ]
+       },
+       "hl": 2
+      },
+      {
+       "say": "La capacidad se estima por el método volumétrico. Se multiplica el volumen poral por la densidad del CO₂ en las condiciones del reservorio, y por un factor de eficiencia. Ese factor refleja que solo una pequeña parte del volumen poral se puede ocupar.",
+       "scene": {
+        "t": "fm",
+        "k": "Capacidad volumétrica",
+        "h": "Método volumétrico",
+        "f": "M = A · h · φ · ρ · E\nρ: densidad del CO₂ en reservorio\nE: factor de eficiencia",
+        "n": "E depende del sitio y es la variable más incierta."
+       }
+      },
+      {
+       "say": "Laboratorio. Es un acuífero de ejemplo. Cambiá el área, el espesor, la porosidad y el factor de eficiencia. Mirá cuántos años de inyección alcanza para un proyecto de una cierta emisión anual.",
+       "scene": {
+        "t": "viz",
+        "w": "ccsc",
+        "h": "Capacidad y años de inyección",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "El factor de eficiencia de almacenamiento representa:",
+        "o": [
+         "La fracción del poro que realmente se puede ocupar",
+         "El precio del CO₂",
+         "La porosidad",
+         "La profundidad"
+        ],
+        "a": 0,
+        "e": "Es la variable más incierta del método volumétrico."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "El almacenamiento en yacimientos agotados tiene como riesgo principal:",
+     "o": [
+      "Pozos viejos que pueden ser vías de fuga",
+      "Falta de sello",
+      "Exceso de capacidad",
+      "Ausencia de infraestructura"
+     ],
+     "a": 0,
+     "e": "Los pozos antiguos deben revisarse y controlarse."
+    },
+    {
+     "q": "Con un factor de eficiencia de 2 %, de cada 100 unidades de volumen poral se puede ocupar:",
+     "o": [
+      "2 unidades",
+      "50 unidades",
+      "98 unidades",
+      "100 unidades"
+     ],
+     "a": 0,
+     "e": "E es la fracción utilizable."
+    },
+    {
+     "q": "Una profundidad de más de unos 800 metros se pide para:",
+     "o": [
+      "Que el CO₂ esté denso y ocupe menos volumen",
+      "Evitar el sello",
+      "Bajar la presión",
+      "Reducir la porosidad"
+     ],
+     "a": 0,
+     "e": "A esa profundidad la presión y la temperatura lo mantienen denso."
+    }
+   ]
+  },
+  {
+   "id": "am2",
+   "title": "Módulo 2 · Entrampamiento y estándares",
+   "lessons": [
+    {
+     "id": "a3",
+     "title": "Mecanismos de entrampamiento",
+     "comp": "Entrampamiento",
+     "cues": [
+      {
+       "say": "El CO₂ inyectado es menos denso que el agua salada y tiende a subir. Se queda en el reservorio por cuatro mecanismos que actúan en escalas de tiempo distintas, según el Informe especial del IPCC de 2005.",
+       "scene": {
+        "t": "bul",
+        "k": "Mecanismos",
+        "h": "De rápido a lento",
+        "items": [
+         "Estructural y estratigráfico: el sello retiene el CO₂ libre",
+         "Residual: la capilaridad deja gotas atrapadas en los poros",
+         "Disolución: el CO₂ se disuelve en el agua salada",
+         "Mineral: reacciona con la roca y forma minerales, en el muy largo plazo"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Laboratorio. Es una sección esquemática con la pluma de CO₂. Movés el tiempo desde el inicio de la inyección, y mirá cómo cambia la fracción atrapada por cada mecanismo. Las proporciones son ilustrativas.",
+       "scene": {
+        "t": "viz",
+        "w": "ccs",
+        "h": "Entrampamiento en el tiempo",
+        "p": {
+         "t": 100
+        }
+       },
+       "lab": true
+      },
+      {
+       "say": "La conclusión práctica es que el riesgo es mayor al principio, cuando todo el CO₂ está libre, y baja con el tiempo, a medida que se inmoviliza. Esa idea sostiene el diseño: sello y presión controlados al inicio, monitoreo y cierre responsable después.",
+       "scene": {
+        "t": "bul",
+        "k": "Riesgo en el tiempo",
+        "h": "Qué implica",
+        "items": [
+         "El CO₂ libre es el que más riesgo tiene",
+         "El entrampamiento residual y la disolución crecen con los años",
+         "El monitoreo es más intenso al inicio",
+         "El cierre del sitio se demuestra con datos y no con el tiempo solo"
+        ]
+       },
+       "hl": 1
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "El mecanismo que atrapa gotas de CO₂ en los poros se llama:",
+        "o": [
+         "Entrampamiento residual",
+         "Entrampamiento mineral",
+         "Corrosión",
+         "Cementación"
+        ],
+        "a": 0,
+        "e": "Es un efecto de la capilaridad."
+       }
+      }
+     ]
+    },
+    {
+     "id": "a4",
+     "title": "Recursos de almacenamiento: el sistema SRMS",
+     "comp": "Recursos y estándares",
+     "cues": [
+      {
+       "say": "Así como PRMS ordena los recursos de petróleo y gas, la SPE aprobó en julio de 2017 el Sistema de Gestión de Recursos de Almacenamiento de CO₂, conocido como SRMS. Su propósito, según la SPE, es establecer estándares técnicos de evaluación de capacidad y recursos.",
+       "scene": {
+        "t": "bul",
+        "k": "SRMS",
+        "h": "Para qué sirve",
+        "items": [
+         "Un lenguaje común para evaluar capacidad de almacenamiento",
+         "Aplica una lógica de proyecto, con grados de madurez",
+         "Permite comparar sitios y proyectos entre sí",
+         "Las Guías de aplicación se publicaron en julio de 2022"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "La idea central es la diferencia entre lo que podría caber en teoría y lo que un proyecto concreto puede almacenar, con tecnología, regulación y economía disponibles. Igual que en reservas, la clasificación depende de la madurez del proyecto, no del tamaño del acuífero.",
+       "scene": {
+        "t": "tbl",
+        "k": "De la teoría al proyecto",
+        "h": "Cantidades distintas",
+        "cols": [
+         "Concepto",
+         "Qué mide",
+         "Quién lo determina"
+        ],
+        "rows": [
+         [
+          "Volumen poral",
+          "Espacio total en la roca",
+          "Geología"
+         ],
+         [
+          "Capacidad teórica",
+          "Lo que cabría con eficiencia ideal",
+          "Geología y física"
+         ],
+         [
+          "Capacidad efectiva",
+          "Lo realmente utilizable con restricciones del sitio",
+          "Presión, sello, geometría"
+         ],
+         [
+          "Recurso de un proyecto",
+          "Cantidad asignada a un proyecto con madurez definida",
+          "Proyecto, regulación y economía"
+         ]
+        ],
+        "n": "La clasificación exacta de categorías debe consultarse en el documento SRMS vigente."
+       }
+      },
+      {
+       "say": "Para el evaluador, la consecuencia es de método. Se documentan los supuestos, se informan rangos y se declara la madurez del proyecto. Una cifra de capacidad sin su método de cálculo y su incertidumbre no es comparable con otra.",
+       "scene": {
+        "t": "bul",
+        "k": "Buenas prácticas",
+        "h": "Al informar capacidad",
+        "items": [
+         "Declarar método, datos y supuestos",
+         "Informar un rango y no solo un valor",
+         "Separar capacidad del sitio de capacidad de un proyecto",
+         "Actualizar con datos de monitoreo"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "El SRMS busca:",
+        "o": [
+         "Estandarizar la evaluación de capacidad y recursos de almacenamiento",
+         "Fijar el precio del CO₂",
+         "Reemplazar a PRMS",
+         "Eliminar la regulación"
+        ],
+        "a": 0,
+        "e": "Su propósito es técnico y de consistencia entre evaluadores."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "El entrampamiento mineral actúa principalmente en:",
+     "o": [
+      "El muy largo plazo",
+      "El primer día",
+      "Solo en el pozo",
+      "La superficie"
+     ],
+     "a": 0,
+     "e": "Es el más lento de los cuatro mecanismos."
+    },
+    {
+     "q": "El riesgo de fuga es mayor:",
+     "o": [
+      "Al principio, cuando el CO₂ está libre",
+      "Siempre igual",
+      "Después de mil años",
+      "Nunca existe"
+     ],
+     "a": 0,
+     "e": "Con el tiempo parte del CO₂ se inmoviliza."
+    },
+    {
+     "q": "SRMS fue aprobado por la SPE en:",
+     "o": [
+      "Julio de 2017",
+      "1996",
+      "2024",
+      "1970"
+     ],
+     "a": 0,
+     "e": "Sus Guías de aplicación salieron en julio de 2022."
+    }
+   ]
+  },
+  {
+   "id": "am3",
+   "title": "Módulo 3 · Monitoreo y proyectos reales",
+   "lessons": [
+    {
+     "id": "a5",
+     "title": "Monitoreo, medición y verificación",
+     "comp": "Monitoreo y riesgo",
+     "cues": [
+      {
+       "say": "Un plan de monitoreo, medición y verificación, conocido como MMV, demuestra dónde está el CO₂ y que se mantiene confinado. En la Unión Europea, la directiva de almacenamiento exige un monitoreo cuidadoso y demostrar que el almacenamiento es seguro a lo largo del tiempo.",
+       "scene": {
+        "t": "bul",
+        "k": "MMV",
+        "h": "Objetivos",
+        "items": [
+         "Verificar la cantidad inyectada y su ubicación",
+         "Detectar a tiempo una pérdida de confinamiento",
+         "Validar y recalibrar el modelo de simulación",
+         "Cumplir con la regulación y sostener la licencia social"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Las técnicas se combinan. La sísmica repetida, o sísmica 4D, ve la pluma. Las mediciones de presión y temperatura en pozo muestran el comportamiento dinámico. Y el monitoreo superficial y de agua subterránea vigila posibles fugas hacia arriba.",
+       "scene": {
+        "t": "tbl",
+        "k": "Técnicas",
+        "h": "Qué mide cada una",
+        "cols": [
+         "Técnica",
+         "Qué mide",
+         "Dónde"
+        ],
+        "rows": [
+         [
+          "Sísmica 4D",
+          "Extensión y geometría de la pluma",
+          "Entre campañas repetidas"
+         ],
+         [
+          "Presión y temperatura en pozo",
+          "Comportamiento dinámico",
+          "En el pozo"
+         ],
+         [
+          "Gravimetría y electromagnetismo",
+          "Densidad y conductividad del medio",
+          "Fondo marino o superficie"
+         ],
+         [
+          "Monitoreo de suelo y agua",
+          "Posibles fugas hacia la superficie",
+          "Superficie y acuíferos someros"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Los riesgos principales son conocidos. Pozos antiguos mal sellados, fallas conductivas, sobrepresión que fracture el sello y, en algunas zonas, sismicidad inducida. Todos se gestionan con caracterización previa, control de presión y un plan de respuesta ante desvíos.",
+       "scene": {
+        "t": "bul",
+        "k": "Riesgos",
+        "h": "Y cómo se gestionan",
+        "items": [
+         "Pozos antiguos: inventario, inspección y reparación",
+         "Fallas: mapeo y estudios geomecánicos",
+         "Sobrepresión: límite de presión por debajo de la fractura",
+         "Sismicidad inducida: monitoreo y reducción del caudal si hace falta",
+         "Plan de respuesta con umbrales definidos de antemano"
+        ]
+       },
+       "hl": 1
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "La sísmica 4D se usa en MMV para:",
+        "o": [
+         "Ver cómo cambia la pluma entre campañas",
+         "Medir el precio",
+         "Perforar",
+         "Calcular la porosidad"
+        ],
+        "a": 0,
+        "e": "Compara estudios sísmicos repetidos en el tiempo."
+       }
+      }
+     ]
+    },
+    {
+     "id": "a6",
+     "title": "Sleipner, Quest y la evaluación de un proyecto",
+     "comp": "Proyectos reales",
+     "cues": [
+      {
+       "say": "Sleipner es el proyecto de referencia. Comenzó en 1996 en el Mar del Norte, impulsado por el impuesto noruego al CO₂. Inyecta en la Formación Utsira, una arenisca bajo un sello de lutitas, y en febrero de 2024 se informaban más de 19 millones de toneladas almacenadas.",
+       "scene": {
+        "t": "case",
+        "h": "Sleipner, Mar del Norte",
+        "src": "Vattenfall (2024), Norway's Sleipner: where CO2 has been buried in the rock since 1996",
+        "S": "Gas con alrededor de 9 % de CO₂, más del que admitía el mercado, y un impuesto noruego que hacía más rentable almacenar que emitir.",
+        "T": "Separar el CO₂ del gas natural y almacenarlo de manera segura en el subsuelo.",
+        "A": "Inyección en la Formación Utsira desde 1996, a más de 800 metros bajo el fondo marino, con monitoreo exigido por la normativa europea.",
+        "R": "Más de 19 millones de toneladas de CO₂ almacenadas según el informe de febrero de 2024."
+       }
+      },
+      {
+       "say": "Quest, en Alberta, Canadá, es otro caso. Shell opera, en nombre de una sociedad de tres empresas, la captura en tres unidades de hidrógeno de la planta Scotford, con un proceso de aminas. Empezó a fines de 2015, con una capacidad de un millón de toneladas por año, y almacena en las arenas del Cámbrico basal, a unos dos kilómetros de profundidad.",
+       "scene": {
+        "t": "case",
+        "h": "Quest, Alberta",
+        "src": "Carbon Storage Initiative, ficha de la instalación Quest",
+        "S": "Mejorador de petróleo pesado Scotford, con emisiones de las unidades de hidrógeno.",
+        "T": "Capturar alrededor de un tercio de las emisiones del mejorador y almacenarlas.",
+        "A": "Captura con aminas, transporte y almacenamiento en un acuífero salino de las arenas del Cámbrico basal a unos 2 km.",
+        "R": "Capacidad de captura de un millón de toneladas por año desde fines de 2015."
+       }
+      },
+      {
+       "say": "Para evaluar un proyecto propio conviene una lista corta. Capacidad con su método y rango, sello demostrado, plan de MMV, costo de toda la cadena y no solo del almacenamiento, responsabilidad a largo plazo y la licencia social de la comunidad.",
+       "scene": {
+        "t": "bul",
+        "k": "Checklist",
+        "h": "Para evaluar un proyecto",
+        "items": [
+         "Capacidad con método, rango y madurez declarada",
+         "Sello y pozos controlados",
+         "Plan de monitoreo, medición y verificación",
+         "Costo de toda la cadena",
+         "Responsabilidad a largo plazo y licencia social"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Un plan de evaluación de un proyecto CCS debe considerar:",
+        "o": [
+         "Toda la cadena y su responsabilidad a largo plazo",
+         "Solo el pozo de inyección",
+         "Solo la captura",
+         "Solo el precio del CO₂"
+        ],
+        "a": 0,
+        "e": "El almacenamiento es solo un eslabón."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "El impuesto noruego al CO₂ fue clave en:",
+     "o": [
+      "Sleipner, porque hizo rentable almacenar",
+      "Quest",
+      "Manantiales Behr",
+      "El gas seco"
+     ],
+     "a": 0,
+     "e": "Según Vattenfall, hacía más rentable almacenar que liberar."
+    },
+    {
+     "q": "Quest almacena en:",
+     "o": [
+      "Un acuífero salino de arenas del Cámbrico basal",
+      "Un yacimiento de gas agotado en el mar",
+      "Una cueva",
+      "Un tanque"
+     ],
+     "a": 0,
+     "e": "A unos dos kilómetros de profundidad."
+    },
+    {
+     "q": "Una cifra de capacidad sin método ni rango:",
+     "o": [
+      "No es comparable con otras",
+      "Es la más confiable",
+      "No requiere datos",
+      "Es definitiva"
+     ],
+     "a": 0,
+     "e": "La comparabilidad exige método e incertidumbre."
+    }
+   ]
+  }
+ ],
+ "exam": [
+  {
+   "q": "En el método volumétrico, el factor E representa:",
+   "o": [
+    "La fracción del volumen poral que puede ocuparse",
+    "La profundidad",
+    "El costo",
+    "La presión inicial"
+   ],
+   "a": 0,
+   "e": "Es la variable más incierta."
+  },
+  {
+   "q": "Por qué el entrampamiento residual y la disolución mejoran la seguridad con el tiempo:",
+   "o": [
+    "Inmovilizan parte del CO₂",
+    "Aumentan la presión",
+    "Aumentan la porosidad",
+    "Eliminan el sello"
+   ],
+   "a": 0,
+   "e": "El CO₂ deja de estar libre."
+  },
+  {
+   "q": "El MMV tiene como objetivo:",
+   "o": [
+    "Demostrar dónde está el CO₂ y que se mantiene confinado",
+    "Calcular el precio",
+    "Perforar pozos",
+    "Reducir el espesor"
+   ],
+   "a": 0,
+   "e": "Combina sísmica 4D, pozo y superficie."
+  },
+  {
+   "q": "Un yacimiento agotado como sitio tiene como riesgo:",
+   "o": [
+    "Pozos antiguos como vías de fuga",
+    "Falta de datos de sello demostrado",
+    "Ausencia total de pozos",
+    "Alta salinidad del agua"
+   ],
+   "a": 0,
+   "e": "Hay que inventariarlos y controlarlos."
+  },
+  {
+   "q": "El SRMS es:",
+   "o": [
+    "Un sistema de gestión de recursos de almacenamiento de CO₂ de la SPE",
+    "Una ley argentina",
+    "Un tipo de pozo",
+    "Un precio de referencia"
+   ],
+   "a": 0,
+   "e": "Aprobado en julio de 2017."
+  },
+  {
+   "q": "Sleipner almacena CO₂ desde:",
+   "o": [
+    "1996",
+    "2024",
+    "1850",
+    "2005"
+   ],
+   "a": 0,
+   "e": "Con más de 19 millones de toneladas informadas en 2024."
+  }
+ ],
+ "outro": {
+  "phrase": "Almacenar bien es demostrarlo con datos, durante mucho tiempo.",
+  "recap": [
+   "La cadena CCS suma captura, transporte y almacenamiento; el sitio se elige por reservorio, sello, profundidad y presión.",
+   "La capacidad volumétrica depende de un factor de eficiencia muy incierto, y se informa con rango.",
+   "El MMV, el control de pozos y los estándares como SRMS sostienen la seguridad de largo plazo."
+  ]
+ },
+ "downloads": [
+  {
+   "file": "xlsx/H3L_CO2_Capacidad_de_Almacenamiento.xlsx",
+   "title": "Capacidad de almacenamiento de CO₂ (Excel)",
+   "desc": "Cálculo volumétrico con entradas editables, casos bajo, base y alto de porosidad, densidad y factor de eficiencia, y una tabla de años de inyección para distintas emisiones anuales.",
+   "task": "Con 100 km², 50 m y 20 % de porosidad, calculá la capacidad con E = 1 %, 2 % y 4 %, y cuántos años cubre cada una para 1 Mt/año."
+  }
+ ],
+ "cases": [
+  {
+   "title": "Sleipner (Mar del Norte)",
+   "text": "Desde 1996, el CO₂ separado del gas natural se inyecta en la Formación Utsira, a más de 800 metros bajo el fondo marino. Según Vattenfall, en febrero de 2024 había más de 19 millones de toneladas almacenadas, y el impuesto noruego al CO₂ hacía más rentable almacenar que emitir.",
+   "src": "Vattenfall (2024), Norway's Sleipner: where CO2 has been buried in the rock since 1996"
+  },
+  {
+   "title": "Quest (Alberta)",
+   "text": "La captura en el mejorador Scotford comenzó a fines de 2015, con una capacidad de un millón de toneladas de CO₂ por año, y el CO₂ se almacena en las arenas del Cámbrico basal, a unos 2 km.",
+   "src": "Carbon Storage Initiative, ficha de Quest"
+  }
+ ],
+ "refs": [
+  {
+   "tag": "Informe",
+   "cite": "IPCC (2005). Informe especial sobre captura y almacenamiento de dióxido de carbono.",
+   "why": "mecanismos de entrampamiento"
+  },
+  {
+   "tag": "Estándar",
+   "cite": "SPE (2017). CO2 Storage Resources Management System (SRMS); Guías de aplicación, 2022.",
+   "why": "clasificación de recursos de almacenamiento"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Cavanagh, A. J. y Haszeldine, R. S. (2014). The Sleipner storage site: Capillary flow modeling of a layered CO2 plume requires fractured shale barriers within the Utsira Formation. Int. J. Greenhouse Gas Control 21, 101–112.",
+   "why": "pluma de Sleipner y sísmica repetida"
+  },
+  {
+   "tag": "Fuente",
+   "cite": "Vattenfall (2024). Norway's Sleipner: where CO2 has been buried in the rock since 1996.",
+   "why": "caso Sleipner"
+  },
+  {
+   "tag": "Fuente",
+   "cite": "Carbon Storage Initiative. Quest.",
+   "why": "caso Quest"
+  }
+ ]
+}

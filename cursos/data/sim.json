@@ -1,0 +1,767 @@
+{
+ "id": "sim",
+ "title": "Simulación numérica de reservorios e history matching",
+ "subtitle": "De las ecuaciones a la malla, del ajuste histórico a la incertidumbre del pronóstico.",
+ "desc": "Curso aplicado sobre cómo se construye, se ajusta y se usa un modelo de simulación: ecuaciones, mallas y dispersión numérica, inicialización y pozos, ajuste histórico, no unicidad, métodos asistidos con conjuntos y buenas prácticas de validación y gobernanza.",
+ "objectives": [
+  "Explicar qué ecuaciones resuelve un simulador y qué tipo de modelo conviene según el fluido y el mecanismo de recuperación.",
+  "Reconocer los efectos de la malla, el paso de tiempo y el escalado sobre los resultados.",
+  "Plantear un ajuste histórico, explicar por qué la solución no es única y qué datos ayudan a reducir la ambigüedad.",
+  "Comunicar un pronóstico como un rango, con su validación y sus límites."
+ ],
+ "labs": [
+  "dispersión numérica en el frente de agua",
+  "ajuste histórico y no unicidad",
+  "efecto del paso de tiempo y de la malla"
+ ],
+ "practiceMin": 80,
+ "competencies": [
+  {
+   "name": "Fundamentos del simulador",
+   "lessons": [
+    "s1"
+   ]
+  },
+  {
+   "name": "Malla y numérica",
+   "lessons": [
+    "s2"
+   ]
+  },
+  {
+   "name": "Modelo y pozos",
+   "lessons": [
+    "s3"
+   ]
+  },
+  {
+   "name": "Ajuste histórico",
+   "lessons": [
+    "s4",
+    "s5"
+   ]
+  },
+  {
+   "name": "Pronóstico y gobernanza",
+   "lessons": [
+    "s6"
+   ]
+  }
+ ],
+ "intro": {
+  "hook": "Un simulador no predice el futuro: ordena lo que sabemos. Vamos a ver cómo se construye, cómo se ajusta al pasado y cuánta confianza merece su pronóstico.",
+  "questions": [
+   "¿Qué ecuaciones resuelve un simulador y por qué hay que discretizarlas?",
+   "¿Por qué un modelo que ajusta la historia puede dar pronósticos muy distintos de otro que también ajusta?",
+   "¿Cómo se comunica un pronóstico con incertidumbre?"
+  ],
+  "star": {
+   "caso": "Sleipner: cuando el modelo no reproduce la pluma de CO₂",
+   "S": "En el campo Sleipner, en el Mar del Norte, se inyecta CO₂ en la Formación Utsira desde 1996, y la pluma fue observada con varias campañas de sísmica 4D.",
+   "T": "Reproducir con simulación de flujo la geometría de la pluma observada, formada por nueve capas delgadas.",
+   "A": "Las simulaciones convencionales de flujo de Darcy no reproducían la geometría. Un modelo de flujo capilar basado en percolación por invasión sí lo logró, pero solo suponiendo barreras de lutita fracturadas.",
+   "R": "El ajuste obligó a revisar la descripción del subsuelo: el modelo no solo ajustaba, también cambió lo que se creía de las barreras y del sello."
+  }
+ },
+ "modules": [
+  {
+   "id": "sm1",
+   "title": "Módulo 1 · El modelo y su numérica",
+   "lessons": [
+    {
+     "id": "s1",
+     "title": "Qué resuelve un simulador y qué tipo elegir",
+     "comp": "Fundamentos del simulador",
+     "cues": [
+      {
+       "say": "Un simulador de reservorios resuelve, en cada celda y en cada paso de tiempo, un balance de masa para cada componente, junto con la ley de Darcy para el flujo entre celdas y relaciones de estado que describen los fluidos.",
+       "scene": {
+        "t": "fm",
+        "k": "Ecuaciones base",
+        "h": "Balance de masa y ley de Darcy",
+        "f": "∂(φ ρ S)/∂t + ∇·(ρ v) = q\n\nv = −(k k_r / μ) · (∇p − ρ g ∇z)",
+        "n": "El primer término es la acumulación de masa. El segundo, el flujo entre celdas. q representa pozos. Se escribe una ecuación por fase o componente."
+       }
+      },
+      {
+       "say": "Como no hay solución analítica para un reservorio real, se divide el espacio en celdas y el tiempo en pasos. Esa discretización convierte las ecuaciones en un sistema grande de ecuaciones no lineales, que se resuelve por iteraciones.",
+       "scene": {
+        "t": "bul",
+        "k": "Discretización",
+        "h": "Qué se hace",
+        "items": [
+         "Dividir el reservorio en celdas con propiedades propias",
+         "Avanzar en pasos de tiempo",
+         "Linealizar y resolver el sistema en cada paso",
+         "Controlar el error con pasos y mallas adecuados",
+         "Chequear siempre el balance de materiales del resultado"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Según el fluido y el mecanismo se elige el tipo de modelo. Petróleo negro para la mayoría de los casos, composicional cuando importan los componentes, térmico para vapor, y modelos específicos para químicos o para fracturas naturales.",
+       "scene": {
+        "t": "tbl",
+        "k": "Tipos de simulador",
+        "h": "Cuál usar y por qué",
+        "cols": [
+         "Modelo",
+         "Cuándo conviene",
+         "Costo"
+        ],
+        "rows": [
+         [
+          "Petróleo negro",
+          "Petróleo y gas con comportamiento simple",
+          "Bajo"
+         ],
+         [
+          "Composicional",
+          "Gas condensado, inyección de gas miscible, CO₂",
+          "Alto"
+         ],
+         [
+          "Térmico",
+          "Vapor, combustión in situ",
+          "Alto"
+         ],
+         [
+          "Químico",
+          "Polímero, tensioactivos",
+          "Medio a alto"
+         ],
+         [
+          "Doble porosidad",
+          "Fracturas naturales con matriz",
+          "Medio"
+         ]
+        ],
+        "n": "La regla práctica: usar el modelo más simple que capture el mecanismo que se quiere estudiar."
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "La regla práctica para elegir el tipo de simulador es:",
+        "o": [
+         "Usar el más simple que capture el mecanismo",
+         "Usar siempre el composicional",
+         "Usar el que tiene más celdas",
+         "Usar el más barato"
+        ],
+        "a": 0,
+        "e": "Un modelo más complejo no es mejor si no aporta al mecanismo de interés y exige más datos que no existen."
+       }
+      }
+     ]
+    },
+    {
+     "id": "s2",
+     "title": "Mallas, escalado y dispersión numérica",
+     "comp": "Malla y numérica",
+     "cues": [
+      {
+       "say": "La malla fija cuánto detalle ve el modelo. Una malla fina captura mejor los frentes y las heterogeneidades, pero cuesta más. Una malla gruesa corre rápido, pero suaviza lo que debería ser abrupto.",
+       "scene": {
+        "t": "bul",
+        "k": "Malla",
+        "h": "Decisiones de diseño",
+        "items": [
+         "Tamaño de celda según el gradiente que se quiere resolver",
+         "Refinar cerca de pozos y de frentes",
+         "Orientar la malla según fallas y direcciones de flujo",
+         "Escalar propiedades de la geología a la malla de flujo",
+         "Verificar que el resultado no cambie al refinar"
+        ]
+       },
+       "hl": 2
+      },
+      {
+       "say": "Laboratorio. Es un frente de agua que avanza en una malla de una dimensión, comparado con la solución analítica de Buckley y Leverett. Cambiá el número de celdas y mirá cómo se suaviza el frente. Después subí el número de Courant por encima de uno.",
+       "scene": {
+        "t": "viz",
+        "w": "sim",
+        "h": "Dispersión numérica",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "Esa suavización se llama dispersión numérica. No es física: es un error del método. Hace que el agua llegue antes a los pozos y adelanta la irrupción. Se reduce con más celdas, con esquemas de mayor orden o con pasos de tiempo adecuados.",
+       "scene": {
+        "t": "bul",
+        "k": "Dispersión numérica",
+        "h": "Qué pasa y qué se hace",
+        "items": [
+         "Suaviza frentes abruptos y adelanta la irrupción",
+         "Depende del tamaño de celda y del esquema",
+         "Se detecta comparando contra una malla más fina",
+         "Los esquemas implícitos son estables, pero también suavizan",
+         "Con esquemas explícitos hay que respetar el límite de Courant"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "El escalado es otro paso delicado. Pasar de millones de celdas geológicas a decenas de miles de celdas de flujo exige promediar propiedades. La permeabilidad no se promedia como la porosidad, y un promedio simple puede borrar canales o barreras que controlan el flujo.",
+       "scene": {
+        "t": "tbl",
+        "k": "Escalado",
+        "h": "Cómo se promedia",
+        "cols": [
+         "Propiedad",
+         "Se promedia con",
+         "Cuidado"
+        ],
+        "rows": [
+         [
+          "Porosidad",
+          "Promedio ponderado por volumen",
+          "Es aditiva"
+         ],
+         [
+          "Saturación",
+          "Ponderada por volumen poral",
+          "Depende de la porosidad"
+         ],
+         [
+          "Permeabilidad",
+          "Métodos que consideran el flujo",
+          "Un promedio simple distorsiona canales y barreras"
+         ],
+         [
+          "Razón neto/bruto",
+          "Promedio ponderado",
+          "Conservar las barreras continuas"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "La dispersión numérica es:",
+        "o": [
+         "Un error del método que suaviza los frentes",
+         "Un fenómeno físico del reservorio",
+         "Un parámetro de la roca",
+         "Una propiedad del fluido"
+        ],
+        "a": 0,
+        "e": "Se debe a la discretización y no a la física del reservorio."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "La ley de Darcy en un simulador se usa para:",
+     "o": [
+      "El flujo entre celdas",
+      "La porosidad",
+      "La compresibilidad",
+      "La temperatura"
+     ],
+     "a": 0,
+     "e": "Relaciona el caudal con el gradiente de presión."
+    },
+    {
+     "q": "Para estudiar vapor se elige un modelo:",
+     "o": [
+      "Térmico",
+      "De petróleo negro",
+      "De agua",
+      "Estático"
+     ],
+     "a": 0,
+     "e": "El calor y la temperatura son parte de las ecuaciones."
+    },
+    {
+     "q": "Con mallas más gruesas, el frente de agua simulado suele:",
+     "o": [
+      "Llegar antes y verse más suave",
+      "Llegar después",
+      "Quedar igual",
+      "Desaparecer"
+     ],
+     "a": 0,
+     "e": "Es el efecto de la dispersión numérica."
+    }
+   ]
+  },
+  {
+   "id": "sm2",
+   "title": "Módulo 2 · Datos de entrada y ajuste",
+   "lessons": [
+    {
+     "id": "s3",
+     "title": "Inicialización, roca-fluido y pozos",
+     "comp": "Modelo y pozos",
+     "cues": [
+      {
+       "say": "Antes de simular hay que inicializar el modelo en equilibrio. Se definen los contactos agua-petróleo y gas-petróleo, las presiones y las saturaciones iniciales, y se verifica que el petróleo original resultante coincida con el volumétrico del modelo estático.",
+       "scene": {
+        "t": "bul",
+        "k": "Inicialización",
+        "h": "Qué verificar",
+        "items": [
+         "Contactos y presiones de referencia",
+         "Saturaciones iniciales consistentes con la presión capilar",
+         "Volumen in situ igual al del modelo estático",
+         "Equilibrio: sin flujo en el tiempo cero",
+         "Pozos y completaciones bien ubicados en la malla"
+        ]
+       },
+       "hl": 1
+      },
+      {
+       "say": "Las curvas de permeabilidad relativa y de presión capilar gobiernan cómo se mueven los fluidos. Vienen de ensayos de laboratorio sobre pocas muestras, y son entre los parámetros más inciertos y más influyentes del modelo.",
+       "scene": {
+        "t": "bul",
+        "k": "Roca-fluido",
+        "h": "Datos clave",
+        "items": [
+         "Permeabilidad relativa agua-petróleo y gas-petróleo",
+         "Presión capilar y mojabilidad",
+         "Saturaciones críticas y residuales",
+         "Propiedades PVT: factor volumétrico, viscosidad y relación gas-petróleo",
+         "Compresibilidad de roca y fluidos"
+        ]
+       },
+       "hl": 1
+      },
+      {
+       "say": "Los pozos se conectan a la malla por un índice de pozo. Como la presión de una celda no es la del fondo del pozo, se usa un radio equivalente que relaciona ambas. El daño, la completación y los controles de caudal o presión completan la descripción.",
+       "scene": {
+        "t": "fm",
+        "k": "Índice de pozo",
+        "h": "Relación caudal–presión",
+        "f": "q = IP · ( p celda − p fondo )\n\nIP = 2π k h / ( μ · [ ln( r e / r w ) + S ] )",
+        "n": "r e es el radio equivalente de la celda del pozo y S el daño. Se verifica que el índice sea coherente con las pruebas de pozo."
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Antes de simular el pronóstico, la inicialización debe verificar que:",
+        "o": [
+         "El petróleo in situ coincida con el modelo estático",
+         "Todos los pozos produzcan igual",
+         "La malla sea cuadrada",
+         "El precio sea alto"
+        ],
+        "a": 0,
+        "e": "Es una de las primeras comprobaciones de consistencia del modelo."
+       }
+      }
+     ]
+    },
+    {
+     "id": "s4",
+     "title": "Ajuste histórico y no unicidad",
+     "comp": "Ajuste histórico",
+     "cues": [
+      {
+       "say": "El ajuste histórico consiste en modificar parámetros inciertos hasta que el modelo reproduzca lo observado: presiones, caudales, cortes de agua y relaciones gas-petróleo. Es un problema inverso, y como tal, tiene más de una solución.",
+       "scene": {
+        "t": "bul",
+        "k": "Ajuste histórico",
+        "h": "Etapas",
+        "items": [
+         "Definir qué datos se van a reproducir",
+         "Elegir los parámetros inciertos y sus rangos",
+         "Ajustar primero presiones y luego fluidos",
+         "Cuantificar el error con una función objetivo",
+         "Verificar que los cambios sean geológicamente razonables"
+        ]
+       },
+       "hl": 2
+      },
+      {
+       "say": "Laboratorio. Es un reservorio con acuífero, y un modelo de balance de materiales. Con solo la presión, muchos pares de petróleo original y fuerza del acuífero ajustan igual. Después incorporá el agua producida y mirá cómo se cierra el valle.",
+       "scene": {
+        "t": "viz",
+        "w": "hm",
+        "h": "Ajuste histórico y no unicidad",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "Esto es la no unicidad. Dos modelos con el mismo ajuste pueden dar pronósticos distintos, sobre todo en lo que los datos no restringen. La forma de reducirla es sumar información independiente: otro tipo de dato, otra escala o una restricción geológica.",
+       "scene": {
+        "t": "bul",
+        "k": "No unicidad",
+        "h": "Cómo se reduce",
+        "items": [
+         "Sumar datos de otra naturaleza: agua producida, sísmica 4D, trazadores",
+         "Ajustar pozo por pozo y no solo el campo",
+         "Imponer límites geológicos a los parámetros",
+         "Aceptar que queda un rango y usarlo para pronosticar"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Dos modelos que ajustan igual la historia:",
+        "o": [
+         "Pueden dar pronósticos distintos",
+         "Siempre dan el mismo pronóstico",
+         "Son idénticos",
+         "No existen"
+        ],
+        "a": 0,
+        "e": "La historia no restringe todo lo que importa para el futuro."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "Un modelo se inicializa en equilibrio para que:",
+     "o": [
+      "No haya flujo en el tiempo cero",
+      "Todos los pozos produzcan",
+      "La presión sea cero",
+      "El agua no exista"
+     ],
+     "a": 0,
+     "e": "Es una condición básica de consistencia."
+    },
+    {
+     "q": "Las permeabilidades relativas provienen en general de:",
+     "o": [
+      "Ensayos de laboratorio con pocas muestras",
+      "Mediciones continuas en todo el campo",
+      "El precio del petróleo",
+      "La sísmica"
+     ],
+     "a": 0,
+     "e": "Son datos escasos y muy influyentes."
+    },
+    {
+     "q": "El ajuste histórico es un problema:",
+     "o": [
+      "Inverso con más de una solución",
+      "Con una solución única",
+      "Sin datos",
+      "Resuelto por la malla"
+     ],
+     "a": 0,
+     "e": "Distintas combinaciones de parámetros pueden reproducir lo mismo."
+    }
+   ]
+  },
+  {
+   "id": "sm3",
+   "title": "Módulo 3 · Incertidumbre y gobernanza",
+   "lessons": [
+    {
+     "id": "s5",
+     "title": "Ajuste asistido y métodos de conjunto",
+     "comp": "Ajuste histórico",
+     "cues": [
+      {
+       "say": "Ajustar a mano, parámetro por parámetro, es lento y sesgado. El ajuste asistido usa algoritmos para explorar el espacio de parámetros y minimizar el error entre lo observado y lo simulado.",
+       "scene": {
+        "t": "tbl",
+        "k": "Enfoques",
+        "h": "Cómo se ajusta",
+        "cols": [
+         "Enfoque",
+         "Idea",
+         "Límite"
+        ],
+        "rows": [
+         [
+          "Manual",
+          "El ingeniero cambia parámetros por criterio",
+          "Lento y depende del analista"
+         ],
+         [
+          "Optimización",
+          "Un algoritmo busca el mínimo del error",
+          "Puede dar un solo modelo"
+         ],
+         [
+          "Métodos de conjunto",
+          "Muchos modelos se actualizan a la vez con los datos",
+          "Devuelven un rango de modelos ajustados"
+         ],
+         [
+          "Modelos proxy",
+          "Un modelo rápido reemplaza al simulador",
+          "Hay que validarlo contra el simulador"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Los métodos de conjunto, como el suavizador de conjunto con asimilación múltiple de datos, conocido por sus siglas en inglés ES-MDA, fueron presentados por Emerick y Reynolds para el ajuste histórico asistido. Parten de muchas realizaciones y las actualizan varias veces con los datos observados.",
+       "scene": {
+        "t": "bul",
+        "k": "ES-MDA",
+        "h": "Qué aporta",
+        "items": [
+         "Trabaja con un conjunto de modelos y no con uno solo",
+         "Asimila los datos en varias pasadas, con ruido controlado",
+         "Devuelve un conjunto de modelos ajustados: da incertidumbre",
+         "Su principal limitación es el colapso del conjunto en problemas grandes",
+         "Exige elegir bien los factores de inflación y el tamaño del conjunto"
+        ]
+       },
+       "hl": 1
+      },
+      {
+       "say": "Un conjunto de modelos ajustados es la base de un pronóstico probabilista. Se corre cada modelo hacia adelante y se informan los percentiles. Así el pronóstico es un rango, y no un número que parece más preciso de lo que es.",
+       "scene": {
+        "t": "bul",
+        "k": "Del conjunto al pronóstico",
+        "h": "Cómo se usa",
+        "items": [
+         "Correr todos los modelos ajustados en el futuro",
+         "Informar P90, P50 y P10 del resultado",
+         "Identificar qué parámetros explican la dispersión",
+         "Decidir qué dato adicional reduciría el rango"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Un conjunto de modelos ajustados sirve para:",
+        "o": [
+         "Cuantificar la incertidumbre del pronóstico",
+         "Eliminar toda incertidumbre",
+         "Evitar el simulador",
+         "Reemplazar los datos"
+        ],
+        "a": 0,
+        "e": "Se corre cada modelo y se informa un rango."
+       }
+      }
+     ]
+    },
+    {
+     "id": "s6",
+     "title": "Pronóstico, validación y gobernanza del modelo",
+     "comp": "Pronóstico y gobernanza",
+     "cues": [
+      {
+       "say": "Un modelo ajustado no está validado por el solo hecho de ajustar. Una buena práctica es guardar una parte de la historia sin usarla en el ajuste y comprobar si el modelo la predice. Se llama validación con datos retenidos.",
+       "scene": {
+        "t": "bul",
+        "k": "Validación",
+        "h": "Prácticas",
+        "items": [
+         "Retener los últimos meses de historia y predecirlos",
+         "Comparar contra pozos nuevos o campañas posteriores",
+         "Revisar que los parámetros finales sean razonables",
+         "Comparar con modelos analíticos simples como control",
+         "Repetir cuando hay datos nuevos"
+        ]
+       },
+       "hl": 1
+      },
+      {
+       "say": "El caso de Sleipner muestra por qué importa. Las simulaciones convencionales de Darcy no reproducían la pluma de CO₂ observada con sísmica. Un modelo de flujo capilar sí la reprodujo, pero solo con barreras de lutita fracturadas. Ajustar obligó a revisar la geología.",
+       "scene": {
+        "t": "case",
+        "h": "Sleipner, Mar del Norte",
+        "src": "Cavanagh y Haszeldine (2014), International Journal of Greenhouse Gas Control 21, 101–112",
+        "S": "Inyección de CO₂ en la Formación Utsira desde 1996, con varias campañas de sísmica 4D.",
+        "T": "Reproducir la geometría de la pluma, en nueve capas delgadas.",
+        "A": "Los modelos convencionales de Darcy no la reproducían; el modelo capilar sí, con barreras de lutita fracturadas.",
+        "R": "El ajuste cambió la interpretación del subsuelo: un buen modelo también pone a prueba la geología."
+       }
+      },
+      {
+       "say": "La gobernanza del modelo cierra el ciclo. Se documentan las versiones, los datos usados, las decisiones de ajuste y las limitaciones. Quien usa el pronóstico debe saber para qué sirve el modelo y para qué no.",
+       "scene": {
+        "t": "bul",
+        "k": "Gobernanza",
+        "h": "Qué documentar",
+        "items": [
+         "Versión de datos y de modelo, con fecha y responsable",
+         "Qué se ajustó y qué se dejó fijo, y por qué",
+         "Rango de incertidumbre y su origen",
+         "Usos aprobados y no aprobados del modelo",
+         "Plan de actualización con nuevos datos"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Una buena práctica de validación es:",
+        "o": [
+         "Retener datos de la historia y predecirlos",
+         "Ajustar todo y no revisar nada",
+         "Cambiar la geología sin documentar",
+         "Usar un solo modelo"
+        ],
+        "a": 0,
+        "e": "Si el modelo no predice datos que no usó, el ajuste puede ser solo un artificio."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "Los métodos de conjunto devuelven:",
+     "o": [
+      "Un conjunto de modelos ajustados",
+      "Un único modelo exacto",
+      "Solo el error",
+      "Ninguna incertidumbre"
+     ],
+     "a": 0,
+     "e": "De ahí se obtiene un pronóstico probabilista."
+    },
+    {
+     "q": "La validación con datos retenidos consiste en:",
+     "o": [
+      "Predecir historia que no se usó en el ajuste",
+      "Ajustar con todos los datos",
+      "Eliminar pozos",
+      "Cambiar la malla"
+     ],
+     "a": 0,
+     "e": "Prueba la capacidad predictiva real del modelo."
+    },
+    {
+     "q": "Documentar una versión del modelo sirve para:",
+     "o": [
+      "Que otros sepan qué datos y decisiones hay detrás",
+      "Alargar el proyecto",
+      "Evitar la validación",
+      "Subir el petróleo original"
+     ],
+     "a": 0,
+     "e": "Es el centro de la gobernanza de modelos."
+    }
+   ]
+  }
+ ],
+ "exam": [
+  {
+   "q": "La dispersión numérica en un simulador:",
+   "o": [
+    "Adelanta la irrupción de agua por suavizar el frente",
+    "Retrasa la irrupción",
+    "No afecta a los frentes",
+    "Es una propiedad de la roca"
+   ],
+   "a": 0,
+   "e": "Es un error de discretización que se reduce refinando."
+  },
+  {
+   "q": "Con solo la presión como dato de ajuste, un reservorio con acuífero suele tener:",
+   "o": [
+    "Muchas combinaciones de parámetros que ajustan",
+    "Una sola solución",
+    "Ninguna solución",
+    "Solo soluciones con acuífero nulo"
+   ],
+   "a": 0,
+   "e": "Hay compensación entre el petróleo original y la fuerza del acuífero."
+  },
+  {
+   "q": "Un esquema explícito con número de Courant mayor que uno:",
+   "o": [
+    "Puede volverse inestable",
+    "Siempre es exacto",
+    "No necesita pasos de tiempo",
+    "Elimina la dispersión"
+   ],
+   "a": 0,
+   "e": "Es el límite de estabilidad del esquema."
+  },
+  {
+   "q": "Un método de conjunto como ES-MDA se usa para:",
+   "o": [
+    "Ajustar muchos modelos a la vez y obtener incertidumbre",
+    "Reemplazar los pozos",
+    "Calcular el precio",
+    "Medir la porosidad"
+   ],
+   "a": 0,
+   "e": "Parte de muchas realizaciones y las actualiza con los datos."
+  },
+  {
+   "q": "Cuando un modelo ajustado no predice datos retenidos, conviene:",
+   "o": [
+    "Revisar el modelo y sus supuestos",
+    "Presentarlo igual",
+    "Borrar los datos retenidos",
+    "Aumentar la malla sin revisar"
+   ],
+   "a": 0,
+   "e": "Es una señal de que el ajuste puede no ser predictivo."
+  },
+  {
+   "q": "La inicialización correcta de un modelo verifica que:",
+   "o": [
+    "El petróleo in situ coincida con el modelo estático",
+    "Todos los pozos produzcan lo mismo",
+    "La permeabilidad sea uniforme",
+    "No haya agua"
+   ],
+   "a": 0,
+   "e": "Es una comprobación de consistencia elemental."
+  }
+ ],
+ "outro": {
+  "phrase": "Un modelo no es la verdad: es una hipótesis que se pone a prueba contra los datos.",
+  "recap": [
+   "El simulador resuelve balances de masa discretizados, y la malla y el paso de tiempo condicionan el resultado.",
+   "El ajuste histórico no tiene solución única: sumar datos independientes reduce el rango.",
+   "Los métodos de conjunto y la validación convierten el pronóstico en un rango con respaldo."
+  ]
+ },
+ "downloads": [
+  {
+   "file": "xlsx/H3L_Simulacion_Ajuste_y_Dispersion.xlsx",
+   "title": "Ajuste histórico y dispersión numérica (Excel)",
+   "desc": "Balance de materiales con acuífero para ajustar presión y agua producida con una función objetivo, un mapa de error en el plano petróleo original–acuífero, y un esquema upwind de Buckley y Leverett con distintos tamaños de celda.",
+   "task": "Ajustá la presión con N y Ca, anotá tres pares que ajusten igual, y calculá cuánto cambia el agua acumulada a 20 años entre ellos."
+  }
+ ],
+ "cases": [
+  {
+   "title": "Sleipner (Mar del Norte)",
+   "text": "Las simulaciones convencionales de flujo de Darcy no reproducían la geometría de la pluma de CO₂ observada con sísmica 4D en la Formación Utsira. Un modelo de flujo capilar con percolación por invasión sí la reprodujo, pero solo suponiendo barreras de lutita fracturadas. En 2019 Equinor anunció la liberación de todos los datos del proyecto, que almacena CO₂ desde 1996.",
+   "src": "Cavanagh y Haszeldine (2014), Int. J. Greenhouse Gas Control 21, 101–112; Equinor, vía Industrial Info (25 de junio de 2019)"
+  }
+ ],
+ "refs": [
+  {
+   "tag": "Paper",
+   "cite": "Cavanagh, A. J. y Haszeldine, R. S. (2014). The Sleipner storage site: Capillary flow modeling of a layered CO2 plume requires fractured shale barriers within the Utsira Formation. International Journal of Greenhouse Gas Control 21, 101–112.",
+   "why": "caso Sleipner"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Emerick, A. A. y Reynolds, A. C. (2013). Ensemble smoother with multiple data assimilation. Computers & Geosciences 55, 3–15.",
+   "why": "ES-MDA"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Buckley, S. E. y Leverett, M. C. (1942). Mechanism of fluid displacement in sands. Transactions of the AIME 142, 107–116.",
+   "why": "frente de agua de referencia"
+  },
+  {
+   "tag": "Fuente",
+   "cite": "Equinor (2019). Equinor releasing 20 years of carbon capture data from North Sea. Industrial Info, 25 de junio de 2019.",
+   "why": "datos de Sleipner"
+  }
+ ]
+}
