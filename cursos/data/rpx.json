@@ -1,8 +1,8 @@
 {
  "id": "rpx",
  "title": "Reservas avanzadas: incertidumbre, agregación y auditoría",
- "subtitle": "Rangos probabilistas, suma de portafolios, conciliación anual y lecciones del caso Shell 2004.",
- "desc": "Curso que continúa Recursos y Reservas SPE-PRMS: precisiones de la actualización 2018, incertidumbre probabilista y P90/P50/P10, agregación de portafolios, influencia del precio y del límite económico, conciliación y tasa de reposición, auditoría y control interno, y el caso de la recategorización de Shell.",
+ "subtitle": "Rangos probabilistas, suma de portafolios, conciliación anual y lecciones de un caso de sobreestimación de reservas en 2004.",
+ "desc": "Curso que continúa Recursos y Reservas SPE-PRMS: precisiones de la actualización 2018, incertidumbre probabilista y P90/P50/P10, agregación de portafolios, influencia del precio y del límite económico, conciliación y tasa de reposición, auditoría y control interno, y un caso de recategorización de reservas.",
  "objectives": [
   "Aplicar las precisiones de PRMS 2018 sobre reservas, recursos contingentes y recursos prospectivos.",
   "Interpretar los percentiles P90, P50 y P10 y su relación con 1P, 2P y 3P.",
@@ -62,8 +62,8 @@
    "¿Qué controles evitan una sobreestimación de reservas?"
   ],
   "star": {
-   "caso": "Shell 2004: la recategorización de reservas",
-   "S": "En agosto de 2004, la SEC anunció un acuerdo con Royal Dutch Petroleum y Shell Transport and Trading, que habían informado reservas probadas de más en su Formulario 20-F de 2002.",
+   "caso": "2004: la recategorización de reservas",
+   "S": "En agosto de 2004, la SEC anunció un acuerdo con dos sociedades de una petrolera integrada, que habían informado reservas probadas de más en su Formulario 20-F de 2002.",
    "T": "Entender cómo reservas declaradas como probadas pueden no cumplir los criterios exigidos, y qué controles faltaron.",
    "A": "La SEC halló una sobreestimación de 4.470 millones de barriles de reservas probadas, cerca del 23 % medido en barriles equivalentes de petróleo, y también una sobreestimación de unos 6.600 millones de dólares en la medida estandarizada de flujos de caja futuros.",
    "R": "Las empresas aceptaron una multa de 120 millones de dólares y se comprometieron a invertir 5 millones más en un programa de cumplimiento, sin admitir ni negar los hallazgos."
@@ -497,16 +497,16 @@
     },
     {
      "id": "v6",
-     "title": "El caso Shell 2004 y sus lecciones",
+     "title": "El caso de 2004 y sus lecciones",
      "comp": "Casos y lecciones",
      "cues": [
       {
-       "say": "El 24 de agosto de 2004, la SEC anunció que Royal Dutch Petroleum y Shell Transport and Trading habían sobreestimado en 4.470 millones de barriles sus reservas probadas informadas en el Formulario 20-F de 2002. Equivalía a cerca del 23 % de sus reservas medidas en barriles equivalentes.",
+       "say": "El 24 de agosto de 2004, la SEC anunció que las dos sociedades controlantes de una petrolera integrada habían sobreestimado en 4.470 millones de barriles sus reservas probadas informadas en el Formulario 20-F de 2002. Equivalía a cerca del 23 % de sus reservas medidas en barriles equivalentes.",
        "scene": {
         "t": "case",
-        "h": "Shell, 2004",
+        "h": "Caso de 2004",
         "src": "SEC, comunicado 2004-116 (24 de agosto de 2004)",
-        "S": "Reservas probadas informadas en el Formulario 20-F de 2002 por Royal Dutch Petroleum y Shell Transport and Trading.",
+        "S": "Reservas probadas informadas en el Formulario 20-F de 2002 por las dos sociedades controlantes de una petrolera integrada.",
         "T": "Entender qué reservas no cumplían los criterios de reservas probadas y qué controles fallaron.",
         "A": "La SEC halló una sobreestimación de 4.470 millones de barriles, cerca del 23 %, y de unos 6.600 millones de dólares en la medida estandarizada de flujos futuros.",
         "R": "Multa de 120 millones de dólares, más un compromiso de 5 millones en un programa de cumplimiento, sin admitir ni negar los hallazgos."
@@ -547,7 +547,7 @@
       {
        "say": "Pregunta rápida.",
        "q": {
-        "q": "El comunicado de la SEC sobre Shell en 2004 habló de:",
+        "q": "El comunicado de la SEC sobre este caso de 2004 habló de:",
         "o": [
          "Una sobreestimación de reservas probadas",
          "Un descubrimiento récord",
@@ -574,7 +574,7 @@
      "e": "Se parte del inicio y se llega al cierre."
     },
     {
-     "q": "El caso Shell 2004 terminó con una multa de:",
+     "q": "El caso de 2004 terminó con una multa de:",
      "o": [
       "120 millones de dólares",
       "1 millón de dólares",
@@ -671,7 +671,7 @@
   "recap": [
    "PRMS 2018 clasifica por proyecto y ordena la incertidumbre en categorías.",
    "Los percentiles y la agregación dependen del propósito: planificar no es lo mismo que reportar.",
-   "La conciliación, la auditoría y el control independiente sostienen la confianza en las cifras, como mostró el caso Shell."
+   "La conciliación, la auditoría y el control independiente sostienen la confianza en las cifras, como mostró el caso de 2004."
   ]
  },
  "downloads": [
@@ -684,8 +684,8 @@
  ],
  "cases": [
   {
-   "title": "Shell (2004)",
-   "text": "La SEC anunció el 24 de agosto de 2004 un acuerdo por el cual Royal Dutch Petroleum y Shell Transport and Trading pagaron 120 millones de dólares por haber sobreestimado en 4.470 millones de barriles, cerca del 23 %, sus reservas probadas informadas en el Formulario 20-F de 2002; la medida estandarizada de flujos de caja futuros también estaba sobreestimada en unos 6.600 millones de dólares.",
+   "title": "Sobreestimación de reservas (2004)",
+   "text": "La SEC anunció el 24 de agosto de 2004 un acuerdo por el cual las dos sociedades controlantes de una petrolera integrada pagaron 120 millones de dólares por haber sobreestimado en 4.470 millones de barriles, cerca del 23 %, sus reservas probadas informadas en el Formulario 20-F de 2002; la medida estandarizada de flujos de caja futuros también estaba sobreestimada en unos 6.600 millones de dólares.",
    "src": "SEC, comunicado 2004-116 (24 de agosto de 2004)"
   }
  ],
@@ -712,8 +712,8 @@
   },
   {
    "tag": "Fuente",
-   "cite": "SEC (2004). Comunicado de prensa 2004-116, 24 de agosto de 2004, sobre Royal Dutch Petroleum y Shell Transport and Trading.",
-   "why": "caso Shell"
+   "cite": "SEC (2004). Comunicado de prensa 2004-116, 24 de agosto de 2004, sobre las sociedades controlantes de una petrolera integrada.",
+   "why": "caso de 2004"
   }
  ]
 }

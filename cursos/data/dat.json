@@ -52,11 +52,11 @@
    "¿Qué hay que cuidar para que un modelo siga funcionando en producción?"
   ],
   "star": {
-   "caso": "Volve: datos abiertos de un campo real (Equinor, 2018)",
+   "caso": "Volve: datos abiertos de un campo real del Mar del Norte (2018)",
    "S": "La industria tenía pocos conjuntos de datos reales y completos de un campo para investigar y para enseñar.",
    "T": "Facilitar la investigación y el aprendizaje con datos reales de subsuelo y de producción.",
-   "A": "En junio de 2018 Equinor, con los socios de la licencia del campo, compartió los datos del campo Volve, ya fuera de servicio, con datos de producción, pozos, sísmica, registros y modelos.",
-   "R": "Son alrededor de 40.000 archivos, disponibles bajo la licencia de datos abiertos de Equinor, que se usan en investigación y en formación."
+   "A": "En junio de 2018 el operador del campo, con los socios de la licencia, compartió los datos del campo Volve, ya fuera de servicio, con datos de producción, pozos, sísmica, registros y modelos.",
+   "R": "Son alrededor de 40.000 archivos, disponibles bajo la licencia de datos abiertos del operador, que se usan en investigación y en formación."
   }
  },
  "modules": [
@@ -722,14 +722,14 @@
        "hl": 2
       },
       {
-       "say": "El caso Volve muestra el valor de los datos abiertos. En junio de 2018 Equinor compartió los datos del campo Volve, con los socios de la licencia.",
+       "say": "El caso Volve muestra el valor de los datos abiertos. En junio de 2018 el operador del campo compartió los datos de Volve, con los socios de la licencia.",
        "scene": {
         "t": "case",
         "h": "Volve: datos reales de un campo",
-        "src": "Equinor, Volve data village; OilIT (2018)",
+        "src": "Volve data village (datos abiertos del campo); OilIT (2018)",
         "S": "Pocos conjuntos reales y completos de un campo estaban disponibles para investigar o para enseñar.",
         "T": "Facilitar la investigación y la formación con datos de subsuelo y de producción.",
-        "A": "En junio de 2018 Equinor, con los socios de la licencia, compartió los datos del campo Volve, ya fuera de servicio: producción, pozos y completaciones, sísmica, registros, geología y modelos estáticos y dinámicos. Los datos están disponibles bajo la licencia de datos abiertos de Equinor.",
+        "A": "En junio de 2018 el operador del campo, con los socios de la licencia, compartió los datos del campo Volve, ya fuera de servicio: producción, pozos y completaciones, sísmica, registros, geología y modelos estáticos y dinámicos. Los datos están disponibles bajo la licencia de datos abiertos del operador.",
         "R": "Un conjunto de unos 40.000 archivos, en formatos heterogéneos como Eclipse, OpenWorks, RMS, PDF y datos de perforación en WITSML, usado en investigación y formación. Conviene leer los términos de la licencia antes de usar los datos."
        }
       },
@@ -765,13 +765,13 @@
     {
      "q": "El conjunto de datos del campo Volve fue compartido por:",
      "o": [
-      "Equinor",
+      "El operador del campo",
       "Una universidad",
       "Un proveedor de software",
       "Un regulador"
      ],
      "a": 0,
-     "e": "Equinor, con los socios de la licencia, lo publicó en 2018."
+     "e": "El operador del campo, con los socios de la licencia, lo publicó en 2018."
     },
     {
      "q": "Una práctica de buen MLOps es:",
@@ -874,8 +874,8 @@
  "cases": [
   {
    "title": "Volve: datos abiertos de un campo real",
-   "text": "En junio de 2018 Equinor, con los socios de la licencia del campo, compartió los datos del campo Volve, ya fuera de servicio: producción, pozos y completaciones, sísmica, registros, geología y modelos. Son alrededor de 40.000 archivos, disponibles bajo la licencia de datos abiertos de Equinor.",
-   "src": "Equinor, Volve data village; OilIT (2018)"
+   "text": "En junio de 2018 el operador del campo, con los socios de la licencia, compartió los datos del campo Volve, ya fuera de servicio: producción, pozos y completaciones, sísmica, registros, geología y modelos. Son alrededor de 40.000 archivos, disponibles bajo la licencia de datos abiertos del operador.",
+   "src": "Volve data village (datos abiertos del campo); OilIT (2018)"
   }
  ],
  "refs": [
@@ -921,12 +921,12 @@
   },
   {
    "tag": "Fuente",
-   "cite": "Equinor. Volve field data village (datos abiertos del campo Volve), 2018.",
+   "cite": "El operador del campo. Volve field data village (datos abiertos del campo Volve), 2018.",
    "why": "caso de datos abiertos"
   },
   {
    "tag": "Fuente",
-   "cite": "OilIT (2018). Equinor releases massive data set from decommissioned Volve oilfield.",
+   "cite": "OilIT (2018). El operador del campo releases massive data set from decommissioned Volve oilfield.",
    "why": "descripción de la publicación de Volve"
   }
  ]

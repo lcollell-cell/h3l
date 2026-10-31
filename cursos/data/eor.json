@@ -52,7 +52,7 @@
   ],
   "star": {
    "caso": "Manantiales Behr: polímeros en un campo de 90 años",
-   "S": "Manantiales Behr, operado por YPF en la Cuenca del Golfo San Jorge, Chubut, a unos 40 km al noroeste de Comodoro Rivadavia, es un campo maduro con petróleo viscoso.",
+   "S": "Manantiales Behr, en la Cuenca del Golfo San Jorge, Chubut, a unos 40 km al noroeste de Comodoro Rivadavia, es un campo maduro con petróleo viscoso.",
    "T": "Aumentar la producción de un campo con casi un siglo de actividad.",
    "A": "Se potenció la recuperación secundaria y se inició la terciaria: el primer piloto en la zona de Grimbeek comenzó en 2019, y se instalaron cinco plantas de inyección de polímeros.",
    "R": "En diciembre de 2020 el campo llegó a 3.747 metros cúbicos diarios, su mayor producción en 90 años de actividad."
@@ -554,12 +554,12 @@
      "comp": "Selección, piloto y escala",
      "cues": [
       {
-       "say": "Manantiales Behr, en el Golfo San Jorge, es un campo con casi un siglo de producción y petróleo viscoso. YPF potenció la recuperación secundaria y comenzó la terciaria: el primer piloto de polímeros fue en la zona de Grimbeek, en 2019.",
+       "say": "Manantiales Behr, en el Golfo San Jorge, es un campo con casi un siglo de producción y petróleo viscoso. El operador potenció la recuperación secundaria y comenzó la terciaria: el primer piloto de polímeros fue en la zona de Grimbeek, en 2019.",
        "scene": {
         "t": "case",
         "h": "Manantiales Behr, Chubut",
-        "src": "iProfesional, YPF: Manantiales Behr tuvo la producción más alta de su historia",
-        "S": "Campo operado por YPF en la Cuenca del Golfo San Jorge, a unos 40 km al noroeste de Comodoro Rivadavia, con 90 años de actividad.",
+        "src": "iProfesional, nota sobre la producción récord del yacimiento Manantiales Behr",
+        "S": "Campo en la Cuenca del Golfo San Jorge, a unos 40 km al noroeste de Comodoro Rivadavia, con 90 años de actividad.",
         "T": "Aumentar la producción de un campo maduro de petróleo viscoso.",
         "A": "Recuperación secundaria potenciada y primer piloto terciario con polímeros en Grimbeek en 2019; luego, cinco plantas de inyección de polímeros.",
         "R": "En diciembre de 2020 el campo alcanzó 3.747 metros cúbicos diarios, la producción más alta de su historia."
@@ -737,8 +737,8 @@
  "cases": [
   {
    "title": "Manantiales Behr (Chubut)",
-   "text": "En diciembre de 2020, el campo operado por YPF en la Cuenca del Golfo San Jorge alcanzó 3.747 metros cúbicos diarios, su mayor producción en 90 años de actividad. El aumento se atribuyó a la recuperación secundaria y terciaria; el primer piloto terciario, en la zona de Grimbeek, comenzó en 2019, y se instalaron cinco plantas de inyección de polímeros.",
-   "src": "iProfesional, YPF: Manantiales Behr tuvo la producción más alta de su historia"
+   "text": "En diciembre de 2020, el campo en la Cuenca del Golfo San Jorge alcanzó 3.747 metros cúbicos diarios, su mayor producción en 90 años de actividad. El aumento se atribuyó a la recuperación secundaria y terciaria; el primer piloto terciario, en la zona de Grimbeek, comenzó en 2019, y se instalaron cinco plantas de inyección de polímeros.",
+   "src": "iProfesional, nota sobre la producción récord del yacimiento Manantiales Behr"
   }
  ],
  "refs": [
@@ -764,7 +764,7 @@
   },
   {
    "tag": "Fuente",
-   "cite": "iProfesional. YPF: Manantiales Behr tuvo la producción más alta de su historia.",
+   "cite": "iProfesional. Nota sobre la producción más alta de la historia de Manantiales Behr.",
    "why": "caso Manantiales Behr"
   }
  ]

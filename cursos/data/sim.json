@@ -738,8 +738,8 @@
  "cases": [
   {
    "title": "Sleipner (Mar del Norte)",
-   "text": "Las simulaciones convencionales de flujo de Darcy no reproducían la geometría de la pluma de CO₂ observada con sísmica 4D en la Formación Utsira. Un modelo de flujo capilar con percolación por invasión sí la reprodujo, pero solo suponiendo barreras de lutita fracturadas. En 2019 Equinor anunció la liberación de todos los datos del proyecto, que almacena CO₂ desde 1996.",
-   "src": "Cavanagh y Haszeldine (2014), Int. J. Greenhouse Gas Control 21, 101–112; Equinor, vía Industrial Info (25 de junio de 2019)"
+   "text": "Las simulaciones convencionales de flujo de Darcy no reproducían la geometría de la pluma de CO₂ observada con sísmica 4D en la Formación Utsira. Un modelo de flujo capilar con percolación por invasión sí la reprodujo, pero solo suponiendo barreras de lutita fracturadas. En 2019 el operador anunció la liberación de todos los datos del proyecto, que almacena CO₂ desde 1996.",
+   "src": "Cavanagh y Haszeldine (2014), Int. J. Greenhouse Gas Control 21, 101–112; Industrial Info (25 de junio de 2019)"
   }
  ],
  "refs": [
@@ -760,7 +760,7 @@
   },
   {
    "tag": "Fuente",
-   "cite": "Equinor (2019). Equinor releasing 20 years of carbon capture data from North Sea. Industrial Info, 25 de junio de 2019.",
+   "cite": "Industrial Info (25 de junio de 2019). Nota sobre la liberación de 20 años de datos de captura de carbono en el Mar del Norte.",
    "why": "datos de Sleipner"
   }
  ]

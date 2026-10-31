@@ -52,8 +52,8 @@
    "¿Cuánto produce un pozo no convencional a lo largo de su vida?"
   ],
   "star": {
-   "caso": "Barnett Shale: Mitchell Energy y la fractura con slickwater",
-   "S": "Mitchell Energy trabajó el Barnett desde comienzos de los años ochenta y, según fuentes secundarias, hacia 1997 había gastado unos 250 millones de dólares sin recuperar el gasto.",
+   "caso": "Barnett Shale: la fractura con slickwater",
+   "S": "Una operadora independiente trabajó el Barnett desde comienzos de los años ochenta y, según fuentes secundarias, hacia 1997 había gastado unos 250 millones de dólares sin recuperar el gasto.",
    "T": "Bajar el costo de las completaciones y aumentar la recuperación de gas.",
    "A": "En 1997 el ingeniero Nick Steinsberger propuso usar fractura con agua de baja viscosidad, o slickwater, ya empleada en el este de Texas, en lugar de geles.",
    "R": "El pozo S.H. Griffin N.º 3 superó en sus primeros noventa días a los anteriores de la compañía, y la completación costaba entre 75.000 y 100.000 dólares menos."
@@ -200,12 +200,12 @@
        }
       },
       {
-       "say": "Este es el caso que mostró que el fluido importa. En el Barnett, Mitchell Energy pasó de geles a fractura con slickwater a fines de los años noventa.",
+       "say": "Este es el caso que mostró que el fluido importa. En el Barnett, una operadora independiente pasó de geles a fractura con slickwater a fines de los años noventa.",
        "scene": {
         "t": "case",
         "h": "Barnett: de geles a slickwater",
         "src": "Barnett Shale (Wikipedia) y fuentes secundarias. Conviene verificar las cifras con fuentes primarias.",
-        "S": "Mitchell Energy trabajaba el Barnett desde 1981. Según fuentes secundarias, había gastado unos 250 millones de dólares hacia 1997 sin recuperarlos.",
+        "S": "Una operadora independiente trabajaba el Barnett desde 1981. Según fuentes secundarias, había gastado unos 250 millones de dólares hacia 1997 sin recuperarlos.",
         "T": "Reducir el costo de completación y aumentar la recuperación de gas.",
         "A": "En 1997 Nick Steinsberger propuso usar slickwater, ya empleado en el este de Texas, en lugar de geles. En 1998, el pozo S.H. Griffin N.º 3 fue la primera prueba.",
         "R": "Superó a los pozos anteriores de la compañía en sus primeros 90 días, y redujo el costo de completación en 75.000 a 100.000 dólares. Luego se sumaron los pozos horizontales: en 2008 se completaron 2.901 horizontales frente a 183 verticales."
@@ -833,8 +833,8 @@
  ],
  "cases": [
   {
-   "title": "Barnett Shale: Mitchell Energy y el slickwater",
-   "text": "Según las fuentes secundarias consultadas, Mitchell Energy trabajó el Barnett desde 1981 y hacia 1997 había gastado unos 250 millones de dólares sin recuperar el gasto. En 1997 Nick Steinsberger propuso fracturar con slickwater, y en 1998 el pozo S.H. Griffin N.º 3 superó a los anteriores en sus primeros 90 días. En 2002 Devon Energy adquirió Mitchell Energy. En 2008 se completaron 2.901 pozos horizontales y 183 verticales. Las cifras provienen de fuentes secundarias, y conviene verificarlas con fuentes primarias.",
+   "title": "Barnett Shale: el slickwater",
+   "text": "Según las fuentes secundarias consultadas, Una operadora independiente trabajó el Barnett desde 1981 y hacia 1997 había gastado unos 250 millones de dólares sin recuperar el gasto. En 1997 Nick Steinsberger propuso fracturar con slickwater, y en 1998 el pozo S.H. Griffin N.º 3 superó a los anteriores en sus primeros 90 días. En 2002 esa operadora fue adquirida por otra compañía. En 2008 se completaron 2.901 pozos horizontales y 183 verticales. Las cifras provienen de fuentes secundarias, y conviene verificarlas con fuentes primarias.",
    "src": "Barnett Shale (Wikipedia); Zuckerman, G. (2013). The Frackers"
   }
  ],
@@ -882,7 +882,7 @@
   {
    "tag": "Libro",
    "cite": "Zuckerman, G. (2013). The Frackers. Portfolio/Penguin.",
-   "why": "historia del Barnett y de Mitchell Energy"
+   "why": "historia del Barnett y de su operadora"
   },
   {
    "tag": "Estándar",
