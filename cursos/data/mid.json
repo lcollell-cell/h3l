@@ -1,0 +1,751 @@
+{
+ "id": "mid",
+ "title": "Midstream: transporte y medición fiscal",
+ "subtitle": "Hidráulica de ductos, capacidad de gasoductos, transferencia de custodia, incertidumbre de medición, integridad y ciberseguridad.",
+ "desc": "Curso para quien opera o contrata el tramo entre el yacimiento y el cliente: pérdida de carga y bombeo, capacidad de un gasoducto, medición fiscal con su incertidumbre, almacenamiento y contratos de transporte, integridad de ductos y la protección de los sistemas de control frente a ataques informáticos.",
+ "objectives": [
+  "Calcular la pérdida de carga de un ducto de líquido y entender el efecto del diámetro y del caudal.",
+  "Explicar la medición fiscal, sus equipos y la transferencia de custodia.",
+  "Estimar la incertidumbre de una medición y su efecto económico.",
+  "Describir la gestión de integridad y los riesgos operativos y cibernéticos de un ducto."
+ ],
+ "labs": [
+  "pérdida de carga y potencia de bombeo de un ducto",
+  "incertidumbre de la medición fiscal y su costo"
+ ],
+ "practiceMin": 80,
+ "competencies": [
+  {
+   "name": "Hidráulica de ductos de líquido",
+   "lessons": [
+    "m1"
+   ]
+  },
+  {
+   "name": "Gasoductos y capacidad",
+   "lessons": [
+    "m2"
+   ]
+  },
+  {
+   "name": "Medición fiscal",
+   "lessons": [
+    "m3"
+   ]
+  },
+  {
+   "name": "Incertidumbre y balances",
+   "lessons": [
+    "m4"
+   ]
+  },
+  {
+   "name": "Almacenamiento y contratos",
+   "lessons": [
+    "m5"
+   ]
+  },
+  {
+   "name": "Integridad y ciberseguridad",
+   "lessons": [
+    "m6"
+   ]
+  }
+ ],
+ "intro": {
+  "hook": "El midstream no produce petróleo ni gas, pero decide cuánto llega al cliente y a qué costo. Una pequeña diferencia de medición, repetida millones de veces, vale mucho dinero.",
+  "questions": [
+   "¿Cuánto cuesta mover un fluido por un ducto y cómo se reduce?",
+   "¿Quién mide, con qué equipos y con qué incertidumbre?",
+   "¿Cómo se protege un ducto de la corrosión y de los ataques informáticos?"
+  ],
+  "star": {
+   "caso": "Mayo de 2021: un ataque de ransomware a un sistema de ductos",
+   "S": "En mayo de 2021, un ataque de ransomware afectó a la empresa que operaba un gran sistema de ductos de combustibles en el este de Estados Unidos. Las agencias CISA y FBI emitieron un aviso técnico sobre el grupo atacante.",
+   "T": "Proteger la operación y la seguridad de un sistema crítico, y restablecer el servicio.",
+   "A": "La empresa suspendió de forma preventiva la operación de sus ductos mientras evaluaba el alcance del ataque. El aviso conjunto de las agencias recomendó buenas prácticas: copias de respaldo, segmentación de redes, autenticación fuerte y un plan de respuesta.",
+   "R": "El caso muestra que la ciberseguridad es parte de la continuidad operativa y que la separación entre redes administrativas y de control es una barrera esencial."
+  }
+ },
+ "modules": [
+  {
+   "id": "mm1",
+   "title": "Módulo 1 · Transporte",
+   "lessons": [
+    {
+     "id": "m1",
+     "title": "Ductos de líquidos: pérdida de carga y bombeo",
+     "comp": "Hidráulica de ductos de líquido",
+     "cues": [
+      {
+       "say": "Un ducto de líquidos gasta energía en vencer la fricción. La caída de presión depende del caudal, del diámetro, de la longitud, de la densidad y de la viscosidad. La ecuación de Darcy y Weisbach la expresa con un factor de fricción que depende del número de Reynolds y de la rugosidad de la pared.",
+       "scene": {
+        "t": "fm",
+        "k": "Darcy y Weisbach",
+        "h": "Caída de presión",
+        "f": "ΔP = f · (L / D) · ρ · v² / 2\nRe = ρ · v · D / μ\nPotencia hidráulica = Q · ΔP",
+        "n": "En flujo turbulento, f depende de Re y de la rugosidad relativa."
+       }
+      },
+      {
+       "say": "Dos conclusiones prácticas. La caída crece casi con el cuadrado del caudal, así que duplicar el caudal cuadruplica la presión necesaria. Y cae muy fuerte al aumentar el diámetro, porque la velocidad baja con el cuadrado del diámetro. Por eso conviene dimensionar un ducto pensando en el crecimiento futuro del caudal.",
+       "scene": {
+        "t": "bul",
+        "k": "Diseño",
+        "h": "Lecciones del cálculo",
+        "items": [
+         "Duplicar el caudal multiplica por cuatro la caída de presión aproximadamente",
+         "Un diámetro mayor reduce mucho la caída y la potencia",
+         "La viscosidad pesa más en flujo laminar, a caudales bajos",
+         "Se diseña con el caudal futuro y con margen"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Laboratorio. Cambiá el caudal, el diámetro, la longitud, la viscosidad y la densidad. Mirá la caída de presión y la potencia hidráulica, y comparás tres diámetros en la misma gráfica. No hay desniveles en este modelo.",
+       "scene": {
+        "t": "viz",
+        "w": "pipe",
+        "h": "Pérdida de carga de un ducto",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Si se duplica el caudal en flujo turbulento, la caída de presión:",
+        "o": [
+         "Se reduce a la mitad",
+         "Se multiplica por cerca de cuatro",
+         "No cambia",
+         "Se anula"
+        ],
+        "a": 1,
+        "e": "Depende aproximadamente del cuadrado de la velocidad."
+       }
+      }
+     ]
+    },
+    {
+     "id": "m2",
+     "title": "Gasoductos: capacidad, compresión y empaquetamiento",
+     "comp": "Gasoductos y capacidad",
+     "cues": [
+      {
+       "say": "Un gasoducto transporta gas comprimido. La capacidad depende de la presión de entrada y de salida, del diámetro y de la longitud. Las ecuaciones de flujo de gas, como la de Weymouth, muestran que la capacidad crece aproximadamente con el diámetro elevado a ocho tercios. Un diámetro un poco mayor aumenta mucho la capacidad.",
+       "scene": {
+        "t": "bul",
+        "k": "Capacidad",
+        "h": "Qué la determina",
+        "items": [
+         "Presión de entrada y presión mínima de entrega",
+         "Diámetro: la capacidad crece aproximadamente con D elevado a 8/3",
+         "Longitud: más largo, menos capacidad",
+         "Estaciones de compresión intermedias para sostener la presión"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "El gas en un gasoducto es compresible y el ducto almacena gas por su propio volumen. Ese almacenamiento, llamado empaquetamiento de línea o linepack, amortigua las variaciones de la demanda a lo largo del día. Un operador usa el linepack para atender picos sin parar la entrada de gas.",
+       "scene": {
+        "t": "tbl",
+        "k": "Servicios",
+        "h": "Tipos de contrato",
+        "cols": [
+         "Tipo",
+         "Qué garantiza",
+         "Para quién"
+        ],
+        "rows": [
+         [
+          "Firme",
+          "Capacidad reservada y pagada siempre",
+          "Quien no puede interrumpir su entrega"
+         ],
+         [
+          "Interrumpible",
+          "Se usa si hay capacidad libre",
+          "Quien tolera cortes a menor costo"
+         ],
+         [
+          "Ship or pay",
+          "Se paga la capacidad se use o no",
+          "Cargadores con volúmenes previsibles"
+         ],
+         [
+          "Spot o de corto plazo",
+          "Capacidad ocasional",
+          "Ventas puntuales"
+         ]
+        ],
+        "n": "Los términos exactos y las tarifas dependen de la regulación y del contrato de cada sistema."
+       }
+      },
+      {
+       "say": "La consecuencia comercial es que la capacidad de transporte es un activo escaso. Un productor sin capacidad contratada no puede llevar su gas al mercado, aunque lo tenga. Por eso el transporte se planifica junto con el desarrollo del campo, y los cuellos de botella determinan el precio en cada punto de la red.",
+       "scene": {
+        "t": "bul",
+        "k": "Efecto en el negocio",
+        "h": "Capacidad y precio",
+        "items": [
+         "Sin capacidad no hay venta, aunque haya gas",
+         "Los cuellos de botella separan los precios regionales",
+         "Ampliar suma costo y plazo",
+         "El transporte se planifica con el campo"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "El linepack de un gasoducto es:",
+        "o": [
+         "Un contrato",
+         "Una válvula",
+         "Un tipo de medidor",
+         "El gas almacenado en el propio ducto por compresión"
+        ],
+        "a": 3,
+        "e": "Amortigua los picos de demanda."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "La potencia hidráulica de bombeo es aproximadamente:",
+     "o": [
+      "Diámetro por longitud",
+      "Caudal por caída de presión",
+      "Viscosidad por densidad",
+      "Presión por temperatura"
+     ],
+     "a": 1,
+     "e": "P = Q · ΔP."
+    },
+    {
+     "q": "Un diámetro mayor en un ducto de líquido:",
+     "o": [
+      "Reduce la velocidad y la caída de presión",
+      "Aumenta la velocidad",
+      "No cambia nada",
+      "Aumenta la viscosidad"
+     ],
+     "a": 0,
+     "e": "La velocidad baja con el cuadrado del diámetro."
+    },
+    {
+     "q": "Un contrato firme de transporte significa:",
+     "o": [
+      "Un descuento al azar",
+      "Capacidad solo si sobra",
+      "Un tipo de pozo",
+      "Capacidad reservada que se paga siempre"
+     ],
+     "a": 3,
+     "e": "Garantiza la entrega, con el costo fijo."
+    }
+   ]
+  },
+  {
+   "id": "mm2",
+   "title": "Módulo 2 · Medición fiscal",
+   "lessons": [
+    {
+     "id": "m3",
+     "title": "Medición fiscal y transferencia de custodia",
+     "comp": "Medición fiscal",
+     "cues": [
+      {
+       "say": "La medición fiscal es la que se usa para cobrar, pagar regalías, impuestos o transferir propiedad. Aquí la exactitud tiene valor económico directo. Cada punto de transferencia de custodia tiene un medidor, un procedimiento de cálculo y una verificación periódica acordados entre las partes y la autoridad.",
+       "scene": {
+        "t": "bul",
+        "k": "Medición fiscal",
+        "h": "Para qué se usa",
+        "items": [
+         "Facturar la venta o el transporte",
+         "Calcular regalías e impuestos",
+         "Transferir la custodia entre empresas",
+         "Conciliar balances entre puntos de medición"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Hay varios tipos de medidor, y cada uno responde a un fluido y a un rango. La placa de orificio se rige por la norma AGA 3, la turbina por la AGA 7 y el medidor ultrasónico por la AGA 9. En líquidos se usan medidores de desplazamiento positivo, turbinas, Coriolis o ultrasónicos, con la serie API MPMS como referencia, y calibración con probadores.",
+       "scene": {
+        "t": "tbl",
+        "k": "Medidores",
+        "h": "Opciones frecuentes",
+        "cols": [
+         "Medidor",
+         "Fluido",
+         "Ventaja"
+        ],
+        "rows": [
+         [
+          "Placa de orificio",
+          "Gas",
+          "Simple y normalizado"
+         ],
+         [
+          "Turbina",
+          "Gas y líquidos",
+          "Buena exactitud en su rango"
+         ],
+         [
+          "Ultrasónico",
+          "Gas y líquidos",
+          "Sin partes móviles y gran rango"
+         ],
+         [
+          "Coriolis",
+          "Líquidos y gas",
+          "Mide masa directamente"
+         ]
+        ],
+        "n": "Las normas aplicables dependen del fluido, del país y del contrato."
+       }
+      },
+      {
+       "say": "Un punto de medición fiscal de líquidos se compone de un medidor, un probador que lo verifica, instrumentos de temperatura y presión, y un sistema para tomar muestras y medir el contenido de agua y sedimentos. El volumen bruto se corrige a condiciones estándar de temperatura y presión antes de facturar.",
+       "scene": {
+        "t": "bul",
+        "k": "Un punto de medición",
+        "h": "Qué incluye",
+        "items": [
+         "Medidor y probador",
+         "Temperatura y presión corregidas",
+         "Muestreador para agua y sedimentos",
+         "Computador de caudal con trazabilidad",
+         "Verificación y calibración periódicas"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "La medición fiscal se distingue de la medición operativa porque:",
+        "o": [
+         "No requiere calibración",
+         "Es menos exacta",
+         "Se usa para cobrar, pagar y transferir propiedad",
+         "No tiene norma"
+        ],
+        "a": 2,
+        "e": "Su exactitud tiene valor económico directo."
+       }
+      }
+     ]
+    },
+    {
+     "id": "m4",
+     "title": "Incertidumbre, balances y pérdidas",
+     "comp": "Incertidumbre y balances",
+     "cues": [
+      {
+       "say": "Toda medición tiene una incertidumbre. El volumen que se factura combina varios errores: el medidor, la temperatura, la densidad y el muestreo de agua y sedimentos. Si son independientes, se combinan como la raíz de la suma de los cuadrados, y se informa una incertidumbre expandida con un factor de cobertura, normalmente k igual a 2.",
+       "scene": {
+        "t": "fm",
+        "k": "Combinación",
+        "h": "Incertidumbre estándar",
+        "f": "u = √(u₁² + u₂² + u₃² + …)\nU = k · u    (k = 2 ≈ 95 %)",
+        "n": "Los componentes deben ser independientes entre sí."
+       }
+      },
+      {
+       "say": "Laboratorio. Cambiá la incertidumbre de cada fuente, el volumen anual y el precio. Mirá cuál pesa más y cuánto vale la incertidumbre expandida en dólares por año. Los números son de ejemplo, no de un medidor real.",
+       "scene": {
+        "t": "viz",
+        "w": "meas",
+        "h": "Incertidumbre de la medición fiscal",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "El balance de masa cierra el círculo. Se compara lo que entra con lo que sale de un sistema y se analiza la diferencia. Una diferencia pequeña y estable es normal; una diferencia que crece señala un medidor descalibrado, una fuga o un error de cálculo. La conciliación periódica es la herramienta de detección.",
+       "scene": {
+        "t": "bul",
+        "k": "Balance",
+        "h": "Cómo se usa",
+        "items": [
+         "Entradas menos salidas por período",
+         "La diferencia se compara con la incertidumbre combinada",
+         "Una tendencia creciente exige investigar",
+         "Se concilia con otros puntos de la red"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Para mejorar la incertidumbre total conviene:",
+        "o": [
+         "Mejorar la fuente que menos pesa",
+         "Actuar sobre la fuente que más contribuye",
+         "Ignorar el muestreo",
+         "Subir la temperatura"
+        ],
+        "a": 1,
+        "e": "Es la que más reduce la incertidumbre combinada."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "La incertidumbre combinada de fuentes independientes se obtiene como:",
+     "o": [
+      "El promedio",
+      "La suma simple",
+      "La raíz de la suma de los cuadrados",
+      "El producto"
+     ],
+     "a": 2,
+     "e": "Se combinan en cuadratura."
+    },
+    {
+     "q": "Un factor de cobertura k = 2 corresponde aproximadamente a:",
+     "o": [
+      "Un 95 % de confianza",
+      "Un 50 % de confianza",
+      "Un 100 % de confianza",
+      "Un 5 % de confianza"
+     ],
+     "a": 0,
+     "e": "Es el valor usual para la incertidumbre expandida."
+    },
+    {
+     "q": "Una diferencia creciente en el balance de masa señala:",
+     "o": [
+      "Que todo está bien",
+      "Un posible problema de medición o una fuga",
+      "Un precio alto",
+      "Más caudal"
+     ],
+     "a": 1,
+     "e": "Hay que investigar la causa."
+    }
+   ]
+  },
+  {
+   "id": "mm3",
+   "title": "Módulo 3 · Almacenamiento, integridad y riesgo",
+   "lessons": [
+    {
+     "id": "m5",
+     "title": "Almacenamiento, terminales y programación",
+     "comp": "Almacenamiento y contratos",
+     "cues": [
+      {
+       "say": "Un tanque de almacenamiento cumple tres funciones. Amortiguar las diferencias entre producción y despacho, dar tiempo para medir y controlar la calidad, y permitir mezclar calidades. Un terminal agrupa tanques, bombas, medición y brazos de carga, y es el punto donde el producto cambia de ducto a buque, camión o tren.",
+       "scene": {
+        "t": "bul",
+        "k": "Almacenamiento",
+        "h": "Funciones",
+        "items": [
+         "Amortiguar producción y despacho",
+         "Medir y controlar calidad antes de entregar",
+         "Mezclar calidades para cumplir especificación",
+         "Permitir programar buques y camiones"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "La programación coordina las entregas. En ductos de varios productos, los lotes se envían uno detrás del otro y en el contacto se forma una interfase que se corta o se reprocesa. Se programan volúmenes, ventanas de buques y capacidad de tanques, y se evitan las demoras que cuestan dinero.",
+       "scene": {
+        "t": "tbl",
+        "k": "Programación",
+        "h": "Qué se coordina",
+        "cols": [
+         "Elemento",
+         "Qué se coordina",
+         "Riesgo"
+        ],
+        "rows": [
+         [
+          "Lotes en el ducto",
+          "Orden y volúmenes",
+          "Mezcla en la interfase"
+         ],
+         [
+          "Tanques",
+          "Capacidad libre y calidad",
+          "Desborde o falta de volumen"
+         ],
+         [
+          "Buques",
+          "Ventanas de carga",
+          "Demoras y penalidades"
+         ],
+         [
+          "Contratos",
+          "Volúmenes y fechas",
+          "Incumplimiento"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "En las pérdidas por evaporación, los tanques de techo fijo emiten vapores de hidrocarburos, que son valor perdido y emisiones. Los tanques de techo flotante y los sistemas de recuperación de vapores reducen ese efecto. Es un punto de contacto con el curso de gestión de emisiones.",
+       "scene": {
+        "t": "bul",
+        "k": "Pérdidas",
+        "h": "Y emisiones",
+        "items": [
+         "Evaporación en los tanques de techo fijo",
+         "Techo flotante o recuperación de vapores",
+         "Medición de las pérdidas",
+         "Relación con el inventario de emisiones"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Un tanque de almacenamiento permite:",
+        "o": [
+         "Medir la porosidad",
+         "Subir la presión de reservorio",
+         "Amortiguar diferencias entre producción y despacho",
+         "Eliminar el agua de formación"
+        ],
+        "a": 2,
+        "e": "Es una de sus funciones principales."
+       }
+      }
+     ]
+    },
+    {
+     "id": "m6",
+     "title": "Integridad, ciberseguridad y el caso del ransomware de 2021",
+     "comp": "Integridad y ciberseguridad",
+     "cues": [
+      {
+       "say": "La integridad de un ducto se gestiona como un ciclo. Se identifican las amenazas, como la corrosión, los daños de terceros o los defectos de fabricación, se inspecciona con herramientas que viajan dentro de la línea, se evalúan los defectos y se reparan según su criticidad. La presión máxima de operación admisible se revisa con esa información.",
+       "scene": {
+        "t": "bul",
+        "k": "Integridad",
+        "h": "Ciclo de gestión",
+        "items": [
+         "Identificar amenazas: corrosión, terceros, fatiga, defectos",
+         "Inspección en línea con herramientas inteligentes",
+         "Evaluación de defectos con criterios de aptitud para el servicio",
+         "Reparación o reducción de la presión máxima admisible",
+         "Repetir con una frecuencia basada en el riesgo"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Los sistemas de control, los SCADA, y los sistemas administrativos están cada vez más conectados. Una intrusión en la red administrativa puede afectar la operación, aunque no toque los controles. En mayo de 2021, un ataque de ransomware afectó a la empresa que operaba un gran sistema de ductos de combustibles en Estados Unidos, y la empresa suspendió preventivamente las operaciones de sus ductos.",
+       "scene": {
+        "t": "case",
+        "h": "Ransomware a un sistema de ductos, mayo de 2021",
+        "src": "CISA y FBI (2021), Alerta AA21-131A: DarkSide Ransomware, Best Practices for Preventing Business Disruption from Ransomware Attacks",
+        "S": "Un sistema de ductos de combustibles muy extenso con redes administrativas y de control conectadas.",
+        "T": "Proteger la seguridad y la continuidad de una infraestructura crítica ante un ataque de ransomware.",
+        "A": "La empresa suspendió de manera preventiva sus operaciones mientras evaluaba el alcance. El aviso de CISA y FBI recomendó copias de respaldo, segmentación de redes, autenticación multifactor y un plan de respuesta.",
+        "R": "Un caso de referencia sobre la continuidad operativa y la ciberseguridad de la infraestructura energética."
+       }
+      },
+      {
+       "say": "La protección se organiza en capas. Segmentar las redes de control de las administrativas, limitar los accesos remotos, mantener copias de respaldo fuera de línea, aplicar autenticación multifactor, actualizar los sistemas, formar a las personas y ensayar el plan de respuesta. Una buena práctica es poder operar en modo manual durante un incidente.",
+       "scene": {
+        "t": "bul",
+        "k": "Ciberseguridad",
+        "h": "Capas de protección",
+        "items": [
+         "Separar la red de control de la red administrativa",
+         "Control de accesos remotos y autenticación multifactor",
+         "Copias de respaldo probadas y fuera de línea",
+         "Actualizaciones y gestión de vulnerabilidades",
+         "Plan de respuesta y operación manual de contingencia"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Una barrera clave contra la propagación de un ataque a los sistemas de control es:",
+        "o": [
+         "Usar una sola red para todo",
+         "Separar la red de control de la red administrativa",
+         "Eliminar las copias de respaldo",
+         "Aumentar la presión"
+        ],
+        "a": 1,
+        "e": "La segmentación limita el alcance del incidente."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "Una interfase en un ducto de varios productos es:",
+     "o": [
+      "Un contrato",
+      "Un tipo de válvula",
+      "La zona de mezcla entre dos lotes consecutivos",
+      "Un medidor"
+     ],
+     "a": 2,
+     "e": "Se corta o se reprocesa."
+    },
+    {
+     "q": "El ciclo de integridad de un ducto incluye:",
+     "o": [
+      "Solo reparar",
+      "Identificar amenazas, inspeccionar, evaluar y reparar",
+      "Solo medir caudal",
+      "Solo facturar"
+     ],
+     "a": 1,
+     "e": "Se repite con una frecuencia basada en el riesgo."
+    },
+    {
+     "q": "Una buena práctica ante ransomware es:",
+     "o": [
+      "Conectar todo a internet",
+      "Tener copias de respaldo fuera de línea y segmentar las redes",
+      "Evitar la actualización",
+      "No planificar"
+     ],
+     "a": 1,
+     "e": "Es una de las recomendaciones del aviso de CISA y FBI."
+    }
+   ]
+  }
+ ],
+ "exam": [
+  {
+   "q": "En un ducto de líquido turbulento, duplicar el caudal aumenta la caída de presión:",
+   "o": [
+    "A la mitad",
+    "Aproximadamente cuatro veces",
+    "Un 10 %",
+    "No cambia"
+   ],
+   "a": 1,
+   "e": "Depende de v²."
+  },
+  {
+   "q": "La medición fiscal sirve para:",
+   "o": [
+    "Decorar",
+    "Controlar la porosidad",
+    "Reducir la presión",
+    "Cobrar, pagar regalías y transferir custodia"
+   ],
+   "a": 3,
+   "e": "Su exactitud tiene valor económico."
+  },
+  {
+   "q": "Con incertidumbres independientes de 0,3 % y 0,4 %, la combinada es:",
+   "o": [
+    "0,7 %",
+    "0,5 %",
+    "0,1 %",
+    "1,2 %"
+   ],
+   "a": 1,
+   "e": "√(0,09 + 0,16) = 0,5."
+  },
+  {
+   "q": "El linepack sirve para:",
+   "o": [
+    "Aumentar la porosidad",
+    "Amortiguar picos de demanda con el gas del propio ducto",
+    "Cerrar un pozo",
+    "Subir el precio"
+   ],
+   "a": 1,
+   "e": "El ducto almacena gas por su volumen."
+  },
+  {
+   "q": "La inspección en línea de un ducto detecta:",
+   "o": [
+    "El precio",
+    "Corrosión y otros defectos",
+    "El caudal del pozo",
+    "La temperatura ambiente"
+   ],
+   "a": 1,
+   "e": "Se hace con herramientas inteligentes."
+  },
+  {
+   "q": "El caso de 2021 mostró que:",
+   "o": [
+    "La ciberseguridad es parte de la continuidad operativa",
+    "Los ductos no se conectan a redes",
+    "No hubo efecto",
+    "El problema fue del reservorio"
+   ],
+   "a": 0,
+   "e": "La empresa suspendió operaciones de forma preventiva."
+  }
+ ],
+ "outro": {
+  "can": [
+   "calcular la caída de presión y la potencia de bombeo de un ducto",
+   "estimar la incertidumbre de una medición fiscal y su valor económico",
+   "describir el ciclo de integridad y las capas de protección cibernética de un ducto"
+  ],
+  "phrase": "En midstream, lo que no se mide bien no se cobra bien, y lo que no se protege no se opera.",
+  "recap": [
+   "La hidráulica de ductos se gobierna por el caudal y el diámetro, y el gasoducto por presión, compresión y linepack.",
+   "La medición fiscal se apoya en normas, probadores e incertidumbre combinada.",
+   "Integridad y ciberseguridad se gestionan en ciclos y en capas, con planes ensayados."
+  ]
+ },
+ "downloads": [
+  {
+   "file": "xlsx/H3L_Midstream_Hidraulica_e_Incertidumbre.xlsx",
+   "title": "Midstream: hidráulica e incertidumbre (Excel)",
+   "desc": "Pérdida de carga de un ducto con Darcy-Weisbach y Swamee-Jain para tres diámetros, potencia hidráulica y presupuesto de incertidumbre de una medición fiscal con su valor económico anual.",
+   "task": "Con 500 m³/h, 350 mm, 100 km y 8 cP, calculá la caída de presión, y compará con 400 mm; luego estimá el valor anual de la incertidumbre para 5 MMbbl."
+  }
+ ],
+ "cases": [
+  {
+   "title": "Ransomware a un sistema de ductos (mayo de 2021)",
+   "text": "Un ataque de ransomware afectó a la empresa que operaba un gran sistema de ductos de combustibles en Estados Unidos, y la empresa suspendió de forma preventiva sus operaciones. CISA y FBI emitieron la alerta AA21-131A con buenas prácticas de prevención.",
+   "src": "CISA y FBI (2021), Alerta AA21-131A"
+  }
+ ],
+ "refs": [
+  {
+   "tag": "Fuente",
+   "cite": "CISA y FBI (2021). Alert AA21-131A: DarkSide Ransomware: Best Practices for Preventing Business Disruption from Ransomware Attacks.",
+   "why": "caso de ransomware y buenas prácticas"
+  },
+  {
+   "tag": "Norma",
+   "cite": "API Manual of Petroleum Measurement Standards (MPMS), capítulos 4, 5 y 12.",
+   "why": "calibración, medición y cálculo de volúmenes de líquidos"
+  },
+  {
+   "tag": "Norma",
+   "cite": "AGA Report No. 3 (orificio), No. 7 (turbina) y No. 9 (ultrasónico).",
+   "why": "medición de gas natural"
+  },
+  {
+   "tag": "Guía",
+   "cite": "JCGM 100:2008. Evaluation of measurement data: Guide to the expression of uncertainty in measurement (GUM).",
+   "why": "combinación de incertidumbres"
+  }
+ ]
+}

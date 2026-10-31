@@ -194,12 +194,12 @@
        "q": {
         "q": "Si la ventana de ajuste incluye flujo dominado por los límites, el producto A·√k estimado:",
         "o": [
-         "Resulta subestimado",
          "Resulta sobreestimado",
+         "Resulta subestimado",
          "No cambia",
          "No se puede calcular"
         ],
-        "a": 0,
+        "a": 1,
         "e": "La pendiente aparente aumenta."
        }
       }
@@ -210,34 +210,34 @@
     {
      "q": "La inversa del caudal contra la raíz del tiempo es una recta si el flujo es:",
      "o": [
-      "Lineal transitorio",
       "Radial",
+      "Lineal transitorio",
       "Dominado por los límites",
       "Esférico"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Es la firma del flujo lineal."
     },
     {
      "q": "Con presión de fondo variable se debe:",
      "o": [
-      "Normalizar el caudal por la caída de presión",
-      "Ignorar la presión",
       "Usar el precio",
+      "Ignorar la presión",
+      "Normalizar el caudal por la caída de presión",
       "Aumentar la ventana"
      ],
-     "a": 0,
+     "a": 2,
      "e": "Así el análisis no confunde cambios de operación con cambios de régimen."
     },
     {
      "q": "Del gráfico de raíz de tiempo se obtiene directamente:",
      "o": [
-      "El producto del área por la raíz de la permeabilidad",
+      "El precio",
       "La permeabilidad sola",
       "La porosidad",
-      "El precio"
+      "El producto del área por la raíz de la permeabilidad"
      ],
-     "a": 0,
+     "a": 3,
      "e": "Para separar A y k hay que conocer uno de los dos."
     }
    ]
@@ -316,12 +316,12 @@
        "q": {
         "q": "El tiempo de balance de materiales se usa para:",
         "o": [
-         "Compensar el efecto de un caudal variable",
+         "Determinar el precio",
          "Medir la porosidad",
          "Contar los pozos",
-         "Determinar el precio"
+         "Compensar el efecto de un caudal variable"
         ],
-        "a": 0,
+        "a": 3,
         "e": "Permite comparar pozos con historiales distintos."
        }
       }
@@ -388,12 +388,12 @@
        "q": {
         "q": "Con b mayor que uno y sin declinación terminal, el pronóstico:",
         "o": [
-         "Sobreestima el volumen a largo plazo",
+         "No se puede calcular",
          "Subestima el volumen",
          "Da exactamente el volumen real",
-         "No se puede calcular"
+         "Sobreestima el volumen a largo plazo"
         ],
-        "a": 0,
+        "a": 3,
         "e": "El volumen acumulado no converge."
        }
       }
@@ -404,34 +404,34 @@
     {
      "q": "La ventana de ajuste incorrecta en raíz de tiempo produce:",
      "o": [
-      "Un valor sesgado de A·√k",
       "Mayor porosidad",
+      "Un valor sesgado de A·√k",
       "Cambio del precio",
       "Un pozo nuevo"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Hay que elegirla dentro del flujo lineal."
     },
     {
      "q": "El tiempo de balance de materiales:",
      "o": [
-      "Compensa un caudal variable",
+      "Mide la permeabilidad",
       "Reemplaza la presión",
       "Calcula el costo",
-      "Mide la permeabilidad"
+      "Compensa un caudal variable"
      ],
-     "a": 0,
+     "a": 3,
      "e": "Hace comparables pozos con operación distinta."
     },
     {
      "q": "Una declinación terminal se usa para:",
      "o": [
-      "Evitar sobreestimar el EUR",
+      "Medir el área",
       "Aumentar la producción",
       "Cambiar el pozo",
-      "Medir el área"
+      "Evitar sobreestimar el EUR"
      ],
-     "a": 0,
+     "a": 3,
      "e": "Impone una declinación mínima a largo plazo."
     }
    ]
@@ -496,12 +496,12 @@
        "q": {
         "q": "En reservas de lutitas, el EUR debe documentarse:",
         "o": [
-         "Con sus condiciones técnicas y comerciales",
          "Sin supuestos",
+         "Con sus condiciones técnicas y comerciales",
          "Solo con el precio",
          "Sin método"
         ],
-        "a": 0,
+        "a": 1,
         "e": "Es una aclaración de PRMS 2018."
        }
       }
@@ -577,23 +577,23 @@
     {
      "q": "El análisis de producción sirve para estimar:",
      "o": [
-      "Volumen drenado e interferencia",
       "El precio",
+      "Volumen drenado e interferencia",
       "La profundidad",
       "El diámetro"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Con el balance de materiales de flujo."
     },
     {
      "q": "Las reservas no desarrolladas bajo PRMS 2018 deben comenzar su desarrollo en:",
      "o": [
-      "Cinco años desde su clasificación inicial",
-      "Un mes",
       "Cincuenta años",
+      "Un mes",
+      "Cinco años desde su clasificación inicial",
       "Sin plazo"
      ],
-     "a": 0,
+     "a": 2,
      "e": "Es una de las precisiones del documento de 2018."
     },
     {
@@ -625,23 +625,23 @@
   {
    "q": "Si la ventana de ajuste incluye flujo dominado por los límites:",
    "o": [
-    "A·√k se subestima",
     "A·√k se sobreestima",
+    "A·√k se subestima",
     "No cambia",
     "Se anula"
    ],
-   "a": 0,
+   "a": 1,
    "e": "La pendiente aparente aumenta."
   },
   {
    "q": "El flujo lineal transitorio en log-log muestra una pendiente de:",
    "o": [
-    "Menos un medio",
     "Cero",
+    "Menos un medio",
     "Uno",
     "Menos dos"
    ],
-   "a": 0,
+   "a": 1,
    "e": "Es su firma característica."
   },
   {
@@ -658,23 +658,23 @@
   {
    "q": "El tiempo de balance de materiales:",
    "o": [
-    "Hace comparables pozos con caudal variable",
+    "Mide la presión",
     "Fija el precio",
     "Reemplaza el análisis",
-    "Mide la presión"
+    "Hace comparables pozos con caudal variable"
    ],
-   "a": 0,
+   "a": 3,
    "e": "Compensa la historia de caudales."
   },
   {
    "q": "Para calibrar el pronóstico de pozos nuevos conviene:",
    "o": [
-    "Compararlos con la curva tipo de su zona y recalibrar",
     "Ignorar los pozos vecinos",
+    "Compararlos con la curva tipo de su zona y recalibrar",
     "Usar un único valor",
     "Eliminar los datos"
    ],
-   "a": 0,
+   "a": 1,
    "e": "Es una práctica de seguimiento."
   }
  ],

@@ -107,11 +107,11 @@
         "q": "Al aumentar la viscosidad del petróleo, la irrupción de agua ocurre:",
         "o": [
          "Más tarde y con mayor recuperación",
-         "Antes y con menor recuperación a la irrupción",
          "Igual",
+         "Antes y con menor recuperación a la irrupción",
          "Solo si se baja la presión"
         ],
-        "a": 1,
+        "a": 2,
         "e": "Aumenta la razón de movilidad M; el frente es menos estable y el agua llega antes a los productores."
        }
       }
@@ -156,11 +156,11 @@
         "q": "¿Qué factor del producto RF = Ed × Ea × Ev depende sobre todo del arreglo de pozos?",
         "o": [
          "Ed",
-         "Ea",
+         "Ninguno",
          "Ev",
-         "Ninguno"
+         "Ea"
         ],
-        "a": 1,
+        "a": 3,
         "e": "El barrido areal depende de la geometría del arreglo, de la razón de movilidad y del volumen inyectado."
        }
       }
@@ -171,34 +171,34 @@
     {
      "q": "Una razón de movilidad M mayor que 1 significa que:",
      "o": [
-      "El agua es menos móvil que el petróleo",
       "El agua es más móvil que el petróleo: desplazamiento desfavorable",
+      "El agua es menos móvil que el petróleo",
       "No hay desplazamiento",
       "El petróleo es inmóvil"
      ],
-     "a": 1,
+     "a": 0,
      "e": "El agua tiende a digitarse y a canalizarse."
     },
     {
      "q": "La saturación residual de petróleo (Sor) limita principalmente:",
      "o": [
-      "La eficiencia de desplazamiento",
       "La presión de burbuja",
+      "La eficiencia de desplazamiento",
       "El barrido areal",
       "El número de pozos"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Es el petróleo que queda atrapado a escala de poro aun en zonas barridas."
     },
     {
      "q": "Un canal de alta permeabilidad entre un inyector y un productor provoca:",
      "o": [
       "Irrupción tardía",
-      "Irrupción temprana y mal barrido",
       "Más recuperación",
+      "Irrupción temprana y mal barrido",
       "Nada"
      ],
-     "a": 1,
+     "a": 2,
      "e": "El agua sigue el camino de menor resistencia y deja petróleo sin barrer."
     }
    ]
@@ -262,11 +262,11 @@
         "q": "Un coeficiente de Dykstra-Parsons cercano a 1 indica:",
         "o": [
          "Reservorio homogéneo",
-         "Reservorio muy heterogéneo",
          "Ausencia de capas",
+         "Reservorio muy heterogéneo",
          "Saturación de agua alta"
         ],
-        "a": 1,
+        "a": 2,
         "e": "Un valor alto representa una gran variación de permeabilidad entre capas, con riesgo de canalización."
        }
       }
@@ -374,11 +374,11 @@
         "q": "¿Por qué se desairea el agua antes de inyectarla?",
         "o": [
          "Para aumentar su salinidad",
-         "Para reducir la corrosión por oxígeno disuelto",
+         "Para quitarle el gas natural",
          "Para elevar su temperatura",
-         "Para quitarle el gas natural"
+         "Para reducir la corrosión por oxígeno disuelto"
         ],
-        "a": 1,
+        "a": 3,
         "e": "El oxígeno acelera la corrosión de las cañerías y genera óxidos que además pueden taponar."
        }
       }
@@ -390,33 +390,33 @@
      "q": "¿Qué es el conformance?",
      "o": [
       "La calidad del agua",
-      "El control de la distribución del agua inyectada entre capas y zonas",
       "El diámetro del casing",
+      "El control de la distribución del agua inyectada entre capas y zonas",
       "La viscosidad del petróleo"
      ],
-     "a": 1,
+     "a": 2,
      "e": "Son las acciones para mejorar el barrido y reducir la canalización."
     },
     {
      "q": "El agua producida suele reinyectarse porque:",
      "o": [
       "Es siempre de mejor calidad",
-      "Reduce el consumo de agua nueva y el manejo de efluentes",
+      "Elimina la necesidad de filtrar",
       "Eleva el Sor",
-      "Elimina la necesidad de filtrar"
+      "Reduce el consumo de agua nueva y el manejo de efluentes"
      ],
-     "a": 1,
+     "a": 3,
      "e": "Reduce costos y pasivo ambiental, aunque debe tratarse."
     },
     {
      "q": "Las bacterias sulfato reductoras pueden provocar:",
      "o": [
       "Más permeabilidad",
-      "Acidificación por sulfuro de hidrógeno y corrosión",
+      "Mayor presión de fractura",
       "Menor viscosidad",
-      "Mayor presión de fractura"
+      "Acidificación por sulfuro de hidrógeno y corrosión"
      ],
-     "a": 1,
+     "a": 3,
      "e": "Generan H₂S, con riesgo para la seguridad, para la corrosión y para la calidad del crudo."
     }
    ]
@@ -464,11 +464,11 @@
         "q": "Si la pendiente del Hall plot de un inyector aumenta con el tiempo, lo más probable es:",
         "o": [
          "Fractura de la formación",
-         "Daño o taponamiento: pérdida de inyectividad",
          "Mejora de la calidad del agua",
+         "Daño o taponamiento: pérdida de inyectividad",
          "Ausencia de daño"
         ],
-        "a": 1,
+        "a": 2,
         "e": "Mayor pendiente significa mayor resistencia al flujo: el pozo se está dañando o taponando."
        }
       }
@@ -510,11 +510,11 @@
         "q": "¿Qué ventaja tuvo el piloto de inyección de 1981 en Ekofisk antes de la plataforma de 1987?",
         "o": [
          "Ninguna",
-         "Permitió medir la respuesta del reservorio antes de escalar la inversión",
+         "Aumentó la permeabilidad de matriz",
          "Evitó medir presiones",
-         "Aumentó la permeabilidad de matriz"
+         "Permitió medir la respuesta del reservorio antes de escalar la inversión"
         ],
-        "a": 1,
+        "a": 3,
         "e": "Un piloto reduce la incertidumbre y el riesgo antes de comprometer capital masivo."
        }
       }
@@ -536,12 +536,12 @@
     {
      "q": "El Hall plot sirve sobre todo para:",
      "o": [
-      "Medir la viscosidad",
       "Diagnosticar la inyectividad de un pozo inyector",
+      "Medir la viscosidad",
       "Calcular el Bo",
       "Estimar el área"
      ],
-     "a": 1,
+     "a": 0,
      "e": "Su pendiente es proporcional a la resistencia al flujo."
     },
     {
@@ -563,66 +563,66 @@
    "q": "El factor de recuperación de una inyección de agua es:",
    "o": [
     "Ed + Ea + Ev",
-    "Ed × Ea × Ev",
+    "Ea / Ev",
     "Solo Ed",
-    "Ea / Ev"
+    "Ed × Ea × Ev"
    ],
-   "a": 1,
+   "a": 3,
    "e": "Es el producto de las tres eficiencias."
   },
   {
    "q": "La razón de movilidad M favorable es:",
    "o": [
     "Mucho mayor que 1",
-    "Menor o cercana a 1",
     "Negativa",
+    "Menor o cercana a 1",
     "Infinita"
    ],
-   "a": 1,
+   "a": 2,
    "e": "Con M ≤ 1 el frente es más estable."
   },
   {
    "q": "El arreglo de referencia de cinco puntos tiene:",
    "o": [
     "Un inyector por cuatro productores",
-    "Un productor rodeado de cuatro inyectores",
     "Dos inyectores",
+    "Un productor rodeado de cuatro inyectores",
     "Solo productores"
    ],
-   "a": 1,
+   "a": 2,
    "e": "Five-spot: un productor con cuatro inyectores en sus vértices."
   },
   {
    "q": "La principal consecuencia de un Dykstra-Parsons muy alto es:",
    "o": [
-    "Mejor barrido vertical",
     "Canalización y barrido vertical pobre",
+    "Mejor barrido vertical",
     "Menos agua producida",
     "Mayor presión"
    ],
-   "a": 1,
+   "a": 0,
    "e": "El agua avanza por las capas más permeables."
   },
   {
    "q": "En el Hall plot, una pendiente que disminuye con el tiempo sugiere:",
    "o": [
-    "Daño de formación",
     "Fractura, canalización o inyección fuera de zona",
+    "Daño de formación",
     "Calidad del agua perfecta",
     "Ausencia de producción"
    ],
-   "a": 1,
+   "a": 0,
    "e": "Menor resistencia al flujo puede indicar fractura o pérdida del agua hacia otras zonas."
   },
   {
    "q": "Un VRR mucho mayor que 1 sostenido puede implicar:",
    "o": [
     "Caída de presión",
-    "Riesgo de fractura y de pérdidas de agua",
     "Menor producción de agua",
+    "Riesgo de fractura y de pérdidas de agua",
     "Menor inyección"
    ],
-   "a": 1,
+   "a": 2,
    "e": "Sobreinyectar eleva la presión por encima de lo conveniente."
   }
  ],

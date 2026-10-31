@@ -107,11 +107,11 @@
         "q": "La electricidad que una instalación compra de la red es parte del:",
         "o": [
          "Alcance 1",
-         "Alcance 2",
          "Alcance 3 exclusivamente",
+         "Alcance 2",
          "No se inventaría"
         ],
-        "a": 1,
+        "a": 2,
         "e": "Son emisiones indirectas por energía comprada: alcance 2."
        }
       }
@@ -183,11 +183,11 @@
         "q": "Pasar de GWP a 100 años a GWP a 20 años para el metano:",
         "o": [
          "Reduce su peso en el inventario",
-         "Aumenta su peso relativo en el inventario",
+         "Elimina el metano",
          "No cambia",
-         "Elimina el metano"
+         "Aumenta su peso relativo en el inventario"
         ],
-        "a": 1,
+        "a": 3,
         "e": "El GWP20 del metano fósil es 82,5 frente a 29,8 del GWP100, así que su contribución en CO₂ equivalente sube con el horizonte corto."
        }
       }
@@ -198,34 +198,34 @@
     {
      "q": "Las emisiones por combustión de gas en una planta propia son:",
      "o": [
-      "Alcance 1",
       "Alcance 2",
+      "Alcance 1",
       "Alcance 3",
       "Ninguno"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Son directas, de fuentes que controla la empresa."
     },
     {
      "q": "El GWP a 100 años del metano fósil (AR6) es de aproximadamente:",
      "o": [
       "1",
-      "29,8",
       "273",
+      "29,8",
       "1000"
      ],
-     "a": 1,
+     "a": 2,
      "e": "AR6 informa 29,8 para el metano de origen fósil a 100 años."
     },
     {
      "q": "OGMP 2.0 se refiere a:",
      "o": [
       "Un tipo de antorcha",
-      "El marco de reporte de metano de ONU Ambiente para petróleo y gas",
       "Un catalizador",
+      "El marco de reporte de metano de ONU Ambiente para petróleo y gas",
       "Una norma de cementación"
      ],
-     "a": 1,
+     "a": 2,
      "e": "Es el marco de reporte y mejora de metano de ONU Ambiente."
     }
    ]
@@ -269,11 +269,11 @@
         "q": "Una medida con costo negativo en la MACC significa que:",
         "o": [
          "Cuesta más de lo que ahorra",
-         "Sus ahorros superan su costo anualizado",
+         "Es ilegal",
          "No reduce emisiones",
-         "Es ilegal"
+         "Sus ahorros superan su costo anualizado"
         ],
-        "a": 1,
+        "a": 3,
         "e": "Genera ahorros netos: por ejemplo, el gas recuperado vale más que el costo de la medida."
        }
       }
@@ -384,12 +384,12 @@
        "q": {
         "q": "La electrificación de un compresor reduce emisiones netas cuando:",
         "o": [
-         "La red es siempre de carbón",
          "La electricidad tiene menor intensidad de emisiones que la combustión del equipo reemplazado",
+         "La red es siempre de carbón",
          "El motor es más pesado",
          "Se instala sin medir"
         ],
-        "a": 1,
+        "a": 0,
         "e": "El beneficio depende de comparar intensidades de emisión: la de la red contra la del equipo actual."
        }
       }
@@ -400,12 +400,12 @@
     {
      "q": "En una MACC, el ancho de cada barra representa:",
      "o": [
-      "El costo por tonelada",
       "El volumen de emisiones evitadas por la medida",
+      "El costo por tonelada",
       "La inversión inicial",
       "El precio del gas"
      ],
-     "a": 1,
+     "a": 0,
      "e": "El eje horizontal acumula el potencial de abatimiento."
     },
     {
@@ -423,11 +423,11 @@
      "q": "Recuperar gas de antorcha puede tener costo negativo porque:",
      "o": [
       "Es gratis",
-      "El gas recuperado se puede vender o usar",
+      "Disminuye el precio del carbono",
       "Se vende CO₂",
-      "Disminuye el precio del carbono"
+      "El gas recuperado se puede vender o usar"
      ],
-     "a": 1,
+     "a": 3,
      "e": "El ahorro o ingreso por el gas puede compensar el costo."
     }
    ]
@@ -473,11 +473,11 @@
         "q": "¿Por qué un acuífero salino profundo es adecuado para almacenar CO₂?",
         "o": [
          "Porque está vacío",
-         "Porque combina capacidad, un sello superior y condiciones en que el CO₂ queda denso",
+         "Porque no tiene sello",
          "Porque tiene gas natural",
-         "Porque no tiene sello"
+         "Porque combina capacidad, un sello superior y condiciones en que el CO₂ queda denso"
         ],
-        "a": 1,
+        "a": 3,
         "e": "Se requiere capacidad de almacenamiento, un sello eficaz y profundidad suficiente para mantener el CO₂ denso."
        }
       }
@@ -535,22 +535,22 @@
      "q": "¿Cuál es el orden correcto de la cadena CCS?",
      "o": [
       "Inyección, captura, transporte, compresión",
-      "Captura, compresión, transporte, inyección",
       "Transporte, captura, inyección, compresión",
+      "Captura, compresión, transporte, inyección",
       "Compresión, inyección, captura, transporte"
      ],
-     "a": 1,
+     "a": 2,
      "e": "Se captura, se comprime, se transporta y se inyecta."
     },
     {
      "q": "¿Qué mecanismo de entrampamiento es el más lento?",
      "o": [
       "Estructural",
-      "Residual",
+      "Mineralización",
       "Disolución",
-      "Mineralización"
+      "Residual"
      ],
-     "a": 3,
+     "a": 1,
      "e": "La mineralización actúa en escalas de cientos a miles de años."
     },
     {
@@ -584,54 +584,54 @@
    "o": [
     "Alcance 1",
     "Alcance 2",
-    "Alcance 3",
-    "Es una emisión evitada"
+    "Es una emisión evitada",
+    "Alcance 3"
    ],
-   "a": 2,
+   "a": 3,
    "e": "Es una categoría del alcance 3."
   },
   {
    "q": "Con GWP a 20 años, el metano en el inventario:",
    "o": [
-    "Pesa menos",
     "Pesa más",
+    "Pesa menos",
     "Pesa igual",
     "Desaparece"
    ],
-   "a": 1,
+   "a": 0,
    "e": "82,5 frente a 29,8 de GWP100 (AR6, metano fósil)."
   },
   {
    "q": "Una medida con costo negativo en una MACC:",
    "o": [
-    "No cuesta nada",
     "Tiene ahorros que superan su costo",
+    "No cuesta nada",
     "No reduce emisiones",
     "Aumenta emisiones"
    ],
-   "a": 1,
+   "a": 0,
    "e": "Genera un beneficio económico neto."
   },
   {
    "q": "La electrificación reduce emisiones netas si:",
    "o": [
-    "Siempre",
     "La intensidad de emisión de la electricidad es menor que la del equipo reemplazado",
+    "Siempre",
     "Nunca",
     "Solo en tierra"
    ],
-   "a": 1,
+   "a": 0,
    "e": "Hay que comparar intensidades."
   },
   {
    "q": "El almacenamiento geológico de CO₂ requiere, entre otros elementos:",
    "o": [
-    "Un sello eficaz y un programa de monitoreo",
+    "Un pozo de agua dulce",
     "Ninguna evaluación geológica",
     "Presiones nulas",
-    "Un pozo de agua dulce"
+    "Un sello eficaz y un programa de monitoreo"
    ],
-   "a": 0,
+   "a": 3,
    "e": "Sello, capacidad, inyectividad y monitoreo son condiciones del almacenamiento seguro."
   }
  ],

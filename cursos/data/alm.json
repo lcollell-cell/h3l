@@ -144,12 +144,12 @@
        "q": {
         "q": "Los acuíferos salinos profundos se destacan por:",
         "o": [
-         "Su gran capacidad de almacenamiento",
+         "Estar siempre cerca de la costa",
          "Producir petróleo",
          "Tener pozos viejos",
-         "Estar siempre cerca de la costa"
+         "Su gran capacidad de almacenamiento"
         ],
-        "a": 0,
+        "a": 3,
         "e": "Son los sitios de mayor capacidad disponible."
        }
       }
@@ -215,12 +215,12 @@
        "q": {
         "q": "El factor de eficiencia de almacenamiento representa:",
         "o": [
-         "La fracción del poro que realmente se puede ocupar",
-         "El precio del CO₂",
          "La porosidad",
+         "El precio del CO₂",
+         "La fracción del poro que realmente se puede ocupar",
          "La profundidad"
         ],
-        "a": 0,
+        "a": 2,
         "e": "Es la variable más incierta del método volumétrico."
        }
       }
@@ -231,34 +231,34 @@
     {
      "q": "El almacenamiento en yacimientos agotados tiene como riesgo principal:",
      "o": [
-      "Pozos viejos que pueden ser vías de fuga",
+      "Ausencia de infraestructura",
       "Falta de sello",
       "Exceso de capacidad",
-      "Ausencia de infraestructura"
+      "Pozos viejos que pueden ser vías de fuga"
      ],
-     "a": 0,
+     "a": 3,
      "e": "Los pozos antiguos deben revisarse y controlarse."
     },
     {
      "q": "Con un factor de eficiencia de 2 %, de cada 100 unidades de volumen poral se puede ocupar:",
      "o": [
-      "2 unidades",
+      "100 unidades",
       "50 unidades",
       "98 unidades",
-      "100 unidades"
+      "2 unidades"
      ],
-     "a": 0,
+     "a": 3,
      "e": "E es la fracción utilizable."
     },
     {
      "q": "Una profundidad de más de unos 800 metros se pide para:",
      "o": [
-      "Que el CO₂ esté denso y ocupe menos volumen",
-      "Evitar el sello",
       "Bajar la presión",
+      "Evitar el sello",
+      "Que el CO₂ esté denso y ocupe menos volumen",
       "Reducir la porosidad"
      ],
-     "a": 0,
+     "a": 2,
      "e": "A esa profundidad la presión y la temperatura lo mantienen denso."
     }
    ]
@@ -333,12 +333,12 @@
        "q": {
         "q": "El mecanismo que atrapa gotas de CO₂ en los poros se llama:",
         "o": [
-         "Entrampamiento residual",
          "Entrampamiento mineral",
+         "Entrampamiento residual",
          "Corrosión",
          "Cementación"
         ],
-        "a": 0,
+        "a": 1,
         "e": "Es un efecto de la capilaridad."
        }
       }
@@ -420,12 +420,12 @@
        "q": {
         "q": "El SRMS busca:",
         "o": [
-         "Estandarizar la evaluación de capacidad y recursos de almacenamiento",
-         "Fijar el precio del CO₂",
          "Reemplazar a PRMS",
+         "Fijar el precio del CO₂",
+         "Estandarizar la evaluación de capacidad y recursos de almacenamiento",
          "Eliminar la regulación"
         ],
-        "a": 0,
+        "a": 2,
         "e": "Su propósito es técnico y de consistencia entre evaluadores."
        }
       }
@@ -436,23 +436,23 @@
     {
      "q": "El entrampamiento mineral actúa principalmente en:",
      "o": [
-      "El muy largo plazo",
+      "La superficie",
       "El primer día",
       "Solo en el pozo",
-      "La superficie"
+      "El muy largo plazo"
      ],
-     "a": 0,
+     "a": 3,
      "e": "Es el más lento de los cuatro mecanismos."
     },
     {
      "q": "El riesgo de fuga es mayor:",
      "o": [
-      "Al principio, cuando el CO₂ está libre",
-      "Siempre igual",
       "Después de mil años",
+      "Siempre igual",
+      "Al principio, cuando el CO₂ está libre",
       "Nunca existe"
      ],
-     "a": 0,
+     "a": 2,
      "e": "Con el tiempo parte del CO₂ se inmoviliza."
     },
     {
@@ -548,12 +548,12 @@
        "q": {
         "q": "La sísmica 4D se usa en MMV para:",
         "o": [
-         "Ver cómo cambia la pluma entre campañas",
-         "Medir el precio",
          "Perforar",
+         "Medir el precio",
+         "Ver cómo cambia la pluma entre campañas",
          "Calcular la porosidad"
         ],
-        "a": 0,
+        "a": 2,
         "e": "Compara estudios sísmicos repetidos en el tiempo."
        }
       }
@@ -609,12 +609,12 @@
        "q": {
         "q": "Un plan de evaluación de un proyecto CCS debe considerar:",
         "o": [
-         "Toda la cadena y su responsabilidad a largo plazo",
+         "Solo el precio del CO₂",
          "Solo el pozo de inyección",
          "Solo la captura",
-         "Solo el precio del CO₂"
+         "Toda la cadena y su responsabilidad a largo plazo"
         ],
-        "a": 0,
+        "a": 3,
         "e": "El almacenamiento es solo un eslabón."
        }
       }
@@ -647,12 +647,12 @@
     {
      "q": "Una cifra de capacidad sin método ni rango:",
      "o": [
-      "No es comparable con otras",
-      "Es la más confiable",
       "No requiere datos",
+      "Es la más confiable",
+      "No es comparable con otras",
       "Es definitiva"
      ],
-     "a": 0,
+     "a": 2,
      "e": "La comparabilidad exige método e incertidumbre."
     }
    ]
@@ -662,12 +662,12 @@
   {
    "q": "En el método volumétrico, el factor E representa:",
    "o": [
-    "La fracción del volumen poral que puede ocuparse",
     "La profundidad",
+    "La fracción del volumen poral que puede ocuparse",
     "El costo",
     "La presión inicial"
    ],
-   "a": 0,
+   "a": 1,
    "e": "Es la variable más incierta."
   },
   {
@@ -695,12 +695,12 @@
   {
    "q": "Un yacimiento agotado como sitio tiene como riesgo:",
    "o": [
-    "Pozos antiguos como vías de fuga",
     "Falta de datos de sello demostrado",
+    "Pozos antiguos como vías de fuga",
     "Ausencia total de pozos",
     "Alta salinidad del agua"
    ],
-   "a": 0,
+   "a": 1,
    "e": "Hay que inventariarlos y controlarlos."
   },
   {
@@ -717,12 +717,12 @@
   {
    "q": "Sleipner almacena CO₂ desde:",
    "o": [
-    "1996",
+    "2005",
     "2024",
     "1850",
-    "2005"
+    "1996"
    ],
-   "a": 0,
+   "a": 3,
    "e": "Con más de 19 millones de toneladas informadas en 2024."
   }
  ],

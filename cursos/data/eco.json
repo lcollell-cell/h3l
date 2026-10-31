@@ -140,12 +140,12 @@
        "q": {
         "q": "Un VPN positivo a la tasa de descuento elegida significa que el proyecto:",
         "o": [
-         "Rinde más que la tasa exigida",
-         "Rinde menos que la tasa",
          "No tiene costos",
+         "Rinde menos que la tasa",
+         "Rinde más que la tasa exigida",
          "Es seguro"
         ],
-        "a": 0,
+        "a": 2,
         "e": "El VPN positivo indica un rendimiento superior al exigido, sujeto a los supuestos."
        }
       }
@@ -202,12 +202,12 @@
        "q": {
         "q": "Un tornado se ordena de arriba hacia abajo por:",
         "o": [
-         "El rango de resultado de cada variable",
-         "El orden alfabético",
          "El caso base",
+         "El orden alfabético",
+         "El rango de resultado de cada variable",
          "El valor de la inversión"
         ],
-        "a": 0,
+        "a": 2,
         "e": "La variable con mayor efecto sobre el VPN queda arriba."
        }
       }
@@ -240,12 +240,12 @@
     {
      "q": "En un análisis de tornado, se cambia:",
      "o": [
-      "Una variable por vez",
+      "Solo el precio",
       "Todas a la vez",
       "Ninguna",
-      "Solo el precio"
+      "Una variable por vez"
      ],
-     "a": 0,
+     "a": 3,
      "e": "Cada barra representa el efecto de una variable."
     }
    ]
@@ -410,12 +410,12 @@
        "q": {
         "q": "La participación del Estado resume:",
         "o": [
-         "La porción del valor del proyecto que recibe el Estado",
+         "La tasa de descuento",
          "El costo del pozo",
          "El precio del crudo",
-         "La tasa de descuento"
+         "La porción del valor del proyecto que recibe el Estado"
         ],
-        "a": 0,
+        "a": 3,
         "e": "Incluye regalías, impuestos y reparto de producción."
        }
       }
@@ -426,23 +426,23 @@
     {
      "q": "El valor monetario esperado se obtiene:",
      "o": [
-      "Ponderando los resultados por su probabilidad",
+      "Dividiendo por la TIR",
       "Sumando los costos",
       "Multiplicando por el precio",
-      "Dividiendo por la TIR"
+      "Ponderando los resultados por su probabilidad"
      ],
-     "a": 0,
+     "a": 3,
      "e": "Es el promedio ponderado de los resultados posibles."
     },
     {
      "q": "Un portafolio de pozos independientes, frente a un solo pozo, tiene:",
      "o": [
-      "Menor probabilidad de pérdida total",
-      "Mayor probabilidad de pérdida",
       "El mismo VME",
+      "Mayor probabilidad de pérdida",
+      "Menor probabilidad de pérdida total",
       "Ningún riesgo"
      ],
-     "a": 0,
+     "a": 2,
      "e": "El efecto de agregación reduce la dispersión del resultado."
     },
     {
@@ -531,12 +531,12 @@
        "q": {
         "q": "Cuando el precio cae y el límite económico sube, parte de las reservas:",
         "o": [
-         "Puede pasar a recursos contingentes",
+         "No cambia",
          "Se duplica",
          "Pasa a prospectivos con certeza",
-         "No cambia"
+         "Puede pasar a recursos contingentes"
         ],
-        "a": 0,
+        "a": 3,
         "e": "El volumen deja de ser económico bajo esas condiciones."
        }
       }
@@ -591,12 +591,12 @@
        "q": {
         "q": "Una lección de los megaproyectos es:",
         "o": [
-         "Definir bien el alcance y probar escenarios adversos antes de comprometer el capital",
-         "Ignorar el riesgo",
          "Fijar el plazo por decreto",
+         "Ignorar el riesgo",
+         "Definir bien el alcance y probar escenarios adversos antes de comprometer el capital",
          "Evitar toda contingencia"
         ],
-        "a": 0,
+        "a": 2,
         "e": "La preparación previa y la contingencia realista reducen los sobrecostos."
        }
       }
@@ -607,12 +607,12 @@
     {
      "q": "Para probar la resistencia de un proyecto conviene:",
      "o": [
-      "Incluir escenarios adversos y extremos",
+      "Ignorar el precio",
       "Usar solo el caso base",
       "Quitar los costos",
-      "Ignorar el precio"
+      "Incluir escenarios adversos y extremos"
      ],
-     "a": 0,
+     "a": 3,
      "e": "Un proyecto robusto se evalúa con escenarios malos además de los esperados."
     },
     {
@@ -629,12 +629,12 @@
     {
      "q": "En Kashagan, la producción:",
      "o": [
-      "Comenzó en 2013 y se detuvo semanas después por corrosión",
       "Comenzó en 1990",
+      "Comenzó en 2013 y se detuvo semanas después por corrosión",
       "Nunca se detuvo",
       "No tuvo costos"
      ],
-     "a": 0,
+     "a": 1,
      "e": "El gas sulfuroso corroyó las cañerías y obligó a parar."
     }
    ]
@@ -655,34 +655,34 @@
   {
    "q": "El tornado muestra:",
    "o": [
-    "El efecto de cada variable sobre el VPN",
     "La probabilidad de éxito",
+    "El efecto de cada variable sobre el VPN",
     "El volumen",
     "El precio histórico"
    ],
-   "a": 0,
+   "a": 1,
    "e": "Ordena las variables por su efecto sobre el resultado."
   },
   {
    "q": "La probabilidad de equilibrio es:",
    "o": [
-    "C / (V + C)",
     "V / C",
+    "C / (V + C)",
     "C · V",
     "V + C"
    ],
-   "a": 0,
+   "a": 1,
    "e": "Es la probabilidad con la cual el VME es cero."
   },
   {
    "q": "Un portafolio de pozos independientes reduce:",
    "o": [
-    "La probabilidad de pérdida total",
     "El VME",
+    "La probabilidad de pérdida total",
     "El capital",
     "El costo de cada pozo"
    ],
-   "a": 0,
+   "a": 1,
    "e": "La diversificación disminuye la dispersión."
   },
   {
@@ -699,12 +699,12 @@
   {
    "q": "La lección principal de los megaproyectos es:",
    "o": [
-    "Preparar bien y considerar escenarios adversos",
-    "Evitar el análisis",
     "Reducir el alcance al azar",
+    "Evitar el análisis",
+    "Preparar bien y considerar escenarios adversos",
     "Ignorar el cronograma"
    ],
-   "a": 0,
+   "a": 2,
    "e": "La preparación previa y la contingencia son claves."
   }
  ],

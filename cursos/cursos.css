@@ -344,3 +344,13 @@ body.fs-lock{overflow:hidden}
 .player.fs .ctl{width:100%;max-width:100vw}
 @media(max-width:700px) and (orientation:portrait){.player.fs .stage{width:100vw}.player.fs{justify-content:flex-start}}
 .player:fullscreen{max-width:none}
+
+/* filtros del catálogo */
+.flt{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:flex-end;margin:-4px 0 18px}
+.flt label{display:flex;flex-direction:column;gap:4px;font:600 12px var(--font);color:var(--mut);min-width:0;flex:1 1 170px;max-width:260px}
+.flt select{font:500 13.5px var(--font);padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--navy);min-width:0;width:100%}
+.flt select.on{border-color:var(--green2);box-shadow:0 0 0 1px var(--green2)}
+.flt select:focus-visible,.flt button:focus-visible{outline:3px solid var(--green2);outline-offset:1px}
+.flt button:disabled{opacity:.45;cursor:default}
+.fcnt{font:600 13px var(--font);color:var(--mut);align-self:center;margin-left:auto}
+@media(max-width:700px){.flt label{flex:1 1 100%;max-width:none}.fcnt{margin-left:0;flex:1 1 100%}}

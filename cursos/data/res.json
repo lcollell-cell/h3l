@@ -107,11 +107,11 @@
         "q": "Una acumulación descubierta cuyo proyecto todavía no es comercial, por ejemplo por falta de mercado, se clasifica como:",
         "o": [
          "Reserva probada",
-         "Recurso contingente",
          "Recurso prospectivo",
+         "Recurso contingente",
          "Irrecuperable"
         ],
-        "a": 1,
+        "a": 2,
         "e": "Descubierta pero no comercial es recurso contingente. Si se resuelve la limitación y el proyecto se justifica, puede pasar a reserva."
        }
       }
@@ -196,32 +196,32 @@
      "o": [
       "Descubierto",
       "Comercial",
-      "Probabilidad de éxito exploratorio",
-      "Remanente"
+      "Remanente",
+      "Probabilidad de éxito exploratorio"
      ],
-     "a": 2,
+     "a": 3,
      "e": "La probabilidad de éxito exploratorio corresponde a los recursos prospectivos, no a las reservas."
     },
     {
      "q": "2P equivale, con métodos probabilísticos, a:",
      "o": [
       "P90",
-      "P50",
+      "P1",
       "P10",
-      "P1"
+      "P50"
      ],
-     "a": 1,
+     "a": 3,
      "e": "La mejor estimación se asocia al P50: 50 % de probabilidad de ser igualada o superada."
     },
     {
      "q": "Un volumen contingente se convierte en reserva cuando:",
      "o": [
-      "Sube la volatilidad",
       "El proyecto pasa a cumplir los criterios de comercialidad y se aprueba su desarrollo",
+      "Sube la volatilidad",
       "Se imprime el informe",
       "Se agrega otro pozo de observación"
      ],
-     "a": 1,
+     "a": 0,
      "e": "Hay que resolver la contingencia y justificar el proyecto de desarrollo."
     }
    ]
@@ -356,22 +356,22 @@
      "q": "En la declinación de Arps, b = 0 corresponde a una declinación:",
      "o": [
       "Armónica",
-      "Exponencial",
+      "Logarítmica",
       "Lineal",
-      "Logarítmica"
+      "Exponencial"
      ],
-     "a": 1,
+     "a": 3,
      "e": "Con b = 0 la tasa de declinación es constante: exponencial."
     },
     {
      "q": "El EUR es:",
      "o": [
       "La producción de un mes",
-      "La producción acumulada hasta el límite económico más la ya producida",
+      "La reserva probada del campo",
       "El caudal inicial",
-      "La reserva probada del campo"
+      "La producción acumulada hasta el límite económico más la ya producida"
      ],
-     "a": 1,
+     "a": 3,
      "e": "EUR significa recuperación final estimada de un pozo o proyecto."
     },
     {
@@ -456,12 +456,12 @@
        "q": {
         "q": "Un volumen probado no desarrollado sin plan para perforarse en cinco años, bajo las reglas de la SEC:",
         "o": [
-         "Se mantiene indefinidamente",
          "Debe recategorizarse, salvo circunstancias específicas justificadas",
+         "Se mantiene indefinidamente",
          "Pasa automáticamente a 3P",
          "Se duplica"
         ],
-        "a": 1,
+        "a": 0,
         "e": "La norma exige desarrollo normalmente dentro de cinco años; de lo contrario se reclasifica."
        }
       }
@@ -503,11 +503,11 @@
         "q": "En este caso, la recategorización principalmente reflejó que:",
         "o": [
          "Desapareció el hidrocarburo del subsuelo",
-         "Los volúmenes no cumplían la madurez de proyecto exigida para reservas probadas",
          "El precio del crudo subió",
+         "Los volúmenes no cumplían la madurez de proyecto exigida para reservas probadas",
          "Se perforaron demasiados pozos"
         ],
-        "a": 1,
+        "a": 2,
         "e": "La compañía indicó que no cambiaban los volúmenes totales in situ ni los recuperables finales, sino el estado de madurez como probadas."
        }
       }
@@ -519,33 +519,33 @@
      "q": "Según la SEC (desde 2010), el precio para estimar reservas es:",
      "o": [
       "El pronóstico del evaluador",
-      "El promedio de 12 meses del primer día de cada mes",
       "El precio máximo del año",
+      "El promedio de 12 meses del primer día de cada mes",
       "El precio spot de hoy"
      ],
-     "a": 1,
+     "a": 2,
      "e": "La regla busca un criterio objetivo y reproducible."
     },
     {
      "q": "El mayor porcentaje del ajuste de reservas de 2004 estuvo en:",
      "o": [
-      "Probadas desarrolladas",
       "Probadas no desarrolladas",
+      "Probadas desarrolladas",
       "Recursos prospectivos",
       "Gas no convencional"
      ],
-     "a": 1,
+     "a": 0,
      "e": "Más del 90 % del cambio fue en probadas no desarrolladas."
     },
     {
      "q": "¿Qué práctica ayuda a que una estimación sea auditable?",
      "o": [
       "Cambiar de método todos los años sin explicar",
-      "Documentar hipótesis y conciliar los cambios anuales",
+      "Usar un único pozo análogo sin justificar",
       "No registrar fuentes",
-      "Usar un único pozo análogo sin justificar"
+      "Documentar hipótesis y conciliar los cambios anuales"
      ],
-     "a": 1,
+     "a": 3,
      "e": "La trazabilidad de hipótesis y la conciliación son la base de la auditabilidad."
     }
    ]
@@ -566,12 +566,12 @@
   {
    "q": "Con métodos probabilísticos, 1P corresponde a:",
    "o": [
-    "P10",
-    "P50",
     "P90",
+    "P50",
+    "P10",
     "P99"
    ],
-   "a": 2,
+   "a": 0,
    "e": "1P: al menos 90 % de probabilidad de ser igualada o superada."
   },
   {
@@ -589,33 +589,33 @@
    "q": "Un valor de b mayor en la declinación de Arps, con el mismo límite económico, tiende a:",
    "o": [
     "Reducir el EUR",
-    "Aumentar el EUR",
     "No afectar el EUR",
+    "Aumentar el EUR",
     "Anular la declinación"
    ],
-   "a": 1,
+   "a": 2,
    "e": "La cola de producción se alarga."
   },
   {
    "q": "Cuando el precio baja y el límite económico supera el caudal inicial del pozo, el volumen:",
    "o": [
     "Sigue siendo reserva",
-    "Deja de ser comercial y pasa a recurso contingente",
+    "Se vuelve prospectivo",
     "Se convierte en probado desarrollado",
-    "Se vuelve prospectivo"
+    "Deja de ser comercial y pasa a recurso contingente"
    ],
-   "a": 1,
+   "a": 3,
    "e": "Pierde el criterio de comercialidad."
   },
   {
    "q": "La principal enseñanza del caso de recategorización de 2004 es que:",
    "o": [
     "Las reservas dependen solo de la geología",
-    "La categoría depende también de la madurez del proyecto y requiere control independiente",
     "La SEC no audita",
+    "La categoría depende también de la madurez del proyecto y requiere control independiente",
     "El gas nunca es reserva"
    ],
-   "a": 1,
+   "a": 2,
    "e": "Madurez de proyecto y gobernanza son tan importantes como el volumen."
   }
  ],

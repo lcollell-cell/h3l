@@ -126,12 +126,12 @@
        "q": {
         "q": "Un petróleo residual alto después del barrido indica un problema de:",
         "o": [
-         "Eficiencia de desplazamiento",
          "Precio del petróleo",
+         "Eficiencia de desplazamiento",
          "Cantidad de pozos",
          "Profundidad"
         ],
-        "a": 0,
+        "a": 1,
         "e": "Es el petróleo que el agua no puede mover aunque barra la roca."
        }
       }
@@ -189,12 +189,12 @@
        "q": {
         "q": "Un polímero en el agua inyectada actúa principalmente sobre:",
         "o": [
-         "El barrido, al bajar la razón de movilidad",
+         "La presión capilar",
          "La saturación residual",
          "La porosidad",
-         "La presión capilar"
+         "El barrido, al bajar la razón de movilidad"
         ],
-        "a": 0,
+        "a": 3,
         "e": "Hace más viscosa el agua y estabiliza el frente."
        }
       }
@@ -205,34 +205,34 @@
     {
      "q": "Si el barrido vertical es el problema, conviene:",
      "o": [
-      "Mejorar la conformancia o la movilidad",
+      "Aumentar la profundidad",
       "Bajar la tensión interfacial solamente",
       "Cerrar el campo",
-      "Aumentar la profundidad"
+      "Mejorar la conformancia o la movilidad"
      ],
-     "a": 0,
+     "a": 3,
      "e": "Las capas muy permeables concentran el agua."
     },
     {
      "q": "La eficiencia de desplazamiento depende de:",
      "o": [
-      "La saturación residual de petróleo",
+      "La edad del campo",
       "El número de pozos",
       "El precio",
-      "La edad del campo"
+      "La saturación residual de petróleo"
      ],
-     "a": 0,
+     "a": 3,
      "e": "Es la parte del petróleo que se mueve en la roca barrida."
     },
     {
      "q": "Un tensioactivo actúa sobre:",
      "o": [
-      "La tensión interfacial",
       "La permeabilidad absoluta",
+      "La tensión interfacial",
       "La profundidad",
       "El espesor"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Libera el petróleo atrapado por capilaridad."
     }
    ]
@@ -417,12 +417,12 @@
        "q": {
         "q": "El calor ayuda a recuperar petróleo pesado porque:",
         "o": [
-         "Baja la viscosidad del petróleo",
          "Aumenta la porosidad",
+         "Baja la viscosidad del petróleo",
          "Elimina el agua",
          "Sube la densidad"
         ],
-        "a": 0,
+        "a": 1,
         "e": "Un petróleo menos viscoso se mueve mucho mejor."
        }
       }
@@ -433,34 +433,34 @@
     {
      "q": "El CO₂ miscible reduce el petróleo residual porque:",
      "o": [
-      "Elimina la tensión interfacial en la zona barrida",
+      "Baja la presión",
       "Aumenta la viscosidad del petróleo",
       "Cierra los poros",
-      "Baja la presión"
+      "Elimina la tensión interfacial en la zona barrida"
      ],
-     "a": 0,
+     "a": 3,
      "e": "Al mezclarse, ya no hay interfaz que atrape petróleo."
     },
     {
      "q": "El WAG es:",
      "o": [
-      "Inyección alternada de agua y gas",
+      "Una pérdida de lodo",
       "Una prueba de pozo",
       "Un tipo de polímero",
-      "Una pérdida de lodo"
+      "Inyección alternada de agua y gas"
      ],
-     "a": 0,
+     "a": 3,
      "e": "Es un control de movilidad para el gas."
     },
     {
      "q": "El SAGD se usa para:",
      "o": [
-      "Bitúmenes y petróleos extrapesados",
-      "Gas seco",
       "Pozos de agua",
+      "Gas seco",
+      "Bitúmenes y petróleos extrapesados",
       "Reservorios de baja presión"
      ],
-     "a": 0,
+     "a": 2,
      "e": "Dos pozos horizontales con drenaje gravitacional."
     }
    ]
@@ -615,12 +615,12 @@
        "q": {
         "q": "Antes de escalar un proyecto EOR conviene:",
         "o": [
-         "Medir el piloto contra un caso base",
+         "Esperar que suba el precio",
          "Instalar todo de una vez",
          "Evitar la simulación",
-         "Esperar que suba el precio"
+         "Medir el piloto contra un caso base"
         ],
-        "a": 0,
+        "a": 3,
         "e": "El piloto debe poder atribuir la respuesta al método."
        }
       }
@@ -631,34 +631,34 @@
     {
      "q": "El primer paso en la selección de un método es:",
      "o": [
-      "Comparar el campo con criterios técnicos de referencia",
-      "Comprar el equipo",
       "Perforar pozos nuevos",
+      "Comprar el equipo",
+      "Comparar el campo con criterios técnicos de referencia",
       "Fijar el precio de venta"
      ],
-     "a": 0,
+     "a": 2,
      "e": "Es la criba inicial."
     },
     {
      "q": "Un piloto bien diseñado debe tener:",
      "o": [
-      "Criterios de éxito definidos y caso base",
+      "Un resultado conocido de antemano",
       "Ninguna medición",
       "Solo un pozo sin control",
-      "Un resultado conocido de antemano"
+      "Criterios de éxito definidos y caso base"
      ],
-     "a": 0,
+     "a": 3,
      "e": "Así se atribuye la respuesta al método."
     },
     {
      "q": "En Manantiales Behr, el primer piloto terciario con polímeros fue en:",
      "o": [
-      "La zona de Grimbeek, en 2019",
-      "La zona de Neuquén, en 1995",
       "Mendoza, en 2010",
+      "La zona de Neuquén, en 1995",
+      "La zona de Grimbeek, en 2019",
       "El Mar del Norte"
      ],
-     "a": 0,
+     "a": 2,
      "e": "Según la prensa, luego se instalaron cinco plantas de polímeros."
     }
    ]
@@ -668,12 +668,12 @@
   {
    "q": "Un polímero en el agua inyectada mejora principalmente:",
    "o": [
-    "El barrido, por menor razón de movilidad",
-    "La saturación residual",
     "La temperatura",
+    "La saturación residual",
+    "El barrido, por menor razón de movilidad",
     "La porosidad"
    ],
-   "a": 0,
+   "a": 2,
    "e": "Hace más viscosa el agua y estabiliza el frente."
   },
   {
@@ -690,45 +690,45 @@
   {
    "q": "La inyección alternada de agua y gas ayuda a:",
    "o": [
-    "Controlar la movilidad del gas",
-    "Sellar el reservorio",
     "Bajar la salinidad",
+    "Sellar el reservorio",
+    "Controlar la movilidad del gas",
     "Evitar la inyección"
    ],
-   "a": 0,
+   "a": 2,
    "e": "Compensa la baja viscosidad del gas."
   },
   {
    "q": "La eficiencia de desplazamiento depende de:",
    "o": [
-    "La saturación residual de petróleo",
+    "La profundidad del mar",
     "La cantidad de plantas",
     "El precio del gas",
-    "La profundidad del mar"
+    "La saturación residual de petróleo"
    ],
-   "a": 0,
+   "a": 3,
    "e": "Es el petróleo movible dentro de la roca barrida."
   },
   {
    "q": "Para petróleos extrapesados el método más habitual es:",
    "o": [
-    "Térmico",
-    "Inyección de nitrógeno solamente",
     "Solo agua fría",
+    "Inyección de nitrógeno solamente",
+    "Térmico",
     "Ninguno"
    ],
-   "a": 0,
+   "a": 2,
    "e": "El calor baja la viscosidad."
   },
   {
    "q": "Los criterios de selección de Taber, Martin y Seright sirven como:",
    "o": [
-    "Una criba inicial de referencia",
     "Un diseño final",
+    "Una criba inicial de referencia",
     "Un precio",
     "Una regulación"
    ],
-   "a": 0,
+   "a": 1,
    "e": "Luego se valida con laboratorio, simulación y piloto."
   }
  ],

@@ -138,12 +138,12 @@
        "q": {
         "q": "La fractura hidráulica se propaga en dirección perpendicular a:",
         "o": [
-         "El esfuerzo mínimo",
+         "La estratificación",
          "El esfuerzo máximo",
          "La gravedad",
-         "La estratificación"
+         "El esfuerzo mínimo"
         ],
-        "a": 0,
+        "a": 3,
         "e": "Se abre contra la dirección de menor resistencia: perpendicular al esfuerzo mínimo."
        }
       }
@@ -245,12 +245,12 @@
        "q": {
         "q": "Un fluido de baja viscosidad con alto caudal, para fracturas largas y complejas, es:",
         "o": [
-         "Slickwater",
+         "Salmuera pesada",
          "Gel entrecruzado",
          "Aire",
-         "Salmuera pesada"
+         "Slickwater"
         ],
-        "a": 0,
+        "a": 3,
         "e": "El slickwater es agua con reductor de fricción, de baja viscosidad."
        }
       }
@@ -261,12 +261,12 @@
     {
      "q": "La presión neta de la fractura es:",
      "o": [
-      "La presión del fluido menos el esfuerzo mínimo",
       "La presión de poro",
+      "La presión del fluido menos el esfuerzo mínimo",
       "El esfuerzo máximo",
       "El peso del lodo"
      ],
-     "a": 0,
+     "a": 1,
      "e": "La fractura crece si esa diferencia es positiva."
     },
     {
@@ -283,12 +283,12 @@
     {
      "q": "El apuntalante se usa para:",
      "o": [
-      "Mantener abierta la fractura",
       "Aumentar el esfuerzo",
+      "Mantener abierta la fractura",
       "Reducir la presión de poro",
       "Bajar la viscosidad"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Sostiene la fractura abierta luego de que baja la presión."
     }
    ]
@@ -424,12 +424,12 @@
        "q": {
         "q": "El tapón entre etapas sirve para:",
         "o": [
-         "Aislar la etapa ya fracturada de la siguiente",
+         "Cementar el pozo",
          "Aumentar la presión de poro",
          "Medir el caudal",
-         "Cementar el pozo"
+         "Aislar la etapa ya fracturada de la siguiente"
         ],
-        "a": 0,
+        "a": 3,
         "e": "Permite fracturar cada etapa por separado."
        }
       }
@@ -526,12 +526,12 @@
        "q": {
         "q": "En el gráfico de Nolte y Smith, una pendiente positiva y unitaria sugiere:",
         "o": [
-         "Restricción en la punta, riesgo de arenamiento",
          "Crecimiento estable",
+         "Restricción en la punta, riesgo de arenamiento",
          "Crecimiento de altura sin control",
          "Fractura cerrada"
         ],
-        "a": 0,
+        "a": 1,
         "e": "Es el modo III, de extensión restringida."
        }
       }
@@ -542,34 +542,34 @@
     {
      "q": "El plug and perf consiste en:",
      "o": [
-      "Cañonear, fracturar y aislar con tapón cada etapa",
+      "Cerrar el pozo",
       "Perforar sin cañoneo",
       "Cementar con gel",
-      "Cerrar el pozo"
+      "Cañonear, fracturar y aislar con tapón cada etapa"
      ],
-     "a": 0,
+     "a": 3,
      "e": "Es el método de completación por etapas más usado."
     },
     {
      "q": "Los golpes de fractura entre pozos vecinos se llaman efecto:",
      "o": [
-      "Padre-hijo",
+      "Venturi",
       "Skin",
       "Coning",
-      "Venturi"
+      "Padre-hijo"
      ],
-     "a": 0,
+     "a": 3,
      "e": "Un pozo nuevo se comunica con uno viejo."
     },
     {
      "q": "La fibra óptica permite:",
      "o": [
-      "Ver cómo se reparte el fluido entre clústeres",
-      "Medir la porosidad",
       "Calcular el peso del lodo",
+      "Medir la porosidad",
+      "Ver cómo se reparte el fluido entre clústeres",
       "Medir el pH del agua"
      ],
-     "a": 0,
+     "a": 2,
      "e": "Registra distribución de deformación y temperatura a lo largo del pozo."
     }
    ]
@@ -639,12 +639,12 @@
        "q": {
         "q": "Con un exponente b mayor que uno, sin una declinación terminal, el volumen a largo plazo:",
         "o": [
-         "Se sobreestima",
-         "Se subestima",
          "No cambia",
+         "Se subestima",
+         "Se sobreestima",
          "Es cero"
         ],
-        "a": 0,
+        "a": 2,
         "e": "La hiperbólica con b > 1 decrece muy lentamente en la cola y acumula volumen irreal."
        }
       }
@@ -726,12 +726,12 @@
        "q": {
         "q": "Para comparar la productividad de dos pozos conviene mirar:",
         "o": [
-         "EUR por pie lateral con el mismo diseño y calidad de roca",
-         "Solo el caudal del primer día",
          "Solo el costo total",
+         "Solo el caudal del primer día",
+         "EUR por pie lateral con el mismo diseño y calidad de roca",
          "El número de etapas"
         ],
-        "a": 0,
+        "a": 2,
         "e": "Normalizar por longitud y comparar bajo las mismas condiciones evita conclusiones engañosas."
        }
       }
@@ -742,12 +742,12 @@
     {
      "q": "La hiperbólica modificada agrega a la de Arps:",
      "o": [
-      "Una declinación terminal mínima",
-      "Más agua",
       "Un choke",
+      "Más agua",
+      "Una declinación terminal mínima",
       "Una corrección de temperatura"
      ],
-     "a": 0,
+     "a": 2,
      "e": "Desde cierto punto se pasa a una exponencial con declinación mínima."
     },
     {
@@ -779,12 +779,12 @@
   {
    "q": "La fractura se abre cuando:",
    "o": [
-    "La presión del fluido supera el esfuerzo mínimo",
     "La presión cae a cero",
+    "La presión del fluido supera el esfuerzo mínimo",
     "La arena es fina",
     "El pozo está cerrado"
    ],
-   "a": 0,
+   "a": 1,
    "e": "La presión neta debe ser positiva."
   },
   {
@@ -801,12 +801,12 @@
   {
    "q": "El slickwater se caracteriza por:",
    "o": [
-    "Baja viscosidad y alto caudal",
     "Alta viscosidad",
+    "Baja viscosidad y alto caudal",
     "No contiene agua",
     "Solo transporta arena fina"
    ],
-   "a": 0,
+   "a": 1,
    "e": "Es agua con reductor de fricción."
   },
   {
@@ -823,23 +823,23 @@
   {
    "q": "La hiperbólica con b > 1 sin declinación mínima:",
    "o": [
-    "Sobreestima el volumen",
-    "Subestima el volumen",
     "Es exacta",
+    "Subestima el volumen",
+    "Sobreestima el volumen",
     "Da volumen cero"
    ],
-   "a": 0,
+   "a": 2,
    "e": "La cola decrece muy lentamente."
   },
   {
    "q": "El efecto padre-hijo es:",
    "o": [
-    "Interferencia entre un pozo nuevo y uno vecino",
     "Un tipo de apuntalante",
+    "Interferencia entre un pozo nuevo y uno vecino",
     "Un fluido",
     "Una válvula"
    ],
-   "a": 0,
+   "a": 1,
    "e": "Los pozos se comunican por las fracturas."
   }
  ],

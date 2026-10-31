@@ -212,12 +212,12 @@
        "q": {
         "q": "El P90 de un volumen es:",
         "o": [
-         "El valor con al menos 90 % de probabilidad de ser igualado o superado",
          "El valor con 90 % de probabilidad de no ser superado",
+         "El valor con al menos 90 % de probabilidad de ser igualado o superado",
          "El promedio",
          "El valor máximo posible"
         ],
-        "a": 0,
+        "a": 1,
         "e": "Es el estimado bajo, asociado a 1P."
        }
       }
@@ -228,34 +228,34 @@
     {
      "q": "Las reservas se distinguen de los recursos contingentes porque:",
      "o": [
-      "El proyecto es comercial",
       "Tienen más petróleo",
+      "El proyecto es comercial",
       "Están más lejos",
       "Se miden en otras unidades"
      ],
-     "a": 0,
+     "a": 1,
      "e": "La clase depende de la comercialidad del proyecto."
     },
     {
      "q": "En una distribución de volúmenes recuperables, el P10 es:",
      "o": [
-      "Mayor que el P90",
       "Menor que el P90",
+      "Mayor que el P90",
       "Igual al P90",
       "No existe"
      ],
-     "a": 0,
+     "a": 1,
      "e": "El P90 es el estimado bajo y el P10 el alto."
     },
     {
      "q": "Las reservas no desarrolladas deben iniciar su desarrollo en:",
      "o": [
-      "Cinco años desde su clasificación inicial",
-      "Un año",
       "Veinte años",
+      "Un año",
+      "Cinco años desde su clasificación inicial",
       "No hay plazo"
      ],
-     "a": 0,
+     "a": 2,
      "e": "Es una precisión de PRMS 2018."
     }
    ]
@@ -316,12 +316,12 @@
        "q": {
         "q": "Con muchos pozos independientes, la suma aritmética de los P90 individuales:",
         "o": [
-         "Subestima el P90 del portafolio",
          "Sobreestima el P90 del portafolio",
+         "Subestima el P90 del portafolio",
          "Es exactamente igual",
          "No se puede calcular"
         ],
-        "a": 0,
+        "a": 1,
         "e": "La diversificación estrecha el rango del total."
        }
       }
@@ -386,12 +386,12 @@
        "q": {
         "q": "Una caída de precio puede provocar que:",
         "o": [
-         "Algunos volúmenes salgan de la categoría de reservas",
          "Aumente la porosidad",
+         "Algunos volúmenes salgan de la categoría de reservas",
          "Se multipliquen las reservas",
          "Se cierre el mercado"
         ],
-        "a": 0,
+        "a": 1,
         "e": "Pasan a ser recursos contingentes si ya no son rentables."
        }
       }
@@ -402,12 +402,12 @@
     {
      "q": "La agregación probabilista de pozos independientes:",
      "o": [
-      "Estrecha el rango relativo del portafolio",
+      "Elimina la incertidumbre",
       "Ensancha el rango",
       "No cambia nada",
-      "Elimina la incertidumbre"
+      "Estrecha el rango relativo del portafolio"
      ],
-     "a": 0,
+     "a": 3,
      "e": "Es la diversificación."
     },
     {
@@ -424,12 +424,12 @@
     {
      "q": "Los costos de abandono en PRMS 2018:",
      "o": [
-      "Se incluyen en la economía",
-      "No se consideran",
       "Solo se informan",
+      "No se consideran",
+      "Se incluyen en la economía",
       "Los paga el Estado siempre"
      ],
-     "a": 0,
+     "a": 2,
      "e": "Es una precisión de 2018."
     }
    ]
@@ -549,12 +549,12 @@
        "q": {
         "q": "El comunicado de la SEC sobre este caso de 2004 habló de:",
         "o": [
-         "Una sobreestimación de reservas probadas",
-         "Un descubrimiento récord",
          "Un cambio de precio",
+         "Un descubrimiento récord",
+         "Una sobreestimación de reservas probadas",
          "Una fusión"
         ],
-        "a": 0,
+        "a": 2,
         "e": "Fue de 4.470 millones de barriles, según la SEC."
        }
       }
@@ -565,12 +565,12 @@
     {
      "q": "La conciliación de reservas incluye:",
      "o": [
-      "Producción, revisiones, extensiones, compras y ventas",
-      "Solo la producción",
       "Solo el precio",
+      "Solo la producción",
+      "Producción, revisiones, extensiones, compras y ventas",
       "Solo el pozo más grande"
      ],
-     "a": 0,
+     "a": 2,
      "e": "Se parte del inicio y se llega al cierre."
     },
     {
@@ -587,12 +587,12 @@
     {
      "q": "Una revisión sistemática negativa debe:",
      "o": [
-      "Analizarse y reconocerse",
+      "Ignorarse",
       "Ocultarse",
       "Compensarse con compras",
-      "Ignorarse"
+      "Analizarse y reconocerse"
      ],
-     "a": 0,
+     "a": 3,
      "e": "Es una señal de sesgo en las estimaciones."
     }
    ]
@@ -602,23 +602,23 @@
   {
    "q": "En PRMS 2018, la diferencia entre reservas y recursos contingentes es:",
    "o": [
-    "La comercialidad del proyecto",
     "El color del petróleo",
+    "La comercialidad del proyecto",
     "La cantidad de pozos",
     "El país"
    ],
-   "a": 0,
+   "a": 1,
    "e": "Las reservas son de proyectos comerciales."
   },
   {
    "q": "Con N pozos independientes, la suma de los P90 individuales frente al P90 del total:",
    "o": [
-    "Es menor que el P90 del total",
+    "No tiene relación",
     "Es mayor",
     "Es igual siempre",
-    "No tiene relación"
+    "Es menor que el P90 del total"
    ],
-   "a": 0,
+   "a": 3,
    "e": "Se diversifica el riesgo."
   },
   {
@@ -646,27 +646,33 @@
   {
    "q": "Una caída sostenida de precios puede:",
    "o": [
-    "Reducir las reservas por límite económico",
+    "Eliminar la necesidad de auditoría",
     "Aumentarlas siempre",
     "No afectarlas",
-    "Eliminar la necesidad de auditoría"
+    "Reducir las reservas por límite económico"
    ],
-   "a": 0,
+   "a": 3,
    "e": "Algunos volúmenes dejan de ser comerciales."
   },
   {
    "q": "Qué control reduce el riesgo de sobreestimar reservas:",
    "o": [
-    "Separar quien estima de quien aprueba",
-    "Eliminar la documentación",
     "Fijar metas sin revisión",
+    "Eliminar la documentación",
+    "Separar quien estima de quien aprueba",
     "Usar solo un método"
    ],
-   "a": 0,
+   "a": 2,
    "e": "Es una buena práctica de control independiente."
   }
  ],
- "outro": {"can":["las precisiones de PRMS 2018 en la práctica", "los rangos P90, P50 y P10 y la agregación de portafolios", "el efecto del precio y del límite económico sobre las reservas", "la conciliación anual, la tasa de reposición y el soporte para una auditoría"],
+ "outro": {
+  "can": [
+   "las precisiones de PRMS 2018 en la práctica",
+   "los rangos P90, P50 y P10 y la agregación de portafolios",
+   "el efecto del precio y del límite económico sobre las reservas",
+   "la conciliación anual, la tasa de reposición y el soporte para una auditoría"
+  ],
   "phrase": "Una reserva defendible es la que se puede explicar, auditar y reconciliar.",
   "recap": [
    "PRMS 2018 clasifica por proyecto y ordena la incertidumbre en categorías.",

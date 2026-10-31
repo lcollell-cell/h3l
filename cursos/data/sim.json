@@ -159,12 +159,12 @@
        "q": {
         "q": "La regla práctica para elegir el tipo de simulador es:",
         "o": [
-         "Usar el más simple que capture el mecanismo",
          "Usar siempre el composicional",
+         "Usar el más simple que capture el mecanismo",
          "Usar el que tiene más celdas",
          "Usar el más barato"
         ],
-        "a": 0,
+        "a": 1,
         "e": "Un modelo más complejo no es mejor si no aporta al mecanismo de interés y exige más datos que no existen."
        }
       }
@@ -257,12 +257,12 @@
        "q": {
         "q": "La dispersión numérica es:",
         "o": [
-         "Un error del método que suaviza los frentes",
+         "Una propiedad del fluido",
          "Un fenómeno físico del reservorio",
          "Un parámetro de la roca",
-         "Una propiedad del fluido"
+         "Un error del método que suaviza los frentes"
         ],
-        "a": 0,
+        "a": 3,
         "e": "Se debe a la discretización y no a la física del reservorio."
        }
       }
@@ -273,34 +273,34 @@
     {
      "q": "La ley de Darcy en un simulador se usa para:",
      "o": [
-      "El flujo entre celdas",
+      "La temperatura",
       "La porosidad",
       "La compresibilidad",
-      "La temperatura"
+      "El flujo entre celdas"
      ],
-     "a": 0,
+     "a": 3,
      "e": "Relaciona el caudal con el gradiente de presión."
     },
     {
      "q": "Para estudiar vapor se elige un modelo:",
      "o": [
-      "Térmico",
+      "Estático",
       "De petróleo negro",
       "De agua",
-      "Estático"
+      "Térmico"
      ],
-     "a": 0,
+     "a": 3,
      "e": "El calor y la temperatura son parte de las ecuaciones."
     },
     {
      "q": "Con mallas más gruesas, el frente de agua simulado suele:",
      "o": [
-      "Llegar antes y verse más suave",
-      "Llegar después",
       "Quedar igual",
+      "Llegar después",
+      "Llegar antes y verse más suave",
       "Desaparecer"
      ],
-     "a": 0,
+     "a": 2,
      "e": "Es el efecto de la dispersión numérica."
     }
    ]
@@ -375,12 +375,12 @@
        "q": {
         "q": "Antes de simular el pronóstico, la inicialización debe verificar que:",
         "o": [
-         "El petróleo in situ coincida con el modelo estático",
-         "Todos los pozos produzcan igual",
          "La malla sea cuadrada",
+         "Todos los pozos produzcan igual",
+         "El petróleo in situ coincida con el modelo estático",
          "El precio sea alto"
         ],
-        "a": 0,
+        "a": 2,
         "e": "Es una de las primeras comprobaciones de consistencia del modelo."
        }
       }
@@ -437,12 +437,12 @@
        "q": {
         "q": "Dos modelos que ajustan igual la historia:",
         "o": [
-         "Pueden dar pronósticos distintos",
          "Siempre dan el mismo pronóstico",
+         "Pueden dar pronósticos distintos",
          "Son idénticos",
          "No existen"
         ],
-        "a": 0,
+        "a": 1,
         "e": "La historia no restringe todo lo que importa para el futuro."
        }
       }
@@ -453,12 +453,12 @@
     {
      "q": "Un modelo se inicializa en equilibrio para que:",
      "o": [
-      "No haya flujo en el tiempo cero",
+      "El agua no exista",
       "Todos los pozos produzcan",
       "La presión sea cero",
-      "El agua no exista"
+      "No haya flujo en el tiempo cero"
      ],
-     "a": 0,
+     "a": 3,
      "e": "Es una condición básica de consistencia."
     },
     {
@@ -475,12 +475,12 @@
     {
      "q": "El ajuste histórico es un problema:",
      "o": [
-      "Inverso con más de una solución",
-      "Con una solución única",
       "Sin datos",
+      "Con una solución única",
+      "Inverso con más de una solución",
       "Resuelto por la malla"
      ],
-     "a": 0,
+     "a": 2,
      "e": "Distintas combinaciones de parámetros pueden reproducir lo mismo."
     }
    ]
@@ -565,12 +565,12 @@
        "q": {
         "q": "Un conjunto de modelos ajustados sirve para:",
         "o": [
-         "Cuantificar la incertidumbre del pronóstico",
+         "Reemplazar los datos",
          "Eliminar toda incertidumbre",
          "Evitar el simulador",
-         "Reemplazar los datos"
+         "Cuantificar la incertidumbre del pronóstico"
         ],
-        "a": 0,
+        "a": 3,
         "e": "Se corre cada modelo y se informa un rango."
        }
       }
@@ -630,12 +630,12 @@
        "q": {
         "q": "Una buena práctica de validación es:",
         "o": [
-         "Retener datos de la historia y predecirlos",
-         "Ajustar todo y no revisar nada",
          "Cambiar la geología sin documentar",
+         "Ajustar todo y no revisar nada",
+         "Retener datos de la historia y predecirlos",
          "Usar un solo modelo"
         ],
-        "a": 0,
+        "a": 2,
         "e": "Si el modelo no predice datos que no usó, el ajuste puede ser solo un artificio."
        }
       }
@@ -646,23 +646,23 @@
     {
      "q": "Los métodos de conjunto devuelven:",
      "o": [
-      "Un conjunto de modelos ajustados",
+      "Ninguna incertidumbre",
       "Un único modelo exacto",
       "Solo el error",
-      "Ninguna incertidumbre"
+      "Un conjunto de modelos ajustados"
      ],
-     "a": 0,
+     "a": 3,
      "e": "De ahí se obtiene un pronóstico probabilista."
     },
     {
      "q": "La validación con datos retenidos consiste en:",
      "o": [
-      "Predecir historia que no se usó en el ajuste",
+      "Cambiar la malla",
       "Ajustar con todos los datos",
       "Eliminar pozos",
-      "Cambiar la malla"
+      "Predecir historia que no se usó en el ajuste"
      ],
-     "a": 0,
+     "a": 3,
      "e": "Prueba la capacidad predictiva real del modelo."
     },
     {
@@ -683,23 +683,23 @@
   {
    "q": "La dispersión numérica en un simulador:",
    "o": [
-    "Adelanta la irrupción de agua por suavizar el frente",
     "Retrasa la irrupción",
+    "Adelanta la irrupción de agua por suavizar el frente",
     "No afecta a los frentes",
     "Es una propiedad de la roca"
    ],
-   "a": 0,
+   "a": 1,
    "e": "Es un error de discretización que se reduce refinando."
   },
   {
    "q": "Con solo la presión como dato de ajuste, un reservorio con acuífero suele tener:",
    "o": [
-    "Muchas combinaciones de parámetros que ajustan",
     "Una sola solución",
+    "Muchas combinaciones de parámetros que ajustan",
     "Ninguna solución",
     "Solo soluciones con acuífero nulo"
    ],
-   "a": 0,
+   "a": 1,
    "e": "Hay compensación entre el petróleo original y la fuerza del acuífero."
   },
   {
@@ -716,12 +716,12 @@
   {
    "q": "Un método de conjunto como ES-MDA se usa para:",
    "o": [
-    "Ajustar muchos modelos a la vez y obtener incertidumbre",
     "Reemplazar los pozos",
+    "Ajustar muchos modelos a la vez y obtener incertidumbre",
     "Calcular el precio",
     "Medir la porosidad"
    ],
-   "a": 0,
+   "a": 1,
    "e": "Parte de muchas realizaciones y las actualiza con los datos."
   },
   {
@@ -738,12 +738,12 @@
   {
    "q": "La inicialización correcta de un modelo verifica que:",
    "o": [
-    "El petróleo in situ coincida con el modelo estático",
+    "No haya agua",
     "Todos los pozos produzcan lo mismo",
     "La permeabilidad sea uniforme",
-    "No haya agua"
+    "El petróleo in situ coincida con el modelo estático"
    ],
-   "a": 0,
+   "a": 3,
    "e": "Es una comprobación de consistencia elemental."
   }
  ],

@@ -127,11 +127,11 @@
         "q": "Si el lodo pesa menos que la presión de poro más el margen en un intervalo, el riesgo principal es:",
         "o": [
          "Pérdida de circulación",
-         "Influjo de fluidos de formación (kick)",
+         "Mayor ROP sin riesgo",
          "Pega por presión diferencial únicamente",
-         "Mayor ROP sin riesgo"
+         "Influjo de fluidos de formación (kick)"
         ],
-        "a": 1,
+        "a": 3,
         "e": "Con presión del pozo menor que la de formación, los fluidos entran al pozo: es un influjo, que puede escalar a un reventón."
        }
       }
@@ -188,34 +188,34 @@
     {
      "q": "¿Qué representa el ECD?",
      "o": [
-      "Un tipo de cemento",
       "La densidad equivalente de circulación, que incluye las pérdidas de fricción",
+      "Un tipo de cemento",
       "El costo diario",
       "La presión de burbuja"
      ],
-     "a": 1,
+     "a": 0,
      "e": "En circulación, la presión en el fondo es mayor que en estático."
     },
     {
      "q": "Se asienta una cañería principalmente para:",
      "o": [
-      "Aumentar la ROP",
       "Aislar un tramo y poder cambiar la densidad de lodo dentro de una nueva ventana",
+      "Aumentar la ROP",
       "Decorar el pozo",
       "Reducir el número de trépanos"
      ],
-     "a": 1,
+     "a": 0,
      "e": "Cuando la ventana se cierra, una cañería cementada permite continuar con otro peso."
     },
     {
      "q": "¿Cuántas barreras independientes y verificadas se espera tener?",
      "o": [
-      "Una",
       "Al menos dos",
+      "Una",
       "Ninguna si hay BOP",
       "Cinco"
      ],
-     "a": 1,
+     "a": 0,
      "e": "El principio de doble barrera es base de las normas de integridad."
     }
    ]
@@ -367,33 +367,33 @@
      "q": "El tiempo perdido invisible es:",
      "o": [
       "Una falla de equipo declarada",
-      "Trabajar más lento que el mejor valor demostrado sin que haya falla",
       "El tiempo de cementación",
+      "Trabajar más lento que el mejor valor demostrado sin que haya falla",
       "El clima"
      ],
-     "a": 1,
+     "a": 2,
      "e": "No aparece como evento, pero consume días."
     },
     {
      "q": "¿Qué KPI relaciona el tiempo no productivo con el total?",
      "o": [
-      "NPT %",
+      "Gradiente de fractura",
       "ROP",
       "Costo por metro",
-      "Gradiente de fractura"
+      "NPT %"
      ],
-     "a": 0,
+     "a": 3,
      "e": "Se calcula dividiendo el tiempo no productivo por el tiempo total."
     },
     {
      "q": "El límite técnico se construye:",
      "o": [
-      "Con el peor desempeño",
       "Con el mejor desempeño demostrado por operación, sin NPT",
+      "Con el peor desempeño",
       "Con el promedio",
       "Al azar"
      ],
-     "a": 1,
+     "a": 0,
      "e": "Es una referencia de lo posible con las tecnologías y prácticas disponibles."
     }
    ]
@@ -516,11 +516,11 @@
         "q": "Ante un indicador claro de influjo, la primera acción es:",
         "o": [
          "Seguir perforando para terminar la sección",
-         "Cerrar el pozo con el preventor",
          "Cambiar el trépano",
+         "Cerrar el pozo con el preventor",
          "Avisar al final del turno"
         ],
-        "a": 1,
+        "a": 2,
         "e": "Cerrar el pozo lo antes posible limita el volumen del influjo y las presiones resultantes."
        }
       }
@@ -561,12 +561,12 @@
        "q": {
         "q": "Según la CSB, una de las fallas técnicas centrales en Macondo fue:",
         "o": [
-         "Un trépano defectuoso",
          "Una prueba de presión negativa mal interpretada, que llevó a creer que el pozo estaba sellado",
+         "Un trépano defectuoso",
          "Exceso de cemento",
          "Falta de lodo en pileta"
         ],
-        "a": 1,
+        "a": 0,
         "e": "La CSB señala que se concluyó erróneamente que la zona estaba sellada, y que luego el retiro de lodo permitió el paso de hidrocarburos."
        }
       }
@@ -577,34 +577,34 @@
     {
      "q": "Un indicador primario de influjo es:",
      "o": [
-      "Cambio de color del lodo",
       "Aumento del caudal de retorno con bombas constantes",
+      "Cambio de color del lodo",
       "Ruido del top drive",
       "Una baja de temperatura"
      ],
-     "a": 1,
+     "a": 0,
      "e": "Es una señal directa de que el pozo está entregando más fluido del que se bombea."
     },
     {
      "q": "En Macondo, ¿cuántas personas murieron?",
      "o": [
-      "3",
       "11",
+      "3",
       "27",
       "115"
      ],
-     "a": 1,
+     "a": 0,
      "e": "Murieron 11 personas; 115 fueron evacuadas."
     },
     {
      "q": "El principio de barreras indica que se debe:",
      "o": [
       "Confiar en una sola barrera robusta",
-      "Contar con al menos dos barreras independientes y verificadas",
+      "Retirar el BOP antes de cementar",
       "Evitar probar las barreras",
-      "Retirar el BOP antes de cementar"
+      "Contar con al menos dos barreras independientes y verificadas"
      ],
-     "a": 1,
+     "a": 3,
      "e": "Una sola barrera sin verificación es un punto único de falla."
     }
    ]
@@ -614,45 +614,45 @@
   {
    "q": "La ventana operativa de lodo está limitada por:",
    "o": [
-    "Presión de poro y gradiente de fractura",
     "ROP y torque",
+    "Presión de poro y gradiente de fractura",
     "Costo y clima",
     "Cemento y trépano"
    ],
-   "a": 0,
+   "a": 1,
    "e": "Por debajo de la presión de poro hay influjo; por encima de la fractura, pérdidas."
   },
   {
    "q": "El ECD siempre es:",
    "o": [
     "Menor que el peso del lodo",
-    "Mayor o igual que el peso estático del lodo",
     "Cero",
+    "Mayor o igual que el peso estático del lodo",
     "Independiente del caudal"
    ],
-   "a": 1,
+   "a": 2,
    "e": "En circulación se suman pérdidas de fricción en el anular."
   },
   {
    "q": "El tiempo perdido invisible se diferencia del NPT en que:",
    "o": [
     "No existe",
-    "No es una falla declarada: se trabaja más lento que lo posible",
     "Es siempre clima",
+    "No es una falla declarada: se trabaja más lento que lo posible",
     "Es siempre equipo"
    ],
-   "a": 1,
+   "a": 2,
    "e": "Es una ineficiencia no registrada como evento."
   },
   {
    "q": "Un diagrama de Pareto del NPT se usa para:",
    "o": [
-    "Priorizar causas",
     "Calcular la presión de poro",
+    "Priorizar causas",
     "Dimensionar el cemento",
     "Elegir el color del lodo"
    ],
-   "a": 0,
+   "a": 1,
    "e": "Muestra qué pocas causas concentran la mayor parte del tiempo perdido."
   },
   {

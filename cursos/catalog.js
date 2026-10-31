@@ -6,22 +6,28 @@ function card(m){var c=courses[m.id],cs=HC.cs(m.id),p=c?HC.progress(c):{pct:0,ce
   var nl=c?c.modules.reduce(function(a,x){return a+x.lessons.length},0):'…',mins=c?Math.round(c.totalSec/60):'…';
   var nq=c?(c.modules.length+1):'…',nx=c?(c.downloads||[]).length:'…';
   return '<article class="card"><div class="cv" style="--cc:'+esc(m.color)+'">'+HC.ico[m.icon]+'<div class="tag">'+esc(m.tag)+'</div><h3>'+esc(m.title)+'</h3></div>'+
-  '<div class="cb"><p>'+esc(m.short)+'</p><div class="meta"><span>'+nl+' '+HC.t('lessons')+'</span><span>≈ '+mins+' '+HC.t('min')+' + Excel</span><span>'+nq+' '+HC.t('exams')+'</span><span>'+HC.t('level')+': '+esc(m.level)+'</span></div>'+
+  '<div class="cb"><p>'+esc(m.short)+'</p><div class="meta"><span>'+nl+' '+HC.t('lessons')+'</span><span>≈ '+mins+' '+HC.t('min')+' + Excel</span><span>'+nq+' '+HC.t('exams')+'</span><span>'+HC.t('level')+': '+esc(lvTxt(m))+'</span></div>'+
   '<div class="bar" role="progressbar" aria-valuenow="'+p.pct+'" aria-valuemin="0" aria-valuemax="100"><i style="width:'+p.pct+'%"></i></div>'+
   '<div class="acts"><a class="btn g s" href="curso.html?c='+esc(m.id)+'">'+st+'</a>'+(p.pct>0?'<span class="badge">'+p.pct+' % '+HC.t('done')+'</span>':'')+(p.cert?'<span class="badge">'+HC.t('certok')+'</span>':'')+'</div></div></article>'}
-var VKEY='h3l-cursos-vista',TKEY='h3l-cursos-arbol',view='cards',q='',open_={};
-try{var v0=localStorage.getItem(VKEY);if(v0==='cards'||v0==='list'||v0==='tree')view=v0;open_=JSON.parse(localStorage.getItem(TKEY)||'{}')||{}}catch(e){}
-function sv(){try{localStorage.setItem(VKEY,view);localStorage.setItem(TKEY,JSON.stringify(open_))}catch(e){}}
+var VKEY='h3l-cursos-vista',TKEY='h3l-cursos-arbol',FKEY='h3l-cursos-filtros',view='cards',q='',open_={},F={sec:'',lv:'',tp:''};
+try{var v0=localStorage.getItem(VKEY);if(v0==='cards'||v0==='list'||v0==='tree')view=v0;open_=JSON.parse(localStorage.getItem(TKEY)||'{}')||{};var f0=JSON.parse(localStorage.getItem(FKEY)||'{}')||{};['sec','lv','tp'].forEach(function(k){if(typeof f0[k]==='string')F[k]=f0[k]})}catch(e){}
+function sv(){try{localStorage.setItem(VKEY,view);localStorage.setItem(TKEY,JSON.stringify(open_));localStorage.setItem(FKEY,JSON.stringify(F))}catch(e){}}
+function lvTxt(m){return m.levels&&m.levels.length?m.levels.map(function(l){return HC.t('lv_'+l)}).join('–'):m.level}
+function secOf(id){for(var i=0;i<data.sections.length;i++)if(data.sections[i].courses.indexOf(id)>=0)return data.sections[i].id;return''}
+/* filtro por faceta; ov = faceta y valor que se prueban en lugar del estado actual (para los contadores) */
+function passF(m,ov){var f={sec:F.sec,lv:F.lv,tp:F.tp};if(ov)f[ov[0]]=ov[1];
+  if(f.sec&&secOf(m.id)!==f.sec)return false;if(f.lv&&(m.levels||[]).indexOf(f.lv)<0)return false;if(f.tp&&(m.topics||[]).indexOf(f.tp)<0)return false;return true}
+function filtersOn(){return !!(F.sec||F.lv||F.tp)}
 function norm(x){return String(x||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'')}
 function nLes(c){return c?c.modules.reduce(function(a,x){return a+x.lessons.length},0):0}
-function courseHit(m,c,qq){if(!qq)return true;var hay=[m.title,m.short,m.tag,m.level].join(' ');if(c){hay+=' '+c.title+' '+(c.subtitle||'');c.modules.forEach(function(md){hay+=' '+md.title;md.lessons.forEach(function(l){hay+=' '+l.title})});(c.downloads||[]).forEach(function(d){hay+=' '+d.title})}return norm(hay).indexOf(qq)>=0}
+function courseHit(m,c,qq){if(!qq)return true;var hay=[m.title,m.short,m.tag,lvTxt(m)].concat((m.topics||[]).map(function(t){return HC.t('tp_'+t)})).join(' ');if(c){hay+=' '+c.title+' '+(c.subtitle||'');c.modules.forEach(function(md){hay+=' '+md.title;md.lessons.forEach(function(l){hay+=' '+l.title})});(c.downloads||[]).forEach(function(d){hay+=' '+d.title})}return norm(hay).indexOf(qq)>=0}
 function secList(){var by={};data.courses.forEach(function(m){by[m.id]=m});var qq=norm(q.trim());
-  return data.sections.map(function(s){return{s:s,list:s.courses.map(function(id){return by[id]}).filter(function(m){return m&&courseHit(m,courses[m.id],qq)})}}).filter(function(x){return x.list.length})}
+  return data.sections.map(function(s){return{s:s,list:s.courses.map(function(id){return by[id]}).filter(function(m){return m&&passF(m)&&courseHit(m,courses[m.id],qq)})}}).filter(function(x){return x.list.length})}
 function vCards(sl){return sl.map(function(x){return '<div style="margin-bottom:30px"><h2 style="font-size:17px;margin-top:14px">'+esc(x.s.title)+' <small>'+x.list.length+'</small></h2><p style="margin-bottom:12px;font-size:13.5px">'+esc(x.s.desc)+'</p><div class="grid">'+x.list.map(card).join('')+'</div></div>'}).join('')}
 function vList(sl){var h='<div class="ltw"><table class="lt"><thead><tr><th>'+HC.t('th_c')+'</th><th class="c1">'+HC.t('th_lv')+'</th><th class="c2">'+HC.t('th_ls')+'</th><th class="c2">'+HC.t('th_du')+'</th><th>'+HC.t('th_pr')+'</th><th>'+HC.t('th_ac')+'</th></tr></thead><tbody>';
   sl.forEach(function(x){h+='<tr class="gs"><td colspan="6"><b>'+esc(x.s.title)+'</b> <small>'+x.list.length+'</small><span> · '+esc(x.s.desc)+'</span></td></tr>';
     x.list.forEach(function(m){var c=courses[m.id],p=c?HC.progress(c):{pct:0,cert:false},st=p.cert?HC.t('review'):(p.pct>0?HC.t('resume'):HC.t('start'));
-      h+='<tr><td><i class="dot" style="background:'+esc(m.color)+'"></i><a href="curso.html?c='+esc(m.id)+'"><b>'+esc(m.title)+'</b></a><div class="sub">'+esc(m.tag)+' · '+esc(m.short)+'</div></td><td class="c1">'+esc(m.level)+'</td><td class="c2">'+(c?nLes(c):'…')+'</td><td class="c2">'+(c?'≈ '+Math.round(c.totalSec/60)+' '+HC.t('min'):'…')+'</td>'+
+      h+='<tr><td><i class="dot" style="background:'+esc(m.color)+'"></i><a href="curso.html?c='+esc(m.id)+'"><b>'+esc(m.title)+'</b></a><div class="sub">'+esc(m.tag)+' · '+esc(m.short)+'</div></td><td class="c1">'+esc(lvTxt(m))+'</td><td class="c2">'+(c?nLes(c):'…')+'</td><td class="c2">'+(c?'≈ '+Math.round(c.totalSec/60)+' '+HC.t('min'):'…')+'</td>'+
       '<td><div class="bar" role="progressbar" aria-valuenow="'+p.pct+'" aria-valuemin="0" aria-valuemax="100"><i style="width:'+p.pct+'%"></i></div><small>'+p.pct+' %'+(p.cert?' · '+HC.t('certok'):'')+'</small></td><td><a class="btn g s" href="curso.html?c='+esc(m.id)+'">'+st+'</a></td></tr>'})});
   return h+'</tbody></table></div>'}
 function tnode(id,cls,label,kids,extra,deflt){var op=open_[id];if(op===undefined)op=!!deflt;if(q.trim()&&kids)op=true;
@@ -37,6 +43,18 @@ function vTree(sl){var qq=norm(q.trim()),h='<ul class="tree" role="tree" aria-la
     kc+=tnode('c:'+m.id,'cr','<i class="dot" style="background:'+esc(m.color)+'"></i><a href="curso.html?c='+esc(m.id)+'"><b>'+esc(m.title)+'</b></a>',km||'<li class="ld">…</li>','<small>'+(c?nLes(c)+' '+HC.t('lessons')+' · ':'')+p.pct+' %</small>',false)});
     h+=tnode('s:'+x.s.id,'sc','<b>'+esc(x.s.title)+'</b>',kc,'<small>'+x.list.length+'</small>',true)});
   return h+'</ul><p class="trh">'+esc(HC.t('tr_hint'))+'</p>'}
+
+function fOpts(sel,facet,all,items){var qq=norm(q.trim()),cur=F[facet],h='<option value="">'+esc(all)+'</option>';
+  items.forEach(function(it){var n=data.courses.filter(function(m){return passF(m,[facet,it.id])&&courseHit(m,courses[m.id],qq)}).length;
+    h+='<option value="'+esc(it.id)+'"'+(n===0&&cur!==it.id?' disabled':'')+'>'+esc(it.l)+' ('+n+')</option>'});
+  sel.innerHTML=h;sel.value=cur}
+function buildFilters(){if(!data)return;
+  fOpts($('#fSec'),'sec',HC.t('fl_all_sec'),data.sections.map(function(x){return{id:x.id,l:HC.t('sc_'+x.id)}}));
+  fOpts($('#fLv'),'lv',HC.t('fl_all_lv'),['b','i','a'].map(function(x){return{id:x,l:HC.t('lv_'+x)}}));
+  fOpts($('#fTp'),'tp',HC.t('fl_all_tp'),(data.topics||[]).map(function(x){return{id:x,l:HC.t('tp_'+x)}}));
+  ['fSec','fLv','fTp'].forEach(function(id){var e=$('#'+id);e.classList.toggle('on',!!e.value)});
+  $('#fClr').disabled=!(filtersOn()||q.trim());
+  var nn=0;secList().forEach(function(x){nn+=x.list.length});$('#fCnt').textContent=HC.t('fl_count',{n:nn,t:data.courses.length})}
 function treeKeys(){var T=$('.tree');if(!T)return;
   function rows(){return Array.prototype.filter.call(T.querySelectorAll('.row'),function(r){var li=r.parentElement.parentElement.closest('li[aria-expanded="false"]');return !li})}
   function foc(r){if(!r)return;Array.prototype.forEach.call(T.querySelectorAll('.row'),function(x){x.tabIndex=-1});r.tabIndex=0;r.focus()}
@@ -51,8 +69,8 @@ function treeKeys(){var T=$('.tree');if(!T)return;
     else if(k==='Enter'||k===' '){var a=row.querySelector('a');if(a&&!li.hasAttribute('aria-expanded')){a.click()}else if(li.hasAttribute('aria-expanded'))toggle(li);e.preventDefault()}})}
 function render(){if(!data)return;var sl=secList(),h;
   if(view==='list')h=vList(sl);else if(view==='tree')h=vTree(sl);else h=vCards(sl);
-  if(!sl.length)h='<p class="nores">'+esc(HC.t('nores'))+'</p>';
-  $('#secs').innerHTML=h;$('#secs').setAttribute('data-v',view);
+  if(!sl.length)h='<p class="nores">'+esc(HC.t(filtersOn()?'nores2':'nores'))+'</p>';
+  buildFilters();$('#secs').innerHTML=h;$('#secs').setAttribute('data-v',view);
   Array.prototype.forEach.call(document.querySelectorAll('#vsw button'),function(b){b.setAttribute('aria-pressed',b.getAttribute('data-v')===view?'true':'false')});
   $('#trbtns').hidden=view!=='tree';if(view==='tree')treeKeys();
   var nl=0,nx=0,nc=data.courses.length;Object.keys(courses).forEach(function(k){var c=courses[k];nl+=c.modules.reduce(function(a,x){return a+x.lessons.length},0);nx+=(c.downloads||[]).length});
@@ -61,6 +79,8 @@ function render(){if(!data)return;var sl=secList(),h;
   $('#langnote').textContent=HC.t('lang_note')}
 function bind(){Array.prototype.forEach.call(document.querySelectorAll('#vsw button'),function(b){b.addEventListener('click',function(){view=b.getAttribute('data-v');sv();render()})});
   var qi=$('#qs'),tm;qi.addEventListener('input',function(){clearTimeout(tm);tm=setTimeout(function(){q=qi.value;render()},120)});
+  [['fSec','sec'],['fLv','lv'],['fTp','tp']].forEach(function(p){$('#'+p[0]).addEventListener('change',function(){F[p[1]]=this.value;sv();render()})});
+  $('#fClr').addEventListener('click',function(){F={sec:'',lv:'',tp:''};q='';$('#qs').value='';sv();render()});
   $('#exAll').addEventListener('click',function(){var T=document.querySelectorAll('.tree li[aria-expanded]');Array.prototype.forEach.call(T,function(li){open_[li.getAttribute('data-id')]=true});sv();render()});
   $('#coAll').addEventListener('click',function(){var T=document.querySelectorAll('.tree li[aria-expanded]');Array.prototype.forEach.call(T,function(li){open_[li.getAttribute('data-id')]=false});q='';$('#qs').value='';sv();render()})}
 bind();HC.langSelect($('#lang'));HC.apply();HC.onlang=function(){HC.apply();render()};

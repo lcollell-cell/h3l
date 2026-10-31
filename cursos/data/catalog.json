@@ -10,7 +10,9 @@
     "res",
     "pta",
     "sim",
-    "rpx"
+    "rpx",
+    "pvt",
+    "gas"
    ]
   },
   {
@@ -23,7 +25,8 @@
     "nod",
     "frac",
     "eor",
-    "rta"
+    "rta",
+    "fac"
    ]
   },
   {
@@ -41,7 +44,17 @@
    "desc": "Evaluación económica, decisión bajo incertidumbre y ciencia de datos aplicada.",
    "courses": [
     "eco",
-    "dat"
+    "dat",
+    "com"
+   ]
+  },
+  {
+   "id": "midstream",
+   "title": "Midstream y seguridad de procesos",
+   "desc": "Transporte, medición fiscal, integridad y gestión del riesgo de procesos.",
+   "courses": [
+    "mid",
+    "hse"
    ]
   }
  ],
@@ -54,7 +67,13 @@
    "level": "Intermedio",
    "color": "#3A6BD0",
    "icon": "geo",
-   "tag": "Geociencias"
+   "tag": "Geociencias",
+   "levels": [
+    "i"
+   ],
+   "topics": [
+    "geo"
+   ]
   },
   {
    "id": "res",
@@ -64,7 +83,15 @@
    "level": "Intermedio–Avanzado",
    "color": "#17755A",
    "icon": "res",
-   "tag": "Reservas"
+   "tag": "Reservas",
+   "levels": [
+    "i",
+    "a"
+   ],
+   "topics": [
+    "reservas",
+    "res"
+   ]
   },
   {
    "id": "wf",
@@ -74,7 +101,14 @@
    "level": "Avanzado",
    "color": "#1d7fa8",
    "icon": "wf",
-   "tag": "Reservorios"
+   "tag": "Reservorios",
+   "levels": [
+    "a"
+   ],
+   "topics": [
+    "res",
+    "eor"
+   ]
   },
   {
    "id": "per",
@@ -84,7 +118,13 @@
    "level": "Intermedio",
    "color": "#c2680a",
    "icon": "per",
-   "tag": "Perforación"
+   "tag": "Perforación",
+   "levels": [
+    "i"
+   ],
+   "topics": [
+    "perf"
+   ]
   },
   {
    "id": "gei",
@@ -94,7 +134,13 @@
    "level": "Intermedio",
    "color": "#5fa83a",
    "icon": "gei",
-   "tag": "Transición energética"
+   "tag": "Transición energética",
+   "levels": [
+    "i"
+   ],
+   "topics": [
+    "emis"
+   ]
   },
   {
    "id": "pta",
@@ -104,7 +150,14 @@
    "level": "Avanzado",
    "color": "#6b5bd6",
    "icon": "pta",
-   "tag": "Reservorios"
+   "tag": "Reservorios",
+   "levels": [
+    "a"
+   ],
+   "topics": [
+    "pruebas",
+    "res"
+   ]
   },
   {
    "id": "nod",
@@ -114,7 +167,13 @@
    "level": "Intermedio",
    "color": "#0f8b8d",
    "icon": "nod",
-   "tag": "Producción"
+   "tag": "Producción",
+   "levels": [
+    "i"
+   ],
+   "topics": [
+    "prod"
+   ]
   },
   {
    "id": "frac",
@@ -124,7 +183,15 @@
    "level": "Intermedio–Avanzado",
    "color": "#b3414a",
    "icon": "frac",
-   "tag": "No convencionales"
+   "tag": "No convencionales",
+   "levels": [
+    "i",
+    "a"
+   ],
+   "topics": [
+    "noconv",
+    "prod"
+   ]
   },
   {
    "id": "eco",
@@ -134,7 +201,13 @@
    "level": "Intermedio",
    "color": "#a8801f",
    "icon": "eco",
-   "tag": "Economía"
+   "tag": "Economía",
+   "levels": [
+    "i"
+   ],
+   "topics": [
+    "eco"
+   ]
   },
   {
    "id": "dat",
@@ -144,7 +217,13 @@
    "level": "Intermedio",
    "color": "#2b6cb0",
    "icon": "dat",
-   "tag": "Datos e IA"
+   "tag": "Datos e IA",
+   "levels": [
+    "i"
+   ],
+   "topics": [
+    "datos"
+   ]
   },
   {
    "id": "sim",
@@ -154,7 +233,14 @@
    "level": "Avanzado",
    "color": "#3b82c4",
    "icon": "sim",
-   "tag": "Reservorios"
+   "tag": "Reservorios",
+   "levels": [
+    "a"
+   ],
+   "topics": [
+    "sim",
+    "res"
+   ]
   },
   {
    "id": "eor",
@@ -164,7 +250,14 @@
    "level": "Avanzado",
    "color": "#c26a2e",
    "icon": "eor",
-   "tag": "Reservorios"
+   "tag": "Reservorios",
+   "levels": [
+    "a"
+   ],
+   "topics": [
+    "eor",
+    "res"
+   ]
   },
   {
    "id": "rta",
@@ -174,7 +267,14 @@
    "level": "Avanzado",
    "color": "#2e9c8f",
    "icon": "rta",
-   "tag": "Producción"
+   "tag": "Producción",
+   "levels": [
+    "a"
+   ],
+   "topics": [
+    "noconv",
+    "prod"
+   ]
   },
   {
    "id": "alm",
@@ -184,7 +284,13 @@
    "level": "Intermedio",
    "color": "#6aa84f",
    "icon": "alm",
-   "tag": "Transición energética"
+   "tag": "Transición energética",
+   "levels": [
+    "i"
+   ],
+   "topics": [
+    "emis"
+   ]
   },
   {
    "id": "rpx",
@@ -194,7 +300,138 @@
    "level": "Avanzado",
    "color": "#8a5fb4",
    "icon": "rpx",
-   "tag": "Reservas"
+   "tag": "Reservas",
+   "levels": [
+    "a"
+   ],
+   "topics": [
+    "reservas"
+   ]
+  },
+  {
+   "id": "pvt",
+   "n": 16,
+   "title": "Propiedades de los fluidos de reservorio (PVT)",
+   "short": "Tipos de fluido, factor Z, Rs, Bo y presión de burbuja, ensayos de laboratorio y ecuaciones de estado.",
+   "level": "Básico–Intermedio",
+   "color": "#1b8fbf",
+   "icon": "pvt",
+   "tag": "Reservorios",
+   "levels": [
+    "b",
+    "i"
+   ],
+   "topics": [
+    "fluid",
+    "res"
+   ]
+  },
+  {
+   "id": "gas",
+   "n": 17,
+   "title": "Ingeniería de yacimientos de gas",
+   "short": "Gas en sitio, balance p/z, curva de entrega, carga de líquidos y presión de abandono, con Groningen.",
+   "level": "Intermedio–Avanzado",
+   "color": "#d6932b",
+   "icon": "gas",
+   "tag": "Reservorios",
+   "levels": [
+    "i",
+    "a"
+   ],
+   "topics": [
+    "gas",
+    "res"
+   ]
+  },
+  {
+   "id": "fac",
+   "n": 18,
+   "title": "Facilities de superficie y aseguramiento de flujo",
+   "short": "Separación, tratamiento, compresión, alivio, hidratos, ceras y flujo multifásico.",
+   "level": "Básico–Intermedio",
+   "color": "#5b7083",
+   "icon": "fac",
+   "tag": "Producción",
+   "levels": [
+    "b",
+    "i"
+   ],
+   "topics": [
+    "fac",
+    "prod"
+   ]
+  },
+  {
+   "id": "mid",
+   "n": 19,
+   "title": "Midstream: transporte y medición fiscal",
+   "short": "Hidráulica de ductos, medición fiscal e incertidumbre, integridad y ciberseguridad.",
+   "level": "Intermedio",
+   "color": "#8c5a2b",
+   "icon": "mid",
+   "tag": "Midstream",
+   "levels": [
+    "i"
+   ],
+   "topics": [
+    "mid"
+   ]
+  },
+  {
+   "id": "hse",
+   "n": 20,
+   "title": "Seguridad de procesos y gestión del riesgo",
+   "short": "HAZOP, LOPA, niveles SIL, gestión de cambios y permisos de trabajo, con Piper Alpha.",
+   "level": "Básico–Intermedio",
+   "color": "#c0392b",
+   "icon": "hse",
+   "tag": "Seguridad",
+   "levels": [
+    "b",
+    "i"
+   ],
+   "topics": [
+    "seg"
+   ]
+  },
+  {
+   "id": "com",
+   "n": 21,
+   "title": "Comercialización de hidrocarburos y cobertura de precios",
+   "short": "Netback, diferenciales, put, collar y swap, riesgo de contraparte y el WTI negativo de 2020.",
+   "level": "Básico–Intermedio",
+   "color": "#b8527a",
+   "icon": "com",
+   "tag": "Comercialización",
+   "levels": [
+    "b",
+    "i"
+   ],
+   "topics": [
+    "com",
+    "eco"
+   ]
   }
+ ],
+ "topics": [
+  "geo",
+  "fluid",
+  "res",
+  "reservas",
+  "pruebas",
+  "sim",
+  "eor",
+  "gas",
+  "perf",
+  "prod",
+  "noconv",
+  "fac",
+  "mid",
+  "seg",
+  "emis",
+  "eco",
+  "com",
+  "datos"
  ]
 }

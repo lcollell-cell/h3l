@@ -1,0 +1,769 @@
+{
+ "id": "pvt",
+ "title": "Propiedades de los fluidos de reservorio (PVT)",
+ "subtitle": "Tipos de fluido, factor Z, Rs, Bo y presión de burbuja, ensayos de laboratorio y ecuaciones de estado.",
+ "desc": "Curso base para todo el que calcula reservas, simula o diseña facilities: cómo se clasifican los fluidos de un reservorio, cómo se comportan el gas y el petróleo con la presión, qué mide un ensayo PVT, cómo se usan las correlaciones y las ecuaciones de estado, y cómo se llega del barril de reservorio al barril de tanque.",
+ "objectives": [
+  "Clasificar un fluido de reservorio y anticipar su comportamiento al despresurizarse.",
+  "Calcular el factor Z y el factor volumétrico del gas con correlaciones.",
+  "Interpretar Rs, Bo y la presión de burbuja de un petróleo y usarlos para pasar de barriles de reservorio a barriles de tanque.",
+  "Leer un informe PVT, evaluar su calidad y decidir cuándo una correlación alcanza y cuándo hace falta laboratorio."
+ ],
+ "labs": [
+  "propiedades del petróleo negro: Rs y Bo contra la presión",
+  "factor Z y factor volumétrico del gas"
+ ],
+ "practiceMin": 75,
+ "competencies": [
+  {
+   "name": "Clasificación de fluidos",
+   "lessons": [
+    "p1"
+   ]
+  },
+  {
+   "name": "Propiedades del gas",
+   "lessons": [
+    "p2"
+   ]
+  },
+  {
+   "name": "Petróleo negro",
+   "lessons": [
+    "p3"
+   ]
+  },
+  {
+   "name": "Viscosidad y correlaciones",
+   "lessons": [
+    "p4"
+   ]
+  },
+  {
+   "name": "Ensayos de laboratorio",
+   "lessons": [
+    "p5"
+   ]
+  },
+  {
+   "name": "Ecuaciones de estado y uso",
+   "lessons": [
+    "p6"
+   ]
+  }
+ ],
+ "intro": {
+  "hook": "Todo cálculo de reservorio empieza por saber qué fluido hay y cómo cambia con la presión. Un error en el PVT se hereda en las reservas, en la simulación y en el diseño de las instalaciones.",
+  "questions": [
+   "¿Cómo se sabe si un reservorio produce petróleo negro, volátil, condensado o gas seco?",
+   "¿Qué significan Rs, Bo y Bg, y cómo se usan para medir reservas?",
+   "¿Cuándo alcanza una correlación y cuándo hay que pedir un ensayo de laboratorio?"
+  ],
+  "star": {
+   "caso": "Ejemplo didáctico: la muestra tomada por debajo de la presión de burbuja",
+   "S": "Un pozo exploratorio produce petróleo con la presión de fondo fluyente por debajo de la presión de burbuja del reservorio, y la muestra de separador se recombina con una relación gas-petróleo del día de la prueba.",
+   "T": "Obtener un informe PVT que represente al fluido original del reservorio.",
+   "A": "El laboratorio mide una presión de burbuja menor que la del reservorio, porque la muestra tiene menos gas del que debía. Al revisar las condiciones de muestreo se repite la toma con el pozo estabilizado y presión de fondo mayor.",
+   "R": "La nueva muestra da una presión de burbuja consistente con el reservorio. Es un ejemplo didáctico ilustrativo, no un caso real."
+  }
+ },
+ "modules": [
+  {
+   "id": "pm1",
+   "title": "Módulo 1 · Fluidos y gas",
+   "lessons": [
+    {
+     "id": "p1",
+     "title": "Tipos de fluido de reservorio",
+     "comp": "Clasificación de fluidos",
+     "cues": [
+      {
+       "say": "Un fluido de reservorio es una mezcla de hidrocarburos y su comportamiento depende de dos cosas: la composición y la temperatura del yacimiento. Con esas dos variables se ubica el punto del reservorio en un diagrama de fases de presión y temperatura, y se anticipa qué pasará al despresurizarlo.",
+       "scene": {
+        "t": "bul",
+        "k": "Diagrama de fases",
+        "h": "Qué mirar",
+        "items": [
+         "Curva de burbuja: aparece la primera burbuja de gas",
+         "Curva de rocío: aparece la primera gota de líquido",
+         "Punto crítico: se encuentran las dos curvas",
+         "Cricondenterma: temperatura máxima donde coexisten dos fases",
+         "La temperatura del reservorio define el camino de la despresurización"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Se distinguen cinco tipos de fluido. Petróleo negro, petróleo volátil, gas condensado retrógrado, gas húmedo y gas seco. Los límites numéricos son reglas prácticas de la industria y cada laboratorio o empresa fija los suyos, así que se toman como orientación y no como frontera exacta.",
+       "scene": {
+        "t": "tbl",
+        "k": "Cinco tipos",
+        "h": "Comportamiento y señales",
+        "cols": [
+         "Tipo",
+         "Qué pasa al bajar la presión",
+         "Señal en superficie"
+        ],
+        "rows": [
+         [
+          "Petróleo negro",
+          "Libera gas por debajo de la presión de burbuja",
+          "Poco gas por barril, líquido oscuro"
+         ],
+         [
+          "Petróleo volátil",
+          "Libera mucho gas, con un encogimiento fuerte del líquido",
+          "Más gas por barril y líquido más claro"
+         ],
+         [
+          "Gas condensado retrógrado",
+          "Deja caer líquido en el reservorio al bajar de la presión de rocío",
+          "Líquido claro y mucho gas"
+         ],
+         [
+          "Gas húmedo",
+          "Queda monofásico en el reservorio y condensa en superficie",
+          "Algo de líquido muy claro"
+         ],
+         [
+          "Gas seco",
+          "Queda gaseoso también en superficie",
+          "Casi sin líquido"
+         ]
+        ],
+        "n": "Los límites de relación gas-petróleo son orientativos y dependen del criterio de cada laboratorio."
+       }
+      },
+      {
+       "say": "El condensado retrógrado merece atención especial. Al bajar la presión por debajo del rocío, se forma líquido en el reservorio que, en su mayor parte, no se produce. El pozo entrega un gas cada vez más pobre y se pierde líquido valioso en la roca.",
+       "scene": {
+        "t": "bul",
+        "k": "Condensado retrógrado",
+        "h": "Consecuencias prácticas",
+        "items": [
+         "Hay un banco de condensado alrededor del pozo que reduce la permeabilidad al gas",
+         "Mantener la presión por encima del rocío, si es viable, protege el líquido",
+         "El muestreo temprano es clave, antes de bajar de la presión de rocío",
+         "La reinyección de gas seco es una opción de manejo"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "En un gas condensado retrógrado, al caer la presión por debajo del rocío:",
+        "o": [
+         "El fluido se vuelve sólido",
+         "Se forma gas seco",
+         "Se forma líquido en el reservorio",
+         "Sube la temperatura"
+        ],
+        "a": 2,
+        "e": "Parte del líquido queda atrapado en la roca."
+       }
+      }
+     ]
+    },
+    {
+     "id": "p2",
+     "title": "Gas: factor Z y factor volumétrico",
+     "comp": "Propiedades del gas",
+     "cues": [
+      {
+       "say": "Un gas real se aparta de la ley del gas ideal y esa desviación se mide con el factor de compresibilidad Z. La ecuación de estado del gas real es p por V igual a Z por n por R por T. Z vale cerca de uno a baja presión, baja por debajo de uno a presiones medias y vuelve a subir a presiones altas.",
+       "scene": {
+        "t": "fm",
+        "k": "Gas real",
+        "h": "Ecuación de estado",
+        "f": "p · V = Z · n · R · T\nBg = 0,02827 · Z · T / p   (ft³/scf, T en °R, p en psi)",
+        "n": "Bg convierte volumen de reservorio en volumen de superficie."
+       }
+      },
+      {
+       "say": "Z se obtiene de correlaciones basadas en propiedades pseudo-reducidas. Primero se calcula la presión y la temperatura pseudo-críticas de la mezcla a partir de la densidad relativa del gas, y luego se lee Z. El gráfico clásico de Standing y Katz, de 1942, es la base de muchas de esas correlaciones.",
+       "scene": {
+        "t": "bul",
+        "k": "Procedimiento",
+        "h": "De la composición al Z",
+        "items": [
+         "Densidad relativa del gas y contaminantes como CO₂ y H₂S",
+         "Presión y temperatura pseudo-críticas de la mezcla",
+         "Presión y temperatura pseudo-reducidas",
+         "Z por correlación o por ecuación de estado",
+         "Bg con la fórmula de arriba"
+        ]
+       },
+       "hl": 1
+      },
+      {
+       "say": "Laboratorio. Es un gas de ejemplo. Cambiá la densidad relativa, la temperatura y la presión de trabajo. Mirá cómo Z baja y luego sube, y cómo Bg cae casi con la inversa de la presión.",
+       "scene": {
+        "t": "viz",
+        "w": "zf",
+        "h": "Factor Z y factor volumétrico del gas",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "El factor volumétrico del gas Bg se usa para:",
+        "o": [
+         "Pasar de volumen de reservorio a volumen de superficie",
+         "Calcular la viscosidad",
+         "Medir la porosidad",
+         "Fijar el precio"
+        ],
+        "a": 0,
+        "e": "Bg relaciona el volumen en reservorio con el volumen en condiciones estándar."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "Cuál de estos fluidos deja líquido en el reservorio al despresurizarse bajo el rocío:",
+     "o": [
+      "Gas condensado retrógrado",
+      "Gas seco",
+      "Petróleo muerto",
+      "Agua dulce"
+     ],
+     "a": 0,
+     "e": "Es el rasgo del comportamiento retrógrado."
+    },
+    {
+     "q": "El factor Z mide:",
+     "o": [
+      "La temperatura de rocío",
+      "La viscosidad",
+      "La porosidad",
+      "La desviación del gas real respecto del ideal"
+     ],
+     "a": 3,
+     "e": "Z igual a uno corresponde al gas ideal."
+    },
+    {
+     "q": "Si la presión sube y todo lo demás queda igual, Bg:",
+     "o": [
+      "No cambia",
+      "Aumenta mucho",
+      "Disminuye de forma aproximada con la inversa de la presión",
+      "Se vuelve negativo"
+     ],
+     "a": 2,
+     "e": "A más presión el gas ocupa menos volumen."
+    }
+   ]
+  },
+  {
+   "id": "pm2",
+   "title": "Módulo 2 · Petróleo",
+   "lessons": [
+    {
+     "id": "p3",
+     "title": "Petróleo negro: Rs, Bo y presión de burbuja",
+     "comp": "Petróleo negro",
+     "cues": [
+      {
+       "say": "Un petróleo negro tiene gas disuelto. La relación gas-petróleo en solución, Rs, es el gas disuelto por barril de petróleo en condiciones de superficie. La presión de burbuja es la presión a la que aparece la primera burbuja de gas al despresurizar. Por encima de ella el petróleo está subsaturado, y por debajo, saturado.",
+       "scene": {
+        "t": "bul",
+        "k": "Definiciones",
+        "h": "Las tres variables",
+        "items": [
+         "Rs: gas disuelto por barril de tanque, en scf por STB",
+         "Presión de burbuja Pb: donde empieza a liberarse gas",
+         "Subsaturado: presión por encima de Pb, todo el gas sigue disuelto",
+         "Saturado: presión por debajo de Pb, hay gas libre en el reservorio"
+        ]
+       },
+       "hl": 1
+      },
+      {
+       "say": "El factor volumétrico del petróleo, Bo, es el volumen de reservorio que ocupa un barril de tanque junto con su gas disuelto. Es siempre mayor que uno. Sube al bajar la presión hasta Pb porque el líquido se expande, y baja después porque el gas sale de solución y el líquido se encoge.",
+       "scene": {
+        "t": "fm",
+        "k": "Factor volumétrico",
+        "h": "Bo",
+        "f": "Bo = (volumen de petróleo + gas disuelto en reservorio) / (volumen de petróleo en tanque)\nN [STB] = N [bbl en reservorio] / Bo",
+        "n": "Con Bo se pasa de barriles de reservorio a barriles de tanque, base de las reservas."
+       }
+      },
+      {
+       "say": "Laboratorio. Son correlaciones de Standing, un método clásico de 1947 desarrollado con petróleos de California. Cambiá la densidad API, el gas disuelto, la temperatura y el Rsb. Mirá cómo cambian la presión de burbuja y las curvas de Rs y Bo.",
+       "scene": {
+        "t": "viz",
+        "w": "pvt",
+        "h": "Rs y Bo contra la presión",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Por debajo de la presión de burbuja, al seguir bajando la presión:",
+        "o": [
+         "Aumenta Rs",
+         "El petróleo se vuelve gas",
+         "El gas sale de solución y Bo disminuye",
+         "El agua desaparece"
+        ],
+        "a": 2,
+        "e": "Rs y Bo caen porque el líquido pierde gas."
+       }
+      }
+     ]
+    },
+    {
+     "id": "p4",
+     "title": "Viscosidad, compresibilidad y límites de las correlaciones",
+     "comp": "Viscosidad y correlaciones",
+     "cues": [
+      {
+       "say": "La viscosidad del petróleo gobierna cuánto cuesta moverlo en la roca y en los ductos. Depende de la temperatura, del gas disuelto y de la presión. Baja al disolverse gas hasta la presión de burbuja, y por encima de Pb sube suavemente con la presión.",
+       "scene": {
+        "t": "bul",
+        "k": "Viscosidad",
+        "h": "Qué la gobierna",
+        "items": [
+         "El petróleo muerto es el que no tiene gas disuelto",
+         "El gas disuelto baja la viscosidad de forma marcada",
+         "A mayor temperatura, menor viscosidad",
+         "Por encima de Pb sube un poco con la presión"
+        ]
+       },
+       "hl": 1
+      },
+      {
+       "say": "La compresibilidad del petróleo subsaturado es pequeña pero decisiva en el comienzo de la vida del reservorio, cuando la expansión del líquido es el principal mecanismo de empuje. Un valor típico es del orden de 10 a 20 millonésimas por psi, y se mide en el ensayo.",
+       "scene": {
+        "t": "tbl",
+        "k": "Propiedades y cómo se obtienen",
+        "h": "Medición o correlación",
+        "cols": [
+         "Propiedad",
+         "Cómo se obtiene",
+         "Atención"
+        ],
+        "rows": [
+         [
+          "Presión de burbuja",
+          "Ensayo de expansión a composición constante",
+          "Es la propiedad más crítica"
+         ],
+         [
+          "Rs y Bo",
+          "Liberación diferencial y ensayo de separadores",
+          "Corregir a condiciones de separador"
+         ],
+         [
+          "Viscosidad",
+          "Viscosímetro de laboratorio, o correlación",
+          "Las correlaciones fallan en crudos pesados"
+         ],
+         [
+          "Compresibilidad",
+          "Medición sobre Pb",
+          "Valor chico con efecto grande al inicio"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Las correlaciones como las de Standing o las de Vasquez y Beggs, de 1980, se calibraron con conjuntos de fluidos particulares. Sirven para una primera estimación, para controlar la coherencia de un informe y para estudios de pre-factibilidad. Para reservas y diseño se prefiere el ensayo del fluido propio.",
+       "scene": {
+        "t": "bul",
+        "k": "Cuándo usar correlaciones",
+        "h": "Y cuándo no",
+        "items": [
+         "Sirven en etapa temprana y para detectar datos incoherentes",
+         "Se aplican dentro del rango de datos con que fueron calibradas",
+         "Con crudos pesados, espumantes o de composición inusual el error crece",
+         "Para reservas y diseño se usa el ensayo del fluido propio"
+        ]
+       },
+       "hl": 3
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Una correlación PVT conviene usarla:",
+        "o": [
+         "Para reemplazar siempre al laboratorio",
+         "Como estimación temprana y control de coherencia",
+         "Fuera de su rango de calibración sin cuidado",
+         "Solo con gas seco"
+        ],
+        "a": 1,
+        "e": "El dato de laboratorio manda para reservas y diseño."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "La presión de burbuja es la presión a la cual:",
+     "o": [
+      "Aparece la primera burbuja de gas al despresurizar",
+      "Se congela el petróleo",
+      "El petróleo se vuelve gas",
+      "Aparece agua"
+     ],
+     "a": 0,
+     "e": "Define el límite entre petróleo subsaturado y saturado."
+    },
+    {
+     "q": "Si Bo = 1,25 bbl/STB, cada 1.000 barriles de reservorio equivalen a:",
+     "o": [
+      "1.250 barriles de tanque",
+      "800 barriles de tanque",
+      "1.000 barriles de tanque",
+      "2.250 barriles de tanque"
+     ],
+     "a": 1,
+     "e": "Se divide por Bo: 1.000 / 1,25 = 800."
+    },
+    {
+     "q": "Una correlación se usa con cuidado en crudos pesados porque:",
+     "o": [
+      "Siempre dan el valor exacto",
+      "No tienen viscosidad",
+      "El error crece fuera del rango de calibración",
+      "No tienen gas"
+     ],
+     "a": 2,
+     "e": "Las correlaciones dependen de los fluidos con que se calibraron."
+    }
+   ]
+  },
+  {
+   "id": "pm3",
+   "title": "Módulo 3 · Laboratorio y uso",
+   "lessons": [
+    {
+     "id": "p5",
+     "title": "Muestreo y ensayos PVT",
+     "comp": "Ensayos de laboratorio",
+     "cues": [
+      {
+       "say": "Un buen PVT empieza por una buena muestra. Hay dos vías: la muestra de fondo, tomada con herramienta en el pozo, y las muestras de separador de petróleo y de gas, que se recombinan en el laboratorio con la relación gas-petróleo medida en la prueba. En ambos casos el pozo debe estar estabilizado y la presión de fondo, por encima de la de burbuja o de rocío.",
+       "scene": {
+        "t": "bul",
+        "k": "Muestreo",
+        "h": "Condiciones para una muestra representativa",
+        "items": [
+         "Pozo estabilizado y caudal constante",
+         "Presión de fondo fluyente por encima de la de burbuja o de rocío",
+         "Medir con precisión la relación gas-petróleo de la prueba",
+         "Registrar condiciones de separador y cadena de custodia",
+         "Idealmente, tomar la muestra temprano en la vida del pozo"
+        ]
+       },
+       "hl": 2
+      },
+      {
+       "say": "Los ensayos típicos son cuatro. Expansión a composición constante, para la presión de burbuja y la compresibilidad. Liberación diferencial, para Rs, Bo y densidad. Ensayos de separadores, para llevar los datos a condiciones de superficie. Y agotamiento a volumen constante para gases condensados.",
+       "scene": {
+        "t": "tbl",
+        "k": "Ensayos",
+        "h": "Qué entrega cada uno",
+        "cols": [
+         "Ensayo",
+         "Para qué fluido",
+         "Resultado principal"
+        ],
+        "rows": [
+         [
+          "Expansión a composición constante",
+          "Petróleo y gas condensado",
+          "Presión de burbuja o rocío, compresibilidad"
+         ],
+         [
+          "Liberación diferencial",
+          "Petróleo",
+          "Rs, Bo y densidad del petróleo"
+         ],
+         [
+          "Ensayo de separadores",
+          "Petróleo",
+          "Bo y Rs a condiciones de superficie"
+         ],
+         [
+          "Agotamiento a volumen constante",
+          "Gas condensado",
+          "Composición y líquido producido"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Antes de usar un informe hay que validarlo. Se controlan la consistencia de la composición, el balance de materiales entre etapas y la regularidad de las curvas. También que la presión de burbuja del laboratorio sea coherente con la presión de reservorio en el momento del muestreo.",
+       "scene": {
+        "t": "bul",
+        "k": "Validación",
+        "h": "Controles mínimos",
+        "items": [
+         "Balance de materiales entre etapas del ensayo",
+         "Curvas suaves, sin quiebres inexplicables",
+         "Presión de burbuja igual o menor que la presión de reservorio",
+         "Comparar con correlaciones como control cruzado",
+         "Documentar las condiciones de muestreo"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Una presión de burbuja de laboratorio mayor que la presión inicial del reservorio sugiere:",
+        "o": [
+         "Un problema de la muestra o del informe",
+         "Que el reservorio es de gas seco",
+         "Que no hay petróleo",
+         "Un buen informe"
+        ],
+        "a": 0,
+        "e": "Un petróleo no puede estar saturado por encima de su presión inicial en un reservorio subsaturado: hay que revisar la muestra."
+       }
+      }
+     ]
+    },
+    {
+     "id": "p6",
+     "title": "Ecuaciones de estado y uso en reservas y simulación",
+     "comp": "Ecuaciones de estado y uso",
+     "cues": [
+      {
+       "say": "Una ecuación de estado cúbica, como la de Peng y Robinson de 1976 o la de Soave, calcula el equilibrio entre fases a partir de la composición. Se ajustan sus parámetros con los datos del laboratorio para reproducirlos, y luego se usa el modelo para extrapolar a condiciones que no se midieron.",
+       "scene": {
+        "t": "bul",
+        "k": "Ecuación de estado",
+        "h": "Cómo se usa",
+        "items": [
+         "Se carga la composición con la fracción pesada caracterizada",
+         "Se ajustan parámetros hasta reproducir los ensayos",
+         "Se agrupan componentes para acelerar la simulación",
+         "El modelo ajustado extrapola, pero con cuidado fuera del rango medido"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Hay dos formas de usar el PVT en simulación. El modelo de petróleo negro usa tablas de Rs, Bo y viscosidad contra presión, y sirve para la mayoría de los petróleos. El modelo composicional sigue cada componente, y es necesario con petróleos volátiles, gas condensado o inyección de gas miscible.",
+       "scene": {
+        "t": "tbl",
+        "k": "Dos modelos",
+        "h": "Cuándo cada uno",
+        "cols": [
+         "Modelo",
+         "Cuándo",
+         "Costo"
+        ],
+        "rows": [
+         [
+          "Petróleo negro",
+          "Petróleos con poca volatilidad y empuje de agua o gas disuelto",
+          "Bajo"
+         ],
+         [
+          "Composicional",
+          "Volátiles, condensados y gas miscible",
+          "Alto, con más datos y tiempo de cálculo"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "El vínculo con las reservas es directo. El petróleo original en sitio en barriles de tanque se obtiene dividiendo el volumen poral con petróleo por Bo. Un Bo mal medido cambia el volumen original y, por lo tanto, todas las reservas que se derivan de él.",
+       "scene": {
+        "t": "fm",
+        "k": "Volumen original",
+        "h": "Del poro al tanque",
+        "f": "N = 7.758 · A · h · φ · (1 − Sw) / Bo   [STB; A en acres, h en ft]",
+        "n": "El factor 7.758 convierte acres por pie en barriles."
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "El modelo composicional es necesario sobre todo en:",
+        "o": [
+         "Cualquier pozo",
+         "Agua dulce",
+         "Petróleos muertos",
+         "Petróleos volátiles y gas condensado"
+        ],
+        "a": 3,
+        "e": "Allí el comportamiento de fases es más sensible a la composición."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "Una muestra de separador se recombina en el laboratorio usando:",
+     "o": [
+      "La relación gas-petróleo medida en la prueba",
+      "El precio del crudo",
+      "El diámetro del ducto",
+      "La porosidad"
+     ],
+     "a": 0,
+     "e": "Una relación gas-petróleo errónea produce una muestra no representativa."
+    },
+    {
+     "q": "El ensayo que entrega la presión de burbuja y la compresibilidad es:",
+     "o": [
+      "Ensayo de separadores",
+      "Corte de agua",
+      "Expansión a composición constante",
+      "Sísmica"
+     ],
+     "a": 2,
+     "e": "Se mide el volumen contra la presión sin cambiar la composición."
+    },
+    {
+     "q": "Con N = 7.758 A h φ (1 − Sw) / Bo, un Bo mayor produce:",
+     "o": [
+      "Volumen negativo",
+      "Más barriles de tanque",
+      "El mismo volumen",
+      "Menos barriles de tanque"
+     ],
+     "a": 3,
+     "e": "Bo está en el denominador."
+    }
+   ]
+  }
+ ],
+ "exam": [
+  {
+   "q": "Un fluido que condensa líquido en el reservorio al bajar de la presión de rocío es:",
+   "o": [
+    "Un gas condensado retrógrado",
+    "Un gas seco",
+    "Un petróleo muerto",
+    "Un agua de formación"
+   ],
+   "a": 0,
+   "e": "Es el comportamiento retrógrado."
+  },
+  {
+   "q": "El Bg se usa para:",
+   "o": [
+    "Medir la saturación de agua",
+    "Medir porosidad",
+    "Calcular el precio",
+    "Convertir volumen de reservorio de gas a volumen estándar"
+   ],
+   "a": 3,
+   "e": "Relaciona el volumen en reservorio con el de superficie."
+  },
+  {
+   "q": "Por encima de la presión de burbuja, al bajar la presión:",
+   "o": [
+    "Aparece una capa de gas",
+    "El gas sale de solución",
+    "Rs disminuye",
+    "El petróleo se expande y Bo aumenta ligeramente"
+   ],
+   "a": 3,
+   "e": "Todo el gas sigue disuelto y el líquido se expande por su compresibilidad."
+  },
+  {
+   "q": "Una correlación PVT es adecuada para:",
+   "o": [
+    "Una estimación temprana y control de coherencia",
+    "Reemplazar siempre un ensayo para reservas",
+    "Fluidos fuera de rango sin revisar",
+    "Medir la presión de fondo"
+   ],
+   "a": 0,
+   "e": "Su rango de calibración limita su uso."
+  },
+  {
+   "q": "Si Bo vale 1,4 bbl/STB, un volumen de 700.000 barriles de petróleo en reservorio equivale a:",
+   "o": [
+    "980.000 STB",
+    "500.000 STB",
+    "700.000 STB",
+    "1.400.000 STB"
+   ],
+   "a": 1,
+   "e": "Se divide por Bo: 700.000 / 1,4 = 500.000."
+  },
+  {
+   "q": "La validación de un informe PVT incluye:",
+   "o": [
+    "Solo el precio",
+    "Solo la fecha del informe",
+    "Solo el nombre del laboratorio",
+    "Balance de materiales, regularidad de curvas y coherencia con la presión de reservorio"
+   ],
+   "a": 3,
+   "e": "Son los controles mínimos de calidad."
+  }
+ ],
+ "outro": {
+  "can": [
+   "clasificar un fluido de reservorio y anticipar su comportamiento al despresurizarse",
+   "calcular Z y Bg con correlaciones, y Bo y Rs de un petróleo negro",
+   "leer un informe PVT, validarlo y decidir si hace falta repetir la muestra o un ensayo"
+  ],
+  "phrase": "Un buen PVT empieza en una buena muestra y se valida antes de usarse.",
+  "recap": [
+   "Los cinco tipos de fluido se distinguen por su comportamiento de fases, y el condensado retrógrado pierde líquido en el reservorio.",
+   "Bg y Bo llevan volúmenes de reservorio a condiciones de superficie, base de las reservas.",
+   "Las correlaciones orientan, el laboratorio manda, y toda muestra se valida antes de usarse."
+  ]
+ },
+ "downloads": [
+  {
+   "file": "xlsx/H3L_PVT_Petroleo_Negro_y_Gas.xlsx",
+   "title": "PVT de petróleo negro y gas (Excel)",
+   "desc": "Presión de burbuja, Rs y Bo de Standing con entradas editables, tabla de Bo y volumen original en barriles de tanque, y cálculo de Z (Papay) y Bg de un gas con propiedades pseudo-críticas de Sutton.",
+   "task": "Con 32 °API, γg = 0,75, 200 °F y Rsb = 600 scf/STB, calculá Pb y Bo a 1.500 psi, y pasá 10 MMbbl de reservorio a barriles de tanque."
+  }
+ ],
+ "cases": [
+  {
+   "title": "Ejemplo didáctico: la muestra tomada por debajo de la presión de burbuja",
+   "text": "Un laboratorio informa una presión de burbuja menor que la del reservorio porque el pozo se muestreó con presión de fondo por debajo de Pb y el gas libre no se recolectó. La solución es repetir la toma con el pozo estabilizado y la presión de fondo por encima de Pb. Es un ejemplo ilustrativo, no un caso real.",
+   "src": "Ejemplo didáctico de H3L, no es un caso real"
+  }
+ ],
+ "refs": [
+  {
+   "tag": "Paper",
+   "cite": "Standing, M. B. y Katz, D. L. (1942). Density of natural gases. Transactions of the AIME 146, 140–149.",
+   "why": "factor Z por propiedades pseudo-reducidas"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Standing, M. B. (1947). A pressure-volume-temperature correlation for mixtures of California oils and gases. Drilling and Production Practice, API, 275–287.",
+   "why": "correlaciones de Pb, Rs y Bo"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Vasquez, M. y Beggs, H. D. (1980). Correlations for fluid physical property prediction. Journal of Petroleum Technology 32(6), 968–970.",
+   "why": "correlaciones alternativas de propiedades del petróleo"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Peng, D.-Y. y Robinson, D. B. (1976). A new two-constant equation of state. Industrial & Engineering Chemistry Fundamentals 15(1), 59–64.",
+   "why": "ecuación de estado cúbica"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Lee, J. y Wattenbarger, R. A. (1996). Gas Reservoir Engineering. SPE Textbook Series, Vol. 5.",
+   "why": "propiedades del gas y su uso"
+  }
+ ]
+}

@@ -167,12 +167,12 @@
        "q": {
         "q": "El punto de operación de un pozo está en:",
         "o": [
-         "El cruce de la curva de afluencia con la curva de tubing",
-         "El máximo de la IPR",
          "El máximo del tubing",
+         "El máximo de la IPR",
+         "El cruce de la curva de afluencia con la curva de tubing",
          "La presión de reservorio"
         ],
-        "a": 0,
+        "a": 2,
         "e": "Allí coinciden la presión que da el reservorio y la que necesita la tubería."
        }
       }
@@ -267,12 +267,12 @@
        "q": {
         "q": "La IPR de Vogel se usa principalmente cuando:",
         "o": [
-         "El pozo produce por debajo de la presión de burbuja",
+         "El pozo está cerrado",
          "Hay solo agua",
          "El pozo es de gas seco",
-         "El pozo está cerrado"
+         "El pozo produce por debajo de la presión de burbuja"
         ],
-        "a": 0,
+        "a": 3,
         "e": "Es el caso de empuje por gas en solución, con gas libre en el reservorio."
        }
       }
@@ -283,23 +283,23 @@
     {
      "q": "En el análisis nodal, la afluencia es:",
      "o": [
-      "La presión que da el reservorio",
-      "La demanda de la tubería",
       "La presión del separador",
+      "La demanda de la tubería",
+      "La presión que da el reservorio",
       "El nivel de líquido"
      ],
-     "a": 0,
+     "a": 2,
      "e": "La IPR describe cuánto caudal entrega el reservorio para cada presión de fondo."
     },
     {
      "q": "Si baja la presión de reservorio, la curva IPR:",
      "o": [
-      "Se desplaza hacia menor caudal",
       "Se desplaza hacia mayor caudal",
+      "Se desplaza hacia menor caudal",
       "No cambia",
       "Se vuelve vertical"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Con menos presión disponible, el pozo entrega menos caudal."
     },
     {
@@ -412,12 +412,12 @@
        "q": {
         "q": "Al aumentar el corte de agua, manteniendo lo demás, la presión de fondo necesaria para levantar el fluido:",
         "o": [
-         "Aumenta",
+         "Se vuelve cero",
          "Disminuye",
          "No cambia",
-         "Se vuelve cero"
+         "Aumenta"
         ],
-        "a": 0,
+        "a": 3,
         "e": "La mezcla es más densa y la columna hidrostática pesa más."
        }
       }
@@ -490,12 +490,12 @@
        "q": {
         "q": "El flujo crítico en el choke se caracteriza por:",
         "o": [
-         "Que la presión aguas abajo ya no influye en el caudal",
          "Que el caudal es cero",
+         "Que la presión aguas abajo ya no influye en el caudal",
          "Que no hay gas",
          "Que la línea está cerrada"
         ],
-        "a": 0,
+        "a": 1,
         "e": "En flujo crítico las perturbaciones de aguas abajo no se transmiten hacia el pozo."
        }
       }
@@ -506,34 +506,34 @@
     {
      "q": "Un tubing muy grande puede causar:",
      "o": [
-      "Menor fricción pero riesgo de carga de líquido",
+      "Corrosión inmediata",
       "Siempre más caudal",
       "Pozo cerrado",
-      "Corrosión inmediata"
+      "Menor fricción pero riesgo de carga de líquido"
      ],
-     "a": 0,
+     "a": 3,
      "e": "La baja velocidad favorece el deslizamiento del líquido."
     },
     {
      "q": "En los pozos de gas, la velocidad crítica de Turner sirve para:",
      "o": [
-      "Saber si el gas arrastra el líquido",
       "Medir la porosidad",
+      "Saber si el gas arrastra el líquido",
       "Calcular la permeabilidad",
       "Elegir el choke"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Compara la velocidad real del gas con la necesaria para arrastrar gotas."
     },
     {
      "q": "Las correlaciones de flujo multifásico:",
      "o": [
-      "Se calibran con datos medidos del pozo",
       "Son universales",
+      "Se calibran con datos medidos del pozo",
       "Se usan sin calibrar",
       "Son iguales entre sí"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Se comparan con gradientes medidos y se ajustan."
     }
    ]
@@ -699,12 +699,12 @@
        "q": {
         "q": "El amperaje de una ESP se vigila porque:",
         "o": [
-         "Refleja la carga del motor y ayuda a detectar problemas de bomba o de gas",
          "Mide la porosidad",
+         "Refleja la carga del motor y ayuda a detectar problemas de bomba o de gas",
          "Define el tubing",
          "No sirve"
         ],
-        "a": 0,
+        "a": 1,
         "e": "Variaciones del amperaje alertan sobre gas, bloqueo o desgaste."
        }
       }
@@ -715,12 +715,12 @@
     {
      "q": "El plunger lift se aplica sobre todo a:",
      "o": [
-      "Pozos de gas con carga de líquido",
       "Pozos inyectores",
+      "Pozos de gas con carga de líquido",
       "Pozos de agua",
       "Pozos exploratorios"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Usa la energía del gas del propio pozo para elevar el líquido acumulado."
     },
     {
@@ -763,12 +763,12 @@
   {
    "q": "Una IPR de Vogel se usa por debajo de:",
    "o": [
-    "La presión de burbuja",
-    "La presión de rocío",
     "La presión atmosférica",
+    "La presión de rocío",
+    "La presión de burbuja",
     "La presión de fractura"
    ],
-   "a": 0,
+   "a": 2,
    "e": "Hay gas libre en el reservorio."
   },
   {
@@ -785,34 +785,34 @@
   {
    "q": "Una presión de boca menor suele:",
    "o": [
-    "Aumentar el caudal",
     "Reducir el caudal",
+    "Aumentar el caudal",
     "Cerrar el pozo",
     "Aumentar el agua"
    ],
-   "a": 0,
+   "a": 1,
    "e": "Reduce la contrapresión del sistema."
   },
   {
    "q": "La carga de líquido en pozos de gas aparece cuando:",
    "o": [
-    "La velocidad del gas es menor que la crítica",
+    "El pozo es nuevo",
     "La velocidad es muy alta",
     "No hay agua",
-    "El pozo es nuevo"
+    "La velocidad del gas es menor que la crítica"
    ],
-   "a": 0,
+   "a": 3,
    "e": "El gas ya no arrastra las gotas."
   },
   {
    "q": "Para elegir un método de levantamiento se considera:",
    "o": [
-    "Caudal, fluidos, sólidos, gas, desvío y costo",
-    "Solo el color",
     "Solo el diámetro",
+    "Solo el color",
+    "Caudal, fluidos, sólidos, gas, desvío y costo",
     "Solo la profundidad"
    ],
-   "a": 0,
+   "a": 2,
    "e": "Es una decisión de varios criterios técnicos y económicos."
   }
  ],

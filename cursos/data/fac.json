@@ -1,0 +1,750 @@
+{
+ "id": "fac",
+ "title": "Facilities de superficie y aseguramiento de flujo",
+ "subtitle": "Separación, tratamiento, compresión, alivio, hidratos, ceras y flujo multifásico: de la boca de pozo al punto de venta.",
+ "desc": "Curso para quien conecta el pozo con el mercado: dimensionamiento de separadores con el criterio de Souders y Brown, deshidratación, compresión por etapas, sistemas de alivio, y aseguramiento de flujo frente a hidratos, ceras, asfaltenos, erosión y corrosión.",
+ "objectives": [
+  "Dimensionar un separador y justificar el tiempo de residencia y el factor K.",
+  "Explicar la deshidratación de gas y crudo y su especificación de venta.",
+  "Calcular la relación de compresión, la temperatura de descarga y la potencia, y decidir cuántas etapas usar.",
+  "Identificar los riesgos de aseguramiento de flujo y las barreras que se usan."
+ ],
+ "labs": [
+  "dimensionamiento de un separador de gas",
+  "compresión: etapas, temperatura y potencia"
+ ],
+ "practiceMin": 80,
+ "competencies": [
+  {
+   "name": "Separación",
+   "lessons": [
+    "f1"
+   ]
+  },
+  {
+   "name": "Tratamiento y especificación",
+   "lessons": [
+    "f2"
+   ]
+  },
+  {
+   "name": "Compresión",
+   "lessons": [
+    "f3"
+   ]
+  },
+  {
+   "name": "Alivio y antorcha",
+   "lessons": [
+    "f4"
+   ]
+  },
+  {
+   "name": "Hidratos, ceras y asfaltenos",
+   "lessons": [
+    "f5"
+   ]
+  },
+  {
+   "name": "Flujo multifásico, erosión y corrosión",
+   "lessons": [
+    "f6"
+   ]
+  }
+ ],
+ "intro": {
+  "hook": "Un campo no produce hasta que el fluido llega limpio, seco y a la presión correcta al punto de venta. Las instalaciones de superficie transforman la producción en un producto vendible, y son donde se pierde o se gana mucha plata.",
+  "questions": [
+   "¿Cómo se dimensiona un separador y por qué importa el tiempo de residencia?",
+   "¿Por qué se comprime en etapas y qué límite impone la temperatura?",
+   "¿Qué es el aseguramiento de flujo y qué lo amenaza?"
+  ],
+  "star": {
+   "caso": "Ejemplo didáctico: el separador que arrastraba líquido",
+   "S": "Un separador de gas, diseñado años atrás para un caudal menor, recibe más producción por la perforación de nuevos pozos. El compresor aguas abajo empieza a disparar por alto nivel en su depurador.",
+   "T": "Recuperar la capacidad sin parar la producción ni comprar un recipiente nuevo.",
+   "A": "Se calcula la velocidad del gas con el factor K de diseño y se confirma que está por encima de la admisible. Se evalúan un mejor extractor de niebla, una presión mayor de operación y la ampliación con un segundo recipiente.",
+   "R": "Subir la presión de operación y cambiar el extractor de niebla recuperan capacidad con costo bajo. Es un ejemplo didáctico ilustrativo, no un caso real."
+  }
+ },
+ "modules": [
+  {
+   "id": "fm1",
+   "title": "Módulo 1 · Separación y tratamiento",
+   "lessons": [
+    {
+     "id": "f1",
+     "title": "Separación gas-líquido y dimensionamiento",
+     "comp": "Separación",
+     "cues": [
+      {
+       "say": "El primer equipo de una instalación es el separador. Separa por gravedad el gas, el petróleo y el agua que llegan juntos desde los pozos. Su tamaño lo fijan dos criterios. Para el gas, que las gotas decanten y no arrastren líquido. Para el líquido, un tiempo de residencia suficiente para que se separen las fases.",
+       "scene": {
+        "t": "bul",
+        "k": "Separador",
+        "h": "Qué debe lograr",
+        "items": [
+         "Gas sin líquido arrastrado, para proteger compresores y ductos",
+         "Petróleo sin gas disuelto en exceso",
+         "Agua separada del crudo",
+         "Capacidad para absorber golpes de líquido"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Para el gas, el criterio clásico es el de Souders y Brown, de 1934. La velocidad máxima admisible es el factor K por la raíz de la diferencia de densidades sobre la del gas. Con esa velocidad y el caudal real se calcula el área de paso y el diámetro mínimo del recipiente.",
+       "scene": {
+        "t": "fm",
+        "k": "Souders y Brown",
+        "h": "Velocidad máxima del gas",
+        "f": "v = K · √[(ρl − ρg) / ρg]\nA = Q / v    D = √(4A/π)",
+        "n": "K depende del diseño interno y del extractor de niebla: se toma de la norma o del fabricante."
+       }
+      },
+      {
+       "say": "Laboratorio. Cambiá el caudal de gas, la presión, el factor K y la densidad del líquido. Mirá cómo el diámetro mínimo baja al subir la presión, porque el gas más denso ocupa menos volumen real.",
+       "scene": {
+        "t": "viz",
+        "w": "sep",
+        "h": "Diámetro mínimo de un separador vertical",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Al aumentar la presión de operación de un separador de gas, manteniendo el caudal estándar:",
+        "o": [
+         "El diámetro mínimo aumenta mucho",
+         "El diámetro mínimo disminuye",
+         "No hay efecto",
+         "El gas se vuelve líquido"
+        ],
+        "a": 1,
+        "e": "El gas más denso ocupa menos volumen real."
+       }
+      }
+     ]
+    },
+    {
+     "id": "f2",
+     "title": "Tratamiento: deshidratación de crudo y de gas",
+     "comp": "Tratamiento y especificación",
+     "cues": [
+      {
+       "say": "El petróleo llega con agua emulsionada y sales. Se trata con calor, productos químicos desemulsionantes, tiempo de residencia y a veces un campo eléctrico. El objetivo es entregar un crudo con un contenido de agua y sedimentos, el BSW, por debajo del máximo que fija el contrato o la norma de transferencia.",
+       "scene": {
+        "t": "bul",
+        "k": "Crudo",
+        "h": "Pasos típicos",
+        "items": [
+         "Separación gravitacional del agua libre",
+         "Calentamiento y química desemulsionante",
+         "Tratadores térmicos o electrostáticos",
+         "Desalado si hay sales",
+         "Medición del BSW en la transferencia"
+        ]
+       },
+       "hl": 1
+      },
+      {
+       "say": "El gas se deshidrata para evitar hidratos y corrosión en el gasoducto. El método más extendido es la absorción con glicol, usualmente trietilenglicol, que se regenera por calentamiento. Para especificaciones muy exigentes se usan tamices moleculares. La especificación final, normalmente un punto de rocío de agua, la fija el contrato o el transportista.",
+       "scene": {
+        "t": "tbl",
+        "k": "Deshidratación",
+        "h": "Opciones",
+        "cols": [
+         "Método",
+         "Principio",
+         "Cuándo"
+        ],
+        "rows": [
+         [
+          "Glicol (TEG)",
+          "Absorbe agua y se regenera",
+          "Estándar en campo"
+         ],
+         [
+          "Tamiz molecular",
+          "Adsorbe agua",
+          "Especificaciones muy bajas o gas criogénico"
+         ],
+         [
+          "Enfriamiento y separación",
+          "El agua condensa al enfriar",
+          "Cuando se ajusta también el punto de rocío de hidrocarburos"
+         ],
+         [
+          "Inhibidor (glicol o metanol)",
+          "Evita hidratos en el ducto",
+          "Líneas con riesgo de hidratos"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Lo importante para la operación es que la especificación manda. El gas se vende contra un punto de rocío de agua y de hidrocarburos, un poder calorífico y un máximo de CO₂ y H₂S, según el contrato y la norma del transportista. Producir gas fuera de especificación se paga con descuentos o con el cierre del punto de entrega.",
+       "scene": {
+        "t": "bul",
+        "k": "Especificaciones",
+        "h": "Qué se controla",
+        "items": [
+         "Punto de rocío de agua",
+         "Punto de rocío de hidrocarburos",
+         "Poder calorífico",
+         "Máximo de CO₂, H₂S y otros contaminantes",
+         "Los valores exactos los fija el contrato y el transportista"
+        ]
+       },
+       "hl": 4
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "El gas se deshidrata sobre todo para:",
+        "o": [
+         "Subir la presión",
+         "Aumentar el contenido de agua",
+         "Evitar hidratos y corrosión en el ducto",
+         "Aumentar el caudal"
+        ],
+        "a": 2,
+        "e": "El agua libre es la causa de hidratos y corrosión."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "El factor K en Souders y Brown depende de:",
+     "o": [
+      "El color del gas",
+      "El diseño interno y el extractor de niebla",
+      "La longitud del ducto",
+      "El precio"
+     ],
+     "a": 1,
+     "e": "Se toma de la norma o del fabricante."
+    },
+    {
+     "q": "Un tiempo de residencia mayor sirve para:",
+     "o": [
+      "Aumentar el caudal de gas",
+      "Que las fases líquidas se separen mejor",
+      "Bajar la presión",
+      "Eliminar el K"
+     ],
+     "a": 1,
+     "e": "Las gotas o las fases necesitan tiempo para decantar."
+    },
+    {
+     "q": "La especificación de venta del gas la fija:",
+     "o": [
+      "El separador",
+      "El contrato y la norma del transportista",
+      "La temperatura ambiente",
+      "El precio del crudo"
+     ],
+     "a": 1,
+     "e": "Cada transportista y contrato tiene sus valores."
+    }
+   ]
+  },
+  {
+   "id": "fm2",
+   "title": "Módulo 2 · Compresión y alivio",
+   "lessons": [
+    {
+     "id": "f3",
+     "title": "Compresión de gas: relación, etapas y potencia",
+     "comp": "Compresión",
+     "cues": [
+      {
+       "say": "Un compresor aumenta la presión del gas para llevarlo a un ducto o a un proceso. Lo que define el trabajo es la relación de compresión, el cociente entre la presión de descarga y la de succión, y no la diferencia de presiones. Un compresor que sube de 5 a 40 bar tiene una relación de 8.",
+       "scene": {
+        "t": "fm",
+        "k": "Compresión",
+        "h": "Relación y temperatura",
+        "f": "r = P2 / P1\nT2 = T1 · [1 + (r^((k−1)/k) − 1) / η]",
+        "n": "k es el cociente de calores específicos y η la eficiencia adiabática. Temperaturas absolutas."
+       }
+      },
+      {
+       "say": "Cuando la relación es alta, la temperatura de descarga sube y llega a límites mecánicos o del gas. Por eso se comprime en etapas, con enfriamiento del gas entre etapas. Como orientación, se limita la relación por etapa a valores del orden de 3 a 4, y el número de etapas resulta del cociente total.",
+       "scene": {
+        "t": "bul",
+        "k": "Etapas",
+        "h": "Por qué se usan",
+        "items": [
+         "Limitan la temperatura de descarga",
+         "Reducen la potencia total con enfriamiento intermedio",
+         "Requieren separadores entre etapas para drenar el condensado",
+         "Cada etapa suma costo y complejidad"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Laboratorio. Cambiá la presión de succión y de descarga, la temperatura, el caudal y la eficiencia. Mirá la relación de compresión, la temperatura de descarga y la potencia. El modelo usa gas ideal y sirve para dimensionar, no para comprar.",
+       "scene": {
+        "t": "viz",
+        "w": "comp",
+        "h": "Potencia y temperatura de compresión",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "La relación de compresión de un compresor que va de 5 a 40 bar es:",
+        "o": [
+         "35",
+         "8",
+         "0,125",
+         "45"
+        ],
+        "a": 1,
+        "e": "Es 40 dividido por 5."
+       }
+      }
+     ]
+    },
+    {
+     "id": "f4",
+     "title": "Sistemas de alivio, antorcha y venteo",
+     "comp": "Alivio y antorcha",
+     "cues": [
+      {
+       "say": "Todo recipiente y toda línea necesita protección contra sobrepresión. La última barrera es una válvula de alivio que descarga a un sistema de antorcha o de venteo. Las causas típicas de sobrepresión son una salida bloqueada, un incendio externo, la expansión térmica de un líquido atrapado y la falla de un control.",
+       "scene": {
+        "t": "bul",
+        "k": "Causas",
+        "h": "De sobrepresión",
+        "items": [
+         "Salida bloqueada",
+         "Incendio externo",
+         "Expansión térmica de líquido atrapado",
+         "Falla de un lazo de control",
+         "Reflujo desde un sistema de mayor presión"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "El diseño parte de identificar el escenario que exige el mayor caudal de alivio, que es el que dimensiona la válvula y el colector. La norma API 521 describe los sistemas de alivio y despresurización, y la API 14C el análisis de los sistemas de seguridad de instalaciones de producción en el mar. Se aplican con las reglas locales.",
+       "scene": {
+        "t": "tbl",
+        "k": "Alivio",
+        "h": "Elementos",
+        "cols": [
+         "Elemento",
+         "Función",
+         "Atención"
+        ],
+        "rows": [
+         [
+          "Válvula de alivio",
+          "Abre al llegar a la presión de ajuste",
+          "Se prueba y se calibra periódicamente"
+         ],
+         [
+          "Colector de alivio",
+          "Lleva la descarga a la antorcha",
+          "Contrapresión que reduce la capacidad"
+         ],
+         [
+          "Separador de antorcha",
+          "Retiene líquido arrastrado",
+          "Evita lluvia de líquido encendido"
+         ],
+         [
+          "Antorcha",
+          "Quema el gas con seguridad",
+          "Radiación y emisiones"
+         ]
+        ],
+        "n": "Los criterios de diseño deben tomarse de la norma y de la regulación vigentes."
+       }
+      },
+      {
+       "say": "Hay una consecuencia ambiental. Quemar en antorcha emite CO₂, y una combustión incompleta o un apagado deja escapar metano. Por eso se diseña para minimizar el gas a antorcha en operación normal, con recuperación de gas de baja presión, y se mide el gas quemado. Se relaciona con el curso de gestión de emisiones.",
+       "scene": {
+        "t": "bul",
+        "k": "Antorcha",
+        "h": "Y emisiones",
+        "items": [
+         "La antorcha es seguridad y no un método de disposición",
+         "Medir el gas quemado y venteado",
+         "Recuperar los gases de baja presión",
+         "Eficiencia de combustión a vigilar"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "El escenario que se usa para dimensionar la válvula de alivio es:",
+        "o": [
+         "El más barato",
+         "El más probable",
+         "El que requiere el mayor caudal de alivio",
+         "El de menor presión"
+        ],
+        "a": 2,
+        "e": "La válvula debe poder con el caso más exigente."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "Al comprimir en etapas se busca:",
+     "o": [
+      "Aumentar la relación por etapa",
+      "Limitar la temperatura de descarga y la potencia",
+      "Evitar el enfriamiento",
+      "Reducir el caudal"
+     ],
+     "a": 1,
+     "e": "Se enfría el gas entre etapas."
+    },
+    {
+     "q": "Una válvula de alivio es:",
+     "o": [
+      "La última barrera de protección contra sobrepresión",
+      "Un medidor",
+      "Un separador",
+      "Una antorcha"
+     ],
+     "a": 0,
+     "e": "Se calibra y se prueba periódicamente."
+    },
+    {
+     "q": "Lo que define el trabajo de un compresor es:",
+     "o": [
+      "La relación de compresión",
+      "Solo la diferencia de presiones",
+      "El color del gas",
+      "El tipo de roca"
+     ],
+     "a": 0,
+     "e": "La relación P2/P1 determina el trabajo y la temperatura."
+    }
+   ]
+  },
+  {
+   "id": "fm3",
+   "title": "Módulo 3 · Aseguramiento de flujo",
+   "lessons": [
+    {
+     "id": "f5",
+     "title": "Hidratos, ceras y asfaltenos",
+     "comp": "Hidratos, ceras y asfaltenos",
+     "cues": [
+      {
+       "say": "Aseguramiento de flujo es garantizar que el fluido llegue de forma continua desde el pozo hasta el punto de entrega. Sus amenazas son sólidos que obstruyen: hidratos, ceras y asfaltenos, además de incrustaciones. Se manejan con prevención, con monitoreo y con procedimientos de remediación, y se diseñan desde el principio.",
+       "scene": {
+        "t": "bul",
+        "k": "Sólidos",
+        "h": "Los cuatro grandes",
+        "items": [
+         "Hidratos de gas: agua y gas a presión alta y temperatura baja",
+         "Ceras o parafinas: cristales al enfriarse el crudo",
+         "Asfaltenos: precipitan al cambiar presión o composición",
+         "Incrustaciones minerales por mezcla de aguas"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Los hidratos son cristales de agua y gas que se forman a presión alta y temperatura baja, y pueden bloquear una línea en horas. Se previenen manteniendo la temperatura fuera de la región de formación, sacando el agua, o inyectando un inhibidor termodinámico como el metanol o el monoetilenglicol, que desplaza la curva de formación.",
+       "scene": {
+        "t": "tbl",
+        "k": "Hidratos",
+        "h": "Prevención",
+        "cols": [
+         "Barrera",
+         "Cómo actúa",
+         "Atención"
+        ],
+        "rows": [
+         [
+          "Aislación o calentamiento",
+          "Mantiene T sobre la de formación",
+          "Costo y limitación en paradas"
+         ],
+         [
+          "Deshidratación",
+          "Quita el agua que forma el cristal",
+          "Requiere control de especificación"
+         ],
+         [
+          "Inhibidor químico",
+          "Baja la temperatura de formación",
+          "Costo de inyección y recuperación"
+         ],
+         [
+          "Despresurización",
+          "Remedio ante un bloqueo, con cuidado",
+          "Riesgo de tapón que se desplaza"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Las ceras aparecen cuando el crudo se enfría por debajo de la temperatura de aparición de ceras, y aumentan la viscosidad y depositan en la pared. Se controlan con aislación, con inhibidores y con limpieza mecánica, usando raspadores o pigs. Los asfaltenos son otra fracción y se estudian con ensayos de laboratorio de la muestra propia.",
+       "scene": {
+        "t": "bul",
+        "k": "Ceras y asfaltenos",
+        "h": "Manejo",
+        "items": [
+         "Medir la temperatura de aparición de ceras y el punto de fluidez en laboratorio",
+         "Aislar o calentar las líneas críticas",
+         "Pigging regular para remover depósitos",
+         "Inhibidores químicos",
+         "Ensayo de laboratorio de asfaltenos con el crudo del campo"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Un inhibidor termodinámico de hidratos como el metanol:",
+        "o": [
+         "Aumenta el agua",
+         "Desplaza la curva de formación hacia temperaturas menores",
+         "Sube la presión",
+         "Genera cera"
+        ],
+        "a": 1,
+        "e": "Permite operar a menor temperatura sin formar hidratos."
+       }
+      }
+     ]
+    },
+    {
+     "id": "f6",
+     "title": "Flujo multifásico, erosión y corrosión",
+     "comp": "Flujo multifásico, erosión y corrosión",
+     "cues": [
+      {
+       "say": "En una línea con gas y líquido el flujo puede adoptar distintos regímenes: estratificado, anular, burbujas o tapones, también llamados slugs. Los tapones son un problema de diseño, porque llegan al separador como golpes de líquido y pueden desbordarlo. Se estudian con modelos de flujo multifásico y se manejan con un volumen de recepción adecuado.",
+       "scene": {
+        "t": "bul",
+        "k": "Regímenes",
+        "h": "En una línea bifásica",
+        "items": [
+         "Estratificado: el líquido corre por abajo y el gas por arriba",
+         "Anular: líquido en la pared y gas en el centro",
+         "Tapones o slugs: alternan gas y líquido",
+         "Los tapones requieren volumen en el separador de llegada"
+        ]
+       },
+       "hl": 3
+      },
+      {
+       "say": "La erosión y la corrosión limitan la velocidad. La práctica recomendada API RP 14E propone una velocidad erosional que depende de la densidad de la mezcla, con una constante C. Un valor de 100, en unidades de pie por segundo y libras por pie cúbico, es el valor conservador para servicio continuo. Con arena o CO₂ se requiere más análisis.",
+       "scene": {
+        "t": "fm",
+        "k": "Velocidad erosional",
+        "h": "API RP 14E",
+        "f": "Ve = C / √ρm   (ft/s, ρm en lb/ft³)\nC = 100 es un valor conservador para servicio continuo",
+        "n": "Con sólidos o corrosión se debe revisar y no basta con esta regla."
+       }
+      },
+      {
+       "say": "El CO₂ disuelto en agua forma un ácido débil que corroe el acero al carbono. Se controla con inhibidores de corrosión, con materiales resistentes o con control del agua. La corrosión se monitorea con cupones, sondas y la inspección periódica, y la integridad se gestiona con un programa que combina esos datos.",
+       "scene": {
+        "t": "bul",
+        "k": "Corrosión",
+        "h": "Cómo se gestiona",
+        "items": [
+         "Quitar el agua o evitar su contacto con el acero",
+         "Inhibidores de corrosión",
+         "Materiales resistentes en líneas críticas",
+         "Cupones, sondas e inspección en línea",
+         "Un programa de integridad con datos y alertas"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Los tapones o slugs son un problema porque:",
+        "o": [
+         "Reducen el caudal de agua",
+         "Llegan como golpes de líquido al separador",
+         "Bajan la presión del reservorio",
+         "Mejoran la separación"
+        ],
+        "a": 1,
+        "e": "Pueden desbordar el recipiente de recepción."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "Los hidratos se forman con:",
+     "o": [
+      "Agua sola",
+      "Solo petróleo caliente",
+      "Gas seco a alta temperatura",
+      "Agua y gas a alta presión y baja temperatura"
+     ],
+     "a": 3,
+     "e": "Son cristales de agua y gas."
+    },
+    {
+     "q": "Un pig se usa en una línea para:",
+     "o": [
+      "Aumentar el caudal de gas",
+      "Medir la presión del reservorio",
+      "Limpiar depósitos, como ceras",
+      "Evitar el gas"
+     ],
+     "a": 2,
+     "e": "Es un raspador que barre la línea."
+    },
+    {
+     "q": "La corrosión por CO₂ depende de:",
+     "o": [
+      "La presencia de agua con CO₂ disuelto",
+      "El color del acero",
+      "La densidad del gas seco",
+      "La longitud del ducto"
+     ],
+     "a": 0,
+     "e": "Sin agua, el CO₂ no corroe el acero."
+    }
+   ]
+  }
+ ],
+ "exam": [
+  {
+   "q": "El criterio de Souders y Brown dimensiona:",
+   "o": [
+    "La viscosidad",
+    "La potencia de un compresor",
+    "La presión de un reservorio",
+    "El diámetro mínimo de un separador para gas"
+   ],
+   "a": 3,
+   "e": "A partir de la velocidad máxima admisible."
+  },
+  {
+   "q": "La compresión en etapas se usa para:",
+   "o": [
+    "Aumentar la relación por etapa",
+    "Limitar la temperatura de descarga",
+    "Evitar el enfriamiento",
+    "Subir el caudal de agua"
+   ],
+   "a": 1,
+   "e": "Se enfría entre etapas."
+  },
+  {
+   "q": "Una especificación de punto de rocío de agua evita:",
+   "o": [
+    "Hidratos y corrosión en el ducto",
+    "Que el gas pese menos",
+    "Que el gas se queme",
+    "Que baje la presión"
+   ],
+   "a": 0,
+   "e": "El agua libre es la causa."
+  },
+  {
+   "q": "El caso de dimensionamiento de una válvula de alivio es:",
+   "o": [
+    "El de mayor caudal de alivio requerido",
+    "El de menor caudal",
+    "El más probable siempre",
+    "El de presión cero"
+   ],
+   "a": 0,
+   "e": "Debe cubrir el escenario más exigente."
+  },
+  {
+   "q": "Para una línea con riesgo de hidratos puede usarse:",
+   "o": [
+    "Solo agua dulce",
+    "Aire comprimido",
+    "Arena",
+    "Un inhibidor como el monoetilenglicol"
+   ],
+   "a": 3,
+   "e": "Desplaza la curva de formación."
+  },
+  {
+   "q": "La velocidad erosional de API RP 14E depende de:",
+   "o": [
+    "La densidad de la mezcla",
+    "El color del fluido",
+    "La edad de la línea",
+    "El nombre del pozo"
+   ],
+   "a": 0,
+   "e": "Ve = C dividido la raíz de la densidad."
+  }
+ ],
+ "outro": {
+  "can": [
+   "dimensionar un separador de gas con el criterio de Souders y Brown",
+   "calcular la relación de compresión, la temperatura de descarga y la potencia, y elegir etapas",
+   "identificar los riesgos de aseguramiento de flujo y sus barreras"
+  ],
+  "phrase": "Una buena instalación entrega producto en especificación y sin sorpresas.",
+  "recap": [
+   "El separador se dimensiona por velocidad del gas y por tiempo de residencia del líquido.",
+   "La compresión se piensa por relación y por etapas, y el alivio protege ante la sobrepresión.",
+   "Hidratos, ceras, tapones, erosión y corrosión se previenen desde el diseño y se monitorean en operación."
+  ]
+ },
+ "downloads": [
+  {
+   "file": "xlsx/H3L_Facilities_Separador_y_Compresion.xlsx",
+   "title": "Facilities: separador y compresión (Excel)",
+   "desc": "Dimensionamiento de un separador vertical con Souders y Brown con entradas editables, y cálculo de relación de compresión, temperatura de descarga, potencia y número de etapas orientativo, con una tabla de sensibilidad.",
+   "task": "Con 20 MMscfd, 30 bar y K = 0,10, calculá el diámetro mínimo; luego, con una succión de 5 bar y una descarga de 40 bar, calculá la temperatura y la potencia."
+  }
+ ],
+ "cases": [
+  {
+   "title": "Ejemplo didáctico: el separador que arrastraba líquido",
+   "text": "Un separador de gas, al recibir más producción, supera la velocidad admisible del gas y el líquido llega al compresor. La solución económica combina una presión de operación mayor y un extractor de niebla de mejor desempeño. Es un ejemplo ilustrativo, no un caso real.",
+   "src": "Ejemplo didáctico de H3L, no es un caso real"
+  }
+ ],
+ "refs": [
+  {
+   "tag": "Paper",
+   "cite": "Souders, M. y Brown, G. G. (1934). Design of fractionating columns. I. Entrainment and capacity. Industrial & Engineering Chemistry 26(1), 98–103.",
+   "why": "velocidad admisible del gas en un separador"
+  },
+  {
+   "tag": "Norma",
+   "cite": "API RP 14E. Recommended Practice for Design and Installation of Offshore Production Platform Piping Systems.",
+   "why": "velocidad erosional"
+  },
+  {
+   "tag": "Norma",
+   "cite": "API Standard 521. Pressure-relieving and Depressuring Systems.",
+   "why": "sistemas de alivio y antorcha"
+  },
+  {
+   "tag": "Norma",
+   "cite": "API RP 14C. Analysis, Design, Installation, and Testing of Safety Systems for Offshore Production Facilities.",
+   "why": "análisis de seguridad de instalaciones de producción"
+  }
+ ]
+}

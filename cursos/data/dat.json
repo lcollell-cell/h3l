@@ -148,12 +148,12 @@
        "q": {
         "q": "Un dato que está completo pero con unidades mezcladas tiene problema de:",
         "o": [
-         "Consistencia",
-         "Completitud",
          "Oportunidad",
+         "Completitud",
+         "Consistencia",
          "Unicidad"
         ],
-        "a": 0,
+        "a": 2,
         "e": "Las unidades distintas rompen la consistencia entre registros."
        }
       }
@@ -254,12 +254,12 @@
        "q": {
         "q": "El z-score clásico puede fallar en presencia de errores grandes porque:",
         "o": [
-         "Los errores inflan la media y el desvío, y se enmascaran",
-         "Es muy lento",
          "Solo sirve con agua",
+         "Es muy lento",
+         "Los errores inflan la media y el desvío, y se enmascaran",
          "Elimina la tendencia"
         ],
-        "a": 0,
+        "a": 2,
         "e": "Los propios valores erróneos agrandan el desvío y hacen que parezcan normales."
        }
       }
@@ -270,12 +270,12 @@
     {
      "q": "Un cierre programado de un pozo debe:",
      "o": [
-      "Marcarse con su causa y no borrarse",
       "Borrarse",
+      "Marcarse con su causa y no borrarse",
       "Reemplazarse por la media",
       "Ignorarse"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Es un evento real, que conviene conservar con su causa."
     },
     {
@@ -292,12 +292,12 @@
     {
      "q": "Una mediana móvil es útil porque:",
      "o": [
-      "Descuenta la tendencia local",
+      "Reemplaza al experto",
       "Elimina todo ruido",
       "Sustituye al sensor",
-      "Reemplaza al experto"
+      "Descuenta la tendencia local"
      ],
-     "a": 0,
+     "a": 3,
      "e": "Permite buscar atípicos respecto de un nivel local en lugar de uno global."
     }
    ]
@@ -408,12 +408,12 @@
        "q": {
         "q": "Si el error de entrenamiento es muy bajo y el de prueba alto, el modelo sufre:",
         "o": [
-         "Sobreajuste",
          "Subajuste",
+         "Sobreajuste",
          "Buen ajuste",
          "Falta de datos de entrada"
         ],
-        "a": 0,
+        "a": 1,
         "e": "Memoriza el entrenamiento y generaliza mal."
        }
       }
@@ -435,23 +435,23 @@
     {
      "q": "Una forma de reducir el sobreajuste es:",
      "o": [
-      "Regularizar o simplificar el modelo",
       "Agregar más parámetros",
+      "Regularizar o simplificar el modelo",
       "Evaluar solo con el entrenamiento",
       "Quitar la prueba"
      ],
-     "a": 0,
+     "a": 1,
      "e": "La regularización controla la complejidad."
     },
     {
      "q": "El modelo de referencia (baseline) sirve para:",
      "o": [
-      "Saber si el modelo complejo realmente mejora",
+      "Evitar la validación",
       "Dar nombre al proyecto",
       "Reemplazar los datos",
-      "Evitar la validación"
+      "Saber si el modelo complejo realmente mejora"
      ],
-     "a": 0,
+     "a": 3,
      "e": "Permite medir el aporte real de un modelo más complejo."
     }
    ]
@@ -701,12 +701,12 @@
        "q": {
         "q": "Se llama deriva de datos a:",
         "o": [
-         "El cambio en la distribución de las variables de entrada",
+         "La pérdida de un archivo",
          "Un error de tipeo",
          "Un tipo de sensor",
-         "La pérdida de un archivo"
+         "El cambio en la distribución de las variables de entrada"
         ],
-        "a": 0,
+        "a": 3,
         "e": "Los datos de entrada cambian respecto de los de entrenamiento."
        }
       }
@@ -780,12 +780,12 @@
        "q": {
         "q": "Un modelo de lenguaje que se usa para ingeniería debe:",
         "o": [
-         "Citar fuentes y pasar por revisión humana",
-         "Reemplazar al ingeniero",
          "Usar datos confidenciales sin control",
+         "Reemplazar al ingeniero",
+         "Citar fuentes y pasar por revisión humana",
          "Dar siempre una sola respuesta"
         ],
-        "a": 0,
+        "a": 2,
         "e": "Así se controla el riesgo de respuestas inventadas y se mantiene la responsabilidad."
        }
       }
@@ -796,12 +796,12 @@
     {
      "q": "La deriva de concepto es:",
      "o": [
-      "Un cambio en la relación entre entrada y resultado",
-      "Un cambio de nombre",
       "Un archivo corrupto",
+      "Un cambio de nombre",
+      "Un cambio en la relación entre entrada y resultado",
       "Una variable faltante"
      ],
-     "a": 0,
+     "a": 2,
      "e": "El modelo ya no refleja cómo funciona el proceso."
     },
     {
@@ -818,12 +818,12 @@
     {
      "q": "Una práctica de buen MLOps es:",
      "o": [
-      "Versionar datos, código y modelos",
       "Entrenar sin registro",
+      "Versionar datos, código y modelos",
       "Desplegar sin pruebas",
       "Borrar los datos viejos"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Permite reproducir y auditar los resultados."
     }
    ]
@@ -833,12 +833,12 @@
   {
    "q": "Para detectar atípicos en una serie con tendencia, conviene:",
    "o": [
-    "Descontar la tendencia, por ejemplo con una mediana móvil",
+    "Borrar la serie",
     "Usar la media global",
     "Ignorar los datos",
-    "Borrar la serie"
+    "Descontar la tendencia, por ejemplo con una mediana móvil"
    ],
-   "a": 0,
+   "a": 3,
    "e": "Se busca respecto de un nivel local."
   },
   {
@@ -866,23 +866,23 @@
   {
    "q": "Un modelo híbrido sirve para:",
    "o": [
-    "Respetar la física y aprender de los datos",
     "Evitar los datos",
+    "Respetar la física y aprender de los datos",
     "Evitar la física",
     "Reemplazar al ingeniero"
    ],
-   "a": 0,
+   "a": 1,
    "e": "Combina las dos fuentes de conocimiento."
   },
   {
    "q": "La deriva de datos se vigila con:",
    "o": [
-    "Monitoreo de la distribución de las entradas",
     "Un cambio de color",
+    "Monitoreo de la distribución de las entradas",
     "Un nuevo sensor",
     "Más preguntas"
    ],
-   "a": 0,
+   "a": 1,
    "e": "Se comparan los datos de producción con los de entrenamiento."
   },
   {

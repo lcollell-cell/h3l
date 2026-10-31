@@ -530,5 +530,131 @@ W.rrp=function(box,p,api){var h=mkui(box,[{k:'prod',l:'Producción del año',min
     h.out('<strong>Tasa de reposición '+nf(rr*100,0)+' %</strong> (adiciones netas / producción; cada empresa define su versión). Por debajo de 100 % se consumen reservas. Una revisión negativa por precio bajo puede borrar una buena campaña de extensiones. (Cifras de ejemplo.)')}
   draw(h.V)};
 
+/* ===== PVT: petróleo negro (correlaciones de Standing) ===== */
+function pvtOil(API,gg,T,Rsb){var go=141.5/(131.5+API),pb=18.2*(Math.pow(Rsb/gg,.83)*Math.pow(10,.00091*T-.0125*API)-1.4);pb=Math.max(pb,15);
+  function Rs(p){if(p>=pb)return Rsb;return gg*Math.pow((p/18.2+1.4)*Math.pow(10,.0125*API-.00091*T),1/.83)}
+  function Bo(p){var r=Rs(p),b=.9759+.00012*Math.pow(r*Math.sqrt(gg/go)+1.25*T,1.2);if(p>pb){var bob=.9759+.00012*Math.pow(Rsb*Math.sqrt(gg/go)+1.25*T,1.2);return bob*Math.exp(-1e-5*(p-pb))}return b}
+  return{pb:pb,Rs:Rs,Bo:Bo}}
+W.pvt=function(box,p,api){var h=mkui(box,[{k:'API',l:'Densidad API',min:15,max:45,step:1,v:p.API||32,f:function(v){return nf(v)+' °API'}},{k:'gg',l:'Densidad relativa del gas disuelto',min:.55,max:1.1,step:.01,v:p.gg||.75,f:function(v){return nf(v,2)}},{k:'T',l:'Temperatura del reservorio',min:100,max:300,step:5,v:p.T||200,f:function(v){return nf(v)+' °F'}},{k:'Rsb',l:'Relación gas-petróleo de burbuja Rsb',min:100,max:1500,step:25,v:p.Rsb||600,f:function(v){return nf(v)+' scf/STB'}}],draw,{side:true,w:700,h:340,touch:api.touch}),svg=h.svg;
+  function draw(V){svg.innerHTML='';var o=pvtOil(V.API,V.gg,V.T,V.Rsb),pm=Math.max(1000,Math.ceil(o.pb*1.6/500)*500),i,a=[],b=[];
+    for(i=0;i<=60;i++){var P=pm*i/60;a.push([P,o.Rs(P)]);b.push([P,o.Bo(P)])}
+    var g1=sv('g',null,svg),g2=sv('g',{transform:'translate(350,0)'},svg);
+    var p1=plot(g1,340,280,{l:46,r:10,t:26,b:40},[0,pm],[0,Math.ceil(V.Rsb*1.1/100)*100],{xl:'Presión (psi)',nx:4,ny:4}),bys=b.map(function(x){return x[1]}),bmax=Math.max.apply(null,bys),bmin=Math.min.apply(null,bys);
+    var by0=Math.min(1,bmin*.98),by1=bmax*1.04,p2=plot(g2,340,280,{l:46,r:10,t:26,b:40},[0,pm],[by0,by1],{xl:'Presión (psi)',nx:4,ny:4,yf:function(v){return nf(v,2)}});
+    lbl(g1,46,16,'Rs: gas disuelto (scf/STB)',TX,11);lbl(g2,46,16,'Bo: factor volumétrico (bbl/STB)',TX,11);
+    path(g1,a,p1.X,p1.Y,GN,2.4);path(g2,b,p2.X,p2.Y,AM,2.4);
+    [[g1,p1],[g2,p2]].forEach(function(z){sv('line',{x1:z[1].X(o.pb),x2:z[1].X(o.pb),y1:z[1].m.t,y2:z[1].m.t+z[1].h,stroke:'#fff','stroke-width':1.3,'stroke-dasharray':'4 3'},z[0]);lbl(z[0],z[1].X(o.pb)+4,z[1].m.t+12,'Pb ≈ '+nf(o.pb,0)+' psi',TX,10.5)});
+    h.out('Presión de burbuja <strong>≈ '+nf(o.pb,0)+' psi</strong> (correlación de Standing). Por debajo, el gas sale de solución: baja Rs y baja Bo. Por encima, solo se comprime el líquido y Bo cae muy poco. Correlaciones: estimación de partida; el dato de laboratorio manda. (Valores de ejemplo.)')}
+  draw(h.V)};
+
+/* ===== PVT: factor Z (Papay) y factor volumétrico del gas ===== */
+function gasZ(p,T,gg){var ppc=756.8-131*gg-3.6*gg*gg,tpc=169.2+349.5*gg-74*gg*gg,pr=p/ppc,tr=(T+459.67)/tpc;return 1-3.52*pr/Math.pow(10,.9813*tr)+.274*pr*pr/Math.pow(10,.8157*tr)}
+W.zf=function(box,p,api){var h=mkui(box,[{k:'gg',l:'Densidad relativa del gas',min:.55,max:.9,step:.01,v:p.gg||.65,f:function(v){return nf(v,2)}},{k:'T',l:'Temperatura',min:80,max:300,step:5,v:p.T||200,f:function(v){return nf(v)+' °F'}},{k:'P',l:'Presión de trabajo',min:200,max:8000,step:100,v:p.P||3000,f:function(v){return nf(v)+' psi'}}],draw,{side:true,w:700,h:340,touch:api.touch}),svg=h.svg;
+  function draw(V){svg.innerHTML='';var i,a=[],b=[],Tr=V.T+459.67;for(i=1;i<=60;i++){var P=8000*i/60;a.push([P,gasZ(P,V.T,V.gg)]);b.push([P,.02827*gasZ(P,V.T,V.gg)*Tr/P])}
+    var zmin=Math.min.apply(null,a.map(function(x){return x[1]})),z0=Math.floor(Math.min(.7,zmin)*20)/20,g1=sv('g',null,svg),g2=sv('g',{transform:'translate(350,0)'},svg);
+    var p1=plot(g1,340,280,{l:46,r:10,t:26,b:40},[0,8000],[z0,1.1],{xl:'Presión (psi)',nx:4,ny:4,yf:function(v){return nf(v,2)}}),bmax=b[0][1];
+    var p2=plot(g2,340,280,{l:52,r:10,t:26,b:40},[0,8000],[0,Math.ceil(bmax*1.05*100)/100],{xl:'Presión (psi)',nx:4,ny:4,yf:function(v){return nf(v,2)}});
+    lbl(g1,46,16,'Factor de compresibilidad Z',TX,11);lbl(g2,52,16,'Bg (ft³/scf)',TX,11);path(g1,a,p1.X,p1.Y,GN,2.4);path(g2,b,p2.X,p2.Y,AM,2.4);
+    var z=gasZ(V.P,V.T,V.gg),bg=.02827*z*Tr/V.P;sv('circle',{cx:p1.X(V.P),cy:p1.Y(z),r:5,fill:'#fff'},g1);sv('circle',{cx:p2.X(V.P),cy:p2.Y(bg),r:5,fill:'#fff'},g2);
+    h.out('A '+nf(V.P)+' psi y '+nf(V.T)+' °F: <strong>Z = '+nf(z,3)+'</strong>, <strong>Bg = '+nf(bg,5)+' ft³/scf</strong> (≈ '+nf(1/bg,0)+' scf por ft³ en reservorio). Z viene de la aproximación de Papay con propiedades pseudocríticas de Sutton; para diseño se usan correlaciones más completas o datos de laboratorio. (Valores de ejemplo.)')}
+  draw(h.V)};
+
+/* ===== GAS: balance de materiales p/z ===== */
+W.pz=function(box,p,api){var h=mkui(box,[{k:'G',l:'Gas original en sitio G',min:50,max:1000,step:10,v:p.G||300,f:function(v){return nf(v)+' Bscf'}},{k:'e',l:'Reposición por acuífero (fracción del vaciamiento)',min:0,max:.6,step:.05,v:p.e!=null?p.e:0,f:function(v){return nf(v*100)+' %'}},{k:'Gp',l:'Producción acumulada Gp',min:0,max:.9,step:.01,v:p.Gp||.4,f:function(v){return nf(v*100)+' % de G'}}],draw,{side:true,w:700,h:340,touch:api.touch}),svg=h.svg;
+  function draw(V){svg.innerHTML='';var pz0=4500/gasZ(4500,200,.65),pl=plot(svg,700,300,{l:60,r:20,t:24,b:44},[0,V.G],[0,pz0*1.05],{xl:'Producción acumulada Gp (Bscf)',yl:'p/z (psi)',nx:5,ny:5});
+    path(svg,[[0,pz0],[V.G,0]],pl.X,pl.Y,GN,2,'6 4');lbl(svg,pl.X(V.G*.55),pl.Y(pz0*.5)-8,'volumétrico: p/z = (pi/zi)(1 − Gp/G)',GN,10.5);
+    var pts=[],gp=V.Gp*V.G,i;for(i=0;i<=20;i++){var x=gp*i/20;pts.push([x,pz0*(1-(1-V.e)*x/V.G)])}path(svg,pts,pl.X,pl.Y,AM,2.8);
+    var yEnd=pts[pts.length-1][1];sv('circle',{cx:pl.X(gp),cy:pl.Y(yEnd),r:5,fill:'#fff'},svg);
+    var Ga=V.G/(1-V.e);if(V.e>0){path(svg,[[0,pz0],[Math.min(Ga,V.G*2),pz0*(1-Math.min(Ga,V.G*2)/Ga)]],pl.X,pl.Y,RD,1.6,'3 3');}
+    lbl(svg,pl.X(0)+8,pl.Y(pz0)-8,'pi / zi = '+nf(pz0,0)+' psi',TX,10.5);
+    h.out('Con Gp = <strong>'+nf(gp,0)+' Bscf</strong>, p/z ≈ <strong>'+nf(yEnd,0)+' psi</strong>.'+(V.e>0?' Con reposición de agua del '+nf(V.e*100)+' %, extrapolar la recta daría <strong>G aparente = '+nf(Ga,0)+' Bscf</strong> frente a G = '+nf(V.G,0)+': el acuífero hace parecer más grande al reservorio.':' Sin acuífero, la recta p/z vs Gp corta el eje en G.')+' (Modelo simplificado, valores de ejemplo.)')}
+  draw(h.V)};
+
+/* ===== GAS: curva de entrega (retropresión) ===== */
+W.dlv=function(box,p,api){var h=mkui(box,[{k:'pr',l:'Presión de reservorio',min:500,max:6000,step:100,v:p.pr||3000,f:function(v){return nf(v)+' psi'}},{k:'aof',l:'Caudal a pozo abierto (AOF)',min:5,max:100,step:5,v:p.aof||40,f:function(v){return nf(v)+' MMscfd'}},{k:'n',l:'Exponente n (1 = laminar, 0,5 = turbulento)',min:.5,max:1,step:.05,v:p.n||.85,f:function(v){return nf(v,2)}},{k:'pw',l:'Presión de fondo fluyente',min:100,max:3000,step:50,v:p.pw||1500,f:function(v){return nf(v)+' psi'}}],draw,{side:true,w:700,h:340,touch:api.touch}),svg=h.svg;
+  function draw(V){svg.innerHTML='';var C=V.aof/Math.pow(V.pr*V.pr,V.n),pw=Math.min(V.pw,V.pr),q=C*Math.pow(V.pr*V.pr-pw*pw,V.n),pts=[],i,pl=plot(svg,700,300,{l:60,r:20,t:24,b:44},[0,V.aof*1.05],[0,V.pr*1.05],{xl:'Caudal q (MMscfd)',yl:'Presión de fondo fluyente (psi)',nx:5,ny:5});
+    for(i=0;i<=60;i++){var P=V.pr*(1-i/60);pts.push([C*Math.pow(Math.max(0,V.pr*V.pr-P*P),V.n),P])}path(svg,pts,pl.X,pl.Y,GN,2.8);
+    sv('circle',{cx:pl.X(q),cy:pl.Y(pw),r:5.5,fill:'#fff'},svg);lbl(svg,pl.X(V.aof)-4,pl.Y(0)-8,'AOF '+nf(V.aof)+' MMscfd',AM,10.5,'end');lbl(svg,pl.X(0)+8,pl.Y(V.pr)+14,'pr = '+nf(V.pr)+' psi',TX,10.5);
+    h.out('Con pwf = '+nf(pw)+' psi el pozo entrega <strong>'+nf(q,1)+' MMscfd</strong> ('+nf(q/V.aof*100,0)+' % del AOF). Ecuación de retropresión q = C (pr² − pwf²)ⁿ: n cerca de 0,5 indica flujo turbulento y una curva con más caída. El AOF es una referencia, no un caudal operable. (Valores de ejemplo.)')}
+  draw(h.V)};
+
+/* ===== FACILITIES: dimensionamiento de un separador (Souders-Brown) ===== */
+W.sep=function(box,p,api){var h=mkui(box,[{k:'Q',l:'Caudal de gas',min:1,max:100,step:1,v:p.Q||20,f:function(v){return nf(v)+' MMscfd'}},{k:'P',l:'Presión de operación',min:5,max:100,step:1,v:p.P||30,f:function(v){return nf(v)+' bar'}},{k:'K',l:'Factor K de Souders-Brown',min:.04,max:.2,step:.01,v:p.K||.1,f:function(v){return nf(v,2)+' m/s'}},{k:'rl',l:'Densidad del líquido',min:600,max:1000,step:10,v:p.rl||800,f:function(v){return nf(v)+' kg/m³'}}],draw,{side:true,w:700,h:340,touch:api.touch}),svg=h.svg;
+  function dia(Qm,P,K,rl){var T=313.15,z=.9,gg=.7,rg=P*1e5*28.97*gg/(z*8314*T),qa=Qm*28316.85/86400*(1.01325/P)*(T/288.71)*z,v=K*Math.sqrt((rl-rg)/rg),A=qa/v;return{rg:rg,qa:qa,v:v,A:A,D:Math.sqrt(4*A/Math.PI)}}
+  function draw(V){svg.innerHTML='';var r=dia(V.Q,V.P,V.K,V.rl),pts=[],i;for(i=0;i<=40;i++){var P=5+95*i/40;pts.push([P,dia(V.Q,P,V.K,V.rl).D])}
+    var Dm=Math.ceil(pts[0][1]*1.05*10)/10,pl=plot(svg,700,300,{l:60,r:20,t:24,b:44},[0,100],[0,Dm],{xl:'Presión de operación (bar)',yl:'Diámetro mínimo (m)',nx:5,ny:5,yf:function(v){return nf(v,1)}});
+    path(svg,pts,pl.X,pl.Y,GN,2.8);sv('circle',{cx:pl.X(V.P),cy:pl.Y(r.D),r:5.5,fill:'#fff'},svg);
+    lbl(svg,pl.X(100)-6,pl.Y(Dm)+14,'Gas a '+nf(V.Q)+' MMscfd, T = 40 °C, Z = 0,9, γg = 0,7',TX,10.5,'end');
+    h.out('A '+nf(V.P)+' bar el gas pesa <strong>'+nf(r.rg,1)+' kg/m³</strong>; la velocidad máxima admisible es <strong>'+nf(r.v,2)+' m/s</strong> y el diámetro mínimo del separador vertical es <strong>'+nf(r.D,2)+' m</strong>. A mayor presión el gas es más denso, el caudal real baja y el recipiente se achica. K depende del diseño interno (extractor de niebla) y se toma de una norma o del fabricante. (Valores de ejemplo.)')}
+  draw(h.V)};
+
+/* ===== FACILITIES: compresión ===== */
+W.comp=function(box,p,api){var h=mkui(box,[{k:'P1',l:'Presión de succión',min:1,max:40,step:.5,v:p.P1||5,f:function(v){return nf(v,1)+' bar'}},{k:'P2',l:'Presión de descarga',min:10,max:150,step:1,v:p.P2||40,f:function(v){return nf(v)+' bar'}},{k:'T1',l:'Temperatura de succión',min:10,max:60,step:1,v:p.T1||35,f:function(v){return nf(v)+' °C'}},{k:'Q',l:'Caudal de gas',min:1,max:60,step:1,v:p.Q||15,f:function(v){return nf(v)+' MMscfd'}},{k:'eta',l:'Eficiencia politrópica/adiabática',min:.6,max:.9,step:.01,v:p.eta||.75,f:function(v){return nf(v*100)+' %'}}],draw,{side:true,w:700,h:340,touch:api.touch}),svg=h.svg;
+  var k=1.28,gg=.7,M=28.97*gg;
+  function calc(V,r){var a=Math.pow(r,(k-1)/k),T1=V.T1+273.15,T2=T1*(1+(a-1)/V.eta),m=V.Q*28316.85/86400*M/23.64,w=m*(8314.46/M)*T1*(k/(k-1))*(a-1)/V.eta/1000;return{T2:T2-273.15,kW:w}}
+  function draw(V){svg.innerHTML='';var r=Math.max(1.01,V.P2/V.P1),c=calc(V,r),pts=[],i;for(i=0;i<=40;i++){var rr=1.2+10.8*i/40;pts.push([rr,calc(V,rr).kW])}
+    var kmx=Math.ceil(pts[pts.length-1][1]*1.05/100)*100,pl=plot(svg,700,300,{l:60,r:20,t:24,b:44},[1,12],[0,kmx],{xl:'Relación de compresión r = P2/P1',yl:'Potencia (kW)',nx:5,ny:5});
+    path(svg,pts,pl.X,pl.Y,GN,2.8);var rx=Math.min(12,r);sv('circle',{cx:pl.X(rx),cy:pl.Y(c.kW),r:5.5,fill:'#fff'},svg);
+    var ns=Math.ceil(Math.log(r)/Math.log(4));h.out('Relación <strong>'+nf(r,1)+'</strong>: temperatura de descarga <strong>≈ '+nf(c.T2,0)+' °C</strong>, potencia al gas <strong>≈ '+nf(c.kW,0)+' kW</strong>. Con relaciones altas la temperatura sube y conviene dividir en etapas con enfriamiento intermedio (como orientación, '+ns+' etapa'+(ns>1?'s':'')+' con relación ≤ 4 cada una). Modelo de gas ideal con k = 1,28 y Z = 1: sirve para dimensionar, no para comprar. (Valores de ejemplo.)')}
+  draw(h.V)};
+
+/* ===== MIDSTREAM: pérdida de carga en un ducto de líquido ===== */
+W.pipe=function(box,p,api){var h=mkui(box,[{k:'Q',l:'Caudal',min:50,max:1500,step:10,v:p.Q||500,f:function(v){return nf(v)+' m³/h'}},{k:'D',l:'Diámetro interno',min:150,max:600,step:10,v:p.D||350,f:function(v){return nf(v)+' mm'}},{k:'L',l:'Longitud',min:10,max:300,step:5,v:p.L||100,f:function(v){return nf(v)+' km'}},{k:'mu',l:'Viscosidad',min:1,max:100,step:1,v:p.mu||8,f:function(v){return nf(v)+' cP'}},{k:'rho',l:'Densidad',min:700,max:950,step:10,v:p.rho||840,f:function(v){return nf(v)+' kg/m³'}}],draw,{side:true,w:700,h:340,touch:api.touch}),svg=h.svg;
+  function dp(Q,D,L,mu,rho){var d=D/1000,A=Math.PI*d*d/4,v=Q/3600/A,Re=rho*v*d/(mu/1000),e=4.6e-5,f=Re<2300?64/Re:.25/Math.pow(Math.log10(e/(3.7*d)+5.74/Math.pow(Re,.9)),2);return{v:v,Re:Re,f:f,dP:f*(L*1000/d)*rho*v*v/2/1e5}}
+  function draw(V){svg.innerHTML='';var r=dp(V.Q,V.D,V.L,V.mu,V.rho),ds=[V.D*.8,V.D,V.D*1.2],cols=[RD,GN,BL],pm=Math.max(5,Math.ceil(dp(1500,V.D*.8,V.L,V.mu,V.rho).dP/10)*10),pl=plot(svg,700,300,{l:60,r:20,t:24,b:44},[0,1500],[0,pm],{xl:'Caudal (m³/h)',yl:'Caída de presión (bar)',nx:5,ny:5});
+    ds.forEach(function(d,i){var pts=[],j;for(j=1;j<=40;j++){var q=1500*j/40;pts.push([q,Math.min(pm,dp(q,d,V.L,V.mu,V.rho).dP)])}path(svg,pts,pl.X,pl.Y,cols[i],i===1?2.8:1.6);lbl(svg,pl.X(1500)-4,pl.Y(Math.min(pm,dp(1500,d,V.L,V.mu,V.rho).dP))-6,nf(d)+' mm',cols[i],10.5,'end')});
+    sv('circle',{cx:pl.X(V.Q),cy:pl.Y(Math.min(pm,r.dP)),r:5.5,fill:'#fff'},svg);var kw=V.Q/3600*r.dP*1e5/1000;
+    h.out('Velocidad <strong>'+nf(r.v,2)+' m/s</strong>, Reynolds <strong>'+nf(r.Re,0)+'</strong> ('+(r.Re<2300?'laminar':'turbulento')+'), caída de presión <strong>'+nf(r.dP,1)+' bar</strong> en '+nf(V.L)+' km; potencia hidráulica <strong>≈ '+nf(kw,0)+' kW</strong>. La pérdida crece casi con el cuadrado del caudal y cae fuerte al aumentar el diámetro. Darcy-Weisbach con factor de Swamee-Jain; sin desniveles. (Valores de ejemplo.)')}
+  draw(h.V)};
+
+/* ===== MIDSTREAM: incertidumbre de la medición fiscal ===== */
+W.meas=function(box,p,api){var h=mkui(box,[{k:'um',l:'Incertidumbre del medidor (caudal)',min:.05,max:1,step:.05,v:p.um||.25,f:function(v){return nf(v,2)+' %'}},{k:'ut',l:'Incertidumbre de temperatura (efecto en volumen)',min:.02,max:.5,step:.01,v:p.ut||.1,f:function(v){return nf(v,2)+' %'}},{k:'ud',l:'Incertidumbre de densidad',min:.02,max:.5,step:.01,v:p.ud||.1,f:function(v){return nf(v,2)+' %'}},{k:'us',l:'Incertidumbre de muestreo y agua/sedimento',min:.02,max:.5,step:.01,v:p.us||.15,f:function(v){return nf(v,2)+' %'}},{k:'vol',l:'Volumen anual transferido',min:.5,max:20,step:.5,v:p.vol||5,f:function(v){return nf(v,1)+' MMbbl'}},{k:'pr',l:'Precio de ejemplo',min:30,max:120,step:5,v:p.pr||70,f:function(v){return nf(v)+' USD/bbl'}}],draw,{side:true,w:700,h:340,touch:api.touch}),svg=h.svg;
+  function draw(V){svg.innerHTML='';var xs=[['Medidor',V.um],['Temperatura',V.ut],['Densidad',V.ud],['Muestreo / BSW',V.us]],u=Math.sqrt(xs.reduce(function(a,x){return a+x[1]*x[1]},0)),mx=Math.max(1,u*1.2),i;
+    lbl(svg,30,30,'Contribución de cada fuente (incertidumbre estándar)',TX,12);
+    xs.forEach(function(x,i){var y=52+i*42;lbl(svg,30,y+14,x[0],TX,11);sv('rect',{x:190,y:y,width:300,height:20,fill:'rgba(255,255,255,.1)'},svg);sv('rect',{x:190,y:y,width:300*x[1]/mx,height:20,fill:BL},svg);lbl(svg,196+300*x[1]/mx,y+14,nf(x[1],2)+' %',TX,10.5)});
+    var y=52+4*42+6;lbl(svg,30,y+14,'Combinada (raíz de suma de cuadrados)',GN,11);sv('rect',{x:190,y:y,width:300,height:22,fill:'rgba(255,255,255,.1)'},svg);sv('rect',{x:190,y:y,width:300*u/mx,height:22,fill:GN},svg);lbl(svg,196+300*u/mx,y+15,nf(u,2)+' %',GN,11);
+    var U=2*u,risk=V.vol*1e6*V.pr*U/100;lbl(svg,30,y+60,'Expandida (k = 2, ≈ 95 %): ±'+nf(U,2)+' %  →  ± '+nf(risk/1e6,2)+' millones de USD por año',AM,12);
+    h.out('Incertidumbre combinada <strong>'+nf(u,2)+' %</strong>; expandida (k = 2) <strong>±'+nf(U,2)+' %</strong>. Sobre '+nf(V.vol,1)+' MMbbl, equivale a unos <strong>±'+nf(risk/1e6,2)+' millones de USD por año</strong>. La mejor inversión es reducir la fuente que más pesa. Las magnitudes son de ejemplo, no de un medidor real.')}
+  draw(h.V)};
+
+/* ===== COMERCIALIZACIÓN: cobertura con put, collar y swap ===== */
+W.hdg=function(box,p,api){var h=mkui(box,[{k:'ty',t:'sel',l:'Estrategia',o:[['none','Sin cobertura'],['put','Put (piso)'],['collar','Collar (piso y techo)'],['swap','Swap (precio fijo)']],v:p.ty||'put'},{k:'K1',l:'Precio piso (strike del put) / precio fijo del swap',min:40,max:100,step:1,v:p.K1||60,f:function(v){return nf(v)+' USD/bbl'}},{k:'K2',l:'Precio techo (strike del call vendido)',min:60,max:130,step:1,v:p.K2||85,f:function(v){return nf(v)+' USD/bbl'}},{k:'pm',l:'Prima neta pagada',min:0,max:10,step:.5,v:p.pm!=null?p.pm:3,f:function(v){return nf(v,1)+' USD/bbl'}},{k:'S',l:'Precio de mercado al vencimiento',min:20,max:130,step:1,v:p.S||55,f:function(v){return nf(v)+' USD/bbl'}}],draw,{side:true,w:700,h:340,touch:api.touch}),svg=h.svg;
+  function inc(V,s){var K1=V.K1,K2=Math.max(V.K2,V.K1+1);if(V.ty==='none')return s;if(V.ty==='put')return Math.max(s,K1)-V.pm;if(V.ty==='collar')return Math.min(Math.max(s,K1),K2)-V.pm*.0;return K1}
+  function draw(V){svg.innerHTML='';var pl=plot(svg,700,300,{l:60,r:20,t:24,b:44},[20,130],[0,130],{xl:'Precio de mercado al vencimiento (USD/bbl)',yl:'Ingreso neto por barril (USD)',nx:5,ny:5}),pts=[],base=[],s;
+    for(s=20;s<=130;s+=2){base.push([s,s]);pts.push([s,inc(V,s)])}path(svg,base,pl.X,pl.Y,'rgba(255,255,255,.45)',1.6,'5 4');path(svg,pts,pl.X,pl.Y,GN,2.8);
+    var r=inc(V,V.S);sv('circle',{cx:pl.X(V.S),cy:pl.Y(r),r:5.5,fill:'#fff'},svg);lbl(svg,pl.X(130)-4,pl.Y(130)+12,'Sin cobertura (línea punteada)',TX,10.5,'end');
+    h.out('Con el mercado en <strong>'+nf(V.S)+'</strong>, el ingreso por barril es <strong>'+nf(r,1)+'</strong> USD con esta estrategia frente a <strong>'+nf(V.S)+'</strong> sin cobertura'+(V.ty==='put'?' (la prima de '+nf(V.pm,1)+' USD es el costo del seguro)':V.ty==='collar'?' (el techo resigna ganancia a cambio de bajar el costo; aquí se supone un collar sin prima)':V.ty==='swap'?' (el swap fija el precio: elimina riesgo y también ganancia)':'')+'. Las primas son datos de entrada, no un cálculo de valuación. Ejemplo didáctico.')}
+  draw(h.V)};
+
+/* ===== COMERCIALIZACIÓN: netback y paridad de exportación ===== */
+W.nbk=function(box,p,api){var h=mkui(box,[{k:'ref',l:'Precio de referencia (crudo marcador)',min:40,max:120,step:1,v:p.ref||75,f:function(v){return nf(v)+' USD/bbl'}},{k:'dq',l:'Diferencial de calidad y ubicación',min:-15,max:5,step:.5,v:p.dq!=null?p.dq:-6,f:function(v){return nf(v,1)+' USD/bbl'}},{k:'fl',l:'Flete, seguro y gastos de puerto',min:0,max:15,step:.5,v:p.fl||4,f:function(v){return nf(v,1)+' USD/bbl'}},{k:'du',l:'Derechos de exportación (ejemplo)',min:0,max:30,step:1,v:p.du!=null?p.du:8,f:function(v){return nf(v)+' %'}},{k:'tr',l:'Transporte hasta el puerto',min:0,max:10,step:.5,v:p.tr||3,f:function(v){return nf(v,1)+' USD/bbl'}}],draw,{side:true,w:700,h:340,touch:api.touch}),svg=h.svg;
+  function draw(V){svg.innerHTML='';var fob=V.ref+V.dq-V.fl,duty=Math.max(0,fob*V.du/100),nb=fob-duty-V.tr,steps=[['Referencia',V.ref,V.ref,BL],['Diferencial',V.dq,V.ref+V.dq,V.dq<0?RD:GN],['Flete y puerto',-V.fl,fob,RD],['Derechos',-duty,fob-duty,RD],['Transporte',-V.tr,nb,RD],['Netback en boca de pozo',nb,nb,GN]];
+    var mx=Math.max(V.ref*1.1,10),pl=plot(svg,700,300,{l:60,r:20,t:24,b:60},[0,6],[0,mx],{nx:6,ny:5,yl:'USD por barril',xf:function(){return ''}}),i,run=0;
+    steps.forEach(function(s,i){var x=pl.X(i)+8,w=pl.X(1)-pl.X(0)-16,y0,y1;if(i===0||i===5){y0=0;y1=s[1]}else{y0=s[2];y1=s[2]-s[1]}var top=Math.max(y0,y1),bot=Math.min(y0,y1);sv('rect',{x:x,y:pl.Y(top),width:w,height:Math.max(1,pl.Y(bot)-pl.Y(top)),fill:s[3],'fill-opacity':.85},svg);lbl(svg,x+w/2,pl.Y(top)-5,nf(s[1],1),'#fff',10.5,'middle');lbl(svg,x+w/2,300-34,s[0],TX,10,'middle')});
+    h.out('Netback ≈ <strong>'+nf(nb,1)+' USD/bbl</strong> en boca de pozo: lo que queda del precio de referencia después de calidad, flete, derechos y transporte. Comparar el netback de exportar con el precio local es la lógica de la paridad de exportación. Los valores, incluidos los derechos, son de ejemplo y cambian por normativa.')}
+  draw(h.V)};
+
+/* ===== SEGURIDAD DE PROCESOS: LOPA ===== */
+W.lopa=function(box,p,api){var h=mkui(box,[{k:'fi',l:'Frecuencia del evento iniciador (10^x por año)',min:-3,max:0,step:.5,v:p.fi!=null?p.fi:-1,f:function(v){return '10^'+nf(v,1)}},{k:'p1',l:'PFD del control básico del proceso (10^x)',min:-2,max:0,step:.5,v:p.p1!=null?p.p1:-1,f:function(v){return '10^'+nf(v,1)}},{k:'p2',l:'PFD de alarma y respuesta del operador (10^x)',min:-2,max:0,step:.5,v:p.p2!=null?p.p2:-1,f:function(v){return '10^'+nf(v,1)}},{k:'p3',l:'PFD de la válvula de alivio u otra barrera (10^x)',min:-3,max:0,step:.5,v:p.p3!=null?p.p3:-2,f:function(v){return '10^'+nf(v,1)}},{k:'tg',l:'Frecuencia tolerable (10^x por año)',min:-7,max:-3,step:.5,v:p.tg!=null?p.tg:-5,f:function(v){return '10^'+nf(v,1)}}],draw,{side:true,w:700,h:340,touch:api.touch}),svg=h.svg;
+  function draw(V){svg.innerHTML='';var fm=V.fi+V.p1+V.p2+V.p3,gap=fm-V.tg,need=Math.max(0,gap),sil=need<=0?'No hace falta una función instrumentada adicional':need<=1?'SIL 1 (PFD entre 0,1 y 0,01)':need<=2?'SIL 2 (PFD entre 0,01 y 0,001)':need<=3?'SIL 3 (PFD entre 0,001 y 0,0001)':'Más de SIL 3: rediseñar el proceso';
+    var X0=40,W0=620,lo=-9,hi=1,sx=function(e){return X0+(e-lo)/(hi-lo)*W0};lbl(svg,X0,28,'Frecuencia del escenario (escala logarítmica, por año)',TX,12);
+    var rows=[['Iniciador',V.fi,BL],['Con control básico',V.fi+V.p1,VI],['Con alarma y operador',V.fi+V.p1+V.p2,AM],['Con alivio / barrera',fm,GN]];
+    rows.forEach(function(r,i){var y=50+i*44;lbl(svg,X0,y+13,r[0],TX,11);sv('rect',{x:sx(lo),y:y+18,width:Math.max(2,sx(r[1])-sx(lo)),height:16,fill:r[2],'fill-opacity':.85},svg);lbl(svg,sx(r[1])+6,y+31,'10^'+nf(r[1],1),TX,10.5)});
+    sv('line',{x1:sx(V.tg),x2:sx(V.tg),y1:44,y2:232,stroke:RD,'stroke-width':1.6,'stroke-dasharray':'5 4'},svg);lbl(svg,sx(V.tg)+5,246,'Tolerable 10^'+nf(V.tg,1),RD,11);
+    h.out('Frecuencia mitigada <strong>10^'+nf(fm,1)+'</strong> por año frente a una meta de <strong>10^'+nf(V.tg,1)+'</strong>. '+(need<=0?'Cumple con las capas actuales.':'Falta reducir en un factor 10^'+nf(need,1)+': <strong>'+sil+'</strong>.')+' LOPA es una verificación de orden de magnitud: cada capa debe ser independiente y su PFD estar justificado. Valores de ejemplo.')}
+  draw(h.V)};
+
+/* ===== SEGURIDAD DE PROCESOS: matriz de riesgo 5x5 ===== */
+W.rmx=function(box,p,api){var h=mkui(box,[{k:'s',l:'Severidad de la consecuencia (1 a 5)',min:1,max:5,step:1,v:p.s||4,f:function(v){return nf(v)}},{k:'l',l:'Probabilidad inicial (1 a 5)',min:1,max:5,step:1,v:p.l||4,f:function(v){return nf(v)}},{k:'b',l:'Niveles que bajan las barreras independientes',min:0,max:4,step:1,v:p.b!=null?p.b:2,f:function(v){return nf(v)}}],draw,{side:true,w:700,h:340,touch:api.touch}),svg=h.svg;
+  function col(r){return r<=4?'#2f8f5b':r<=9?'#c9a227':r<=15?'#d9822b':'#c0392b'}
+  function draw(V){svg.innerHTML='';var cw=54,x0=120,y0=30,i,j,l2=Math.max(1,V.l-V.b);
+    for(i=1;i<=5;i++)for(j=1;j<=5;j++){sv('rect',{x:x0+(j-1)*cw,y:y0+(5-i)*cw*.9,width:cw-2,height:cw*.9-2,fill:col(i*j),'fill-opacity':.8},svg);lbl(svg,x0+(j-1)*cw+cw/2-1,y0+(5-i)*cw*.9+cw*.45+3,i*j,'#fff',10.5,'middle')}
+    lbl(svg,x0+cw*2.5,y0+5*cw*.9+22,'Severidad →',TX,11,'middle');sv('text',{transform:'rotate(-90)',x:-(y0+cw*.9*2.5),y:x0-34,'text-anchor':'middle',fill:TX,'font-size':11,'font-weight':600},svg,'Probabilidad →');
+    function mk(l,s,c,t){var cx=x0+(s-1)*cw+cw/2-1,cy=y0+(5-l)*cw*.9+cw*.45;sv('circle',{cx:cx,cy:cy,r:11,fill:c,stroke:'#fff','stroke-width':2},svg);lbl(svg,cx,cy+4,t,'#0b1a30',11,'middle')}
+    mk(l2,V.s,GN,'B');mk(V.l,V.s,'#fff','A');var r0=V.s*V.l,r1=V.s*l2;
+    lbl(svg,420,60,'A: riesgo inicial = '+r0,'#fff',12);lbl(svg,420,84,'B: con barreras = '+r1,GN,12);
+    h.out('Riesgo inicial <strong>'+r0+'</strong> → con barreras <strong>'+r1+'</strong>. La matriz ordena prioridades, no mide el riesgo: cada organización define sus categorías y qué nivel es tolerable, y las barreras deben ser independientes, estar vigentes y verificarse. Ejemplo didáctico.')}
+  draw(h.V)};
+
 W.build=function(name,box,p,api){if(!W[name]){box.innerHTML='<div class="out">Laboratorio no disponible: '+name+'</div>';return{}}return W[name](box,p||{},api||{touch:function(){}})||{}};
 })();

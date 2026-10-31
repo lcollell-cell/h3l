@@ -1,0 +1,709 @@
+{
+ "id": "gas",
+ "title": "Ingeniería de yacimientos de gas",
+ "subtitle": "Gas original en sitio, balance de materiales p/z, curva de entrega, carga de líquidos y presión de abandono, con el caso Groningen.",
+ "desc": "Curso que lleva al ingeniero de reservorios y de producción al mundo del gas: el cálculo volumétrico, el método p/z con y sin acuífero, la ecuación de retropresión y el potencial del pozo, la carga de líquidos, la presión de abandono como control de las reservas y los riesgos geomecánicos del agotamiento.",
+ "objectives": [
+  "Calcular el gas original en sitio por el método volumétrico y estimar las reservas con una presión de abandono.",
+  "Aplicar el balance de materiales p/z e identificar el efecto de un acuífero.",
+  "Construir e interpretar una curva de entrega y el potencial de un pozo de gas.",
+  "Reconocer la carga de líquidos y los riesgos geomecánicos del agotamiento de un yacimiento."
+ ],
+ "labs": [
+  "balance de materiales p/z con acuífero",
+  "curva de entrega de un pozo de gas"
+ ],
+ "practiceMin": 80,
+ "competencies": [
+  {
+   "name": "Gas en sitio y recuperación",
+   "lessons": [
+    "g1"
+   ]
+  },
+  {
+   "name": "Balance de materiales p/z",
+   "lessons": [
+    "g2"
+   ]
+  },
+  {
+   "name": "Entrega de un pozo",
+   "lessons": [
+    "g3"
+   ]
+  },
+  {
+   "name": "Carga de líquidos",
+   "lessons": [
+    "g4"
+   ]
+  },
+  {
+   "name": "Abandono y reservas",
+   "lessons": [
+    "g5"
+   ]
+  },
+  {
+   "name": "Riesgos del agotamiento",
+   "lessons": [
+    "g6"
+   ]
+  }
+ ],
+ "intro": {
+  "hook": "El gas se produce por expansión: la presión cae y el yacimiento entrega lo que puede. Con pocos datos de presión y producción se puede estimar cuánto gas hay, y con la curva de entrega, cuánto puede salir por día.",
+  "questions": [
+   "¿Cuánto gas hay y cuánto se recupera?",
+   "¿Qué dice el gráfico de p/z contra la producción acumulada?",
+   "¿Qué pasa cuando el yacimiento se agota y qué riesgos trae?"
+  ],
+  "star": {
+   "caso": "Groningen: el mayor campo de gas de Europa",
+   "S": "Groningen, en el norte de los Países Bajos, se descubrió en 1959 y es el mayor campo de gas de Europa. Se produjo durante décadas por expansión del gas y la caída de presión.",
+   "T": "Abastecer de gas a los Países Bajos y a otros mercados europeos con un recurso de gran tamaño.",
+   "A": "La caída de presión compactó el yacimiento y desde 1986 se registraron unos 1.600 sismos inducidos. En 2012 ocurrió uno de magnitud 3,6, el mayor de la región. En 2018 las autoridades decidieron reducir gradualmente la producción.",
+   "R": "La extracción se detuvo en octubre de 2023. El caso muestra que el agotamiento de un yacimiento tiene efectos geomecánicos que deben evaluarse y gestionarse."
+  }
+ },
+ "modules": [
+  {
+   "id": "gm1",
+   "title": "Módulo 1 · Cuánto gas hay",
+   "lessons": [
+    {
+     "id": "g1",
+     "title": "Gas original en sitio y factor de recuperación",
+     "comp": "Gas en sitio y recuperación",
+     "cues": [
+      {
+       "say": "El gas original en sitio se calcula por el método volumétrico. Se multiplica el volumen poral con gas por el inverso del factor volumétrico inicial, para pasar del reservorio a condiciones de superficie. Los datos de entrada son área, espesor, porosidad, saturación de agua y el Bg inicial que sale del PVT.",
+       "scene": {
+        "t": "fm",
+        "k": "Gas original en sitio",
+        "h": "Método volumétrico",
+        "f": "G = 43.560 · A · h · φ · (1 − Sw) / Bgi   [scf; A en acres, h en ft, Bgi en ft³/scf]",
+        "n": "43.560 es el número de pies cuadrados por acre."
+       }
+      },
+      {
+       "say": "La recuperación del gas depende del mecanismo de empuje. En un yacimiento volumétrico, sin acuífero, el gas se expande y se recupera una fracción alta, limitada por la presión de abandono. Con empuje de agua, el acuífero invade la roca y deja gas atrapado, y la recuperación suele ser menor.",
+       "scene": {
+        "t": "tbl",
+        "k": "Mecanismos",
+        "h": "Recuperación y atención",
+        "cols": [
+         "Mecanismo",
+         "Recuperación",
+         "Atención"
+        ],
+        "rows": [
+         [
+          "Volumétrico (expansión)",
+          "Alta, limitada por la presión de abandono",
+          "Depende de la presión de abandono"
+         ],
+         [
+          "Empuje de agua",
+          "Menor, por gas atrapado detrás del frente",
+          "El acuífero mantiene la presión pero invade el pozo"
+         ],
+         [
+          "Sobrepresionado",
+          "Cambia de pendiente cuando la roca se compacta",
+          "Hay que interpretar el balance con cuidado"
+         ]
+        ],
+        "n": "No se dan porcentajes fijos: dependen de cada yacimiento y de la presión de abandono."
+       }
+      },
+      {
+       "say": "El factor de recuperación se calcula con las presiones. Es uno menos el cociente entre p sobre z de abandono y p sobre z inicial, en un yacimiento volumétrico. De ahí que la presión de abandono, que depende de la compresión y del contrato, sea una variable económica con efecto directo sobre las reservas.",
+       "scene": {
+        "t": "fm",
+        "k": "Recuperación volumétrica",
+        "h": "Con p/z",
+        "f": "FR = 1 − (pa / za) / (pi / zi)",
+        "n": "pa y za: presión y Z de abandono. pi y zi: iniciales."
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "En un yacimiento de gas volumétrico, la presión de abandono más baja produce:",
+        "o": [
+         "Más agua",
+         "Menor factor de recuperación",
+         "Ninguna diferencia",
+         "Mayor factor de recuperación"
+        ],
+        "a": 3,
+        "e": "Se recupera más gas al bajar más la presión."
+       }
+      }
+     ]
+    },
+    {
+     "id": "g2",
+     "title": "Balance de materiales y gráfico p/z",
+     "comp": "Balance de materiales p/z",
+     "cues": [
+      {
+       "say": "El balance de materiales dice que el gas producido sale del gas que el yacimiento tenía. En un yacimiento volumétrico, la relación entre p sobre z y la producción acumulada es una recta. Se grafica p/z contra Gp, y la recta, extrapolada hasta p/z igual a cero, corta el eje en el gas original en sitio G.",
+       "scene": {
+        "t": "fm",
+        "k": "Balance volumétrico",
+        "h": "Recta p/z",
+        "f": "p/z = (pi/zi) · (1 − Gp / G)",
+        "n": "Pendiente negativa. La intersección con el eje de Gp es G."
+       }
+      },
+      {
+       "say": "Si hay un acuífero activo, el agua repone parte del vaciamiento. La presión cae más lentamente y la recta se curva hacia arriba. Una extrapolación ingenua de los primeros puntos sobreestima el gas en sitio, porque el acuífero hace parecer al yacimiento más grande de lo que es.",
+       "scene": {
+        "t": "bul",
+        "k": "Efecto del acuífero",
+        "h": "Qué se observa",
+        "items": [
+         "La presión cae más lento que en un yacimiento volumétrico",
+         "La recta p/z se curva y la extrapolación temprana sobreestima G",
+         "Se necesita un modelo de acuífero para separar los efectos",
+         "La producción de agua en los pozos es una señal de alerta"
+        ]
+       },
+       "hl": 1
+      },
+      {
+       "say": "Laboratorio. Es un modelo simplificado con un porcentaje de reposición de agua. Cambiá el gas original, la reposición y la producción acumulada. Compará la recta volumétrica con la curva real y mirá el gas en sitio aparente que daría una extrapolación.",
+       "scene": {
+        "t": "viz",
+        "w": "pz",
+        "h": "Balance de materiales p/z",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Con empuje de agua, extrapolar la recta p/z de los primeros datos:",
+        "o": [
+         "No se puede graficar",
+         "Subestima el gas en sitio",
+         "Da el valor exacto",
+         "Sobreestima el gas en sitio"
+        ],
+        "a": 3,
+        "e": "La reposición hace que la presión caiga menos."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "El gas original en sitio de un yacimiento volumétrico se obtiene de:",
+     "o": [
+      "La temperatura de rocío",
+      "El caudal inicial",
+      "La viscosidad",
+      "La intersección de la recta p/z con el eje de Gp"
+     ],
+     "a": 3,
+     "e": "Es el punto donde p/z llega a cero."
+    },
+    {
+     "q": "En la fórmula volumétrica, dividir por Bgi sirve para:",
+     "o": [
+      "Pasar volumen de reservorio a volumen estándar",
+      "Calcular la presión",
+      "Obtener la viscosidad",
+      "Corregir por agua"
+     ],
+     "a": 0,
+     "e": "Bgi es el factor volumétrico inicial."
+    },
+    {
+     "q": "Un acuífero activo en un yacimiento de gas:",
+     "o": [
+      "Aumenta la porosidad",
+      "Disminuye la caída de presión y puede atrapar gas",
+      "Elimina el agua",
+      "Reduce el gas en sitio real"
+     ],
+     "a": 1,
+     "e": "Repone parte del vaciamiento pero deja gas atrapado."
+    }
+   ]
+  },
+  {
+   "id": "gm2",
+   "title": "Módulo 2 · Entrega y producción",
+   "lessons": [
+    {
+     "id": "g3",
+     "title": "Curva de entrega y potencial del pozo",
+     "comp": "Entrega de un pozo",
+     "cues": [
+      {
+       "say": "La capacidad de un pozo de gas se describe con la ecuación de retropresión, propuesta por Rawlins y Schellhardt en 1936. El caudal es una constante por la diferencia de cuadrados de presión, elevada a un exponente n. Con n igual a uno el flujo es laminar y con n cercano a medio, turbulento.",
+       "scene": {
+        "t": "fm",
+        "k": "Retropresión",
+        "h": "Rawlins y Schellhardt",
+        "f": "q = C · (pr² − pwf²)ⁿ\nAOF = C · pr^(2n)   (pwf = 0)",
+        "n": "C y n se obtienen de pruebas en varios caudales. Con 0,5 ≤ n ≤ 1."
+       }
+      },
+      {
+       "say": "El caudal a pozo abierto, o AOF, es el caudal teórico cuando la presión de fondo es cero. Es una referencia para comparar pozos y no un caudal operable. El caudal real depende de la presión de fondo fluyente, que a su vez depende de la tubería, del separador y de la compresión disponibles.",
+       "scene": {
+        "t": "bul",
+        "k": "AOF y caudal real",
+        "h": "Cómo leerlos",
+        "items": [
+         "AOF mide el potencial del reservorio y no el caudal de operación",
+         "El caudal operable cruza la curva de entrega con la curva de la tubería",
+         "Bajar la presión de cabeza con compresión sube el caudal",
+         "Con la caída de presión del reservorio, la curva de entrega se achica"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Laboratorio. Cambiá la presión de reservorio, el AOF, el exponente n y la presión de fondo fluyente. Mirá cómo el caudal sube al bajar la presión de fondo, con menos ganancia cuando el flujo es turbulento.",
+       "scene": {
+        "t": "viz",
+        "w": "dlv",
+        "h": "Curva de entrega",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "El AOF es:",
+        "o": [
+         "Un tipo de pozo",
+         "El caudal operativo real",
+         "La presión de rocío",
+         "Un caudal teórico de referencia con presión de fondo cero"
+        ],
+        "a": 3,
+        "e": "No se opera a pozo abierto."
+       }
+      }
+     ]
+    },
+    {
+     "id": "g4",
+     "title": "Carga de líquidos y vida de un pozo de gas",
+     "comp": "Carga de líquidos",
+     "cues": [
+      {
+       "say": "Los pozos de gas producen algo de agua o condensado. Mientras la velocidad del gas es alta, arrastra las gotas hasta la superficie. Cuando el yacimiento se despresuriza y el caudal baja, las gotas caen, el líquido se acumula en el fondo y su peso frena el pozo. Es la carga de líquidos.",
+       "scene": {
+        "t": "bul",
+        "k": "Carga de líquidos",
+        "h": "Cómo se manifiesta",
+        "items": [
+         "Caída brusca del caudal y de la presión de cabeza",
+         "Producción intermitente o a golpes",
+         "Aumento de la diferencia entre presión de tubing y de casing",
+         "Es más frecuente al envejecer el pozo"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Turner y coautores propusieron en 1969 un criterio simple: existe una velocidad crítica del gas, y por debajo de ella el pozo se carga. Con la densidad del gas en libras por pie cúbico y la velocidad en pies por segundo, el coeficiente típico es 5,62 para agua y 4,02 para condensado.",
+       "scene": {
+        "t": "fm",
+        "k": "Velocidad crítica",
+        "h": "Criterio de Turner",
+        "f": "vc = 5,62 · (ρl − ρg)^0,25 / ρg^0,5   (agua, ρ en lb/ft³, v en ft/s)\nvc = 4,02 · (ρl − ρg)^0,25 / ρg^0,5   (condensado)",
+        "n": "Se compara con la velocidad del gas en el fondo del pozo."
+       }
+      },
+      {
+       "say": "Para resolverlo se actúa sobre la velocidad o sobre el líquido. Se baja el diámetro de la tubería, se instalan sartas de velocidad, se bombea espumante, se usa un émbolo o gas lift, o se reduce la presión de cabeza con compresión. La solución se elige por costo y por la vida restante del pozo.",
+       "scene": {
+        "t": "tbl",
+        "k": "Soluciones",
+        "h": "Cuándo conviene cada una",
+        "cols": [
+         "Solución",
+         "Principio",
+         "Cuándo"
+        ],
+        "rows": [
+         [
+          "Sarta de velocidad",
+          "Tubería más chica sube la velocidad",
+          "Pozos con caudal bajo y vida larga"
+         ],
+         [
+          "Espumante",
+          "Aligera el líquido",
+          "Líquido con agua y poca producción"
+         ],
+         [
+          "Émbolo",
+          "Barre el líquido con un pistón",
+          "Relación gas-líquido alta"
+         ],
+         [
+          "Compresión",
+          "Baja la presión de cabeza",
+          "Varios pozos del mismo sistema"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "La carga de líquidos se produce cuando:",
+        "o": [
+         "Hay exceso de presión",
+         "La velocidad es muy alta",
+         "El pozo es nuevo",
+         "La velocidad del gas es menor que la crítica"
+        ],
+        "a": 3,
+        "e": "Las gotas ya no se arrastran hasta la superficie."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "En la ecuación de retropresión, un exponente n cercano a 0,5 indica:",
+     "o": [
+      "Ausencia de gas",
+      "Flujo siempre laminar",
+      "Flujo con fuerte turbulencia",
+      "Un acuífero fuerte"
+     ],
+     "a": 2,
+     "e": "Con n = 1 el flujo es laminar."
+    },
+    {
+     "q": "La mejor forma de aumentar el caudal de un pozo de gas con buen reservorio es:",
+     "o": [
+      "Reducir el diámetro sin análisis",
+      "Subir la presión de cabeza",
+      "Cerrar el pozo",
+      "Bajar la presión de fondo fluyente"
+     ],
+     "a": 3,
+     "e": "Con más caída de presión entra más gas."
+    },
+    {
+     "q": "Una sarta de velocidad ayuda porque:",
+     "o": [
+      "Reduce la presión de reservorio",
+      "Una tubería más chica aumenta la velocidad del gas",
+      "Aumenta el agua",
+      "Elimina el gas"
+     ],
+     "a": 1,
+     "e": "Con mayor velocidad se arrastra el líquido."
+    }
+   ]
+  },
+  {
+   "id": "gm3",
+   "title": "Módulo 3 · Abandono y riesgos",
+   "lessons": [
+    {
+     "id": "g5",
+     "title": "Presión de abandono y reservas de gas",
+     "comp": "Abandono y reservas",
+     "cues": [
+      {
+       "say": "La presión de abandono es la presión de reservorio a la cual el pozo deja de ser económico. Se determina con el caudal mínimo rentable, la presión de entrada al sistema y la compresión disponible. Con menor presión de abandono se recupera más gas, pero hay que pagar más compresión.",
+       "scene": {
+        "t": "bul",
+        "k": "Presión de abandono",
+        "h": "De qué depende",
+        "items": [
+         "Caudal mínimo económico del pozo",
+         "Presión del gasoducto de salida",
+         "Capacidad y costo de la compresión",
+         "Costos fijos y contrato de venta",
+         "Se revisa cada año con los datos nuevos"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Una vez fijada, la presión de abandono define las reservas. Se calcula el valor de p sobre z de abandono, se lee la producción acumulada final en la recta de balance y se resta lo ya producido. Cada cambio de contrato, de precio o de costo mueve esa presión y, con ella, las reservas.",
+       "scene": {
+        "t": "fm",
+        "k": "Reservas",
+        "h": "Con la recta p/z",
+        "f": "Gp,final = G · [1 − (pa/za)/(pi/zi)]\nReservas = Gp,final − Gp,acumulado",
+        "n": "Las reservas dependen de un supuesto económico: la presión de abandono."
+       }
+      },
+      {
+       "say": "Un yacimiento de gas casi siempre tiene un período de meseta, en el que se entrega un caudal contractual constante, seguido de una declinación cuando el yacimiento ya no puede sostenerlo. El número de pozos y la compresión se diseñan para extender la meseta con el costo mínimo.",
+       "scene": {
+        "t": "bul",
+        "k": "Meseta y declinación",
+        "h": "Diseño de un desarrollo",
+        "items": [
+         "Caudal contractual en meseta",
+         "Número de pozos para sostener la entrega",
+         "Compresión para extender la meseta",
+         "Declinación posterior con los pozos disponibles"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Las reservas de un yacimiento de gas volumétrico dependen de la presión de abandono porque:",
+        "o": [
+         "Define cuánto gas se puede producir antes de que deje de ser rentable",
+         "Cambia la porosidad",
+         "Cambia la temperatura de rocío",
+         "Elimina el agua"
+        ],
+        "a": 0,
+        "e": "Una presión más baja recupera más gas, con más compresión."
+       }
+      }
+     ]
+    },
+    {
+     "id": "g6",
+     "title": "Riesgos del agotamiento y el caso Groningen",
+     "comp": "Riesgos del agotamiento",
+     "cues": [
+      {
+       "say": "Al extraer fluido, la presión de poros baja y la roca soporta más peso efectivo. La formación se compacta. En algunas condiciones esa compactación llega a la superficie como subsidencia, o reactiva fallas y produce sismos inducidos. Es un riesgo geomecánico que debe evaluarse antes de desarrollar el yacimiento.",
+       "scene": {
+        "t": "bul",
+        "k": "Riesgos geomecánicos",
+        "h": "Del subsuelo a la superficie",
+        "items": [
+         "Compactación del yacimiento al bajar la presión de poros",
+         "Subsidencia en la superficie",
+         "Reactivación de fallas y sismos inducidos",
+         "Riesgo para pozos y para las construcciones cercanas"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Groningen fue descubierto en 1959 y es el mayor campo de gas de Europa. Desde 1986 se registraron unos 1.600 sismos. En 2012 hubo uno de magnitud 3,6, el mayor de la región. En 2018 las autoridades decidieron cerrar gradualmente el campo y la producción se detuvo en octubre de 2023, con algunos pozos disponibles como contingencia.",
+       "scene": {
+        "t": "case",
+        "h": "Groningen, Países Bajos",
+        "src": "Euronews (20 de abril de 2024), Netherlands officially stops drilling at Groningen's giant gas field",
+        "S": "Un campo gigante en producción desde la década de 1960, con compactación y sismos inducidos que afectaron a la población.",
+        "T": "Equilibrar el abastecimiento de gas con la seguridad de las personas.",
+        "A": "Reducción gradual de la producción desde la decisión de 2018, y detención de la extracción en octubre de 2023.",
+        "R": "Cierre del campo, con algunos pozos como contingencia ante un invierno extremo."
+       }
+      },
+      {
+       "say": "La lección para el evaluador es de método. Los estudios geomecánicos y el monitoreo de la subsidencia y de la sismicidad forman parte del plan de desarrollo, y el costo social y ambiental entra en la decisión, no solo en la evaluación del recurso. Un recurso grande no es una reserva si no hay licencia para producirlo.",
+       "scene": {
+        "t": "bul",
+        "k": "Buenas prácticas",
+        "h": "Para gestionar el riesgo",
+        "items": [
+         "Estudio geomecánico antes del desarrollo",
+         "Monitoreo de subsidencia y sismicidad",
+         "Umbrales de acción definidos de antemano",
+         "Comunicación con la comunidad",
+         "Plan de cierre y responsabilidad posterior"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "La compactación de un yacimiento al despresurizarse puede producir:",
+        "o": [
+         "Más gas en sitio",
+         "Aumento de la porosidad",
+         "Aumento de la presión",
+         "Subsidencia y sismos inducidos"
+        ],
+        "a": 3,
+        "e": "Es el riesgo geomecánico del agotamiento."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "La presión de abandono depende sobre todo de:",
+     "o": [
+      "La economía del pozo, la presión de la red y la compresión",
+      "La porosidad",
+      "El color del gas",
+      "El tipo de roca madre"
+     ],
+     "a": 0,
+     "e": "Es una variable económica con efecto directo sobre las reservas."
+    },
+    {
+     "q": "Un criterio simple para anticipar la carga de líquidos es:",
+     "o": [
+      "Medir el color del agua",
+      "Comparar la velocidad del gas con la velocidad crítica de Turner",
+      "Contar los pozos",
+      "Reducir el caudal a cero"
+     ],
+     "a": 1,
+     "e": "Por debajo de la velocidad crítica las gotas caen."
+    },
+    {
+     "q": "Los sismos inducidos de Groningen se relacionan con:",
+     "o": [
+      "Un terremoto natural de una falla lejana",
+      "La compactación por la caída de presión del yacimiento",
+      "La inyección de agua",
+      "La minería"
+     ],
+     "a": 1,
+     "e": "La despresurización redujo el soporte de la roca."
+    }
+   ]
+  }
+ ],
+ "exam": [
+  {
+   "q": "La intersección de la recta p/z con el eje de Gp da:",
+   "o": [
+    "La presión de rocío",
+    "El gas original en sitio",
+    "La porosidad",
+    "El caudal inicial"
+   ],
+   "a": 1,
+   "e": "En un yacimiento volumétrico."
+  },
+  {
+   "q": "Si un acuífero repone parte del vaciamiento:",
+   "o": [
+    "Z aumenta",
+    "El yacimiento se vuelve seco",
+    "La caída de presión es menor y G aparente se sobreestima",
+    "Se produce menos agua"
+   ],
+   "a": 2,
+   "e": "La recta p/z se curva."
+  },
+  {
+   "q": "El AOF representa:",
+   "o": [
+    "La presión de cabeza",
+    "El caudal que se opera",
+    "Un caudal teórico con presión de fondo cero",
+    "Una tubería"
+   ],
+   "a": 2,
+   "e": "Es un valor de referencia."
+  },
+  {
+   "q": "Un pozo de gas con carga de líquidos presenta:",
+   "o": [
+    "Caída de caudal y producción intermitente",
+    "Aumento de velocidad",
+    "Más presión de reservorio",
+    "Menos agua"
+   ],
+   "a": 0,
+   "e": "El líquido acumulado frena el pozo."
+  },
+  {
+   "q": "Al bajar la presión de abandono:",
+   "o": [
+    "No cambia nada",
+    "Disminuye la recuperación",
+    "Aumenta la recuperación y el costo de compresión",
+    "Desaparece el agua"
+   ],
+   "a": 2,
+   "e": "Se debe pagar más compresión para producir más gas."
+  },
+  {
+   "q": "Una lección de Groningen para evaluar un recurso es:",
+   "o": [
+    "Que el tamaño garantiza la reserva",
+    "Que los sismos no existen",
+    "Evaluar el riesgo geomecánico y la licencia para producir",
+    "Que el gas no se agota"
+   ],
+   "a": 2,
+   "e": "Un recurso grande no es una reserva sin licencia para producirlo."
+  }
+ ],
+ "outro": {
+  "can": [
+   "calcular el gas en sitio y las reservas con una presión de abandono",
+   "interpretar el gráfico p/z y detectar el efecto de un acuífero",
+   "construir una curva de entrega, anticipar la carga de líquidos y evaluar riesgos geomecánicos"
+  ],
+  "phrase": "En gas, la presión cuenta la historia del yacimiento: leerla bien vale más que extrapolarla rápido.",
+  "recap": [
+   "El gas en sitio sale del volumen poral y de Bgi, y la recta p/z lo confirma si no hay acuífero.",
+   "La curva de entrega y la presión de abandono transforman el potencial del reservorio en caudal y en reservas.",
+   "La carga de líquidos y el riesgo geomecánico de Groningen muestran que el agotamiento tiene costos físicos y sociales."
+  ]
+ },
+ "downloads": [
+  {
+   "file": "xlsx/H3L_Gas_Balance_pz_y_Entrega.xlsx",
+   "title": "Gas: balance p/z y curva de entrega (Excel)",
+   "desc": "Datos de presión y producción de ejemplo con regresión de p/z contra Gp, gas en sitio y reservas a una presión de abandono editable, y la curva de entrega por retropresión con AOF y caudal a una presión de fondo elegida.",
+   "task": "Con los datos de ejemplo, extrapolá la recta p/z, estimá G, y calculá las reservas para presiones de abandono de 500 y 1.000 psi."
+  }
+ ],
+ "cases": [
+  {
+   "title": "Groningen (Países Bajos)",
+   "text": "Descubierto en 1959, es el mayor campo de gas de Europa. Desde 1986 se registraron unos 1.600 sismos inducidos, con uno de magnitud 3,6 en 2012. En 2018 las autoridades decidieron cerrar el campo gradualmente, y la extracción se detuvo en octubre de 2023.",
+   "src": "Euronews (20 de abril de 2024), Netherlands officially stops drilling at Groningen's giant gas field"
+  }
+ ],
+ "refs": [
+  {
+   "tag": "Paper",
+   "cite": "Rawlins, E. L. y Schellhardt, M. A. (1936). Back-pressure data on natural gas wells and their application to production practices. U.S. Bureau of Mines, Monograph 7.",
+   "why": "ecuación de retropresión"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Lee, J. y Wattenbarger, R. A. (1996). Gas Reservoir Engineering. SPE Textbook Series, Vol. 5.",
+   "why": "balance de materiales y entrega en gas"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Turner, R. G., Hubbard, M. G. y Dukler, A. E. (1969). Analysis and prediction of minimum flow rate for the continuous removal of liquids from gas wells. Journal of Petroleum Technology 21(11), 1475–1482.",
+   "why": "velocidad crítica y carga de líquidos"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Standing, M. B. y Katz, D. L. (1942). Density of natural gases. Transactions of the AIME 146, 140–149.",
+   "why": "factor Z en el cálculo de p/z"
+  },
+  {
+   "tag": "Fuente",
+   "cite": "Euronews (2024). Netherlands officially stops drilling at Groningen's giant gas field.",
+   "why": "caso Groningen"
+  }
+ ]
+}

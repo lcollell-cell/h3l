@@ -121,12 +121,12 @@
        "q": {
         "q": "Una trampa se formó después de que el petróleo ya había migrado y se había perdido. ¿Qué concluís?",
         "o": [
-         "El prospecto sigue siendo igual de atractivo",
          "Falla la sincronía trampa–migración: probablemente no hay acumulación",
+         "El prospecto sigue siendo igual de atractivo",
          "El sello compensa cualquier problema de timing",
          "Solo importa la porosidad del reservorio"
         ],
-        "a": 1,
+        "a": 0,
         "e": "El petróleo necesita una trampa ya formada cuando migra. Si la trampa llega tarde, el hidrocarburo se pierde aunque existan todos los elementos."
        }
       }
@@ -181,12 +181,12 @@
        "q": {
         "q": "Si el gradiente geotérmico de una cuenca es mayor, manteniendo igual la historia de enterramiento, ¿qué ocurre con la generación?",
         "o": [
-         "Se retrasa",
          "Se adelanta: la roca alcanza antes las temperaturas de generación",
+         "Se retrasa",
          "No cambia",
          "Solo cambia la porosidad"
         ],
-        "a": 1,
+        "a": 0,
         "e": "Mayor gradiente significa mayor temperatura a igual profundidad, así que la roca entra antes en la ventana de generación."
        }
       }
@@ -209,22 +209,22 @@
      "q": "¿Qué indica la reflectancia de vitrinita (Ro)?",
      "o": [
       "La permeabilidad",
-      "El grado de madurez térmica de la materia orgánica",
+      "El espesor del sello",
       "La salinidad del agua",
-      "El espesor del sello"
+      "El grado de madurez térmica de la materia orgánica"
      ],
-     "a": 1,
+     "a": 3,
      "e": "Ro mide la madurez térmica y permite ubicar las ventanas de petróleo y gas."
     },
     {
      "q": "Un sistema donde el sello se depositó sobre el reservorio, pero la generación terminó hace mucho antes de que existiera la trampa, es un caso de:",
      "o": [
       "Excelente sincronía",
-      "Mala sincronía de eventos",
       "Sobrepresión",
+      "Mala sincronía de eventos",
       "Falla de la sísmica"
      ],
-     "a": 1,
+     "a": 2,
      "e": "La trampa debe existir antes o durante la migración; si no, el hidrocarburo no se acumula."
     }
    ]
@@ -308,12 +308,12 @@
        "q": {
         "q": "¿Con qué criterio conviene correlacionar pozos para construir un modelo estático?",
         "o": [
-         "Por parecido litológico de la roca",
          "Por superficies cronoestratigráficas, apoyadas en sísmica y bioestratigrafía",
+         "Por parecido litológico de la roca",
          "Por la profundidad de los topes",
          "Por el orden en que se perforaron los pozos"
         ],
-        "a": 1,
+        "a": 0,
         "e": "Las superficies de tiempo preservan la geometría real. La litología puede cruzar líneas de tiempo y conducir a conectividad falsa."
        }
       }
@@ -399,22 +399,22 @@
      "q": "¿Qué mide principalmente el registro de rayos gamma?",
      "o": [
       "La saturación de petróleo",
-      "El contenido de arcilla (radioactividad natural)",
       "La temperatura",
+      "El contenido de arcilla (radioactividad natural)",
       "La permeabilidad absoluta"
      ],
-     "a": 1,
+     "a": 2,
      "e": "Rayos gamma responde a minerales radioactivos asociados a arcillas, por eso se usa para estimar arcillosidad."
     },
     {
      "q": "La superficie de máxima inundación suele ser útil porque:",
      "o": [
-      "Es siempre una falla",
       "Es un marcador regional de correlación",
+      "Es siempre una falla",
       "Indica la presencia de agua dulce",
       "Define la ventana de gas"
      ],
-     "a": 1,
+     "a": 0,
      "e": "Marca la máxima profundización y es un horizonte de correlación confiable."
     },
     {
@@ -600,11 +600,11 @@
         "q": "¿Qué dato nuevo reduce con más certeza el rango P90–P10 del STOIIP?",
         "o": [
          "Repetir la misma simulación",
-         "Un pozo adicional o un núcleo que ajuste espesor, porosidad o saturación",
          "Cambiar el color del mapa",
+         "Un pozo adicional o un núcleo que ajuste espesor, porosidad o saturación",
          "Aumentar el número de decimales"
         ],
-        "a": 1,
+        "a": 2,
         "e": "La incertidumbre baja con información nueva, no con cálculo adicional sobre los mismos datos."
        }
       }
@@ -615,34 +615,34 @@
     {
      "q": "En la fórmula del STOIIP, ¿qué representa Bo?",
      "o": [
-      "El factor volumétrico del petróleo",
+      "La presión de burbuja",
       "El espesor bruto",
       "La saturación de agua",
-      "La presión de burbuja"
+      "El factor volumétrico del petróleo"
      ],
-     "a": 0,
+     "a": 3,
      "e": "Bo convierte volumen en condiciones de reservorio a condiciones de superficie."
     },
     {
      "q": "¿Qué diferencia al kriging de la simulación gaussiana secuencial?",
      "o": [
-      "El kriging da una estimación suave; la simulación da realizaciones equiprobables",
       "No hay diferencia",
+      "El kriging da una estimación suave; la simulación da realizaciones equiprobables",
       "El kriging no usa datos",
       "La simulación solo sirve para fallas"
      ],
-     "a": 0,
+     "a": 1,
      "e": "El kriging minimiza la varianza del error y suaviza; la simulación reproduce la variabilidad y mide incertidumbre."
     },
     {
      "q": "Si aumenta la incertidumbre de cada parámetro y no hay datos nuevos, el rango P10/P90 del STOIIP:",
      "o": [
       "Se reduce",
-      "Se abre",
       "Queda igual",
+      "Se abre",
       "Desaparece"
      ],
-     "a": 1,
+     "a": 2,
      "e": "Mayor incertidumbre de entrada se traduce en mayor dispersión de la salida."
     }
    ]
@@ -652,56 +652,56 @@
   {
    "q": "Un sistema petrolero exige:",
    "o": [
-    "Solo roca generadora",
     "Elementos y procesos, correctamente sincronizados",
+    "Solo roca generadora",
     "Solo trampa estructural",
     "Solo reservorio con alta porosidad"
    ],
-   "a": 1,
+   "a": 0,
    "e": "Los elementos y los procesos deben existir y ocurrir en el orden correcto."
   },
   {
    "q": "Una cuenca tiene un gradiente geotérmico alto. En igual historia de enterramiento, la ventana de petróleo se alcanza:",
    "o": [
     "Más tarde",
-    "Antes",
+    "Igual",
     "Nunca",
-    "Igual"
+    "Antes"
    ],
-   "a": 1,
+   "a": 3,
    "e": "Más temperatura a igual profundidad adelanta la generación."
   },
   {
    "q": "El criterio correcto de correlación para un modelo estático es:",
    "o": [
     "Litológico",
-    "Cronoestratigráfico",
     "Por distancia entre pozos",
+    "Cronoestratigráfico",
     "Por producción"
    ],
-   "a": 1,
+   "a": 2,
    "e": "Las superficies de tiempo preservan la geometría real de los cuerpos."
   },
   {
    "q": "Si se aplica Archie con parámetros por defecto en una lutita orgánica sin calibrar:",
    "o": [
     "La Sw es siempre correcta",
-    "Se puede obtener una Sw muy errónea",
+    "No importa",
     "El resultado es más conservador",
-    "No importa"
+    "Se puede obtener una Sw muy errónea"
    ],
-   "a": 1,
+   "a": 3,
    "e": "Hay que calibrar a, m y n con núcleos y usar modelos adecuados para rocas arcillosas y orgánicas."
   },
   {
    "q": "El upscaling debe cuidar especialmente:",
    "o": [
-    "La estética del modelo",
     "La conectividad y el comportamiento de flujo",
+    "La estética del modelo",
     "El número de colores",
     "El nombre de las zonas"
    ],
-   "a": 1,
+   "a": 0,
    "e": "Un escalado que destruye la conectividad invalida el modelo dinámico."
   },
   {

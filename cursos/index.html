@@ -14,7 +14,7 @@
 <meta property="og:title" content="Cursos Online H3L — H3L Global Energy">
 <meta property="og:description" content="Cursos online H3L de oil & gas y transición energética: lecciones narradas e interactivas, Excel de práctica, evaluaciones y certificado verificable para LinkedIn.">
 <meta property="og:image" content="https://www.h3lglobalenergy.com/assets/og-image.png">
-<link rel="stylesheet" href="cursos.css?v=9">
+<link rel="stylesheet" href="cursos.css?v=10">
 </head>
 <body>
 <header class="top">
@@ -41,11 +41,18 @@
   </section>
   <section class="sect" id="catalogo"><h2><span data-t="sec_h"></span><small id="langnote"></small></h2><p data-t="sec_p"></p>
   <div class="tb"><input id="qs" type="search" data-ta="placeholder:q_ph" placeholder="Buscar curso, tema o lección…" aria-label="Buscar"><div class="seg" id="vsw" role="group" data-ta="aria-label:vw" aria-label="Vista"><button type="button" data-v="cards" aria-pressed="true" data-t="vw_cards">Tarjetas</button><button type="button" data-v="list" aria-pressed="false" data-t="vw_list">Listado</button><button type="button" data-v="tree" aria-pressed="false" data-t="vw_tree">Explorador</button></div><div id="trbtns" hidden><button type="button" class="btn o s" id="exAll" data-t="ex_all">Expandir todo</button> <button type="button" class="btn o s" id="coAll" data-t="co_all">Contraer todo</button></div></div>
+  <div class="flt" id="flt" role="group" data-ta="aria-label:fl_aria" aria-label="Filtros del catálogo">
+    <label><span data-t="fl_sec">Categoría</span><select id="fSec"></select></label>
+    <label><span data-t="fl_lv">Nivel</span><select id="fLv"></select></label>
+    <label><span data-t="fl_tp">Tema</span><select id="fTp"></select></label>
+    <button type="button" class="btn o s" id="fClr" data-t="fl_clear">Limpiar filtros</button>
+    <span class="fcnt" id="fCnt" role="status" aria-live="polite"></span>
+  </div>
   <div id="secs"></div></section>
 </div>
 </main>
 <footer class="foot"><div class="wrap"><div>© H3L Global Energy · info@h3lglobalenergy.com · www.h3lglobalenergy.com</div><div data-t="demo">Los datos numéricos de los laboratorios y de los Excel son ejemplos didácticos, no datos de campos reales.</div></div></footer>
-<script src="core.js?v=5"></script>
-<script src="catalog.js?v=1"></script>
+<script src="core.js?v=6"></script>
+<script src="catalog.js?v=2"></script>
 <script src="../assets/h3l-stats.js?v=2" defer></script>
 </body></html>

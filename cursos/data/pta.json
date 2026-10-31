@@ -158,12 +158,12 @@
        "q": {
         "q": "Un cierre de fondo, con la válvula en el fondo del pozo, sirve sobre todo para:",
         "o": [
-         "Reducir el almacenamiento del pozo",
          "Aumentar la permeabilidad",
+         "Reducir el almacenamiento del pozo",
          "Eliminar el daño",
          "Cambiar el fluido producido"
         ],
-        "a": 0,
+        "a": 1,
         "e": "Al cerrar en el fondo el volumen de fluido que sigue acumulándose es mucho menor, y el efecto de almacenamiento termina antes."
        }
       }
@@ -288,34 +288,34 @@
     {
      "q": "La derivada de presión que se grafica es la derivada respecto de:",
      "o": [
-      "El tiempo lineal",
       "El logaritmo del tiempo",
+      "El tiempo lineal",
       "La profundidad",
       "El caudal"
      ],
-     "a": 1,
+     "a": 0,
      "e": "Se usa dΔp/d ln t, que en flujo radial infinito es constante."
     },
     {
      "q": "Una prueba de restauración o build-up consiste en:",
      "o": [
       "Producir a caudal constante sin cerrar",
-      "Cerrar el pozo luego de producir y medir la presión",
       "Inyectar sin medir",
+      "Cerrar el pozo luego de producir y medir la presión",
       "Cambiar el choke cada hora"
      ],
-     "a": 1,
+     "a": 2,
      "e": "Se cierra el pozo luego de un período de producción y se registra la recuperación de la presión."
     },
     {
      "q": "Antes de la prueba, la simulación sirve para:",
      "o": [
       "Elegir el color del informe",
-      "Estimar cuánto tiempo hace falta para ver el régimen buscado",
+      "Evitar el cierre",
       "Reemplazar al sensor",
-      "Evitar el cierre"
+      "Estimar cuánto tiempo hace falta para ver el régimen buscado"
      ],
-     "a": 1,
+     "a": 3,
      "e": "Permite estimar cuándo se alcanzan el flujo radial o los límites."
     }
    ]
@@ -385,12 +385,12 @@
        "q": {
         "q": "Un factor de daño positivo indica:",
         "o": [
-         "Caída de presión adicional cerca del pozo",
+         "Un reservorio infinito",
          "Un pozo fracturado",
          "Mayor permeabilidad",
-         "Un reservorio infinito"
+         "Caída de presión adicional cerca del pozo"
         ],
-        "a": 0,
+        "a": 3,
         "e": "S positivo es una restricción al flujo cerca del pozo, que agrega caída de presión."
        }
       }
@@ -571,12 +571,12 @@
     {
      "q": "Con una pendiente de Horner mayor, para el mismo caudal, la permeabilidad es:",
      "o": [
-      "Mayor",
       "Menor",
+      "Mayor",
       "Igual",
       "Indeterminada"
      ],
-     "a": 1,
+     "a": 0,
      "e": "k es inversamente proporcional a la pendiente m."
     },
     {
@@ -671,12 +671,12 @@
        "q": {
         "q": "El DFIT sirve principalmente para estimar:",
         "o": [
-         "La presión de cierre de la fractura y la presión de reservorio",
+         "El peso del lodo",
          "La saturación de agua",
          "La porosidad",
-         "El peso del lodo"
+         "La presión de cierre de la fractura y la presión de reservorio"
         ],
-        "a": 0,
+        "a": 3,
         "e": "Es una minifractura que se analiza durante el cierre, y de ella salen la presión de cierre y la presión de poro."
        }
       }
@@ -768,12 +768,12 @@
        "q": {
         "q": "Para poder interpretar bien una restauración de presión, el historial de caudales debe:",
         "o": [
-         "Estar completo y sincronizado con la presión",
-         "Omitirse",
          "Ser aproximado",
+         "Omitirse",
+         "Estar completo y sincronizado con la presión",
          "Descartarse"
         ],
-        "a": 0,
+        "a": 2,
         "e": "La superposición necesita todos los cambios de caudal que ocurrieron antes del cierre."
        }
       }
@@ -795,23 +795,23 @@
     {
      "q": "Si en el laboratorio no aparece la meseta de la derivada, lo correcto es:",
      "o": [
-      "Leer k igual",
       "Concluir que no se alcanzó el flujo radial y que hace falta más tiempo o menos almacenamiento",
+      "Leer k igual",
       "Eliminar el dato",
       "Usar el último punto"
      ],
-     "a": 1,
+     "a": 0,
      "e": "Sin meseta no se puede leer la capacidad de flujo de ese régimen."
     },
     {
      "q": "El análisis RTA usa:",
      "o": [
-      "Datos de producción",
+      "Solo análisis de fluidos",
       "Solo registros eléctricos",
       "Solo sísmica",
-      "Solo análisis de fluidos"
+      "Datos de producción"
      ],
-     "a": 0,
+     "a": 3,
      "e": "Aprovecha los caudales y presiones de producción para estimar parámetros del reservorio."
     }
    ]
@@ -832,56 +832,56 @@
   {
    "q": "La derivada de presión se calcula respecto de:",
    "o": [
-    "t",
     "ln t",
+    "t",
     "p",
     "q"
    ],
-   "a": 1,
+   "a": 0,
    "e": "dΔp/d ln t."
   },
   {
    "q": "El flujo lineal hacia una fractura aparece con una derivada de pendiente:",
    "o": [
     "1",
-    "1/2",
     "0",
+    "1/2",
     "−1"
    ],
-   "a": 1,
+   "a": 2,
    "e": "La pendiente 1/2 es la firma del flujo lineal."
   },
   {
    "q": "El almacenamiento del pozo se reconoce por:",
    "o": [
-    "Pendiente unitaria al inicio",
+    "Pendiente negativa",
     "Una meseta",
     "Un valle",
-    "Pendiente negativa"
+    "Pendiente unitaria al inicio"
    ],
-   "a": 0,
+   "a": 3,
    "e": "En el inicio, presión y derivada siguen una recta de pendiente 1."
   },
   {
    "q": "Una falla sellante a cierta distancia produce:",
    "o": [
-    "Una meseta que se duplica",
+    "Ningún cambio",
     "Un valle",
     "Una pendiente 1/2 al inicio",
-    "Ningún cambio"
+    "Una meseta que se duplica"
    ],
-   "a": 0,
+   "a": 3,
    "e": "El segundo nivel de la meseta vale el doble del primero."
   },
   {
    "q": "Un buen informe de prueba debe incluir:",
    "o": [
-    "Parámetros con incertidumbre y supuestos",
-    "Solo un número",
     "Solo gráficos",
+    "Solo un número",
+    "Parámetros con incertidumbre y supuestos",
     "Nada de los datos"
    ],
-   "a": 0,
+   "a": 2,
    "e": "Trazabilidad y rangos hacen que el resultado sea utilizable."
   }
  ],

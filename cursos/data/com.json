@@ -1,0 +1,744 @@
+{
+ "id": "com",
+ "title": "Comercialización de hidrocarburos y cobertura de precios",
+ "subtitle": "Precios de referencia, diferenciales, netback, paridad de exportación, futuros, swaps y opciones, riesgo de contraparte y el WTI negativo de 2020.",
+ "desc": "Curso para quien vende petróleo y gas y para quien decide cuánto riesgo de precio asumir: cómo se forma el precio, qué es el netback, cómo funcionan los instrumentos de cobertura, qué riesgos aparecen con las contrapartes y los contratos, y qué enseñó el precio negativo del WTI en abril de 2020.",
+ "objectives": [
+  "Explicar cómo se forma el precio de un crudo y de un gas a partir de una referencia y diferenciales.",
+  "Calcular un netback y compararlo con el precio local y con la exportación.",
+  "Describir futuros, swaps y opciones y comparar put, collar y swap como coberturas.",
+  "Gestionar riesgos de contraparte, de base y de liquidez, y definir una política de cobertura."
+ ],
+ "labs": [
+  "netback de exportación paso a paso",
+  "coberturas: put, collar y swap"
+ ],
+ "practiceMin": 80,
+ "competencies": [
+  {
+   "name": "Formación de precios",
+   "lessons": [
+    "c1"
+   ]
+  },
+  {
+   "name": "Netback y paridad",
+   "lessons": [
+    "c2"
+   ]
+  },
+  {
+   "name": "Instrumentos de cobertura",
+   "lessons": [
+    "c3"
+   ]
+  },
+  {
+   "name": "Estrategias de cobertura",
+   "lessons": [
+    "c4"
+   ]
+  },
+  {
+   "name": "Contratos y contraparte",
+   "lessons": [
+    "c5"
+   ]
+  },
+  {
+   "name": "Gobierno del riesgo",
+   "lessons": [
+    "c6"
+   ]
+  }
+ ],
+ "intro": {
+  "hook": "El precio es la variable que más mueve el valor de un proyecto y la que menos controla el productor. Lo que sí se puede decidir es qué parte de ese riesgo se asume y qué parte se cubre.",
+  "questions": [
+   "¿De qué se compone el precio que efectivamente recibe un productor?",
+   "¿Cuándo conviene cubrirse y con qué instrumento?",
+   "¿Qué riesgos nuevos aparecen cuando se cubre?"
+  ],
+  "star": {
+   "caso": "20 de abril de 2020: el WTI cerró en −37,63 dólares",
+   "S": "A comienzos de 2020 el mercado mundial ya tenía exceso de oferta, y la pandemia produjo una caída de la demanda sin precedentes. El contrato de futuros de mayo del WTI se acercaba a su vencimiento.",
+   "T": "Quienes tenían posiciones debían cerrarlas antes del vencimiento o prepararse para recibir el petróleo físico.",
+   "A": "Según el informe preliminar de la CFTC, el contrato de mayo bajó de 17,73 dólares por barril y se liquidó el 20 de abril de 2020, el día anterior a su vencimiento, en −37,63. Entre los factores que pudieron influir, el informe menciona la preocupación por la disponibilidad de almacenamiento.",
+   "R": "Fue la primera vez en 37 años de cotización que el contrato operó a un precio negativo. El caso muestra que la logística tiene valor y que hay que entender cómo se liquida un instrumento antes de usarlo para cubrirse. La CFTC aclaró que su informe no establece causas."
+  }
+ },
+ "modules": [
+  {
+   "id": "cm1",
+   "title": "Módulo 1 · De dónde sale el precio",
+   "lessons": [
+    {
+     "id": "c1",
+     "title": "Referencias, diferenciales y contratos",
+     "comp": "Formación de precios",
+     "cues": [
+      {
+       "say": "El precio de un crudo se fija con una referencia, o marcador, más o menos un diferencial. Las referencias más usadas son el Brent, de crudo del Mar del Norte, y el WTI, de crudo de Estados Unidos entregado en Cushing, Oklahoma. El precio de venta es la referencia más el diferencial que refleja calidad y ubicación.",
+       "scene": {
+        "t": "fm",
+        "k": "Precio de venta",
+        "h": "Referencia y diferencial",
+        "f": "Precio = precio de referencia + diferencial de calidad y de ubicación",
+        "n": "El diferencial puede ser negativo, si el crudo es peor o está más lejos que el marcador."
+       }
+      },
+      {
+       "say": "La calidad se mide con la densidad API y con el contenido de azufre. Un crudo liviano y de bajo azufre rinde más productos valiosos en una refinería y se vende mejor. Uno pesado y de alto azufre requiere procesos más complejos y recibe un descuento. La ubicación pesa por el costo de llevarlo hasta el comprador.",
+       "scene": {
+        "t": "tbl",
+        "k": "Calidad",
+        "h": "Efecto en el diferencial",
+        "cols": [
+         "Característica",
+         "Valorado",
+         "Efecto"
+        ],
+        "rows": [
+         [
+          "Densidad API alta (liviano)",
+          "Más nafta y diésel",
+          "Diferencial mejor"
+         ],
+         [
+          "Azufre bajo (dulce)",
+          "Menos tratamiento",
+          "Diferencial mejor"
+         ],
+         [
+          "Densidad API baja (pesado)",
+          "Más residuos",
+          "Diferencial peor"
+         ],
+         [
+          "Lejanía del comprador",
+          "Más flete y logística",
+          "Diferencial peor"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "El gas natural no tiene un único precio mundial. Se negocia en mercados regionales, con referencias como el Henry Hub en Estados Unidos, y los precios de cada región pueden ser muy distintos. El gas natural licuado conecta mercados, a cambio del costo de licuar, transportar y regasificar. Los contratos pueden ser de largo plazo, indexados, o de corto plazo, al contado.",
+       "scene": {
+        "t": "bul",
+        "k": "Gas",
+        "h": "Precios regionales",
+        "items": [
+         "No hay un precio único global",
+         "Referencias regionales, como Henry Hub",
+         "Contratos de largo plazo con fórmulas de indexación",
+         "El GNL conecta mercados con un costo fijo alto",
+         "La capacidad de transporte condiciona el precio local"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "El precio de venta de un crudo suele expresarse como:",
+        "o": [
+         "Solo el costo de producción",
+         "Una referencia más un diferencial",
+         "El precio del gas",
+         "Un valor fijo para siempre"
+        ],
+        "a": 1,
+        "e": "El diferencial refleja calidad y ubicación."
+       }
+      }
+     ]
+    },
+    {
+     "id": "c2",
+     "title": "Netback y paridad de exportación",
+     "comp": "Netback y paridad",
+     "cues": [
+      {
+       "say": "El netback es lo que recibe el productor en boca de pozo después de descontar todo lo que cuesta llegar al comprador. Se parte del precio de referencia, se suma el diferencial, se restan el flete, los gastos de puerto, los derechos o impuestos de exportación y el transporte hasta el puerto.",
+       "scene": {
+        "t": "fm",
+        "k": "Netback",
+        "h": "Del mercado al pozo",
+        "f": "Netback = referencia + diferencial − flete y puerto − derechos − transporte interno",
+        "n": "Se expresa en dólares por barril en la boca de pozo."
+       }
+      },
+      {
+       "say": "Laboratorio. Cambiá el precio de referencia, el diferencial, el flete, los derechos y el transporte. Mirá cómo se arma la cascada que va del precio internacional al netback. Los valores, incluidos los derechos, son de ejemplo y cambian con la normativa.",
+       "scene": {
+        "t": "viz",
+        "w": "nbk",
+        "h": "Netback de exportación",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "La paridad de exportación compara lo que se obtiene exportando con lo que se obtiene vendiendo en el mercado local. Si el precio local es menor que el netback de exportar, el productor prefiere exportar, y si no puede hacerlo, el mercado local queda con un precio inferior. Es una herramienta para analizar políticas de precios y de acceso al mercado.",
+       "scene": {
+        "t": "bul",
+        "k": "Paridad",
+        "h": "Cómo se lee",
+        "items": [
+         "Precio local contra netback de exportar",
+         "Si el local es menor, hay incentivo a exportar",
+         "Las restricciones de exportación bajan el precio local",
+         "Los derechos de exportación bajan el netback",
+         "La política de cada país cambia con el tiempo"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Un derecho de exportación más alto, con lo demás igual:",
+        "o": [
+         "Sube el netback",
+         "Baja el netback del productor",
+         "No cambia el netback",
+         "Sube el precio internacional"
+        ],
+        "a": 1,
+        "e": "Se resta del precio de referencia."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "El crudo liviano y dulce suele tener:",
+     "o": [
+      "Ningún diferencial",
+      "Un diferencial peor",
+      "Un diferencial mejor que un pesado y sulfuroso",
+      "Un precio negativo"
+     ],
+     "a": 2,
+     "e": "Rinde más productos valiosos."
+    },
+    {
+     "q": "El Henry Hub es:",
+     "o": [
+      "Una referencia de precio del gas en Estados Unidos",
+      "Un tipo de pozo",
+      "Un puerto",
+      "Una norma"
+     ],
+     "a": 0,
+     "e": "Los mercados de gas son regionales."
+    },
+    {
+     "q": "El netback se calcula:",
+     "o": [
+      "Con el precio local",
+      "Sumando los costos",
+      "Solo con el flete",
+      "Descontando del precio de referencia todo el costo de llegar al comprador"
+     ],
+     "a": 3,
+     "e": "Es lo que queda en boca de pozo."
+    }
+   ]
+  },
+  {
+   "id": "cm2",
+   "title": "Módulo 2 · Cobertura",
+   "lessons": [
+    {
+     "id": "c3",
+     "title": "Futuros, swaps y opciones",
+     "comp": "Instrumentos de cobertura",
+     "cues": [
+      {
+       "say": "Un futuro es un contrato estandarizado, negociado en un mercado organizado, para comprar o vender una cantidad de producto a un precio y en una fecha futuros. Exige un depósito de garantía y se liquida a diario con el precio de mercado, de modo que las ganancias y las pérdidas se pagan o se cobran todos los días, los llamados márgenes.",
+       "scene": {
+        "t": "bul",
+        "k": "Futuro",
+        "h": "Características",
+        "items": [
+         "Estandarizado y negociado en un mercado organizado",
+         "Garantía inicial y liquidación diaria",
+         "Se cierra antes del vencimiento casi siempre",
+         "Una pérdida diaria exige fondos de inmediato"
+        ]
+       },
+       "hl": 3
+      },
+      {
+       "say": "Un swap es un contrato privado en el que se cambia un precio variable por uno fijo durante un período, y se liquida por diferencia. Una opción da el derecho, pero no la obligación, de comprar, el call, o de vender, el put, a un precio fijado, el strike. Quien compra la opción paga una prima por ese derecho.",
+       "scene": {
+        "t": "tbl",
+        "k": "Instrumentos",
+        "h": "Comparación",
+        "cols": [
+         "Instrumento",
+         "Qué fija",
+         "Costo inicial"
+        ],
+        "rows": [
+         [
+          "Futuro",
+          "Un precio y una fecha",
+          "Garantía y márgenes diarios"
+         ],
+         [
+          "Swap",
+          "Un precio fijo por período",
+          "Sin prima, con riesgo de crédito"
+         ],
+         [
+          "Put comprado",
+          "Un precio mínimo",
+          "Prima"
+         ],
+         [
+          "Call comprado",
+          "Un precio máximo de compra",
+          "Prima"
+         ],
+         [
+          "Collar",
+          "Piso y techo",
+          "Prima baja o nula"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Cubrir no es especular. La cobertura se hace sobre producción esperada, para reducir la variabilidad del flujo de caja, y no para ganar con el mercado. Si se cubre más de lo que se produce, se vuelve especulación. Y la cobertura nunca es perfecta: aparece el riesgo de base, la diferencia entre el precio de referencia cubierto y el precio real que recibe el productor.",
+       "scene": {
+        "t": "bul",
+        "k": "Cobertura",
+        "h": "Principios",
+        "items": [
+         "Se cubre producción esperada y no más",
+         "El objetivo es proteger el flujo de caja",
+         "El riesgo de base permanece",
+         "Se pierde la ganancia si el precio sube, según el instrumento",
+         "Hay costos: primas, márgenes y crédito"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Un put comprado asegura:",
+        "o": [
+         "Ninguna protección",
+         "Un precio máximo",
+         "Un precio fijo exacto",
+         "Un precio mínimo de venta, a cambio de una prima"
+        ],
+        "a": 3,
+        "e": "Es como un seguro de piso."
+       }
+      }
+     ]
+    },
+    {
+     "id": "c4",
+     "title": "Estrategias de cobertura",
+     "comp": "Estrategias de cobertura",
+     "cues": [
+      {
+       "say": "Cuatro estrategias básicas. Sin cobertura, el productor se expone al precio de mercado completo. Con un put, se paga una prima y se asegura un piso, sin perder la ganancia si el precio sube. Con un swap, se fija el precio y se elimina el riesgo y la ganancia. Con un collar, se pone un piso y un techo, a menor costo.",
+       "scene": {
+        "t": "bul",
+        "k": "Estrategias",
+        "h": "Qué pierde y qué gana cada una",
+        "items": [
+         "Sin cobertura: riesgo total, ganancia total",
+         "Put: piso asegurado, prima como costo, ganancia abierta",
+         "Swap: precio fijo, sin riesgo y sin ganancia adicional",
+         "Collar: piso y techo, costo bajo o nulo, ganancia limitada"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Laboratorio. Elegí la estrategia, el precio piso, el techo y la prima, y movés el precio de mercado al vencimiento. Mirá el ingreso por barril contra el mercado sin cobertura. Las primas son datos de entrada y no una valuación. Es un ejemplo didáctico.",
+       "scene": {
+        "t": "viz",
+        "w": "hdg",
+        "h": "Cobertura con put, collar y swap",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "La decisión depende del objetivo. Una empresa con deuda y compromisos de inversión necesita un piso y suele preferir put o collar. Una con costos bajos y balance sólido puede asumir más riesgo. La política de cobertura define qué porcentaje de la producción de cada año se cubre, con qué instrumentos y quién lo aprueba.",
+       "scene": {
+        "t": "bul",
+        "k": "Política",
+        "h": "Qué define",
+        "items": [
+         "Porcentaje cubierto por año y horizonte",
+         "Instrumentos permitidos",
+         "Contrapartes aprobadas y límites",
+         "Quién autoriza y cómo se informa",
+         "Revisión periódica ante cambios del negocio"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Un collar, comparado con un put, normalmente:",
+        "o": [
+         "Cuesta más",
+         "Cuesta menos, pero limita la ganancia si el precio sube",
+         "No tiene piso",
+         "Es ilimitado en la ganancia"
+        ],
+        "a": 1,
+        "e": "El techo vendido financia parte del piso."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "Un swap de precio fijo:",
+     "o": [
+      "No tiene contraparte",
+      "Solo elimina la ganancia",
+      "Aumenta el riesgo",
+      "Elimina el riesgo de precio y también la ganancia adicional"
+     ],
+     "a": 3,
+     "e": "Fija el precio recibido."
+    },
+    {
+     "q": "El riesgo de base es:",
+     "o": [
+      "Una multa",
+      "La diferencia entre el precio cubierto y el real que se recibe",
+      "Un tipo de tanque",
+      "Un impuesto"
+     ],
+     "a": 1,
+     "e": "La cobertura nunca es perfecta."
+    },
+    {
+     "q": "Una cobertura sobre más producción de la que se espera tener es:",
+     "o": [
+      "Una posición especulativa",
+      "Una cobertura perfecta",
+      "Una forma de bajar los costos",
+      "Obligatoria"
+     ],
+     "a": 0,
+     "e": "Si se cubre más de lo que se produce, se asume riesgo."
+    }
+   ]
+  },
+  {
+   "id": "cm3",
+   "title": "Módulo 3 · Contratos, contraparte y gobierno",
+   "lessons": [
+    {
+     "id": "c5",
+     "title": "Contratos y riesgo de contraparte",
+     "comp": "Contratos y contraparte",
+     "cues": [
+      {
+       "say": "Todo contrato de venta define a quién se entrega, dónde, cuándo y bajo qué condiciones. Los términos de entrega internacionales, los Incoterms de la Cámara de Comercio Internacional, ordenan quién paga el flete y el seguro y dónde se transfiere el riesgo. En venta de crudo se ven mucho FOB, el comprador asume desde el embarque, y CIF, el vendedor paga flete y seguro.",
+       "scene": {
+        "t": "tbl",
+        "k": "Entrega",
+        "h": "Dos términos frecuentes",
+        "cols": [
+         "Término",
+         "Quién paga flete y seguro",
+         "Riesgo pasa al comprador"
+        ],
+        "rows": [
+         [
+          "FOB",
+          "El comprador",
+          "Al embarcar"
+         ],
+         [
+          "CIF",
+          "El vendedor",
+          "Al embarcar, aunque el vendedor contrata flete y seguro"
+         ]
+        ],
+        "n": "Los términos exactos dependen del contrato y de la versión de Incoterms que se use."
+       }
+      },
+      {
+       "say": "El riesgo de contraparte es que la otra parte no cumpla. Se gestiona con análisis de crédito, límites por contraparte, garantías, cartas de crédito y acuerdos marco que permiten compensar saldos. Un contrato de cobertura sin una contraparte confiable puede ser tan riesgoso como no cubrirse.",
+       "scene": {
+        "t": "bul",
+        "k": "Contraparte",
+        "h": "Cómo se gestiona",
+        "items": [
+         "Análisis de crédito y límites por contraparte",
+         "Cartas de crédito y garantías",
+         "Acuerdos marco con compensación de saldos",
+         "Diversificar contrapartes",
+         "Seguimiento continuo de su situación financiera"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Hay otras cláusulas que importan. La fuerza mayor, qué eventos liberan a una parte; la calidad, con límites y penalidades por incumplir la especificación; el volumen, con mínimos y tolerancias, y los mecanismos de resolución de disputas. Una cláusula bien redactada vale más que una negociación posterior en medio de un conflicto.",
+       "scene": {
+        "t": "bul",
+        "k": "Cláusulas",
+        "h": "A revisar",
+        "items": [
+         "Fuerza mayor",
+         "Calidad y penalidades",
+         "Volumen mínimo y tolerancias",
+         "Precio y fórmula de ajuste",
+         "Resolución de disputas"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Una carta de crédito sirve para:",
+        "o": [
+         "Reducir el riesgo de que el comprador no pague",
+         "Medir el petróleo",
+         "Subir el precio",
+         "Bajar la presión"
+        ],
+        "a": 0,
+        "e": "Un banco garantiza el pago."
+       }
+      }
+     ]
+    },
+    {
+     "id": "c6",
+     "title": "Gobierno del riesgo y el WTI negativo de 2020",
+     "comp": "Gobierno del riesgo",
+     "cues": [
+      {
+       "say": "El 20 de abril de 2020, el contrato de futuros de mayo del WTI cerró en menos 37,63 dólares por barril, según la CFTC. Fue la primera vez que ese contrato operó a un precio negativo en 37 años. La CFTC menciona como factores que pudieron influir el exceso de oferta, la caída de demanda por la pandemia y la preocupación por el almacenamiento, aunque su informe no establece causas.",
+       "scene": {
+        "t": "case",
+        "h": "WTI negativo, 20 de abril de 2020",
+        "src": "CFTC (2020), comunicado 8315-20 sobre los futuros de petróleo crudo WTI",
+        "S": "Mercado con exceso de oferta, caída de demanda por la pandemia y preocupación por el almacenamiento, con un contrato de futuros a un día del vencimiento.",
+        "T": "Cerrar posiciones antes del vencimiento del contrato de mayo.",
+        "A": "El contrato bajó de 17,73 dólares por barril y se liquidó en −37,63 el 20 de abril de 2020, según la CFTC.",
+        "R": "Primer precio negativo en 37 años de cotización. Muestra que la logística tiene valor y que un instrumento debe entenderse antes de usarlo para cubrirse."
+       }
+      },
+      {
+       "say": "Para un productor que se cubre, la enseñanza es de gobierno. Entender cómo se liquida el instrumento, tener fondos para los márgenes, no cerrar posiciones físicas a último momento, y definir quién decide y con qué límites. El comité de riesgos revisa las posiciones, las contrapartes y el desempeño de las coberturas con regularidad.",
+       "scene": {
+        "t": "bul",
+        "k": "Gobierno",
+        "h": "De una política de riesgo",
+        "items": [
+         "Política aprobada por el directorio",
+         "Un comité de riesgos con reuniones regulares",
+         "Límites de posición, de crédito y de pérdida",
+         "Separación entre quien opera y quien controla",
+         "Informes periódicos de posiciones y de efectividad"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Un resumen del curso es una pregunta de orden. Primero, ¿cuánto vale el negocio sin cobertura y cuánto de ese riesgo puede soportar la empresa? Segundo, ¿qué instrumento cubre ese riesgo con el menor costo y el menor riesgo adicional? Tercero, ¿quién controla y cómo se mide? Cubrir es una decisión de empresa y no un trámite financiero.",
+       "scene": {
+        "t": "bul",
+        "k": "Tres preguntas",
+        "h": "Para decidir una cobertura",
+        "items": [
+         "¿Cuánto riesgo puede soportar la empresa?",
+         "¿Qué instrumento lo cubre con el menor costo y riesgo extra?",
+         "¿Quién controla y cómo se mide el resultado?",
+         "¿Qué pasa con el flujo de caja si el mercado se mueve en contra?"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "El precio negativo del WTI de 2020 mostró que:",
+        "o": [
+         "Un precio de futuros puede ser negativo y hay que entender cómo se liquida el instrumento",
+         "El petróleo no vale nada",
+         "Los futuros no existen",
+         "El precio nunca baja de cero"
+        ],
+        "a": 0,
+        "e": "Fue la primera vez en 37 años de ese contrato."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "El 20 de abril de 2020, el contrato de mayo del WTI se liquidó en:",
+     "o": [
+      "100 dólares",
+      "37,63 dólares por barril",
+      "0 dólares",
+      "−37,63 dólares por barril"
+     ],
+     "a": 3,
+     "e": "Según la CFTC, el día anterior a su vencimiento."
+    },
+    {
+     "q": "Un comité de riesgos revisa:",
+     "o": [
+      "Los planos",
+      "Posiciones, contrapartes y desempeño de las coberturas",
+      "La porosidad",
+      "El color de los tanques"
+     ],
+     "a": 1,
+     "e": "Forma parte del gobierno del riesgo."
+    },
+    {
+     "q": "Una carta de crédito reduce el riesgo de:",
+     "o": [
+      "Corrosión",
+      "Contraparte",
+      "Presión",
+      "Sismos"
+     ],
+     "a": 1,
+     "e": "Un banco garantiza el pago."
+    }
+   ]
+  }
+ ],
+ "exam": [
+  {
+   "q": "El precio de venta de un crudo se compone de:",
+   "o": [
+    "Solo el costo",
+    "Una referencia y un diferencial",
+    "El precio local del gas",
+    "Un número al azar"
+   ],
+   "a": 1,
+   "e": "Diferencial por calidad y ubicación."
+  },
+  {
+   "q": "Con referencia 75, diferencial −6, flete 4, derechos de 8 % sobre el FOB y transporte 3, el netback es aproximadamente:",
+   "o": [
+    "75 USD/bbl",
+    "62 USD/bbl",
+    "56,8 USD/bbl",
+    "44 USD/bbl"
+   ],
+   "a": 2,
+   "e": "FOB = 75 − 6 − 4 = 65; derechos 5,2; 65 − 5,2 − 3 = 56,8."
+  },
+  {
+   "q": "El instrumento que da un piso sin limitar la ganancia al alza es:",
+   "o": [
+    "El collar",
+    "El swap",
+    "El futuro vendido",
+    "El put"
+   ],
+   "a": 3,
+   "e": "Se paga una prima por ese derecho."
+  },
+  {
+   "q": "El riesgo de base significa:",
+   "o": [
+    "Un error de cálculo",
+    "Una multa",
+    "Que el precio cubierto difiere del que se recibe",
+    "Un tanque vacío"
+   ],
+   "a": 2,
+   "e": "La cobertura no es perfecta."
+  },
+  {
+   "q": "Una política de cobertura debe definir:",
+   "o": [
+    "Solo un precio objetivo",
+    "Porcentajes, instrumentos, contrapartes, límites y responsables",
+    "Solo el color",
+    "Nada"
+   ],
+   "a": 1,
+   "e": "Es una decisión de empresa y de gobierno."
+  },
+  {
+   "q": "Una enseñanza del WTI negativo es:",
+   "o": [
+    "El precio siempre es positivo",
+    "El petróleo no se puede cubrir",
+    "Los futuros no sirven",
+    "Los instrumentos deben entenderse y la logística tiene valor"
+   ],
+   "a": 3,
+   "e": "El precio de un contrato puede ser negativo cerca del vencimiento."
+  }
+ ],
+ "outro": {
+  "can": [
+   "armar el precio de un crudo con referencia y diferencial, y calcular un netback",
+   "comparar put, collar y swap, y entender sus costos y límites",
+   "proponer una política de cobertura con límites, contrapartes y responsables"
+  ],
+  "phrase": "Cubrirse es decidir cuánto riesgo se asume, y no un trámite financiero.",
+  "recap": [
+   "El precio efectivo es la referencia más un diferencial, menos los costos para llegar al comprador.",
+   "Put, collar y swap protegen de forma distinta, con costos y límites diferentes.",
+   "Riesgo de contraparte, liquidez y gobierno forman parte de la cobertura, y el WTI negativo de 2020 lo mostró."
+  ]
+ },
+ "downloads": [
+  {
+   "file": "xlsx/H3L_Comercializacion_Netback_y_Cobertura.xlsx",
+   "title": "Comercialización: netback y cobertura (Excel)",
+   "desc": "Cascada de netback con entradas editables y una tabla de ingreso por barril con put, collar y swap contra una grilla de precios de mercado, con el costo de la prima y el resultado neto.",
+   "task": "Con referencia de 75, diferencial de −6, flete de 4, derechos de 8 % y transporte de 3, calculá el netback; luego compará put a 60 con prima de 3 y swap a 65 si el mercado vence a 50 y a 90."
+  }
+ ],
+ "cases": [
+  {
+   "title": "WTI negativo (20 de abril de 2020)",
+   "text": "El contrato de futuros de mayo del WTI se liquidó en −37,63 dólares por barril el 20 de abril de 2020, el día anterior a su vencimiento, y fue la primera vez en 37 años que operó a un precio negativo. La CFTC cita como factores posibles el exceso de oferta, la caída de demanda por el COVID-19 y la preocupación por el almacenamiento, sin establecer causas.",
+   "src": "CFTC (2020), comunicado 8315-20"
+  }
+ ],
+ "refs": [
+  {
+   "tag": "Fuente",
+   "cite": "CFTC (2020). Comunicado 8315-20 sobre los futuros de petróleo crudo WTI de abril de 2020.",
+   "why": "caso del WTI negativo"
+  },
+  {
+   "tag": "Norma",
+   "cite": "Cámara de Comercio Internacional (2020). Incoterms 2020.",
+   "why": "términos de entrega FOB y CIF"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Hull, J. C. Options, Futures, and Other Derivatives. Pearson.",
+   "why": "futuros, swaps y opciones"
+  }
+ ]
+}
