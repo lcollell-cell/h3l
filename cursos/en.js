@@ -13,7 +13,7 @@ var P=[
 ['lecciones narradas + presentación y cierre','narrated lessons + introduction and closing'],['min de narración','min of narration'],
 ['Laboratorios interactivos y mapas:','Interactive labs and maps:'],['planilla(s) Excel de práctica con fórmulas vivas','practice Excel workbook(s) with live formulas'],
 ['quizzes de módulo, preguntas rápidas en las lecciones y examen final','module quizzes, quick questions inside lessons and a final exam'],
-['Certificado H3L verificable y publicable en LinkedIn','Verifiable H3L certificate you can post on LinkedIn'],
+['Certificado H3L verificable, para compartir en tu perfil profesional','Verifiable H3L certificate to share on your professional profile'],
 ['Casos reales','Real cases'],['Bibliografía y estándares','References and standards'],['Caso','Case'],
 ['Esquema de 5 niveles de dominio: conocer → aprender → aplicar → transferir → transformar. Las competencias del curso se basan en un mapa de competencias técnicas de exploración y producción (geología, reservorios, producción, perforación).','Five mastery levels: know → learn → apply → transfer → transform. The course competencies are based on a technical competency map for exploration and production (geology, reservoirs, production, drilling).'],
 ['preguntas · mínimo 70 %','questions · minimum 70 %'],['preg. · 70 %','questions · 70 %'],['preg.','questions'],
