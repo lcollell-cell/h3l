@@ -354,3 +354,15 @@ body.fs-lock{overflow:hidden}
 .flt button:disabled{opacity:.45;cursor:default}
 .fcnt{font:600 13px var(--font);color:var(--mut);align-self:center;margin-left:auto}
 @media(max-width:700px){.flt label{flex:1 1 100%;max-width:none}.fcnt{margin-left:0;flex:1 1 100%}}
+/* barra superior: enlace de la página actual y distribución en móvil (una fila ordenada, sin saltos) */
+.top nav a[aria-current=page]{background:var(--soft);color:var(--green)}
+@media(max-width:700px){
+ .top{display:grid;grid-template-columns:auto 1fr;align-items:center;column-gap:10px;row-gap:6px;padding:8px 12px 6px}
+ .top .sec{justify-self:start;border-left:2px solid var(--line);padding-left:10px;font-size:11px;line-height:1.15}
+ .top nav{grid-column:1/-1;display:flex;flex-wrap:nowrap;gap:4px;width:100%;margin:0;align-items:stretch;border-top:1px solid var(--line);padding-top:6px}
+ .top nav a{flex:1 1 0;display:flex;align-items:center;justify-content:center;text-align:center;padding:8px 4px;font-size:12.5px;line-height:1.15;min-height:44px}
+ .top nav a:nth-last-of-type(1):nth-of-type(3){flex:1.35 1 0}
+ .top nav select{flex:0 0 auto;min-height:44px}
+}
+@media(max-width:340px){.top nav{flex-wrap:wrap}.top nav a{flex:1 1 28%}.top nav select{flex:1 1 100%;min-height:40px}}
+.tree .row>a{min-width:0;flex:1 1 auto;overflow-wrap:anywhere}.tree .row small{flex:0 0 auto}
