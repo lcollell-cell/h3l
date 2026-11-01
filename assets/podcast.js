@@ -28,18 +28,29 @@ function ui(){var c=$('pod-ctl');if(!c)return;
   $('pod-play').textContent=state==='playing'?t('pause'):(state==='paused'?t('resume'):t('btn'));
   $('pod-stop').hidden=state==='idle';$('pod-stop').textContent=t('stop');
   $('pod-note').textContent=state==='idle'?t('lbl'):t('playing',{i:Math.min(idx,items?items.length:0),n:items?items.length:0})}
-function voice(l){var vs=window.speechSynthesis.getVoices()||[],pre=l;
-  for(var i=0;i<vs.length;i++)if(vs[i].lang&&vs[i].lang.toLowerCase()===LOC[l].toLowerCase())return vs[i];
-  for(var j=0;j<vs.length;j++)if(vs[j].lang&&vs[j].lang.toLowerCase().indexOf(pre)===0)return vs[j];return null}
-function say(txt,l,done){var u=new SpeechSynthesisUtterance(pron(txt,l));u.lang=LOC[l];var v=voice(l);if(v)u.voice=v;u.rate=1;
-  u.onend=done;u.onerror=function(e){if(state!=='idle')done()};window.speechSynthesis.speak(u)}
+/* voz: se prefiere una voz natural/neuronal/mejorada del dispositivo y la variante regional; se evitan las voces robóticas */
+function vscore(v,l){var n=(v.name||'')+' '+(v.voiceURI||''),sc=0,lc=(v.lang||'').toLowerCase().replace('_','-');
+  if(lc===LOC[l].toLowerCase())sc+=30;else if(lc.indexOf(l)===0)sc+=15;else return -1;
+  if(/natural|neural|online|premium|enhanced|mejorada|siri|google|wavenet|studio/i.test(n))sc+=40;
+  if(/compact|espeak|robot|novelty|zarvox|trinoids|whisper|bells|bad news|good news|cellos|organ|boing|bubbles|albert|jester|superstar|wobble/i.test(n))sc-=60;
+  if(v.localService===false&&/google|online|natural/i.test(n))sc+=5;return sc}
+function voice(l){var vs=window.speechSynthesis.getVoices()||[],best=null,bs=-1;
+  vs.forEach(function(v){var x=vscore(v,l);if(x>bs){bs=x;best=v}});return best}
+/* ritmo: algo más lento que lo normal y con pausas para poder retener cada noticia */
+var RATE=0.9,PAUSE_NOTE=1100,PAUSE_HEAD=450,PAUSE_PART=350;
+function pieces(txt){var m=String(txt).match(/(?:[^,;:.]|[.,](?=\d))+[,;:.]?\s*/g)||[txt],out=[],cur='';m.forEach(function(x){if(cur&&(cur+x).length>90){out.push(cur);cur=x}else cur+=x});if(cur)out.push(cur);return out.map(function(x){return x.trim()}).filter(Boolean)}
+function say(txt,l,done,gap){var parts=pieces(pron(txt,l)),k=0;
+  (function next(){if(state==='idle')return;if(k>=parts.length){setTimeout(function(){if(state!=='idle')done()},gap==null?0:gap);return}
+    var u=new SpeechSynthesisUtterance(parts[k++]);u.lang=LOC[l];var v=voice(l);if(v)u.voice=v;u.rate=RATE;u.pitch=1;
+    u.onend=function(){if(k<parts.length&&state!=='idle')setTimeout(next,PAUSE_PART);else next()};
+    u.onerror=function(){if(state!=='idle')next()};window.speechSynthesis.speak(u)})()}
 function step(n){
   if(state==='idle')return;
-  if(n===-1){say(t('intro',{d:dstr(items[0]&&items[0].date,lang),n:items.length}),lang,function(){step(0)});return}
-  if(n>=items.length){say(t('end'),lang,function(){if(skipped>0)say(t('skip',{k:skipped}),lang,stop);else stop()});return}
+  if(n===-1){say(t('intro',{d:dstr(items[0]&&items[0].date,lang),n:items.length}),lang,function(){step(0)},PAUSE_NOTE);return}
+  if(n>=items.length){say(t('end'),lang,function(){if(skipped>0)say(t('skip',{k:skipped}),lang,stop);else stop()},500);return}
   idx=n+1;ui();var it=items[n];
   say(t('note',{i:n+1,s:it.source||'',d:dstr(it.date,lang)}),lang,function(){
-    if(state==='idle')return;say(it.say,lang,function(){step(n+1)})})}
+    if(state==='idle')return;say(it.say,lang,function(){step(n+1)},PAUSE_NOTE)},PAUSE_HEAD)}
 function stop(){state='idle';idx=0;try{window.speechSynthesis.cancel()}catch(e){}ui()}
 function get(u){return fetch(u,{cache:'no-cache'}).then(function(r){if(!r.ok)throw 0;return r.json()})}
 /* todo se dice en el idioma de la interfaz: se usa la traducción de data/news-i18n.json; sin traducción y en otro idioma, la nota no se lee */
