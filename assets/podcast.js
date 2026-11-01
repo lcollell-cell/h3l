@@ -4,16 +4,20 @@
 (function(){
 'use strict';
 var TX={
- es:{btn:'Escuchar resumen',pause:'Pausar',resume:'Seguir',stop:'Detener',intro:'Resumen de noticias de petróleo y gas de H3L, al {d}. Son {n} notas.',note:'Nota {i}. {s}, {d}.',end:'Fin del resumen. Los enlaces a cada nota están en la lista de noticias.',unsup:'Tu navegador no permite audio de voz.',lbl:'Resumen en audio: lectura de los titulares reales de las noticias, con la voz del navegador.',playing:'Reproduciendo: nota {i} de {n}',err:'No se pudieron cargar las noticias.'},
- en:{btn:'Listen to summary',pause:'Pause',resume:'Resume',stop:'Stop',intro:'H3L oil and gas news summary, as of {d}. {n} stories.',note:'Story {i}. {s}, {d}.',end:'End of the summary. Links to each story are in the news list.',unsup:'Your browser does not support speech audio.',lbl:'Audio summary: reads the real headlines of the news items aloud, using the browser voice.',playing:'Playing: story {i} of {n}',err:'The news could not be loaded.'},
- fr:{btn:'Écouter le résumé',pause:'Pause',resume:'Reprendre',stop:'Arrêter',intro:'Résumé des actualités pétrole et gaz de H3L, au {d}. {n} articles.',note:'Article {i}. {s}, {d}.',end:'Fin du résumé. Les liens vers chaque article figurent dans la liste des actualités.',unsup:'Votre navigateur ne prend pas en charge la synthèse vocale.',lbl:'Résumé audio : lecture des vrais titres des actualités, avec la voix du navigateur.',playing:'Lecture : article {i} sur {n}',err:'Impossible de charger les actualités.'},
- pt:{btn:'Ouvir resumo',pause:'Pausar',resume:'Continuar',stop:'Parar',intro:'Resumo de notícias de petróleo e gás da H3L, em {d}. São {n} notas.',note:'Nota {i}. {s}, {d}.',end:'Fim do resumo. Os links de cada nota estão na lista de notícias.',unsup:'Seu navegador não suporta áudio de voz.',lbl:'Resumo em áudio: leitura dos títulos reais das notícias, com a voz do navegador.',playing:'Reproduzindo: nota {i} de {n}',err:'Não foi possível carregar as notícias.'}
+ es:{btn:'Escuchar resumen',pause:'Pausar',resume:'Seguir',stop:'Detener',intro:'Resumen de noticias de petróleo y gas de H3L, al {d}. Son {n} notas.',note:'Nota {i}. {s}, {d}.',end:'Fin del resumen. Los enlaces a cada nota están en la lista de noticias.',skip:'{k} notas más están en otro idioma y todavía no tienen traducción; las encontrás en la lista.',unsup:'Tu navegador no permite audio de voz.',lbl:'Resumen en audio: lectura de los titulares reales de las noticias, con la voz del navegador.',playing:'Reproduciendo: nota {i} de {n}',err:'No se pudieron cargar las noticias.'},
+ en:{btn:'Listen to summary',pause:'Pause',resume:'Resume',stop:'Stop',intro:'H3L oil and gas news summary, as of {d}. {n} stories.',note:'Story {i}. {s}, {d}.',end:'End of the summary. Links to each story are in the news list.',skip:'{k} more stories are in another language and have no translation yet; you can find them in the list.',unsup:'Your browser does not support speech audio.',lbl:'Audio summary: reads the real headlines of the news items aloud, using the browser voice.',playing:'Playing: story {i} of {n}',err:'The news could not be loaded.'},
+ fr:{btn:'Écouter le résumé',pause:'Pause',resume:'Reprendre',stop:'Arrêter',intro:'Résumé des actualités pétrole et gaz de H3L, au {d}. {n} articles.',note:'Article {i}. {s}, {d}.',end:'Fin du résumé. Les liens vers chaque article figurent dans la liste des actualités.',skip:'{k} autres articles sont dans une autre langue et ne sont pas encore traduits ; ils figurent dans la liste.',unsup:'Votre navigateur ne prend pas en charge la synthèse vocale.',lbl:'Résumé audio : lecture des vrais titres des actualités, avec la voix du navigateur.',playing:'Lecture : article {i} sur {n}',err:'Impossible de charger les actualités.'},
+ pt:{btn:'Ouvir resumo',pause:'Pausar',resume:'Continuar',stop:'Parar',intro:'Resumo de notícias de petróleo e gás da H3L, em {d}. São {n} notas.',note:'Nota {i}. {s}, {d}.',end:'Fim do resumo. Os links de cada nota estão na lista de notícias.',skip:'{k} outras notas estão em outro idioma e ainda não têm tradução; elas estão na lista.',unsup:'Seu navegador não suporta áudio de voz.',lbl:'Resumo em áudio: leitura dos títulos reais das notícias, com a voz do navegador.',playing:'Reproduzindo: nota {i} de {n}',err:'Não foi possível carregar as notícias.'}
 };
 var LOC={es:'es-AR',en:'en-US',fr:'fr-FR',pt:'pt-BR'};
 var MON={es:['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'],en:['January','February','March','April','May','June','July','August','September','October','November','December'],fr:['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'],pt:['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro']};
+/* dicción: cómo se dicen siglas y símbolos en cada idioma (YPF en español se dice "i pe efe", no "i griega") */
+var PRON={es:[[/\bYPF\b/g,'i pe efe'],[/u\$s\s*([\d.,]+)\s*millones/gi,'$1 millones de dólares'],[/U\$S|US\$/g,'dólares'],[/\bGNL\b/g,'gas natural licuado'],[/\bUSD\b/g,'dólares']],
+ en:[[/\bYPFs\b/g,'Y P Fs'],[/\bYPF\b/g,'Y P F']],fr:[[/\bYPF\b/g,'i grec pé èf']],pt:[[/\bYPF\b/g,'i pê éfe']]};
+function pron(x,l){var r=PRON[l]||[];for(var i=0;i<r.length;i++)x=x.replace(r[i][0],r[i][1]);return x.replace(/\.com\b/gi,'')}
 var ES_SRC=/lmneuquen|infobae|cronista|r[ií]o negro|cuyo|mejor energ|clar[ií]n|p[aá]gina|ámbito|ambito|econom|energ[ií]a/i;
 var EN_SRC=/journal|reuters|bloomberg|offshore|world oil|rigzone|upstream/i;
-var items=null,idx=0,state='idle',lang='es';
+var items=null,idx=0,state='idle',lang='es',skipped=0;
 function $(i){return document.getElementById(i)}
 function t(k,o){var s=(TX[lang]||TX.es)[k]||TX.es[k];if(o)for(var x in o)s=s.replace('{'+x+'}',o[x]);return s}
 function dstr(iso,l){var p=String(iso||'').split('-');if(p.length<3)return iso||'';var m=(MON[l]||MON.es)[+p[1]-1],d=+p[2];
@@ -27,20 +31,25 @@ function ui(){var c=$('pod-ctl');if(!c)return;
 function voice(l){var vs=window.speechSynthesis.getVoices()||[],pre=l;
   for(var i=0;i<vs.length;i++)if(vs[i].lang&&vs[i].lang.toLowerCase()===LOC[l].toLowerCase())return vs[i];
   for(var j=0;j<vs.length;j++)if(vs[j].lang&&vs[j].lang.toLowerCase().indexOf(pre)===0)return vs[j];return null}
-function say(txt,l,done){var u=new SpeechSynthesisUtterance(txt);u.lang=LOC[l];var v=voice(l);if(v)u.voice=v;u.rate=1;
+function say(txt,l,done){var u=new SpeechSynthesisUtterance(pron(txt,l));u.lang=LOC[l];var v=voice(l);if(v)u.voice=v;u.rate=1;
   u.onend=done;u.onerror=function(e){if(state!=='idle')done()};window.speechSynthesis.speak(u)}
 function step(n){
   if(state==='idle')return;
   if(n===-1){say(t('intro',{d:dstr(items[0]&&items[0].date,lang),n:items.length}),lang,function(){step(0)});return}
-  if(n>=items.length){say(t('end'),lang,function(){stop()});return}
+  if(n>=items.length){say(t('end'),lang,function(){if(skipped>0)say(t('skip',{k:skipped}),lang,stop);else stop()});return}
   idx=n+1;ui();var it=items[n];
   say(t('note',{i:n+1,s:it.source||'',d:dstr(it.date,lang)}),lang,function(){
-    if(state==='idle')return;say(it.title,tlang(it),function(){step(n+1)})})}
+    if(state==='idle')return;say(it.say,lang,function(){step(n+1)})})}
 function stop(){state='idle';idx=0;try{window.speechSynthesis.cancel()}catch(e){}ui()}
+function get(u){return fetch(u,{cache:'no-cache'}).then(function(r){if(!r.ok)throw 0;return r.json()})}
+/* todo se dice en el idioma de la interfaz: se usa la traducción de data/news-i18n.json; sin traducción y en otro idioma, la nota no se lee */
+function prep(list,tr){var out=[];skipped=0;list.forEach(function(it){var m=(tr&&tr[it.title])||{},x=m[lang]||(tlang(it)===lang?it.title:null);
+  if(x)out.push({source:it.source,date:it.date,say:x});else skipped++});return out}
 function start(){
   if(!('speechSynthesis' in window)){$('pod-note').textContent=t('unsup');return}
-  fetch('data/news.json',{cache:'no-cache'}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){
-    items=(d.items||[]).slice(0,10);if(!items.length)throw 0;state='playing';idx=0;window.speechSynthesis.cancel();ui();step(-1)
+  var L=lang;
+  Promise.all([get('data/news.json'),get('data/news-i18n.json').catch(function(){return {items:{}}})]).then(function(r){
+    if(L!==lang)return;items=prep((r[0].items||[]).slice(0,10),r[1].items);if(!items.length)throw 0;state='playing';idx=0;window.speechSynthesis.cancel();ui();step(-1)
   }).catch(function(){$('pod-note').textContent=t('err')})}
 function click(){
   if(state==='idle')return start();

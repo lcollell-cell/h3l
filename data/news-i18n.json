@@ -1,0 +1,65 @@
+{
+ "nota": "Titulares traducidos para el resumen en audio. Clave = titular original de data/news.json. Los titulares nuevos sin traduccion no se leen en idiomas distintos al original.",
+ "items": {
+  "TotalEnergies farms out partial interest in block offshore Nigeria ahead of appraisal": {
+   "es": "TotalEnergies cede una participación parcial en un bloque operado costa afuera de Nigeria antes de la evaluación",
+   "fr": "TotalEnergies cède une participation partielle dans un bloc opéré en mer au large du Nigeria avant l'appréciation",
+   "pt": "A TotalEnergies cede participação parcial em um bloco operado offshore na Nigéria antes da avaliação",
+   "en": "TotalEnergies farms out partial interest in block offshore Nigeria ahead of appraisal"
+  },
+  "Valero to acquire former LyondellBasell Houston oil refinery, restart 165,000 b/d by end-2027": {
+   "es": "Valero comprará la antigua refinería de petróleo de LyondellBasell en Houston y la reiniciará con 165.000 barriles diarios a fines de 2027",
+   "fr": "Valero va acquérir l'ancienne raffinerie de LyondellBasell à Houston et la redémarrer à 165 000 barils par jour d'ici fin 2027",
+   "pt": "A Valero vai comprar a antiga refinaria da LyondellBasell em Houston e reiniciá-la com 165.000 barris por dia até o fim de 2027",
+   "en": "Valero to acquire former LyondellBasell Houston oil refinery, restart 165,000 b/d by end-2027"
+  },
+  "Vaca Muerta: YPF proyecta llegar a 22 perforadores en febrero": {
+   "en": "Vaca Muerta: YPF plans to reach 22 drilling rigs in February",
+   "fr": "Vaca Muerta : YPF prévoit d'atteindre 22 appareils de forage en février",
+   "pt": "Vaca Muerta: a YPF projeta chegar a 22 sondas em fevereiro",
+   "es": "Vaca Muerta: YPF proyecta llegar a 22 perforadores en febrero"
+  },
+  "Vaca Muerta: la euforia y los límites de la ejecución": {
+   "en": "Vaca Muerta: the euphoria and the limits of execution",
+   "fr": "Vaca Muerta : l'euphorie et les limites de l'exécution",
+   "pt": "Vaca Muerta: a euforia e os limites da execução",
+   "es": "Vaca Muerta: la euforia y los límites de la ejecución"
+  },
+  "Las “YPF” del Pacífico le enseñan a Argentina cómo juntar u$s 200.000 millones para Vaca Muerta": {
+   "es": "Las “YPF” del Pacífico le enseñan a Argentina cómo juntar u$s 200.000 millones para Vaca Muerta",
+   "en": "The “YPFs” of the Pacific show Argentina how to raise 200 billion dollars for Vaca Muerta",
+   "fr": "Les « YPF » du Pacifique montrent à l'Argentine comment réunir 200 milliards de dollars pour Vaca Muerta",
+   "pt": "As “YPF” do Pacífico ensinam à Argentina como juntar 200 bilhões de dólares para Vaca Muerta"
+  },
+  "YPF Luz y Nestlé consolidan su alianza con una nueva acción": {
+   "en": "YPF Luz and Nestlé consolidate their alliance with a new initiative",
+   "fr": "YPF Luz et Nestlé consolident leur alliance avec une nouvelle action",
+   "pt": "A YPF Luz e a Nestlé consolidam sua aliança com uma nova ação",
+   "es": "YPF Luz y Nestlé consolidan su alianza con una nueva acción"
+  },
+  "Horacio Marín, líder de YPF, ante ingenieros: Argentina pasa de ser un país con petróleo a ser un país petrolero": {
+   "en": "Horacio Marín, head of YPF, to engineers: Argentina goes from being a country with oil to being an oil country",
+   "fr": "Horacio Marín, patron d'YPF, devant des ingénieurs : l'Argentine passe d'un pays avec du pétrole à un pays pétrolier",
+   "pt": "Horacio Marín, líder da YPF, diante de engenheiros: a Argentina deixa de ser um país com petróleo para ser um país petroleiro",
+   "es": "Horacio Marín, líder de YPF, ante ingenieros: Argentina pasa de ser un país con petróleo a ser un país petrolero"
+  },
+  "El gas de Vaca Muerta busca ganar terreno en el transporte de cargas y abrir nuevos mercados regionales": {
+   "en": "Vaca Muerta gas seeks to gain ground in freight transport and open new regional markets",
+   "fr": "Le gaz de Vaca Muerta cherche à gagner du terrain dans le transport de marchandises et à ouvrir de nouveaux marchés régionaux",
+   "pt": "O gás de Vaca Muerta busca ganhar espaço no transporte de cargas e abrir novos mercados regionais",
+   "es": "El gas de Vaca Muerta busca ganar terreno en el transporte de cargas y abrir nuevos mercados regionales"
+  },
+  "Shell adds to Gulf of Mexico production with Silvertip Phase 3 startup": {
+   "es": "Shell suma producción en el Golfo de México con el arranque de la fase 3 de Silvertip",
+   "fr": "Shell accroît sa production dans le golfe du Mexique avec le démarrage de la phase 3 de Silvertip",
+   "pt": "A Shell aumenta a produção no Golfo do México com a partida da fase 3 de Silvertip",
+   "en": "Shell adds to Gulf of Mexico production with Silvertip Phase 3 startup"
+  },
+  "Shell's third-quarter earnings rise on record refining margins, stronger gas results": {
+   "es": "Las ganancias de Shell en el tercer trimestre suben por márgenes de refinación récord y mejores resultados de gas",
+   "fr": "Les bénéfices de Shell au troisième trimestre augmentent grâce à des marges de raffinage record et à de meilleurs résultats gaziers",
+   "pt": "O lucro da Shell no terceiro trimestre sobe com margens de refino recordes e melhores resultados em gás",
+   "en": "Shell's third-quarter earnings rise on record refining margins, stronger gas results"
+  }
+ }
+}
