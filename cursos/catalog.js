@@ -76,13 +76,13 @@ function render(){if(!data)return;var sl=secList(),h;
   var nl=0,nx=0,nc=data.courses.length;Object.keys(courses).forEach(function(k){var c=courses[k];nl+=c.modules.reduce(function(a,x){return a+x.lessons.length},0);nx+=(c.downloads||[]).length});
   var nq=Object.keys(courses).reduce(function(a,k){return a+courses[k].modules.length+1},0);
   $('#stats').innerHTML='<div><b>'+nc+'</b><span>'+HC.t('st_c')+'</span></div><div><b>'+nl+'</b><span>'+HC.t('st_l')+'</span></div><div><b>'+nq+'</b><span>'+HC.t('st_q')+'</span></div><div><b>'+nx+'</b><span>'+HC.t('st_x')+'</span></div>';
-  $('#langnote').textContent=HC.t('lang_note')}
+  $('#langnote').textContent=HC.t('lang_note',{n:(HC.enList||[]).length,t:HC.nTotal||''})}
 function bind(){Array.prototype.forEach.call(document.querySelectorAll('#vsw button'),function(b){b.addEventListener('click',function(){view=b.getAttribute('data-v');sv();render()})});
   var qi=$('#qs'),tm;qi.addEventListener('input',function(){clearTimeout(tm);tm=setTimeout(function(){q=qi.value;render()},120)});
   [['fSec','sec'],['fLv','lv'],['fTp','tp']].forEach(function(p){$('#'+p[0]).addEventListener('change',function(){F[p[1]]=this.value;sv();render()})});
   $('#fClr').addEventListener('click',function(){F={sec:'',lv:'',tp:''};q='';$('#qs').value='';sv();render()});
   $('#exAll').addEventListener('click',function(){var T=document.querySelectorAll('.tree li[aria-expanded]');Array.prototype.forEach.call(T,function(li){open_[li.getAttribute('data-id')]=true});sv();render()});
   $('#coAll').addEventListener('click',function(){var T=document.querySelectorAll('.tree li[aria-expanded]');Array.prototype.forEach.call(T,function(li){open_[li.getAttribute('data-id')]=false});q='';$('#qs').value='';sv();render()})}
-bind();HC.langSelect($('#lang'));HC.apply();HC.onlang=function(){HC.apply();render()};
+bind();HC.langSelect($('#lang'));HC.apply();HC.onlang=function(){if((HC.lang==='en')!==(HC.catLang==='en')){location.reload();return}HC.apply();render()};
 HC.loadCatalog().then(function(c){data=c;render();return Promise.all(c.courses.map(function(m){return HC.loadCourse(m.id).then(function(x){courses[m.id]=x}).catch(function(){})}))}).then(render);
 })();

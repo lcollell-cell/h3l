@@ -1,0 +1,725 @@
+{
+ "id": "gei",
+ "title": "Emissions management and energy transition in oil & gas",
+ "subtitle": "GHG inventories, methane, MACC curves and CO₂ capture and storage.",
+ "desc": "An applied emissions management course for oil and gas operations: inventory by scope, methane management, economic prioritization of measures, efficiency and electrification, and CO₂ capture and storage, with the real case of Sleipner.",
+ "objectives": [
+  "Build a greenhouse gas inventory by scopes 1, 2 and 3.",
+  "Explain the weight of methane and how it changes with the chosen warming potential.",
+  "Prioritize reduction measures with a marginal abatement cost curve.",
+  "Describe the CO₂ capture and storage chain and its trapping mechanisms."
+ ],
+ "labs": [
+  "emissions inventory with GWP100 and GWP20",
+  "MACC curve with carbon and gas price",
+  "CCS chain with trapping over time",
+  "efficiency and electrification map"
+ ],
+ "practiceMin": 90,
+ "competencies": [
+  {
+   "name": "Emissions inventory and reporting",
+   "lessons": [
+    "e1"
+   ]
+  },
+  {
+   "name": "Methane management",
+   "lessons": [
+    "e2"
+   ]
+  },
+  {
+   "name": "Abatement prioritization and economics",
+   "lessons": [
+    "e3",
+    "e4"
+   ]
+  },
+  {
+   "name": "CO₂ capture and storage",
+   "lessons": [
+    "e5",
+    "e6"
+   ]
+  }
+ ],
+ "intro": {
+  "hook": "We will learn to measure, prioritize and reduce the emissions of an oil and gas operation, and to understand the role of CO₂ capture.",
+  "questions": [
+   "How much do we really emit, and where does it come from?",
+   "Which reduction measures should we do first, and at what cost?",
+   "Is it technically safe to store CO₂ underground?"
+  ],
+  "star": {
+   "caso": "Sleipner, North Sea (Norway)",
+   "S": "The gas from the Sleipner West field contains CO₂ that must be separated before it is sold.",
+   "T": "Store that CO₂ underground instead of releasing it to the atmosphere.",
+   "A": "Injection since 1996 into the Utsira Formation, a saline aquifer about 1,000 meters below the seabed, with subsurface monitoring.",
+   "R": "About one million tonnes of CO₂ per year and more than 20 million tonnes stored since the start."
+  }
+ },
+ "modules": [
+  {
+   "id": "em1",
+   "title": "Module 1 · Inventory and methane",
+   "lessons": [
+    {
+     "id": "e1",
+     "title": "Scopes 1, 2 and 3: how an inventory is built",
+     "comp": "Inventory",
+     "cues": [
+      {
+       "say": "A greenhouse gas inventory organizes emissions into three scopes. It is the GHG Protocol scheme, used by almost all companies and reporting standards.",
+       "scene": {
+        "t": "bul",
+        "k": "GHG Protocol",
+        "h": "The three scopes",
+        "items": [
+         "Scope 1: direct emissions from owned sources. Combustion, flaring, venting and fugitives",
+         "Scope 2: indirect emissions from purchased electricity, steam or heat",
+         "Scope 3: the rest of the value chain. In oil and gas, the use of sold products weighs heavily"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "For each source, the emission is activity data times an emission factor. Factors come from guidelines such as the IPCC's, from 2006 with its 2019 refinement, or from sector compendia such as the American Petroleum Institute's.",
+       "hl": 2
+      },
+      {
+       "say": "Lab. This is an example inventory. You move the flared gas, the fuel, the methane leaks and the purchased electricity. Notice which source dominates and how it changes when you include scope 3.",
+       "scene": {
+        "t": "viz",
+        "w": "ghg",
+        "h": "Example emissions inventory",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "A good practice is to set organizational boundaries, by operational control or by equity share, and keep them constant. The ISO 14064 standard establishes how to quantify, report and verify an inventory.",
+       "hl": 2
+      },
+      {
+       "say": "Quick question.",
+       "q": {
+        "q": "The electricity a facility buys from the grid is part of:",
+        "o": [
+         "Scope 1",
+         "Scope 3 only",
+         "Scope 2",
+         "It is not inventoried"
+        ],
+        "a": 2,
+        "e": "These are indirect emissions from purchased energy: scope 2."
+       }
+      }
+     ]
+    },
+    {
+     "id": "e2",
+     "title": "Methane: warming potential, venting and OGMP 2.0",
+     "comp": "Methane management",
+     "cues": [
+      {
+       "say": "Methane is the main greenhouse gas the industry emits besides CO₂. Its effect depends on the time horizon chosen to compare it: at twenty years it weighs much more than at one hundred.",
+       "scene": {
+        "t": "tbl",
+        "k": "IPCC AR6",
+        "h": "Global warming potentials (GWP)",
+        "cols": [
+         "Gas",
+         "GWP at 100 years",
+         "GWP at 20 years"
+        ],
+        "rows": [
+         [
+          "CO₂",
+          "1",
+          "1"
+         ],
+         [
+          "Fossil methane (CH₄)",
+          "29.8",
+          "82.5"
+         ],
+         [
+          "Nitrous oxide (N₂O)",
+          "273",
+          "273"
+         ]
+        ],
+        "n": "Values from the IPCC Sixth Assessment Report (AR6). Methane lasts only a few years in the atmosphere: that is why the 20-year horizon exaggerates its relative weight and the 100-year horizon smooths it."
+       }
+      },
+      {
+       "say": "In upstream, the main methane sources are equipment leaks, process vents, pneumatic controllers and incomplete combustion in flares. A poorly operated flare can emit unburned methane.",
+       "scene": {
+        "t": "bul",
+        "k": "Sources",
+        "h": "Where methane comes from in upstream",
+        "items": [
+         "Fugitives: valves, flanges, compressors, tanks",
+         "Process and maintenance venting",
+         "Pneumatic devices and gas-driven controllers",
+         "Flares with low combustion efficiency",
+         "Abnormal and large-emission events"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "The reporting framework of the UN Environment Oil and Gas Methane Partnership, OGMP 2.0, defines five levels. The highest, level five, requires source-level and site-level measurements, and their reconciliation.",
+       "hl": 4
+      },
+      {
+       "say": "And the World Bank initiative to end routine gas flaring by 2030 is another reference. Recovering flared gas, besides reducing emissions, turns it into a saleable product.",
+       "hl": 4
+      },
+      {
+       "say": "Quick question.",
+       "q": {
+        "q": "Moving from a 100-year GWP to a 20-year GWP for methane:",
+        "o": [
+         "Reduces its weight in the inventory",
+         "Eliminates the methane",
+         "Does not change anything",
+         "Increases its relative weight in the inventory"
+        ],
+        "a": 3,
+        "e": "The GWP20 of fossil methane is 82.5 versus 29.8 for GWP100, so its CO₂-equivalent contribution rises with the short horizon."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "Emissions from gas combustion in an owned plant are:",
+     "o": [
+      "Scope 2",
+      "Scope 1",
+      "Scope 3",
+      "None"
+     ],
+     "a": 1,
+     "e": "They are direct, from sources the company controls."
+    },
+    {
+     "q": "The 100-year GWP of fossil methane (AR6) is approximately:",
+     "o": [
+      "1",
+      "273",
+      "29.8",
+      "1000"
+     ],
+     "a": 2,
+     "e": "AR6 reports 29.8 for fossil-origin methane at 100 years."
+    },
+    {
+     "q": "OGMP 2.0 refers to:",
+     "o": [
+      "A type of flare",
+      "A catalyst",
+      "The UN Environment methane reporting framework for oil and gas",
+      "A cementing standard"
+     ],
+     "a": 2,
+     "e": "It is the UN Environment framework for methane reporting and improvement."
+    }
+   ]
+  },
+  {
+   "id": "em2",
+   "title": "Module 2 · Reduction and prioritization",
+   "lessons": [
+    {
+     "id": "e3",
+     "title": "Marginal abatement cost curve (MACC)",
+     "comp": "Prioritization",
+     "cues": [
+      {
+       "say": "A MACC curve orders reduction measures from lowest to highest cost per tonne avoided. The width of each bar is how much it reduces, and the height is what each tonne costs.",
+       "scene": {
+        "t": "fm",
+        "k": "Key concept",
+        "h": "Marginal abatement cost",
+        "f": "Cost (USD/tCO₂e) = ( Annualized cost − Annual savings ) / tCO₂e avoided per year",
+        "n": "Savings include recovered gas that is sold or that no longer has to be bought. A measure whose savings exceed its cost has a negative cost."
+       }
+      },
+      {
+       "say": "Lab. This is an example curve. Raise the carbon price and see how many measures become viable. Then raise the gas price: measures that recover gas get cheaper, and some turn to negative cost.",
+       "scene": {
+        "t": "viz",
+        "w": "macc",
+        "h": "Example MACC curve",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "The tool is useful for prioritizing, but it has limits. It does not capture interactions between measures, non-economic barriers or execution risk. It is used as a guide and completed with project analysis.",
+       "hl": 0
+      },
+      {
+       "say": "Quick question.",
+       "q": {
+        "q": "A measure with negative cost on the MACC means that:",
+        "o": [
+         "It costs more than it saves",
+         "It is illegal",
+         "It does not reduce emissions",
+         "Its savings exceed its annualized cost"
+        ],
+        "a": 3,
+        "e": "It generates net savings: for example, the recovered gas is worth more than the cost of the measure."
+       }
+      }
+     ]
+    },
+    {
+     "id": "e4",
+     "title": "Energy efficiency and electrification",
+     "comp": "Prioritization",
+     "cues": [
+      {
+       "say": "Before thinking about new technologies, it pays to measure. Energy efficiency starts from a baseline, an audit, a plan of measures and savings verification. The ISO 50001 standard organizes that energy management cycle.",
+       "scene": {
+        "t": "viz",
+        "w": "concept",
+        "h": "Efficiency and electrification cycle",
+        "p": {
+         "nodes": [
+          {
+           "l": "Línea de base|energía y emisiones",
+           "x": 12,
+           "y": 50,
+           "c": "#8ea2bd",
+           "n": "Sin una línea de base medida no se pueden demostrar ahorros."
+          },
+          {
+           "l": "Auditoría|energética",
+           "x": 34,
+           "y": 50,
+           "c": "#3A6BD0",
+           "n": "Identifica pérdidas: compresores, bombas, calentadores, aire de instrumentos, gas combustible."
+          },
+          {
+           "l": "Eficiencia|operativa",
+           "x": 58,
+           "y": 22,
+           "c": "#17755A",
+           "n": "Optimizar puntos de operación, reducir recirculaciones y recuperar calor. Suele ser lo más barato."
+          },
+          {
+           "l": "Electrificación|de equipos",
+           "x": 58,
+           "y": 50,
+           "c": "#17755A",
+           "n": "Reemplazar turbinas o motores a gas por motores eléctricos. Su beneficio depende de la intensidad de emisiones de la red."
+          },
+          {
+           "l": "Renovables|y almacenamiento",
+           "x": 58,
+           "y": 78,
+           "c": "#17755A",
+           "n": "Generación solar o eólica para cargas locales, con respaldo."
+          },
+          {
+           "l": "Medición y|verificación",
+           "x": 82,
+           "y": 50,
+           "c": "#b7791f",
+           "n": "Se verifican los ahorros contra la línea de base y se reportan."
+          }
+         ],
+         "edges": [
+          [
+           0,
+           1
+          ],
+          [
+           1,
+           2
+          ],
+          [
+           1,
+           3
+          ],
+          [
+           1,
+           4
+          ],
+          [
+           2,
+           5
+          ],
+          [
+           3,
+           5
+          ],
+          [
+           4,
+           5
+          ]
+         ],
+         "hint": "Tocá cada bloque para ver su aporte.",
+         "nw": 140
+        }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Electrification only reduces net emissions if the electricity is low-intensity. If the grid uses fossil fuels, you must compare the grid's emission intensity with that of the equipment being replaced.",
+       "hl": 3
+      },
+      {
+       "say": "One reference: in Norway, offshore installations such as Johan Sverdrup are powered with electricity from shore, which avoids generating the energy with gas turbines on the platform.",
+       "hl": 3
+      },
+      {
+       "say": "Quick question.",
+       "q": {
+        "q": "Electrifying a compressor reduces net emissions when:",
+        "o": [
+         "The electricity has lower emission intensity than the combustion of the replaced equipment",
+         "The grid is always coal",
+         "The motor is heavier",
+         "It is installed without measuring"
+        ],
+        "a": 0,
+        "e": "The benefit depends on comparing emission intensities: the grid's against that of the current equipment."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "On a MACC, the width of each bar represents:",
+     "o": [
+      "The volume of emissions avoided by the measure",
+      "The cost per tonne",
+      "The initial investment",
+      "The gas price"
+     ],
+     "a": 0,
+     "e": "The horizontal axis accumulates abatement potential."
+    },
+    {
+     "q": "To demonstrate energy savings you first need:",
+     "o": [
+      "To install technology",
+      "A measured baseline",
+      "To increase production",
+      "A new contract"
+     ],
+     "a": 1,
+     "e": "Without a baseline there is no way to compare."
+    },
+    {
+     "q": "Recovering flare gas can have a negative cost because:",
+     "o": [
+      "It is free",
+      "It lowers the carbon price",
+      "CO₂ is sold",
+      "The recovered gas can be sold or used"
+     ],
+     "a": 3,
+     "e": "The savings or revenue from the gas can offset the cost."
+    }
+   ]
+  },
+  {
+   "id": "em3",
+   "title": "Module 3 · CO₂ capture and storage",
+   "lessons": [
+    {
+     "id": "e5",
+     "title": "CCUS: value chain and trapping mechanisms",
+     "comp": "Capture and storage",
+     "cues": [
+      {
+       "say": "CO₂ capture and storage is a chain of four links: capture at the source, compression and conditioning, transport by pipeline or ship, and injection into a geological formation.",
+       "scene": {
+        "t": "viz",
+        "w": "ccs",
+        "h": "CCS chain and trapping over time",
+        "p": {
+         "t": 100
+        }
+       },
+       "hl": 0,
+       "lab": true
+      },
+      {
+       "say": "Safe storage requires a reservoir with capacity and injectivity, and a seal that contains it. Typically deep saline aquifers are sought, below eight hundred meters, where CO₂ is in a dense state.",
+       "hl": 0
+      },
+      {
+       "say": "Over time, CO₂ is immobilized by four mechanisms: structural trapping, residual trapping by capillarity, solubility trapping in water and, much more slowly, mineralization. The IPCC Special Report of 2005 describes them.",
+       "hl": 0
+      },
+      {
+       "say": "Move the lab's time control. Watch how the CO₂ goes from being free under the seal to being dissolved or trapped in the pores. The proportions are illustrative: they depend on each formation.",
+       "hl": 0,
+       "lab": true
+      },
+      {
+       "say": "Quick question.",
+       "q": {
+        "q": "Why is a deep saline aquifer suitable for storing CO₂?",
+        "o": [
+         "Because it is empty",
+         "Because it has no seal",
+         "Because it has natural gas",
+         "Because it combines capacity, an upper seal and conditions in which CO₂ stays dense"
+        ],
+        "a": 3,
+        "e": "It needs storage capacity, an effective seal and enough depth to keep the CO₂ dense."
+       }
+      }
+     ]
+    },
+    {
+     "id": "e6",
+     "title": "Real case: Sleipner (Norway, since 1996)",
+     "comp": "Capture and storage",
+     "cues": [
+      {
+       "say": "Sleipner is the first commercial project to store CO₂ in a saline aquifer. It has operated since 1996 in the North Sea, run by the license operator on behalf of the license partners.",
+       "scene": {
+        "t": "case",
+        "h": "Sleipner: CO₂ storage in the Utsira Formation",
+        "src": "CO2RE, storage facilities database",
+        "S": "The gas produced in the Sleipner West field contains CO₂ that must be separated before it is sold.",
+        "T": "Store that separated CO₂ instead of releasing it to the atmosphere.",
+        "A": "Injection into the Utsira Formation, a saline aquifer about 1,000 meters below the seabed, with subsurface monitoring.",
+        "R": "Close to one million tonnes per year of CO₂ injected, and more than 20 million tonnes stored since the start."
+       },
+       "hl": 0
+      },
+      {
+       "say": "Repeated high-resolution seismic monitoring made it possible to follow the CO₂ plume in the aquifer. That information is the basis of technical confidence in geological storage.",
+       "hl": 1
+      },
+      {
+       "say": "The lesson: safe storage is a geoscience problem, and it rests on characterization, monitoring and verification. The same petroleum system and static model concepts we saw in other courses, applied to a different purpose.",
+       "hl": 2
+      },
+      {
+       "say": "And a good reporting practice: injection figures are checked with the operator's source and with independent audits, and reported with their methodology.",
+       "hl": 3
+      },
+      {
+       "say": "Quick question.",
+       "q": {
+        "q": "Which tool made it possible to follow the CO₂ plume at Sleipner?",
+        "o": [
+         "Mud analysis",
+         "Repeated high-resolution seismic",
+         "A special drill bit",
+         "Surface gas chromatography"
+        ],
+        "a": 1,
+        "e": "Repeated seismic monitoring shows how the CO₂ spreads in the reservoir."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "What is the correct order of the CCS chain?",
+     "o": [
+      "Injection, capture, transport, compression",
+      "Transport, capture, injection, compression",
+      "Capture, compression, transport, injection",
+      "Compression, injection, capture, transport"
+     ],
+     "a": 2,
+     "e": "It is captured, compressed, transported and injected."
+    },
+    {
+     "q": "Which trapping mechanism is the slowest?",
+     "o": [
+      "Structural",
+      "Mineralization",
+      "Solubility",
+      "Residual"
+     ],
+     "a": 1,
+     "e": "Mineralization acts on scales of hundreds to thousands of years."
+    },
+    {
+     "q": "Sleipner injects CO₂ into:",
+     "o": [
+      "A depleted gas field",
+      "A saline aquifer, the Utsira Formation",
+      "A coal mine",
+      "The ocean"
+     ],
+     "a": 1,
+     "e": "The Utsira Formation is a deep saline aquifer."
+    }
+   ]
+  }
+ ],
+ "exam": [
+  {
+   "q": "Gas flared at an owned flare is an emission of:",
+   "o": [
+    "Scope 1",
+    "Scope 2",
+    "Scope 3",
+    "None"
+   ],
+   "a": 0,
+   "e": "These are direct combustion emissions from company sources."
+  },
+  {
+   "q": "The use of sold products belongs to:",
+   "o": [
+    "Scope 1",
+    "Scope 2",
+    "It is an avoided emission",
+    "Scope 3"
+   ],
+   "a": 3,
+   "e": "It is a category of scope 3."
+  },
+  {
+   "q": "With a 20-year GWP, methane in the inventory:",
+   "o": [
+    "Weighs more",
+    "Weighs less",
+    "Weighs the same",
+    "Disappears"
+   ],
+   "a": 0,
+   "e": "82.5 versus 29.8 for GWP100 (AR6, fossil methane)."
+  },
+  {
+   "q": "A measure with negative cost on a MACC:",
+   "o": [
+    "Has savings that exceed its cost",
+    "Costs nothing",
+    "Does not reduce emissions",
+    "Increases emissions"
+   ],
+   "a": 0,
+   "e": "It generates a net economic benefit."
+  },
+  {
+   "q": "Electrification reduces net emissions if:",
+   "o": [
+    "The emission intensity of the electricity is lower than that of the replaced equipment",
+    "Always",
+    "Never",
+    "Only onshore"
+   ],
+   "a": 0,
+   "e": "Intensities must be compared."
+  },
+  {
+   "q": "Geological CO₂ storage requires, among other elements:",
+   "o": [
+    "A freshwater well",
+    "No geological evaluation",
+    "Zero pressures",
+    "An effective seal and a monitoring program"
+   ],
+   "a": 3,
+   "e": "Seal, capacity, injectivity and monitoring are conditions for safe storage."
+  }
+ ],
+ "outro": {
+  "can": [
+   "an emissions inventory of scopes 1, 2 and 3",
+   "methane emissions and their reporting under OGMP 2.0",
+   "a marginal abatement cost curve to prioritize measures",
+   "the CCUS value chain and its trapping mechanisms"
+  ],
+  "phrase": "Measure, prioritize and reduce: the transition is also engineering.",
+  "recap": [
+   "The inventory organizes emissions by scope, and methane changes weight depending on the chosen GWP.",
+   "The MACC prioritizes measures by cost, and the gas price can turn the cost of some measures negative.",
+   "CO₂ storage is safe when there is capacity, seal and monitoring, as at Sleipner."
+  ]
+ },
+ "downloads": [
+  {
+   "file": "xlsx/H3L_Emisiones_Inventario_y_MACC.xlsx",
+   "title": "GHG inventory and MACC curve (Excel)",
+   "desc": "Example inventory by scope with AR6 GWP100 and GWP20 and an ordered MACC curve with editable carbon and gas prices.",
+   "task": "Switch the GWP from 100 to 20 years and calculate how much the weight of methane rises. Then raise the carbon price to 80 USD/t and list the viable measures."
+  }
+ ],
+ "cases": [
+  {
+   "title": "Sleipner (North Sea, Norway)",
+   "text": "CO₂ separated from Sleipner West gas and stored in the Utsira Formation, a saline aquifer about 1,000 m below the seabed. Operating since 1996 (license operator), with around 1 million tonnes per year and more than 20 million tonnes stored since the start. It is monitored with repeated seismic. Cumulative figures are updated: check the operator's source.",
+   "src": "CO2RE, storage facilities database (carbonstorage.io)"
+  }
+ ],
+ "refs": [
+  {
+   "tag": "Standard",
+   "cite": "WRI/WBCSD. The Greenhouse Gas Protocol: A Corporate Accounting and Reporting Standard (Revised Edition) and Corporate Value Chain (Scope 3) Standard.",
+   "why": "scopes 1, 2 and 3"
+  },
+  {
+   "tag": "Standard",
+   "cite": "ISO 14064-1/2/3. Greenhouse gases: quantification and reporting, projects and verification.",
+   "why": "inventory and verification"
+  },
+  {
+   "tag": "Standard",
+   "cite": "ISO 50001. Energy management systems.",
+   "why": "energy efficiency cycle"
+  },
+  {
+   "tag": "Report",
+   "cite": "IPCC (2021). Climate Change 2021: The Physical Science Basis. Contribution of Working Group I to AR6, chapter 7, table 7.15.",
+   "why": "GWP values"
+  },
+  {
+   "tag": "Report",
+   "cite": "IPCC (2006). Guidelines for National Greenhouse Gas Inventories and 2019 Refinement.",
+   "why": "factors and methodologies"
+  },
+  {
+   "tag": "Report",
+   "cite": "IPCC (2005). Special Report on Carbon Dioxide Capture and Storage.",
+   "why": "trapping mechanisms and risks"
+  },
+  {
+   "tag": "Standard",
+   "cite": "UNEP. Oil & Gas Methane Partnership 2.0 (OGMP 2.0), reporting framework.",
+   "why": "methane reporting levels"
+  },
+  {
+   "tag": "Report",
+   "cite": "IEA. Global Methane Tracker.",
+   "why": "sector methane emissions and reduction options"
+  },
+  {
+   "tag": "Compendium",
+   "cite": "API (2021). Compendium of Greenhouse Gas Emissions Methodologies for the Oil and Natural Gas Industry.",
+   "why": "sector factors and methods"
+  },
+  {
+   "tag": "Report",
+   "cite": "McKinsey & Company (2009). Pathways to a Low-Carbon Economy, Version 2 of the Global GHG Abatement Cost Curve.",
+   "why": "origin of the MACC curve"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Alvarez, R. A. et al. (2018). Assessment of methane emissions from the U.S. oil and gas supply chain. Science 361(6398), 186–188.",
+   "why": "measurements versus methane inventories"
+  }
+ ],
+ "lang": "en"
+}

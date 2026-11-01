@@ -6,16 +6,16 @@ var stage=$('#stage'),SS=window.speechSynthesis,hasTTS=!!(SS&&window.SpeechSynth
 function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){}return null}
 /* ---------- carga ---------- */
 HC.langSelect($('#lang'));
-Promise.all([HC.loadCatalog(),HC.loadCourse(cid)]).then(function(r){META=r[0].courses.filter(function(x){return x.id===cid})[0]||{title:r[1].title,color:'#17755A'};C=r[1];CS=HC.cs(cid);flat=HC.flat(C);
+Promise.all([HC.loadCatalog(),HC.loadCourse(cid)]).then(function(r){META=r[0].courses.filter(function(x){return x.id===cid})[0]||{title:r[1].title,color:'#17755A'};C=r[1];HC.course=C;CS=HC.cs(cid);flat=HC.flat(C);
   document.title=(META.title||C.title)+' — Cursos Online H3L';$('#ctitle').textContent=META.title||C.title;$('#csub').textContent=C.subtitle||META.short||'';
   var want=params.get('l'),i=flat.findIndex(function(l){return l.id===want});if(i<0&&CS.last&&CS.last.li<flat.length)i=CS.last.li;if(i<0)i=0;
   initVoices();buildTabs();buildSide();bindControls();HC.apply();loadLesson(i,i===(CS.last&&CS.last.li)?CS.last.ci:0,false)}).catch(function(e){$('#ctitle').textContent='No se pudo cargar el curso';console.error(e)});
-HC.onlang=function(){HC.apply();buildTabs();buildSide();updateUI()};
+HC.onlang=function(){var want=HC.cLang();if(C&&want!==C.lang&&!(want==='en'&&C.fb)){try{if(window.speechSynthesis)speechSynthesis.cancel()}catch(e){}location.reload();return}HC.apply();buildTabs();buildSide();updateUI()};
 /* ---------- voces ---------- */
 var voicesDone=false;
 function initVoices(){if(!hasTTS){ttsOn=false;voicesDone=true;return}
-  function load(){voices=SS.getVoices().filter(function(v){return /^es/i.test(v.lang)});var sel=$('#sVoice');sel.innerHTML='';
-    voices.sort(function(a,b){var o=['es-AR','es-MX','es-US','es-ES'];var x=o.indexOf(a.lang),y=o.indexOf(b.lang);return(x<0?9:x)-(y<0?9:y)});
+  function load(){var en=C&&C.lang==='en';voices=SS.getVoices().filter(function(v){return en?/^en/i.test(v.lang):/^es/i.test(v.lang)});var sel=$('#sVoice');sel.innerHTML='';
+    voices.sort(function(a,b){var o=en?['en-US','en-GB','en-AU','en-CA']:['es-AR','es-MX','es-US','es-ES'];var x=o.indexOf(a.lang),y=o.indexOf(b.lang);return(x<0?9:x)-(y<0?9:y)});
     voices.forEach(function(v,i){var o=el('option',{value:i},v.name+' ('+v.lang+')');sel.appendChild(o)});
     var saved=ls('h3l-cursos-voice'),ix=voices.findIndex(function(v){return v.name===saved});if(ix<0)ix=0;if(voices.length){sel.value=ix;voice=voices[ix]}else{voice=null;ttsOn=false}
     sel.style.display=voices.length?'':'none';updateUI()}

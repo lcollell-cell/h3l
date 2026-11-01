@@ -1,0 +1,139 @@
+{
+ "sections": {
+  "subsuelo": {
+   "title": "Subsurface and reserves",
+   "desc": "Geoscience, reservoirs, reserves and well testing."
+  },
+  "produccion": {
+   "title": "Production and operations",
+   "desc": "Secondary recovery, well construction, production and unconventionals."
+  },
+  "energia": {
+   "title": "Energy and transition",
+   "desc": "Emissions, methane and CO₂ capture."
+  },
+  "negocio": {
+   "title": "Economics, data and AI",
+   "desc": "Economic evaluation, decisions under uncertainty and applied data science."
+  },
+  "midstream": {
+   "title": "Midstream and process safety",
+   "desc": "Transport, fiscal measurement, integrity and process risk management."
+  }
+ },
+ "courses": {
+  "geo": {
+   "title": "Geoscience: petroleum system and static characterization",
+   "short": "From the basin to the static model, with Vaca Muerta as the common thread.",
+   "tag": "Geoscience"
+  },
+  "res": {
+   "title": "Resources and Reserves SPE-PRMS",
+   "short": "Classification, uncertainty, decline, economics and reserves governance.",
+   "tag": "Reserves"
+  },
+  "wf": {
+   "title": "Waterflooding and reservoir surveillance",
+   "short": "From fractional flow to the Hall plot: design, operate and diagnose water injection.",
+   "tag": "Reservoirs"
+  },
+  "per": {
+   "title": "Drilling: mud window, technical limit and well control",
+   "short": "Well architecture, operational efficiency and safety barriers.",
+   "tag": "Drilling"
+  },
+  "gei": {
+   "title": "Emissions management and energy transition in oil & gas",
+   "short": "GHG inventories, methane, MACC curves and CO₂ capture and storage.",
+   "tag": "Energy transition"
+  },
+  "pta": {
+   "title": "Well testing and pressure transient analysis",
+   "short": "From shut-in to permeability, skin and boundaries, using the pressure derivative.",
+   "tag": "Reservoirs"
+  },
+  "nod": {
+   "title": "Nodal analysis and artificial lift",
+   "short": "IPR, tubing curve, optimization and lift method selection.",
+   "tag": "Production"
+  },
+  "frac": {
+   "title": "Hydraulic fracturing and unconventional well completion",
+   "short": "Stresses, stage design, diagnostics and forecasting with modified decline.",
+   "tag": "Unconventionals"
+  },
+  "eco": {
+   "title": "Petroleum economics and decisions under uncertainty",
+   "short": "Cash flow, tornado, expected value, portfolio and megaproject lessons.",
+   "tag": "Economics"
+  },
+  "dat": {
+   "title": "Data science and AI applied to upstream",
+   "short": "Data quality, machine learning, MLOps and governance, with the Volve case.",
+   "tag": "Data and AI"
+  },
+  "sim": {
+   "title": "Reservoir simulation and history matching",
+   "short": "From the equations to the grid, and from history match to forecast uncertainty.",
+   "tag": "Reservoirs"
+  },
+  "eor": {
+   "title": "Enhanced oil recovery (EOR): chemical, gas and thermal",
+   "short": "Sweep and displacement efficiency, methods, screening and pilots, with Manantiales Behr.",
+   "tag": "Reservoirs"
+  },
+  "rta": {
+   "title": "Production analysis and RTA in unconventional wells",
+   "short": "Linear flow, square-root time, match window and forecast, with Vaca Muerta.",
+   "tag": "Production"
+  },
+  "alm": {
+   "title": "Geological CO₂ storage (CCS)",
+   "short": "Site, capacity, trapping, monitoring and standards, with Sleipner and Quest.",
+   "tag": "Energy transition"
+  },
+  "rpx": {
+   "title": "Advanced reserves: uncertainty, aggregation and audit",
+   "short": "Percentiles, portfolio summation, reconciliation and the 2004 reserves recategorization case.",
+   "tag": "Reserves"
+  },
+  "pvt": {
+   "title": "Reservoir fluid properties (PVT)",
+   "short": "Fluid types, Z factor, Rs, Bo and bubble-point pressure, lab tests and equations of state.",
+   "tag": "Reservoirs"
+  },
+  "gas": {
+   "title": "Gas reservoir engineering",
+   "short": "Gas in place, p/z material balance, deliverability, liquid loading and abandonment pressure, with Groningen.",
+   "tag": "Reservoirs"
+  },
+  "fac": {
+   "title": "Surface facilities and flow assurance",
+   "short": "Separation, treating, compression, relief, hydrates, waxes and multiphase flow.",
+   "tag": "Production"
+  },
+  "mid": {
+   "title": "Midstream: transport and fiscal measurement",
+   "short": "Pipeline hydraulics, fiscal metering and uncertainty, integrity and cybersecurity.",
+   "tag": "Midstream"
+  },
+  "hse": {
+   "title": "Process safety and risk management",
+   "short": "HAZOP, LOPA, SIL levels, management of change and work permits, with Piper Alpha.",
+   "tag": "Safety"
+  },
+  "com": {
+   "title": "Hydrocarbon marketing and price hedging",
+   "short": "Netback, differentials, put, collar and swap, counterparty risk and the negative WTI of 2020.",
+   "tag": "Marketing"
+  },
+  "frr": {
+   "title": "Recovery factors and PRMS reserves",
+   "short": "Recovery by reservoir and strategy, EOR methods and feasibility, current and final recovery factor, and SPE-PRMS classification.",
+   "tag": "Reserves"
+  }
+ },
+ "available": [
+  "gei"
+ ]
+}
