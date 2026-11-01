@@ -366,3 +366,15 @@ body.fs-lock{overflow:hidden}
 }
 @media(max-width:340px){.top nav{flex-wrap:wrap}.top nav a{flex:1 1 28%}.top nav select{flex:1 1 100%;min-height:40px}}
 .tree .row>a{min-width:0;flex:1 1 auto;overflow-wrap:anywhere}.tree .row small{flex:0 0 auto}
+/* suscripción: botón de la barra, etiquetas de acceso y nav móvil */
+.top nav a.subb{background:var(--green);color:#fff}.top nav a.subb:hover{background:var(--green2)}.top nav a.subb[aria-current=page]{background:var(--green2);color:#fff}
+.sb{display:inline-block;font:700 11px/1 var(--font);padding:4px 8px;border-radius:999px;margin-left:8px;vertical-align:middle;white-space:nowrap}
+.sb.free{background:rgba(23,117,90,.14);color:var(--green)}.sb.paid{background:rgba(58,107,208,.14);color:#2a4fa8}.sb.lock{background:#fff3cd;color:#7a5b00}
+.cv .sb{position:absolute;top:10px;right:10px;margin:0;background:#fff}
+@media(max-width:700px){
+ .top nav{flex-wrap:wrap}
+ .top nav a{flex:1 1 28%}
+ .top nav a.subb{flex:1 1 55%}
+ .top nav select{flex:0 0 auto}
+}
+.q select{width:100%;max-width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font:500 15px var(--font)}

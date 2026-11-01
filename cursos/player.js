@@ -7,7 +7,7 @@ function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorag
 /* ---------- carga ---------- */
 HC.langSelect($('#lang'));
 Promise.all([HC.loadCatalog(),HC.loadCourse(cid)]).then(function(r){META=r[0].courses.filter(function(x){return x.id===cid})[0]||{title:r[1].title,color:'#17755A'};C=r[1];HC.course=C;CS=HC.cs(cid);flat=HC.flat(C);
-  document.title=(META.title||C.title)+' — Cursos Online H3L';$('#ctitle').textContent=META.title||C.title;$('#csub').textContent=C.subtitle||META.short||'';
+  document.title=(META.title||C.title)+' — Cursos Online H3L';$('#ctitle').textContent=META.title||C.title;$('#csub').textContent=C.subtitle||META.short||'';if(HC.subs&&HC.subs.locked(cid)){HC.subs.paywall(C,META);HC.apply();HC.onlang=function(){location.reload()};return}
   var want=params.get('l'),i=flat.findIndex(function(l){return l.id===want});if(i<0&&CS.last&&CS.last.li<flat.length)i=CS.last.li;if(i<0)i=0;
   initVoices();buildTabs();buildSide();bindControls();HC.apply();loadLesson(i,i===(CS.last&&CS.last.li)?CS.last.ci:0,false)}).catch(function(e){$('#ctitle').textContent='No se pudo cargar el curso';console.error(e)});
 HC.onlang=function(){var want=HC.cLang();if(C&&want!==C.lang&&!(want==='en'&&C.fb)){try{if(window.speechSynthesis)speechSynthesis.cancel()}catch(e){}location.reload();return}HC.apply();buildTabs();buildSide();updateUI()};

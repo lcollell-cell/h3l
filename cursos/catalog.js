@@ -5,7 +5,7 @@ function card(m){var c=courses[m.id],cs=HC.cs(m.id),p=c?HC.progress(c):{pct:0,ce
   var st=p.cert?HC.t('review'):(p.pct>0?HC.t('resume'):HC.t('start'));
   var nl=c?c.modules.reduce(function(a,x){return a+x.lessons.length},0):'…',mins=c?Math.round(c.totalSec/60):'…';
   var nq=c?(c.modules.length+1):'…',nx=c?(c.downloads||[]).length:'…';
-  return '<article class="card"><div class="cv" style="--cc:'+esc(m.color)+'">'+HC.ico[m.icon]+'<div class="tag">'+esc(m.tag)+'</div><h3>'+esc(m.title)+'</h3></div>'+
+  return '<article class="card"><div class="cv" style="--cc:'+esc(m.color)+'">'+HC.ico[m.icon]+'<div class="tag">'+esc(m.tag)+'</div><h3>'+esc(m.title)+'</h3>'+(HC.subs?HC.subs.badge(m.id):'')+'</div>'+
   '<div class="cb"><p>'+esc(m.short)+'</p><div class="meta"><span>'+nl+' '+HC.t('lessons')+'</span><span>≈ '+mins+' '+HC.t('min')+' + Excel</span><span>'+nq+' '+HC.t('exams')+'</span><span>'+HC.t('level')+': '+esc(lvTxt(m))+'</span></div>'+
   '<div class="bar" role="progressbar" aria-valuenow="'+p.pct+'" aria-valuemin="0" aria-valuemax="100"><i style="width:'+p.pct+'%"></i></div>'+
   '<div class="acts"><a class="btn g s" href="curso.html?c='+esc(m.id)+'">'+st+'</a>'+(p.pct>0?'<span class="badge">'+p.pct+' % '+HC.t('done')+'</span>':'')+(p.cert?'<span class="badge">'+HC.t('certok')+'</span>':'')+'</div></div></article>'}
@@ -27,7 +27,7 @@ function vCards(sl){return sl.map(function(x){return '<div style="margin-bottom:
 function vList(sl){var h='<div class="ltw"><table class="lt"><thead><tr><th>'+HC.t('th_c')+'</th><th class="c1">'+HC.t('th_lv')+'</th><th class="c2">'+HC.t('th_ls')+'</th><th class="c2">'+HC.t('th_du')+'</th><th>'+HC.t('th_pr')+'</th><th>'+HC.t('th_ac')+'</th></tr></thead><tbody>';
   sl.forEach(function(x){h+='<tr class="gs"><td colspan="6"><b>'+esc(x.s.title)+'</b> <small>'+x.list.length+'</small><span> · '+esc(x.s.desc)+'</span></td></tr>';
     x.list.forEach(function(m){var c=courses[m.id],p=c?HC.progress(c):{pct:0,cert:false},st=p.cert?HC.t('review'):(p.pct>0?HC.t('resume'):HC.t('start'));
-      h+='<tr><td><i class="dot" style="background:'+esc(m.color)+'"></i><a href="curso.html?c='+esc(m.id)+'"><b>'+esc(m.title)+'</b></a><div class="sub">'+esc(m.tag)+' · '+esc(m.short)+'</div></td><td class="c1">'+esc(lvTxt(m))+'</td><td class="c2">'+(c?nLes(c):'…')+'</td><td class="c2">'+(c?'≈ '+Math.round(c.totalSec/60)+' '+HC.t('min'):'…')+'</td>'+
+      h+='<tr><td><i class="dot" style="background:'+esc(m.color)+'"></i><a href="curso.html?c='+esc(m.id)+'"><b>'+esc(m.title)+'</b></a> '+(HC.subs?HC.subs.badge(m.id):'')+'<div class="sub">'+esc(m.tag)+' · '+esc(m.short)+'</div></td><td class="c1">'+esc(lvTxt(m))+'</td><td class="c2">'+(c?nLes(c):'…')+'</td><td class="c2">'+(c?'≈ '+Math.round(c.totalSec/60)+' '+HC.t('min'):'…')+'</td>'+
       '<td><div class="bar" role="progressbar" aria-valuenow="'+p.pct+'" aria-valuemin="0" aria-valuemax="100"><i style="width:'+p.pct+'%"></i></div><small>'+p.pct+' %'+(p.cert?' · '+HC.t('certok'):'')+'</small></td><td><a class="btn g s" href="curso.html?c='+esc(m.id)+'">'+st+'</a></td></tr>'})});
   return h+'</tbody></table></div>'}
 function tnode(id,cls,label,kids,extra,deflt){var op=open_[id];if(op===undefined)op=!!deflt;if(q.trim()&&kids)op=true;
@@ -40,7 +40,7 @@ function vTree(sl){var qq=norm(q.trim()),h='<ul class="tree" role="tree" aria-la
         if(kl||!qq||cm){var qd=cs.q&&cs.q[md.id]&&cs.q[md.id].best>=70;kl+=tnode('q:'+md.id,'lf','<a href="curso.html?c='+esc(m.id)+'">'+esc(HC.t('quiz_m'))+'</a>','',qd?'<span class="ok">✓</span>':'');km+=tnode('m:'+md.id,'md','<b>'+esc(md.title)+'</b>',kl,'<small>'+md.lessons.length+' '+HC.t('lessons')+'</small>',false)}});
       if((c.downloads||[]).length&&(!qq||cm||c.downloads.some(function(d){return norm(d.title).indexOf(qq)>=0}))){var kf='';c.downloads.forEach(function(d,i){kf+=tnode('f:'+m.id+i,'lf fl','<a href="'+esc(d.file)+'" download>'+esc(d.title)+'</a>','','<small>xlsx</small>')});km+=tnode('x:'+m.id,'md','<b>'+esc(HC.t('tr_files'))+'</b>',kf,'<small>'+c.downloads.length+'</small>',false)}
       km+=tnode('e:'+m.id,'lf','<a href="curso.html?c='+esc(m.id)+'">'+esc(HC.t('tr_exam'))+'</a>','',(cs.e&&cs.e.best>=70?'<span class="ok">✓</span>':''))}
-    kc+=tnode('c:'+m.id,'cr','<i class="dot" style="background:'+esc(m.color)+'"></i><a href="curso.html?c='+esc(m.id)+'"><b>'+esc(m.title)+'</b></a>',km||'<li class="ld">…</li>','<small>'+(c?nLes(c)+' '+HC.t('lessons')+' · ':'')+p.pct+' %</small>',false)});
+    kc+=tnode('c:'+m.id,'cr','<i class="dot" style="background:'+esc(m.color)+'"></i><a href="curso.html?c='+esc(m.id)+'"><b>'+esc(m.title)+'</b></a>'+' '+(HC.subs?HC.subs.badge(m.id):''),km||'<li class="ld">…</li>','<small>'+(c?nLes(c)+' '+HC.t('lessons')+' · ':'')+p.pct+' %</small>',false)});
     h+=tnode('s:'+x.s.id,'sc','<b>'+esc(x.s.title)+'</b>',kc,'<small>'+x.list.length+'</small>',true)});
   return h+'</ul><p class="trh">'+esc(HC.t('tr_hint'))+'</p>'}
 
