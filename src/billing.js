@@ -3,7 +3,7 @@
    aplicar sql/billing.sql y enrutar estas funciones desde worker.js (ver la lista de verificación en el documento).
    Las partes específicas de cada pasarela (URL de la API y formato del webhook) están aisladas en `provider` y deben confirmarse con su documentación. */
 
-export const PRICE_CENTS = 2000, FREE_LIMIT = 3, CURRENCY = 'USD';
+export const PRICE_CENTS = 2500, FREE_LIMIT = 2, CURRENCY = 'USD';
 
 const hex = (buf) => [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, '0')).join('');
 function safeEq(a, b) { if (a.length !== b.length) return false; let r = 0; for (let i = 0; i < a.length; i++) r |= a.charCodeAt(i) ^ b.charCodeAt(i); return r === 0; }

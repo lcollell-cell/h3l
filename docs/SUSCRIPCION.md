@@ -1,29 +1,29 @@
-# Suscripción a Cursos Online H3L (3 cursos gratis + USD 20 por curso)
+# Suscripción a Cursos Online H3L (2 cursos gratis + USD 25 por curso)
 
 **Estado: SIMULACIÓN.** No hay cobro ni factura real. Todo lo que se ve en `cursos/suscripcion.html` es de ejemplo y queda en el navegador de quien lo prueba.
 
 ## Regla comercial implementada
-- Cada cuenta elige **3 cursos gratis** (se confirman una sola vez).
-- Cada curso adicional se desbloquea por **USD 20** (pago único, acceso permanente).
+- Cada cuenta elige **2 cursos gratis** (se confirman una sola vez).
+- Cada curso adicional se desbloquea por **USD 25** (pago único, acceso permanente).
 - Sin simulación activa, **todos los cursos siguen abiertos**. La simulación se activa en `suscripcion.html` (botón) o con `?demo=1`; se apaga con `?demo=0`.
 
 ## Cómo mostrarla a los socios
 1. Abrir `…/cursos/suscripcion.html` y pulsar **Activar simulación**.
 2. Paso 1: cargar cuenta y datos de facturación (nombre o razón social, email, país, identificación fiscal, domicilio).
-3. Paso 2: elegir 3 cursos gratis y confirmar. En el catálogo aparecen las etiquetas *Gratis* / *USD 20* / *Desbloqueado*, y un curso bloqueado muestra la pantalla de acceso.
+3. Paso 2: elegir 2 cursos gratis y confirmar. En el catálogo aparecen las etiquetas *Gratis* / *USD 25* / *Desbloqueado*, y un curso bloqueado muestra la pantalla de acceso.
 4. Paso 3: desbloquear otro curso. Tarjeta de prueba `4242 4242 4242 4242` (aprobada); terminada en `0002` simula un rechazo. No se envía ningún dato de tarjeta a ningún lado.
 5. Paso 4: ver o descargar el **comprobante de ejemplo** (sin valor fiscal).
 6. *Borrar datos de la simulación* deja todo en cero para repetir la demo.
 
 ## Flujo real (cuando se active)
 1. Cuenta (email + datos de facturación) guardada en el servidor (D1: `sql/billing.sql`).
-2. Los 3 cursos gratis se registran como `entitlements` con `source='free'` (máximo 3, `grantFree` en `src/billing.js`).
+2. Los 2 cursos gratis se registran como `entitlements` con `source='free'` (máximo 2, `grantFree` en `src/billing.js`).
 3. Al desbloquear un curso se crea una orden `pending` y se redirige al **checkout alojado de la pasarela** (los datos de tarjeta nunca pasan por el sitio).
 4. La pasarela avisa por **webhook firmado**; el servidor verifica la firma (`verifySignature`), comprueba que **monto y moneda coincidan** y recién ahí habilita el curso (`onPaid`, idempotente por `provider_ref`).
 5. Se envía el comprobante al comprador y se emite la **factura electrónica de ARCA** (ver abajo); se guardan nº y CAE en `orders`.
 6. El acceso queda ligado a la cuenta (no al navegador), válido en todos sus dispositivos.
 
-`src/billing.js` y `sql/billing.sql` están escritos y probados con datos simulados (firma, límite de 3 gratis, monto distinto, pago duplicado), pero **no están conectados** a `src/worker.js` ni a `wrangler.jsonc`.
+`src/billing.js` y `sql/billing.sql` están escritos y probados con datos simulados (firma, límite de 2 gratis, monto distinto, pago duplicado), pero **no están conectados** a `src/worker.js` ni a `wrangler.jsonc`.
 
 ## Cómo cobrar y facturar correctamente (investigación, a validar con el contador)
 - **Stripe:** según una comparativa de 2026, una empresa argentina **no puede abrir cuenta directa** y necesita una sociedad en EE. UU. (LLC) ([develop Argentina](https://developargentina.com/comparativas/stripe-vs-mercadopago-vs-todoPago-2026)).

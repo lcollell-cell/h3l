@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS accounts (
   address TEXT,
   created_at TEXT NOT NULL
 );
--- Un acceso por curso. source: 'free' (hasta 3 por cuenta) o 'paid' (USD 20 cada uno).
+-- Un acceso por curso. source: 'free' (hasta 2 por cuenta) o 'paid' (USD 25 cada uno).
 CREATE TABLE IF NOT EXISTS entitlements (
   account_id TEXT NOT NULL REFERENCES accounts(id),
   course_id TEXT NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS orders (
   id TEXT PRIMARY KEY,              -- id propio (H3L-AAAA-NNNN)
   account_id TEXT NOT NULL REFERENCES accounts(id),
   course_id TEXT NOT NULL,
-  amount_cents INTEGER NOT NULL,    -- 2000 = USD 20,00
+  amount_cents INTEGER NOT NULL,    -- 2500 = USD 25,00
   currency TEXT NOT NULL DEFAULT 'USD',
   status TEXT NOT NULL,             -- 'pending' | 'paid' | 'refunded' | 'failed'
   provider TEXT NOT NULL,           -- pasarela elegida
