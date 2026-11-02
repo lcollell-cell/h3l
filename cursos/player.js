@@ -134,7 +134,7 @@ function markTranscript(soft){var box=$('#txList');if(!box)return;$$('button',bo
 function txtOf(L,withTime){return L.title+'\n'+L.cues.map(function(c,i){var t=0;for(var k=0;k<i;k++)t+=HC.cueDur(L.cues[k]);return(withTime?'['+HC.fmt(t)+'] ':'')+c.say}).join('\n')}
 function dl(name,text,type){var a=el('a');a.href=URL.createObjectURL(new Blob([text],{type:type||'text/plain;charset=utf-8'}));a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500)}
 /* ---------- pestañas ---------- */
-var TABS=['ov','tr','nt','fl','rf','cm','ce'],curTab='ov';
+var TABS=['ov','tr','nt','fl','rf','ce'],curTab='ov';
 function buildTabs(){var t=$('#tabs');t.innerHTML='';TABS.forEach(function(k){var b=el('button',{role:'tab','aria-selected':k===curTab,'data-k':k},HC.t('tab_'+k));b.addEventListener('click',function(){selectTab(k)});t.appendChild(b)});
   var p=$('#panes');p.innerHTML='';TABS.forEach(function(k){var d=el('div',{class:'pane',id:'p_'+k,role:'tabpanel'});d.hidden=k!==curTab;p.appendChild(d)});
   paneOv();paneTr();paneNt();paneFl();paneRf();paneCm();paneCe();if(flat&&starts.length){buildTranscript()}}
@@ -160,7 +160,7 @@ function levels(comp){var lessons=comp.lessons,cs=CS,all=lessons.every(function(
   var lab=lessons.some(function(id){return cs.l[id]&&cs.l[id].lab})||lessons.every(function(id){var L=flat.filter(function(x){return x.id===id})[0];return L&&!L.cues.some(function(c){return c.scene&&c.scene.t==='viz'})}),xl=Object.keys(cs.x||{}).some(function(k){return cs.x[k]});
   var mods=C.modules.filter(function(m){return m.lessons.some(function(l){return lessons.indexOf(l.id)>=0})}),q=mods.every(function(m){return cs.q[m.id]&&cs.q[m.id].best>=70}),ex=cs.e&&cs.e.best>=85;
   var lv=0;if(all)lv=1;if(lv===1&&cpOk)lv=2;if(lv===2&&lab&&xl)lv=3;if(lv===3&&q)lv=4;if(lv===4&&ex)lv=5;return lv}
-function paneCm(){var p=$('#p_cm'),h='<h3>'+HC.t('tab_cm')+'</h3><p class="note-s" style="margin-bottom:10px">'+esc(HC.t('cm_p'))+'</p><div class="cm"><table><thead><tr><th>'+HC.t('cm_c')+'</th>'+[1,2,3,4,5].map(function(i){return '<th>'+i+' · '+HC.t('lv'+i)+'</th>'}).join('')+'</tr></thead><tbody>';
+function paneCm(){var p=$('#p_cm');if(!p)return;var h='<h3>'+HC.t('tab_cm')+'</h3><p class="note-s" style="margin-bottom:10px">'+esc(HC.t('cm_p'))+'</p><div class="cm"><table><thead><tr><th>'+HC.t('cm_c')+'</th>'+[1,2,3,4,5].map(function(i){return '<th>'+i+' · '+HC.t('lv'+i)+'</th>'}).join('')+'</tr></thead><tbody>';
   (C.competencies||[]).forEach(function(c){var lv=flat?levels(c):0;h+='<tr><td>'+esc(c.name)+'</td>'+[1,2,3,4,5].map(function(i){return '<td><i class="'+(i<=lv?'f':'')+'"></i></td>'}).join('')+'</tr>'});
   p.innerHTML=h+'</tbody></table></div><p class="note-s" style="margin-top:10px">Esquema de 5 niveles de dominio: conocer → aprender → aplicar → transferir → transformar. Las competencias del curso se basan en un mapa de competencias técnicas de exploración y producción (geología, reservorios, producción, perforación).</p>'}
 /* ---------- lateral ---------- */
