@@ -22,6 +22,8 @@
   "vars": {
     "REPORT_TO": "info_sitio@h3lglobalenergy.com",
     "REPORT_FROM": "reportes@h3lglobalenergy.com",
+    // Buzon que recibe las valoraciones y sugerencias de los cursos (asunto "Sugerencia de Curso: ..."). Usa el mismo remitente y RESEND_API_KEY.
+    "FEEDBACK_TO": "info_clientes_usuarios@h3lglobalenergy.com",
     "REPORT_HOSTS": "www.h3lglobalenergy.com,h3lglobalenergy.com",
     "TZ_OFFSET_MIN": "-180"
   }

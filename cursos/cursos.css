@@ -378,3 +378,9 @@ body.fs-lock{overflow:hidden}
  .top nav select{flex:0 0 auto}
 }
 .q select{width:100%;max-width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font:500 15px var(--font)}
+/* valoración del curso */
+.fb{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);position:relative}
+.stars{display:flex;gap:4px;margin:8px 0 10px}
+.stars .star{font-size:34px;line-height:1;background:none;border:0;color:#c3ccd9;cursor:pointer;padding:2px 4px;min-width:44px;min-height:44px;border-radius:8px}
+.stars .star.on{color:#f0a81c}.stars .star:hover{color:#f0a81c}.stars .star:focus-visible{outline:3px solid var(--green2)}
+.fb textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font:500 15px var(--font);resize:vertical}

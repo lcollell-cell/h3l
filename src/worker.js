@@ -297,11 +297,62 @@ async function tutorVerify(request, env) {
   } catch { return Response.json({ valid: false }, { headers: nostore }); }
 }
 
+
+/* ---- Valoración de cursos (estrellas + sugerencia) ----
+   POST /api/feedback {course,title,rating,text,email,lang,hp} -> {ok, mailed}
+   Guarda la valoración en D1 (tabla feedback) y manda un mail a FEEDBACK_TO con el asunto "Sugerencia de Curso: <curso>" (Resend, mismo remitente del reporte).
+   Límite: 6 envíos por hora por visitante (hash con sal, sin guardar la IP). El campo hp es una trampa para bots. */
+const FEEDBACK_MAX_HR = 6;
+let fbReady = false;
+async function ensureFeedback(env) {
+  if (fbReady || !env.DB) return;
+  await env.DB.batch([
+    env.DB.prepare(`CREATE TABLE IF NOT EXISTS feedback (id INTEGER PRIMARY KEY AUTOINCREMENT, ts TEXT NOT NULL, course TEXT NOT NULL, rating INTEGER NOT NULL, text TEXT, email TEXT, lang TEXT)`),
+    env.DB.prepare(`CREATE TABLE IF NOT EXISTS feedback_rate (k TEXT NOT NULL, hr INTEGER NOT NULL, n INTEGER NOT NULL, PRIMARY KEY (k, hr))`),
+  ]);
+  fbReady = true;
+}
+const oneLine = (v, n) => String(v ?? '').replace(/[\r\n\t]+/g, ' ').replace(/[<>]/g, '').trim().slice(0, n);
+async function feedback(request, env) {
+  const body = await readJson(request);
+  if (!body) return Response.json({ ok: false }, { status: 400, headers: nostore });
+  if (body.hp) return Response.json({ ok: true, mailed: false }, { headers: nostore });          // bot: se ignora en silencio
+  const course = oneLine(body.course, 8).toLowerCase();
+  const rating = Number(body.rating);
+  if (!/^[a-z0-9]{2,8}$/.test(course) || !Number.isInteger(rating) || rating < 1 || rating > 5) return Response.json({ ok: false }, { status: 400, headers: nostore });
+  const title = oneLine(body.title, 140) || course;
+  const text = String(body.text ?? '').replace(/[<>]/g, '').trim().slice(0, 1500);
+  const email = /^[^\s@]{1,64}@[^\s@]{1,120}\.[^\s@]{2,}$/.test(String(body.email ?? '').trim()) ? String(body.email).trim().slice(0, 120) : '';
+  const lang = ['es', 'en', 'fr', 'pt'].includes(body.lang) ? body.lang : 'es';
+  if (env.DB) {
+    await ensureFeedback(env);
+    const hr = Math.floor(Date.now() / 3600000);
+    const k = (await sha(`${request.headers.get('cf-connecting-ip') || 'x'}|fb|${await getSalt(env)}`)).slice(0, 24);
+    const row = await env.DB.prepare(`SELECT n FROM feedback_rate WHERE k=? AND hr=?`).bind(k, hr).first();
+    if (row && row.n >= FEEDBACK_MAX_HR) return Response.json({ ok: false }, { status: 429, headers: nostore });
+    await env.DB.prepare(`INSERT INTO feedback_rate (k, hr, n) VALUES (?, ?, 1) ON CONFLICT(k, hr) DO UPDATE SET n=n+1`).bind(k, hr).run();
+    await env.DB.prepare(`DELETE FROM feedback_rate WHERE hr < ?`).bind(hr - 48).run();
+    await env.DB.prepare(`INSERT INTO feedback (ts, course, rating, text, email, lang) VALUES (?, ?, ?, ?, ?, ?)`).bind(new Date().toISOString(), course, rating, text, email, lang).run();
+  }
+  let mailed = false;
+  if (env.RESEND_API_KEY && env.FEEDBACK_TO && env.REPORT_FROM) {
+    const stars = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+    const esc = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+    const lines = [`Curso: ${title} (${course})`, `Valoración: ${stars} (${rating} de 5)`, `Idioma: ${lang}`, email ? `Contacto: ${email}` : 'Contacto: (no indicado)', '', text || '(sin sugerencia escrita)'];
+    const payload = { from: `H3L Global Energy · Cursos <${env.REPORT_FROM}>`, to: [env.FEEDBACK_TO], subject: `Sugerencia de Curso: ${title}`, text: lines.join('\n'), html: `<p>${lines.map(esc).join('<br>')}</p>` };
+    if (email) payload.reply_to = email;
+    const res = await fetch('https://api.resend.com/emails', { method: 'POST', headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+    mailed = res.ok;
+  }
+  return Response.json({ ok: true, mailed }, { headers: nostore });
+}
+
 export default {
   async fetch(request, env, ctx) {
     const { pathname } = new URL(request.url);
     if (pathname === '/api/collect' && request.method === 'POST') return collect(request, env, ctx);
     if (pathname === '/api/report-test' && request.method === 'POST') return reportTest(request, env);
+    if (pathname === '/api/feedback' && request.method === 'POST') return feedback(request, env);
     if (pathname === '/api/tutor-login' && request.method === 'POST') return tutorLogin(request, env);
     if (pathname === '/api/tutor-verify' && request.method === 'POST') return tutorVerify(request, env);
     if (pathname === '/api/export' && request.method === 'GET') return exportMetrics(request, env);
