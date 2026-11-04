@@ -456,3 +456,27 @@ body.fs-lock{overflow:hidden}
 #gNd{transform-origin:150px 140px;transform-box:view-box}
 .gm-med{grid-template-columns:repeat(3,1fr)}
 @media(max-width:560px){.gm-med{grid-template-columns:repeat(2,1fr)}}
+
+/* Juego: pantalla única, sobria, sin scroll en el tablero */
+body.game{background:#f4f6fa;min-height:100dvh}
+body.game .gtop{position:static;justify-content:space-between;padding:10px 18px;gap:12px;box-shadow:none;border-bottom:1px solid var(--line);background:#fff}
+body.game .gtop img{height:34px;width:auto;display:block}
+body.game .gm{padding:12px 16px 14px;max-width:560px;min-height:calc(100dvh - 56px)}
+.gm-hud{justify-content:space-between;gap:10px;font-size:13px;margin:0 0 8px}
+.gm-hud b{font-weight:600;letter-spacing:.04em;text-transform:uppercase;font-size:11px}
+.gm-hrt{font-size:17px}
+.gm-med{grid-template-columns:repeat(3,1fr)!important;gap:5px;margin:0 0 6px}
+.gm-med li{flex-direction:row;align-items:center;justify-content:space-between;gap:6px;padding:4px 8px;border-radius:6px;border-top:0;border-left:3px solid var(--cc);font-size:10.5px;font-weight:600}
+.gm-med li em{flex:none;gap:3px}.gm-med li i{width:8px;height:8px;border-width:1.5px}
+.gm-gauge{width:min(100%,calc(100dvh - 300px),420px);min-width:230px;margin:8px auto 8px}
+.gm-stage{display:flex;flex-direction:column;align-items:center}
+.gm-stage p{margin:0}
+#gSp{padding:13px 28px;background:var(--navy);border-color:var(--navy);letter-spacing:.04em}
+#gSp:hover{background:#27406b}
+.gm-how summary{font:700 13px var(--font);color:var(--navy);cursor:pointer}
+.gm-how ul{margin-top:8px!important}
+.gm-q{padding:12px 14px 14px}.gm-qt{font-size:16px;margin:0 0 10px}
+.gm-opt{padding:9px 12px;font-size:13.5px}.gm-opts{gap:6px}
+.gm-pw{margin-top:10px}
+@media(max-width:560px){.gm-med li{font-size:10px;padding:4px 6px}}
+body.game .gtop select{width:auto;flex:none;min-width:64px}
