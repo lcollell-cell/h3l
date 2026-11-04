@@ -65,10 +65,21 @@ function gauge(opts){G.mode='show';
 function launch(opts){if(G.mode!=='show')return;G.mode='busy';var b=$('#gSp');b.disabled=true;b.textContent=L('spinning');
   var n=opts.length,a=270/n,i=Math.floor(Math.random()*n),pick=opts[i],tg=-135+i*a+a/2+(Math.random()-.5)*a*.5,nd=$('#gNd');
   function go(){if(!G||G.mode!=='flip')return;G.mode='';pick==='caso'?caseScreen():qScreen(pick)}
-  if(reduce){nd.style.transition='none';nd.style.transform='rotate('+tg+'deg)';G.mode='flip';return setTimeout(go,300)}
-  nd.style.transition='transform .75s cubic-bezier(.4,0,.6,1)';nd.style.transform='rotate(125deg)';
-  setTimeout(function(){if(!G||!$('#gNd'))return;nd.style.transition='transform 2.4s cubic-bezier(.25,1.6,.45,1)';nd.style.transform='rotate('+tg+'deg)'},800);
-  setTimeout(function(){if(G)G.mode='flip';setTimeout(go,700)},3300)}
+  function put(t){nd.style.transition='none';nd.style.transform='rotate('+t+'deg)'}
+  if(reduce){put(tg);G.mode='flip';return setTimeout(go,300)}
+  /* Aguja con inercia: resorte amortiguado (subamortiguado), topes en los extremos y temblor que se apaga */
+  var th=-135,w=0,t=0,dt=1/120,last=null,acc=0,set=0,phase=0,K=48,ZE=.2,hit=0;set=Math.min(134,tg+34);if(set<-60)set=70;
+  function step(){var k=phase?K:140,c=2*(phase?ZE:.85)*Math.sqrt(k),f=k*(set-th)-c*w;
+    w+=f*dt;th+=w*dt;t+=dt;
+    if(th>138){th=138;w=-Math.abs(w)*.4}else if(th<-138){th=-138;w=Math.abs(w)*.4}
+    if(!phase&&(t>.8||th>set-4)){phase=1;set=tg;hit=t}
+    return th+(phase?Math.sin(t*70)*Math.max(0,.35-(t-hit)*.12)*Math.min(1,Math.abs(w)/25):0)}
+  function frame(ts){if(!G||!$('#gNd'))return;if(last==null)last=ts;acc+=Math.min(.05,(ts-last)/1000);last=ts;var v=th;
+    while(acc>=dt){v=step();acc-=dt}
+    put(v);
+    if(phase&&Math.abs(th-tg)<.25&&Math.abs(w)<1.5||t>7){put(tg);G.mode='flip';return setTimeout(go,650)}
+    requestAnimationFrame(frame)}
+  requestAnimationFrame(frame)}
 
 function pickQ(cat){var pool=DATA.q.filter(function(x){return x.c===cat&&(G.level===0||x.l===G.level)});if(!pool.length)pool=DATA.q.filter(function(x){return x.c===cat});
   var u=G.used[cat]||(G.used[cat]={}),free=pool.filter(function(x){return !u[x.q]});if(!free.length){G.used[cat]={};free=pool}var x=rnd(free);G.used[cat][x.q]=1;return x}
