@@ -482,3 +482,53 @@ body.game .gm{padding:12px 16px 14px;max-width:560px;min-height:calc(100dvh - 56
 body.game .gtop select{width:auto;flex:none;min-width:64px}
 .gm-l2{display:inline-block;margin-left:6px;padding:2px 8px;border-radius:999px;background:var(--navy);color:#fff;font:700 10px var(--font);letter-spacing:.06em;text-transform:uppercase;vertical-align:middle}
 .gm-l2c{border-left:4px solid var(--navy)}.gm-l2c p{margin:0 0 12px;font-size:14px;color:var(--mut)}
+
+/* animaciones de cambio de nivel */
+.gm-lu{border-radius:14px;overflow:hidden;background:#0f2a42;color:#fff;margin:0 0 14px;box-shadow:0 8px 24px rgba(11,26,48,.25)}
+.gm-lu .lu-art{line-height:0}.lu-svg{width:100%;height:auto;display:block}
+.gm-lu .lu-tx{padding:12px 16px 14px;display:flex;flex-direction:column;gap:3px;text-align:center;animation:luFade .8s .9s both}
+.gm-lu .lu-tx b{font:800 18px/1.2 var(--font)}.gm-lu .lu-tx span{font:500 13px/1.4 var(--font);color:#cfe0f5}
+@keyframes luFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.lu-st circle{fill:#fff;animation:luTw 2.2s ease-in-out infinite}.lu-st circle:nth-child(2n){animation-delay:.7s}
+@keyframes luTw{0%,100%{opacity:.35}50%{opacity:1}}
+/* 1: perforacion y surgencia */
+.lu-str{transform-origin:160px 30px;transform-box:view-box;animation:luDrill 1.3s ease-out both}
+@keyframes luDrill{from{transform:scaleY(.05)}to{transform:scaleY(1)}}
+.lu-p{animation:luGush 1.5s cubic-bezier(.2,.7,.3,1) 1.2s both}
+.lu-p.p2{animation-delay:1.3s}.lu-p.p3{animation-delay:1.4s}.lu-p.p4{animation-delay:1.5s}.lu-p.p5{animation-delay:1.55s}.lu-p.p6{animation-delay:1.25s}
+@keyframes luGush{0%{transform:translateY(80px);opacity:0}30%{opacity:1}100%{transform:none;opacity:1}}
+.lu-pool{transform-origin:160px 112px;transform-box:view-box;animation:luPool 1s 2.2s both}
+@keyframes luPool{from{transform:scaleX(.1)}to{transform:none}}
+/* 3: manometro */
+.lu-needle{transform-origin:160px 118px;transform-box:view-box;animation:luNeedle 2s cubic-bezier(.3,1.5,.5,1) both}
+@keyframes luNeedle{0%{transform:rotate(-85deg)}70%{transform:rotate(58deg)}100%{transform:rotate(42deg)}}
+.lu-needle{transform:rotate(42deg)}
+.lu-spark circle{animation:luSp 1.4s ease-out 1.8s both}.lu-spark .s2{animation-delay:2s}.lu-spark .s3{animation-delay:2.2s}.lu-spark .s4{animation-delay:2.1s}
+@keyframes luSp{0%{opacity:0;transform:scale(.2)}50%{opacity:1;transform:scale(1.8)}100%{opacity:.9;transform:scale(1)}}
+/* 4: plataforma */
+.lu-sun{animation:luSun 2s ease-out both}
+@keyframes luSun{from{transform:translateY(46px)}to{transform:none}}
+.lu-plat{animation:luPlat 1.6s cubic-bezier(.2,.9,.3,1) both}
+@keyframes luPlat{from{transform:translateY(50px);opacity:0}to{transform:none;opacity:1}}
+.lu-sea{animation:luSea 5s linear infinite}
+@keyframes luSea{from{transform:translateX(0)}to{transform:translateX(40px)}}
+.lu-fl{transform-origin:205px 46px;transform-box:view-box;animation:luFl .5s ease-in-out infinite alternate}
+@keyframes luFl{from{transform:scale(.8,.85)}to{transform:scale(1.1,1.2)}}
+/* 5: campo al amanecer */
+.lu-rays{transform-origin:160px 84px;transform-box:view-box;animation:luRay 14s linear infinite}
+@keyframes luRay{to{transform:rotate(360deg)}}
+.lu-sun2{animation:luSun 2s ease-out both}
+.lu-beam{transform-origin:73px 98px;transform-box:view-box;animation:luNod 1.6s ease-in-out infinite alternate}
+.lu-beam.b2{transform-origin:161px 100px;animation-delay:.3s}.lu-beam.b3{transform-origin:249px 98px;animation-delay:.6s}
+@keyframes luNod{from{transform:rotate(-12deg)}to{transform:rotate(12deg)}}
+.lu-conf rect{animation:luConf 3s linear infinite}.lu-conf .c2{animation-delay:.5s}.lu-conf .c3{animation-delay:1s}.lu-conf .c4{animation-delay:1.5s}.lu-conf .c5{animation-delay:.9s}
+@keyframes luConf{from{transform:translateY(0) rotate(0)}to{transform:translateY(150px) rotate(300deg)}}
+/* pantalla de nuevo nivel */
+.gm-splash{position:fixed;inset:0;z-index:50;background:radial-gradient(circle at 50% 40%,#27406a,#0b1a30);display:flex;align-items:center;justify-content:center;color:#fff;text-align:center;animation:luIn .35s both}
+.gm-splash.out{opacity:0;transition:opacity .3s}
+.gm-splash .sp-in{display:flex;flex-direction:column;gap:8px;padding:0 24px}
+.gm-splash small{font:700 12px/1 var(--font);letter-spacing:.18em;text-transform:uppercase;color:#e8a15a;animation:luFade .6s .1s both}
+.gm-splash b{font:800 38px/1.1 var(--font);animation:luZoom .9s .25s cubic-bezier(.2,1.4,.4,1) both}
+.gm-splash span{font:500 16px/1.4 var(--font);color:#cfe0f5;animation:luFade .7s .8s both}
+@keyframes luIn{from{opacity:0}to{opacity:1}}
+@keyframes luZoom{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:none}}
