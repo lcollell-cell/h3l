@@ -544,3 +544,4 @@ body.game .gtop select{width:auto;flex:none;min-width:64px}
 .gm-ordl li{border-left:3px solid var(--line);padding:4px 8px;background:#fff;border-radius:6px}.gm-ordl li.g{border-color:var(--ok)}.gm-ordl li.r{border-color:var(--bad)}.gm-ordl li p{margin:2px 0 0;font-size:12.5px;color:var(--mut)}
 .gm-trap{font-size:12.5px;color:var(--mut)}
 .gm-ordl li b{font-size:13.5px;font-weight:700;line-height:1.35}
+.gm-comm{margin-top:10px;padding-top:10px;border-top:1px solid #e3e8f2;font-size:12.5px}.gm-comm a{font-weight:600;color:#1B2944;text-decoration:underline}
