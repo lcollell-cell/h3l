@@ -299,7 +299,7 @@ async function tutorVerify(request, env) {
 
 
 /* ---- Valoración de cursos (estrellas + sugerencia) ----
-   POST /api/feedback {course,title,rating,text,email,lang,hp} -> {ok, mailed}
+   POST /api/feedback {course,title,rating,text,email,lang,hp} -> {ok, mailed}  (course 'juego' = propuesta de situaciones para el juego: rating 0, title = nombre opcional, asunto "Propuesta para el Juego de Campo")
    Guarda la valoración en D1 (tabla feedback) y manda un mail a FEEDBACK_TO con el asunto "Sugerencia de Curso: <curso>" (Resend, mismo remitente del reporte).
    Límite: 6 envíos por hora por visitante (hash con sal, sin guardar la IP). El campo hp es una trampa para bots. */
 const FEEDBACK_MAX_HR = 6;
@@ -319,9 +319,11 @@ async function feedback(request, env) {
   if (body.hp) return Response.json({ ok: true, mailed: false }, { headers: nostore });          // bot: se ignora en silencio
   const course = oneLine(body.course, 8).toLowerCase();
   const rating = Number(body.rating);
-  if (!/^[a-z0-9]{2,8}$/.test(course) || !Number.isInteger(rating) || rating < 1 || rating > 5) return Response.json({ ok: false }, { status: 400, headers: nostore });
+  const propuesta = course === 'juego';          // propuesta de situaciones para el juego de campo: sin estrellas, el texto es obligatorio
+  if (!/^[a-z0-9]{2,8}$/.test(course) || !Number.isInteger(rating) || (propuesta ? rating !== 0 : (rating < 1 || rating > 5))) return Response.json({ ok: false }, { status: 400, headers: nostore });
   const title = oneLine(body.title, 140) || course;
   const text = String(body.text ?? '').replace(/[<>]/g, '').trim().slice(0, 1500);
+  if (propuesta && text.length < 10) return Response.json({ ok: false }, { status: 400, headers: nostore });
   const email = /^[^\s@]{1,64}@[^\s@]{1,120}\.[^\s@]{2,}$/.test(String(body.email ?? '').trim()) ? String(body.email).trim().slice(0, 120) : '';
   const lang = ['es', 'en', 'fr', 'pt'].includes(body.lang) ? body.lang : 'es';
   if (env.DB) {
@@ -338,8 +340,10 @@ async function feedback(request, env) {
   if (env.RESEND_API_KEY && env.FEEDBACK_TO && env.REPORT_FROM) {
     const stars = '★'.repeat(rating) + '☆'.repeat(5 - rating);
     const esc = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;');
-    const lines = [`Curso: ${title} (${course})`, `Valoración: ${stars} (${rating} de 5)`, `Idioma: ${lang}`, email ? `Contacto: ${email}` : 'Contacto: (no indicado)', '', text || '(sin sugerencia escrita)'];
-    const payload = { from: `H3L Global Energy · Cursos <${env.REPORT_FROM}>`, to: [env.FEEDBACK_TO], subject: `Sugerencia de Curso: ${title}`, text: lines.join('\n'), html: `<p>${lines.map(esc).join('<br>')}</p>` };
+    const lines = propuesta
+      ? [`Propuesta para el Juego de Campo`, `Nombre: ${title === course ? '(no indicado)' : title}`, `Idioma: ${lang}`, email ? `Contacto: ${email}` : 'Contacto: (no indicado)', '', text]
+      : [`Curso: ${title} (${course})`, `Valoración: ${stars} (${rating} de 5)`, `Idioma: ${lang}`, email ? `Contacto: ${email}` : 'Contacto: (no indicado)', '', text || '(sin sugerencia escrita)'];
+    const payload = { from: `H3L Global Energy · ${propuesta ? 'Juego' : 'Cursos'} <${env.REPORT_FROM}>`, to: [env.FEEDBACK_TO], subject: propuesta ? `Propuesta para el Juego de Campo${title === course ? '' : ': ' + title}` : `Sugerencia de Curso: ${title}`, text: lines.join('\n'), html: `<p>${lines.map(esc).join('<br>')}</p>` };
     if (email) payload.reply_to = email;
     const res = await fetch('https://api.resend.com/emails', { method: 'POST', headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
     mailed = res.ok;
