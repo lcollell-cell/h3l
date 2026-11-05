@@ -65,8 +65,9 @@ function gaugeSvg(opts){var n=opts.length,a=270/n,cx=150,cy=140,R=130,r0=60,sv='
   for(i=0;i<n;i++){var t0=-135+i*a,t1=t0+a,tm=t0+a/2,c=opts[i],lab=CN(c).split(' ')[0],pl=pt(tm,95),rot=(tm>90||tm<-90)?tm+90:tm-90;
     sv+='<path d="M'+f(pt(t0,R))+'A'+R+' '+R+' 0 0 1 '+f(pt(t1,R))+'L'+f(pt(t1,r0))+'A'+r0+' '+r0+' 0 0 0 '+f(pt(t0,r0))+'Z" fill="'+COL[c]+'" stroke="#fff" stroke-width="2.5"/>'+
     '<text x="'+pl[0].toFixed(1)+'" y="'+pl[1].toFixed(1)+'" transform="rotate('+rot.toFixed(1)+' '+pl[0].toFixed(1)+' '+pl[1].toFixed(1)+')" text-anchor="middle" dominant-baseline="middle" fill="#fff" font-size="10.5" font-weight="600" letter-spacing=".3"'+(lab.length>8?' textLength="52" lengthAdjust="spacingAndGlyphs"':'')+'>'+esc(lab)+'</text>'}
-  for(i=0;i<=27;i++){var tt=-135+i*10,p1=pt(tt,R+4),p2=pt(tt,R+(i%3?8:13));sv+='<line x1="'+p1[0].toFixed(1)+'" y1="'+p1[1].toFixed(1)+'" x2="'+p2[0].toFixed(1)+'" y2="'+p2[1].toFixed(1)+'" stroke="#1B2944" stroke-width="'+(i%3?1.2:2.2)+'"/>'}
-  return '<svg viewBox="0 -8 300 296" role="img" aria-label="'+esc(L('mg'))+'"><circle cx="150" cy="140" r="146" fill="#fff" stroke="#1B2944" stroke-width="3"/>'+sv+
+  for(i=0;i<=27;i++){var tt=-135+i*10,p1=pt(tt,R+4),p2=pt(tt,R+(i%3?8:13));sv+='<line x1="'+p1[0].toFixed(1)+'" y1="'+p1[1].toFixed(1)+'" x2="'+p2[0].toFixed(1)+'" y2="'+p2[1].toFixed(1)+'" stroke="#1B2944" stroke-width="'+(i%3?1.2:2.2)+'"/>';if(!(i%3)){var pn=pt(tt,R+25);sv+='<text x="'+pn[0].toFixed(1)+'" y="'+pn[1].toFixed(1)+'" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="600" fill="#4a5a78" class="gm-num">'+(i/3*10)+'</text>'}}
+  sv+='<text x="150" y="232" text-anchor="middle" font-size="11" font-weight="700" letter-spacing="1.5" fill="#4a5a78">PSI</text>';
+  return '<svg viewBox="-16 -26 332 332" role="img" aria-label="'+esc(L('mg'))+'"><circle cx="150" cy="140" r="164" fill="#f4f6fa" stroke="#1B2944" stroke-width="3"/><circle cx="150" cy="140" r="146" fill="#fff" stroke="#c5cde0" stroke-width="1"/>'+sv+
    '<g id="gNd" style="transform:rotate(-135deg)"><polygon points="146,150 154,150 150,26" fill="#1B2944"/></g><circle cx="150" cy="140" r="14" fill="#1B2944"/><circle cx="150" cy="140" r="5" fill="#fff"/></svg>'}
 
 function gauge(opts){G.mode='show';
