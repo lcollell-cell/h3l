@@ -532,3 +532,15 @@ body.game .gtop select{width:auto;flex:none;min-width:64px}
 .gm-splash span{font:500 16px/1.4 var(--font);color:#cfe0f5;animation:luFade .7s .8s both}
 @keyframes luIn{from{opacity:0}to{opacity:1}}
 @keyframes luZoom{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:none}}
+
+/* 8 niveles, ordenar acciones, "conozca algo mas" */
+.gm-lv{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.gm-lv .btn{justify-content:center;padding:10px 4px;font-size:12px;white-space:nowrap}
+@media(max-width:420px){.gm-lv{grid-template-columns:repeat(2,1fr)}.gm-lv .btn{font-size:13px}}
+.gm-more{font:500 12px/1.4 var(--font);color:var(--mut);margin:6px 0 0}.gm-more span{opacity:.85}.gm-more a{color:var(--mut);text-decoration:underline;text-underline-offset:2px}.gm-more a:hover{color:var(--navy)}
+.gm-ord .gm-opt kbd{min-width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center}
+.gm-ord .gm-opt.sel{border-color:var(--cc);background:#f1ebf8}.gm-ord .gm-opt.sel kbd{background:var(--cc);color:#fff;border-color:var(--cc)}
+.gm-ordbar{display:flex;gap:8px;margin:10px 0 0}
+.gm-ordl{list-style:none;margin:8px 0;padding:0;display:flex;flex-direction:column;gap:6px}
+.gm-ordl li{border-left:3px solid var(--line);padding:4px 8px;background:#fff;border-radius:6px}.gm-ordl li.g{border-color:var(--ok)}.gm-ordl li.r{border-color:var(--bad)}.gm-ordl li p{margin:2px 0 0;font-size:12.5px;color:var(--mut)}
+.gm-trap{font-size:12.5px;color:var(--mut)}
+.gm-ordl li b{font-size:13.5px;font-weight:700;line-height:1.35}
