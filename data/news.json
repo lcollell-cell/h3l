@@ -1,6 +1,60 @@
 {
  "items": [
   {
+   "source": "La Nación",
+   "title": "Una alianza argentina y americana se mete en el negocio del gas de Vaca Muerta",
+   "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPZHRSNDE0TzJhVVRkTmhFdDQwRk1rZzBNbDBUOXRMWjg4cnA2N2VWWkFyd0pxYUhLMHFMYTRQOHF0V1JjTEJGQXl2SDdyaTFTVjU1WDJ3TmV6dTJkMU9JdmExdW10c1VJbG5TM0xHa1VoMnBraGNOVUxTUTJtemdRNUd5QjJOVVhPWTdZa0NMVy0xX3M5X3FpNnRGQU4zdUhaYkpkdzhTZzR6VHZCRTEwbWhJRkJNOVVBTWkxbDV3TlRqNXp2YUhn?oc=5",
+   "date": "2026-11-06",
+   "region": "AR"
+  },
+  {
+   "source": "Perfil",
+   "title": "Malvinas: Argentina y Reino Unido se enfrentan en el Tribunal del Mar por el petróleo de Sea Lion",
+   "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxNbk5FSmRqNnhodUEwd1F0elE5bk9KaUcxQnludkp6WlJJY1QzU2F4cmQ0S2hFZ0lSWllXZFBlUGxVN21wb2dBMTVsZjRaWjBtSjlybjZLS3lJQ3FVdFNDckI5eWhVRzgteHg2bWE2S2RkN01kQUg4bjg2bF9janJETVVSaEV6NTA4X2FiOGM3cGI2LUpLMEd0SXRkcldzZHJBOElIek5QdlZVSmRSVGpQZ3BEam52Yy1Bb0J4TUdrZE1FdG5BNlg3UUp6QlJNQmhnNHdmMU4xdFQ?oc=5",
+   "date": "2026-11-06",
+   "region": "AR"
+  },
+  {
+   "source": "Punto Biz",
+   "title": "Una alianza argentina-estadounidense se mete en el gas de Vaca Muerta",
+   "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPaW1KVHV3TjNlb1J4OVJrcG5TM01RZDJnNE02dXdXcXhmcW8yUlQ2eVF1RDVnUi12Z1lvSHB6SVpoXzZyVjJvNTBQVG9FVXJRZFpNTnF3MGtVc2JzWDJfX3hzQUxvLUdCLU82RDMwUF9jMGprYnN2bjI3WS0tNlk0OEVHZ0htdnZfVllXLW1fcnUxWTVqTnZFYllsWXRTT2tmRGNoajBmYy1OUGF2b2RJbk5IY3A?oc=5",
+   "date": "2026-11-06",
+   "region": "AR"
+  },
+  {
+   "source": "El Liberal",
+   "title": "Explotación de hidrocarburos en Malvinas: Argentina enfrentará al Reino Unido ante un tribunal internacional en Alemania",
+   "url": "https://news.google.com/rss/articles/CBMi_AFBVV95cUxQU0x4UXZGelVrTkROallhRFh2T2c3N1dSXzRVRW1HZk02QmNOQ3phd29VTmVlU3dLemRwMllDSExRWmw0alRnWXRtRlZnWkRGOXN0cmtKX2h2bHJjdjNndFhVcDk3RkpIbk1hNlYtNHdxalN0WUp1bXZuQjJKNHpuMWdPOVk0UHJHZG9EUUJlQjFLWG43OXFWbHREdXozb3lqWkpmQ3FONVBBc2lFRHRNNVlHTHBMRDF3NUx3eVM1N2RPSmx2TEZoREN0LTdXRFY0VzV3LWwyb1pwa2FxWmZhWWRTajN1TjBwbHVSTjNRSk5vLVlDSm05bmFwMUTSAYYCQVVfeXFMTjVwTVZmbUc0Y1gwejBucF93Y0RQOVljUFNxcUFJaDRfQnpDRFRKTmZOc3VfMXZUUzJHM2RRRm1SYlVXcmprZjJDZ1pWVFJHRjdiQnhTd3Njcng1NnJrcTB6XzJmT3pzblFSdmVYamJ4WUZDUDdNZF9PSWpUdjNNNlc0dXRmeloxd2RPM2dKWUhOandpNE9iVzB3cG1mdzJRNnQ2QVc5d1o0TGJ0Njg5REZXNkxoTTJoTTNLT2Z3emJOaEUwRDFYbm9qQkhfZEVKSDRqc29PY2hZakluMkd4dEcydlBsNmJvTU5PZkt1bGlpNXdnZ3NKSGlhTG9SZ291VDVjRVQtQQ?oc=5",
+   "date": "2026-11-06",
+   "region": "AR"
+  },
+  {
+   "source": "Noticias AgroPecuarias",
+   "title": "La derrota electoral de Trump provoca una baja del petróleo y abre interrogantes para Vaca Muerta",
+   "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxPWENKOENrekRkSk5oenc3QmJ2bjIxRlJUb055akNYSnZwNEZ5SHY5bGZBWERHWXBHYkhkbEkzWHE4V0hrcm1FTlU4MGo0TS1lMGpEbEpVaHV1OGNnajJwbllDLVdRYWU1MjlJV01RLWhtYjFMc0dUU0JGdWxVUXFuWlBsRnV2dWhZd09LY2FwVWpVbjE3WnRqbC1IN1o1SFN5ZW94ZFhYUmc3dERjVldWQ1ZyYU5sblNWSnUzdWhxYnl6ZHdfelh1YWkzekpnN0ttdXJoSnpxZS1oTkpNY1hpag?oc=5",
+   "date": "2026-11-06",
+   "region": "AR"
+  },
+  {
+   "source": "ArgenPorts",
+   "title": "Cómo será el muelle que Argentina LNG proyecta en Río Negro para exportar líquidos de Vaca Muerta",
+   "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQaHVVTHBrclJpR200eTdNVUtNUXhsTnVlWGhJSnlCcnF3TkxYNHhiUW5LdlpnV1VuNTc5dGNuSjF6VGp2ZGtFX3lKektxc3JBeUpCYU44TjdVLUtNZGpobTNkcnZIcEJtbnAtR01qUnUxcmdKQlZVQ0RvTnRucE9aVlVTdmZHUGhzWnMwRUhHckV4bzRFMkl1ZWdpSEozM3ZJeTBGUUNUZEVyZ1RrRWNJOHJMaTlVaDF2TkRaSVJJZXd2cWp0?oc=5",
+   "date": "2026-11-06",
+   "region": "AR"
+  },
+  {
+   "source": "Oil & Gas Journal",
+   "title": "APA to beef up exploration spending in 2027",
+   "url": "https://www.ogj.com/general-interest/companies/news/55417056/apa-to-beef-up-exploration-spending-in-27",
+   "date": "2026-11-05"
+  },
+  {
+   "source": "Oil & Gas Journal",
+   "title": "QatarEnergy continues Maydan Mahzam field redevelopment",
+   "url": "https://www.ogj.com/exploration-development/news/55416995/qatarenergy-continues-maydan-mahzam-field-redevelopment",
+   "date": "2026-11-05"
+  },
+  {
    "source": "Oil & Gas Journal",
    "title": "US sanctions network supporting Iranian oil shipments",
    "url": "https://www.ogj.com/general-interest/economics-markets/news/55416991/us-sanctions-network-supporting-iranian-oil-shipments",
@@ -11,61 +65,7 @@
    "title": "Matador eyes 5%+ production growth next year",
    "url": "https://www.ogj.com/general-interest/companies/news/55416852/matador-eyes-5-production-growth-next-year",
    "date": "2026-11-05"
-  },
-  {
-   "source": "Diario Río Negro",
-   "title": "Vaca Muerta aportó el 70% de la producción petrolera nacional y marcó un nuevo máximo histórico",
-   "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxPVlR0dFhJSnpyY19TUFhJdEk2MUNVYlQ0R0tER0V3OWs4cWNnRzZNcjI0bFRMUWtYY2hPeDFOakFwNXVhY0VXMlE5MkU5VEs3a3FBSl96RkpuZnFKVlZlazZqWnRabGtsa3NZNlctUHByb2oyRENwNEtuZGJkaGFNeWhGTFpCZjd0bkt3NGxJZlNOZmRtelpKbEl5V3BNWjY3UUJkUmZuaUxXODBxcFRKUlY2YlZjSUdFZExSWUx3Y0MtY2hxSmVVb3o3ZTBwRG1MUnM4ckJB0gHeAUFVX3lxTE5VTUxRajlCeFdITUxLQ3dUc3lhTmJGNHh5cHk2ekZsUTlsRVVER01KWmJYVklrOFFxOGZqRUg1ZEJYWk9tU1RoWm5FbnRrSlo4d2ZROFVjbnpvRWJhM3ZmdFNVZXhrYjRoRkJ2aFV1VVJIcWVqaTFranFfT3dqMFoyeWdGamxpdjRCTWtoNDIxNnRkZVRQdFQ4RFZFQUU4aVBWaGNlTlZMaUFtcG5rM3VSTk54dGo5VjVSV0NWcTYzNmdGVFU2aV9KZmJoeXZrbEEtUG1YWVo1SGd6ZF9Bdw?oc=5",
-   "date": "2026-11-05",
-   "region": "AR"
-  },
-  {
-   "source": "El Cronista",
-   "title": "YPF, a un contrato de cerrar el paquete comercial de Argentina LNG",
-   "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxOdDBGNmdIOGJITjZhT25HWkp3N3c0M2RlSW5fanFUUW9DbjB0enpmd0YwRnpPX2pyaDJoVWVZbXREY1phWFdfbWs3LUpaOTVYX2ZSQklCc2djUkxibHhFdG83XzgzWW0wTFplTlhwWHI3VDhSVTJ2WDFhMzlMY0tXZmRRemtUQ1FMLUVwT0ktTTItS2V5N1VCVDhGOEE0SFdqRmRERW9CSDhXTFl2ZmfSAcgBQVVfeXFMTkNOY21hNkZ2TV9BYXJfN0JqNEJ1Y2Naay00cnJVbjdNeldGOFhVZzdKQWlER2FINmt1TWlTWG9jZ05JN1UxdDd4S2VTdGRoVFlfNFlxYmV4R3pxbGp0NjlDdTl6SEpBM3VFaWJwVDBYdTlzM25CWFB0RVJJSlNiTENYbkVZaFcwVmpRT1pKRnJ5TzFkWTFqY1NWWEF1Ny1rX0pVVjJ2Vk5GMzhMSjlJWVNzUF9qNEgzZ3l6WkNYRk1aNjFTX3huOTg?oc=5",
-   "date": "2026-11-05",
-   "region": "AR"
-  },
-  {
-   "source": "Lmneuquen.com",
-   "title": "Por qué los proyectos de Argentina LNG cambiaron el gas seco por el húmedo",
-   "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPbEM5OU4xRHJvZURHTmhmQUhHX3VGakIydkxpbmNhR2NIMnFZNXZPVWlXMUpWSHlIdVpja1RCalROZWxnUXduUGlreDlJYnU5M3ItUkxWY21tZ0hmNUIyRGVFTmhHbjhNTkZhdDhydFhxNHg1SFh0anJsaXF0TVBGb0pMbUo4ZVZkNWkzMFhHdG5aQWZTQ0VjczhjdmVVbEdIRWZtdWU4WDZwbUHSAbABQVVfeXFMTjM0RFJ4Mjk4bHdWWTl5dnVFLWVjNnFLRG1VMVVyUUxhNmJTVElxTE5NQ3FzZExORVJMZnNhS2puNkFVd1Mxa0JXMEJuZzZ1NXVSM0QxSWF4ZWRmTTZyNDRwWS1KNF9VUGxYZV9ZU2NIVWxNNVRMZ0xmdGJkZEY5eEpsTGJ1Y0U3Z0NpcnZnQWdNS1YyMm1Lc2I2eTV1WkppWTdPNWRibnhwa1ZFbUxIRGU?oc=5",
-   "date": "2026-11-05",
-   "region": "AR"
-  },
-  {
-   "source": "iProfesional",
-   "title": "Equinor e YPF reactivan la búsqueda de una Vaca Muerta del mar",
-   "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQZ2N0LWJOUTc5S2ZrLS1fa2VwSndDLTVCT0pjcThGQ1ZfZ0w3bE9zUnZROFYwenJhTVBJUERhZVlnR0U1Um85LUpOVWI5SGZWYmgwYmQ3ZEFGeWdwZXFxQ204bG1GdmZMdVFLT0h6U0NMSDBYcDI4MkhDbEVIOFJQQ2t4SzczTGlVSFRNT2I4RG0tWk9DY2lpV3F4U0l5cnhhdWg3Vkl0azc4QdIBrwFBVV95cUxQVEJEelZEcTN3N1h1dTVfOVpFbktTakM2NVFkbndUQ19KSGZjbFpWakx4RVBiME1ETmlsYURJeUh3c1lqcHNWNFl5SG1QN25NUEJzWm42SzliaWVmd0ZKLTdzSXR4RjhuWkoxZS1jUmlVLTBFRzhTQ3J0aFY3azUwSk5zeEk5cVBJYVY4cHM5UjVxa1RTOVpVYU9FNzQ3WlJZVk1hLTZ1cmZDeVBTOVY0?oc=5",
-   "date": "2026-11-05",
-   "region": "AR"
-  },
-  {
-   "source": "San Nicolás",
-   "title": "Ana Botín respalda el rumbo económico y apuesta fuerte a Vaca Muerta - Diario El Norte",
-   "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNMWF0MnhGZE9GQVhnR01WTHpYNFJNaTNMUC1wbS1vWE1nTDQ2Q2JGWUFxeGJZUmtuY2x2dWtuaHBKNmV3WVJFLWo3eXJKSjVyTWpvakFUTkdtdU9HdWIyelk5SWNsNjk0SEVKSUpXWUREWGdNM1hYSHpRX1phUXBaQUZfdVMwdVhpdk9xWC1kVFJrMEVSenRodDZXZEQ5ekE?oc=5",
-   "date": "2026-11-05",
-   "region": "AR"
-  },
-  {
-   "source": "La Nación",
-   "title": "Una petrolera noruega confirmó que volverá a buscar petróleo en el mar argentino",
-   "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQdTVEaWtXT3dlclR6NjUwbWpJeGVRLWVMYUpzMkhxeGFZVkVHZnA0R3E2TFM3Z1FFTVgxNjVfU2UtTWRxenlrdDRqNkE1NGtNbGJFZjJQemFySndUeVMxem5sRW1acmVJWVJlT3lmT2VhbkdjZEZ2QndONWlaNEx5Q2p1Vm0wamJoUFRpZDgyLXBrX29Ga2hTT2hQaG5qX2RBdkJyRkxqVjB0eHViY1RRdzVESFlaNUNHYU9FZk9EV0UwTHAwMElYSlJ3?oc=5",
-   "date": "2026-11-05",
-   "region": "AR"
-  },
-  {
-   "source": "Oil & Gas Journal",
-   "title": "Ovintiv shuffles some fourth-quarter spending to Permian basin",
-   "url": "https://www.ogj.com/general-interest/companies/news/55416710/ovintiv-shuffles-some-q4-spending-to-the-permian",
-   "date": "2026-11-04"
-  },
-  {
-   "source": "Oil & Gas Journal",
-   "title": "Vedanta to explore off India’s east coast",
-   "url": "https://www.ogj.com/exploration-development/news/55416608/vedanta-oil-and-gas-to-explore-off-indias-east-coast",
-   "date": "2026-11-04"
   }
  ],
- "checked": "2026-11-05T18:47Z"
+ "checked": "2026-11-06T18:02Z"
 }
