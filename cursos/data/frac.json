@@ -13,7 +13,9 @@
   "declinación hiperbólica modificada con declinación terminal",
   "sensibilidad del EUR al exponente b",
   "flujo de trabajo de una etapa de fractura",
-  "indicadores de eficiencia de completación"
+  "indicadores de eficiencia de completación",
+  "conductividad adimensional de fractura (FCD)",
+  "presión neta log-log (Nolte y Smith)"
  ],
  "practiceMin": 90,
  "competencies": [
@@ -259,6 +261,16 @@
        }
       },
       {
+       "say": "Laboratorio. Cambiá la permeabilidad del apuntalante, el ancho, la conductividad retenida y la permeabilidad de la matriz. Mirá cómo una fractura más larga baja el FCD y cuándo el límite pasa a ser la fractura.",
+       "scene": {
+        "t": "viz",
+        "w": "fcd",
+        "h": "Conductividad adimensional de fractura (FCD)",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
        "say": "Pregunta rápida.",
        "q": {
         "q": "Un fluido de baja viscosidad, bombeado a caudal alto con reductor de fricción, es:",
@@ -496,6 +508,16 @@
         ],
         "n": "Es una interpretación cualitativa: las pendientes son orientativas, dependen del modelo, del filtrado y del ruido, y se combinan con otros diagnósticos. El Excel del curso usa umbrales fijos solo como ejercicio; no son una regla de la literatura."
        }
+      },
+      {
+       "say": "Laboratorio. Elegí un escenario y subí el ruido. Mirá cómo cambia la pendiente ajustada del tramo final según la ventana: la clasificación automática puede equivocarse.",
+       "scene": {
+        "t": "viz",
+        "w": "nolte",
+        "h": "Presión neta log-log (Nolte y Smith)",
+        "p": {}
+       },
+       "lab": true
       },
       {
        "say": "Además de la presión hay otras herramientas. La microsísmica ubica eventos de ruptura. La fibra óptica registra deformación y temperatura. Los trazadores indican qué clústeres aportan. Y las pruebas de interferencia muestran conexiones entre pozos.",

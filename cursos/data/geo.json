@@ -14,7 +14,9 @@
   "eventos del sistema petrolero",
   "historia de enterramiento",
   "perfil con cortes",
-  "Monte Carlo de STOIIP"
+  "Monte Carlo de STOIIP",
+  "sensibilidad de Archie a m y n",
+  "sensibilidad del STOIIP y error de unidades"
  ],
  "practiceMin": 75,
  "competencies": [
@@ -353,6 +355,16 @@
        "hl": 0
       },
       {
+       "say": "Laboratorio. Cambiá el exponente de cementación m y el de saturación n, y mirá cuánto se mueve la saturación de agua respecto de los valores por defecto. Eso es calibrar con núcleos.",
+       "scene": {
+        "t": "viz",
+        "w": "archie",
+        "h": "Sensibilidad de Archie a m y n",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
        "say": "Después viene una decisión de ingeniería: los cortes. Se definen valores máximos de arcillosidad y de Sw, y un mínimo de porosidad, para distinguir roca neta, roca reservorio y net pay.",
        "scene": {
         "t": "bul",
@@ -592,6 +604,16 @@
          "Un error de unidades (metros en vez de pies con 7758) cambia el resultado por 3,28"
         ]
        }
+      },
+      {
+       "say": "Laboratorio. Este tornado muestra cuánto mueve el STOIIP cada parámetro. Activá el error de unidades: usar metros con el factor 7758 reduce el resultado 3,28 veces.",
+       "scene": {
+        "t": "viz",
+        "w": "volsens",
+        "h": "Sensibilidad del STOIIP y error de unidades",
+        "p": {}
+       },
+       "lab": true
       },
       {
        "say": "Laboratorio. Es una simulación Monte Carlo con área, espesor, porosidad y saturación de agua. Subí la incertidumbre de los parámetros y observá cómo se abren P90, P50 y P10 sin ningún dato nuevo.",
