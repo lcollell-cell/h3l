@@ -197,25 +197,25 @@ function bumpersEn(c){var I=c.intro,O=c.outro,q=I.questions,st=I.star,mods=c.mod
   if(!I.cues)I.cues=[{say:'Welcome to '+c.title+'. '+I.hook,scene:{t:'bin'},hl:-1},
    {say:'This course answers three questions that add value to any technical team. First: '+q[0],hl:0},{say:'Second: '+q[1],hl:1},{say:'And third: '+q[2],hl:2},
    {say:'Everything is applied with the STAR method on a real case: '+st.caso+'. First, the situation. '+st.S,scene:{t:'star'},hl:0},{say:'The task. '+st.T,hl:1},{say:'The action. '+st.A,hl:2},{say:'And the result. '+st.R,hl:3},
-   {say:'The course has '+c.modules.length+' modules. Each one ends with a quiz, there are Excel workbooks to practice with, and a final exam. When you pass, you get your H3L certificate, which you can share on your professional profile.',scene:{t:'bul',k:'Course roadmap',h:'How it is organized',items:mods.concat(['Practice Excel files','Final exam and H3L certificate'])}}];
+   {say:'The course has '+c.modules.length+' modules. Each one ends with a quiz, '+((c.downloads||[]).length===1?'there is an Excel workbook to practice with':'there are Excel workbooks to practice with')+', and a final exam. When you pass, you get your H3L certificate, which you can share on your professional profile.',scene:{t:'bul',k:'Course roadmap',h:'How it is organized',items:mods.concat(['Practice Excel files','Final exam and H3L certificate'])}}];
   var can=(O.can&&O.can.length)?O.can:c.competencies.map(function(x){return x.name});
   var nl=0,nlab=0;c.modules.forEach(function(m){m.lessons.forEach(function(l){nl++;l.cues.forEach(function(q){if(q.lab)nlab++})})});
   var nx=(c.downloads||[]).length;
   if(!O.cues){O.cues=O.recap.map(function(r,i){var o={say:r,hl:i};if(!i){o.say='Let us review the essentials. '+r;o.scene={t:'bul',k:'Take-aways',h:'Key ideas',items:O.recap}}return o});
-   O.cues.push({say:'By finishing this course, you can now analyze and validate: '+can.join('; ')+'.',scene:{t:'can',k:'At the end of the course',h:'You can now analyze and validate',items:can}});
-   O.cues.push({say:'Items covered: '+nl+' lessons in '+c.modules.length+' modules'+(nlab?', '+nlab+' interactive labs':'')+(nx?', '+nx+(nx===1?' Excel workbook':' Excel workbooks'):'')+', and one quiz per module plus the final exam.',scene:{t:'seen'}});
+   O.cues.push({say:'By finishing this course, you will be able to recognize and apply: '+can.join('; ')+'.',scene:{t:'can',k:'At the end of the course',h:'You will be able to recognize and apply',items:can}});
+   O.cues.push({say:'Items covered: '+nl+' lessons in '+c.modules.length+' modules'+(nlab?', '+nlab+(nlab===1?' interactive lab':' interactive labs'):'')+(nx?', '+nx+(nx===1?' Excel workbook':' Excel workbooks'):'')+', and one quiz per module plus the final exam.',scene:{t:'seen'}});
    O.cues.push({say:O.phrase+' Thank you for learning with H3L Global Energy. Contact: info@h3lglobalenergy.com',tts:O.phrase+' Thank you for learning with H3L Global Energy. Write to us at info, at, h3l global energy, dot com.',scene:{t:'bout'}})}}
 function bumpers(c){if(c.lang==='en')return bumpersEn(c);var I=c.intro,O=c.outro,q=I.questions,st=I.star,mods=c.modules.map(function(m){return m.title});
   if(!I.cues)I.cues=[{say:'Bienvenido a '+c.title+'. '+I.hook,scene:{t:'bin'},hl:-1},
    {say:'Este curso responde tres preguntas que agregan valor a cualquier equipo técnico. Primera: '+q[0],hl:0},{say:'Segunda: '+q[1],hl:1},{say:'Y tercera: '+q[2],hl:2},
    {say:'Todo se aplica con la metodología STAR sobre un caso real: '+st.caso+'. Primero, la situación. '+st.S,scene:{t:'star'},hl:0},{say:'La tarea. '+st.T,hl:1},{say:'La acción. '+st.A,hl:2},{say:'Y el resultado. '+st.R,hl:3},
-   {say:'El curso tiene '+c.modules.length+' módulos. Cada uno termina con un quiz, hay planillas Excel para practicar y un examen final. Al aprobar, obtenés tu certificado H3L, verificable y listo para compartir en tu perfil profesional.',scene:{t:'bul',k:'Ruta del curso',h:'Cómo está organizado',items:mods.concat(['Excel de práctica','Examen final y certificado H3L'])}}];
+   {say:'El curso tiene '+c.modules.length+' módulos. Cada uno termina con un quiz, '+((c.downloads||[]).length===1?'hay una planilla Excel para practicar':'hay planillas Excel para practicar')+' y un examen final. Al aprobar, obtenés tu certificado H3L, verificable y listo para compartir en tu perfil profesional.',scene:{t:'bul',k:'Ruta del curso',h:'Cómo está organizado',items:mods.concat(['Excel de práctica','Examen final y certificado H3L'])}}];
   var can=(O.can&&O.can.length)?O.can:c.competencies.map(function(x){return x.name});
   var nl=0,nlab=0;c.modules.forEach(function(m){m.lessons.forEach(function(l){nl++;l.cues.forEach(function(q){if(q.lab)nlab++})})});
   var nx=(c.downloads||[]).length;
   if(!O.cues){O.cues=O.recap.map(function(r,i){var o={say:r,hl:i};if(!i){o.say='Repasemos lo esencial. '+r;o.scene={t:'bul',k:'Para llevarte',h:'Ideas clave',items:O.recap}}return o});
-   O.cues.push({say:'Al terminar este curso, usted ahora puede analizar y validar: '+can.join('; ')+'.',scene:{t:'can',k:'Al finalizar el curso',h:'Usted ahora puede analizar y validar',items:can}});
-   O.cues.push({say:'Ítems vistos: '+nl+' lecciones en '+c.modules.length+' módulos'+(nlab?', '+nlab+' laboratorios interactivos':'')+(nx?', '+nx+(nx===1?' planilla Excel':' planillas Excel'):'')+', y un quiz por módulo más el examen final.',scene:{t:'seen'}});
+   O.cues.push({say:'Al terminar este curso vas a poder reconocer y aplicar: '+can.join('; ')+'.',scene:{t:'can',k:'Al finalizar el curso',h:'Vas a poder reconocer y aplicar',items:can}});
+   O.cues.push({say:'Ítems vistos: '+nl+' lecciones en '+c.modules.length+' módulos'+(nlab?', '+nlab+(nlab===1?' laboratorio interactivo':' laboratorios interactivos'):'')+(nx?', '+nx+(nx===1?' planilla Excel':' planillas Excel'):'')+', y un quiz por módulo más el examen final.',scene:{t:'seen'}});
    O.cues.push({say:O.phrase+' Gracias por aprender con H3L Global Energy. Contacto: info@h3lglobalenergy.com',tts:O.phrase+' Gracias por aprender con H3L Global Energy. Escribinos a info, arroba, h3l global energy, punto com.',scene:{t:'bout'}})}}
 /* idioma del contenido: si la interfaz está en inglés y existe data/en/<id>.json se usa; si no, español */
 HC.cLang=function(){return HC.lang==='en'?'en':'es'};

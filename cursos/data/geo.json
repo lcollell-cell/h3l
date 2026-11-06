@@ -63,8 +63,8 @@
    "caso": "Vaca Muerta, cuenca Neuquina",
    "S": "Una formación marina del Jurásico Superior al Cretácico Inferior, rica en materia orgánica, que es a la vez generadora y reservorio no convencional.",
    "T": "Identificar dónde está la mejor roca y cuánto hidrocarburo contiene antes de desarrollar a escala.",
-   "A": "Integrar geoquímica, registros, núcleos y sísmica en un modelo estático y cuantificar su incertidumbre.",
-   "R": "Un modelo que sostiene la priorización de áreas piloto. En julio de 2013 dos compañías firmaron un acuerdo de desarrollo en Vaca Muerta."
+   "A": "Integrar la geoquímica (madurez y carbono orgánico), los registros y la calibración con núcleos en un modelo estático y cuantificar su incertidumbre. La interpretación sísmica queda fuera del alcance de este curso.",
+   "R": "Un modelo estático con su rango de volumen, que permite priorizar áreas piloto y decidir qué dato nuevo reduce más la incertidumbre."
   }
  },
  "modules": [
@@ -88,8 +88,8 @@
          "Roca reservorio: almacena y deja fluir",
          "Roca sello: impide el escape",
          "Sobrecarga: entierra la generadora hasta madurarla",
-         "Trampa: la geometría que retiene",
-         "Procesos: generación, migración, acumulación y preservación"
+         "Trampa: la geometría que retiene (su formación es un proceso, según Magoon y Dow)",
+         "Procesos: formación de la trampa, generación, migración, acumulación y preservación"
         ]
        },
        "hl": 0
@@ -103,8 +103,22 @@
        "hl": 4
       },
       {
-       "say": "Y los procesos son cuatro: generación, migración, acumulación y preservación. Basta que uno falle, o que ocurra en mal orden, para que no haya campo.",
+       "say": "Y los procesos: la formación de la trampa, la generación, la migración y la acumulación, con la preservación posterior. En el esquema de Magoon y Dow la formación de la trampa cuenta como proceso; aquí la miramos aparte para estudiar su sincronía con la migración. Basta que uno falle, o que ocurra en mal orden, para que no haya campo.",
        "hl": 5
+      },
+      {
+       "say": "Para ordenar todo en el tiempo se usa el cuadro de eventos. Muestra cuándo se depositaron las rocas, cuándo se formó la trampa y cuándo ocurrieron la generación, la migración y la acumulación. De ahí sale el momento crítico: el instante que mejor representa la generación, la migración y la acumulación de la mayor parte del petróleo del sistema.",
+       "scene": {
+        "t": "bul",
+        "k": "Cuadro de eventos",
+        "h": "Herramienta estándar del sistema petrolero",
+        "items": [
+         "Eje de tiempo geológico con elementos y procesos",
+         "La trampa debe existir antes o durante la migración",
+         "Momento crítico: cuando se acumuló la mayor parte del petróleo",
+         "El laboratorio siguiente muestra la sincronía en un cuadro simple"
+        ]
+       }
       },
       {
        "say": "Laboratorio. Movés el momento geológico y ves qué elementos están activos. Activá el escenario donde la trampa se forma después de la migración y mirá qué pasa con la sincronía.",
@@ -153,7 +167,7 @@
        "hl": 0
       },
       {
-       "say": "La reflectancia de vitrinita, Ro, es el indicador más usado de madurez. Los límites varían con el tipo de querógeno, y las temperaturas son solo una referencia. La obra clásica es la de Tissot y Welte, de 1984.",
+       "say": "La reflectancia de vitrinita, Ro, es el indicador más usado de madurez. Los límites varían con el tipo de querógeno, y las temperaturas son solo una referencia. El tipo II, de origen marino, es el de Vaca Muerta y genera sobre todo petróleo; el tipo III, de origen terrestre, tiende a generar gas. La obra clásica es la de Tissot y Welte, de 1984.",
        "hl": 3
       },
       {
@@ -167,7 +181,7 @@
        "lab": true
       },
       {
-       "say": "Ahora llevemos esa idea al mapa. A mayor enterramiento, la ventana de petróleo, luego la de gas húmedo y la de gas seco, avanzan hacia el antepaís. Es un esquema conceptual, no un mapa real.",
+       "say": "Ahora llevemos esa idea al mapa. A mayor enterramiento aparecen primero la ventana de petróleo, luego la de gas húmedo y la de gas seco, y la madurez crece hacia el depocentro de la cuenca: en la Neuquina, hacia el oeste. Es un esquema conceptual, no un mapa real, y el sentido depende de cada cuenca.",
        "scene": {
         "t": "viz",
         "w": "basin",
@@ -354,7 +368,7 @@
        "hl": 3
       },
       {
-       "say": "Laboratorio. Este es un perfil sintético. Movés los tres cortes y observás cómo cambian el espesor útil y el volumen de petróleo en sitio. Un corte más exigente reduce el volumen: es una decisión, no un dato.",
+       "say": "Laboratorio. Este es un perfil sintético. Movés los tres cortes y observás cómo cambian el espesor útil y el volumen de petróleo en sitio. Un corte más exigente reduce el volumen: es una decisión, no un dato. La planilla del curso repite este perfil con fórmulas, en las hojas Perfil y Escenarios.",
        "scene": {
         "t": "viz",
         "w": "cutoffs",
@@ -364,7 +378,7 @@
        "lab": true
       },
       {
-       "say": "En una roca generadora, el carbono orgánico total se estima con registros. El método de Passey superpone la curva de resistividad y la de porosidad en escalas compatibles. La separación entre ambas, llamada delta log R, crece con la materia orgánica y se calibra con análisis de laboratorio.",
+       "say": "En una roca generadora, el carbono orgánico total se estima con registros. El método de Passey y colaboradores, de 1990, superpone la curva de resistividad y la de porosidad en escalas compatibles. La separación entre ambas, llamada delta log R, crece con la materia orgánica y se calibra con análisis de laboratorio.",
        "scene": {
         "t": "bul",
         "k": "Roca generadora",
@@ -556,13 +570,27 @@
      "comp": "Volumetría y riesgos",
      "cues": [
       {
-       "say": "El petróleo original en sitio, el STOIIP, se calcula con una fórmula simple, cuyo peso está en cada parámetro. En unidades de campo, el factor 7758 convierte acre-pie en barriles.",
+       "say": "El petróleo original en sitio, el STOIIP, se calcula con una fórmula simple, cuyo peso está en cada parámetro. En unidades de campo, el factor 7758 convierte acre-pie en barriles, así que el área va en acres y el espesor neto en pies, no en metros. Bo lleva el volumen de condiciones de reservorio a condiciones de superficie.",
        "scene": {
         "t": "fm",
         "k": "Concepto clave",
         "h": "Volumetría de petróleo in situ",
-        "f": "STOIIP = 7758 · A · h · φ · (1 − Sw) / Bo\n\nA: acres · h: pies · Bo: bbl/STB",
+        "f": "STOIIP = 7758 · A · h · φ · (1 − Sw) / Bo\n\nA: acres · h: espesor neto en pies (ya con los cortes; si se parte del bruto, h = bruto × NTG) · Bo: bbl/STB",
         "n": "Cada parámetro tiene incertidumbre propia. La respuesta honesta es un rango, no un número."
+       }
+      },
+      {
+       "say": "Una advertencia para los no convencionales. Área por espesor por porosidad por uno menos Sw estima el petróleo libre en los poros. No captura bien el petróleo adsorbido ni el ligado al querógeno. Y el factor de recuperación de la planilla, 8 por ciento, es un supuesto didáctico, no un valor de Vaca Muerta.",
+       "scene": {
+        "t": "bul",
+        "k": "Límites del método",
+        "h": "Volumetría en no convencionales",
+        "items": [
+         "Estima el petróleo libre en los poros",
+         "No captura bien el petróleo adsorbido ni el ligado al querógeno",
+         "El factor de recuperación del ejemplo (8 %) es didáctico",
+         "Un error de unidades (metros en vez de pies con 7758) cambia el resultado por 3,28"
+        ]
        }
       },
       {
@@ -582,16 +610,16 @@
        "scene": {
         "t": "case",
         "h": "Vaca Muerta, cuenca Neuquina",
-        "src": "Hart Energy; Oil & Gas Journal, julio de 2013",
+        "src": "Caso didáctico sobre la geología general de Vaca Muerta; los valores de la planilla son sintéticos",
         "S": "Formación generadora y a la vez reservorio no convencional, de edad Jurásico Superior–Cretácico Inferior, en una cuenca de antepaís.",
         "T": "Ubicar la mejor roca y estimar el hidrocarburo contenido antes de comprometer un desarrollo masivo.",
-        "A": "Combinar geoquímica, registros, núcleos y sísmica en un modelo estático y trabajar proyectos piloto para reducir incertidumbre.",
-        "R": "Un modelo que sostiene la priorización de áreas. En julio de 2013 dos compañías firmaron un acuerdo de desarrollo para Vaca Muerta."
+        "A": "Combinar madurez y carbono orgánico, registros y calibración con núcleos en un modelo estático, y trabajar proyectos piloto para reducir incertidumbre. La sísmica entra como dato de entrada y no se desarrolla en este curso.",
+        "R": "Un modelo con su rango de volumen, que permite priorizar áreas y decidir qué dato nuevo reduce más la incertidumbre."
        },
        "hl": 0
       },
       {
-       "say": "La aplicación es la que vimos: sistema petrolero con generadora madura, correlación por superficies de tiempo, cortes definidos con núcleos y un volumen siempre acompañado de su rango de incertidumbre.",
+       "say": "La aplicación es la que vimos: sistema petrolero con generadora madura, correlación por superficies de tiempo, cortes definidos con núcleos y un volumen siempre acompañado de su rango de incertidumbre. En la planilla del curso, el escenario optimista agrega mucho más net pay que STOIIP, porque la roca que se suma es de peor calidad.",
        "hl": 3
       },
       {
@@ -733,7 +761,7 @@
   {
    "file": "xlsx/H3L_Geo_Volumetria_y_Cortes.xlsx",
    "title": "Volumetría, cortes y Monte Carlo (Excel)",
-   "desc": "Perfil sintético con cortes de Vsh, porosidad y Sw, net pay y STOIIP determinístico y por escenarios P90/P50/P10.",
+   "desc": "Perfil sintético con cortes de Vsh, porosidad y Sw, net pay y STOIIP determinístico y por escenarios (caso bajo, medio y alto).",
    "task": "Endurecé el corte de Sw de 0,60 a 0,45 y anotá cuánto cae el STOIIP. Armá una tabla con tres escenarios de cortes."
   }
  ],

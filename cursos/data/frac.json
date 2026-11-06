@@ -53,10 +53,10 @@
   ],
   "star": {
    "caso": "Barnett Shale: la fractura con slickwater",
-   "S": "Una operadora independiente trabajó el Barnett desde comienzos de los años ochenta y, según fuentes secundarias, hacia 1997 había gastado unos 250 millones de dólares sin recuperar el gasto.",
+   "S": "Mitchell Energy, una operadora independiente, trabajó el Barnett desde 1981 y, según un exdirectivo citado en la literatura, hacia 1997 había invertido unos 250 millones de dólares sin recuperar los costos.",
    "T": "Bajar el costo de las completaciones y aumentar la recuperación de gas.",
    "A": "En 1997 el ingeniero Nick Steinsberger propuso usar fractura con agua de baja viscosidad, o slickwater, ya empleada en el este de Texas, en lugar de geles.",
-   "R": "El pozo S.H. Griffin N.º 3 superó en sus primeros noventa días a los anteriores de la compañía, y la completación costaba entre 75.000 y 100.000 dólares menos."
+   "R": "El pozo S.H. Griffin superó en sus primeros noventa días a los anteriores de la compañía, y la completación costaba entre 75.000 y 100.000 dólares menos, según fuentes secundarias. Esas fuentes no separan cuánto se debe al fluido y cuánto a otros cambios operativos."
   }
  },
  "modules": [
@@ -86,13 +86,27 @@
        "hl": 0
       },
       {
-       "say": "La fractura se abre cuando la presión del fluido supera el esfuerzo mínimo de la roca. Y se propaga perpendicular a ese esfuerzo mínimo, que suele ser horizontal. Por eso los pozos se perforan en la dirección del esfuerzo mínimo, y las fracturas resultan transversales.",
+       "say": "Para iniciar una fractura, la presión en el pozo debe superar el esfuerzo mínimo más la resistencia a tracción de la roca, con efectos de la presión de poro, de la orientación del pozo y de la concentración de esfuerzos cerca de él. Una vez iniciada, se propaga mientras la presión neta sea positiva. Son tres cosas distintas: la presión de iniciación, la de propagación y la presión neta.",
        "scene": {
         "t": "fm",
-        "k": "Condición de apertura",
+        "k": "Condición de propagación",
         "h": "Presión neta",
         "f": "p neta = p fluido en la fractura − σ mínimo\n\nLa fractura crece si p neta > 0",
-        "n": "La presión neta controla el ancho. Las barreras de esfuerzo en las capas vecinas controlan la altura."
+        "n": "La presión neta controla el ancho. Las barreras de esfuerzo en las capas vecinas controlan la altura. La iniciación exige además vencer la resistencia a tracción de la roca."
+       }
+      },
+      {
+       "say": "En el caso típico de fracturas verticales, el plano de la fractura es perpendicular al esfuerzo horizontal mínimo, Shmin: su normal es paralela a Shmin. Por eso el lateral suele perforarse paralelo a Shmin, y las fracturas resultan transversales al pozo. Depende del régimen de esfuerzos y de la orientación local.",
+       "scene": {
+        "t": "bul",
+        "k": "Geometría",
+        "h": "Esfuerzo mínimo, plano de fractura y lateral",
+        "items": [
+         "Plano de la fractura: perpendicular a Shmin",
+         "Normal del plano: paralela a Shmin",
+         "Lateral paralelo a Shmin: fracturas transversales",
+         "Vale para fracturas verticales; depende del régimen de esfuerzos"
+        ]
        }
       },
       {
@@ -155,7 +169,7 @@
      "comp": "Diseño de fractura y fluidos",
      "cues": [
       {
-       "say": "Para estimar la geometría hay modelos clásicos. El PKN, de Perkins y Kern, de 1961, supone fracturas más largas que altas. El KGD, de Khristianovic, Geertsma y de Klerk, supone lo contrario. Los modelos modernos son pseudo-tridimensionales o planares tridimensionales.",
+       "say": "Para estimar la geometría hay modelos clásicos. El PKN, de Perkins y Kern, de 1961, supone una fractura de longitud mucho mayor que su altura, con la altura confinada. El KGD, de Khristianovic, Geertsma y de Klerk, supone lo contrario: una altura mayor que la longitud.",
        "scene": {
         "t": "bul",
         "k": "Modelos",
@@ -170,7 +184,10 @@
        "hl": 0
       },
       {
-       "say": "Los fluidos se eligen por viscosidad. El slickwater es agua con reductor de fricción: baja viscosidad, caudales altos, fracturas largas. Los geles de alta viscosidad transportan más apuntalante y abren mayor ancho. Los sistemas híbridos combinan ambos.",
+       "say": "Cada uno asume una geometría, un confinamiento vertical y un régimen de propagación, y hay que verificar que se cumplan. Los modelos modernos son pseudo-tridimensionales o planares tridimensionales, y no son una única formulación."
+      },
+      {
+       "say": "Los fluidos se eligen por viscosidad. El slickwater es agua con reductor de fricción: baja viscosidad y caudales altos, lo que suele favorecer una red más compleja. Pero la longitud, la altura y la distribución del apuntalante dependen de los esfuerzos, el filtrado, el caudal, el volumen y el diseño. Los geles de alta viscosidad transportan más apuntalante y abren mayor ancho. Los sistemas híbridos combinan ambos.",
        "scene": {
         "t": "tbl",
         "k": "Sistemas de fluido",
@@ -183,7 +200,7 @@
         "rows": [
          [
           "Slickwater",
-          "Baja viscosidad, alto caudal, fracturas largas y complejas",
+          "Baja viscosidad y alto caudal; suele favorecer una red compleja, y la longitud depende del diseño",
           "Lutitas frágiles de baja permeabilidad"
          ],
          [
@@ -204,11 +221,11 @@
        "scene": {
         "t": "case",
         "h": "Barnett: de geles a slickwater",
-        "src": "Barnett Shale (Wikipedia) y fuentes secundarias. Conviene verificar las cifras con fuentes primarias.",
-        "S": "Una operadora independiente trabajaba el Barnett desde 1981. Según fuentes secundarias, había gastado unos 250 millones de dólares hacia 1997 sin recuperarlos.",
+        "src": "Wang y Krupnick, A Retrospective Review of Shale Gas Development in the United States, Resources for the Future (2013); Hinton, Journal of American History 99(1); Gold, Wall Street Journal (29 de junio de 2018). Las cifras de costo son de fuentes secundarias.",
+        "S": "Mitchell Energy trabajaba el Barnett desde 1981. Un exdirectivo, citado por Wang y Krupnick (2013), afirma que hacia 1997 había invertido unos 250 millones de dólares sin recuperar los costos.",
         "T": "Reducir el costo de completación y aumentar la recuperación de gas.",
-        "A": "En 1997 Nick Steinsberger propuso usar slickwater, ya empleado en el este de Texas, en lugar de geles. En 1998, el pozo S.H. Griffin N.º 3 fue la primera prueba.",
-        "R": "Superó a los pozos anteriores de la compañía en sus primeros 90 días, y redujo el costo de completación en 75.000 a 100.000 dólares. Luego se sumaron los pozos horizontales: en 2008 se completaron 2.901 horizontales frente a 183 verticales."
+        "A": "En 1997 Nick Steinsberger propuso usar slickwater, ya empleado en el este de Texas, en lugar de geles. En 1998, el pozo S.H. Griffin fue la primera prueba (las fuentes lo numeran N.º 3 o N.º 4).",
+        "R": "Según fuentes secundarias, superó a los pozos anteriores de la compañía en sus primeros 90 días y redujo el costo de completación en 75.000 a 100.000 dólares; no se aísla el efecto del fluido del de otros cambios operativos. Luego se sumaron los pozos horizontales: en 2008 se completaron 2.901 horizontales frente a 183 verticales."
        }
       },
       {
@@ -227,23 +244,24 @@
        "hl": 2
       },
       {
-       "say": "La conductividad adimensional de fractura relaciona la capacidad de la fractura con la de la formación: permeabilidad de la fractura por ancho, dividido por la permeabilidad de la roca y la longitud. Si es alta, la fractura casi no limita el flujo. Si es baja, el cuello de botella está en la fractura. Prats la introdujo en 1961.",
+       "say": "La conductividad adimensional de fractura relaciona la capacidad de la fractura con la de la formación: la permeabilidad del apuntalante por el ancho de la fractura, dividido por la permeabilidad de la roca y la semilongitud de la fractura. Si es alta, la fractura casi no limita el flujo. Si es baja, el cuello de botella está en la fractura. Prats la introdujo en 1961.",
        "scene": {
         "t": "bul",
         "k": "Conductividad",
         "h": "Conductividad adimensional de fractura",
         "items": [
-         "FCD = kf·w / (k·xf)",
+         "FCD = kf·wf / (k·xf), con xf la semilongitud",
          "FCD alta: la formación es el límite",
          "FCD baja: la fractura es el límite",
-         "Valores de referencia que se discuten en la literatura, no una receta fija"
+         "Valores de referencia que se discuten en la literatura, no una receta fija",
+         "La conductividad efectiva cae con el esfuerzo de cierre, el daño, los finos, el embedment y la degradación del apuntalante"
         ]
        }
       },
       {
        "say": "Pregunta rápida.",
        "q": {
-        "q": "Un fluido de baja viscosidad con alto caudal, para fracturas largas y complejas, es:",
+        "q": "Un fluido de baja viscosidad, bombeado a caudal alto con reductor de fricción, es:",
         "o": [
          "Salmuera pesada",
          "Gel entrecruzado",
@@ -370,7 +388,7 @@
        "hl": 2
       },
       {
-       "say": "Los parámetros de diseño son la longitud de etapa, el número de clústeres por etapa, el espaciamiento entre clústeres, el volumen de fluido y de apuntalante por pie lateral y el caudal de bombeo.",
+       "say": "Los parámetros de diseño son la longitud de etapa, el número de clústeres por etapa, el espaciamiento entre clústeres, el volumen de fluido y de apuntalante por pie lateral y el caudal de bombeo. También se fijan los límites de presión y de caudal, la secuencia de bombeo, la rampa de concentración de apuntalante, los desviadores y los criterios de aceptación.",
        "scene": {
         "t": "tbl",
         "k": "Diseño de etapas",
@@ -403,6 +421,9 @@
          ]
         ]
        }
+      },
+      {
+       "say": "El espaciamiento depende de la convención: longitud de etapa sobre número de clústeres, o distancia entre centros extremos, que es la longitud sobre N menos uno."
       },
       {
        "say": "Un problema conocido es la eficiencia de los clústeres. En muchas etapas no todos los clústeres reciben fluido de manera pareja. Por eso se diagnostica con fibra óptica, trazadores y registros de producción, y se ajusta el diseño.",
@@ -441,7 +462,7 @@
      "comp": "Completación y diagnóstico",
      "cues": [
       {
-       "say": "La presión de tratamiento durante el bombeo es una fuente de información. Nolte y Smith, en 1981, propusieron interpretar la presión neta contra el tiempo en escala doble logarítmica y reconocer cuatro modos de propagación.",
+       "say": "La presión de tratamiento durante el bombeo es una fuente de información. Nolte y Smith, en 1981, propusieron interpretar la presión neta contra el tiempo en escala doble logarítmica y reconocer cuatro modos de propagación. Es una herramienta de diagnóstico: se leen tendencias sostenidas de la presión neta, que es la presión de fondo menos el esfuerzo de cierre, y no un valor aislado ni una clasificación automática inequívoca.",
        "scene": {
         "t": "tbl",
         "k": "Gráfico de Nolte y Smith",
@@ -454,7 +475,7 @@
         "rows": [
          [
           "I",
-          "Positiva, baja",
+          "Positiva, baja (del orden de 1/8 a 1/4)",
           "Propagación estable en longitud"
          ],
          [
@@ -473,7 +494,7 @@
           "Crecimiento de altura sin control"
          ]
         ],
-        "n": "Es una interpretación cualitativa y se combina con otros diagnósticos."
+        "n": "Es una interpretación cualitativa: las pendientes son orientativas, dependen del modelo, del filtrado y del ruido, y se combinan con otros diagnósticos. El Excel del curso usa umbrales fijos solo como ejercicio; no son una regla de la literatura."
        }
       },
       {
@@ -508,7 +529,7 @@
        "hl": 1
       },
       {
-       "say": "El volumen estimulado, SRV, se estima con microsísmica como la roca alcanzada por fracturas. No es lo mismo que el volumen drenado ni garantiza conectividad con el pozo. Se contrasta con producción, trazadores y diagnósticos de presión antes de usarlo para pronosticar.",
+       "say": "El volumen estimulado, SRV, se estima con microsísmica como la roca alcanzada por fracturas. No es lo mismo que el volumen drenado ni garantiza conectividad con el pozo. La nube depende del umbral de detección, de la geometría de los sensores y de la incertidumbre de localización, y no mide volumen con conductividad. Se contrasta con producción, trazadores y diagnósticos de presión antes de usarlo para pronosticar.",
        "scene": {
         "t": "bul",
         "k": "Diagnóstico",
@@ -599,7 +620,7 @@
        "hl": 2
       },
       {
-       "say": "La práctica habitual es la hiperbólica modificada. Se usa la hiperbólica hasta que la declinación instantánea baja a un valor mínimo, y desde ahí se pasa a una exponencial con esa declinación terminal.",
+       "say": "La práctica habitual es la hiperbólica modificada. Se usa la hiperbólica hasta que la declinación instantánea baja a un valor mínimo, y desde ahí se pasa a una exponencial con esa declinación terminal. Di y Dmin son declinaciones nominales anuales. Esto reduce el riesgo de sobreestimar, pero no lo elimina: el EUR es sensible a b, qi, Di y Dmin.",
        "scene": {
         "t": "fm",
         "k": "Hiperbólica modificada",
@@ -619,7 +640,7 @@
        "lab": true
       },
       {
-       "say": "Hay otros modelos para no convencionales, como el de exponencial estirada de Valkó, el de potencia con exponencial de Ilk y el de Duong. Se prueban con datos y se comparan con análogos. En reservas se exige además razonabilidad de los volúmenes.",
+       "say": "Hay otros modelos para no convencionales, como el de exponencial estirada de Valkó, el de potencia con exponencial de Ilk y el de Duong. Se aplican según el régimen de flujo y la calidad de los datos, y se comparan con análogos. En reservas se exige además razonabilidad de los volúmenes.",
        "scene": {
         "t": "bul",
         "k": "Otros modelos",
@@ -633,6 +654,20 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Una nota sobre la planilla del curso. Aproxima el volumen de cada mes con el caudal inicial por 30,4 días y descuenta al inicio del período. Su valor presente es un ejemplo didáctico, sin impuestos, abandono ni costos de agua o transporte, y no es una evaluación económica de reservas.",
+       "scene": {
+        "t": "bul",
+        "k": "Planilla del curso",
+        "h": "Alcance y supuestos",
+        "items": [
+         "Volumen mensual: caudal inicial por 30,4 días",
+         "Descuento al inicio del período",
+         "VPN simplificado: sin impuestos, abandono, agua ni transporte",
+         "Ejemplo didáctico, no evaluación de reservas"
+        ]
+       }
       },
       {
        "say": "Pregunta rápida.",
@@ -656,7 +691,7 @@
      "comp": "Producción y operación",
      "cues": [
       {
-       "say": "Para vigilar una campaña se siguen indicadores simples. Etapas por día, costo por pie lateral, producción por pie lateral y relación entre el costo de la completación y el EUR. Sin ellos es difícil distinguir lo que mejora de lo que solo cambia.",
+       "say": "Para vigilar una campaña se siguen indicadores simples. Etapas por día, costo por pie lateral, producción por pie lateral y relación entre el costo de la completación y el EUR. La planilla del curso expresa el costo por metro lateral; para comparar con referencias internacionales hay que pasarlo a pies. Sin ellos es difícil distinguir lo que mejora de lo que solo cambia.",
        "scene": {
         "t": "tbl",
         "k": "Indicadores",
@@ -777,10 +812,10 @@
  ],
  "exam": [
   {
-   "q": "La fractura se abre cuando:",
+   "q": "Una fractura ya iniciada sigue propagándose cuando:",
    "o": [
     "La presión cae a cero",
-    "La presión del fluido supera el esfuerzo mínimo",
+    "La presión neta es positiva: la del fluido supera el esfuerzo mínimo",
     "La arena es fina",
     "El pozo está cerrado"
    ],
