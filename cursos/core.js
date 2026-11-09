@@ -16,7 +16,7 @@ es:{home:'Sitio H3L',cat:'Cursos',admin:'Administrar',verify:'Verificar certific
  how4:'4 · Certificate',how4p:'Certificado H3L con código verificable; lo agregás a tu perfil profesional en un clic.',
  start:'Comenzar',resume:'Continuar',review:'Repasar',lessons:'lecciones',min:'min',done:'completado',level:'Nivel',
  ex:'Excel',exams:'evaluaciones',certok:'Certificado obtenido',
- back:'← Catálogo',course:'Curso',content:'Contenido del curso',files:'Archivos de práctica',tab_ov:'Resumen',tab_tr:'Transcripción',tab_nt:'Notas',tab_fl:'Archivos',tab_rf:'Bibliografía y casos',tab_cm:'Mapa de competencias',tab_ce:'Certificado',
+ back:'← Catálogo',course:'Curso',content:'Contenido del curso',files:'Archivos de práctica',tab_ov:'Resumen',tab_gl:'Glosario',note:'Nota',note_x:'Cerrar nota',note_l:'Ver nota',gl_p:'Términos que el curso aclara con una nota. Se marcan con + en la transcripción y en las preguntas.',tab_tr:'Transcripción',tab_nt:'Notas',tab_fl:'Archivos',tab_rf:'Bibliografía y casos',tab_cm:'Mapa de competencias',tab_ce:'Certificado',
  play:'Reproducir',pause:'Pausar',b10:'Retroceder 10 s',f10:'Adelantar 10 s',prev:'Anterior',next:'Siguiente',speed:'Velocidad',voice:'Voz',fs:'Pantalla completa',novoice:'Este navegador no tiene una voz en español: se muestran los subtítulos.',nosound:'Sin narración (solo subtítulos)',cc:'Subtítulos',
  cont:'Continuar ▶',lab:'Laboratorio: movés las variables y después presionás Continuar.',
  lesson_done:'Lección completada',up_next:'Siguiente lección',
@@ -47,7 +47,7 @@ en:{home:'H3L site',cat:'Courses',admin:'Manage',verify:'Verify certificate',pil
  how3:'3 · Get assessed',how3p:'Quick questions inside lessons, a quiz per module (pass at 70%) and a final exam.',
  how4:'4 · Get certified',how4p:'H3L certificate with a verifiable code; add it to your professional profile in one click.',
  start:'Start',resume:'Continue',review:'Review',lessons:'lessons',min:'min',done:'completed',level:'Level',ex:'Excel',exams:'assessments',certok:'Certificate earned',
- back:'← Catalog',course:'Course',content:'Course content',files:'Practice files',tab_ov:'Overview',tab_tr:'Transcript',tab_nt:'Notes',tab_fl:'Files',tab_rf:'References & cases',tab_cm:'Competency map',tab_ce:'Certificate',
+ back:'← Catalog',course:'Course',content:'Course content',files:'Practice files',tab_ov:'Overview',tab_gl:'Glossary',note:'Note',note_x:'Close note',note_l:'View note',gl_p:'Terms the course clarifies with a note. They are marked with + in the transcript and in the questions.',tab_tr:'Transcript',tab_nt:'Notes',tab_fl:'Files',tab_rf:'References & cases',tab_cm:'Competency map',tab_ce:'Certificate',
  play:'Play',pause:'Pause',b10:'Back 10 s',f10:'Forward 10 s',prev:'Previous',next:'Next',speed:'Speed',voice:'Voice',fs:'Full screen',novoice:'This browser has no Spanish voice: captions are shown instead.',nosound:'No narration (captions only)',cc:'Captions',
  cont:'Continue ▶',lab:'Lab: move the variables, then press Continue.',lesson_done:'Lesson completed',up_next:'Next lesson',
  srch:'Search the transcript…',dl_tx:'Download transcript',copy:'Copy',print:'Print',copied:'Copied',
@@ -77,7 +77,7 @@ fr:{home:'Site H3L',cat:'Cours',admin:'Gérer',verify:'Vérifier un certificat',
  how3:'3 · Évaluez-vous',how3p:'Questions rapides dans la leçon, quiz par module (réussite à 70 %) et examen final.',
  how4:'4 · Certifiez-vous',how4p:'Certificat H3L avec code vérifiable ; ajoutez-le à votre profil professionnel en un clic.',
  start:'Commencer',resume:'Continuer',review:'Réviser',lessons:'leçons',min:'min',done:'terminé',level:'Niveau',ex:'Excel',exams:'évaluations',certok:'Certificat obtenu',
- back:'← Catalogue',course:'Cours',content:'Contenu du cours',files:"Fichiers d'exercices",tab_ov:'Résumé',tab_tr:'Transcription',tab_nt:'Notes',tab_fl:'Fichiers',tab_rf:'Bibliographie et cas',tab_cm:'Carte des compétences',tab_ce:'Certificat',
+ back:'← Catalogue',course:'Cours',content:'Contenu du cours',files:"Fichiers d'exercices",tab_ov:'Résumé',tab_gl:'Glossaire',note:'Note',note_x:'Fermer la note',note_l:'Voir la note',gl_p:'Termes précisés par une note dans le cours. Ils sont marqués d’un + dans la transcription et dans les questions.',tab_tr:'Transcription',tab_nt:'Notes',tab_fl:'Fichiers',tab_rf:'Bibliographie et cas',tab_cm:'Carte des compétences',tab_ce:'Certificat',
  play:'Lecture',pause:'Pause',b10:'Reculer de 10 s',f10:'Avancer de 10 s',prev:'Précédent',next:'Suivant',speed:'Vitesse',voice:'Voix',fs:'Plein écran',novoice:'Ce navigateur n’a pas de voix espagnole : les sous-titres sont affichés.',nosound:'Sans narration (sous-titres)',cc:'Sous-titres',
  cont:'Continuer ▶',lab:'Labo : modifiez les variables puis appuyez sur Continuer.',lesson_done:'Leçon terminée',up_next:'Leçon suivante',
  srch:'Rechercher dans la transcription…',dl_tx:'Télécharger la transcription',copy:'Copier',print:'Imprimer',copied:'Copié',
@@ -107,7 +107,7 @@ pt:{home:'Site H3L',cat:'Cursos',admin:'Gerenciar',verify:'Verificar certificado
  how3:'3 · Avalie-se',how3p:'Perguntas rápidas na aula, quiz por módulo (aprovação com 70 %) e exame final.',
  how4:'4 · Certifique-se',how4p:'Certificado H3L com código verificável; adicione ao seu perfil profissional em um clique.',
  start:'Começar',resume:'Continuar',review:'Revisar',lessons:'aulas',min:'min',done:'concluído',level:'Nível',ex:'Excel',exams:'avaliações',certok:'Certificado obtido',
- back:'← Catálogo',course:'Curso',content:'Conteúdo do curso',files:'Arquivos de prática',tab_ov:'Resumo',tab_tr:'Transcrição',tab_nt:'Notas',tab_fl:'Arquivos',tab_rf:'Bibliografia e casos',tab_cm:'Mapa de competências',tab_ce:'Certificado',
+ back:'← Catálogo',course:'Curso',content:'Conteúdo do curso',files:'Arquivos de prática',tab_ov:'Resumo',tab_gl:'Glossário',note:'Nota',note_x:'Fechar nota',note_l:'Ver nota',gl_p:'Termos que o curso esclarece com uma nota. Aparecem marcados com + na transcrição e nas perguntas.',tab_tr:'Transcrição',tab_nt:'Notas',tab_fl:'Arquivos',tab_rf:'Bibliografia e casos',tab_cm:'Mapa de competências',tab_ce:'Certificado',
  play:'Reproduzir',pause:'Pausar',b10:'Voltar 10 s',f10:'Avançar 10 s',prev:'Anterior',next:'Próxima',speed:'Velocidade',voice:'Voz',fs:'Tela cheia',novoice:'Este navegador não tem voz em espanhol: as legendas são exibidas.',nosound:'Sem narração (só legendas)',cc:'Legendas',
  cont:'Continuar ▶',lab:'Laboratório: mova as variáveis e depois pressione Continuar.',lesson_done:'Aula concluída',up_next:'Próxima aula',
  srch:'Buscar na transcrição…',dl_tx:'Baixar transcrição',copy:'Copiar',print:'Imprimir',copied:'Copiado',
@@ -217,6 +217,12 @@ function bumpers(c){if(c.lang==='en')return bumpersEn(c);var I=c.intro,O=c.outro
    O.cues.push({say:'Este es el cierre del curso. Ahora podés reconocer y aplicar: '+can.join('; ')+'.',scene:{t:'can',k:'Lo que lograste',h:'Ahora podés reconocer y aplicar',items:can}});
    O.cues.push({say:'Ítems vistos: '+nl+' lecciones en '+c.modules.length+' módulos'+(nlab?', '+nlab+(nlab===1?' laboratorio interactivo':' laboratorios interactivos'):'')+(nx?', '+nx+(nx===1?' planilla Excel':' planillas Excel'):'')+', y un quiz por módulo más el examen final.',scene:{t:'seen'}});
    O.cues.push({say:O.phrase+' Gracias por aprender con H3L Global Energy. Contacto: info@h3lglobalenergy.com',tts:O.phrase+' Gracias por aprender con H3L Global Energy. Escribinos a info, arroba, h3l global energy, punto com.',scene:{t:'bout'}})}}
+/* notas aclaratorias: cada nota es {t: frase del texto a la que se ancla, n: texto de la nota, k: término opcional que se marca también en los quizzes y en el glosario}. No se leen en voz alta. */
+HC.NR={};
+HC.noted=function(text,notes,pre){text=String(text);var out='',pos=0,list=[],low=text.toLowerCase();(notes||[]).forEach(function(nt,j){HC.NR[pre+j]=nt;var a=String(nt.t||''),i=a?text.indexOf(a):-1;if(i<0&&a)i=low.indexOf(a.toLowerCase());if(i>=0)list.push({i:i,e:i+a.length,j:j})});
+  list.sort(function(a,b){return a.i-b.i});
+  list.forEach(function(x){if(x.i<pos)return;out+=HC.esc(text.slice(pos,x.i))+HC.esc(text.slice(x.i,x.e))+'<span class="nt-mk" role="button" aria-expanded="false" aria-label="'+HC.esc(HC.t('note_l'))+'" data-nid="'+pre+x.j+'">+</span>';pos=x.e});
+  return out+HC.esc(text.slice(pos))};
 /* pronunciación: solo para la voz (los subtítulos no cambian). Corrige siglas y palabras que las voces leen mal */
 HC.pron=function(t,lang){t=String(t);if(lang==='en')return t.replace(/\bh3l\b/gi,'H 3 L');return t.replace(/\bPVT\b/g,'pe ve te').replace(/\bupstream\b/gi,'ápstrim').replace(/\bh3l\b/gi,'hache tres ele')};
 /* idioma del contenido: si la interfaz está en inglés y existe data/en/<id>.json se usa; si no, español */

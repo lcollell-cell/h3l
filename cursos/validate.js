@@ -29,6 +29,9 @@ HV.validate=function(c,orig){var E=[],W=[];function e(p,m){E.push({p:p,m:m})}fun
       l.cues.forEach(function(q,ci){var cp=lp+'.cues.'+ci;if(!isS(q.say)){e(cp+'.say','req')}else{var n=words(q.say);tw+=n;if(n>70)w(cp+'.say','long')}
         if(q.hl!=null&&!(Number.isInteger(q.hl)&&q.hl>=-1))e(cp+'.hl','hl');
         if(q.scene)scene(q.scene,cp+'.scene');
+        if(q.notes!=null){if(!Array.isArray(q.notes))e(cp+'.notes','ntform');else{if(q.notes.length>2)w(cp+'.notes','ntmany');
+          q.notes.forEach(function(x,k){var np=cp+'.notes.'+k;if(!x||!isS(x.t)||!isS(x.n)){e(np,'ntform');return}
+            if(isS(q.say)&&q.say.toLowerCase().indexOf(x.t.toLowerCase())<0)w(np+'.t','ntanchor');if(words(x.n)>25)w(np+'.n','ntlong')})}}
         if(q.q)qcheck(q.q,cp+'.q');
         if(q.lab&&!(q.scene&&q.scene.t==='viz'))w(cp+'.lab','labviz')});
       if(tw<60)w(lp,'short');if(tw>260)w(lp,'longl')}) });

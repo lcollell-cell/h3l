@@ -359,7 +359,14 @@
         "h": "Sesgo, varianza y ruido",
         "f": "Error esperado = sesgo² + varianza + ruido\n\nModelo simple: alto sesgo, baja varianza (subajuste)\nModelo complejo: bajo sesgo, alta varianza (sobreajuste)",
         "n": "La regularización reduce la varianza a cambio de un poco de sesgo."
-       }
+       },
+       "notes": [
+        {
+         "t": "memorizar el ruido",
+         "k": "sobreajuste",
+         "n": "Sobreajuste (overfitting): el modelo aprende incluso el ruido de los datos de entrenamiento y por eso falla con datos nuevos."
+        }
+       ]
       },
       {
        "say": "Laboratorio. Son catorce puntos de entrenamiento y cuarenta de prueba. Subí el grado del polinomio y mirá cómo el error de entrenamiento baja mientras el de prueba sube. Después agregá regularización.",
@@ -387,7 +394,14 @@
          "Informar incertidumbre y no solo un número"
         ]
        },
-       "hl": 0
+       "hl": 0,
+       "notes": [
+        {
+         "t": "modelo simple de referencia",
+         "k": "baseline",
+         "n": "Baseline (modelo de referencia): un modelo simple, como el promedio histórico, contra el que se mide si el modelo complejo realmente mejora."
+        }
+       ]
       },
       {
        "say": "Los valores de Shapley, usados por el método SHAP, reparten una predicción entre las variables que la produjeron. Sirven para auditar un modelo y detectar comportamientos extraños. No prueban causalidad: una variable importante en el modelo no es necesariamente una causa en el campo.",
@@ -678,7 +692,14 @@
          "Se detecta con monitoreo y alertas de desempeño"
         ]
        },
-       "hl": 0
+       "hl": 0,
+       "notes": [
+        {
+         "t": "cambia la relación entre variables y resultado",
+         "k": "deriva de concepto",
+         "n": "Deriva de concepto (concept drift): cambia la relación entre entradas y resultado. Si solo cambian los datos de entrada, es deriva de datos."
+        }
+       ]
       },
       {
        "say": "Sculley y colaboradores, en 2015, describieron la deuda técnica de los sistemas de aprendizaje automático: dependencias de datos, configuración y pruebas insuficientes. Versionar datos y modelos, y automatizar las pruebas, reduce esa deuda.",
@@ -694,7 +715,14 @@
          "Un plan para retirar un modelo"
         ]
        },
-       "hl": 3
+       "hl": 3,
+       "notes": [
+        {
+         "t": "deuda técnica",
+         "k": "deuda técnica",
+         "n": "Deuda técnica: costo futuro que se acumula por los atajos de hoy en el diseño y las pruebas del sistema (Sculley et al., 2015)."
+        }
+       ]
       },
       {
        "say": "Pregunta rápida.",
