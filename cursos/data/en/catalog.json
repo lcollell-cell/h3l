@@ -19,6 +19,10 @@
   "midstream": {
    "title": "Midstream and process safety",
    "desc": "Transport, fiscal measurement, integrity and process risk management."
+  },
+  "gestion": {
+   "title": "Project management",
+   "desc": "Jira and Primavera P6: agile, defects, planning, resources, earned value and schedule risk."
   }
  },
  "courses": {

@@ -1,0 +1,855 @@
+{
+ "id": "jsc",
+ "title": "Scrum con Jira: desarrollo ágil de productos de datos en Oil & Gas",
+ "subtitle": "Roles, eventos, backlog, sprints, estimación e informes de Jira, con un caso completo de un tablero de vigilancia de pozos.",
+ "desc": "Curso aplicado de Scrum con Jira: el marco según la Guía de Scrum 2020, la configuración de un proyecto Scrum, la escritura de historias de usuario, la estimación con puntos, la planificación y ejecución del sprint, los informes de burndown y velocidad, y la revisión y retrospectiva. Se cierra con un caso completo, de inicio a fin, de un producto de datos para la vigilancia de pozos.",
+ "objectives": [
+  "Describir los roles, eventos y artefactos de Scrum y sus compromisos.",
+  "Configurar un proyecto Scrum en Jira con épicas, historias, sprints e informes.",
+  "Escribir y estimar historias de usuario y planificar un sprint con la velocidad histórica.",
+  "Llevar un caso de inicio a fin, con pronóstico por rangos y lecciones aprendidas."
+ ],
+ "labs": [],
+ "practiceMin": 90,
+ "competencies": [
+  {
+   "name": "Fundamentos de Scrum",
+   "lessons": [
+    "jscl1"
+   ]
+  },
+  {
+   "name": "Configuración en Jira",
+   "lessons": [
+    "jscl2"
+   ]
+  },
+  {
+   "name": "Planificación y ejecución",
+   "lessons": [
+    "jscl3",
+    "jscl4"
+   ]
+  },
+  {
+   "name": "Caso de vigilancia de pozos",
+   "lessons": [
+    "jscl5",
+    "jscl6"
+   ]
+  }
+ ],
+ "intro": {
+  "hook": "Vamos a aprender a construir un producto por entregas cortas, con un equipo que prioriza, estima y mejora en cada sprint, usando Jira como tablero de trabajo.",
+  "questions": [
+   "¿Cómo se organiza un equipo para entregar valor cada dos semanas?",
+   "¿Qué muestran los informes de Jira y cómo ayudan a decidir?",
+   "¿Cómo se pronostica cuántos sprints faltan sin prometer fechas exactas?"
+  ],
+  "star": {
+   "caso": "bp: de cuatro equipos de Scrum a cientos de equipos ágiles",
+   "S": "bp inició en 2016 una transformación de su negocio upstream basada en formas ágiles de trabajo.",
+   "T": "Acelerar decisiones y ciclos de trabajo sin descuidar la seguridad.",
+   "A": "El negocio del Mar del Norte capacitó inicialmente a cuatro equipos en la metodología Scrum, y luego la práctica se extendió a otras áreas.",
+   "R": "Según una entrevista publicada por McKinsey, hubo mejoras de entre el 40 y el 50 por ciento en los tiempos de ciclo, con foco en seguridad y calidad, y hoy hay alrededor de 700 equipos ágiles."
+  }
+ },
+ "modules": [
+  {
+   "id": "jscm1",
+   "title": "Módulo 1 · Scrum y configuración en Jira",
+   "lessons": [
+    {
+     "id": "jscl1",
+     "title": "Scrum: marco de trabajo, roles, eventos y artefactos",
+     "comp": "Fundamentos de Scrum",
+     "cues": [
+      {
+       "say": "Scrum es un marco liviano para resolver problemas complejos entregando valor de forma frecuente. Según la Guía de Scrum de dos mil veinte, se apoya en la transparencia, la inspección y la adaptación.",
+       "scene": {
+        "t": "bul",
+        "k": "Marco",
+        "h": "Qué es Scrum",
+        "items": [
+         "Marco liviano para resolver problemas complejos con entregas frecuentes",
+         "Se apoya en tres pilares: transparencia, inspección y adaptación",
+         "Valores: compromiso, foco, apertura, respeto y coraje",
+         "Un equipo de diez personas o menos, con un solo objetivo de producto"
+        ]
+       },
+       "notes": [
+        {
+         "t": "Guía de Scrum",
+         "k": "Guía",
+         "n": "Documento de Schwaber y Sutherland que define Scrum; la versión vigente es de 2020."
+        }
+       ]
+      },
+      {
+       "say": "El equipo tiene tres responsabilidades: el Product Owner, el Scrum Master y los Developers. Cada artefacto tiene un compromiso: el objetivo del producto, el objetivo del sprint y la definición de terminado.",
+       "scene": {
+        "t": "tbl",
+        "k": "Estructura",
+        "h": "Roles, eventos y artefactos",
+        "cols": [
+         "Elemento",
+         "Qué es",
+         "Compromiso"
+        ],
+        "rows": [
+         [
+          "Product Owner",
+          "Maximiza el valor y ordena el Product Backlog",
+          "Objetivo del producto"
+         ],
+         [
+          "Scrum Master",
+          "Ayuda al equipo a aplicar Scrum y quita impedimentos",
+          "—"
+         ],
+         [
+          "Developers",
+          "Construyen el incremento utilizable en cada sprint",
+          "Definición de terminado"
+         ],
+         [
+          "Sprint Backlog",
+          "Trabajo elegido para el sprint",
+          "Objetivo del sprint"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Los eventos son cinco. El sprint, que dura un mes o menos, contiene a los demás: la planificación, el scrum diario de quince minutos, la revisión con los interesados y la retrospectiva del equipo.",
+       "scene": {
+        "t": "tbl",
+        "k": "Eventos",
+        "h": "Los cinco eventos de Scrum",
+        "cols": [
+         "Evento",
+         "Para qué",
+         "Tope con sprint de un mes"
+        ],
+        "rows": [
+         [
+          "Sprint",
+          "Contenedor de los demás eventos",
+          "Un mes o menos"
+         ],
+         [
+          "Planificación",
+          "Elegir qué y cómo",
+          "8 horas"
+         ],
+         [
+          "Scrum diario",
+          "Sincronizar y ajustar el plan",
+          "15 minutos"
+         ],
+         [
+          "Revisión",
+          "Inspeccionar el incremento con los interesados",
+          "4 horas"
+         ],
+         [
+          "Retrospectiva",
+          "Mejorar la forma de trabajar",
+          "3 horas"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "En Scrum, el compromiso asociado al incremento es:",
+        "o": [
+         "El objetivo del sprint",
+         "La definición de terminado",
+         "El objetivo del producto",
+         "El plan de liberación"
+        ],
+        "a": 1,
+        "e": "El incremento se compromete con la definición de terminado."
+       }
+      }
+     ]
+    },
+    {
+     "id": "jscl2",
+     "title": "Preparar Jira para Scrum: proyecto, tickets y backlog",
+     "comp": "Configuración en Jira",
+     "cues": [
+      {
+       "say": "Un proyecto Scrum en Jira organiza el trabajo en una jerarquía. Las épicas agrupan historias, y las historias se dividen en tareas y subtareas. Los errores se registran como un tipo propio.",
+       "scene": {
+        "t": "tbl",
+        "k": "Jerarquía",
+        "h": "Tipos de ticket habituales",
+        "cols": [
+         "Tipo",
+         "Qué representa",
+         "Ejemplo en el caso"
+        ],
+        "rows": [
+         [
+          "Épica",
+          "Objetivo grande que abarca varios sprints",
+          "Alertas de desvío de producción"
+         ],
+         [
+          "Historia",
+          "Valor para un usuario, entregable en un sprint",
+          "Ver pozos con desvío mayor al diez por ciento"
+         ],
+         [
+          "Tarea",
+          "Trabajo técnico necesario",
+          "Conectar la base de producción"
+         ],
+         [
+          "Error",
+          "Defecto a corregir",
+          "Valores nulos en la serie diaria"
+         ],
+         [
+          "Subtarea",
+          "Pasos de una historia o tarea",
+          "Escribir pruebas de la regla de alerta"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "El Backlog de Jira es la lista ordenada de tickets. El Product Owner la prioriza. Al crear un sprint se fijan nombre, fechas y objetivo, se arrastran los tickets elegidos y se inicia el sprint. Aparece el tablero activo y los informes.",
+       "scene": {
+        "t": "bul",
+        "k": "Backlog",
+        "h": "Qué hace Jira en cada paso",
+        "items": [
+         "Backlog: lista ordenada de tickets; el Product Owner la prioriza",
+         "Crear sprint: nombre, duración, fechas y objetivo del sprint",
+         "Estimación: puntos de historia en cada ticket",
+         "Tablero activo: columnas de Por hacer, En curso y Hecho",
+         "Informes: burndown, velocity y reporte del sprint"
+        ]
+       }
+      },
+      {
+       "say": "Jira no trae una definición de terminado lista. Se la incorpora como lista de verificación en el ticket y como condición del paso a Hecho. En proyectos con datos de campo, incluye la validación de calidad de los datos.",
+       "scene": {
+        "t": "bul",
+        "k": "Definición de terminado",
+        "h": "Cómo reflejarla en Jira",
+        "items": [
+         "Escribirla como lista de verificación en cada historia",
+         "Exigir revisión y pruebas antes de pasar a Hecho",
+         "Incluir la validación de calidad de los datos en proyectos analíticos",
+         "Revisarla en la retrospectiva si aparecen defectos tardíos"
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "En Jira, una épica es:",
+        "o": [
+         "Un objetivo grande que reúne varias historias",
+         "Una subtarea",
+         "Un informe",
+         "Un sprint largo"
+        ],
+        "a": 0,
+        "e": "Las épicas agrupan historias relacionadas."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "¿Quién ordena el Product Backlog?",
+     "o": [
+      "El Scrum Master",
+      "El Product Owner",
+      "Cualquier interesado",
+      "El Jefe de Proyecto"
+     ],
+     "a": 1,
+     "e": "Es responsabilidad del Product Owner."
+    },
+    {
+     "q": "¿Cuánto dura como máximo el scrum diario?",
+     "o": [
+      "15 minutos",
+      "1 hora",
+      "Medio día",
+      "Un día"
+     ],
+     "a": 0,
+     "e": "Es un evento de 15 minutos."
+    },
+    {
+     "q": "Una épica en Jira reúne:",
+     "o": [
+      "Errores solamente",
+      "Historias y tareas relacionadas",
+      "Informes",
+      "Usuarios"
+     ],
+     "a": 1,
+     "e": "Agrupa trabajo grande en historias."
+    }
+   ]
+  },
+  {
+   "id": "jscm2",
+   "title": "Módulo 2 · Planificar, ejecutar y mejorar",
+   "lessons": [
+    {
+     "id": "jscl3",
+     "title": "Historias de usuario, estimación y planificación del sprint",
+     "comp": "Backlog y planificación",
+     "cues": [
+      {
+       "say": "Una buena historia de usuario sigue el formato: como un rol, quiero una capacidad, para obtener un beneficio. Se evalúa con los criterios INVEST, de Bill Wake: independiente, negociable, valiosa, estimable, pequeña y testeable.",
+       "scene": {
+        "t": "fm",
+        "k": "Historia de usuario",
+        "h": "Formato y criterios INVEST",
+        "f": "Como <rol> quiero <capacidad> para <beneficio>\n\nINVEST: Independiente, Negociable, Valiosa,\nEstimable, Pequeña (Small) y Testeable",
+        "n": "Cohn (2004) difundió el formato; Wake (2003) propuso INVEST."
+       }
+      },
+      {
+       "say": "Los puntos de historia miden el esfuerzo relativo, no las horas. El equipo compara cada historia con una de referencia y usa una escala que crece, como la de Fibonacci. Una historia muy grande se divide antes de entrar a un sprint.",
+       "scene": {
+        "t": "bul",
+        "k": "Estimación",
+        "h": "Puntos de historia",
+        "items": [
+         "Miden esfuerzo relativo, no horas",
+         "Se estima en equipo, comparando con una historia de referencia",
+         "Se usa una escala como Fibonacci: 1, 2, 3, 5, 8, 13",
+         "Una historia mayor a 13 puntos se divide antes de entrar al sprint"
+        ]
+       }
+      },
+      {
+       "say": "La planificación responde tres preguntas: por qué es valioso este sprint, qué se puede terminar y cómo se hará el trabajo. El equipo elige historias según su velocidad histórica, y no según la presión de las fechas.",
+       "scene": {
+        "t": "bul",
+        "k": "Planificación",
+        "h": "Qué responde la planificación del sprint",
+        "items": [
+         "Por qué es valioso este sprint: el objetivo del sprint",
+         "Qué se puede terminar: historias elegidas según la capacidad",
+         "Cómo se hará el trabajo: tareas y subtareas",
+         "La capacidad se estima con la velocidad de los sprints previos"
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Los puntos de historia expresan:",
+        "o": [
+         "Horas de trabajo",
+         "Esfuerzo relativo",
+         "Costo en dólares",
+         "Prioridad del cliente"
+        ],
+        "a": 1,
+        "e": "Son una medida relativa de esfuerzo y complejidad."
+       }
+      }
+     ]
+    },
+    {
+     "id": "jscl4",
+     "title": "Ejecutar el sprint: informes, revisión y retrospectiva",
+     "comp": "Ejecución y mejora",
+     "cues": [
+      {
+       "say": "Durante el sprint, el equipo se sincroniza en el scrum diario frente al tablero activo. Cada ticket tiene un responsable y los impedimentos se marcan con bandera. El foco es el objetivo del sprint, no informar al jefe.",
+       "scene": {
+        "t": "bul",
+        "k": "Scrum diario",
+        "h": "Cómo usar el tablero activo",
+        "items": [
+         "Tickets con responsable, en la columna que corresponde",
+         "Los impedimentos se marcan con bandera y se comunican al Scrum Master",
+         "El foco es el objetivo del sprint, no informar al jefe",
+         "Quince minutos, de pie o en pantalla, a la misma hora"
+        ]
+       }
+      },
+      {
+       "say": "Jira muestra el burndown, que es el trabajo restante frente al tiempo, y la velocidad, que compara los puntos comprometidos con los terminados en cada sprint. Con la velocidad se planifica la capacidad.",
+       "scene": {
+        "t": "tbl",
+        "k": "Informes de Jira",
+        "h": "Qué muestra cada informe",
+        "cols": [
+         "Informe",
+         "Qué muestra",
+         "Cómo se usa"
+        ],
+        "rows": [
+         [
+          "Burndown del sprint",
+          "Trabajo restante frente al tiempo",
+          "Ver si el sprint va a cumplir"
+         ],
+         [
+          "Velocity",
+          "Puntos comprometidos y terminados por sprint",
+          "Planificar la capacidad"
+         ],
+         [
+          "Reporte del sprint",
+          "Qué se terminó y qué no",
+          "Preparar la revisión"
+         ],
+         [
+          "Burndown de la versión",
+          "Puntos terminados frente al alcance",
+          "Seguir una liberación"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "La revisión inspecciona el incremento con los interesados y adapta el backlog. La retrospectiva es solo del equipo y busca mejorar la forma de trabajar. Conviene salir con una acción concreta, registrada como ticket.",
+       "scene": {
+        "t": "bul",
+        "k": "Revisión y retrospectiva",
+        "h": "Dos eventos distintos",
+        "items": [
+         "Revisión: se inspecciona el incremento con los interesados y se adapta el backlog",
+         "Retrospectiva: el equipo mejora su forma de trabajar",
+         "Una acción de mejora por sprint, con responsable",
+         "Las acciones se registran como tickets en el backlog"
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "El informe de velocidad de Jira se usa principalmente para:",
+        "o": [
+         "Pagar horas extra",
+         "Planificar la capacidad de próximos sprints",
+         "Cerrar el proyecto",
+         "Medir cada persona"
+        ],
+        "a": 1,
+        "e": "La velocidad histórica orienta cuánto se puede comprometer."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "INVEST sirve para:",
+     "o": [
+      "Calcular costos",
+      "Evaluar la calidad de una historia",
+      "Medir la velocidad",
+      "Cerrar un sprint"
+     ],
+     "a": 1,
+     "e": "Es un conjunto de criterios para historias."
+    },
+    {
+     "q": "La velocidad se usa para:",
+     "o": [
+      "Comparar equipos",
+      "Planificar capacidad",
+      "Premiar al mejor",
+      "Calcular el presupuesto"
+     ],
+     "a": 1,
+     "e": "Orienta cuánto comprometer."
+    },
+    {
+     "q": "La retrospectiva busca:",
+     "o": [
+      "Aprobar el incremento",
+      "Mejorar la forma de trabajar",
+      "Cambiar el producto",
+      "Elegir al Scrum Master"
+     ],
+     "a": 1,
+     "e": "Es un evento del equipo para mejorar."
+    }
+   ]
+  },
+  {
+   "id": "jscm3",
+   "title": "Módulo 3 · Caso completo del tablero de vigilancia",
+   "lessons": [
+    {
+     "id": "jscl5",
+     "title": "Caso completo (1): visión, backlog y los primeros sprints",
+     "comp": "Caso de vigilancia de pozos",
+     "cues": [
+      {
+       "say": "Presentamos el caso, un ejemplo didáctico con datos ilustrativos. Un equipo de ingeniería de producción, ciencia de datos y desarrollo construye un tablero de vigilancia con alertas de desvío de producción. Trabajan en sprints de dos semanas.",
+       "scene": {
+        "t": "bul",
+        "k": "Contexto",
+        "h": "Un tablero de vigilancia con alertas (ejemplo didáctico)",
+        "items": [
+         "Un equipo mixto de ingeniería de producción, ciencia de datos y desarrollo",
+         "Producto: tablero que detecta pozos con desvío de producción",
+         "Product Owner: jefe de Producción; Scrum Master: analista senior",
+         "Sprints de dos semanas; datos y plazos ilustrativos"
+        ]
+       }
+      },
+      {
+       "say": "Paso uno, el objetivo del producto: detectar en menos de una hora los pozos con desvío mayor al diez por ciento. Paso dos, el backlog con cuatro épicas y ciento diez puntos de historia. El Product Owner prioriza primero los datos.",
+       "scene": {
+        "t": "bul",
+        "k": "Objetivo",
+        "h": "Del objetivo del producto al backlog",
+        "items": [
+         "Objetivo del producto: detectar en menos de una hora los pozos con desvío mayor al diez por ciento",
+         "Épicas: Datos y calidad, Alertas, Visualización, Adopción",
+         "Backlog inicial: 110 puntos de historia",
+         "El Product Owner ordena por valor y riesgo: primero los datos"
+        ]
+       }
+      },
+      {
+       "say": "El primer sprint tiene como objetivo tener los datos diarios limpios y accesibles. Se comprometen veinte puntos y se terminan dieciocho: la calidad de los datos fue más trabajo que lo previsto. En el segundo sprint se valida una regla de alerta.",
+       "scene": {
+        "t": "tbl",
+        "k": "Sprints 1 y 2",
+        "h": "Objetivo y resultado de cada sprint",
+        "cols": [
+         "Sprint",
+         "Objetivo",
+         "Comprometido",
+         "Terminado"
+        ],
+        "rows": [
+         [
+          "1",
+          "Datos diarios de producción limpios y accesibles",
+          "20",
+          "18"
+         ],
+         [
+          "2",
+          "Primera regla de alerta validada con tres pozos",
+          "22",
+          "22"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "En el caso, el primer sprint terminó dieciocho de veinte puntos. Eso debería usarse para:",
+        "o": [
+         "Sancionar al equipo",
+         "Ajustar la planificación futura con datos reales",
+         "Ocultar la diferencia",
+         "Reducir el backlog a cero"
+        ],
+        "a": 1,
+        "e": "La velocidad histórica sirve para planificar con realismo."
+       }
+      }
+     ]
+    },
+    {
+     "id": "jscl6",
+     "title": "Caso completo (2): liberación, pronóstico y lecciones",
+     "comp": "Pronóstico y cierre del caso",
+     "cues": [
+      {
+       "say": "En el tercer sprint se entregan las alertas por correo y un ranking de pozos, con veinticuatro puntos. En el cuarto, el tablero con filtros y la capacitación a operadores, con veinticinco. Se acumulan ochenta y nueve de ciento diez puntos.",
+       "scene": {
+        "t": "tbl",
+        "k": "Sprints 3 y 4",
+        "h": "Resultado y velocidad acumulada",
+        "cols": [
+         "Sprint",
+         "Objetivo",
+         "Terminado",
+         "Acumulado"
+        ],
+        "rows": [
+         [
+          "3",
+          "Alertas por correo y ranking de pozos",
+          "24",
+          "64"
+         ],
+         [
+          "4",
+          "Tablero con filtros y capacitación a operadores",
+          "25",
+          "89"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Con la velocidad de los últimos tres sprints, cerca de veinticuatro puntos, y veintiún puntos restantes, falta aproximadamente un sprint. Siempre se informa como un rango, no como una fecha exacta.",
+       "scene": {
+        "t": "fm",
+        "k": "Pronóstico",
+        "h": "Cuántos sprints faltan",
+        "f": "Velocidad de referencia ≈ promedio de los últimos 3 sprints = (22 + 24 + 25) ÷ 3 ≈ 24\n\nPuntos restantes = 110 − 89 = 21\nSprints restantes ≈ 21 ÷ 24 ≈ 1",
+        "n": "Se informa como un rango, usando la velocidad mínima y máxima observadas."
+       }
+      },
+      {
+       "say": "En la revisión, los operadores piden un filtro por yacimiento y entra al backlog. En la retrospectiva, el equipo agrega a la definición de terminado una validación con el operador y pruebas automáticas de calidad de datos.",
+       "scene": {
+        "t": "bul",
+        "k": "Revisión y retrospectiva",
+        "h": "Qué se aprendió",
+        "items": [
+         "Los operadores pidieron un filtro por yacimiento: entró al backlog",
+         "Se mejoró la definición de terminado: incluir validación con el operador",
+         "Acción: pruebas automáticas de calidad de datos antes de cada sprint",
+         "Se decidió liberar la versión 1.0 al terminar el sprint 5"
+        ]
+       }
+      },
+      {
+       "say": "Las lecciones. Scrum entrega valor temprano pero no elimina la incertidumbre. La velocidad sirve para planificar, no para comparar equipos. Y en operaciones, la seguridad y la calidad de los datos forman parte de la definición de terminado.",
+       "scene": {
+        "t": "bul",
+        "k": "Lecciones",
+        "h": "Lo que deja el caso",
+        "items": [
+         "Scrum entrega valor temprano, pero no elimina la incertidumbre",
+         "La velocidad sirve para planificar, no para comparar equipos",
+         "El Product Owner decide el orden; el equipo, cuánto se puede comprometer",
+         "En campo, la seguridad y la calidad de los datos forman parte de terminado"
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Con 21 puntos restantes y velocidad cercana a 24, el pronóstico es:",
+        "o": [
+         "Más de 5 sprints",
+         "Aproximadamente 1 sprint, informado como rango",
+         "Imposible de estimar",
+         "Exactamente 2 sprints"
+        ],
+        "a": 1,
+        "e": "El pronóstico se calcula con la velocidad histórica y se informa con incertidumbre."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "¿Qué se priorizó primero en el caso?",
+     "o": [
+      "La capacitación",
+      "Los datos limpios y accesibles",
+      "La interfaz",
+      "El informe final"
+     ],
+     "a": 1,
+     "e": "Sin datos confiables, las alertas no sirven."
+    },
+    {
+     "q": "¿Cómo se informa el pronóstico?",
+     "o": [
+      "Como una fecha exacta",
+      "Como un rango",
+      "No se informa",
+      "Como una opinión"
+     ],
+     "a": 1,
+     "e": "Se reconoce la incertidumbre."
+    },
+    {
+     "q": "¿Qué se agregó a la definición de terminado?",
+     "o": [
+      "Una validación con el operador",
+      "Más reuniones",
+      "Menos pruebas",
+      "Un nuevo rol"
+     ],
+     "a": 0,
+     "e": "Fue el resultado de la retrospectiva."
+    }
+   ]
+  }
+ ],
+ "exam": [
+  {
+   "q": "El sprint dura:",
+   "o": [
+    "Un mes o menos",
+    "Tres meses",
+    "Un año",
+    "Lo que defina el jefe"
+   ],
+   "a": 0,
+   "e": "La Guía de Scrum fija un mes o menos."
+  },
+  {
+   "q": "El compromiso del Product Backlog es:",
+   "o": [
+    "El objetivo del producto",
+    "La definición de terminado",
+    "El objetivo del sprint",
+    "La velocidad"
+   ],
+   "a": 0,
+   "e": "El objetivo del producto."
+  },
+  {
+   "q": "Los puntos de historia son:",
+   "o": [
+    "Horas",
+    "Esfuerzo relativo",
+    "Dólares",
+    "Días"
+   ],
+   "a": 1,
+   "e": "Es una medida relativa."
+  },
+  {
+   "q": "¿Qué informe de Jira muestra el trabajo restante del sprint?",
+   "o": [
+    "Velocity",
+    "Burndown",
+    "Roadmap",
+    "Control"
+   ],
+   "a": 1,
+   "e": "El burndown compara el trabajo restante con el tiempo."
+  },
+  {
+   "q": "Con 21 puntos restantes y velocidad 24, faltan aproximadamente:",
+   "o": [
+    "1 sprint",
+    "5 sprints",
+    "10 sprints",
+    "Ninguno"
+   ],
+   "a": 0,
+   "e": "21 dividido 24 es menos de un sprint."
+  },
+  {
+   "q": "En operaciones, la definición de terminado debe incluir:",
+   "o": [
+    "Solo el código",
+    "La seguridad y la calidad de los datos",
+    "El plan de ventas",
+    "Nada especial"
+   ],
+   "a": 1,
+   "e": "El riesgo operativo y la calidad de datos son parte de lo terminado."
+  }
+ ],
+ "outro": {
+  "can": [
+   "los roles, eventos y artefactos de Scrum según la Guía de 2020",
+   "configurar un proyecto Scrum en Jira con épicas, historias, sprints e informes",
+   "estimar con puntos de historia y pronosticar con la velocidad",
+   "llevar un caso completo de un producto de datos para la vigilancia de pozos"
+  ],
+  "phrase": "Entregar poco, a menudo y con calidad es la mejor forma de aprender rápido.",
+  "recap": [
+   "Scrum se organiza en sprints con un objetivo, un backlog ordenado y una definición de terminado.",
+   "Jira aporta backlog, tablero activo y los informes de burndown y velocidad.",
+   "La velocidad histórica permite pronosticar con un rango, no con una promesa."
+  ]
+ },
+ "downloads": [
+  {
+   "file": "xlsx/H3L_Scrum_Velocidad_y_Pronostico.xlsx",
+   "title": "Backlog, velocidad y pronóstico del caso (Excel)",
+   "desc": "Backlog de ejemplo con puntos de historia, cuatro sprints con compromiso y resultado, burndown con fórmulas, velocidad promedio y pronóstico de sprints restantes. Datos ilustrativos.",
+   "task": "Suponé que el sprint 5 termina solo 18 puntos. Recalculá el pronóstico usando la velocidad mínima, la promedio y la máxima, y expresalo como un rango de sprints."
+  }
+ ],
+ "cases": [
+  {
+   "title": "bp: Scrum en el negocio upstream",
+   "text": "Según una entrevista publicada por McKinsey, bp inició en 2016 una transformación ágil de su negocio upstream. Su unidad del Mar del Norte entrenó inicialmente cuatro equipos en Scrum y vio mejoras del 40 al 50 por ciento en tiempos de ciclo, manteniendo el foco en seguridad y calidad. La empresa informa hoy alrededor de 700 equipos ágiles en producción y operaciones, mantenimiento, pozos, proyectos y subsuelo.",
+   "src": "McKinsey & Company, bp: An agility pioneer in the energy industry (entrevista), mckinsey.com"
+  },
+  {
+   "title": "Anadarko: equipos de Scrum con ingenieros y científicos de datos",
+   "text": "El Journal of Petroleum Technology describió a un grupo de Anadarko con varios equipos de Scrum de cuatro a cinco personas que combinan ingenieros de reservorios y científicos de datos. Un equipo que llevaba meses en un proyecto de optimización de levantamiento artificial lo discontinuó: poder cancelar a tiempo también forma parte del método.",
+   "src": "Journal of Petroleum Technology (2018), An Inside Look at Anadarko Petroleum's Digital Transformation, jpt.spe.org"
+  }
+ ],
+ "refs": [
+  {
+   "tag": "Guía",
+   "cite": "Schwaber, K. y Sutherland, J. (2020). The Scrum Guide. scrumguides.org.",
+   "why": "definición oficial de Scrum"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Takeuchi, H. y Nonaka, I. (1986). The new new product development game. Harvard Business Review 64(1), 137–146.",
+   "why": "origen del término Scrum en equipos de desarrollo"
+  },
+  {
+   "tag": "Manifiesto",
+   "cite": "Beck, K. et al. (2001). Manifesto for Agile Software Development. agilemanifesto.org.",
+   "why": "valores y principios ágiles"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Rubin, K. S. (2012). Essential Scrum: A Practical Guide to the Most Popular Agile Process. Addison-Wesley.",
+   "why": "guía práctica de Scrum"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Cohn, M. (2004). User Stories Applied: For Agile Software Development. Addison-Wesley.",
+   "why": "historias de usuario"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Cohn, M. (2005). Agile Estimating and Planning. Prentice Hall.",
+   "why": "estimación y planificación ágil"
+  },
+  {
+   "tag": "Artículo",
+   "cite": "Wake, B. (2003). INVEST in Good Stories, and SMART Tasks. xp123.com.",
+   "why": "criterios INVEST"
+  },
+  {
+   "tag": "Guía",
+   "cite": "Project Management Institute y Agile Alliance (2017). Agile Practice Guide. PMI.",
+   "why": "agilidad dentro de la gestión de proyectos"
+  },
+  {
+   "tag": "Informe",
+   "cite": "McKinsey & Company. bp: An agility pioneer in the energy industry. mckinsey.com.",
+   "why": "agilidad en una petrolera"
+  },
+  {
+   "tag": "Artículo",
+   "cite": "Journal of Petroleum Technology (2018). An Inside Look at Anadarko Petroleum's Digital Transformation. jpt.spe.org.",
+   "why": "Scrum con ingenieros y científicos de datos"
+  },
+  {
+   "tag": "Documentación",
+   "cite": "Atlassian. Jira Software Cloud: documentación de proyectos Scrum, backlog, sprints e informes. support.atlassian.com/jira-software-cloud",
+   "why": "configuración en Jira"
+  }
+ ]
+}

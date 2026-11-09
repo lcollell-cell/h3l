@@ -1,0 +1,946 @@
+{
+ "id": "p6k",
+ "title": "Riesgo del cronograma y simulación de Monte Carlo con Primavera P6",
+ "subtitle": "Estimaciones de tres puntos, eventos de riesgo, percentiles, criticidad y reserva de tiempo, con un caso completo del desarrollo de un pad.",
+ "desc": "Curso aplicado de análisis de riesgo del cronograma con Oracle Primavera P6: por qué la fecha determinista no alcanza, estimaciones de tres puntos, registro de riesgos, simulación de Monte Carlo, percentiles, índice de criticidad, sensibilidad y definición de la reserva de tiempo. Se cierra con un caso completo, de inicio a fin, de un pad de seis pozos en un yacimiento no convencional.",
+ "objectives": [
+  "Explicar por qué una fecha determinista tiene una probabilidad asociada y suele ser optimista.",
+  "Cargar estimaciones de tres puntos y eventos de riesgo en el modelo de un cronograma.",
+  "Interpretar percentiles, criticidad y sensibilidad de una simulación de Monte Carlo.",
+  "Llevar un caso de inicio a fin: simular, definir la fecha comprometida y la reserva, y planificar acciones."
+ ],
+ "labs": [],
+ "practiceMin": 90,
+ "competencies": [
+  {
+   "name": "Fundamentos del riesgo de cronograma",
+   "lessons": [
+    "p6kl1"
+   ]
+  },
+  {
+   "name": "Datos de entrada",
+   "lessons": [
+    "p6kl2"
+   ]
+  },
+  {
+   "name": "Simulación y herramientas",
+   "lessons": [
+    "p6kl3",
+    "p6kl4"
+   ]
+  },
+  {
+   "name": "Caso del pad de seis pozos",
+   "lessons": [
+    "p6kl5",
+    "p6kl6"
+   ]
+  }
+ ],
+ "intro": {
+  "hook": "Vamos a aprender a responder con qué probabilidad se cumple una fecha, simulando miles de cronogramas posibles a partir del plan de Primavera.",
+  "questions": [
+   "¿Con qué probabilidad se cumple la fecha de un cronograma de una sola fecha?",
+   "¿Cómo se incorporan las incertidumbres y los riesgos al cronograma?",
+   "¿Cómo se define una reserva de tiempo que se pueda gestionar?"
+  ],
+  "star": {
+   "caso": "258 proyectos: sobrecostos en nueve de cada diez",
+   "S": "Flyvbjerg, Holm y Buhl analizaron 258 proyectos de obras públicas de transporte en 20 países, con una inversión total de unos 90.000 millones de dólares.",
+   "T": "Comparar el costo estimado al decidir la construcción con el costo real final.",
+   "A": "Los autores relevaron proyectos de ferrocarriles, puentes, túneles y rutas, y contrastaron las estimaciones con los resultados.",
+   "R": "En nueve de cada diez proyectos el costo real superó al estimado. Los autores concluyeron que el sesgo es sistemático y no un error al azar."
+  }
+ },
+ "modules": [
+  {
+   "id": "p6km1",
+   "title": "Módulo 1 · Fundamentos y datos de entrada",
+   "lessons": [
+    {
+     "id": "p6kl1",
+     "title": "Por qué el cronograma determinista no alcanza",
+     "comp": "Fundamentos del riesgo de cronograma",
+     "cues": [
+      {
+       "say": "Un cronograma determinista tiene una sola fecha, pero cada duración es una estimación incierta. No dice con qué probabilidad se cumplirá la fecha final. Las estimaciones suelen ser optimistas, y varios caminos casi críticos agravan el problema.",
+       "scene": {
+        "t": "bul",
+        "k": "Problema",
+        "h": "Lo que un cronograma de una sola fecha no dice",
+        "items": [
+         "Cada duración es una estimación puntual, aunque sea incierta",
+         "La fecha final no tiene una probabilidad asociada",
+         "Las estimaciones suelen ser optimistas",
+         "Varios caminos casi críticos hacen más probable el atraso"
+        ]
+       }
+      },
+      {
+       "say": "Cuando varios caminos convergen, el fin lo marca el más lento. En promedio, ese máximo es mayor que el de los valores más probables. MacCrimmon y Ryavec lo señalaron en mil novecientos sesenta y cuatro: PERT subestima el plazo cuando hay caminos paralelos.",
+       "scene": {
+        "t": "bul",
+        "k": "Sesgo de convergencia",
+        "h": "Por qué el plazo medio es mayor que la suma de los modos",
+        "items": [
+         "Cuando varios caminos convergen, el fin lo marca el más lento",
+         "Ese máximo es en promedio mayor que el máximo de los valores más probables",
+         "MacCrimmon y Ryavec (1964) mostraron que PERT subestima el plazo",
+         "Por eso la fecha determinista suele tener baja confianza"
+        ]
+       }
+      },
+      {
+       "say": "Hay tres enfoques. El colchón fijo suma un porcentaje sin saber dónde ni cuánto. PERT usa tres estimaciones pero ignora la convergencia de caminos. La simulación de Monte Carlo calcula miles de cronogramas posibles y resume los resultados.",
+       "scene": {
+        "t": "tbl",
+        "k": "Enfoques",
+        "h": "Cómo se trata la incertidumbre del cronograma",
+        "cols": [
+         "Enfoque",
+         "Qué hace",
+         "Limitación"
+        ],
+        "rows": [
+         [
+          "Colchón fijo",
+          "Suma un porcentaje al plazo",
+          "No sabe dónde ni cuánto"
+         ],
+         [
+          "PERT",
+          "Usa tres estimaciones en una fórmula",
+          "Ignora la convergencia de caminos"
+         ],
+         [
+          "Simulación de Monte Carlo",
+          "Simula miles de cronogramas posibles",
+          "Requiere buenos datos de entrada"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "La fecha determinista de un cronograma con caminos paralelos casi críticos suele tener:",
+        "o": [
+         "Una probabilidad de cumplimiento baja",
+         "Una probabilidad de cumplimiento del 100 %",
+         "Una probabilidad de cumplimiento alta",
+         "Una probabilidad que no existe"
+        ],
+        "a": 0,
+        "e": "La convergencia de caminos agrega retraso esperado."
+       }
+      }
+     ]
+    },
+    {
+     "id": "p6kl2",
+     "title": "Estimaciones de tres puntos y registro de riesgos",
+     "comp": "Datos de entrada",
+     "cues": [
+      {
+       "say": "Para cada actividad incierta se pide una estimación de tres puntos: la duración mínima, la más probable y la máxima. Los valores salen de datos históricos y de entrevistas con expertos, no de una persona sola.",
+       "scene": {
+        "t": "tbl",
+        "k": "Tres puntos",
+        "h": "Mínimo, más probable y máximo",
+        "cols": [
+         "Actividad",
+         "Mínimo",
+         "Más probable",
+         "Máximo"
+        ],
+        "rows": [
+         [
+          "Permisos",
+          "35",
+          "40",
+          "55"
+         ],
+         [
+          "Perforación de 6 pozos",
+          "115",
+          "130",
+          "160"
+         ],
+         [
+          "Instalaciones de superficie",
+          "160",
+          "190",
+          "230"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Con los tres puntos se arma una distribución, triangular o beta. Casi siempre la cola derecha es más larga que la izquierda, porque las demoras pueden ser mayores que los adelantos. Hay que evitar contar dos veces el mismo riesgo.",
+       "scene": {
+        "t": "bul",
+        "k": "Distribuciones",
+        "h": "Cómo se interpretan",
+        "items": [
+         "Triangular: simple, usa los tres valores",
+         "PERT o beta: da más peso al valor más probable",
+         "La cola derecha suele ser más larga que la izquierda",
+         "Los rangos deben incluir el impacto de riesgos conocidos, sin duplicarlos"
+        ]
+       }
+      },
+      {
+       "say": "Los eventos de riesgo se registran con su probabilidad, su impacto en días y la actividad afectada. En la simulación, cada evento ocurre en una proporción de las iteraciones y suma su impacto cuando ocurre.",
+       "scene": {
+        "t": "tbl",
+        "k": "Registro",
+        "h": "Riesgos como eventos probables",
+        "cols": [
+         "Riesgo",
+         "Probabilidad",
+         "Impacto",
+         "Actividad afectada"
+        ],
+        "rows": [
+         [
+          "Falla del equipo de fractura",
+          "25 %",
+          "5 a 15 días",
+          "Terminación"
+         ],
+         [
+          "Pérdida de circulación",
+          "30 %",
+          "8 a 20 días",
+          "Perforación"
+         ],
+         [
+          "Demora en permisos adicionales",
+          "20 %",
+          "10 a 30 días",
+          "Permisos"
+         ]
+        ]
+       },
+       "notes": [
+        {
+         "t": "eventos de riesgo",
+         "k": "evento de riesgo",
+         "n": "Hecho incierto que, si ocurre, cambia la duración de una actividad; se describe con probabilidad e impacto."
+        }
+       ]
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Las estimaciones de tres puntos deberían provenir de:",
+        "o": [
+         "Datos históricos y juicio de expertos",
+         "Una sola persona",
+         "El plazo contractual",
+         "El valor más optimista"
+        ],
+        "a": 0,
+        "e": "Reducen sesgos individuales."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "La fecha determinista:",
+     "o": [
+      "No tiene una probabilidad asociada",
+      "Siempre se cumple",
+      "Es la más probable",
+      "Es el P80"
+     ],
+     "a": 0,
+     "e": "Es una fecha puntual."
+    },
+    {
+     "q": "Las estimaciones de tres puntos incluyen:",
+     "o": [
+      "Mínimo, más probable y máximo",
+      "Costo, plazo y calidad",
+      "Inicio, fin y duración",
+      "Un solo valor"
+     ],
+     "a": 0,
+     "e": "Son los tres puntos."
+    },
+    {
+     "q": "La cola derecha de una duración suele ser:",
+     "o": [
+      "Más larga que la izquierda",
+      "Más corta",
+      "Igual",
+      "Inexistente"
+     ],
+     "a": 0,
+     "e": "Las demoras pueden ser mayores que los adelantos."
+    }
+   ]
+  },
+  {
+   "id": "p6km2",
+   "title": "Módulo 2 · Simulación y herramientas",
+   "lessons": [
+    {
+     "id": "p6kl3",
+     "title": "Simulación de Monte Carlo del cronograma",
+     "comp": "Simulación",
+     "cues": [
+      {
+       "say": "La simulación parte de un cronograma con lógica sana. Se le agregan rangos de duración y eventos de riesgo, se calculan miles de iteraciones y se obtiene la distribución de fechas finales. Con eso se decide la fecha comprometida y la reserva.",
+       "scene": {
+        "t": "viz",
+        "w": "concept",
+        "h": "Cómo funciona la simulación",
+        "p": {
+         "nodes": [
+          {
+           "l": "Cronograma CPM",
+           "x": 8,
+           "y": 50,
+           "c": "#8ea2bd",
+           "n": "Lógica sana y calendarios correctos."
+          },
+          {
+           "l": "Incertidumbre",
+           "x": 30,
+           "y": 50,
+           "c": "#3A6BD0",
+           "n": "Rangos de duración y eventos de riesgo."
+          },
+          {
+           "l": "Iteraciones",
+           "x": 52,
+           "y": 50,
+           "c": "#17755A",
+           "n": "Miles de cronogramas simulados."
+          },
+          {
+           "l": "Resultados",
+           "x": 74,
+           "y": 50,
+           "c": "#b7791f",
+           "n": "Distribución de fechas finales."
+          },
+          {
+           "l": "Decisión",
+           "x": 93,
+           "y": 50,
+           "c": "#6b5bd6",
+           "n": "Fecha comprometida y reserva."
+          }
+         ],
+         "edges": [
+          [
+           0,
+           1
+          ],
+          [
+           1,
+           2
+          ],
+          [
+           2,
+           3
+          ],
+          [
+           3,
+           4
+          ]
+         ],
+         "hint": "Tocá cada bloque para ver el detalle."
+        }
+       }
+      },
+      {
+       "say": "La simulación entrega la curva de probabilidad acumulada de la fecha final, con percentiles como el P50 y el P80, el índice de criticidad de cada actividad y la sensibilidad, que muestra cuáles influyen más en el plazo.",
+       "scene": {
+        "t": "bul",
+        "k": "Resultados",
+        "h": "Qué entrega la simulación",
+        "items": [
+         "Curva de probabilidad acumulada de la fecha final",
+         "Percentiles: P10, P50, P80 y P90",
+         "Índice de criticidad: cuántas veces una actividad es crítica",
+         "Sensibilidad: qué actividades más influyen en el plazo total"
+        ]
+       }
+      },
+      {
+       "say": "Para que el análisis sea creíble, se audita la lógica antes de simular, se correlacionan las actividades que dependen del mismo factor, como el contratista, y se registran los supuestos. Hulett y la práctica AACE cincuenta y siete R cero nueve recomiendan este procedimiento.",
+       "scene": {
+        "t": "bul",
+        "k": "Buenas prácticas",
+        "h": "Para que el análisis sea creíble",
+        "items": [
+         "Auditar la lógica del cronograma antes de simular",
+         "Correlacionar actividades que dependen del mismo factor, como clima o contratista",
+         "Entrevistar a expertos y registrar los supuestos",
+         "Repetir el análisis cuando cambia el cronograma"
+        ]
+       },
+       "notes": [
+        {
+         "t": "correlacionan",
+         "k": "correlación",
+         "n": "Relación entre dos variables: si una actividad se demora, es más probable que otra relacionada también lo haga."
+        }
+       ]
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "El índice de criticidad de una actividad es:",
+        "o": [
+         "La proporción de iteraciones en que está en la ruta crítica",
+         "Su costo",
+         "Su duración más probable",
+         "El número de recursos"
+        ],
+        "a": 0,
+        "e": "Indica cuán a menudo es crítica."
+       }
+      }
+     ]
+    },
+    {
+     "id": "p6kl4",
+     "title": "Primavera y las herramientas de riesgo: del plan al análisis",
+     "comp": "Herramientas",
+     "cues": [
+      {
+       "say": "El ecosistema de Primavera ofrece un registro de riesgos en P6, con probabilidad, impacto y asignación a actividades. Para la simulación se integra con Primavera Risk Analysis. En casos pequeños se puede usar una planilla con fórmulas aleatorias.",
+       "scene": {
+        "t": "bul",
+        "k": "Herramientas",
+        "h": "Qué ofrece el ecosistema de Primavera",
+        "items": [
+         "Registro de riesgos en P6, con probabilidad, impacto y asignación a actividades",
+         "Integración con Oracle Primavera Risk Analysis para la simulación",
+         "Planillas con fórmulas aleatorias para casos pequeños",
+         "Otras aplicaciones de riesgo de cronograma que importan el archivo del plan"
+        ]
+       }
+      },
+      {
+       "say": "El flujo de trabajo tiene cinco pasos: auditar y exportar el cronograma, cargar rangos y riesgos, simular, analizar criticidad y sensibilidad, y definir la reserva y las acciones. Cada paso deja un documento que respalda la decisión.",
+       "scene": {
+        "t": "tbl",
+        "k": "Flujo",
+        "h": "Del archivo del plan al informe",
+        "cols": [
+         "Paso",
+         "Qué se hace",
+         "Resultado"
+        ],
+        "rows": [
+         [
+          "1",
+          "Auditar y exportar el cronograma",
+          "Cronograma validado"
+         ],
+         [
+          "2",
+          "Cargar rangos y riesgos",
+          "Modelo de incertidumbre"
+         ],
+         [
+          "3",
+          "Simular miles de iteraciones",
+          "Distribución de fechas"
+         ],
+         [
+          "4",
+          "Analizar criticidad y sensibilidad",
+          "Actividades clave"
+         ],
+         [
+          "5",
+          "Definir reserva y acciones",
+          "Decisión documentada"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "La reserva de tiempo es la diferencia entre la fecha con la confianza elegida, por ejemplo el P80, y la fecha determinista. Tiene un responsable y se gestiona de forma visible. No se reparte como colchón escondido en cada actividad.",
+       "scene": {
+        "t": "bul",
+        "k": "Reserva",
+        "h": "Cómo se define la reserva de tiempo",
+        "items": [
+         "Reserva = fecha con la confianza elegida − fecha determinista",
+         "La confianza la define la política de la empresa, por ejemplo P80",
+         "La reserva se asigna a un responsable y se gestiona de forma visible",
+         "No se reparte como colchón dentro de las actividades"
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "La reserva de tiempo se calcula como:",
+        "o": [
+         "Fecha con confianza elegida menos fecha determinista",
+         "Fecha determinista menos P80",
+         "Duración total dividida por dos",
+         "El máximo de las duraciones"
+        ],
+        "a": 0,
+        "e": "Por ejemplo, P80 menos la fecha determinista."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "La simulación de Monte Carlo calcula:",
+     "o": [
+      "Miles de cronogramas posibles",
+      "Un solo cronograma",
+      "Solo el costo",
+      "Solo la holgura"
+     ],
+     "a": 0,
+     "e": "Usa muchas iteraciones."
+    },
+    {
+     "q": "El P80 es la fecha con:",
+     "o": [
+      "80 % de probabilidad de cumplirse",
+      "80 % del costo",
+      "80 días",
+      "80 actividades"
+     ],
+     "a": 0,
+     "e": "Confianza de 80 %."
+    },
+    {
+     "q": "La reserva de tiempo se asigna a:",
+     "o": [
+      "Un responsable, de forma visible",
+      "Todas las actividades",
+      "Nadie",
+      "Los contratistas"
+     ],
+     "a": 0,
+     "e": "Se gestiona de forma visible."
+    }
+   ]
+  },
+  {
+   "id": "p6km3",
+   "title": "Módulo 3 · Caso completo del pad de seis pozos",
+   "lessons": [
+    {
+     "id": "p6kl5",
+     "title": "Caso completo (1): modelo de riesgo del desarrollo de un pad",
+     "comp": "Caso del pad de seis pozos",
+     "cues": [
+      {
+       "say": "Presentamos el caso, un ejemplo didáctico con datos ilustrativos. Se desarrolla un pad de seis pozos en un yacimiento no convencional. El cronograma determinista dice doscientos ochenta días, y la dirección pide una fecha con ochenta por ciento de confianza.",
+       "scene": {
+        "t": "bul",
+        "k": "Contexto",
+        "h": "Un pad de seis pozos de ejemplo en un yacimiento no convencional",
+        "items": [
+         "Permisos, locación, movilización, perforación, terminación, instalaciones y puesta en producción",
+         "Fecha determinista: 280 días",
+         "La dirección pide una fecha comprometida con confianza del 80 %",
+         "Datos ilustrativos"
+        ]
+       }
+      },
+      {
+       "say": "Paso uno, cargar el modelo. El camino de perforación y el de instalaciones parten de la locación y convergen en la puesta en producción. Con los valores más probables, el camino de instalaciones domina y marca doscientos ochenta días.",
+       "scene": {
+        "t": "tbl",
+        "k": "Modelo",
+        "h": "Actividades, rangos y relaciones",
+        "cols": [
+         "Actividad",
+         "Mín.",
+         "Probable",
+         "Máx.",
+         "Predecesora"
+        ],
+        "rows": [
+         [
+          "A Permisos",
+          "35",
+          "40",
+          "55",
+          "—"
+         ],
+         [
+          "B Locación y camino",
+          "13",
+          "15",
+          "20",
+          "A"
+         ],
+         [
+          "C Movilización del equipo",
+          "5",
+          "6",
+          "9",
+          "B"
+         ],
+         [
+          "D Perforación de 6 pozos",
+          "115",
+          "130",
+          "160",
+          "C"
+         ],
+         [
+          "E Terminación y fractura",
+          "65",
+          "75",
+          "95",
+          "D"
+         ],
+         [
+          "F Instalaciones de superficie",
+          "160",
+          "190",
+          "230",
+          "B"
+         ],
+         [
+          "H Línea de conducción",
+          "22",
+          "25",
+          "32",
+          "F"
+         ],
+         [
+          "G Puesta en producción",
+          "9",
+          "10",
+          "14",
+          "E y H"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "El camino de perforación y terminación suma doscientos sesenta y seis días y el de instalaciones doscientos setenta. La fecha determinista es de doscientos ochenta. Los dos caminos están a solo cuatro días uno de otro: es un caso típico de convergencia.",
+       "scene": {
+        "t": "fm",
+        "k": "Cálculo",
+        "h": "La fecha determinista",
+        "f": "Camino 1: A 40 + B 15 + C 6 + D 130 + E 75 = 266 días\nCamino 2: A 40 + B 15 + F 190 + H 25 = 270 días\n\nFecha determinista = 270 + G 10 = 280 días",
+        "n": "Ambos caminos son casi críticos: la diferencia es de solo 4 días."
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "¿Por qué conviene simular este cronograma?",
+        "o": [
+         "Hay dos caminos casi críticos que convergen",
+         "Es muy corto",
+         "No hay incertidumbre",
+         "No tiene lógica"
+        ],
+        "a": 0,
+        "e": "Esa convergencia aumenta el retraso esperado."
+       }
+      }
+     ]
+    },
+    {
+     "id": "p6kl6",
+     "title": "Caso completo (2): resultados, reserva y decisión",
+     "comp": "Resultados y decisión",
+     "cues": [
+      {
+       "say": "La simulación muestra que cumplir los doscientos ochenta días tiene una probabilidad de cerca de cinco por ciento. El P50 es de unos doscientos noventa y nueve días, el P80 de trescientos diez y el P90 de trescientos quince.",
+       "scene": {
+        "t": "tbl",
+        "k": "Resultados",
+        "h": "Simulación de 40.000 iteraciones (valores aproximados)",
+        "cols": [
+         "Medida",
+         "Valor"
+        ],
+        "rows": [
+         [
+          "Fecha determinista",
+          "280 días"
+         ],
+         [
+          "Probabilidad de cumplir 280 días",
+          "≈ 5 %"
+         ],
+         [
+          "P50",
+          "≈ 299 días"
+         ],
+         [
+          "P80",
+          "≈ 310 días"
+         ],
+         [
+          "P90",
+          "≈ 315 días"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "El camino de instalaciones, que es crítico en el cronograma determinista, lo es solo en cuarenta y cuatro por ciento de las iteraciones. El de perforación y terminación lo es en el resto. Las actividades con mayor influencia son las instalaciones, la perforación y la terminación.",
+       "scene": {
+        "t": "bul",
+        "k": "Criticidad",
+        "h": "Lo que muestra el análisis de criticidad y sensibilidad",
+        "items": [
+         "El camino de instalaciones es crítico en cerca de 44 % de las iteraciones",
+         "El camino de perforación y terminación lo es en cerca de 56 %",
+         "Mayor influencia en el plazo: instalaciones (F), perforación (D) y terminación (E)",
+         "El camino determinista no es siempre el crítico"
+        ]
+       }
+      },
+      {
+       "say": "La dirección compromete la fecha con ochenta por ciento de confianza, trescientos diez días, y no los doscientos ochenta. La reserva de treinta días queda a cargo de un responsable. Además se adelanta la compra de equipos críticos y se asegura el equipo de fractura.",
+       "scene": {
+        "t": "bul",
+        "k": "Decisión",
+        "h": "Qué hace la dirección",
+        "items": [
+         "Compromete 310 días, el P80, y no 280",
+         "Reserva de 30 días, con un responsable único",
+         "Acciones: adelantar la compra de equipos críticos de las instalaciones y asegurar la disponibilidad del equipo de fractura",
+         "Repetir la simulación cuando cambie el cronograma"
+        ]
+       }
+      },
+      {
+       "say": "Las lecciones. Una fecha determinista puede tener una probabilidad muy baja. La simulación muestra dónde actuar, y no solo cuánto se puede demorar. La reserva se gestiona de forma visible. Y los resultados valen lo que valen los datos de entrada.",
+       "scene": {
+        "t": "bul",
+        "k": "Lecciones",
+        "h": "Lo que deja el caso",
+        "items": [
+         "Una fecha determinista puede tener una probabilidad muy baja",
+         "La simulación muestra dónde actuar, no solo cuánto se puede demorar",
+         "La reserva se gestiona de forma visible",
+         "Los resultados valen lo que valen los datos de entrada"
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Comprometer el P80 en lugar de la fecha determinista significa:",
+        "o": [
+         "Aceptar una fecha con mayor probabilidad de cumplirse",
+         "Comprometer la fecha más optimista",
+         "Eliminar el riesgo",
+         "Reducir el alcance"
+        ],
+        "a": 0,
+        "e": "Con 80 % de confianza."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "¿Cuál era la fecha determinista del caso?",
+     "o": [
+      "280 días",
+      "270 días",
+      "310 días",
+      "266 días"
+     ],
+     "a": 0,
+     "e": "270 más 10."
+    },
+    {
+     "q": "¿Cuál es el P80 del caso?",
+     "o": [
+      "Alrededor de 310 días",
+      "280 días",
+      "Alrededor de 250 días",
+      "Alrededor de 400 días"
+     ],
+     "a": 0,
+     "e": "Aproximadamente 310."
+    },
+    {
+     "q": "¿Qué probabilidad tiene la fecha determinista?",
+     "o": [
+      "Alrededor de 5 %",
+      "50 %",
+      "80 %",
+      "100 %"
+     ],
+     "a": 0,
+     "e": "Es muy baja."
+    }
+   ]
+  }
+ ],
+ "exam": [
+  {
+   "q": "El sesgo de convergencia de caminos hace que:",
+   "o": [
+    "La fecha determinista sea optimista",
+    "El plazo se reduzca",
+    "La simulación sea innecesaria",
+    "Desaparezca la incertidumbre"
+   ],
+   "a": 0,
+   "e": "El máximo de varios caminos es mayor que el máximo de sus valores probables."
+  },
+  {
+   "q": "El índice de criticidad indica:",
+   "o": [
+    "La proporción de iteraciones en que es crítica",
+    "El costo",
+    "El riesgo de seguridad",
+    "La duración original"
+   ],
+   "a": 0,
+   "e": "Mide la frecuencia de criticidad."
+  },
+  {
+   "q": "Una reserva bien gestionada:",
+   "o": [
+    "Tiene responsable y es visible",
+    "Se oculta en actividades",
+    "No se mide",
+    "Es igual para todos"
+   ],
+   "a": 0,
+   "e": "Se gestiona de forma visible."
+  },
+  {
+   "q": "En el caso, el P80 es de aproximadamente:",
+   "o": [
+    "310 días",
+    "280 días",
+    "299 días",
+    "350 días"
+   ],
+   "a": 0,
+   "e": "Fecha con 80 % de confianza."
+  },
+  {
+   "q": "Antes de simular, hay que:",
+   "o": [
+    "Auditar la lógica del cronograma",
+    "Cambiar el calendario",
+    "Eliminar los hitos",
+    "Borrar los riesgos"
+   ],
+   "a": 0,
+   "e": "Un modelo con lógica pobre da resultados engañosos."
+  },
+  {
+   "q": "El análisis de riesgo debe repetirse:",
+   "o": [
+    "Cuando cambia el cronograma",
+    "Nunca",
+    "Una vez al final",
+    "Solo si el cliente lo pide"
+   ],
+   "a": 0,
+   "e": "El modelo debe reflejar el plan vigente."
+  }
+ ],
+ "outro": {
+  "can": [
+   "por qué una fecha determinista tiene una probabilidad asociada y suele ser baja",
+   "cargar rangos de tres puntos y eventos de riesgo en un modelo de cronograma",
+   "interpretar percentiles, criticidad y sensibilidad de una simulación de Monte Carlo",
+   "definir una fecha comprometida y una reserva de tiempo con responsable"
+  ],
+  "phrase": "No se trata de adivinar la fecha, sino de saber cuánta confianza tiene.",
+  "recap": [
+   "La convergencia de caminos casi críticos vuelve optimista a la fecha determinista.",
+   "La simulación entrega percentiles, criticidad y sensibilidad para decidir dónde actuar.",
+   "La reserva de tiempo se define con una confianza elegida y se gestiona de forma visible."
+  ]
+ },
+ "downloads": [
+  {
+   "file": "xlsx/H3L_Primavera_Riesgo_Monte_Carlo.xlsx",
+   "title": "Simulación de Monte Carlo del cronograma del pad (Excel)",
+   "desc": "Ocho actividades con rangos de tres puntos, un evento de riesgo, 1.000 iteraciones con fórmulas aleatorias, percentiles, probabilidad de cumplir la fecha determinista y criticidad por camino. Datos ilustrativos.",
+   "task": "Presioná F9 para generar una nueva simulación y observá cuánto varían el P50 y el P80. Después reducí el máximo de Instalaciones de 230 a 200 días y compará el P80."
+  }
+ ],
+ "cases": [
+  {
+   "title": "Sobrecostos en proyectos de infraestructura",
+   "text": "Flyvbjerg, Holm y Buhl analizaron 258 proyectos de transporte de 20 países. En nueve de cada diez, el costo real superó al estimado al decidir la construcción. Los autores sostienen que el sesgo es sistemático.",
+   "src": "Flyvbjerg, B., Holm, M. S. y Buhl, S. (2002). Underestimating costs in public works projects: error or lie? Journal of the American Planning Association 68(3), 279–295"
+  }
+ ],
+ "refs": [
+  {
+   "tag": "Libro",
+   "cite": "Hulett, D. T. (2009). Practical Schedule Risk Analysis. Gower.",
+   "why": "análisis de riesgo de cronograma"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Hulett, D. T. (2011). Integrated Cost-Schedule Risk Analysis. Gower.",
+   "why": "riesgo integrado de costo y plazo"
+  },
+  {
+   "tag": "Recomendación",
+   "cite": "AACE International. Recommended Practice 57R-09: Integrated Cost and Schedule Risk Analysis Using Monte Carlo Simulation of a CPM Model.",
+   "why": "procedimiento de simulación"
+  },
+  {
+   "tag": "Recomendación",
+   "cite": "AACE International. Recommended Practice 41R-08: Risk Analysis and Contingency Determination Using Range Estimating.",
+   "why": "rangos y contingencia"
+  },
+  {
+   "tag": "Paper",
+   "cite": "MacCrimmon, K. R. y Ryavec, C. A. (1964). An analytical study of the PERT assumptions. Operations Research 12(1), 16–37.",
+   "why": "sesgo de PERT"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Flyvbjerg, B., Holm, M. S. y Buhl, S. (2002). Underestimating costs in public works projects: error or lie? Journal of the American Planning Association 68(3), 279–295.",
+   "why": "sesgo sistemático de estimación"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Flyvbjerg, B., Bruzelius, N. y Rothengatter, W. (2003). Megaprojects and Risk: An Anatomy of Ambition. Cambridge University Press.",
+   "why": "riesgo en megaproyectos"
+  },
+  {
+   "tag": "Guía",
+   "cite": "Project Management Institute (2019). Practice Standard for Project Risk Management. PMI.",
+   "why": "gestión de riesgos de proyecto"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Merrow, E. W. (2011). Industrial Megaprojects: Concepts, Strategies, and Practices for Success. Wiley.",
+   "why": "desempeño de proyectos industriales"
+  },
+  {
+   "tag": "Documentación",
+   "cite": "Oracle. Primavera P6 EPPM y Primavera Risk Analysis: documentación de administración y gestión de riesgos. docs.oracle.com",
+   "why": "herramientas de riesgo"
+  }
+ ]
+}

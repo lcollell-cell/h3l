@@ -1,0 +1,970 @@
+{
+ "id": "p6p",
+ "title": "Planificación y cronograma CPM de una parada de planta con Primavera P6",
+ "subtitle": "Estructura del proyecto, actividades, relaciones, ruta crítica y calidad del cronograma, con un caso completo de parada de planta.",
+ "desc": "Curso aplicado de planificación con Oracle Primavera P6: estructura de proyectos (EPS, OBS, EDT, calendarios y códigos), tipos de actividad, relaciones y restricciones, cálculo del método del camino crítico, lectura de la holgura, verificación de calidad del cronograma y comparación de escenarios. Se cierra con un caso completo, de inicio a fin, de la planificación de la parada programada de una planta de tratamiento de gas.",
+ "objectives": [
+  "Organizar un proyecto en Primavera con EPS, EDT, calendarios y códigos.",
+  "Definir actividades y relaciones con una lógica sana, y calcular la ruta crítica y la holgura.",
+  "Verificar la calidad del cronograma y comparar escenarios para acortar la ruta crítica.",
+  "Llevar un caso de inicio a fin: cargar, calcular, optimizar y presentar el cronograma de una parada."
+ ],
+ "labs": [],
+ "practiceMin": 90,
+ "competencies": [
+  {
+   "name": "Estructura y calendarios",
+   "lessons": [
+    "p6pl1"
+   ]
+  },
+  {
+   "name": "Lógica y ruta crítica",
+   "lessons": [
+    "p6pl2"
+   ]
+  },
+  {
+   "name": "Carga, análisis y calidad",
+   "lessons": [
+    "p6pl3",
+    "p6pl4"
+   ]
+  },
+  {
+   "name": "Caso de la parada de planta",
+   "lessons": [
+    "p6pl5",
+    "p6pl6"
+   ]
+  }
+ ],
+ "intro": {
+  "hook": "Vamos a aprender a construir un cronograma que se pueda calcular, auditar y defender, usando Primavera P6 para planificar la parada de una planta.",
+  "questions": [
+   "¿Cómo se organiza un proyecto en Primavera para que el cronograma sea claro y auditable?",
+   "¿Qué hace crítica a una actividad y cómo se acorta el proyecto?",
+   "¿Qué verificaciones muestran que un cronograma tiene buena calidad?"
+  ],
+  "star": {
+   "caso": "Wheatstone (Australia): módulos que definieron el plazo",
+   "S": "Wheatstone, proyecto de gas natural licuado de Chevron en Australia Occidental, dependía de módulos que se fabricaban en astilleros de ultramar.",
+   "T": "Entregar los módulos a tiempo para montarlos en el sitio, una actividad de suministro ubicada en el camino crítico.",
+   "A": "El astillero original de Malasia no pudo con el alcance de trabajo, y fue necesario recurrir a otros astilleros.",
+   "R": "Según Energy News Bulletin, la demora en la entrega de módulos fue el principal factor del aumento de costo, y la empresa dijo que buscaba mejorar la ejecución de sus proyectos."
+  }
+ },
+ "modules": [
+  {
+   "id": "p6pm1",
+   "title": "Módulo 1 · Estructura y lógica del cronograma",
+   "lessons": [
+    {
+     "id": "p6pl1",
+     "title": "Estructura del proyecto en Primavera: EPS, OBS, EDT y calendarios",
+     "comp": "Estructura y calendarios",
+     "cues": [
+      {
+       "say": "Primavera P6 organiza la información en estructuras. La EPS ordena los proyectos de la empresa. La OBS define los responsables. La EDT, o WBS, divide el proyecto en entregables. Y los códigos permiten filtrar y agrupar por disciplina, área o contratista.",
+       "scene": {
+        "t": "tbl",
+        "k": "Estructuras",
+        "h": "Cuatro estructuras que organizan la información",
+        "cols": [
+         "Estructura",
+         "Qué organiza",
+         "Ejemplo"
+        ],
+        "rows": [
+         [
+          "EPS",
+          "Estructura de proyectos de la empresa",
+          "Compañía › Activo › Proyecto"
+         ],
+         [
+          "OBS",
+          "Quién es responsable de qué",
+          "Gerencia de Mantenimiento"
+         ],
+         [
+          "EDT (WBS)",
+          "Entregables y paquetes de trabajo",
+          "Parada › Mecánica › Compresor"
+         ],
+         [
+          "Códigos",
+          "Etiquetas para filtrar y agrupar",
+          "Disciplina, área o contratista"
+         ]
+        ]
+       },
+       "notes": [
+        {
+         "t": "EPS",
+         "k": "EPS",
+         "n": "Enterprise Project Structure: árbol jerárquico que ordena todos los proyectos de la organización."
+        }
+       ]
+      },
+      {
+       "say": "Los calendarios son de tres niveles: global, de proyecto y de recurso. En una parada de planta se usa un calendario de veinticuatro horas, siete días, porque los equipos trabajan en turnos continuos. Un error de calendario desplaza todas las fechas.",
+       "scene": {
+        "t": "tbl",
+        "k": "Calendarios",
+        "h": "Tres niveles de calendario",
+        "cols": [
+         "Nivel",
+         "Se usa para",
+         "Ejemplo"
+        ],
+        "rows": [
+         [
+          "Global",
+          "Estándar de la empresa",
+          "Lunes a viernes, 8 horas"
+         ],
+         [
+          "Proyecto",
+          "Calendario del proyecto",
+          "Parada: 24 horas, 7 días"
+         ],
+         [
+          "Recurso",
+          "Disponibilidad de personas o equipos",
+          "Cuadrilla en dos turnos"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Una buena práctica es partir de una EDT orientada a entregables, y usar identificadores de actividad con lógica, como área y disciplina. Los códigos permiten armar vistas por contratista o por área sin duplicar actividades.",
+       "scene": {
+        "t": "bul",
+        "k": "Buenas prácticas",
+        "h": "Cómo estructurar el proyecto",
+        "items": [
+         "Una EDT orientada a entregables, no a actividades sueltas",
+         "Un identificador de actividad con lógica, por ejemplo área y disciplina",
+         "Un solo calendario para el proyecto, y excepciones solo cuando hace falta",
+         "Códigos de actividad para disciplina, contratista y área"
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "La EPS de Primavera sirve para:",
+        "o": [
+         "Ordenar los proyectos de la empresa",
+         "Definir las relaciones entre actividades",
+         "Calcular la ruta crítica",
+         "Cargar costos reales"
+        ],
+        "a": 0,
+        "e": "Es la estructura jerárquica de proyectos."
+       }
+      }
+     ]
+    },
+    {
+     "id": "p6pl2",
+     "title": "Actividades, relaciones, restricciones y ruta crítica",
+     "comp": "Lógica del cronograma",
+     "cues": [
+      {
+       "say": "Primavera distingue tipos de actividad. La dependiente de tarea se programa con su calendario. La de nivel de esfuerzo dura mientras duran otras, como la supervisión. Y los hitos de inicio y fin son eventos sin duración.",
+       "scene": {
+        "t": "tbl",
+        "k": "Actividades",
+        "h": "Tipos de actividad en Primavera",
+        "cols": [
+         "Tipo",
+         "Qué representa",
+         "Ejemplo"
+        ],
+        "rows": [
+         [
+          "Dependiente de tarea",
+          "Se programa con su calendario",
+          "Reemplazo del intercambiador"
+         ],
+         [
+          "Dependiente de recurso",
+          "Se programa con el calendario del recurso",
+          "Inspección con un solo inspector"
+         ],
+         [
+          "Nivel de esfuerzo",
+          "Dura mientras dura otro trabajo",
+          "Supervisión de la parada"
+         ],
+         [
+          "Hito de inicio o fin",
+          "Evento sin duración",
+          "Fin del apagado"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "La lógica del cronograma debe ser sana. Se prefieren las relaciones fin a inicio, se evitan los adelantos y las restricciones duras, y toda actividad tiene predecesora y sucesora. Una restricción dura fuerza una fecha y oculta problemas de lógica.",
+       "scene": {
+        "t": "bul",
+        "k": "Relaciones y restricciones",
+        "h": "Reglas para una lógica sana",
+        "items": [
+         "Preferir relaciones fin a inicio",
+         "Evitar adelantos negativos; usar los retrasos con criterio y justificarlos",
+         "Evitar restricciones duras: tapan la lógica",
+         "Toda actividad con predecesora y sucesora, salvo el inicio y el fin"
+        ]
+       }
+      },
+      {
+       "say": "Al planificar, con la tecla F9, Primavera calcula las fechas tempranas y tardías y la holgura total. Se pueden definir como críticas las actividades con holgura cero o usar la opción de ruta más larga, que identifica la verdadera ruta crítica.",
+       "scene": {
+        "t": "bul",
+        "k": "Cálculo",
+        "h": "Qué hace Planificar, la tecla F9",
+        "items": [
+         "Calcula fechas tempranas y tardías con la fecha de corte",
+         "Obtiene la holgura total y la holgura libre",
+         "Define como críticas las actividades con holgura menor o igual a cero",
+         "Opción: ruta más larga, para identificar la ruta crítica real"
+        ]
+       },
+       "notes": [
+        {
+         "t": "holgura total",
+         "k": "holgura total",
+         "n": "Tiempo que una actividad puede demorarse sin retrasar la fecha de fin del proyecto."
+        }
+       ]
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Una restricción dura en una actividad:",
+        "o": [
+         "Fuerza una fecha y puede ocultar problemas de lógica",
+         "Mejora siempre el cronograma",
+         "Reemplaza las relaciones",
+         "Calcula la holgura"
+        ],
+        "a": 0,
+        "e": "Debe usarse con muy poca frecuencia y justificarse."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "La EDT organiza:",
+     "o": [
+      "Entregables y paquetes de trabajo",
+      "Usuarios",
+      "Calendarios",
+      "Costos reales"
+     ],
+     "a": 0,
+     "e": "Divide el proyecto en entregables."
+    },
+    {
+     "q": "Un calendario de 24 horas, 7 días se usa para:",
+     "o": [
+      "Una parada con turnos continuos",
+      "Una oficina",
+      "Un contrato",
+      "Un informe"
+     ],
+     "a": 0,
+     "e": "Refleja el trabajo en turnos continuos."
+    },
+    {
+     "q": "Se prefiere la relación:",
+     "o": [
+      "Inicio a fin",
+      "Fin a inicio",
+      "Fin a fin",
+      "Adelanto negativo"
+     ],
+     "a": 1,
+     "e": "Es la más simple y clara."
+    }
+   ]
+  },
+  {
+   "id": "p6pm2",
+   "title": "Módulo 2 · Cargar, calcular y verificar",
+   "lessons": [
+    {
+     "id": "p6pl3",
+     "title": "Paso a paso: crear el proyecto y cargar actividades",
+     "comp": "Carga del cronograma",
+     "cues": [
+      {
+       "say": "El trabajo en Primavera sigue una secuencia: crear el proyecto dentro de la EPS, definir la EDT, cargar las actividades con su duración, establecer las relaciones y planificar. Se revisa el resultado antes de seguir.",
+       "scene": {
+        "t": "viz",
+        "w": "concept",
+        "h": "Secuencia de trabajo",
+        "p": {
+         "nodes": [
+          {
+           "l": "Crear proyecto",
+           "x": 8,
+           "y": 50,
+           "c": "#8ea2bd",
+           "n": "Dentro de la EPS, con fecha de inicio y calendario."
+          },
+          {
+           "l": "EDT",
+           "x": 28,
+           "y": 50,
+           "c": "#3A6BD0",
+           "n": "Entregables y paquetes de trabajo."
+          },
+          {
+           "l": "Actividades",
+           "x": 50,
+           "y": 50,
+           "c": "#17755A",
+           "n": "Con duración original y calendario."
+          },
+          {
+           "l": "Relaciones",
+           "x": 72,
+           "y": 50,
+           "c": "#b7791f",
+           "n": "Lógica entre actividades."
+          },
+          {
+           "l": "Planificar",
+           "x": 92,
+           "y": 50,
+           "c": "#6b5bd6",
+           "n": "F9 y revisión de resultados."
+          }
+         ],
+         "edges": [
+          [
+           0,
+           1
+          ],
+          [
+           1,
+           2
+          ],
+          [
+           2,
+           3
+          ],
+          [
+           3,
+           4
+          ]
+         ],
+         "hint": "Tocá cada bloque para ver el detalle."
+        }
+       }
+      },
+      {
+       "say": "La duración se estima con la cantidad de trabajo y la productividad de la cuadrilla, y se contrasta con paradas anteriores. Evita colchones ocultos dentro de cada actividad: el margen se gestiona aparte, como reserva visible.",
+       "scene": {
+        "t": "bul",
+        "k": "Duraciones",
+        "h": "Cómo estimar la duración original",
+        "items": [
+         "Con la cantidad de trabajo y la productividad de la cuadrilla",
+         "Con datos de paradas anteriores del mismo equipo",
+         "Con el calendario del recurso, no con días corridos",
+         "Sin colchones ocultos en cada actividad: el margen se gestiona aparte"
+        ]
+       }
+      },
+      {
+       "say": "Las vistas se arman con diseños, filtros y agrupaciones. Una vista útil muestra el diagrama de barras con la ruta crítica resaltada, agrupado por disciplina o contratista, y con la columna de holgura total siempre visible.",
+       "scene": {
+        "t": "bul",
+        "k": "Vistas",
+        "h": "Diseños, filtros y agrupaciones",
+        "items": [
+         "Diagrama de barras con la ruta crítica resaltada",
+         "Agrupar por disciplina, contratista o área con códigos",
+         "Filtro para ver solo actividades críticas o con poca holgura",
+         "Columna de holgura total siempre visible"
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "¿Cuál es el primer paso al preparar un cronograma?",
+        "o": [
+         "Crear el proyecto y la EDT",
+         "Cargar los costos reales",
+         "Aplicar restricciones duras",
+         "Imprimir el diagrama"
+        ],
+        "a": 0,
+        "e": "Se parte de la estructura del proyecto."
+       }
+      }
+     ]
+    },
+    {
+     "id": "p6pl4",
+     "title": "Calcular, analizar la holgura y verificar la calidad",
+     "comp": "Análisis y calidad",
+     "cues": [
+      {
+       "say": "Para verificar la calidad se usa la evaluación de catorce puntos del DCMA, una referencia habitual. Revisa, por ejemplo, la lógica incompleta, los adelantos, las relaciones fin a inicio, las restricciones duras y la holgura negativa.",
+       "scene": {
+        "t": "tbl",
+        "k": "Calidad",
+        "h": "Verificaciones de calidad de un cronograma",
+        "cols": [
+         "Verificación",
+         "Umbral habitual",
+         "Por qué"
+        ],
+        "rows": [
+         [
+          "Actividades sin predecesora o sucesora",
+          "Menos de 5 %",
+          "Lógica incompleta"
+         ],
+         [
+          "Adelantos (leads)",
+          "Ninguno",
+          "Distorsionan la ruta crítica"
+         ],
+         [
+          "Relaciones fin a inicio",
+          "Al menos 90 %",
+          "Lógica simple y clara"
+         ],
+         [
+          "Restricciones duras",
+          "Menos de 5 %",
+          "Tapan la lógica"
+         ],
+         [
+          "Holgura negativa",
+          "Ninguna",
+          "Indica que no se cumple una fecha"
+         ]
+        ]
+       },
+       "notes": [
+        {
+         "t": "DCMA",
+         "k": "DCMA",
+         "n": "Defense Contract Management Agency: agencia del gobierno de EE. UU. cuya evaluación de cronogramas se usa como referencia."
+        }
+       ]
+      },
+      {
+       "say": "Una holgura de cero indica una actividad crítica. Las de holgura pequeña son casi críticas y se siguen cada semana. Una holgura excesivamente grande suele indicar una relación que falta, y debe revisarse.",
+       "scene": {
+        "t": "bul",
+        "k": "Holgura",
+        "h": "Cómo leerla",
+        "items": [
+         "Holgura total cero: la actividad es crítica",
+         "Holgura pequeña: casi crítica y de seguimiento semanal",
+         "Holgura grande: margen que puede usarse para nivelar recursos",
+         "Una holgura excesivamente grande suele indicar lógica faltante"
+        ]
+       }
+      },
+      {
+       "say": "Para comparar alternativas se copia el proyecto y se cambia una variable por vez. Acortar la ruta crítica requiere más recursos o trabajo en paralelo, y cada opción tiene su costo y su riesgo. Cada escenario debe documentar su supuesto.",
+       "scene": {
+        "t": "bul",
+        "k": "Escenarios",
+        "h": "Cómo comparar alternativas",
+        "items": [
+         "Copiar el proyecto y modificar una variable por vez",
+         "Acortar la ruta crítica: más recursos o trabajo en paralelo",
+         "Comparar duración, costo y riesgo de cada alternativa",
+         "Documentar el supuesto de cada escenario"
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Una actividad con holgura total igual a cero es:",
+        "o": [
+         "Crítica",
+         "Opcional",
+         "Innecesaria",
+         "Terminada"
+        ],
+        "a": 0,
+        "e": "No tiene margen sin retrasar el proyecto."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "La tecla F9 en Primavera:",
+     "o": [
+      "Planifica el cronograma",
+      "Imprime",
+      "Cierra el proyecto",
+      "Borra actividades"
+     ],
+     "a": 0,
+     "e": "Recalcula fechas y holguras."
+    },
+    {
+     "q": "Una restricción dura:",
+     "o": [
+      "Debe evitarse",
+      "Siempre se usa",
+      "Calcula costos",
+      "Define la EPS"
+     ],
+     "a": 0,
+     "e": "Tapa problemas de lógica."
+    },
+    {
+     "q": "Una holgura muy grande suele indicar:",
+     "o": [
+      "Lógica faltante",
+      "Buen plan",
+      "Mayor calidad",
+      "Actividad crítica"
+     ],
+     "a": 0,
+     "e": "Puede faltar una relación."
+    }
+   ]
+  },
+  {
+   "id": "p6pm3",
+   "title": "Módulo 3 · Caso completo de la parada de planta",
+   "lessons": [
+    {
+     "id": "p6pl5",
+     "title": "Caso completo (1): planificar la parada de una planta de gas",
+     "comp": "Caso de la parada de planta",
+     "cues": [
+      {
+       "say": "Presentamos el caso, un ejemplo didáctico con datos ilustrativos. Una planta de tratamiento de gas tiene una parada programada con ventana de veintiocho días. Incluye el reemplazo de un intercambiador, la reparación de un compresor, inspecciones y revisión de válvulas.",
+       "scene": {
+        "t": "bul",
+        "k": "Contexto",
+        "h": "Una parada programada (turnaround) de ejemplo",
+        "items": [
+         "Planta de tratamiento de gas, ventana de 28 días",
+         "Tareas principales: reemplazo de un intercambiador, reparación de un compresor, inspección de recipientes y revisión de válvulas de seguridad",
+         "Calendario de 24 horas, 7 días",
+         "Datos ilustrativos para practicar el método"
+        ]
+       }
+      },
+      {
+       "say": "Paso uno, cargar la red. Son doce actividades con duraciones y predecesoras. Tras abrir los equipos, cuatro frentes trabajan en paralelo: inspección, intercambiador, compresor y válvulas. El cierre de equipos espera a los cuatro.",
+       "scene": {
+        "t": "tbl",
+        "k": "Red",
+        "h": "Actividades, duraciones y predecesoras",
+        "cols": [
+         "Id",
+         "Actividad",
+         "Días",
+         "Predecesoras"
+        ],
+        "rows": [
+         [
+          "P1",
+          "Apagado y despresurización",
+          "2",
+          "—"
+         ],
+         [
+          "P2",
+          "Aislamiento y bloqueo",
+          "1",
+          "P1"
+         ],
+         [
+          "P3",
+          "Andamios y accesos",
+          "2",
+          "P2"
+         ],
+         [
+          "P4",
+          "Apertura de equipos",
+          "3",
+          "P3"
+         ],
+         [
+          "P5",
+          "Inspección de recipientes y cañerías",
+          "4",
+          "P4"
+         ],
+         [
+          "P6",
+          "Reemplazo del intercambiador",
+          "8",
+          "P4"
+         ],
+         [
+          "P7",
+          "Reparación del compresor",
+          "10",
+          "P4"
+         ],
+         [
+          "P8",
+          "Revisión de válvulas de seguridad",
+          "5",
+          "P4"
+         ],
+         [
+          "P9",
+          "Correcciones de inspección",
+          "3",
+          "P5"
+         ],
+         [
+          "P10",
+          "Cierre de equipos y retiro de andamios",
+          "3",
+          "P6, P7, P8, P9"
+         ],
+         [
+          "P11",
+          "Pruebas de estanqueidad",
+          "2",
+          "P10"
+         ],
+         [
+          "P12",
+          "Reposición de servicios y arranque",
+          "3",
+          "P11"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Al planificar, la duración total es de veintiséis días. La ruta crítica pasa por la reparación del compresor. El intercambiador tiene dos días de holgura, las inspecciones tres y las válvulas cinco. Con la ventana de veintiocho días, queda una reserva de dos.",
+       "scene": {
+        "t": "fm",
+        "k": "Resultado",
+        "h": "Cálculo del cronograma (tecla F9)",
+        "f": "Duración total = 2 + 1 + 2 + 3 + 10 + 3 + 2 + 3 = 26 días\n\nRuta crítica: P1 → P2 → P3 → P4 → P7 → P10 → P11 → P12\nHolguras: P6 = 2 días, P5 y P9 = 3 días, P8 = 5 días",
+        "n": "La ventana es de 28 días: queda una reserva de 2 días."
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "En el caso, la ruta crítica pasa por el compresor porque:",
+        "o": [
+         "Es el frente más largo después de abrir los equipos",
+         "Cuesta más",
+         "Lo pidió el jefe",
+         "Tiene más personas"
+        ],
+        "a": 0,
+        "e": "Su duración de 10 días define el camino más largo."
+       }
+      }
+     ]
+    },
+    {
+     "id": "p6pl6",
+     "title": "Caso completo (2): optimizar, controlar la calidad y presentar",
+     "comp": "Optimización y presentación",
+     "cues": [
+      {
+       "say": "Antes de presentar el cronograma se verifica su calidad. Todas las actividades tienen predecesora y sucesora, las relaciones son de fin a inicio, no hay restricciones duras ni holgura negativa y la ruta crítica es única.",
+       "scene": {
+        "t": "bul",
+        "k": "Control de calidad",
+        "h": "Verificaciones del cronograma del caso",
+        "items": [
+         "Todas las actividades tienen predecesora y sucesora salvo inicio y fin",
+         "Todas las relaciones son de fin a inicio, sin adelantos",
+         "Sin restricciones duras ni holgura negativa",
+         "Una única ruta crítica, de 8 actividades"
+        ]
+       }
+      },
+      {
+       "say": "Para ganar días se actúa sobre la ruta crítica. Se preposicionan los repuestos del compresor, se arman andamios antes del apagado final y se refuerza el frente crítico. Cada medida se evalúa en plazo, costo y seguridad.",
+       "scene": {
+        "t": "bul",
+        "k": "Optimización",
+        "h": "Cómo ganar días sin aumentar el riesgo",
+        "items": [
+         "Adelantar andamios en las áreas del compresor antes del apagado final",
+         "Preposicionar repuestos del compresor para evitar esperas",
+         "Un tercer turno de soldadura solo en el frente crítico",
+         "Cada medida se evalúa en costo, plazo y seguridad"
+        ]
+       }
+      },
+      {
+       "say": "Se comparan tres escenarios. El caso base dura veintiséis días. Preposicionar repuestos baja la duración a veinticuatro con costo bajo. Un turno extra la baja a veintitrés, pero con costo medio y mayor fatiga. La decisión equilibra los tres factores.",
+       "scene": {
+        "t": "tbl",
+        "k": "Escenarios",
+        "h": "Comparación de alternativas (datos ilustrativos)",
+        "cols": [
+         "Escenario",
+         "Duración",
+         "Costo adicional",
+         "Riesgo"
+        ],
+        "rows": [
+         [
+          "Base",
+          "26 días",
+          "0",
+          "Reserva de 2 días"
+         ],
+         [
+          "Repuestos preposicionados",
+          "24 días",
+          "Bajo",
+          "Menor incertidumbre"
+         ],
+         [
+          "Turno extra en el compresor",
+          "23 días",
+          "Medio",
+          "Mayor fatiga"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Se presenta a la gerencia la ruta crítica, la reserva de la ventana, los hitos y los riesgos principales. Una vez aprobado, se guarda como línea base para controlar el avance, tema del tercer curso de esta serie.",
+       "scene": {
+        "t": "bul",
+        "k": "Presentación",
+        "h": "Qué muestra el informe a la gerencia",
+        "items": [
+         "Ruta crítica y reserva de la ventana",
+         "Hitos principales: apagado, apertura, cierre y arranque",
+         "Riesgos principales y acciones",
+         "Línea base guardada para controlar el avance"
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Un escenario de menor duración pero con mayor fatiga debe:",
+        "o": [
+         "Evaluarse también por riesgo y seguridad",
+         "Aprobarse siempre",
+         "Descartarse siempre",
+         "Ocultarse"
+        ],
+        "a": 0,
+        "e": "La decisión equilibra plazo, costo y seguridad."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "¿Cuánto dura el cronograma base del caso?",
+     "o": [
+      "26 días",
+      "28 días",
+      "20 días",
+      "30 días"
+     ],
+     "a": 0,
+     "e": "2 + 1 + 2 + 3 + 10 + 3 + 2 + 3."
+    },
+    {
+     "q": "¿Qué actividad tiene 5 días de holgura?",
+     "o": [
+      "Revisión de válvulas",
+      "Compresor",
+      "Pruebas",
+      "Apagado"
+     ],
+     "a": 0,
+     "e": "P8 tiene cinco días."
+    },
+    {
+     "q": "Para acortar el cronograma se actúa sobre:",
+     "o": [
+      "La ruta crítica",
+      "Cualquier actividad",
+      "La actividad más barata",
+      "El hito final"
+     ],
+     "a": 0,
+     "e": "Solo reducir la ruta crítica acorta el proyecto."
+    }
+   ]
+  }
+ ],
+ "exam": [
+  {
+   "q": "La EPS es:",
+   "o": [
+    "La estructura de proyectos de la empresa",
+    "Una relación",
+    "Un calendario",
+    "Un costo"
+   ],
+   "a": 0,
+   "e": "Enterprise Project Structure."
+  },
+  {
+   "q": "¿Qué indica una holgura total de cero?",
+   "o": [
+    "Actividad crítica",
+    "Actividad opcional",
+    "Actividad terminada",
+    "Actividad sin costo"
+   ],
+   "a": 0,
+   "e": "No hay margen."
+  },
+  {
+   "q": "Las relaciones recomendadas son:",
+   "o": [
+    "Fin a inicio",
+    "Inicio a fin",
+    "Adelantos",
+    "Retrasos negativos"
+   ],
+   "a": 0,
+   "e": "Son las más claras."
+  },
+  {
+   "q": "¿Qué mide la evaluación de catorce puntos del DCMA?",
+   "o": [
+    "La calidad del cronograma",
+    "El costo real",
+    "El avance físico",
+    "La productividad"
+   ],
+   "a": 0,
+   "e": "Es una verificación de calidad del cronograma."
+  },
+  {
+   "q": "En el caso, el compresor define la ruta crítica porque:",
+   "o": [
+    "Es el frente más largo",
+    "Es el más caro",
+    "Es el más nuevo",
+    "Es el primero"
+   ],
+   "a": 0,
+   "e": "Duración de diez días."
+  },
+  {
+   "q": "Al presentar el cronograma aprobado, se debe:",
+   "o": [
+    "Guardar la línea base",
+    "Borrar los escenarios",
+    "Cambiar el calendario",
+    "Eliminar la ruta crítica"
+   ],
+   "a": 0,
+   "e": "La línea base permite controlar el avance."
+  }
+ ],
+ "outro": {
+  "can": [
+   "la estructura de Primavera: EPS, OBS, EDT, calendarios y códigos",
+   "definir actividades y relaciones con una lógica sana y calcular la ruta crítica",
+   "verificar la calidad de un cronograma con criterios como la evaluación del DCMA",
+   "llevar de inicio a fin la planificación de la parada de una planta"
+  ],
+  "phrase": "Un cronograma vale lo que vale su lógica.",
+  "recap": [
+   "La lógica sana usa relaciones fin a inicio, sin restricciones duras ni adelantos.",
+   "La ruta crítica define la duración y es donde se gana o se pierde tiempo.",
+   "La calidad del cronograma se verifica antes de presentarlo y de guardar la línea base."
+  ]
+ },
+ "downloads": [
+  {
+   "file": "xlsx/H3L_Primavera_Parada_CPM.xlsx",
+   "title": "Red y ruta crítica de la parada de planta (Excel)",
+   "desc": "Las doce actividades del caso con pasadas hacia adelante y hacia atrás, holgura total y libre, ruta crítica marcada y verificación de calidad. Datos ilustrativos.",
+   "task": "Cambiá la duración del compresor de 10 a 14 días y observá qué pasa con la ventana de 28 días. Después probá reducir la apertura de equipos de 3 a 2 días y compará."
+  }
+ ],
+ "cases": [
+  {
+   "title": "Wheatstone LNG: la entrega de módulos",
+   "text": "En el proyecto de GNL Wheatstone, de Chevron en Australia Occidental, el principal factor del aumento de costo fue la demora en la entrega de módulos. El astillero original de Malasia no pudo con el alcance de trabajo y se necesitaron otros astilleros. La empresa dijo enfrentar desafíos similares a los de Gorgon y buscaba mejorar la ejecución de sus proyectos.",
+   "src": "Energy News Bulletin, Wheatstone costs soar, energynewsbulletin.net"
+  }
+ ],
+ "refs": [
+  {
+   "tag": "Documentación",
+   "cite": "Oracle. Primavera P6 Professional y P6 EPPM: guías de usuario (estructura de proyectos, actividades, relaciones y planificación). docs.oracle.com",
+   "why": "funciones de la herramienta"
+  },
+  {
+   "tag": "Guía",
+   "cite": "Project Management Institute (2019). Practice Standard for Scheduling, 3.ª ed. PMI.",
+   "why": "buenas prácticas de cronograma"
+  },
+  {
+   "tag": "Recomendación",
+   "cite": "AACE International (2006). Recommended Practice 49R-06: Identifying the Critical Path.",
+   "why": "definición de ruta crítica"
+  },
+  {
+   "tag": "Recomendación",
+   "cite": "AACE International. Recommended Practice 29R-03: Forensic Schedule Analysis.",
+   "why": "análisis de cronogramas y demoras"
+  },
+  {
+   "tag": "Guía",
+   "cite": "Defense Contract Management Agency (2012). DCMA 14-Point Assessment (Earned Value Management System Program Analysis Pamphlet).",
+   "why": "evaluación de calidad del cronograma"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Kelley, J. E. y Walker, M. R. (1959). Critical-path planning and scheduling. Proceedings of the Eastern Joint Computer Conference, 160–173.",
+   "why": "método del camino crítico"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Malcolm, D. G., Roseboom, J. H., Clark, C. E. y Fazar, W. (1959). Application of a technique for research and development program evaluation. Operations Research 7(5), 646–669.",
+   "why": "origen de PERT"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Lewis, J. P. (2005). Project Planning, Scheduling and Control, 4.ª ed. McGraw-Hill.",
+   "why": "planificación y control"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Palmer, D. (2019). Maintenance Planning and Scheduling Handbook, 4.ª ed. McGraw-Hill.",
+   "why": "planificación del mantenimiento"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Merrow, E. W. (2011). Industrial Megaprojects: Concepts, Strategies, and Practices for Success. Wiley.",
+   "why": "planificación de proyectos industriales"
+  }
+ ]
+}

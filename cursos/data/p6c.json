@@ -1,0 +1,863 @@
+{
+ "id": "p6c",
+ "title": "Control del proyecto y valor ganado en un ducto con Primavera P6",
+ "subtitle": "Línea base, avance, valor ganado, cronograma ganado y pronóstico por rango, con un caso completo de un ducto de transporte.",
+ "desc": "Curso aplicado de control de proyectos con Oracle Primavera P6: línea base y fecha de corte, formas de medir el avance, valor ganado (PV, EV, AC, CPI, SPI, EAC y TCPI), cronograma ganado, el ciclo de actualización en Primavera y el informe mensual. Se cierra con un caso completo, de inicio a fin, de control de la construcción de un ducto de ciento veinte kilómetros.",
+ "objectives": [
+  "Guardar una línea base, fijar la fecha de corte y actualizar el avance en Primavera.",
+  "Calcular e interpretar PV, EV, AC, los índices de costo y cronograma, el EAC y el TCPI.",
+  "Usar el cronograma ganado y la ruta crítica para el análisis de plazo.",
+  "Llevar un caso de control de inicio a fin con pronóstico por rango y acciones correctivas."
+ ],
+ "labs": [],
+ "practiceMin": 90,
+ "competencies": [
+  {
+   "name": "Línea base y avance",
+   "lessons": [
+    "p6cl1"
+   ]
+  },
+  {
+   "name": "Valor ganado",
+   "lessons": [
+    "p6cl2"
+   ]
+  },
+  {
+   "name": "Plazo y paso a paso",
+   "lessons": [
+    "p6cl3",
+    "p6cl4"
+   ]
+  },
+  {
+   "name": "Caso del ducto",
+   "lessons": [
+    "p6cl5",
+    "p6cl6"
+   ]
+  }
+ ],
+ "intro": {
+  "hook": "Vamos a aprender a controlar un proyecto con datos: medir el avance, comparar con la línea base, pronosticar el costo y el plazo final y decidir qué hacer, usando Primavera P6.",
+  "questions": [
+   "¿Cómo se mide el avance real de un proyecto de forma confiable?",
+   "¿Qué dicen los índices de costo y de cronograma, y qué pronóstico se puede hacer?",
+   "¿Por qué el valor ganado debe complementarse con la ruta crítica?"
+  ],
+  "star": {
+   "caso": "Kashagan (Kazajistán): costos y plazos de un megaproyecto",
+   "S": "El campo Kashagan, en el Mar Caspio norte, fue desarrollado con islas artificiales y gas con alto contenido de azufre.",
+   "T": "Iniciar la producción y recuperar la inversión en los plazos y el presupuesto del plan original.",
+   "A": "La producción comenzó en septiembre de 2013, más de una década después de lo previsto, y se detuvo semanas después por la corrosión de cañerías por gas sulfuroso.",
+   "R": "Un presupuesto de 38.000 millones de dólares en 2008 subió a 53.000 millones hacia fines de 2015, y en octubre de 2016 se cargó el primer crudo para exportación."
+  }
+ },
+ "modules": [
+  {
+   "id": "p6cm1",
+   "title": "Módulo 1 · Línea base y valor ganado",
+   "lessons": [
+    {
+     "id": "p6cl1",
+     "title": "Línea base, fecha de corte y actualización del avance",
+     "comp": "Línea base y avance",
+     "cues": [
+      {
+       "say": "El control se apoya en cuatro ideas. La línea base es la copia aprobada del plan. La fecha de corte fija el momento de la medición. El avance real refleja el estado actual. Y el pronóstico anticipa cómo terminará el proyecto.",
+       "scene": {
+        "t": "tbl",
+        "k": "Conceptos",
+        "h": "Cuatro ideas del control del cronograma",
+        "cols": [
+         "Concepto",
+         "Qué es",
+         "Para qué sirve"
+        ],
+        "rows": [
+         [
+          "Línea base",
+          "Copia aprobada del plan",
+          "Comparar lo real con lo planificado"
+         ],
+         [
+          "Fecha de corte",
+          "Fecha hasta la cual se informa el avance",
+          "Fijar el momento de la medición"
+         ],
+         [
+          "Avance real",
+          "Fechas reales y porcentaje completado",
+          "Reflejar el estado actual"
+         ],
+         [
+          "Pronóstico",
+          "Fechas y costos hasta el final",
+          "Anticipar el resultado"
+         ]
+        ]
+       },
+       "notes": [
+        {
+         "t": "línea base",
+         "k": "baseline",
+         "n": "Copia aprobada del cronograma y el presupuesto que sirve de referencia para medir desvíos."
+        }
+       ]
+      },
+      {
+       "say": "El porcentaje completado puede medirse por duración, por avance físico o por unidades de recurso. En obras con cantidades medibles, como kilómetros soldados en un ducto, el avance físico es el más confiable.",
+       "scene": {
+        "t": "tbl",
+        "k": "Avance",
+        "h": "Formas de medir el porcentaje completado",
+        "cols": [
+         "Tipo",
+         "Cómo se mide",
+         "Cuándo usarlo"
+        ],
+        "rows": [
+         [
+          "Duración",
+          "Tiempo transcurrido sobre el total",
+          "Actividades sin producto medible"
+         ],
+         [
+          "Físico",
+          "Cantidad de trabajo realizado",
+          "Obras con cantidades, como kilómetros soldados"
+         ],
+         [
+          "Unidades",
+          "Horas de recurso consumidas",
+          "Servicios por horas"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Al actualizar, se informan fechas reales y no estimaciones. Se actualiza con la misma frecuencia y el mismo corte, y se revisa la duración restante de las actividades en curso. Las actividades fuera de secuencia se tratan con criterio.",
+       "scene": {
+        "t": "bul",
+        "k": "Actualización",
+        "h": "Buenas prácticas al actualizar",
+        "items": [
+         "Actualizar siempre con la misma frecuencia y el mismo corte",
+         "Informar fechas reales de inicio y fin, no estimaciones",
+         "Revisar la duración restante de las actividades en curso",
+         "Tratar con criterio las actividades fuera de secuencia"
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "En un ducto, la forma más confiable de medir el avance de soldadura es:",
+        "o": [
+         "El avance físico en kilómetros",
+         "El tiempo transcurrido",
+         "La opinión del contratista",
+         "El gasto"
+        ],
+        "a": 0,
+        "e": "Mide cantidad de trabajo real."
+       }
+      }
+     ]
+    },
+    {
+     "id": "p6cl2",
+     "title": "Valor ganado: PV, EV, AC e indicadores",
+     "comp": "Valor ganado",
+     "cues": [
+      {
+       "say": "El valor ganado compara tres variables. El valor planificado es el presupuesto del trabajo previsto hasta hoy. El valor ganado es el presupuesto del trabajo realmente hecho. Y el costo real es lo que costó ese trabajo.",
+       "scene": {
+        "t": "tbl",
+        "k": "Variables",
+        "h": "Las tres variables básicas",
+        "cols": [
+         "Variable",
+         "Sigla",
+         "Qué mide"
+        ],
+        "rows": [
+         [
+          "Valor planificado",
+          "PV",
+          "Presupuesto del trabajo previsto hasta la fecha de corte"
+         ],
+         [
+          "Valor ganado",
+          "EV",
+          "Presupuesto del trabajo realmente hecho"
+         ],
+         [
+          "Costo real",
+          "AC",
+          "Lo que costó el trabajo realizado"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Con esas variables se calculan la variación de costo, el índice de desempeño de costo, la variación de cronograma y el índice de desempeño de cronograma. Un índice menor que uno indica que el proyecto va peor que el plan.",
+       "scene": {
+        "t": "fm",
+        "k": "Indicadores",
+        "h": "Variaciones e índices",
+        "f": "CV = EV − AC          CPI = EV ÷ AC\nSV = EV − PV          SPI = EV ÷ PV\n\nCPI y SPI menores que 1: costo y plazo peores que el plan",
+        "n": "Una variación negativa significa un desvío desfavorable."
+       }
+      },
+      {
+       "say": "Para pronosticar se usa la estimación a la terminación, o EAC. Si el desempeño de costo se mantiene, es el presupuesto dividido por el índice de costo. El TCPI indica el desempeño que se necesita en lo que falta para cumplir el presupuesto.",
+       "scene": {
+        "t": "fm",
+        "k": "Pronóstico",
+        "h": "Estimación a la terminación",
+        "f": "EAC = BAC ÷ CPI          ETC = EAC − AC\nVAC = BAC − EAC\nTCPI = (BAC − EV) ÷ (BAC − AC)",
+        "n": "Hay otros pronósticos: según el supuesto sobre el desempeño futuro, el EAC varía."
+       },
+       "notes": [
+        {
+         "t": "EAC",
+         "k": "EAC",
+         "n": "Estimate at Completion: costo total previsto al terminar el proyecto."
+        }
+       ]
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Un SPI de 0,88 indica que:",
+        "o": [
+         "El proyecto avanza al 88 % del ritmo planificado",
+         "El proyecto está adelantado",
+         "El costo es 88 % del plan",
+         "No hay desvío"
+        ],
+        "a": 0,
+        "e": "El valor ganado es 88 % del planificado."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "La línea base es:",
+     "o": [
+      "La copia aprobada del plan",
+      "El plan sin aprobar",
+      "El costo real",
+      "La ruta crítica"
+     ],
+     "a": 0,
+     "e": "Se usa como referencia."
+    },
+    {
+     "q": "El CPI se calcula como:",
+     "o": [
+      "EV ÷ AC",
+      "EV ÷ PV",
+      "AC ÷ EV",
+      "PV ÷ EV"
+     ],
+     "a": 0,
+     "e": "Índice de desempeño de costo."
+    },
+    {
+     "q": "Una variación de costo negativa indica:",
+     "o": [
+      "Gasto mayor que el trabajo realizado",
+      "Ahorro",
+      "Adelanto",
+      "Nada"
+     ],
+     "a": 0,
+     "e": "EV menor que AC."
+    }
+   ]
+  },
+  {
+   "id": "p6cm2",
+   "title": "Módulo 2 · Plazo, ruta crítica y paso a paso",
+   "lessons": [
+    {
+     "id": "p6cl3",
+     "title": "Cronograma de valor ganado: más allá del SPI",
+     "comp": "Plazo y valor ganado",
+     "cues": [
+      {
+       "say": "El SPI tiene una limitación: tiende a uno al terminar el proyecto, aun si terminó tarde, y mide el desvío en dinero. Lipke propuso en dos mil tres el cronograma ganado, que expresa el desvío en unidades de tiempo.",
+       "scene": {
+        "t": "bul",
+        "k": "Limitación",
+        "h": "El SPI engaña al final del proyecto",
+        "items": [
+         "El SPI tiende a uno al terminar, aunque el proyecto esté atrasado",
+         "La variación de cronograma se mide en dinero y no en tiempo",
+         "Anbari (2003) y Lipke (2003) propusieron medidas en unidades de tiempo",
+         "Se complementa con el análisis de la ruta crítica"
+        ]
+       },
+       "notes": [
+        {
+         "t": "cronograma ganado",
+         "k": "cronograma ganado",
+         "n": "Earned schedule: tiempo en que el valor planificado igualaba al valor ganado actual."
+        }
+       ]
+      },
+      {
+       "say": "El cronograma ganado se calcula buscando en la curva del valor planificado el momento en que igualaba al valor ganado actual. Su cociente con el tiempo real transcurrido es un índice en tiempo, y permite pronosticar la duración.",
+       "scene": {
+        "t": "fm",
+        "k": "Cronograma ganado",
+        "h": "Cálculo en meses",
+        "f": "ES = meses completos con PV ≤ EV + (EV − PV del mes anterior) ÷ (PV del mes − PV del mes anterior)\n\nSPI(t) = ES ÷ AT          Duración prevista ≈ duración planificada ÷ SPI(t)",
+        "n": "AT es el tiempo real transcurrido hasta la fecha de corte."
+       }
+      },
+      {
+       "say": "El valor ganado no distingue actividades críticas de las que no lo son. Un atraso en la ruta crítica mueve el fin del proyecto, mientras que uno con holgura puede no hacerlo. Por eso se analiza el valor ganado junto con la ruta crítica.",
+       "scene": {
+        "t": "bul",
+        "k": "Ruta crítica",
+        "h": "Por qué no alcanza solo con el valor ganado",
+        "items": [
+         "El valor ganado no distingue actividades críticas de no críticas",
+         "Un atraso en la ruta crítica mueve el fin; uno con holgura puede no hacerlo",
+         "El análisis de tendencias de holgura anticipa problemas",
+         "Ambos análisis se complementan"
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "El cronograma ganado expresa el desvío de plazo en:",
+        "o": [
+         "Unidades de tiempo",
+         "Dólares",
+         "Porcentaje de costo",
+         "Unidades de recurso"
+        ],
+        "a": 0,
+        "e": "Esa es su ventaja sobre el SPI."
+       }
+      }
+     ]
+    },
+    {
+     "id": "p6cl4",
+     "title": "Paso a paso en Primavera: línea base, actualización y reportes",
+     "comp": "Paso a paso",
+     "cues": [
+      {
+       "say": "El ciclo de control se repite cada período. Se parte de la línea base guardada, se fija la fecha de corte, se actualiza el avance, se recalcula el cronograma y se analizan el valor ganado y la ruta crítica.",
+       "scene": {
+        "t": "viz",
+        "w": "concept",
+        "h": "Ciclo de control",
+        "p": {
+         "nodes": [
+          {
+           "l": "Guardar línea base",
+           "x": 8,
+           "y": 50,
+           "c": "#8ea2bd",
+           "n": "Copia aprobada del plan."
+          },
+          {
+           "l": "Fecha de corte",
+           "x": 28,
+           "y": 50,
+           "c": "#3A6BD0",
+           "n": "Se fija al final del período."
+          },
+          {
+           "l": "Actualizar avance",
+           "x": 50,
+           "y": 50,
+           "c": "#17755A",
+           "n": "Fechas reales y duración restante."
+          },
+          {
+           "l": "Planificar",
+           "x": 72,
+           "y": 50,
+           "c": "#b7791f",
+           "n": "Recalcular con F9."
+          },
+          {
+           "l": "Analizar",
+           "x": 92,
+           "y": 50,
+           "c": "#6b5bd6",
+           "n": "Valor ganado y ruta crítica."
+          }
+         ],
+         "edges": [
+          [
+           0,
+           1
+          ],
+          [
+           1,
+           2
+          ],
+          [
+           2,
+           3
+          ],
+          [
+           3,
+           4
+          ]
+         ],
+         "hint": "Tocá cada bloque para ver el detalle."
+        }
+       }
+      },
+      {
+       "say": "En Primavera se guardan y asignan líneas base, se actualiza el avance con fechas reales, y se almacena el desempeño del período para conservar el historial. Los diseños permiten comparar las fechas y los costos actuales con la línea base.",
+       "scene": {
+        "t": "bul",
+        "k": "En Primavera",
+        "h": "Funciones que se usan",
+        "items": [
+         "Mantener líneas base y asignarlas al proyecto para comparar",
+         "Actualizar el avance con fechas reales y porcentaje completado",
+         "Almacenar el desempeño del período, para conservar el historial",
+         "Diseños que comparan fechas y costos actuales con la línea base"
+        ]
+       }
+      },
+      {
+       "say": "El informe mensual muestra el avance planificado y real, los índices de costo y cronograma, el pronóstico del costo final, la ruta crítica actual con las actividades casi críticas, y los riesgos y las acciones correctivas.",
+       "scene": {
+        "t": "bul",
+        "k": "Informe",
+        "h": "Qué incluye el informe mensual",
+        "items": [
+         "Avance planificado y real, con la curva S",
+         "CPI, SPI y pronóstico del costo final",
+         "Ruta crítica actual y actividades casi críticas",
+         "Riesgos, desvíos principales y acciones correctivas"
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Almacenar el desempeño del período permite:",
+        "o": [
+         "Conservar el historial para analizar tendencias",
+         "Borrar la línea base",
+         "Cambiar la EPS",
+         "Eliminar la ruta crítica"
+        ],
+        "a": 0,
+        "e": "Se guarda cada corte."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "El SPI tiende a uno al final del proyecto:",
+     "o": [
+      "Aunque haya terminado tarde",
+      "Solo si terminó a tiempo",
+      "Nunca",
+      "Solo con la línea base"
+     ],
+     "a": 0,
+     "e": "Por eso se complementa."
+    },
+    {
+     "q": "El cronograma ganado se expresa en:",
+     "o": [
+      "Unidades de tiempo",
+      "Dólares",
+      "Porcentajes de costo",
+      "Horas de recurso"
+     ],
+     "a": 0,
+     "e": "Es su ventaja."
+    },
+    {
+     "q": "El ciclo de control se repite:",
+     "o": [
+      "Cada período",
+      "Una vez",
+      "Al final",
+      "Nunca"
+     ],
+     "a": 0,
+     "e": "Es una práctica periódica."
+    }
+   ]
+  },
+  {
+   "id": "p6cm3",
+   "title": "Módulo 3 · Caso completo del ducto",
+   "lessons": [
+    {
+     "id": "p6cl5",
+     "title": "Caso completo (1): línea base de un ducto de 120 kilómetros",
+     "comp": "Caso del ducto",
+     "cues": [
+      {
+       "say": "Presentamos el caso, un ejemplo didáctico con datos ilustrativos. Se construye un ducto de ciento veinte kilómetros en ocho meses, con un presupuesto de treinta y seis millones de dólares. Las etapas son derecho de paso, zanja, soldadura, revestimiento, tapada y prueba hidráulica.",
+       "scene": {
+        "t": "bul",
+        "k": "Contexto",
+        "h": "Un ducto de transporte de ejemplo",
+        "items": [
+         "120 km de cañería de 20 pulgadas, plazo de 8 meses",
+         "Presupuesto de ejemplo (BAC): 36 millones de dólares",
+         "Etapas: derecho de paso, zanja, soldadura, revestimiento, bajada y tapada, prueba hidráulica",
+         "Datos ilustrativos"
+        ]
+       }
+      },
+      {
+       "say": "Paso uno, guardar la línea base. El valor planificado acumulado forma la curva S del proyecto: dos coma cinco millones al mes uno, quince al mes cuatro y treinta y seis al mes ocho.",
+       "scene": {
+        "t": "tbl",
+        "k": "Línea base",
+        "h": "Valor planificado acumulado (millones de USD)",
+        "cols": [
+         "Mes",
+         "1",
+         "2",
+         "3",
+         "4",
+         "5",
+         "6",
+         "7",
+         "8"
+        ],
+        "rows": [
+         [
+          "PV acumulado",
+          "2,5",
+          "6,5",
+          "11,0",
+          "15,0",
+          "19,5",
+          "25,0",
+          "31,0",
+          "36,0"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Paso dos, definir cómo se mide el avance. Cada etapa tiene un peso según su presupuesto, y su avance se mide en kilómetros completados. El avance ponderado de las etapas da el valor ganado, con la misma regla todos los meses.",
+       "scene": {
+        "t": "bul",
+        "k": "Avance físico",
+        "h": "Cómo se mide el avance",
+        "items": [
+         "Pesos por etapa, según su presupuesto",
+         "Kilómetros completados en cada etapa",
+         "Avance ponderado del proyecto por etapa",
+         "Medición el último día de cada mes con la misma regla"
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "El valor ganado del proyecto se obtiene:",
+        "o": [
+         "Ponderando el avance físico de las etapas por su presupuesto",
+         "Sumando los gastos",
+         "Dividiendo por el plazo",
+         "Con la opinión del gerente"
+        ],
+        "a": 0,
+        "e": "El avance físico multiplicado por el presupuesto da EV."
+       }
+      }
+     ]
+    },
+    {
+     "id": "p6cl6",
+     "title": "Caso completo (2): mes 4, desvíos, pronóstico y acciones",
+     "comp": "Control y pronóstico",
+     "cues": [
+      {
+       "say": "En el mes cuatro, el valor planificado es de quince millones, el valor ganado es de trece coma dos y el costo real es de catorce coma cinco. El presupuesto total es de treinta y seis millones.",
+       "scene": {
+        "t": "tbl",
+        "k": "Mes 4",
+        "h": "Datos de la fecha de corte (millones de USD)",
+        "cols": [
+         "Variable",
+         "Valor"
+        ],
+        "rows": [
+         [
+          "PV (planificado)",
+          "15,0"
+         ],
+         [
+          "EV (ganado)",
+          "13,2"
+         ],
+         [
+          "AC (costo real)",
+          "14,5"
+         ],
+         [
+          "BAC (presupuesto total)",
+          "36,0"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "El proyecto gasta más y avanza menos que lo planificado. El índice de costo es cero coma noventa y uno y el de cronograma cero coma ochenta y ocho. Si el desempeño se mantiene, el costo final sería de treinta y nueve coma seis millones, casi diez por ciento más.",
+       "scene": {
+        "t": "fm",
+        "k": "Indicadores",
+        "h": "Resultados del mes 4",
+        "f": "CV = 13,2 − 14,5 = −1,3 M     CPI = 13,2 ÷ 14,5 = 0,91\nSV = 13,2 − 15,0 = −1,8 M     SPI = 13,2 ÷ 15,0 = 0,88\n\nEAC = 36 ÷ 0,91 ≈ 39,6 M     VAC ≈ −3,6 M     TCPI ≈ 1,06",
+        "n": "Con el supuesto de que el costo se mantiene: 3,6 M de sobrecosto, cerca de 10 % del presupuesto."
+       }
+      },
+      {
+       "say": "En plazo, el cronograma ganado es de tres coma cincuenta y cinco meses frente a cuatro transcurridos. Si el ritmo se mantiene, el ducto terminaría en cerca de nueve meses, un mes más tarde que lo planificado.",
+       "scene": {
+        "t": "fm",
+        "k": "Plazo",
+        "h": "Cronograma ganado en el mes 4",
+        "f": "EV = 13,2 está entre PV(mes 3) = 11,0 y PV(mes 4) = 15,0\nES = 3 + (13,2 − 11,0) ÷ (15,0 − 11,0) = 3,55 meses\nSPI(t) = 3,55 ÷ 4 ≈ 0,89\n\nDuración prevista ≈ 8 ÷ 0,89 ≈ 9,0 meses",
+        "n": "El atraso en el plazo es de cerca de 0,45 meses a la fecha de corte."
+       }
+      },
+      {
+       "say": "La causa es un tramo de zanja en roca no previsto en la estimación. El gerente suma una cuadrilla de zanjeo, reordena etapas y presenta una solicitud de cambio con respaldo técnico. El pronóstico se informa como rango, de treinta y siete coma tres a cuarenta y tres millones.",
+       "scene": {
+        "t": "bul",
+        "k": "Acciones",
+        "h": "Decisiones del gerente",
+        "items": [
+         "Causa principal: zanja en roca entre los km 40 y 55 no prevista en la estimación",
+         "Acciones: segunda cuadrilla de zanjeo y revisión del orden de las etapas",
+         "Solicitud de cambio por la condición geológica, con respaldo técnico",
+         "Rango de EAC: 37,3 M (resto según presupuesto) a 43,0 M (costo y plazo peores)"
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "El valor ganado de trece coma dos millones frente a un costo real de catorce coma cinco indica:",
+        "o": [
+         "Un desvío desfavorable de costo",
+         "Un ahorro",
+         "Un adelanto",
+         "Ningún desvío"
+        ],
+        "a": 0,
+        "e": "CV negativo y CPI menor que uno."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "¿Cuál es el CPI del mes 4 del caso?",
+     "o": [
+      "0,91",
+      "0,88",
+      "1,06",
+      "1,00"
+     ],
+     "a": 0,
+     "e": "13,2 dividido 14,5."
+    },
+    {
+     "q": "¿Cuál es el SPI?",
+     "o": [
+      "0,88",
+      "0,91",
+      "1,06",
+      "1,00"
+     ],
+     "a": 0,
+     "e": "13,2 dividido 15,0."
+    },
+    {
+     "q": "¿Cómo se informa el EAC?",
+     "o": [
+      "Como un rango",
+      "Como una cifra exacta",
+      "No se informa",
+      "Como porcentaje solamente"
+     ],
+     "a": 0,
+     "e": "Se reconoce la incertidumbre."
+    }
+   ]
+  }
+ ],
+ "exam": [
+  {
+   "q": "El valor ganado (EV) es:",
+   "o": [
+    "El presupuesto del trabajo realizado",
+    "El costo real",
+    "El valor planificado",
+    "El pronóstico"
+   ],
+   "a": 0,
+   "e": "Mide lo hecho en términos de presupuesto."
+  },
+  {
+   "q": "TCPI mayor que 1 indica que:",
+   "o": [
+    "Hay que mejorar el desempeño para cumplir el presupuesto",
+    "El proyecto va bien",
+    "No hay desvío",
+    "No se necesita acción"
+   ],
+   "a": 0,
+   "e": "Se necesita más eficiencia."
+  },
+  {
+   "q": "El avance físico es el más confiable cuando:",
+   "o": [
+    "Hay cantidades medibles",
+    "No hay productos",
+    "El trabajo es intangible",
+    "Solo se mide el gasto"
+   ],
+   "a": 0,
+   "e": "Por ejemplo, kilómetros soldados."
+  },
+  {
+   "q": "El EAC del caso, con el supuesto de que el CPI se mantiene, es de:",
+   "o": [
+    "39,6 millones",
+    "36 millones",
+    "43 millones",
+    "37,3 millones"
+   ],
+   "a": 0,
+   "e": "36 dividido 0,91."
+  },
+  {
+   "q": "El cronograma ganado:",
+   "o": [
+    "Mide el desvío en tiempo",
+    "Mide el costo",
+    "Calcula la holgura",
+    "Define el calendario"
+   ],
+   "a": 0,
+   "e": "Es una medida en unidades de tiempo."
+  },
+  {
+   "q": "El valor ganado debe complementarse con:",
+   "o": [
+    "La ruta crítica",
+    "El calendario global",
+    "La EPS",
+    "Un nuevo contrato"
+   ],
+   "a": 0,
+   "e": "No distingue actividades críticas."
+  }
+ ],
+ "outro": {
+  "can": [
+   "guardar una línea base, fijar la fecha de corte y actualizar el avance en Primavera",
+   "calcular PV, EV, AC, CPI, SPI, EAC y TCPI e interpretarlos",
+   "usar el cronograma ganado para expresar el desvío en tiempo",
+   "llevar un caso de control de un ducto con pronóstico por rango y acciones"
+  ],
+  "phrase": "Medir bien el avance es la mitad de controlar el proyecto.",
+  "recap": [
+   "El valor ganado compara el trabajo hecho con el plan y con el costo real.",
+   "El pronóstico se informa como un rango, según los supuestos de desempeño futuro.",
+   "El valor ganado se complementa con la ruta crítica y con el cronograma ganado."
+  ]
+ },
+ "downloads": [
+  {
+   "file": "xlsx/H3L_Primavera_Valor_Ganado_Ducto.xlsx",
+   "title": "Valor ganado del ducto: control mensual (Excel)",
+   "desc": "Curva S planificada de 8 meses, avance físico por etapa, PV, EV, AC, variaciones, índices, EAC en tres versiones, TCPI y cronograma ganado con fórmulas. Datos ilustrativos.",
+   "task": "Cambiá el costo real del mes 4 de 14,5 a 13,0 y observá cómo cambian el CPI y el EAC. Después probá el avance físico de zanja en 80 % y compará el cronograma ganado."
+  }
+ ],
+ "cases": [
+  {
+   "title": "Kashagan (Kazajistán)",
+   "text": "La producción empezó en septiembre de 2013, más de una década después de lo previsto, y se detuvo semanas más tarde porque el gas sulfuroso corroyó las cañerías. Un presupuesto de 2008 de 38.000 millones de dólares subió a 53.000 millones hacia fines de 2015. En octubre de 2016 se cargó el primer crudo para exportación.",
+   "src": "World Oil (14 de octubre de 2016), Oil from $50-billion Kashagan field starts flowing to export"
+  }
+ ],
+ "refs": [
+  {
+   "tag": "Documentación",
+   "cite": "Oracle. Primavera P6 Professional: guía del usuario (líneas base, actualización del avance, valor ganado y desempeño del período). docs.oracle.com",
+   "why": "funciones de la herramienta"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Fleming, Q. W. y Koppelman, J. M. (2016). Earned Value Project Management, 4.ª ed. Project Management Institute.",
+   "why": "valor ganado"
+  },
+  {
+   "tag": "Guía",
+   "cite": "Project Management Institute (2019). Practice Standard for Earned Value Management, 2.ª ed. PMI.",
+   "why": "estándar de valor ganado"
+  },
+  {
+   "tag": "Norma",
+   "cite": "ANSI/EIA-748. Earned Value Management Systems. Government Electronics and Information Technology Association / NDIA.",
+   "why": "criterios de un sistema de valor ganado"
+  },
+  {
+   "tag": "Artículo",
+   "cite": "Lipke, W. (2003). Schedule is different. The Measurable News, marzo, 31–34.",
+   "why": "cronograma ganado"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Anbari, F. T. (2003). Earned value project management method and extensions. Project Management Journal 34(4), 12–23.",
+   "why": "extensiones del valor ganado"
+  },
+  {
+   "tag": "Guía",
+   "cite": "Project Management Institute (2019). Practice Standard for Scheduling, 3.ª ed. PMI.",
+   "why": "seguimiento del cronograma"
+  },
+  {
+   "tag": "Recomendación",
+   "cite": "AACE International. Recommended Practice 29R-03: Forensic Schedule Analysis.",
+   "why": "análisis de demoras"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Merrow, E. W. (2011). Industrial Megaprojects: Concepts, Strategies, and Practices for Success. Wiley.",
+   "why": "desempeño de megaproyectos"
+  },
+  {
+   "tag": "Artículo",
+   "cite": "World Oil (2016). Oil from $50-billion Kashagan field starts flowing to export.",
+   "why": "caso Kashagan"
+  }
+ ]
+}

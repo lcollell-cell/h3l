@@ -1,0 +1,851 @@
+{
+ "id": "p6r",
+ "title": "Recursos, costos y nivelación en la construcción de una planta con Primavera P6",
+ "subtitle": "Roles y recursos, asignaciones, sobreasignación, nivelación, curva S y flujo de caja, con un caso completo de una instalación de producción.",
+ "desc": "Curso aplicado de recursos y costos con Oracle Primavera P6: recursos de mano de obra, equipo y material, roles y cuentas de costo, asignaciones y precios unitarios, perfil de demanda y sobreasignación, nivelación de recursos y su efecto en el plazo, curva S y flujo de caja. Se cierra con un caso completo, de inicio a fin, de la construcción de una instalación temprana de producción.",
+ "objectives": [
+  "Distinguir recursos, roles y cuentas de costo y asignarlos a las actividades.",
+  "Detectar la sobreasignación y nivelar recursos entendiendo su efecto en el plazo.",
+  "Construir la curva S y el flujo de caja a partir del plan de recursos y costos.",
+  "Llevar un caso de inicio a fin y decidir entre alternativas de plazo, costo y seguridad."
+ ],
+ "labs": [],
+ "practiceMin": 90,
+ "competencies": [
+  {
+   "name": "Recursos y roles",
+   "lessons": [
+    "p6rl1"
+   ]
+  },
+  {
+   "name": "Costos y flujo de caja",
+   "lessons": [
+    "p6rl2"
+   ]
+  },
+  {
+   "name": "Nivelación y paso a paso",
+   "lessons": [
+    "p6rl3",
+    "p6rl4"
+   ]
+  },
+  {
+   "name": "Caso de la planta de tratamiento",
+   "lessons": [
+    "p6rl5",
+    "p6rl6"
+   ]
+  }
+ ],
+ "intro": {
+  "hook": "Vamos a aprender a incorporar recursos y costos al cronograma, a detectar la sobreasignación y a decidir cómo resolverla, usando Primavera P6.",
+  "questions": [
+   "¿Cómo se carga la demanda de recursos y costos en el cronograma?",
+   "¿Qué pasa con el plazo cuando se nivelan los recursos?",
+   "¿Cómo se obtiene la curva S y el flujo de caja del proyecto?"
+  ],
+  "star": {
+   "caso": "Gorgon (Australia): productividad y recursos",
+   "S": "Gorgon, proyecto de gas natural licuado de Chevron en Australia Occidental, es una de las obras más grandes de la industria.",
+   "T": "Construir dentro del presupuesto y el plazo aprobados.",
+   "A": "Chevron revisó dos veces el costo de capital y atribuyó los aumentos al clima, a un dólar australiano alto, a problemas logísticos y a baja productividad.",
+   "R": "El presupuesto pasó de 37.000 a 54.000 millones de dólares. Un cronograma sin supuestos de productividad realistas pierde valor como herramienta de control."
+  }
+ },
+ "modules": [
+  {
+   "id": "p6rm1",
+   "title": "Módulo 1 · Recursos, roles y costos",
+   "lessons": [
+    {
+     "id": "p6rl1",
+     "title": "Recursos, roles y costos en Primavera",
+     "comp": "Recursos y roles",
+     "cues": [
+      {
+       "say": "Primavera distingue recursos de mano de obra, de equipo y de material. Un rol es la función requerida, como soldador, y permite planificar antes de saber qué persona la ocupará. Las cuentas de costo clasifican los costos por rubro.",
+       "scene": {
+        "t": "tbl",
+        "k": "Conceptos",
+        "h": "Recursos, roles y cuentas de costo",
+        "cols": [
+         "Concepto",
+         "Qué es",
+         "Ejemplo"
+        ],
+        "rows": [
+         [
+          "Recurso de mano de obra",
+          "Persona o cuadrilla con un costo por hora",
+          "Soldador calificado"
+         ],
+         [
+          "Recurso de equipo",
+          "Equipo con costo por hora o por día",
+          "Grúa de 100 toneladas"
+         ],
+         [
+          "Recurso de material",
+          "Material con costo por unidad",
+          "Metros de cañería"
+         ],
+         [
+          "Rol",
+          "Función requerida, antes de nombrar a la persona",
+          "Soldador, cañista, electricista"
+         ],
+         [
+          "Cuenta de costo",
+          "Código para clasificar costos",
+          "Civil, mecánica, instrumentos"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Al asignar un recurso se indican las unidades por unidad de tiempo, por ejemplo ocho soldadores por día. El costo es el producto de las unidades, el precio unitario y la duración. El tipo de duración define qué se recalcula si cambia la asignación.",
+       "scene": {
+        "t": "bul",
+        "k": "Asignación",
+        "h": "Cómo se asigna un recurso a una actividad",
+        "items": [
+         "Unidades por unidad de tiempo: por ejemplo, 8 soldadores por día",
+         "Costo = unidades × precio unitario × duración",
+         "El tipo de duración define qué se recalcula al cambiar las unidades",
+         "Curvas de recurso: distribuir el esfuerzo de forma no uniforme"
+        ]
+       }
+      },
+      {
+       "say": "Una buena práctica es planificar primero con roles y luego nombrar a las personas. Los precios unitarios deben estar actualizados, y el calendario del recurso debe contemplar feriados y turnos. No hace falta asignar recursos a todo: solo donde importan.",
+       "scene": {
+        "t": "bul",
+        "k": "Buenas prácticas",
+        "h": "Para un modelo de recursos confiable",
+        "items": [
+         "Planificar primero con roles y luego con personas",
+         "Mantener actualizados los precios unitarios",
+         "Usar un calendario de recurso realista, con feriados",
+         "Asignar recursos solo donde importan para el plazo o el costo"
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Un rol sirve para:",
+        "o": [
+         "Planificar la función requerida antes de nombrar a la persona",
+         "Registrar el costo real",
+         "Definir una relación",
+         "Guardar la línea base"
+        ],
+        "a": 0,
+        "e": "Permite planificar capacidad sin nombrar personas."
+       }
+      }
+     ]
+    },
+    {
+     "id": "p6rl2",
+     "title": "Carga de costos, curva S y flujo de caja",
+     "comp": "Costos y flujo de caja",
+     "cues": [
+      {
+       "say": "Los costos de un proyecto en Primavera provienen de los recursos asignados y de los gastos, como contratos o compras. Se clasifican en cuentas de costo, y la suma es el presupuesto a la finalización.",
+       "scene": {
+        "t": "bul",
+        "k": "Costo",
+        "h": "Qué costos se cargan",
+        "items": [
+         "Costo de recursos asignados a las actividades",
+         "Gastos: contratos, compras y servicios sin recurso",
+         "Costo presupuestado a la finalización",
+         "Cuentas de costo para agrupar y reportar"
+        ]
+       }
+      },
+      {
+       "say": "La curva S muestra el costo acumulado en el tiempo. Se calcula distribuyendo el costo de cada actividad a lo largo de su duración. Su pendiente mensual es el flujo de caja que necesita financiar el proyecto.",
+       "scene": {
+        "t": "fm",
+        "k": "Curva S",
+        "h": "Presupuesto acumulado en el tiempo",
+        "f": "Costo acumulado(t) = Σ costo de cada actividad distribuido en su duración hasta t\n\nFlujo de caja del mes = Costo acumulado(mes) − Costo acumulado(mes − 1)",
+        "n": "La curva S suele tener forma de S porque el gasto es lento al inicio, acelera en la construcción y se reduce al cierre."
+       }
+      },
+      {
+       "say": "La forma de distribuir el gasto importa. Las compras de equipos mayores concentran el pago en pocos hitos. Y si se extiende la duración de una actividad con recurso por hora, también crece su costo. Las curvas de recurso reflejan los picos reales.",
+       "scene": {
+        "t": "bul",
+        "k": "Distribución",
+        "h": "Cómo afecta la forma de gastar",
+        "items": [
+         "Una curva más temprana financia más pronto y es más costosa",
+         "Las compras de equipos mayores concentran gasto en pocos hitos de pago",
+         "El costo de un recurso por hora crece cuando se extiende la duración",
+         "Las curvas de recurso permiten reflejar picos y valles reales"
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "La pendiente de la curva S en un mes representa:",
+        "o": [
+         "El flujo de caja de ese mes",
+         "La holgura",
+         "El riesgo",
+         "El avance físico"
+        ],
+        "a": 0,
+        "e": "Es el costo del mes."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "Un rol es:",
+     "o": [
+      "La función requerida",
+      "Una persona con nombre",
+      "Un calendario",
+      "Un hito"
+     ],
+     "a": 0,
+     "e": "Se define antes de nombrar a la persona."
+    },
+    {
+     "q": "El costo de una asignación se calcula como:",
+     "o": [
+      "Unidades × precio unitario × duración",
+      "Solo precio",
+      "Solo duración",
+      "Holgura × costo"
+     ],
+     "a": 0,
+     "e": "Es el producto de esos tres factores."
+    },
+    {
+     "q": "La curva S representa:",
+     "o": [
+      "Costo acumulado",
+      "Holgura",
+      "Riesgo",
+      "Calendario"
+     ],
+     "a": 0,
+     "e": "Costo acumulado en el tiempo."
+    }
+   ]
+  },
+  {
+   "id": "p6rm2",
+   "title": "Módulo 2 · Nivelación y paso a paso",
+   "lessons": [
+    {
+     "id": "p6rl3",
+     "title": "Sobreasignación y nivelación de recursos",
+     "comp": "Nivelación",
+     "cues": [
+      {
+       "say": "Hay sobreasignación cuando la demanda de un recurso supera su capacidad en algún día. Se detecta en los perfiles de recursos. Un cronograma que no considera la capacidad puede ser irreal. Se resuelve con más capacidad, otro orden o más tiempo.",
+       "scene": {
+        "t": "bul",
+        "k": "Problema",
+        "h": "Qué es la sobreasignación",
+        "items": [
+         "La demanda de un recurso supera su capacidad en algún día",
+         "Se detecta en los perfiles y en las hojas de uso de recursos",
+         "Un cronograma sin recursos puede ser irreal",
+         "Se resuelve con más capacidad, otro orden o más tiempo"
+        ]
+       }
+      },
+      {
+       "say": "La nivelación retrasa actividades, primero las que tienen holgura, para respetar la capacidad del recurso. Se define un orden de prioridad. Si hay que retrasar actividades críticas, el proyecto se alarga, y por eso se compara siempre con el cronograma sin nivelar.",
+       "scene": {
+        "t": "bul",
+        "k": "Nivelación",
+        "h": "Cómo funciona la nivelación de recursos",
+        "items": [
+         "Primavera retrasa actividades con holgura para respetar la capacidad",
+         "Se define el orden de prioridad de las actividades que compiten",
+         "Si las actividades críticas se retrasan, el proyecto se alarga",
+         "Siempre se revisa el resultado y se compara con el cronograma sin nivelar"
+        ]
+       }
+      },
+      {
+       "say": "Frente a un pico de demanda hay cuatro opciones: nivelar con la holgura, contratar cuadrillas, extender la duración o agregar turnos. Cada una cambia plazo y costo de manera distinta, y la decisión es del gerente del proyecto.",
+       "scene": {
+        "t": "tbl",
+        "k": "Opciones",
+        "h": "Cómo resolver un pico de demanda",
+        "cols": [
+         "Opción",
+         "Efecto en plazo",
+         "Efecto en costo"
+        ],
+        "rows": [
+         [
+          "Nivelar usando la holgura",
+          "Ninguno si alcanza la holgura",
+          "Ninguno"
+         ],
+         [
+          "Contratar más cuadrillas",
+          "Ninguno",
+          "Mayor, por movilización"
+         ],
+         [
+          "Extender la duración",
+          "Mayor",
+          "Puede aumentar costos fijos"
+         ],
+         [
+          "Turnos adicionales",
+          "Menor",
+          "Mayor, con horas extra"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Nivelar recursos puede:",
+        "o": [
+         "Alargar el proyecto si se retrasan actividades críticas",
+         "No cambiar nunca el plazo",
+         "Reducir siempre el costo",
+         "Eliminar los riesgos"
+        ],
+        "a": 0,
+        "e": "Por eso se compara el resultado."
+       }
+      }
+     ]
+    },
+    {
+     "id": "p6rl4",
+     "title": "Paso a paso: perfil de recursos, nivelación y flujo de caja",
+     "comp": "Paso a paso",
+     "cues": [
+      {
+       "say": "La secuencia es: definir recursos y roles con precios y calendarios, asignarlos a las actividades, revisar el perfil de demanda frente a la capacidad, nivelar con criterio y revisar la curva S y el flujo de caja.",
+       "scene": {
+        "t": "viz",
+        "w": "concept",
+        "h": "Secuencia de trabajo",
+        "p": {
+         "nodes": [
+          {
+           "l": "Definir recursos",
+           "x": 8,
+           "y": 50,
+           "c": "#8ea2bd",
+           "n": "Roles, recursos, precios y calendarios."
+          },
+          {
+           "l": "Asignar",
+           "x": 28,
+           "y": 50,
+           "c": "#3A6BD0",
+           "n": "Unidades por día a cada actividad."
+          },
+          {
+           "l": "Perfil",
+           "x": 50,
+           "y": 50,
+           "c": "#17755A",
+           "n": "Demanda frente a capacidad."
+          },
+          {
+           "l": "Nivelar",
+           "x": 72,
+           "y": 50,
+           "c": "#b7791f",
+           "n": "Resolver picos con criterio."
+          },
+          {
+           "l": "Costos",
+           "x": 92,
+           "y": 50,
+           "c": "#6b5bd6",
+           "n": "Curva S y flujo de caja."
+          }
+         ],
+         "edges": [
+          [
+           0,
+           1
+          ],
+          [
+           1,
+           2
+          ],
+          [
+           2,
+           3
+          ],
+          [
+           3,
+           4
+          ]
+         ],
+         "hint": "Tocá cada bloque para ver el detalle."
+        }
+       }
+      },
+      {
+       "say": "Antes de aprobar el plan se controla el pico de cada recurso crítico frente a la disponibilidad real, el efecto de la nivelación sobre la fecha final, los hitos de pago de los equipos mayores y la coherencia entre costo y avance.",
+       "scene": {
+        "t": "bul",
+        "k": "Revisión",
+        "h": "Qué se controla antes de aprobar",
+        "items": [
+         "El pico de cada recurso crítico frente a su disponibilidad real",
+         "El efecto de la nivelación sobre la fecha final",
+         "Los hitos de pago de equipos mayores",
+         "La coherencia entre costo y avance previsto"
+        ]
+       }
+      },
+      {
+       "say": "El plan debe dejar asentados los supuestos de productividad y de disponibilidad, las prioridades usadas para nivelar, la versión del cronograma y quién aprobó los cambios de capacidad. Es lo que permite auditar el plan más adelante.",
+       "scene": {
+        "t": "bul",
+        "k": "Documentación",
+        "h": "Qué se deja asentado",
+        "items": [
+         "Supuestos de productividad y disponibilidad de cuadrillas",
+         "Prioridades usadas para nivelar",
+         "Versión del cronograma y fecha de corte",
+         "Quién aprobó los cambios de capacidad"
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Antes de aprobar un plan con recursos conviene comparar:",
+        "o": [
+         "El cronograma nivelado y el no nivelado",
+         "Los colores del diagrama",
+         "El nombre del archivo",
+         "El número de usuarios"
+        ],
+        "a": 0,
+        "e": "Se compara el efecto de la nivelación."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "La sobreasignación ocurre cuando:",
+     "o": [
+      "La demanda supera la capacidad",
+      "Sobran recursos",
+      "Hay holgura",
+      "El calendario es global"
+     ],
+     "a": 0,
+     "e": "Hay más demanda que capacidad."
+    },
+    {
+     "q": "La nivelación prioriza retrasar:",
+     "o": [
+      "Actividades con holgura",
+      "Actividades críticas",
+      "Hitos de pago",
+      "Todas por igual"
+     ],
+     "a": 0,
+     "e": "Primero se usa la holgura."
+    },
+    {
+     "q": "Antes de aprobar se compara:",
+     "o": [
+      "Cronograma nivelado y no nivelado",
+      "Dos colores",
+      "Dos archivos de otra empresa",
+      "Nada"
+     ],
+     "a": 0,
+     "e": "Se evalúa el efecto del nivelado."
+    }
+   ]
+  },
+  {
+   "id": "p6rm3",
+   "title": "Módulo 3 · Caso completo de la planta de tratamiento",
+   "lessons": [
+    {
+     "id": "p6rl5",
+     "title": "Caso completo (1): modelo de recursos de una planta de tratamiento de crudo",
+     "comp": "Caso de la planta de tratamiento",
+     "cues": [
+      {
+       "say": "Presentamos el caso, un ejemplo didáctico con datos ilustrativos. Se construye una instalación temprana de producción, con puesta en marcha a los ciento cincuenta días. El presupuesto de ejemplo es de veintiocho millones de dólares y el recurso crítico son los soldadores.",
+       "scene": {
+        "t": "bul",
+        "k": "Contexto",
+        "h": "Una instalación temprana de producción (EPF) de ejemplo",
+        "items": [
+         "Planta de tratamiento de crudo con puesta en marcha en 150 días",
+         "Presupuesto de ejemplo: 28 millones de dólares",
+         "Recurso crítico: soldadores, con una capacidad de 20 por día",
+         "Datos ilustrativos"
+        ]
+       }
+      },
+      {
+       "say": "Cuatro actividades requieren soldadores: el prefabricado, el montaje de estructuras, la soldadura de tanques y el montaje de cañerías. Se cargan en Primavera con sus asignaciones, y se revisa el perfil de demanda diaria.",
+       "scene": {
+        "t": "tbl",
+        "k": "Actividades",
+        "h": "Los trabajos con soldadura (inicio, duración y demanda)",
+        "cols": [
+         "Actividad",
+         "Inicio (día)",
+         "Duración",
+         "Soldadores por día"
+        ],
+        "rows": [
+         [
+          "Prefabricado de cañerías",
+          "45",
+          "40",
+          "10"
+         ],
+         [
+          "Montaje de estructuras",
+          "55",
+          "30",
+          "8"
+         ],
+         [
+          "Soldadura de tanques",
+          "70",
+          "25",
+          "6"
+         ],
+         [
+          "Montaje de cañerías",
+          "75",
+          "35",
+          "14"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "El perfil de demanda muestra el problema. Entre los días setenta y ochenta y cuatro la demanda supera los veinte soldadores disponibles, con un pico de treinta y ocho. Son quince días de sobreasignación.",
+       "scene": {
+        "t": "fm",
+        "k": "Perfil",
+        "h": "Demanda de soldadores por día",
+        "f": "Días 45–54: 10   |   días 55–69: 18   |   días 70–74: 24\nDías 75–84: 38   |   días 85–94: 20   |   días 95–109: 14\n\nCapacidad = 20 por día  →  sobreasignación entre los días 70 y 84 (15 días); pico de 38",
+        "n": "Los picos de demanda no se pueden cubrir contratando de un día para otro."
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "¿Qué indica el pico de 38 soldadores?",
+        "o": [
+         "Que la demanda supera mucho la capacidad de 20",
+         "Que sobran soldadores",
+         "Que el plan está listo",
+         "Que el costo baja"
+        ],
+        "a": 0,
+        "e": "Hay un déficit importante de capacidad."
+       }
+      }
+     ]
+    },
+    {
+     "id": "p6rl6",
+     "title": "Caso completo (2): nivelar, costear y decidir",
+     "comp": "Nivelación y decisión",
+     "cues": [
+      {
+       "say": "La nivelación corre el montaje de cañerías del día setenta y cinco al ochenta y cinco, y la soldadura de tanques del día setenta al ochenta y cinco. La demanda máxima pasa a ser de veinte soldadores. Las pruebas empiezan cinco días más tarde.",
+       "scene": {
+        "t": "bul",
+        "k": "Nivelación",
+        "h": "Qué se retrasa y por qué",
+        "items": [
+         "Montaje de cañerías: se corre del día 75 al 85",
+         "Soldadura de tanques: se corre del día 70 al 85",
+         "Resultado: demanda máxima de 20 soldadores por día",
+         "Las pruebas empiezan el día 120 y no el 115"
+        ]
+       }
+      },
+      {
+       "say": "Se comparan alternativas. Sin nivelar, el proyecto termina el día ciento cuarenta y nueve, pero exige contratar cuadrillas extra. Nivelando, termina el ciento cincuenta y cuatro, sin cuadrillas adicionales. Un turno extra deja el fin en el ciento cincuenta.",
+       "scene": {
+        "t": "tbl",
+        "k": "Comparación",
+        "h": "Dos formas de resolver el pico (datos ilustrativos)",
+        "cols": [
+         "Alternativa",
+         "Fin del proyecto",
+         "Efecto en costo"
+        ],
+        "rows": [
+         [
+          "Sin nivelar",
+          "Día 149",
+          "Cuadrillas extra y movilización"
+         ],
+         [
+          "Nivelar con la holgura disponible",
+          "Día 154",
+          "Sin cuadrillas extra"
+         ],
+         [
+          "Nivelar y sumar un turno",
+          "Día 150",
+          "Horas extra moderadas"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "El gerente compara el valor de cinco días de producción con el costo de las cuadrillas extra y revisa el riesgo de seguridad por exceso de gente en un frente. Aprueba una opción y guarda la línea base con los supuestos registrados.",
+       "scene": {
+        "t": "bul",
+        "k": "Decisión",
+        "h": "Cómo decide el gerente",
+        "items": [
+         "Comparar el valor de cinco días de producción contra el costo de cuadrillas extra",
+         "Revisar el riesgo de seguridad por fatiga o por exceso de gente en un frente",
+         "Aprobar la opción y guardar la línea base",
+         "Registrar los supuestos de productividad"
+        ]
+       }
+      },
+      {
+       "say": "Las lecciones. Un cronograma sin recursos puede ser inviable. La nivelación tiene efecto sobre el plazo. Los roles permiten planificar capacidad antes de contratar. Y la curva S y el flujo de caja dependen del plan de recursos.",
+       "scene": {
+        "t": "bul",
+        "k": "Lecciones",
+        "h": "Lo que deja el caso",
+        "items": [
+         "Un cronograma sin recursos puede ser inviable",
+         "La nivelación tiene efecto sobre el plazo, que debe verse",
+         "Los roles permiten planificar capacidad antes de contratar",
+         "La curva S y el flujo de caja dependen del plan de recursos"
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "En el caso, nivelar con la holgura disponible:",
+        "o": [
+         "Alarga cinco días el proyecto sin cuadrillas extra",
+         "Reduce el plazo",
+         "Aumenta el pico de demanda",
+         "Elimina el riesgo"
+        ],
+        "a": 0,
+        "e": "Fin del día 149 al 154."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "¿Cuál era el pico de demanda de soldadores?",
+     "o": [
+      "38",
+      "20",
+      "14",
+      "10"
+     ],
+     "a": 0,
+     "e": "Entre los días 75 y 84."
+    },
+    {
+     "q": "¿Cuántos días de sobreasignación hay?",
+     "o": [
+      "15",
+      "5",
+      "30",
+      "0"
+     ],
+     "a": 0,
+     "e": "Entre los días 70 y 84."
+    },
+    {
+     "q": "Al nivelar con holgura, ¿cuándo termina el proyecto?",
+     "o": [
+      "Día 154",
+      "Día 149",
+      "Día 140",
+      "Día 160"
+     ],
+     "a": 0,
+     "e": "Se retrasan 5 días las pruebas y la puesta en marcha."
+    }
+   ]
+  }
+ ],
+ "exam": [
+  {
+   "q": "Los precios unitarios deben:",
+   "o": [
+    "Mantenerse actualizados",
+    "Ignorarse",
+    "Fijarse una sola vez",
+    "Ser iguales para todos"
+   ],
+   "a": 0,
+   "e": "Cambian con el tiempo."
+  },
+  {
+   "q": "La nivelación de recursos:",
+   "o": [
+    "Puede alargar el proyecto",
+    "Siempre lo acorta",
+    "No tiene efecto",
+    "Elimina costos"
+   ],
+   "a": 0,
+   "e": "Si se retrasan actividades críticas."
+  },
+  {
+   "q": "El flujo de caja mensual es:",
+   "o": [
+    "Diferencia de costo acumulado entre dos meses",
+    "La holgura total",
+    "El pico de recursos",
+    "La duración"
+   ],
+   "a": 0,
+   "e": "Es la pendiente de la curva S."
+  },
+  {
+   "q": "Un rol permite:",
+   "o": [
+    "Planificar capacidad antes de nombrar personas",
+    "Calcular holguras",
+    "Definir el calendario global",
+    "Cambiar la EPS"
+   ],
+   "a": 0,
+   "e": "Se planifica por función."
+  },
+  {
+   "q": "En el caso, el pico de demanda de soldadores es:",
+   "o": [
+    "38",
+    "20",
+    "24",
+    "14"
+   ],
+   "a": 0,
+   "e": "Entre los días 75 y 84."
+  },
+  {
+   "q": "Una decisión de nivelación debe considerar:",
+   "o": [
+    "Plazo, costo y seguridad",
+    "Solo el costo",
+    "Solo el plazo",
+    "Solo la opinión del contratista"
+   ],
+   "a": 0,
+   "e": "Se equilibran los tres."
+  }
+ ],
+ "outro": {
+  "can": [
+   "la diferencia entre recursos, roles y cuentas de costo en Primavera",
+   "asignar recursos, revisar el perfil de demanda y detectar la sobreasignación",
+   "nivelar recursos con criterio y entender su efecto en el plazo",
+   "construir la curva S y el flujo de caja a partir del plan"
+  ],
+  "phrase": "Un plan sin capacidad es un deseo; con recursos y costos, es una decisión.",
+  "recap": [
+   "Los roles permiten planificar capacidad antes de nombrar personas.",
+   "La nivelación usa la holgura y puede alargar el proyecto si toca la ruta crítica.",
+   "La curva S y el flujo de caja salen del plan de recursos y costos."
+  ]
+ },
+ "downloads": [
+  {
+   "file": "xlsx/H3L_Primavera_Recursos_y_Nivelacion.xlsx",
+   "title": "Perfil de recursos y nivelación del caso (Excel)",
+   "desc": "Diez actividades con inicio, duración, soldadores por día y costo; perfil diario de demanda, capacidad editable, días de sobreasignación y curva S mensual. Datos ilustrativos.",
+   "task": "Corré el montaje de cañerías al día 85 y la soldadura de tanques al día 85, y verificá que el pico baja a 20. Después bajá la capacidad a 16 y observá cuántos días de sobreasignación quedan."
+  }
+ ],
+ "cases": [
+  {
+   "title": "Gorgon LNG: productividad y sobrecostos",
+   "text": "Chevron revisó dos veces el costo de capital de Gorgon y atribuyó los aumentos a las demoras por clima, a un dólar australiano alto, a problemas logísticos y a baja productividad. El presupuesto pasó de 37.000 a 54.000 millones de dólares.",
+   "src": "Hart Energy, Chevron flags Gorgon gas delay, hartenergy.com"
+  }
+ ],
+ "refs": [
+  {
+   "tag": "Documentación",
+   "cite": "Oracle. Primavera P6 Professional: guía del usuario (recursos y roles, asignaciones, curvas, nivelación y costos). docs.oracle.com",
+   "why": "funciones de la herramienta"
+  },
+  {
+   "tag": "Guía",
+   "cite": "Project Management Institute (2019). Practice Standard for Scheduling, 3.ª ed. PMI.",
+   "why": "nivelación de recursos"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Harris, R. B. (1990). Packing method for resource leveling (PACK). Journal of Construction Engineering and Management 116(2), 331–350.",
+   "why": "método de nivelación"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Hegazy, T. (1999). Optimization of resource allocation and leveling using genetic algorithms. Journal of Construction Engineering and Management 125(3), 167–175.",
+   "why": "optimización de recursos"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Kerzner, H. (2017). Project Management: A Systems Approach to Planning, Scheduling, and Controlling, 12.ª ed. Wiley.",
+   "why": "recursos y costos de proyectos"
+  },
+  {
+   "tag": "Recomendación",
+   "cite": "AACE International (1997). Recommended Practice 18R-97: Cost Estimate Classification System — As Applied in Engineering, Procurement, and Construction for the Process Industries.",
+   "why": "clases de estimación de costos"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Merrow, E. W. (2011). Industrial Megaprojects: Concepts, Strategies, and Practices for Success. Wiley.",
+   "why": "productividad y proyectos industriales"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Project Management Institute (2021). A Guide to the Project Management Body of Knowledge (PMBOK Guide), 7.ª ed. PMI.",
+   "why": "gestión de recursos y costos"
+  },
+  {
+   "tag": "Artículo",
+   "cite": "Hart Energy. Chevron flags Gorgon gas delay. hartenergy.com",
+   "why": "caso de sobrecostos y productividad"
+  }
+ ]
+}

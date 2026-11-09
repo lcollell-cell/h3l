@@ -1,0 +1,987 @@
+{
+ "id": "jbg",
+ "title": "Gestión de errores con Jira: seguimiento de fallas y defectos en sistemas de campo",
+ "subtitle": "Reporte, triaje, severidad y prioridad, recurrencia, métricas y causa raíz, con un caso completo de medición de tanques.",
+ "desc": "Curso aplicado de seguimiento de errores (bug tracking) con Jira: terminología y ciclo de vida de un error, configuración de un proyecto con campos, componentes y flujo, calidad del reporte, severidad frente a prioridad, duplicados y recurrencia, consultas JQL, métricas y causa raíz. Se cierra con un caso completo, de inicio a fin, sobre la medición de nivel de tanques de una planta de almacenamiento de ejemplo.",
+ "objectives": [
+  "Distinguir error, defecto y falla, y describir el ciclo de vida de un ticket de error.",
+  "Configurar un proyecto de seguimiento de errores en Jira con campos, componentes y flujo.",
+  "Clasificar por severidad y prioridad, tratar duplicados y escalar errores recurrentes.",
+  "Medir con JQL y métricas, registrar la causa raíz y reconocer los límites de Jira frente a la seguridad de procesos."
+ ],
+ "labs": [],
+ "practiceMin": 90,
+ "competencies": [
+  {
+   "name": "Fundamentos del seguimiento de errores",
+   "lessons": [
+    "jbgl1"
+   ]
+  },
+  {
+   "name": "Configuración en Jira",
+   "lessons": [
+    "jbgl2"
+   ]
+  },
+  {
+   "name": "Triaje, gestión y métricas",
+   "lessons": [
+    "jbgl3",
+    "jbgl4"
+   ]
+  },
+  {
+   "name": "Caso de medición de tanques",
+   "lessons": [
+    "jbgl5",
+    "jbgl6"
+   ]
+  }
+ ],
+ "intro": {
+  "hook": "Vamos a aprender a registrar, clasificar y resolver errores en sistemas de campo, para que lo que falla una vez no vuelva a fallar sin que alguien lo advierta.",
+  "questions": [
+   "¿Qué información debe tener un reporte de error para que se pueda resolver?",
+   "¿Cómo se decide qué corregir primero: por gravedad o por urgencia?",
+   "¿Cómo se detecta que un error conocido se está volviendo un riesgo?"
+  ],
+  "star": {
+   "caso": "Buncefield (Reino Unido, 2005): protecciones que no funcionaron",
+   "S": "En diciembre de 2005, en el depósito de combustibles de Buncefield, el tanque 912 se llenaba con nafta. Tenía un medidor automático de nivel y un interruptor independiente de alto nivel.",
+   "T": "Evitar el sobrellenado: el medidor debía mostrar el nivel y el interruptor debía detener la operación si el tanque se llenaba de más.",
+   "A": "El medidor dejó de reflejar el nivel aunque el tanque seguía llenándose, y el interruptor no actuó porque le faltaba un candado que lo mantenía operativo: el proveedor no comunicó ese punto crítico al instalador, al contratista de mantenimiento ni al operador.",
+   "R": "El tanque se desbordó y hubo explosiones y un incendio de cinco días. La investigación oficial, con informe final de 2008, mostró que fallaron ambas protecciones y puso el foco en la gestión de seguridad de procesos."
+  }
+ },
+ "modules": [
+  {
+   "id": "jbgm1",
+   "title": "Módulo 1 · Fundamentos y configuración",
+   "lessons": [
+    {
+     "id": "jbgl1",
+     "title": "Error, defecto y falla: ciclo de vida de un error",
+     "comp": "Fundamentos del seguimiento de errores",
+     "cues": [
+      {
+       "say": "Un error es una equivocación humana. Introduce un defecto en el sistema, y cuando el defecto actúa produce una falla visible. La norma IEEE 1044 llama anomalía a cualquier desvío observado que debe investigarse.",
+       "scene": {
+        "t": "tbl",
+        "k": "Terminología",
+        "h": "Error, defecto y falla",
+        "cols": [
+         "Término",
+         "Qué es",
+         "Ejemplo en una planta"
+        ],
+        "rows": [
+         [
+          "Error",
+          "Equivocación humana",
+          "Configurar mal la unidad de un medidor"
+         ],
+         [
+          "Defecto",
+          "Imperfección que queda en el sistema",
+          "Unidad incorrecta en la tabla de conversión"
+         ],
+         [
+          "Falla",
+          "Efecto visible cuando el defecto actúa",
+          "El reporte muestra volúmenes erróneos"
+         ],
+         [
+          "Anomalía",
+          "Cualquier desvío observado que se investiga",
+          "Un valor que no cambia durante horas"
+         ]
+        ]
+       },
+       "notes": [
+        {
+         "t": "IEEE 1044",
+         "k": "IEEE 1044",
+         "n": "Norma sobre la clasificación de anomalías de software; su versión vigente es de 2009."
+        }
+       ]
+      },
+      {
+       "say": "Un error recorre un ciclo de vida: se reporta, se clasifica en el triaje, se corrige, se verifica y se cierra. La verificación la hace otra persona, y si no se resolvió, el ticket se reabre.",
+       "scene": {
+        "t": "viz",
+        "w": "concept",
+        "h": "Ciclo de vida de un error",
+        "p": {
+         "nodes": [
+          {
+           "l": "Nuevo",
+           "x": 8,
+           "y": 50,
+           "c": "#8ea2bd",
+           "n": "Se reporta con pasos para reproducirlo."
+          },
+          {
+           "l": "Triaje",
+           "x": 28,
+           "y": 50,
+           "c": "#b7791f",
+           "n": "Se clasifica, se descarta si es duplicado y se asigna."
+          },
+          {
+           "l": "En corrección",
+           "x": 50,
+           "y": 50,
+           "c": "#3A6BD0",
+           "n": "Se analiza la causa y se corrige."
+          },
+          {
+           "l": "Verificación",
+           "x": 72,
+           "y": 50,
+           "c": "#6b5bd6",
+           "n": "Otra persona confirma que se resolvió."
+          },
+          {
+           "l": "Cerrado",
+           "x": 92,
+           "y": 50,
+           "c": "#17755A",
+           "n": "Resuelto y verificado, con aprendizaje registrado."
+          }
+         ],
+         "edges": [
+          [
+           0,
+           1
+          ],
+          [
+           1,
+           2
+          ],
+          [
+           2,
+           3
+          ],
+          [
+           3,
+           4
+          ]
+         ],
+         "hint": "Tocá cada bloque para ver el detalle."
+        }
+       }
+      },
+      {
+       "say": "Seguir los errores de forma ordenada hace visibles los desvíos que se repiten, deja registro de las decisiones y permite medir tiempos de resolución y reincidencia. En una planta, eso evita que lo conocido se normalice.",
+       "scene": {
+        "t": "bul",
+        "k": "Por qué importa",
+        "h": "Seguir los errores en operaciones",
+        "items": [
+         "Los desvíos repetidos se vuelven visibles y se escalan",
+         "Queda registro de qué se decidió y por qué",
+         "Se miden tiempos de resolución y reincidencia",
+         "Se comparte lo aprendido con otros activos"
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Un defecto es:",
+        "o": [
+         "Una equivocación humana",
+         "Una imperfección que queda en el sistema",
+         "El efecto visible de una falla",
+         "Un tipo de usuario"
+        ],
+        "a": 1,
+        "e": "El defecto es lo que queda en el sistema; la falla es su efecto."
+       }
+      }
+     ]
+    },
+    {
+     "id": "jbgl2",
+     "title": "Configurar un proyecto de seguimiento de errores en Jira",
+     "comp": "Configuración en Jira",
+     "cues": [
+      {
+       "say": "Un buen reporte incluye un resumen claro, pasos para reproducirlo, resultado esperado y observado, entorno, severidad y componente. Bettenburg y colaboradores mostraron que los pasos para reproducir son lo que más ayuda a quien corrige.",
+       "scene": {
+        "t": "tbl",
+        "k": "Campos",
+        "h": "Información que debe llevar cada error",
+        "cols": [
+         "Campo",
+         "Para qué sirve",
+         "Ejemplo"
+        ],
+        "rows": [
+         [
+          "Resumen",
+          "Título claro y específico",
+          "Medidor del tanque 3 se congela"
+         ],
+         [
+          "Pasos para reproducir",
+          "Que otra persona lo pueda repetir",
+          "1. Llenar a 40 % 2. Observar el valor"
+         ],
+         [
+          "Resultado esperado y observado",
+          "Mostrar la diferencia",
+          "Debe subir; queda fijo"
+         ],
+         [
+          "Entorno",
+          "Versión, equipo y condiciones",
+          "Sistema SCADA, tanque 3"
+         ],
+         [
+          "Severidad",
+          "Impacto del error",
+          "Crítica, alta, media o baja"
+         ],
+         [
+          "Componente",
+          "Parte afectada",
+          "Medición de nivel"
+         ]
+        ]
+       },
+       "notes": [
+        {
+         "t": "Bettenburg",
+         "k": "Bettenburg",
+         "n": "Investigador que encuestó a desarrolladores sobre qué hace útil a un reporte de error (2008)."
+        }
+       ]
+      },
+      {
+       "say": "En Jira, el flujo de trabajo del error tiene estados y transiciones. Un flujo simple tiene cinco estados. Se puede exigir un campo, como la causa raíz, antes de pasar a Hecho, y agregar una transición para reabrir.",
+       "scene": {
+        "t": "viz",
+        "w": "concept",
+        "h": "Flujo de trabajo sugerido",
+        "p": {
+         "nodes": [
+          {
+           "l": "Abierto",
+           "x": 8,
+           "y": 50,
+           "c": "#8ea2bd",
+           "n": "Recién reportado, sin clasificar."
+          },
+          {
+           "l": "En triaje",
+           "x": 28,
+           "y": 50,
+           "c": "#b7791f",
+           "n": "Se revisa y se prioriza."
+          },
+          {
+           "l": "En corrección",
+           "x": 50,
+           "y": 50,
+           "c": "#3A6BD0",
+           "n": "Con responsable asignado."
+          },
+          {
+           "l": "En verificación",
+           "x": 72,
+           "y": 50,
+           "c": "#6b5bd6",
+           "n": "Se prueba en el entorno real."
+          },
+          {
+           "l": "Hecho",
+           "x": 92,
+           "y": 50,
+           "c": "#17755A",
+           "n": "Cerrado con causa registrada."
+          }
+         ],
+         "edges": [
+          [
+           0,
+           1
+          ],
+          [
+           1,
+           2
+          ],
+          [
+           2,
+           3
+          ],
+          [
+           3,
+           4
+          ]
+         ],
+         "hint": "Tocá cada bloque para ver el detalle."
+        }
+       }
+      },
+      {
+       "say": "Jira organiza los errores con componentes, versiones y etiquetas. La versión afectada y la de corrección permiten saber desde cuándo existe el error y en qué liberación se arregla. Los enlaces conectan duplicados y causas.",
+       "scene": {
+        "t": "bul",
+        "k": "Componentes y versiones",
+        "h": "Organizar el seguimiento",
+        "items": [
+         "Componentes: medición, comunicaciones, reportes, integración",
+         "Versión afectada y versión de corrección",
+         "Etiquetas para temas transversales, como recurrente",
+         "Enlaces entre tickets: duplica, bloquea y se relaciona con"
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "¿Qué dato ayuda más a quien debe corregir un error?",
+        "o": [
+         "Los pasos para reproducirlo",
+         "El color del ticket",
+         "El nombre del reportante",
+         "La hora del reporte"
+        ],
+        "a": 0,
+        "e": "Los pasos para reproducir permiten confirmar y diagnosticar el error."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "Una falla es:",
+     "o": [
+      "La equivocación humana",
+      "El efecto visible del defecto",
+      "El nombre de un ticket",
+      "Un componente"
+     ],
+     "a": 1,
+     "e": "La falla es el efecto observable."
+    },
+    {
+     "q": "¿Quién verifica la resolución de un error?",
+     "o": [
+      "Quien lo corrigió",
+      "Otra persona",
+      "Nadie",
+      "El reportante siempre"
+     ],
+     "a": 1,
+     "e": "La verificación independiente reduce reaperturas."
+    },
+    {
+     "q": "Un reporte útil incluye:",
+     "o": [
+      "Solo el título",
+      "Pasos para reproducir, esperado y observado",
+      "Una opinión",
+      "El nombre del culpable"
+     ],
+     "a": 1,
+     "e": "Permite reproducir y diagnosticar."
+    }
+   ]
+  },
+  {
+   "id": "jbgm2",
+   "title": "Módulo 2 · Triaje, gestión y métricas",
+   "lessons": [
+    {
+     "id": "jbgl3",
+     "title": "Reportar y clasificar: severidad, prioridad y duplicados",
+     "comp": "Triaje",
+     "cues": [
+      {
+       "say": "Severidad y prioridad no son lo mismo. La severidad mide qué tan grave es el efecto del error. La prioridad define qué tan pronto hay que corregirlo, y la decide quien administra el producto o la planta.",
+       "scene": {
+        "t": "tbl",
+        "k": "Severidad y prioridad",
+        "h": "Dos conceptos diferentes",
+        "cols": [
+         "Concepto",
+         "Responde a",
+         "Quién lo define"
+        ],
+        "rows": [
+         [
+          "Severidad",
+          "¿Qué tan grave es el efecto?",
+          "Quien reporta y quien analiza"
+         ],
+         [
+          "Prioridad",
+          "¿Qué tan pronto hay que corregirlo?",
+          "El responsable del producto o de la planta"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Una escala útil de severidad tiene cuatro niveles. La crítica es la que afecta una barrera de seguridad. Un error crítico no entra en la cola normal: se escala de inmediato por el sistema de gestión de seguridad de procesos.",
+       "scene": {
+        "t": "tbl",
+        "k": "Severidad",
+        "h": "Una escala para instrumentos y software de campo",
+        "cols": [
+         "Nivel",
+         "Criterio",
+         "Ejemplo"
+        ],
+        "rows": [
+         [
+          "Crítica",
+          "Afecta una barrera de seguridad o puede causar pérdida de contención",
+          "Alarma de alto nivel inoperante"
+         ],
+         [
+          "Alta",
+          "Dato de medición con impacto fiscal o de balance",
+          "Volumen erróneo en el reporte de entrega"
+         ],
+         [
+          "Media",
+          "Pérdida de función con alternativa",
+          "El gráfico no actualiza, pero la tabla sí"
+         ],
+         [
+          "Baja",
+          "Problema cosmético",
+          "Etiqueta mal escrita"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Cuando aparece un error ya reportado, se enlaza como duplicado y se suma una recurrencia al ticket original. Una regla de automatización puede subir la prioridad al llegar a tres. Un error conocido que se repite es una señal de riesgo.",
+       "scene": {
+        "t": "bul",
+        "k": "Duplicados y recurrencia",
+        "h": "Cómo tratarlos",
+        "items": [
+         "Si ya existe, se enlaza como duplicado y se cierra el nuevo",
+         "Se suma una recurrencia al ticket original",
+         "Con tres o más recurrencias, se sube la prioridad y se avisa",
+         "Un error conocido que se repite es una señal de riesgo, no una molestia"
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "La severidad de un error describe:",
+        "o": [
+         "Qué tan pronto hay que corregirlo",
+         "Qué tan grave es su efecto",
+         "Quién lo reportó",
+         "En qué versión se arregló"
+        ],
+        "a": 1,
+        "e": "La prioridad es la urgencia; la severidad es la gravedad del efecto."
+       }
+      }
+     ]
+    },
+    {
+     "id": "jbgl4",
+     "title": "Gestionar, medir y aprender: JQL, tableros y causa raíz",
+     "comp": "Gestión y métricas",
+     "cues": [
+      {
+       "say": "JQL es el lenguaje de consultas de Jira. Con unas pocas consultas el equipo arma su tablero de seguimiento: errores abiertos, críticos abiertos, recurrentes y cerrados del mes. Los resultados se muestran en tableros con gadgets.",
+       "scene": {
+        "t": "bul",
+        "k": "JQL",
+        "h": "Consultas que usa el equipo",
+        "items": [
+         "Abiertos: project = PLANTA AND issuetype = Bug AND statusCategory != Done",
+         "Críticos abiertos: ... AND cf[Severidad] = Crítica",
+         "Recurrentes: labels = recurrente AND statusCategory != Done",
+         "Cerrados del mes: resolved >= startOfMonth()"
+        ]
+       },
+       "notes": [
+        {
+         "t": "JQL",
+         "k": "JQL",
+         "n": "Jira Query Language: lenguaje para buscar y filtrar tickets con condiciones."
+        }
+       ]
+      },
+      {
+       "say": "Tres métricas basta para empezar: el tiempo medio de resolución, la tasa de reapertura y la tasa de escape, que es la proporción de errores hallados en operación. Se miden por severidad, para no mezclar críticos con cosméticos.",
+       "scene": {
+        "t": "fm",
+        "k": "Métricas",
+        "h": "Tiempo de resolución y reincidencia",
+        "f": "MTTR = Σ (fecha de resolución − fecha de reporte) ÷ N.º de errores resueltos\n\nTasa de reapertura = errores reabiertos ÷ errores cerrados\nTasa de escape = errores hallados en operación ÷ total de errores",
+        "n": "Se miden por severidad: promediar críticos con cosméticos oculta lo importante."
+       }
+      },
+      {
+       "say": "Cada error importante debería terminar con una causa raíz registrada. La técnica de los cinco porqués ayuda a llegar a una causa del sistema y no a un culpable. La acción correctiva se enlaza al ticket y se revisa cada trimestre.",
+       "scene": {
+        "t": "bul",
+        "k": "Causa raíz",
+        "h": "Aprender de cada error importante",
+        "items": [
+         "Preguntar por qué cinco veces hasta llegar a una causa del sistema",
+         "Registrar la causa en un campo obligatorio al cerrar",
+         "Enlazar el error con la acción correctiva",
+         "Revisar las causas más frecuentes cada trimestre"
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Una tasa de escape alta indica que:",
+        "o": [
+         "Se encuentran pocos errores en operación",
+         "Los errores llegan a operación sin detectarse antes",
+         "El equipo es más rápido",
+         "Hay menos usuarios"
+        ],
+        "a": 1,
+        "e": "La tasa de escape mide los errores que se detectan recién en operación."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "La prioridad indica:",
+     "o": [
+      "Qué tan grave es el efecto",
+      "Qué tan pronto corregir",
+      "Quién lo reportó",
+      "El componente"
+     ],
+     "a": 1,
+     "e": "La severidad es la gravedad; la prioridad, la urgencia."
+    },
+    {
+     "q": "Un error ya reportado se:",
+     "o": [
+      "Ignora",
+      "Enlaza como duplicado y suma recurrencia",
+      "Borra",
+      "Reasigna a otro proyecto"
+     ],
+     "a": 1,
+     "e": "Se conserva la señal de repetición."
+    },
+    {
+     "q": "El MTTR es:",
+     "o": [
+      "El tiempo medio de resolución",
+      "El máximo de reportes",
+      "La tasa de escape",
+      "Una prioridad"
+     ],
+     "a": 0,
+     "e": "Mean time to resolve/repair."
+    }
+   ]
+  },
+  {
+   "id": "jbgm3",
+   "title": "Módulo 3 · Caso completo de medición de tanques",
+   "lessons": [
+    {
+     "id": "jbgl5",
+     "title": "Caso completo (1): detectar, reportar y clasificar",
+     "comp": "Caso de medición de tanques",
+     "cues": [
+      {
+       "say": "Presentamos el caso, un ejemplo didáctico. Una planta de almacenamiento tiene seis tanques con medición automática de nivel, alarmas en el sistema SCADA y un interruptor independiente de alto nivel. Los problemas se comunicaban por radio y por correo.",
+       "scene": {
+        "t": "bul",
+        "k": "Contexto",
+        "h": "Una planta de almacenamiento de ejemplo",
+        "items": [
+         "Seis tanques de combustible con medición automática de nivel",
+         "Un sistema SCADA con alarmas de alto nivel y un interruptor independiente",
+         "Antes: errores comunicados por radio y correo, sin registro común",
+         "Objetivo: un seguimiento único con escalamiento por severidad"
+        ]
+       }
+      },
+      {
+       "say": "En la primera semana se reportan seis errores. Dos son críticos porque afectan barreras contra el sobrellenado. Se escalan de inmediato por el sistema de gestión de seguridad de procesos y por el responsable de la planta.",
+       "scene": {
+        "t": "tbl",
+        "k": "Seis reportes",
+        "h": "Triaje inicial de los errores del caso",
+        "cols": [
+         "Ticket",
+         "Resumen",
+         "Severidad",
+         "Prioridad"
+        ],
+        "rows": [
+         [
+          "PLA-1",
+          "Medidor del tanque 3 se congela al llenar",
+          "Crítica",
+          "Más alta"
+         ],
+         [
+          "PLA-2",
+          "Interruptor independiente sin comprobar tras prueba",
+          "Crítica",
+          "Más alta"
+         ],
+         [
+          "PLA-3",
+          "Alarma de alto nivel configurada bajo el máximo operativo",
+          "Alta",
+          "Alta"
+         ],
+         [
+          "PLA-4",
+          "Valor congelado sin indicación de calidad",
+          "Alta",
+          "Alta"
+         ],
+         [
+          "PLA-5",
+          "Unidad equivocada en el reporte de inventario",
+          "Alta",
+          "Media"
+         ],
+         [
+          "PLA-6",
+          "Etiqueta mal escrita en el tablero",
+          "Baja",
+          "Baja"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Veamos el primer reporte. Incluye los pasos para reproducirlo, el resultado esperado, el observado y el entorno. Con esa información, un técnico de instrumentos puede confirmar la falla sin llamar a quien la reportó.",
+       "scene": {
+        "t": "bul",
+        "k": "Primer reporte",
+        "h": "Un buen reporte de PLA-1",
+        "items": [
+         "Pasos: llenar el tanque 3 desde 40 por ciento y observar el valor en pantalla",
+         "Esperado: el nivel sube junto con el llenado",
+         "Observado: el valor queda fijo aunque el caudal continúa",
+         "Entorno: SCADA de la planta, tanque 3, turno noche"
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "En el caso, ¿por qué los dos errores críticos se escalan fuera de Jira?",
+        "o": [
+         "Porque afectan barreras de seguridad y requieren gestión de seguridad de procesos",
+         "Porque no se pueden registrar",
+         "Porque Jira no admite errores críticos",
+         "Para ocultarlos"
+        ],
+        "a": 0,
+        "e": "Jira apoya el seguimiento, pero las barreras de seguridad se gestionan con el sistema de seguridad de procesos."
+       }
+      }
+     ]
+    },
+    {
+     "id": "jbgl6",
+     "title": "Caso completo (2): resolver, verificar y aprender",
+     "comp": "Resolución y aprendizaje",
+     "cues": [
+      {
+       "say": "Los errores críticos se corrigen y se verifican con una prueba en campo hecha por una persona distinta de quien corrigió. Cada ticket cierra con la causa raíz y la acción correctiva registradas. Sin verificación, el ticket no se cierra.",
+       "scene": {
+        "t": "bul",
+        "k": "Resolución",
+        "h": "Qué ocurre con los errores críticos",
+        "items": [
+         "PLA-1: se cambia el sensor y se comprueba con llenado de prueba",
+         "PLA-2: se agrega la comprobación del interruptor a la lista del turno",
+         "Ambos se verifican por una persona distinta de quien corrigió",
+         "Se registran causa raíz y acción correctiva en cada ticket"
+        ]
+       }
+      },
+      {
+       "say": "Más adelante, la falla de congelamiento aparece en otros tanques. Cada aviso se enlaza como duplicado y suma una recurrencia. Al llegar a tres, la regla sube la prioridad y notifica. Lo repetido deja de ser una molestia y pasa a ser riesgo.",
+       "scene": {
+        "t": "bul",
+        "k": "Recurrencia",
+        "h": "Regla de escalamiento automático",
+        "items": [
+         "En el mes aparece tres veces la falla de congelamiento en otros tanques",
+         "Cada aviso se enlaza como duplicado y suma una recurrencia",
+         "Al llegar a tres, Jira sube la prioridad y notifica al responsable",
+         "Se abre una acción correctiva de fondo con el proveedor"
+        ]
+       }
+      },
+      {
+       "say": "Tras un trimestre, no queda ningún error sin responsable, los críticos se resuelven en dos días y la acción de fondo con el proveedor elimina la repetición. La tasa de reapertura de ocho por ciento sirve como punto de partida.",
+       "scene": {
+        "t": "tbl",
+        "k": "Resultados",
+        "h": "Primer trimestre (datos ilustrativos)",
+        "cols": [
+         "Métrica",
+         "Antes",
+         "Después"
+        ],
+        "rows": [
+         [
+          "Errores sin responsable",
+          "Sin dato",
+          "0"
+         ],
+         [
+          "MTTR de severidad crítica",
+          "Sin dato",
+          "2 días"
+         ],
+         [
+          "Errores críticos que se repitieron",
+          "3 sin registro",
+          "0 tras la acción de fondo"
+         ],
+         [
+          "Tasa de reapertura",
+          "Sin dato",
+          "8 %"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Las lecciones. Un error conocido que se repite debe escalarse. Un control de seguridad se prueba, no se supone. Y Jira organiza el seguimiento, pero no reemplaza la gestión de cambios, el mantenimiento ni la seguridad de procesos.",
+       "scene": {
+        "t": "bul",
+        "k": "Lecciones",
+        "h": "Lo que deja el caso",
+        "items": [
+         "Un error conocido que se repite debe escalarse",
+         "Los controles de seguridad se prueban y se verifican, no se suponen",
+         "Jira organiza el seguimiento; no reemplaza el sistema de gestión de seguridad de procesos ni el de mantenimiento",
+         "Las métricas se miran por severidad"
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "La regla de recurrencia del caso sirve para:",
+        "o": [
+         "Cerrar tickets más rápido",
+         "Escalar errores repetidos antes de que se normalicen",
+         "Eliminar duplicados",
+         "Reducir la severidad"
+        ],
+        "a": 1,
+        "e": "Un error que se repite se vuelve una señal de riesgo."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "En el caso, los errores críticos se escalan por:",
+     "o": [
+      "Correo común",
+      "El sistema de gestión de seguridad de procesos",
+      "Un comentario",
+      "Nadie"
+     ],
+     "a": 1,
+     "e": "Afectan barreras de seguridad."
+    },
+    {
+     "q": "La verificación de la corrección la hace:",
+     "o": [
+      "La misma persona",
+      "Una persona distinta",
+      "El proveedor solamente",
+      "Jira automáticamente"
+     ],
+     "a": 1,
+     "e": "Verificación independiente."
+    },
+    {
+     "q": "Un error que se repite es:",
+     "o": [
+      "Una molestia",
+      "Una señal de riesgo",
+      "Un error menor",
+      "Algo normal"
+     ],
+     "a": 1,
+     "e": "Debe escalarse."
+    }
+   ]
+  }
+ ],
+ "exam": [
+  {
+   "q": "Un error produce una falla cuando:",
+   "o": [
+    "El defecto actúa",
+    "Se cierra el ticket",
+    "Cambia la versión",
+    "Hay un duplicado"
+   ],
+   "a": 0,
+   "e": "La falla es el efecto del defecto."
+  },
+  {
+   "q": "¿Qué dato permite reproducir un error?",
+   "o": [
+    "Los pasos para reproducir",
+    "El prestigio de quien reporta",
+    "El color",
+    "El horario"
+   ],
+   "a": 0,
+   "e": "Son el dato más útil según Bettenburg y colaboradores."
+  },
+  {
+   "q": "Un error que afecta una barrera de seguridad tiene severidad:",
+   "o": [
+    "Baja",
+    "Media",
+    "Crítica",
+    "Cosmética"
+   ],
+   "a": 2,
+   "e": "Es la categoría más grave."
+  },
+  {
+   "q": "Una tasa de reapertura alta sugiere:",
+   "o": [
+    "Mejor verificación",
+    "Correcciones o verificaciones deficientes",
+    "Menos errores",
+    "Más prioridad"
+   ],
+   "a": 1,
+   "e": "Los tickets vuelven a abrirse porque no se resolvió bien."
+  },
+  {
+   "q": "JQL sirve para:",
+   "o": [
+    "Escribir informes en Word",
+    "Buscar y filtrar tickets",
+    "Crear usuarios",
+    "Diseñar flujos"
+   ],
+   "a": 1,
+   "e": "Es el lenguaje de consultas de Jira."
+  },
+  {
+   "q": "Jira, respecto de la gestión de seguridad de procesos:",
+   "o": [
+    "La reemplaza",
+    "La complementa para el seguimiento",
+    "La elimina",
+    "La define"
+   ],
+   "a": 1,
+   "e": "El seguimiento no sustituye los sistemas de gestión de seguridad."
+  }
+ ],
+ "outro": {
+  "can": [
+   "la diferencia entre error, defecto y falla, y el ciclo de vida de un ticket",
+   "configurar un proyecto de seguimiento de errores con campos, flujo y componentes en Jira",
+   "clasificar por severidad y prioridad, tratar duplicados y escalar la recurrencia",
+   "llevar un caso completo de medición de tanques con métricas y causa raíz"
+  ],
+  "phrase": "Lo que se repite sin registro se vuelve costumbre; lo que se registra se puede corregir.",
+  "recap": [
+   "Un buen reporte permite reproducir el error sin preguntar a quien lo reportó.",
+   "Severidad y prioridad son conceptos distintos, y la recurrencia es una señal de riesgo.",
+   "Jira ordena el seguimiento, pero las barreras de seguridad se gestionan con su propio sistema."
+  ]
+ },
+ "downloads": [
+  {
+   "file": "xlsx/H3L_Errores_Triaje_y_Metricas.xlsx",
+   "title": "Registro de errores, triaje y métricas (Excel)",
+   "desc": "Veinticinco errores de ejemplo con severidad, prioridad, fechas, estado y recurrencia; MTTR por severidad, tasa de reapertura, tasa de escape y regla de escalamiento. Datos ilustrativos.",
+   "task": "Cargá tres errores nuevos de severidad crítica y observá cómo cambia el MTTR. Después bajá el umbral de recurrencia de 3 a 2 y contá cuántos errores quedan escalados."
+  }
+ ],
+ "cases": [
+  {
+   "title": "Buncefield (Reino Unido, 2005)",
+   "text": "El 10 y 11 de diciembre de 2005, el tanque 912 del depósito de Buncefield se sobrellenó con nafta. El medidor automático dejó de reflejar el nivel y el interruptor independiente de alto nivel estaba inoperante, porque faltaba colocar un candado que lo mantenía en posición de trabajo; el proveedor no había comunicado ese punto. Se produjeron explosiones y un incendio de cinco días. La investigación oficial publicó su informe final en 2008.",
+   "src": "Buncefield Major Incident Investigation Board (2008), The Buncefield Incident 11 December 2005: The final report, ISBN 978 0 7176 6270 8; HSE, Buncefield: Why did it happen? (2011)"
+  }
+ ],
+ "refs": [
+  {
+   "tag": "Informe",
+   "cite": "Buncefield Major Incident Investigation Board (2008). The Buncefield Incident 11 December 2005: The final report of the Major Incident Investigation Board. HSE Books, ISBN 978 0 7176 6270 8.",
+   "why": "fallas de protecciones y su gestión"
+  },
+  {
+   "tag": "Informe",
+   "cite": "HSE, Environment Agency y SEPA (2011). Buncefield: Why did it happen? The underlying causes of the explosion and fire at the Buncefield oil storage depot, Hemel Hempstead, England, on 11 December 2005.",
+   "why": "causas subyacentes"
+  },
+  {
+   "tag": "Norma",
+   "cite": "IEEE (2009). IEEE Std 1044-2009: Standard Classification for Software Anomalies.",
+   "why": "clasificación de anomalías"
+  },
+  {
+   "tag": "Norma",
+   "cite": "ISO/IEC/IEEE (2017). ISO/IEC/IEEE 24765: Systems and software engineering — Vocabulary.",
+   "why": "error, defecto y falla"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Bettenburg, N., Just, S., Schröter, A., Weiss, C., Premraj, R. y Zimmermann, T. (2008). What makes a good bug report? Proceedings of the 16th ACM SIGSOFT International Symposium on Foundations of Software Engineering, 308–318.",
+   "why": "calidad de un reporte"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Anvik, J., Hiew, L. y Murphy, G. C. (2006). Who should fix this bug? Proceedings of the 28th International Conference on Software Engineering, 361–370.",
+   "why": "triaje y asignación"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Zeller, A. (2009). Why Programs Fail: A Guide to Systematic Debugging, 2.ª ed. Morgan Kaufmann.",
+   "why": "diagnóstico sistemático"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Center for Chemical Process Safety (2007). Guidelines for Risk Based Process Safety. Wiley / AIChE.",
+   "why": "gestión de seguridad de procesos"
+  },
+  {
+   "tag": "Norma",
+   "cite": "IEC (2016). IEC 61511-1: Functional safety — Safety instrumented systems for the process industry sector.",
+   "why": "sistemas instrumentados de seguridad"
+  },
+  {
+   "tag": "Documentación",
+   "cite": "Atlassian. Jira Software Cloud: documentación de proyectos de seguimiento de errores, flujos de trabajo y JQL. support.atlassian.com/jira-software-cloud",
+   "why": "configuración en Jira"
+  }
+ ]
+}

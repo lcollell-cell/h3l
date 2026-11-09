@@ -1,0 +1,1032 @@
+{
+ "id": "jcl",
+ "title": "Gestión clásica de proyectos con Jira: planificación por fases y control en Oil & Gas",
+ "subtitle": "Fases y compuertas, EDT, ruta crítica, control de cambios y seguimiento en Jira, con un caso completo de perforación de un pozo.",
+ "desc": "Curso aplicado de gestión clásica de proyectos con Jira, basado en el PMBOK y en prácticas de la industria: grupos de procesos, fases y compuertas, estructura de desglose del trabajo, dependencias y ruta crítica, configuración de Jira con épicas, hitos, flujo con aprobación y vistas de cronograma, control de cambios y límites de la herramienta. Se cierra con un caso completo, de inicio a fin, de perforación y puesta en producción de un pozo horizontal.",
+ "objectives": [
+  "Describir los grupos de procesos, las fases y las compuertas de la gestión clásica.",
+  "Armar una EDT y una red de actividades, y calcular la ruta crítica y las holguras.",
+  "Configurar en Jira épicas, hitos, vínculos, flujo con aprobación y control de cambios.",
+  "Llevar un caso de inicio a fin, con un desvío, un cambio aprobado y el cierre con lecciones."
+ ],
+ "labs": [],
+ "practiceMin": 90,
+ "competencies": [
+  {
+   "name": "Fundamentos de gestión clásica",
+   "lessons": [
+    "jcll1"
+   ]
+  },
+  {
+   "name": "Alcance y cronograma",
+   "lessons": [
+    "jcll2"
+   ]
+  },
+  {
+   "name": "Jira para proyectos por fases",
+   "lessons": [
+    "jcll3",
+    "jcll4"
+   ]
+  },
+  {
+   "name": "Caso de perforación de un pozo",
+   "lessons": [
+    "jcll5",
+    "jcll6"
+   ]
+  }
+ ],
+ "intro": {
+  "hook": "Vamos a aprender a planificar un proyecto por fases, calcular su ruta crítica y controlar los cambios, usando Jira para dar trazabilidad al trabajo de todo el equipo.",
+  "questions": [
+   "¿Cómo se divide un proyecto grande en fases y entregables controlables?",
+   "¿Qué hace crítica a una actividad y cuándo puede cambiar?",
+   "¿Qué puede hacer Jira en un proyecto clásico y qué debe completarse con otras herramientas?"
+  ],
+  "star": {
+   "caso": "Gorgon LNG (Australia): una línea base que se movió",
+   "S": "Gorgon, proyecto de gas natural licuado de Chevron en la isla Barrow, en Australia Occidental, se aprobó en 2009 con un presupuesto de 37.000 millones de dólares.",
+   "T": "Producir el primer GNL en el plazo y dentro del costo de la línea base aprobada.",
+   "A": "Chevron revisó dos veces el costo de capital. Atribuyó los sobrecostos al clima, a un dólar australiano alto, a problemas logísticos y a baja productividad.",
+   "R": "El presupuesto llegó a 54.000 millones de dólares, y el primer GNL se produjo en 2016, casi 18 meses después de lo previsto, según Energy News Bulletin."
+  }
+ },
+ "modules": [
+  {
+   "id": "jclm1",
+   "title": "Módulo 1 · Fundamentos de gestión clásica",
+   "lessons": [
+    {
+     "id": "jcll1",
+     "title": "Gestión clásica: fases, grupos de procesos y compuertas",
+     "comp": "Fundamentos de gestión clásica",
+     "cues": [
+      {
+       "say": "La gestión clásica organiza el proyecto en grupos de procesos: inicio, planificación, ejecución, seguimiento y control, y cierre. Así los describe la guía del PMBOK, del Project Management Institute. La séptima edición agrega principios y dominios de desempeño.",
+       "scene": {
+        "t": "tbl",
+        "k": "Procesos",
+        "h": "Los cinco grupos de procesos del PMBOK",
+        "cols": [
+         "Grupo",
+         "Qué se hace",
+         "Resultado típico"
+        ],
+        "rows": [
+         [
+          "Inicio",
+          "Justificar y autorizar el proyecto",
+          "Acta de constitución"
+         ],
+         [
+          "Planificación",
+          "Definir alcance, cronograma, costo y riesgos",
+          "Plan y líneas base"
+         ],
+         [
+          "Ejecución",
+          "Realizar el trabajo del plan",
+          "Entregables"
+         ],
+         [
+          "Seguimiento y control",
+          "Medir, comparar con la línea base y corregir",
+          "Informes y cambios aprobados"
+         ],
+         [
+          "Cierre",
+          "Entregar y registrar lo aprendido",
+          "Aceptación y lecciones"
+         ]
+        ]
+       },
+       "notes": [
+        {
+         "t": "PMBOK",
+         "k": "PMBOK",
+         "n": "Guide to the Project Management Body of Knowledge: guía del PMI con prácticas reconocidas en gestión de proyectos."
+        }
+       ]
+      },
+      {
+       "say": "En petróleo y gas es habitual dividir el proyecto en fases separadas por compuertas de decisión. Es el modelo de puertas y etapas que Cooper describió en mil novecientos noventa. En cada compuerta se decide si continuar, corregir o detener.",
+       "scene": {
+        "t": "viz",
+        "w": "concept",
+        "h": "Proyecto por fases con compuertas",
+        "p": {
+         "nodes": [
+          {
+           "l": "Concepto",
+           "x": 10,
+           "y": 50,
+           "c": "#8ea2bd",
+           "n": "Se define la oportunidad y el alcance preliminar."
+          },
+          {
+           "l": "Diseño",
+           "x": 30,
+           "y": 50,
+           "c": "#3A6BD0",
+           "n": "Se completa la ingeniería y se estima el costo."
+          },
+          {
+           "l": "Ejecución",
+           "x": 52,
+           "y": 50,
+           "c": "#17755A",
+           "n": "Se construye o perfora."
+          },
+          {
+           "l": "Puesta en marcha",
+           "x": 74,
+           "y": 50,
+           "c": "#b7791f",
+           "n": "Se prueba y se entrega a operaciones."
+          },
+          {
+           "l": "Cierre",
+           "x": 92,
+           "y": 50,
+           "c": "#8ea2bd",
+           "n": "Se registra lo aprendido."
+          }
+         ],
+         "edges": [
+          [
+           0,
+           1,
+           "Compuerta 1"
+          ],
+          [
+           1,
+           2,
+           "Compuerta 2"
+          ],
+          [
+           2,
+           3,
+           "Compuerta 3"
+          ],
+          [
+           3,
+           4,
+           "Compuerta 4"
+          ]
+         ],
+         "hint": "Tocá cada bloque para ver el detalle."
+        }
+       },
+       "notes": [
+        {
+         "t": "compuertas",
+         "k": "compuerta",
+         "n": "Gate: punto de revisión al final de una fase donde se decide si el proyecto continúa."
+        }
+       ]
+      },
+      {
+       "say": "La gestión clásica conviene cuando el alcance es estable, hay contratos con entregables fijos y se necesita controlar contra una línea base. Si los requisitos cambian mucho, conviene Scrum, y si el trabajo es continuo, Kanban.",
+       "scene": {
+        "t": "tbl",
+        "k": "Elección",
+        "h": "Cuándo conviene la gestión clásica",
+        "cols": [
+         "Situación",
+         "Conviene",
+         "Por qué"
+        ],
+        "rows": [
+         [
+          "Alcance estable y conocido",
+          "Clásica",
+          "El plan puede definirse por adelantado"
+         ],
+         [
+          "Obra con contrato y entregables fijos",
+          "Clásica",
+          "Hay que controlar contra una línea base"
+         ],
+         [
+          "Producto con requisitos que cambian",
+          "Ágil",
+          "Se aprende entregando por partes"
+         ],
+         [
+          "Trabajo continuo",
+          "Kanban",
+          "Lo importante es el flujo"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "¿Qué se decide en una compuerta?",
+        "o": [
+         "Si el proyecto continúa, se corrige o se detiene",
+         "Cuántos puntos tiene una historia",
+         "El color del tablero",
+         "El horario del equipo"
+        ],
+        "a": 0,
+        "e": "La compuerta es un punto formal de decisión entre fases."
+       }
+      }
+     ]
+    },
+    {
+     "id": "jcll2",
+     "title": "Alcance, EDT, dependencias y ruta crítica",
+     "comp": "Alcance y cronograma",
+     "cues": [
+      {
+       "say": "La estructura de desglose del trabajo, o EDT, divide el alcance en entregables y paquetes de trabajo. Cumple la regla del cien por ciento: lo que está en los hijos cubre todo el alcance del padre. Define qué se hace, no cuándo.",
+       "scene": {
+        "t": "bul",
+        "k": "EDT",
+        "h": "Estructura de desglose del trabajo",
+        "items": [
+         "Divide el alcance en entregables y paquetes de trabajo",
+         "Regla del cien por ciento: la suma de los hijos cubre todo el alcance del padre",
+         "Cada paquete tiene un responsable y un criterio de aceptación",
+         "La EDT define qué se hace; el cronograma, cuándo"
+        ]
+       }
+      },
+      {
+       "say": "El método del camino crítico calcula las fechas tempranas con una pasada hacia adelante y las tardías con una pasada hacia atrás. La holgura total es la diferencia. La ruta crítica reúne las actividades sin holgura: cualquier atraso mueve el fin del proyecto.",
+       "scene": {
+        "t": "fm",
+        "k": "Ruta crítica",
+        "h": "Método del camino crítico",
+        "f": "Pasada hacia adelante: Inicio temprano + Duración = Fin temprano\nPasada hacia atrás: Fin tardío − Duración = Inicio tardío\n\nHolgura total = Inicio tardío − Inicio temprano\nRuta crítica: actividades con holgura total = 0",
+        "n": "El método fue presentado por Kelley y Walker en 1959."
+       },
+       "notes": [
+        {
+         "t": "holgura",
+         "k": "holgura",
+         "n": "Tiempo que una actividad puede demorarse sin retrasar el fin del proyecto."
+        }
+       ]
+      },
+      {
+       "say": "Las dependencias son de cuatro tipos. La más común es de fin a inicio: una actividad empieza cuando termina la anterior. También existen inicio a inicio, fin a fin e inicio a fin, que es la menos usada.",
+       "scene": {
+        "t": "tbl",
+        "k": "Dependencias",
+        "h": "Cuatro tipos de relación",
+        "cols": [
+         "Tipo",
+         "Significado",
+         "Ejemplo"
+        ],
+        "rows": [
+         [
+          "Fin a inicio",
+          "B empieza cuando A termina",
+          "Perforar y luego terminar el pozo"
+         ],
+         [
+          "Inicio a inicio",
+          "B empieza cuando A empieza",
+          "Compras y permisos en paralelo"
+         ],
+         [
+          "Fin a fin",
+          "B termina cuando A termina",
+          "Pruebas y documentación"
+         ],
+         [
+          "Inicio a fin",
+          "B termina cuando A empieza",
+          "Raro; guardia hasta que arranque el turno"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "La holgura total de una actividad crítica es:",
+        "o": [
+         "Cero",
+         "Diez días",
+         "Negativa siempre",
+         "Igual a su duración"
+        ],
+        "a": 0,
+        "e": "Las actividades críticas no tienen holgura."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "La guía del PMBOK organiza el proyecto en:",
+     "o": [
+      "Sprints",
+      "Grupos de procesos",
+      "Columnas",
+      "Equipos"
+     ],
+     "a": 1,
+     "e": "Inicio, planificación, ejecución, seguimiento y control, y cierre."
+    },
+    {
+     "q": "La regla del cien por ciento se refiere a:",
+     "o": [
+      "La EDT",
+      "El costo",
+      "El riesgo",
+      "La calidad"
+     ],
+     "a": 0,
+     "e": "La suma de los hijos cubre todo el alcance del padre."
+    },
+    {
+     "q": "En la ruta crítica, la holgura total es:",
+     "o": [
+      "Mayor que cero",
+      "Cero",
+      "Negativa",
+      "Infinita"
+     ],
+     "a": 1,
+     "e": "No hay margen sin retrasar el fin."
+    }
+   ]
+  },
+  {
+   "id": "jclm2",
+   "title": "Módulo 2 · Jira para proyectos por fases",
+   "lessons": [
+    {
+     "id": "jcll3",
+     "title": "Configurar Jira para un proyecto por fases",
+     "comp": "Configuración en Jira",
+     "cues": [
+      {
+       "say": "En Jira, las fases o entregables se representan como épicas y los paquetes de trabajo como tareas. En un proyecto gestionado por la empresa se crean tipos propios, como Hito para las compuertas y Cambio para el control de cambios.",
+       "scene": {
+        "t": "tbl",
+        "k": "Estructura",
+        "h": "Cómo se representa el proyecto en Jira",
+        "cols": [
+         "Elemento del proyecto",
+         "Elemento de Jira",
+         "Ejemplo"
+        ],
+        "rows": [
+         [
+          "Fase o entregable",
+          "Épica",
+          "Perforación"
+         ],
+         [
+          "Paquete de trabajo",
+          "Tarea",
+          "Perforar la sección vertical"
+         ],
+         [
+          "Paso",
+          "Subtarea",
+          "Revisar el programa de lodos"
+         ],
+         [
+          "Compuerta",
+          "Tipo de ticket Hito",
+          "Listo para perforar"
+         ],
+         [
+          "Cambio",
+          "Tipo de ticket Cambio",
+          "Aumentar un turno en locación"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "El flujo de trabajo puede incluir una aprobación. Se restringe la transición a Aprobado a un rol autorizado, y se exigen campos como el criterio de aceptación. El historial del ticket deja registro de quién aprobó y cuándo.",
+       "scene": {
+        "t": "bul",
+        "k": "Flujo",
+        "h": "Un flujo con aprobación",
+        "items": [
+         "Estados: Propuesto, En revisión, Aprobado, En ejecución, Verificado y Cerrado",
+         "La transición a Aprobado solo la hace un rol autorizado",
+         "Campos obligatorios: entregable y criterio de aceptación",
+         "Un historial que muestra quién aprobó y cuándo"
+        ]
+       }
+      },
+      {
+       "say": "Los vínculos entre tickets permiten mostrar dependencias. La vista Timeline presenta épicas, fechas y dependencias de un proyecto, y en Jira Premium la función Plans planifica entre varios equipos. Pero Jira no calcula la ruta crítica de forma nativa.",
+       "scene": {
+        "t": "bul",
+        "k": "Cronograma",
+        "h": "Vínculos y vista de cronograma",
+        "items": [
+         "Los tickets se enlazan con relaciones como bloquea y es bloqueado por",
+         "La vista Timeline muestra épicas, fechas y dependencias de un proyecto",
+         "Plans, de Jira Premium, planifica entre varios equipos y proyectos",
+         "Jira no calcula la ruta crítica de forma nativa"
+        ]
+       },
+       "notes": [
+        {
+         "t": "Timeline",
+         "k": "Timeline",
+         "n": "Vista de cronograma de Jira con barras para épicas y tickets según sus fechas."
+        }
+       ]
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Para la compuerta de un proyecto en Jira conviene crear:",
+        "o": [
+         "Un tipo de ticket Hito con aprobación",
+         "Un sprint",
+         "Una subtarea sin responsable",
+         "Un comentario"
+        ],
+        "a": 0,
+        "e": "El hito con transición controlada permite registrar la decisión."
+       }
+      }
+     ]
+    },
+    {
+     "id": "jcll4",
+     "title": "Seguimiento, control de cambios y límites de Jira",
+     "comp": "Seguimiento y control",
+     "cues": [
+      {
+       "say": "El seguimiento semanal se apoya en un tablero con gadgets: tickets vencidos, bloqueados, creados frente a resueltos, avance por épica y próximos hitos. El informe de estado sale de esos datos y no de la memoria de cada responsable.",
+       "scene": {
+        "t": "bul",
+        "k": "Tableros",
+        "h": "Información para el seguimiento semanal",
+        "items": [
+         "Filtro de tickets vencidos y de tickets bloqueados",
+         "Gráfico de tickets creados frente a resueltos",
+         "Estado por épica: porcentaje de tareas terminadas",
+         "Lista de hitos próximos y de cambios pendientes"
+        ]
+       }
+      },
+      {
+       "say": "Todo cambio al alcance, al plazo o al costo se registra como un ticket, con su motivo y su impacto. Lo evalúa y lo aprueba el comité o el patrocinador según un umbral. Aprobado el cambio, se actualizan los tickets y la línea base.",
+       "scene": {
+        "t": "bul",
+        "k": "Control de cambios",
+        "h": "Un cambio no es un pedido informal",
+        "items": [
+         "Se registra como ticket de tipo Cambio con motivo e impacto",
+         "Se evalúa el efecto sobre alcance, plazo, costo y riesgo",
+         "Lo aprueba el comité o el patrocinador, según el umbral",
+         "Si se aprueba, se actualizan los tickets y la línea base"
+        ]
+       }
+      },
+      {
+       "say": "Conviene conocer los límites. Jira no calcula la ruta crítica, no guarda líneas base de costo y plazo de forma nativa ni calcula valor ganado. Esas funciones se completan con Primavera, con aplicaciones del Marketplace o con una planilla de control.",
+       "scene": {
+        "t": "tbl",
+        "k": "Límites",
+        "h": "Qué cubre Jira y qué se complementa",
+        "cols": [
+         "Necesidad",
+         "Jira",
+         "Cómo se completa"
+        ],
+        "rows": [
+         [
+          "Ruta crítica",
+          "No calcula",
+          "Primavera, Microsoft Project o aplicaciones del Marketplace"
+         ],
+         [
+          "Línea base de costo y plazo",
+          "No nativa",
+          "Planilla o aplicación específica"
+         ],
+         [
+          "Valor ganado",
+          "No nativo",
+          "Planilla de control, como la del curso"
+         ],
+         [
+          "Aprobaciones y trazabilidad",
+          "Sí, con flujos y roles",
+          "—"
+         ]
+        ]
+       },
+       "notes": [
+        {
+         "t": "valor ganado",
+         "k": "valor ganado",
+         "n": "Técnica que compara el trabajo realizado con el planificado y el costo real. Se verá en los cursos de Primavera."
+        }
+       ]
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Un cambio de alcance en este modelo se gestiona:",
+        "o": [
+         "Con un ticket de cambio aprobado por quien corresponde",
+         "Con un correo informal",
+         "Sin registro",
+         "Solo al final del proyecto"
+        ],
+        "a": 0,
+        "e": "El ticket deja trazabilidad de motivo, impacto y aprobación."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "En Jira, una fase se suele representar como:",
+     "o": [
+      "Una épica",
+      "Un sprint",
+      "Un comentario",
+      "Un usuario"
+     ],
+     "a": 0,
+     "e": "La épica agrupa el trabajo de la fase."
+    },
+    {
+     "q": "Jira, por sí solo, no:",
+     "o": [
+      "Registra aprobaciones",
+      "Calcula la ruta crítica",
+      "Enlaza tickets",
+      "Muestra una vista de cronograma"
+     ],
+     "a": 1,
+     "e": "Para ruta crítica se usa otra herramienta."
+    },
+    {
+     "q": "Un cambio aprobado debe:",
+     "o": [
+      "Quedar sin registro",
+      "Actualizar tickets y línea base",
+      "Esperar al cierre",
+      "Eliminarse"
+     ],
+     "a": 1,
+     "e": "Se mantiene la trazabilidad."
+    }
+   ]
+  },
+  {
+   "id": "jclm3",
+   "title": "Módulo 3 · Caso completo de perforación de un pozo",
+   "lessons": [
+    {
+     "id": "jcll5",
+     "title": "Caso completo (1): inicio y planificación del pozo",
+     "comp": "Caso de perforación de un pozo",
+     "cues": [
+      {
+       "say": "Presentamos el caso, un ejemplo didáctico con datos ilustrativos. Se debe perforar, terminar y poner en producción un pozo horizontal en un yacimiento no convencional. El presupuesto es de nueve coma cuatro millones de dólares.",
+       "scene": {
+        "t": "bul",
+        "k": "Contexto",
+        "h": "Un pozo horizontal de ejemplo en un yacimiento no convencional",
+        "items": [
+         "Objetivo: pozo terminado y en producción en 111 días como máximo",
+         "Presupuesto de ejemplo: 9,4 millones de dólares",
+         "Patrocinador: gerente de activo; gerente de proyecto: ingeniero de pozos",
+         "Datos ilustrativos, para practicar el método"
+        ]
+       }
+      },
+      {
+       "say": "Paso uno, armar la red. Hay diez actividades con sus duraciones y predecesoras. La ingeniería y los permisos arrancan en paralelo, y la movilización del equipo espera materiales y locación.",
+       "scene": {
+        "t": "tbl",
+        "k": "Actividades",
+        "h": "Red del proyecto con duraciones y predecesoras",
+        "cols": [
+         "Actividad",
+         "Días",
+         "Predecesora"
+        ],
+        "rows": [
+         [
+          "A Ingeniería del pozo",
+          "20",
+          "—"
+         ],
+         [
+          "B Permisos ambientales y de superficie",
+          "30",
+          "—"
+         ],
+         [
+          "C Compra de materiales críticos",
+          "25",
+          "A"
+         ],
+         [
+          "D Locación y camino",
+          "12",
+          "B"
+         ],
+         [
+          "E Movilización del equipo",
+          "5",
+          "C y D"
+         ],
+         [
+          "F Perforación",
+          "28",
+          "E"
+         ],
+         [
+          "G Terminación del pozo",
+          "12",
+          "F"
+         ],
+         [
+          "H Fractura hidráulica",
+          "9",
+          "G"
+         ],
+         [
+          "J Líneas de conducción",
+          "18",
+          "D"
+         ],
+         [
+          "I Puesta en producción",
+          "10",
+          "H y J"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Con la pasada hacia adelante, el camino de ingeniería y compras llega a cuarenta y cinco días, y el de permisos y locación a cuarenta y dos. La ruta crítica pasa por A, C, E, F, G, H e I, y dura ciento nueve días. Los permisos tienen tres días de holgura.",
+       "scene": {
+        "t": "fm",
+        "k": "Cálculo",
+        "h": "Ruta crítica del caso",
+        "f": "Camino 1: A 20 + C 25 = 45 días hasta la movilización\nCamino 2: B 30 + D 12 = 42 días  →  holgura de 3 días\n\nRuta crítica: A → C → E → F → G → H → I\nDuración total: 20 + 25 + 5 + 28 + 12 + 9 + 10 = 109 días",
+        "n": "Las líneas de conducción (J) tienen una holgura de 39 días."
+       }
+      },
+      {
+       "say": "Paso dos, cargar el plan en Jira. Se crean cinco épicas, las tareas con sus fechas y los enlaces de dependencia, y cinco hitos con aprobación. El costo presupuestado de cada tarea se carga como un campo, para poder exportarlo.",
+       "scene": {
+        "t": "bul",
+        "k": "Jira",
+        "h": "Cómo se carga el plan en Jira",
+        "items": [
+         "Cinco épicas: Ingeniería y permisos, Locación, Perforación, Terminación y fractura, Puesta en producción",
+         "Cada actividad es una tarea con fechas y enlaces de dependencia",
+         "Cinco hitos: diseño aprobado, listo para perforar, perforación terminada, pozo terminado y entrega",
+         "Campos de ejemplo: costo presupuestado y responsable"
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Los permisos (B) tienen tres días de holgura. Si se atrasan 5 días:",
+        "o": [
+         "La ruta crítica pasa por B y D, y el proyecto se atrasa 2 días",
+         "No pasa nada",
+         "El proyecto se adelanta",
+         "La ingeniería se detiene"
+        ],
+        "a": 0,
+        "e": "B más D pasarían a 47 días y superan a los 45 de A más C."
+       }
+      }
+     ]
+    },
+    {
+     "id": "jcll6",
+     "title": "Caso completo (2): ejecución, control de cambios y cierre",
+     "comp": "Ejecución y cierre",
+     "cues": [
+      {
+       "say": "La compuerta de listo para perforar tiene un criterio claro: permisos vigentes, locación recibida, materiales en sitio, programa aprobado y análisis de riesgos hecho. Si falta uno, el hito no se aprueba y no se moviliza el equipo.",
+       "scene": {
+        "t": "tbl",
+        "k": "Hito",
+        "h": "Compuerta «Listo para perforar»",
+        "cols": [
+         "Criterio",
+         "Responsable",
+         "Estado"
+        ],
+        "rows": [
+         [
+          "Permisos aprobados y vigentes",
+          "Ambiente",
+          "Cumplido"
+         ],
+         [
+          "Locación recibida y verificada",
+          "Construcción",
+          "Cumplido"
+         ],
+         [
+          "Materiales críticos en sitio",
+          "Compras",
+          "Cumplido"
+         ],
+         [
+          "Programa de perforación aprobado",
+          "Ingeniería",
+          "Cumplido"
+         ],
+         [
+          "Análisis de riesgos del equipo",
+          "Seguridad",
+          "Cumplido"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "En el mes uno, los permisos se atrasan cinco días. El camino de permisos y locación pasa a cuarenta y siete, mayor que los cuarenta y cinco del otro, y la ruta crítica cambia. El proyecto se retrasaría dos días.",
+       "scene": {
+        "t": "bul",
+        "k": "Desvío",
+        "h": "Los permisos se atrasan cinco días",
+        "items": [
+         "B pasa de 30 a 35 días y, con D de 12, llega a 47 días",
+         "La ruta crítica cambia: pasa por B y D, y el proyecto se retrasa 2 días",
+         "Cambio propuesto: un turno adicional en la locación, D baja a 10 días",
+         "Impacto: costo adicional de ejemplo de 40.000 dólares, sin retraso final"
+        ]
+       }
+      },
+      {
+       "say": "El gerente registra el cambio como ticket, con motivo, propuesta e impacto. El patrocinador compara el costo adicional con el valor de dos días de producción y lo aprueba. Se actualizan las fechas y la línea base.",
+       "scene": {
+        "t": "tbl",
+        "k": "Cambio",
+        "h": "Solicitud de cambio CAM-1",
+        "cols": [
+         "Campo",
+         "Contenido"
+        ],
+        "rows": [
+         [
+          "Motivo",
+          "Atraso de 5 días en permisos"
+         ],
+         [
+          "Propuesta",
+          "Un turno adicional en la locación"
+         ],
+         [
+          "Impacto en plazo",
+          "Se evita el atraso de 2 días"
+         ],
+         [
+          "Impacto en costo",
+          "Aumento de ejemplo de 40.000 dólares"
+         ],
+         [
+          "Decisión",
+          "Aprobado por el patrocinador; se actualiza la línea base"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Al cierre se registran las lecciones. Una actividad con holgura puede volverse crítica. La compuerta evitó movilizar el equipo sin permisos. Y Jira aportó trazabilidad, mientras que la ruta crítica y el valor ganado se calcularon en la planilla.",
+       "scene": {
+        "t": "bul",
+        "k": "Cierre",
+        "h": "Lecciones aprendidas",
+        "items": [
+         "Una actividad con holgura puede volverse crítica",
+         "La compuerta evitó movilizar el equipo sin permisos",
+         "El cambio quedó registrado con su aprobación",
+         "Jira dio trazabilidad; el cálculo de ruta crítica y valor ganado se hizo en la planilla"
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "¿Qué enseña el caso sobre la holgura?",
+        "o": [
+         "Que una actividad con holgura puede volverse crítica si se atrasa lo suficiente",
+         "Que nunca importa",
+         "Que solo importa la ruta crítica original",
+         "Que se debe eliminar"
+        ],
+        "a": 0,
+        "e": "Al consumirse la holgura, el camino se vuelve crítico."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "¿Cuánto dura la ruta crítica del caso?",
+     "o": [
+      "109 días",
+      "42 días",
+      "45 días",
+      "90 días"
+     ],
+     "a": 0,
+     "e": "20 + 25 + 5 + 28 + 12 + 9 + 10."
+    },
+    {
+     "q": "¿Qué actividad tiene 3 días de holgura al inicio?",
+     "o": [
+      "Ingeniería",
+      "Permisos",
+      "Perforación",
+      "Fractura"
+     ],
+     "a": 1,
+     "e": "B más D llegan a 42 días, frente a 45."
+    },
+    {
+     "q": "¿Cómo se gestionó el atraso de permisos?",
+     "o": [
+      "Con un ticket de cambio aprobado",
+      "Sin decisión",
+      "Cancelando el pozo",
+      "Reduciendo calidad"
+     ],
+     "a": 0,
+     "e": "Se registró y se aprobó el cambio."
+    }
+   ]
+  }
+ ],
+ "exam": [
+  {
+   "q": "Una compuerta es:",
+   "o": [
+    "Un punto de decisión entre fases",
+    "Una actividad",
+    "Un tipo de usuario",
+    "Un informe"
+   ],
+   "a": 0,
+   "e": "Se decide continuar, corregir o detener."
+  },
+  {
+   "q": "La EDT define:",
+   "o": [
+    "Qué se hace",
+    "Cuándo se hace",
+    "Quién paga",
+    "Cuánto vale"
+   ],
+   "a": 0,
+   "e": "Define alcance, no cronograma."
+  },
+  {
+   "q": "La relación más común entre actividades es:",
+   "o": [
+    "Fin a inicio",
+    "Inicio a fin",
+    "Fin a fin",
+    "Ninguna"
+   ],
+   "a": 0,
+   "e": "B empieza cuando A termina."
+  },
+  {
+   "q": "Jira, en un proyecto clásico, aporta sobre todo:",
+   "o": [
+    "Ruta crítica",
+    "Valor ganado",
+    "Trazabilidad de tareas, aprobaciones y cambios",
+    "Costos reales"
+   ],
+   "a": 2,
+   "e": "Esa es su fortaleza; lo demás se complementa."
+  },
+  {
+   "q": "Si una actividad con holgura se atrasa más que su holgura:",
+   "o": [
+    "Se vuelve crítica",
+    "Desaparece",
+    "Se adelanta",
+    "No cambia el plazo"
+   ],
+   "a": 0,
+   "e": "Consume la holgura y mueve el fin del proyecto."
+  },
+  {
+   "q": "Un cambio de alcance requiere:",
+   "o": [
+    "Registro, evaluación de impacto y aprobación",
+    "Un aviso informal",
+    "Esperar al cierre",
+    "Solo la firma del responsable"
+   ],
+   "a": 0,
+   "e": "Es el control integrado de cambios."
+  }
+ ],
+ "outro": {
+  "can": [
+   "los grupos de procesos y las compuertas de la gestión clásica",
+   "armar una EDT, una red de actividades y calcular la ruta crítica",
+   "configurar en Jira épicas, hitos, vínculos, flujo con aprobación y control de cambios",
+   "llevar de inicio a fin un proyecto de perforación de un pozo con sus desvíos"
+  ],
+  "phrase": "Un plan no es una promesa: es la base para decidir cuando algo cambia.",
+  "recap": [
+   "La gestión clásica planifica por fases y controla contra una línea base.",
+   "La ruta crítica cambia cuando se consume la holgura.",
+   "Jira da trazabilidad y aprobación; la ruta crítica y el valor ganado se complementan con otras herramientas."
+  ]
+ },
+ "downloads": [
+  {
+   "file": "xlsx/H3L_Proyecto_Clasico_Ruta_Critica.xlsx",
+   "title": "Red, ruta crítica y control de cambios del pozo (Excel)",
+   "desc": "Las diez actividades del caso con pasadas hacia adelante y hacia atrás, holguras, ruta crítica, presupuesto por actividad y registro de cambios. Datos ilustrativos.",
+   "task": "Cambiá la duración de Permisos de 30 a 35 días y observá cómo cambia la ruta crítica. Después probá reducir Locación de 12 a 10 días y verificá que se recupera el atraso."
+  }
+ ],
+ "cases": [
+  {
+   "title": "Gorgon LNG (Australia Occidental)",
+   "text": "Gorgon fue aprobado en 2009 con un presupuesto de 37.000 millones de dólares. Chevron revisó dos veces el costo de capital, y atribuyó los aumentos a las demoras por clima, a un dólar australiano alto, a la logística y a la baja productividad. El presupuesto llegó a 54.000 millones de dólares, y el primer GNL se produjo en 2016, casi 18 meses tarde.",
+   "src": "Hart Energy, Chevron flags Gorgon gas delay; Energy News Bulletin, Gorgon (primer GNL); Business News (Australia), Gorgon costs blowout"
+  }
+ ],
+ "refs": [
+  {
+   "tag": "Guía",
+   "cite": "Project Management Institute (2017). A Guide to the Project Management Body of Knowledge (PMBOK Guide), 6.ª ed. PMI.",
+   "why": "grupos de procesos y áreas de conocimiento"
+  },
+  {
+   "tag": "Guía",
+   "cite": "Project Management Institute (2021). A Guide to the Project Management Body of Knowledge (PMBOK Guide) y The Standard for Project Management, 7.ª ed. PMI.",
+   "why": "principios y dominios de desempeño"
+  },
+  {
+   "tag": "Norma",
+   "cite": "ISO (2020). ISO 21502:2020 Project, programme and portfolio management — Guidance on project management.",
+   "why": "guía internacional de gestión de proyectos"
+  },
+  {
+   "tag": "Guía",
+   "cite": "Project Management Institute (2019). Practice Standard for Work Breakdown Structures, 3.ª ed. PMI.",
+   "why": "estructura de desglose del trabajo"
+  },
+  {
+   "tag": "Guía",
+   "cite": "Project Management Institute (2019). Practice Standard for Scheduling, 3.ª ed. PMI.",
+   "why": "cronograma y ruta crítica"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Kelley, J. E. y Walker, M. R. (1959). Critical-path planning and scheduling. Proceedings of the Eastern Joint Computer Conference, 160–173.",
+   "why": "origen del método del camino crítico"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Cooper, R. G. (1990). Stage-gate systems: a new tool for managing new products. Business Horizons 33(3), 44–54.",
+   "why": "fases y compuertas"
+  },
+  {
+   "tag": "Recomendación",
+   "cite": "AACE International (1997). Recommended Practice 18R-97: Cost Estimate Classification System — As Applied in Engineering, Procurement, and Construction for the Process Industries.",
+   "why": "madurez de las estimaciones por fase"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Merrow, E. W. (2011). Industrial Megaprojects: Concepts, Strategies, and Practices for Success. Wiley.",
+   "why": "proyectos industriales de gran escala"
+  },
+  {
+   "tag": "Documentación",
+   "cite": "Atlassian. Jira Cloud: tipos de ticket, flujos de trabajo, vista Timeline y Plans (Jira Premium). support.atlassian.com/jira-software-cloud",
+   "why": "configuración en Jira"
+  }
+ ]
+}

@@ -1,0 +1,979 @@
+{
+ "id": "jkb",
+ "title": "Kanban con Jira: flujo continuo de trabajo en Oil & Gas",
+ "subtitle": "Tablero, límites de trabajo en curso, clases de servicio y métricas de flujo, con un caso completo de intervenciones de pozo.",
+ "desc": "Curso aplicado de gestión del flujo de trabajo con Kanban y Jira: los principios del método, la configuración de un proyecto y un tablero, los límites de trabajo en curso, las clases de servicio, las métricas de flujo y su lectura en los informes de Jira. Se cierra con un caso completo, de inicio a fin, aplicado a las intervenciones de pozo de un yacimiento de ejemplo.",
+ "objectives": [
+  "Explicar los principios y las prácticas del método Kanban y cuándo conviene frente a Scrum.",
+  "Configurar un proyecto y un tablero Kanban en Jira con estados, campos y límites de trabajo en curso.",
+  "Aplicar clases de servicio y leer las métricas de flujo, el flujo acumulado y el gráfico de control.",
+  "Llevar un caso de inicio a fin: diseñar el tablero, ejecutar, medir y mejorar."
+ ],
+ "labs": [],
+ "practiceMin": 90,
+ "competencies": [
+  {
+   "name": "Fundamentos de Kanban",
+   "lessons": [
+    "jkbl1"
+   ]
+  },
+  {
+   "name": "Configuración en Jira",
+   "lessons": [
+    "jkbl2"
+   ]
+  },
+  {
+   "name": "Flujo, límites y métricas",
+   "lessons": [
+    "jkbl3",
+    "jkbl4"
+   ]
+  },
+  {
+   "name": "Caso de intervenciones de pozo",
+   "lessons": [
+    "jkbl5",
+    "jkbl6"
+   ]
+  }
+ ],
+ "intro": {
+  "hook": "Vamos a aprender a gestionar trabajo que nunca deja de llegar, como las intervenciones de pozo o el mantenimiento, con un tablero que muestra el flujo y lo mejora.",
+  "questions": [
+   "¿Cómo se gestiona trabajo continuo sin sprints ni fechas de cierre?",
+   "¿Por qué limitar el trabajo en curso hace que las cosas terminen antes?",
+   "¿Qué métricas usa un equipo para prometer plazos realistas?"
+  ],
+  "star": {
+   "caso": "Toyota: tarjetas que limitan el trabajo en curso",
+   "S": "Toyota buscaba producir solo lo necesario, cuando se necesita y en la cantidad necesaria, sin acumular inventario entre procesos.",
+   "T": "Coordinar la producción entre procesos sin una programación central detallada.",
+   "A": "Dentro del Sistema de Producción Toyota, el proceso siguiente entregaba una tarjeta, llamada kanban, al anterior para pedir la reposición. Solo se producía lo que una tarjeta autorizaba, lo que limitaba el trabajo en curso.",
+   "R": "El sistema fue descrito por Sugimori y colaboradores en 1977 y por Ohno en 1988, y inspiró el método Kanban para trabajo del conocimiento que formalizó David Anderson en 2010."
+  }
+ },
+ "modules": [
+  {
+   "id": "jkbm1",
+   "title": "Módulo 1 · Fundamentos y configuración",
+   "lessons": [
+    {
+     "id": "jkbl1",
+     "title": "Qué es Kanban y dónde sirve en petróleo y gas",
+     "comp": "Fundamentos de Kanban",
+     "cues": [
+      {
+       "say": "Kanban es un método para gestionar el flujo de trabajo. No define roles ni iteraciones fijas: parte del proceso que ya existe, lo hace visible y lo mejora de a poco. Se resume en seis prácticas.",
+       "scene": {
+        "t": "bul",
+        "k": "Método",
+        "h": "Seis prácticas de Kanban",
+        "items": [
+         "Visualizar el trabajo en un tablero",
+         "Limitar el trabajo en curso",
+         "Gestionar el flujo y medirlo",
+         "Hacer explícitas las políticas",
+         "Implementar ciclos de retroalimentación",
+         "Mejorar de forma colaborativa y evolutiva"
+        ]
+       },
+       "notes": [
+        {
+         "t": "flujo de trabajo",
+         "k": "flujo",
+         "n": "Recorrido de un pedido desde que entra hasta que se entrega, pasando por las etapas del proceso."
+        }
+       ]
+      },
+      {
+       "say": "Frente a Scrum, Kanban no trabaja por sprints ni exige roles nuevos. Los cambios pueden entrar en cualquier momento, y las métricas clave son el tiempo de ciclo y el throughput.",
+       "scene": {
+        "t": "tbl",
+        "k": "Comparación",
+        "h": "Kanban frente a Scrum",
+        "cols": [
+         "Aspecto",
+         "Kanban",
+         "Scrum"
+        ],
+        "rows": [
+         [
+          "Cadencia",
+          "Flujo continuo",
+          "Sprints de duración fija"
+         ],
+         [
+          "Roles",
+          "No exige roles nuevos",
+          "Product Owner, Scrum Master y Developers"
+         ],
+         [
+          "Cambios",
+          "Pueden entrar en cualquier momento",
+          "Se acuerdan entre sprints"
+         ],
+         [
+          "Métrica clave",
+          "Tiempo de ciclo y throughput",
+          "Objetivo del sprint y velocidad"
+         ],
+         [
+          "Encaja en",
+          "Trabajo continuo e impredecible",
+          "Producto que se entrega por incrementos"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Encaja donde el trabajo llega de forma continua y no se puede planificar por completo: las intervenciones de pozo, el mantenimiento, los estudios que piden las áreas y los trámites de permisos.",
+       "scene": {
+        "t": "bul",
+        "k": "Aplicaciones",
+        "h": "Dónde encaja en Oil & Gas",
+        "items": [
+         "Intervenciones y workovers de pozos",
+         "Órdenes de mantenimiento de planta",
+         "Solicitudes de estudios a ingeniería",
+         "Gestión de permisos y trámites",
+         "Pedidos al equipo de datos y automatización"
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "¿Cuál es un rasgo central de Kanban?",
+        "o": [
+         "Sprints de dos semanas obligatorios",
+         "Limitar el trabajo en curso",
+         "Un Product Owner que prioriza",
+         "Entregar solo al final del proyecto"
+        ],
+        "a": 1,
+        "e": "Limitar el trabajo en curso es una de las prácticas centrales del método."
+       }
+      }
+     ]
+    },
+    {
+     "id": "jkbl2",
+     "title": "Crear y configurar un proyecto Kanban en Jira",
+     "comp": "Configuración en Jira",
+     "cues": [
+      {
+       "say": "En Jira se crea un proyecto con la plantilla Kanban. Puede ser gestionado por el equipo, con configuración simple, o gestionado por la empresa, con flujos, campos y permisos centralizados. Se empieza simple y se evoluciona.",
+       "scene": {
+        "t": "tbl",
+        "k": "Proyecto",
+        "h": "Dos tipos de proyecto en Jira",
+        "cols": [
+         "Tipo",
+         "Ventaja",
+         "Cuándo elegirlo"
+        ],
+        "rows": [
+         [
+          "Gestionado por el equipo",
+          "Configuración propia, simple y rápida",
+          "Un equipo que quiere empezar ya"
+         ],
+         [
+          "Gestionado por la empresa",
+          "Flujos, campos y permisos compartidos",
+          "Varios equipos con estándares y reportes comunes"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Primero se dibuja el proceso real, tal como ocurre hoy. Cada etapa se convierte en una columna del tablero, y cada columna agrupa uno o más estados del flujo de trabajo de Jira. No se inventa un proceso ideal el primer día.",
+       "scene": {
+        "t": "viz",
+        "w": "concept",
+        "h": "Del proceso real al tablero",
+        "p": {
+         "nodes": [
+          {
+           "l": "Solicitud",
+           "x": 10,
+           "y": 50,
+           "c": "#8ea2bd",
+           "n": "El pedido entra con pozo, motivo y prioridad."
+          },
+          {
+           "l": "Análisis técnico",
+           "x": 28,
+           "y": 50,
+           "c": "#3A6BD0",
+           "n": "Un ingeniero define el trabajo y los riesgos."
+          },
+          {
+           "l": "Programado",
+           "x": 46,
+           "y": 50,
+           "c": "#b7791f",
+           "n": "Tiene fecha tentativa y recursos asignados."
+          },
+          {
+           "l": "En ejecución",
+           "x": 64,
+           "y": 50,
+           "c": "#17755A",
+           "n": "El equipo de campo hace la intervención."
+          },
+          {
+           "l": "Verificación",
+           "x": 82,
+           "y": 50,
+           "c": "#6b5bd6",
+           "n": "Se confirma la producción del pozo."
+          },
+          {
+           "l": "Cerrado",
+           "x": 94,
+           "y": 50,
+           "c": "#8ea2bd",
+           "n": "Terminado según la definición acordada."
+          }
+         ],
+         "edges": [
+          [
+           0,
+           1
+          ],
+          [
+           1,
+           2
+          ],
+          [
+           2,
+           3
+          ],
+          [
+           3,
+           4
+          ],
+          [
+           4,
+           5
+          ]
+         ],
+         "hint": "Tocá cada bloque para ver el detalle."
+        }
+       },
+       "notes": [
+        {
+         "t": "estados",
+         "k": "estado",
+         "n": "Situación de un ticket dentro del flujo, como Por hacer, En curso o Hecho."
+        }
+       ]
+      },
+      {
+       "say": "Cada pedido es un ticket. Según la versión, Jira lo llama issue o work item. Conviene definir pocos campos obligatorios: el pozo o equipo, la prioridad, la clase de servicio y el responsable.",
+       "scene": {
+        "t": "bul",
+        "k": "Campos",
+        "h": "Qué información lleva cada ticket",
+        "items": [
+         "Tipo de ticket: intervención, mantenimiento o estudio",
+         "Campo Pozo o Equipo para ubicar el trabajo",
+         "Prioridad y clase de servicio",
+         "Responsable y fecha límite cuando hay compromiso",
+         "Componente o etiqueta por yacimiento"
+        ]
+       },
+       "notes": [
+        {
+         "t": "ticket",
+         "k": "ticket",
+         "n": "Unidad de trabajo en Jira: un pedido, una tarea o un error, con su estado y responsable."
+        }
+       ]
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "En un tablero Kanban de Jira, cada columna:",
+        "o": [
+         "Agrupa uno o más estados del flujo",
+         "Representa un sprint",
+         "Es un usuario del proyecto",
+         "Es un informe"
+        ],
+        "a": 0,
+        "e": "Las columnas del tablero se asocian a los estados del flujo de trabajo."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "Kanban parte de:",
+     "o": [
+      "Un proceso nuevo y completo",
+      "El proceso que ya existe, hecho visible",
+      "Un proyecto con fecha de fin",
+      "Roles definidos por el método"
+     ],
+     "a": 1,
+     "e": "Kanban empieza por el proceso actual."
+    },
+    {
+     "q": "Una columna de tablero en Jira agrupa:",
+     "o": [
+      "Sprints",
+      "Estados del flujo",
+      "Informes",
+      "Usuarios"
+     ],
+     "a": 1,
+     "e": "Cada columna se asocia a uno o más estados."
+    },
+    {
+     "q": "Kanban encaja especialmente en:",
+     "o": [
+      "Trabajo continuo e impredecible",
+      "Un único proyecto con fecha fija",
+      "Obras civiles",
+      "Contratos de compra"
+     ],
+     "a": 0,
+     "e": "Sirve cuando el trabajo llega de forma constante."
+    }
+   ]
+  },
+  {
+   "id": "jkbm2",
+   "title": "Módulo 2 · Flujo, límites y métricas",
+   "lessons": [
+    {
+     "id": "jkbl3",
+     "title": "Límites de trabajo en curso y clases de servicio",
+     "comp": "Flujo y límites",
+     "cues": [
+      {
+       "say": "El límite de trabajo en curso, o WIP, es la cantidad máxima de tickets que puede haber en una etapa. Al alcanzarlo, nadie empieza algo nuevo: se ayuda a terminar. La ley de Little, de mil novecientos sesenta y uno, relaciona WIP, throughput y tiempo de ciclo.",
+       "scene": {
+        "t": "fm",
+        "k": "Ley de Little",
+        "h": "Relación entre WIP, throughput y tiempo",
+        "f": "Tiempo de ciclo promedio = WIP promedio ÷ Throughput promedio\n\nEjemplo: 12 tickets en curso y 3 terminados por semana → 4 semanas\nCon 6 en curso y el mismo throughput → 2 semanas",
+        "n": "Vale en régimen estable: al bajar el WIP, el throughput debe sostenerse."
+       },
+       "notes": [
+        {
+         "t": "WIP",
+         "k": "WIP",
+         "n": "Work in progress: trabajo iniciado que todavía no se terminó."
+        }
+       ]
+      },
+      {
+       "say": "En Jira cada columna admite un máximo, y se resalta cuando se supera. Un buen punto de partida es un límite cercano al número de personas de la etapa. Después se ajusta mirando el flujo, no por intuición.",
+       "scene": {
+        "t": "bul",
+        "k": "Límites",
+        "h": "Cómo fijar el límite de una columna",
+        "items": [
+         "Empezar cerca de la cantidad de personas de esa etapa",
+         "Si la columna se llena seguido, hay un cuello de botella aguas abajo",
+         "Si nunca se llena, el límite es demasiado alto",
+         "El límite es una política: se revisa en cada retrospectiva"
+        ]
+       }
+      },
+      {
+       "say": "No todo el trabajo es igual. Las clases de servicio definen cómo se trata cada ticket. Un pozo parado por un riesgo de seguridad no espera en la fila como un estudio de rutina.",
+       "scene": {
+        "t": "tbl",
+        "k": "Clases de servicio",
+        "h": "Cuatro formas de tratar el trabajo",
+        "cols": [
+         "Clase",
+         "Cuándo se usa",
+         "Política"
+        ],
+        "rows": [
+         [
+          "Expedite",
+          "Riesgo de seguridad o pozo de alta producción parado",
+          "Salta la fila; máximo uno a la vez"
+         ],
+         [
+          "Fecha fija",
+          "Permiso o ventana de equipo comprometida",
+          "Se planifica para llegar antes de la fecha"
+         ],
+         [
+          "Estándar",
+          "Trabajo habitual",
+          "El primero en entrar es el primero en salir"
+         ],
+         [
+          "Intangible",
+          "Mejoras sin fecha",
+          "Se hace con la capacidad libre"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Si el throughput es constante y el WIP se reduce a la mitad, el tiempo de ciclo promedio:",
+        "o": [
+         "Se duplica",
+         "Se reduce a la mitad",
+         "No cambia",
+         "Se vuelve cero"
+        ],
+        "a": 1,
+        "e": "Por la ley de Little, el tiempo de ciclo es el WIP dividido por el throughput."
+       }
+      }
+     ]
+    },
+    {
+     "id": "jkbl4",
+     "title": "Métricas de flujo, informes de Jira y mejora continua",
+     "comp": "Métricas de flujo",
+     "cues": [
+      {
+       "say": "Un tablero Kanban se gestiona con cuatro métricas: el WIP, el tiempo de ciclo, el throughput y la antigüedad del trabajo en curso. Son las que propone Vacanti en su libro de métricas de flujo.",
+       "scene": {
+        "t": "tbl",
+        "k": "Métricas",
+        "h": "Las cuatro métricas de flujo",
+        "cols": [
+         "Métrica",
+         "Qué mide",
+         "Para qué sirve"
+        ],
+        "rows": [
+         [
+          "WIP",
+          "Tickets en curso",
+          "Controlar la sobrecarga"
+         ],
+         [
+          "Tiempo de ciclo",
+          "Días desde que empieza hasta que termina",
+          "Prometer plazos realistas"
+         ],
+         [
+          "Throughput",
+          "Tickets terminados por semana",
+          "Estimar capacidad"
+         ],
+         [
+          "Antigüedad",
+          "Días que lleva un ticket en curso",
+          "Detectar trabajos trabados"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Jira ofrece el diagrama de flujo acumulado, que muestra cuántos tickets hay en cada estado a lo largo del tiempo, y el gráfico de control, que muestra el tiempo de ciclo de cada ticket. Una banda que se ensancha señala una cola.",
+       "scene": {
+        "t": "bul",
+        "k": "Informes",
+        "h": "Cómo leer los informes de Jira",
+        "items": [
+         "Bandas paralelas en el flujo acumulado: flujo estable",
+         "Una banda que se ensancha: cola en esa etapa",
+         "Puntos muy altos en el gráfico de control: tickets a revisar",
+         "Usar percentiles y no solo el promedio para comprometer plazos"
+        ]
+       },
+       "notes": [
+        {
+         "t": "diagrama de flujo acumulado",
+         "k": "CFD",
+         "n": "Cumulative flow diagram: gráfico de áreas apiladas con los tickets por estado en el tiempo."
+        }
+       ]
+      },
+      {
+       "say": "Para prometer un plazo se usa un percentil. Si el ochenta y cinco por ciento de los tickets se cerró en diez días o menos, se puede comprometer ese plazo. Es una estimación basada en datos reales, no en una opinión.",
+       "scene": {
+        "t": "fm",
+        "k": "Percentiles",
+        "h": "Compromiso de plazo con datos",
+        "f": "Percentil 85 del tiempo de ciclo = 10 días\n\n«El 85 % de las intervenciones se completa en 10 días o menos»",
+        "n": "Se calcula sobre tickets cerrados recientes y se revisa todos los meses."
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Una banda que se ensancha en el diagrama de flujo acumulado indica:",
+        "o": [
+         "Una cola que crece en esa etapa",
+         "Menor WIP",
+         "Mayor throughput",
+         "Que el proyecto terminó"
+        ],
+        "a": 0,
+        "e": "Si entran más tickets de los que salen de una etapa, su banda se ensancha."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "El WIP es:",
+     "o": [
+      "La cantidad de personas del equipo",
+      "El trabajo iniciado y no terminado",
+      "La velocidad del equipo",
+      "El plazo del proyecto"
+     ],
+     "a": 1,
+     "e": "WIP es work in progress, trabajo en curso."
+    },
+    {
+     "q": "Una clase de servicio Expedite:",
+     "o": [
+      "Se atiende cuando sobra tiempo",
+      "Salta la fila con un máximo acordado",
+      "Reemplaza al límite de WIP",
+      "Se usa para todos los pedidos"
+     ],
+     "a": 1,
+     "e": "Es la excepción para riesgos o impactos grandes."
+    },
+    {
+     "q": "Para comprometer un plazo conviene usar:",
+     "o": [
+      "El promedio solamente",
+      "Un percentil del tiempo de ciclo",
+      "La opinión del líder",
+      "El plazo del último ticket"
+     ],
+     "a": 1,
+     "e": "El percentil refleja la dispersión real de los datos."
+    }
+   ]
+  },
+  {
+   "id": "jkbm3",
+   "title": "Módulo 3 · Caso completo de intervenciones de pozo",
+   "lessons": [
+    {
+     "id": "jkbl5",
+     "title": "Caso completo (1): diseñar el tablero y arrancar",
+     "comp": "Caso de intervenciones de pozo",
+     "cues": [
+      {
+       "say": "Presentamos el caso, un ejemplo didáctico con datos ilustrativos. Un equipo de intervenciones atiende cuarenta pozos con bombeo mecánico y un equipo de torre. Recibe pedidos de cambio de bomba y reparación de fondo, hoy por correo y planillas.",
+       "scene": {
+        "t": "bul",
+        "k": "Situación",
+        "h": "Equipo de intervenciones de un yacimiento de ejemplo",
+        "items": [
+         "Cuarenta pozos con bombeo mecánico y un equipo de torre",
+         "Pedidos por correo, sin prioridad clara",
+         "Pozos esperando semanas sin que nadie lo vea",
+         "Objetivo: reducir el tiempo de ciclo y ganar visibilidad"
+        ]
+       }
+      },
+      {
+       "say": "Paso uno, mapear el proceso en seis etapas. Paso dos, crear el proyecto Kanban con esas columnas y los campos Pozo, Yacimiento y Producción diferida. El límite de En ejecución es uno, porque hay un solo equipo de torre.",
+       "scene": {
+        "t": "tbl",
+        "k": "Tablero",
+        "h": "Columnas, estados y límites de WIP",
+        "cols": [
+         "Columna",
+         "Estado en Jira",
+         "Límite"
+        ],
+        "rows": [
+         [
+          "Solicitud",
+          "Por hacer",
+          "Sin límite"
+         ],
+         [
+          "Análisis técnico",
+          "En análisis",
+          "4"
+         ],
+         [
+          "Programado",
+          "Programado",
+          "5"
+         ],
+         [
+          "En ejecución",
+          "En ejecución",
+          "1"
+         ],
+         [
+          "Verificación",
+          "Verificando",
+          "3"
+         ],
+         [
+          "Cerrado",
+          "Hecho",
+          "Sin límite"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Paso tres, definir las políticas visibles: quién puede marcar un pedido como urgente, cuántos a la vez y qué significa terminado. Aquí, una intervención se cierra solo cuando la producción del pozo se verificó durante siete días.",
+       "scene": {
+        "t": "bul",
+        "k": "Políticas",
+        "h": "Reglas visibles del equipo",
+        "items": [
+         "Expedite solo con riesgo de seguridad o producción mayor al umbral acordado",
+         "Un solo ticket urgente a la vez",
+         "Terminado significa producción verificada durante siete días",
+         "Todo ticket bloqueado lleva bandera y motivo",
+         "Revisión diaria del tablero, de quince minutos"
+        ]
+       }
+      },
+      {
+       "say": "Paso cuatro, automatizar lo repetitivo con reglas de Jira. Cada regla tiene un disparador, una condición y una acción. Así el equipo no pierde tiempo asignando tickets ni olvida los seguimientos.",
+       "scene": {
+        "t": "tbl",
+        "k": "Automatización",
+        "h": "Tres reglas de Jira para el equipo",
+        "cols": [
+         "Disparador",
+         "Condición",
+         "Acción"
+        ],
+        "rows": [
+         [
+          "Ticket creado",
+          "Yacimiento Norte",
+          "Asignar al analista de la zona"
+         ],
+         [
+          "Cinco días sin cambios",
+          "Estado en curso",
+          "Avisar al líder del equipo"
+         ],
+         [
+          "Pasa a Verificación",
+          "Producción diferida cargada",
+          "Crear tarea de seguimiento a siete días"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "En el caso, el límite de En ejecución es uno porque:",
+        "o": [
+         "Hay un solo equipo de torre disponible",
+         "Jira lo exige",
+         "Se quiere tener menos tickets",
+         "Kanban obliga a usar uno"
+        ],
+        "a": 0,
+        "e": "El límite refleja la capacidad real de la etapa, que es un solo equipo."
+       }
+      }
+     ]
+    },
+    {
+     "id": "jkbl6",
+     "title": "Caso completo (2): ejecutar, medir y mejorar",
+     "comp": "Medición y mejora",
+     "cues": [
+      {
+       "say": "Pasan ocho semanas. El flujo acumulado muestra que la banda de Programado se ensancha: los pedidos esperan la torre. El cuello de botella es la ejecución, no el análisis. Al bajar el WIP, el tiempo de ciclo pasa de veinticuatro a trece días.",
+       "scene": {
+        "t": "tbl",
+        "k": "Resultados",
+        "h": "Primeras ocho semanas (datos ilustrativos)",
+        "cols": [
+         "Métrica",
+         "Semanas 1 a 4",
+         "Semanas 5 a 8"
+        ],
+        "rows": [
+         [
+          "WIP promedio",
+          "14",
+          "9"
+         ],
+         [
+          "Throughput por semana",
+          "4",
+          "5"
+         ],
+         [
+          "Tiempo de ciclo promedio",
+          "24 días",
+          "13 días"
+         ],
+         [
+          "Tickets bloqueados",
+          "6",
+          "2"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "El equipo decide con datos. Agrupa las intervenciones de un mismo yacimiento para reducir traslados, reserva una ventana semanal para los trabajos de fecha fija y baja el límite de Programado de cinco a cuatro.",
+       "scene": {
+        "t": "bul",
+        "k": "Decisiones",
+        "h": "Qué cambia el equipo con los datos",
+        "items": [
+         "Agrupar intervenciones de un mismo yacimiento para reducir traslados",
+         "Reservar una ventana semanal para trabajos de fecha fija",
+         "Bajar el límite de Programado de cinco a cuatro",
+         "Revisar el criterio de urgencia en la retrospectiva"
+        ]
+       }
+      },
+      {
+       "say": "Un pozo de alta producción se para por la falla de la bomba. Es un ticket Expedite: salta la fila y el equipo no inicia otros trabajos. Se cierra en tres días, pero el resto de los tickets se demora, y esa compensación queda registrada.",
+       "scene": {
+        "t": "bul",
+        "k": "Expedite",
+        "h": "Un pozo de alta producción se detiene",
+        "items": [
+         "Se crea con clase Expedite y la producción diferida estimada",
+         "Se frena el siguiente trabajo de la cola, no el que está en ejecución",
+         "Tiempo de ciclo del ticket: 3 días frente a 13 del promedio",
+         "Costo: el promedio de los demás subió un día esa semana"
+        ]
+       }
+      },
+      {
+       "say": "Las lecciones. Un tablero visible cambia las conversaciones. Limitar el trabajo en curso acorta los plazos. Las métricas se usan para mejorar el proceso, no para evaluar personas. Y Jira complementa al sistema de mantenimiento de la empresa; no lo reemplaza.",
+       "scene": {
+        "t": "bul",
+        "k": "Lecciones",
+        "h": "Lo que deja el caso",
+        "items": [
+         "Un tablero visible cambia las conversaciones",
+         "Limitar el WIP acorta los plazos",
+         "Las métricas sirven para mejorar el proceso, no para evaluar personas",
+         "Kanban complementa al sistema de mantenimiento de la empresa, no lo reemplaza"
+        ]
+       }
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "En el caso, la banda de Programado que se ensancha indica:",
+        "o": [
+         "Una cola esperando al equipo de torre",
+         "Exceso de analistas",
+         "Menor demanda",
+         "Un error de Jira"
+        ],
+        "a": 0,
+        "e": "Los pedidos entran a Programado más rápido de lo que salen hacia la ejecución."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "En el caso, ¿qué indicó el cuello de botella?",
+     "o": [
+      "La banda de Programado que se ensanchaba",
+      "El número de usuarios",
+      "El color del tablero",
+      "La cantidad de comentarios"
+     ],
+     "a": 0,
+     "e": "Los pedidos esperaban al equipo de torre."
+    },
+    {
+     "q": "¿Cuándo se cierra una intervención en el caso?",
+     "o": [
+      "Al terminar la torre",
+      "Con la producción verificada siete días",
+      "Cuando el líder lo decide",
+      "Al cargar el costo"
+     ],
+     "a": 1,
+     "e": "Esa es la definición de terminado acordada."
+    },
+    {
+     "q": "Las métricas de flujo se usan para:",
+     "o": [
+      "Evaluar personas",
+      "Mejorar el proceso",
+      "Reemplazar el mantenimiento",
+      "Cerrar tickets"
+     ],
+     "a": 1,
+     "e": "El objetivo es mejorar el proceso."
+    }
+   ]
+  }
+ ],
+ "exam": [
+  {
+   "q": "Una de las prácticas de Kanban es:",
+   "o": [
+    "Dividir en sprints",
+    "Limitar el trabajo en curso",
+    "Fijar roles",
+    "Planificar todo al inicio"
+   ],
+   "a": 1,
+   "e": "Limitar el WIP es una práctica del método."
+  },
+  {
+   "q": "Con WIP 12 y throughput 3 por semana, el tiempo de ciclo promedio es:",
+   "o": [
+    "2 semanas",
+    "4 semanas",
+    "9 semanas",
+    "36 semanas"
+   ],
+   "a": 1,
+   "e": "12 dividido 3 son 4 semanas."
+  },
+  {
+   "q": "La clase de servicio de un permiso con fecha comprometida es:",
+   "o": [
+    "Expedite",
+    "Fecha fija",
+    "Intangible",
+    "Estándar"
+   ],
+   "a": 1,
+   "e": "Se planifica para llegar antes de la fecha."
+  },
+  {
+   "q": "Una banda que se ensancha en el flujo acumulado señala:",
+   "o": [
+    "Una cola",
+    "Menos trabajo",
+    "Más velocidad",
+    "Un sprint"
+   ],
+   "a": 0,
+   "e": "Entran más tickets de los que salen."
+  },
+  {
+   "q": "Un límite de WIP que nunca se alcanza:",
+   "o": [
+    "Es perfecto",
+    "Probablemente es demasiado alto",
+    "Impide el flujo",
+    "Reemplaza la política"
+   ],
+   "a": 1,
+   "e": "No cumple su función de limitar."
+  },
+  {
+   "q": "Jira, en este caso, respecto del sistema de mantenimiento:",
+   "o": [
+    "Lo reemplaza",
+    "Lo complementa",
+    "Lo elimina",
+    "Lo duplica sin límite"
+   ],
+   "a": 1,
+   "e": "Se usa para gestionar el flujo, no para sustituir sistemas de registro."
+  }
+ ],
+ "outro": {
+  "can": [
+   "qué es Kanban y cuándo conviene en operaciones de petróleo y gas",
+   "configurar un tablero Kanban con límites de WIP y clases de servicio en Jira",
+   "leer el flujo acumulado y el gráfico de control para detectar cuellos de botella",
+   "aplicar el método a un caso completo de intervenciones de pozo"
+  ],
+  "phrase": "Lo que se ve se puede mejorar; lo que se limita, se termina.",
+  "recap": [
+   "Kanban hace visible el flujo y limita el trabajo en curso.",
+   "La ley de Little relaciona WIP, throughput y tiempo de ciclo.",
+   "Las métricas se usan para mejorar el proceso, no para evaluar personas."
+  ]
+ },
+ "downloads": [
+  {
+   "file": "xlsx/H3L_Kanban_Metricas_de_Flujo.xlsx",
+   "title": "Métricas de flujo del caso de intervenciones (Excel)",
+   "desc": "Veinte tickets de ejemplo con fechas, tiempo de ciclo, throughput semanal, WIP, percentil 85 y verificación de la ley de Little. Datos ilustrativos.",
+   "task": "Cambiá el límite de WIP de Programado de 5 a 3 y estimá con la ley de Little el nuevo tiempo de ciclo. Después sumá un ticket Expedite y mirá el efecto sobre el percentil 85."
+  }
+ ],
+ "cases": [
+  {
+   "title": "Toyota: el kanban como sistema de arrastre",
+   "text": "Dentro del Sistema de Producción Toyota, una tarjeta kanban autoriza al proceso anterior a producir solo lo que el siguiente consumió. Esa regla limita el trabajo en curso entre procesos. El sistema fue descrito en 1977 por Sugimori, Kusunoki, Cho y Uchikawa, y por Ohno en 1988.",
+   "src": "Sugimori et al. (1977), International Journal of Production Research 15(6), 553–564; Ohno (1988), Toyota Production System, Productivity Press"
+  }
+ ],
+ "refs": [
+  {
+   "tag": "Libro",
+   "cite": "Anderson, D. J. (2010). Kanban: Successful Evolutionary Change for Your Technology Business. Blue Hole Press.",
+   "why": "el método Kanban y las clases de servicio"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Anderson, D. J. y Carmichael, A. (2016). Essential Kanban Condensed. Lean Kanban University Press.",
+   "why": "las prácticas del método, resumidas"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Vacanti, D. S. (2015). Actionable Agile Metrics for Predictability: An Introduction. Daniel S. Vacanti, Inc.",
+   "why": "métricas de flujo y percentiles"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Little, J. D. C. (1961). A proof for the queuing formula: L = λW. Operations Research 9(3), 383–387.",
+   "why": "ley de Little"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Sugimori, Y., Kusunoki, K., Cho, F. y Uchikawa, S. (1977). Toyota production system and Kanban system: materialization of just-in-time and respect-for-human system. International Journal of Production Research 15(6), 553–564.",
+   "why": "origen del kanban en Toyota"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Ohno, T. (1988). Toyota Production System: Beyond Large-Scale Production. Productivity Press.",
+   "why": "producción just-in-time"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Reinertsen, D. G. (2009). The Principles of Product Development Flow: Second Generation Lean Product Development. Celeritas Publishing.",
+   "why": "colas, lotes y costo de la demora"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Hopp, W. J. y Spearman, M. L. (2008). Factory Physics, 3.ª ed. Waveland Press.",
+   "why": "WIP, throughput y tiempo de ciclo"
+  },
+  {
+   "tag": "Guía",
+   "cite": "Kniberg, H. y Skarin, M. (2010). Kanban and Scrum: making the most of both. InfoQ.",
+   "why": "Kanban y Scrum combinados"
+  },
+  {
+   "tag": "Documentación",
+   "cite": "Atlassian. Jira Software Cloud: documentación de tableros Kanban, restricciones de columna e informes. support.atlassian.com/jira-software-cloud",
+   "why": "configuración en Jira"
+  }
+ ]
+}

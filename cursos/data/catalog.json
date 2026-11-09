@@ -57,6 +57,21 @@
     "mid",
     "hse"
    ]
+  },
+  {
+   "id": "gestion",
+   "title": "Gestión de proyectos",
+   "desc": "Jira y Primavera P6: agilidad, errores, planificación, recursos, valor ganado y riesgo del cronograma.",
+   "courses": [
+    "jkb",
+    "jsc",
+    "jbg",
+    "jcl",
+    "p6p",
+    "p6r",
+    "p6c",
+    "p6k"
+   ]
   }
  ],
  "courses": [
@@ -432,6 +447,153 @@
     "eor",
     "res"
    ]
+  },
+  {
+   "id": "jkb",
+   "n": 23,
+   "title": "Kanban con Jira: flujo continuo de trabajo en Oil & Gas",
+   "short": "Tablero, límites de trabajo en curso, clases de servicio y métricas de flujo, con un caso de intervenciones de pozo.",
+   "level": "Básico–Intermedio",
+   "color": "#2f7fa8",
+   "icon": "jkb",
+   "tag": "Jira Kanban",
+   "levels": [
+    "b",
+    "i"
+   ],
+   "topics": [
+    "agil",
+    "pm"
+   ]
+  },
+  {
+   "id": "jsc",
+   "n": 24,
+   "title": "Scrum con Jira: desarrollo ágil de productos de datos en Oil & Gas",
+   "short": "Roles, eventos, backlog, sprints, estimación e informes de Jira, con un caso de tablero de vigilancia de pozos.",
+   "level": "Básico–Intermedio",
+   "color": "#3d8f5a",
+   "icon": "jsc",
+   "tag": "Jira Scrum",
+   "levels": [
+    "b",
+    "i"
+   ],
+   "topics": [
+    "agil",
+    "pm",
+    "datos"
+   ]
+  },
+  {
+   "id": "jbg",
+   "n": 25,
+   "title": "Gestión de errores con Jira: seguimiento de fallas y defectos en sistemas de campo",
+   "short": "Reporte, triaje, severidad y prioridad, recurrencia, métricas y causa raíz, con un caso de medición de tanques.",
+   "level": "Básico–Intermedio",
+   "color": "#b5543c",
+   "icon": "jbg",
+   "tag": "Jira Errores",
+   "levels": [
+    "b",
+    "i"
+   ],
+   "topics": [
+    "agil",
+    "seg"
+   ]
+  },
+  {
+   "id": "jcl",
+   "n": 26,
+   "title": "Gestión clásica de proyectos con Jira: planificación por fases y control en Oil & Gas",
+   "short": "Fases y compuertas, EDT, ruta crítica, control de cambios y seguimiento en Jira, con un caso de perforación de un pozo.",
+   "level": "Básico–Intermedio",
+   "color": "#6a5aa8",
+   "icon": "jcl",
+   "tag": "Jira Clásica",
+   "levels": [
+    "b",
+    "i"
+   ],
+   "topics": [
+    "pm",
+    "plan"
+   ]
+  },
+  {
+   "id": "p6p",
+   "n": 27,
+   "title": "Planificación y cronograma CPM de una parada de planta con Primavera P6",
+   "short": "Estructura del proyecto, actividades, relaciones, ruta crítica y calidad del cronograma, con un caso de parada de planta.",
+   "level": "Intermedio–Avanzado",
+   "color": "#c47a1e",
+   "icon": "p6p",
+   "tag": "Primavera P6",
+   "levels": [
+    "i",
+    "a"
+   ],
+   "topics": [
+    "pm",
+    "plan"
+   ]
+  },
+  {
+   "id": "p6r",
+   "n": 28,
+   "title": "Recursos, costos y nivelación en la construcción de una planta con Primavera P6",
+   "short": "Roles y recursos, asignaciones, sobreasignación, nivelación, curva S y flujo de caja, con un caso de una instalación de producción.",
+   "level": "Intermedio–Avanzado",
+   "color": "#9a6b2f",
+   "icon": "p6r",
+   "tag": "Primavera P6",
+   "levels": [
+    "i",
+    "a"
+   ],
+   "topics": [
+    "pm",
+    "plan"
+   ]
+  },
+  {
+   "id": "p6c",
+   "n": 29,
+   "title": "Control del proyecto y valor ganado en un ducto con Primavera P6",
+   "short": "Línea base, avance, valor ganado, cronograma ganado y pronóstico por rango, con un caso de un ducto de transporte.",
+   "level": "Intermedio–Avanzado",
+   "color": "#1f8a84",
+   "icon": "p6c",
+   "tag": "Primavera P6",
+   "levels": [
+    "i",
+    "a"
+   ],
+   "topics": [
+    "pm",
+    "plan",
+    "mid"
+   ]
+  },
+  {
+   "id": "p6k",
+   "n": 30,
+   "title": "Riesgo del cronograma y simulación de Monte Carlo con Primavera P6",
+   "short": "Estimaciones de tres puntos, eventos de riesgo, percentiles, criticidad y reserva de tiempo, con un caso del desarrollo de un pad.",
+   "level": "Intermedio–Avanzado",
+   "color": "#a8404f",
+   "icon": "p6k",
+   "tag": "Primavera P6",
+   "levels": [
+    "i",
+    "a"
+   ],
+   "topics": [
+    "pm",
+    "plan",
+    "eco"
+   ]
   }
  ],
  "topics": [
@@ -452,6 +614,9 @@
   "emis",
   "eco",
   "com",
-  "datos"
+  "datos",
+  "agil",
+  "pm",
+  "plan"
  ]
 }
