@@ -237,7 +237,7 @@ HC.numEs=(function(){var U=['cero','uno','dos','tres','cuatro','cinco','seis','s
 function ap(x){return x.replace(/veintiuno$/,'veintiún').replace(/uno$/,'un')}
 function w(n){if(n<30)return U[n];if(n<100)return T[Math.floor(n/10)]+(n%10?' y '+U[n%10]:'');if(n<1000)return n===100?'cien':H[Math.floor(n/100)]+(n%100?' '+w(n%100):'');if(n<1e6){var m=Math.floor(n/1e3),r=n%1e3;return(m===1?'mil':ap(w(m))+' mil')+(r?' '+w(r):'')}var M=Math.floor(n/1e6),q=n%1e6;return(M===1?'un millón':ap(w(M))+' millones')+(q?' '+w(q):'')}
 return function(t){return String(t).replace(/(?<![\d.,])\d{1,3}(?:\.\d{3})+(?![\d]|,\d)/g,function(m){return w(parseInt(m.replace(/\./g,''),10))})}})();
-HC.pron=function(t,lang){t=String(t);if(lang==='en')return t.replace(/\bh3l\b/gi,'H 3 L');return HC.numEs(t).replace(/\bPVT\b/g,'pe ve te').replace(/\bupstream\b/gi,'ápstrim').replace(/\bh3l\b/gi,'hache tres ele')};
+HC.pron=function(t,lang){t=String(t);if(lang==='en')return t.replace(/\bh3l\b/gi,'H 3 L');return HC.numEs(t).replace(/\bpetrol(er[oa]s?)\b/gi,function(m,x){return m.slice(0,5)+'-l'+x}).replace(/\bPVT\b/g,'pe ve te').replace(/\bupstream\b/gi,'ápstrim').replace(/\bh3l\b/gi,'hache tres ele')};
 /* idioma del contenido: si la interfaz está en inglés y existe data/en/<id>.json se usa; si no, español */
 HC.cLang=function(){return HC.lang==='en'?'en':'es'};
 HC.hasEn=function(id){return !!(HC.enList&&HC.enList.indexOf(id)>=0)};
