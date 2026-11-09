@@ -371,33 +371,33 @@
      "q": "Kanban parte de:",
      "o": [
       "Un proceso nuevo y completo",
-      "El proceso que ya existe, hecho visible",
       "Un proyecto con fecha de fin",
-      "Roles definidos por el método"
+      "Roles definidos por el método",
+      "El proceso que ya existe, hecho visible"
      ],
-     "a": 1,
+     "a": 3,
      "e": "Kanban empieza por el proceso actual."
     },
     {
      "q": "Una columna de tablero en Jira agrupa:",
      "o": [
-      "Sprints",
-      "Estados del flujo",
       "Informes",
-      "Usuarios"
+      "Usuarios",
+      "Estados del flujo",
+      "Sprints"
      ],
-     "a": 1,
+     "a": 2,
      "e": "Cada columna se asocia a uno o más estados."
     },
     {
      "q": "Kanban encaja especialmente en:",
      "o": [
+      "Contratos de compra",
       "Trabajo continuo e impredecible",
       "Un único proyecto con fecha fija",
-      "Obras civiles",
-      "Contratos de compra"
+      "Obras civiles"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Sirve cuando el trabajo llega de forma constante."
     }
    ]
@@ -611,34 +611,34 @@
     {
      "q": "El WIP es:",
      "o": [
-      "La cantidad de personas del equipo",
       "El trabajo iniciado y no terminado",
+      "La cantidad de personas del equipo",
       "La velocidad del equipo",
       "El plazo del proyecto"
      ],
-     "a": 1,
+     "a": 0,
      "e": "WIP es work in progress, trabajo en curso."
     },
     {
      "q": "Una clase de servicio Expedite:",
      "o": [
-      "Se atiende cuando sobra tiempo",
-      "Salta la fila con un máximo acordado",
       "Reemplaza al límite de WIP",
-      "Se usa para todos los pedidos"
+      "Se usa para todos los pedidos",
+      "Se atiende cuando sobra tiempo",
+      "Salta la fila con un máximo acordado"
      ],
-     "a": 1,
+     "a": 3,
      "e": "Es la excepción para riesgos o impactos grandes."
     },
     {
      "q": "Para comprometer un plazo conviene usar:",
      "o": [
+      "El plazo del último ticket",
       "El promedio solamente",
       "Un percentil del tiempo de ciclo",
-      "La opinión del líder",
-      "El plazo del último ticket"
+      "La opinión del líder"
      ],
-     "a": 1,
+     "a": 2,
      "e": "El percentil refleja la dispersión real de los datos."
     }
    ]
@@ -944,34 +944,34 @@
     {
      "q": "En el caso, ¿qué indicó el cuello de botella?",
      "o": [
-      "La banda de Programado que se ensanchaba",
       "El número de usuarios",
+      "La banda de Programado que se ensanchaba",
       "El color del tablero",
       "La cantidad de comentarios"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Los pedidos esperaban al equipo de torre."
     },
     {
      "q": "¿Cuándo se cierra una intervención en el caso?",
      "o": [
-      "Al terminar la torre",
       "Con la producción verificada siete días",
       "Cuando el líder lo decide",
-      "Al cargar el costo"
+      "Al cargar el costo",
+      "Al terminar la torre"
      ],
-     "a": 1,
+     "a": 0,
      "e": "Esa es la definición de terminado acordada."
     },
     {
      "q": "Las métricas de flujo se usan para:",
      "o": [
+      "Cerrar tickets",
       "Evaluar personas",
-      "Mejorar el proceso",
       "Reemplazar el mantenimiento",
-      "Cerrar tickets"
+      "Mejorar el proceso"
      ],
-     "a": 1,
+     "a": 3,
      "e": "El objetivo es mejorar el proceso."
     }
    ]
@@ -982,20 +982,20 @@
    "q": "Una de las prácticas de Kanban es:",
    "o": [
     "Dividir en sprints",
-    "Limitar el trabajo en curso",
     "Fijar roles",
+    "Limitar el trabajo en curso",
     "Planificar todo al inicio"
    ],
-   "a": 1,
+   "a": 2,
    "e": "Limitar el WIP es una práctica del método."
   },
   {
    "q": "Con WIP 12 y throughput 3 por semana, el tiempo de ciclo promedio es:",
    "o": [
-    "2 semanas",
-    "4 semanas",
     "9 semanas",
-    "36 semanas"
+    "4 semanas",
+    "36 semanas",
+    "2 semanas"
    ],
    "a": 1,
    "e": "12 dividido 3 son 4 semanas."
@@ -1003,43 +1003,43 @@
   {
    "q": "La clase de servicio de un permiso con fecha comprometida es:",
    "o": [
-    "Expedite",
     "Fecha fija",
-    "Intangible",
-    "Estándar"
+    "Estándar",
+    "Expedite",
+    "Intangible"
    ],
-   "a": 1,
+   "a": 0,
    "e": "Se planifica para llegar antes de la fecha."
   },
   {
    "q": "Una banda que se ensancha en el flujo acumulado señala:",
    "o": [
-    "Una cola",
     "Menos trabajo",
     "Más velocidad",
-    "Un sprint"
+    "Un sprint",
+    "Una cola"
    ],
-   "a": 0,
+   "a": 3,
    "e": "Entran más tickets de los que salen."
   },
   {
    "q": "Un límite de WIP que nunca se alcanza:",
    "o": [
-    "Es perfecto",
-    "Probablemente es demasiado alto",
     "Impide el flujo",
-    "Reemplaza la política"
+    "Reemplaza la política",
+    "Probablemente es demasiado alto",
+    "Es perfecto"
    ],
-   "a": 1,
+   "a": 2,
    "e": "No cumple su función de limitar."
   },
   {
    "q": "Jira, en este caso, respecto del sistema de mantenimiento:",
    "o": [
-    "Lo reemplaza",
+    "Lo duplica sin límite",
     "Lo complementa",
-    "Lo elimina",
-    "Lo duplica sin límite"
+    "Lo reemplaza",
+    "Lo elimina"
    ],
    "a": 1,
    "e": "Se usa para gestionar el flujo, no para sustituir sistemas de registro."

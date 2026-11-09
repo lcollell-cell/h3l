@@ -313,33 +313,33 @@
      "q": "En el análisis nodal, la afluencia es:",
      "o": [
       "La presión del separador",
-      "La demanda de la tubería",
       "La presión que da el reservorio",
+      "La demanda de la tubería",
       "El nivel de líquido"
      ],
-     "a": 2,
+     "a": 1,
      "e": "La IPR describe cuánto caudal entrega el reservorio para cada presión de fondo."
     },
     {
      "q": "Si baja la presión de reservorio, la curva IPR:",
      "o": [
-      "Se desplaza hacia mayor caudal",
       "Se desplaza hacia menor caudal",
       "No cambia",
-      "Se vuelve vertical"
+      "Se vuelve vertical",
+      "Se desplaza hacia mayor caudal"
      ],
-     "a": 1,
+     "a": 0,
      "e": "Con menos presión disponible, el pozo entrega menos caudal."
     },
     {
      "q": "El índice de productividad lineal es válido:",
      "o": [
-      "Por encima de la presión de burbuja",
+      "Solo en pozos inyectores",
       "En todo momento",
       "Solo en pozos de gas",
-      "Solo en pozos inyectores"
+      "Por encima de la presión de burbuja"
      ],
-     "a": 0,
+     "a": 3,
      "e": "Con flujo monofásico en el reservorio la relación caudal-presión es una recta."
     }
    ]
@@ -598,19 +598,19 @@
      "o": [
       "Corrosión inmediata",
       "Siempre más caudal",
-      "Pozo cerrado",
-      "Menor fricción pero riesgo de carga de líquido"
+      "Menor fricción pero riesgo de carga de líquido",
+      "Pozo cerrado"
      ],
-     "a": 3,
+     "a": 2,
      "e": "La baja velocidad favorece el deslizamiento del líquido."
     },
     {
      "q": "En los pozos de gas, la velocidad crítica de Turner sirve para:",
      "o": [
-      "Medir la porosidad",
-      "Saber si el gas arrastra el líquido",
       "Calcular la permeabilidad",
-      "Elegir el choke"
+      "Saber si el gas arrastra el líquido",
+      "Elegir el choke",
+      "Medir la porosidad"
      ],
      "a": 1,
      "e": "Compara la velocidad real del gas con la necesaria para arrastrar gotas."
@@ -618,12 +618,12 @@
     {
      "q": "Las correlaciones de flujo multifásico:",
      "o": [
-      "Son universales",
       "Se calibran con datos medidos del pozo",
-      "Se usan sin calibrar",
-      "Son iguales entre sí"
+      "Son iguales entre sí",
+      "Son universales",
+      "Se usan sin calibrar"
      ],
-     "a": 1,
+     "a": 0,
      "e": "Se comparan con gradientes medidos y se ajustan."
     }
    ]
@@ -862,33 +862,33 @@
      "q": "El plunger lift se aplica sobre todo a:",
      "o": [
       "Pozos inyectores",
-      "Pozos de gas con carga de líquido",
       "Pozos de agua",
-      "Pozos exploratorios"
+      "Pozos exploratorios",
+      "Pozos de gas con carga de líquido"
      ],
-     "a": 1,
+     "a": 3,
      "e": "Usa la energía del gas del propio pozo para elevar el líquido acumulado."
     },
     {
      "q": "En gas lift continuo, más gas inyectado siempre aumenta el caudal:",
      "o": [
-      "Falso: después de un punto la fricción lo reduce",
-      "Verdadero",
       "Solo con agua",
-      "Solo con petróleo"
+      "Solo con petróleo",
+      "Falso: después de un punto la fricción lo reduce",
+      "Verdadero"
      ],
-     "a": 0,
+     "a": 2,
      "e": "La curva de rendimiento tiene un máximo."
     },
     {
      "q": "Una carta dinamométrica se usa en:",
      "o": [
+      "Plunger lift",
       "Bombeo mecánico",
       "ESP",
-      "Gas lift",
-      "Plunger lift"
+      "Gas lift"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Muestra la carga contra el recorrido de la varilla pulida."
     }
    ]
@@ -909,23 +909,23 @@
   {
    "q": "Una IPR de Vogel se usa por debajo de:",
    "o": [
-    "La presión atmosférica",
     "La presión de rocío",
-    "La presión de burbuja",
-    "La presión de fractura"
+    "La presión de fractura",
+    "La presión atmosférica",
+    "La presión de burbuja"
    ],
-   "a": 2,
+   "a": 3,
    "e": "Hay gas libre en el reservorio."
   },
   {
    "q": "Aumentar el corte de agua en el pozo:",
    "o": [
-    "Reduce el caudal por mayor peso de columna",
+    "Elimina la fricción",
     "Aumenta el caudal",
-    "No tiene efecto",
-    "Elimina la fricción"
+    "Reduce el caudal por mayor peso de columna",
+    "No tiene efecto"
    ],
-   "a": 0,
+   "a": 2,
    "e": "La mezcla es más pesada."
   },
   {
@@ -942,23 +942,23 @@
   {
    "q": "La carga de líquido en pozos de gas aparece cuando:",
    "o": [
-    "El pozo es nuevo",
+    "La velocidad del gas es menor que la crítica",
     "La velocidad es muy alta",
     "No hay agua",
-    "La velocidad del gas es menor que la crítica"
+    "El pozo es nuevo"
    ],
-   "a": 3,
+   "a": 0,
    "e": "El gas ya no arrastra las gotas."
   },
   {
    "q": "Para elegir un método de levantamiento se considera:",
    "o": [
+    "Solo la profundidad",
     "Solo el diámetro",
     "Solo el color",
-    "Caudal, fluidos, sólidos, gas, desvío y costo",
-    "Solo la profundidad"
+    "Caudal, fluidos, sólidos, gas, desvío y costo"
    ],
-   "a": 2,
+   "a": 3,
    "e": "Es una decisión de varios criterios técnicos y económicos."
   }
  ],

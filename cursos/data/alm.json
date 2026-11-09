@@ -290,32 +290,32 @@
      "o": [
       "Ausencia de infraestructura",
       "Falta de sello",
-      "Exceso de capacidad",
-      "Pozos viejos que pueden ser vías de fuga"
+      "Pozos viejos que pueden ser vías de fuga",
+      "Exceso de capacidad"
      ],
-     "a": 3,
+     "a": 2,
      "e": "Los pozos antiguos deben revisarse y controlarse."
     },
     {
      "q": "Con un factor de eficiencia de 2 %, de cada 100 unidades de volumen poral se puede ocupar:",
      "o": [
-      "100 unidades",
       "50 unidades",
+      "2 unidades",
       "98 unidades",
-      "2 unidades"
+      "100 unidades"
      ],
-     "a": 3,
+     "a": 1,
      "e": "E es la fracción utilizable."
     },
     {
      "q": "Una profundidad de más de unos 800 metros se pide para:",
      "o": [
-      "Bajar la presión",
-      "Evitar el sello",
       "Que el CO₂ esté denso y ocupe menos volumen",
-      "Reducir la porosidad"
+      "Reducir la porosidad",
+      "Bajar la presión",
+      "Evitar el sello"
      ],
-     "a": 2,
+     "a": 0,
      "e": "A esa profundidad la presión y la temperatura lo mantienen denso."
     }
    ]
@@ -565,10 +565,10 @@
     {
      "q": "El riesgo de fuga es mayor:",
      "o": [
-      "Después de mil años",
       "Siempre igual",
+      "Nunca existe",
       "Al principio, cuando el CO₂ está libre",
-      "Nunca existe"
+      "Después de mil años"
      ],
      "a": 2,
      "e": "Con el tiempo parte del CO₂ se inmoviliza."
@@ -576,12 +576,12 @@
     {
      "q": "SRMS fue aprobado por la SPE en:",
      "o": [
+      "1970",
       "Julio de 2017",
       "1996",
-      "2024",
-      "1970"
+      "2024"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Sus Guías de aplicación salieron en julio de 2022."
     }
    ]
@@ -798,21 +798,21 @@
     {
      "q": "Quest almacena en:",
      "o": [
-      "Un acuífero salino de arenas del Cámbrico basal",
-      "Un yacimiento de gas agotado en el mar",
       "Una cueva",
-      "Un tanque"
+      "Un tanque",
+      "Un yacimiento de gas agotado en el mar",
+      "Un acuífero salino de arenas del Cámbrico basal"
      ],
-     "a": 0,
+     "a": 3,
      "e": "A unos dos kilómetros de profundidad."
     },
     {
      "q": "Una cifra de capacidad sin método ni rango:",
      "o": [
+      "Es definitiva",
       "No requiere datos",
-      "Es la más confiable",
       "No es comparable con otras",
-      "Es definitiva"
+      "Es la más confiable"
      ],
      "a": 2,
      "e": "La comparabilidad exige método e incertidumbre."
@@ -836,9 +836,9 @@
    "q": "Por qué el entrampamiento residual y la disolución mejoran la seguridad con el tiempo:",
    "o": [
     "Inmovilizan parte del CO₂",
-    "Aumentan la presión",
     "Aumentan la porosidad",
-    "Eliminan el sello"
+    "Eliminan el sello",
+    "Aumentan la presión"
    ],
    "a": 0,
    "e": "El CO₂ deja de estar libre."
@@ -846,45 +846,45 @@
   {
    "q": "El MMV tiene como objetivo:",
    "o": [
-    "Demostrar dónde está el CO₂ y que se mantiene confinado",
+    "Reducir el espesor",
     "Calcular el precio",
     "Perforar pozos",
-    "Reducir el espesor"
+    "Demostrar dónde está el CO₂ y que se mantiene confinado"
    ],
-   "a": 0,
+   "a": 3,
    "e": "Combina sísmica 4D, pozo y superficie."
   },
   {
    "q": "Un yacimiento agotado como sitio tiene como riesgo:",
    "o": [
     "Falta de datos de sello demostrado",
-    "Pozos antiguos como vías de fuga",
     "Ausencia total de pozos",
+    "Pozos antiguos como vías de fuga",
     "Alta salinidad del agua"
    ],
-   "a": 1,
+   "a": 2,
    "e": "Hay que inventariarlos y controlarlos."
   },
   {
    "q": "El SRMS es:",
    "o": [
-    "Un sistema de gestión de recursos de almacenamiento de CO₂ de la SPE",
-    "Una ley argentina",
     "Un tipo de pozo",
-    "Un precio de referencia"
+    "Un sistema de gestión de recursos de almacenamiento de CO₂ de la SPE",
+    "Un precio de referencia",
+    "Una ley argentina"
    ],
-   "a": 0,
+   "a": 1,
    "e": "Aprobado en julio de 2017."
   },
   {
    "q": "Sleipner almacena CO₂ desde:",
    "o": [
-    "2005",
-    "2024",
+    "1996",
     "1850",
-    "1996"
+    "2005",
+    "2024"
    ],
-   "a": 3,
+   "a": 0,
    "e": "Con más de 19 millones de toneladas informadas en 2024."
   }
  ],

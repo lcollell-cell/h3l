@@ -257,33 +257,33 @@
      "q": "La potencia hidráulica de bombeo es aproximadamente:",
      "o": [
       "Diámetro por longitud",
-      "Caudal por caída de presión",
       "Viscosidad por densidad",
+      "Caudal por caída de presión",
       "Presión por temperatura"
      ],
-     "a": 1,
+     "a": 2,
      "e": "P = Q · ΔP."
     },
     {
      "q": "Un diámetro mayor en un ducto de líquido:",
      "o": [
-      "Reduce la velocidad y la caída de presión",
-      "Aumenta la velocidad",
       "No cambia nada",
-      "Aumenta la viscosidad"
+      "Reduce la velocidad y la caída de presión",
+      "Aumenta la viscosidad",
+      "Aumenta la velocidad"
      ],
-     "a": 0,
+     "a": 1,
      "e": "La velocidad baja con el cuadrado del diámetro."
     },
     {
      "q": "Un contrato firme de transporte significa:",
      "o": [
-      "Un descuento al azar",
-      "Capacidad solo si sobra",
+      "Capacidad reservada que se paga siempre",
       "Un tipo de pozo",
-      "Capacidad reservada que se paga siempre"
+      "Un descuento al azar",
+      "Capacidad solo si sobra"
      ],
-     "a": 3,
+     "a": 0,
      "e": "Garantiza la entrega, con el costo fijo."
     }
    ]
@@ -483,30 +483,30 @@
      "o": [
       "El promedio",
       "La suma simple",
-      "La raíz de la suma de los cuadrados",
-      "El producto"
+      "El producto",
+      "La raíz de la suma de los cuadrados"
      ],
-     "a": 2,
+     "a": 3,
      "e": "Se combinan en cuadratura."
     },
     {
      "q": "Un factor de cobertura k = 2 corresponde aproximadamente a:",
      "o": [
-      "Un 95 % de confianza",
-      "Un 50 % de confianza",
       "Un 100 % de confianza",
-      "Un 5 % de confianza"
+      "Un 5 % de confianza",
+      "Un 95 % de confianza",
+      "Un 50 % de confianza"
      ],
-     "a": 0,
+     "a": 2,
      "e": "Es el valor usual para la incertidumbre expandida."
     },
     {
      "q": "Una diferencia creciente en el balance de masa señala:",
      "o": [
-      "Que todo está bien",
+      "Más caudal",
       "Un posible problema de medición o una fuga",
-      "Un precio alto",
-      "Más caudal"
+      "Que todo está bien",
+      "Un precio alto"
      ],
      "a": 1,
      "e": "Hay que investigar la causa."
@@ -729,34 +729,34 @@
     {
      "q": "Una interfase en un ducto de varios productos es:",
      "o": [
+      "La zona de mezcla entre dos lotes consecutivos",
       "Un contrato",
       "Un tipo de válvula",
-      "La zona de mezcla entre dos lotes consecutivos",
       "Un medidor"
      ],
-     "a": 2,
+     "a": 0,
      "e": "Se corta o se reprocesa."
     },
     {
      "q": "El ciclo de integridad de un ducto incluye:",
      "o": [
-      "Solo reparar",
-      "Identificar amenazas, inspeccionar, evaluar y reparar",
       "Solo medir caudal",
-      "Solo facturar"
+      "Solo facturar",
+      "Solo reparar",
+      "Identificar amenazas, inspeccionar, evaluar y reparar"
      ],
-     "a": 1,
+     "a": 3,
      "e": "Se repite con una frecuencia basada en el riesgo."
     },
     {
      "q": "Una buena práctica ante ransomware es:",
      "o": [
+      "No planificar",
       "Conectar todo a internet",
       "Tener copias de respaldo fuera de línea y segmentar las redes",
-      "Evitar la actualización",
-      "No planificar"
+      "Evitar la actualización"
      ],
-     "a": 1,
+     "a": 2,
      "e": "Es una de las recomendaciones del aviso de CISA y FBI."
     }
    ]
@@ -777,43 +777,43 @@
   {
    "q": "La medición fiscal sirve para:",
    "o": [
-    "Decorar",
+    "Cobrar, pagar regalías y transferir custodia",
     "Controlar la porosidad",
     "Reducir la presión",
-    "Cobrar, pagar regalías y transferir custodia"
+    "Decorar"
    ],
-   "a": 3,
+   "a": 0,
    "e": "Su exactitud tiene valor económico."
   },
   {
    "q": "Con incertidumbres independientes de 0,3 % y 0,4 %, la combinada es:",
    "o": [
+    "1,2 %",
     "0,7 %",
-    "0,5 %",
     "0,1 %",
-    "1,2 %"
+    "0,5 %"
    ],
-   "a": 1,
+   "a": 3,
    "e": "√(0,09 + 0,16) = 0,5."
   },
   {
    "q": "El linepack sirve para:",
    "o": [
     "Aumentar la porosidad",
-    "Amortiguar picos de demanda con el gas del propio ducto",
     "Cerrar un pozo",
+    "Amortiguar picos de demanda con el gas del propio ducto",
     "Subir el precio"
    ],
-   "a": 1,
+   "a": 2,
    "e": "El ducto almacena gas por su volumen."
   },
   {
    "q": "La inspección en línea de un ducto detecta:",
    "o": [
-    "El precio",
-    "Corrosión y otros defectos",
     "El caudal del pozo",
-    "La temperatura ambiente"
+    "Corrosión y otros defectos",
+    "La temperatura ambiente",
+    "El precio"
    ],
    "a": 1,
    "e": "Se hace con herramientas inteligentes."
@@ -822,9 +822,9 @@
    "q": "El caso de 2021 mostró que:",
    "o": [
     "La ciberseguridad es parte de la continuidad operativa",
+    "El problema fue del reservorio",
     "Los ductos no se conectan a redes",
-    "No hubo efecto",
-    "El problema fue del reservorio"
+    "No hubo efecto"
    ],
    "a": 0,
    "e": "La empresa suspendió operaciones de forma preventiva."

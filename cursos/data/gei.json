@@ -92,8 +92,7 @@
        "hl": 2
       },
       {
-       "say": "Para cada fuente, la emisión es un dato de actividad por un factor de emisión. Los factores salen de guías como las del IPCC, de 2006 con su actualización de 2019, o de compendios sectoriales como el del Instituto Americano del Petróleo.",
-       "hl": 2
+       "say": "Para cada fuente, la emisión es un dato de actividad por un factor de emisión. Los factores salen de guías como las del IPCC, de 2006 con su actualización de 2019, o de compendios sectoriales como el del Instituto Americano del Petróleo."
       },
       {
        "say": "Laboratorio. Es un inventario de ejemplo. Movés el gas quemado en antorcha, el combustible, las fugas de metano y la electricidad comprada. Observá qué fuente domina y cómo cambia cuando incluís el alcance 3.",
@@ -194,12 +193,10 @@
        "hl": 4
       },
       {
-       "say": "El marco de reporte de la Asociación de Petróleo y Gas de ONU Ambiente, OGMP 2.0, define cinco niveles. El más alto, el nivel cinco, exige mediciones a nivel de fuente y de sitio, y su conciliación.",
-       "hl": 4
+       "say": "El marco de reporte de la Asociación de Petróleo y Gas de ONU Ambiente, OGMP 2.0, define cinco niveles. El más alto, el nivel cinco, exige mediciones a nivel de fuente y de sitio, y su conciliación."
       },
       {
-       "say": "Y la iniciativa del Banco Mundial para eliminar la quema rutinaria de gas hacia 2030 es otra referencia. Recuperar el gas que se quema, además de reducir emisiones, lo convierte en un producto vendible.",
-       "hl": 4
+       "say": "Y la iniciativa del Banco Mundial para eliminar la quema rutinaria de gas hacia 2030 es otra referencia. Recuperar el gas que se quema, además de reducir emisiones, lo convierte en un producto vendible."
       },
       {
        "say": "Pregunta rápida.",
@@ -233,23 +230,23 @@
     {
      "q": "El GWP a 100 años del metano fósil (AR6) es de aproximadamente:",
      "o": [
-      "1",
-      "273",
       "29,8",
-      "1000"
+      "273",
+      "1000",
+      "1"
      ],
-     "a": 2,
+     "a": 0,
      "e": "AR6 informa 29,8 para el metano de origen fósil a 100 años."
     },
     {
      "q": "OGMP 2.0 se refiere a:",
      "o": [
+      "Una norma de cementación",
       "Un tipo de antorcha",
       "Un catalizador",
-      "El marco de reporte de metano de ONU Ambiente para petróleo y gas",
-      "Una norma de cementación"
+      "El marco de reporte de metano de ONU Ambiente para petróleo y gas"
      ],
-     "a": 2,
+     "a": 3,
      "e": "Es el marco de reporte y mejora de metano de ONU Ambiente."
     }
    ]
@@ -424,21 +421,21 @@
     {
      "q": "En una MACC, el ancho de cada barra representa:",
      "o": [
-      "El volumen de emisiones evitadas por la medida",
       "El costo por tonelada",
       "La inversión inicial",
+      "El volumen de emisiones evitadas por la medida",
       "El precio del gas"
      ],
-     "a": 0,
+     "a": 2,
      "e": "El eje horizontal acumula el potencial de abatimiento."
     },
     {
      "q": "Para demostrar ahorros energéticos se necesita primero:",
      "o": [
-      "Instalar tecnología",
-      "Una línea de base medida",
       "Aumentar la producción",
-      "Un nuevo contrato"
+      "Una línea de base medida",
+      "Un nuevo contrato",
+      "Instalar tecnología"
      ],
      "a": 1,
      "e": "Sin línea de base no hay forma de comparar."
@@ -446,12 +443,12 @@
     {
      "q": "Recuperar gas de antorcha puede tener costo negativo porque:",
      "o": [
-      "Es gratis",
-      "Disminuye el precio del carbono",
+      "El gas recuperado se puede vender o usar",
       "Se vende CO₂",
-      "El gas recuperado se puede vender o usar"
+      "Es gratis",
+      "Disminuye el precio del carbono"
      ],
-     "a": 3,
+     "a": 0,
      "e": "El ahorro o ingreso por el gas puede compensar el costo."
     }
    ]
@@ -560,30 +557,30 @@
      "o": [
       "Inyección, captura, transporte, compresión",
       "Transporte, captura, inyección, compresión",
-      "Captura, compresión, transporte, inyección",
-      "Compresión, inyección, captura, transporte"
+      "Compresión, inyección, captura, transporte",
+      "Captura, compresión, transporte, inyección"
      ],
-     "a": 2,
+     "a": 3,
      "e": "Se captura, se comprime, se transporta y se inyecta."
     },
     {
      "q": "¿Qué mecanismo de entrampamiento es el más lento?",
      "o": [
-      "Estructural",
-      "Mineralización",
       "Disolución",
-      "Residual"
+      "Residual",
+      "Mineralización",
+      "Estructural"
      ],
-     "a": 1,
+     "a": 2,
      "e": "La mineralización actúa en escalas de cientos a miles de años."
     },
     {
      "q": "Sleipner inyecta CO₂ en:",
      "o": [
-      "Un yacimiento agotado de gas",
+      "El océano",
       "Un acuífero salino, la Formación Utsira",
-      "Una mina de carbón",
-      "El océano"
+      "Un yacimiento agotado de gas",
+      "Una mina de carbón"
      ],
      "a": 1,
      "e": "La Formación Utsira es un acuífero salino profundo."
@@ -606,9 +603,9 @@
   {
    "q": "El uso de los productos vendidos pertenece al:",
    "o": [
-    "Alcance 1",
     "Alcance 2",
     "Es una emisión evitada",
+    "Alcance 1",
     "Alcance 3"
    ],
    "a": 3,
@@ -617,32 +614,32 @@
   {
    "q": "Con GWP a 20 años, el metano en el inventario:",
    "o": [
-    "Pesa más",
+    "Desaparece",
     "Pesa menos",
-    "Pesa igual",
-    "Desaparece"
+    "Pesa más",
+    "Pesa igual"
    ],
-   "a": 0,
+   "a": 2,
    "e": "82,5 frente a 29,8 de GWP100 (AR6, metano fósil)."
   },
   {
    "q": "Una medida con costo negativo en una MACC:",
    "o": [
-    "Tiene ahorros que superan su costo",
     "No cuesta nada",
+    "Tiene ahorros que superan su costo",
     "No reduce emisiones",
     "Aumenta emisiones"
    ],
-   "a": 0,
+   "a": 1,
    "e": "Genera un beneficio económico neto."
   },
   {
    "q": "La electrificación reduce emisiones netas si:",
    "o": [
     "La intensidad de emisión de la electricidad es menor que la del equipo reemplazado",
-    "Siempre",
     "Nunca",
-    "Solo en tierra"
+    "Solo en tierra",
+    "Siempre"
    ],
    "a": 0,
    "e": "Hay que comparar intensidades."
@@ -650,9 +647,9 @@
   {
    "q": "El almacenamiento geológico de CO₂ requiere, entre otros elementos:",
    "o": [
+    "Presiones nulas",
     "Un pozo de agua dulce",
     "Ninguna evaluación geológica",
-    "Presiones nulas",
     "Un sello eficaz y un programa de monitoreo"
    ],
    "a": 3,

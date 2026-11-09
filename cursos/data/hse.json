@@ -295,34 +295,34 @@
     {
      "q": "Un peligro con barreras muy fiables puede tener:",
      "o": [
+      "Riesgo bajo",
       "Frecuencia alta",
       "Riesgo infinito",
-      "Riesgo bajo",
       "Ninguna consecuencia posible"
      ],
-     "a": 2,
+     "a": 0,
      "e": "Las barreras reducen la probabilidad o la gravedad."
     },
     {
      "q": "El modelo del queso suizo explica que un accidente ocurre cuando:",
      "o": [
-      "Hay mucho trabajo",
       "Falla una sola barrera siempre",
-      "Se alinean fallas en varias barreras",
-      "Hay poca presión"
+      "Hay poca presión",
+      "Hay mucho trabajo",
+      "Se alinean fallas en varias barreras"
      ],
-     "a": 2,
+     "a": 3,
      "e": "Cada barrera tiene agujeros."
     },
     {
      "q": "El resultado más valioso de un HAZOP es:",
      "o": [
+      "Un costo menor",
       "Un informe archivado",
       "Recomendaciones cerradas con seguimiento",
-      "Un plano",
-      "Un costo menor"
+      "Un plano"
      ],
-     "a": 1,
+     "a": 2,
      "e": "Sin cierre de acciones no cambia el riesgo."
     }
    ]
@@ -530,34 +530,34 @@
     {
      "q": "En LOPA, dos capas que dependen de la misma alimentación eléctrica:",
      "o": [
-      "No se cuentan como independientes",
       "Se multiplican siempre",
+      "No se cuentan como independientes",
       "Se ignoran siempre",
       "Suman cero"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Una causa común las hace fallar juntas."
     },
     {
      "q": "Si la frecuencia mitigada es mayor que la tolerable:",
      "o": [
-      "El proceso es intrínsecamente seguro",
-      "Se cumple el objetivo",
       "Falta reducción de riesgo",
-      "Se anula el iniciador"
+      "Se cumple el objetivo",
+      "Se anula el iniciador",
+      "El proceso es intrínsecamente seguro"
      ],
-     "a": 2,
+     "a": 0,
      "e": "Hay que agregar capas o rediseñar."
     },
     {
      "q": "La prueba funcional periódica de una función instrumentada sirve para:",
      "o": [
+      "Eliminar el sensor",
       "Reducir el caudal",
       "Aumentar la presión",
-      "Mantener la integridad que se asumió en el diseño",
-      "Eliminar el sensor"
+      "Mantener la integridad que se asumió en el diseño"
      ],
-     "a": 2,
+     "a": 3,
      "e": "Sin pruebas, el SIL se degrada."
     }
    ]
@@ -788,32 +788,32 @@
      "o": [
       "El caudal",
       "El número de muertos del año",
-      "El precio del crudo",
-      "El porcentaje de pruebas de seguridad al día"
+      "El porcentaje de pruebas de seguridad al día",
+      "El precio del crudo"
      ],
-     "a": 3,
+     "a": 2,
      "e": "Mide el estado de las barreras antes de un evento."
     },
     {
      "q": "Un cambio temporal sin análisis de riesgo equivale a:",
      "o": [
-      "Retirar una barrera sin avisar",
-      "Mejorar la seguridad",
       "Un cambio sin efecto",
-      "Una auditoría"
+      "Retirar una barrera sin avisar",
+      "Una auditoría",
+      "Mejorar la seguridad"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Los cambios sin gestión son una causa frecuente de accidentes."
     },
     {
      "q": "Un traspaso de turno seguro incluye:",
      "o": [
-      "Ninguna información",
-      "Solo un saludo",
       "Registro escrito y revisión de los permisos activos",
-      "Un cambio de nombre"
+      "Un cambio de nombre",
+      "Ninguna información",
+      "Solo un saludo"
      ],
-     "a": 2,
+     "a": 0,
      "e": "La información que no se transmite no existe."
     }
    ]
@@ -825,51 +825,51 @@
    "o": [
     "El tamaño del plano",
     "Solo el nombre del escenario",
-    "La frecuencia o la consecuencia",
-    "El color del equipo"
+    "El color del equipo",
+    "La frecuencia o la consecuencia"
    ],
-   "a": 2,
+   "a": 3,
    "e": "Son los dos componentes del riesgo."
   },
   {
    "q": "En un HAZOP se aplican palabras guía a:",
    "o": [
-    "Los parámetros del proceso en cada nodo",
-    "El presupuesto",
     "El personal",
-    "Las cuentas"
+    "Las cuentas",
+    "Los parámetros del proceso en cada nodo",
+    "El presupuesto"
    ],
-   "a": 0,
+   "a": 2,
    "e": "Así se encuentran los desvíos."
   },
   {
    "q": "Con un iniciador de 10⁻¹ por año, capas de 10⁻¹ y 10⁻² y una meta de 10⁻⁵, la frecuencia mitigada es:",
    "o": [
-    "10⁻³, cumple",
-    "10⁻⁶, cumple",
+    "10⁻⁵, cumple",
     "10⁻⁴, mayor que la meta: falta una reducción de 10",
-    "10⁻⁵, cumple"
+    "10⁻³, cumple",
+    "10⁻⁶, cumple"
    ],
-   "a": 2,
+   "a": 1,
    "e": "10⁻¹ × 10⁻¹ × 10⁻² = 10⁻⁴, un orden de magnitud por encima de la meta de 10⁻⁵."
   },
   {
    "q": "Un SIL 3 en baja demanda corresponde a una probabilidad de falla entre:",
    "o": [
+    "0,001 y 0,0001",
     "0,01 y 0,001",
     "0,1 y 0,01",
-    "0,001 y 0,0001",
     "1 y 0,1"
    ],
-   "a": 2,
+   "a": 0,
    "e": "Es una reducción de riesgo de 1.000 a 10.000."
   },
   {
    "q": "El permiso de trabajo debe estar:",
    "o": [
-    "Siempre verbal",
     "Guardado en una oficina lejana",
     "Solo en la memoria",
+    "Siempre verbal",
     "Visible y conocido donde se opera y donde se trabaja"
    ],
    "a": 3,
@@ -878,12 +878,12 @@
   {
    "q": "El informe Cullen subrayó que la responsabilidad de la seguridad es:",
    "o": [
-    "De quien crea el riesgo y trabaja con él",
+    "De nadie",
     "Solo del Estado",
-    "Solo de los trabajadores",
-    "De nadie"
+    "De quien crea el riesgo y trabaja con él",
+    "Solo de los trabajadores"
    ],
-   "a": 0,
+   "a": 2,
    "e": "La empresa debe tener su propio sistema de gestión."
   }
  ],

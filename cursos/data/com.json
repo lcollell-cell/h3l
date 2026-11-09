@@ -250,32 +250,32 @@
      "o": [
       "Ningún diferencial",
       "Un diferencial peor",
-      "Un diferencial mejor que un pesado y sulfuroso",
-      "Un precio negativo"
+      "Un precio negativo",
+      "Un diferencial mejor que un pesado y sulfuroso"
      ],
-     "a": 2,
+     "a": 3,
      "e": "Rinde más productos valiosos."
     },
     {
      "q": "El Henry Hub es:",
      "o": [
-      "Una referencia de precio del gas en Estados Unidos",
-      "Un tipo de pozo",
       "Un puerto",
-      "Una norma"
+      "Una norma",
+      "Una referencia de precio del gas en Estados Unidos",
+      "Un tipo de pozo"
      ],
-     "a": 0,
+     "a": 2,
      "e": "Los mercados de gas son regionales."
     },
     {
      "q": "El netback se calcula:",
      "o": [
-      "Con el precio local",
-      "Sumando los costos",
       "Solo con el flete",
-      "Descontando del precio de referencia todo el costo de llegar al comprador"
+      "Descontando del precio de referencia todo el costo de llegar al comprador",
+      "Con el precio local",
+      "Sumando los costos"
      ],
-     "a": 3,
+     "a": 1,
      "e": "Es lo que queda en boca de pozo."
     }
    ]
@@ -499,34 +499,34 @@
     {
      "q": "Un swap de precio fijo:",
      "o": [
+      "Elimina el riesgo de precio y también la ganancia adicional",
       "No tiene contraparte",
       "Solo elimina la ganancia",
-      "Aumenta el riesgo",
-      "Elimina el riesgo de precio y también la ganancia adicional"
+      "Aumenta el riesgo"
      ],
-     "a": 3,
+     "a": 0,
      "e": "Fija el precio recibido."
     },
     {
      "q": "El riesgo de base es:",
      "o": [
-      "Una multa",
-      "La diferencia entre el precio cubierto y el real que se recibe",
       "Un tipo de tanque",
-      "Un impuesto"
+      "Un impuesto",
+      "Una multa",
+      "La diferencia entre el precio cubierto y el real que se recibe"
      ],
-     "a": 1,
+     "a": 3,
      "e": "La cobertura nunca es perfecta."
     },
     {
      "q": "Una cobertura sobre más producción de la que se espera tener es:",
      "o": [
-      "Una posición especulativa",
+      "Obligatoria",
       "Una cobertura perfecta",
-      "Una forma de bajar los costos",
-      "Obligatoria"
+      "Una posición especulativa",
+      "Una forma de bajar los costos"
      ],
-     "a": 0,
+     "a": 2,
      "e": "Si se cubre más de lo que se produce, se asume riesgo."
     }
    ]
@@ -744,33 +744,33 @@
      "q": "El 20 de abril de 2020, el contrato de mayo del WTI se liquidó en:",
      "o": [
       "100 dólares",
+      "−37,63 dólares por barril",
       "37,63 dólares por barril",
-      "0 dólares",
-      "−37,63 dólares por barril"
+      "0 dólares"
      ],
-     "a": 3,
+     "a": 1,
      "e": "Según la CFTC, el día anterior a su vencimiento."
     },
     {
      "q": "Un comité de riesgos revisa:",
      "o": [
-      "Los planos",
       "Posiciones, contrapartes y desempeño de las coberturas",
       "La porosidad",
-      "El color de los tanques"
+      "El color de los tanques",
+      "Los planos"
      ],
-     "a": 1,
+     "a": 0,
      "e": "Forma parte del gobierno del riesgo."
     },
     {
      "q": "Una carta de crédito reduce el riesgo de:",
      "o": [
+      "Sismos",
       "Corrosión",
-      "Contraparte",
       "Presión",
-      "Sismos"
+      "Contraparte"
      ],
-     "a": 1,
+     "a": 3,
      "e": "Un banco garantiza el pago."
     }
    ]
@@ -781,33 +781,33 @@
    "q": "El precio de venta de un crudo se compone de:",
    "o": [
     "Solo el costo",
-    "Una referencia y un diferencial",
     "El precio local del gas",
+    "Una referencia y un diferencial",
     "Un número al azar"
    ],
-   "a": 1,
+   "a": 2,
    "e": "Diferencial por calidad y ubicación."
   },
   {
    "q": "Con referencia 75, diferencial −6, flete 4, derechos de 8 % sobre el FOB y transporte 3, el netback es aproximadamente:",
    "o": [
-    "75 USD/bbl",
     "62 USD/bbl",
     "56,8 USD/bbl",
-    "44 USD/bbl"
+    "44 USD/bbl",
+    "75 USD/bbl"
    ],
-   "a": 2,
+   "a": 1,
    "e": "FOB = 75 − 6 − 4 = 65; derechos 5,2; 65 − 5,2 − 3 = 56,8."
   },
   {
    "q": "El instrumento que da un piso sin limitar la ganancia al alza es:",
    "o": [
-    "El collar",
-    "El swap",
+    "El put",
     "El futuro vendido",
-    "El put"
+    "El collar",
+    "El swap"
    ],
-   "a": 3,
+   "a": 0,
    "e": "Se paga una prima por ese derecho."
   },
   {
@@ -815,32 +815,32 @@
    "o": [
     "Un error de cálculo",
     "Una multa",
-    "Que el precio cubierto difiere del que se recibe",
-    "Un tanque vacío"
+    "Un tanque vacío",
+    "Que el precio cubierto difiere del que se recibe"
    ],
-   "a": 2,
+   "a": 3,
    "e": "La cobertura no es perfecta."
   },
   {
    "q": "Una política de cobertura debe definir:",
    "o": [
-    "Solo un precio objetivo",
-    "Porcentajes, instrumentos, contrapartes, límites y responsables",
     "Solo el color",
-    "Nada"
+    "Nada",
+    "Porcentajes, instrumentos, contrapartes, límites y responsables",
+    "Solo un precio objetivo"
    ],
-   "a": 1,
+   "a": 2,
    "e": "Es una decisión de empresa y de gobierno."
   },
   {
    "q": "Una enseñanza del WTI negativo es:",
    "o": [
-    "El precio siempre es positivo",
-    "El petróleo no se puede cubrir",
     "Los futuros no sirven",
-    "Los instrumentos deben entenderse y la logística tiene valor"
+    "Los instrumentos deben entenderse y la logística tiene valor",
+    "El precio siempre es positivo",
+    "El petróleo no se puede cubrir"
    ],
-   "a": 3,
+   "a": 1,
    "e": "El precio de un contrato puede ser negativo cerca del vencimiento."
   }
  ],

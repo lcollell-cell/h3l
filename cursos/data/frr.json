@@ -285,33 +285,33 @@
      "q": "El factor de recobro final es:",
      "o": [
       "La producción de hoy",
-      "La recuperación final estimada sobre el petróleo original en sitio",
       "El caudal inicial",
+      "La recuperación final estimada sobre el petróleo original en sitio",
       "El precio de equilibrio"
      ],
-     "a": 1,
+     "a": 2,
      "e": "RF final = EUR / N."
     },
     {
      "q": "Dentro de la eficiencia de desplazamiento, un petróleo residual más bajo significa:",
      "o": [
-      "Ningún efecto",
       "Menor recobro",
       "Mayor recobro",
-      "Mayor viscosidad"
+      "Mayor viscosidad",
+      "Ningún efecto"
      ],
-     "a": 2,
+     "a": 1,
      "e": "ED = 1 − Sor / (1 − Swi)."
     },
     {
      "q": "Con empuje de gas en solución, el recobro típico es:",
      "o": [
-      "Mayor al 90 %",
-      "Entre 35 y 75 %",
       "Entre 5 y 30 % del petróleo original",
-      "Cero"
+      "Cero",
+      "Mayor al 90 %",
+      "Entre 35 y 75 %"
      ],
-     "a": 2,
+     "a": 0,
      "e": "Rango típico compilado por Sills (AAPG Wiki)."
     }
    ]
@@ -541,32 +541,32 @@
     {
      "q": "La recuperación terciaria o EOR se caracteriza por:",
      "o": [
-      "Cambiar las propiedades del fluido o la interacción con la roca",
       "Mantener solo la presión",
       "Perforar pozos de relleno",
-      "Cerrar pozos"
+      "Cerrar pozos",
+      "Cambiar las propiedades del fluido o la interacción con la roca"
      ],
-     "a": 0,
+     "a": 3,
      "e": "La secundaria mantiene presión y desplaza."
     },
     {
      "q": "Un polímero inyectado actúa principalmente sobre:",
      "o": [
-      "La porosidad",
       "El petróleo residual en los poros barridos",
       "La temperatura del yacimiento",
-      "El barrido, por menor razón de movilidad"
+      "El barrido, por menor razón de movilidad",
+      "La porosidad"
      ],
-     "a": 3,
+     "a": 2,
      "e": "No baja el petróleo residual por sí solo."
     },
     {
      "q": "La relación vapor-petróleo mide:",
      "o": [
-      "La presión del yacimiento",
+      "La permeabilidad",
       "El consumo de vapor por barril de petróleo producido",
-      "La densidad API",
-      "La permeabilidad"
+      "La presión del yacimiento",
+      "La densidad API"
      ],
      "a": 1,
      "e": "Es el principal indicador de uso de recursos en un método térmico."
@@ -881,20 +881,20 @@
     {
      "q": "Según PRMS, para que un recurso contingente sea reserva debe:",
      "o": [
+      "Cumplir criterios de comercialidad con intención firme de desarrollar",
       "Tener un recobro mayor al 50 %",
       "Haber sido producido",
-      "Cumplir criterios de comercialidad con intención firme de desarrollar",
       "Estar en otro país"
      ],
-     "a": 2,
+     "a": 0,
      "e": "Guías de aplicación de PRMS."
     },
     {
      "q": "Un método de EOR cuya recuperación comercial depende de tecnología en desarrollo suele clasificarse como:",
      "o": [
-      "Recurso prospectivo en exploración",
       "Reserva desarrollada en producción",
       "Producción acumulada",
+      "Recurso prospectivo en exploración",
       "Recurso contingente"
      ],
      "a": 3,
@@ -903,12 +903,12 @@
     {
      "q": "Si sube el consumo de insumo por barril incremental:",
      "o": [
+      "El factor actual aumenta",
       "Las reservas aumentan",
       "Sube el costo, el límite económico se adelanta y bajan las reservas",
-      "Nada cambia",
-      "El factor actual aumenta"
+      "Nada cambia"
      ],
-     "a": 1,
+     "a": 2,
      "e": "La economía es parte de la clasificación."
     }
    ]
@@ -919,30 +919,30 @@
    "q": "Si Np = 22 MMbbl y N = 100 MMbbl, el factor de recobro actual es:",
    "o": [
     "100 %",
+    "22 %",
     "78 %",
-    "2,2 %",
-    "22 %"
+    "2,2 %"
    ],
-   "a": 3,
+   "a": 1,
    "e": "Np dividido por N."
   },
   {
    "q": "El factor de recobro final de reservas se calcula con:",
    "o": [
-    "N / Np",
+    "(Np + reservas remanentes) / N",
     "Reservas / precio",
     "Np / reservas",
-    "(Np + reservas remanentes) / N"
+    "N / Np"
    ],
-   "a": 3,
+   "a": 0,
    "e": "Combina lo producido y lo que falta de proyectos de reservas."
   },
   {
    "q": "Con un casquete de gas, el recobro típico de la compilación AAPG es:",
    "o": [
+    "80 a 100 %",
     "0 %",
     "5 a 30 % de incremento",
-    "80 a 100 %",
     "20 a 40 % del petróleo original"
    ],
    "a": 3,
@@ -951,34 +951,34 @@
   {
    "q": "Un yacimiento con capas de permeabilidades muy distintas recupera mal con inyección de agua porque:",
    "o": [
-    "El agua pasa por las capas rápidas y el barrido vertical es malo",
     "El agua es más liviana que el petróleo",
     "No hay presión",
+    "El agua pasa por las capas rápidas y el barrido vertical es malo",
     "La roca no tiene porosidad"
    ],
-   "a": 0,
+   "a": 2,
    "e": "La eficiencia de barrido vertical es baja."
   },
   {
    "q": "El método de EOR que ataca el barrido por mayor viscosidad del agua es:",
    "o": [
-    "El polímero",
-    "El vapor",
     "El CO₂ miscible",
-    "La combustión in situ"
+    "El polímero",
+    "La combustión in situ",
+    "El vapor"
    ],
-   "a": 0,
+   "a": 1,
    "e": "Reduce la razón de movilidad."
   },
   {
    "q": "Un proyecto de EOR en piloto, sin aprobación de inversión, tiene su incremento de recobro en:",
    "o": [
-    "Recursos prospectivos",
-    "Reservas probadas desarrolladas en producción",
+    "Recursos contingentes",
     "Producción acumulada",
-    "Recursos contingentes"
+    "Recursos prospectivos",
+    "Reservas probadas desarrolladas en producción"
    ],
-   "a": 3,
+   "a": 0,
    "e": "Falta cumplir los criterios de comercialidad."
   }
  ],

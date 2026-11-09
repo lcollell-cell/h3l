@@ -171,34 +171,34 @@
     {
      "q": "Una razón de movilidad M mayor que 1 significa que:",
      "o": [
+      "El petróleo es inmóvil",
       "El agua es más móvil que el petróleo: desplazamiento desfavorable",
       "El agua es menos móvil que el petróleo",
-      "No hay desplazamiento",
-      "El petróleo es inmóvil"
+      "No hay desplazamiento"
      ],
-     "a": 0,
+     "a": 1,
      "e": "El agua tiende a digitarse y a canalizarse."
     },
     {
      "q": "La saturación residual de petróleo (Sor) limita principalmente:",
      "o": [
-      "La presión de burbuja",
       "La eficiencia de desplazamiento",
+      "La presión de burbuja",
       "El barrido areal",
       "El número de pozos"
      ],
-     "a": 1,
+     "a": 0,
      "e": "Es el petróleo que queda atrapado a escala de poro aun en zonas barridas."
     },
     {
      "q": "Un canal de alta permeabilidad entre un inyector y un productor provoca:",
      "o": [
-      "Irrupción tardía",
       "Más recuperación",
-      "Irrupción temprana y mal barrido",
-      "Nada"
+      "Nada",
+      "Irrupción tardía",
+      "Irrupción temprana y mal barrido"
      ],
-     "a": 2,
+     "a": 3,
      "e": "El agua sigue el camino de menor resistencia y deja petróleo sin barrer."
     }
    ]
@@ -227,7 +227,7 @@
        "hl": 0
       },
       {
-       "say": "El control de esa canalización se llama conformance. Las herramientas son: reperforar o re-completar para aislar zonas, inyección selectiva con mandriles, modificadores de perfil y ajuste de caudales por pozo.",
+       "say": "El control de esa canalización se llama conformance. Las herramientas: la inyección selectiva por zona, con mandriles.",
        "scene": {
         "t": "bul",
         "k": "Conformance",
@@ -243,7 +243,23 @@
        "hl": 0
       },
       {
-       "say": "Los modelos de capas simplifican la heterogeneidad. Stiles supone un desplazamiento tipo pistón sin flujo entre capas: las más permeables irrumpen primero. Dykstra y Parsons usan el coeficiente de variación de la permeabilidad. Koval propuso un factor que combina heterogeneidad y razón de viscosidades efectiva.",
+       "say": "El aislamiento mecánico de zonas ladronas, reperforando o re-completando.",
+       "hl": 1
+      },
+      {
+       "say": "Los modificadores de perfil de inyección o de producción.",
+       "hl": 2
+      },
+      {
+       "say": "El rebalanceo de caudales entre inyectores, o el ajuste de caudales por pozo.",
+       "hl": 3
+      },
+      {
+       "say": "Y la conversión o reubicación de pozos.",
+       "hl": 4
+      },
+      {
+       "say": "Los modelos de capas simplifican la heterogeneidad. Stiles supone capas ordenadas y un frente tipo pistón, sin flujo entre capas: las más permeables irrumpen primero.",
        "scene": {
         "t": "bul",
         "k": "Modelos de capas",
@@ -254,7 +270,20 @@
          "Factor de Koval: heterogeneidad más razón de viscosidades efectiva",
          "Todos suponen simplificaciones: sirven para ordenar y comparar, no para predecir al detalle"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Dykstra y Parsons usan el coeficiente de variación de la permeabilidad.",
+       "hl": 1
+      },
+      {
+       "say": "Koval propuso un factor que combina heterogeneidad y razón de viscosidades efectiva.",
+       "hl": 2
+      },
+      {
+       "say": "Todos suponen simplificaciones: sirven para ordenar y comparar, no para predecir al detalle.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -389,10 +418,10 @@
     {
      "q": "¿Qué es el conformance?",
      "o": [
+      "La viscosidad del petróleo",
       "La calidad del agua",
-      "El diámetro del casing",
       "El control de la distribución del agua inyectada entre capas y zonas",
-      "La viscosidad del petróleo"
+      "El diámetro del casing"
      ],
      "a": 2,
      "e": "Son las acciones para mejorar el barrido y reducir la canalización."
@@ -401,22 +430,22 @@
      "q": "El agua producida suele reinyectarse porque:",
      "o": [
       "Es siempre de mejor calidad",
+      "Reduce el consumo de agua nueva y el manejo de efluentes",
       "Elimina la necesidad de filtrar",
-      "Eleva el Sor",
-      "Reduce el consumo de agua nueva y el manejo de efluentes"
+      "Eleva el Sor"
      ],
-     "a": 3,
+     "a": 1,
      "e": "Reduce costos y pasivo ambiental, aunque debe tratarse."
     },
     {
      "q": "Las bacterias sulfato reductoras pueden provocar:",
      "o": [
-      "Más permeabilidad",
+      "Acidificación por sulfuro de hidrógeno y corrosión",
       "Mayor presión de fractura",
       "Menor viscosidad",
-      "Acidificación por sulfuro de hidrógeno y corrosión"
+      "Más permeabilidad"
      ],
-     "a": 3,
+     "a": 0,
      "e": "Generan H₂S, con riesgo para la seguridad, para la corrosión y para la calidad del crudo."
     }
    ]
@@ -525,34 +554,34 @@
     {
      "q": "Un VRR de 0,6 indica:",
      "o": [
+      "Fractura segura",
       "Sobreinyección",
-      "Subinyección: la presión tiende a caer",
       "Equilibrio",
-      "Fractura segura"
+      "Subinyección: la presión tiende a caer"
      ],
-     "a": 1,
+     "a": 3,
      "e": "Se inyecta menos volumen del que se produce."
     },
     {
      "q": "El Hall plot sirve sobre todo para:",
      "o": [
-      "Diagnosticar la inyectividad de un pozo inyector",
       "Medir la viscosidad",
       "Calcular el Bo",
+      "Diagnosticar la inyectividad de un pozo inyector",
       "Estimar el área"
      ],
-     "a": 0,
+     "a": 2,
      "e": "Su pendiente es proporcional a la resistencia al flujo."
     },
     {
      "q": "En Ekofisk, la inyección de agua se escaló después de:",
      "o": [
-      "Un piloto en 1981",
-      "Descubrir el campo en 1969 sin ensayos",
       "El hundimiento de 1998",
-      "Ningún ensayo"
+      "Un piloto en 1981",
+      "Ningún ensayo",
+      "Descubrir el campo en 1969 sin ensayos"
      ],
-     "a": 0,
+     "a": 1,
      "e": "El piloto en Tor, de 1981, precedió a la plataforma de inyección de 1987."
     }
    ]
@@ -562,12 +591,12 @@
   {
    "q": "El factor de recuperación de una inyección de agua es:",
    "o": [
-    "Ed + Ea + Ev",
-    "Ea / Ev",
+    "Ed × Ea × Ev",
     "Solo Ed",
-    "Ed × Ea × Ev"
+    "Ed + Ea + Ev",
+    "Ea / Ev"
    ],
-   "a": 3,
+   "a": 0,
    "e": "Es el producto de las tres eficiencias."
   },
   {
@@ -575,19 +604,19 @@
    "o": [
     "Mucho mayor que 1",
     "Negativa",
-    "Menor o cercana a 1",
-    "Infinita"
+    "Infinita",
+    "Menor o cercana a 1"
    ],
-   "a": 2,
+   "a": 3,
    "e": "Con M ≤ 1 el frente es más estable."
   },
   {
    "q": "El arreglo de referencia de cinco puntos tiene:",
    "o": [
-    "Un inyector por cuatro productores",
     "Dos inyectores",
+    "Solo productores",
     "Un productor rodeado de cuatro inyectores",
-    "Solo productores"
+    "Un inyector por cuatro productores"
    ],
    "a": 2,
    "e": "Five-spot: un productor con cuatro inyectores en sus vértices."
@@ -595,12 +624,12 @@
   {
    "q": "La principal consecuencia de un Dykstra-Parsons muy alto es:",
    "o": [
+    "Mayor presión",
     "Canalización y barrido vertical pobre",
     "Mejor barrido vertical",
-    "Menos agua producida",
-    "Mayor presión"
+    "Menos agua producida"
    ],
-   "a": 0,
+   "a": 1,
    "e": "El agua avanza por las capas más permeables."
   },
   {
@@ -617,12 +646,12 @@
   {
    "q": "Un VRR mucho mayor que 1 sostenido puede implicar:",
    "o": [
-    "Caída de presión",
     "Menor producción de agua",
-    "Riesgo de fractura y de pérdidas de agua",
-    "Menor inyección"
+    "Menor inyección",
+    "Caída de presión",
+    "Riesgo de fractura y de pérdidas de agua"
    ],
-   "a": 2,
+   "a": 3,
    "e": "Sobreinyectar eleva la presión por encima de lo conveniente."
   }
  ],

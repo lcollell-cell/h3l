@@ -228,21 +228,21 @@
     {
      "q": "En la fórmula volumétrica, dividir por Bgi sirve para:",
      "o": [
-      "Pasar volumen de reservorio a volumen estándar",
-      "Calcular la presión",
       "Obtener la viscosidad",
-      "Corregir por agua"
+      "Corregir por agua",
+      "Pasar volumen de reservorio a volumen estándar",
+      "Calcular la presión"
      ],
-     "a": 0,
+     "a": 2,
      "e": "Bgi es el factor volumétrico inicial."
     },
     {
      "q": "Un acuífero activo en un yacimiento de gas:",
      "o": [
-      "Aumenta la porosidad",
+      "Reduce el gas en sitio real",
       "Disminuye la caída de presión y puede atrapar gas",
-      "Elimina el agua",
-      "Reduce el gas en sitio real"
+      "Aumenta la porosidad",
+      "Elimina el agua"
      ],
      "a": 1,
      "e": "Repone parte del vaciamiento pero deja gas atrapado."
@@ -419,20 +419,20 @@
     {
      "q": "En la ecuación de retropresión, un exponente n cercano a 0,5 indica:",
      "o": [
+      "Flujo con fuerte turbulencia",
       "Ausencia de gas",
       "Flujo siempre laminar",
-      "Flujo con fuerte turbulencia",
       "Un acuífero fuerte"
      ],
-     "a": 2,
+     "a": 0,
      "e": "Con n = 1 el flujo es laminar."
     },
     {
      "q": "La mejor forma de aumentar el caudal de un pozo de gas con buen reservorio es:",
      "o": [
-      "Reducir el diámetro sin análisis",
       "Subir la presión de cabeza",
       "Cerrar el pozo",
+      "Reducir el diámetro sin análisis",
       "Bajar la presión de fondo fluyente"
      ],
      "a": 3,
@@ -441,12 +441,12 @@
     {
      "q": "Una sarta de velocidad ayuda porque:",
      "o": [
+      "Elimina el gas",
       "Reduce la presión de reservorio",
       "Una tubería más chica aumenta la velocidad del gas",
-      "Aumenta el agua",
-      "Elimina el gas"
+      "Aumenta el agua"
      ],
-     "a": 1,
+     "a": 2,
      "e": "Con mayor velocidad se arrastra el líquido."
     }
    ]
@@ -642,34 +642,34 @@
     {
      "q": "La presión de abandono depende sobre todo de:",
      "o": [
-      "La economía del pozo, la presión de la red y la compresión",
       "La porosidad",
+      "La economía del pozo, la presión de la red y la compresión",
       "El color del gas",
       "El tipo de roca madre"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Es una variable económica con efecto directo sobre las reservas."
     },
     {
      "q": "Un criterio simple para anticipar la carga de líquidos es:",
      "o": [
-      "Medir el color del agua",
       "Comparar la velocidad del gas con la velocidad crítica de Turner",
       "Contar los pozos",
-      "Reducir el caudal a cero"
+      "Reducir el caudal a cero",
+      "Medir el color del agua"
      ],
-     "a": 1,
+     "a": 0,
      "e": "Por debajo de la velocidad crítica las gotas caen."
     },
     {
      "q": "Los sismos inducidos de Groningen se relacionan con:",
      "o": [
+      "La minería",
       "Un terremoto natural de una falla lejana",
-      "La compactación por la caída de presión del yacimiento",
       "La inyección de agua",
-      "La minería"
+      "La compactación por la caída de presión del yacimiento"
      ],
-     "a": 1,
+     "a": 3,
      "e": "La despresurización redujo el soporte de la roca."
     }
    ]
@@ -680,53 +680,53 @@
    "q": "La intersección de la recta p/z con el eje de Gp da:",
    "o": [
     "La presión de rocío",
-    "El gas original en sitio",
     "La porosidad",
+    "El gas original en sitio",
     "El caudal inicial"
    ],
-   "a": 1,
+   "a": 2,
    "e": "En un yacimiento volumétrico."
   },
   {
    "q": "Si un acuífero repone parte del vaciamiento:",
    "o": [
-    "Z aumenta",
     "El yacimiento se vuelve seco",
     "La caída de presión es menor y G aparente se sobreestima",
-    "Se produce menos agua"
+    "Se produce menos agua",
+    "Z aumenta"
    ],
-   "a": 2,
+   "a": 1,
    "e": "La recta p/z se curva."
   },
   {
    "q": "El AOF representa:",
    "o": [
-    "La presión de cabeza",
-    "El caudal que se opera",
     "Un caudal teórico con presión de fondo cero",
-    "Una tubería"
+    "Una tubería",
+    "La presión de cabeza",
+    "El caudal que se opera"
    ],
-   "a": 2,
+   "a": 0,
    "e": "Es un valor de referencia."
   },
   {
    "q": "Un pozo de gas con carga de líquidos presenta:",
    "o": [
-    "Caída de caudal y producción intermitente",
     "Aumento de velocidad",
     "Más presión de reservorio",
-    "Menos agua"
+    "Menos agua",
+    "Caída de caudal y producción intermitente"
    ],
-   "a": 0,
+   "a": 3,
    "e": "El líquido acumulado frena el pozo."
   },
   {
    "q": "Al bajar la presión de abandono:",
    "o": [
-    "No cambia nada",
     "Disminuye la recuperación",
+    "Desaparece el agua",
     "Aumenta la recuperación y el costo de compresión",
-    "Desaparece el agua"
+    "No cambia nada"
    ],
    "a": 2,
    "e": "Se debe pagar más compresión para producir más gas."
@@ -734,12 +734,12 @@
   {
    "q": "Una lección de Groningen para evaluar un recurso es:",
    "o": [
-    "Que el tamaño garantiza la reserva",
-    "Que los sismos no existen",
+    "Que el gas no se agota",
     "Evaluar el riesgo geomecánico y la licencia para producir",
-    "Que el gas no se agota"
+    "Que el tamaño garantiza la reserva",
+    "Que los sismos no existen"
    ],
-   "a": 2,
+   "a": 1,
    "e": "Un recurso grande no es una reserva sin licencia para producirlo."
   }
  ],

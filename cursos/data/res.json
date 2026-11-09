@@ -72,7 +72,7 @@
      "comp": "Determinación de reservas",
      "cues": [
       {
-       "say": "El sistema de gestión de recursos petroleros, PRMS, lo publica la Sociedad de Ingenieros de Petróleo junto con otras entidades técnicas. Su última edición es de 2018. Ordena todo el hidrocarburo en una sola estructura.",
+       "say": "El sistema de gestión de recursos petroleros, PRMS, lo publica la Sociedad de Ingenieros de Petróleo junto con otras entidades técnicas. Su última edición es de 2018. Ordena todo el hidrocarburo en una sola estructura. Para que una cantidad cuente como reserva, tiene que estar descubierta.",
        "scene": {
         "t": "bul",
         "k": "SPE-PRMS 2018",
@@ -88,8 +88,23 @@
        "hl": 0
       },
       {
-       "say": "Estos criterios se cumplen todos a la vez. Falta uno, por ejemplo la comercialidad, y el volumen pasa a recursos contingentes. Un volumen sin descubrir se llama recurso prospectivo.",
+       "say": "Tiene que ser recuperable.",
+       "hl": 1
+      },
+      {
+       "say": "Tiene que ser comercial.",
+       "hl": 2
+      },
+      {
+       "say": "Tiene que ser remanente a la fecha de evaluación.",
+       "hl": 3
+      },
+      {
+       "say": "Y estar basada en un proyecto de desarrollo definido.",
        "hl": 4
+      },
+      {
+       "say": "Estos criterios se cumplen todos a la vez. Falta uno, por ejemplo la comercialidad, y el volumen pasa a recursos contingentes. Un volumen sin descubrir se llama recurso prospectivo."
       },
       {
        "say": "Laboratorio. Explorá el marco. Tocá cada bloque y leé su definición. Fijate que la clasificación tiene dos ejes: madurez del proyecto, y rango de incertidumbre baja, mejor o alta.",
@@ -196,30 +211,30 @@
      "o": [
       "Descubierto",
       "Comercial",
-      "Remanente",
-      "Probabilidad de éxito exploratorio"
+      "Probabilidad de éxito exploratorio",
+      "Remanente"
      ],
-     "a": 3,
+     "a": 2,
      "e": "La probabilidad de éxito exploratorio corresponde a los recursos prospectivos, no a las reservas."
     },
     {
      "q": "2P equivale, con métodos probabilísticos, a:",
      "o": [
-      "P90",
       "P1",
+      "P50",
       "P10",
-      "P50"
+      "P90"
      ],
-     "a": 3,
+     "a": 1,
      "e": "La mejor estimación se asocia al P50: 50 % de probabilidad de ser igualada o superada."
     },
     {
      "q": "Un volumen contingente se convierte en reserva cuando:",
      "o": [
       "El proyecto pasa a cumplir los criterios de comercialidad y se aprueba su desarrollo",
+      "Se agrega otro pozo de observación",
       "Sube la volatilidad",
-      "Se imprime el informe",
-      "Se agrega otro pozo de observación"
+      "Se imprime el informe"
      ],
      "a": 0,
      "e": "Hay que resolver la contingencia y justificar el proyecto de desarrollo."
@@ -268,7 +283,7 @@
        "hl": 0
       },
       {
-       "say": "Arps extrapola la historia de producción. Cuando hay datos de presión, el balance de materiales da el volumen original en sitio de forma independiente y permite contrastar el resultado. Donde no hay historia, PRMS admite análogos, siempre que estén documentados y sean comparables.",
+       "say": "Arps extrapola la historia de producción: es la declinación, que extrapola el comportamiento observado.",
        "scene": {
         "t": "bul",
         "k": "Contraste de métodos",
@@ -279,7 +294,20 @@
          "Análogos documentados cuando no hay historia",
          "Diferencias grandes entre métodos son una alerta"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Cuando hay datos de presión, el balance de materiales da el volumen en sitio con presión y producción, de forma independiente, y permite contrastar el resultado.",
+       "hl": 1
+      },
+      {
+       "say": "Donde no hay historia, PRMS admite análogos, siempre que estén documentados y sean comparables.",
+       "hl": 2
+      },
+      {
+       "say": "Y las diferencias grandes entre métodos son una alerta.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -366,21 +394,21 @@
     {
      "q": "El EUR es:",
      "o": [
-      "La producción de un mes",
       "La reserva probada del campo",
       "El caudal inicial",
-      "La producción acumulada hasta el límite económico más la ya producida"
+      "La producción acumulada hasta el límite económico más la ya producida",
+      "La producción de un mes"
      ],
-     "a": 3,
+     "a": 2,
      "e": "EUR significa recuperación final estimada de un pozo o proyecto."
     },
     {
      "q": "Con precios más bajos, las reservas económicas de un pozo marginal:",
      "o": [
-      "Aumentan",
+      "Se duplican",
       "Pueden disminuir o pasar a contingentes",
-      "No se ven afectadas",
-      "Se duplican"
+      "Aumentan",
+      "No se ven afectadas"
      ],
      "a": 1,
      "e": "El límite económico sube y el volumen deja de ser comercial."
@@ -436,7 +464,7 @@
        "hl": 0
       },
       {
-       "say": "Buenas prácticas de auditoría: documentar el método, las hipótesis y las fuentes; conciliar los cambios año a año; aplicar criterios homogéneos entre proyectos; e involucrar evaluadores independientes y competentes.",
+       "say": "Buenas prácticas de auditoría. Primero, hipótesis de precio, costo y tecnología explícitas.",
        "scene": {
         "t": "bul",
         "k": "Gobernanza",
@@ -450,6 +478,22 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Soporte técnico de cada análogo y de cada exponente b.",
+       "hl": 1
+      },
+      {
+       "say": "Conciliación anual: producción, revisiones, extensiones, compras y ventas.",
+       "hl": 2
+      },
+      {
+       "say": "Trazabilidad entre el modelo y el reporte.",
+       "hl": 3
+      },
+      {
+       "say": "Y evaluadores competentes, e independientes de quien reporta.",
+       "hl": 4
       },
       {
        "say": "Pregunta rápida.",
@@ -518,34 +562,34 @@
     {
      "q": "Según la SEC (desde 2010), el precio para estimar reservas es:",
      "o": [
+      "El promedio de 12 meses del primer día de cada mes",
       "El pronóstico del evaluador",
       "El precio máximo del año",
-      "El promedio de 12 meses del primer día de cada mes",
       "El precio spot de hoy"
      ],
-     "a": 2,
+     "a": 0,
      "e": "La regla busca un criterio objetivo y reproducible."
     },
     {
      "q": "El mayor porcentaje del ajuste de reservas de 2004 estuvo en:",
      "o": [
-      "Probadas no desarrolladas",
-      "Probadas desarrolladas",
       "Recursos prospectivos",
-      "Gas no convencional"
+      "Gas no convencional",
+      "Probadas desarrolladas",
+      "Probadas no desarrolladas"
      ],
-     "a": 0,
+     "a": 3,
      "e": "Más del 90 % del cambio fue en probadas no desarrolladas."
     },
     {
      "q": "¿Qué práctica ayuda a que una estimación sea auditable?",
      "o": [
-      "Cambiar de método todos los años sin explicar",
-      "Usar un único pozo análogo sin justificar",
       "No registrar fuentes",
-      "Documentar hipótesis y conciliar los cambios anuales"
+      "Cambiar de método todos los años sin explicar",
+      "Documentar hipótesis y conciliar los cambios anuales",
+      "Usar un único pozo análogo sin justificar"
      ],
-     "a": 3,
+     "a": 2,
      "e": "La trazabilidad de hipótesis y la conciliación son la base de la auditabilidad."
     }
    ]
@@ -567,9 +611,9 @@
    "q": "Con métodos probabilísticos, 1P corresponde a:",
    "o": [
     "P90",
-    "P50",
     "P10",
-    "P99"
+    "P99",
+    "P50"
    ],
    "a": 0,
    "e": "1P: al menos 90 % de probabilidad de ser igualada o superada."
@@ -577,12 +621,12 @@
   {
    "q": "Sumar P90 de pozos individuales para obtener el P90 del conjunto:",
    "o": [
+    "Es irrelevante",
     "Es lo correcto",
-    "Subestima el P90 del conjunto si los pozos son independientes",
     "Siempre lo sobreestima",
-    "Es irrelevante"
+    "Subestima el P90 del conjunto si los pozos son independientes"
    ],
-   "a": 1,
+   "a": 3,
    "e": "El efecto de portafolio hace que el P90 del conjunto sea mayor que la suma de P90."
   },
   {
@@ -599,23 +643,23 @@
   {
    "q": "Cuando el precio baja y el límite económico supera el caudal inicial del pozo, el volumen:",
    "o": [
-    "Sigue siendo reserva",
     "Se vuelve prospectivo",
+    "Deja de ser comercial y pasa a recurso contingente",
     "Se convierte en probado desarrollado",
-    "Deja de ser comercial y pasa a recurso contingente"
+    "Sigue siendo reserva"
    ],
-   "a": 3,
+   "a": 1,
    "e": "Pierde el criterio de comercialidad."
   },
   {
    "q": "La principal enseñanza del caso de recategorización de 2004 es que:",
    "o": [
-    "Las reservas dependen solo de la geología",
-    "La SEC no audita",
     "La categoría depende también de la madurez del proyecto y requiere control independiente",
-    "El gas nunca es reserva"
+    "El gas nunca es reserva",
+    "Las reservas dependen solo de la geología",
+    "La SEC no audita"
    ],
-   "a": 2,
+   "a": 0,
    "e": "Madurez de proyecto y gobernanza son tan importantes como el volumen."
   }
  ],

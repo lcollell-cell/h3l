@@ -292,21 +292,21 @@
     {
      "q": "La fecha determinista:",
      "o": [
-      "No tiene una probabilidad asociada",
       "Siempre se cumple",
+      "No tiene una probabilidad asociada",
       "Es la más probable",
       "Es el P80"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Es una fecha puntual."
     },
     {
      "q": "Las estimaciones de tres puntos incluyen:",
      "o": [
       "Mínimo, más probable y máximo",
-      "Costo, plazo y calidad",
       "Inicio, fin y duración",
-      "Un solo valor"
+      "Un solo valor",
+      "Costo, plazo y calidad"
      ],
      "a": 0,
      "e": "Son los tres puntos."
@@ -314,12 +314,12 @@
     {
      "q": "La cola derecha de una duración suele ser:",
      "o": [
-      "Más larga que la izquierda",
+      "Inexistente",
       "Más corta",
       "Igual",
-      "Inexistente"
+      "Más larga que la izquierda"
      ],
-     "a": 0,
+     "a": 3,
      "e": "Las demoras pueden ser mayores que los adelantos."
     }
    ]
@@ -596,23 +596,23 @@
     {
      "q": "La simulación de Monte Carlo calcula:",
      "o": [
-      "Miles de cronogramas posibles",
       "Un solo cronograma",
       "Solo el costo",
+      "Miles de cronogramas posibles",
       "Solo la holgura"
      ],
-     "a": 0,
+     "a": 2,
      "e": "Usa muchas iteraciones."
     },
     {
      "q": "El P80 es la fecha con:",
      "o": [
-      "80 % de probabilidad de cumplirse",
-      "80 % del costo",
       "80 días",
-      "80 actividades"
+      "80 % de probabilidad de cumplirse",
+      "80 actividades",
+      "80 % del costo"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Confianza de 80 %."
     },
     {
@@ -904,34 +904,34 @@
     {
      "q": "¿Cuál era la fecha determinista del caso?",
      "o": [
-      "280 días",
       "270 días",
       "310 días",
-      "266 días"
+      "266 días",
+      "280 días"
      ],
-     "a": 0,
+     "a": 3,
      "e": "270 más 10."
     },
     {
      "q": "¿Cuál es el P80 del caso?",
      "o": [
-      "Alrededor de 310 días",
-      "280 días",
       "Alrededor de 250 días",
-      "Alrededor de 400 días"
+      "Alrededor de 400 días",
+      "Alrededor de 310 días",
+      "280 días"
      ],
-     "a": 0,
+     "a": 2,
      "e": "Aproximadamente 310."
     },
     {
      "q": "¿Qué probabilidad tiene la fecha determinista?",
      "o": [
+      "100 %",
       "Alrededor de 5 %",
       "50 %",
-      "80 %",
-      "100 %"
+      "80 %"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Es muy baja."
     }
    ]
@@ -952,43 +952,43 @@
   {
    "q": "El índice de criticidad indica:",
    "o": [
-    "La proporción de iteraciones en que es crítica",
-    "El costo",
     "El riesgo de seguridad",
-    "La duración original"
+    "La duración original",
+    "El costo",
+    "La proporción de iteraciones en que es crítica"
    ],
-   "a": 0,
+   "a": 3,
    "e": "Mide la frecuencia de criticidad."
   },
   {
    "q": "Una reserva bien gestionada:",
    "o": [
-    "Tiene responsable y es visible",
+    "Es igual para todos",
     "Se oculta en actividades",
-    "No se mide",
-    "Es igual para todos"
+    "Tiene responsable y es visible",
+    "No se mide"
    ],
-   "a": 0,
+   "a": 2,
    "e": "Se gestiona de forma visible."
   },
   {
    "q": "En el caso, el P80 es de aproximadamente:",
    "o": [
-    "310 días",
     "280 días",
+    "310 días",
     "299 días",
     "350 días"
    ],
-   "a": 0,
+   "a": 1,
    "e": "Fecha con 80 % de confianza."
   },
   {
    "q": "Antes de simular, hay que:",
    "o": [
     "Auditar la lógica del cronograma",
-    "Cambiar el calendario",
     "Eliminar los hitos",
-    "Borrar los riesgos"
+    "Borrar los riesgos",
+    "Cambiar el calendario"
    ],
    "a": 0,
    "e": "Un modelo con lógica pobre da resultados engañosos."
@@ -996,12 +996,12 @@
   {
    "q": "El análisis de riesgo debe repetirse:",
    "o": [
-    "Cuando cambia el cronograma",
+    "Solo si el cliente lo pide",
     "Nunca",
     "Una vez al final",
-    "Solo si el cliente lo pide"
+    "Cuando cambia el cronograma"
    ],
-   "a": 0,
+   "a": 3,
    "e": "El modelo debe reflejar el plan vigente."
   }
  ],

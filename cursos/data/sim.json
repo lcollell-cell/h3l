@@ -84,7 +84,7 @@
        }
       },
       {
-       "say": "Como no hay solución analítica para un reservorio real, se divide el espacio en celdas y el tiempo en pasos. Esa discretización convierte las ecuaciones en un sistema grande de ecuaciones no lineales, que se resuelve por iteraciones.",
+       "say": "Como no hay solución analítica para un reservorio real, se divide el reservorio en celdas con propiedades propias.",
        "scene": {
         "t": "bul",
         "k": "Discretización",
@@ -98,6 +98,22 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Y el tiempo en pasos: se avanza paso a paso.",
+       "hl": 1
+      },
+      {
+       "say": "Esa discretización convierte las ecuaciones en un sistema grande de ecuaciones no lineales: se linealiza y se resuelve en cada paso, por iteraciones.",
+       "hl": 2
+      },
+      {
+       "say": "El error se controla con pasos y mallas adecuados.",
+       "hl": 3
+      },
+      {
+       "say": "Y siempre se chequea el balance de materiales del resultado.",
+       "hl": 4
       },
       {
        "say": "Según el fluido y el mecanismo se elige el tipo de modelo. Petróleo negro para la mayoría de los casos, composicional cuando importan los componentes, térmico para vapor, y modelos específicos para químicos o para fracturas naturales.",
@@ -141,7 +157,7 @@
        }
       },
       {
-       "say": "En desplazamientos miscibles, el modelo de Todd y Longstaff mezcla viscosidades y densidades con un parámetro de mezcla entre cero y uno, para representar la inestabilidad viscosa sin resolver cada dedo. Es una aproximación: el parámetro se calibra, no se mide.",
+       "say": "En desplazamientos miscibles, el modelo de Todd y Longstaff mezcla viscosidades y densidades con un parámetro de mezcla entre cero y uno.",
        "scene": {
         "t": "bul",
         "k": "Modelos miscibles",
@@ -152,7 +168,20 @@
          "Se calibra con laboratorio o historia",
          "Es una aproximación, no una medición"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Así representa la inestabilidad viscosa sin resolver cada dedo, y sin malla fina.",
+       "hl": 1
+      },
+      {
+       "say": "El parámetro se calibra con laboratorio o historia.",
+       "hl": 2
+      },
+      {
+       "say": "Es una aproximación, y no una medición.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -176,7 +205,7 @@
      "comp": "Malla y numérica",
      "cues": [
       {
-       "say": "La malla fija cuánto detalle ve el modelo. Una malla fina captura mejor los frentes y las heterogeneidades, pero cuesta más. Una malla gruesa corre rápido, pero suaviza lo que debería ser abrupto.",
+       "say": "La malla fija cuánto detalle ve el modelo. El tamaño de celda se elige según el gradiente que se quiere resolver: una malla fina captura mejor los frentes y las heterogeneidades, pero cuesta más.",
        "scene": {
         "t": "bul",
         "k": "Malla",
@@ -189,7 +218,23 @@
          "Verificar que el resultado no cambie al refinar"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Se refina cerca de pozos y de frentes: una malla gruesa corre rápido, pero suaviza lo que debería ser abrupto.",
+       "hl": 1
+      },
+      {
+       "say": "Se orienta la malla según fallas y direcciones de flujo.",
        "hl": 2
+      },
+      {
+       "say": "Se escalan las propiedades de la geología a la malla de flujo.",
+       "hl": 3
+      },
+      {
+       "say": "Y se verifica que el resultado no cambie al refinar.",
+       "hl": 4
       },
       {
        "say": "Laboratorio. Es un frente de agua que avanza en una malla de una dimensión, comparado con la solución analítica de Buckley y Leverett. Cambiá el número de celdas y mirá cómo se suaviza el frente. Después subí el número de Courant por encima de uno.",
@@ -202,7 +247,7 @@
        "lab": true
       },
       {
-       "say": "Esa suavización se llama dispersión numérica. No es física: es un error del método. Hace que el agua llegue antes a los pozos y adelanta la irrupción. Se reduce con más celdas, con esquemas de mayor orden o con pasos de tiempo adecuados.",
+       "say": "Esa suavización se llama dispersión numérica. No es física: es un error del método. Suaviza los frentes abruptos y adelanta la irrupción: el agua llega antes a los pozos.",
        "scene": {
         "t": "bul",
         "k": "Dispersión numérica",
@@ -216,6 +261,22 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Depende del tamaño de celda y del esquema.",
+       "hl": 1
+      },
+      {
+       "say": "Se detecta comparando contra una malla más fina.",
+       "hl": 2
+      },
+      {
+       "say": "Los esquemas implícitos son estables, pero también suavizan.",
+       "hl": 3
+      },
+      {
+       "say": "Y con esquemas explícitos hay que respetar el límite de Courant.",
+       "hl": 4
       },
       {
        "say": "El escalado es otro paso delicado. Pasar de millones de celdas geológicas a decenas de miles de celdas de flujo exige promediar propiedades. La permeabilidad no se promedia como la porosidad, y un promedio simple puede borrar canales o barreras que controlan el flujo.",
@@ -274,33 +335,33 @@
      "q": "La ley de Darcy en un simulador se usa para:",
      "o": [
       "La temperatura",
+      "El flujo entre celdas",
       "La porosidad",
-      "La compresibilidad",
-      "El flujo entre celdas"
+      "La compresibilidad"
      ],
-     "a": 3,
+     "a": 1,
      "e": "Relaciona el caudal con el gradiente de presión."
     },
     {
      "q": "Para estudiar vapor se elige un modelo:",
      "o": [
-      "Estático",
+      "Térmico",
       "De petróleo negro",
       "De agua",
-      "Térmico"
+      "Estático"
      ],
-     "a": 3,
+     "a": 0,
      "e": "El calor y la temperatura son parte de las ecuaciones."
     },
     {
      "q": "Con mallas más gruesas, el frente de agua simulado suele:",
      "o": [
+      "Desaparecer",
       "Quedar igual",
       "Llegar después",
-      "Llegar antes y verse más suave",
-      "Desaparecer"
+      "Llegar antes y verse más suave"
      ],
-     "a": 2,
+     "a": 3,
      "e": "Es el efecto de la dispersión numérica."
     }
    ]
@@ -315,7 +376,7 @@
      "comp": "Modelo y pozos",
      "cues": [
       {
-       "say": "Antes de simular hay que inicializar el modelo en equilibrio. Se definen los contactos agua-petróleo y gas-petróleo, las presiones y las saturaciones iniciales, y se verifica que el petróleo original resultante coincida con el volumétrico del modelo estático.",
+       "say": "Antes de simular hay que inicializar el modelo en equilibrio. Primero, los contactos y las presiones de referencia.",
        "scene": {
         "t": "bul",
         "k": "Inicialización",
@@ -328,10 +389,26 @@
          "Pozos y completaciones bien ubicados en la malla"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Las saturaciones iniciales, consistentes con la presión capilar.",
        "hl": 1
       },
       {
-       "say": "Las curvas de permeabilidad relativa y de presión capilar gobiernan cómo se mueven los fluidos. Vienen de ensayos de laboratorio sobre pocas muestras, y son entre los parámetros más inciertos y más influyentes del modelo.",
+       "say": "El volumen in situ debe ser igual al del modelo estático.",
+       "hl": 2
+      },
+      {
+       "say": "El equilibrio: sin flujo en el tiempo cero.",
+       "hl": 3
+      },
+      {
+       "say": "Y los pozos y las completaciones bien ubicados en la malla.",
+       "hl": 4
+      },
+      {
+       "say": "Las curvas de permeabilidad relativa y de presión capilar gobiernan cómo se mueven los fluidos. Primero, la permeabilidad relativa agua-petróleo y gas-petróleo.",
        "scene": {
         "t": "bul",
         "k": "Roca-fluido",
@@ -344,7 +421,23 @@
          "Compresibilidad de roca y fluidos"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "La presión capilar y la mojabilidad.",
        "hl": 1
+      },
+      {
+       "say": "Las saturaciones críticas y residuales.",
+       "hl": 2
+      },
+      {
+       "say": "Las propiedades PVT: factor volumétrico, viscosidad y relación gas-petróleo.",
+       "hl": 3
+      },
+      {
+       "say": "Y la compresibilidad de la roca y de los fluidos. Vienen de ensayos sobre pocas muestras, y son de los parámetros más inciertos y más influyentes del modelo.",
+       "hl": 4
       },
       {
        "say": "Los pozos se conectan a la malla por un índice de pozo. Como la presión de una celda no es la del fondo del pozo, se usa un radio equivalente que relaciona ambas. El daño, la completación y los controles de caudal o presión completan la descripción.",
@@ -357,7 +450,7 @@
        }
       },
       {
-       "say": "En el pozo, la presión del bloque de la malla no es la presión de fondo. Peaceman propuso una relación entre ambas con un radio equivalente que depende del tamaño de celda: es el índice del pozo. En roca-fluido, las curvas de permeabilidad relativa pueden tener histéresis, como en la inyección de gas.",
+       "say": "En el pozo, la presión del bloque de la malla no es la presión de fondo.",
        "scene": {
         "t": "bul",
         "k": "Pozos y roca-fluido",
@@ -368,7 +461,20 @@
          "Histéresis: el camino de saturación importa",
          "Relevante en inyección alternada y almacenamiento de gas"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Peaceman propuso una relación entre ambas con un radio equivalente que depende del tamaño de celda: es el índice del pozo.",
+       "hl": 1
+      },
+      {
+       "say": "Además, las curvas de permeabilidad relativa pueden tener histéresis: el camino de saturación importa.",
+       "hl": 2
+      },
+      {
+       "say": "Es relevante en inyección alternada y en almacenamiento de gas.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -392,7 +498,7 @@
      "comp": "Ajuste histórico",
      "cues": [
       {
-       "say": "El ajuste histórico consiste en modificar parámetros inciertos hasta que el modelo reproduzca lo observado: presiones, caudales, cortes de agua y relaciones gas-petróleo. Es un problema inverso, y como tal, tiene más de una solución.",
+       "say": "El ajuste histórico consiste en modificar parámetros inciertos hasta que el modelo reproduzca lo observado: presiones, caudales, cortes de agua y relaciones gas-petróleo. Es un problema inverso, y tiene más de una solución. Primero, definir qué datos se van a reproducir.",
        "scene": {
         "t": "bul",
         "k": "Ajuste histórico",
@@ -405,7 +511,23 @@
          "Verificar que los cambios sean geológicamente razonables"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Elegir los parámetros inciertos y sus rangos.",
+       "hl": 1
+      },
+      {
+       "say": "Ajustar primero presiones y luego fluidos.",
        "hl": 2
+      },
+      {
+       "say": "Cuantificar el error con una función objetivo.",
+       "hl": 3
+      },
+      {
+       "say": "Y verificar que los cambios sean geológicamente razonables.",
+       "hl": 4
       },
       {
        "say": "Laboratorio. Es un reservorio con acuífero, y un modelo de balance de materiales. Con solo la presión, muchos pares de petróleo original y fuerza del acuífero ajustan igual. Después incorporá el agua producida y mirá cómo se cierra el valle.",
@@ -418,7 +540,7 @@
        "lab": true
       },
       {
-       "say": "Esto es la no unicidad. Dos modelos con el mismo ajuste pueden dar pronósticos distintos, sobre todo en lo que los datos no restringen. La forma de reducirla es sumar información independiente: otro tipo de dato, otra escala o una restricción geológica.",
+       "say": "Esto es la no unicidad. Dos modelos con el mismo ajuste pueden dar pronósticos distintos. La forma de reducirla es sumar datos de otra naturaleza: agua producida, sísmica 4D, trazadores.",
        "scene": {
         "t": "bul",
         "k": "No unicidad",
@@ -431,6 +553,18 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Ajustar pozo por pozo y no solo el campo.",
+       "hl": 1
+      },
+      {
+       "say": "Imponer límites geológicos a los parámetros.",
+       "hl": 2
+      },
+      {
+       "say": "Y aceptar que queda un rango, y usarlo para pronosticar.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -455,32 +589,32 @@
      "o": [
       "El agua no exista",
       "Todos los pozos produzcan",
-      "La presión sea cero",
-      "No haya flujo en el tiempo cero"
+      "No haya flujo en el tiempo cero",
+      "La presión sea cero"
      ],
-     "a": 3,
+     "a": 2,
      "e": "Es una condición básica de consistencia."
     },
     {
      "q": "Las permeabilidades relativas provienen en general de:",
      "o": [
-      "Ensayos de laboratorio con pocas muestras",
-      "Mediciones continuas en todo el campo",
       "El precio del petróleo",
-      "La sísmica"
+      "Ensayos de laboratorio con pocas muestras",
+      "La sísmica",
+      "Mediciones continuas en todo el campo"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Son datos escasos y muy influyentes."
     },
     {
      "q": "El ajuste histórico es un problema:",
      "o": [
-      "Sin datos",
-      "Con una solución única",
       "Inverso con más de una solución",
-      "Resuelto por la malla"
+      "Resuelto por la malla",
+      "Sin datos",
+      "Con una solución única"
      ],
-     "a": 2,
+     "a": 0,
      "e": "Distintas combinaciones de parámetros pueden reproducir lo mismo."
     }
    ]
@@ -530,7 +664,7 @@
        }
       },
       {
-       "say": "Los métodos de conjunto, como el suavizador de conjunto con asimilación múltiple de datos, conocido por sus siglas en inglés ES-MDA, fueron presentados por Emerick y Reynolds para el ajuste histórico asistido. Parten de muchas realizaciones y las actualizan varias veces con los datos observados.",
+       "say": "Los métodos de conjunto, como el ES-MDA, el suavizador de conjunto con asimilación múltiple de datos, fueron presentados por Emerick y Reynolds para el ajuste histórico asistido. Trabajan con un conjunto de modelos y no con uno solo.",
        "scene": {
         "t": "bul",
         "k": "ES-MDA",
@@ -543,10 +677,26 @@
          "Exige elegir bien los factores de inflación y el tamaño del conjunto"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Asimilan los datos en varias pasadas, con ruido controlado.",
        "hl": 1
       },
       {
-       "say": "Un conjunto de modelos ajustados es la base de un pronóstico probabilista. Se corre cada modelo hacia adelante y se informan los percentiles. Así el pronóstico es un rango, y no un número que parece más preciso de lo que es.",
+       "say": "Devuelven un conjunto de modelos ajustados, que da incertidumbre.",
+       "hl": 2
+      },
+      {
+       "say": "Su principal limitación es el colapso del conjunto en problemas grandes.",
+       "hl": 3
+      },
+      {
+       "say": "Y exigen elegir bien los factores de inflación y el tamaño del conjunto.",
+       "hl": 4
+      },
+      {
+       "say": "Un conjunto de modelos ajustados es la base de un pronóstico probabilista. Se corren todos los modelos hacia adelante.",
        "scene": {
         "t": "bul",
         "k": "Del conjunto al pronóstico",
@@ -559,6 +709,18 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Se informan P90, P50 y P10 del resultado: el pronóstico es un rango, y no un número que parece más preciso de lo que es.",
+       "hl": 1
+      },
+      {
+       "say": "Se identifica qué parámetros explican la dispersión.",
+       "hl": 2
+      },
+      {
+       "say": "Y se decide qué dato adicional reduciría el rango.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -582,7 +744,7 @@
      "comp": "Pronóstico y gobernanza",
      "cues": [
       {
-       "say": "Un modelo ajustado no está validado por el solo hecho de ajustar. Una buena práctica es guardar una parte de la historia sin usarla en el ajuste y comprobar si el modelo la predice. Se llama validación con datos retenidos.",
+       "say": "Un modelo ajustado no está validado por el solo hecho de ajustar. Una buena práctica es retener los últimos meses de historia y predecirlos: la validación con datos retenidos.",
        "scene": {
         "t": "bul",
         "k": "Validación",
@@ -595,7 +757,23 @@
          "Repetir cuando hay datos nuevos"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Se compara contra pozos nuevos o campañas posteriores.",
        "hl": 1
+      },
+      {
+       "say": "Se revisa que los parámetros finales sean razonables.",
+       "hl": 2
+      },
+      {
+       "say": "Se compara con modelos analíticos simples como control.",
+       "hl": 3
+      },
+      {
+       "say": "Y se repite cuando hay datos nuevos.",
+       "hl": 4
       },
       {
        "say": "El caso de Sleipner muestra por qué importa. Las simulaciones convencionales de Darcy no reproducían la pluma de CO₂ observada con sísmica. Un modelo de flujo capilar sí la reprodujo, pero solo con barreras de lutita fracturadas. Ajustar obligó a revisar la geología.",
@@ -610,7 +788,7 @@
        }
       },
       {
-       "say": "La gobernanza del modelo cierra el ciclo. Se documentan las versiones, los datos usados, las decisiones de ajuste y las limitaciones. Quien usa el pronóstico debe saber para qué sirve el modelo y para qué no.",
+       "say": "La gobernanza del modelo cierra el ciclo. Se documenta la versión de datos y de modelo, con fecha y responsable.",
        "scene": {
         "t": "bul",
         "k": "Gobernanza",
@@ -624,6 +802,22 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Qué se ajustó y qué se dejó fijo, y por qué.",
+       "hl": 1
+      },
+      {
+       "say": "El rango de incertidumbre y su origen.",
+       "hl": 2
+      },
+      {
+       "say": "Los usos aprobados y no aprobados del modelo: quien usa el pronóstico debe saber para qué sirve el modelo y para qué no.",
+       "hl": 3
+      },
+      {
+       "say": "Y el plan de actualización con nuevos datos.",
+       "hl": 4
       },
       {
        "say": "Pregunta rápida.",
@@ -657,23 +851,23 @@
     {
      "q": "La validación con datos retenidos consiste en:",
      "o": [
-      "Cambiar la malla",
       "Ajustar con todos los datos",
       "Eliminar pozos",
-      "Predecir historia que no se usó en el ajuste"
+      "Predecir historia que no se usó en el ajuste",
+      "Cambiar la malla"
      ],
-     "a": 3,
+     "a": 2,
      "e": "Prueba la capacidad predictiva real del modelo."
     },
     {
      "q": "Documentar una versión del modelo sirve para:",
      "o": [
+      "Subir el petróleo original",
       "Que otros sepan qué datos y decisiones hay detrás",
       "Alargar el proyecto",
-      "Evitar la validación",
-      "Subir el petróleo original"
+      "Evitar la validación"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Es el centro de la gobernanza de modelos."
     }
    ]
@@ -683,34 +877,34 @@
   {
    "q": "La dispersión numérica en un simulador:",
    "o": [
-    "Retrasa la irrupción",
     "Adelanta la irrupción de agua por suavizar el frente",
+    "Retrasa la irrupción",
     "No afecta a los frentes",
     "Es una propiedad de la roca"
    ],
-   "a": 1,
+   "a": 0,
    "e": "Es un error de discretización que se reduce refinando."
   },
   {
    "q": "Con solo la presión como dato de ajuste, un reservorio con acuífero suele tener:",
    "o": [
-    "Una sola solución",
-    "Muchas combinaciones de parámetros que ajustan",
     "Ninguna solución",
-    "Solo soluciones con acuífero nulo"
+    "Solo soluciones con acuífero nulo",
+    "Una sola solución",
+    "Muchas combinaciones de parámetros que ajustan"
    ],
-   "a": 1,
+   "a": 3,
    "e": "Hay compensación entre el petróleo original y la fuerza del acuífero."
   },
   {
    "q": "Un esquema explícito con número de Courant mayor que uno:",
    "o": [
-    "Puede volverse inestable",
+    "Elimina la dispersión",
     "Siempre es exacto",
-    "No necesita pasos de tiempo",
-    "Elimina la dispersión"
+    "Puede volverse inestable",
+    "No necesita pasos de tiempo"
    ],
-   "a": 0,
+   "a": 2,
    "e": "Es el límite de estabilidad del esquema."
   },
   {
@@ -728,9 +922,9 @@
    "q": "Cuando un modelo ajustado no predice datos retenidos, conviene:",
    "o": [
     "Revisar el modelo y sus supuestos",
-    "Presentarlo igual",
     "Borrar los datos retenidos",
-    "Aumentar la malla sin revisar"
+    "Aumentar la malla sin revisar",
+    "Presentarlo igual"
    ],
    "a": 0,
    "e": "Es una señal de que el ajuste puede no ser predictivo."
@@ -738,9 +932,9 @@
   {
    "q": "La inicialización correcta de un modelo verifica que:",
    "o": [
+    "La permeabilidad sea uniforme",
     "No haya agua",
     "Todos los pozos produzcan lo mismo",
-    "La permeabilidad sea uniforme",
     "El petróleo in situ coincida con el modelo estático"
    ],
    "a": 3,

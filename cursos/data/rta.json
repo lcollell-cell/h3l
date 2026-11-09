@@ -74,7 +74,7 @@
      "comp": "Regímenes de flujo",
      "cues": [
       {
-       "say": "En un pozo con fracturas hidráulicas muy conductivas, el flujo evoluciona por regímenes. Primero un flujo lineal transitorio hacia las fracturas, que domina durante años. Después, cuando se siente el límite del volumen drenado, el flujo dominado por los límites.",
+       "say": "En un pozo con fracturas hidráulicas muy conductivas, el flujo evoluciona por regímenes. Al inicio, el flujo en la fractura y los efectos de la completación.",
        "scene": {
         "t": "bul",
         "k": "Regímenes",
@@ -86,7 +86,19 @@
          "En lutitas, el lineal puede ser el único régimen observado"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Después, un flujo lineal transitorio desde la matriz hacia las fracturas, que domina durante años.",
        "hl": 1
+      },
+      {
+       "say": "Cuando se alcanzan los bordes drenados, el flujo dominado por los límites.",
+       "hl": 2
+      },
+      {
+       "say": "Y en lutitas, el lineal puede ser el único régimen observado.",
+       "hl": 3
       },
       {
        "say": "Cada régimen tiene una firma. En un gráfico de caudal contra tiempo en escala logarítmica, el flujo lineal muestra una pendiente de menos un medio. El flujo límite, una declinación más pronunciada. Reconocerlos permite elegir el método de análisis y de pronóstico.",
@@ -119,7 +131,7 @@
        }
       },
       {
-       "say": "La condición de operación importa. Si el pozo produce con presión de fondo variable, hay que normalizar el caudal por la caída de presión. Un análisis con caudal sin normalizar puede confundir un cambio de choque con un cambio de régimen.",
+       "say": "La condición de operación importa. Si el pozo produce con presión de fondo variable, hay que usar el caudal normalizado por la caída de presión.",
        "scene": {
         "t": "bul",
         "k": "Normalización",
@@ -132,6 +144,18 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Hay que separar los cierres y los cambios de choque, para no confundir un cambio de choque con un cambio de régimen.",
+       "hl": 1
+      },
+      {
+       "say": "Excluir los datos de limpieza inicial.",
+       "hl": 2
+      },
+      {
+       "say": "Y trabajar con datos diarios, y revisar los atípicos.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -175,7 +199,7 @@
        "lab": true
       },
       {
-       "say": "La ventana es la decisión crítica. Hay que elegirla donde los puntos forman una recta y estimar el fin del flujo lineal. Un método habitual es combinarlo con el balance de materiales de flujo, que da el volumen drenado, y compararlo con el espaciamiento de pozos vecinos.",
+       "say": "La ventana es la decisión crítica. Hay que excluir los datos tempranos con efectos de limpieza.",
        "scene": {
         "t": "bul",
         "k": "Ventana",
@@ -188,6 +212,18 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Elegirla donde los puntos forman una recta, y terminar antes de que la recta se curve.",
+       "hl": 1
+      },
+      {
+       "say": "Verificarla contra el volumen drenado del balance de materiales de flujo, y compararlo con el espaciamiento de pozos vecinos.",
+       "hl": 2
+      },
+      {
+       "say": "Y repetir con distintas ventanas y reportar el rango.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -211,20 +247,20 @@
      "q": "La inversa del caudal contra la raíz del tiempo es una recta si el flujo es:",
      "o": [
       "Radial",
-      "Lineal transitorio",
       "Dominado por los límites",
-      "Esférico"
+      "Esférico",
+      "Lineal transitorio"
      ],
-     "a": 1,
+     "a": 3,
      "e": "Es la firma del flujo lineal."
     },
     {
      "q": "Con presión de fondo variable se debe:",
      "o": [
-      "Usar el precio",
       "Ignorar la presión",
+      "Aumentar la ventana",
       "Normalizar el caudal por la caída de presión",
-      "Aumentar la ventana"
+      "Usar el precio"
      ],
      "a": 2,
      "e": "Así el análisis no confunde cambios de operación con cambios de régimen."
@@ -232,12 +268,12 @@
     {
      "q": "Del gráfico de raíz de tiempo se obtiene directamente:",
      "o": [
-      "El precio",
-      "La permeabilidad sola",
       "La porosidad",
-      "El producto del área por la raíz de la permeabilidad"
+      "El producto del área por la raíz de la permeabilidad",
+      "El precio",
+      "La permeabilidad sola"
      ],
-     "a": 3,
+     "a": 1,
      "e": "Para separar A y k hay que conocer uno de los dos."
     }
    ]
@@ -252,7 +288,7 @@
      "comp": "Calidad de los datos",
      "cues": [
       {
-       "say": "Antes de ajustar se revisan los datos. Los caudales diarios de pozos de lutitas suelen tener cierres, restricciones y errores de medición. Una limpieza sistemática evita pronósticos que reflejan cambios de operación y no del reservorio.",
+       "say": "Antes de ajustar se revisan los datos. Los caudales diarios de pozos de lutitas suelen tener cierres, restricciones y errores de medición. Primero, revisar los días sin producción y las reasignaciones.",
        "scene": {
         "t": "bul",
         "k": "Limpieza",
@@ -268,7 +304,23 @@
        "hl": 0
       },
       {
-       "say": "El tiempo cero y el tiempo de balance de materiales son otra fuente de error. En pozos con caudal variable, el tiempo se corrige para tener en cuenta el historial de caudales, y así la comparación entre pozos es justa.",
+       "say": "Identificar los cambios de choque y de método.",
+       "hl": 1
+      },
+      {
+       "say": "Marcar los atípicos con criterios robustos.",
+       "hl": 2
+      },
+      {
+       "say": "Alinear el tiempo cero con el inicio de producción.",
+       "hl": 3
+      },
+      {
+       "say": "Y documentar cada exclusión. Una limpieza sistemática evita pronósticos que reflejan cambios de operación y no del reservorio.",
+       "hl": 4
+      },
+      {
+       "say": "El tiempo cero y el tiempo de balance de materiales son otra fuente de error. El caudal variable distorsiona el gráfico en tiempo calendario.",
        "scene": {
         "t": "bul",
         "k": "Tiempo equivalente",
@@ -280,10 +332,22 @@
          "Es la base de las curvas tipo"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "El tiempo de balance de materiales lo compensa, porque corrige el historial de caudales.",
        "hl": 1
       },
       {
-       "say": "Las curvas tipo comparan el pozo con soluciones teóricas, como las de Wattenbarger y colaboradores de 1998 para flujo lineal en pozos fracturados de gas de baja permeabilidad. El método dibuja el caudal normalizado contra el tiempo adimensional y ajusta por desplazamiento.",
+       "say": "Así se pueden comparar pozos con operación distinta.",
+       "hl": 2
+      },
+      {
+       "say": "Y es la base de las curvas tipo.",
+       "hl": 3
+      },
+      {
+       "say": "Las curvas tipo comparan el pozo con soluciones teóricas, como las de Wattenbarger y colaboradores de 1998 para flujo lineal en pozos fracturados de gas de baja permeabilidad. Se dibuja el caudal normalizado contra el tiempo de balance de materiales.",
        "scene": {
         "t": "bul",
         "k": "Curvas tipo",
@@ -298,7 +362,19 @@
        "hl": 0
       },
       {
-       "say": "Además de la raíz de tiempo, el análisis usa curvas tipo como Fetkovich, Blasingame y Agarwal y Gardner. Trabajan con el tiempo de balance de materiales y con el caudal normalizado por la caída de presión, de modo que los cambios de presión de fondo no se confunden con declinación. En gas, el pseudotiempo corrige las propiedades.",
+       "say": "Se ajusta el desplazamiento horizontal y vertical.",
+       "hl": 1
+      },
+      {
+       "say": "De ahí salen parámetros relacionados con el área y la permeabilidad.",
+       "hl": 2
+      },
+      {
+       "say": "Es un método de referencia: debe verificarse con otros.",
+       "hl": 3
+      },
+      {
+       "say": "Además de la raíz de tiempo, el análisis usa curvas tipo como Fetkovich, Blasingame y Agarwal y Gardner. Trabajan con el caudal normalizado por la caída de presión, de modo que los cambios de presión de fondo no se confunden con declinación.",
        "scene": {
         "t": "bul",
         "k": "Curvas tipo",
@@ -309,7 +385,20 @@
          "Pseudotiempo para gas, por la variación de propiedades",
          "Integral y derivada de caudal para afinar el ajuste"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Y con el tiempo de balance de materiales.",
+       "hl": 1
+      },
+      {
+       "say": "En gas, el pseudotiempo corrige la variación de propiedades.",
+       "hl": 2
+      },
+      {
+       "say": "Y la integral y la derivada del caudal sirven para afinar el ajuste.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -355,7 +444,7 @@
        "lab": true
       },
       {
-       "say": "La práctica estándar es pasar a una declinación exponencial cuando la declinación instantánea baja a un valor mínimo. Ese mínimo, y la decisión de cuándo empezar, dependen del análisis de analogías y del criterio del evaluador, y deben documentarse.",
+       "say": "La práctica estándar es pasar a una declinación exponencial cuando la declinación instantánea baja a un valor mínimo. Ese mínimo se fija con base en analogías.",
        "scene": {
         "t": "bul",
         "k": "Declinación terminal",
@@ -367,10 +456,22 @@
          "Usar rangos y no solo un valor"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Y se documenta cuándo y por qué se pasa a la terminal.",
        "hl": 1
       },
       {
-       "say": "Para lutitas se usan modelos empíricos que respetan el régimen lineal prolongado, como la declinación de Duong y la exponencial extendida. Ayudan a pronosticar, pero se contrastan con la hiperbólica modificada y con el método físico. Un EUR razonable surge de la coincidencia entre varios.",
+       "say": "Se compara el EUR con el de pozos vecinos de más historia.",
+       "hl": 2
+      },
+      {
+       "say": "Y se usan rangos y no solo un valor.",
+       "hl": 3
+      },
+      {
+       "say": "Para lutitas se usan modelos empíricos que respetan el régimen lineal prolongado, como la declinación de Duong.",
        "scene": {
         "t": "bul",
         "k": "Modelos empíricos",
@@ -381,7 +482,20 @@
          "Hiperbólica modificada con declinación límite",
          "Comparar varios y reportar el rango"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "La exponencial extendida, con un ritmo de declinación que evoluciona.",
+       "hl": 1
+      },
+      {
+       "say": "La hiperbólica modificada, con declinación límite.",
+       "hl": 2
+      },
+      {
+       "say": "Ayudan a pronosticar, pero se comparan varios y se reporta el rango: un EUR razonable surge de la coincidencia entre varios.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -404,20 +518,20 @@
     {
      "q": "La ventana de ajuste incorrecta en raíz de tiempo produce:",
      "o": [
-      "Mayor porosidad",
       "Un valor sesgado de A·√k",
+      "Mayor porosidad",
       "Cambio del precio",
       "Un pozo nuevo"
      ],
-     "a": 1,
+     "a": 0,
      "e": "Hay que elegirla dentro del flujo lineal."
     },
     {
      "q": "El tiempo de balance de materiales:",
      "o": [
-      "Mide la permeabilidad",
       "Reemplaza la presión",
       "Calcula el costo",
+      "Mide la permeabilidad",
       "Compensa un caudal variable"
      ],
      "a": 3,
@@ -426,12 +540,12 @@
     {
      "q": "Una declinación terminal se usa para:",
      "o": [
-      "Medir el área",
-      "Aumentar la producción",
       "Cambiar el pozo",
-      "Evitar sobreestimar el EUR"
+      "Medir el área",
+      "Evitar sobreestimar el EUR",
+      "Aumentar la producción"
      ],
-     "a": 3,
+     "a": 2,
      "e": "Impone una declinación mínima a largo plazo."
     }
    ]
@@ -446,7 +560,7 @@
      "comp": "Pronóstico y EUR",
      "cues": [
       {
-       "say": "Con pocos meses de historia, el pronóstico tiene mucha incertidumbre. Dos ajustes razonables pueden diferir en el EUR. Por eso se pronostica con rangos, y los pozos con poca historia se evalúan con analogías de pozos más antiguos de la misma zona.",
+       "say": "Con pocos meses de historia, el pronóstico tiene mucha incertidumbre. Hay poca historia de producción, y dos ajustes razonables pueden diferir en el EUR.",
        "scene": {
         "t": "bul",
         "k": "Incertidumbre",
@@ -459,10 +573,26 @@
          "Nuevas condiciones de operación"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Importa la elección de b y de la declinación terminal.",
+       "hl": 1
+      },
+      {
+       "say": "Hay variación entre pozos de un mismo pad.",
        "hl": 2
       },
       {
-       "say": "En reservas, PRMS 2018 aclara que el EUR debe referirse a sus condiciones técnicas y comerciales. Y que los recursos no convencionales de lutitas se tratan como un subtipo de petróleo y gas de baja permeabilidad. Esto obliga a documentar el método y el límite económico.",
+       "say": "Hay cambios de diseño de fractura entre campañas.",
+       "hl": 3
+      },
+      {
+       "say": "Y nuevas condiciones de operación. Por eso se pronostica con rangos, y los pozos con poca historia se evalúan con analogías de pozos más antiguos.",
+       "hl": 4
+      },
+      {
+       "say": "En reservas, PRMS 2018 aclara que el EUR debe referirse a sus condiciones técnicas y comerciales.",
        "scene": {
         "t": "bul",
         "k": "PRMS 2018",
@@ -477,7 +607,19 @@
        "hl": 0
       },
       {
-       "say": "Una práctica sólida es mantener un sistema de seguimiento. Cada pozo nuevo se compara con el pronóstico de analogía, y el desvío sistemático, para arriba o para abajo, se usa para recalibrar las curvas tipo antes de calcular reservas.",
+       "say": "Las reservas requieren tecnología establecida.",
+       "hl": 1
+      },
+      {
+       "say": "Las reservas no desarrolladas deben iniciar su desarrollo en un plazo de cinco años.",
+       "hl": 2
+      },
+      {
+       "say": "Y los recursos de lutitas, shale oil y shale gas, se tratan como subtipos de tight oil y tight gas. Esto obliga a documentar el método y el límite económico.",
+       "hl": 3
+      },
+      {
+       "say": "Una práctica sólida es mantener un sistema de seguimiento. Cada pozo nuevo se compara con la curva tipo de su zona.",
        "scene": {
         "t": "bul",
         "k": "Seguimiento",
@@ -490,6 +632,18 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Se mide el desvío acumulado y su tendencia.",
+       "hl": 1
+      },
+      {
+       "say": "Cuando el sesgo es sistemático, se recalibra la curva antes de calcular reservas.",
+       "hl": 2
+      },
+      {
+       "say": "Y se informa la revisión de reservas con su causa.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -513,7 +667,7 @@
      "comp": "Espaciamiento y casos",
      "cues": [
       {
-       "say": "El espaciamiento define cuánto volumen drena cada pozo. Si es muy grande, queda petróleo sin drenar. Si es muy chico, los pozos interfieren y cada uno produce menos. El análisis de producción ayuda a estimar el volumen drenado y a detectar la interferencia entre pozos.",
+       "say": "El espaciamiento define cuánto volumen drena cada pozo. Si es muy grande, queda petróleo sin drenar. El volumen drenado de cada pozo se estima con el balance de materiales de flujo.",
        "scene": {
         "t": "bul",
         "k": "Espaciamiento",
@@ -526,7 +680,23 @@
          "Datos de presión y de trazadores si existen"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Si es muy chico, los pozos interfieren y cada uno produce menos: se analiza la interferencia entre pozos vecinos y pozos nuevos.",
+       "hl": 1
+      },
+      {
+       "say": "Se mide el efecto sobre el EUR por pozo y por sección.",
        "hl": 2
+      },
+      {
+       "say": "Se evalúa la economía por pozo y por área.",
+       "hl": 3
+      },
+      {
+       "say": "Y se usan los datos de presión y de trazadores, si existen.",
+       "hl": 4
       },
       {
        "say": "El caso de Vaca Muerta muestra la escala de lo que está en juego. En junio de 2026 la producción nacional llegó a 914.900 barriles por día, y la Cuenca Neuquina aportó 715.105, el 79 %. Según la nota, el no convencional representó cerca del 70 % del total en el acumulado del año.",
@@ -541,7 +711,7 @@
        }
       },
       {
-       "say": "Todo el curso se resume en una disciplina. Limpiar los datos, reconocer el régimen, elegir bien la ventana, pronosticar con rangos y contrastar con analogías y con el volumen drenado. Un pozo se pronostica con un método, pero se valida con varios.",
+       "say": "Todo el curso se resume en una disciplina. Datos limpios y normalizados.",
        "scene": {
         "t": "bul",
         "k": "Resumen",
@@ -555,6 +725,22 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Régimen identificado.",
+       "hl": 1
+      },
+      {
+       "say": "Ventana elegida y justificada.",
+       "hl": 2
+      },
+      {
+       "say": "Pronóstico con rango y declinación terminal.",
+       "hl": 3
+      },
+      {
+       "say": "Y contraste con analogías y con el balance de materiales. Un pozo se pronostica con un método, pero se valida con varios.",
+       "hl": 4
       },
       {
        "say": "Pregunta rápida.",
@@ -588,23 +774,23 @@
     {
      "q": "Las reservas no desarrolladas bajo PRMS 2018 deben comenzar su desarrollo en:",
      "o": [
-      "Cincuenta años",
-      "Un mes",
       "Cinco años desde su clasificación inicial",
-      "Sin plazo"
+      "Un mes",
+      "Sin plazo",
+      "Cincuenta años"
      ],
-     "a": 2,
+     "a": 0,
      "e": "Es una de las precisiones del documento de 2018."
     },
     {
      "q": "En junio de 2026, la Cuenca Neuquina aportó cerca de:",
      "o": [
-      "El 79 % de la producción nacional",
+      "El 100 %",
       "El 5 %",
       "El 20 %",
-      "El 100 %"
+      "El 79 % de la producción nacional"
      ],
-     "a": 0,
+     "a": 3,
      "e": "715.105 barriles por día sobre 914.900."
     }
    ]
@@ -614,21 +800,21 @@
   {
    "q": "La pendiente en raíz de tiempo permite estimar:",
    "o": [
-    "El producto del área de flujo por la raíz de k",
     "Solo el precio",
     "La porosidad",
+    "El producto del área de flujo por la raíz de k",
     "El diámetro del pozo"
    ],
-   "a": 0,
+   "a": 2,
    "e": "A y k no se separan sin otra información."
   },
   {
    "q": "Si la ventana de ajuste incluye flujo dominado por los límites:",
    "o": [
-    "A·√k se sobreestima",
-    "A·√k se subestima",
     "No cambia",
-    "Se anula"
+    "A·√k se subestima",
+    "Se anula",
+    "A·√k se sobreestima"
    ],
    "a": 1,
    "e": "La pendiente aparente aumenta."
@@ -636,43 +822,43 @@
   {
    "q": "El flujo lineal transitorio en log-log muestra una pendiente de:",
    "o": [
-    "Cero",
     "Menos un medio",
-    "Uno",
-    "Menos dos"
+    "Menos dos",
+    "Cero",
+    "Uno"
    ],
-   "a": 1,
+   "a": 0,
    "e": "Es su firma característica."
   },
   {
    "q": "Con b = 1,5 sin declinación terminal, el EUR extrapolado:",
    "o": [
-    "Puede estar sobreestimado",
     "Es exacto",
     "Es cero",
-    "Es el mínimo posible"
+    "Es el mínimo posible",
+    "Puede estar sobreestimado"
    ],
-   "a": 0,
+   "a": 3,
    "e": "La hiperbólica pura produce de más a largo plazo."
   },
   {
    "q": "El tiempo de balance de materiales:",
    "o": [
-    "Mide la presión",
     "Fija el precio",
     "Reemplaza el análisis",
-    "Hace comparables pozos con caudal variable"
+    "Hace comparables pozos con caudal variable",
+    "Mide la presión"
    ],
-   "a": 3,
+   "a": 2,
    "e": "Compensa la historia de caudales."
   },
   {
    "q": "Para calibrar el pronóstico de pozos nuevos conviene:",
    "o": [
-    "Ignorar los pozos vecinos",
+    "Eliminar los datos",
     "Compararlos con la curva tipo de su zona y recalibrar",
-    "Usar un único valor",
-    "Eliminar los datos"
+    "Ignorar los pozos vecinos",
+    "Usar un único valor"
    ],
    "a": 1,
    "e": "Es una práctica de seguimiento."

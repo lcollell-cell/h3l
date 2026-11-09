@@ -356,9 +356,9 @@
      "q": "La regla del cien por ciento se refiere a:",
      "o": [
       "La EDT",
-      "El costo",
       "El riesgo",
-      "La calidad"
+      "La calidad",
+      "El costo"
      ],
      "a": 0,
      "e": "La suma de los hijos cubre todo el alcance del padre."
@@ -366,12 +366,12 @@
     {
      "q": "En la ruta crítica, la holgura total es:",
      "o": [
+      "Infinita",
       "Mayor que cero",
-      "Cero",
       "Negativa",
-      "Infinita"
+      "Cero"
      ],
-     "a": 1,
+     "a": 3,
      "e": "No hay margen sin retrasar el fin."
     }
    ]
@@ -624,21 +624,21 @@
     {
      "q": "En Jira, una fase se suele representar como:",
      "o": [
-      "Una épica",
       "Un sprint",
       "Un comentario",
+      "Una épica",
       "Un usuario"
      ],
-     "a": 0,
+     "a": 2,
      "e": "La épica agrupa el trabajo de la fase."
     },
     {
      "q": "Jira, por sí solo, no:",
      "o": [
-      "Registra aprobaciones",
-      "Calcula la ruta crítica",
       "Enlaza tickets",
-      "Muestra una vista de cronograma"
+      "Calcula la ruta crítica",
+      "Muestra una vista de cronograma",
+      "Registra aprobaciones"
      ],
      "a": 1,
      "e": "Para ruta crítica se usa otra herramienta."
@@ -646,12 +646,12 @@
     {
      "q": "Un cambio aprobado debe:",
      "o": [
-      "Quedar sin registro",
       "Actualizar tickets y línea base",
-      "Esperar al cierre",
-      "Eliminarse"
+      "Eliminarse",
+      "Quedar sin registro",
+      "Esperar al cierre"
      ],
-     "a": 1,
+     "a": 0,
      "e": "Se mantiene la trazabilidad."
     }
    ]
@@ -964,34 +964,34 @@
     {
      "q": "¿Cuánto dura la ruta crítica del caso?",
      "o": [
-      "109 días",
       "42 días",
       "45 días",
-      "90 días"
+      "90 días",
+      "109 días"
      ],
-     "a": 0,
+     "a": 3,
      "e": "20 + 25 + 5 + 28 + 12 + 9 + 10."
     },
     {
      "q": "¿Qué actividad tiene 3 días de holgura al inicio?",
      "o": [
-      "Ingeniería",
-      "Permisos",
       "Perforación",
-      "Fractura"
+      "Fractura",
+      "Permisos",
+      "Ingeniería"
      ],
-     "a": 1,
+     "a": 2,
      "e": "B más D llegan a 42 días, frente a 45."
     },
     {
      "q": "¿Cómo se gestionó el atraso de permisos?",
      "o": [
+      "Reduciendo calidad",
       "Con un ticket de cambio aprobado",
       "Sin decisión",
-      "Cancelando el pozo",
-      "Reduciendo calidad"
+      "Cancelando el pozo"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Se registró y se aprobó el cambio."
     }
    ]
@@ -1012,43 +1012,43 @@
   {
    "q": "La EDT define:",
    "o": [
-    "Qué se hace",
-    "Cuándo se hace",
     "Quién paga",
-    "Cuánto vale"
+    "Cuánto vale",
+    "Cuándo se hace",
+    "Qué se hace"
    ],
-   "a": 0,
+   "a": 3,
    "e": "Define alcance, no cronograma."
   },
   {
    "q": "La relación más común entre actividades es:",
    "o": [
-    "Fin a inicio",
+    "Ninguna",
     "Inicio a fin",
-    "Fin a fin",
-    "Ninguna"
+    "Fin a inicio",
+    "Fin a fin"
    ],
-   "a": 0,
+   "a": 2,
    "e": "B empieza cuando A termina."
   },
   {
    "q": "Jira, en un proyecto clásico, aporta sobre todo:",
    "o": [
     "Ruta crítica",
-    "Valor ganado",
     "Trazabilidad de tareas, aprobaciones y cambios",
+    "Valor ganado",
     "Costos reales"
    ],
-   "a": 2,
+   "a": 1,
    "e": "Esa es su fortaleza; lo demás se complementa."
   },
   {
    "q": "Si una actividad con holgura se atrasa más que su holgura:",
    "o": [
     "Se vuelve crítica",
-    "Desaparece",
     "Se adelanta",
-    "No cambia el plazo"
+    "No cambia el plazo",
+    "Desaparece"
    ],
    "a": 0,
    "e": "Consume la holgura y mueve el fin del proyecto."
@@ -1056,12 +1056,12 @@
   {
    "q": "Un cambio de alcance requiere:",
    "o": [
-    "Registro, evaluación de impacto y aprobación",
+    "Solo la firma del responsable",
     "Un aviso informal",
     "Esperar al cierre",
-    "Solo la firma del responsable"
+    "Registro, evaluación de impacto y aprobación"
    ],
-   "a": 0,
+   "a": 3,
    "e": "Es el control integrado de cambios."
   }
  ],

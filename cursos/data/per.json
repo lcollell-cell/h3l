@@ -73,7 +73,7 @@
      "comp": "Arquitectura de pozos",
      "cues": [
       {
-       "say": "Perforar es un balance de presiones. El lodo debe pesar lo suficiente para contener los fluidos de formación, pero no tanto como para fracturar la roca. Esa franja se llama ventana operativa.",
+       "say": "Perforar es un balance de presiones. El lodo debe pesar lo suficiente para contener los fluidos de formación, pero no tanto como para fracturar la roca. Esa franja se llama ventana operativa. La presión de poro es el piso: por debajo hay influjo o kick.",
        "scene": {
         "t": "bul",
         "k": "Diseño de pozo",
@@ -88,8 +88,19 @@
        "hl": 0
       },
       {
-       "say": "El lodo en circulación ejerce más presión que el lodo estático, por la fricción en el anular. Esa densidad equivalente de circulación, o ECD, es la que no debe superar el gradiente de fractura.",
+       "say": "El gradiente de fractura es el techo: por encima hay pérdidas de circulación.",
+       "hl": 1
+      },
+      {
+       "say": "El margen de seguridad protege durante los viajes de herramienta.",
+       "hl": 2
+      },
+      {
+       "say": "Y la ECD, la densidad equivalente de circulación, suma las pérdidas de fricción en el anular.",
        "hl": 3
+      },
+      {
+       "say": "El lodo en circulación ejerce más presión que el lodo estático, por la fricción en el anular. Esa densidad equivalente de circulación, o ECD, es la que no debe superar el gradiente de fractura."
       },
       {
        "say": "Laboratorio. Este es un perfil de ejemplo. Movés la densidad del lodo y el ECD, y cambiás la profundidad. Mirá dónde aparece un riesgo de kick y dónde un riesgo de pérdidas, y qué intervalo cabe con un solo peso de lodo.",
@@ -109,7 +120,7 @@
        "hl": 3
       },
       {
-       "say": "La presión de poro se estima con registros comparando el valor medido de sónico o resistividad con la tendencia normal de compactación, como en el método de Eaton. La presión de fractura también tiene métodos empíricos, pero se mide en el zapato con una prueba de integridad o una prueba de leak-off.",
+       "say": "La presión de poro se estima con registros, y mide el desvío respecto de la tendencia normal de compactación, como en el método de Eaton, con el valor medido de sónico o resistividad.",
        "scene": {
         "t": "bul",
         "k": "Presión de poro y fractura",
@@ -120,7 +131,20 @@
          "FIT: confirma que el zapato resiste una presión dada",
          "LOT: se llega al inicio de la pérdida y se registra"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "La presión de fractura también tiene métodos empíricos, como Eaton y Matthews–Kelly.",
+       "hl": 1
+      },
+      {
+       "say": "Pero se mide en el zapato. La prueba de integridad, FIT, confirma que el zapato resiste una presión dada.",
+       "hl": 2
+      },
+      {
+       "say": "Y la prueba de leak-off, LOT, llega hasta el inicio de la pérdida, y se registra.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -192,34 +216,34 @@
     {
      "q": "¿Qué representa el ECD?",
      "o": [
-      "La densidad equivalente de circulación, que incluye las pérdidas de fricción",
       "Un tipo de cemento",
       "El costo diario",
-      "La presión de burbuja"
+      "La presión de burbuja",
+      "La densidad equivalente de circulación, que incluye las pérdidas de fricción"
      ],
-     "a": 0,
+     "a": 3,
      "e": "En circulación, la presión en el fondo es mayor que en estático."
     },
     {
      "q": "Se asienta una cañería principalmente para:",
      "o": [
-      "Aislar un tramo y poder cambiar la densidad de lodo dentro de una nueva ventana",
-      "Aumentar la ROP",
       "Decorar el pozo",
-      "Reducir el número de trépanos"
+      "Reducir el número de trépanos",
+      "Aislar un tramo y poder cambiar la densidad de lodo dentro de una nueva ventana",
+      "Aumentar la ROP"
      ],
-     "a": 0,
+     "a": 2,
      "e": "Cuando la ventana se cierra, una cañería cementada permite continuar con otro peso."
     },
     {
      "q": "¿Cuántas barreras independientes y verificadas se espera tener?",
      "o": [
+      "Cinco",
       "Al menos dos",
       "Una",
-      "Ninguna si hay BOP",
-      "Cinco"
+      "Ninguna si hay BOP"
      ],
-     "a": 0,
+     "a": 1,
      "e": "El principio de doble barrera es base de las normas de integridad."
     }
    ]
@@ -234,7 +258,7 @@
      "comp": "Límite técnico",
      "cues": [
       {
-       "say": "El límite técnico es el mejor tiempo que se podría lograr en un pozo si todo funcionara sin fallas ni esperas. No es un récord, es un valor de referencia construido con el mejor desempeño demostrado, operación por operación.",
+       "say": "El límite técnico es el mejor tiempo que se podría lograr en un pozo si todo funcionara sin fallas ni esperas. No es un récord, es un valor de referencia. El tiempo productivo es perforar, conectar y viajar.",
        "scene": {
         "t": "bul",
         "k": "Límite técnico",
@@ -249,8 +273,19 @@
        "hl": 0
       },
       {
-       "say": "La curva de rendimiento de perforación, descripta por Brett y Millheim en 1986, grafica profundidad contra tiempo. Los tramos horizontales son NPT, y la diferencia de pendiente respecto del límite técnico es tiempo invisible.",
+       "say": "El tiempo perdido invisible: se trabaja más lento que lo posible, pero sin falla.",
+       "hl": 1
+      },
+      {
+       "say": "El NPT: fallas, esperas y problemas que detienen la operación.",
+       "hl": 2
+      },
+      {
+       "say": "Y el límite técnico: el pozo sin NPT y con el mejor desempeño demostrado, operación por operación.",
        "hl": 3
+      },
+      {
+       "say": "La curva de rendimiento de perforación, descripta por Brett y Millheim en 1986, grafica profundidad contra tiempo. Los tramos horizontales son NPT, y la diferencia de pendiente respecto del límite técnico es tiempo invisible."
       },
       {
        "say": "Laboratorio. Movés cuánto NPT eliminás, cuánto tiempo invisible recuperás y cuánto mejorás la velocidad de penetración. Mirá cuántos días y cuánto dinero se ahorran, con el costo diario del equipo.",
@@ -270,7 +305,7 @@
        "say": "En la planilla, el tiempo se reparte entre rotación, conexiones, viajes, entubación, registros, terminación y mudanza. Y como el límite técnico no se alcanza por definición, el ahorro realista sale de palancas parciales, como las del laboratorio."
       },
       {
-       "say": "La energía específica mecánica, MSE, mide la energía que se gasta para destruir un volumen de roca. Si el MSE sube sin que cambie la roca, hay ineficiencia, como vibración o embolamiento de la barrena. Con vigilancia en tiempo real se corrige el parámetro antes de perder metros.",
+       "say": "La energía específica mecánica, MSE, mide la energía que se gasta para destruir un volumen de roca. Es un concepto de Teale, de 1965.",
        "scene": {
         "t": "bul",
         "k": "Eficiencia de perforación",
@@ -281,7 +316,20 @@
          "Vibración, embolamiento, parámetros inadecuados",
          "Se usa en tiempo real junto con la curva de límite técnico"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Si el MSE sube sin que cambie la formación, hay que buscar la causa.",
+       "hl": 1
+      },
+      {
+       "say": "Puede ser vibración, embolamiento de la barrena o parámetros inadecuados.",
+       "hl": 2
+      },
+      {
+       "say": "Y se usa en tiempo real junto con la curva de límite técnico, para corregir el parámetro antes de perder metros.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -378,20 +426,20 @@
     {
      "q": "El tiempo perdido invisible es:",
      "o": [
+      "Trabajar más lento que el mejor valor demostrado sin que haya falla",
       "Una falla de equipo declarada",
       "El tiempo de cementación",
-      "Trabajar más lento que el mejor valor demostrado sin que haya falla",
       "El clima"
      ],
-     "a": 2,
+     "a": 0,
      "e": "No aparece como evento, pero consume días."
     },
     {
      "q": "¿Qué KPI relaciona el tiempo no productivo con el total?",
      "o": [
-      "Gradiente de fractura",
       "ROP",
       "Costo por metro",
+      "Gradiente de fractura",
       "NPT %"
      ],
      "a": 3,
@@ -400,12 +448,12 @@
     {
      "q": "El límite técnico se construye:",
      "o": [
-      "Con el mejor desempeño demostrado por operación, sin NPT",
+      "Al azar",
       "Con el peor desempeño",
-      "Con el promedio",
-      "Al azar"
+      "Con el mejor desempeño demostrado por operación, sin NPT",
+      "Con el promedio"
      ],
-     "a": 0,
+     "a": 2,
      "e": "Es una referencia de lo posible con las tecnologías y prácticas disponibles."
     }
    ]
@@ -420,7 +468,7 @@
      "comp": "Control del pozo",
      "cues": [
       {
-       "say": "Un influjo se detecta con indicadores de superficie. Los primarios son el aumento del caudal de retorno con las bombas constantes y la ganancia de volumen en piletas. Los secundarios incluyen el aumento de la velocidad de perforación y el lodo cortado por gas.",
+       "say": "Un influjo se detecta con indicadores de superficie. El primer indicador primario es el aumento del caudal de retorno con las bombas constantes.",
        "scene": {
         "t": "bul",
         "k": "Control de pozo",
@@ -435,8 +483,19 @@
        "hl": 0
       },
       {
-       "say": "Ante un indicador, la respuesta es cerrar el pozo. Se detiene la perforación, se levanta la herramienta, se verifica flujo y se cierra con el preventor. Es mejor un cierre de más que un influjo que crece.",
+       "say": "El segundo primario es la ganancia en el volumen de piletas.",
+       "hl": 1
+      },
+      {
+       "say": "Entre los secundarios, el aumento brusco de la velocidad de perforación, o drilling break.",
+       "hl": 2
+      },
+      {
+       "say": "Y también el lodo cortado por gas, o el aumento de gas de fondo.",
        "hl": 3
+      },
+      {
+       "say": "Ante un indicador, la respuesta es cerrar el pozo. Se detiene la perforación, se levanta la herramienta, se verifica flujo y se cierra con el preventor. Es mejor un cierre de más que un influjo que crece."
       },
       {
        "say": "Este mapa muestra la secuencia: detectar, cerrar, registrar presiones, calcular, circular y restaurar el control. Tocá cada paso para ver qué se hace y por qué.",
@@ -519,7 +578,7 @@
        "hl": 0
       },
       {
-       "say": "Con el pozo cerrado se registran dos presiones: la de cierre en la tubería, SIDPP, y la de cierre en el anular, SICP. La SIDPP mide cuánto supera la presión de formación al lodo de la tubería, y por eso sirve para calcular el peso de lodo de control. La SICP suele ser mayor, porque el influjo es más liviano que el lodo.",
+       "say": "Con el pozo cerrado se registran dos presiones. La SIDPP es la presión de cierre en la tubería, y sirve para calcular el peso de lodo de control.",
        "scene": {
         "t": "bul",
         "k": "Presiones de cierre",
@@ -530,7 +589,20 @@
          "Se esperan a que se estabilicen antes de calcular",
          "La ganancia de piletas indica el volumen del influjo"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "La SICP es la presión de cierre en el anular, y suele ser mayor que la SIDPP, porque el influjo es más liviano que el lodo.",
+       "hl": 1
+      },
+      {
+       "say": "Se espera a que se estabilicen antes de calcular.",
+       "hl": 2
+      },
+      {
+       "say": "Y la ganancia de piletas indica el volumen del influjo.",
+       "hl": 3
       },
       {
        "say": "El peso de lodo de control es el peso actual más la SIDPP, dividida por 0,052 y por la profundidad vertical verdadera. Por ejemplo, con lodo de 10 ppg, 10.000 pies y una SIDPP de 520 psi, hay que subir un ppg: el peso de control es 11 ppg.",
@@ -553,7 +625,7 @@
        "lab": true
       },
       {
-       "say": "Después se circula el influjo manteniendo constante la presión de fondo. En el método del perforador se hacen dos circulaciones: la primera con el lodo original para sacar el influjo, y la segunda con el lodo de control. En el método del ingeniero, o esperar y densificar, se prepara el lodo de control y se circula una sola vez.",
+       "say": "Después se circula el influjo manteniendo constante la presión de fondo. La presión inicial de circulación es la SIDPP más la presión de bombeo a caudal reducido.",
        "scene": {
         "t": "bul",
         "k": "Métodos de circulación",
@@ -564,11 +636,23 @@
          "Perforador: dos circulaciones",
          "Ingeniero: una circulación, con lodo de control desde el inicio"
         ]
-       }
+       },
+       "hl": 0
       },
       {
-       "say": "La capacitación y la certificación de control de pozo, como el programa IADC WellSharp, y los simulacros de cierre, entrenan al equipo para responder sin dudar. La norma API 53 regula el equipo de preventores y sus pruebas. Este curso presenta los conceptos y no reemplaza una certificación de control de pozo como IADC WellSharp.",
-       "hl": 5
+       "say": "La presión final es la presión de bombeo por el peso de control, dividido por el peso original.",
+       "hl": 1
+      },
+      {
+       "say": "En el método del perforador se hacen dos circulaciones: la primera con el lodo original para sacar el influjo, y la segunda con el lodo de control.",
+       "hl": 2
+      },
+      {
+       "say": "En el método del ingeniero, o esperar y densificar, se prepara el lodo de control y se circula una sola vez.",
+       "hl": 3
+      },
+      {
+       "say": "La capacitación y la certificación de control de pozo, como el programa IADC WellSharp, y los simulacros de cierre, entrenan al equipo para responder sin dudar. La norma API 53 regula el equipo de preventores y sus pruebas. Este curso presenta los conceptos y no reemplaza una certificación de control de pozo como IADC WellSharp."
       },
       {
        "say": "Pregunta rápida.",
@@ -637,21 +721,21 @@
     {
      "q": "Un indicador primario de influjo es:",
      "o": [
-      "Aumento del caudal de retorno con bombas constantes",
       "Cambio de color del lodo",
+      "Aumento del caudal de retorno con bombas constantes",
       "Ruido del top drive",
       "Una baja de temperatura"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Es una señal directa de que el pozo está entregando más fluido del que se bombea."
     },
     {
      "q": "En Macondo, ¿cuántas personas murieron?",
      "o": [
       "11",
-      "3",
       "27",
-      "115"
+      "115",
+      "3"
      ],
      "a": 0,
      "e": "Murieron 11 personas; 115 fueron evacuadas."
@@ -659,9 +743,9 @@
     {
      "q": "El principio de barreras indica que se debe:",
      "o": [
+      "Evitar probar las barreras",
       "Confiar en una sola barrera robusta",
       "Retirar el BOP antes de cementar",
-      "Evitar probar las barreras",
       "Contar con al menos dos barreras independientes y verificadas"
      ],
      "a": 3,
@@ -675,64 +759,64 @@
    "q": "La ventana operativa de lodo está limitada por:",
    "o": [
     "ROP y torque",
-    "Presión de poro y gradiente de fractura",
     "Costo y clima",
+    "Presión de poro y gradiente de fractura",
     "Cemento y trépano"
    ],
-   "a": 1,
+   "a": 2,
    "e": "Por debajo de la presión de poro hay influjo; por encima de la fractura, pérdidas."
   },
   {
    "q": "El ECD siempre es:",
    "o": [
-    "Menor que el peso del lodo",
     "Cero",
     "Mayor o igual que el peso estático del lodo",
-    "Independiente del caudal"
+    "Independiente del caudal",
+    "Menor que el peso del lodo"
    ],
-   "a": 2,
+   "a": 1,
    "e": "En circulación se suman pérdidas de fricción en el anular."
   },
   {
    "q": "El tiempo perdido invisible se diferencia del NPT en que:",
    "o": [
-    "No existe",
-    "Es siempre clima",
     "No es una falla declarada: se trabaja más lento que lo posible",
-    "Es siempre equipo"
+    "Es siempre equipo",
+    "No existe",
+    "Es siempre clima"
    ],
-   "a": 2,
+   "a": 0,
    "e": "Es una ineficiencia no registrada como evento."
   },
   {
    "q": "Un diagrama de Pareto del NPT se usa para:",
    "o": [
     "Calcular la presión de poro",
-    "Priorizar causas",
     "Dimensionar el cemento",
-    "Elegir el color del lodo"
+    "Elegir el color del lodo",
+    "Priorizar causas"
    ],
-   "a": 1,
+   "a": 3,
    "e": "Muestra qué pocas causas concentran la mayor parte del tiempo perdido."
   },
   {
    "q": "Ante un influjo confirmado, el método de control busca:",
    "o": [
-    "Aumentar la ROP",
-    "Mantener la presión de fondo constante mientras se circula el influjo",
     "Detener las bombas indefinidamente",
-    "Perforar más rápido"
+    "Perforar más rápido",
+    "Mantener la presión de fondo constante mientras se circula el influjo",
+    "Aumentar la ROP"
    ],
-   "a": 1,
+   "a": 2,
    "e": "Los métodos del perforador y del ingeniero mantienen la presión de fondo por encima de la de formación."
   },
   {
    "q": "La enseñanza organizacional más importante de Macondo es que:",
    "o": [
-    "Basta con tener un BOP",
+    "La cementación no importa",
     "Las barreras deben verificarse y los factores humanos y la gobernanza forman parte del control",
-    "El clima fue la única causa",
-    "La cementación no importa"
+    "Basta con tener un BOP",
+    "El clima fue la única causa"
    ],
    "a": 1,
    "e": "La CSB identificó hallazgos técnicos, humanos, de gobernanza y regulatorios."

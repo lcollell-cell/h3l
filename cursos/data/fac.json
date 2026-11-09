@@ -266,20 +266,20 @@
      "q": "El factor K en Souders y Brown depende de:",
      "o": [
       "El color del gas",
-      "El diseño interno y el extractor de niebla",
       "La longitud del ducto",
+      "El diseño interno y el extractor de niebla",
       "El precio"
      ],
-     "a": 1,
+     "a": 2,
      "e": "Se toma de la norma o del fabricante."
     },
     {
      "q": "Un tiempo de residencia mayor sirve para:",
      "o": [
-      "Aumentar el caudal de gas",
-      "Que las fases líquidas se separen mejor",
       "Bajar la presión",
-      "Eliminar el K"
+      "Que las fases líquidas se separen mejor",
+      "Eliminar el K",
+      "Aumentar el caudal de gas"
      ],
      "a": 1,
      "e": "Las gotas o las fases necesitan tiempo para decantar."
@@ -287,12 +287,12 @@
     {
      "q": "La especificación de venta del gas la fija:",
      "o": [
-      "El separador",
       "El contrato y la norma del transportista",
-      "La temperatura ambiente",
-      "El precio del crudo"
+      "El precio del crudo",
+      "El separador",
+      "La temperatura ambiente"
      ],
-     "a": 1,
+     "a": 0,
      "e": "Cada transportista y contrato tiene sus valores."
     }
    ]
@@ -491,33 +491,33 @@
      "q": "Al comprimir en etapas se busca:",
      "o": [
       "Aumentar la relación por etapa",
-      "Limitar la temperatura de descarga y la potencia",
       "Evitar el enfriamiento",
-      "Reducir el caudal"
+      "Reducir el caudal",
+      "Limitar la temperatura de descarga y la potencia"
      ],
-     "a": 1,
+     "a": 3,
      "e": "Se enfría el gas entre etapas."
     },
     {
      "q": "Una válvula de alivio es:",
      "o": [
-      "La última barrera de protección contra sobrepresión",
-      "Un medidor",
       "Un separador",
-      "Una antorcha"
+      "Una antorcha",
+      "La última barrera de protección contra sobrepresión",
+      "Un medidor"
      ],
-     "a": 0,
+     "a": 2,
      "e": "Se calibra y se prueba periódicamente."
     },
     {
      "q": "Lo que define el trabajo de un compresor es:",
      "o": [
+      "El tipo de roca",
       "La relación de compresión",
       "Solo la diferencia de presiones",
-      "El color del gas",
-      "El tipo de roca"
+      "El color del gas"
      ],
-     "a": 0,
+     "a": 1,
      "e": "La relación P2/P1 determina el trabajo y la temperatura."
     }
    ]
@@ -736,34 +736,34 @@
     {
      "q": "Los hidratos se forman con:",
      "o": [
+      "Agua y gas a alta presión y baja temperatura",
       "Agua sola",
       "Solo petróleo caliente",
-      "Gas seco a alta temperatura",
-      "Agua y gas a alta presión y baja temperatura"
+      "Gas seco a alta temperatura"
      ],
-     "a": 3,
+     "a": 0,
      "e": "Son cristales de agua y gas."
     },
     {
      "q": "Un pig se usa en una línea para:",
      "o": [
-      "Aumentar el caudal de gas",
       "Medir la presión del reservorio",
-      "Limpiar depósitos, como ceras",
-      "Evitar el gas"
+      "Evitar el gas",
+      "Aumentar el caudal de gas",
+      "Limpiar depósitos, como ceras"
      ],
-     "a": 2,
+     "a": 3,
      "e": "Es un raspador que barre la línea."
     },
     {
      "q": "La corrosión por CO₂ depende de:",
      "o": [
-      "La presencia de agua con CO₂ disuelto",
+      "La longitud del ducto",
       "El color del acero",
-      "La densidad del gas seco",
-      "La longitud del ducto"
+      "La presencia de agua con CO₂ disuelto",
+      "La densidad del gas seco"
      ],
-     "a": 0,
+     "a": 2,
      "e": "Sin agua, el CO₂ no corroe el acero."
     }
    ]
@@ -774,64 +774,64 @@
    "q": "El criterio de Souders y Brown dimensiona:",
    "o": [
     "La viscosidad",
+    "El diámetro mínimo de un separador para gas",
     "La potencia de un compresor",
-    "La presión de un reservorio",
-    "El diámetro mínimo de un separador para gas"
+    "La presión de un reservorio"
    ],
-   "a": 3,
+   "a": 1,
    "e": "A partir de la velocidad máxima admisible."
   },
   {
    "q": "La compresión en etapas se usa para:",
    "o": [
-    "Aumentar la relación por etapa",
     "Limitar la temperatura de descarga",
     "Evitar el enfriamiento",
-    "Subir el caudal de agua"
+    "Subir el caudal de agua",
+    "Aumentar la relación por etapa"
    ],
-   "a": 1,
+   "a": 0,
    "e": "Se enfría entre etapas."
   },
   {
    "q": "Una especificación de punto de rocío de agua evita:",
    "o": [
-    "Hidratos y corrosión en el ducto",
+    "Que baje la presión",
     "Que el gas pese menos",
     "Que el gas se queme",
-    "Que baje la presión"
+    "Hidratos y corrosión en el ducto"
    ],
-   "a": 0,
+   "a": 3,
    "e": "El agua libre es la causa."
   },
   {
    "q": "El caso de dimensionamiento de una válvula de alivio es:",
    "o": [
-    "El de mayor caudal de alivio requerido",
     "El de menor caudal",
     "El más probable siempre",
+    "El de mayor caudal de alivio requerido",
     "El de presión cero"
    ],
-   "a": 0,
+   "a": 2,
    "e": "Debe cubrir el escenario más exigente."
   },
   {
    "q": "Para una línea con riesgo de hidratos puede usarse:",
    "o": [
-    "Solo agua dulce",
     "Aire comprimido",
+    "Un inhibidor como el monoetilenglicol",
     "Arena",
-    "Un inhibidor como el monoetilenglicol"
+    "Solo agua dulce"
    ],
-   "a": 3,
+   "a": 1,
    "e": "Desplaza la curva de formación."
   },
   {
    "q": "La velocidad erosional de API RP 14E depende de:",
    "o": [
     "La densidad de la mezcla",
+    "El nombre del pozo",
     "El color del fluido",
-    "La edad de la línea",
-    "El nombre del pozo"
+    "La edad de la línea"
    ],
    "a": 0,
    "e": "Ve = C dividido la raíz de la densidad."

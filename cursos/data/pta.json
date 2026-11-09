@@ -72,7 +72,7 @@
      "comp": "Diseño y ejecución de pruebas",
      "cues": [
       {
-       "say": "Una prueba de pozo perturba el caudal y registra cómo responde la presión. Esa respuesta depende del reservorio, y por eso permite conocerlo sin necesidad de recuperar una muestra. Con el tiempo la perturbación alcanza zonas más lejanas: el radio de investigación crece con la raíz de k·t sobre φ·μ·ct, y no es una distancia fija.",
+       "say": "Una prueba de pozo perturba el caudal y registra cómo responde la presión. Esa respuesta depende del reservorio, y permite conocer la permeabilidad y la capacidad de flujo, k por h.",
        "scene": {
         "t": "bul",
         "k": "Concepto",
@@ -86,6 +86,22 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "El daño o la estimulación alrededor del pozo, el factor de daño S.",
+       "hl": 1
+      },
+      {
+       "say": "La presión inicial o la presión media del reservorio.",
+       "hl": 2
+      },
+      {
+       "say": "Las heterogeneidades y límites: fallas, fracturas y cierres. Con el tiempo la perturbación alcanza zonas más lejanas: el radio de investigación no es una distancia fija.",
+       "hl": 3
+      },
+      {
+       "say": "Y el volumen conectado, en pruebas largas.",
+       "hl": 4
       },
       {
        "say": "Laboratorio. Cambiá la permeabilidad y la duración de la prueba. Mirá hasta dónde llega la perturbación: en roca de nanodarcies, cientos de horas investigan apenas unos pies.",
@@ -149,7 +165,7 @@
        }
       },
       {
-       "say": "Una buena prueba se diseña antes de hacerla. Hay que fijar el objetivo, simular la respuesta para estimar cuánto tiempo hace falta, calibrar los sensores, definir su ubicación, el muestreo y el rango, estabilizar el pozo antes del cierre y acordar el historial de caudales que se va a registrar.",
+       "say": "Una buena prueba se diseña antes de hacerla. Primero, un objetivo claro: qué decisión depende del resultado.",
        "scene": {
         "t": "bul",
         "k": "Mejores prácticas",
@@ -166,7 +182,39 @@
          "Criterio para decidir el tiempo de cierre, según la simulación"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Una simulación previa, para estimar la duración necesaria.",
+       "hl": 1
+      },
+      {
+       "say": "Un sensor de fondo calibrado, con resolución y deriva conocidas.",
+       "hl": 2
+      },
+      {
+       "say": "Un historial de caudales completo y sincronizado con la presión.",
+       "hl": 3
+      },
+      {
+       "say": "Un cierre de fondo cuando sea posible, para reducir el almacenamiento.",
        "hl": 4
+      },
+      {
+       "say": "Seguridad y manejo de fluidos acordados con operaciones.",
+       "hl": 5
+      },
+      {
+       "say": "La ubicación del sensor, la frecuencia de muestreo, la resolución y el rango, definidos de antemano.",
+       "hl": 6
+      },
+      {
+       "say": "La estabilización previa del pozo, y el caudal y la duración de la producción antes del cierre.",
+       "hl": 7
+      },
+      {
+       "say": "Y un criterio para decidir el tiempo de cierre, según la simulación.",
+       "hl": 8
       },
       {
        "say": "Pregunta rápida.",
@@ -246,7 +294,7 @@
        "lab": true
       },
       {
-       "say": "Dos cosas para fijarse. El almacenamiento domina la respuesta temprana y puede tapar el flujo radial; el daño suma presión y modifica la transición hacia el régimen radial. Con mucho almacenamiento puede que la meseta no aparezca en la duración de la prueba, y entonces el daño no se estima con confianza.",
+       "say": "Dos cosas para fijarse. El almacenamiento domina la respuesta temprana y puede tapar el flujo radial; el daño suma presión y modifica la transición hacia el régimen radial. Si subís S, la curva de presión se despega de la derivada.",
        "scene": {
         "t": "bul",
         "k": "Qué observar",
@@ -258,7 +306,19 @@
          "Cuando no hay meseta, no se puede leer k de ella"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Si subís C, la pendiente unitaria dura más y la meseta tarda.",
        "hl": 1
+      },
+      {
+       "say": "Si bajás k, la meseta sube, porque Δp aumenta.",
+       "hl": 2
+      },
+      {
+       "say": "Y con mucho almacenamiento puede que la meseta no aparezca en la duración de la prueba: cuando no hay meseta, no se puede leer k de ella.",
+       "hl": 3
       },
       {
        "say": "Cuando la derivada llega a la meseta, la permeabilidad puede estimarse de ahí, si se cumplen los supuestos y las unidades del modelo: k es 70,6 por q, B y mu, dividido por el espesor y por el valor de la meseta.",
@@ -303,31 +363,31 @@
     {
      "q": "La derivada de presión que se grafica es la derivada respecto de:",
      "o": [
-      "El logaritmo del tiempo",
       "El tiempo lineal",
+      "El logaritmo del tiempo",
       "La profundidad",
       "El caudal"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Se usa dΔp/d ln t, que en flujo radial infinito es constante."
     },
     {
      "q": "Una prueba de restauración o build-up consiste en:",
      "o": [
-      "Producir a caudal constante sin cerrar",
-      "Inyectar sin medir",
       "Cerrar el pozo luego de producir y medir la presión",
-      "Cambiar el choke cada hora"
+      "Inyectar sin medir",
+      "Cambiar el choke cada hora",
+      "Producir a caudal constante sin cerrar"
      ],
-     "a": 2,
+     "a": 0,
      "e": "Se cierra el pozo luego de un período de producción y se registra la recuperación de la presión."
     },
     {
      "q": "Antes de la prueba, la simulación sirve para:",
      "o": [
+      "Reemplazar al sensor",
       "Elegir el color del informe",
       "Evitar el cierre",
-      "Reemplazar al sensor",
       "Estimar cuánto tiempo hace falta para ver el régimen buscado"
      ],
      "a": 3,
@@ -375,7 +435,7 @@
        "lab": true
       },
       {
-       "say": "El factor de daño S resume cuánta caída de presión adicional hay cerca del pozo. Positivo indica daño o restricción. Negativo indica estimulación, por ejemplo una fractura.",
+       "say": "El factor de daño S resume cuánta caída de presión adicional hay cerca del pozo. Positivo indica daño o restricción. La caída adicional es 0,87 por m por S. Viene del daño de formación: invasión de lodo, finos, incrustaciones.",
        "scene": {
         "t": "bul",
         "k": "Daño",
@@ -388,10 +448,26 @@
          "Caída adicional de presión: 0,87 · m · S"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "De la penetración parcial o el cañoneo insuficiente.",
+       "hl": 1
+      },
+      {
+       "say": "De la desviación del pozo y el flujo convergente.",
+       "hl": 2
+      },
+      {
+       "say": "Con S negativo hay estimulación, por ejemplo acidificación.",
+       "hl": 3
+      },
+      {
+       "say": "O fractura hidráulica.",
        "hl": 4
       },
       {
-       "say": "La eficiencia de flujo compara el caudal real con el que tendría un pozo sin daño. Una eficiencia menor que uno sugiere que remover el daño agrega producción, y se evalúa contra el costo de intervenir.",
+       "say": "La eficiencia de flujo compara el caudal real con el que tendría un pozo sin daño: es p asterisco menos pwf menos el delta p de daño, dividido por p asterisco menos pwf.",
        "scene": {
         "t": "bul",
         "k": "Uso del resultado",
@@ -404,6 +480,18 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Una eficiencia menor que uno sugiere que remover el daño agrega producción: con daño alto se evalúa acidificación o limpieza.",
+       "hl": 1
+      },
+      {
+       "say": "Con daño bajo y k baja, la producción la limita el reservorio.",
+       "hl": 2
+      },
+      {
+       "say": "Y la decisión depende del costo de la intervención.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -457,7 +545,7 @@
        }
       },
       {
-       "say": "Un reservorio naturalmente fracturado se modela como dos medios, la matriz y las fracturas. Es el modelo de Warren y Root, de 1963. Deja un valle en la derivada: su profundidad depende de ω, la fracción de capacidad de almacenamiento en las fracturas, y el momento en que aparece depende de λ, el coeficiente de transferencia matriz-fractura.",
+       "say": "Un reservorio naturalmente fracturado se modela como dos medios, la matriz y las fracturas. Es el modelo de Warren y Root, de 1963. Omega es la fracción de capacidad de almacenamiento en las fracturas.",
        "scene": {
         "t": "bul",
         "k": "Doble porosidad",
@@ -469,7 +557,19 @@
          "Es frecuente en carbonatos y rocas fracturadas"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Lambda es el coeficiente de transferencia matriz-fractura.",
+       "hl": 1
+      },
+      {
+       "say": "Se ve como un valle en la derivada antes de la meseta final: su profundidad depende de omega, y el momento en que aparece, de lambda.",
        "hl": 2
+      },
+      {
+       "say": "Es frecuente en carbonatos y rocas fracturadas.",
+       "hl": 3
       },
       {
        "say": "El flujo de trabajo de la interpretación es iterativo. Se controla la calidad, se identifican los regímenes con la derivada, se propone un modelo, se ajusta por regresión y se valida con información independiente.",
@@ -550,7 +650,7 @@
        "hl": 5
       },
       {
-       "say": "Un punto central es la no unicidad. Distintos modelos pueden ajustar los mismos datos. Un buen ajuste matemático por sí solo no valida el modelo. Por ejemplo, un valle en la derivada puede ser doble porosidad o un efecto de fase en el pozo; la geología o un registro de producción permiten discriminar. La interpretación es creíble solo cuando el modelo es coherente con la geología y con otras mediciones.",
+       "say": "Un punto central es la no unicidad. Distintos modelos pueden ajustar los mismos datos, así que hay que probar más de un modelo y comparar el ajuste. Un buen ajuste matemático por sí solo no valida el modelo.",
        "scene": {
         "t": "bul",
         "k": "No unicidad",
@@ -563,6 +663,18 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Hay que pedir coherencia con la sísmica, los perfiles y los testigos. Por ejemplo, un valle en la derivada puede ser doble porosidad o un efecto de fase en el pozo.",
+       "hl": 1
+      },
+      {
+       "say": "Se reportan rangos y no solo un valor.",
+       "hl": 2
+      },
+      {
+       "say": "Y se registran los supuestos junto con el resultado.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -585,34 +697,34 @@
     {
      "q": "El método de Horner usa:",
      "o": [
-      "El tramo de flujo radial",
       "El tramo de almacenamiento",
       "Cualquier tramo",
+      "El tramo de flujo radial",
       "Solo el primer dato"
      ],
-     "a": 0,
+     "a": 2,
      "e": "La recta de Horner solo es válida en flujo radial."
     },
     {
      "q": "Con una pendiente de Horner mayor, para el mismo caudal, la permeabilidad es:",
      "o": [
-      "Menor",
-      "Mayor",
       "Igual",
-      "Indeterminada"
+      "Menor",
+      "Indeterminada",
+      "Mayor"
      ],
-     "a": 0,
+     "a": 1,
      "e": "k es inversamente proporcional a la pendiente m."
     },
     {
      "q": "Un valle en la derivada antes de la meseta sugiere:",
      "o": [
-      "Almacenamiento",
       "Doble porosidad",
-      "Falla sellante",
-      "Pozo horizontal"
+      "Pozo horizontal",
+      "Almacenamiento",
+      "Falla sellante"
      ],
-     "a": 1,
+     "a": 0,
      "e": "Es la firma del reservorio naturalmente fracturado."
     }
    ]
@@ -627,7 +739,7 @@
      "comp": "Pruebas en no convencionales y gas",
      "cues": [
       {
-       "say": "En roca de permeabilidad ultra baja el flujo radial puede tardar meses o años en aparecer, aunque no es una regla universal: depende de la permeabilidad, la geometría, el espaciamiento y el diseño de las fracturas. Domina el flujo lineal hacia la fractura.",
+       "say": "En roca de permeabilidad ultra baja el flujo radial puede tardar meses o años en aparecer, aunque no es una regla universal. Domina el flujo lineal, con pendiente un medio en la derivada.",
        "scene": {
         "t": "bul",
         "k": "No convencionales",
@@ -639,7 +751,19 @@
          "Se aprovechan las pruebas cortas de fractura, como el DFIT"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Los cierres largos son caros por la producción diferida.",
        "hl": 1
+      },
+      {
+       "say": "Por eso se usa la producción misma, el análisis RTA, para estimar k por Ac.",
+       "hl": 2
+      },
+      {
+       "say": "Y se aprovechan las pruebas cortas de fractura, como el DFIT.",
+       "hl": 3
       },
       {
        "say": "Por eso se complementa con el análisis de datos de producción, o RTA, que reconoce flujo lineal, bilineal y radial por sus pendientes, con límites ligados a la geometría de la fractura."
@@ -684,7 +808,7 @@
        "say": "De ahí se estima la presión de cierre, el comportamiento del filtrado y, según el procedimiento y la calidad de los datos, la presión de reservorio. Se interpretan las desviaciones del comportamiento ideal; no se lee un único punto."
       },
       {
-       "say": "En pozos de gas hay dos ajustes. La compresibilidad y la viscosidad dependen de la presión, y se usa una pseudo-presión del gas real. Y a caudales altos aparece un daño aparente que crece con el caudal, por el término de inercia o turbulencia del flujo no Darcy; no es daño mecánico ni de formación.",
+       "say": "En pozos de gas hay dos ajustes. La compresibilidad y la viscosidad dependen de la presión, y se usa una pseudo-presión del gas real, de Al-Hussainy, Ramey y Crawford, de 1966. Se agrega pseudo-tiempo cuando mu por ct cambia mucho durante la prueba.",
        "scene": {
         "t": "bul",
         "k": "Gas",
@@ -695,7 +819,15 @@
          "El Excel del curso trabaja con petróleo y propiedades constantes"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "A caudales altos aparece un daño aparente que crece con el caudal, por la inercia o turbulencia del flujo no Darcy: S prima es S más D por q. No es daño mecánico ni de formación; se separa con pruebas a varios caudales.",
        "hl": 1
+      },
+      {
+       "say": "El Excel del curso trabaja con petróleo y propiedades constantes.",
+       "hl": 2
       },
       {
        "say": "Pregunta rápida.",
@@ -719,7 +851,7 @@
      "comp": "Diseño y ejecución de pruebas",
      "cues": [
       {
-       "say": "La interpretación es tan buena como los datos. Hay que revisar deriva y resolución del sensor, sincronizar tiempos, y confirmar que el historial de caudales tiene todos los cambios, porque la superposición los necesita.",
+       "say": "La interpretación es tan buena como los datos. Primero, la calibración y la deriva del sensor de fondo.",
        "scene": {
         "t": "bul",
         "k": "Calidad de datos",
@@ -733,10 +865,30 @@
          "Ubicación, muestreo y rango del sensor definidos antes de la prueba"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "La resolución debe ser suficiente para la derivada: el ruido la arruina.",
        "hl": 1
       },
       {
-       "say": "Hay errores que se repiten. Usar un tramo con almacenamiento para la recta de Horner, suponer un reservorio infinito cuando hay un límite, o cerrar el pozo poco tiempo y no alcanzar el régimen buscado.",
+       "say": "Los tiempos deben estar sincronizados entre presión y caudal.",
+       "hl": 2
+      },
+      {
+       "say": "El historial de caudales debe estar completo, con los cambios de choke, porque la superposición los necesita.",
+       "hl": 3
+      },
+      {
+       "say": "Hay que mirar los efectos de fase en el pozo, como la segregación de fluidos.",
+       "hl": 4
+      },
+      {
+       "say": "Y la ubicación, el muestreo y el rango del sensor se definen antes de la prueba.",
+       "hl": 5
+      },
+      {
+       "say": "Hay errores que se repiten. Ajustar la recta de Horner en el tramo equivocado, por ejemplo un tramo con almacenamiento.",
        "scene": {
         "t": "bul",
         "k": "Errores comunes",
@@ -750,6 +902,22 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Ignorar el historial previo de caudales.",
+       "hl": 1
+      },
+      {
+       "say": "Cerrar el pozo poco tiempo y no alcanzar el régimen buscado.",
+       "hl": 2
+      },
+      {
+       "say": "Suponer un reservorio infinito cuando hay un límite.",
+       "hl": 3
+      },
+      {
+       "say": "Y reportar un solo valor sin rango.",
+       "hl": 4
       },
       {
        "say": "Laboratorio. Es un pozo dañado, de baja permeabilidad y con mucho almacenamiento. Probá si en las mil horas de la prueba se llega a ver el flujo radial, y qué cambia si se hace un cierre de fondo para reducir el almacenamiento.",
@@ -766,7 +934,7 @@
        "lab": true
       },
       {
-       "say": "El informe final debe dejar todo trazable. Objetivo, datos y su calidad, modelo y supuestos, parámetros con rangos, y las recomendaciones. Con eso otra persona puede repetir el análisis.",
+       "say": "El informe final debe dejar todo trazable. Primero, el objetivo y la decisión que apoya.",
        "scene": {
         "t": "bul",
         "k": "Informe",
@@ -779,10 +947,26 @@
          "Recomendaciones y próximos pasos"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Los datos, su calidad y las correcciones aplicadas.",
+       "hl": 1
+      },
+      {
+       "say": "El modelo, los supuestos y el ajuste.",
        "hl": 2
       },
       {
-       "say": "La deconvolución convierte los datos de varios períodos de flujo y cierre en la respuesta equivalente a un único caudal constante. Así se ve una ventana de tiempo más larga que la de un solo cierre. Es un problema matemático sensible al ruido y a los errores del historial de caudales; no crea información independiente ni reemplaza el control de calidad, y se usa como complemento del análisis convencional.",
+       "say": "Los parámetros con su incertidumbre.",
+       "hl": 3
+      },
+      {
+       "say": "Y las recomendaciones y próximos pasos. Con eso otra persona puede repetir el análisis.",
+       "hl": 4
+      },
+      {
+       "say": "La deconvolución combina varios períodos de flujo y cierre en una sola respuesta, equivalente a un único caudal constante.",
        "scene": {
         "t": "bul",
         "k": "Técnicas avanzadas",
@@ -793,7 +977,20 @@
          "Exige datos de caudal confiables",
          "Se interpreta junto con el análisis convencional"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Así se amplía el tiempo de investigación: se ve una ventana más larga que la de un solo cierre.",
+       "hl": 1
+      },
+      {
+       "say": "Es un problema matemático sensible al ruido: exige datos de caudal confiables, y no crea información independiente.",
+       "hl": 2
+      },
+      {
+       "say": "Se usa como complemento del análisis convencional, y se interpreta junto con él.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -816,34 +1013,34 @@
     {
      "q": "Un sensor con deriva afecta sobre todo a:",
      "o": [
-      "La lectura de presión a lo largo del tiempo",
       "El color del informe",
       "El caudal",
-      "El nombre del pozo"
+      "El nombre del pozo",
+      "La lectura de presión a lo largo del tiempo"
      ],
-     "a": 0,
+     "a": 3,
      "e": "La deriva distorsiona las presiones, y con ellas la derivada y la interpretación."
     },
     {
      "q": "Si en el laboratorio no aparece la meseta de la derivada, lo correcto es:",
      "o": [
-      "Concluir que no se alcanzó el flujo radial y que hace falta más tiempo o menos almacenamiento",
-      "Leer k igual",
       "Eliminar el dato",
-      "Usar el último punto"
+      "Usar el último punto",
+      "Concluir que no se alcanzó el flujo radial y que hace falta más tiempo o menos almacenamiento",
+      "Leer k igual"
      ],
-     "a": 0,
+     "a": 2,
      "e": "Sin meseta no se puede leer la capacidad de flujo de ese régimen."
     },
     {
      "q": "El análisis RTA usa:",
      "o": [
-      "Solo análisis de fluidos",
-      "Solo registros eléctricos",
       "Solo sísmica",
-      "Datos de producción"
+      "Datos de producción",
+      "Solo análisis de fluidos",
+      "Solo registros eléctricos"
      ],
-     "a": 3,
+     "a": 1,
      "e": "Aprovecha los caudales y presiones de producción para estimar parámetros del reservorio."
     }
    ]
@@ -864,21 +1061,21 @@
   {
    "q": "La derivada de presión se calcula respecto de:",
    "o": [
-    "ln t",
-    "t",
     "p",
-    "q"
+    "q",
+    "t",
+    "ln t"
    ],
-   "a": 0,
+   "a": 3,
    "e": "dΔp/d ln t."
   },
   {
    "q": "El flujo lineal hacia una fractura aparece con una derivada de pendiente:",
    "o": [
+    "−1",
     "1",
-    "0",
     "1/2",
-    "−1"
+    "0"
    ],
    "a": 2,
    "e": "La pendiente 1/2 es la firma del flujo lineal."
@@ -887,33 +1084,33 @@
    "q": "El almacenamiento del pozo se reconoce por:",
    "o": [
     "Pendiente negativa",
+    "Pendiente unitaria al inicio",
     "Una meseta",
-    "Un valle",
-    "Pendiente unitaria al inicio"
+    "Un valle"
    ],
-   "a": 3,
+   "a": 1,
    "e": "En el inicio, presión y derivada siguen una recta de pendiente 1."
   },
   {
    "q": "Una falla sellante a cierta distancia produce:",
    "o": [
-    "Ningún cambio",
+    "Una meseta que se duplica",
     "Un valle",
     "Una pendiente 1/2 al inicio",
-    "Una meseta que se duplica"
+    "Ningún cambio"
    ],
-   "a": 3,
+   "a": 0,
    "e": "El segundo nivel de la meseta vale el doble del primero."
   },
   {
    "q": "Un buen informe de prueba debe incluir:",
    "o": [
+    "Nada de los datos",
     "Solo gráficos",
     "Solo un número",
-    "Parámetros con incertidumbre y supuestos",
-    "Nada de los datos"
+    "Parámetros con incertidumbre y supuestos"
    ],
-   "a": 2,
+   "a": 3,
    "e": "Trazabilidad y rangos hacen que el resultado sea utilizable."
   }
  ],

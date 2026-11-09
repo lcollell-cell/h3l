@@ -275,23 +275,23 @@
     {
      "q": "El costo de una asignación se calcula como:",
      "o": [
-      "Unidades × precio unitario × duración",
-      "Solo precio",
       "Solo duración",
-      "Holgura × costo"
+      "Holgura × costo",
+      "Solo precio",
+      "Unidades × precio unitario × duración"
      ],
-     "a": 0,
+     "a": 3,
      "e": "Es el producto de esos tres factores."
     },
     {
      "q": "La curva S representa:",
      "o": [
-      "Costo acumulado",
+      "Calendario",
       "Holgura",
-      "Riesgo",
-      "Calendario"
+      "Costo acumulado",
+      "Riesgo"
      ],
-     "a": 0,
+     "a": 2,
      "e": "Costo acumulado en el tiempo."
     }
    ]
@@ -556,21 +556,21 @@
     {
      "q": "La sobreasignación ocurre cuando:",
      "o": [
-      "La demanda supera la capacidad",
       "Sobran recursos",
+      "La demanda supera la capacidad",
       "Hay holgura",
       "El calendario es global"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Hay más demanda que capacidad."
     },
     {
      "q": "La nivelación prioriza retrasar:",
      "o": [
       "Actividades con holgura",
-      "Actividades críticas",
       "Hitos de pago",
-      "Todas por igual"
+      "Todas por igual",
+      "Actividades críticas"
      ],
      "a": 0,
      "e": "Primero se usa la holgura."
@@ -578,12 +578,12 @@
     {
      "q": "Antes de aprobar se compara:",
      "o": [
-      "Cronograma nivelado y no nivelado",
+      "Nada",
       "Dos colores",
       "Dos archivos de otra empresa",
-      "Nada"
+      "Cronograma nivelado y no nivelado"
      ],
-     "a": 0,
+     "a": 3,
      "e": "Se evalúa el efecto del nivelado."
     }
    ]
@@ -827,32 +827,32 @@
     {
      "q": "¿Cuál era el pico de demanda de soldadores?",
      "o": [
-      "38",
       "20",
       "14",
+      "38",
       "10"
      ],
-     "a": 0,
+     "a": 2,
      "e": "Entre los días 75 y 84."
     },
     {
      "q": "¿Cuántos días de sobreasignación hay?",
      "o": [
-      "15",
-      "5",
       "30",
-      "0"
+      "15",
+      "0",
+      "5"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Entre los días 70 y 84."
     },
     {
      "q": "Al nivelar con holgura, ¿cuándo termina el proyecto?",
      "o": [
       "Día 154",
+      "Día 160",
       "Día 149",
-      "Día 140",
-      "Día 160"
+      "Día 140"
      ],
      "a": 0,
      "e": "Se retrasan 5 días las pruebas y la puesta en marcha."
@@ -864,34 +864,34 @@
   {
    "q": "Los precios unitarios deben:",
    "o": [
-    "Mantenerse actualizados",
     "Ignorarse",
     "Fijarse una sola vez",
-    "Ser iguales para todos"
+    "Ser iguales para todos",
+    "Mantenerse actualizados"
    ],
-   "a": 0,
+   "a": 3,
    "e": "Cambian con el tiempo."
   },
   {
    "q": "La nivelación de recursos:",
    "o": [
-    "Puede alargar el proyecto",
-    "Siempre lo acorta",
     "No tiene efecto",
-    "Elimina costos"
+    "Elimina costos",
+    "Puede alargar el proyecto",
+    "Siempre lo acorta"
    ],
-   "a": 0,
+   "a": 2,
    "e": "Si se retrasan actividades críticas."
   },
   {
    "q": "El flujo de caja mensual es:",
    "o": [
+    "La duración",
     "Diferencia de costo acumulado entre dos meses",
     "La holgura total",
-    "El pico de recursos",
-    "La duración"
+    "El pico de recursos"
    ],
-   "a": 0,
+   "a": 1,
    "e": "Es la pendiente de la curva S."
   },
   {
@@ -908,23 +908,23 @@
   {
    "q": "En el caso, el pico de demanda de soldadores es:",
    "o": [
-    "38",
-    "20",
     "24",
-    "14"
+    "14",
+    "20",
+    "38"
    ],
-   "a": 0,
+   "a": 3,
    "e": "Entre los días 75 y 84."
   },
   {
    "q": "Una decisión de nivelación debe considerar:",
    "o": [
-    "Plazo, costo y seguridad",
+    "Solo la opinión del contratista",
     "Solo el costo",
-    "Solo el plazo",
-    "Solo la opinión del contratista"
+    "Plazo, costo y seguridad",
+    "Solo el plazo"
    ],
-   "a": 0,
+   "a": 2,
    "e": "Se equilibran los tres."
   }
  ],

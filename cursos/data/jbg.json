@@ -387,31 +387,31 @@
      "q": "Una falla es:",
      "o": [
       "La equivocación humana",
-      "El efecto visible del defecto",
       "El nombre de un ticket",
-      "Un componente"
+      "Un componente",
+      "El efecto visible del defecto"
      ],
-     "a": 1,
+     "a": 3,
      "e": "La falla es el efecto observable."
     },
     {
      "q": "¿Quién verifica la resolución de un error?",
      "o": [
-      "Quien lo corrigió",
-      "Otra persona",
       "Nadie",
-      "El reportante siempre"
+      "El reportante siempre",
+      "Otra persona",
+      "Quien lo corrigió"
      ],
-     "a": 1,
+     "a": 2,
      "e": "La verificación independiente reduce reaperturas."
     },
     {
      "q": "Un reporte útil incluye:",
      "o": [
-      "Solo el título",
+      "El nombre del culpable",
       "Pasos para reproducir, esperado y observado",
-      "Una opinión",
-      "El nombre del culpable"
+      "Solo el título",
+      "Una opinión"
      ],
      "a": 1,
      "e": "Permite reproducir y diagnosticar."
@@ -627,34 +627,34 @@
     {
      "q": "La prioridad indica:",
      "o": [
-      "Qué tan grave es el efecto",
       "Qué tan pronto corregir",
+      "Qué tan grave es el efecto",
       "Quién lo reportó",
       "El componente"
      ],
-     "a": 1,
+     "a": 0,
      "e": "La severidad es la gravedad; la prioridad, la urgencia."
     },
     {
      "q": "Un error ya reportado se:",
      "o": [
-      "Ignora",
-      "Enlaza como duplicado y suma recurrencia",
       "Borra",
-      "Reasigna a otro proyecto"
+      "Reasigna a otro proyecto",
+      "Ignora",
+      "Enlaza como duplicado y suma recurrencia"
      ],
-     "a": 1,
+     "a": 3,
      "e": "Se conserva la señal de repetición."
     },
     {
      "q": "El MTTR es:",
      "o": [
-      "El tiempo medio de resolución",
+      "Una prioridad",
       "El máximo de reportes",
-      "La tasa de escape",
-      "Una prioridad"
+      "El tiempo medio de resolución",
+      "La tasa de escape"
      ],
-     "a": 0,
+     "a": 2,
      "e": "Mean time to resolve/repair."
     }
    ]
@@ -943,23 +943,23 @@
     {
      "q": "La verificación de la corrección la hace:",
      "o": [
-      "La misma persona",
       "Una persona distinta",
       "El proveedor solamente",
-      "Jira automáticamente"
+      "Jira automáticamente",
+      "La misma persona"
      ],
-     "a": 1,
+     "a": 0,
      "e": "Verificación independiente."
     },
     {
      "q": "Un error que se repite es:",
      "o": [
+      "Algo normal",
       "Una molestia",
-      "Una señal de riesgo",
       "Un error menor",
-      "Algo normal"
+      "Una señal de riesgo"
      ],
-     "a": 1,
+     "a": 3,
      "e": "Debe escalarse."
     }
    ]
@@ -969,65 +969,65 @@
   {
    "q": "Un error produce una falla cuando:",
    "o": [
-    "El defecto actúa",
     "Se cierra el ticket",
     "Cambia la versión",
+    "El defecto actúa",
     "Hay un duplicado"
    ],
-   "a": 0,
+   "a": 2,
    "e": "La falla es el efecto del defecto."
   },
   {
    "q": "¿Qué dato permite reproducir un error?",
    "o": [
-    "Los pasos para reproducir",
-    "El prestigio de quien reporta",
     "El color",
-    "El horario"
+    "Los pasos para reproducir",
+    "El horario",
+    "El prestigio de quien reporta"
    ],
-   "a": 0,
+   "a": 1,
    "e": "Son el dato más útil según Bettenburg y colaboradores."
   },
   {
    "q": "Un error que afecta una barrera de seguridad tiene severidad:",
    "o": [
-    "Baja",
-    "Media",
     "Crítica",
-    "Cosmética"
+    "Cosmética",
+    "Baja",
+    "Media"
    ],
-   "a": 2,
+   "a": 0,
    "e": "Es la categoría más grave."
   },
   {
    "q": "Una tasa de reapertura alta sugiere:",
    "o": [
     "Mejor verificación",
-    "Correcciones o verificaciones deficientes",
     "Menos errores",
-    "Más prioridad"
+    "Más prioridad",
+    "Correcciones o verificaciones deficientes"
    ],
-   "a": 1,
+   "a": 3,
    "e": "Los tickets vuelven a abrirse porque no se resolvió bien."
   },
   {
    "q": "JQL sirve para:",
    "o": [
-    "Escribir informes en Word",
-    "Buscar y filtrar tickets",
     "Crear usuarios",
-    "Diseñar flujos"
+    "Diseñar flujos",
+    "Buscar y filtrar tickets",
+    "Escribir informes en Word"
    ],
-   "a": 1,
+   "a": 2,
    "e": "Es el lenguaje de consultas de Jira."
   },
   {
    "q": "Jira, respecto de la gestión de seguridad de procesos:",
    "o": [
-    "La reemplaza",
+    "La define",
     "La complementa para el seguimiento",
-    "La elimina",
-    "La define"
+    "La reemplaza",
+    "La elimina"
    ],
    "a": 1,
    "e": "El seguimiento no sustituye los sistemas de gestión de seguridad."

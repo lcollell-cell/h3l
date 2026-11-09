@@ -314,34 +314,34 @@
     {
      "q": "¿Quién ordena el Product Backlog?",
      "o": [
-      "El Scrum Master",
       "El Product Owner",
+      "El Scrum Master",
       "Cualquier interesado",
       "El Jefe de Proyecto"
      ],
-     "a": 1,
+     "a": 0,
      "e": "Es responsabilidad del Product Owner."
     },
     {
      "q": "¿Cuánto dura como máximo el scrum diario?",
      "o": [
-      "15 minutos",
-      "1 hora",
       "Medio día",
-      "Un día"
+      "Un día",
+      "1 hora",
+      "15 minutos"
      ],
-     "a": 0,
+     "a": 3,
      "e": "Es un evento de 15 minutos."
     },
     {
      "q": "Una épica en Jira reúne:",
      "o": [
+      "Usuarios",
       "Errores solamente",
       "Historias y tareas relacionadas",
-      "Informes",
-      "Usuarios"
+      "Informes"
      ],
-     "a": 1,
+     "a": 2,
      "e": "Agrupa trabajo grande en historias."
     }
    ]
@@ -561,23 +561,23 @@
     {
      "q": "La velocidad se usa para:",
      "o": [
-      "Comparar equipos",
       "Planificar capacidad",
       "Premiar al mejor",
-      "Calcular el presupuesto"
+      "Calcular el presupuesto",
+      "Comparar equipos"
      ],
-     "a": 1,
+     "a": 0,
      "e": "Orienta cuánto comprometer."
     },
     {
      "q": "La retrospectiva busca:",
      "o": [
+      "Elegir al Scrum Master",
       "Aprobar el incremento",
-      "Mejorar la forma de trabajar",
       "Cambiar el producto",
-      "Elegir al Scrum Master"
+      "Mejorar la forma de trabajar"
      ],
-     "a": 1,
+     "a": 3,
      "e": "Es un evento del equipo para mejorar."
     }
    ]
@@ -808,20 +808,20 @@
      "q": "¿Qué se priorizó primero en el caso?",
      "o": [
       "La capacitación",
-      "Los datos limpios y accesibles",
       "La interfaz",
+      "Los datos limpios y accesibles",
       "El informe final"
      ],
-     "a": 1,
+     "a": 2,
      "e": "Sin datos confiables, las alertas no sirven."
     },
     {
      "q": "¿Cómo se informa el pronóstico?",
      "o": [
-      "Como una fecha exacta",
-      "Como un rango",
       "No se informa",
-      "Como una opinión"
+      "Como un rango",
+      "Como una opinión",
+      "Como una fecha exacta"
      ],
      "a": 1,
      "e": "Se reconoce la incertidumbre."
@@ -830,9 +830,9 @@
      "q": "¿Qué se agregó a la definición de terminado?",
      "o": [
       "Una validación con el operador",
+      "Un nuevo rol",
       "Más reuniones",
-      "Menos pruebas",
-      "Un nuevo rol"
+      "Menos pruebas"
      ],
      "a": 0,
      "e": "Fue el resultado de la retrospectiva."
@@ -844,32 +844,32 @@
   {
    "q": "El sprint dura:",
    "o": [
-    "Un mes o menos",
     "Tres meses",
     "Un año",
-    "Lo que defina el jefe"
+    "Lo que defina el jefe",
+    "Un mes o menos"
    ],
-   "a": 0,
+   "a": 3,
    "e": "La Guía de Scrum fija un mes o menos."
   },
   {
    "q": "El compromiso del Product Backlog es:",
    "o": [
-    "El objetivo del producto",
-    "La definición de terminado",
     "El objetivo del sprint",
-    "La velocidad"
+    "La velocidad",
+    "El objetivo del producto",
+    "La definición de terminado"
    ],
-   "a": 0,
+   "a": 2,
    "e": "El objetivo del producto."
   },
   {
    "q": "Los puntos de historia son:",
    "o": [
-    "Horas",
+    "Días",
     "Esfuerzo relativo",
-    "Dólares",
-    "Días"
+    "Horas",
+    "Dólares"
    ],
    "a": 1,
    "e": "Es una medida relativa."
@@ -877,34 +877,34 @@
   {
    "q": "¿Qué informe de Jira muestra el trabajo restante del sprint?",
    "o": [
-    "Velocity",
     "Burndown",
+    "Velocity",
     "Roadmap",
     "Control"
    ],
-   "a": 1,
+   "a": 0,
    "e": "El burndown compara el trabajo restante con el tiempo."
   },
   {
    "q": "Con 21 puntos restantes y velocidad 24, faltan aproximadamente:",
    "o": [
-    "1 sprint",
-    "5 sprints",
     "10 sprints",
-    "Ninguno"
+    "Ninguno",
+    "5 sprints",
+    "1 sprint"
    ],
-   "a": 0,
+   "a": 3,
    "e": "21 dividido 24 es menos de un sprint."
   },
   {
    "q": "En operaciones, la definición de terminado debe incluir:",
    "o": [
+    "Nada especial",
     "Solo el código",
     "La seguridad y la calidad de los datos",
-    "El plan de ventas",
-    "Nada especial"
+    "El plan de ventas"
    ],
-   "a": 1,
+   "a": 2,
    "e": "El riesgo operativo y la calidad de datos son parte de lo terminado."
   }
  ],

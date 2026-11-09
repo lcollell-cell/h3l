@@ -111,7 +111,7 @@
        }
       },
       {
-       "say": "Entre los cambios de 2018 hay varios muy prácticos. Las reservas posibles no pueden existir solas, salvo como extensión de un proyecto vecino de reservas probables. Las reservas no desarrolladas deben iniciar su desarrollo dentro de cinco años. Y los costos de abandono forman parte de la economía.",
+       "say": "Entre los cambios de 2018 hay varios muy prácticos. Las reservas posibles solas no se admiten, salvo como extensión de un proyecto 2P vecino.",
        "scene": {
         "t": "bul",
         "k": "Precisiones de 2018",
@@ -127,7 +127,23 @@
        "hl": 0
       },
       {
-       "say": "Otras precisiones tocan los recursos contingentes. Los subtipos \"marginal\" y \"no marginal\" pasaron a llamarse económicamente viable y económicamente no viable. Y el EUR debe expresarse con sus condiciones técnicas y comerciales, por ejemplo, el EUR probado es la reserva 1P más lo producido.",
+       "say": "Las reservas no desarrolladas deben iniciar su desarrollo dentro de cinco años de su clasificación inicial.",
+       "hl": 1
+      },
+      {
+       "say": "Los costos de abandono y restauración se incluyen en la economía.",
+       "hl": 2
+      },
+      {
+       "say": "Las reservas exigen tecnología establecida; los contingentes pueden depender de tecnología en desarrollo.",
+       "hl": 3
+      },
+      {
+       "say": "Y se agregó el concepto de recursos técnicamente recuperables.",
+       "hl": 4
+      },
+      {
+       "say": "Otras precisiones tocan los recursos contingentes. Los subtipos marginal y no marginal pasaron a llamarse económicamente viable y económicamente no viable.",
        "scene": {
         "t": "bul",
         "k": "Más precisiones",
@@ -140,7 +156,23 @@
          "Las reservas netas se asignan según el derecho contractual"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "El EUR debe expresarse con sus condiciones técnicas y comerciales, por ejemplo, el EUR probado es la reserva 1P más lo producido.",
        "hl": 1
+      },
+      {
+       "say": "No se permiten condiciones ni clasificaciones divididas dentro de un mismo proyecto.",
+       "hl": 2
+      },
+      {
+       "say": "Se agregaron calificaciones para evaluadores y auditores de reservas.",
+       "hl": 3
+      },
+      {
+       "say": "Y las reservas netas se asignan según el derecho contractual.",
+       "hl": 4
       },
       {
        "say": "Pregunta rápida.",
@@ -164,7 +196,7 @@
      "comp": "Incertidumbre probabilista",
      "cues": [
       {
-       "say": "En el enfoque probabilista, el volumen es una distribución. El valor bajo, o P90, es el que tiene al menos un 90 % de probabilidad de ser igualado o superado. El P50 es el mejor estimado, y el P10, el valor alto, con solo un 10 % de probabilidad de ser superado.",
+       "say": "En el enfoque probabilista, el volumen es una distribución. El valor bajo, o P90, tiene al menos un 90 por ciento de probabilidad de ser igualado o superado.",
        "scene": {
         "t": "bul",
         "k": "Percentiles",
@@ -180,6 +212,22 @@
        "hl": 0
       },
       {
+       "say": "El P50 es la mediana y el mejor estimado.",
+       "hl": 1
+      },
+      {
+       "say": "El P10 es el valor alto, con solo un 10 por ciento de probabilidad de ser superado.",
+       "hl": 2
+      },
+      {
+       "say": "Se asocian a 1P, 2P y 3P, o a 1C, 2C y 3C.",
+       "hl": 3
+      },
+      {
+       "say": "Y el rango P10 sobre P90 mide cuán abierta es la incertidumbre.",
+       "hl": 4
+      },
+      {
        "say": "Laboratorio. Es un petróleo original estimado por simulación de Monte Carlo a partir de cuatro parámetros: área, espesor, porosidad y saturación de agua. Subí la incertidumbre de los parámetros y mirá cómo se abre el rango entre P90 y P10.",
        "scene": {
         "t": "viz",
@@ -192,7 +240,7 @@
        "lab": true
       },
       {
-       "say": "Los cálculos tienen supuestos que conviene hacer explícitos. Las distribuciones de entrada y sus correlaciones determinan el resultado. Si dos parámetros están correlacionados y se los trata como independientes, el rango queda subestimado.",
+       "say": "Los cálculos tienen supuestos que conviene hacer explícitos. Las distribuciones de entrada se justifican con datos o analogías.",
        "scene": {
         "t": "bul",
         "k": "Supuestos",
@@ -206,6 +254,22 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Las correlaciones determinan el resultado: si dos parámetros están correlacionados y se los trata como independientes, el rango queda subestimado.",
+       "hl": 1
+      },
+      {
+       "say": "Un rango estrecho puede reflejar exceso de confianza y no certeza.",
+       "hl": 2
+      },
+      {
+       "say": "Se contrasta con un cálculo determinista de control.",
+       "hl": 3
+      },
+      {
+       "say": "Y se documenta qué se supuso y por qué.",
+       "hl": 4
       },
       {
        "say": "Pregunta rápida.",
@@ -229,20 +293,20 @@
      "q": "Las reservas se distinguen de los recursos contingentes porque:",
      "o": [
       "Tienen más petróleo",
-      "El proyecto es comercial",
       "Están más lejos",
+      "El proyecto es comercial",
       "Se miden en otras unidades"
      ],
-     "a": 1,
+     "a": 2,
      "e": "La clase depende de la comercialidad del proyecto."
     },
     {
      "q": "En una distribución de volúmenes recuperables, el P10 es:",
      "o": [
-      "Menor que el P90",
-      "Mayor que el P90",
       "Igual al P90",
-      "No existe"
+      "Mayor que el P90",
+      "No existe",
+      "Menor que el P90"
      ],
      "a": 1,
      "e": "El P90 es el estimado bajo y el P10 el alto."
@@ -250,12 +314,12 @@
     {
      "q": "Las reservas no desarrolladas deben iniciar su desarrollo en:",
      "o": [
-      "Veinte años",
-      "Un año",
       "Cinco años desde su clasificación inicial",
-      "No hay plazo"
+      "No hay plazo",
+      "Veinte años",
+      "Un año"
      ],
-     "a": 2,
+     "a": 0,
      "e": "Es una precisión de PRMS 2018."
     }
    ]
@@ -270,7 +334,7 @@
      "comp": "Agregación de portafolios",
      "cues": [
       {
-       "say": "Cuando se suman varios pozos o campos, hay dos formas de hacerlo. La aritmética suma cada categoría: todos los 1P, todos los 2P. La probabilista combina las distribuciones. Con muchos elementos independientes, el resultado de ambas difiere.",
+       "say": "Cuando se suman varios pozos o campos, hay dos formas de hacerlo. La suma aritmética es simple y transparente: suma cada categoría, todos los 1P, todos los 2P.",
        "scene": {
         "t": "bul",
         "k": "Dos formas de sumar",
@@ -285,6 +349,18 @@
        "hl": 0
       },
       {
+       "say": "La agregación probabilista combina distribuciones.",
+       "hl": 1
+      },
+      {
+       "say": "Con elementos independientes, el rango del portafolio es más estrecho que la suma de rangos.",
+       "hl": 2
+      },
+      {
+       "say": "Por eso la suma de los P90 subestima el P90 del portafolio.",
+       "hl": 3
+      },
+      {
        "say": "Laboratorio. Es un portafolio de pozos con EUR lognormal. Subí la cantidad de pozos y mirá cómo se estrecha el rango relativo del portafolio, y cómo se aleja la suma de los P90 individuales del P90 del total.",
        "scene": {
         "t": "viz",
@@ -297,7 +373,7 @@
        "lab": true
       },
       {
-       "say": "PRMS indica que el método de agregación depende del propósito. Para el reporte, aclara que no se debe incorporar agregación estadística más allá del nivel de campo, propiedad o proyecto. Y la SEC pide en su Ítem 1202 sumas aritméticas simples de las estimaciones por categoría.",
+       "say": "PRMS, en su sección 4.2.1, indica que el método de agregación depende del propósito.",
        "scene": {
         "t": "bul",
         "k": "Reglas de reporte",
@@ -309,7 +385,19 @@
          "La agregación probabilista sirve para planificar y para valuar portafolios"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Para el reporte, aclara que no se debe incorporar agregación estadística más allá del nivel de campo, propiedad o proyecto.",
        "hl": 1
+      },
+      {
+       "say": "La SEC, en la Regulación S-K, Ítem 1202, pide sumas aritméticas simples por categoría.",
+       "hl": 2
+      },
+      {
+       "say": "Y la agregación probabilista sirve para planificar y para valuar portafolios.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -333,7 +421,7 @@
      "comp": "Economía de las reservas",
      "cues": [
       {
-       "say": "Una reserva debe ser comercialmente recuperable. Eso depende de la economía, y por eso del precio y del costo. Un precio más bajo acorta la vida de los pozos y puede quitar volúmenes de la categoría de reservas, que pasan a recursos contingentes.",
+       "say": "Una reserva debe ser comercialmente recuperable. Eso depende de la economía, y por eso del precio y del costo. Se produce hasta el límite económico del pozo o del proyecto.",
        "scene": {
         "t": "bul",
         "k": "Economía",
@@ -347,6 +435,22 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Un precio menor acorta la vida económica.",
+       "hl": 1
+      },
+      {
+       "say": "Los volúmenes que dejan de ser rentables salen de reservas y pasan a recursos contingentes.",
+       "hl": 2
+      },
+      {
+       "say": "Los costos de abandono se incluyen en la economía.",
+       "hl": 3
+      },
+      {
+       "say": "Y las inversiones futuras necesarias deben estar contempladas.",
+       "hl": 4
       },
       {
        "say": "Laboratorio. Es un pozo de ejemplo con declinación. Cambiá el precio, el costo fijo y las regalías, y mirá cómo se mueve el límite económico y el volumen recuperable.",
@@ -367,7 +471,7 @@
        "lab": true
       },
       {
-       "say": "Para la información regulada de la SEC se usa un precio promedio de doce meses y no el precio del día. Eso evita que un pico o una caída puntual cambie las reservas. Los resultados deben documentar la fuente del precio y el método de promedio.",
+       "say": "Para la información regulada de la SEC se usa un precio promedio de doce meses y no el precio del día. Eso evita que un pico o una caída puntual cambie las reservas.",
        "scene": {
         "t": "bul",
         "k": "Precio de referencia",
@@ -380,6 +484,18 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Para la planificación interna se usan escenarios de precio.",
+       "hl": 1
+      },
+      {
+       "say": "Se mide la sensibilidad de las reservas al precio.",
+       "hl": 2
+      },
+      {
+       "say": "Y se documentan la fuente del precio y el método de promedio.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -413,23 +529,23 @@
     {
      "q": "La regla de la SEC para reporte pide:",
      "o": [
-      "Sumas aritméticas simples por categoría",
-      "Agregación estadística total",
       "Solo P50",
-      "Ningún método"
+      "Ningún método",
+      "Sumas aritméticas simples por categoría",
+      "Agregación estadística total"
      ],
-     "a": 0,
+     "a": 2,
      "e": "Está en el Ítem 1202 de la Regulación S-K."
     },
     {
      "q": "Los costos de abandono en PRMS 2018:",
      "o": [
-      "Solo se informan",
-      "No se consideran",
+      "Los paga el Estado siempre",
       "Se incluyen en la economía",
-      "Los paga el Estado siempre"
+      "Solo se informan",
+      "No se consideran"
      ],
-     "a": 2,
+     "a": 1,
      "e": "Es una precisión de 2018."
     }
    ]
@@ -464,7 +580,7 @@
        "lab": true
       },
       {
-       "say": "La auditoría y el control interno protegen la calidad de las cifras. PRMS 2018 incorporó calificaciones para evaluadores y auditores de reservas. Una buena práctica es separar quien estima de quien aprueba, documentar cada decisión y revisar los desvíos sistemáticos.",
+       "say": "La auditoría y el control interno protegen la calidad de las cifras. PRMS 2018 incorporó calificaciones para evaluadores y auditores de reservas.",
        "scene": {
         "t": "bul",
         "k": "Control",
@@ -477,7 +593,23 @@
          "Análisis de los desvíos: las revisiones sistemáticas negativas son una señal"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Una buena práctica es separar quien estima de quien aprueba.",
        "hl": 1
+      },
+      {
+       "say": "Documentar los datos, el método y los supuestos.",
+       "hl": 2
+      },
+      {
+       "say": "Hacer una revisión independiente periódica.",
+       "hl": 3
+      },
+      {
+       "say": "Y analizar los desvíos: las revisiones sistemáticas negativas son una señal.",
+       "hl": 4
       },
       {
        "say": "Pregunta rápida.",
@@ -513,7 +645,7 @@
        }
       },
       {
-       "say": "El caso muestra tres lecciones. Las reservas probadas tienen una definición estricta, y no cumplirla tiene consecuencias financieras y reputacionales. El control interno debe ser independiente de la presión por cumplir metas. Y las revisiones a la baja deben reconocerse a tiempo.",
+       "say": "El caso muestra tres lecciones. Las reservas probadas tienen una definición estricta, que se aplica con rigor y se audita: no cumplirla tiene consecuencias financieras y reputacionales.",
        "scene": {
         "t": "bul",
         "k": "Lecciones",
@@ -525,10 +657,22 @@
          "Las cifras de reservas afectan otras medidas financieras, como los flujos futuros descontados"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "El control interno debe ser independiente de la presión por cumplir metas de reposición.",
+       "hl": 1
+      },
+      {
+       "say": "Las revisiones a la baja deben reconocerse a tiempo y explicarse.",
        "hl": 2
       },
       {
-       "say": "Para cerrar el curso, una lista de verificación. Clasificación por proyecto, volumen con rango y método explícito, agregación acorde al propósito, economía con precio de referencia, conciliación explicada y control independiente. Con esos seis puntos, una cifra de reservas es defendible.",
+       "say": "Y las cifras de reservas afectan otras medidas financieras, como los flujos futuros descontados.",
+       "hl": 3
+      },
+      {
+       "say": "Para cerrar el curso, una lista de verificación. Primero, la clasificación por proyecto y madurez.",
        "scene": {
         "t": "bul",
         "k": "Checklist",
@@ -543,6 +687,26 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Segundo, el rango con método y supuestos explícitos.",
+       "hl": 1
+      },
+      {
+       "say": "Tercero, la agregación acorde al propósito.",
+       "hl": 2
+      },
+      {
+       "say": "Cuarto, la economía con precio de referencia y abandono.",
+       "hl": 3
+      },
+      {
+       "say": "Quinto, la conciliación anual explicada.",
+       "hl": 4
+      },
+      {
+       "say": "Y sexto, el control interno independiente. Con esos seis puntos, una cifra de reservas es defendible.",
+       "hl": 5
       },
       {
        "say": "Pregunta rápida.",
@@ -565,34 +729,34 @@
     {
      "q": "La conciliación de reservas incluye:",
      "o": [
+      "Producción, revisiones, extensiones, compras y ventas",
       "Solo el precio",
       "Solo la producción",
-      "Producción, revisiones, extensiones, compras y ventas",
       "Solo el pozo más grande"
      ],
-     "a": 2,
+     "a": 0,
      "e": "Se parte del inicio y se llega al cierre."
     },
     {
      "q": "El caso de 2004 terminó con una multa de:",
      "o": [
-      "120 millones de dólares",
-      "1 millón de dólares",
       "12 mil millones",
-      "Sin multa"
+      "Sin multa",
+      "1 millón de dólares",
+      "120 millones de dólares"
      ],
-     "a": 0,
+     "a": 3,
      "e": "Más 5 millones para cumplimiento, según la SEC."
     },
     {
      "q": "Una revisión sistemática negativa debe:",
      "o": [
-      "Ignorarse",
-      "Ocultarse",
       "Compensarse con compras",
-      "Analizarse y reconocerse"
+      "Ignorarse",
+      "Analizarse y reconocerse",
+      "Ocultarse"
      ],
-     "a": 3,
+     "a": 2,
      "e": "Es una señal de sesgo en las estimaciones."
     }
    ]
@@ -613,56 +777,56 @@
   {
    "q": "Con N pozos independientes, la suma de los P90 individuales frente al P90 del total:",
    "o": [
-    "No tiene relación",
+    "Es menor que el P90 del total",
     "Es mayor",
     "Es igual siempre",
-    "Es menor que el P90 del total"
+    "No tiene relación"
    ],
-   "a": 3,
+   "a": 0,
    "e": "Se diversifica el riesgo."
   },
   {
    "q": "Para reportar a la SEC, las categorías se suman:",
    "o": [
-    "Aritméticamente",
+    "No se suman",
     "Con Monte Carlo del portafolio",
     "Solo con P50",
-    "No se suman"
+    "Aritméticamente"
    ],
-   "a": 0,
+   "a": 3,
    "e": "El Ítem 1202 pide sumas aritméticas simples."
   },
   {
    "q": "Una tasa de reposición del 70 % indica que:",
    "o": [
-    "Las adiciones netas cubren el 70 % de la producción",
     "Se repuso el 170 %",
     "No hubo producción",
+    "Las adiciones netas cubren el 70 % de la producción",
     "Hay descubrimientos extraordinarios"
    ],
-   "a": 0,
+   "a": 2,
    "e": "Las reservas de la empresa disminuyen."
   },
   {
    "q": "Una caída sostenida de precios puede:",
    "o": [
-    "Eliminar la necesidad de auditoría",
     "Aumentarlas siempre",
+    "Reducir las reservas por límite económico",
     "No afectarlas",
-    "Reducir las reservas por límite económico"
+    "Eliminar la necesidad de auditoría"
    ],
-   "a": 3,
+   "a": 1,
    "e": "Algunos volúmenes dejan de ser comerciales."
   },
   {
    "q": "Qué control reduce el riesgo de sobreestimar reservas:",
    "o": [
-    "Fijar metas sin revisión",
-    "Eliminar la documentación",
     "Separar quien estima de quien aprueba",
-    "Usar solo un método"
+    "Usar solo un método",
+    "Fijar metas sin revisión",
+    "Eliminar la documentación"
    ],
-   "a": 2,
+   "a": 0,
    "e": "Es una buena práctica de control independiente."
   }
  ],

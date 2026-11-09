@@ -361,34 +361,34 @@
     {
      "q": "La presión neta de la fractura es:",
      "o": [
-      "La presión de poro",
       "La presión del fluido menos el esfuerzo mínimo",
       "El esfuerzo máximo",
-      "El peso del lodo"
+      "El peso del lodo",
+      "La presión de poro"
      ],
-     "a": 1,
+     "a": 0,
      "e": "La fractura crece si esa diferencia es positiva."
     },
     {
      "q": "Los pozos horizontales para fracturas transversales se perforan:",
      "o": [
-      "En la dirección del esfuerzo mínimo",
+      "Al azar",
       "En la del esfuerzo máximo",
       "Verticalmente",
-      "Al azar"
+      "En la dirección del esfuerzo mínimo"
      ],
-     "a": 0,
+     "a": 3,
      "e": "Así las fracturas, perpendiculares al esfuerzo mínimo, cortan el pozo en forma transversal."
     },
     {
      "q": "El apuntalante se usa para:",
      "o": [
       "Aumentar el esfuerzo",
-      "Mantener abierta la fractura",
       "Reducir la presión de poro",
+      "Mantener abierta la fractura",
       "Bajar la viscosidad"
      ],
-     "a": 1,
+     "a": 2,
      "e": "Sostiene la fractura abierta luego de que baja la presión."
     }
    ]
@@ -708,23 +708,23 @@
     {
      "q": "El plug and perf consiste en:",
      "o": [
-      "Cerrar el pozo",
       "Perforar sin cañoneo",
+      "Cañonear, fracturar y aislar con tapón cada etapa",
       "Cementar con gel",
-      "Cañonear, fracturar y aislar con tapón cada etapa"
+      "Cerrar el pozo"
      ],
-     "a": 3,
+     "a": 1,
      "e": "Es el método de completación por etapas más usado."
     },
     {
      "q": "Los golpes de fractura entre pozos vecinos se llaman efecto:",
      "o": [
-      "Venturi",
-      "Skin",
+      "Padre-hijo",
       "Coning",
-      "Padre-hijo"
+      "Venturi",
+      "Skin"
      ],
-     "a": 3,
+     "a": 0,
      "e": "Un pozo nuevo se comunica con uno viejo."
     },
     {
@@ -732,10 +732,10 @@
      "o": [
       "Calcular el peso del lodo",
       "Medir la porosidad",
-      "Ver cómo se reparte el fluido entre clústeres",
-      "Medir el pH del agua"
+      "Medir el pH del agua",
+      "Ver cómo se reparte el fluido entre clústeres"
      ],
-     "a": 2,
+     "a": 3,
      "e": "Registra distribución de deformación y temperatura a lo largo del pozo."
     }
    ]
@@ -991,10 +991,10 @@
     {
      "q": "La hiperbólica modificada agrega a la de Arps:",
      "o": [
-      "Un choke",
       "Más agua",
+      "Una corrección de temperatura",
       "Una declinación terminal mínima",
-      "Una corrección de temperatura"
+      "Un choke"
      ],
      "a": 2,
      "e": "Desde cierto punto se pasa a una exponencial con declinación mínima."
@@ -1002,12 +1002,12 @@
     {
      "q": "El tiempo de cambio ts aumenta cuando:",
      "o": [
+      "Di es cero",
       "Dmin baja",
       "Dmin sube",
-      "b es cero",
-      "Di es cero"
+      "b es cero"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Con una declinación terminal menor, la hiperbólica dura más tiempo."
     },
     {
@@ -1028,23 +1028,23 @@
   {
    "q": "Una fractura ya iniciada sigue propagándose cuando:",
    "o": [
-    "La presión cae a cero",
-    "La presión neta es positiva: la del fluido supera el esfuerzo mínimo",
     "La arena es fina",
-    "El pozo está cerrado"
+    "El pozo está cerrado",
+    "La presión cae a cero",
+    "La presión neta es positiva: la del fluido supera el esfuerzo mínimo"
    ],
-   "a": 1,
+   "a": 3,
    "e": "La presión neta debe ser positiva."
   },
   {
    "q": "Una fractura con altura limitada se explica por:",
    "o": [
-    "Barreras de esfuerzo en las capas vecinas",
+    "El diámetro del tubing",
     "El peso del lodo",
-    "La temperatura",
-    "El diámetro del tubing"
+    "Barreras de esfuerzo en las capas vecinas",
+    "La temperatura"
    ],
-   "a": 0,
+   "a": 2,
    "e": "El contraste de esfuerzos frena el crecimiento vertical."
   },
   {
@@ -1062,9 +1062,9 @@
    "q": "Una pendiente positiva y unitaria en Nolte y Smith sugiere:",
    "o": [
     "Arenamiento en la punta",
-    "Crecimiento estable",
     "Fractura cerrada",
-    "Sin presión"
+    "Sin presión",
+    "Crecimiento estable"
    ],
    "a": 0,
    "e": "Es el modo III, de extensión restringida."
@@ -1072,23 +1072,23 @@
   {
    "q": "La hiperbólica con b > 1 sin declinación mínima:",
    "o": [
+    "Da volumen cero",
     "Es exacta",
     "Subestima el volumen",
-    "Sobreestima el volumen",
-    "Da volumen cero"
+    "Sobreestima el volumen"
    ],
-   "a": 2,
+   "a": 3,
    "e": "La cola decrece muy lentamente."
   },
   {
    "q": "El efecto padre-hijo es:",
    "o": [
     "Un tipo de apuntalante",
-    "Interferencia entre un pozo nuevo y uno vecino",
     "Un fluido",
+    "Interferencia entre un pozo nuevo y uno vecino",
     "Una válvula"
    ],
-   "a": 1,
+   "a": 2,
    "e": "Los pozos se comunican por las fracturas."
   }
  ],

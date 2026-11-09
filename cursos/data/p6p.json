@@ -301,34 +301,34 @@
     {
      "q": "La EDT organiza:",
      "o": [
-      "Entregables y paquetes de trabajo",
       "Usuarios",
       "Calendarios",
+      "Entregables y paquetes de trabajo",
       "Costos reales"
      ],
-     "a": 0,
+     "a": 2,
      "e": "Divide el proyecto en entregables."
     },
     {
      "q": "Un calendario de 24 horas, 7 días se usa para:",
      "o": [
-      "Una parada con turnos continuos",
-      "Una oficina",
       "Un contrato",
-      "Un informe"
+      "Una parada con turnos continuos",
+      "Un informe",
+      "Una oficina"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Refleja el trabajo en turnos continuos."
     },
     {
      "q": "Se prefiere la relación:",
      "o": [
-      "Inicio a fin",
       "Fin a inicio",
-      "Fin a fin",
-      "Adelanto negativo"
+      "Adelanto negativo",
+      "Inicio a fin",
+      "Fin a fin"
      ],
-     "a": 1,
+     "a": 0,
      "e": "Es la más simple y clara."
     }
    ]
@@ -605,34 +605,34 @@
     {
      "q": "La tecla F9 en Primavera:",
      "o": [
-      "Planifica el cronograma",
       "Imprime",
       "Cierra el proyecto",
-      "Borra actividades"
+      "Borra actividades",
+      "Planifica el cronograma"
      ],
-     "a": 0,
+     "a": 3,
      "e": "Recalcula fechas y holguras."
     },
     {
      "q": "Una restricción dura:",
      "o": [
-      "Debe evitarse",
-      "Siempre se usa",
       "Calcula costos",
-      "Define la EPS"
+      "Define la EPS",
+      "Debe evitarse",
+      "Siempre se usa"
      ],
-     "a": 0,
+     "a": 2,
      "e": "Tapa problemas de lógica."
     },
     {
      "q": "Una holgura muy grande suele indicar:",
      "o": [
+      "Actividad crítica",
       "Lógica faltante",
       "Buen plan",
-      "Mayor calidad",
-      "Actividad crítica"
+      "Mayor calidad"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Puede faltar una relación."
     }
    ]
@@ -939,23 +939,23 @@
     {
      "q": "¿Qué actividad tiene 5 días de holgura?",
      "o": [
-      "Revisión de válvulas",
-      "Compresor",
       "Pruebas",
-      "Apagado"
+      "Apagado",
+      "Compresor",
+      "Revisión de válvulas"
      ],
-     "a": 0,
+     "a": 3,
      "e": "P8 tiene cinco días."
     },
     {
      "q": "Para acortar el cronograma se actúa sobre:",
      "o": [
-      "La ruta crítica",
+      "El hito final",
       "Cualquier actividad",
-      "La actividad más barata",
-      "El hito final"
+      "La ruta crítica",
+      "La actividad más barata"
      ],
-     "a": 0,
+     "a": 2,
      "e": "Solo reducir la ruta crítica acorta el proyecto."
     }
    ]
@@ -965,21 +965,21 @@
   {
    "q": "La EPS es:",
    "o": [
-    "La estructura de proyectos de la empresa",
     "Una relación",
+    "La estructura de proyectos de la empresa",
     "Un calendario",
     "Un costo"
    ],
-   "a": 0,
+   "a": 1,
    "e": "Enterprise Project Structure."
   },
   {
    "q": "¿Qué indica una holgura total de cero?",
    "o": [
     "Actividad crítica",
-    "Actividad opcional",
     "Actividad terminada",
-    "Actividad sin costo"
+    "Actividad sin costo",
+    "Actividad opcional"
    ],
    "a": 0,
    "e": "No hay margen."
@@ -987,43 +987,43 @@
   {
    "q": "Las relaciones recomendadas son:",
    "o": [
-    "Fin a inicio",
+    "Retrasos negativos",
     "Inicio a fin",
     "Adelantos",
-    "Retrasos negativos"
+    "Fin a inicio"
    ],
-   "a": 0,
+   "a": 3,
    "e": "Son las más claras."
   },
   {
    "q": "¿Qué mide la evaluación de catorce puntos del DCMA?",
    "o": [
-    "La calidad del cronograma",
     "El costo real",
     "El avance físico",
+    "La calidad del cronograma",
     "La productividad"
    ],
-   "a": 0,
+   "a": 2,
    "e": "Es una verificación de calidad del cronograma."
   },
   {
    "q": "En el caso, el compresor define la ruta crítica porque:",
    "o": [
-    "Es el frente más largo",
-    "Es el más caro",
     "Es el más nuevo",
-    "Es el primero"
+    "Es el frente más largo",
+    "Es el primero",
+    "Es el más caro"
    ],
-   "a": 0,
+   "a": 1,
    "e": "Duración de diez días."
   },
   {
    "q": "Al presentar el cronograma aprobado, se debe:",
    "o": [
     "Guardar la línea base",
+    "Eliminar la ruta crítica",
     "Borrar los escenarios",
-    "Cambiar el calendario",
-    "Eliminar la ruta crítica"
+    "Cambiar el calendario"
    ],
    "a": 0,
    "e": "La línea base permite controlar el avance."

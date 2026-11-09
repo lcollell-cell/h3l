@@ -262,21 +262,21 @@
     {
      "q": "La línea base es:",
      "o": [
-      "La copia aprobada del plan",
       "El plan sin aprobar",
+      "La copia aprobada del plan",
       "El costo real",
       "La ruta crítica"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Se usa como referencia."
     },
     {
      "q": "El CPI se calcula como:",
      "o": [
       "EV ÷ AC",
-      "EV ÷ PV",
       "AC ÷ EV",
-      "PV ÷ EV"
+      "PV ÷ EV",
+      "EV ÷ PV"
      ],
      "a": 0,
      "e": "Índice de desempeño de costo."
@@ -284,12 +284,12 @@
     {
      "q": "Una variación de costo negativa indica:",
      "o": [
-      "Gasto mayor que el trabajo realizado",
+      "Nada",
       "Ahorro",
       "Adelanto",
-      "Nada"
+      "Gasto mayor que el trabajo realizado"
      ],
-     "a": 0,
+     "a": 3,
      "e": "EV menor que AC."
     }
    ]
@@ -536,32 +536,32 @@
     {
      "q": "El SPI tiende a uno al final del proyecto:",
      "o": [
-      "Aunque haya terminado tarde",
       "Solo si terminó a tiempo",
       "Nunca",
+      "Aunque haya terminado tarde",
       "Solo con la línea base"
      ],
-     "a": 0,
+     "a": 2,
      "e": "Por eso se complementa."
     },
     {
      "q": "El cronograma ganado se expresa en:",
      "o": [
-      "Unidades de tiempo",
-      "Dólares",
       "Porcentajes de costo",
-      "Horas de recurso"
+      "Unidades de tiempo",
+      "Horas de recurso",
+      "Dólares"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Es su ventaja."
     },
     {
      "q": "El ciclo de control se repite:",
      "o": [
       "Cada período",
+      "Nunca",
       "Una vez",
-      "Al final",
-      "Nunca"
+      "Al final"
      ],
      "a": 0,
      "e": "Es una práctica periódica."
@@ -782,34 +782,34 @@
     {
      "q": "¿Cuál es el CPI del mes 4 del caso?",
      "o": [
-      "0,91",
       "0,88",
       "1,06",
-      "1,00"
+      "1,00",
+      "0,91"
      ],
-     "a": 0,
+     "a": 3,
      "e": "13,2 dividido 14,5."
     },
     {
      "q": "¿Cuál es el SPI?",
      "o": [
-      "0,88",
-      "0,91",
       "1,06",
-      "1,00"
+      "1,00",
+      "0,88",
+      "0,91"
      ],
-     "a": 0,
+     "a": 2,
      "e": "13,2 dividido 15,0."
     },
     {
      "q": "¿Cómo se informa el EAC?",
      "o": [
+      "Como porcentaje solamente",
       "Como un rango",
       "Como una cifra exacta",
-      "No se informa",
-      "Como porcentaje solamente"
+      "No se informa"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Se reconoce la incertidumbre."
     }
    ]
@@ -830,43 +830,43 @@
   {
    "q": "TCPI mayor que 1 indica que:",
    "o": [
-    "Hay que mejorar el desempeño para cumplir el presupuesto",
-    "El proyecto va bien",
     "No hay desvío",
-    "No se necesita acción"
+    "No se necesita acción",
+    "El proyecto va bien",
+    "Hay que mejorar el desempeño para cumplir el presupuesto"
    ],
-   "a": 0,
+   "a": 3,
    "e": "Se necesita más eficiencia."
   },
   {
    "q": "El avance físico es el más confiable cuando:",
    "o": [
-    "Hay cantidades medibles",
+    "Solo se mide el gasto",
     "No hay productos",
-    "El trabajo es intangible",
-    "Solo se mide el gasto"
+    "Hay cantidades medibles",
+    "El trabajo es intangible"
    ],
-   "a": 0,
+   "a": 2,
    "e": "Por ejemplo, kilómetros soldados."
   },
   {
    "q": "El EAC del caso, con el supuesto de que el CPI se mantiene, es de:",
    "o": [
-    "39,6 millones",
     "36 millones",
+    "39,6 millones",
     "43 millones",
     "37,3 millones"
    ],
-   "a": 0,
+   "a": 1,
    "e": "36 dividido 0,91."
   },
   {
    "q": "El cronograma ganado:",
    "o": [
     "Mide el desvío en tiempo",
-    "Mide el costo",
     "Calcula la holgura",
-    "Define el calendario"
+    "Define el calendario",
+    "Mide el costo"
    ],
    "a": 0,
    "e": "Es una medida en unidades de tiempo."
@@ -874,12 +874,12 @@
   {
    "q": "El valor ganado debe complementarse con:",
    "o": [
-    "La ruta crítica",
+    "Un nuevo contrato",
     "El calendario global",
     "La EPS",
-    "Un nuevo contrato"
+    "La ruta crítica"
    ],
-   "a": 0,
+   "a": 3,
    "e": "No distingue actividades críticas."
   }
  ],

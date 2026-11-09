@@ -359,9 +359,9 @@
      "q": "DLIS es un formato de:",
      "o": [
       "Registros de pozo",
-      "Sísmica",
       "Contratos",
-      "Facturas"
+      "Facturas",
+      "Sísmica"
      ],
      "a": 0,
      "e": "Es un formato binario usado en registros de pozo."
@@ -369,9 +369,9 @@
     {
      "q": "Una mediana móvil es útil porque:",
      "o": [
+      "Sustituye al sensor",
       "Reemplaza al experto",
       "Elimina todo ruido",
-      "Sustituye al sensor",
       "Descuenta la tendencia local"
      ],
      "a": 3,
@@ -544,21 +544,21 @@
     {
      "q": "La fuga de información ocurre cuando:",
      "o": [
-      "Datos de la prueba influyen en el entrenamiento",
       "Hay un error de tipeo",
       "Se pierde un archivo",
+      "Datos de la prueba influyen en el entrenamiento",
       "Se borra un modelo"
      ],
-     "a": 0,
+     "a": 2,
      "e": "Por ejemplo, filas del mismo pozo en entrenamiento y prueba."
     },
     {
      "q": "Una forma de reducir el sobreajuste es:",
      "o": [
-      "Agregar más parámetros",
-      "Regularizar o simplificar el modelo",
       "Evaluar solo con el entrenamiento",
-      "Quitar la prueba"
+      "Regularizar o simplificar el modelo",
+      "Quitar la prueba",
+      "Agregar más parámetros"
      ],
      "a": 1,
      "e": "La regularización controla la complejidad."
@@ -566,12 +566,12 @@
     {
      "q": "El modelo de referencia (baseline) sirve para:",
      "o": [
-      "Evitar la validación",
-      "Dar nombre al proyecto",
+      "Saber si el modelo complejo realmente mejora",
       "Reemplazar los datos",
-      "Saber si el modelo complejo realmente mejora"
+      "Evitar la validación",
+      "Dar nombre al proyecto"
      ],
-     "a": 3,
+     "a": 0,
      "e": "Permite medir el aporte real de un modelo más complejo."
     }
    ]
@@ -1034,30 +1034,30 @@
      "o": [
       "Un archivo corrupto",
       "Un cambio de nombre",
-      "Un cambio en la relación entre entrada y resultado",
-      "Una variable faltante"
+      "Una variable faltante",
+      "Un cambio en la relación entre entrada y resultado"
      ],
-     "a": 2,
+     "a": 3,
      "e": "El modelo ya no refleja cómo funciona el proceso."
     },
     {
      "q": "El conjunto de datos del campo Volve fue compartido por:",
      "o": [
-      "El operador del campo",
-      "Una universidad",
       "Un proveedor de software",
-      "Un regulador"
+      "Un regulador",
+      "El operador del campo",
+      "Una universidad"
      ],
-     "a": 0,
+     "a": 2,
      "e": "El operador del campo, con los socios de la licencia, lo publicó en 2018."
     },
     {
      "q": "Una práctica de buen MLOps es:",
      "o": [
-      "Entrenar sin registro",
+      "Borrar los datos viejos",
       "Versionar datos, código y modelos",
-      "Desplegar sin pruebas",
-      "Borrar los datos viejos"
+      "Entrenar sin registro",
+      "Desplegar sin pruebas"
      ],
      "a": 1,
      "e": "Permite reproducir y auditar los resultados."
@@ -1069,12 +1069,12 @@
   {
    "q": "Para detectar atípicos en una serie con tendencia, conviene:",
    "o": [
+    "Descontar la tendencia, por ejemplo con una mediana móvil",
     "Borrar la serie",
     "Usar la media global",
-    "Ignorar los datos",
-    "Descontar la tendencia, por ejemplo con una mediana móvil"
+    "Ignorar los datos"
    ],
-   "a": 3,
+   "a": 0,
    "e": "Se busca respecto de un nivel local."
   },
   {
@@ -1091,12 +1091,12 @@
   {
    "q": "La validación por pozo evita:",
    "o": [
-    "La fuga de información entre entrenamiento y prueba",
+    "La visualización",
     "El uso de datos",
-    "El costo del entrenamiento",
-    "La visualización"
+    "La fuga de información entre entrenamiento y prueba",
+    "El costo del entrenamiento"
    ],
-   "a": 0,
+   "a": 2,
    "e": "Los datos de un mismo pozo se mantienen juntos."
   },
   {
@@ -1113,23 +1113,23 @@
   {
    "q": "La deriva de datos se vigila con:",
    "o": [
-    "Un cambio de color",
     "Monitoreo de la distribución de las entradas",
     "Un nuevo sensor",
-    "Más preguntas"
+    "Más preguntas",
+    "Un cambio de color"
    ],
-   "a": 1,
+   "a": 0,
    "e": "Se comparan los datos de producción con los de entrenamiento."
   },
   {
    "q": "Los modelos de lenguaje en ingeniería deben usarse:",
    "o": [
-    "Con fuentes verificables y revisión humana",
+    "Con datos confidenciales",
     "Sin fuentes",
     "Como única autoridad",
-    "Con datos confidenciales"
+    "Con fuentes verificables y revisión humana"
    ],
-   "a": 0,
+   "a": 3,
    "e": "Pueden generar información inexacta."
   }
  ],
