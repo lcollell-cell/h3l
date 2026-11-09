@@ -80,7 +80,7 @@
        }
       },
       {
-       "say": "Además del VPN se usan otros indicadores. La TIR es la tasa que anula el VPN. El payback es el tiempo para recuperar la inversión. Y el índice de eficiencia de la inversión compara el VPN con el capital invertido.",
+       "say": "Además del VPN se usan otros indicadores. La TIR, que es la tasa interna de retorno, es la tasa que anula el VPN. El payback es el tiempo para recuperar la inversión. Y el índice de eficiencia de la inversión compara el VPN con el capital invertido.",
        "scene": {
         "t": "tbl",
         "k": "Indicadores",
