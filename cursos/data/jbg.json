@@ -921,7 +921,7 @@
   {
    "file": "xlsx/H3L_Errores_Triaje_y_Metricas.xlsx",
    "title": "Registro de errores, triaje y métricas (Excel)",
-   "desc": "Veinticinco errores de ejemplo con severidad, prioridad, fechas, estado y recurrencia; MTTR por severidad, tasa de reapertura, tasa de escape y regla de escalamiento. Datos ilustrativos.",
+   "desc": "Veinticinco errores de ejemplo con severidad, prioridad, fechas, responsable y recurrencia; MTTR por severidad, tasa de reapertura, tasa de escape, errores sin responsable y regla de escalamiento. Los seis primeros son los del triaje del curso. Datos ilustrativos.",
    "task": "Cargá tres errores nuevos de severidad crítica y observá cómo cambia el MTTR. Después bajá el umbral de recurrencia de 3 a 2 y contá cuántos errores quedan escalados."
   }
  ],

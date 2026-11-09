@@ -913,7 +913,7 @@
   {
    "file": "xlsx/H3L_Kanban_Metricas_de_Flujo.xlsx",
    "title": "Métricas de flujo del caso de intervenciones (Excel)",
-   "desc": "Veinte tickets de ejemplo con fechas, tiempo de ciclo, throughput semanal, WIP, percentil 85 y verificación de la ley de Little. Datos ilustrativos.",
+   "desc": "Treinta y seis tickets de ejemplo de las ocho semanas del caso, con fechas, tiempo de ciclo, throughput, WIP, percentil 85, tickets bloqueados y verificación de la ley de Little. Los valores coinciden con la tabla de resultados del curso. Datos ilustrativos.",
    "task": "Cambiá el límite de WIP de Programado de 5 a 3 y estimá con la ley de Little el nuevo tiempo de ciclo. Después sumá un ticket Expedite y mirá el efecto sobre el percentil 85."
   }
  ],
