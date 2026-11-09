@@ -88,7 +88,13 @@ function hideCheckpoint(){var d=$('#cpbox');if(d)d.remove()}
 var keepU=[];
 function stopSpeech(){tok++;keepU=[];if(hasTTS)try{SS.cancel()}catch(e){}clearInterval(timer);timer=null}
 /* trozos de frase: evita el corte de voces largas en Chrome y mantiene las referencias vivas (Safari/Chrome descartan el objeto y no disparan onend) */
-function chunks(t){var m=String(t).match(/[^.!?;:…]+[.!?;:…]*\s*/g)||[t],out=[],cur='';m.forEach(function(s){if(cur&&(cur+s).length>170){out.push(cur);cur=s}else cur+=s});if(cur)out.push(cur);return out.map(function(x){return x.trim()}).filter(Boolean)}
+/* el primer trozo es corto (la voz en linea tarda en sintetizar y empieza a sonar antes); los demas se encolan juntos */
+function chunks(t){var m=String(t).match(/[^.!?;:…]+[.!?;:…]*\s*/g)||[t],u=[],out=[],cur='';
+  m.forEach(function(s){if(s.length>100)s.split(/(?<=,)\s+/).forEach(function(x){u.push(x+' ')});else u.push(s)});
+  u.forEach(function(s){var lim=out.length?150:80;if(cur&&(cur+s).length>lim){out.push(cur);cur=s}else cur+=s});if(cur)out.push(cur);return out.map(function(x){return x.trim()}).filter(Boolean)}
+/* calentamiento: con el primer toque en la pagina se abre la conexion de la voz (silencioso) para que el primer play no espere */
+var warmed=false;function warm(){if(warmed||!hasTTS||!voice||playing)return;warmed=true;try{var u=new SpeechSynthesisUtterance(' ');u.voice=voice;u.lang=voice.lang;u.volume=0;SS.speak(u)}catch(e){}}
+document.addEventListener('pointerdown',warm,{once:true,passive:true});
 function speakCue(){var busy=false;try{busy=!!(hasTTS&&(SS.speaking||SS.pending))}catch(e){}stopSpeech();var L=flat[li],c=L.cues[ci],my=tok;
   timer=setInterval(function(){if(!playing||waiting)return;elapsed+=.2*speed;if(elapsed>HC.cueDur(c)*(ttsOn&&voice?1.5:1)&&!(ttsOn&&voice)){cueEnd(my)}tickUI()},200);
   if(ttsOn&&voice){var parts=chunks(HC.pron(c.tts||c.say,C.lang));
