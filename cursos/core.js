@@ -26,7 +26,7 @@ es:{home:'Sitio H3L',cat:'Cursos',admin:'Administrar',verify:'Verificar certific
  q_lock:'Completá antes todas las lecciones.',exam_lock:'Disponible al completar lecciones y quizzes de módulo.',
  cp_t:'Pregunta rápida',cp_ok:'Correcto',cp_no:'Revisá: ',cp_go:'Seguir',
  xl_get:'Descargar',xl_done:'Marcar como practicado',xl_dn:'Practicado ✓',
- cert_h:'Certificado H3L',cert_p:'Al aprobar el curso podés generar tu certificado. El nombre que escribas aparecerá en el documento y en el código de verificación.',
+ cert_h:'Certificado H3L',cert_p:'Al aprobar el curso podés generar tu certificado. El nombre que escribas aparecerá en el documento y en el código de verificación. Es un certificado de finalización y aprobación de un curso online de H3L.',
  cert_name:'Nombre completo',cert_gen:'Generar certificado',cert_png:'Descargar PNG',cert_li:'Agregar a mi perfil profesional',cert_sh:'Compartir publicación',cert_url:'Enlace de verificación',cert_lock:'Para obtener el certificado necesitás completar todas las lecciones, aprobar los quizzes de módulo y el examen final.',
  cert_note:'La verificación comprueba que el código coincide con los datos del certificado (nombre, curso, fecha y puntaje). Es un control de integridad, no un registro central.',
  prog:'Tu progreso',lbl_ls:'Lecciones',lbl_qz:'Quizzes',lbl_ex:'Examen',
@@ -35,7 +35,7 @@ es:{home:'Sitio H3L',cat:'Cursos',admin:'Administrar',verify:'Verificar certific
  demo:'Los datos numéricos de los laboratorios y de los Excel son ejemplos didácticos, no datos de campos reales.',
  adm_h:'Administración de cursos',adm_p:'Vista de gestión: secciones, lecciones, evaluaciones y archivos. Los cambios de visibilidad y orden se guardan en este navegador y se exportan a catalog.json para publicarlos.',
  adm_exp:'Exportar catalog.json',adm_rst:'Restablecer',pub:'Publicado',hid:'Oculto',ord:'Orden',ttl:'Título',vis:'Visible',
- ver_h:'Verificar certificado H3L',ver_ok:'Certificado válido: los datos coinciden con el código.',ver_bad:'El código no coincide con los datos. El certificado fue alterado o el enlace está incompleto.',ver_none:'Pegá el enlace de verificación del certificado o abrilo desde el QR/enlace.'},
+ ver_h:'Verificar certificado H3L',ver_ok:'Los datos coinciden con el código de verificación. Esto confirma la integridad del documento; no es una titulación oficial ni una acreditación profesional.',ver_bad:'El código no coincide con los datos. El certificado fue alterado o el enlace está incompleto.',ver_none:'Pegá el enlace de verificación del certificado o abrilo desde el QR/enlace.'},
 en:{home:'H3L site',cat:'Courses',admin:'Manage',verify:'Verify certificate',pill:'H3L Online Courses',
  hero_h:'Learn oil & gas and energy transition through real cases',
  hero_p:'Narrated, interactive lessons with labs, maps, practice Excel workbooks, assessments and a verifiable H3L certificate to share on your professional profile. Pause, rewind, read the transcript and take notes.',
@@ -56,7 +56,7 @@ en:{home:'H3L site',cat:'Courses',admin:'Manage',verify:'Verify certificate',pil
  q_lock:'Complete all lessons first.',exam_lock:'Available after completing lessons and module quizzes.',
  cp_t:'Quick question',cp_ok:'Correct',cp_no:'Review: ',cp_go:'Keep going',
  xl_get:'Download',xl_done:'Mark as practiced',xl_dn:'Practiced ✓',
- cert_h:'H3L certificate',cert_p:'When you pass the course you can generate your certificate. The name you type appears on the document and in the verification code.',
+ cert_h:'H3L certificate',cert_p:'When you pass the course you can generate your certificate. The name you type appears on the document and in the verification code. It certifies completion and approval of an online H3L course.',
  cert_name:'Full name',cert_gen:'Generate certificate',cert_png:'Download PNG',cert_li:'Add to my professional profile',cert_sh:'Share a post',cert_url:'Verification link',cert_lock:'To earn the certificate, complete all lessons, pass the module quizzes and the final exam.',
  cert_note:'Verification checks that the code matches the certificate data (name, course, date, score). It is an integrity check, not a central registry.',
  prog:'Your progress',lbl_ls:'Lessons',lbl_qz:'Quizzes',lbl_ex:'Exam',
@@ -65,7 +65,7 @@ en:{home:'H3L site',cat:'Courses',admin:'Manage',verify:'Verify certificate',pil
  demo:'Numeric data in labs and Excel files are teaching examples, not real field data.',
  adm_h:'Course administration',adm_p:'Management view: sections, lessons, assessments and files. Visibility and order changes are saved in this browser and exported to catalog.json for publishing.',
  adm_exp:'Export catalog.json',adm_rst:'Reset',pub:'Published',hid:'Hidden',ord:'Order',ttl:'Title',vis:'Visible',
- ver_h:'Verify an H3L certificate',ver_ok:'Valid certificate: the data matches the code.',ver_bad:'The code does not match the data. The certificate was altered or the link is incomplete.',ver_none:'Open the certificate verification link to check it.'},
+ ver_h:'Verify an H3L certificate',ver_ok:'The data matches the verification code. This confirms the integrity of the document; it is not an official degree or a professional accreditation.',ver_bad:'The code does not match the data. The certificate was altered or the link is incomplete.',ver_none:'Open the certificate verification link to check it.'},
 fr:{home:'Site H3L',cat:'Cours',admin:'Gérer',verify:'Vérifier un certificat',pill:'Cours en ligne H3L',
  hero_h:"Apprenez le pétrole, le gaz et la transition énergétique avec des cas réels",
  hero_p:"Leçons narrées et interactives avec laboratoires, cartes, classeurs Excel d'exercices, évaluations et certificat H3L vérifiable à partager sur votre profil professionnel. Pause, retour en arrière, transcription et notes.",
@@ -86,7 +86,7 @@ fr:{home:'Site H3L',cat:'Cours',admin:'Gérer',verify:'Vérifier un certificat',
  q_lock:"Terminez d'abord toutes les leçons.",exam_lock:'Disponible après les leçons et les quiz de module.',
  cp_t:'Question rapide',cp_ok:'Correct',cp_no:'À revoir : ',cp_go:'Continuer',
  xl_get:'Télécharger',xl_done:'Marquer comme pratiqué',xl_dn:'Pratiqué ✓',
- cert_h:'Certificat H3L',cert_p:"En réussissant le cours, vous pouvez générer votre certificat. Le nom saisi apparaît sur le document et dans le code de vérification.",
+ cert_h:'Certificat H3L',cert_p:"En réussissant le cours, vous pouvez générer votre certificat. Le nom saisi apparaît sur le document et dans le code de vérification. Il atteste la réalisation et la réussite d’un cours en ligne H3L.",
  cert_name:'Nom complet',cert_gen:'Générer le certificat',cert_png:'Télécharger PNG',cert_li:'Ajouter à mon profil professionnel',cert_sh:'Partager une publication',cert_url:'Lien de vérification',cert_lock:"Pour obtenir le certificat : terminer toutes les leçons, réussir les quiz de module et l'examen final.",
  cert_note:"La vérification contrôle que le code correspond aux données (nom, cours, date, score). C'est un contrôle d'intégrité, pas un registre central.",
  prog:'Votre progression',lbl_ls:'Leçons',lbl_qz:'Quiz',lbl_ex:'Examen',
@@ -95,7 +95,7 @@ fr:{home:'Site H3L',cat:'Cours',admin:'Gérer',verify:'Vérifier un certificat',
  demo:"Les données numériques des labos et des Excel sont des exemples pédagogiques, pas des données de champs réels.",
  adm_h:'Administration des cours',adm_p:"Vue de gestion : sections, leçons, évaluations et fichiers. Les changements de visibilité et d'ordre sont enregistrés dans ce navigateur et exportés vers catalog.json.",
  adm_exp:'Exporter catalog.json',adm_rst:'Réinitialiser',pub:'Publié',hid:'Masqué',ord:'Ordre',ttl:'Titre',vis:'Visible',
- ver_h:'Vérifier un certificat H3L',ver_ok:'Certificat valide : les données correspondent au code.',ver_bad:'Le code ne correspond pas aux données : certificat modifié ou lien incomplet.',ver_none:'Ouvrez le lien de vérification du certificat.'},
+ ver_h:'Vérifier un certificat H3L',ver_ok:'Les données correspondent au code de vérification. Cela confirme l’intégrité du document ; ce n’est ni un diplôme officiel ni une accréditation professionnelle.',ver_bad:'Le code ne correspond pas aux données : certificat modifié ou lien incomplet.',ver_none:'Ouvrez le lien de vérification du certificat.'},
 pt:{home:'Site H3L',cat:'Cursos',admin:'Gerenciar',verify:'Verificar certificado',pill:'Cursos Online H3L',
  hero_h:'Aprenda petróleo, gás e transição energética com casos reais',
  hero_p:'Aulas narradas e interativas com laboratórios, mapas, planilhas Excel de prática, avaliações e certificado H3L verificável para compartilhar no seu perfil profissional. Pause, volte, leia a transcrição e faça anotações.',
@@ -116,7 +116,7 @@ pt:{home:'Site H3L',cat:'Cursos',admin:'Gerenciar',verify:'Verificar certificado
  q_lock:'Conclua antes todas as aulas.',exam_lock:'Disponível após concluir aulas e quizzes dos módulos.',
  cp_t:'Pergunta rápida',cp_ok:'Correto',cp_no:'Revise: ',cp_go:'Seguir',
  xl_get:'Baixar',xl_done:'Marcar como praticado',xl_dn:'Praticado ✓',
- cert_h:'Certificado H3L',cert_p:'Ao ser aprovado no curso você pode gerar seu certificado. O nome digitado aparece no documento e no código de verificação.',
+ cert_h:'Certificado H3L',cert_p:'Ao ser aprovado no curso você pode gerar seu certificado. O nome digitado aparece no documento e no código de verificação. Ele atesta a conclusão e a aprovação em um curso online da H3L.',
  cert_name:'Nome completo',cert_gen:'Gerar certificado',cert_png:'Baixar PNG',cert_li:'Adicionar ao meu perfil profissional',cert_sh:'Compartilhar publicação',cert_url:'Link de verificação',cert_lock:'Para obter o certificado: concluir todas as aulas, passar nos quizzes de módulo e no exame final.',
  cert_note:'A verificação confere se o código coincide com os dados (nome, curso, data, pontuação). É um controle de integridade, não um registro central.',
  prog:'Seu progresso',lbl_ls:'Aulas',lbl_qz:'Quizzes',lbl_ex:'Exame',
@@ -125,7 +125,7 @@ pt:{home:'Site H3L',cat:'Cursos',admin:'Gerenciar',verify:'Verificar certificado
  demo:'Os dados numéricos dos laboratórios e dos Excel são exemplos didáticos, não dados de campos reais.',
  adm_h:'Administração de cursos',adm_p:'Visão de gestão: seções, aulas, avaliações e arquivos. Mudanças de visibilidade e ordem ficam neste navegador e são exportadas para catalog.json.',
  adm_exp:'Exportar catalog.json',adm_rst:'Restaurar',pub:'Publicado',hid:'Oculto',ord:'Ordem',ttl:'Título',vis:'Visível',
- ver_h:'Verificar certificado H3L',ver_ok:'Certificado válido: os dados coincidem com o código.',ver_bad:'O código não coincide com os dados: certificado alterado ou link incompleto.',ver_none:'Abra o link de verificação do certificado.'}
+ ver_h:'Verificar certificado H3L',ver_ok:'Os dados coincidem com o código de verificação. Isso confirma a integridade do documento; não é uma titulação oficial nem uma acreditação profissional.',ver_bad:'O código não coincide com os dados: certificado alterado ou link incompleto.',ver_none:'Abra o link de verificação do certificado.'}
 };
 function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,v)}catch(e){}return null}
 var lang=ls('h3l_lang');try{var q=new URLSearchParams(location.search).get('lang');if(q&&LANGS.indexOf(q)>=0){lang=q;ls('h3l_lang',q)}}catch(e){}
@@ -202,21 +202,23 @@ function bumpersEn(c){var I=c.intro,O=c.outro,q=I.questions,st=I.star,mods=c.mod
   var nl=0,nlab=0;c.modules.forEach(function(m){m.lessons.forEach(function(l){nl++;l.cues.forEach(function(q){if(q.lab)nlab++})})});
   var nx=(c.downloads||[]).length;
   if(!O.cues){O.cues=O.recap.map(function(r,i){var o={say:r,hl:i};if(!i){o.say='Let us review the essentials. '+r;o.scene={t:'bul',k:'Take-aways',h:'Key ideas',items:O.recap}}return o});
-   O.cues.push({say:'By finishing this course, you will be able to recognize and apply: '+can.join('; ')+'.',scene:{t:'can',k:'At the end of the course',h:'You will be able to recognize and apply',items:can}});
+   O.cues.push({say:'This is the end of the course. You can now recognize and apply: '+can.join('; ')+'.',scene:{t:'can',k:'What you achieved',h:'You can now recognize and apply',items:can}});
    O.cues.push({say:'Items covered: '+nl+' lessons in '+c.modules.length+' modules'+(nlab?', '+nlab+(nlab===1?' interactive lab':' interactive labs'):'')+(nx?', '+nx+(nx===1?' Excel workbook':' Excel workbooks'):'')+', and one quiz per module plus the final exam.',scene:{t:'seen'}});
    O.cues.push({say:O.phrase+' Thank you for learning with H3L Global Energy. Contact: info@h3lglobalenergy.com',tts:O.phrase+' Thank you for learning with H3L Global Energy. Write to us at info, at, h3l global energy, dot com.',scene:{t:'bout'}})}}
 function bumpers(c){if(c.lang==='en')return bumpersEn(c);var I=c.intro,O=c.outro,q=I.questions,st=I.star,mods=c.modules.map(function(m){return m.title});
   if(!I.cues)I.cues=[{say:'Bienvenido a '+c.title+'. '+I.hook,scene:{t:'bin'},hl:-1},
    {say:'Este curso responde tres preguntas que agregan valor a cualquier equipo técnico. Primera: '+q[0],hl:0},{say:'Segunda: '+q[1],hl:1},{say:'Y tercera: '+q[2],hl:2},
    {say:'Todo se aplica con la metodología STAR sobre un caso real: '+st.caso+'. Primero, la situación. '+st.S,scene:{t:'star'},hl:0},{say:'La tarea. '+st.T,hl:1},{say:'La acción. '+st.A,hl:2},{say:'Y el resultado. '+st.R,hl:3},
-   {say:'El curso tiene '+c.modules.length+' módulos. Cada uno termina con un quiz, '+((c.downloads||[]).length===1?'hay una planilla Excel para practicar':'hay planillas Excel para practicar')+' y un examen final. Al aprobar, obtenés tu certificado H3L, verificable y listo para compartir en tu perfil profesional.',scene:{t:'bul',k:'Ruta del curso',h:'Cómo está organizado',items:mods.concat(['Excel de práctica','Examen final y certificado H3L'])}}];
+   {say:'El curso tiene '+c.modules.length+' módulos. Cada uno termina con un quiz, '+((c.downloads||[]).length===1?'hay una planilla Excel para practicar':'hay planillas Excel para practicar')+' y un examen final. Al aprobar, obtenés tu certificado H3L, con código de verificación, listo para compartir en tu perfil profesional.',scene:{t:'bul',k:'Ruta del curso',h:'Cómo está organizado',items:mods.concat(['Excel de práctica','Examen final y certificado H3L'])}}];
   var can=(O.can&&O.can.length)?O.can:c.competencies.map(function(x){return x.name});
   var nl=0,nlab=0;c.modules.forEach(function(m){m.lessons.forEach(function(l){nl++;l.cues.forEach(function(q){if(q.lab)nlab++})})});
   var nx=(c.downloads||[]).length;
   if(!O.cues){O.cues=O.recap.map(function(r,i){var o={say:r,hl:i};if(!i){o.say='Repasemos lo esencial. '+r;o.scene={t:'bul',k:'Para llevarte',h:'Ideas clave',items:O.recap}}return o});
-   O.cues.push({say:'Al terminar este curso vas a poder reconocer y aplicar: '+can.join('; ')+'.',scene:{t:'can',k:'Al finalizar el curso',h:'Vas a poder reconocer y aplicar',items:can}});
+   O.cues.push({say:'Este es el cierre del curso. Ahora podés reconocer y aplicar: '+can.join('; ')+'.',scene:{t:'can',k:'Lo que lograste',h:'Ahora podés reconocer y aplicar',items:can}});
    O.cues.push({say:'Ítems vistos: '+nl+' lecciones en '+c.modules.length+' módulos'+(nlab?', '+nlab+(nlab===1?' laboratorio interactivo':' laboratorios interactivos'):'')+(nx?', '+nx+(nx===1?' planilla Excel':' planillas Excel'):'')+', y un quiz por módulo más el examen final.',scene:{t:'seen'}});
    O.cues.push({say:O.phrase+' Gracias por aprender con H3L Global Energy. Contacto: info@h3lglobalenergy.com',tts:O.phrase+' Gracias por aprender con H3L Global Energy. Escribinos a info, arroba, h3l global energy, punto com.',scene:{t:'bout'}})}}
+/* pronunciación: solo para la voz (los subtítulos no cambian). Corrige siglas y palabras que las voces leen mal */
+HC.pron=function(t,lang){t=String(t);if(lang==='en')return t.replace(/\bh3l\b/gi,'H 3 L');return t.replace(/\bPVT\b/g,'pe ve te').replace(/\bupstream\b/gi,'ápstrim').replace(/\bh3l\b/gi,'hache tres ele')};
 /* idioma del contenido: si la interfaz está en inglés y existe data/en/<id>.json se usa; si no, español */
 HC.cLang=function(){return HC.lang==='en'?'en':'es'};
 HC.hasEn=function(id){return !!(HC.enList&&HC.enList.indexOf(id)>=0)};

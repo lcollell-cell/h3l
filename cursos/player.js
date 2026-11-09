@@ -76,7 +76,7 @@ function stopSpeech(){tok++;keepU=[];if(hasTTS)try{SS.cancel()}catch(e){}clearIn
 function chunks(t){var m=String(t).match(/[^.!?;:…]+[.!?;:…]*\s*/g)||[t],out=[],cur='';m.forEach(function(s){if(cur&&(cur+s).length>170){out.push(cur);cur=s}else cur+=s});if(cur)out.push(cur);return out.map(function(x){return x.trim()}).filter(Boolean)}
 function speakCue(){var busy=false;try{busy=!!(hasTTS&&(SS.speaking||SS.pending))}catch(e){}stopSpeech();var L=flat[li],c=L.cues[ci],my=tok;
   timer=setInterval(function(){if(!playing||waiting)return;elapsed+=.2*speed;if(elapsed>HC.cueDur(c)*(ttsOn&&voice?1.5:1)&&!(ttsOn&&voice)){cueEnd(my)}tickUI()},200);
-  if(ttsOn&&voice){var parts=chunks(c.tts||c.say);
+  if(ttsOn&&voice){var parts=chunks(HC.pron(c.tts||c.say,C.lang));
     var go=function(){if(tok!==my)return;parts.forEach(function(txt,k){var u=new SpeechSynthesisUtterance(txt);try{u.voice=voice}catch(e){}u.lang=voice.lang;u.rate=Math.min(2,speed);keepU.push(u);
       if(k===parts.length-1)u.onend=function(){if(tok===my)cueEnd(my)};
       u.onerror=function(e){if(tok===my&&e.error!=='interrupted'&&e.error!=='canceled'){ttsOn=false;updateUI()}};

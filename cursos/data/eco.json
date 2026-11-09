@@ -47,9 +47,9 @@
  "intro": {
   "hook": "Vamos a aprender a decidir con números cuando casi todo es incierto: el precio, el volumen, el costo y hasta el resultado del pozo.",
   "questions": [
-   "¿Cómo se sabe si un proyecto upstream vale la pena?",
-   "¿Qué variable mueve más el resultado y cuál conviene cuidar?",
-   "¿Por qué un pozo con valor esperado positivo puede ser mala idea, y un portafolio no?"
+   "¿Cómo se evalúa la viabilidad económica de un proyecto upstream?",
+   "¿Qué variable tiene mayor sensibilidad sobre el resultado y cuál conviene gestionar?",
+   "¿Por qué un pozo con valor esperado positivo puede no ser viable por su riesgo, y un portafolio de pozos sí?"
   ],
   "star": {
    "caso": "Kashagan (Kazajistán): tiempos y costos de un megaproyecto",

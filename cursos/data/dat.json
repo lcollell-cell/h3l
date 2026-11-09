@@ -374,7 +374,7 @@
        "lab": true
       },
       {
-       "say": "En datos de pozos hay una trampa frecuente, la fuga de información. Si se mezclan datos de un mismo pozo entre entrenamiento y prueba, el modelo parece mejor de lo que es. Hay que validar por pozo, o por campo, y siempre comparar con un modelo simple de referencia.",
+       "say": "En datos de pozos hay un error metodológico frecuente, la fuga de información. Si se mezclan datos de un mismo pozo entre entrenamiento y prueba, el modelo parece mejor de lo que es. Hay que validar por pozo, o por campo, y siempre comparar con un modelo simple de referencia.",
        "scene": {
         "t": "bul",
         "k": "Validación",

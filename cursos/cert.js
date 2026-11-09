@@ -33,6 +33,6 @@ C.draw=function(canvas,d,title,code,mods){var W=1754,H=1240,ctx=canvas.getContex
     ctx.fillStyle='#fff';ctx.textAlign='center';ctx.font='700 40px Montserrat, sans-serif';ctx.fillText('H3L',cx,cy+4);ctx.font='700 15px Montserrat, sans-serif';ctx.fillText('APROBADO',cx,cy+30);ctx.textAlign='left';
     ctx.fillStyle='#1B2944';ctx.font='700 22px Montserrat, sans-serif';ctx.fillText('Código de verificación: '+code,250,H-210);
     ctx.fillStyle='#5b6b86';ctx.font='500 18px Montserrat, sans-serif';var vu=C.verifyUrl(d,code);ctx.fillText('Verificar: '+(vu.length>120?C.base()+'verificar.html (con el enlace del certificado)':vu),250,H-176);
-    ctx.font='500 17px Montserrat, sans-serif';wrapText(ctx,'Certificado de capacitación emitido por H3L Global Energy. Acredita la finalización de un curso online y no constituye una habilitación profesional ni una acreditación oficial.',250,H-134,1300,24);
+    ctx.font='500 20px Montserrat, sans-serif';wrapText(ctx,'Certificado de capacitación emitido por H3L Global Energy. Acredita la finalización de un curso online y no constituye una habilitación profesional ni una acreditación oficial.',250,H-134,1300,28);
     ctx.fillStyle='#17755A';ctx.font='700 19px Montserrat, sans-serif';ctx.fillText('info@h3lglobalenergy.com  ·  www.h3lglobalenergy.com',250,H-78)})};
 })();
