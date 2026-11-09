@@ -65,7 +65,7 @@
      "comp": "Fundamentos del riesgo de cronograma",
      "cues": [
       {
-       "say": "Un cronograma determinista tiene una sola fecha, pero cada duración es una estimación incierta. No dice con qué probabilidad se cumplirá la fecha final. Las estimaciones suelen ser optimistas, y varios caminos casi críticos agravan el problema.",
+       "say": "Un cronograma determinista tiene una sola fecha, pero cada duración es una estimación puntual, aunque sea incierta.",
        "scene": {
         "t": "bul",
         "k": "Problema",
@@ -76,10 +76,23 @@
          "Las estimaciones suelen ser optimistas",
          "Varios caminos casi críticos hacen más probable el atraso"
         ]
-       }
+       },
+       "hl": 0
       },
       {
-       "say": "Cuando varios caminos convergen, el fin lo marca el más lento. En promedio, ese máximo es mayor que el de los valores más probables. MacCrimmon y Ryavec lo señalaron en mil novecientos sesenta y cuatro: PERT subestima el plazo cuando hay caminos paralelos.",
+       "say": "No dice con qué probabilidad se cumplirá la fecha final.",
+       "hl": 1
+      },
+      {
+       "say": "Las estimaciones suelen ser optimistas.",
+       "hl": 2
+      },
+      {
+       "say": "Y varios caminos casi críticos hacen más probable el atraso.",
+       "hl": 3
+      },
+      {
+       "say": "Cuando varios caminos convergen, el fin lo marca el más lento.",
        "scene": {
         "t": "bul",
         "k": "Sesgo de convergencia",
@@ -90,7 +103,20 @@
          "MacCrimmon y Ryavec (1964) mostraron que PERT subestima el plazo",
          "Por eso la fecha determinista suele tener baja confianza"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "En promedio, ese máximo es mayor que el máximo de los valores más probables.",
+       "hl": 1
+      },
+      {
+       "say": "MacCrimmon y Ryavec lo señalaron en mil novecientos sesenta y cuatro: PERT subestima el plazo cuando hay caminos paralelos.",
+       "hl": 2
+      },
+      {
+       "say": "Por eso la fecha determinista suele tener baja confianza.",
+       "hl": 3
       },
       {
        "say": "Hay tres enfoques. El colchón fijo suma un porcentaje sin saber dónde ni cuánto. PERT usa tres estimaciones pero ignora la convergencia de caminos. La simulación de Monte Carlo calcula miles de cronogramas posibles y resume los resultados.",
@@ -178,7 +204,7 @@
        }
       },
       {
-       "say": "Con los tres puntos se arma una distribución, triangular o beta. Casi siempre la cola derecha es más larga que la izquierda, porque las demoras pueden ser mayores que los adelantos. Hay que evitar contar dos veces el mismo riesgo.",
+       "say": "Con los tres puntos se arma una distribución. La triangular es simple y usa los tres valores.",
        "scene": {
         "t": "bul",
         "k": "Distribuciones",
@@ -189,7 +215,20 @@
          "La cola derecha suele ser más larga que la izquierda",
          "Los rangos deben incluir el impacto de riesgos conocidos, sin duplicarlos"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "La PERT o beta da más peso al valor más probable.",
+       "hl": 1
+      },
+      {
+       "say": "Casi siempre la cola derecha es más larga que la izquierda, porque las demoras pueden ser mayores que los adelantos.",
+       "hl": 2
+      },
+      {
+       "say": "Y los rangos deben incluir el impacto de riesgos conocidos, evitando contar dos veces el mismo riesgo.",
+       "hl": 3
       },
       {
        "say": "Los eventos de riesgo se registran con su probabilidad, su impacto en días y la actividad afectada. En la simulación, cada evento ocurre en una proporción de las iteraciones y suma su impacto cuando ocurre.",
@@ -361,7 +400,7 @@
        }
       },
       {
-       "say": "La simulación entrega la curva de probabilidad acumulada de la fecha final, con percentiles como el P50 y el P80, el índice de criticidad de cada actividad y la sensibilidad, que muestra cuáles influyen más en el plazo.",
+       "say": "La simulación entrega la curva de probabilidad acumulada de la fecha final.",
        "scene": {
         "t": "bul",
         "k": "Resultados",
@@ -372,10 +411,23 @@
          "Índice de criticidad: cuántas veces una actividad es crítica",
          "Sensibilidad: qué actividades más influyen en el plazo total"
         ]
-       }
+       },
+       "hl": 0
       },
       {
-       "say": "Para que el análisis sea creíble, se audita la lógica antes de simular, se correlacionan las actividades que dependen del mismo factor, como el contratista, y se registran los supuestos. Hulett y la práctica AACE cincuenta y siete R cero nueve recomiendan este procedimiento.",
+       "say": "Con percentiles: P10, P50, P80 y P90.",
+       "hl": 1
+      },
+      {
+       "say": "El índice de criticidad: cuántas veces una actividad es crítica.",
+       "hl": 2
+      },
+      {
+       "say": "Y la sensibilidad, que muestra qué actividades más influyen en el plazo total.",
+       "hl": 3
+      },
+      {
+       "say": "Para que el análisis sea creíble, se audita la lógica del cronograma antes de simular.",
        "scene": {
         "t": "bul",
         "k": "Buenas prácticas",
@@ -393,7 +445,20 @@
          "k": "correlación",
          "n": "Relación entre dos variables: si una actividad se demora, es más probable que otra relacionada también lo haga."
         }
-       ]
+       ],
+       "hl": 0
+      },
+      {
+       "say": "Se correlacionan las actividades que dependen del mismo factor, como el clima o el contratista.",
+       "hl": 1
+      },
+      {
+       "say": "Se entrevista a expertos y se registran los supuestos.",
+       "hl": 2
+      },
+      {
+       "say": "Y se repite el análisis cuando cambia el cronograma. Hulett y la práctica AACE cincuenta y siete R cero nueve recomiendan este procedimiento.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -417,7 +482,7 @@
      "comp": "Herramientas",
      "cues": [
       {
-       "say": "El ecosistema de Primavera ofrece un registro de riesgos en P6, con probabilidad, impacto y asignación a actividades. Para la simulación se integra con Primavera Risk Analysis. En casos pequeños se puede usar una planilla con fórmulas aleatorias.",
+       "say": "El ecosistema de Primavera ofrece un registro de riesgos en P6, con probabilidad, impacto y asignación a actividades.",
        "scene": {
         "t": "bul",
         "k": "Herramientas",
@@ -428,7 +493,20 @@
          "Planillas con fórmulas aleatorias para casos pequeños",
          "Otras aplicaciones de riesgo de cronograma que importan el archivo del plan"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Para la simulación se integra con Oracle Primavera Risk Analysis.",
+       "hl": 1
+      },
+      {
+       "say": "En casos pequeños se pueden usar planillas con fórmulas aleatorias.",
+       "hl": 2
+      },
+      {
+       "say": "Y otras aplicaciones de riesgo de cronograma importan el archivo del plan.",
+       "hl": 3
       },
       {
        "say": "El flujo de trabajo tiene cinco pasos: auditar y exportar el cronograma, cargar rangos y riesgos, simular, analizar criticidad y sensibilidad, y definir la reserva y las acciones. Cada paso deja un documento que respalda la decisión.",
@@ -471,7 +549,7 @@
        }
       },
       {
-       "say": "La reserva de tiempo es la diferencia entre la fecha con la confianza elegida, por ejemplo el P80, y la fecha determinista. Tiene un responsable y se gestiona de forma visible. No se reparte como colchón escondido en cada actividad.",
+       "say": "La reserva de tiempo es la fecha con la confianza elegida, por ejemplo el P80, menos la fecha determinista.",
        "scene": {
         "t": "bul",
         "k": "Reserva",
@@ -482,7 +560,20 @@
          "La reserva se asigna a un responsable y se gestiona de forma visible",
          "No se reparte como colchón dentro de las actividades"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "La confianza la define la política de la empresa.",
+       "hl": 1
+      },
+      {
+       "say": "La reserva se asigna a un responsable y se gestiona de forma visible.",
+       "hl": 2
+      },
+      {
+       "say": "No se reparte como colchón escondido en cada actividad.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -547,7 +638,7 @@
      "comp": "Caso del pad de seis pozos",
      "cues": [
       {
-       "say": "Presentamos el caso, un ejemplo didáctico con datos ilustrativos. Se desarrolla un pad de seis pozos en un yacimiento no convencional. El cronograma determinista dice doscientos ochenta días, y la dirección pide una fecha con ochenta por ciento de confianza.",
+       "say": "Presentamos el caso, un ejemplo didáctico con datos ilustrativos. Se desarrolla un pad de seis pozos en un yacimiento no convencional. Las actividades: permisos, locación, movilización, perforación, terminación, instalaciones y puesta en producción.",
        "scene": {
         "t": "bul",
         "k": "Contexto",
@@ -558,7 +649,20 @@
          "La dirección pide una fecha comprometida con confianza del 80 %",
          "Datos ilustrativos"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "El cronograma determinista dice doscientos ochenta días.",
+       "hl": 1
+      },
+      {
+       "say": "La dirección pide una fecha comprometida con ochenta por ciento de confianza.",
+       "hl": 2
+      },
+      {
+       "say": "Los datos son ilustrativos.",
+       "hl": 3
       },
       {
        "say": "Paso uno, cargar el modelo. El camino de perforación y el de instalaciones parten de la locación y convergen en la puesta en producción. Con los valores más probables, el camino de instalaciones domina y marca doscientos ochenta días.",
@@ -699,7 +803,7 @@
        }
       },
       {
-       "say": "El camino de instalaciones, que es crítico en el cronograma determinista, lo es solo en cuarenta y cuatro por ciento de las iteraciones. El de perforación y terminación lo es en el resto. Las actividades con mayor influencia son las instalaciones, la perforación y la terminación.",
+       "say": "El camino de instalaciones, crítico en el cronograma determinista, lo es solo en cerca de cuarenta y cuatro por ciento de las iteraciones.",
        "scene": {
         "t": "bul",
         "k": "Criticidad",
@@ -710,10 +814,23 @@
          "Mayor influencia en el plazo: instalaciones (F), perforación (D) y terminación (E)",
          "El camino determinista no es siempre el crítico"
         ]
-       }
+       },
+       "hl": 0
       },
       {
-       "say": "La dirección compromete la fecha con ochenta por ciento de confianza, trescientos diez días, y no los doscientos ochenta. La reserva de treinta días queda a cargo de un responsable. Además se adelanta la compra de equipos críticos y se asegura el equipo de fractura.",
+       "say": "El de perforación y terminación lo es en cerca de cincuenta y seis por ciento, el resto.",
+       "hl": 1
+      },
+      {
+       "say": "Las actividades con mayor influencia en el plazo son las instalaciones, la perforación y la terminación.",
+       "hl": 2
+      },
+      {
+       "say": "El camino determinista no es siempre el crítico.",
+       "hl": 3
+      },
+      {
+       "say": "La dirección compromete trescientos diez días, el P80, y no los doscientos ochenta.",
        "scene": {
         "t": "bul",
         "k": "Decisión",
@@ -724,10 +841,23 @@
          "Acciones: adelantar la compra de equipos críticos de las instalaciones y asegurar la disponibilidad del equipo de fractura",
          "Repetir la simulación cuando cambie el cronograma"
         ]
-       }
+       },
+       "hl": 0
       },
       {
-       "say": "Las lecciones. Una fecha determinista puede tener una probabilidad muy baja. La simulación muestra dónde actuar, y no solo cuánto se puede demorar. La reserva se gestiona de forma visible. Y los resultados valen lo que valen los datos de entrada.",
+       "say": "La reserva de treinta días queda a cargo de un responsable único.",
+       "hl": 1
+      },
+      {
+       "say": "Además, se adelanta la compra de equipos críticos de las instalaciones y se asegura la disponibilidad del equipo de fractura.",
+       "hl": 2
+      },
+      {
+       "say": "Y se repite la simulación cuando cambie el cronograma.",
+       "hl": 3
+      },
+      {
+       "say": "Las lecciones. Una fecha determinista puede tener una probabilidad muy baja.",
        "scene": {
         "t": "bul",
         "k": "Lecciones",
@@ -738,7 +868,20 @@
          "La reserva se gestiona de forma visible",
          "Los resultados valen lo que valen los datos de entrada"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "La simulación muestra dónde actuar, y no solo cuánto se puede demorar.",
+       "hl": 1
+      },
+      {
+       "say": "La reserva se gestiona de forma visible.",
+       "hl": 2
+      },
+      {
+       "say": "Y los resultados valen lo que valen los datos de entrada.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",

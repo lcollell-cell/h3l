@@ -88,7 +88,7 @@
        }
       },
       {
-       "say": "Dos conclusiones prácticas. La caída crece casi con el cuadrado del caudal, así que duplicar el caudal cuadruplica la presión necesaria. Y cae muy fuerte al aumentar el diámetro, porque la velocidad baja con el cuadrado del diámetro. Por eso conviene dimensionar un ducto pensando en el crecimiento futuro del caudal.",
+       "say": "Dos conclusiones prácticas. La caída de presión crece casi con el cuadrado del caudal: duplicar el caudal multiplica por cuatro la caída, aproximadamente.",
        "scene": {
         "t": "bul",
         "k": "Diseño",
@@ -101,6 +101,18 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Y cae muy fuerte al aumentar el diámetro, porque la velocidad baja con el cuadrado del diámetro. Un diámetro mayor reduce mucho la caída y la potencia.",
+       "hl": 1
+      },
+      {
+       "say": "La viscosidad pesa más en flujo laminar, a caudales bajos.",
+       "hl": 2
+      },
+      {
+       "say": "Por eso un ducto se diseña con el caudal futuro y con margen.",
+       "hl": 3
       },
       {
        "say": "Laboratorio. Cambiá el caudal, el diámetro, la longitud, la viscosidad y la densidad. Mirá la caída de presión y la potencia hidráulica, y comparás tres diámetros en la misma gráfica. No hay desniveles en este modelo.",
@@ -134,7 +146,7 @@
      "comp": "Gasoductos y capacidad",
      "cues": [
       {
-       "say": "Un gasoducto transporta gas comprimido. La capacidad depende de la presión de entrada y de salida, del diámetro y de la longitud. Las ecuaciones de flujo de gas, como la de Weymouth, muestran que la capacidad crece aproximadamente con el diámetro elevado a ocho tercios. Un diámetro un poco mayor aumenta mucho la capacidad.",
+       "say": "Un gasoducto transporta gas comprimido. La capacidad depende de la presión de entrada y de la presión mínima de entrega.",
        "scene": {
         "t": "bul",
         "k": "Capacidad",
@@ -147,6 +159,18 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Del diámetro: según las ecuaciones de flujo de gas, como la de Weymouth, la capacidad crece aproximadamente con el diámetro elevado a ocho tercios. Un diámetro un poco mayor aumenta mucho la capacidad.",
+       "hl": 1
+      },
+      {
+       "say": "De la longitud: más largo, menos capacidad.",
+       "hl": 2
+      },
+      {
+       "say": "Y se sostiene la presión con estaciones de compresión intermedias.",
+       "hl": 3
       },
       {
        "say": "El gas en un gasoducto es compresible y el ducto almacena gas por su propio volumen. Ese almacenamiento, llamado empaquetamiento de línea o linepack, amortigua las variaciones de la demanda a lo largo del día. Un operador usa el linepack para atender picos sin parar la entrada de gas.",
@@ -185,7 +209,7 @@
        }
       },
       {
-       "say": "La consecuencia comercial es que la capacidad de transporte es un activo escaso. Un productor sin capacidad contratada no puede llevar su gas al mercado, aunque lo tenga. Por eso el transporte se planifica junto con el desarrollo del campo, y los cuellos de botella determinan el precio en cada punto de la red.",
+       "say": "La consecuencia comercial es que la capacidad de transporte es un activo escaso. Sin capacidad no hay venta, aunque haya gas.",
        "scene": {
         "t": "bul",
         "k": "Efecto en el negocio",
@@ -198,6 +222,18 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Los cuellos de botella separan los precios regionales: determinan el precio en cada punto de la red.",
+       "hl": 1
+      },
+      {
+       "say": "Ampliar suma costo y plazo.",
+       "hl": 2
+      },
+      {
+       "say": "Por eso el transporte se planifica junto con el desarrollo del campo.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -262,7 +298,7 @@
      "comp": "Medición fiscal",
      "cues": [
       {
-       "say": "La medición fiscal es la que se usa para cobrar, pagar regalías, impuestos o transferir propiedad. Aquí la exactitud tiene valor económico directo. Cada punto de transferencia de custodia tiene un medidor, un procedimiento de cálculo y una verificación periódica acordados entre las partes y la autoridad.",
+       "say": "La medición fiscal es la que se usa para cobrar, pagar regalías, impuestos o transferir propiedad. Aquí la exactitud tiene valor económico directo. Sirve para facturar la venta o el transporte.",
        "scene": {
         "t": "bul",
         "k": "Medición fiscal",
@@ -275,6 +311,18 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Para calcular regalías e impuestos.",
+       "hl": 1
+      },
+      {
+       "say": "Para transferir la custodia entre empresas.",
+       "hl": 2
+      },
+      {
+       "say": "Y para conciliar balances entre puntos de medición. Cada punto tiene un medidor, un procedimiento de cálculo y una verificación periódica acordados entre las partes y la autoridad.",
+       "hl": 3
       },
       {
        "say": "Hay varios tipos de medidor, y cada uno responde a un fluido y a un rango. La placa de orificio se rige por la norma AGA 3, la turbina por la AGA 7 y el medidor ultrasónico por la AGA 9. En líquidos se usan medidores de desplazamiento positivo, turbinas, Coriolis o ultrasónicos, con la serie API MPMS como referencia, y calibración con probadores.",
@@ -313,7 +361,7 @@
        }
       },
       {
-       "say": "Un punto de medición fiscal de líquidos se compone de un medidor, un probador que lo verifica, instrumentos de temperatura y presión, y un sistema para tomar muestras y medir el contenido de agua y sedimentos. El volumen bruto se corrige a condiciones estándar de temperatura y presión antes de facturar.",
+       "say": "Un punto de medición fiscal de líquidos se compone de un medidor y un probador que lo verifica.",
        "scene": {
         "t": "bul",
         "k": "Un punto de medición",
@@ -327,6 +375,22 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "De instrumentos de temperatura y presión: el volumen bruto se corrige a condiciones estándar antes de facturar.",
+       "hl": 1
+      },
+      {
+       "say": "De un muestreador, para medir el agua y los sedimentos.",
+       "hl": 2
+      },
+      {
+       "say": "De un computador de caudal con trazabilidad.",
+       "hl": 3
+      },
+      {
+       "say": "Y de verificación y calibración periódicas.",
+       "hl": 4
       },
       {
        "say": "Pregunta rápida.",
@@ -370,7 +434,7 @@
        "lab": true
       },
       {
-       "say": "El balance de masa cierra el círculo. Se compara lo que entra con lo que sale de un sistema y se analiza la diferencia. Una diferencia pequeña y estable es normal; una diferencia que crece señala un medidor descalibrado, una fuga o un error de cálculo. La conciliación periódica es la herramienta de detección.",
+       "say": "El balance de masa cierra el círculo. Se calculan las entradas menos las salidas por período.",
        "scene": {
         "t": "bul",
         "k": "Balance",
@@ -383,6 +447,18 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "La diferencia se compara con la incertidumbre combinada. Una diferencia pequeña y estable es normal.",
+       "hl": 1
+      },
+      {
+       "say": "Una tendencia creciente exige investigar: puede ser un medidor descalibrado, una fuga o un error de cálculo.",
+       "hl": 2
+      },
+      {
+       "say": "Y se concilia con otros puntos de la red. La conciliación periódica es la herramienta de detección.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -447,7 +523,7 @@
      "comp": "Almacenamiento y contratos",
      "cues": [
       {
-       "say": "Un tanque de almacenamiento cumple tres funciones. Amortiguar las diferencias entre producción y despacho, dar tiempo para medir y controlar la calidad, y permitir mezclar calidades. Un terminal agrupa tanques, bombas, medición y brazos de carga, y es el punto donde el producto cambia de ducto a buque, camión o tren.",
+       "say": "Un tanque de almacenamiento cumple varias funciones. Amortigua las diferencias entre producción y despacho.",
        "scene": {
         "t": "bul",
         "k": "Almacenamiento",
@@ -460,6 +536,18 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Da tiempo para medir y controlar la calidad antes de entregar.",
+       "hl": 1
+      },
+      {
+       "say": "Permite mezclar calidades para cumplir la especificación.",
+       "hl": 2
+      },
+      {
+       "say": "Y permite programar buques y camiones. Un terminal agrupa tanques, bombas, medición y brazos de carga: es el punto donde el producto cambia de ducto a buque, camión o tren.",
+       "hl": 3
       },
       {
        "say": "La programación coordina las entregas. En ductos de varios productos, los lotes se envían uno detrás del otro y en el contacto se forma una interfase que se corta o se reprocesa. Se programan volúmenes, ventanas de buques y capacidad de tanques, y se evitan las demoras que cuestan dinero.",
@@ -497,7 +585,7 @@
        }
       },
       {
-       "say": "En las pérdidas por evaporación, los tanques de techo fijo emiten vapores de hidrocarburos, que son valor perdido y emisiones. Los tanques de techo flotante y los sistemas de recuperación de vapores reducen ese efecto. Es un punto de contacto con el curso de gestión de emisiones.",
+       "say": "En las pérdidas por evaporación, los tanques de techo fijo emiten vapores de hidrocarburos, que son valor perdido y emisiones.",
        "scene": {
         "t": "bul",
         "k": "Pérdidas",
@@ -510,6 +598,18 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Los tanques de techo flotante y los sistemas de recuperación de vapores reducen ese efecto.",
+       "hl": 1
+      },
+      {
+       "say": "Se miden las pérdidas.",
+       "hl": 2
+      },
+      {
+       "say": "Y hay una relación con el inventario de emisiones: es un punto de contacto con el curso de gestión de emisiones.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -533,7 +633,7 @@
      "comp": "Integridad y ciberseguridad",
      "cues": [
       {
-       "say": "La integridad de un ducto se gestiona como un ciclo. Se identifican las amenazas, como la corrosión, los daños de terceros o los defectos de fabricación, se inspecciona con herramientas que viajan dentro de la línea, se evalúan los defectos y se reparan según su criticidad. La presión máxima de operación admisible se revisa con esa información.",
+       "say": "La integridad de un ducto se gestiona como un ciclo. Primero, identificar las amenazas: corrosión, daños de terceros, fatiga y defectos de fabricación.",
        "scene": {
         "t": "bul",
         "k": "Integridad",
@@ -549,6 +649,22 @@
        "hl": 0
       },
       {
+       "say": "Segundo, la inspección en línea con herramientas inteligentes, que viajan dentro de la línea.",
+       "hl": 1
+      },
+      {
+       "say": "Tercero, evaluar los defectos con criterios de aptitud para el servicio.",
+       "hl": 2
+      },
+      {
+       "say": "Cuarto, reparar, o reducir la presión máxima de operación admisible, según la criticidad.",
+       "hl": 3
+      },
+      {
+       "say": "Y quinto, repetir con una frecuencia basada en el riesgo.",
+       "hl": 4
+      },
+      {
        "say": "Los sistemas de control, los SCADA, y los sistemas administrativos están cada vez más conectados. Una intrusión en la red administrativa puede afectar la operación, aunque no toque los controles. En mayo de 2021, un ataque de ransomware afectó a la empresa que operaba un gran sistema de ductos de combustibles en Estados Unidos, y la empresa suspendió preventivamente las operaciones de sus ductos.",
        "scene": {
         "t": "case",
@@ -561,7 +677,7 @@
        }
       },
       {
-       "say": "La protección se organiza en capas. Segmentar las redes de control de las administrativas, limitar los accesos remotos, mantener copias de respaldo fuera de línea, aplicar autenticación multifactor, actualizar los sistemas, formar a las personas y ensayar el plan de respuesta. Una buena práctica es poder operar en modo manual durante un incidente.",
+       "say": "La protección se organiza en capas. Primero, separar la red de control de la red administrativa.",
        "scene": {
         "t": "bul",
         "k": "Ciberseguridad",
@@ -575,6 +691,22 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Controlar los accesos remotos y aplicar autenticación multifactor.",
+       "hl": 1
+      },
+      {
+       "say": "Mantener copias de respaldo probadas y fuera de línea.",
+       "hl": 2
+      },
+      {
+       "say": "Actualizar los sistemas y gestionar las vulnerabilidades.",
+       "hl": 3
+      },
+      {
+       "say": "Y tener un plan de respuesta, con operación manual de contingencia: una buena práctica es poder operar en modo manual durante un incidente.",
+       "hl": 4
       },
       {
        "say": "Pregunta rápida.",

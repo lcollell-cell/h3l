@@ -147,7 +147,7 @@
        }
       },
       {
-       "say": "El enfoque viene de Gilbert, de 1954, y se difundió con el trabajo de Mach, Proaño y Brown, de 1979. Permite ver el efecto de cada componente y decidir dónde conviene intervenir.",
+       "say": "El enfoque viene de Gilbert, de 1954, y se difundió con el trabajo de Mach, Proaño y Brown, de 1979. Permite ver cuánto produce el pozo con la completación actual.",
        "scene": {
         "t": "bul",
         "k": "Para qué sirve",
@@ -160,7 +160,23 @@
          "Cuánto vale una estimulación para el caudal"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Qué ganancia da un tubing mayor o una presión de boca menor.",
+       "hl": 1
+      },
+      {
+       "say": "Cuándo el pozo deja de surgir y necesita levantamiento.",
+       "hl": 2
+      },
+      {
+       "say": "Dónde está el cuello de botella del sistema.",
        "hl": 3
+      },
+      {
+       "say": "Y cuánto vale una estimulación para el caudal. Así se decide dónde conviene intervenir.",
+       "hl": 4
       },
       {
        "say": "Pregunta rápida.",
@@ -249,7 +265,7 @@
        }
       },
       {
-       "say": "En pozos horizontales, el índice de productividad se calcula con la longitud del tramo, el espesor y la relación de permeabilidades vertical y horizontal. Joshi extendió el concepto de radio equivalente. Un tramo más largo ayuda, pero con retornos decrecientes por la caída de presión dentro del pozo.",
+       "say": "En pozos horizontales, el índice de productividad se calcula con la longitud del tramo y el espesor. Joshi extendió el concepto de radio equivalente.",
        "scene": {
         "t": "bul",
         "k": "Pozos horizontales",
@@ -260,7 +276,20 @@
          "Retornos decrecientes con la longitud",
          "La caída de presión en el lateral limita el aporte"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Importa también la relación de permeabilidades vertical y horizontal, la anisotropía.",
+       "hl": 1
+      },
+      {
+       "say": "Un tramo más largo ayuda, pero con retornos decrecientes.",
+       "hl": 2
+      },
+      {
+       "say": "Porque la caída de presión dentro del pozo, en el lateral, limita el aporte.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -379,7 +408,7 @@
        "lab": true
       },
       {
-       "say": "Una conclusión práctica. A mayor corte de agua, la columna es más pesada y el caudal cae. Por eso el levantamiento artificial se vuelve necesario a medida que el pozo madura.",
+       "say": "Una conclusión práctica. El agua aumenta el peso de la columna: a mayor corte de agua, el caudal cae.",
        "scene": {
         "t": "bul",
         "k": "Lección",
@@ -391,10 +420,22 @@
          "Las curvas se actualizan con datos medidos"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Además, la presión del reservorio baja con la extracción.",
+       "hl": 1
+      },
+      {
+       "say": "El pozo deja de surgir y necesita levantamiento artificial a medida que madura.",
        "hl": 2
       },
       {
-       "say": "No hay una correlación de flujo multifásico válida para todos los casos. Duns y Ros, Hagedorn y Brown, Orkiszewski, Beggs y Brill, y Mukherjee y Brill para tramos inclinados tienen rangos distintos. Se elige y se calibra con gradientes de presión medidos en el pozo.",
+       "say": "Y las curvas se actualizan con datos medidos.",
+       "hl": 3
+      },
+      {
+       "say": "No hay una correlación de flujo multifásico válida para todos los casos. Para pozos verticales: Duns y Ros, Hagedorn y Brown, y Orkiszewski.",
        "scene": {
         "t": "bul",
         "k": "Correlaciones de flujo",
@@ -405,7 +446,20 @@
          "Modelos mecanicistas como alternativa",
          "Calibrar con gradientes medidos antes de optimizar"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Para tuberías y pozos inclinados: Beggs y Brill, y Mukherjee y Brill.",
+       "hl": 1
+      },
+      {
+       "say": "Los modelos mecanicistas son una alternativa.",
+       "hl": 2
+      },
+      {
+       "say": "Se elige la correlación y se calibra con gradientes de presión medidos en el pozo, antes de optimizar.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -429,7 +483,7 @@
      "comp": "Flujo en tubería y optimización",
      "cues": [
       {
-       "say": "El diámetro del tubing tiene un óptimo. Si es muy chico, la fricción crece. Si es muy grande, la velocidad baja y en pozos con gas o con agua el líquido puede acumularse y cargar el pozo.",
+       "say": "El diámetro del tubing tiene un óptimo. Si es muy chico, la fricción es alta y limita el caudal.",
        "scene": {
         "t": "bul",
         "k": "Tubing",
@@ -441,7 +495,19 @@
          "Se verifica con la curva de tubing de cada diámetro"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Si es muy grande, la velocidad baja y en pozos con gas o con agua el líquido puede acumularse y cargar el pozo.",
        "hl": 1
+      },
+      {
+       "say": "El óptimo cambia con el caudal y con el tiempo.",
+       "hl": 2
+      },
+      {
+       "say": "Y se verifica con la curva de tubing de cada diámetro.",
+       "hl": 3
       },
       {
        "say": "En pozos de gas la carga de líquido es un problema conocido. Turner y colaboradores, en 1969, propusieron una velocidad crítica del gas para arrastrar las gotas, que crece con la tensión superficial y la diferencia de densidades.",
@@ -459,6 +525,18 @@
        "hl": 0
       },
       {
+       "say": "Si el gas no la supera, el líquido se acumula y la producción cae.",
+       "hl": 1
+      },
+      {
+       "say": "Las soluciones: tubing menor, espuma, plunger o bombeo.",
+       "hl": 2
+      },
+      {
+       "say": "Se verifica con la velocidad real contra la crítica.",
+       "hl": 3
+      },
+      {
        "say": "Laboratorio. Cambiá el diámetro del tubing y la presión en boca de pozo. Observá cuánto cambia el caudal y notá que más tubing no siempre mejora.",
        "scene": {
         "t": "viz",
@@ -471,7 +549,7 @@
        "lab": true
       },
       {
-       "say": "Bajar la presión de boca suele ser la mejora más barata, porque reduce la contrapresión sobre todo el sistema. Pero depende de la red de superficie, y lo que se gana en un pozo puede perderse en otro.",
+       "say": "Bajar la presión de boca suele ser la mejora más barata, porque reduce la contrapresión sobre todo el sistema: mayor caudal en el pozo.",
        "scene": {
         "t": "bul",
         "k": "Presión de boca",
@@ -483,7 +561,19 @@
          "Optimizar el pozo sin mirar la red puede trasladar el problema"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "La compresión en cabeza o en batería cuesta energía.",
        "hl": 1
+      },
+      {
+       "say": "El choke fija el caudal en flujo crítico.",
+       "hl": 2
+      },
+      {
+       "say": "Pero depende de la red de superficie: optimizar el pozo sin mirar la red puede trasladar el problema, y lo que se gana en un pozo puede perderse en otro.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -548,7 +638,7 @@
      "comp": "Levantamiento artificial",
      "cues": [
       {
-       "say": "En gas lift se inyecta gas a alta presión en el espacio anular. El gas entra al tubing por una válvula y aligera la columna. Puede ser continuo, con inyección permanente, o intermitente, en ciclos.",
+       "say": "En gas lift se inyecta gas a alta presión en el espacio anular. El gas entra al tubing por una válvula y aligera la columna. Puede ser continuo, con inyección permanente, para pozos de caudal medio a alto.",
        "scene": {
         "t": "bul",
         "k": "Gas lift",
@@ -562,6 +652,22 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "O intermitente, en ciclos, para pozos de bajo caudal.",
+       "hl": 1
+      },
+      {
+       "say": "Se usan válvulas de descarga para arrancar el pozo.",
+       "hl": 2
+      },
+      {
+       "say": "Y una válvula operadora en el punto de inyección.",
+       "hl": 3
+      },
+      {
+       "say": "No tiene partes móviles en el fondo, pero requiere gas y compresión.",
+       "hl": 4
       },
       {
        "say": "El caudal no crece siempre con el gas. Al comienzo cada metro cúbico inyectado aligera la columna y suma producción. Pasado un punto, la fricción crece más que el beneficio y el caudal baja.",
@@ -587,7 +693,7 @@
        "lab": true
       },
       {
-       "say": "En campos con muchos pozos, el problema es la red. El gas es limitado y la presión de la red condiciona la inyección. Reordenar la red de gas puede aumentar la producción sin consumir más gas.",
+       "say": "En campos con muchos pozos, el problema es la red. Hay que asignar el gas donde da más ganancia marginal: el gas es limitado.",
        "scene": {
         "t": "bul",
         "k": "Optimización",
@@ -599,7 +705,19 @@
          "Vigilar con datos medidos, no solo con modelos"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Evitar caídas de presión en la red de inyección: la presión de la red condiciona la inyección.",
+       "hl": 1
+      },
+      {
+       "say": "Mantener las válvulas calibradas y los pozos estables.",
        "hl": 2
+      },
+      {
+       "say": "Y vigilar con datos medidos, no solo con modelos. Reordenar la red de gas puede aumentar la producción sin consumir más gas.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -664,7 +782,7 @@
        }
       },
       {
-       "say": "Vigilar el levantamiento artificial es parte del trabajo. En bombeo mecánico se leen las cartas dinamométricas. En ESP, el amperaje y la presión de entrada. En gas lift, la presión de inyección y la estabilidad del pozo.",
+       "say": "Vigilar el levantamiento artificial es parte del trabajo. En bombeo mecánico se leen las cartas dinamométricas, el llenado de bomba y el nivel.",
        "scene": {
         "t": "bul",
         "k": "Vigilancia",
@@ -677,10 +795,26 @@
          "Todos: caudal, corte de agua y consumo de energía"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "En ESP, el amperaje, la frecuencia, la presión y la temperatura de entrada.",
        "hl": 1
       },
       {
-       "say": "Y una decisión económica. Se compara el aumento de producción con el costo de capital, de energía y de intervención, durante la vida del pozo. Un método más caro puede ser el mejor si produce más durante más tiempo.",
+       "say": "En PCP, el torque y la velocidad.",
+       "hl": 2
+      },
+      {
+       "say": "En gas lift, la presión y el caudal de inyección, y la estabilidad del pozo.",
+       "hl": 3
+      },
+      {
+       "say": "Y en todos, el caudal, el corte de agua y el consumo de energía.",
+       "hl": 4
+      },
+      {
+       "say": "Y una decisión económica. Se compara la producción incremental durante la vida del pozo.",
        "scene": {
         "t": "bul",
         "k": "Decisión",
@@ -693,6 +827,18 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Con el capital, la energía y el mantenimiento.",
+       "hl": 1
+      },
+      {
+       "say": "Con la frecuencia y el costo de las intervenciones.",
+       "hl": 2
+      },
+      {
+       "say": "Y con la flexibilidad para cambiar de método si cambian las condiciones. Un método más caro puede ser el mejor si produce más durante más tiempo.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",

@@ -137,7 +137,7 @@
        }
       },
       {
-       "say": "Una buena práctica es partir de una EDT orientada a entregables, y usar identificadores de actividad con lógica, como área y disciplina. Los códigos permiten armar vistas por contratista o por área sin duplicar actividades.",
+       "say": "Una buena práctica es partir de una EDT orientada a entregables, y no a actividades sueltas.",
        "scene": {
         "t": "bul",
         "k": "Buenas prácticas",
@@ -148,7 +148,20 @@
          "Un solo calendario para el proyecto, y excepciones solo cuando hace falta",
          "Códigos de actividad para disciplina, contratista y área"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Usar identificadores de actividad con lógica, por ejemplo área y disciplina.",
+       "hl": 1
+      },
+      {
+       "say": "Usar un solo calendario para el proyecto, y excepciones solo cuando hace falta.",
+       "hl": 2
+      },
+      {
+       "say": "Y códigos de actividad para disciplina, contratista y área: permiten armar vistas sin duplicar actividades.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -207,7 +220,7 @@
        }
       },
       {
-       "say": "La lógica del cronograma debe ser sana. Se prefieren las relaciones fin a inicio, se evitan los adelantos y las restricciones duras, y toda actividad tiene predecesora y sucesora. Una restricción dura fuerza una fecha y oculta problemas de lógica.",
+       "say": "La lógica del cronograma debe ser sana. Se prefieren las relaciones fin a inicio.",
        "scene": {
         "t": "bul",
         "k": "Relaciones y restricciones",
@@ -218,10 +231,23 @@
          "Evitar restricciones duras: tapan la lógica",
          "Toda actividad con predecesora y sucesora, salvo el inicio y el fin"
         ]
-       }
+       },
+       "hl": 0
       },
       {
-       "say": "Al planificar, con la tecla F9, Primavera calcula las fechas tempranas y tardías y la holgura total. Se pueden definir como críticas las actividades con holgura cero o usar la opción de ruta más larga, que identifica la verdadera ruta crítica.",
+       "say": "Se evitan los adelantos negativos; los retrasos se usan con criterio y se justifican.",
+       "hl": 1
+      },
+      {
+       "say": "Se evitan las restricciones duras: fuerzan una fecha y tapan problemas de lógica.",
+       "hl": 2
+      },
+      {
+       "say": "Y toda actividad tiene predecesora y sucesora, salvo el inicio y el fin.",
+       "hl": 3
+      },
+      {
+       "say": "Al planificar, con la tecla F9, Primavera calcula las fechas tempranas y tardías con la fecha de corte.",
        "scene": {
         "t": "bul",
         "k": "Cálculo",
@@ -239,7 +265,20 @@
          "k": "holgura total",
          "n": "Tiempo que una actividad puede demorarse sin retrasar la fecha de fin del proyecto."
         }
-       ]
+       ],
+       "hl": 0
+      },
+      {
+       "say": "Obtiene la holgura total y la holgura libre.",
+       "hl": 1
+      },
+      {
+       "say": "Se pueden definir como críticas las actividades con holgura menor o igual a cero.",
+       "hl": 2
+      },
+      {
+       "say": "O usar la opción de ruta más larga, que identifica la verdadera ruta crítica.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -370,7 +409,7 @@
        }
       },
       {
-       "say": "La duración se estima con la cantidad de trabajo y la productividad de la cuadrilla, y se contrasta con paradas anteriores. Evita colchones ocultos dentro de cada actividad: el margen se gestiona aparte, como reserva visible.",
+       "say": "La duración se estima con la cantidad de trabajo y la productividad de la cuadrilla.",
        "scene": {
         "t": "bul",
         "k": "Duraciones",
@@ -381,10 +420,23 @@
          "Con el calendario del recurso, no con días corridos",
          "Sin colchones ocultos en cada actividad: el margen se gestiona aparte"
         ]
-       }
+       },
+       "hl": 0
       },
       {
-       "say": "Las vistas se arman con diseños, filtros y agrupaciones. Una vista útil muestra el diagrama de barras con la ruta crítica resaltada, agrupado por disciplina o contratista, y con la columna de holgura total siempre visible.",
+       "say": "Se contrasta con datos de paradas anteriores del mismo equipo.",
+       "hl": 1
+      },
+      {
+       "say": "Se usa el calendario del recurso, y no días corridos.",
+       "hl": 2
+      },
+      {
+       "say": "Y sin colchones ocultos en cada actividad: el margen se gestiona aparte, como reserva visible.",
+       "hl": 3
+      },
+      {
+       "say": "Las vistas se arman con diseños, filtros y agrupaciones. Una vista útil muestra el diagrama de barras con la ruta crítica resaltada.",
        "scene": {
         "t": "bul",
         "k": "Vistas",
@@ -395,7 +447,20 @@
          "Filtro para ver solo actividades críticas o con poca holgura",
          "Columna de holgura total siempre visible"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Agrupado por disciplina, contratista o área, con códigos.",
+       "hl": 1
+      },
+      {
+       "say": "Con un filtro para ver solo actividades críticas o con poca holgura.",
+       "hl": 2
+      },
+      {
+       "say": "Y con la columna de holgura total siempre visible.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -466,7 +531,7 @@
        ]
       },
       {
-       "say": "Una holgura de cero indica una actividad crítica. Las de holgura pequeña son casi críticas y se siguen cada semana. Una holgura excesivamente grande suele indicar una relación que falta, y debe revisarse.",
+       "say": "Una holgura total de cero indica una actividad crítica.",
        "scene": {
         "t": "bul",
         "k": "Holgura",
@@ -477,10 +542,23 @@
          "Holgura grande: margen que puede usarse para nivelar recursos",
          "Una holgura excesivamente grande suele indicar lógica faltante"
         ]
-       }
+       },
+       "hl": 0
       },
       {
-       "say": "Para comparar alternativas se copia el proyecto y se cambia una variable por vez. Acortar la ruta crítica requiere más recursos o trabajo en paralelo, y cada opción tiene su costo y su riesgo. Cada escenario debe documentar su supuesto.",
+       "say": "Las de holgura pequeña son casi críticas y se siguen cada semana.",
+       "hl": 1
+      },
+      {
+       "say": "Una holgura grande es un margen que puede usarse para nivelar recursos.",
+       "hl": 2
+      },
+      {
+       "say": "Pero una holgura excesivamente grande suele indicar lógica faltante, y debe revisarse.",
+       "hl": 3
+      },
+      {
+       "say": "Para comparar alternativas se copia el proyecto y se cambia una variable por vez.",
        "scene": {
         "t": "bul",
         "k": "Escenarios",
@@ -491,7 +569,20 @@
          "Comparar duración, costo y riesgo de cada alternativa",
          "Documentar el supuesto de cada escenario"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Acortar la ruta crítica requiere más recursos o trabajo en paralelo.",
+       "hl": 1
+      },
+      {
+       "say": "Se compara la duración, el costo y el riesgo de cada alternativa.",
+       "hl": 2
+      },
+      {
+       "say": "Y cada escenario debe documentar su supuesto.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -556,7 +647,7 @@
      "comp": "Caso de la parada de planta",
      "cues": [
       {
-       "say": "Presentamos el caso, un ejemplo didáctico con datos ilustrativos. Una planta de tratamiento de gas tiene una parada programada con ventana de veintiocho días. Incluye el reemplazo de un intercambiador, la reparación de un compresor, inspecciones y revisión de válvulas.",
+       "say": "Presentamos el caso, un ejemplo didáctico con datos ilustrativos. Una planta de tratamiento de gas tiene una parada programada con ventana de veintiocho días.",
        "scene": {
         "t": "bul",
         "k": "Contexto",
@@ -567,7 +658,20 @@
          "Calendario de 24 horas, 7 días",
          "Datos ilustrativos para practicar el método"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Las tareas principales: el reemplazo de un intercambiador, la reparación de un compresor, la inspección de recipientes y la revisión de válvulas de seguridad.",
+       "hl": 1
+      },
+      {
+       "say": "El calendario es de 24 horas, 7 días.",
+       "hl": 2
+      },
+      {
+       "say": "Son datos ilustrativos para practicar el método.",
+       "hl": 3
       },
       {
        "say": "Paso uno, cargar la red. Son doce actividades con duraciones y predecesoras. Tras abrir los equipos, cuatro frentes trabajan en paralelo: inspección, intercambiador, compresor y válvulas. El cierre de equipos espera a los cuatro.",
@@ -689,7 +793,7 @@
      "comp": "Optimización y presentación",
      "cues": [
       {
-       "say": "Antes de presentar el cronograma se verifica su calidad. Todas las actividades tienen predecesora y sucesora, las relaciones son de fin a inicio, no hay restricciones duras ni holgura negativa y la ruta crítica es única.",
+       "say": "Antes de presentar el cronograma se verifica su calidad. Todas las actividades tienen predecesora y sucesora, salvo el inicio y el fin.",
        "scene": {
         "t": "bul",
         "k": "Control de calidad",
@@ -700,10 +804,23 @@
          "Sin restricciones duras ni holgura negativa",
          "Una única ruta crítica, de 8 actividades"
         ]
-       }
+       },
+       "hl": 0
       },
       {
-       "say": "Para ganar días se actúa sobre la ruta crítica. Se preposicionan los repuestos del compresor, se arman andamios antes del apagado final y se refuerza el frente crítico. Cada medida se evalúa en plazo, costo y seguridad.",
+       "say": "Todas las relaciones son de fin a inicio, sin adelantos.",
+       "hl": 1
+      },
+      {
+       "say": "No hay restricciones duras ni holgura negativa.",
+       "hl": 2
+      },
+      {
+       "say": "Y la ruta crítica es única, de 8 actividades.",
+       "hl": 3
+      },
+      {
+       "say": "Para ganar días se actúa sobre la ruta crítica. Se adelantan los andamios en las áreas del compresor, antes del apagado final.",
        "scene": {
         "t": "bul",
         "k": "Optimización",
@@ -714,7 +831,20 @@
          "Un tercer turno de soldadura solo en el frente crítico",
          "Cada medida se evalúa en costo, plazo y seguridad"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Se preposicionan los repuestos del compresor, para evitar esperas.",
+       "hl": 1
+      },
+      {
+       "say": "Se agrega un tercer turno de soldadura, solo en el frente crítico.",
+       "hl": 2
+      },
+      {
+       "say": "Y cada medida se evalúa en costo, plazo y seguridad.",
+       "hl": 3
       },
       {
        "say": "Se comparan tres escenarios. El caso base dura veintiséis días. Preposicionar repuestos baja la duración a veinticuatro con costo bajo. Un turno extra la baja a veintitrés, pero con costo medio y mayor fatiga. La decisión equilibra los tres factores.",
@@ -751,7 +881,7 @@
        }
       },
       {
-       "say": "Se presenta a la gerencia la ruta crítica, la reserva de la ventana, los hitos y los riesgos principales. Una vez aprobado, se guarda como línea base para controlar el avance, tema del tercer curso de esta serie.",
+       "say": "Se presenta a la gerencia la ruta crítica y la reserva de la ventana.",
        "scene": {
         "t": "bul",
         "k": "Presentación",
@@ -762,7 +892,20 @@
          "Riesgos principales y acciones",
          "Línea base guardada para controlar el avance"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Los hitos principales: apagado, apertura, cierre y arranque.",
+       "hl": 1
+      },
+      {
+       "say": "Los riesgos principales y las acciones.",
+       "hl": 2
+      },
+      {
+       "say": "Y una vez aprobado, se guarda como línea base para controlar el avance, tema del tercer curso de esta serie.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",

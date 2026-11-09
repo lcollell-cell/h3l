@@ -137,7 +137,7 @@
        }
       },
       {
-       "say": "Al actualizar, se informan fechas reales y no estimaciones. Se actualiza con la misma frecuencia y el mismo corte, y se revisa la duración restante de las actividades en curso. Las actividades fuera de secuencia se tratan con criterio.",
+       "say": "Al actualizar, se hace siempre con la misma frecuencia y el mismo corte.",
        "scene": {
         "t": "bul",
         "k": "Actualización",
@@ -148,7 +148,20 @@
          "Revisar la duración restante de las actividades en curso",
          "Tratar con criterio las actividades fuera de secuencia"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Se informan fechas reales de inicio y fin, y no estimaciones.",
+       "hl": 1
+      },
+      {
+       "say": "Se revisa la duración restante de las actividades en curso.",
+       "hl": 2
+      },
+      {
+       "say": "Y las actividades fuera de secuencia se tratan con criterio.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -291,7 +304,7 @@
      "comp": "Plazo y valor ganado",
      "cues": [
       {
-       "say": "El SPI tiene una limitación: tiende a uno al terminar el proyecto, aun si terminó tarde, y mide el desvío en dinero. Lipke propuso en dos mil tres el cronograma ganado, que expresa el desvío en unidades de tiempo.",
+       "say": "El SPI tiene una limitación: tiende a uno al terminar el proyecto, aunque esté atrasado.",
        "scene": {
         "t": "bul",
         "k": "Limitación",
@@ -309,7 +322,20 @@
          "k": "cronograma ganado",
          "n": "Earned schedule: tiempo en que el valor planificado igualaba al valor ganado actual."
         }
-       ]
+       ],
+       "hl": 0
+      },
+      {
+       "say": "La variación de cronograma se mide en dinero y no en tiempo.",
+       "hl": 1
+      },
+      {
+       "say": "Anbari y Lipke propusieron en dos mil tres medidas en unidades de tiempo, como el cronograma ganado.",
+       "hl": 2
+      },
+      {
+       "say": "Y se complementa con el análisis de la ruta crítica.",
+       "hl": 3
       },
       {
        "say": "El cronograma ganado se calcula buscando en la curva del valor planificado el momento en que igualaba al valor ganado actual. Su cociente con el tiempo real transcurrido es un índice en tiempo, y permite pronosticar la duración.",
@@ -322,7 +348,7 @@
        }
       },
       {
-       "say": "El valor ganado no distingue actividades críticas de las que no lo son. Un atraso en la ruta crítica mueve el fin del proyecto, mientras que uno con holgura puede no hacerlo. Por eso se analiza el valor ganado junto con la ruta crítica.",
+       "say": "El valor ganado no distingue actividades críticas de las que no lo son.",
        "scene": {
         "t": "bul",
         "k": "Ruta crítica",
@@ -333,7 +359,20 @@
          "El análisis de tendencias de holgura anticipa problemas",
          "Ambos análisis se complementan"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Un atraso en la ruta crítica mueve el fin del proyecto; uno con holgura puede no hacerlo.",
+       "hl": 1
+      },
+      {
+       "say": "El análisis de tendencias de holgura anticipa problemas.",
+       "hl": 2
+      },
+      {
+       "say": "Por eso ambos análisis se complementan: el valor ganado junto con la ruta crítica.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -423,7 +462,7 @@
        }
       },
       {
-       "say": "En Primavera se guardan y asignan líneas base, se actualiza el avance con fechas reales, y se almacena el desempeño del período para conservar el historial. Los diseños permiten comparar las fechas y los costos actuales con la línea base.",
+       "say": "En Primavera se mantienen líneas base y se asignan al proyecto para comparar.",
        "scene": {
         "t": "bul",
         "k": "En Primavera",
@@ -434,10 +473,23 @@
          "Almacenar el desempeño del período, para conservar el historial",
          "Diseños que comparan fechas y costos actuales con la línea base"
         ]
-       }
+       },
+       "hl": 0
       },
       {
-       "say": "El informe mensual muestra el avance planificado y real, los índices de costo y cronograma, el pronóstico del costo final, la ruta crítica actual con las actividades casi críticas, y los riesgos y las acciones correctivas.",
+       "say": "Se actualiza el avance con fechas reales y porcentaje completado.",
+       "hl": 1
+      },
+      {
+       "say": "Se almacena el desempeño del período, para conservar el historial.",
+       "hl": 2
+      },
+      {
+       "say": "Y los diseños comparan las fechas y los costos actuales con la línea base.",
+       "hl": 3
+      },
+      {
+       "say": "El informe mensual muestra el avance planificado y real, con la curva S.",
        "scene": {
         "t": "bul",
         "k": "Informe",
@@ -448,7 +500,20 @@
          "Ruta crítica actual y actividades casi críticas",
          "Riesgos, desvíos principales y acciones correctivas"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Los índices de costo y cronograma, CPI y SPI, y el pronóstico del costo final.",
+       "hl": 1
+      },
+      {
+       "say": "La ruta crítica actual, con las actividades casi críticas.",
+       "hl": 2
+      },
+      {
+       "say": "Y los riesgos, los desvíos principales y las acciones correctivas.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -513,7 +578,7 @@
      "comp": "Caso del ducto",
      "cues": [
       {
-       "say": "Presentamos el caso, un ejemplo didáctico con datos ilustrativos. Se construye un ducto de ciento veinte kilómetros en ocho meses, con un presupuesto de treinta y seis millones de dólares. Las etapas son derecho de paso, zanja, soldadura, revestimiento, tapada y prueba hidráulica.",
+       "say": "Presentamos el caso, un ejemplo didáctico con datos ilustrativos. Se construye un ducto de 120 kilómetros de cañería de 20 pulgadas, en un plazo de 8 meses.",
        "scene": {
         "t": "bul",
         "k": "Contexto",
@@ -524,7 +589,20 @@
          "Etapas: derecho de paso, zanja, soldadura, revestimiento, bajada y tapada, prueba hidráulica",
          "Datos ilustrativos"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "El presupuesto de ejemplo, el BAC, es de treinta y seis millones de dólares.",
+       "hl": 1
+      },
+      {
+       "say": "Las etapas son derecho de paso, zanja, soldadura, revestimiento, bajada y tapada, y prueba hidráulica.",
+       "hl": 2
+      },
+      {
+       "say": "Todos los datos son ilustrativos.",
+       "hl": 3
       },
       {
        "say": "Paso uno, guardar la línea base. El valor planificado acumulado forma la curva S del proyecto: dos coma cinco millones al mes uno, quince al mes cuatro y treinta y seis al mes ocho.",
@@ -559,7 +637,7 @@
        }
       },
       {
-       "say": "Paso dos, definir cómo se mide el avance. Cada etapa tiene un peso según su presupuesto, y su avance se mide en kilómetros completados. El avance ponderado de las etapas da el valor ganado, con la misma regla todos los meses.",
+       "say": "Paso dos, definir cómo se mide el avance. Cada etapa tiene un peso según su presupuesto.",
        "scene": {
         "t": "bul",
         "k": "Avance físico",
@@ -570,7 +648,20 @@
          "Avance ponderado del proyecto por etapa",
          "Medición el último día de cada mes con la misma regla"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "El avance de cada etapa se mide en kilómetros completados.",
+       "hl": 1
+      },
+      {
+       "say": "El avance ponderado de las etapas da el valor ganado del proyecto.",
+       "hl": 2
+      },
+      {
+       "say": "Y se mide el último día de cada mes, con la misma regla.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -644,7 +735,7 @@
        }
       },
       {
-       "say": "La causa es un tramo de zanja en roca no previsto en la estimación. El gerente suma una cuadrilla de zanjeo, reordena etapas y presenta una solicitud de cambio con respaldo técnico. El pronóstico se informa como rango, de treinta y siete coma tres a cuarenta y tres millones.",
+       "say": "La causa principal es un tramo de zanja en roca, entre los km 40 y 55, no previsto en la estimación.",
        "scene": {
         "t": "bul",
         "k": "Acciones",
@@ -655,7 +746,20 @@
          "Solicitud de cambio por la condición geológica, con respaldo técnico",
          "Rango de EAC: 37,3 M (resto según presupuesto) a 43,0 M (costo y plazo peores)"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Las acciones: el gerente suma una segunda cuadrilla de zanjeo y revisa el orden de las etapas.",
+       "hl": 1
+      },
+      {
+       "say": "Presenta una solicitud de cambio por la condición geológica, con respaldo técnico.",
+       "hl": 2
+      },
+      {
+       "say": "Y el pronóstico se informa como rango, el EAC: de treinta y siete coma tres millones, con el resto según presupuesto, a cuarenta y tres millones, con costo y plazo peores.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",

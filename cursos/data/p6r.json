@@ -105,7 +105,7 @@
        }
       },
       {
-       "say": "Al asignar un recurso se indican las unidades por unidad de tiempo, por ejemplo ocho soldadores por día. El costo es el producto de las unidades, el precio unitario y la duración. El tipo de duración define qué se recalcula si cambia la asignación.",
+       "say": "Al asignar un recurso se indican las unidades por unidad de tiempo, por ejemplo ocho soldadores por día.",
        "scene": {
         "t": "bul",
         "k": "Asignación",
@@ -116,10 +116,23 @@
          "El tipo de duración define qué se recalcula al cambiar las unidades",
          "Curvas de recurso: distribuir el esfuerzo de forma no uniforme"
         ]
-       }
+       },
+       "hl": 0
       },
       {
-       "say": "Una buena práctica es planificar primero con roles y luego nombrar a las personas. Los precios unitarios deben estar actualizados, y el calendario del recurso debe contemplar feriados y turnos. No hace falta asignar recursos a todo: solo donde importan.",
+       "say": "El costo es el producto de las unidades, el precio unitario y la duración.",
+       "hl": 1
+      },
+      {
+       "say": "El tipo de duración define qué se recalcula al cambiar las unidades.",
+       "hl": 2
+      },
+      {
+       "say": "Y las curvas de recurso permiten distribuir el esfuerzo de forma no uniforme.",
+       "hl": 3
+      },
+      {
+       "say": "Una buena práctica es planificar primero con roles y luego con personas.",
        "scene": {
         "t": "bul",
         "k": "Buenas prácticas",
@@ -130,7 +143,20 @@
          "Usar un calendario de recurso realista, con feriados",
          "Asignar recursos solo donde importan para el plazo o el costo"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Mantener actualizados los precios unitarios.",
+       "hl": 1
+      },
+      {
+       "say": "Usar un calendario de recurso realista, con feriados y turnos.",
+       "hl": 2
+      },
+      {
+       "say": "Y asignar recursos solo donde importan para el plazo o el costo.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -154,7 +180,7 @@
      "comp": "Costos y flujo de caja",
      "cues": [
       {
-       "say": "Los costos de un proyecto en Primavera provienen de los recursos asignados y de los gastos, como contratos o compras. Se clasifican en cuentas de costo, y la suma es el presupuesto a la finalización.",
+       "say": "Los costos de un proyecto en Primavera provienen del costo de los recursos asignados a las actividades.",
        "scene": {
         "t": "bul",
         "k": "Costo",
@@ -165,7 +191,20 @@
          "Costo presupuestado a la finalización",
          "Cuentas de costo para agrupar y reportar"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Y de los gastos: contratos, compras y servicios sin recurso.",
+       "hl": 1
+      },
+      {
+       "say": "La suma es el costo presupuestado a la finalización.",
+       "hl": 2
+      },
+      {
+       "say": "Y se clasifican en cuentas de costo, para agrupar y reportar.",
+       "hl": 3
       },
       {
        "say": "La curva S muestra el costo acumulado en el tiempo. Se calcula distribuyendo el costo de cada actividad a lo largo de su duración. Su pendiente mensual es el flujo de caja que necesita financiar el proyecto.",
@@ -178,7 +217,7 @@
        }
       },
       {
-       "say": "La forma de distribuir el gasto importa. Las compras de equipos mayores concentran el pago en pocos hitos. Y si se extiende la duración de una actividad con recurso por hora, también crece su costo. Las curvas de recurso reflejan los picos reales.",
+       "say": "La forma de distribuir el gasto importa. Una curva más temprana financia más pronto y es más costosa.",
        "scene": {
         "t": "bul",
         "k": "Distribución",
@@ -189,7 +228,20 @@
          "El costo de un recurso por hora crece cuando se extiende la duración",
          "Las curvas de recurso permiten reflejar picos y valles reales"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Las compras de equipos mayores concentran el gasto en pocos hitos de pago.",
+       "hl": 1
+      },
+      {
+       "say": "El costo de un recurso por hora crece cuando se extiende la duración de la actividad.",
+       "hl": 2
+      },
+      {
+       "say": "Y las curvas de recurso permiten reflejar los picos y valles reales.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -254,7 +306,7 @@
      "comp": "Nivelación",
      "cues": [
       {
-       "say": "Hay sobreasignación cuando la demanda de un recurso supera su capacidad en algún día. Se detecta en los perfiles de recursos. Un cronograma que no considera la capacidad puede ser irreal. Se resuelve con más capacidad, otro orden o más tiempo.",
+       "say": "Hay sobreasignación cuando la demanda de un recurso supera su capacidad en algún día.",
        "scene": {
         "t": "bul",
         "k": "Problema",
@@ -265,10 +317,23 @@
          "Un cronograma sin recursos puede ser irreal",
          "Se resuelve con más capacidad, otro orden o más tiempo"
         ]
-       }
+       },
+       "hl": 0
       },
       {
-       "say": "La nivelación retrasa actividades, primero las que tienen holgura, para respetar la capacidad del recurso. Se define un orden de prioridad. Si hay que retrasar actividades críticas, el proyecto se alarga, y por eso se compara siempre con el cronograma sin nivelar.",
+       "say": "Se detecta en los perfiles y en las hojas de uso de recursos.",
+       "hl": 1
+      },
+      {
+       "say": "Un cronograma sin recursos puede ser irreal.",
+       "hl": 2
+      },
+      {
+       "say": "Se resuelve con más capacidad, otro orden o más tiempo.",
+       "hl": 3
+      },
+      {
+       "say": "La nivelación en Primavera retrasa actividades con holgura para respetar la capacidad del recurso.",
        "scene": {
         "t": "bul",
         "k": "Nivelación",
@@ -279,7 +344,20 @@
          "Si las actividades críticas se retrasan, el proyecto se alarga",
          "Siempre se revisa el resultado y se compara con el cronograma sin nivelar"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Se define el orden de prioridad de las actividades que compiten.",
+       "hl": 1
+      },
+      {
+       "say": "Si hay que retrasar actividades críticas, el proyecto se alarga.",
+       "hl": 2
+      },
+      {
+       "say": "Por eso siempre se revisa el resultado y se compara con el cronograma sin nivelar.",
+       "hl": 3
       },
       {
        "say": "Frente a un pico de demanda hay cuatro opciones: nivelar con la holgura, contratar cuadrillas, extender la duración o agregar turnos. Cada una cambia plazo y costo de manera distinta, y la decisión es del gerente del proyecto.",
@@ -404,7 +482,7 @@
        }
       },
       {
-       "say": "Antes de aprobar el plan se controla el pico de cada recurso crítico frente a la disponibilidad real, el efecto de la nivelación sobre la fecha final, los hitos de pago de los equipos mayores y la coherencia entre costo y avance.",
+       "say": "Antes de aprobar el plan se controla el pico de cada recurso crítico frente a su disponibilidad real.",
        "scene": {
         "t": "bul",
         "k": "Revisión",
@@ -415,10 +493,23 @@
          "Los hitos de pago de equipos mayores",
          "La coherencia entre costo y avance previsto"
         ]
-       }
+       },
+       "hl": 0
       },
       {
-       "say": "El plan debe dejar asentados los supuestos de productividad y de disponibilidad, las prioridades usadas para nivelar, la versión del cronograma y quién aprobó los cambios de capacidad. Es lo que permite auditar el plan más adelante.",
+       "say": "El efecto de la nivelación sobre la fecha final.",
+       "hl": 1
+      },
+      {
+       "say": "Los hitos de pago de los equipos mayores.",
+       "hl": 2
+      },
+      {
+       "say": "Y la coherencia entre el costo y el avance previsto.",
+       "hl": 3
+      },
+      {
+       "say": "El plan debe dejar asentados los supuestos de productividad y de disponibilidad de cuadrillas.",
        "scene": {
         "t": "bul",
         "k": "Documentación",
@@ -429,7 +520,20 @@
          "Versión del cronograma y fecha de corte",
          "Quién aprobó los cambios de capacidad"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Las prioridades usadas para nivelar.",
+       "hl": 1
+      },
+      {
+       "say": "La versión del cronograma y la fecha de corte.",
+       "hl": 2
+      },
+      {
+       "say": "Y quién aprobó los cambios de capacidad. Es lo que permite auditar el plan más adelante.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -494,7 +598,7 @@
      "comp": "Caso de la planta de tratamiento",
      "cues": [
       {
-       "say": "Presentamos el caso, un ejemplo didáctico con datos ilustrativos. Se construye una instalación temprana de producción, con puesta en marcha a los ciento cincuenta días. El presupuesto de ejemplo es de veintiocho millones de dólares y el recurso crítico son los soldadores.",
+       "say": "Presentamos el caso, un ejemplo didáctico con datos ilustrativos. Se construye una planta de tratamiento de crudo, una instalación temprana de producción, con puesta en marcha a los ciento cincuenta días.",
        "scene": {
         "t": "bul",
         "k": "Contexto",
@@ -505,7 +609,20 @@
          "Recurso crítico: soldadores, con una capacidad de 20 por día",
          "Datos ilustrativos"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "El presupuesto de ejemplo es de veintiocho millones de dólares.",
+       "hl": 1
+      },
+      {
+       "say": "El recurso crítico son los soldadores, con una capacidad de 20 por día.",
+       "hl": 2
+      },
+      {
+       "say": "Los datos son ilustrativos.",
+       "hl": 3
       },
       {
        "say": "Cuatro actividades requieren soldadores: el prefabricado, el montaje de estructuras, la soldadura de tanques y el montaje de cañerías. Se cargan en Primavera con sus asignaciones, y se revisa el perfil de demanda diaria.",
@@ -579,7 +696,7 @@
      "comp": "Nivelación y decisión",
      "cues": [
       {
-       "say": "La nivelación corre el montaje de cañerías del día setenta y cinco al ochenta y cinco, y la soldadura de tanques del día setenta al ochenta y cinco. La demanda máxima pasa a ser de veinte soldadores. Las pruebas empiezan cinco días más tarde.",
+       "say": "La nivelación corre el montaje de cañerías del día setenta y cinco al ochenta y cinco.",
        "scene": {
         "t": "bul",
         "k": "Nivelación",
@@ -590,7 +707,20 @@
          "Resultado: demanda máxima de 20 soldadores por día",
          "Las pruebas empiezan el día 120 y no el 115"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Corre la soldadura de tanques del día setenta al ochenta y cinco.",
+       "hl": 1
+      },
+      {
+       "say": "El resultado: la demanda máxima pasa a ser de veinte soldadores por día.",
+       "hl": 2
+      },
+      {
+       "say": "Y las pruebas empiezan el día 120, y no el 115: cinco días más tarde.",
+       "hl": 3
       },
       {
        "say": "Se comparan alternativas. Sin nivelar, el proyecto termina el día ciento cuarenta y nueve, pero exige contratar cuadrillas extra. Nivelando, termina el ciento cincuenta y cuatro, sin cuadrillas adicionales. Un turno extra deja el fin en el ciento cincuenta.",
@@ -623,7 +753,7 @@
        }
       },
       {
-       "say": "El gerente compara el valor de cinco días de producción con el costo de las cuadrillas extra y revisa el riesgo de seguridad por exceso de gente en un frente. Aprueba una opción y guarda la línea base con los supuestos registrados.",
+       "say": "El gerente compara el valor de cinco días de producción con el costo de las cuadrillas extra.",
        "scene": {
         "t": "bul",
         "k": "Decisión",
@@ -634,10 +764,23 @@
          "Aprobar la opción y guardar la línea base",
          "Registrar los supuestos de productividad"
         ]
-       }
+       },
+       "hl": 0
       },
       {
-       "say": "Las lecciones. Un cronograma sin recursos puede ser inviable. La nivelación tiene efecto sobre el plazo. Los roles permiten planificar capacidad antes de contratar. Y la curva S y el flujo de caja dependen del plan de recursos.",
+       "say": "Revisa el riesgo de seguridad por fatiga o por exceso de gente en un frente.",
+       "hl": 1
+      },
+      {
+       "say": "Aprueba una opción y guarda la línea base.",
+       "hl": 2
+      },
+      {
+       "say": "Y registra los supuestos de productividad.",
+       "hl": 3
+      },
+      {
+       "say": "Las lecciones. Un cronograma sin recursos puede ser inviable.",
        "scene": {
         "t": "bul",
         "k": "Lecciones",
@@ -648,7 +791,20 @@
          "Los roles permiten planificar capacidad antes de contratar",
          "La curva S y el flujo de caja dependen del plan de recursos"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "La nivelación tiene efecto sobre el plazo, que debe verse.",
+       "hl": 1
+      },
+      {
+       "say": "Los roles permiten planificar capacidad antes de contratar.",
+       "hl": 2
+      },
+      {
+       "say": "Y la curva S y el flujo de caja dependen del plan de recursos.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
