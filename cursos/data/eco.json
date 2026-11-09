@@ -262,32 +262,32 @@
     {
      "q": "El VPN se calcula:",
      "o": [
-      "Descontando los flujos de caja a una tasa",
-      "Sumando precios",
-      "Restando regalías solamente",
-      "Multiplicando por la TIR"
+      "Sumando los ingresos de cada año sin descontar",
+      "Dividiendo la inversión por el ingreso anual",
+      "Descontando cada flujo de caja a una tasa",
+      "Multiplicando los flujos por la TIR"
      ],
-     "a": 0,
+     "a": 2,
      "e": "Cada flujo futuro se descuenta a valor presente."
     },
     {
      "q": "Un costo fijo, a diferencia de uno variable:",
      "o": [
+      "Crece en proporción al volumen producido",
       "Se paga aunque la producción sea baja",
-      "Crece con el volumen",
-      "Se anula al cerrar el pozo",
-      "No afecta el límite económico"
+      "Se anula cuando se cierra el pozo",
+      "No influye en el límite económico"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Por eso fija el caudal mínimo económico."
     },
     {
      "q": "En un análisis de tornado, se cambia:",
      "o": [
-      "Solo el precio",
-      "Todas a la vez",
-      "Ninguna",
-      "Una variable por vez"
+      "Solo el precio, en todos los casos",
+      "Todas las variables a la vez",
+      "Ninguna, solo se calcula el caso base",
+      "Una variable por vez dentro de su rango"
      ],
      "a": 3,
      "e": "Cada barra representa el efecto de una variable."
@@ -426,7 +426,7 @@
      "comp": "Fiscalidad, portafolio y casos",
      "cues": [
       {
-       "say": "El resultado económico depende del régimen fiscal y contractual. En la concesión, la empresa tiene el recurso, paga regalías e impuestos, y asume el riesgo y el costo. En la producción compartida, el Estado recibe una parte de la producción luego de recuperar costos, y hay reparto de ganancia. En el contrato de servicio, se paga un honorario por el servicio prestado, y el riesgo de precio recae sobre el Estado.",
+       "say": "El resultado económico depende del régimen fiscal y contractual. En la concesión, la empresa tiene el recurso, paga regalías e impuestos, y asume el riesgo y el costo.",
        "scene": {
         "t": "tbl",
         "k": "Regímenes",
@@ -455,6 +455,9 @@
         ],
         "n": "Los detalles dependen de cada país y cada contrato. Se verifica siempre la normativa y las cláusulas vigentes."
        }
+      },
+      {
+       "say": "En la producción compartida, el Estado recibe una parte de la producción luego de recuperar costos, y hay reparto de ganancia. En el contrato de servicio, se paga un honorario por el servicio prestado, y el riesgo de precio recae sobre el Estado."
       },
       {
        "say": "Un indicador de síntesis es la participación del Estado, o government take. Reúne regalías, impuestos y reparto de producción.",
@@ -531,34 +534,34 @@
     {
      "q": "El valor monetario esperado se obtiene:",
      "o": [
-      "Dividiendo por la TIR",
-      "Sumando los costos",
-      "Multiplicando por el precio",
-      "Ponderando los resultados por su probabilidad"
+      "Ponderando los resultados por su probabilidad",
+      "Dividiendo el valor final por la TIR del proyecto",
+      "Sumando los costos de cada rama del árbol",
+      "Multiplicando el valor del pozo por el precio"
      ],
-     "a": 3,
+     "a": 0,
      "e": "Es el promedio ponderado de los resultados posibles."
     },
     {
      "q": "Un portafolio de pozos independientes, frente a un solo pozo, tiene:",
      "o": [
-      "El mismo VME",
-      "Mayor probabilidad de pérdida",
-      "Menor probabilidad de pérdida total",
-      "Ningún riesgo"
+      "Mayor VME por cada pozo",
+      "Mayor probabilidad de pérdida total",
+      "Ningún riesgo de perder dinero",
+      "Menor probabilidad de pérdida total"
      ],
-     "a": 2,
+     "a": 3,
      "e": "El efecto de agregación reduce la dispersión del resultado."
     },
     {
      "q": "En contratos de producción compartida, el Estado recibe:",
      "o": [
-      "Una parte de la producción luego de la recuperación de costos",
-      "Solo regalías",
-      "Nada",
-      "El precio completo"
+      "Solo las regalías sobre la producción",
+      "Una parte de la producción luego de recuperar costos",
+      "Todo el precio de venta del crudo producido",
+      "Un honorario fijo por el servicio que se presta"
      ],
-     "a": 0,
+     "a": 1,
      "e": "Hay un reparto después de recuperar costos."
     }
    ]
@@ -690,7 +693,7 @@
      "comp": "Fiscalidad, portafolio y casos",
      "cues": [
       {
-       "say": "Kashagan, en Kazajistán, es un campo en el norte del Mar Caspio, con islas artificiales y gas con alto contenido de azufre. El objetivo era iniciar la producción y recuperar la inversión en los plazos del plan original. La producción inicial fue en septiembre de 2013, más de una década después de lo previsto, y se detuvo semanas después por la corrosión de cañerías. El presupuesto de 2008, de 38.000 millones de dólares, subió a 53.000 millones hacia fines de 2015. En octubre de 2016 se cargó el primer crudo para exportación, y la producción estable llevó más tiempo.",
+       "say": "Kashagan, en Kazajistán, es un campo en el norte del Mar Caspio, con islas artificiales y gas con alto contenido de azufre. El objetivo era iniciar la producción y recuperar la inversión en los plazos del plan original.",
        "scene": {
         "t": "case",
         "h": "Kashagan, Kazajistán",
@@ -702,7 +705,10 @@
        }
       },
       {
-       "say": "Otro caso: el precio negativo del WTI, en abril de 2020. La demanda estaba deprimida por la pandemia, y la capacidad de almacenamiento era limitada. La pregunta era por qué el contrato de futuros más cercano llegó a un precio negativo. El contrato de mayo de 2020 de WTI cayó de 17,73 dólares y liquidó a menos 37,63 dólares por barril el 20 de abril, un día antes de su vencimiento, según la CFTC. Mostró que un escenario de precios bajos no es solo una versión suave del caso base: se incluyen eventos extremos y se prueba la resistencia del proyecto.",
+       "say": "La producción inicial fue en septiembre de 2013, más de una década después de lo previsto, y se detuvo semanas después por la corrosión de cañerías. El presupuesto de 2008, de 38.000 millones de dólares, subió a 53.000 millones hacia fines de 2015. En octubre de 2016 se cargó el primer crudo para exportación, y la producción estable llevó más tiempo."
+      },
+      {
+       "say": "Otro caso: el precio negativo del WTI, en abril de 2020. La demanda estaba deprimida por la pandemia, y la capacidad de almacenamiento era limitada. La pregunta era por qué el contrato de futuros más cercano llegó a un precio negativo.",
        "scene": {
         "t": "case",
         "h": "Precio negativo del WTI, abril de 2020",
@@ -712,6 +718,9 @@
         "A": "El contrato de mayo de 2020 de WTI cayó de 17,73 dólares y liquidó a −37,63 dólares por barril el 20 de abril, un día antes de su vencimiento.",
         "R": "Mostró que un escenario de precios bajos no es solo una versión suave del caso base: se incluyen eventos extremos y se prueba la resistencia del proyecto."
        }
+      },
+      {
+       "say": "El contrato de mayo de 2020 de WTI cayó de 17,73 dólares y liquidó a menos 37,63 dólares por barril el 20 de abril, un día antes de su vencimiento, según la CFTC. Mostró que un escenario de precios bajos no es solo una versión suave del caso base: se incluyen eventos extremos y se prueba la resistencia del proyecto."
       },
       {
        "say": "Las lecciones. Primero, definir bien el alcance antes de la decisión final de inversión.",
@@ -761,32 +770,32 @@
     {
      "q": "Para probar la resistencia de un proyecto conviene:",
      "o": [
-      "Ignorar el precio",
-      "Usar solo el caso base",
-      "Quitar los costos",
-      "Incluir escenarios adversos y extremos"
+      "Usar solo el caso base, el más probable",
+      "Ignorar el precio y mirar solo los costos",
+      "Incluir escenarios adversos y extremos",
+      "Quitar los costos fijos del análisis"
      ],
-     "a": 3,
+     "a": 2,
      "e": "Un proyecto robusto se evalúa con escenarios malos además de los esperados."
     },
     {
      "q": "El índice VPN sobre inversión sirve para:",
      "o": [
-      "Ordenar proyectos cuando el capital es limitado",
-      "Calcular el precio",
-      "Medir la porosidad",
-      "Definir el contrato"
+      "Calcular el precio de equilibrio del crudo",
+      "Medir la porosidad de la formación",
+      "Definir el tipo de contrato fiscal",
+      "Ordenar proyectos con capital limitado"
      ],
-     "a": 0,
+     "a": 3,
      "e": "Prioriza los proyectos con mayor valor por unidad de capital."
     },
     {
      "q": "En Kashagan, la producción:",
      "o": [
-      "Comenzó en 1990",
-      "Comenzó en 2013 y se detuvo semanas después por corrosión",
-      "Nunca se detuvo",
-      "No tuvo costos"
+      "Comenzó en 1990 y nunca se detuvo",
+      "Comenzó en 2013 y se detuvo semanas después",
+      "Comenzó en 2013 y no tuvo sobrecostos",
+      "Comenzó en 2020, tras el precio negativo"
      ],
      "a": 1,
      "e": "El gas sulfuroso corroyó las cañerías y obligó a parar."
@@ -798,23 +807,23 @@
   {
    "q": "El VPN positivo indica:",
    "o": [
+    "Ausencia de costos de operación",
+    "Rendimiento igual a la inflación",
     "Rendimiento mayor que la tasa exigida",
-    "Rendimiento menor",
-    "Pérdida segura",
-    "Ausencia de costos"
+    "Pérdida segura para el proyecto"
    ],
-   "a": 0,
+   "a": 2,
    "e": "El proyecto agrega valor a la tasa elegida."
   },
   {
    "q": "El tornado muestra:",
    "o": [
-    "La probabilidad de éxito",
-    "El efecto de cada variable sobre el VPN",
-    "El volumen",
-    "El precio histórico"
+    "La probabilidad de éxito de cada pozo",
+    "El volumen de reservas recuperables",
+    "El precio histórico del crudo",
+    "El efecto de cada variable sobre el VPN"
    ],
-   "a": 1,
+   "a": 3,
    "e": "Ordena las variables por su efecto sobre el resultado."
   },
   {
@@ -831,12 +840,12 @@
   {
    "q": "Un portafolio de pozos independientes reduce:",
    "o": [
-    "El VME",
+    "El VME esperado de cada pozo del conjunto",
+    "El capital total que se invierte",
     "La probabilidad de pérdida total",
-    "El capital",
-    "El costo de cada pozo"
+    "El costo individual de cada pozo perforado"
    ],
-   "a": 1,
+   "a": 2,
    "e": "La diversificación disminuye la dispersión."
   },
   {
@@ -853,12 +862,12 @@
   {
    "q": "La lección principal de los megaproyectos es:",
    "o": [
-    "Reducir el alcance al azar",
-    "Evitar el análisis",
-    "Preparar bien y considerar escenarios adversos",
-    "Ignorar el cronograma"
+    "Recortar el alcance sin analizar el impacto",
+    "Evitar el análisis para ganar tiempo",
+    "Ignorar el cronograma original",
+    "Preparar bien y considerar escenarios adversos"
    ],
-   "a": 2,
+   "a": 3,
    "e": "La preparación previa y la contingencia son claves."
   }
  ],
