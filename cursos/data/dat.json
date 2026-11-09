@@ -695,9 +695,14 @@
        "hl": 0,
        "notes": [
         {
+         "t": "Los datos de entrada cambian",
+         "k": "deriva de datos",
+         "n": "Deriva de datos (data drift): cambia la distribución de los datos de entrada, por ejemplo por un nuevo diseño de completación."
+        },
+        {
          "t": "cambia la relación entre variables y resultado",
          "k": "deriva de concepto",
-         "n": "Deriva de concepto (concept drift): cambia la relación entre entradas y resultado. Si solo cambian los datos de entrada, es deriva de datos."
+         "n": "Deriva de concepto (concept drift): cambia la relación entre las entradas y el resultado, aunque las entradas se vean iguales."
         }
        ]
       },
