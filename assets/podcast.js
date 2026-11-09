@@ -11,8 +11,13 @@ var TX={
 };
 var LOC={es:'es-AR',en:'en-US',fr:'fr-FR',pt:'pt-BR'};
 var MON={es:['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'],en:['January','February','March','April','May','June','July','August','September','October','November','December'],fr:['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'],pt:['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro']};
+/* cifras con punto de miles a palabras (40.000 = cuarenta mil) para que la voz las diga bien */
+var numEs=(function(){var U=['cero','uno','dos','tres','cuatro','cinco','seis','siete','ocho','nueve','diez','once','doce','trece','catorce','quince','dieciséis','diecisiete','dieciocho','diecinueve','veinte','veintiuno','veintidós','veintitrés','veinticuatro','veinticinco','veintiséis','veintisiete','veintiocho','veintinueve'],T=['','','','treinta','cuarenta','cincuenta','sesenta','setenta','ochenta','noventa'],H=['','ciento','doscientos','trescientos','cuatrocientos','quinientos','seiscientos','setecientos','ochocientos','novecientos'];
+function ap(x){return x.replace(/veintiuno$/,'veintiún').replace(/uno$/,'un')}
+function w(n){if(n<30)return U[n];if(n<100)return T[Math.floor(n/10)]+(n%10?' y '+U[n%10]:'');if(n<1000)return n===100?'cien':H[Math.floor(n/100)]+(n%100?' '+w(n%100):'');if(n<1e6){var m=Math.floor(n/1e3),r=n%1e3;return(m===1?'mil':ap(w(m))+' mil')+(r?' '+w(r):'')}var M=Math.floor(n/1e6),q=n%1e6;return(M===1?'un millón':ap(w(M))+' millones')+(q?' '+w(q):'')}
+return function(t){return String(t).replace(/(?<![\d.,])\d{1,3}(?:\.\d{3})+(?!\d|,\d)/g,function(m){return w(parseInt(m.replace(/\./g,''),10))})}})();
 /* dicción: cómo se dicen siglas y símbolos en cada idioma (YPF en español se dice "i pe efe", no "i griega") */
-var PRON={es:[[/\bYPF\b/g,'i pe efe'],[/u\$s\s*([\d.,]+)\s*millones/gi,'$1 millones de dólares'],[/U\$S|US\$/g,'dólares'],[/\bGNL\b/g,'gas natural licuado'],[/\bUSD\b/g,'dólares']],
+var PRON={es:[[/\bYPF\b/g,'i pe efe'],[/u\$s\s*([\d.,]+)\s*millones/gi,'$1 millones de dólares'],[/U\$S|US\$/g,'dólares'],[/\bGNL\b/g,'gas natural licuado'],[/\bUSD\b/g,'dólares'],[/(?<![\d.,])\d{1,3}(?:\.\d{3})+(?!\d|,\d)/g,numEs]],
  en:[[/\bYPFs\b/g,'Y P Fs'],[/\bYPF\b/g,'Y P F']],fr:[[/\bYPF\b/g,'i grec pé èf']],pt:[[/\bYPF\b/g,'i pê éfe']]};
 function pron(x,l){var r=PRON[l]||[];for(var i=0;i<r.length;i++)x=x.replace(r[i][0],r[i][1]);return x.replace(/\.com\b/gi,'')}
 var ES_SRC=/lmneuquen|infobae|cronista|r[ií]o negro|cuyo|mejor energ|clar[ií]n|p[aá]gina|ámbito|ambito|econom|energ[ií]a/i;
