@@ -173,7 +173,7 @@
        }
       },
       {
-       "say": "Seguir los errores de forma ordenada hace visibles los desvíos que se repiten, deja registro de las decisiones y permite medir tiempos de resolución y reincidencia. En una planta, eso evita que lo conocido se normalice.",
+       "say": "Seguir los errores de forma ordenada hace visibles los desvíos repetidos, y permite escalarlos.",
        "scene": {
         "t": "bul",
         "k": "Por qué importa",
@@ -184,7 +184,20 @@
          "Se miden tiempos de resolución y reincidencia",
          "Se comparte lo aprendido con otros activos"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Deja registro de qué se decidió y por qué.",
+       "hl": 1
+      },
+      {
+       "say": "Permite medir tiempos de resolución y reincidencia.",
+       "hl": 2
+      },
+      {
+       "say": "Y se comparte lo aprendido con otros activos. En una planta, eso evita que lo conocido se normalice.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -326,7 +339,7 @@
        }
       },
       {
-       "say": "Jira organiza los errores con componentes, versiones y etiquetas. La versión afectada y la de corrección permiten saber desde cuándo existe el error y en qué liberación se arregla. Los enlaces conectan duplicados y causas.",
+       "say": "Jira organiza los errores con componentes: medición, comunicaciones, reportes e integración.",
        "scene": {
         "t": "bul",
         "k": "Componentes y versiones",
@@ -337,7 +350,20 @@
          "Etiquetas para temas transversales, como recurrente",
          "Enlaces entre tickets: duplica, bloquea y se relaciona con"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "La versión afectada y la de corrección permiten saber desde cuándo existe el error y en qué liberación se arregla.",
+       "hl": 1
+      },
+      {
+       "say": "Las etiquetas sirven para temas transversales, como recurrente.",
+       "hl": 2
+      },
+      {
+       "say": "Y los enlaces entre tickets conectan duplicados y causas: duplica, bloquea y se relaciona con.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -462,7 +488,7 @@
        }
       },
       {
-       "say": "Cuando aparece un error ya reportado, se enlaza como duplicado y se suma una recurrencia al ticket original. Una regla de automatización puede subir la prioridad al llegar a tres. Un error conocido que se repite es una señal de riesgo.",
+       "say": "Cuando aparece un error ya reportado, se enlaza como duplicado y se cierra el nuevo.",
        "scene": {
         "t": "bul",
         "k": "Duplicados y recurrencia",
@@ -473,7 +499,20 @@
          "Con tres o más recurrencias, se sube la prioridad y se avisa",
          "Un error conocido que se repite es una señal de riesgo, no una molestia"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Se suma una recurrencia al ticket original.",
+       "hl": 1
+      },
+      {
+       "say": "Una regla de automatización sube la prioridad y avisa al llegar a tres recurrencias.",
+       "hl": 2
+      },
+      {
+       "say": "Un error conocido que se repite es una señal de riesgo, y no una molestia.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -497,7 +536,7 @@
      "comp": "Gestión y métricas",
      "cues": [
       {
-       "say": "JQL es el lenguaje de consultas de Jira. Con unas pocas consultas el equipo arma su tablero de seguimiento: errores abiertos, críticos abiertos, recurrentes y cerrados del mes. Los resultados se muestran en tableros con gadgets.",
+       "say": "JQL es el lenguaje de consultas de Jira. Con unas pocas consultas el equipo arma su tablero de seguimiento. Primero, los errores abiertos: del proyecto planta, de tipo Bug, que todavía no están terminados.",
        "scene": {
         "t": "bul",
         "k": "JQL",
@@ -515,7 +554,20 @@
          "k": "JQL",
          "n": "Jira Query Language: lenguaje para buscar y filtrar tickets con condiciones."
         }
-       ]
+       ],
+       "hl": 0
+      },
+      {
+       "say": "Segundo, los críticos abiertos: los mismos, con severidad crítica.",
+       "hl": 1
+      },
+      {
+       "say": "Tercero, los recurrentes: los que llevan la etiqueta recurrente y siguen abiertos.",
+       "hl": 2
+      },
+      {
+       "say": "Y cuarto, los cerrados del mes, resueltos desde el inicio del mes. Los resultados se muestran en tableros con gadgets.",
+       "hl": 3
       },
       {
        "say": "Tres métricas basta para empezar: el tiempo medio de resolución, la tasa de reapertura y la tasa de escape, que es la proporción de errores hallados en operación. Se miden por severidad, para no mezclar críticos con cosméticos.",
@@ -528,7 +580,7 @@
        }
       },
       {
-       "say": "Cada error importante debería terminar con una causa raíz registrada. La técnica de los cinco porqués ayuda a llegar a una causa del sistema y no a un culpable. La acción correctiva se enlaza al ticket y se revisa cada trimestre.",
+       "say": "Cada error importante debería terminar con una causa raíz registrada. La técnica de los cinco porqués: preguntar por qué cinco veces hasta llegar a una causa del sistema y no a un culpable.",
        "scene": {
         "t": "bul",
         "k": "Causa raíz",
@@ -539,7 +591,20 @@
          "Enlazar el error con la acción correctiva",
          "Revisar las causas más frecuentes cada trimestre"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "La causa se registra en un campo obligatorio al cerrar.",
+       "hl": 1
+      },
+      {
+       "say": "El error se enlaza con la acción correctiva.",
+       "hl": 2
+      },
+      {
+       "say": "Y las causas más frecuentes se revisan cada trimestre.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -604,7 +669,7 @@
      "comp": "Caso de medición de tanques",
      "cues": [
       {
-       "say": "Presentamos el caso, un ejemplo didáctico. Una planta de almacenamiento tiene seis tanques con medición automática de nivel, alarmas en el sistema SCADA y un interruptor independiente de alto nivel. Los problemas se comunicaban por radio y por correo.",
+       "say": "Presentamos el caso, un ejemplo didáctico. Una planta de almacenamiento tiene seis tanques de combustible con medición automática de nivel.",
        "scene": {
         "t": "bul",
         "k": "Contexto",
@@ -615,7 +680,20 @@
          "Antes: errores comunicados por radio y correo, sin registro común",
          "Objetivo: un seguimiento único con escalamiento por severidad"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Tiene un sistema SCADA con alarmas de alto nivel y un interruptor independiente.",
+       "hl": 1
+      },
+      {
+       "say": "Antes, los errores se comunicaban por radio y por correo, sin registro común.",
+       "hl": 2
+      },
+      {
+       "say": "El objetivo es un seguimiento único, con escalamiento por severidad.",
+       "hl": 3
       },
       {
        "say": "En la primera semana se reportan seis errores. Dos son críticos porque afectan barreras contra el sobrellenado. Se escalan de inmediato por el sistema de gestión de seguridad de procesos y por el responsable de la planta.",
@@ -670,7 +748,7 @@
        }
       },
       {
-       "say": "Veamos el primer reporte. Incluye los pasos para reproducirlo, el resultado esperado, el observado y el entorno. Con esa información, un técnico de instrumentos puede confirmar la falla sin llamar a quien la reportó.",
+       "say": "Veamos el primer reporte. Incluye los pasos para reproducirlo: llenar el tanque 3 desde 40 por ciento y observar el valor en pantalla.",
        "scene": {
         "t": "bul",
         "k": "Primer reporte",
@@ -681,7 +759,20 @@
          "Observado: el valor queda fijo aunque el caudal continúa",
          "Entorno: SCADA de la planta, tanque 3, turno noche"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "El resultado esperado: el nivel sube junto con el llenado.",
+       "hl": 1
+      },
+      {
+       "say": "El observado: el valor queda fijo aunque el caudal continúa.",
+       "hl": 2
+      },
+      {
+       "say": "Y el entorno: SCADA de la planta, tanque 3, turno noche. Con eso, un técnico de instrumentos puede confirmar la falla sin llamar a quien la reportó.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -705,7 +796,7 @@
      "comp": "Resolución y aprendizaje",
      "cues": [
       {
-       "say": "Los errores críticos se corrigen y se verifican con una prueba en campo hecha por una persona distinta de quien corrigió. Cada ticket cierra con la causa raíz y la acción correctiva registradas. Sin verificación, el ticket no se cierra.",
+       "say": "Los errores críticos se corrigen y se verifican con una prueba en campo. En el ticket PLA-1, se cambia el sensor y se comprueba con un llenado de prueba.",
        "scene": {
         "t": "bul",
         "k": "Resolución",
@@ -716,10 +807,23 @@
          "Ambos se verifican por una persona distinta de quien corrigió",
          "Se registran causa raíz y acción correctiva en cada ticket"
         ]
-       }
+       },
+       "hl": 0
       },
       {
-       "say": "Más adelante, la falla de congelamiento aparece en otros tanques. Cada aviso se enlaza como duplicado y suma una recurrencia. Al llegar a tres, la regla sube la prioridad y notifica. Lo repetido deja de ser una molestia y pasa a ser riesgo.",
+       "say": "En el PLA-2, se agrega la comprobación del interruptor a la lista del turno.",
+       "hl": 1
+      },
+      {
+       "say": "Ambos se verifican por una persona distinta de quien corrigió.",
+       "hl": 2
+      },
+      {
+       "say": "Y cada ticket cierra con la causa raíz y la acción correctiva registradas. Sin verificación, el ticket no se cierra.",
+       "hl": 3
+      },
+      {
+       "say": "Más adelante, en el mes, la falla de congelamiento aparece tres veces en otros tanques.",
        "scene": {
         "t": "bul",
         "k": "Recurrencia",
@@ -730,7 +834,20 @@
          "Al llegar a tres, Jira sube la prioridad y notifica al responsable",
          "Se abre una acción correctiva de fondo con el proveedor"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Cada aviso se enlaza como duplicado y suma una recurrencia.",
+       "hl": 1
+      },
+      {
+       "say": "Al llegar a tres, Jira sube la prioridad y notifica al responsable.",
+       "hl": 2
+      },
+      {
+       "say": "Y se abre una acción correctiva de fondo con el proveedor. Lo repetido deja de ser una molestia y pasa a ser riesgo.",
+       "hl": 3
       },
       {
        "say": "Tras un trimestre, no queda ningún error sin responsable, los críticos se resuelven en dos días y la acción de fondo con el proveedor elimina la repetición. La tasa de reapertura de ocho por ciento sirve como punto de partida.",
@@ -768,7 +885,7 @@
        }
       },
       {
-       "say": "Las lecciones. Un error conocido que se repite debe escalarse. Un control de seguridad se prueba, no se supone. Y Jira organiza el seguimiento, pero no reemplaza la gestión de cambios, el mantenimiento ni la seguridad de procesos.",
+       "say": "Las lecciones. Un error conocido que se repite debe escalarse.",
        "scene": {
         "t": "bul",
         "k": "Lecciones",
@@ -779,7 +896,20 @@
          "Jira organiza el seguimiento; no reemplaza el sistema de gestión de seguridad de procesos ni el de mantenimiento",
          "Las métricas se miran por severidad"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Un control de seguridad se prueba y se verifica, no se supone.",
+       "hl": 1
+      },
+      {
+       "say": "Jira organiza el seguimiento, pero no reemplaza el sistema de gestión de seguridad de procesos ni el de mantenimiento.",
+       "hl": 2
+      },
+      {
+       "say": "Y las métricas se miran por severidad.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",

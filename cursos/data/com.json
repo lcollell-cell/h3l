@@ -123,7 +123,7 @@
        }
       },
       {
-       "say": "El gas natural no tiene un único precio mundial. Se negocia en mercados regionales, con referencias como el Henry Hub en Estados Unidos, y los precios de cada región pueden ser muy distintos. El gas natural licuado conecta mercados, a cambio del costo de licuar, transportar y regasificar. Los contratos pueden ser de largo plazo, indexados, o de corto plazo, al contado.",
+       "say": "El gas natural no tiene un único precio mundial.",
        "scene": {
         "t": "bul",
         "k": "Gas",
@@ -137,6 +137,22 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Se negocia en mercados regionales, con referencias como el Henry Hub en Estados Unidos, y los precios de cada región pueden ser muy distintos.",
+       "hl": 1
+      },
+      {
+       "say": "Los contratos pueden ser de largo plazo, con fórmulas de indexación, o de corto plazo, al contado.",
+       "hl": 2
+      },
+      {
+       "say": "El gas natural licuado conecta mercados, a cambio de un costo fijo alto: licuar, transportar y regasificar.",
+       "hl": 3
+      },
+      {
+       "say": "Y la capacidad de transporte condiciona el precio local.",
+       "hl": 4
       },
       {
        "say": "Pregunta rápida.",
@@ -180,7 +196,7 @@
        "lab": true
       },
       {
-       "say": "La paridad de exportación compara lo que se obtiene exportando con lo que se obtiene vendiendo en el mercado local. Si el precio local es menor que el netback de exportar, el productor prefiere exportar, y si no puede hacerlo, el mercado local queda con un precio inferior. Es una herramienta para analizar políticas de precios y de acceso al mercado.",
+       "say": "La paridad de exportación compara el precio local con el netback de exportar.",
        "scene": {
         "t": "bul",
         "k": "Paridad",
@@ -194,6 +210,22 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Si el local es menor, el productor tiene incentivo a exportar.",
+       "hl": 1
+      },
+      {
+       "say": "Si no puede hacerlo, por restricciones de exportación, el mercado local queda con un precio inferior.",
+       "hl": 2
+      },
+      {
+       "say": "Los derechos de exportación, a su vez, bajan el netback.",
+       "hl": 3
+      },
+      {
+       "say": "Y la política de cada país cambia con el tiempo. Es una herramienta para analizar políticas de precios y de acceso al mercado.",
+       "hl": 4
       },
       {
        "say": "Pregunta rápida.",
@@ -258,7 +290,7 @@
      "comp": "Instrumentos de cobertura",
      "cues": [
       {
-       "say": "Un futuro es un contrato estandarizado, negociado en un mercado organizado, para comprar o vender una cantidad de producto a un precio y en una fecha futuros. Exige un depósito de garantía y se liquida a diario con el precio de mercado, de modo que las ganancias y las pérdidas se pagan o se cobran todos los días, los llamados márgenes.",
+       "say": "Un futuro es un contrato estandarizado, negociado en un mercado organizado, para comprar o vender una cantidad de producto a un precio y en una fecha futuros.",
        "scene": {
         "t": "bul",
         "k": "Futuro",
@@ -270,6 +302,18 @@
          "Una pérdida diaria exige fondos de inmediato"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Exige una garantía inicial y se liquida a diario con el precio de mercado: las ganancias y las pérdidas se pagan o se cobran todos los días, los llamados márgenes.",
+       "hl": 1
+      },
+      {
+       "say": "Casi siempre se cierra antes del vencimiento.",
+       "hl": 2
+      },
+      {
+       "say": "Y una pérdida diaria exige fondos de inmediato.",
        "hl": 3
       },
       {
@@ -313,7 +357,7 @@
        }
       },
       {
-       "say": "Cubrir no es especular. La cobertura se hace sobre producción esperada, para reducir la variabilidad del flujo de caja, y no para ganar con el mercado. Si se cubre más de lo que se produce, se vuelve especulación. Y la cobertura nunca es perfecta: aparece el riesgo de base, la diferencia entre el precio de referencia cubierto y el precio real que recibe el productor.",
+       "say": "Cubrir no es especular. Se cubre producción esperada, y no más; si se cubre más de lo que se produce, se vuelve especulación.",
        "scene": {
         "t": "bul",
         "k": "Cobertura",
@@ -327,6 +371,22 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "El objetivo es proteger el flujo de caja, reduciendo su variabilidad.",
+       "hl": 1
+      },
+      {
+       "say": "La cobertura nunca es perfecta: el riesgo de base permanece, la diferencia entre el precio de referencia cubierto y el que recibe el productor.",
+       "hl": 2
+      },
+      {
+       "say": "Según el instrumento, se pierde la ganancia si el precio sube.",
+       "hl": 3
+      },
+      {
+       "say": "Y hay costos: primas, márgenes y crédito.",
+       "hl": 4
       },
       {
        "say": "Pregunta rápida.",
@@ -350,7 +410,7 @@
      "comp": "Estrategias de cobertura",
      "cues": [
       {
-       "say": "Cuatro estrategias básicas. Sin cobertura, el productor se expone al precio de mercado completo. Con un put, se paga una prima y se asegura un piso, sin perder la ganancia si el precio sube. Con un swap, se fija el precio y se elimina el riesgo y la ganancia. Con un collar, se pone un piso y un techo, a menor costo.",
+       "say": "Hay cuatro estrategias básicas. Sin cobertura, el productor se expone al precio de mercado completo: riesgo total y ganancia total.",
        "scene": {
         "t": "bul",
         "k": "Estrategias",
@@ -365,6 +425,18 @@
        "hl": 0
       },
       {
+       "say": "Con un put, se paga una prima y se asegura un piso, sin perder la ganancia si el precio sube.",
+       "hl": 1
+      },
+      {
+       "say": "Con un swap, se fija el precio: se elimina el riesgo, y también la ganancia adicional.",
+       "hl": 2
+      },
+      {
+       "say": "Con un collar, se pone un piso y un techo, a un costo bajo o nulo, con ganancia limitada.",
+       "hl": 3
+      },
+      {
        "say": "Laboratorio. Elegí la estrategia, el precio piso, el techo y la prima, y movés el precio de mercado al vencimiento. Mirá el ingreso por barril contra el mercado sin cobertura. Las primas son datos de entrada y no una valuación. Es un ejemplo didáctico.",
        "scene": {
         "t": "viz",
@@ -375,7 +447,7 @@
        "lab": true
       },
       {
-       "say": "La decisión depende del objetivo. Una empresa con deuda y compromisos de inversión necesita un piso y suele preferir put o collar. Una con costos bajos y balance sólido puede asumir más riesgo. La política de cobertura define qué porcentaje de la producción de cada año se cubre, con qué instrumentos y quién lo aprueba.",
+       "say": "La decisión depende del objetivo. Una empresa con deuda y compromisos de inversión necesita un piso y suele preferir put o collar; una con costos bajos y balance sólido puede asumir más riesgo. La política define el porcentaje cubierto por año y el horizonte.",
        "scene": {
         "t": "bul",
         "k": "Política",
@@ -389,6 +461,22 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Define los instrumentos permitidos.",
+       "hl": 1
+      },
+      {
+       "say": "Las contrapartes aprobadas y sus límites.",
+       "hl": 2
+      },
+      {
+       "say": "Quién autoriza y cómo se informa.",
+       "hl": 3
+      },
+      {
+       "say": "Y la revisión periódica ante cambios del negocio.",
+       "hl": 4
       },
       {
        "say": "Pregunta rápida.",
@@ -479,7 +567,7 @@
        }
       },
       {
-       "say": "El riesgo de contraparte es que la otra parte no cumpla. Se gestiona con análisis de crédito, límites por contraparte, garantías, cartas de crédito y acuerdos marco que permiten compensar saldos. Un contrato de cobertura sin una contraparte confiable puede ser tan riesgoso como no cubrirse.",
+       "say": "El riesgo de contraparte es que la otra parte no cumpla. Se gestiona con análisis de crédito y límites por contraparte.",
        "scene": {
         "t": "bul",
         "k": "Contraparte",
@@ -495,7 +583,23 @@
        "hl": 0
       },
       {
-       "say": "Hay otras cláusulas que importan. La fuerza mayor, qué eventos liberan a una parte; la calidad, con límites y penalidades por incumplir la especificación; el volumen, con mínimos y tolerancias, y los mecanismos de resolución de disputas. Una cláusula bien redactada vale más que una negociación posterior en medio de un conflicto.",
+       "say": "Con cartas de crédito y garantías.",
+       "hl": 1
+      },
+      {
+       "say": "Con acuerdos marco que permiten compensar saldos.",
+       "hl": 2
+      },
+      {
+       "say": "Diversificando contrapartes.",
+       "hl": 3
+      },
+      {
+       "say": "Y con seguimiento continuo de su situación financiera. Una cobertura sin una contraparte confiable puede ser tan riesgosa como no cubrirse.",
+       "hl": 4
+      },
+      {
+       "say": "Hay otras cláusulas que importan. La fuerza mayor: qué eventos liberan a una parte.",
        "scene": {
         "t": "bul",
         "k": "Cláusulas",
@@ -509,6 +613,22 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "La calidad, con límites y penalidades por incumplir la especificación.",
+       "hl": 1
+      },
+      {
+       "say": "El volumen, con mínimos y tolerancias.",
+       "hl": 2
+      },
+      {
+       "say": "El precio y su fórmula de ajuste.",
+       "hl": 3
+      },
+      {
+       "say": "Y la resolución de disputas. Una cláusula bien redactada vale más que una negociación posterior en medio de un conflicto.",
+       "hl": 4
       },
       {
        "say": "Pregunta rápida.",
@@ -544,7 +664,7 @@
        }
       },
       {
-       "say": "Para un productor que se cubre, la enseñanza es de gobierno. Entender cómo se liquida el instrumento, tener fondos para los márgenes, no cerrar posiciones físicas a último momento, y definir quién decide y con qué límites. El comité de riesgos revisa las posiciones, las contrapartes y el desempeño de las coberturas con regularidad.",
+       "say": "Para un productor que se cubre, la enseñanza es de gobierno. Primero, una política aprobada por el directorio.",
        "scene": {
         "t": "bul",
         "k": "Gobierno",
@@ -560,7 +680,23 @@
        "hl": 0
       },
       {
-       "say": "Un resumen del curso es una pregunta de orden. Primero, ¿cuánto vale el negocio sin cobertura y cuánto de ese riesgo puede soportar la empresa? Segundo, ¿qué instrumento cubre ese riesgo con el menor costo y el menor riesgo adicional? Tercero, ¿quién controla y cómo se mide? Cubrir es una decisión de empresa y no un trámite financiero.",
+       "say": "Un comité de riesgos con reuniones regulares, que revisa posiciones, contrapartes y desempeño.",
+       "hl": 1
+      },
+      {
+       "say": "Límites de posición, de crédito y de pérdida.",
+       "hl": 2
+      },
+      {
+       "say": "Separación entre quien opera y quien controla.",
+       "hl": 3
+      },
+      {
+       "say": "E informes periódicos de posiciones y de efectividad. Hay que entender cómo se liquida el instrumento y tener fondos para los márgenes.",
+       "hl": 4
+      },
+      {
+       "say": "Un resumen del curso es una pregunta de orden. Primero, ¿cuánto riesgo puede soportar la empresa, y cuánto vale el negocio sin cobertura?",
        "scene": {
         "t": "bul",
         "k": "Tres preguntas",
@@ -573,6 +709,18 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Segundo, ¿qué instrumento lo cubre con el menor costo y el menor riesgo adicional?",
+       "hl": 1
+      },
+      {
+       "say": "Tercero, ¿quién controla y cómo se mide el resultado?",
+       "hl": 2
+      },
+      {
+       "say": "Y cuarto, ¿qué pasa con el flujo de caja si el mercado se mueve en contra? Cubrir es una decisión de empresa y no un trámite financiero.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",

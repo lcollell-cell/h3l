@@ -245,7 +245,7 @@
      "comp": "Alcance y cronograma",
      "cues": [
       {
-       "say": "La estructura de desglose del trabajo, o EDT, divide el alcance en entregables y paquetes de trabajo. Cumple la regla del cien por ciento: lo que está en los hijos cubre todo el alcance del padre. Define qué se hace, no cuándo.",
+       "say": "La estructura de desglose del trabajo, o EDT, divide el alcance en entregables y paquetes de trabajo.",
        "scene": {
         "t": "bul",
         "k": "EDT",
@@ -256,7 +256,20 @@
          "Cada paquete tiene un responsable y un criterio de aceptación",
          "La EDT define qué se hace; el cronograma, cuándo"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Cumple la regla del cien por ciento: lo que está en los hijos cubre todo el alcance del padre.",
+       "hl": 1
+      },
+      {
+       "say": "Cada paquete tiene un responsable y un criterio de aceptación.",
+       "hl": 2
+      },
+      {
+       "say": "La EDT define qué se hace; el cronograma, cuándo.",
+       "hl": 3
       },
       {
        "say": "El método del camino crítico calcula las fechas tempranas con una pasada hacia adelante y las tardías con una pasada hacia atrás. La holgura total es la diferencia. La ruta crítica reúne las actividades sin holgura: cualquier atraso mueve el fin del proyecto.",
@@ -413,7 +426,7 @@
        }
       },
       {
-       "say": "El flujo de trabajo puede incluir una aprobación. Se restringe la transición a Aprobado a un rol autorizado, y se exigen campos como el criterio de aceptación. El historial del ticket deja registro de quién aprobó y cuándo.",
+       "say": "El flujo de trabajo puede incluir una aprobación, con estados: Propuesto, En revisión, Aprobado, En ejecución, Verificado y Cerrado.",
        "scene": {
         "t": "bul",
         "k": "Flujo",
@@ -424,10 +437,23 @@
          "Campos obligatorios: entregable y criterio de aceptación",
          "Un historial que muestra quién aprobó y cuándo"
         ]
-       }
+       },
+       "hl": 0
       },
       {
-       "say": "Los vínculos entre tickets permiten mostrar dependencias. La vista Timeline presenta épicas, fechas y dependencias de un proyecto, y en Jira Premium la función Plans planifica entre varios equipos. Pero Jira no calcula la ruta crítica de forma nativa.",
+       "say": "La transición a Aprobado solo la hace un rol autorizado.",
+       "hl": 1
+      },
+      {
+       "say": "Se exigen campos obligatorios: el entregable y el criterio de aceptación.",
+       "hl": 2
+      },
+      {
+       "say": "Y el historial del ticket deja registro de quién aprobó y cuándo.",
+       "hl": 3
+      },
+      {
+       "say": "Los vínculos entre tickets permiten mostrar dependencias, con relaciones como bloquea y es bloqueado por.",
        "scene": {
         "t": "bul",
         "k": "Cronograma",
@@ -445,7 +471,20 @@
          "k": "Timeline",
          "n": "Vista de cronograma de Jira con barras para épicas y tickets según sus fechas."
         }
-       ]
+       ],
+       "hl": 0
+      },
+      {
+       "say": "La vista Timeline presenta épicas, fechas y dependencias de un proyecto.",
+       "hl": 1
+      },
+      {
+       "say": "Plans, de Jira Premium, planifica entre varios equipos y proyectos.",
+       "hl": 2
+      },
+      {
+       "say": "Pero Jira no calcula la ruta crítica de forma nativa.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -469,7 +508,7 @@
      "comp": "Seguimiento y control",
      "cues": [
       {
-       "say": "El seguimiento semanal se apoya en un tablero con gadgets: tickets vencidos, bloqueados, creados frente a resueltos, avance por épica y próximos hitos. El informe de estado sale de esos datos y no de la memoria de cada responsable.",
+       "say": "El seguimiento semanal se apoya en un tablero con gadgets. Primero, el filtro de tickets vencidos y de tickets bloqueados.",
        "scene": {
         "t": "bul",
         "k": "Tableros",
@@ -480,10 +519,23 @@
          "Estado por épica: porcentaje de tareas terminadas",
          "Lista de hitos próximos y de cambios pendientes"
         ]
-       }
+       },
+       "hl": 0
       },
       {
-       "say": "Todo cambio al alcance, al plazo o al costo se registra como un ticket, con su motivo y su impacto. Lo evalúa y lo aprueba el comité o el patrocinador según un umbral. Aprobado el cambio, se actualizan los tickets y la línea base.",
+       "say": "El gráfico de tickets creados frente a resueltos.",
+       "hl": 1
+      },
+      {
+       "say": "El estado por épica: el porcentaje de tareas terminadas.",
+       "hl": 2
+      },
+      {
+       "say": "Y la lista de hitos próximos y de cambios pendientes. El informe de estado sale de esos datos y no de la memoria de cada responsable.",
+       "hl": 3
+      },
+      {
+       "say": "Todo cambio al alcance, al plazo o al costo se registra como un ticket de tipo Cambio, con su motivo y su impacto.",
        "scene": {
         "t": "bul",
         "k": "Control de cambios",
@@ -494,7 +546,20 @@
          "Lo aprueba el comité o el patrocinador, según el umbral",
          "Si se aprueba, se actualizan los tickets y la línea base"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Se evalúa el efecto sobre alcance, plazo, costo y riesgo.",
+       "hl": 1
+      },
+      {
+       "say": "Lo aprueba el comité o el patrocinador, según un umbral.",
+       "hl": 2
+      },
+      {
+       "say": "Y si se aprueba, se actualizan los tickets y la línea base.",
+       "hl": 3
       },
       {
        "say": "Conviene conocer los límites. Jira no calcula la ruta crítica, no guarda líneas base de costo y plazo de forma nativa ni calcula valor ganado. Esas funciones se completan con Primavera, con aplicaciones del Marketplace o con una planilla de control.",
@@ -601,7 +666,7 @@
      "comp": "Caso de perforación de un pozo",
      "cues": [
       {
-       "say": "Presentamos el caso, un ejemplo didáctico con datos ilustrativos. Se debe perforar, terminar y poner en producción un pozo horizontal en un yacimiento no convencional. El presupuesto es de nueve coma cuatro millones de dólares.",
+       "say": "Presentamos el caso, un ejemplo didáctico con datos ilustrativos. Se debe perforar, terminar y poner en producción un pozo horizontal en un yacimiento no convencional. El objetivo: el pozo terminado y en producción en 111 días como máximo.",
        "scene": {
         "t": "bul",
         "k": "Contexto",
@@ -612,7 +677,20 @@
          "Patrocinador: gerente de activo; gerente de proyecto: ingeniero de pozos",
          "Datos ilustrativos, para practicar el método"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "El presupuesto de ejemplo es de nueve coma cuatro millones de dólares.",
+       "hl": 1
+      },
+      {
+       "say": "El patrocinador es el gerente de activo, y el gerente de proyecto, el ingeniero de pozos.",
+       "hl": 2
+      },
+      {
+       "say": "Los datos son ilustrativos, para practicar el método.",
+       "hl": 3
       },
       {
        "say": "Paso uno, armar la red. Hay diez actividades con sus duraciones y predecesoras. La ingeniería y los permisos arrancan en paralelo, y la movilización del equipo espera materiales y locación.",
@@ -690,7 +768,7 @@
        }
       },
       {
-       "say": "Paso dos, cargar el plan en Jira. Se crean cinco épicas, las tareas con sus fechas y los enlaces de dependencia, y cinco hitos con aprobación. El costo presupuestado de cada tarea se carga como un campo, para poder exportarlo.",
+       "say": "Paso dos, cargar el plan en Jira. Se crean cinco épicas: Ingeniería y permisos, Locación, Perforación, Terminación y fractura, y Puesta en producción.",
        "scene": {
         "t": "bul",
         "k": "Jira",
@@ -701,7 +779,20 @@
          "Cinco hitos: diseño aprobado, listo para perforar, perforación terminada, pozo terminado y entrega",
          "Campos de ejemplo: costo presupuestado y responsable"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Cada actividad es una tarea con fechas y enlaces de dependencia.",
+       "hl": 1
+      },
+      {
+       "say": "Se agregan cinco hitos: diseño aprobado, listo para perforar, perforación terminada, pozo terminado y entrega.",
+       "hl": 2
+      },
+      {
+       "say": "Y el costo presupuestado de cada tarea y el responsable se cargan como campos de ejemplo, para poder exportarlos.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -765,7 +856,7 @@
        }
       },
       {
-       "say": "En el mes uno, los permisos se atrasan cinco días. El camino de permisos y locación pasa a cuarenta y siete, mayor que los cuarenta y cinco del otro, y la ruta crítica cambia. El proyecto se retrasaría dos días.",
+       "say": "En el mes uno, los permisos se atrasan cinco días. La actividad B pasa de 30 a 35 días y, con D de 12, el camino llega a cuarenta y siete, mayor que los cuarenta y cinco del otro.",
        "scene": {
         "t": "bul",
         "k": "Desvío",
@@ -776,7 +867,20 @@
          "Cambio propuesto: un turno adicional en la locación, D baja a 10 días",
          "Impacto: costo adicional de ejemplo de 40.000 dólares, sin retraso final"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "La ruta crítica cambia: pasa por B y D, y el proyecto se retrasaría 2 días.",
+       "hl": 1
+      },
+      {
+       "say": "El cambio propuesto es un turno adicional en la locación: D baja a 10 días.",
+       "hl": 2
+      },
+      {
+       "say": "El impacto: un costo adicional de ejemplo de 40.000 dólares, sin retraso final.",
+       "hl": 3
       },
       {
        "say": "El gerente registra el cambio como ticket, con motivo, propuesta e impacto. El patrocinador compara el costo adicional con el valor de dos días de producción y lo aprueba. Se actualizan las fechas y la línea base.",
@@ -813,7 +917,7 @@
        }
       },
       {
-       "say": "Al cierre se registran las lecciones. Una actividad con holgura puede volverse crítica. La compuerta evitó movilizar el equipo sin permisos. Y Jira aportó trazabilidad, mientras que la ruta crítica y el valor ganado se calcularon en la planilla.",
+       "say": "Al cierre se registran las lecciones. Una actividad con holgura puede volverse crítica.",
        "scene": {
         "t": "bul",
         "k": "Cierre",
@@ -824,7 +928,20 @@
          "El cambio quedó registrado con su aprobación",
          "Jira dio trazabilidad; el cálculo de ruta crítica y valor ganado se hizo en la planilla"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "La compuerta evitó movilizar el equipo sin permisos.",
+       "hl": 1
+      },
+      {
+       "say": "El cambio quedó registrado con su aprobación.",
+       "hl": 2
+      },
+      {
+       "say": "Y Jira dio trazabilidad, mientras que el cálculo de la ruta crítica y del valor ganado se hizo en la planilla.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",

@@ -98,7 +98,7 @@
        }
       },
       {
-       "say": "Para usarlos bien hay una regla de coherencia. El factor actual nunca puede superar al final. El final de las reservas no debe incluir lo que todavía no es reserva. Y el final debe poder explicarse con un mecanismo físico, con una curva de declinación o con un pronóstico de simulación, y no con una cifra tomada de otro campo.",
+       "say": "Para usarlos bien hay una regla de coherencia. El factor actual no puede superar al final.",
        "scene": {
         "t": "bul",
         "k": "Reglas de coherencia",
@@ -111,7 +111,23 @@
          "Se compara con análogos como control y no como justificación"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "El final de las reservas incluye solo proyectos que cumplen los criterios de reservas.",
+       "hl": 1
+      },
+      {
+       "say": "El incremento de proyectos aún no comprometidos se informa aparte, como recurso contingente.",
        "hl": 2
+      },
+      {
+       "say": "Cada factor se acompaña de su método: declinación, balance de materiales o simulación, y no una cifra tomada de otro campo.",
+       "hl": 3
+      },
+      {
+       "say": "Y se compara con análogos como control, y no como justificación.",
+       "hl": 4
       },
       {
        "say": "Laboratorio. Es un campo de ejemplo. Cambiá el factor de recobro actual, el final sin EOR y el incremento esperado por EOR, y activá o no el compromiso del proyecto. Mirá cómo el mismo incremento pasa de recurso contingente a reservas y cómo cambia el factor final de reservas.",
@@ -221,7 +237,7 @@
        }
       },
       {
-       "say": "En gas el razonamiento es distinto. Un yacimiento volumétrico, sin acuífero, recupera una fracción alta, limitada por la presión de abandono. Con empuje de agua queda gas atrapado detrás del frente y la recuperación es menor, como se vio en el curso de yacimientos de gas. La presión de abandono es una decisión económica que mueve las reservas.",
+       "say": "En gas el razonamiento es distinto. Un yacimiento volumétrico, sin acuífero, recupera una fracción alta: la recuperación depende de la presión de abandono.",
        "scene": {
         "t": "bul",
         "k": "Gas",
@@ -234,6 +250,18 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Con empuje de agua queda gas atrapado detrás del frente y la recuperación es menor, como se vio en el curso de yacimientos de gas.",
+       "hl": 1
+      },
+      {
+       "say": "La compresión baja la presión de abandono y sube el recobro. La presión de abandono es una decisión económica que mueve las reservas.",
+       "hl": 2
+      },
+      {
+       "say": "Y el factor de recobro de gas se calcula con p sobre z.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -298,7 +326,7 @@
      "comp": "Estrategias de explotación",
      "cues": [
       {
-       "say": "La explotación se organiza en etapas. La primaria usa la energía natural del yacimiento. La secundaria agrega energía de afuera, con inyección de agua o de gas, para mantener presión y desplazar petróleo. La terciaria, o recuperación asistida, EOR, cambia las propiedades del fluido o de la interacción con la roca, para recuperar petróleo que el barrido convencional deja.",
+       "say": "La explotación se organiza en etapas. La primaria usa la energía natural del yacimiento: gas en solución, acuífero o casquete.",
        "scene": {
         "t": "bul",
         "k": "Etapas",
@@ -311,6 +339,18 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "La secundaria agrega energía de afuera, con inyección de agua o de gas, para mantener la presión y desplazar petróleo.",
+       "hl": 1
+      },
+      {
+       "say": "La terciaria, o recuperación asistida, EOR, puede ser térmica, de gas miscible o química, y cambia las propiedades del fluido o de la interacción con la roca, para recuperar petróleo que el barrido convencional deja.",
+       "hl": 2
+      },
+      {
+       "say": "Una misma cuenca puede combinar etapas, y algunas se aplican desde el inicio.",
+       "hl": 3
       },
       {
        "say": "Hay que distinguir EOR de recuperación mejorada, IOR. La IOR es más amplia: incluye perforación de relleno, control de conformance, mejoras de pozo y también EOR. La EOR actúa sobre el petróleo residual y no sobre el barrido. Para el evaluador la diferencia importa, porque el riesgo, el costo y la madurez tecnológica son distintos.",
@@ -414,7 +454,7 @@
        }
       },
       {
-       "say": "Cada método ataca una limitación distinta. El polímero mejora la razón de movilidad y, por lo tanto, el barrido, pero no baja el petróleo residual. El surfactante y el gas miscible bajan el petróleo residual, pero necesitan buen barrido para llegar a la roca. El calor actúa sobre la viscosidad. Por eso a veces se combinan y no se comparan solo por costo.",
+       "say": "Cada método ataca una limitación distinta. El polímero mejora la razón de movilidad y, por lo tanto, el barrido, pero no baja el petróleo residual.",
        "scene": {
         "t": "bul",
         "k": "Qué ataca cada método",
@@ -428,6 +468,22 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "El surfactante y el álcali bajan el petróleo residual.",
+       "hl": 1
+      },
+      {
+       "say": "El gas miscible baja el petróleo residual y expande el petróleo.",
+       "hl": 2
+      },
+      {
+       "say": "El vapor baja la viscosidad del petróleo pesado.",
+       "hl": 3
+      },
+      {
+       "say": "Por eso a veces se combinan, como álcali, surfactante y polímero, que atacan ambos factores, y no se comparan solo por costo.",
+       "hl": 4
       },
       {
        "say": "El recurso que consume cada método es una variable de diseño y de economía. El vapor consume combustible y agua tratada, y se mide con la relación vapor-petróleo. El CO₂ consume gas, y se mide en volumen inyectado por barril incremental. Los polímeros y surfactantes consumen producto químico. Esos consumos entran en el costo operativo y fijan el límite económico del proyecto.",
@@ -527,7 +583,7 @@
      "comp": "Selección de EOR por yacimiento",
      "cues": [
       {
-       "say": "Los criterios de selección, o screening, son rangos de propiedades del petróleo y del yacimiento donde cada método tiene antecedentes de éxito. Los compilaron Taber, Martin y Seright en 1997 a partir de proyectos de campo. Sirven para descartar métodos y armar una lista corta, pero no reemplazan el estudio de laboratorio, de simulación y el piloto.",
+       "say": "Los criterios de selección, o screening, son rangos de propiedades del petróleo y del yacimiento donde cada método tiene antecedentes de éxito. Son una primera selección y no una decisión.",
        "scene": {
         "t": "bul",
         "k": "Screening",
@@ -541,6 +597,22 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Se compara el yacimiento con los rangos de cada método. Los compilaron Taber, Martin y Seright en 1997 a partir de proyectos de campo.",
+       "hl": 1
+      },
+      {
+       "say": "Los límites cambian con el precio, la tecnología y la experiencia de campo.",
+       "hl": 2
+      },
+      {
+       "say": "Se confirman con laboratorio, simulación y piloto.",
+       "hl": 3
+      },
+      {
+       "say": "Y conviene consultar las versiones actualizadas.",
+       "hl": 4
       },
       {
        "say": "Como orientación, los rangos habituales indican lo siguiente. Los métodos térmicos se aplican a crudos pesados y viscosos, a profundidades moderadas y con buena permeabilidad. Los de gas miscible requieren petróleos livianos y profundidad suficiente para alcanzar la presión de miscibilidad. Los químicos requieren permeabilidad suficiente, temperatura y salinidad no extremas y viscosidad moderada.",
@@ -589,7 +661,7 @@
        }
       },
       {
-       "say": "Se decide mejor con preguntas. ¿El petróleo es pesado? Térmico. ¿Es liviano y el yacimiento profundo? Gas miscible. ¿Barre mal la inyección de agua por heterogeneidad? Polímero. ¿Queda mucho petróleo residual en roca permeable? Surfactante. Todo cambia si hay fracturas, carbonatos o salinidad extrema.",
+       "say": "Se decide mejor con preguntas. Primero, la viscosidad y la densidad: ¿el petróleo es pesado? Térmico.",
        "scene": {
         "t": "bul",
         "k": "Preguntas de decisión",
@@ -606,7 +678,27 @@
        "hl": 0
       },
       {
-       "say": "Una regla para maximizar el recobro. Empezar por el factor que más limita. Si el barrido es malo, mejorar el barrido antes de bajar el petróleo residual. Si el petróleo residual es alto y el barrido es bueno, atacar el residual. Y evaluar siempre la ganancia en puntos de recobro frente al costo y al consumo de recursos de cada método.",
+       "say": "¿Es liviano y el yacimiento profundo? Gas miscible, según la profundidad y la presión frente a la miscibilidad.",
+       "hl": 1
+      },
+      {
+       "say": "¿Barre mal la inyección de agua por heterogeneidad o capas ladronas? Polímero.",
+       "hl": 2
+      },
+      {
+       "say": "Se mira la temperatura y la salinidad del yacimiento. ¿Queda mucho petróleo residual en roca permeable? Surfactante.",
+       "hl": 3
+      },
+      {
+       "say": "Y la disponibilidad de insumos: gas, agua, vapor, químicos.",
+       "hl": 4
+      },
+      {
+       "say": "También la infraestructura existente y la proximidad de la fuente de CO₂. Todo cambia si hay fracturas, carbonatos o salinidad extrema.",
+       "hl": 5
+      },
+      {
+       "say": "Una regla para maximizar el recobro: diagnosticar si limita el barrido o el desplazamiento.",
        "scene": {
         "t": "bul",
         "k": "Regla práctica",
@@ -620,6 +712,22 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Elegir el método que ataca el factor limitante: si el barrido es malo, mejorarlo antes de bajar el petróleo residual.",
+       "hl": 1
+      },
+      {
+       "say": "Estimar el incremento en puntos de recobro y su incertidumbre.",
+       "hl": 2
+      },
+      {
+       "say": "Comparar el costo por barril incremental y el uso de insumos.",
+       "hl": 3
+      },
+      {
+       "say": "Y pilotar antes de comprometer el campo.",
+       "hl": 4
       },
       {
        "say": "Pregunta rápida.",
@@ -643,7 +751,7 @@
      "comp": "PRMS y uso de recursos",
      "cues": [
       {
-       "say": "PRMS clasifica las cantidades según su madurez. Un EOR puede estar en recursos contingentes, si depende de condiciones pendientes, o en reservas, si es comercial. Según las guías de aplicación de la SPE, un recurso contingente puede pasar a reservas cuando la entidad muestra intención firme de desarrollarlo y se cumplen los criterios de comercialidad.",
+       "say": "PRMS clasifica las cantidades según su madurez. Las reservas son cantidades comerciales, descubiertas y remanentes bajo un proyecto aplicado.",
        "scene": {
         "t": "bul",
         "k": "Reservas y contingentes",
@@ -657,6 +765,22 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Los recursos contingentes son potencialmente recuperables, pero con condiciones pendientes. Un EOR puede estar en cualquiera de las dos clases.",
+       "hl": 1
+      },
+      {
+       "say": "El paso exige un plan de desarrollo técnicamente maduro, financiamiento y economía positiva.",
+       "hl": 2
+      },
+      {
+       "say": "La intención firme de desarrollar es parte de la comercialidad. Según las guías de aplicación de la SPE, un recurso contingente puede pasar a reservas cuando se cumplen los criterios.",
+       "hl": 3
+      },
+      {
+       "say": "Y las reservas con proyecto aprobado pasan a la subclase aprobada para desarrollo.",
+       "hl": 4
       },
       {
        "say": "Dos reglas conectan con el recobro. Primero, la economía. La producción debe ser económica para ser reserva, y el límite económico se calcula con el flujo neto acumulado, sin contar los costos de abandono. Segundo, la tecnología. Los recursos contingentes pueden incluir proyectos cuya recuperación comercial depende de tecnología en desarrollo, mientras que las reservas requieren tecnología establecida. Un EOR sin piloto exitoso suele estar en contingentes.",
@@ -705,7 +829,7 @@
        }
       },
       {
-       "say": "El uso de recursos influye en lo que se puede clasificar. Si sube el consumo de vapor, gas o químicos, sube el costo por barril incremental, el límite económico se adelanta y las reservas del proyecto bajan. Con un precio menor pasa lo mismo.",
+       "say": "El uso de recursos influye en lo que se puede clasificar. Más insumo por barril incremental sube el costo operativo.",
        "scene": {
         "t": "bul",
         "k": "Uso de recursos",
@@ -719,6 +843,22 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "El límite económico se adelanta y las reservas bajan. Con un precio menor pasa lo mismo.",
+       "hl": 1
+      },
+      {
+       "say": "Las reservas se verifican en los escenarios bajo y alto de precio.",
+       "hl": 2
+      },
+      {
+       "say": "Los consumos reales del piloto reemplazan a los supuestos del diseño.",
+       "hl": 3
+      },
+      {
+       "say": "Y un análisis de sensibilidad muestra cuándo el incremento deja de ser reserva.",
+       "hl": 4
       },
       {
        "say": "Pregunta rápida.",

@@ -160,7 +160,7 @@
        }
       },
       {
-       "say": "Si hay un acuífero activo, el agua repone parte del vaciamiento. La presión cae más lentamente y la recta se curva hacia arriba. Una extrapolación ingenua de los primeros puntos sobreestima el gas en sitio, porque el acuífero hace parecer al yacimiento más grande de lo que es.",
+       "say": "Si hay un acuífero activo, el agua repone parte del vaciamiento, y la presión cae más lento que en un yacimiento volumétrico.",
        "scene": {
         "t": "bul",
         "k": "Efecto del acuífero",
@@ -172,7 +172,19 @@
          "La producción de agua en los pozos es una señal de alerta"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "La recta p sobre z se curva hacia arriba, y la extrapolación temprana sobreestima el gas en sitio: el acuífero hace parecer al yacimiento más grande de lo que es.",
        "hl": 1
+      },
+      {
+       "say": "Se necesita un modelo de acuífero para separar los efectos.",
+       "hl": 2
+      },
+      {
+       "say": "Y la producción de agua en los pozos es una señal de alerta.",
+       "hl": 3
       },
       {
        "say": "Laboratorio. Es un modelo simplificado con un porcentaje de reposición de agua. Cambiá el gas original, la reposición y la producción acumulada. Compará la recta volumétrica con la curva real y mirá el gas en sitio aparente que daría una extrapolación.",
@@ -257,7 +269,7 @@
        }
       },
       {
-       "say": "El caudal a pozo abierto, o AOF, es el caudal teórico cuando la presión de fondo es cero. Es una referencia para comparar pozos y no un caudal operable. El caudal real depende de la presión de fondo fluyente, que a su vez depende de la tubería, del separador y de la compresión disponibles.",
+       "say": "El caudal a pozo abierto, o AOF, es el caudal teórico cuando la presión de fondo es cero. Mide el potencial del reservorio y no es un caudal de operación.",
        "scene": {
         "t": "bul",
         "k": "AOF y caudal real",
@@ -270,6 +282,18 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "El caudal operable resulta de cruzar la curva de entrega con la curva de la tubería. Depende de la presión de fondo fluyente, de la tubería y del separador.",
+       "hl": 1
+      },
+      {
+       "say": "Bajar la presión de cabeza con compresión sube el caudal.",
+       "hl": 2
+      },
+      {
+       "say": "Y con la caída de presión del reservorio, la curva de entrega se achica.",
+       "hl": 3
       },
       {
        "say": "Laboratorio. Cambiá la presión de reservorio, el AOF, el exponente n y la presión de fondo fluyente. Mirá cómo el caudal sube al bajar la presión de fondo, con menos ganancia cuando el flujo es turbulento.",
@@ -303,7 +327,7 @@
      "comp": "Carga de líquidos",
      "cues": [
       {
-       "say": "Los pozos de gas producen algo de agua o condensado. Mientras la velocidad del gas es alta, arrastra las gotas hasta la superficie. Cuando el yacimiento se despresuriza y el caudal baja, las gotas caen, el líquido se acumula en el fondo y su peso frena el pozo. Es la carga de líquidos.",
+       "say": "Los pozos de gas producen algo de agua o condensado. Mientras la velocidad del gas es alta, arrastra las gotas hasta la superficie. Cuando el yacimiento se despresuriza y el caudal baja, las gotas caen y el líquido se acumula en el fondo: es la carga de líquidos. Un síntoma es la caída brusca del caudal y de la presión de cabeza.",
        "scene": {
         "t": "bul",
         "k": "Carga de líquidos",
@@ -316,6 +340,18 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Otro, la producción intermitente o a golpes.",
+       "hl": 1
+      },
+      {
+       "say": "Otro, el aumento de la diferencia entre la presión de tubing y la de casing.",
+       "hl": 2
+      },
+      {
+       "say": "Y es más frecuente al envejecer el pozo.",
+       "hl": 3
       },
       {
        "say": "Turner y coautores propusieron en 1969 un criterio simple: existe una velocidad crítica del gas, y por debajo de ella el pozo se carga. Con la densidad del gas en libras por pie cúbico y la velocidad en pies por segundo, el coeficiente típico es 5,62 para agua y 4,02 para condensado.",
@@ -425,7 +461,7 @@
      "comp": "Abandono y reservas",
      "cues": [
       {
-       "say": "La presión de abandono es la presión de reservorio a la cual el pozo deja de ser económico. Se determina con el caudal mínimo rentable, la presión de entrada al sistema y la compresión disponible. Con menor presión de abandono se recupera más gas, pero hay que pagar más compresión.",
+       "say": "La presión de abandono es la presión de reservorio a la cual el pozo deja de ser económico. Se determina con el caudal mínimo económico del pozo.",
        "scene": {
         "t": "bul",
         "k": "Presión de abandono",
@@ -441,6 +477,22 @@
        "hl": 0
       },
       {
+       "say": "Con la presión del gasoducto de salida.",
+       "hl": 1
+      },
+      {
+       "say": "Con la capacidad y el costo de la compresión: con menor presión de abandono se recupera más gas, pero hay que pagar más compresión.",
+       "hl": 2
+      },
+      {
+       "say": "Con los costos fijos y el contrato de venta.",
+       "hl": 3
+      },
+      {
+       "say": "Y se revisa cada año con los datos nuevos.",
+       "hl": 4
+      },
+      {
        "say": "Una vez fijada, la presión de abandono define las reservas. Se calcula el valor de p sobre z de abandono, se lee la producción acumulada final en la recta de balance y se resta lo ya producido. Cada cambio de contrato, de precio o de costo mueve esa presión y, con ella, las reservas.",
        "scene": {
         "t": "fm",
@@ -451,7 +503,7 @@
        }
       },
       {
-       "say": "Un yacimiento de gas casi siempre tiene un período de meseta, en el que se entrega un caudal contractual constante, seguido de una declinación cuando el yacimiento ya no puede sostenerlo. El número de pozos y la compresión se diseñan para extender la meseta con el costo mínimo.",
+       "say": "Un yacimiento de gas casi siempre tiene un período de meseta, en el que se entrega un caudal contractual constante.",
        "scene": {
         "t": "bul",
         "k": "Meseta y declinación",
@@ -464,6 +516,18 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Se diseña el número de pozos para sostener la entrega.",
+       "hl": 1
+      },
+      {
+       "say": "Y la compresión para extender la meseta con el costo mínimo.",
+       "hl": 2
+      },
+      {
+       "say": "Después viene la declinación, cuando el yacimiento ya no puede sostenerlo, con los pozos disponibles.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -487,7 +551,7 @@
      "comp": "Riesgos del agotamiento",
      "cues": [
       {
-       "say": "Al extraer fluido, la presión de poros baja y la roca soporta más peso efectivo. La formación se compacta. En algunas condiciones esa compactación llega a la superficie como subsidencia, o reactiva fallas y produce sismos inducidos. Es un riesgo geomecánico que debe evaluarse antes de desarrollar el yacimiento.",
+       "say": "Al extraer fluido, la presión de poros baja y la roca soporta más peso efectivo: la formación se compacta.",
        "scene": {
         "t": "bul",
         "k": "Riesgos geomecánicos",
@@ -502,6 +566,18 @@
        "hl": 0
       },
       {
+       "say": "En algunas condiciones, esa compactación llega a la superficie como subsidencia.",
+       "hl": 1
+      },
+      {
+       "say": "O reactiva fallas y produce sismos inducidos.",
+       "hl": 2
+      },
+      {
+       "say": "Es un riesgo para los pozos y para las construcciones cercanas, y debe evaluarse antes de desarrollar el yacimiento.",
+       "hl": 3
+      },
+      {
        "say": "Groningen fue descubierto en 1959 y es el mayor campo de gas de Europa. Desde 1986 se registraron unos 1.600 sismos. En 2012 hubo uno de magnitud 3,6, el mayor de la región. En 2018 las autoridades decidieron cerrar gradualmente el campo y la producción se detuvo en octubre de 2023, con algunos pozos disponibles como contingencia.",
        "scene": {
         "t": "case",
@@ -514,7 +590,7 @@
        }
       },
       {
-       "say": "La lección para el evaluador es de método. Los estudios geomecánicos y el monitoreo de la subsidencia y de la sismicidad forman parte del plan de desarrollo, y el costo social y ambiental entra en la decisión, no solo en la evaluación del recurso. Un recurso grande no es una reserva si no hay licencia para producirlo.",
+       "say": "La lección para el evaluador es de método. Primero, el estudio geomecánico antes del desarrollo.",
        "scene": {
         "t": "bul",
         "k": "Buenas prácticas",
@@ -528,6 +604,22 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Segundo, el monitoreo de la subsidencia y de la sismicidad.",
+       "hl": 1
+      },
+      {
+       "say": "Tercero, umbrales de acción definidos de antemano.",
+       "hl": 2
+      },
+      {
+       "say": "Cuarto, comunicación con la comunidad.",
+       "hl": 3
+      },
+      {
+       "say": "Y un plan de cierre, con responsabilidad posterior. El costo social y ambiental entra en la decisión: un recurso grande no es una reserva si no hay licencia para producirlo.",
+       "hl": 4
       },
       {
        "say": "Pregunta rápida.",

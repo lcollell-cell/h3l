@@ -143,7 +143,7 @@
      "comp": "Métodos químicos",
      "cues": [
       {
-       "say": "Un polímero se disuelve en el agua inyectada y la vuelve más viscosa. Con eso baja la razón de movilidad y mejora el barrido, tanto areal como vertical. No cambia el petróleo residual: actúa sobre el barrido.",
+       "say": "Un polímero se disuelve en el agua inyectada y la vuelve más viscosa. Sube la viscosidad del agua y baja la razón de movilidad.",
        "scene": {
         "t": "bul",
         "k": "Polímero",
@@ -159,6 +159,22 @@
        "hl": 0
       },
       {
+       "say": "Con eso mejora el barrido, tanto areal como vertical. No cambia el petróleo residual: actúa sobre el barrido.",
+       "hl": 1
+      },
+      {
+       "say": "Necesita agua compatible, con salinidad y dureza controladas.",
+       "hl": 2
+      },
+      {
+       "say": "Puede degradarse con la temperatura y la cizalla.",
+       "hl": 3
+      },
+      {
+       "say": "Y requiere una planta de preparación y control de calidad.",
+       "hl": 4
+      },
+      {
        "say": "Laboratorio. Es un modelo de capas con distinta permeabilidad. Subí la viscosidad del agua para simular el polímero y mirá cómo sube el barrido vertical. Después bajá el petróleo residual y comparalo.",
        "scene": {
         "t": "viz",
@@ -169,7 +185,7 @@
        "lab": true
       },
       {
-       "say": "Los tensioactivos actúan sobre otra palanca. Bajan la tensión interfacial entre el petróleo y el agua, y liberan el petróleo atrapado por capilaridad. Por eso se usan para bajar la saturación residual, a menudo combinados con polímero.",
+       "say": "Los tensioactivos actúan sobre otra palanca. Bajan la tensión interfacial entre el petróleo y el agua, y liberan el petróleo atrapado por capilaridad. Por eso bajan la saturación residual.",
        "scene": {
         "t": "bul",
         "k": "Tensioactivo",
@@ -182,7 +198,23 @@
          "Se valida con ensayos de laboratorio y piloto"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "A menudo se combinan con álcali y polímero, en proyectos ASP.",
        "hl": 1
+      },
+      {
+       "say": "Son sensibles a la salinidad y a la roca.",
+       "hl": 2
+      },
+      {
+       "say": "Se pierden por adsorción en la matriz.",
+       "hl": 3
+      },
+      {
+       "say": "Y se validan con ensayos de laboratorio y piloto.",
+       "hl": 4
       },
       {
        "say": "Pregunta rápida.",
@@ -247,7 +279,7 @@
      "comp": "Gas y térmica",
      "cues": [
       {
-       "say": "Un gas puede desplazar petróleo de dos maneras. Inmiscible, empuja como un pistón de baja viscosidad. Miscible, se mezcla con el petróleo y elimina la tensión interfacial, de modo que casi no queda petróleo residual donde pasa.",
+       "say": "Un gas puede desplazar petróleo de dos maneras. Inmiscible, empuja como un pistón de baja viscosidad, para empuje y mantenimiento de presión.",
        "scene": {
         "t": "bul",
         "k": "Gas",
@@ -260,7 +292,23 @@
          "El nitrógeno se usa sobre todo para mantener presión"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Miscible, se mezcla con el petróleo y elimina la tensión interfacial en la zona barrida, de modo que casi no queda petróleo residual donde pasa.",
        "hl": 1
+      },
+      {
+       "say": "La miscibilidad depende de la presión: hay una presión mínima de miscibilidad.",
+       "hl": 2
+      },
+      {
+       "say": "El CO₂ extrae componentes y reduce la viscosidad del petróleo.",
+       "hl": 3
+      },
+      {
+       "say": "Y el nitrógeno se usa sobre todo para mantener presión.",
+       "hl": 4
       },
       {
        "say": "El gran problema de los gases es su baja viscosidad y densidad. Se mueven más rápido que el petróleo y suben por gravedad, y barren una fracción pequeña del reservorio. Para controlarlo se alterna agua y gas, en la técnica llamada WAG.",
@@ -298,7 +346,7 @@
        }
       },
       {
-       "say": "El CO₂ para EOR tiene un valor adicional: parte del gas inyectado queda en el reservorio. Eso conecta la recuperación mejorada con el almacenamiento de carbono, que se ve en otro curso. Hay que medir y verificar ese almacenamiento, y no suponerlo.",
+       "say": "El CO₂ para EOR tiene un valor adicional: parte del gas inyectado queda en el reservorio. Eso conecta la recuperación mejorada con el almacenamiento de carbono, que se ve en otro curso.",
        "scene": {
         "t": "bul",
         "k": "CO₂-EOR y almacenamiento",
@@ -310,10 +358,22 @@
          "El almacenamiento no es el objetivo principal del diseño EOR"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "El CO₂ que vuelve con la producción se separa y se reinyecta.",
+       "hl": 1
+      },
+      {
+       "say": "Hay que medir y verificar ese balance de CO₂, y no suponerlo.",
+       "hl": 2
+      },
+      {
+       "say": "Y el almacenamiento no es el objetivo principal del diseño EOR.",
        "hl": 3
       },
       {
-       "say": "En desplazamientos miscibles, la inestabilidad viscosa produce dedos que reducen el barrido. Koval propuso en 1963 un factor que combina la heterogeneidad y la razón de viscosidades efectiva, y Todd y Longstaff, un modelo de mezcla parcial para simulación. Son aproximaciones útiles para el cribado, no sustituyen al estudio detallado.",
+       "say": "En desplazamientos miscibles, la inestabilidad viscosa produce dedos que reducen el barrido.",
        "scene": {
         "t": "bul",
         "k": "Gases miscibles",
@@ -324,7 +384,20 @@
          "Todd–Longstaff: mezcla parcial en simulación",
          "Útiles para cribar, no para reemplazar el estudio"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Koval propuso en 1963 un factor que combina la heterogeneidad y las viscosidades efectivas.",
+       "hl": 1
+      },
+      {
+       "say": "Todd y Longstaff, un modelo de mezcla parcial para simulación.",
+       "hl": 2
+      },
+      {
+       "say": "Son aproximaciones útiles para cribar, no sustituyen al estudio detallado.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -348,7 +421,7 @@
      "comp": "Gas y térmica",
      "cues": [
       {
-       "say": "En petróleos pesados, la viscosidad cae mucho al calentar. Por eso el calor es el método principal para crudos viscosos: baja la viscosidad, y con ella la razón de movilidad, y el petróleo fluye hacia el pozo.",
+       "say": "En petróleos pesados, la viscosidad baja de manera marcada al calentar. Por eso el calor es el método principal para crudos viscosos.",
        "scene": {
         "t": "bul",
         "k": "Efecto del calor",
@@ -361,6 +434,18 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Además, se expande el petróleo y se aporta energía de empuje.",
+       "hl": 1
+      },
+      {
+       "say": "Aumenta la movilidad y mejora el barrido, y el petróleo fluye hacia el pozo.",
+       "hl": 2
+      },
+      {
+       "say": "Es el método habitual para petróleos pesados y bitúmenes.",
+       "hl": 3
       },
       {
        "say": "Las variantes más conocidas son la estimulación cíclica con vapor, el vapor continuo y el drenaje gravitacional asistido con vapor, o SAGD, con dos pozos horizontales superpuestos. La combustión in situ genera el calor dentro del reservorio, y es más compleja de controlar.",
@@ -398,7 +483,7 @@
        }
       },
       {
-       "say": "Los métodos térmicos tienen un costo energético y ambiental alto. Generar vapor consume gas o energía, y emite dióxido de carbono. La relación entre vapor inyectado y petróleo producido es un indicador central de la eficiencia y de las emisiones.",
+       "say": "Los métodos térmicos tienen un costo energético y ambiental alto. La relación vapor-petróleo es el indicador central: más vapor por barril, más costo y emisiones.",
        "scene": {
         "t": "bul",
         "k": "Costo energético",
@@ -411,6 +496,18 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Generar vapor consume gas o energía, y se pierde calor en el pozo y en el reservorio.",
+       "hl": 1
+      },
+      {
+       "say": "Importan el origen y el tratamiento del agua que se vaporiza.",
+       "hl": 2
+      },
+      {
+       "say": "Y se integra con la gestión de emisiones del campo.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -475,7 +572,7 @@
      "comp": "Selección, piloto y escala",
      "cues": [
       {
-       "say": "La selección empieza con criterios técnicos de profundidad, viscosidad del petróleo, permeabilidad, temperatura y salinidad. Taber, Martin y Seright publicaron en 1997 una revisión de esos criterios, que sigue siendo referencia de partida.",
+       "say": "La selección empieza con criterios técnicos. Primero, la viscosidad y la densidad del petróleo.",
        "scene": {
         "t": "bul",
         "k": "Criterios",
@@ -489,6 +586,22 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Luego la profundidad, la presión y la temperatura.",
+       "hl": 1
+      },
+      {
+       "say": "La permeabilidad y la heterogeneidad.",
+       "hl": 2
+      },
+      {
+       "say": "La salinidad y la dureza del agua.",
+       "hl": 3
+      },
+      {
+       "say": "Y la disponibilidad de agua, gas y calor en superficie. Taber, Martin y Seright publicaron en 1997 una revisión de estos criterios, que sigue siendo referencia de partida.",
+       "hl": 4
       },
       {
        "say": "Los criterios de pantalla son una primera criba y no un diseño. Los proyectos reales rompen sus rangos con frecuencia. Después de pasar la criba se valida con laboratorio, simulación y piloto, y se hace la economía con precios de escenarios bajos.",
@@ -531,7 +644,7 @@
        }
       },
       {
-       "say": "Una buena práctica es definir antes del piloto qué resultado lo considera exitoso y cómo se medirá. Un patrón con pozos de observación, trazadores y balances claros permite atribuir la respuesta al método y no a otros cambios del campo.",
+       "say": "Una buena práctica es definir antes del piloto qué resultado lo considera exitoso, y qué lo considera un fracaso.",
        "scene": {
         "t": "bul",
         "k": "Diseño del piloto",
@@ -545,6 +658,22 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Hace falta un caso base de referencia, con su pronóstico sin el método.",
+       "hl": 1
+      },
+      {
+       "say": "Pozos de observación y trazadores permiten atribuir la respuesta al método y no a otros cambios del campo.",
+       "hl": 2
+      },
+      {
+       "say": "Se miden caudales, presiones y calidad de agua.",
+       "hl": 3
+      },
+      {
+       "say": "Y se prepara un plan de decisión: escalar, repetir o abandonar.",
+       "hl": 4
       },
       {
        "say": "Pregunta rápida.",
@@ -580,7 +709,7 @@
        }
       },
       {
-       "say": "Una lección del caso es la secuencia. Primero se optimizó la inyección de agua, después se hizo un piloto y recién entonces se instalaron plantas a escala. Cada etapa tuvo su medición antes de pasar a la siguiente.",
+       "say": "Una lección del caso es la secuencia. Primero se optimizó la inyección de agua, antes de pensar en polímeros.",
        "scene": {
         "t": "bul",
         "k": "Lecciones",
@@ -592,10 +721,22 @@
          "El resultado se mide contra el pronóstico base, no contra el pasado"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Después se hizo un piloto, con medición antes de escalar.",
+       "hl": 1
+      },
+      {
+       "say": "Recién entonces se instalaron plantas de preparación de polímero a escala, como parte del proyecto.",
        "hl": 2
       },
       {
-       "say": "Por último, la economía. Un proyecto EOR tiene costos de inyectante, de plantas y de tratamiento, y una respuesta que llega con demora. Por eso la evaluación debe incluir un escenario de precio bajo y de respuesta menor, y definir hasta dónde se está dispuesto a invertir antes de la prueba.",
+       "say": "Cada etapa tuvo su medición, y el resultado se mide contra el pronóstico base, no contra el pasado.",
+       "hl": 3
+      },
+      {
+       "say": "Por último, la economía. Un proyecto EOR tiene costo del inyectante por barril incremental.",
        "scene": {
         "t": "bul",
         "k": "Economía",
@@ -608,7 +749,23 @@
          "Reservas: el incremental de EOR se clasifica según su madurez en PRMS"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Inversión en plantas y en tratamiento de agua.",
+       "hl": 1
+      },
+      {
+       "say": "Una respuesta que llega con demora entre la inyección y el resultado.",
+       "hl": 2
+      },
+      {
+       "say": "Por eso la evaluación debe incluir escenarios de precio bajo y de respuesta menor a la esperada.",
        "hl": 3
+      },
+      {
+       "say": "Y las reservas: el incremental de EOR se clasifica según su madurez en PRMS.",
+       "hl": 4
       },
       {
        "say": "Pregunta rápida.",

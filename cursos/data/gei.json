@@ -70,7 +70,7 @@
      "comp": "Inventario",
      "cues": [
       {
-       "say": "Un inventario de gases de efecto invernadero ordena las emisiones en tres alcances. Es el esquema del Protocolo de GEI, que usan casi todas las empresas y los estándares de reporte.",
+       "say": "Un inventario de gases de efecto invernadero ordena las emisiones en tres alcances, según el esquema del Protocolo de GEI, que usan casi todas las empresas y los estándares de reporte. El alcance 1 son las emisiones directas de fuentes propias: combustión, antorcha, venteos y fugitivas.",
        "scene": {
         "t": "bul",
         "k": "GHG Protocol",
@@ -82,6 +82,14 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "El alcance 2 son las emisiones indirectas por la electricidad, el vapor o el calor comprados.",
+       "hl": 1
+      },
+      {
+       "say": "El alcance 3 es el resto de la cadena de valor. En petróleo y gas, el uso de los productos vendidos pesa mucho.",
+       "hl": 2
       },
       {
        "say": "Para cada fuente, la emisión es un dato de actividad por un factor de emisión. Los factores salen de guías como las del IPCC, de 2006 con su actualización de 2019, o de compendios sectoriales como el del Instituto Americano del Petróleo.",
@@ -154,7 +162,7 @@
        }
       },
       {
-       "say": "En el upstream las fuentes principales de metano son las fugas de equipos, los venteos de proceso, los neumáticos de control y la combustión incompleta en antorchas. Una antorcha mal operada puede emitir metano sin quemar.",
+       "say": "En el upstream, las fuentes principales de metano son las fugas de equipos: válvulas, bridas, compresores y tanques.",
        "scene": {
         "t": "bul",
         "k": "Fuentes",
@@ -168,6 +176,22 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Los venteos de proceso y de mantenimiento.",
+       "hl": 1
+      },
+      {
+       "say": "Los neumáticos y dispositivos de control que funcionan con gas.",
+       "hl": 2
+      },
+      {
+       "say": "Las antorchas con baja eficiencia de combustión: una antorcha mal operada puede emitir metano sin quemar.",
+       "hl": 3
+      },
+      {
+       "say": "Y los eventos anómalos y de gran emisión.",
+       "hl": 4
       },
       {
        "say": "El marco de reporte de la Asociación de Petróleo y Gas de ONU Ambiente, OGMP 2.0, define cinco niveles. El más alto, el nivel cinco, exige mediciones a nivel de fuente y de sitio, y su conciliación.",

@@ -79,7 +79,7 @@
      "comp": "Cadena CCS",
      "cues": [
       {
-       "say": "La captura y el almacenamiento de carbono es una cadena. Se separa el CO₂ de una fuente, se comprime, se transporta por ducto o por buque y se inyecta en una formación profunda. Cada eslabón tiene su costo, su riesgo y sus reglas.",
+       "say": "El carbono pasa por una cadena. Primero, la captura en la fuente: gas natural, hidrógeno, cemento o electricidad. Se separa el CO₂ de cada una.",
        "scene": {
         "t": "bul",
         "k": "Cadena",
@@ -93,6 +93,22 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Segundo, la compresión y deshidratación.",
+       "hl": 1
+      },
+      {
+       "say": "Tercero, el transporte, por ducto o por buque.",
+       "hl": 2
+      },
+      {
+       "say": "Cuarto, la inyección en un pozo, en una formación profunda.",
+       "hl": 3
+      },
+      {
+       "say": "Y después, el almacenamiento y el monitoreo. Cada eslabón tiene su costo, su riesgo y sus reglas.",
+       "hl": 4
       },
       {
        "say": "El almacenamiento geológico usa tres tipos de sitio. Acuíferos salinos profundos, que son los de mayor capacidad. Yacimientos de petróleo y gas agotados, que ya demostraron que retienen fluidos. Y reservorios en producción con recuperación mejorada con CO₂.",
@@ -125,7 +141,7 @@
        }
       },
       {
-       "say": "Las dos ideas que ordenan el curso son capacidad y seguridad. Capacidad es cuánto CO₂ cabe y se puede inyectar a un ritmo sostenido. Seguridad es la demostración de que permanece confinado, y se apoya en tres pilares: sello, monitoreo y gestión de pozos.",
+       "say": "Las dos ideas que ordenan el curso son capacidad y seguridad. La primera pregunta: ¿cuánto cabe y a qué ritmo se puede inyectar?",
        "scene": {
         "t": "bul",
         "k": "Capacidad y seguridad",
@@ -138,6 +154,18 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "La segunda: ¿cómo se demuestra que el CO₂ queda confinado?",
+       "hl": 1
+      },
+      {
+       "say": "La seguridad se apoya en tres pilares: sello, monitoreo y pozos.",
+       "hl": 2
+      },
+      {
+       "say": "Ambas preguntas se responden con datos del sitio y no por analogía.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -161,7 +189,7 @@
      "comp": "Selección de sitios y capacidad",
      "cues": [
       {
-       "say": "Un buen sitio tiene cuatro rasgos. Un reservorio con porosidad y permeabilidad suficientes, un sello de baja permeabilidad por encima, una profundidad donde el CO₂ está en estado denso, y condiciones de presión y de estructura que permitan inyectar sin fracturar la roca.",
+       "say": "Un buen sitio tiene un reservorio con porosidad y permeabilidad suficientes.",
        "scene": {
         "t": "bul",
         "k": "Criterios",
@@ -174,7 +202,23 @@
          "Pocas fallas y pozos antiguos bien controlados"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Tiene un sello continuo y de baja permeabilidad por encima.",
+       "hl": 1
+      },
+      {
+       "say": "Está a más de unos 800 metros de profundidad, donde el CO₂ se mantiene denso.",
        "hl": 2
+      },
+      {
+       "say": "Permite inyectar con una presión por debajo de la de fractura.",
+       "hl": 3
+      },
+      {
+       "say": "Y tiene pocas fallas, y pozos antiguos bien controlados.",
+       "hl": 4
       },
       {
        "say": "La capacidad se estima por el método volumétrico. Se multiplica el volumen poral por la densidad del CO₂ en las condiciones del reservorio, y por un factor de eficiencia. Ese factor refleja que solo una pequeña parte del volumen poral se puede ocupar.",
@@ -197,7 +241,7 @@
        "lab": true
       },
       {
-       "say": "La capacidad efectiva se calcula como volumen poral multiplicado por un factor de eficiencia de almacenamiento. Ese factor depende de la geometría del sitio, la heterogeneidad, la flotabilidad y el límite de presión. La literatura distingue capacidad teórica, efectiva, práctica y compatible con el sitio, con incertidumbre creciente.",
+       "say": "La capacidad efectiva es el volumen poral multiplicado por un factor de eficiencia de almacenamiento.",
        "scene": {
         "t": "bul",
         "k": "Capacidad de almacenamiento",
@@ -208,7 +252,20 @@
          "Teórica, efectiva, práctica y de sitio",
          "Límite de presión: margen bajo la presión de fractura"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Ese factor refleja la flotabilidad y la heterogeneidad, además de la geometría del sitio.",
+       "hl": 1
+      },
+      {
+       "say": "La literatura distingue capacidad teórica, efectiva, práctica y de sitio, con incertidumbre creciente.",
+       "hl": 2
+      },
+      {
+       "say": "Y el límite de presión fija el margen bajo la presión de fractura.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -273,7 +330,7 @@
      "comp": "Entrampamiento",
      "cues": [
       {
-       "say": "El CO₂ inyectado es menos denso que el agua salada y tiende a subir. Se queda en el reservorio por cuatro mecanismos que actúan en escalas de tiempo distintas, según el Informe especial del IPCC de 2005.",
+       "say": "El CO₂ inyectado es menos denso que el agua salada y tiende a subir. Se queda en el reservorio por cuatro mecanismos, según el Informe especial del IPCC de 2005. Primero, el estructural y estratigráfico: el sello retiene el CO₂ libre.",
        "scene": {
         "t": "bul",
         "k": "Mecanismos",
@@ -288,6 +345,18 @@
        "hl": 0
       },
       {
+       "say": "Segundo, el residual: la capilaridad deja gotas atrapadas en los poros.",
+       "hl": 1
+      },
+      {
+       "say": "Tercero, la disolución: el CO₂ se disuelve en el agua salada.",
+       "hl": 2
+      },
+      {
+       "say": "Y cuarto, el mineral: reacciona con la roca y forma minerales, en el muy largo plazo. Los cuatro actúan en escalas de tiempo distintas.",
+       "hl": 3
+      },
+      {
        "say": "Laboratorio. Es una sección esquemática con la pluma de CO₂. Movés el tiempo desde el inicio de la inyección, y mirá cómo cambia la fracción atrapada por cada mecanismo. Las proporciones son ilustrativas.",
        "scene": {
         "t": "viz",
@@ -300,7 +369,7 @@
        "lab": true
       },
       {
-       "say": "La conclusión práctica es que el riesgo es mayor al principio, cuando todo el CO₂ está libre, y baja con el tiempo, a medida que se inmoviliza. Esa idea sostiene el diseño: sello y presión controlados al inicio, monitoreo y cierre responsable después.",
+       "say": "El riesgo es mayor al principio, cuando todo el CO₂ está libre, y baja con el tiempo, a medida que se inmoviliza.",
        "scene": {
         "t": "bul",
         "k": "Riesgo en el tiempo",
@@ -312,10 +381,22 @@
          "El cierre del sitio se demuestra con datos y no con el tiempo solo"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "El entrampamiento residual y la disolución crecen con los años.",
        "hl": 1
       },
       {
-       "say": "La histéresis explica el entrampamiento residual: cuando el agua desplaza al CO₂, parte queda atrapada en los poros. Land relacionó la saturación residual con la saturación inicial. Es la razón por la que el CO₂ migrante se inmoviliza con el tiempo, y por la que importa el diseño de la inyección.",
+       "say": "Por eso el monitoreo es más intenso al inicio, con sello y presión controlados.",
+       "hl": 2
+      },
+      {
+       "say": "Y el cierre del sitio se demuestra con datos, y no con el tiempo solo.",
+       "hl": 3
+      },
+      {
+       "say": "La histéresis explica el entrampamiento residual: cuando el agua desplaza al CO₂, deja gotas atrapadas en los poros.",
        "scene": {
         "t": "bul",
         "k": "Entrampamiento residual",
@@ -326,7 +407,20 @@
          "Reduce la migración con el tiempo",
          "Un buen diseño aprovecha este efecto"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Land relacionó la saturación residual con la saturación inicial.",
+       "hl": 1
+      },
+      {
+       "say": "Por eso el CO₂ migrante se inmoviliza y se reduce la migración con el tiempo.",
+       "hl": 2
+      },
+      {
+       "say": "Y un buen diseño de la inyección aprovecha este efecto.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -350,7 +444,7 @@
      "comp": "Recursos y estándares",
      "cues": [
       {
-       "say": "Así como PRMS ordena los recursos de petróleo y gas, la SPE aprobó en julio de 2017 el Sistema de Gestión de Recursos de Almacenamiento de CO₂, conocido como SRMS. Su propósito, según la SPE, es establecer estándares técnicos de evaluación de capacidad y recursos.",
+       "say": "Así como PRMS ordena los recursos de petróleo y gas, la SPE aprobó en julio de 2017 el Sistema de Gestión de Recursos de Almacenamiento de CO₂, o SRMS. Da un lenguaje común para evaluar capacidad de almacenamiento.",
        "scene": {
         "t": "bul",
         "k": "SRMS",
@@ -363,6 +457,18 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Aplica una lógica de proyecto, con grados de madurez.",
+       "hl": 1
+      },
+      {
+       "say": "Permite comparar sitios y proyectos entre sí.",
+       "hl": 2
+      },
+      {
+       "say": "Y sus Guías de aplicación se publicaron en julio de 2022.",
+       "hl": 3
       },
       {
        "say": "La idea central es la diferencia entre lo que podría caber en teoría y lo que un proyecto concreto puede almacenar, con tecnología, regulación y economía disponibles. Igual que en reservas, la clasificación depende de la madurez del proyecto, no del tamaño del acuífero.",
@@ -401,7 +507,7 @@
        }
       },
       {
-       "say": "Para el evaluador, la consecuencia es de método. Se documentan los supuestos, se informan rangos y se declara la madurez del proyecto. Una cifra de capacidad sin su método de cálculo y su incertidumbre no es comparable con otra.",
+       "say": "Para el evaluador, la consecuencia es de método. Primero, declarar el método, los datos y los supuestos.",
        "scene": {
         "t": "bul",
         "k": "Buenas prácticas",
@@ -414,6 +520,18 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Segundo, informar un rango y no solo un valor.",
+       "hl": 1
+      },
+      {
+       "say": "Tercero, separar la capacidad del sitio de la capacidad de un proyecto.",
+       "hl": 2
+      },
+      {
+       "say": "Y actualizar con datos de monitoreo. Una cifra sin su método ni su incertidumbre no es comparable con otra.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -478,7 +596,7 @@
      "comp": "Monitoreo y riesgo",
      "cues": [
       {
-       "say": "Un plan de monitoreo, medición y verificación, conocido como MMV, demuestra dónde está el CO₂ y que se mantiene confinado. En la Unión Europea, la directiva de almacenamiento exige un monitoreo cuidadoso y demostrar que el almacenamiento es seguro a lo largo del tiempo.",
+       "say": "Un plan de monitoreo, medición y verificación, o MMV, demuestra dónde está el CO₂ y que se mantiene confinado. Sirve para verificar la cantidad inyectada y su ubicación.",
        "scene": {
         "t": "bul",
         "k": "MMV",
@@ -491,6 +609,18 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "También para detectar a tiempo una pérdida de confinamiento.",
+       "hl": 1
+      },
+      {
+       "say": "Para validar y recalibrar el modelo de simulación.",
+       "hl": 2
+      },
+      {
+       "say": "Y para cumplir con la regulación y sostener la licencia social. En la Unión Europea, la directiva de almacenamiento exige demostrar que el almacenamiento es seguro a lo largo del tiempo.",
+       "hl": 3
       },
       {
        "say": "Las técnicas se combinan. La sísmica repetida, o sísmica 4D, ve la pluma. Las mediciones de presión y temperatura en pozo muestran el comportamiento dinámico. Y el monitoreo superficial y de agua subterránea vigila posibles fugas hacia arriba.",
@@ -528,7 +658,7 @@
        }
       },
       {
-       "say": "Los riesgos principales son conocidos. Pozos antiguos mal sellados, fallas conductivas, sobrepresión que fracture el sello y, en algunas zonas, sismicidad inducida. Todos se gestionan con caracterización previa, control de presión y un plan de respuesta ante desvíos.",
+       "say": "Los riesgos principales son conocidos. Los pozos antiguos: se hace inventario, inspección y reparación.",
        "scene": {
         "t": "bul",
         "k": "Riesgos",
@@ -541,7 +671,23 @@
          "Plan de respuesta con umbrales definidos de antemano"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Las fallas: se mapean y se hacen estudios geomecánicos.",
        "hl": 1
+      },
+      {
+       "say": "La sobrepresión: se fija un límite de presión por debajo de la fractura.",
+       "hl": 2
+      },
+      {
+       "say": "La sismicidad inducida: se monitorea y se reduce el caudal si hace falta.",
+       "hl": 3
+      },
+      {
+       "say": "Y se define un plan de respuesta, con umbrales fijados de antemano.",
+       "hl": 4
       },
       {
        "say": "Pregunta rápida.",
@@ -589,7 +735,7 @@
        }
       },
       {
-       "say": "Para evaluar un proyecto propio conviene una lista corta. Capacidad con su método y rango, sello demostrado, plan de MMV, costo de toda la cadena y no solo del almacenamiento, responsabilidad a largo plazo y la licencia social de la comunidad.",
+       "say": "Para evaluar un proyecto propio conviene una lista corta. Primero, la capacidad, con método, rango y madurez declarada.",
        "scene": {
         "t": "bul",
         "k": "Checklist",
@@ -603,6 +749,22 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Segundo, el sello y los pozos controlados.",
+       "hl": 1
+      },
+      {
+       "say": "Tercero, el plan de monitoreo, medición y verificación.",
+       "hl": 2
+      },
+      {
+       "say": "Cuarto, el costo de toda la cadena y no solo del almacenamiento.",
+       "hl": 3
+      },
+      {
+       "say": "Y la responsabilidad a largo plazo, y la licencia social de la comunidad.",
+       "hl": 4
       },
       {
        "say": "Pregunta rápida.",

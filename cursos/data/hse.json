@@ -88,7 +88,7 @@
        }
       },
       {
-       "say": "Las barreras son las defensas entre el peligro y el daño. Pueden ser de diseño, como un recipiente con la resistencia correcta, de control, como una alarma y la respuesta del operador, o mitigadoras, como la detección de fuego y el agua contra incendio. El modelo del queso suizo muestra que un accidente ocurre cuando los agujeros de varias capas se alinean.",
+       "say": "Las barreras son las defensas entre el peligro y el daño. Las de prevención evitan que ocurra el evento, como un recipiente de diseño con la resistencia correcta.",
        "scene": {
         "t": "bul",
         "k": "Tipos de barrera",
@@ -101,6 +101,22 @@
          "Un accidente ocurre cuando varios agujeros se alinean"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Las de detección y control lo ven a tiempo y lo corrigen, como una alarma y la respuesta del operador.",
+       "hl": 1
+      },
+      {
+       "say": "Las de mitigación reducen las consecuencias si ocurre, como la detección de fuego y el agua contra incendio.",
+       "hl": 2
+      },
+      {
+       "say": "Cada barrera tiene agujeros: fallas latentes y errores humanos.",
+       "hl": 3
+      },
+      {
+       "say": "El modelo del queso suizo muestra que un accidente ocurre cuando los agujeros de varias capas se alinean.",
        "hl": 4
       },
       {
@@ -155,7 +171,7 @@
      "comp": "Identificación de peligros",
      "cues": [
       {
-       "say": "El HAZOP, estudio de peligros y operabilidad, es el método más usado en procesos. Un equipo multidisciplinar divide el diagrama de proceso en nodos y, para cada uno, aplica palabras guía a los parámetros: caudal, presión, temperatura, nivel. Así descubre desvíos, causas, consecuencias y las salvaguardas existentes.",
+       "say": "El HAZOP, estudio de peligros y operabilidad, es el método más usado en procesos. Un equipo multidisciplinar divide el proceso en nodos.",
        "scene": {
         "t": "bul",
         "k": "HAZOP",
@@ -169,6 +185,22 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Para cada nodo, aplica palabras guía a los parámetros: caudal, presión, temperatura, nivel.",
+       "hl": 1
+      },
+      {
+       "say": "Así identifica las causas y consecuencias del desvío.",
+       "hl": 2
+      },
+      {
+       "say": "Lista las salvaguardas existentes y las recomendaciones.",
+       "hl": 3
+      },
+      {
+       "say": "Y lo conduce un facilitador con un secretario.",
+       "hl": 4
       },
       {
        "say": "Las palabras guía clásicas son ninguno, más, menos, además de, parte de, inverso y distinto de. Aplicadas a un flujo, dan desvíos como flujo cero, flujo mayor, flujo inverso. Por ejemplo, en la descarga de una bomba: flujo cero con la bomba en marcha puede causar sobrepresión y sobrecalentamiento.",
@@ -211,7 +243,7 @@
        }
       },
       {
-       "say": "Dos reglas de buena práctica. Un HAZOP revisa el diseño tal como está dibujado y no como se supone que está construido, así que hay que verificar los planos actualizados. Y sus recomendaciones se rastrean hasta el cierre: un estudio con acciones que nadie cierra no reduce el riesgo.",
+       "say": "Dos reglas de buena práctica. Un HAZOP revisa el diseño tal como está dibujado, así que hay que usar planos actualizados y aprobados.",
        "scene": {
         "t": "bul",
         "k": "Buenas prácticas",
@@ -224,7 +256,23 @@
          "Repetir el estudio ante cambios y periódicamente"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Se convoca a operación, mantenimiento, proceso y seguridad.",
+       "hl": 1
+      },
+      {
+       "say": "Cada recomendación se registra con responsable y fecha.",
+       "hl": 2
+      },
+      {
+       "say": "Y se verifica el cierre de las acciones: un estudio con acciones que nadie cierra no reduce el riesgo.",
        "hl": 3
+      },
+      {
+       "say": "Se repite ante cambios y periódicamente.",
+       "hl": 4
       },
       {
        "say": "Pregunta rápida.",
@@ -309,7 +357,7 @@
        "lab": true
       },
       {
-       "say": "Una capa solo cuenta si es independiente, efectiva y auditable. Si dos capas fallan por la misma causa, como una misma alimentación eléctrica o el mismo operador, no se multiplican. Contar dos veces una misma barrera es el error más común. Los valores de probabilidad de falla deben justificarse con datos propios o de fuentes reconocidas.",
+       "say": "Una capa solo cuenta si es independiente: del iniciador y de las demás capas. Si dos capas fallan por la misma causa, como una misma alimentación eléctrica o el mismo operador, no se multiplican.",
        "scene": {
         "t": "bul",
         "k": "Independencia",
@@ -322,6 +370,22 @@
          "Los valores de PFD se justifican con datos y no por intuición"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Debe ser efectiva: detiene el escenario cuando actúa.",
+       "hl": 1
+      },
+      {
+       "say": "Y auditable: se puede probar que funciona.",
+       "hl": 2
+      },
+      {
+       "say": "No se reutiliza la misma barrera en dos capas: contarla dos veces es el error más común.",
+       "hl": 3
+      },
+      {
+       "say": "Y los valores de PFD se justifican con datos propios o de fuentes reconocidas, y no por intuición.",
        "hl": 4
       },
       {
@@ -356,7 +420,7 @@
      "comp": "Funciones instrumentadas y SIL",
      "cues": [
       {
-       "say": "Cuando las capas no alcanzan, se añade una función instrumentada de seguridad, formada por un sensor, un solucionador lógico y un elemento final, por ejemplo una válvula de cierre. La norma IEC 61511 rige su ciclo de vida en la industria de procesos, y la IEC 61508 es la norma de base de seguridad funcional.",
+       "say": "Cuando las capas no alcanzan, se añade una función instrumentada de seguridad, formada por un sensor que detecta la condición peligrosa.",
        "scene": {
         "t": "bul",
         "k": "Función instrumentada",
@@ -369,6 +433,18 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Un solucionador lógico que decide.",
+       "hl": 1
+      },
+      {
+       "say": "Y un elemento final, por ejemplo una válvula de cierre, que lleva el proceso a estado seguro.",
+       "hl": 2
+      },
+      {
+       "say": "Todo el lazo debe cumplir el nivel requerido. La norma IEC 61511 rige su ciclo de vida en la industria de procesos, y la IEC 61508 es la norma de base de seguridad funcional.",
+       "hl": 3
       },
       {
        "say": "El nivel de integridad de seguridad, SIL, se asigna según la probabilidad de falla bajo demanda requerida. En modo de baja demanda, el SIL 1 corresponde a una probabilidad entre 0,1 y 0,01, el SIL 2 entre 0,01 y 0,001, y el SIL 3 entre 0,001 y 0,0001. El SIL requerido sale del análisis de riesgo, y el SIL logrado depende del diseño.",
@@ -402,7 +478,7 @@
        }
       },
       {
-       "say": "Conseguir el SIL no es comprar un equipo certificado. Se verifica con la arquitectura de votación, el intervalo de pruebas, las fallas de causa común y las pruebas periódicas. Una función bien diseñada pero sin pruebas pierde su integridad. Por eso la prueba funcional periódica y el registro son parte de la barrera.",
+       "say": "Conseguir el SIL no es comprar un equipo certificado. Hacen falta pruebas funcionales con el intervalo del diseño.",
        "scene": {
         "t": "bul",
         "k": "Mantener el SIL",
@@ -416,6 +492,22 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "El registro de pruebas y de fallas.",
+       "hl": 1
+      },
+      {
+       "say": "La gestión de los bypass y de las inhibiciones.",
+       "hl": 2
+      },
+      {
+       "say": "La revisión ante cambios del proceso.",
+       "hl": 3
+      },
+      {
+       "say": "Y la auditoría del ciclo de vida. Una función bien diseñada pero sin pruebas pierde su integridad.",
+       "hl": 4
       },
       {
        "say": "Pregunta rápida.",
@@ -480,7 +572,7 @@
      "comp": "Gestión de cambios y permisos",
      "cues": [
       {
-       "say": "Casi todo accidente grave se relaciona con un cambio o con un trabajo fuera de la rutina. La gestión del cambio exige evaluar el riesgo de toda modificación de proceso, equipos, procedimientos u organización antes de ejecutarla, aprobarla y actualizar la documentación. Un cambio sin análisis es una barrera que se retira sin avisar.",
+       "say": "Casi todo accidente grave se relaciona con un cambio o con un trabajo fuera de la rutina. La gestión del cambio exige registrar todo cambio, incluso los temporales.",
        "scene": {
         "t": "bul",
         "k": "Gestión del cambio",
@@ -494,6 +586,22 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Evaluar el riesgo antes de ejecutarlo.",
+       "hl": 1
+      },
+      {
+       "say": "Aprobarlo por la autoridad correspondiente.",
+       "hl": 2
+      },
+      {
+       "say": "Actualizar planos, procedimientos y capacitación.",
+       "hl": 3
+      },
+      {
+       "say": "Y cerrar el cambio y verificar el resultado. Un cambio sin análisis es una barrera que se retira sin avisar.",
+       "hl": 4
       },
       {
        "say": "El permiso de trabajo es el mecanismo por el cual se autoriza una tarea peligrosa, como un trabajo en caliente o la apertura de un equipo. Debe describir el trabajo, los peligros, las aislaciones y las condiciones. Debe estar visible donde se trabaja y donde se opera, y todos los permisos activos tienen que ser conocidos por quien opera el proceso.",
@@ -536,7 +644,7 @@
        }
       },
       {
-       "say": "El traspaso de turno es otra barrera. Cada turno debe saber qué equipos están fuera de servicio, qué permisos hay activos y qué falta cerrar. Un registro escrito, una reunión de traspaso y una revisión de los permisos suspendidos reducen los errores de comunicación. En seguridad de procesos, la información que no se transmite equivale a información que no existe.",
+       "say": "El traspaso de turno es otra barrera. Cada turno debe saber qué equipos están fuera de servicio: se deja un registro escrito.",
        "scene": {
         "t": "bul",
         "k": "Traspaso de turno",
@@ -550,6 +658,22 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Se hace una reunión de traspaso cara a cara.",
+       "hl": 1
+      },
+      {
+       "say": "Se revisan los permisos activos y suspendidos.",
+       "hl": 2
+      },
+      {
+       "say": "El turno entrante lo confirma.",
+       "hl": 3
+      },
+      {
+       "say": "Y hay un lugar único donde está la información. En seguridad de procesos, la información que no se transmite equivale a información que no existe.",
+       "hl": 4
       },
       {
        "say": "Pregunta rápida.",
@@ -585,7 +709,7 @@
        }
       },
       {
-       "say": "La investigación de Lord Cullen hizo cuatro preguntas sobre el sistema de permisos: si el procedimiento era adecuado, si se cumplía, si había capacitación y si se monitoreaba. La respuesta a las cuatro fue que no. El informe subrayó que la responsabilidad principal recae en quienes crean los riesgos y trabajan con ellos, y que las auditorías deben verificar lo que se hace de verdad y no solo lo escrito.",
+       "say": "La investigación de Lord Cullen hizo cuatro preguntas sobre el sistema de permisos: si el procedimiento era adecuado, si se cumplía, si había capacitación y si se monitoreaba. La respuesta a las cuatro fue que no. La responsabilidad primaria es de la empresa que crea el riesgo.",
        "scene": {
         "t": "bul",
         "k": "Enseñanzas",
@@ -599,6 +723,22 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Cada operador desarrolla su propio sistema de gestión de la seguridad.",
+       "hl": 1
+      },
+      {
+       "say": "Las auditorías verifican lo que realmente se hace, y no solo lo escrito.",
+       "hl": 2
+      },
+      {
+       "say": "Los permisos, el traspaso y la comunicación son barreras críticas.",
+       "hl": 3
+      },
+      {
+       "say": "Y después del informe se adoptó un régimen de caso de seguridad en el sector británico del Mar del Norte.",
+       "hl": 4
       },
       {
        "say": "Para medir la seguridad de procesos hoy se usan indicadores. Los indicadores rezagados cuentan los eventos que ocurrieron, como las pérdidas de contención. Los adelantados miden el estado de las barreras, por ejemplo el porcentaje de pruebas de válvulas de seguridad al día o los cambios sin cerrar. La norma API RP 754 describe indicadores de desempeño de seguridad de procesos.",

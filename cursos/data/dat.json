@@ -70,7 +70,7 @@
      "comp": "Datos del upstream y su calidad",
      "cues": [
       {
-       "say": "El upstream produce datos muy distintos. Series de tiempo de producción y de sensores. Registros de pozo. Sísmica. Reportes en PDF. Modelos de reservorio. Y eventos de perforación en tiempo real.",
+       "say": "El upstream produce datos muy distintos. Primero, series de tiempo: producción, presión y SCADA.",
        "scene": {
         "t": "bul",
         "k": "Fuentes",
@@ -85,6 +85,26 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Registros de pozo y perfiles.",
+       "hl": 1
+      },
+      {
+       "say": "Sísmica, en grandes volúmenes.",
+       "hl": 2
+      },
+      {
+       "say": "Reportes, informes y planos, en PDF o imagen.",
+       "hl": 3
+      },
+      {
+       "say": "Modelos estáticos y dinámicos de reservorio.",
+       "hl": 4
+      },
+      {
+       "say": "Y datos de perforación en tiempo real.",
+       "hl": 5
       },
       {
        "say": "Para cada tipo hay formatos y estándares conocidos. Registros en LAS y DLIS. Sísmica en SEG-Y. Datos de perforación en WITSML y de producción en PRODML, ambos de Energistics. Conocerlos evita reconstruir lo que ya está resuelto.",
@@ -128,7 +148,7 @@
        }
       },
       {
-       "say": "La calidad se evalúa en varias dimensiones. Completitud, exactitud, consistencia, oportunidad y unicidad. Un dato puede estar completo y ser inexacto, o exacto y llegar tarde.",
+       "say": "La calidad se evalúa en varias dimensiones. Completitud: no faltan datos clave.",
        "scene": {
         "t": "bul",
         "k": "Calidad",
@@ -141,7 +161,23 @@
          "Unicidad: sin duplicados"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Exactitud: el dato refleja la realidad medida.",
+       "hl": 1
+      },
+      {
+       "say": "Consistencia: las unidades y los nombres coinciden.",
        "hl": 2
+      },
+      {
+       "say": "Oportunidad: el dato llega cuando se necesita.",
+       "hl": 3
+      },
+      {
+       "say": "Y unicidad: sin duplicados. Un dato puede estar completo y ser inexacto, o exacto y llegar tarde.",
+       "hl": 4
       },
       {
        "say": "Pregunta rápida.",
@@ -165,7 +201,7 @@
      "comp": "Datos del upstream y su calidad",
      "cues": [
       {
-       "say": "Una serie de producción diaria tiene huecos, ceros por cierres y picos de error. Antes de modelar hay que distinguir lo que es un error de lo que es un evento real. Un cierre programado no se borra: se marca.",
+       "say": "Una serie de producción diaria tiene huecos, ceros por cierres y picos de error. Antes que nada, verificar unidades y fechas.",
        "scene": {
         "t": "bul",
         "k": "Reglas",
@@ -178,7 +214,23 @@
          "Conservar el dato original junto al corregido"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Marcar los cierres y eventos reales con su causa: un cierre programado no se borra, se marca.",
        "hl": 1
+      },
+      {
+       "say": "Separar los errores de medición de los comportamientos reales.",
+       "hl": 2
+      },
+      {
+       "say": "Documentar toda corrección aplicada.",
+       "hl": 3
+      },
+      {
+       "say": "Y conservar el dato original junto al corregido.",
+       "hl": 4
       },
       {
        "say": "Hay varios métodos para detectar valores atípicos. El z-score usa la media y el desvío, pero los propios errores los distorsionan. Con la mediana y el desvío absoluto mediano, o MAD, se resisten mejor. Y una mediana móvil descuenta la tendencia.",
@@ -221,7 +273,7 @@
        "lab": true
       },
       {
-       "say": "Una conclusión práctica. El mejor método depende del dato. Para series con tendencia, la mediana móvil es una opción sólida. Y siempre hay que revisar los casos marcados con criterio de ingeniería, porque un pico puede ser real.",
+       "say": "Una conclusión práctica: el mejor método depende del dato. Conviene usar métodos robustos a los propios errores.",
        "scene": {
         "t": "bul",
         "k": "En la práctica",
@@ -236,7 +288,19 @@
        "hl": 0
       },
       {
-       "say": "Una serie de producción mezcla tendencia, ciclos operativos y ruido. Descomponerla en tendencia, estacionalidad y resto, por ejemplo con el método STL, ayuda a separar la declinación natural de las paradas y los cambios operativos antes de ajustar modelos.",
+       "say": "Para series con tendencia, hay que descontar la tendencia antes de buscar atípicos. La mediana móvil es una opción sólida.",
+       "hl": 1
+      },
+      {
+       "say": "Siempre se revisa cada caso marcado con criterio de ingeniería, porque un pico puede ser real.",
+       "hl": 2
+      },
+      {
+       "say": "Y se miden las falsas alarmas y los errores no detectados.",
+       "hl": 3
+      },
+      {
+       "say": "Una serie de producción mezcla tendencia, ciclos operativos y ruido. La tendencia es la declinación del pozo.",
        "scene": {
         "t": "bul",
         "k": "Series de tiempo",
@@ -247,7 +311,20 @@
          "Resto: ruido y eventos",
          "Marcar paradas antes de ajustar"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "La estacionalidad son los ciclos operativos o de demanda.",
+       "hl": 1
+      },
+      {
+       "say": "El resto es ruido y eventos. Descomponer la serie, por ejemplo con el método STL, ayuda a separarlos.",
+       "hl": 2
+      },
+      {
+       "say": "Por eso se marcan las paradas antes de ajustar modelos.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -381,7 +458,7 @@
        "lab": true
       },
       {
-       "say": "En datos de pozos hay un error metodológico frecuente, la fuga de información. Si se mezclan datos de un mismo pozo entre entrenamiento y prueba, el modelo parece mejor de lo que es. Hay que validar por pozo, o por campo, y siempre comparar con un modelo simple de referencia.",
+       "say": "En datos de pozos hay un error metodológico frecuente, la fuga de información. Si se mezclan datos de un mismo pozo entre entrenamiento y prueba, el modelo parece mejor de lo que es. Hay que separar por pozo o por campo, no por filas.",
        "scene": {
         "t": "bul",
         "k": "Validación",
@@ -404,7 +481,23 @@
        ]
       },
       {
-       "say": "Los valores de Shapley, usados por el método SHAP, reparten una predicción entre las variables que la produjeron. Sirven para auditar un modelo y detectar comportamientos extraños. No prueban causalidad: una variable importante en el modelo no es necesariamente una causa en el campo.",
+       "say": "Siempre se compara con una línea de base simple.",
+       "hl": 1
+      },
+      {
+       "say": "Se usa validación cruzada con grupos.",
+       "hl": 2
+      },
+      {
+       "say": "Se evalúa con el criterio de uso real: a futuro, no al azar.",
+       "hl": 3
+      },
+      {
+       "say": "Y se informa la incertidumbre, y no solo un número.",
+       "hl": 4
+      },
+      {
+       "say": "Los valores de Shapley, usados por el método SHAP, reparten una predicción entre las variables que la produjeron: la contribución de cada variable.",
        "scene": {
         "t": "bul",
         "k": "Interpretabilidad",
@@ -415,7 +508,20 @@
          "No demuestra causalidad",
          "Contrastar con el criterio de ingeniería"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Sirven para auditar y depurar un modelo, y detectar comportamientos extraños.",
+       "hl": 1
+      },
+      {
+       "say": "Pero no demuestran causalidad: una variable importante en el modelo no es necesariamente una causa en el campo.",
+       "hl": 2
+      },
+      {
+       "say": "Por eso se contrastan con el criterio de ingeniería.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -547,7 +653,7 @@
        "hl": 2
       },
       {
-       "say": "Para entender qué hace un modelo se usan técnicas de interpretabilidad. Por ejemplo, los valores de Shapley, que reparten la contribución de cada variable a una predicción. Sirven para detectar si el modelo aprendió algo razonable o un artefacto de los datos.",
+       "say": "Para entender qué hace un modelo se usan técnicas de interpretabilidad, como la importancia de variables y los valores de Shapley.",
        "scene": {
         "t": "bul",
         "k": "Interpretabilidad",
@@ -559,10 +665,22 @@
          "Coherencia con la física y con la experiencia de campo"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "También los gráficos de dependencia parcial.",
        "hl": 1
       },
       {
-       "say": "Y siempre se comunica la incertidumbre. Un pronóstico sin rango no sirve para decidir. Se usan intervalos, escenarios o modelos probabilísticos, y se explica qué tan lejos de los datos de entrenamiento se está extrapolando.",
+       "say": "La revisión de casos mal predichos.",
+       "hl": 2
+      },
+      {
+       "say": "Y la coherencia con la física y con la experiencia de campo. Así se detecta si el modelo aprendió algo razonable o un artefacto de los datos.",
+       "hl": 3
+      },
+      {
+       "say": "Siempre se comunica la incertidumbre. Un pronóstico sin rango no sirve para decidir, así que se informa un rango o intervalo de la predicción.",
        "scene": {
         "t": "bul",
         "k": "Incertidumbre",
@@ -574,7 +692,19 @@
          "Supuestos y limitaciones del modelo"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Se muestran escenarios alternativos.",
+       "hl": 1
+      },
+      {
+       "say": "Se avisa cuando se extrapola fuera del rango de datos de entrenamiento.",
        "hl": 2
+      },
+      {
+       "say": "Y se explicitan los supuestos y las limitaciones del modelo.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -680,7 +810,7 @@
        "hl": 4
       },
       {
-       "say": "El mayor riesgo en producción es la deriva. Los datos de entrada cambian, por ejemplo por un nuevo diseño de completación, o cambia la relación entre variables y resultado. El modelo envejece aunque no se toque. Hay que monitorear ambas.",
+       "say": "El mayor riesgo en producción es la deriva. Hay deriva de datos cuando cambia la distribución de las variables de entrada, por ejemplo por un nuevo diseño de completación.",
        "scene": {
         "t": "bul",
         "k": "Deriva",
@@ -707,7 +837,19 @@
        ]
       },
       {
-       "say": "Sculley y colaboradores, en 2015, describieron la deuda técnica de los sistemas de aprendizaje automático: dependencias de datos, configuración y pruebas insuficientes. Versionar datos y modelos, y automatizar las pruebas, reduce esa deuda.",
+       "say": "Hay deriva de concepto cuando cambia la relación entre entrada y resultado.",
+       "hl": 1
+      },
+      {
+       "say": "Cambios de sensores, de procesos o de diseño las provocan.",
+       "hl": 2
+      },
+      {
+       "say": "Y se detectan con monitoreo y alertas de desempeño. El modelo envejece aunque no se toque.",
+       "hl": 3
+      },
+      {
+       "say": "Sculley y colaboradores, en 2015, describieron la deuda técnica de los sistemas de aprendizaje automático: dependencias de datos, configuración y pruebas insuficientes. Se reduce versionando datos, código y modelos.",
        "scene": {
         "t": "bul",
         "k": "Buenas prácticas",
@@ -720,7 +862,7 @@
          "Un plan para retirar un modelo"
         ]
        },
-       "hl": 3,
+       "hl": 0,
        "notes": [
         {
          "t": "deuda técnica",
@@ -728,6 +870,22 @@
          "n": "Deuda técnica: costo futuro que se acumula por los atajos de hoy en el diseño y las pruebas del sistema (Sculley et al., 2015)."
         }
        ]
+      },
+      {
+       "say": "Se debe poder reproducir un resultado con un solo comando.",
+       "hl": 1
+      },
+      {
+       "say": "Se automatizan las pruebas de datos y de modelos.",
+       "hl": 2
+      },
+      {
+       "say": "Se registra quién aprobó qué y cuándo.",
+       "hl": 3
+      },
+      {
+       "say": "Y se prepara un plan para retirar un modelo.",
+       "hl": 4
       },
       {
        "say": "Pregunta rápida.",
@@ -751,7 +909,7 @@
      "comp": "Gobernanza y uso responsable",
      "cues": [
       {
-       "say": "Los datos tienen dueño, responsable de calidad, permisos y ciclo de vida. La gobernanza define quién puede ver qué, cómo se documenta el origen de cada dato, y cómo se garantiza su seguridad, tanto en la red de oficina como en la de operaciones.",
+       "say": "Los datos tienen dueño, responsable de calidad, permisos y ciclo de vida. Cada conjunto de datos tiene un propietario y un responsable.",
        "scene": {
         "t": "bul",
         "k": "Gobernanza",
@@ -764,10 +922,26 @@
          "Datos de terceros: respetar contratos y confidencialidad"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Hay un catálogo, con trazabilidad del origen y de las transformaciones.",
        "hl": 1
       },
       {
-       "say": "El uso de la inteligencia artificial en ingeniería necesita reglas. Un resultado debe poder revisarse, con fuentes y supuestos. Los modelos de lenguaje pueden inventar datos, así que se los usa con fuentes recuperadas y revisión humana, y no como autoridad.",
+       "say": "Los permisos de acceso son los mínimos necesarios.",
+       "hl": 2
+      },
+      {
+       "say": "Se garantiza la seguridad, tanto en la red de oficina como en la de operaciones.",
+       "hl": 3
+      },
+      {
+       "say": "Y con datos de terceros se respetan contratos y confidencialidad.",
+       "hl": 4
+      },
+      {
+       "say": "El uso de la inteligencia artificial en ingeniería necesita reglas. Primero, revisión humana de las decisiones de impacto.",
        "scene": {
         "t": "bul",
         "k": "Uso responsable",
@@ -780,7 +954,23 @@
          "Pruebas de sesgos y de casos límite"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Las fuentes deben estar citadas y ser verificables. Los modelos de lenguaje pueden inventar datos: se usan con fuentes recuperadas, y no como autoridad.",
+       "hl": 1
+      },
+      {
+       "say": "Se registran el modelo, la versión y los datos usados.",
        "hl": 2
+      },
+      {
+       "say": "No se carga información confidencial en servicios no autorizados.",
+       "hl": 3
+      },
+      {
+       "say": "Y se hacen pruebas de sesgos y de casos límite.",
+       "hl": 4
       },
       {
        "say": "El caso Volve muestra el valor de los datos abiertos. En junio de 2018 el operador del campo compartió los datos de Volve, con los socios de la licencia.",
@@ -795,7 +985,7 @@
        }
       },
       {
-       "say": "Los datos deben ser localizables, accesibles, interoperables y reutilizables, los principios FAIR. Y cada modelo merece una ficha que diga para qué sirve, con qué datos se entrenó, cómo se midió y dónde no debe usarse: es la idea de las tarjetas de modelo.",
+       "say": "Los datos deben cumplir los principios FAIR: localizables, accesibles, interoperables y reutilizables.",
        "scene": {
         "t": "bul",
         "k": "Gobernanza",
@@ -806,7 +996,20 @@
          "Datos de entrenamiento y métricas",
          "Responsable y fecha de revisión"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Cada modelo merece una ficha, la idea de las tarjetas de modelo, que dice para qué sirve y cuáles son sus límites.",
+       "hl": 1
+      },
+      {
+       "say": "La ficha incluye los datos de entrenamiento y cómo se midió.",
+       "hl": 2
+      },
+      {
+       "say": "Y el responsable y la fecha de revisión.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",

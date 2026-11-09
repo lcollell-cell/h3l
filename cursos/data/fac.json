@@ -78,7 +78,7 @@
      "comp": "Separación",
      "cues": [
       {
-       "say": "El primer equipo de una instalación es el separador. Separa por gravedad el gas, el petróleo y el agua que llegan juntos desde los pozos. Su tamaño lo fijan dos criterios. Para el gas, que las gotas decanten y no arrastren líquido. Para el líquido, un tiempo de residencia suficiente para que se separen las fases.",
+       "say": "El primer equipo de una instalación es el separador. Separa por gravedad el gas, el petróleo y el agua que llegan juntos desde los pozos. Para el gas, que no arrastre líquido, para proteger compresores y ductos.",
        "scene": {
         "t": "bul",
         "k": "Separador",
@@ -91,6 +91,18 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Para el petróleo, sin gas disuelto en exceso: el líquido necesita un tiempo de residencia suficiente para que se separen las fases.",
+       "hl": 1
+      },
+      {
+       "say": "Y el agua, separada del crudo.",
+       "hl": 2
+      },
+      {
+       "say": "Además, el equipo debe tener capacidad para absorber golpes de líquido.",
+       "hl": 3
       },
       {
        "say": "Para el gas, el criterio clásico es el de Souders y Brown, de 1934. La velocidad máxima admisible es el factor K por la raíz de la diferencia de densidades sobre la del gas. Con esa velocidad y el caudal real se calcula el área de paso y el diámetro mínimo del recipiente.",
@@ -134,7 +146,7 @@
      "comp": "Tratamiento y especificación",
      "cues": [
       {
-       "say": "El petróleo llega con agua emulsionada y sales. Se trata con calor, productos químicos desemulsionantes, tiempo de residencia y a veces un campo eléctrico. El objetivo es entregar un crudo con un contenido de agua y sedimentos, el BSW, por debajo del máximo que fija el contrato o la norma de transferencia.",
+       "say": "El petróleo llega con agua emulsionada y sales. Primero se separa por gravedad el agua libre.",
        "scene": {
         "t": "bul",
         "k": "Crudo",
@@ -147,7 +159,23 @@
          "Medición del BSW en la transferencia"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Luego, calentamiento y química desemulsionante.",
        "hl": 1
+      },
+      {
+       "say": "Se usan tratadores térmicos o electrostáticos, con tiempo de residencia y a veces un campo eléctrico.",
+       "hl": 2
+      },
+      {
+       "say": "Se hace desalado si hay sales.",
+       "hl": 3
+      },
+      {
+       "say": "Y se mide el BSW, el contenido de agua y sedimentos, en la transferencia, que debe estar por debajo del máximo del contrato o de la norma.",
+       "hl": 4
       },
       {
        "say": "El gas se deshidrata para evitar hidratos y corrosión en el gasoducto. El método más extendido es la absorción con glicol, usualmente trietilenglicol, que se regenera por calentamiento. Para especificaciones muy exigentes se usan tamices moleculares. La especificación final, normalmente un punto de rocío de agua, la fija el contrato o el transportista.",
@@ -185,7 +213,7 @@
        }
       },
       {
-       "say": "Lo importante para la operación es que la especificación manda. El gas se vende contra un punto de rocío de agua y de hidrocarburos, un poder calorífico y un máximo de CO₂ y H₂S, según el contrato y la norma del transportista. Producir gas fuera de especificación se paga con descuentos o con el cierre del punto de entrega.",
+       "say": "Lo importante para la operación es que la especificación manda. El gas se vende contra un punto de rocío de agua.",
        "scene": {
         "t": "bul",
         "k": "Especificaciones",
@@ -198,6 +226,22 @@
          "Los valores exactos los fija el contrato y el transportista"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Un punto de rocío de hidrocarburos.",
+       "hl": 1
+      },
+      {
+       "say": "Un poder calorífico.",
+       "hl": 2
+      },
+      {
+       "say": "Y un máximo de CO₂, H₂S y otros contaminantes.",
+       "hl": 3
+      },
+      {
+       "say": "Los valores exactos los fija el contrato y el transportista. Producir gas fuera de especificación se paga con descuentos o con el cierre del punto de entrega.",
        "hl": 4
       },
       {
@@ -273,7 +317,7 @@
        }
       },
       {
-       "say": "Cuando la relación es alta, la temperatura de descarga sube y llega a límites mecánicos o del gas. Por eso se comprime en etapas, con enfriamiento del gas entre etapas. Como orientación, se limita la relación por etapa a valores del orden de 3 a 4, y el número de etapas resulta del cociente total.",
+       "say": "Cuando la relación de compresión es alta, la temperatura de descarga sube y llega a límites mecánicos o del gas. Por eso se comprime en etapas, que limitan esa temperatura.",
        "scene": {
         "t": "bul",
         "k": "Etapas",
@@ -286,6 +330,18 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "El enfriamiento entre etapas reduce la potencia total.",
+       "hl": 1
+      },
+      {
+       "say": "Se requieren separadores entre etapas, para drenar el condensado.",
+       "hl": 2
+      },
+      {
+       "say": "Cada etapa suma costo y complejidad. Como orientación, la relación por etapa es del orden de 3 a 4, y el número de etapas resulta del cociente total.",
+       "hl": 3
       },
       {
        "say": "Laboratorio. Cambiá la presión de succión y de descarga, la temperatura, el caudal y la eficiencia. Mirá la relación de compresión, la temperatura de descarga y la potencia. El modelo usa gas ideal y sirve para dimensionar, no para comprar.",
@@ -319,7 +375,7 @@
      "comp": "Alivio y antorcha",
      "cues": [
       {
-       "say": "Todo recipiente y toda línea necesita protección contra sobrepresión. La última barrera es una válvula de alivio que descarga a un sistema de antorcha o de venteo. Las causas típicas de sobrepresión son una salida bloqueada, un incendio externo, la expansión térmica de un líquido atrapado y la falla de un control.",
+       "say": "Todo recipiente y toda línea necesita protección contra sobrepresión. La última barrera es una válvula de alivio que descarga a un sistema de antorcha o de venteo. Las causas típicas son una salida bloqueada.",
        "scene": {
         "t": "bul",
         "k": "Causas",
@@ -333,6 +389,22 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Un incendio externo.",
+       "hl": 1
+      },
+      {
+       "say": "La expansión térmica de un líquido atrapado.",
+       "hl": 2
+      },
+      {
+       "say": "La falla de un lazo de control.",
+       "hl": 3
+      },
+      {
+       "say": "Y el reflujo desde un sistema de mayor presión.",
+       "hl": 4
       },
       {
        "say": "El diseño parte de identificar el escenario que exige el mayor caudal de alivio, que es el que dimensiona la válvula y el colector. La norma API 521 describe los sistemas de alivio y despresurización, y la API 14C el análisis de los sistemas de seguridad de instalaciones de producción en el mar. Se aplican con las reglas locales.",
@@ -371,7 +443,7 @@
        }
       },
       {
-       "say": "Hay una consecuencia ambiental. Quemar en antorcha emite CO₂, y una combustión incompleta o un apagado deja escapar metano. Por eso se diseña para minimizar el gas a antorcha en operación normal, con recuperación de gas de baja presión, y se mide el gas quemado. Se relaciona con el curso de gestión de emisiones.",
+       "say": "Hay una consecuencia ambiental. La antorcha es seguridad y no un método de disposición. Quemar en antorcha emite CO₂, y una combustión incompleta o un apagado deja escapar metano.",
        "scene": {
         "t": "bul",
         "k": "Antorcha",
@@ -384,6 +456,18 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Por eso se mide el gas quemado y venteado.",
+       "hl": 1
+      },
+      {
+       "say": "Se recupera el gas de baja presión, para minimizar el gas a antorcha en operación normal.",
+       "hl": 2
+      },
+      {
+       "say": "Y se vigila la eficiencia de combustión. Se relaciona con el curso de gestión de emisiones.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -448,7 +532,7 @@
      "comp": "Hidratos, ceras y asfaltenos",
      "cues": [
       {
-       "say": "Aseguramiento de flujo es garantizar que el fluido llegue de forma continua desde el pozo hasta el punto de entrega. Sus amenazas son sólidos que obstruyen: hidratos, ceras y asfaltenos, además de incrustaciones. Se manejan con prevención, con monitoreo y con procedimientos de remediación, y se diseñan desde el principio.",
+       "say": "Aseguramiento de flujo es garantizar que el fluido llegue de forma continua desde el pozo hasta el punto de entrega. Las amenazas son sólidos que obstruyen. Los hidratos de gas: agua y gas a presión alta y temperatura baja.",
        "scene": {
         "t": "bul",
         "k": "Sólidos",
@@ -461,6 +545,18 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Las ceras o parafinas: cristales que se forman al enfriarse el crudo.",
+       "hl": 1
+      },
+      {
+       "say": "Los asfaltenos: precipitan al cambiar la presión o la composición.",
+       "hl": 2
+      },
+      {
+       "say": "Y las incrustaciones minerales, por mezcla de aguas. Se manejan con prevención, monitoreo y remediación, y se diseñan desde el principio.",
+       "hl": 3
       },
       {
        "say": "Los hidratos son cristales de agua y gas que se forman a presión alta y temperatura baja, y pueden bloquear una línea en horas. Se previenen manteniendo la temperatura fuera de la región de formación, sacando el agua, o inyectando un inhibidor termodinámico como el metanol o el monoetilenglicol, que desplaza la curva de formación.",
@@ -498,7 +594,7 @@
        }
       },
       {
-       "say": "Las ceras aparecen cuando el crudo se enfría por debajo de la temperatura de aparición de ceras, y aumentan la viscosidad y depositan en la pared. Se controlan con aislación, con inhibidores y con limpieza mecánica, usando raspadores o pigs. Los asfaltenos son otra fracción y se estudian con ensayos de laboratorio de la muestra propia.",
+       "say": "Las ceras aparecen cuando el crudo se enfría por debajo de la temperatura de aparición de ceras. Esa temperatura y el punto de fluidez se miden en laboratorio.",
        "scene": {
         "t": "bul",
         "k": "Ceras y asfaltenos",
@@ -512,6 +608,22 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Para controlarlas se aíslan o se calientan las líneas críticas.",
+       "hl": 1
+      },
+      {
+       "say": "Se hace pigging regular, con raspadores, para remover depósitos.",
+       "hl": 2
+      },
+      {
+       "say": "Se usan inhibidores químicos.",
+       "hl": 3
+      },
+      {
+       "say": "Y los asfaltenos, otra fracción, se estudian con ensayos de laboratorio con el crudo del campo.",
+       "hl": 4
       },
       {
        "say": "Pregunta rápida.",
@@ -535,7 +647,7 @@
      "comp": "Flujo multifásico, erosión y corrosión",
      "cues": [
       {
-       "say": "En una línea con gas y líquido el flujo puede adoptar distintos regímenes: estratificado, anular, burbujas o tapones, también llamados slugs. Los tapones son un problema de diseño, porque llegan al separador como golpes de líquido y pueden desbordarlo. Se estudian con modelos de flujo multifásico y se manejan con un volumen de recepción adecuado.",
+       "say": "En una línea con gas y líquido el flujo puede adoptar distintos regímenes. En el estratificado, el líquido corre por abajo y el gas por arriba.",
        "scene": {
         "t": "bul",
         "k": "Regímenes",
@@ -547,6 +659,18 @@
          "Los tapones requieren volumen en el separador de llegada"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "En el anular, el líquido va en la pared y el gas en el centro.",
+       "hl": 1
+      },
+      {
+       "say": "En tapones o slugs, alternan gas y líquido.",
+       "hl": 2
+      },
+      {
+       "say": "Los tapones son un problema de diseño: llegan al separador como golpes de líquido y pueden desbordarlo. Se estudian con modelos de flujo multifásico y requieren volumen en el separador de llegada.",
        "hl": 3
       },
       {
@@ -560,7 +684,7 @@
        }
       },
       {
-       "say": "El CO₂ disuelto en agua forma un ácido débil que corroe el acero al carbono. Se controla con inhibidores de corrosión, con materiales resistentes o con control del agua. La corrosión se monitorea con cupones, sondas y la inspección periódica, y la integridad se gestiona con un programa que combina esos datos.",
+       "say": "El CO₂ disuelto en agua forma un ácido débil que corroe el acero al carbono. Se controla quitando el agua o evitando su contacto con el acero.",
        "scene": {
         "t": "bul",
         "k": "Corrosión",
@@ -574,6 +698,22 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Con inhibidores de corrosión.",
+       "hl": 1
+      },
+      {
+       "say": "Con materiales resistentes en líneas críticas.",
+       "hl": 2
+      },
+      {
+       "say": "La corrosión se monitorea con cupones, sondas e inspección en línea.",
+       "hl": 3
+      },
+      {
+       "say": "Y la integridad se gestiona con un programa que combina esos datos, con alertas.",
+       "hl": 4
       },
       {
        "say": "Pregunta rápida.",

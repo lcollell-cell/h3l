@@ -65,7 +65,7 @@
      "comp": "Fundamentos de Scrum",
      "cues": [
       {
-       "say": "Scrum es un marco liviano para resolver problemas complejos entregando valor de forma frecuente. Según la Guía de Scrum de dos mil veinte, se apoya en la transparencia, la inspección y la adaptación.",
+       "say": "Scrum es un marco liviano para resolver problemas complejos, con entregas frecuentes de valor.",
        "scene": {
         "t": "bul",
         "k": "Marco",
@@ -83,7 +83,20 @@
          "k": "Guía",
          "n": "Documento de Schwaber y Sutherland que define Scrum; la versión vigente es de 2020."
         }
-       ]
+       ],
+       "hl": 0
+      },
+      {
+       "say": "Según la Guía de Scrum de dos mil veinte, se apoya en tres pilares: transparencia, inspección y adaptación.",
+       "hl": 1
+      },
+      {
+       "say": "Sus valores son compromiso, foco, apertura, respeto y coraje.",
+       "hl": 2
+      },
+      {
+       "say": "Lo trabaja un equipo de diez personas o menos, con un solo objetivo de producto.",
+       "hl": 3
       },
       {
        "say": "El equipo tiene tres responsabilidades: el Product Owner, el Scrum Master y los Developers. Cada artefacto tiene un compromiso: el objetivo del producto, el objetivo del sprint y la definición de terminado.",
@@ -222,7 +235,7 @@
        }
       },
       {
-       "say": "El Backlog de Jira es la lista ordenada de tickets. El Product Owner la prioriza. Al crear un sprint se fijan nombre, fechas y objetivo, se arrastran los tickets elegidos y se inicia el sprint. Aparece el tablero activo y los informes.",
+       "say": "El Backlog de Jira es la lista ordenada de tickets. El Product Owner la prioriza.",
        "scene": {
         "t": "bul",
         "k": "Backlog",
@@ -234,10 +247,27 @@
          "Tablero activo: columnas de Por hacer, En curso y Hecho",
          "Informes: burndown, velocity y reporte del sprint"
         ]
-       }
+       },
+       "hl": 0
       },
       {
-       "say": "Jira no trae una definición de terminado lista. Se la incorpora como lista de verificación en el ticket y como condición del paso a Hecho. En proyectos con datos de campo, incluye la validación de calidad de los datos.",
+       "say": "Al crear un sprint se fijan el nombre, la duración, las fechas y el objetivo del sprint.",
+       "hl": 1
+      },
+      {
+       "say": "Cada ticket se estima con puntos de historia.",
+       "hl": 2
+      },
+      {
+       "say": "Se inicia el sprint, y aparece el tablero activo, con columnas de Por hacer, En curso y Hecho.",
+       "hl": 3
+      },
+      {
+       "say": "Y los informes: burndown, velocity y reporte del sprint.",
+       "hl": 4
+      },
+      {
+       "say": "Jira no trae una definición de terminado lista. Se la escribe como lista de verificación en cada historia.",
        "scene": {
         "t": "bul",
         "k": "Definición de terminado",
@@ -248,7 +278,20 @@
          "Incluir la validación de calidad de los datos en proyectos analíticos",
          "Revisarla en la retrospectiva si aparecen defectos tardíos"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Se exige revisión y pruebas antes de pasar a Hecho.",
+       "hl": 1
+      },
+      {
+       "say": "En proyectos analíticos, incluye la validación de calidad de los datos.",
+       "hl": 2
+      },
+      {
+       "say": "Y se revisa en la retrospectiva si aparecen defectos tardíos.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -323,7 +366,7 @@
        }
       },
       {
-       "say": "Los puntos de historia miden el esfuerzo relativo, no las horas. El equipo compara cada historia con una de referencia y usa una escala que crece, como la de Fibonacci. Una historia muy grande se divide antes de entrar a un sprint.",
+       "say": "Los puntos de historia miden el esfuerzo relativo, no las horas.",
        "scene": {
         "t": "bul",
         "k": "Estimación",
@@ -334,10 +377,23 @@
          "Se usa una escala como Fibonacci: 1, 2, 3, 5, 8, 13",
          "Una historia mayor a 13 puntos se divide antes de entrar al sprint"
         ]
-       }
+       },
+       "hl": 0
       },
       {
-       "say": "La planificación responde tres preguntas: por qué es valioso este sprint, qué se puede terminar y cómo se hará el trabajo. El equipo elige historias según su velocidad histórica, y no según la presión de las fechas.",
+       "say": "Se estima en equipo, comparando con una historia de referencia.",
+       "hl": 1
+      },
+      {
+       "say": "Se usa una escala que crece, como la de Fibonacci: 1, 2, 3, 5, 8, 13.",
+       "hl": 2
+      },
+      {
+       "say": "Y una historia mayor a 13 puntos se divide antes de entrar al sprint.",
+       "hl": 3
+      },
+      {
+       "say": "La planificación responde tres preguntas. Por qué es valioso este sprint: es el objetivo del sprint.",
        "scene": {
         "t": "bul",
         "k": "Planificación",
@@ -348,7 +404,20 @@
          "Cómo se hará el trabajo: tareas y subtareas",
          "La capacidad se estima con la velocidad de los sprints previos"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Qué se puede terminar: el equipo elige historias según su capacidad, y no según la presión de las fechas.",
+       "hl": 1
+      },
+      {
+       "say": "Cómo se hará el trabajo: tareas y subtareas.",
+       "hl": 2
+      },
+      {
+       "say": "Y la capacidad se estima con la velocidad de los sprints previos.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -372,7 +441,7 @@
      "comp": "Ejecución y mejora",
      "cues": [
       {
-       "say": "Durante el sprint, el equipo se sincroniza en el scrum diario frente al tablero activo. Cada ticket tiene un responsable y los impedimentos se marcan con bandera. El foco es el objetivo del sprint, no informar al jefe.",
+       "say": "Durante el sprint, el equipo se sincroniza en el scrum diario frente al tablero activo. Cada ticket tiene un responsable y está en la columna que corresponde.",
        "scene": {
         "t": "bul",
         "k": "Scrum diario",
@@ -383,7 +452,20 @@
          "El foco es el objetivo del sprint, no informar al jefe",
          "Quince minutos, de pie o en pantalla, a la misma hora"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Los impedimentos se marcan con bandera y se comunican al Scrum Master.",
+       "hl": 1
+      },
+      {
+       "say": "El foco es el objetivo del sprint, no informar al jefe.",
+       "hl": 2
+      },
+      {
+       "say": "Dura quince minutos, de pie o en pantalla, a la misma hora.",
+       "hl": 3
       },
       {
        "say": "Jira muestra el burndown, que es el trabajo restante frente al tiempo, y la velocidad, que compara los puntos comprometidos con los terminados en cada sprint. Con la velocidad se planifica la capacidad.",
@@ -421,7 +503,7 @@
        }
       },
       {
-       "say": "La revisión inspecciona el incremento con los interesados y adapta el backlog. La retrospectiva es solo del equipo y busca mejorar la forma de trabajar. Conviene salir con una acción concreta, registrada como ticket.",
+       "say": "En la revisión se inspecciona el incremento con los interesados y se adapta el backlog.",
        "scene": {
         "t": "bul",
         "k": "Revisión y retrospectiva",
@@ -432,7 +514,20 @@
          "Una acción de mejora por sprint, con responsable",
          "Las acciones se registran como tickets en el backlog"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "La retrospectiva es solo del equipo y busca mejorar la forma de trabajar.",
+       "hl": 1
+      },
+      {
+       "say": "Conviene salir con una acción de mejora por sprint, con responsable.",
+       "hl": 2
+      },
+      {
+       "say": "Y las acciones se registran como tickets en el backlog.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -497,7 +592,7 @@
      "comp": "Caso de vigilancia de pozos",
      "cues": [
       {
-       "say": "Presentamos el caso, un ejemplo didáctico con datos ilustrativos. Un equipo de ingeniería de producción, ciencia de datos y desarrollo construye un tablero de vigilancia con alertas de desvío de producción. Trabajan en sprints de dos semanas.",
+       "say": "Presentamos el caso, un ejemplo didáctico con datos ilustrativos. Un equipo mixto de ingeniería de producción, ciencia de datos y desarrollo.",
        "scene": {
         "t": "bul",
         "k": "Contexto",
@@ -508,10 +603,23 @@
          "Product Owner: jefe de Producción; Scrum Master: analista senior",
          "Sprints de dos semanas; datos y plazos ilustrativos"
         ]
-       }
+       },
+       "hl": 0
       },
       {
-       "say": "Paso uno, el objetivo del producto: detectar en menos de una hora los pozos con desvío mayor al diez por ciento. Paso dos, el backlog con cuatro épicas y ciento diez puntos de historia. El Product Owner prioriza primero los datos.",
+       "say": "El producto es un tablero de vigilancia que detecta pozos con desvío de producción.",
+       "hl": 1
+      },
+      {
+       "say": "El Product Owner es el jefe de Producción, y el Scrum Master, un analista senior.",
+       "hl": 2
+      },
+      {
+       "say": "Trabajan en sprints de dos semanas, con datos y plazos ilustrativos.",
+       "hl": 3
+      },
+      {
+       "say": "Paso uno, el objetivo del producto: detectar en menos de una hora los pozos con desvío mayor al diez por ciento.",
        "scene": {
         "t": "bul",
         "k": "Objetivo",
@@ -522,7 +630,20 @@
          "Backlog inicial: 110 puntos de historia",
          "El Product Owner ordena por valor y riesgo: primero los datos"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Paso dos, las épicas: Datos y calidad, Alertas, Visualización y Adopción.",
+       "hl": 1
+      },
+      {
+       "say": "El backlog inicial tiene ciento diez puntos de historia.",
+       "hl": 2
+      },
+      {
+       "say": "Y el Product Owner ordena por valor y riesgo: primero los datos.",
+       "hl": 3
       },
       {
        "say": "El primer sprint tiene como objetivo tener los datos diarios limpios y accesibles. Se comprometen veinte puntos y se terminan dieciocho: la calidad de los datos fue más trabajo que lo previsto. En el segundo sprint se valida una regla de alerta.",
@@ -612,7 +733,7 @@
        }
       },
       {
-       "say": "En la revisión, los operadores piden un filtro por yacimiento y entra al backlog. En la retrospectiva, el equipo agrega a la definición de terminado una validación con el operador y pruebas automáticas de calidad de datos.",
+       "say": "En la revisión, los operadores piden un filtro por yacimiento, y entra al backlog.",
        "scene": {
         "t": "bul",
         "k": "Revisión y retrospectiva",
@@ -623,10 +744,23 @@
          "Acción: pruebas automáticas de calidad de datos antes de cada sprint",
          "Se decidió liberar la versión 1.0 al terminar el sprint 5"
         ]
-       }
+       },
+       "hl": 0
       },
       {
-       "say": "Las lecciones. Scrum entrega valor temprano pero no elimina la incertidumbre. La velocidad sirve para planificar, no para comparar equipos. Y en operaciones, la seguridad y la calidad de los datos forman parte de la definición de terminado.",
+       "say": "En la retrospectiva, se mejora la definición de terminado: incluye la validación con el operador.",
+       "hl": 1
+      },
+      {
+       "say": "La acción: pruebas automáticas de calidad de datos antes de cada sprint.",
+       "hl": 2
+      },
+      {
+       "say": "Y se decide liberar la versión 1.0 al terminar el sprint 5.",
+       "hl": 3
+      },
+      {
+       "say": "Las lecciones. Scrum entrega valor temprano, pero no elimina la incertidumbre.",
        "scene": {
         "t": "bul",
         "k": "Lecciones",
@@ -637,7 +771,20 @@
          "El Product Owner decide el orden; el equipo, cuánto se puede comprometer",
          "En campo, la seguridad y la calidad de los datos forman parte de terminado"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "La velocidad sirve para planificar, no para comparar equipos.",
+       "hl": 1
+      },
+      {
+       "say": "El Product Owner decide el orden; el equipo, cuánto se puede comprometer.",
+       "hl": 2
+      },
+      {
+       "say": "Y en campo, la seguridad y la calidad de los datos forman parte de la definición de terminado.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",

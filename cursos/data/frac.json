@@ -72,7 +72,7 @@
      "comp": "Geomecánica y fracturabilidad",
      "cues": [
       {
-       "say": "En una lutita la permeabilidad se mide en nanodarcies. El petróleo y el gas están en poros diminutos, y no llegan al pozo con un caudal útil. La fractura crea una superficie de contacto enorme y un camino de alta conductividad.",
+       "say": "En una lutita la permeabilidad de la matriz se mide en nanodarcies.",
        "scene": {
         "t": "bul",
         "k": "Por qué se fractura",
@@ -88,6 +88,22 @@
        "hl": 0
       },
       {
+       "say": "Los poros son pequeños, con el hidrocarburo almacenado dentro.",
+       "hl": 1
+      },
+      {
+       "say": "Sin estimulación, el caudal es casi nulo.",
+       "hl": 2
+      },
+      {
+       "say": "La fractura multiplica el área de contacto y crea un camino de alta conductividad.",
+       "hl": 3
+      },
+      {
+       "say": "Por eso se necesita un pozo horizontal con muchas etapas.",
+       "hl": 4
+      },
+      {
        "say": "Para iniciar una fractura, la presión en el pozo debe superar el esfuerzo mínimo más la resistencia a tracción de la roca, con efectos de la presión de poro, de la orientación del pozo y de la concentración de esfuerzos cerca de él. Una vez iniciada, se propaga mientras la presión neta sea positiva. Son tres cosas distintas: la presión de iniciación, la de propagación y la presión neta.",
        "scene": {
         "t": "fm",
@@ -98,7 +114,7 @@
        }
       },
       {
-       "say": "En el caso típico de fracturas verticales, el plano de la fractura es perpendicular al esfuerzo horizontal mínimo, Shmin: su normal es paralela a Shmin. Por eso el lateral suele perforarse paralelo a Shmin, y las fracturas resultan transversales al pozo. Depende del régimen de esfuerzos y de la orientación local.",
+       "say": "En el caso típico de fracturas verticales, el plano de la fractura es perpendicular al esfuerzo horizontal mínimo, Shmin.",
        "scene": {
         "t": "bul",
         "k": "Geometría",
@@ -109,7 +125,20 @@
          "Lateral paralelo a Shmin: fracturas transversales",
          "Vale para fracturas verticales; depende del régimen de esfuerzos"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Su normal es paralela a Shmin.",
+       "hl": 1
+      },
+      {
+       "say": "Por eso el lateral suele perforarse paralelo a Shmin, y las fracturas resultan transversales al pozo.",
+       "hl": 2
+      },
+      {
+       "say": "Esto vale para fracturas verticales y depende del régimen de esfuerzos y de la orientación local.",
+       "hl": 3
       },
       {
        "say": "Qué hace fracturable a una roca. Contraste de esfuerzos con las capas vecinas, módulo de Young y relación de Poisson, presión de poro, contenido de arcilla y de materia orgánica, y fracturas naturales.",
@@ -171,7 +200,7 @@
      "comp": "Diseño de fractura y fluidos",
      "cues": [
       {
-       "say": "Para estimar la geometría hay modelos clásicos. El PKN, de Perkins y Kern, de 1961, supone una fractura de longitud mucho mayor que su altura, con la altura confinada. El KGD, de Khristianovic, Geertsma y de Klerk, supone lo contrario: una altura mayor que la longitud.",
+       "say": "Para estimar la geometría hay modelos clásicos. El PKN, de Perkins y Kern, de 1961, supone una fractura de longitud mucho mayor que su altura, con el ancho dependiente de la altura.",
        "scene": {
         "t": "bul",
         "k": "Modelos",
@@ -184,6 +213,18 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "El KGD, de Khristianovic, Geertsma y de Klerk, supone lo contrario: una altura mayor que la longitud, con el ancho dependiente de la longitud.",
+       "hl": 1
+      },
+      {
+       "say": "Los modelos pseudo-3D y planar 3D permiten una altura variable según las capas.",
+       "hl": 2
+      },
+      {
+       "say": "Cada uno asume una geometría y un confinamiento vertical; siempre se calibran con presiones de tratamiento y diagnósticos.",
+       "hl": 3
       },
       {
        "say": "Cada uno asume una geometría, un confinamiento vertical y un régimen de propagación, y hay que verificar que se cumplan. Los modelos modernos son pseudo-tridimensionales o planares tridimensionales, y no son una única formulación."
@@ -231,7 +272,7 @@
        }
       },
       {
-       "say": "El apuntalante mantiene abierta la fractura. Lo más usado es arena. Hay que cuidar la granulometría, la resistencia al esfuerzo de cierre y el transporte, porque la conductividad depende de él. La arena de producción regional reduce costos logísticos.",
+       "say": "El apuntalante mantiene abierta la fractura. Lo más usado es arena. Debe resistir el esfuerzo de cierre de la fractura.",
        "scene": {
         "t": "bul",
         "k": "Apuntalante",
@@ -243,10 +284,22 @@
          "Logística: la arena es una parte grande del costo"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Hay que cuidar la granulometría y el transporte en el fluido elegido.",
+       "hl": 1
+      },
+      {
+       "say": "De ellos depende la conductividad a lo largo de la vida del pozo.",
        "hl": 2
       },
       {
-       "say": "La conductividad adimensional de fractura relaciona la capacidad de la fractura con la de la formación: la permeabilidad del apuntalante por el ancho de la fractura, dividido por la permeabilidad de la roca y la semilongitud de la fractura. Si es alta, la fractura casi no limita el flujo. Si es baja, el cuello de botella está en la fractura. Prats la introdujo en 1961.",
+       "say": "Y la logística: la arena es una parte grande del costo, y la de producción regional lo reduce.",
+       "hl": 3
+      },
+      {
+       "say": "La conductividad adimensional de fractura relaciona la capacidad de la fractura con la de la formación. Es FCD igual a kf por wf, dividido por k por xf, con xf la semilongitud. Prats la introdujo en 1961.",
        "scene": {
         "t": "bul",
         "k": "Conductividad",
@@ -258,7 +311,24 @@
          "Valores de referencia que se discuten en la literatura, no una receta fija",
          "La conductividad efectiva cae con el esfuerzo de cierre, el daño, los finos, el embedment y la degradación del apuntalante"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Si es alta, la formación es el límite: la fractura casi no limita el flujo.",
+       "hl": 1
+      },
+      {
+       "say": "Si es baja, el cuello de botella está en la fractura.",
+       "hl": 2
+      },
+      {
+       "say": "Los valores de referencia se discuten en la literatura; no son una receta fija.",
+       "hl": 3
+      },
+      {
+       "say": "Y la conductividad efectiva cae con el esfuerzo de cierre, el daño, los finos, el embedment y la degradación del apuntalante.",
+       "hl": 4
       },
       {
        "say": "Laboratorio. Cambiá la permeabilidad del apuntalante, el ancho, la conductividad retenida y la permeabilidad de la matriz. Mirá cómo una fractura más larga baja el FCD y cuándo el límite pasa a ser la fractura.",
@@ -438,7 +508,7 @@
        "say": "El espaciamiento depende de la convención: longitud de etapa sobre número de clústeres, o distancia entre centros extremos, que es la longitud sobre N menos uno."
       },
       {
-       "say": "Un problema conocido es la eficiencia de los clústeres. En muchas etapas no todos los clústeres reciben fluido de manera pareja. Por eso se diagnostica con fibra óptica, trazadores y registros de producción, y se ajusta el diseño.",
+       "say": "Un problema conocido es la eficiencia de los clústeres: en muchas etapas, no todos aportan lo mismo.",
        "scene": {
         "t": "bul",
         "k": "Eficiencia",
@@ -451,6 +521,18 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Se mide con fibra óptica, trazadores y registros de producción.",
+       "hl": 1
+      },
+      {
+       "say": "Las técnicas de desvío y el diseño del cañoneo mejoran el reparto.",
+       "hl": 2
+      },
+      {
+       "say": "El objetivo es más producción por dólar, y no más etapas.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -520,7 +602,7 @@
        "lab": true
       },
       {
-       "say": "Además de la presión hay otras herramientas. La microsísmica ubica eventos de ruptura. La fibra óptica registra deformación y temperatura. Los trazadores indican qué clústeres aportan. Y las pruebas de interferencia muestran conexiones entre pozos.",
+       "say": "Además de la presión hay otras herramientas. La microsísmica ubica eventos de ruptura y da la extensión aproximada.",
        "scene": {
         "t": "bul",
         "k": "Monitoreo",
@@ -533,10 +615,26 @@
          "DFIT: presión de poro y de cierre"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "La fibra óptica registra deformación y temperatura: muestra la distribución del fluido y la producción por clúster.",
+       "hl": 1
+      },
+      {
+       "say": "Los trazadores indican el aporte de cada zona.",
        "hl": 2
       },
       {
-       "say": "Un fenómeno importante es el efecto padre-hijo. Un pozo nuevo, o hijo, fracturado cerca de uno en producción, o padre, puede comunicarse con él, y perjudicar a ambos. Se maneja con el espaciamiento, el orden de fractura y el diseño.",
+       "say": "Las presiones en pozos vecinos muestran interferencia y golpes de fractura.",
+       "hl": 3
+      },
+      {
+       "say": "Y la prueba DFIT da la presión de poro y de cierre.",
+       "hl": 4
+      },
+      {
+       "say": "Un fenómeno importante es el efecto padre-hijo. Un pozo nuevo, o hijo, fracturado cerca de uno en producción, o padre, puede conectarse con él.",
        "scene": {
         "t": "bul",
         "k": "Padre e hijo",
@@ -548,10 +646,22 @@
          "Se vigila con presiones y datos de producción"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "La producción del padre puede caer temporalmente, y perjudicar a ambos.",
        "hl": 1
       },
       {
-       "say": "El volumen estimulado, SRV, se estima con microsísmica como la roca alcanzada por fracturas. No es lo mismo que el volumen drenado ni garantiza conectividad con el pozo. La nube depende del umbral de detección, de la geometría de los sensores y de la incertidumbre de localización, y no mide volumen con conductividad. Se contrasta con producción, trazadores y diagnósticos de presión antes de usarlo para pronosticar.",
+       "say": "El diseño y el espaciamiento deben considerarlo, junto con el orden de fractura.",
+       "hl": 2
+      },
+      {
+       "say": "Y se vigila con presiones y datos de producción.",
+       "hl": 3
+      },
+      {
+       "say": "El volumen estimulado, SRV, se estima con microsísmica como la roca alcanzada por fracturas. La nube depende del umbral de detección, de la geometría de los sensores y de la incertidumbre de localización.",
        "scene": {
         "t": "bul",
         "k": "Diagnóstico",
@@ -562,7 +672,20 @@
          "Contrastar con producción y trazadores",
          "Uso cuidadoso en el pronóstico"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "No equivale al volumen drenado, ni garantiza conectividad con el pozo.",
+       "hl": 1
+      },
+      {
+       "say": "Hay que contrastarlo con producción, trazadores y diagnósticos de presión.",
+       "hl": 2
+      },
+      {
+       "say": "Y usarlo con cuidado en el pronóstico.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -627,7 +750,7 @@
      "comp": "Producción y operación",
      "cues": [
       {
-       "say": "Los pozos no convencionales tienen una declinación inicial muy fuerte, con flujo lineal prolongado. Con el modelo hiperbólico de Arps, el exponente b suele superar uno, y la curva decrece cada vez más despacio.",
+       "say": "Los pozos no convencionales tienen una declinación inicial muy fuerte, de decenas por ciento por año.",
        "scene": {
         "t": "bul",
         "k": "Comportamiento",
@@ -639,7 +762,19 @@
          "Se corrige con una declinación terminal mínima"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Hay flujo lineal prolongado, y en el modelo hiperbólico de Arps el exponente b suele superar uno.",
+       "hl": 1
+      },
+      {
+       "say": "Con b mayor que uno, la hiperbólica sobreestima la cola, y la curva decrece cada vez más despacio.",
        "hl": 2
+      },
+      {
+       "say": "Se corrige con una declinación terminal mínima.",
+       "hl": 3
       },
       {
        "say": "La práctica habitual es la hiperbólica modificada. Se usa la hiperbólica hasta que la declinación instantánea baja a un valor mínimo, y desde ahí se pasa a una exponencial con esa declinación terminal. Di y Dmin son declinaciones nominales anuales. Esto reduce el riesgo de sobreestimar, pero no lo elimina: el EUR es sensible a b, qi, Di y Dmin.",
@@ -662,7 +797,7 @@
        "lab": true
       },
       {
-       "say": "Hay otros modelos para no convencionales, como el de exponencial estirada de Valkó, el de potencia con exponencial de Ilk y el de Duong. Se aplican según el régimen de flujo y la calidad de los datos, y se comparan con análogos. En reservas se exige además razonabilidad de los volúmenes.",
+       "say": "Hay otros modelos para no convencionales. La exponencial estirada, de Valkó.",
        "scene": {
         "t": "bul",
         "k": "Otros modelos",
@@ -678,7 +813,23 @@
        "hl": 0
       },
       {
-       "say": "Una nota sobre la planilla del curso. Aproxima el volumen de cada mes con el caudal inicial por 30,4 días y descuenta al inicio del período. Su valor presente es un ejemplo didáctico, sin impuestos, abandono ni costos de agua o transporte, y no es una evaluación económica de reservas.",
+       "say": "La potencia con exponencial, de Ilk y colaboradores.",
+       "hl": 1
+      },
+      {
+       "say": "El de Duong, para fracturas dominantes.",
+       "hl": 2
+      },
+      {
+       "say": "El análisis RTA, con presiones de producción.",
+       "hl": 3
+      },
+      {
+       "say": "Se aplican según el régimen de flujo y la calidad de los datos, y siempre se contrastan con análogos. En reservas se exige además razonabilidad de los volúmenes.",
+       "hl": 4
+      },
+      {
+       "say": "Una nota sobre la planilla del curso. Aproxima el volumen mensual con el caudal inicial por 30,4 días.",
        "scene": {
         "t": "bul",
         "k": "Planilla del curso",
@@ -689,7 +840,20 @@
          "VPN simplificado: sin impuestos, abandono, agua ni transporte",
          "Ejemplo didáctico, no evaluación de reservas"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Descuenta al inicio del período.",
+       "hl": 1
+      },
+      {
+       "say": "Su VPN es simplificado: sin impuestos, abandono, ni costos de agua o transporte.",
+       "hl": 2
+      },
+      {
+       "say": "Es un ejemplo didáctico, y no una evaluación económica de reservas.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -748,7 +912,7 @@
        }
       },
       {
-       "say": "La operación debe ser responsable. El agua se maneja con reutilización y tratamiento. Se vigila la sismicidad inducida con monitoreo. Se cuida la integridad de los pozos y se reducen las emisiones de metano y de la combustión de equipos.",
+       "say": "La operación debe ser responsable. En el agua, se reutiliza el flowback y se cuidan las fuentes.",
        "scene": {
         "t": "bul",
         "k": "Operación responsable",
@@ -761,10 +925,26 @@
          "Comunicación y cumplimiento con las autoridades"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "La sismicidad inducida se vigila con monitoreo y protocolos de reducción.",
        "hl": 1
       },
       {
-       "say": "Una mejora real es tratar la completación como un proceso que se aprende. Se prueban variantes, se miden resultados con indicadores comparables, y se escala lo que funciona. Es la historia del Barnett y de los desarrollos posteriores.",
+       "say": "Se cuida la integridad del pozo, con cementación y pruebas.",
+       "hl": 2
+      },
+      {
+       "say": "Se reducen las emisiones de metano y de la combustión de equipos, con terminaciones con captura, y bombas y motores eficientes.",
+       "hl": 3
+      },
+      {
+       "say": "Y se mantiene la comunicación y el cumplimiento con las autoridades.",
+       "hl": 4
+      },
+      {
+       "say": "Una mejora real es tratar la completación como un proceso que se aprende: variar un parámetro por vez cuando sea posible.",
        "scene": {
         "t": "bul",
         "k": "Mejora continua",
@@ -777,6 +957,18 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Usar un pozo tipo como referencia.",
+       "hl": 1
+      },
+      {
+       "say": "Registrar el diseño y las condiciones de cada pozo.",
+       "hl": 2
+      },
+      {
+       "say": "Y revisar los resultados con estadística, y no con casos aislados. Se escala lo que funciona, como en la historia del Barnett.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",

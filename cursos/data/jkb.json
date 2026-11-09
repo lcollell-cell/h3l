@@ -65,7 +65,7 @@
      "comp": "Fundamentos de Kanban",
      "cues": [
       {
-       "say": "Kanban es un método para gestionar el flujo de trabajo. No define roles ni iteraciones fijas: parte del proceso que ya existe, lo hace visible y lo mejora de a poco. Se resume en seis prácticas.",
+       "say": "Kanban es un método para gestionar el flujo de trabajo. No define roles ni iteraciones fijas: parte del proceso que ya existe, lo hace visible y lo mejora de a poco. Se resume en seis prácticas. Primero, visualizar el trabajo en un tablero.",
        "scene": {
         "t": "bul",
         "k": "Método",
@@ -85,7 +85,28 @@
          "k": "flujo",
          "n": "Recorrido de un pedido desde que entra hasta que se entrega, pasando por las etapas del proceso."
         }
-       ]
+       ],
+       "hl": 0
+      },
+      {
+       "say": "Segundo, limitar el trabajo en curso.",
+       "hl": 1
+      },
+      {
+       "say": "Tercero, gestionar el flujo y medirlo.",
+       "hl": 2
+      },
+      {
+       "say": "Cuarto, hacer explícitas las políticas.",
+       "hl": 3
+      },
+      {
+       "say": "Quinto, implementar ciclos de retroalimentación.",
+       "hl": 4
+      },
+      {
+       "say": "Y sexto, mejorar de forma colaborativa y evolutiva.",
+       "hl": 5
       },
       {
        "say": "Frente a Scrum, Kanban no trabaja por sprints ni exige roles nuevos. Los cambios pueden entrar en cualquier momento, y las métricas clave son el tiempo de ciclo y el throughput.",
@@ -128,7 +149,7 @@
        }
       },
       {
-       "say": "Encaja donde el trabajo llega de forma continua y no se puede planificar por completo: las intervenciones de pozo, el mantenimiento, los estudios que piden las áreas y los trámites de permisos.",
+       "say": "Kanban encaja donde el trabajo llega de forma continua y no se puede planificar por completo. Por ejemplo, las intervenciones y workovers de pozos.",
        "scene": {
         "t": "bul",
         "k": "Aplicaciones",
@@ -140,7 +161,24 @@
          "Gestión de permisos y trámites",
          "Pedidos al equipo de datos y automatización"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Las órdenes de mantenimiento de planta.",
+       "hl": 1
+      },
+      {
+       "say": "Las solicitudes de estudios a ingeniería.",
+       "hl": 2
+      },
+      {
+       "say": "La gestión de permisos y trámites.",
+       "hl": 3
+      },
+      {
+       "say": "Y los pedidos al equipo de datos y automatización.",
+       "hl": 4
       },
       {
        "say": "Pregunta rápida.",
@@ -273,7 +311,7 @@
        ]
       },
       {
-       "say": "Cada pedido es un ticket. Según la versión, Jira lo llama issue o work item. Conviene definir pocos campos obligatorios: el pozo o equipo, la prioridad, la clase de servicio y el responsable.",
+       "say": "Cada pedido es un ticket. Según la versión, Jira lo llama issue o work item. Conviene definir pocos campos obligatorios. El tipo de ticket: intervención, mantenimiento o estudio.",
        "scene": {
         "t": "bul",
         "k": "Campos",
@@ -292,7 +330,24 @@
          "k": "ticket",
          "n": "Unidad de trabajo en Jira: un pedido, una tarea o un error, con su estado y responsable."
         }
-       ]
+       ],
+       "hl": 0
+      },
+      {
+       "say": "El campo Pozo o Equipo, para ubicar el trabajo.",
+       "hl": 1
+      },
+      {
+       "say": "La prioridad y la clase de servicio.",
+       "hl": 2
+      },
+      {
+       "say": "El responsable y la fecha límite, cuando hay compromiso.",
+       "hl": 3
+      },
+      {
+       "say": "Y un componente o etiqueta por yacimiento.",
+       "hl": 4
       },
       {
        "say": "Pregunta rápida.",
@@ -374,7 +429,7 @@
        ]
       },
       {
-       "say": "En Jira cada columna admite un máximo, y se resalta cuando se supera. Un buen punto de partida es un límite cercano al número de personas de la etapa. Después se ajusta mirando el flujo, no por intuición.",
+       "say": "En Jira cada columna admite un máximo, y se resalta cuando se supera. Un buen punto de partida es un límite cercano a la cantidad de personas de esa etapa.",
        "scene": {
         "t": "bul",
         "k": "Límites",
@@ -385,7 +440,20 @@
          "Si nunca se llena, el límite es demasiado alto",
          "El límite es una política: se revisa en cada retrospectiva"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Si la columna se llena seguido, hay un cuello de botella aguas abajo.",
+       "hl": 1
+      },
+      {
+       "say": "Si nunca se llena, el límite es demasiado alto.",
+       "hl": 2
+      },
+      {
+       "say": "El límite es una política: se ajusta mirando el flujo, no por intuición, y se revisa en cada retrospectiva.",
+       "hl": 3
       },
       {
        "say": "No todo el trabajo es igual. Las clases de servicio definen cómo se trata cada ticket. Un pozo parado por un riesgo de seguridad no espera en la fila como un estudio de rutina.",
@@ -479,7 +547,7 @@
        }
       },
       {
-       "say": "Jira ofrece el diagrama de flujo acumulado, que muestra cuántos tickets hay en cada estado a lo largo del tiempo, y el gráfico de control, que muestra el tiempo de ciclo de cada ticket. Una banda que se ensancha señala una cola.",
+       "say": "Jira ofrece el diagrama de flujo acumulado, que muestra cuántos tickets hay en cada estado a lo largo del tiempo. Las bandas paralelas indican un flujo estable.",
        "scene": {
         "t": "bul",
         "k": "Informes",
@@ -497,7 +565,20 @@
          "k": "CFD",
          "n": "Cumulative flow diagram: gráfico de áreas apiladas con los tickets por estado en el tiempo."
         }
-       ]
+       ],
+       "hl": 0
+      },
+      {
+       "say": "Una banda que se ensancha señala una cola en esa etapa.",
+       "hl": 1
+      },
+      {
+       "say": "El gráfico de control muestra el tiempo de ciclo de cada ticket: los puntos muy altos son tickets a revisar.",
+       "hl": 2
+      },
+      {
+       "say": "Y conviene usar percentiles y no solo el promedio para comprometer plazos.",
+       "hl": 3
       },
       {
        "say": "Para prometer un plazo se usa un percentil. Si el ochenta y cinco por ciento de los tickets se cerró en diez días o menos, se puede comprometer ese plazo. Es una estimación basada en datos reales, no en una opinión.",
@@ -572,7 +653,7 @@
      "comp": "Caso de intervenciones de pozo",
      "cues": [
       {
-       "say": "Presentamos el caso, un ejemplo didáctico con datos ilustrativos. Un equipo de intervenciones atiende cuarenta pozos con bombeo mecánico y un equipo de torre. Recibe pedidos de cambio de bomba y reparación de fondo, hoy por correo y planillas.",
+       "say": "Presentamos el caso, un ejemplo didáctico con datos ilustrativos. Un equipo de intervenciones atiende cuarenta pozos con bombeo mecánico y un equipo de torre.",
        "scene": {
         "t": "bul",
         "k": "Situación",
@@ -583,7 +664,20 @@
          "Pozos esperando semanas sin que nadie lo vea",
          "Objetivo: reducir el tiempo de ciclo y ganar visibilidad"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Recibe pedidos por correo y planillas, sin prioridad clara.",
+       "hl": 1
+      },
+      {
+       "say": "Hay pozos esperando semanas sin que nadie lo vea.",
+       "hl": 2
+      },
+      {
+       "say": "El objetivo es reducir el tiempo de ciclo y ganar visibilidad.",
+       "hl": 3
       },
       {
        "say": "Paso uno, mapear el proceso en seis etapas. Paso dos, crear el proyecto Kanban con esas columnas y los campos Pozo, Yacimiento y Producción diferida. El límite de En ejecución es uno, porque hay un solo equipo de torre.",
@@ -631,7 +725,7 @@
        }
       },
       {
-       "say": "Paso tres, definir las políticas visibles: quién puede marcar un pedido como urgente, cuántos a la vez y qué significa terminado. Aquí, una intervención se cierra solo cuando la producción del pozo se verificó durante siete días.",
+       "say": "Paso tres, definir las políticas visibles. Expedite solo con riesgo de seguridad o producción mayor al umbral acordado.",
        "scene": {
         "t": "bul",
         "k": "Políticas",
@@ -643,7 +737,24 @@
          "Todo ticket bloqueado lleva bandera y motivo",
          "Revisión diaria del tablero, de quince minutos"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Un solo ticket urgente a la vez.",
+       "hl": 1
+      },
+      {
+       "say": "Terminado significa producción verificada durante siete días.",
+       "hl": 2
+      },
+      {
+       "say": "Todo ticket bloqueado lleva bandera y motivo.",
+       "hl": 3
+      },
+      {
+       "say": "Y se revisa el tablero cada día, durante quince minutos.",
+       "hl": 4
       },
       {
        "say": "Paso cuatro, automatizar lo repetitivo con reglas de Jira. Cada regla tiene un disparador, una condición y una acción. Así el equipo no pierde tiempo asignando tickets ni olvida los seguimientos.",
@@ -732,7 +843,7 @@
        }
       },
       {
-       "say": "El equipo decide con datos. Agrupa las intervenciones de un mismo yacimiento para reducir traslados, reserva una ventana semanal para los trabajos de fecha fija y baja el límite de Programado de cinco a cuatro.",
+       "say": "El equipo decide con datos. Agrupa las intervenciones de un mismo yacimiento para reducir traslados.",
        "scene": {
         "t": "bul",
         "k": "Decisiones",
@@ -743,10 +854,23 @@
          "Bajar el límite de Programado de cinco a cuatro",
          "Revisar el criterio de urgencia en la retrospectiva"
         ]
-       }
+       },
+       "hl": 0
       },
       {
-       "say": "Un pozo de alta producción se para por la falla de la bomba. Es un ticket Expedite: salta la fila y el equipo no inicia otros trabajos. Se cierra en tres días, pero el resto de los tickets se demora, y esa compensación queda registrada.",
+       "say": "Reserva una ventana semanal para los trabajos de fecha fija.",
+       "hl": 1
+      },
+      {
+       "say": "Baja el límite de Programado de cinco a cuatro.",
+       "hl": 2
+      },
+      {
+       "say": "Y revisa el criterio de urgencia en la retrospectiva.",
+       "hl": 3
+      },
+      {
+       "say": "Un pozo de alta producción se para por la falla de la bomba. Se crea el ticket con clase Expedite y la producción diferida estimada.",
        "scene": {
         "t": "bul",
         "k": "Expedite",
@@ -757,10 +881,23 @@
          "Tiempo de ciclo del ticket: 3 días frente a 13 del promedio",
          "Costo: el promedio de los demás subió un día esa semana"
         ]
-       }
+       },
+       "hl": 0
       },
       {
-       "say": "Las lecciones. Un tablero visible cambia las conversaciones. Limitar el trabajo en curso acorta los plazos. Las métricas se usan para mejorar el proceso, no para evaluar personas. Y Jira complementa al sistema de mantenimiento de la empresa; no lo reemplaza.",
+       "say": "Se frena el siguiente trabajo de la cola, y no el que está en ejecución: salta la fila.",
+       "hl": 1
+      },
+      {
+       "say": "El tiempo de ciclo del ticket es de 3 días frente a 13 del promedio.",
+       "hl": 2
+      },
+      {
+       "say": "Pero el costo: el promedio de los demás subió un día esa semana, y esa compensación queda registrada.",
+       "hl": 3
+      },
+      {
+       "say": "Las lecciones. Un tablero visible cambia las conversaciones.",
        "scene": {
         "t": "bul",
         "k": "Lecciones",
@@ -771,7 +908,20 @@
          "Las métricas sirven para mejorar el proceso, no para evaluar personas",
          "Kanban complementa al sistema de mantenimiento de la empresa, no lo reemplaza"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Limitar el trabajo en curso acorta los plazos.",
+       "hl": 1
+      },
+      {
+       "say": "Las métricas sirven para mejorar el proceso, no para evaluar personas.",
+       "hl": 2
+      },
+      {
+       "say": "Y Kanban complementa al sistema de mantenimiento de la empresa; no lo reemplaza.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
