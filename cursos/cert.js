@@ -10,6 +10,21 @@ C.base=function(){var p=location.pathname.replace(/[^\/]*$/,'');return location.
 C.verifyUrl=function(d,code){var q=new URLSearchParams({n:C.norm(d.n),c:d.c,d:d.d,s:d.s,h:d.h,id:code});return C.base()+'verificar.html?'+q.toString()};
 C.linkedin=function(d,title,code){var dt=d.d.split('-');return 'https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME&name='+encodeURIComponent(title+' — H3L Global Energy')+'&organizationName='+encodeURIComponent('H3L Global Energy')+'&issueYear='+dt[0]+'&issueMonth='+(+dt[1])+'&certUrl='+encodeURIComponent(C.verifyUrl(d,code))+'&certId='+encodeURIComponent(code)};
 C.share=function(d,title,code){return 'https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(C.verifyUrl(d,code))};
+C.pdf=function(canvas,title){return new Promise(function(res,rej){canvas.toBlob(function(b){if(!b)return rej(new Error('jpeg'));b.arrayBuffer().then(function(buf){
+  var img=new Uint8Array(buf),w=canvas.width,h=canvas.height,pw=841.89,ph=Math.round(841.89*h/w*100)/100,enc=new TextEncoder(),parts=[],len=0,off=[];
+  function add(u){parts.push(u);len+=u.length}function str(t){add(enc.encode(t))}
+  var tt=String(title||'Certificado H3L').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^\x20-\x7e]/g,'').replace(/[()\\]/g,'');
+  var ct='q '+pw+' 0 0 '+ph+' 0 0 cm /Im0 Do Q';
+  str('%PDF-1.4\n');
+  off[1]=len;str('1 0 obj\n<</Type/Catalog/Pages 2 0 R>>\nendobj\n');
+  off[2]=len;str('2 0 obj\n<</Type/Pages/Kids[3 0 R]/Count 1>>\nendobj\n');
+  off[3]=len;str('3 0 obj\n<</Type/Page/Parent 2 0 R/MediaBox[0 0 '+pw+' '+ph+']/Resources<</XObject<</Im0 4 0 R>>>>/Contents 5 0 R>>\nendobj\n');
+  off[4]=len;str('4 0 obj\n<</Type/XObject/Subtype/Image/Width '+w+'/Height '+h+'/ColorSpace/DeviceRGB/BitsPerComponent 8/Filter/DCTDecode/Length '+img.length+'>>\nstream\n');add(img);str('\nendstream\nendobj\n');
+  off[5]=len;str('5 0 obj\n<</Length '+ct.length+'>>\nstream\n'+ct+'\nendstream\nendobj\n');
+  off[6]=len;str('6 0 obj\n<</Title('+tt+')/Author(H3L Global Energy)/Producer(H3L Cursos Online)>>\nendobj\n');
+  var xr=len;str('xref\n0 7\n0000000000 65535 f \n');for(var i=1;i<=6;i++)str(('0000000000'+off[i]).slice(-10)+' 00000 n \n');
+  str('trailer\n<</Size 7/Root 1 0 R/Info 6 0 R>>\nstartxref\n'+xr+'\n%%EOF\n');
+  res(new Blob(parts,{type:'application/pdf'}))},rej)},'image/jpeg',0.95)})};
 function fit(ctx,text,max,font,min){var sz=max;do{ctx.font=font.replace('{s}',sz);sz-=2}while(ctx.measureText(text).width>1180&&sz>min);return sz}
 function wrapText(ctx,t,x,y,mw,lh){var w=t.split(' '),l='',lines=[];w.forEach(function(s){var tt=l?l+' '+s:s;if(ctx.measureText(tt).width>mw&&l){lines.push(l);l=s}else l=tt});if(l)lines.push(l);lines.forEach(function(s,i){ctx.fillText(s,x,y+i*lh)});return y+lines.length*lh}
 C.draw=function(canvas,d,title,code,mods){var W=1754,H=1240,ctx=canvas.getContext('2d');canvas.width=W;canvas.height=H;
