@@ -120,7 +120,7 @@
        }
       },
       {
-       "say": "El ingreso depende del precio y del perfil de producción. Los costos se dividen en variables, que crecen con el volumen, y fijos, que se pagan aunque el pozo produzca poco. Esta diferencia determina el límite económico.",
+       "say": "Qué entra en el flujo. Primero, el ingreso: depende del precio y del perfil de producción, y se cuenta neto de regalías según el contrato.",
        "scene": {
         "t": "bul",
         "k": "Estructura",
@@ -133,7 +133,23 @@
          "Abandono al final de la vida del proyecto"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Después, los costos operativos. El opex variable se mide por barril y crece con el volumen. El opex fijo se paga por mes, aunque el pozo produzca poco. Esta diferencia determina el límite económico.",
        "hl": 1
+      },
+      {
+       "say": "Luego el capex: perforación, completación e instalaciones.",
+       "hl": 2
+      },
+      {
+       "say": "Los impuestos se calculan con la depreciación de las inversiones.",
+       "hl": 3
+      },
+      {
+       "say": "Y al final de la vida del proyecto, el abandono.",
+       "hl": 4
       },
       {
        "say": "Pregunta rápida.",
@@ -157,7 +173,7 @@
      "comp": "Sensibilidades y escenarios",
      "cues": [
       {
-       "say": "Todo flujo de caja descansa en supuestos inciertos. Un análisis de sensibilidad cambia una variable por vez dentro de un rango, y muestra cuánto se mueve el VPN. El gráfico que ordena los resultados se llama tornado.",
+       "say": "Todo flujo de caja descansa en supuestos inciertos. El análisis de sensibilidad muestra cuánto se mueve el VPN cuando cambia una variable. Se hace en cinco pasos. Primero, fijar un caso base consistente.",
        "scene": {
         "t": "bul",
         "k": "Sensibilidad",
@@ -170,7 +186,23 @@
          "Detectar las variables críticas y las que casi no importan"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Segundo, elegir un rango razonable para cada variable.",
+       "hl": 1
+      },
+      {
+       "say": "Tercero, cambiar una por vez y registrar el VPN.",
        "hl": 2
+      },
+      {
+       "say": "Cuarto, ordenar por el rango de resultado, de mayor a menor. Ese gráfico se llama tornado.",
+       "hl": 3
+      },
+      {
+       "say": "Y quinto, detectar las variables críticas y las que casi no importan.",
+       "hl": 4
       },
       {
        "say": "Laboratorio. Es un pozo de ejemplo con 120 meses. Cambiá el rango de variación y el precio base. Mirá qué variable domina y cuándo el proyecto pasa a dar pérdida.",
@@ -183,7 +215,7 @@
        "lab": true
       },
       {
-       "say": "El tornado tiene límites. Cambia una variable por vez, y en la realidad se mueven juntas. Los costos suelen subir cuando sube el precio. Para eso se usan escenarios consistentes, y simulaciones que consideran las correlaciones.",
+       "say": "El tornado tiene límites. Primero, cambia una variable por vez, y en la realidad se mueven juntas: son variables correlacionadas, como el precio y los costos, que suelen subir juntos.",
        "scene": {
         "t": "bul",
         "k": "Límites",
@@ -196,6 +228,18 @@
         ]
        },
        "hl": 0
+      },
+      {
+       "say": "Segundo, los rangos dependen del criterio de quien los define.",
+       "hl": 1
+      },
+      {
+       "say": "Tercero, no muestra eventos discretos, como un pozo seco.",
+       "hl": 2
+      },
+      {
+       "say": "Y cuarto, no da probabilidades. Para eso se usan escenarios consistentes y la simulación de Monte Carlo, que considera las correlaciones.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -280,7 +324,7 @@
        "lab": true
       },
       {
-       "say": "Hay una diferencia importante. El VME es una regla para el largo plazo y los portafolios. Un pozo solo se gana o se pierde entero. Por eso se mira además cuánto se puede perder y qué tolerancia tiene la compañía al riesgo.",
+       "say": "Hay una diferencia importante. El VME promedia, y un solo pozo no se promedia: se gana o se pierde entero.",
        "scene": {
         "t": "bul",
         "k": "Riesgo",
@@ -292,10 +336,22 @@
          "Las probabilidades de éxito suelen ser optimistas"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Con más pozos independientes, baja la probabilidad de pérdida. Por eso el VME es una regla para el largo plazo y los portafolios.",
        "hl": 1
       },
       {
-       "say": "Y está el valor de la información. Una sísmica, una prueba o un pozo piloto cuestan, pero pueden cambiar la decisión. Se justifican si el valor esperado de lo que permiten decidir mejor supera su costo.",
+       "say": "Además, la exposición máxima debe caber en el presupuesto, y hay que ver qué tolerancia al riesgo tiene la compañía.",
+       "hl": 2
+      },
+      {
+       "say": "Y las probabilidades de éxito suelen ser optimistas.",
+       "hl": 3
+      },
+      {
+       "say": "Y está el valor de la información. Una sísmica, una prueba o un pozo piloto cuestan, pero pueden cambiar la decisión. La información perfecta tiene un valor máximo teórico, igual a lo que se evita perder.",
        "scene": {
         "t": "bul",
         "k": "Información",
@@ -310,7 +366,19 @@
        "hl": 0
       },
       {
-       "say": "El valor de la información compara la decisión con y sin un dato nuevo, como un pozo de delineación o una prueba. Howard lo formalizó en 1966. Las opciones reales amplían la idea: esperar, expandir o abandonar tiene valor, y un VPN estático lo ignora.",
+       "say": "La información real es imperfecta, y vale menos.",
+       "hl": 1
+      },
+      {
+       "say": "Se compara con su costo y con el tiempo que consume.",
+       "hl": 2
+      },
+      {
+       "say": "Y es útil cuando la decisión se puede cambiar según lo que se aprenda.",
+       "hl": 3
+      },
+      {
+       "say": "El valor de la información, o VOI, es el valor esperado con información menos el valor esperado sin ella. Howard lo formalizó en 1966.",
        "scene": {
         "t": "bul",
         "k": "Decisión bajo incertidumbre",
@@ -321,7 +389,20 @@
          "Opciones reales: esperar, expandir, abandonar",
          "El VPN estático ignora la flexibilidad"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Solo conviene pagar por información si cambia la decisión.",
+       "hl": 1
+      },
+      {
+       "say": "Las opciones reales amplían la idea: esperar, expandir o abandonar tiene valor.",
+       "hl": 2
+      },
+      {
+       "say": "Y el VPN estático ignora esa flexibilidad.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -345,7 +426,7 @@
      "comp": "Fiscalidad, portafolio y casos",
      "cues": [
       {
-       "say": "El resultado económico depende del régimen fiscal y contractual. Hay regalías sobre la producción, impuestos sobre las ganancias, y contratos que reparten producción y costos entre el Estado y las empresas.",
+       "say": "El resultado económico depende del régimen fiscal y contractual. En la concesión, la empresa tiene el recurso, paga regalías e impuestos, y asume el riesgo y el costo. En la producción compartida, el Estado recibe una parte de la producción luego de recuperar costos, y hay reparto de ganancia. En el contrato de servicio, se paga un honorario por el servicio prestado, y el riesgo de precio recae sobre el Estado.",
        "scene": {
         "t": "tbl",
         "k": "Regímenes",
@@ -376,7 +457,7 @@
        }
       },
       {
-       "say": "Un indicador de síntesis es la participación del Estado, o government take. Es la porción del valor total del proyecto que va al Estado por regalías, impuestos y reparto de producción. Sirve para comparar regímenes.",
+       "say": "Un indicador de síntesis es la participación del Estado, o government take. Reúne regalías, impuestos y reparto de producción.",
        "scene": {
         "t": "bul",
         "k": "Participación del Estado",
@@ -391,7 +472,19 @@
        "hl": 0
       },
       {
-       "say": "También hay que pensar el financiamiento. La estructura de capital, el costo de la deuda, las coberturas de precio y las garantías afectan el riesgo y la tasa de descuento. Se evalúan junto al proyecto y no por separado.",
+       "say": "Se mide sobre el valor total del proyecto, y sirve para comparar regímenes.",
+       "hl": 1
+      },
+      {
+       "say": "Los regímenes progresivos aumentan la parte del Estado cuando el precio sube.",
+       "hl": 2
+      },
+      {
+       "say": "Y un régimen que castiga el éxito reduce la inversión.",
+       "hl": 3
+      },
+      {
+       "say": "También hay que pensar el financiamiento, que se evalúa junto al proyecto y no por separado. Primero, la deuda y el capital propio: el costo de cada uno.",
        "scene": {
         "t": "bul",
         "k": "Financiamiento",
@@ -403,7 +496,19 @@
          "Impacto sobre la tasa de descuento del proyecto"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Después, las coberturas de precio, para estabilizar el flujo.",
        "hl": 1
+      },
+      {
+       "say": "Las garantías y condiciones del financiamiento.",
+       "hl": 2
+      },
+      {
+       "say": "Y todo esto impacta sobre la tasa de descuento del proyecto.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -468,7 +573,7 @@
      "comp": "Fiscalidad, portafolio y casos",
      "cues": [
       {
-       "say": "El capital es limitado. Para elegir entre proyectos se ordenan por el índice de eficiencia, el VPN dividido por el capital, y se financian de arriba hacia abajo hasta agotar el presupuesto. Se revisa además el riesgo del conjunto.",
+       "say": "El capital es limitado. Para elegir entre proyectos, primero se calcula el VPN y la inversión de cada uno.",
        "scene": {
         "t": "bul",
         "k": "Portafolio",
@@ -480,10 +585,22 @@
          "Revisar riesgo y concentración del conjunto"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Después se ordenan por el índice de eficiencia, el VPN sobre la inversión.",
        "hl": 1
       },
       {
-       "say": "Los precios también definen las reservas. Un volumen solo es reserva si es económico. Si baja el precio, el límite económico sube, y parte de las reservas pasa a recurso contingente. En la regla de la SEC se usa el promedio de los doce últimos meses.",
+       "say": "Se financian de arriba hacia abajo hasta agotar el presupuesto.",
+       "hl": 2
+      },
+      {
+       "say": "Y se revisa el riesgo y la concentración del conjunto.",
+       "hl": 3
+      },
+      {
+       "say": "Los precios también definen las reservas. Una reserva exige un proyecto económico, con un precio razonable.",
        "scene": {
         "t": "bul",
         "k": "Reservas y precio",
@@ -495,6 +612,18 @@
          "En la regla de la SEC se usa el promedio de doce meses de los precios del primer día de cada mes"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Con precios más bajos, el límite económico sube.",
+       "hl": 1
+      },
+      {
+       "say": "Y parte de las reservas puede reclasificarse, y pasar a recurso contingente.",
+       "hl": 2
+      },
+      {
+       "say": "En la regla de la SEC se usa el promedio de doce meses de los precios del primer día de cada mes.",
        "hl": 3
       },
       {
@@ -513,7 +642,7 @@
        "lab": true
       },
       {
-       "say": "Con capital limitado, no alcanza con ordenar por VPN. La eficiencia de inversión, el VPN dividido por la inversión, ayuda a elegir. Y desde Markowitz, en 1952, sabemos que un portafolio se evalúa por su combinación de riesgo y retorno, no proyecto por proyecto.",
+       "say": "Con capital limitado, no alcanza con ordenar por VPN. La eficiencia de inversión, el VPN dividido por la inversión, ayuda a elegir.",
        "scene": {
         "t": "bul",
         "k": "Portafolio",
@@ -524,7 +653,20 @@
          "Riesgo y retorno del portafolio, no solo del proyecto",
          "Correlación entre proyectos"
         ]
-       }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Hay que considerar la restricción de capital y los proyectos indivisibles.",
+       "hl": 1
+      },
+      {
+       "say": "Y desde Markowitz, en 1952, sabemos que un portafolio se evalúa por su riesgo y retorno, y no solo proyecto por proyecto.",
+       "hl": 2
+      },
+      {
+       "say": "Ese riesgo depende de la correlación entre proyectos.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
@@ -548,7 +690,7 @@
      "comp": "Fiscalidad, portafolio y casos",
      "cues": [
       {
-       "say": "Kashagan es un caso conocido de sobrecosto y retraso. La producción empezó en septiembre de 2013, mucho después de lo previsto, y se detuvo semanas después porque el gas sulfuroso corroyó las cañerías.",
+       "say": "Kashagan, en Kazajistán, es un campo en el norte del Mar Caspio, con islas artificiales y gas con alto contenido de azufre. El objetivo era iniciar la producción y recuperar la inversión en los plazos del plan original. La producción inicial fue en septiembre de 2013, más de una década después de lo previsto, y se detuvo semanas después por la corrosión de cañerías. El presupuesto de 2008, de 38.000 millones de dólares, subió a 53.000 millones hacia fines de 2015. En octubre de 2016 se cargó el primer crudo para exportación, y la producción estable llevó más tiempo.",
        "scene": {
         "t": "case",
         "h": "Kashagan, Kazajistán",
@@ -560,7 +702,7 @@
        }
       },
       {
-       "say": "Otro caso: el 20 de abril de 2020 el contrato de futuros de WTI de mayo liquidó a menos 37,63 dólares por barril, según la CFTC, el día antes de su vencimiento. Una señal de que los escenarios deben incluir eventos extremos.",
+       "say": "Otro caso: el precio negativo del WTI, en abril de 2020. La demanda estaba deprimida por la pandemia, y la capacidad de almacenamiento era limitada. La pregunta era por qué el contrato de futuros más cercano llegó a un precio negativo. El contrato de mayo de 2020 de WTI cayó de 17,73 dólares y liquidó a menos 37,63 dólares por barril el 20 de abril, un día antes de su vencimiento, según la CFTC. Mostró que un escenario de precios bajos no es solo una versión suave del caso base: se incluyen eventos extremos y se prueba la resistencia del proyecto.",
        "scene": {
         "t": "case",
         "h": "Precio negativo del WTI, abril de 2020",
@@ -572,7 +714,7 @@
        }
       },
       {
-       "say": "Las lecciones: preparar bien el proyecto antes de comprometer el capital, incluir contingencia realista, probar los escenarios de precio bajo y de costos altos, y reconocer el sesgo de optimismo al estimar probabilidades y plazos.",
+       "say": "Las lecciones. Primero, definir bien el alcance antes de la decisión final de inversión.",
        "scene": {
         "t": "bul",
         "k": "Lecciones",
@@ -584,7 +726,19 @@
          "Los megaproyectos tienden a superar costos y plazos previstos"
         ]
        },
+       "hl": 0
+      },
+      {
+       "say": "Incluir contingencia y probar escenarios adversos, de precio bajo y de costos altos.",
+       "hl": 1
+      },
+      {
+       "say": "Revisar con ojos externos las probabilidades y los plazos, para reconocer el sesgo de optimismo.",
        "hl": 2
+      },
+      {
+       "say": "Porque los megaproyectos tienden a superar los costos y los plazos previstos.",
+       "hl": 3
       },
       {
        "say": "Pregunta rápida.",
