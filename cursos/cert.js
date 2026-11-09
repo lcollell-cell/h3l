@@ -42,7 +42,10 @@ C.draw=function(canvas,d,title,code,mods){var W=1754,H=1240,ctx=canvas.getContex
     ctx.fillStyle='#1B2944';ctx.font='700 50px Montserrat, sans-serif';y=wrapText(ctx,title,250,y+68,1230,62);
     var dt=d.d.split('-'),fecha=(+dt[2])+' de '+MES[+dt[1]-1]+' de '+dt[0];
     ctx.fillStyle='#33415c';ctx.font='500 26px Montserrat, sans-serif';y+=14;ctx.fillText('Fecha de emisión: '+fecha+'   ·   Carga horaria estimada: '+d.h+' h   ·   Examen final: '+d.s+' %',250,y);
-    if(mods&&mods.length){ctx.fillStyle='#5b6b86';ctx.font='500 21px Montserrat, sans-serif';y+=44;var mt='Módulos: '+mods.join(' · ');while(ctx.measureText(mt).width>1020&&mt.length>10)mt=mt.slice(0,-2);if(mt.length<('Módulos: '+mods.join(' · ')).length)mt=mt.replace(/\s+$/,'')+'…';ctx.fillText(mt,250,y)}
+    canvas._modsEnd=y;
+    if(mods&&mods.length){y+=44;var lim=H-250,n=mods.length+1,lh=Math.min(30,Math.floor((lim-y)/n)),fs=Math.max(15,Math.min(21,Math.floor(lh*.7)));
+      ctx.fillStyle='#5b6b86';ctx.font='700 '+fs+'px Montserrat, sans-serif';ctx.fillText('Módulos del curso',250,y);
+      ctx.font='500 '+fs+'px Montserrat, sans-serif';mods.forEach(function(m,k){var t=m;while(ctx.measureText(t).width>1000&&t.length>10)t=t.slice(0,-2);if(t.length<m.length)t=t.replace(/\s+$/,'')+'…';ctx.fillText(t,250,y+lh*(k+1))});canvas._modsEnd=y+lh*mods.length}
     /* sello */
     var cx=W-380,cy=H-330;ctx.beginPath();ctx.arc(cx,cy,92,0,7);ctx.fillStyle='#17755A';ctx.fill();ctx.beginPath();ctx.arc(cx,cy,80,0,7);ctx.strokeStyle='#fff';ctx.lineWidth=3;ctx.stroke();
     ctx.fillStyle='#fff';ctx.textAlign='center';ctx.font='700 40px Montserrat, sans-serif';ctx.fillText('H3L',cx,cy+4);ctx.font='700 15px Montserrat, sans-serif';ctx.fillText('APROBADO',cx,cy+30);ctx.textAlign='left';
