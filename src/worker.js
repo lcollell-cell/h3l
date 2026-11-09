@@ -351,12 +351,58 @@ async function feedback(request, env) {
   return Response.json({ ok: true, mailed }, { headers: nostore });
 }
 
+/* ---- Botón de arrepentimiento ----
+   POST /api/arrepentimiento {course,title,order,orderDate,progress,name,email,reason,lang,hp} -> {ok, mailed}
+   Lo muestra cursos/player.js en cursos comprados mientras el avance sea menor al 50 % (la regla del 50 % la aplica el front; acá se vuelve a controlar progress).
+   Guarda la solicitud en D1 (tabla arrepentimientos), avisa a FEEDBACK_TO y manda una constancia de recepción al email de la persona (Resend). Límite: 3 por hora por visitante. */
+let arReady = false;
+async function ensureArr(env) {
+  if (arReady || !env.DB) return;
+  await env.DB.prepare(`CREATE TABLE IF NOT EXISTS arrepentimientos (id INTEGER PRIMARY KEY AUTOINCREMENT, ts TEXT NOT NULL, course TEXT NOT NULL, ord TEXT, ord_date TEXT, progress INTEGER, name TEXT, email TEXT, reason TEXT, lang TEXT)`).run();
+  arReady = true;
+}
+async function arrepentimiento(request, env) {
+  const body = await readJson(request);
+  if (!body) return Response.json({ ok: false }, { status: 400, headers: nostore });
+  if (body.hp) return Response.json({ ok: true, mailed: false }, { headers: nostore });
+  const course = oneLine(body.course, 8).toLowerCase();
+  const progress = Number(body.progress);
+  const email = String(body.email ?? '').trim();
+  const name = oneLine(body.name, 70);
+  if (!/^[a-z0-9]{2,8}$/.test(course) || !Number.isFinite(progress) || progress < 0 || progress >= 50 || name.length < 3 || !/^[^\s@]{1,64}@[^\s@]{1,120}\.[^\s@]{2,}$/.test(email)) return Response.json({ ok: false }, { status: 400, headers: nostore });
+  const title = oneLine(body.title, 140) || course, ord = oneLine(body.order, 24), ordDate = oneLine(body.orderDate, 10);
+  const reason = String(body.reason ?? '').replace(/[<>]/g, '').trim().slice(0, 800);
+  const lang = ['es', 'en', 'fr', 'pt'].includes(body.lang) ? body.lang : 'es';
+  const ts = new Date().toISOString();
+  if (env.DB) {
+    await ensureFeedback(env); await ensureArr(env);
+    const hr = Math.floor(Date.now() / 3600000);
+    const k = (await sha(`${request.headers.get('cf-connecting-ip') || 'x'}|arr|${await getSalt(env)}`)).slice(0, 24);
+    const row = await env.DB.prepare(`SELECT n FROM feedback_rate WHERE k=? AND hr=?`).bind(k, hr).first();
+    if (row && row.n >= 3) return Response.json({ ok: false }, { status: 429, headers: nostore });
+    await env.DB.prepare(`INSERT INTO feedback_rate (k, hr, n) VALUES (?, ?, 1) ON CONFLICT(k, hr) DO UPDATE SET n=n+1`).bind(k, hr).run();
+    await env.DB.prepare(`INSERT INTO arrepentimientos (ts, course, ord, ord_date, progress, name, email, reason, lang) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`).bind(ts, course, ord, ordDate, Math.round(progress), name, email, reason, lang).run();
+  }
+  let mailed = false;
+  if (env.RESEND_API_KEY && env.FEEDBACK_TO && env.REPORT_FROM) {
+    const esc = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+    const send = (payload) => fetch('https://api.resend.com/emails', { method: 'POST', headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+    const lines = ['Botón de arrepentimiento', `Curso: ${title} (${course})`, `Compra: ${ord || '(sin dato)'} ${ordDate}`.trim(), `Avance del curso: ${Math.round(progress)} %`, `Nombre: ${name}`, `Email: ${email}`, `Idioma: ${lang}`, `Fecha: ${ts}`, '', reason || '(sin motivo)'];
+    const r1 = await send({ from: `H3L Global Energy · Cursos <${env.REPORT_FROM}>`, to: [env.FEEDBACK_TO], reply_to: email, subject: `Botón de arrepentimiento: ${title}`, text: lines.join('\n'), html: `<p>${lines.map(esc).join('<br>')}</p>` });
+    const ack = ['Recibimos tu solicitud de arrepentimiento.', '', `Curso: ${title}`, `Compra: ${ord || '(sin dato)'} ${ordDate}`.trim(), `Fecha de la solicitud: ${ts.slice(0, 10)}`, '', 'Te respondemos por este medio con los pasos de la baja y la devolución. Guardá este mail como constancia.', '', 'H3L Global Energy · info@h3lglobalenergy.com'];
+    const r2 = await send({ from: `H3L Global Energy · Cursos <${env.REPORT_FROM}>`, to: [email], reply_to: env.FEEDBACK_TO, subject: `Constancia: solicitud de arrepentimiento · ${title}`, text: ack.join('\n'), html: `<p>${ack.map(esc).join('<br>')}</p>` });
+    mailed = r1.ok && r2.ok;
+  }
+  return Response.json({ ok: true, mailed }, { headers: nostore });
+}
+
 export default {
   async fetch(request, env, ctx) {
     const { pathname } = new URL(request.url);
     if (pathname === '/api/collect' && request.method === 'POST') return collect(request, env, ctx);
     if (pathname === '/api/report-test' && request.method === 'POST') return reportTest(request, env);
     if (pathname === '/api/feedback' && request.method === 'POST') return feedback(request, env);
+    if (pathname === '/api/arrepentimiento' && request.method === 'POST') return arrepentimiento(request, env);
     if (pathname === '/api/tutor-login' && request.method === 'POST') return tutorLogin(request, env);
     if (pathname === '/api/tutor-verify' && request.method === 'POST') return tutorVerify(request, env);
     if (pathname === '/api/export' && request.method === 'GET') return exportMetrics(request, env);

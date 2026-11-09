@@ -200,7 +200,7 @@ function paneCm(){var p=$('#p_cm');if(!p)return;var h='<h3>'+HC.t('tab_cm')+'</h
   (C.competencies||[]).forEach(function(c){var lv=flat?levels(c):0;h+='<tr><td>'+esc(c.name)+'</td>'+[1,2,3,4,5].map(function(i){return '<td><i class="'+(i<=lv?'f':'')+'"></i></td>'}).join('')+'</tr>'});
   p.innerHTML=h+'</tbody></table></div><p class="note-s" style="margin-top:10px">Esquema de 5 niveles de dominio: conocer → aprender → aplicar → transferir → transformar. Las competencias del curso se basan en un mapa de competencias técnicas de exploración y producción (geología, reservorios, producción, perforación).</p>'}
 /* ---------- lateral ---------- */
-function buildSide(){if(!flat)return;var s=$('#side'),pg=HC.progress(C),i0=0;var h='<div class="ph"><b>'+HC.t('content')+'</b><div class="bar" style="margin:10px 0 4px"><i style="width:'+pg.pct+'%"></i></div><span class="note-s">'+HC.t('prog')+': '+pg.pct+' % · '+HC.t('lbl_ls')+' '+pg.lessons+'/'+pg.lessonsTotal+' · '+HC.t('lbl_qz')+' '+pg.quizzes+'/'+pg.quizzesTotal+' · '+HC.t('lbl_ex')+' '+(pg.exam?'✓':'–')+'</span></div>';
+function buildSide(){if(!flat)return;var s=$('#side'),pg=HC.progress(C),i0=0;var h='<div class="ph"><b>'+HC.t('content')+'</b><div class="bar" style="margin:10px 0 4px"><i style="width:'+pg.pct+'%"></i></div><span class="note-s">'+HC.t('prog')+': '+pg.pct+' % · '+HC.t('lbl_ls')+' '+pg.lessons+'/'+pg.lessonsTotal+' · '+HC.t('lbl_qz')+' '+pg.quizzes+'/'+pg.quizzesTotal+' · '+HC.t('lbl_ex')+' '+(pg.exam?'✓':'–')+'</span>'+arrHtml(pg)+'</div>';
   function les(L,i,mn){var d=CS.l[L.id]&&CS.l[L.id].d;return '<button class="les'+(d?' done':'')+(i===li?' act':'')+'" data-li="'+i+'"><span class="ic">'+(d?'✓':'')+'</span><span>'+esc(L.title)+'<span class="mn">'+Math.max(1,Math.round(L.dur/60))+' '+HC.t('min')+'</span></span></button>'}
   h+='<div class="mod"><h3>'+esc(C.intro.title||'Presentación')+'</h3>'+les(flat[0],0)+'</div>';i0=1;
   C.modules.forEach(function(m){var qs=CS.q[m.id],all=m.lessons.every(function(l){return CS.l[l.id]&&CS.l[l.id].d});h+='<div class="mod"><h3>'+esc(m.title)+'<small>'+m.lessons.length+' '+HC.t('lessons')+'</small></h3>';m.lessons.forEach(function(l){h+=les(l,flat.findIndex(function(x){return x.id===l.id}))});
@@ -208,8 +208,31 @@ function buildSide(){if(!flat)return;var s=$('#side'),pg=HC.progress(C),i0=0;var
   var ready=pg.allLessons&&pg.allQuizzes;h+='<div class="mod"><h3>'+HC.t('exam')+'</h3><div class="qz"><span>'+C.exam.length+' preg. · 70 %</span>'+(CS.e?'<em>'+CS.e.best+' %'+(CS.e.best>=70?' ✓':'')+'</em>':'')+'<button class="btn o s" data-q="exam"'+(ready?'':' disabled title="'+esc(HC.t('exam_lock'))+'"')+'>'+HC.t('q_start')+'</button></div></div>';
   h+='<div class="mod"><h3>'+esc(C.outro.title||'Cierre')+'</h3>'+les(flat[flat.length-1],flat.length-1)+'</div>';
   h+='<div class="mod"><h3>'+HC.t('files')+'</h3>'+(C.downloads||[]).map(function(d){return '<div class="dl">'+HC.ico.file+'<div><b>'+esc(d.title)+'</b><span>'+esc(d.desc)+'</span></div><a class="btn o s" href="'+esc(d.file)+'" download>↓</a></div>'}).join('')+'</div>';
-  s.innerHTML=h;$$('.les',s).forEach(function(b){b.addEventListener('click',function(){go(+b.getAttribute('data-li'))})});$$('[data-q]',s).forEach(function(b){b.addEventListener('click',function(){openQuiz(b.getAttribute('data-q'))})})}
+  s.innerHTML=h;$$('.les',s).forEach(function(b){b.addEventListener('click',function(){go(+b.getAttribute('data-li'))})});$$('[data-q]',s).forEach(function(b){b.addEventListener('click',function(){openQuiz(b.getAttribute('data-q'))})});var ab=$('#arrBtn',s);if(ab)ab.addEventListener('click',openArr)}
 function highlightSide(){$$('#side .les').forEach(function(b){b.classList.toggle('act',+b.getAttribute('data-li')===li)})}
+/* ---------- botón de arrepentimiento (solo cursos comprados y con avance < 50 %) ---------- */
+var ARR_TO='info_clientes_usuarios@h3lglobalenergy.com';
+function arrPaid(){return !!(HC.subs&&HC.subs.active()&&HC.subs.status(cid)==='paid')}
+function arrHtml(pg){if(!arrPaid())return '';if(CS.arr)return '<div class="note-s" style="margin-top:8px">'+esc(HC.t('arr_sent',{d:CS.arr.d}))+'</div>';
+  if(pg.pct>=50)return '<div class="note-s" style="margin-top:8px">'+esc(HC.t('arr_gone'))+'</div>';
+  return '<div style="margin-top:10px"><button class="btn o s" id="arrBtn" type="button">'+esc(HC.t('arr_btn'))+'</button><div class="note-s" style="margin-top:4px">'+esc(HC.t('arr_info',{n:pg.pct}))+'</div></div>'}
+function openArr(){var pg=HC.progress(C);if(!arrPaid()||pg.pct>=50||CS.arr)return;pause();var ord=HC.subs.orderFor(cid),acct=(HC.subs.get().acct)||{},title=META.title||C.title,box=$('#mbox'),modal=$('#modal');modal.hidden=false;document.body.style.overflow='hidden';
+  box.innerHTML='<h3>'+esc(HC.t('arr_h'))+'</h3><div class="sub">'+esc(title)+(ord?' · '+esc(HC.t('arr_order'))+' '+esc(ord.id)+' · '+esc(ord.date):'')+'</div><p class="note-s" style="margin:8px 0">'+esc(HC.t('arr_p'))+'</p>'
+   +'<div class="field"><label for="arN">'+HC.t('arr_name')+'</label><input id="arN" type="text" maxlength="70" autocomplete="name" value="'+esc(acct.name||HC.getName()||'')+'"></div>'
+   +'<div class="field"><label for="arE">'+HC.t('arr_mail')+'</label><input id="arE" type="email" maxlength="120" autocomplete="email" value="'+esc(acct.email||'')+'"></div>'
+   +'<div class="field"><label for="arW">'+HC.t('arr_why')+'</label><textarea id="arW" rows="3" maxlength="800"></textarea></div>'
+   +'<input id="arH" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0">'
+   +'<p class="note-s">'+esc(HC.t('arr_sim'))+'</p><div class="tools" style="margin-top:10px"><button class="btn g" id="arS" type="button">'+HC.t('arr_send')+'</button><button class="btn o" id="arC" type="button">'+HC.t('q_close')+'</button></div><div id="arM" role="status" aria-live="polite" class="note-s" style="font-weight:700;margin-top:8px"></div>';
+  $('#arC').addEventListener('click',closeModal);
+  $('#arS').addEventListener('click',function(){var m=$('#arM'),n=HC.cert.norm($('#arN').value),em=$('#arE').value.trim(),btn=this;
+    if(n.length<3||!/^[^\s@]{1,64}@[^\s@]{1,120}\.[^\s@]{2,}$/.test(em)){m.textContent=HC.t('arr_need');return}
+    var body={course:cid,title:title,order:ord?ord.id:'',orderDate:ord?ord.date:'',progress:pg.pct,name:n,email:em,reason:$('#arW').value.trim(),lang:HC.lang,hp:$('#arH').value};btn.disabled=true;
+    function saved(){CS.arr={d:new Date().toISOString().slice(0,10),o:body.order};HC.save();buildSide()}
+    function viaMail(){var sub='Botón de arrepentimiento: '+title,bd='Curso: '+title+' ('+cid+')\nCompra: '+body.order+' '+body.orderDate+'\nAvance: '+pg.pct+' %\nNombre: '+n+'\nEmail: '+em+'\n\n'+body.reason;
+      location.href='mailto:'+ARR_TO+'?subject='+encodeURIComponent(sub)+'&body='+encodeURIComponent(bd);saved();m.textContent=HC.t('arr_ok2',{m:ARR_TO});btn.disabled=false}
+    fetch('/api/arrepentimiento',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)}).then(function(r){
+      if(r.status===404||r.status===405||r.status===501)return viaMail();
+      if(!r.ok)throw 0;saved();m.textContent=HC.t('arr_ok');btn.disabled=false;$('#arS').hidden=true}).catch(function(){if(window.location.protocol==='file:')return viaMail();m.textContent=HC.t('arr_err');btn.disabled=false})})}
 /* ---------- evaluaciones ---------- */
 function closeModal(){$('#modal').hidden=true;document.body.style.overflow=''}
 function openQuiz(id){var isEx=id==='exam',m=isEx?null:C.modules.filter(function(x){return x.id===id})[0],qs=isEx?C.exam:m.quiz,title=isEx?HC.t('exam'):HC.t('quiz_m')+': '+m.title;pause();
