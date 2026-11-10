@@ -84,7 +84,14 @@
          "Datos de perforación en tiempo real"
         ]
        },
-       "hl": 0
+       "hl": 0,
+       "notes": [
+        {
+         "t": "SCADA",
+         "k": "SCADA",
+         "n": "SCADA (Supervisory Control and Data Acquisition): sistema que recoge en tiempo real las mediciones de campo, como presiones y caudales, y las envía a la sala de control."
+        }
+       ]
       },
       {
        "say": "Registros de pozo y perfiles.",
@@ -161,7 +168,14 @@
          "Unicidad: sin duplicados"
         ]
        },
-       "hl": 0
+       "hl": 0,
+       "notes": [
+        {
+         "t": "dimensiones",
+         "k": "dimensiones de calidad",
+         "n": "Dimensiones de calidad de datos (data quality dimensions): criterios para medir qué tan confiable es un conjunto de datos. En inglés se nombran completeness, accuracy, consistency, timeliness y uniqueness."
+        }
+       ]
       },
       {
        "say": "Exactitud: el dato refleja la realidad medida.",
@@ -260,7 +274,19 @@
           "Parámetro: tamaño de la ventana"
          ]
         ]
-       }
+       },
+       "notes": [
+        {
+         "t": "valores atípicos",
+         "k": "valores atípicos",
+         "n": "Valores atípicos (outliers): datos que se alejan mucho del comportamiento del resto. Pueden ser errores de medición o eventos reales."
+        },
+        {
+         "t": "MAD",
+         "k": "MAD",
+         "n": "MAD (Median Absolute Deviation): mediana de las distancias de cada dato a la mediana. Mide la dispersión sin dejarse distorsionar por los errores."
+        }
+       ]
       },
       {
        "say": "Laboratorio. Es una serie sintética de noventa días con siete datos erróneos. Probá los tres métodos y cambiá el umbral. Mirá cuántos errores detecta cada uno y cuántas falsas alarmas genera.",
@@ -270,7 +296,14 @@
         "h": "Detección de atípicos",
         "p": {}
        },
-       "lab": true
+       "lab": true,
+       "notes": [
+        {
+         "t": "falsas alarmas",
+         "k": "falsas alarmas",
+         "n": "Falsas alarmas (false positives): datos correctos que el método marca como errores. Se miden junto con los errores no detectados (false negatives)."
+        }
+       ]
       },
       {
        "say": "Una conclusión práctica: el mejor método depende del dato. Conviene usar métodos robustos a los propios errores.",
@@ -320,7 +353,14 @@
       },
       {
        "say": "El resto es ruido y eventos. Descomponer la serie, por ejemplo con el método STL, ayuda a separarlos.",
-       "hl": 2
+       "hl": 2,
+       "notes": [
+        {
+         "t": "STL",
+         "k": "STL",
+         "n": "STL (Seasonal-Trend decomposition using Loess): método que separa una serie en tendencia, estacionalidad y resto."
+        }
+       ]
       },
       {
        "say": "Por eso se marcan las paradas antes de ajustar modelos.",
@@ -426,7 +466,14 @@
           "K-medias, jerárquico"
          ]
         ]
-       }
+       },
+       "notes": [
+        {
+         "t": "aprendizaje automático",
+         "k": "aprendizaje automático",
+         "n": "Aprendizaje automático (machine learning): algoritmos que ajustan un modelo a partir de ejemplos, en lugar de seguir reglas escritas a mano."
+        }
+       ]
       },
       {
        "say": "La pregunta central es si el modelo funciona con datos que no vio. El error de entrenamiento siempre baja al aumentar la complejidad. Lo que importa es el error en datos de prueba, que cae y luego sube cuando el modelo empieza a memorizar el ruido.",
@@ -438,6 +485,11 @@
         "n": "La regularización reduce la varianza a cambio de un poco de sesgo."
        },
        "notes": [
+        {
+         "t": "datos de prueba",
+         "k": "datos de prueba",
+         "n": "Datos de prueba (test set): ejemplos que el modelo no usó para entrenar. Miden su desempeño real."
+        },
         {
          "t": "memorizar el ruido",
          "k": "sobreajuste",
@@ -455,7 +507,14 @@
          "dg": 3
         }
        },
-       "lab": true
+       "lab": true,
+       "notes": [
+        {
+         "t": "regularización",
+         "k": "regularización",
+         "n": "Regularización (regularization): penalizar la complejidad del modelo para que no memorice el ruido."
+        }
+       ]
       },
       {
        "say": "En datos de pozos hay un error metodológico frecuente, la fuga de información. Si se mezclan datos de un mismo pozo entre entrenamiento y prueba, el modelo parece mejor de lo que es. Hay que separar por pozo o por campo, no por filas.",
@@ -474,19 +533,33 @@
        "hl": 0,
        "notes": [
         {
-         "t": "modelo simple de referencia",
-         "k": "baseline",
-         "n": "Baseline (modelo de referencia): un modelo simple, como el promedio histórico, contra el que se mide si el modelo complejo realmente mejora."
+         "t": "fuga de información",
+         "k": "fuga de información",
+         "n": "Fuga de información (data leakage): datos de la prueba, o del futuro, que se filtran en el entrenamiento y hacen parecer mejor al modelo de lo que es."
         }
        ]
       },
       {
        "say": "Siempre se compara con una línea de base simple.",
-       "hl": 1
+       "hl": 1,
+       "notes": [
+        {
+         "t": "línea de base",
+         "k": "baseline",
+         "n": "Baseline (línea de base o modelo de referencia): un modelo simple, como el promedio histórico, contra el que se mide si el modelo complejo realmente mejora."
+        }
+       ]
       },
       {
        "say": "Se usa validación cruzada con grupos.",
-       "hl": 2
+       "hl": 2,
+       "notes": [
+        {
+         "t": "validación cruzada con grupos",
+         "k": "validación cruzada",
+         "n": "Validación cruzada (cross-validation): repetir el entrenamiento y la prueba con distintas particiones de los datos. Con grupos (grouped), todos los datos de un mismo pozo quedan juntos en un lado."
+        }
+       ]
       },
       {
        "say": "Se evalúa con el criterio de uso real: a futuro, no al azar.",
@@ -509,7 +582,19 @@
          "Contrastar con el criterio de ingeniería"
         ]
        },
-       "hl": 0
+       "hl": 0,
+       "notes": [
+        {
+         "t": "SHAP",
+         "k": "SHAP",
+         "n": "SHAP (SHapley Additive exPlanations): método que aplica los valores de Shapley, de la teoría de juegos, para repartir una predicción entre las variables."
+        },
+        {
+         "t": "variables",
+         "k": "variables",
+         "n": "Variables (features): las columnas de entrada que usa el modelo para predecir, como presión, caudal o diseño de completación."
+        }
+       ]
       },
       {
        "say": "Sirven para auditar y depurar un modelo, y detectar comportamientos extraños.",
@@ -650,7 +735,19 @@
          "hint": "Tocá cada bloque para ver el detalle."
         }
        },
-       "hl": 2
+       "hl": 2,
+       "notes": [
+        {
+         "t": "modelo proxy de simulación",
+         "k": "modelo proxy",
+         "n": "Modelo proxy (surrogate model): modelo rápido que imita al simulador de reservorio, que es más lento."
+        },
+        {
+         "t": "redes neuronales informadas por física",
+         "k": "PINN",
+         "n": "Redes neuronales informadas por física (Physics-Informed Neural Networks, PINN): incorporan las ecuaciones físicas al entrenamiento para que las predicciones las respeten."
+        }
+       ]
       },
       {
        "say": "Para entender qué hace un modelo se usan técnicas de interpretabilidad, como la importancia de variables y los valores de Shapley.",
@@ -669,7 +766,14 @@
       },
       {
        "say": "También los gráficos de dependencia parcial.",
-       "hl": 1
+       "hl": 1,
+       "notes": [
+        {
+         "t": "gráficos de dependencia parcial",
+         "k": "dependencia parcial",
+         "n": "Gráficos de dependencia parcial (Partial Dependence Plots, PDP): muestran cómo cambia, en promedio, la predicción al variar una variable."
+        }
+       ]
       },
       {
        "say": "La revisión de casos mal predichos.",
@@ -807,7 +911,19 @@
          "hint": "Tocá cada bloque para ver el detalle."
         }
        },
-       "hl": 4
+       "hl": 4,
+       "notes": [
+        {
+         "t": "MLOps",
+         "k": "MLOps",
+         "n": "MLOps (Machine Learning Operations): prácticas de ingeniería para entrenar, desplegar y mantener modelos en operación; equivalen a DevOps en el software."
+        },
+        {
+         "t": "cuaderno",
+         "k": "cuaderno",
+         "n": "Cuaderno (notebook): documento interactivo, como Jupyter, que mezcla código, resultados y texto. Sirve para explorar, no para operar un modelo."
+        }
+       ]
       },
       {
        "say": "El mayor riesgo en producción es la deriva. Hay deriva de datos cuando cambia la distribución de las variables de entrada, por ejemplo por un nuevo diseño de completación.",
@@ -825,20 +941,27 @@
        "hl": 0,
        "notes": [
         {
-         "t": "Los datos de entrada cambian",
-         "k": "deriva de datos",
-         "n": "Deriva de datos (data drift): cambia la distribución de los datos de entrada, por ejemplo por un nuevo diseño de completación."
+         "t": "la deriva",
+         "k": "deriva",
+         "n": "Deriva (drift): con el tiempo, los datos o la realidad que ve el modelo se alejan de aquello con lo que fue entrenado, y su desempeño empeora."
         },
         {
-         "t": "cambia la relación entre variables y resultado",
-         "k": "deriva de concepto",
-         "n": "Deriva de concepto (concept drift): cambia la relación entre las entradas y el resultado, aunque las entradas se vean iguales."
+         "t": "deriva de datos",
+         "k": "deriva de datos",
+         "n": "Deriva de datos (data drift): cambia la distribución de los datos de entrada, por ejemplo por un nuevo diseño de completación."
         }
        ]
       },
       {
        "say": "Hay deriva de concepto cuando cambia la relación entre entrada y resultado.",
-       "hl": 1
+       "hl": 1,
+       "notes": [
+        {
+         "t": "deriva de concepto",
+         "k": "deriva de concepto",
+         "n": "Deriva de concepto (concept drift): cambia la relación entre las entradas y el resultado, aunque las entradas se vean iguales."
+        }
+       ]
       },
       {
        "say": "Cambios de sensores, de procesos o de diseño las provocan.",
@@ -867,7 +990,7 @@
         {
          "t": "deuda técnica",
          "k": "deuda técnica",
-         "n": "Deuda técnica: costo futuro que se acumula por los atajos de hoy en el diseño y las pruebas del sistema (Sculley et al., 2015)."
+         "n": "Deuda técnica (technical debt): costo futuro que se acumula por los atajos de hoy en el diseño y las pruebas del sistema (Sculley et al., 2015)."
         }
        ]
       },
@@ -926,7 +1049,19 @@
       },
       {
        "say": "Hay un catálogo, con trazabilidad del origen y de las transformaciones.",
-       "hl": 1
+       "hl": 1,
+       "notes": [
+        {
+         "t": "catálogo",
+         "k": "catálogo de datos",
+         "n": "Catálogo de datos (data catalog): inventario consultable de los conjuntos de datos, con su descripción, responsable y calidad."
+        },
+        {
+         "t": "trazabilidad",
+         "k": "trazabilidad",
+         "n": "Trazabilidad de datos (data lineage): registro de dónde viene cada dato y qué transformaciones sufrió hasta llegar al análisis."
+        }
+       ]
       },
       {
        "say": "Los permisos de acceso son los mínimos necesarios.",
@@ -958,7 +1093,14 @@
       },
       {
        "say": "Las fuentes deben estar citadas y ser verificables. Los modelos de lenguaje pueden inventar datos: se usan con fuentes recuperadas, y no como autoridad.",
-       "hl": 1
+       "hl": 1,
+       "notes": [
+        {
+         "t": "modelos de lenguaje",
+         "k": "modelos de lenguaje",
+         "n": "Modelos de lenguaje (large language models, LLM): sistemas de inteligencia artificial entrenados con enormes cantidades de texto, que generan respuestas en lenguaje natural."
+        }
+       ]
       },
       {
        "say": "Se registran el modelo, la versión y los datos usados.",
@@ -970,7 +1112,19 @@
       },
       {
        "say": "Y se hacen pruebas de sesgos y de casos límite.",
-       "hl": 4
+       "hl": 4,
+       "notes": [
+        {
+         "t": "sesgos",
+         "k": "sesgos",
+         "n": "Sesgos (bias): errores sistemáticos del modelo, por ejemplo cuando los datos de entrenamiento no representan todos los casos."
+        },
+        {
+         "t": "casos límite",
+         "k": "casos límite",
+         "n": "Casos límite (edge cases): situaciones raras o extremas en las que el modelo tiende a fallar."
+        }
+       ]
       },
       {
        "say": "El caso Volve muestra el valor de los datos abiertos. En junio de 2018 el operador del campo compartió los datos de Volve, con los socios de la licencia.",
@@ -997,11 +1151,25 @@
          "Responsable y fecha de revisión"
         ]
        },
-       "hl": 0
+       "hl": 0,
+       "notes": [
+        {
+         "t": "FAIR",
+         "k": "FAIR",
+         "n": "FAIR (Findable, Accessible, Interoperable, Reusable): principios internacionales para gestionar datos científicos (Wilkinson et al., 2016)."
+        }
+       ]
       },
       {
        "say": "Cada modelo merece una ficha, la idea de las tarjetas de modelo, que dice para qué sirve y cuáles son sus límites.",
-       "hl": 1
+       "hl": 1,
+       "notes": [
+        {
+         "t": "tarjetas de modelo",
+         "k": "tarjeta de modelo",
+         "n": "Tarjeta de modelo (model card): ficha breve que documenta para qué sirve un modelo, con qué datos se entrenó y cuáles son sus límites (Mitchell et al., 2019)."
+        }
+       ]
       },
       {
        "say": "La ficha incluye los datos de entrenamiento y cómo se midió.",
