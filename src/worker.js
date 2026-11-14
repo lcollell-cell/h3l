@@ -5,7 +5,7 @@
    Todo lo demás lo sirve Cloudflare como archivos estáticos (run_worker_first solo para /api/*). */
 import { buildReport, dayOf, shiftDay } from './report.js';
 
-const TYPES = new Set(['pv', 'eng', 'sec', 'vclick', 'vplay', 'vsec', 'vend', 'click', 'hum']);
+const TYPES = new Set(['pv', 'eng', 'sec', 'vclick', 'vplay', 'vsec', 'vend', 'click', 'hum', 'scr', 'ttc']);
 const SERVICES = new Set(['reservas', 'auditoria', 'emisiones', 'datos', 'transicion', 'plataformas', 'geociencias', 'capacitacion']);
 const LANGS = new Set(['es', 'en', 'fr', 'pt']);
 const DEVS = new Set(['movil', 'tablet', 'escritorio']);
@@ -219,6 +219,8 @@ async function runDaily(env) {
       await env.DB.prepare(`INSERT INTO reports (day, sent_at, error) VALUES (?, NULL, ?) ON CONFLICT(day) DO UPDATE SET error=excluded.error`).bind(day, String((e && (e.code || e.message)) || e).slice(0, 200)).run();
     }
   }
+  /* limpieza: los mensajes del formulario de contacto se conservan 1 año */
+  try { await env.DB.prepare(`DELETE FROM contactos WHERE day < ?`).bind(shiftDay(today, -CONTACT_RETENTION_DAYS)).run(); } catch { /* la tabla se crea con el primer mensaje */ }
   /* limpieza: se conservan los eventos de los últimos 90 días */
   await env.DB.prepare(`DELETE FROM events WHERE day < ?`).bind(shiftDay(today, -RETENTION_DAYS)).run();
 }
@@ -425,11 +427,65 @@ async function arrepentimiento(request, env) {
   return Response.json({ ok: true, mailed }, { headers: nostore });
 }
 
+
+/* ---- Formulario de contacto ----
+   POST /api/contact {nombre,apellido,email,empresa,mensaje,lang,hp} -> {ok}
+   Guarda el mensaje en D1 (tabla contactos, se conserva CONTACT_RETENTION_DAYS) y lo manda por mail a CONTACT_TO (Resend, mismo remitente del reporte)
+   con "responder a" = mail del visitante. Solo mismo origen; campo trampa hp; 3 envíos por hora por visitante (hash con sal, sin guardar la IP).
+   ok:true solo si el mail salió: si falla, el sitio abre el mailto: como respaldo. */
+const CONTACT_MAX_HR = 3;
+const CONTACT_RETENTION_DAYS = 365;
+let ctReady = false;
+async function ensureContact(env) {
+  if (ctReady || !env.DB) return;
+  await env.DB.batch([
+    env.DB.prepare(`CREATE TABLE IF NOT EXISTS contactos (id INTEGER PRIMARY KEY AUTOINCREMENT, ts TEXT NOT NULL, day TEXT NOT NULL, nombre TEXT, apellido TEXT, email TEXT, empresa TEXT, mensaje TEXT, lang TEXT)`),
+    env.DB.prepare(`CREATE TABLE IF NOT EXISTS feedback_rate (k TEXT NOT NULL, hr INTEGER NOT NULL, n INTEGER NOT NULL, PRIMARY KEY (k, hr))`),
+  ]);
+  ctReady = true;
+}
+async function contact(request, env) {
+  const url = new URL(request.url);
+  const origin = request.headers.get('Origin');
+  const sameOrigin = origin ? safeHost(origin) === url.host : request.headers.get('Sec-Fetch-Site') === 'same-origin';
+  if (!sameOrigin) return Response.json({ ok: false }, { status: 403, headers: nostore });
+  const body = await readJson(request);
+  if (!body) return Response.json({ ok: false }, { status: 400, headers: nostore });
+  if (body.hp) return Response.json({ ok: true }, { headers: nostore });          // bot: se ignora en silencio
+  if (!env.RESEND_API_KEY || !env.CONTACT_TO || !env.REPORT_FROM || !env.DB) return Response.json({ ok: false }, { status: 503, headers: nostore });
+  const nombre = oneLine(body.nombre, 60), apellido = oneLine(body.apellido, 60), empresa = oneLine(body.empresa, 100);
+  const email = String(body.email ?? '').trim();
+  const mensaje = String(body.mensaje ?? '').replace(/[<>]/g, '').trim().slice(0, 3000);
+  const lang = ['es', 'en', 'fr', 'pt'].includes(body.lang) ? body.lang : 'es';
+  if (nombre.length < 2 || apellido.length < 2 || mensaje.length < 5 || !/^[^\s@]{1,64}@[^\s@]{1,120}\.[^\s@]{2,}$/.test(email) || email.length > 160) return Response.json({ ok: false }, { status: 400, headers: nostore });
+  await ensureSchema(env);
+  await ensureContact(env);
+  const hr = Math.floor(Date.now() / 3600000);
+  const k = (await sha(`${request.headers.get('cf-connecting-ip') || 'x'}|ct|${await getSalt(env)}`)).slice(0, 24);
+  const row = await env.DB.prepare(`SELECT n FROM feedback_rate WHERE k=? AND hr=?`).bind(k, hr).first();
+  if (row && row.n >= CONTACT_MAX_HR) return Response.json({ ok: false }, { status: 429, headers: nostore });
+  await env.DB.prepare(`INSERT INTO feedback_rate (k, hr, n) VALUES (?, ?, 1) ON CONFLICT(k, hr) DO UPDATE SET n=n+1`).bind(k, hr).run();
+  const ts = new Date().toISOString();
+  await env.DB.prepare(`INSERT INTO contactos (ts, day, nombre, apellido, email, empresa, mensaje, lang) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`).bind(ts, dayOf(Math.floor(Date.now() / 1000), env), nombre, apellido, email, empresa, mensaje, lang).run();
+  const esc = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+  const lines = ['Consulta desde el formulario del sitio', `Nombre: ${nombre} ${apellido}`, `Email: ${email}`, `Empresa / ocupación: ${empresa || '(no indicada)'}`, `Idioma del sitio: ${lang}`, `Fecha: ${ts}`, '', mensaje];
+  let mailed = false;
+  try {
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST', headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ from: `H3L Global Energy · Contacto <${env.REPORT_FROM}>`, to: [env.CONTACT_TO], reply_to: email, subject: `Consulta H3L: ${nombre} ${apellido}`, text: lines.join('\n'), html: `<p>${lines.map(esc).join('<br>')}</p>` }),
+    });
+    mailed = res.ok;
+  } catch (e) { console.error('contact mail', e && e.message); }
+  return Response.json({ ok: mailed }, { status: mailed ? 200 : 502, headers: nostore });
+}
+
 export default {
   async fetch(request, env, ctx) {
     const { pathname } = new URL(request.url);
     if (pathname === '/api/collect' && request.method === 'POST') return collect(request, env, ctx);
     if (pathname === '/api/report-test' && request.method === 'POST') return reportTest(request, env);
+    if (pathname === '/api/contact' && request.method === 'POST') return contact(request, env);
     if (pathname === '/api/feedback' && request.method === 'POST') return feedback(request, env);
     if (pathname === '/api/arrepentimiento' && request.method === 'POST') return arrepentimiento(request, env);
     if (pathname === '/api/tutor-login' && request.method === 'POST') return tutorLogin(request, env);

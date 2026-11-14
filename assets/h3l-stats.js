@@ -5,6 +5,7 @@
    Para excluir tu propio navegador: abrir una vez cualquier página del sitio con ?h3l-notrack=1 (y ?h3l-notrack=0 para volver a medir).
    Para marcar un navegador del equipo: abrir una vez con ?h3l-equipo=1 (y ?h3l-equipo=0 para quitar la marca). Sus visitas se miden aparte
    y el reporte las muestra en una sección propia, sin mezclarlas con las del público.
+   Scroll y primer clic: eventos 'scr' (25/50/75/100 %) y 'ttc' (segundos hasta el primer clic).
    Bots: se envían banderas de automatización (ver "sig") y la primera interacción humana real; el Worker guarda el tráfico clasificado como bot
    aparte (host "bot|...") y el reporte lo muestra en una sección propia. */
 (function(){
@@ -98,6 +99,16 @@ var t0=Date.now(),humSent=false;
     if(humSent||!e.isTrusted)return;humSent=true;
     add({t:'hum',n:Math.min(3600,Math.round((Date.now()-t0)/1000))});
   },{passive:true,capture:true})});
+
+/* ---- profundidad de scroll (25, 50, 75 y 100 % del alto de la página, una vez por vista) y segundos hasta el primer clic ---- */
+var scrMax=0;
+function scrollPct(){var d=document.documentElement,h=Math.max(d.scrollHeight,document.body?document.body.scrollHeight:0)-d.clientHeight;
+  if(h<=0)return 100;return Math.min(100,Math.round(((window.pageYOffset||d.scrollTop||0)/h)*100))}
+function checkScroll(){var p=scrollPct();[25,50,75,100].forEach(function(m){if(p>=m&&scrMax<m){scrMax=m;add({t:'scr',k:String(m)},true)}})}
+var scrT=null;
+window.addEventListener('scroll',function(e){if(!e.isTrusted||scrT)return;scrT=setTimeout(function(){scrT=null;checkScroll()},300)},{passive:true});
+var ttcSent=false;
+document.addEventListener('click',function(e){if(ttcSent||!e.isTrusted)return;ttcSent=true;add({t:'ttc',n:Math.min(3600,Math.round((Date.now()-t0)/1000))})},true);
 
 /* ---- vista de página ---- */
 function pageview(){add({t:'pv',ref:refHost(),dev:dev()})}

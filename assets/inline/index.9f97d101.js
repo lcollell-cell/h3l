@@ -1300,15 +1300,39 @@ function enviarContacto(){
   const email=document.getElementById('ctc-email')?.value?.trim();
   const empresa=document.getElementById('ctc-empresa')?.value?.trim()||'';
   const mensaje=document.getElementById('ctc-mensaje')?.value?.trim();
+  const trampa=document.getElementById('ctc-web')?.value||'';
   const status=document.getElementById('ctc-status');
+  const btn=document.querySelector('button[onclick="enviarContacto()"]');
   if(!nombre||!apellido){if(status)status.innerHTML='<span style="color:var(--danger)">'+W('w_er_name')+'</span>';return;}
   if(!email||!email.includes('@')){if(status)status.innerHTML='<span style="color:var(--danger)">'+W('w_bad')+'</span>';return;}
   if(!mensaje){if(status)status.innerHTML='<span style="color:var(--danger)">'+W('w_er_msg')+'</span>';return;}
-  const subject=encodeURIComponent(W('w_mailsub')+' '+nombre+' '+apellido);
-  const body=encodeURIComponent(W('w_mn')+': '+nombre+' '+apellido+'\n'+W('w_me')+': '+email+'\n'+W('w_mc')+': '+empresa+'\n\n'+mensaje);
-  window.location.href='mailto:info@h3lglobalenergy.com?subject='+subject+'&body='+body; /* Safari bloquea window.open para mailto */
-  if(status)status.innerHTML='<span style="color:var(--success)">'+W('w_opening')+'</span>';
-  setTimeout(()=>{if(status)status.innerHTML='';},3000);
+  /* respaldo: abre el programa de correo con el mensaje armado (sin Worker, p. ej. en la copia de prueba de GitHub Pages, o si el envío falla) */
+  const viaMailto=()=>{
+    const subject=encodeURIComponent(W('w_mailsub')+' '+nombre+' '+apellido);
+    const body=encodeURIComponent(W('w_mn')+': '+nombre+' '+apellido+'\n'+W('w_me')+': '+email+'\n'+W('w_mc')+': '+empresa+'\n\n'+mensaje);
+    window.location.href='mailto:info@h3lglobalenergy.com?subject='+subject+'&body='+body; /* Safari bloquea window.open para mailto */
+    if(status)status.innerHTML='<span style="color:var(--success)">'+W('w_opening')+'</span>';
+    setTimeout(()=>{if(status)status.innerHTML='';},3000);
+  };
+  if(btn&&btn.disabled)return;
+  if(btn)btn.disabled=true;
+  if(status)status.innerHTML='<span style="color:var(--text-muted,#6b7a90)">'+W('w_sending')+'</span>';
+  const lang=(function(){try{return localStorage.getItem('h3l_lang')||'es'}catch(e){return 'es'}})();
+  const ctl=typeof AbortController==='function'?new AbortController():null;
+  const to=ctl?setTimeout(()=>ctl.abort(),12000):0;
+  fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'omit',signal:ctl?ctl.signal:undefined,
+    body:JSON.stringify({nombre,apellido,email,empresa,mensaje,lang,hp:trampa})})
+    .then(r=>r.json().then(j=>({st:r.status,ok:!!(j&&j.ok)}),()=>({st:r.status,ok:false})))
+    .then(res=>{
+      clearTimeout(to);if(btn)btn.disabled=false;
+      if(res.ok){
+        if(status)status.innerHTML='<span style="color:var(--success)">'+W('w_sent')+'</span>';
+        ['ctc-nombre','ctc-apellido','ctc-email','ctc-empresa','ctc-mensaje'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+      }else if(res.st===429){
+        if(status)status.innerHTML='<span style="color:var(--danger)">'+W('w_toomany')+'</span>';
+      }else viaMailto();
+    })
+    .catch(()=>{clearTimeout(to);if(btn)btn.disabled=false;viaMailto();});
 }
 
 // ═══ REGISTRO + CSV ═══
