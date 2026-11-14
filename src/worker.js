@@ -5,11 +5,30 @@
    Todo lo demás lo sirve Cloudflare como archivos estáticos (run_worker_first solo para /api/*). */
 import { buildReport, dayOf, shiftDay } from './report.js';
 
-const TYPES = new Set(['pv', 'eng', 'sec', 'vclick', 'vplay', 'vsec', 'vend', 'click']);
+const TYPES = new Set(['pv', 'eng', 'sec', 'vclick', 'vplay', 'vsec', 'vend', 'click', 'hum']);
 const SERVICES = new Set(['reservas', 'auditoria', 'emisiones', 'datos', 'transicion', 'plataformas', 'geociencias', 'capacitacion']);
 const LANGS = new Set(['es', 'en', 'fr', 'pt']);
 const DEVS = new Set(['movil', 'tablet', 'escritorio']);
 const BOT_RE = /bot|crawl|spider|slurp|headless|lighthouse|pagespeed|preview|monitor|uptime|curl|wget|python|node-fetch|axios|java\/|go-http|facebookexternalhit|whatsapp|telegram/i;
+/* Clasificación humano / bot. Cada señal suma puntos; con BOT_SCORE o más la visita se guarda aparte (host "bot|...") y no entra en las cifras públicas.
+   Fuertes (3): UA de bot conocido, bot verificado por Cloudflare, navegador automatizado (wd). Débiles: idioma ausente (1), Chrome sin window.chrome (1),
+   pantalla cero (1), render por software (2), sin Accept-Language en la petición (1), red de centro de datos (1).
+   Un navegador real con una sola señal débil (p. ej. una VPN) no llega al umbral. Los bots que no ejecutan JavaScript nunca llegan a /api/collect. */
+const BOT_SCORE = 3;
+const SIG_POINTS = { wd: 3, nl: 1, nc: 1, sz: 1, gl: 2 };
+const DC_ASNS = new Set([16509, 14618, 15169, 396982, 8075, 14061, 24940, 16276, 63949, 20473, 45102, 37963, 31898, 12876, 51167]); /* AWS, Google, Azure, DigitalOcean, Hetzner, OVH, Linode, Vultr, Alibaba, Oracle, Contabo... */
+const MAX_BOT_PER_VISITOR_DAY = 20;
+const BOT_PREFIX = 'bot|';
+function classify(request, ua, sigRaw) {
+  const reasons = []; let score = 0;
+  const add = (k, pts) => { reasons.push(k); score += pts; };
+  if (!ua || BOT_RE.test(ua)) add('ua', 3);
+  if (request.cf && request.cf.verifiedBotCategory) add('ver', 3);
+  for (const k of String(sigRaw || '').split('-')) if (SIG_POINTS[k]) add(k, SIG_POINTS[k]);
+  if (!request.headers.get('Accept-Language')) add('nal', 1);
+  if (request.cf && DC_ASNS.has(Number(request.cf.asn))) add('asn', 1);
+  return { bot: score >= BOT_SCORE, score, reasons };
+}
 const MAX_BODY = 8000;
 const MAX_EVENTS = 12;
 const MAX_PER_VISITOR_DAY = 400;
@@ -63,6 +82,7 @@ function sanitize(ev, ownHost) {
     n: Math.min(86400, Math.max(0, Number.isFinite(+ev.n) ? Math.round(+ev.n) : 0)),
     ref: clean(ev.ref, /^[a-z0-9.-]{3,80}$/i, 80).toLowerCase(),
     team: ev.i === 1,
+    sig: clean(ev.b, /^[a-z]{2}(-[a-z]{2}){0,4}$/, 20),
   };
   if (!out.sid || !out.pvid) return null;
   if (out.ref === ownHost || out.ref === ownHost.replace(/^www\./, '')) out.ref = '';
@@ -86,7 +106,6 @@ async function collect(request, env, ctx) {
   const sameOrigin = origin ? safeHost(origin) === url.host : request.headers.get('Sec-Fetch-Site') === 'same-origin';
   if (!sameOrigin) return new Response(null, { status: 204 });
   const ua = request.headers.get('User-Agent') || '';
-  if (!ua || BOT_RE.test(ua) || (request.cf && request.cf.verifiedBotCategory)) return new Response(null, { status: 204 });
 
   const text = await request.text();
   if (text.length > MAX_BODY) return new Response(null, { status: 204 });
@@ -96,13 +115,14 @@ async function collect(request, env, ctx) {
   const events = list.map((e) => sanitize(e, url.host)).filter(Boolean);
   if (!events.length) return new Response(null, { status: 204 });
 
-  ctx.waitUntil(store(request, env, url.host, events).catch((e) => console.error('collect', e && e.message)));
+  const verdict = classify(request, ua, events[0].sig);
+  ctx.waitUntil(store(request, env, url.host, events, verdict).catch((e) => console.error('collect', e && e.message)));
   return new Response(null, { status: 204 });
 }
 
 function safeHost(u) { try { return new URL(u).host; } catch { return ''; } }
 
-async function store(request, env, host, events) {
+async function store(request, env, host, events, verdict) {
   await ensureSchema(env);
   const now = Math.floor(Date.now() / 1000);
   const day = dayOf(now, env);
@@ -112,7 +132,16 @@ async function store(request, env, host, events) {
   const country = ((request.cf && request.cf.country) || 'XX').toUpperCase().slice(0, 2);
 
   const used = await env.DB.prepare(`SELECT COUNT(*) c FROM events WHERE day=? AND vid=?`).bind(day, vid).first();
-  if (used && used.c >= MAX_PER_VISITOR_DAY) return;
+  if (used && used.c >= (verdict.bot ? MAX_BOT_PER_VISITOR_DAY : MAX_PER_VISITOR_DAY)) return;
+  if (verdict.bot) {
+    /* tráfico automatizado: solo se guarda la vista de página (con el motivo en label), con tope bajo por visitante y día */
+    const label = verdict.reasons.join('-').slice(0, 30);
+    const pvs = events.filter((e) => e.type === 'pv');
+    if (!pvs.length) return;
+    await env.DB.batch(pvs.map((e) => env.DB.prepare(`INSERT OR IGNORE INTO events (ts, day, host, type, path, sid, pvid, vid, country, lang, dev, label, svc, n, ref, ukey)
+      VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`).bind(now, day, `${BOT_PREFIX}${host}`, 'pv', e.path, e.sid, e.pvid, vid, country, e.lang, e.dev, label, '', 0, '', keyOf(e))));
+    return;
+  }
 
   const upsert = `INSERT INTO events (ts, day, host, type, path, sid, pvid, vid, country, lang, dev, label, svc, n, ref, ukey)
     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)

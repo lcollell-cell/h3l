@@ -16,6 +16,7 @@ const SECTIONS = { somos: 'Quiénes somos', servicios: 'Servicios', noticias: 'N
 const ACTIONS = { mailto: 'Clic en el mail', tel: 'Clic en el teléfono', linkedin: 'Clic en LinkedIn', brochure: 'Descarga del brochure', contact_send: 'Formulario de contacto (Enviar)', chat_open: 'Abrió el chat Copilot', intro_skip: 'Omitió la intro' };
 const LANG_NAME = { es: 'Español', en: 'English', fr: 'Français', pt: 'Português' };
 const DEV_NAME = { movil: 'Móvil', tablet: 'Tablet', escritorio: 'Escritorio' };
+const BOT_REASON = { ua: 'Navegador/herramienta que se declara bot', ver: 'Bot verificado por Cloudflare', wd: 'Navegador automatizado (webdriver)', nl: 'Sin idiomas en el navegador', nc: 'Falso Chrome (sin window.chrome)', sz: 'Pantalla de tamaño cero', gl: 'Render por software (sin cabeza)', nal: 'Sin encabezado de idioma', asn: 'Red de centro de datos' };
 const DAYS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
 
 export function dayOf(ts, env) {
@@ -78,9 +79,18 @@ export async function buildReport(db, day, hosts, env, opts = {}) {
   }
   const tEng = avg([...T.ses].map((sid) => T.eng.get(sid) || 0));
 
+  /* ---- tráfico automatizado (bots): se guarda aparte con host "bot|..."; no entra en las cifras públicas ---- */
+  const bh = hosts.map((h) => `bot|${h}`), bph = bh.map(() => '?').join(',');
+  const brows = (await db.prepare(`SELECT label, vid, country, path FROM events WHERE day=? AND type='pv' AND host IN (${bph})`).bind(day, ...bh).all()).results || [];
+  const B = { pv: brows.length, vids: new Set(brows.map((r) => r.vid)), reasons: new Map(), countries: new Map(), strong: 0 };
+  for (const r of brows) {
+    tally(B.countries, r.country || 'XX');
+    for (const k of new Set(String(r.label || '').split('-').filter(Boolean))) tally(B.reasons, k);
+  }
+
   /* ---- sesiones ---- */
   const S = new Map();
-  const sess = (r) => { let s = S.get(r.sid); if (!s) { s = { sid: r.sid, pv: 0, eng: 0, inter: 0, country: r.country, lang: '', dev: '', vid: r.vid }; S.set(r.sid, s); } return s; };
+  const sess = (r) => { let s = S.get(r.sid); if (!s) { s = { sid: r.sid, pv: 0, eng: 0, inter: 0, hum: 0, country: r.country, lang: '', dev: '', vid: r.vid }; S.set(r.sid, s); } return s; };
   const hours = new Array(24).fill(0);
   const off = Number(env && env.TZ_OFFSET_MIN != null && env.TZ_OFFSET_MIN !== '' ? env.TZ_OFFSET_MIN : -180);
   const pages = new Map(), refs = new Map(), langs = new Map(), devs = new Map(), secs = new Map();
@@ -95,12 +105,14 @@ export async function buildReport(db, day, hosts, env, opts = {}) {
       hours[new Date((r.ts + off * 60) * 1000).getUTCHours()]++;
       if (r.ref) tally(refs, r.ref);
     } else if (r.type === 'eng') s.eng += r.n || 0;
+    else if (r.type === 'hum') s.hum = 1;
     else if (r.type === 'vclick' || r.type === 'click' || (r.type === 'vplay' && r.label === 'manual')) s.inter++;
   }
   const sessions = [...S.values()];
   const nS = sessions.length;
   const visitors = new Set(sessions.map((s) => s.vid)).size;
   const times = sessions.map((s) => s.eng);
+  const sinHum = sessions.filter((s) => s.pv > 0 && !s.hum).length;
   const bounce = sessions.filter((s) => s.pv <= 1 && s.inter === 0 && s.eng < 10).length;
   const withRef = new Set(rows.filter((r) => r.type === 'pv' && r.ref).map((r) => r.sid));
   const directo = sessions.filter((s) => s.pv > 0 && !withRef.has(s.sid)).length;
@@ -175,6 +187,8 @@ export async function buildReport(db, day, hosts, env, opts = {}) {
   const m = (metrica, dim1, dim2, valor) => { if (Number.isFinite(valor)) M.push([day, metrica, dim1 == null ? '' : String(dim1), dim2 == null ? '' : String(dim2), Math.round(valor * 100) / 100]); };
   m('vistas', '', '', pvTotal); m('visitantes', '', '', visitors); m('sesiones', '', '', nS);
   m('tiempo_medio_s', '', '', avgTime); m('tiempo_mediano_s', '', '', median(times)); m('rebote_sesiones', '', '', bounce);
+  if (B.pv) { m('bot_vistas', '', '', B.pv); m('bot_visitantes', '', '', B.vids.size); for (const [k, v] of B.reasons) m('bot_motivo', k, '', v); for (const [c, v] of B.countries) m('bot_pais', c, '', v); }
+  m('sesiones_sin_interaccion', '', '', sinHum);
   if (T.ses.size) { m('interno_vistas', '', '', T.pv); m('interno_sesiones', '', '', T.ses.size); m('interno_clics', '', '', T.clicks); m('interno_tiempo_medio_s', '', '', tEng); }
   for (const [c, o] of countries) { m('pais_sesiones', c, '', o.ses); m('pais_vistas', c, '', pvByCountry.get(c) || 0); m('pais_tiempo_medio_s', c, '', avg(o.eng)); }
   for (const s of svRows) {
@@ -313,6 +327,10 @@ export async function buildReport(db, day, hosts, env, opts = {}) {
   const teamHtml = T.ses.size
     ? `${h2('Tráfico del equipo', 'Navegadores marcados como internos. No están incluidos en ninguna cifra de arriba.')}<p style="margin:6px 0;font-size:14px;line-height:1.6;color:${C.ink}">${nf(T.pv)} ${T.pv === 1 ? 'vista' : 'vistas'} · ${nf(T.ses.size)} ${T.ses.size === 1 ? 'sesión' : 'sesiones'} · tiempo medio ${fmtT(tEng)} · ${nf(T.clicks)} ${T.clicks === 1 ? 'clic' : 'clics'}${T.countries.size ? ` · ${listStr(T.countries, 3)}` : ''}</p>`
     : '';
+  const botHtml = B.pv
+    ? `${h2('Tráfico automatizado (bots)', 'Navegadores sin cabeza, herramientas y bots que ejecutan JavaScript. Se guardan aparte: no están incluidos en ninguna cifra de arriba.')}<p style="margin:6px 0 10px;font-size:14px;line-height:1.6;color:${C.ink}"><b>${nf(B.pv)}</b> ${B.pv === 1 ? 'vista' : 'vistas'} de <b>${nf(B.vids.size)}</b> ${B.vids.size === 1 ? 'origen' : 'orígenes'} · ${pct(B.pv, B.pv + pvTotal)} del total medido (${nf(B.pv + pvTotal)}) · ${listStr(B.countries, 3)}</p>${hbars(top(B.reasons, 8).map(([k, v]) => ({ label: esc(BOT_REASON[k] || k), v, color: C.coral })))}${note('Una misma vista puede sumar varios motivos. Los bots que no ejecutan JavaScript (la mayoría de los rastreadores) no llegan a esta medición.')}`
+    : '';
+  const humNote = nS ? note(`Sesiones sin ninguna interacción humana real (movimiento, scroll, teclado o toque): <b>${sinHum}</b> de ${nS} (${pct(sinHum, nS)}). Pueden ser lecturas muy breves o bots que pasaron el filtro.`) : '';
   const title = `${weekday(day)} ${dmy(day)}`;
   const banner = opts.banner ? `<tr><td style="background:${C.amber};padding:9px 24px;font-size:13px;font-weight:800;color:#3B2A00">${esc(opts.banner)}</td></tr>` : '';
   const html = `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"></head>
@@ -335,8 +353,10 @@ ${h2(pvTotal ? `Hora pico: ${String(hours.indexOf(hmax)).padStart(2, '0')}:00` :
 ${h2('Contacto y otras acciones')}${actChart}${introNote}
 ${h2('Quién nos visita')}${sub3('Idioma')}${langStack}${sub3('Dispositivo')}${devStack}${sub3('Origen')}${originStack}
 ${h2('Páginas y secciones del sitio')}${sub3('Páginas')}${pagesChart}${sub3('Secciones del sitio principal')}${secsChart}
+${humNote}
+${botHtml}
 ${teamHtml}
-<p style="margin:30px 0 0;font-size:11px;color:#9AA7B8;line-height:1.5">Medición propia de www.h3lglobalenergy.com, sin cookies ni datos personales (no se guarda la IP; el país lo informa Cloudflare). Los visitantes se estiman por día y no incluyen bots ni navegadores con “No rastrear”. Día calculado en hora de Argentina (00:00 a 23:59).</p>
+<p style="margin:30px 0 0;font-size:11px;color:#9AA7B8;line-height:1.5">Medición propia de www.h3lglobalenergy.com, sin cookies ni datos personales (no se guarda la IP; el país lo informa Cloudflare). Los visitantes se estiman por día; los bots detectados se muestran aparte y no se incluyen en las cifras, igual que los navegadores con “No rastrear”. Día calculado en hora de Argentina (00:00 a 23:59).</p>
 </td></tr></table></td></tr></table></body></html>`;
 
   /* ---- texto plano ---- */
@@ -347,6 +367,8 @@ ${teamHtml}
   L.push('VIDEOS Y SERVICIOS (clic = play, pantalla completa, sonido, cotización o ver más)');
   svSorted.forEach((s) => L.push(`  ${s.name}: ${s.people} visitantes con clic, ${s.manual} reprod. por clic, ${s.auto} auto, tiempo visto ${s.secs ? fmtT(s.secs) : '—'}, ${s.quote} cotizaciones | ${[...s.countries.entries()].map(([c, v]) => `${countryName(c)} ${v}`).join(', ') || '—'}`));
   if (act.size) { L.push('', 'ACCIONES'); top(act).forEach(([n, v]) => L.push(`  ${n}: ${v}`)); }
+  L.push('', `SESIONES SIN INTERACCIÓN HUMANA REAL: ${sinHum} de ${nS}`);
+  if (B.pv) L.push('', `BOTS DETECTADOS (aparte, no incluidos arriba): ${B.pv} vista(s), ${B.vids.size} origen(es) | motivos: ${top(B.reasons, 8).map(([k, v]) => `${BOT_REASON[k] || k} ${v}`).join(', ')}`);
   if (T.ses.size) L.push('', `TRÁFICO DEL EQUIPO (aparte, no incluido arriba): ${T.pv} vista(s), ${T.ses.size} sesión(es), ${T.clicks} clic(s), tiempo medio ${fmtT(tEng)}`);
   L.push('', 'ÚLTIMOS 7 DÍAS'); days7.forEach(([d, t]) => L.push(`  ${dmy(d)}: ${t ? t.pv : 0} vistas, ${t ? t.vis : 0} visitantes`));
   const text = L.join('\n');

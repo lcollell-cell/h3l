@@ -4,7 +4,9 @@
    No mide si el navegador envía Do Not Track / Global Privacy Control, ni en la copia de prueba de GitHub Pages.
    Para excluir tu propio navegador: abrir una vez cualquier página del sitio con ?h3l-notrack=1 (y ?h3l-notrack=0 para volver a medir).
    Para marcar un navegador del equipo: abrir una vez con ?h3l-equipo=1 (y ?h3l-equipo=0 para quitar la marca). Sus visitas se miden aparte
-   y el reporte las muestra en una sección propia, sin mezclarlas con las del público. */
+   y el reporte las muestra en una sección propia, sin mezclarlas con las del público.
+   Bots: se envían banderas de automatización (ver "sig") y la primera interacción humana real; el Worker guarda el tráfico clasificado como bot
+   aparte (host "bot|...") y el reporte lo muestra en una sección propia. */
 (function(){
 'use strict';
 if(window.top!==window.self)return;                       /* no medir marcos incrustados (evita contar dos veces) */
@@ -38,10 +40,23 @@ function dev(){var w=Math.min(screen.width||innerWidth,innerWidth||9999);return 
 function refHost(){try{if(!document.referrer)return '';var h=new URL(document.referrer).hostname.replace(/^www\./,'');
   return h===location.hostname.replace(/^www\./,'')?'':h.slice(0,80)}catch(e){return ''}}
 
+/* ---- señales de automatización (solo banderas booleanas, sin identificadores): el Worker las usa para separar bots de visitas reales ----
+   wd = navegador controlado por automatización (navigator.webdriver) · nl = sin idiomas · nc = dice ser Chrome pero sin objeto window.chrome
+   sz = pantalla o ventana de tamaño cero · gl = render por software (SwiftShader / llvmpipe, típico de navegadores sin cabeza) */
+var sig=(function(){var o=[];
+  try{if(navigator.webdriver)o.push('wd')}catch(e){}
+  try{if(!navigator.languages||!navigator.languages.length)o.push('nl')}catch(e){}
+  try{var ua=navigator.userAgent||'';if(/Chrome\//.test(ua)&&!/Edg\/|OPR\/|Android/.test(ua)&&!window.chrome)o.push('nc')}catch(e){}
+  try{if(!screen.width||!screen.height||(!window.outerWidth&&!window.outerHeight))o.push('sz')}catch(e){}
+  try{var c=document.createElement('canvas'),g=c.getContext('webgl')||c.getContext('experimental-webgl');
+    if(g){var x=g.getExtension('WEBGL_debug_renderer_info');
+      if(x&&/swiftshader|llvmpipe|softpipe/i.test(String(g.getParameter(x.UNMASKED_RENDERER_WEBGL)||'')))o.push('gl')}}catch(e){}
+  return o.join('-')})();
 var queue=[],seen={},timer=null;
 function add(ev,once){
   if(once){var k=ev.t+'|'+(ev.k||'')+'|'+(ev.s||'');if(seen[k])return;seen[k]=1}
   if(team)ev.i=1;
+  if(sig)ev.b=sig;
   ev.sid=sid;ev.pv=pvid;ev.l=lang();ev.p=location.pathname.slice(0,120);
   queue.push(ev);
   if(!timer)timer=setTimeout(flush,1500);
@@ -75,6 +90,14 @@ function pushTimes(){
 setInterval(function(){if(document.visibilityState==='visible'){pushTimes();flush()}},30000);
 document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden'){pushTimes();flush()}});
 window.addEventListener('pagehide',function(){pushTimes();flush()});
+
+/* ---- primera interacción humana real (event.isTrusted: los eventos simulados por script no cuentan) ---- */
+var t0=Date.now(),humSent=false;
+['mousemove','scroll','keydown','touchstart','pointerdown','wheel'].forEach(function(n){
+  window.addEventListener(n,function h(e){
+    if(humSent||!e.isTrusted)return;humSent=true;
+    add({t:'hum',n:Math.min(3600,Math.round((Date.now()-t0)/1000))});
+  },{passive:true,capture:true})});
 
 /* ---- vista de página ---- */
 function pageview(){add({t:'pv',ref:refHost(),dev:dev()})}
