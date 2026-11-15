@@ -345,6 +345,10 @@ async function ensureFeedback(env) {
 }
 const oneLine = (v, n) => String(v ?? '').replace(/[\r\n\t]+/g, ' ').replace(/[<>]/g, '').trim().slice(0, n);
 async function feedback(request, env) {
+  const url = new URL(request.url);
+  const origin = request.headers.get('Origin');
+  const sameOrigin = origin ? safeHost(origin) === url.host : request.headers.get('Sec-Fetch-Site') === 'same-origin';
+  if (!sameOrigin) return Response.json({ ok: false }, { status: 403, headers: nostore });
   const body = await readJson(request);
   if (!body) return Response.json({ ok: false }, { status: 400, headers: nostore });
   if (body.hp) return Response.json({ ok: true, mailed: false }, { headers: nostore });          // bot: se ignora en silencio
@@ -393,6 +397,10 @@ async function ensureArr(env) {
   arReady = true;
 }
 async function arrepentimiento(request, env) {
+  const url = new URL(request.url);
+  const origin = request.headers.get('Origin');
+  const sameOrigin = origin ? safeHost(origin) === url.host : request.headers.get('Sec-Fetch-Site') === 'same-origin';
+  if (!sameOrigin) return Response.json({ ok: false }, { status: 403, headers: nostore });
   const body = await readJson(request);
   if (!body) return Response.json({ ok: false }, { status: 400, headers: nostore });
   if (body.hp) return Response.json({ ok: true, mailed: false }, { headers: nostore });
@@ -442,8 +450,14 @@ async function ensureContact(env) {
     env.DB.prepare(`CREATE TABLE IF NOT EXISTS contactos (id INTEGER PRIMARY KEY AUTOINCREMENT, ts TEXT NOT NULL, day TEXT NOT NULL, nombre TEXT, apellido TEXT, email TEXT, empresa TEXT, mensaje TEXT, lang TEXT)`),
     env.DB.prepare(`CREATE TABLE IF NOT EXISTS feedback_rate (k TEXT NOT NULL, hr INTEGER NOT NULL, n INTEGER NOT NULL, PRIMARY KEY (k, hr))`),
   ]);
+  for (const c of ['sector', 'activo', 'urgencia']) { try { await env.DB.prepare(`ALTER TABLE contactos ADD COLUMN ${c} TEXT`).run(); } catch { /* ya existe */ } }
   ctReady = true;
 }
+const CT_OPC = {
+  sector: { w_s1: 'Upstream (exploración y producción)', w_s2: 'Midstream y downstream', w_s3: 'Transición energética', w_s4: 'Otro' },
+  activo: { w_a1: 'Yacimiento convencional', w_a2: 'No convencional', w_a3: 'Offshore', w_a4: 'Planta o instalaciones' },
+  urgencia: { w_u1: 'Sin apuro', w_u2: 'Dentro del mes', w_u3: 'Urgente (esta semana)' },
+};
 async function contact(request, env) {
   const url = new URL(request.url);
   const origin = request.headers.get('Origin');
@@ -457,6 +471,8 @@ async function contact(request, env) {
   const email = String(body.email ?? '').trim();
   const mensaje = String(body.mensaje ?? '').replace(/[<>]/g, '').trim().slice(0, 3000);
   const lang = ['es', 'en', 'fr', 'pt'].includes(body.lang) ? body.lang : 'es';
+  const opc = (k) => (Object.prototype.hasOwnProperty.call(CT_OPC[k], body[k]) ? CT_OPC[k][body[k]] : '');
+  const sector = opc('sector'), activo = opc('activo'), urgencia = opc('urgencia');
   if (nombre.length < 2 || apellido.length < 2 || mensaje.length < 5 || !/^[^\s@]{1,64}@[^\s@]{1,120}\.[^\s@]{2,}$/.test(email) || email.length > 160) return Response.json({ ok: false }, { status: 400, headers: nostore });
   await ensureSchema(env);
   await ensureContact(env);
@@ -466,9 +482,9 @@ async function contact(request, env) {
   if (row && row.n >= CONTACT_MAX_HR) return Response.json({ ok: false }, { status: 429, headers: nostore });
   await env.DB.prepare(`INSERT INTO feedback_rate (k, hr, n) VALUES (?, ?, 1) ON CONFLICT(k, hr) DO UPDATE SET n=n+1`).bind(k, hr).run();
   const ts = new Date().toISOString();
-  await env.DB.prepare(`INSERT INTO contactos (ts, day, nombre, apellido, email, empresa, mensaje, lang) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`).bind(ts, dayOf(Math.floor(Date.now() / 1000), env), nombre, apellido, email, empresa, mensaje, lang).run();
+  await env.DB.prepare(`INSERT INTO contactos (ts, day, nombre, apellido, email, empresa, sector, activo, urgencia, mensaje, lang) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`).bind(ts, dayOf(Math.floor(Date.now() / 1000), env), nombre, apellido, email, empresa, sector, activo, urgencia, mensaje, lang).run();
   const esc = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;');
-  const lines = ['Consulta desde el formulario del sitio', `Nombre: ${nombre} ${apellido}`, `Email: ${email}`, `Empresa / ocupación: ${empresa || '(no indicada)'}`, `Idioma del sitio: ${lang}`, `Fecha: ${ts}`, '', mensaje];
+  const lines = ['Consulta desde el formulario del sitio', `Nombre: ${nombre} ${apellido}`, `Email: ${email}`, `Empresa / ocupación: ${empresa || '(no indicada)'}`, `Sector: ${sector || '(no indicado)'}`, `Tipo de activo: ${activo || '(no indicado)'}`, `Urgencia: ${urgencia || '(no indicada)'}`, `Idioma del sitio: ${lang}`, `Fecha: ${ts}`, '', mensaje];
   let mailed = false;
   try {
     const res = await fetch('https://api.resend.com/emails', {
