@@ -135,6 +135,11 @@
    "title": "Recovery factors and PRMS reserves",
    "short": "Recovery by reservoir and strategy, EOR methods and feasibility, current and final recovery factor, and SPE-PRMS classification.",
    "tag": "Reserves"
+  },
+  "pr2": {
+   "title": "SPE-PRMS Reserves and Resources II: beyond proved reserves",
+   "short": "Probable and possible reserves, contingent and prospective resources, project maturity and chance of commerciality, with the 2008 SEC case.",
+   "tag": "Reserves"
   }
  },
  "available": [

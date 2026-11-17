@@ -11,6 +11,7 @@
     "pta",
     "sim",
     "rpx",
+    "pr2",
     "pvt",
     "gas",
     "frr"
@@ -593,6 +594,22 @@
     "pm",
     "plan",
     "eco"
+   ]
+  },
+  {
+   "id": "pr2",
+   "n": 31,
+   "title": "Reservas y Recursos SPE-PRMS II: más allá de las reservas comprobadas",
+   "short": "Reservas probables y posibles, recursos contingentes y prospectivos, madurez del proyecto y chance de comercialidad, con el caso de la SEC en 2008.",
+   "level": "Avanzado",
+   "color": "#8a5fb4",
+   "icon": "rpx",
+   "tag": "Reservas",
+   "levels": [
+    "a"
+   ],
+   "topics": [
+    "reservas"
    ]
   }
  ],
