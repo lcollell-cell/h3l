@@ -1,13 +1,16 @@
 {
  "id": "pr2",
  "title": "Más allá de las reservas comprobadas",
- "subtitle": "Reservas probables y posibles, recursos contingentes y prospectivos, madurez del proyecto y chance de comercialidad.",
- "desc": "Curso que continúa Recursos y Reservas SPE-PRMS. Recorre la clasificación del sistema SPE-PRMS 2018 por fuera de la reserva probada: las subclases de madurez del proyecto, las reservas probables y posibles, los recursos contingentes con su estado económico, el paso a reserva y los recursos prospectivos con sus chances de descubrimiento, de desarrollo y de comercialidad. Con laboratorios de ejemplo y un caso real: la apertura de las reglas de la SEC a las reservas probables y posibles.",
+ "subtitle": "Reservas probables y posibles, desarrolladas no productivas, desarrollo pendiente, recursos contingentes y prospectivos, madurez, chance de comercialidad y sensibilidades.",
+ "desc": "Curso que continúa Recursos y Reservas SPE-PRMS. Recorre la clasificación del sistema SPE-PRMS 2018 por fuera de la reserva probada: las subclases de madurez del proyecto, las reservas probables y posibles, los recursos contingentes con su estado económico, el paso a reserva, las reservas desarrolladas no productivas, el desarrollo pendiente con su rendimiento pendiente (pending performance) y los recursos prospectivos con sus chances de descubrimiento, de desarrollo y de comercialidad. Incluye sensibilidades sobre precio, declinación e inversión. Con laboratorios de ejemplo y un caso real: la apertura de las reglas de la SEC a las reservas probables y posibles.",
  "objectives": [
   "Ubicar un proyecto en su subclase de madurez, desde en producción hasta play, y explicar qué lo frena.",
   "Distinguir las reservas probables y posibles, y los recursos contingentes por subclase y por estado económico.",
   "Explicar qué debe cumplir un proyecto para pasar de recurso contingente a reserva.",
-  "Calcular la chance de comercialidad de un prospecto como producto de las chances de descubrimiento y de desarrollo, y leer sus estimaciones sin riesgo."
+  "Calcular la chance de comercialidad de un prospecto como producto de las chances de descubrimiento y de desarrollo, y leer sus estimaciones sin riesgo.",
+  "Clasificar un volumen de un pozo cerrado o detrás de la tubería como reserva desarrollada no productiva, aplicando el criterio de gasto menor.",
+  "Explicar el rendimiento pendiente (pending performance) y cómo cambia el rango al acumularse historia de producción.",
+  "Leer una sensibilidad e identificar qué variable domina el resultado y debe respaldarse mejor."
  ],
  "labs": [
   "marco PRMS y subclases de madurez",
@@ -45,6 +48,19 @@
     "x2",
     "x7",
     "x8"
+   ]
+  },
+  {
+   "name": "Reservas desarrolladas no productivas y desarrollo pendiente",
+   "lessons": [
+    "x9",
+    "x10"
+   ]
+  },
+  {
+   "name": "Sensibilidades y decisión bajo incertidumbre",
+   "lessons": [
+    "x11"
    ]
   }
  ],
@@ -817,6 +833,476 @@
      "e": "Ya está descubierto: Pg = 1, y por eso Pc = Pd."
     }
    ]
+  },
+  {
+   "id": "xm4",
+   "title": "Módulo 4 · Desarrolladas no productivas, rendimiento pendiente y sensibilidades",
+   "lessons": [
+    {
+     "id": "x9",
+     "title": "Reservas desarrolladas no productivas: cerrados y behind-pipe",
+     "comp": "Reservas desarrolladas no productivas",
+     "cues": [
+      {
+       "say": "Hay reservas desarrolladas que todavía no producen. Son las desarrolladas no productivas. Su volumen está en pozos e instalaciones que ya existen, por eso se llaman desarrolladas, pero hoy no entregan producción. Hay dos tipos: cerrados y detrás de la tubería.",
+       "scene": {
+        "t": "tbl",
+        "k": "Desarrolladas no productivas",
+        "h": "Dos tipos, una condición",
+        "cols": [
+         "Tipo",
+         "Qué es",
+         "Qué falta"
+        ],
+        "rows": [
+         [
+          "Cerrado",
+          "Intervalo abierto sin producir, o pozo parado por mercado, conexión o falla mecánica",
+          "Reabrir, conectar o reparar"
+         ],
+         [
+          "Detrás de la tubería (behind-pipe)",
+          "Zona ya perforada y cementada, todavía sin cañonear ni ensayar",
+          "Una terminación o una recompletación"
+         ]
+        ],
+        "n": "Condición común: el costo de ponerlas en producción es menor frente al de un pozo nuevo."
+       },
+       "notes": [
+        {
+         "t": "detrás de la tubería",
+         "k": "behind-pipe",
+         "n": "Behind-pipe: intervalo detrás del casing, ya atravesado por el pozo, que requiere una terminación adicional antes de producir."
+        }
+       ]
+      },
+      {
+       "say": "La condición clave es el gasto menor. Reactivar el pozo tiene que costar poco frente a un pozo nuevo.",
+       "hl": 0,
+       "scene": {
+        "t": "bul",
+        "k": "Gasto menor",
+        "h": "Cómo se decide",
+        "items": [
+         "Costo de reactivar frente al costo de un pozo nuevo",
+         "Diez por ciento es menor; noventa por ciento es significativo",
+         "Sin porcentaje fijo: el criterio se documenta",
+         "Si es significativo, el volumen es no desarrollado"
+        ]
+       },
+       "notes": [
+        {
+         "t": "gasto menor",
+         "k": "gasto menor",
+         "n": "Gasto menor: costo de reactivar o completar un pozo existente, pequeño en comparación con el de un pozo nuevo."
+        }
+       ]
+      },
+      {
+       "say": "Una reparación que cuesta el diez por ciento de un pozo nuevo es claramente un gasto menor. Una que cuesta el noventa por ciento es una inversión significativa.",
+       "hl": 1
+      },
+      {
+       "say": "Ni PRMS ni la SEC fijan un porcentaje. La empresa tiene que escribir su criterio y aplicarlo igual a todos los pozos.",
+       "hl": 2
+      },
+      {
+       "say": "Si el costo es significativo, el volumen no es desarrollado: pasa a no desarrollado y se evalúa como tal.",
+       "hl": 3
+      },
+      {
+       "say": "Ejemplo. Un pozo cerrado por falta de ducto reabriría con 300 barriles por día, con un límite económico de 20 barriles por día. Con una declinación del veinte por ciento anual, las reservas son unas 511 mil barriles. Fijate cuánto cambia el resultado con la declinación: es la variable que más pesa.",
+       "scene": {
+        "t": "tbl",
+        "k": "Sensibilidad del pozo cerrado",
+        "h": "Reservas según caudal y declinación",
+        "cols": [
+         "Caudal inicial (bbl/d)",
+         "D = 0,15 por año",
+         "D = 0,20 por año",
+         "D = 0,30 por año"
+        ],
+        "rows": [
+         [
+          "250",
+          "560 Mbbl",
+          "420 Mbbl",
+          "280 Mbbl"
+         ],
+         [
+          "300",
+          "681 Mbbl",
+          "511 Mbbl",
+          "341 Mbbl"
+         ],
+         [
+          "350",
+          "803 Mbbl",
+          "602 Mbbl",
+          "402 Mbbl"
+         ]
+        ],
+        "n": "Datos de ejemplo. Pasar de 0,20 a 0,30 por año quita un tercio de las reservas."
+       },
+       "notes": [
+        {
+         "t": "declinación",
+         "k": "declinación nominal",
+         "n": "Declinación nominal: caída del caudal por unidad de tiempo, expresada por año."
+        }
+       ]
+      },
+      {
+       "say": "Si el cierre depende de un contrato o de un ducto sin compromiso firme, el volumen no es reserva: es un recurso contingente en espera. Con contrato firmado y conexión aprobada, vuelve a ser reserva probada desarrollada no productiva."
+      },
+      {
+       "say": "Y cuando el pozo vuelve a producir, se compara con lo previsto. Si da 250 barriles por día en lugar de 300, las reservas bajan de 511 mil a unos 420 mil barriles. Eso es una revisión por comportamiento, no producción."
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "Un pozo cerrado necesita una reparación que cuesta una décima parte de un pozo nuevo. El volumen asociado es:",
+        "o": [
+         "Reserva no desarrollada, porque el pozo está cerrado",
+         "Recurso contingente sin aclarar",
+         "Reserva desarrollada no productiva, si hay evidencia de producibilidad",
+         "Recurso prospectivo"
+        ],
+        "a": 2,
+        "e": "Con gasto menor y evidencia de que el intervalo produce, el volumen es reserva desarrollada no productiva."
+       }
+      }
+     ]
+    },
+    {
+     "id": "x10",
+     "title": "Desarrollo pendiente y rendimiento pendiente (pending performance)",
+     "comp": "Desarrollo pendiente y rendimiento",
+     "cues": [
+      {
+       "say": "Desarrollo pendiente es la subclase contingente más madura. Hay actividad en curso para justificar el desarrollo y una expectativa razonable de comercialidad en un plazo razonable. Veamos dónde se ubica y qué mueve a un volumen entre subclases.",
+       "scene": {
+        "t": "tbl",
+        "k": "Subclases contingentes",
+        "h": "Qué las distingue",
+        "cols": [
+         "Subclase",
+         "Situación",
+         "Qué la mueve"
+        ],
+        "rows": [
+         [
+          "Desarrollo pendiente",
+          "Evaluación activa y chance razonable",
+          "Appraisal, ingeniería inicial y aprobaciones"
+         ],
+         [
+          "Desarrollo en espera",
+          "Justificado, pero demorado",
+          "Mercado, ducto o contrato"
+         ],
+         [
+          "Desarrollo sin aclarar",
+          "Evaluación incompleta",
+          "Más datos del reservorio"
+         ],
+         [
+          "Desarrollo no viable",
+          "Sin planes de desarrollo",
+          "Cambio de precio o de tecnología"
+         ]
+        ]
+       },
+       "notes": [
+        {
+         "t": "Desarrollo pendiente",
+         "k": "desarrollo pendiente",
+         "n": "Desarrollo pendiente (development pending): recurso contingente con actividad en curso para justificar su desarrollo comercial."
+        }
+       ]
+      },
+      {
+       "say": "En este curso llamamos rendimiento pendiente, o pending performance, a un volumen cuyo comportamiento de producción todavía no acumuló historia suficiente para sostener reservas. No es una categoría de PRMS: es una situación que se clasifica en alguna subclase, casi siempre desarrollo pendiente.",
+       "notes": [
+        {
+         "t": "rendimiento pendiente",
+         "k": "rendimiento pendiente",
+         "n": "Rendimiento pendiente (pending performance): término de este curso para volúmenes sin historia de producción suficiente; no es una categoría de PRMS."
+        }
+       ]
+      },
+      {
+       "say": "Un ensayo corto dice que el pozo produce, pero no cuánto va a recuperar.",
+       "hl": 0,
+       "scene": {
+        "t": "bul",
+        "k": "Rendimiento pendiente",
+        "h": "De la prueba a la historia",
+        "items": [
+         "Ensayo corto: indica producibilidad, no recuperación",
+         "Presión estable: sugiere conectividad",
+         "Tres a doce meses: permiten ajustar una declinación",
+         "Más historia: el rango se angosta"
+        ]
+       }
+      },
+      {
+       "say": "Una presión estable sugiere conectividad, pero no la demuestra.",
+       "hl": 1
+      },
+      {
+       "say": "Entre tres y doce meses de producción alcanzan para ajustar una declinación.",
+       "hl": 2
+      },
+      {
+       "say": "Con más historia el rango se angosta y parte del volumen puede evaluarse como reserva.",
+       "hl": 3
+      },
+      {
+       "say": "Un ejemplo. Un pozo de descubrimiento fluyó noventa días a mil doscientos barriles por día. El rango por pozo iba de medio millón a casi tres millones de barriles. Tras un año cayó a 780 barriles por día: la declinación observada es de 43 por ciento anual y, con un límite de 60 barriles por día, quedan unos 610 mil barriles.",
+       "scene": {
+        "t": "tbl",
+        "k": "Del ensayo a la historia",
+        "h": "El rango se angosta",
+        "cols": [
+         "Etapa",
+         "Dato",
+         "Volumen por pozo"
+        ],
+        "rows": [
+         [
+          "Ensayo de 90 días",
+          "1200 bbl/d, presión estable",
+          "1C 0,5 · 2C 1,2 · 3C 2,8 MMbbl"
+         ],
+         [
+          "12 meses de producción",
+          "780 bbl/d; D = 0,43 por año",
+          "610 Mbbl remanentes hasta 60 bbl/d"
+         ]
+        ],
+        "n": "Datos de ejemplo. Con esa historia, una parte puede evaluarse como reserva; la fracción sin respaldo sigue como contingente."
+       }
+      },
+      {
+       "say": "El reloj también cuenta. PRMS toma unos cinco años como referencia para empezar el desarrollo. Si la decisión llega a los dos años y medio y la construcción lleva dos más, la producción empieza a los cuatro años y medio. Si la decisión llega a los tres años y medio y la obra lleva tres, son seis años y medio: hace falta justificarlo, o el volumen sigue como contingente."
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "¿Qué pasa con un volumen con rendimiento pendiente cuando se acumula historia de producción?",
+        "o": [
+         "Se reclasifica automáticamente como reserva probada",
+         "El rango se angosta y parte del volumen puede evaluarse como reserva",
+         "Pasa a recurso prospectivo",
+         "Deja de necesitar aprobaciones"
+        ],
+        "a": 1,
+        "e": "Más historia reduce la incertidumbre; la parte con respaldo de datos puede evaluarse como reserva y el resto sigue como contingente."
+       }
+      }
+     ]
+    },
+    {
+     "id": "x11",
+     "title": "Sensibilidades: qué variable mueve el resultado",
+     "comp": "Sensibilidades y decisión",
+     "cues": [
+      {
+       "say": "Una cifra de reservas sin su sensibilidad es una cifra a medias. La sensibilidad muestra cuánto cambia el resultado cuando cambia una variable, y sirve para saber qué dato hay que respaldar mejor.",
+       "hl": 0,
+       "scene": {
+        "t": "bul",
+        "k": "Sensibilidades",
+        "h": "Qué variable mueve el resultado",
+        "items": [
+         "Precio y costos: el límite económico",
+         "Exponente b y declinación terminal: la cola",
+         "Factor de recuperación y contactos: el volumen",
+         "Inversión por pozo: la economía de cada ubicación"
+        ]
+       },
+       "notes": [
+        {
+         "t": "sensibilidad",
+         "k": "sensibilidad",
+         "n": "Sensibilidad: variación del resultado al cambiar una variable de entrada, manteniendo las demás."
+        }
+       ]
+      },
+      {
+       "say": "El precio y los costos mueven el límite económico, y con él las reservas.",
+       "hl": 1
+      },
+      {
+       "say": "El exponente b y la declinación terminal mueven la cola de la producción.",
+       "hl": 2
+      },
+      {
+       "say": "El factor de recuperación y los contactos mueven el volumen.",
+       "hl": 3
+      },
+      {
+       "say": "La inversión por pozo mueve la economía de cada ubicación no desarrollada.",
+       "hl": 4
+      },
+      {
+       "say": "Tomemos una ubicación no desarrollada de 300 mil barriles, con quince dólares y medio de margen presente por barril. Con una inversión de cuatro millones doscientos mil el valor es positivo. Si el costo sube quince por ciento, el valor pasa a negativo y la ubicación deja de ser probada.",
+       "scene": {
+        "t": "tbl",
+        "k": "Ubicación no desarrollada",
+        "h": "VPN por pozo, en millones de dólares",
+        "cols": [
+         "EUR (Mbbl)",
+         "Inversión 3,60",
+         "Inversión 4,20",
+         "Inversión 4,83"
+        ],
+        "rows": [
+         [
+          "250",
+          "+0,27",
+          "−0,33",
+          "−0,96"
+         ],
+         [
+          "300",
+          "+1,05",
+          "+0,45",
+          "−0,18"
+         ],
+         [
+          "350",
+          "+1,82",
+          "+1,22",
+          "+0,59"
+         ]
+        ],
+        "n": "Datos de ejemplo. El volumen y el costo se leen juntos."
+       }
+      },
+      {
+       "say": "El exponente b es la variable más delicada. Con el mismo caudal inicial, una declinación exponencial da 350 mil barriles. Con b de cinco décimos son 584 mil y con b de ocho décimos, 866 mil, pero con más de treinta años de vida. Sin declinación terminal ni tope de vida, ese resultado no se puede defender.",
+       "scene": {
+        "t": "tbl",
+        "k": "Exponente b",
+        "h": "Acumulada hasta 20 bbl/d (qi = 500 bbl/d; D = 0,50 por año)",
+        "cols": [
+         "Modelo",
+         "Acumulada (Mbbl)",
+         "Años hasta el límite"
+        ],
+        "rows": [
+         [
+          "Exponencial (b = 0)",
+          "350",
+          "6,4"
+         ],
+         [
+          "Hiperbólica b = 0,3",
+          "467",
+          "10,8"
+         ],
+         [
+          "Hiperbólica b = 0,5",
+          "584",
+          "16,0"
+         ],
+         [
+          "Hiperbólica b = 0,8",
+          "866",
+          "30,3"
+         ]
+        ],
+        "n": "Datos de ejemplo; cálculo con la ecuación de Arps."
+       }
+      },
+      {
+       "say": "Las sensibilidades también sirven para decidir. En un proyecto con equilibrio de 11 millones 600 mil barriles, con 25 dólares de margen la probabilidad de superarlo es de 66 por ciento. Con 20 dólares baja a 47 por ciento y con 30 sube a 80 por ciento.",
+       "scene": {
+        "t": "tbl",
+        "k": "Probabilidad de superar el equilibrio",
+        "h": "Según el margen por barril",
+        "cols": [
+         "Margen (USD/bbl)",
+         "Equilibrio (MMbbl)",
+         "Probabilidad"
+        ],
+        "rows": [
+         [
+          "20",
+          "14,5",
+          "47 %"
+         ],
+         [
+          "25",
+          "11,6",
+          "66 %"
+         ],
+         [
+          "30",
+          "9,7",
+          "80 %"
+         ]
+        ],
+        "n": "Datos de ejemplo: lognormal con P50 de 14 MMbbl; inversión de 180 MMUSD."
+       }
+      },
+      {
+       "say": "Regla práctica: informe el caso base y el rango, y diga qué variable lo domina. Las sensibilidades no cambian la categoría por sí solas, pero muestran cuándo hay que revisarla."
+      },
+      {
+       "say": "Pregunta rápida.",
+       "q": {
+        "q": "¿Para qué sirve una sensibilidad?",
+        "o": [
+         "Para reemplazar la categoría de reservas por un valor esperado",
+         "Para mostrar cuánto cambia el resultado al variar una variable y saber qué dato respaldar",
+         "Para sumar probables y posibles a las probadas",
+         "Para eliminar la incertidumbre de la estimación"
+        ],
+        "a": 1,
+        "e": "Muestra el efecto de cada variable sobre el volumen o el valor; no cambia la categoría ni elimina la incertidumbre."
+       }
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "¿Cuándo el volumen de un pozo cerrado es reserva desarrollada no productiva?",
+     "o": [
+      "Cuando el pozo produjo alguna vez",
+      "Cuando reactivarlo cuesta poco frente a un pozo nuevo, y hay evidencia de producibilidad",
+      "Cuando hay un contrato en negociación",
+      "Cuando se perfora un pozo nuevo en el área"
+     ],
+     "a": 1,
+     "e": "La condición es el gasto menor frente a un pozo nuevo y la evidencia de producibilidad y comercialidad."
+    },
+    {
+     "q": "¿Qué significa rendimiento pendiente (pending performance) en este curso?",
+     "o": [
+      "Un volumen sin historia de producción suficiente para sostener reservas",
+      "Una categoría oficial de PRMS",
+      "Una reserva probada con producción en baja",
+      "Un recurso prospectivo con riesgo geológico alto"
+     ],
+     "a": 0,
+     "e": "Es un término del curso, no de PRMS; se clasifica en una subclase, casi siempre desarrollo pendiente."
+    },
+    {
+     "q": "Un gas descubierto sin contrato ni ducto comprometidos es:",
+     "o": [
+      "Reserva probada no desarrollada",
+      "Reserva probable",
+      "Recurso contingente en desarrollo pendiente",
+      "Recurso contingente en espera"
+     ],
+     "a": 3,
+     "e": "Sin compromiso firme de mercado o transporte, el volumen es contingente en espera hasta resolver esa contingencia."
+    }
+   ]
   }
  ],
  "exam": [
@@ -832,15 +1318,15 @@
    "e": "Desarrollo pendiente: hay actividad en curso para justificar el desarrollo comercial en un plazo previsible."
   },
   {
-   "q": "Una acumulación sin descubrir, con un objetivo listo para perforar, es:",
+   "q": "Un pozo cerrado necesita una reparación que cuesta la décima parte de un pozo nuevo y hay evidencia de producibilidad. El volumen es:",
    "o": [
-    "Un play",
-    "Un lead",
-    "Un prospecto",
-    "Una reserva posible"
+    "Reserva no desarrollada",
+    "Recurso contingente sin aclarar",
+    "Reserva desarrollada no productiva",
+    "Recurso prospectivo"
    ],
    "a": 2,
-   "e": "El prospecto está lo bastante definido como para ser un objetivo de perforación."
+   "e": "Con gasto menor y evidencia de producibilidad, es reserva desarrollada no productiva."
   },
   {
    "q": "¿Cuál es la relación correcta para un recurso prospectivo?",
@@ -854,26 +1340,26 @@
    "e": "La chance de comercialidad es el producto de la chance de descubrimiento y la chance de desarrollo."
   },
   {
-   "q": "Las estimaciones 1U, 2U y 3U de un prospecto son:",
+   "q": "Un gas descubierto sin contrato ni ducto comprometidos es:",
    "o": [
-    "Sin riesgo geológico aplicado",
-    "Con la probabilidad de éxito aplicada",
-    "Estimaciones de reservas",
-    "Estimaciones de producción diaria"
+    "Reserva desarrollada no productiva",
+    "Recurso contingente en espera",
+    "Recurso contingente no viable",
+    "Reserva probable"
    ],
-   "a": 0,
-   "e": "La U indica que son sin riesgo: el volumen si hay descubrimiento y desarrollo."
+   "a": 1,
+   "e": "Sin compromiso firme de mercado o transporte, es contingente en espera."
   },
   {
-   "q": "¿Cuál NO es una contingencia típica de un recurso contingente?",
+   "q": "En una declinación hiperbólica, elegir un b alto sin declinación terminal ni tope de vida lleva a:",
    "o": [
-    "Mercado sin definir",
-    "Aprobaciones pendientes",
-    "Producción ya en marcha",
-    "Tecnología en desarrollo"
+    "Subestimar las reservas",
+    "Resultados idénticos a la exponencial",
+    "Reducir el rango de incertidumbre",
+    "Sobrestimar la recuperación final"
    ],
-   "a": 2,
-   "e": "Con producción en marcha, el proyecto ya es reserva en producción, no contingente."
+   "a": 3,
+   "e": "Un b alto alarga la cola de producción; sin declinación terminal ni tope de vida, la recuperación se sobrestima."
   },
   {
    "q": "Según la regla de 2008, la SEC con las reservas probables y posibles:",
@@ -894,14 +1380,19 @@
    "los recursos contingentes, sus subclases y su estado económico",
    "el paso de contingente a reserva y sus criterios",
    "las chances de descubrimiento, de desarrollo y de comercialidad de un prospecto",
-   "por qué se informan por separado reservas, contingentes y prospectivos"
+   "por qué se informan por separado reservas, contingentes y prospectivos",
+   "las reservas desarrolladas no productivas y el criterio de gasto menor",
+   "el desarrollo pendiente y el rendimiento pendiente (pending performance)",
+   "qué variable domina una estimación, con sensibilidades"
   ],
   "phrase": "Del descubrimiento a la reserva, cada volumen con su chance.",
   "recap": [
    "La clase la decide la chance de comercialidad del proyecto; la categoría, la incertidumbre del volumen.",
    "Un contingente pasa a reserva cuando se resuelven todas sus contingencias y el proyecto es comercial, no solo económico.",
    "En un prospecto, la chance de comercialidad es el producto de la chance de descubrimiento y la de desarrollo.",
-   "Reservas, contingentes y prospectivos se informan por separado, cada uno con su rango."
+   "Reservas, contingentes y prospectivos se informan por separado, cada uno con su rango.",
+   "Una reserva desarrollada no productiva exige gasto menor frente a un pozo nuevo y evidencia de producibilidad.",
+   "Más historia de producción angosta el rango; la sensibilidad dice qué dato respaldar."
   ]
  },
  "downloads": [
@@ -949,6 +1440,16 @@
    "tag": "Libro",
    "cite": "Rose, P. R. (2001). Risk Analysis and Management of Petroleum Exploration Ventures. AAPG Methods in Exploration Series 12.",
    "why": "riesgo exploratorio y chance de éxito"
+  },
+  {
+   "tag": "Clásico",
+   "cite": "Arps, J. J. (1945). Analysis of Decline Curves. Transactions of the AIME, 160.",
+   "why": "declinación exponencial e hiperbólica y su exponente b"
+  },
+  {
+   "tag": "Guía",
+   "cite": "SPEE (2010). Monograph 3: Guidelines for the Practical Evaluation of Undeveloped Reserves in Resource Plays.",
+   "why": "criterios para volúmenes no desarrollados y su incertidumbre"
   }
  ]
 }
