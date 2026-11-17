@@ -1399,8 +1399,8 @@
   {
    "file": "xlsx/H3L_Reservas_Recursos_Contingentes_y_Prospectivos.xlsx",
    "title": "Contingentes y prospectivos: viabilidad económica, Pc y volumen esperado (Excel)",
-   "desc": "Cuatro hojas con datos de ejemplo: clasificación por subclase, proyectos contingentes con precio editable, prospectos con Pg, Pd y Pc, y lista de verificación del umbral de reserva.",
-   "task": "En la hoja Contingentes bajá el precio de 65 a 45 USD por barril y observá qué proyectos dejan de ser económicamente viables. Después, en Prospectos, subí Pd del prospecto B de 40 a 70 por ciento y mirá cuánto cambia el volumen esperado."
+   "desc": "Cinco hojas con datos de ejemplo: clasificación por subclase, proyectos contingentes con precio editable, prospectos con Pg, Pd y Pc, lista de verificación del umbral de reserva y sensibilidades (declinación, inversión y exponente b).",
+   "task": "En la hoja Contingentes bajá el precio de 65 a 45 USD por barril y observá qué proyectos dejan de ser económicamente viables. Después, en Prospectos, subí Pd del prospecto B de 40 a 70 por ciento y mirá cuánto cambia el volumen esperado. Por último, en Sensibilidades cambiá el margen de 15,5 a 12 USD por barril y mirá qué ubicaciones pasan a valor negativo."
   }
  ],
  "cases": [
