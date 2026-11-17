@@ -5,11 +5,30 @@
    Todo lo demás lo sirve Cloudflare como archivos estáticos (run_worker_first solo para /api/*). */
 import { buildReport, dayOf, shiftDay } from './report.js';
 
-const TYPES = new Set(['pv', 'eng', 'sec', 'vclick', 'vplay', 'vsec', 'vend', 'click']);
+const TYPES = new Set(['pv', 'eng', 'sec', 'vclick', 'vplay', 'vsec', 'vend', 'click', 'hum', 'scr', 'ttc']);
 const SERVICES = new Set(['reservas', 'auditoria', 'emisiones', 'datos', 'transicion', 'plataformas', 'geociencias', 'capacitacion']);
 const LANGS = new Set(['es', 'en', 'fr', 'pt']);
 const DEVS = new Set(['movil', 'tablet', 'escritorio']);
 const BOT_RE = /bot|crawl|spider|slurp|headless|lighthouse|pagespeed|preview|monitor|uptime|curl|wget|python|node-fetch|axios|java\/|go-http|facebookexternalhit|whatsapp|telegram/i;
+/* Clasificación humano / bot. Cada señal suma puntos; con BOT_SCORE o más la visita se guarda aparte (host "bot|...") y no entra en las cifras públicas.
+   Fuertes (3): UA de bot conocido, bot verificado por Cloudflare, navegador automatizado (wd). Débiles: idioma ausente (1), Chrome sin window.chrome (1),
+   pantalla cero (1), render por software (2), sin Accept-Language en la petición (1), red de centro de datos (1).
+   Un navegador real con una sola señal débil (p. ej. una VPN) no llega al umbral. Los bots que no ejecutan JavaScript nunca llegan a /api/collect. */
+const BOT_SCORE = 3;
+const SIG_POINTS = { wd: 3, nl: 1, nc: 1, sz: 1, gl: 2 };
+const DC_ASNS = new Set([16509, 14618, 15169, 396982, 8075, 14061, 24940, 16276, 63949, 20473, 45102, 37963, 31898, 12876, 51167]); /* AWS, Google, Azure, DigitalOcean, Hetzner, OVH, Linode, Vultr, Alibaba, Oracle, Contabo... */
+const MAX_BOT_PER_VISITOR_DAY = 20;
+const BOT_PREFIX = 'bot|';
+function classify(request, ua, sigRaw) {
+  const reasons = []; let score = 0;
+  const add = (k, pts) => { reasons.push(k); score += pts; };
+  if (!ua || BOT_RE.test(ua)) add('ua', 3);
+  if (request.cf && request.cf.verifiedBotCategory) add('ver', 3);
+  for (const k of String(sigRaw || '').split('-')) if (SIG_POINTS[k]) add(k, SIG_POINTS[k]);
+  if (!request.headers.get('Accept-Language')) add('nal', 1);
+  if (request.cf && DC_ASNS.has(Number(request.cf.asn))) add('asn', 1);
+  return { bot: score >= BOT_SCORE, score, reasons };
+}
 const MAX_BODY = 8000;
 const MAX_EVENTS = 12;
 const MAX_PER_VISITOR_DAY = 400;
@@ -22,6 +41,7 @@ const SCHEMA = [
   `CREATE TABLE IF NOT EXISTS meta (k TEXT PRIMARY KEY, v TEXT)`,
   `CREATE TABLE IF NOT EXISTS reports (day TEXT PRIMARY KEY, sent_at INTEGER, error TEXT)`,
   `CREATE TABLE IF NOT EXISTS metrics (day TEXT NOT NULL, metric TEXT NOT NULL, dim1 TEXT NOT NULL DEFAULT '', dim2 TEXT NOT NULL DEFAULT '', value REAL NOT NULL, PRIMARY KEY (day, metric, dim1, dim2))`,
+  `CREATE TABLE IF NOT EXISTS tutor_fail (k TEXT NOT NULL, hr INTEGER NOT NULL, n INTEGER NOT NULL DEFAULT 0, PRIMARY KEY (k, hr))`,
 ];
 
 let schemaReady = null;
@@ -62,6 +82,7 @@ function sanitize(ev, ownHost) {
     n: Math.min(86400, Math.max(0, Number.isFinite(+ev.n) ? Math.round(+ev.n) : 0)),
     ref: clean(ev.ref, /^[a-z0-9.-]{3,80}$/i, 80).toLowerCase(),
     team: ev.i === 1,
+    sig: clean(ev.b, /^[a-z]{2}(-[a-z]{2}){0,4}$/, 20),
   };
   if (!out.sid || !out.pvid) return null;
   if (out.ref === ownHost || out.ref === ownHost.replace(/^www\./, '')) out.ref = '';
@@ -85,7 +106,6 @@ async function collect(request, env, ctx) {
   const sameOrigin = origin ? safeHost(origin) === url.host : request.headers.get('Sec-Fetch-Site') === 'same-origin';
   if (!sameOrigin) return new Response(null, { status: 204 });
   const ua = request.headers.get('User-Agent') || '';
-  if (!ua || BOT_RE.test(ua) || (request.cf && request.cf.verifiedBotCategory)) return new Response(null, { status: 204 });
 
   const text = await request.text();
   if (text.length > MAX_BODY) return new Response(null, { status: 204 });
@@ -95,13 +115,14 @@ async function collect(request, env, ctx) {
   const events = list.map((e) => sanitize(e, url.host)).filter(Boolean);
   if (!events.length) return new Response(null, { status: 204 });
 
-  ctx.waitUntil(store(request, env, url.host, events).catch((e) => console.error('collect', e && e.message)));
+  const verdict = classify(request, ua, events[0].sig);
+  ctx.waitUntil(store(request, env, url.host, events, verdict).catch((e) => console.error('collect', e && e.message)));
   return new Response(null, { status: 204 });
 }
 
 function safeHost(u) { try { return new URL(u).host; } catch { return ''; } }
 
-async function store(request, env, host, events) {
+async function store(request, env, host, events, verdict) {
   await ensureSchema(env);
   const now = Math.floor(Date.now() / 1000);
   const day = dayOf(now, env);
@@ -111,7 +132,16 @@ async function store(request, env, host, events) {
   const country = ((request.cf && request.cf.country) || 'XX').toUpperCase().slice(0, 2);
 
   const used = await env.DB.prepare(`SELECT COUNT(*) c FROM events WHERE day=? AND vid=?`).bind(day, vid).first();
-  if (used && used.c >= MAX_PER_VISITOR_DAY) return;
+  if (used && used.c >= (verdict.bot ? MAX_BOT_PER_VISITOR_DAY : MAX_PER_VISITOR_DAY)) return;
+  if (verdict.bot) {
+    /* tráfico automatizado: solo se guarda la vista de página (con el motivo en label), con tope bajo por visitante y día */
+    const label = verdict.reasons.join('-').slice(0, 30);
+    const pvs = events.filter((e) => e.type === 'pv');
+    if (!pvs.length) return;
+    await env.DB.batch(pvs.map((e) => env.DB.prepare(`INSERT OR IGNORE INTO events (ts, day, host, type, path, sid, pvid, vid, country, lang, dev, label, svc, n, ref, ukey)
+      VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`).bind(now, day, `${BOT_PREFIX}${host}`, 'pv', e.path, e.sid, e.pvid, vid, country, e.lang, e.dev, label, '', 0, '', keyOf(e))));
+    return;
+  }
 
   const upsert = `INSERT INTO events (ts, day, host, type, path, sid, pvid, vid, country, lang, dev, label, svc, n, ref, ukey)
     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
@@ -189,6 +219,8 @@ async function runDaily(env) {
       await env.DB.prepare(`INSERT INTO reports (day, sent_at, error) VALUES (?, NULL, ?) ON CONFLICT(day) DO UPDATE SET error=excluded.error`).bind(day, String((e && (e.code || e.message)) || e).slice(0, 200)).run();
     }
   }
+  /* limpieza: los mensajes del formulario de contacto se conservan 1 año */
+  try { await env.DB.prepare(`DELETE FROM contactos WHERE day < ?`).bind(shiftDay(today, -CONTACT_RETENTION_DAYS)).run(); } catch { /* la tabla se crea con el primer mensaje */ }
   /* limpieza: se conservan los eventos de los últimos 90 días */
   await env.DB.prepare(`DELETE FROM events WHERE day < ?`).bind(shiftDay(today, -RETENTION_DAYS)).run();
 }
@@ -239,11 +271,241 @@ async function exportMetrics(request, env) {
   return new Response(csv, { headers: { 'content-type': 'text/csv; charset=utf-8', 'cache-control': 'no-store' } });
 }
 
+/* ---- Acceso de tutores (editor de cursos) ----
+   Secretos: TUTOR_CODES = JSON {"idcurso":"sha256 hex de la clave"} y TUTOR_SECRET = clave para firmar las sesiones (ver tools/generar_claves_tutor.py).
+   POST /api/tutor-login  {code}   -> {token, course, exp}  (la clave identifica el curso; sin datos si falla)
+   POST /api/tutor-verify {token}  -> {valid, course, iat}   (lo usa el panel de administración para comprobar el origen de una propuesta) */
+const TUTOR_TTL = 8 * 3600;
+const TUTOR_MAX_FAIL = 8;
+const b64u = (buf) => btoa(String.fromCharCode(...new Uint8Array(buf))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+async function hmac(env, text) {
+  const key = await crypto.subtle.importKey('raw', new TextEncoder().encode(env.TUTOR_SECRET), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+  return b64u(await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(text)));
+}
+const nostore = { 'cache-control': 'no-store' };
+async function readJson(request) {
+  try { const t = await request.text(); return t.length < 4000 ? JSON.parse(t) : null; } catch { return null; }
+}
+async function tutorLogin(request, env) {
+  if (!env.TUTOR_CODES || !env.TUTOR_SECRET) return new Response('Not found', { status: 404 });
+  const body = await readJson(request);
+  const code = body && typeof body.code === 'string' ? body.code.trim() : '';
+  const fail = async () => { await new Promise((r) => setTimeout(r, 700)); return Response.json({ ok: false }, { status: 401, headers: nostore }); };
+  if (!code || code.length > 100) return fail();
+  let k = '', hr = 0;
+  if (env.DB) {
+    await ensureSchema(env);
+    hr = Math.floor(Date.now() / 3600000);
+    k = (await sha(`${request.headers.get('cf-connecting-ip') || 'x'}|${await getSalt(env)}`)).slice(0, 24);
+    const row = await env.DB.prepare(`SELECT n FROM tutor_fail WHERE k=? AND hr=?`).bind(k, hr).first();
+    if (row && row.n >= TUTOR_MAX_FAIL) return Response.json({ ok: false }, { status: 429, headers: nostore });
+  }
+  let map = {};
+  try { map = JSON.parse(env.TUTOR_CODES); } catch { return new Response('Not found', { status: 404 }); }
+  const h = await sha(code);
+  let course = '';
+  for (const [id, want] of Object.entries(map)) if (timingSafeEqual(h, String(want).toLowerCase())) course = id;
+  if (!course) {
+    if (env.DB) {
+      await env.DB.prepare(`INSERT INTO tutor_fail (k, hr, n) VALUES (?, ?, 1) ON CONFLICT(k, hr) DO UPDATE SET n=n+1`).bind(k, hr).run();
+      await env.DB.prepare(`DELETE FROM tutor_fail WHERE hr < ?`).bind(hr - 48).run();
+    }
+    return fail();
+  }
+  const iat = Math.floor(Date.now() / 1000), exp = iat + TUTOR_TTL;
+  const payload = b64u(new TextEncoder().encode(JSON.stringify({ c: course, iat, exp })));
+  return Response.json({ ok: true, course, exp, token: `${payload}.${await hmac(env, payload)}` }, { headers: nostore });
+}
+async function tutorVerify(request, env) {
+  if (!env.TUTOR_SECRET) return new Response('Not found', { status: 404 });
+  const body = await readJson(request);
+  const tok = body && typeof body.token === 'string' ? body.token : '';
+  const [payload, sig] = tok.split('.');
+  if (!payload || !sig || !timingSafeEqual(sig, await hmac(env, payload))) return Response.json({ valid: false }, { headers: nostore });
+  try {
+    const p = JSON.parse(atob(payload.replace(/-/g, '+').replace(/_/g, '/')));
+    return Response.json({ valid: true, course: p.c, iat: p.iat }, { headers: nostore });
+  } catch { return Response.json({ valid: false }, { headers: nostore }); }
+}
+
+
+/* ---- Valoración de cursos (estrellas + sugerencia) ----
+   POST /api/feedback {course,title,rating,text,email,lang,hp} -> {ok, mailed}  (course 'juego' = propuesta de situaciones para el juego: rating 0, title = nombre opcional, asunto "Propuesta para el Juego de Campo")
+   Guarda la valoración en D1 (tabla feedback) y manda un mail a FEEDBACK_TO con el asunto "Sugerencia de Curso: <curso>" (Resend, mismo remitente del reporte).
+   Límite: 6 envíos por hora por visitante (hash con sal, sin guardar la IP). El campo hp es una trampa para bots. */
+const FEEDBACK_MAX_HR = 6;
+let fbReady = false;
+async function ensureFeedback(env) {
+  if (fbReady || !env.DB) return;
+  await env.DB.batch([
+    env.DB.prepare(`CREATE TABLE IF NOT EXISTS feedback (id INTEGER PRIMARY KEY AUTOINCREMENT, ts TEXT NOT NULL, course TEXT NOT NULL, rating INTEGER NOT NULL, text TEXT, email TEXT, lang TEXT)`),
+    env.DB.prepare(`CREATE TABLE IF NOT EXISTS feedback_rate (k TEXT NOT NULL, hr INTEGER NOT NULL, n INTEGER NOT NULL, PRIMARY KEY (k, hr))`),
+  ]);
+  fbReady = true;
+}
+const oneLine = (v, n) => String(v ?? '').replace(/[\r\n\t]+/g, ' ').replace(/[<>]/g, '').trim().slice(0, n);
+async function feedback(request, env) {
+  const url = new URL(request.url);
+  const origin = request.headers.get('Origin');
+  const sameOrigin = origin ? safeHost(origin) === url.host : request.headers.get('Sec-Fetch-Site') === 'same-origin';
+  if (!sameOrigin) return Response.json({ ok: false }, { status: 403, headers: nostore });
+  const body = await readJson(request);
+  if (!body) return Response.json({ ok: false }, { status: 400, headers: nostore });
+  if (body.hp) return Response.json({ ok: true, mailed: false }, { headers: nostore });          // bot: se ignora en silencio
+  const course = oneLine(body.course, 8).toLowerCase();
+  const rating = Number(body.rating);
+  const propuesta = course === 'juego';          // propuesta de situaciones para el juego de campo: sin estrellas, el texto es obligatorio
+  if (!/^[a-z0-9]{2,8}$/.test(course) || !Number.isInteger(rating) || (propuesta ? rating !== 0 : (rating < 1 || rating > 5))) return Response.json({ ok: false }, { status: 400, headers: nostore });
+  const title = oneLine(body.title, 140) || course;
+  const text = String(body.text ?? '').replace(/[<>]/g, '').trim().slice(0, 1500);
+  if (propuesta && text.length < 10) return Response.json({ ok: false }, { status: 400, headers: nostore });
+  const email = /^[^\s@]{1,64}@[^\s@]{1,120}\.[^\s@]{2,}$/.test(String(body.email ?? '').trim()) ? String(body.email).trim().slice(0, 120) : '';
+  const lang = ['es', 'en', 'fr', 'pt'].includes(body.lang) ? body.lang : 'es';
+  if (env.DB) {
+    await ensureFeedback(env);
+    const hr = Math.floor(Date.now() / 3600000);
+    const k = (await sha(`${request.headers.get('cf-connecting-ip') || 'x'}|fb|${await getSalt(env)}`)).slice(0, 24);
+    const row = await env.DB.prepare(`SELECT n FROM feedback_rate WHERE k=? AND hr=?`).bind(k, hr).first();
+    if (row && row.n >= FEEDBACK_MAX_HR) return Response.json({ ok: false }, { status: 429, headers: nostore });
+    await env.DB.prepare(`INSERT INTO feedback_rate (k, hr, n) VALUES (?, ?, 1) ON CONFLICT(k, hr) DO UPDATE SET n=n+1`).bind(k, hr).run();
+    await env.DB.prepare(`DELETE FROM feedback_rate WHERE hr < ?`).bind(hr - 48).run();
+    await env.DB.prepare(`INSERT INTO feedback (ts, course, rating, text, email, lang) VALUES (?, ?, ?, ?, ?, ?)`).bind(new Date().toISOString(), course, rating, text, email, lang).run();
+  }
+  let mailed = false;
+  if (env.RESEND_API_KEY && env.FEEDBACK_TO && env.REPORT_FROM) {
+    const stars = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+    const esc = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+    const lines = propuesta
+      ? [`Propuesta para el Juego de Campo`, `Nombre: ${title === course ? '(no indicado)' : title}`, `Idioma: ${lang}`, email ? `Contacto: ${email}` : 'Contacto: (no indicado)', '', text]
+      : [`Curso: ${title} (${course})`, `Valoración: ${stars} (${rating} de 5)`, `Idioma: ${lang}`, email ? `Contacto: ${email}` : 'Contacto: (no indicado)', '', text || '(sin sugerencia escrita)'];
+    const payload = { from: `H3L Global Energy · ${propuesta ? 'Juego' : 'Cursos'} <${env.REPORT_FROM}>`, to: [env.FEEDBACK_TO], subject: propuesta ? `Propuesta para el Juego de Campo${title === course ? '' : ': ' + title}` : `Sugerencia de Curso: ${title}`, text: lines.join('\n'), html: `<p>${lines.map(esc).join('<br>')}</p>` };
+    if (email) payload.reply_to = email;
+    const res = await fetch('https://api.resend.com/emails', { method: 'POST', headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+    mailed = res.ok;
+  }
+  return Response.json({ ok: true, mailed }, { headers: nostore });
+}
+
+/* ---- Botón de arrepentimiento ----
+   POST /api/arrepentimiento {course,title,order,orderDate,progress,name,email,reason,lang,hp} -> {ok, mailed}
+   Lo muestra cursos/player.js en cursos comprados mientras el avance sea menor al 50 % (la regla del 50 % la aplica el front; acá se vuelve a controlar progress).
+   Guarda la solicitud en D1 (tabla arrepentimientos), avisa a FEEDBACK_TO y manda una constancia de recepción al email de la persona (Resend). Límite: 3 por hora por visitante. */
+let arReady = false;
+async function ensureArr(env) {
+  if (arReady || !env.DB) return;
+  await env.DB.prepare(`CREATE TABLE IF NOT EXISTS arrepentimientos (id INTEGER PRIMARY KEY AUTOINCREMENT, ts TEXT NOT NULL, course TEXT NOT NULL, ord TEXT, ord_date TEXT, progress INTEGER, name TEXT, email TEXT, reason TEXT, lang TEXT)`).run();
+  arReady = true;
+}
+async function arrepentimiento(request, env) {
+  const url = new URL(request.url);
+  const origin = request.headers.get('Origin');
+  const sameOrigin = origin ? safeHost(origin) === url.host : request.headers.get('Sec-Fetch-Site') === 'same-origin';
+  if (!sameOrigin) return Response.json({ ok: false }, { status: 403, headers: nostore });
+  const body = await readJson(request);
+  if (!body) return Response.json({ ok: false }, { status: 400, headers: nostore });
+  if (body.hp) return Response.json({ ok: true, mailed: false }, { headers: nostore });
+  const course = oneLine(body.course, 8).toLowerCase();
+  const progress = Number(body.progress);
+  const email = String(body.email ?? '').trim();
+  const name = oneLine(body.name, 70);
+  if (!/^[a-z0-9]{2,8}$/.test(course) || !Number.isFinite(progress) || progress < 0 || progress >= 50 || name.length < 3 || !/^[^\s@]{1,64}@[^\s@]{1,120}\.[^\s@]{2,}$/.test(email)) return Response.json({ ok: false }, { status: 400, headers: nostore });
+  const title = oneLine(body.title, 140) || course, ord = oneLine(body.order, 24), ordDate = oneLine(body.orderDate, 10);
+  const reason = String(body.reason ?? '').replace(/[<>]/g, '').trim().slice(0, 800);
+  const lang = ['es', 'en', 'fr', 'pt'].includes(body.lang) ? body.lang : 'es';
+  const ts = new Date().toISOString();
+  if (env.DB) {
+    await ensureFeedback(env); await ensureArr(env);
+    const hr = Math.floor(Date.now() / 3600000);
+    const k = (await sha(`${request.headers.get('cf-connecting-ip') || 'x'}|arr|${await getSalt(env)}`)).slice(0, 24);
+    const row = await env.DB.prepare(`SELECT n FROM feedback_rate WHERE k=? AND hr=?`).bind(k, hr).first();
+    if (row && row.n >= 3) return Response.json({ ok: false }, { status: 429, headers: nostore });
+    await env.DB.prepare(`INSERT INTO feedback_rate (k, hr, n) VALUES (?, ?, 1) ON CONFLICT(k, hr) DO UPDATE SET n=n+1`).bind(k, hr).run();
+    await env.DB.prepare(`INSERT INTO arrepentimientos (ts, course, ord, ord_date, progress, name, email, reason, lang) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`).bind(ts, course, ord, ordDate, Math.round(progress), name, email, reason, lang).run();
+  }
+  let mailed = false;
+  if (env.RESEND_API_KEY && env.FEEDBACK_TO && env.REPORT_FROM) {
+    const esc = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+    const send = (payload) => fetch('https://api.resend.com/emails', { method: 'POST', headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+    const lines = ['Botón de arrepentimiento', `Curso: ${title} (${course})`, `Compra: ${ord || '(sin dato)'} ${ordDate}`.trim(), `Avance del curso: ${Math.round(progress)} %`, `Nombre: ${name}`, `Email: ${email}`, `Idioma: ${lang}`, `Fecha: ${ts}`, '', reason || '(sin motivo)'];
+    const r1 = await send({ from: `H3L Global Energy · Cursos <${env.REPORT_FROM}>`, to: [env.FEEDBACK_TO], reply_to: email, subject: `Botón de arrepentimiento: ${title}`, text: lines.join('\n'), html: `<p>${lines.map(esc).join('<br>')}</p>` });
+    const ack = ['Recibimos tu solicitud de arrepentimiento.', '', `Curso: ${title}`, `Compra: ${ord || '(sin dato)'} ${ordDate}`.trim(), `Fecha de la solicitud: ${ts.slice(0, 10)}`, '', 'Te respondemos por este medio con los pasos de la baja y la devolución. Guardá este mail como constancia.', '', 'H3L Global Energy · info@h3lglobalenergy.com'];
+    const r2 = await send({ from: `H3L Global Energy · Cursos <${env.REPORT_FROM}>`, to: [email], reply_to: env.FEEDBACK_TO, subject: `Constancia: solicitud de arrepentimiento · ${title}`, text: ack.join('\n'), html: `<p>${ack.map(esc).join('<br>')}</p>` });
+    mailed = r1.ok && r2.ok;
+  }
+  return Response.json({ ok: true, mailed }, { headers: nostore });
+}
+
+
+/* ---- Formulario de contacto ----
+   POST /api/contact {nombre,apellido,email,empresa,mensaje,lang,hp} -> {ok}
+   Guarda el mensaje en D1 (tabla contactos, se conserva CONTACT_RETENTION_DAYS) y lo manda por mail a CONTACT_TO (Resend, mismo remitente del reporte)
+   con "responder a" = mail del visitante. Solo mismo origen; campo trampa hp; 3 envíos por hora por visitante (hash con sal, sin guardar la IP).
+   ok:true solo si el mail salió: si falla, el sitio abre el mailto: como respaldo. */
+const CONTACT_MAX_HR = 3;
+const CONTACT_RETENTION_DAYS = 365;
+let ctReady = false;
+async function ensureContact(env) {
+  if (ctReady || !env.DB) return;
+  await env.DB.batch([
+    env.DB.prepare(`CREATE TABLE IF NOT EXISTS contactos (id INTEGER PRIMARY KEY AUTOINCREMENT, ts TEXT NOT NULL, day TEXT NOT NULL, nombre TEXT, apellido TEXT, email TEXT, empresa TEXT, mensaje TEXT, lang TEXT)`),
+    env.DB.prepare(`CREATE TABLE IF NOT EXISTS feedback_rate (k TEXT NOT NULL, hr INTEGER NOT NULL, n INTEGER NOT NULL, PRIMARY KEY (k, hr))`),
+  ]);
+  for (const c of ['sector', 'activo', 'urgencia']) { try { await env.DB.prepare(`ALTER TABLE contactos ADD COLUMN ${c} TEXT`).run(); } catch { /* ya existe */ } }
+  ctReady = true;
+}
+const CT_OPC = {
+  sector: { w_s1: 'Upstream (exploración y producción)', w_s2: 'Midstream y downstream', w_s3: 'Transición energética', w_s4: 'Otro' },
+  activo: { w_a1: 'Yacimiento convencional', w_a2: 'No convencional', w_a3: 'Offshore', w_a4: 'Planta o instalaciones' },
+  urgencia: { w_u1: 'Sin apuro', w_u2: 'Dentro del mes', w_u3: 'Urgente (esta semana)' },
+};
+async function contact(request, env) {
+  const url = new URL(request.url);
+  const origin = request.headers.get('Origin');
+  const sameOrigin = origin ? safeHost(origin) === url.host : request.headers.get('Sec-Fetch-Site') === 'same-origin';
+  if (!sameOrigin) return Response.json({ ok: false }, { status: 403, headers: nostore });
+  const body = await readJson(request);
+  if (!body) return Response.json({ ok: false }, { status: 400, headers: nostore });
+  if (body.hp) return Response.json({ ok: true }, { headers: nostore });          // bot: se ignora en silencio
+  if (!env.RESEND_API_KEY || !env.CONTACT_TO || !env.REPORT_FROM || !env.DB) return Response.json({ ok: false }, { status: 503, headers: nostore });
+  const nombre = oneLine(body.nombre, 60), apellido = oneLine(body.apellido, 60), empresa = oneLine(body.empresa, 100);
+  const email = String(body.email ?? '').trim();
+  const mensaje = String(body.mensaje ?? '').replace(/[<>]/g, '').trim().slice(0, 3000);
+  const lang = ['es', 'en', 'fr', 'pt'].includes(body.lang) ? body.lang : 'es';
+  const opc = (k) => (Object.prototype.hasOwnProperty.call(CT_OPC[k], body[k]) ? CT_OPC[k][body[k]] : '');
+  const sector = opc('sector'), activo = opc('activo'), urgencia = opc('urgencia');
+  if (nombre.length < 2 || apellido.length < 2 || mensaje.length < 5 || !/^[^\s@]{1,64}@[^\s@]{1,120}\.[^\s@]{2,}$/.test(email) || email.length > 160) return Response.json({ ok: false }, { status: 400, headers: nostore });
+  await ensureSchema(env);
+  await ensureContact(env);
+  const hr = Math.floor(Date.now() / 3600000);
+  const k = (await sha(`${request.headers.get('cf-connecting-ip') || 'x'}|ct|${await getSalt(env)}`)).slice(0, 24);
+  const row = await env.DB.prepare(`SELECT n FROM feedback_rate WHERE k=? AND hr=?`).bind(k, hr).first();
+  if (row && row.n >= CONTACT_MAX_HR) return Response.json({ ok: false }, { status: 429, headers: nostore });
+  await env.DB.prepare(`INSERT INTO feedback_rate (k, hr, n) VALUES (?, ?, 1) ON CONFLICT(k, hr) DO UPDATE SET n=n+1`).bind(k, hr).run();
+  const ts = new Date().toISOString();
+  await env.DB.prepare(`INSERT INTO contactos (ts, day, nombre, apellido, email, empresa, sector, activo, urgencia, mensaje, lang) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`).bind(ts, dayOf(Math.floor(Date.now() / 1000), env), nombre, apellido, email, empresa, sector, activo, urgencia, mensaje, lang).run();
+  const esc = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+  const lines = ['Consulta desde el formulario del sitio', `Nombre: ${nombre} ${apellido}`, `Email: ${email}`, `Empresa / ocupación: ${empresa || '(no indicada)'}`, `Sector: ${sector || '(no indicado)'}`, `Tipo de activo: ${activo || '(no indicado)'}`, `Urgencia: ${urgencia || '(no indicada)'}`, `Idioma del sitio: ${lang}`, `Fecha: ${ts}`, '', mensaje];
+  let mailed = false;
+  try {
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST', headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ from: `H3L Global Energy · Contacto <${env.REPORT_FROM}>`, to: [env.CONTACT_TO], reply_to: email, subject: `Consulta H3L: ${nombre} ${apellido}`, text: lines.join('\n'), html: `<p>${lines.map(esc).join('<br>')}</p>` }),
+    });
+    mailed = res.ok;
+  } catch (e) { console.error('contact mail', e && e.message); }
+  return Response.json({ ok: mailed }, { status: mailed ? 200 : 502, headers: nostore });
+}
+
 export default {
   async fetch(request, env, ctx) {
     const { pathname } = new URL(request.url);
     if (pathname === '/api/collect' && request.method === 'POST') return collect(request, env, ctx);
     if (pathname === '/api/report-test' && request.method === 'POST') return reportTest(request, env);
+    if (pathname === '/api/contact' && request.method === 'POST') return contact(request, env);
+    if (pathname === '/api/feedback' && request.method === 'POST') return feedback(request, env);
+    if (pathname === '/api/arrepentimiento' && request.method === 'POST') return arrepentimiento(request, env);
+    if (pathname === '/api/tutor-login' && request.method === 'POST') return tutorLogin(request, env);
+    if (pathname === '/api/tutor-verify' && request.method === 'POST') return tutorVerify(request, env);
     if (pathname === '/api/export' && request.method === 'GET') return exportMetrics(request, env);
     if (pathname.startsWith('/api/')) return new Response('Not found', { status: 404 });
     return env.ASSETS.fetch(request);

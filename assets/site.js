@@ -3,7 +3,7 @@
 'use strict';
 var T={
 es:{
- nav_somos:'Quiénes somos',nav_servicios:'Servicios',nav_noticias:'Noticias OIL & GAS',nav_eventos:'Eventos',nav_contacto:'Contactos',
+ nav_somos:'Quiénes somos',nav_servicios:'Servicios',nav_noticias:'Noticias OIL & GAS',nav_eventos:'Eventos',nav_cursos:'Cursos online H3L',nav_contacto:'Contactos',
  hero_cta1:'Ver servicios',hero_cta2:'Solicitar cotización',hero_cta3:'Descargar brochure',
  s_eyebrow:'Quiénes somos',s_badge:'Consultora energética especializada',
  s_h:'Firma independiente de asesoría energética',
@@ -84,6 +84,7 @@ es:{
  w_ct_a:'APELLIDO *',
  w_ct_e:'EMAIL *',
  w_ct_c:'EMPRESA / OCUPACIÓN',
+ w_ct_s:'SECTOR (opcional)',w_ct_t:'TIPO DE ACTIVO (opcional)',w_ct_u:'URGENCIA (opcional)',w_o_none:'Sin indicar',w_s1:'Upstream (exploración y producción)',w_s2:'Midstream y downstream',w_s3:'Transición energética',w_s4:'Otro',w_a1:'Yacimiento convencional',w_a2:'No convencional',w_a3:'Offshore',w_a4:'Planta o instalaciones',w_u1:'Sin apuro',w_u2:'Dentro del mes',w_u3:'Urgente (esta semana)',w_ms:'Sector',w_mt:'Tipo de activo',w_mu:'Urgencia',
  w_ct_q:'CONSULTA *',
  w_ph_n:'Juan',
  w_ph_a:'García',
@@ -101,6 +102,9 @@ es:{
  w_er_name:'Ingresá nombre y apellido',
  w_er_msg:'Escribí tu consulta',
  w_opening:'Abriendo cliente de email...',
+ w_sending:'Enviando...',
+ w_sent:'¡Mensaje enviado! Te respondemos a la brevedad.',
+ w_toomany:'Enviaste varios mensajes seguidos. Probá de nuevo en una hora o escribinos a info@h3lglobalenergy.com.',
  w_mailsub:'Consulta H3L —',
  w_mn:'Nombre',
  w_me:'Email',
@@ -109,7 +113,7 @@ es:{
  w_nl_ph_n:'tu@email.com'
 },
 en:{
- nav_somos:'About us',nav_servicios:'Services',nav_noticias:'OIL & GAS News',nav_eventos:'Events',nav_contacto:'Contact',
+ nav_somos:'About us',nav_servicios:'Services',nav_noticias:'OIL & GAS News',nav_eventos:'Events',nav_cursos:'Online courses H3L',nav_contacto:'Contact',
  hero_cta1:'View services',hero_cta2:'Request a quote',hero_cta3:'Download brochure',
  s_eyebrow:'About us',s_badge:'Specialized energy consultancy',
  s_h:'Independent energy advisory firm',
@@ -190,6 +194,7 @@ en:{
  w_ct_a:'LAST NAME *',
  w_ct_e:'EMAIL *',
  w_ct_c:'COMPANY / OCCUPATION',
+ w_ct_s:'SECTOR (optional)',w_ct_t:'ASSET TYPE (optional)',w_ct_u:'URGENCY (optional)',w_o_none:'Not specified',w_s1:'Upstream (exploration and production)',w_s2:'Midstream and downstream',w_s3:'Energy transition',w_s4:'Other',w_a1:'Conventional field',w_a2:'Unconventional',w_a3:'Offshore',w_a4:'Plant or facilities',w_u1:'No rush',w_u2:'Within the month',w_u3:'Urgent (this week)',w_ms:'Sector',w_mt:'Asset type',w_mu:'Urgency',
  w_ct_q:'MESSAGE *',
  w_ph_n:'John',
  w_ph_a:'Smith',
@@ -207,6 +212,9 @@ en:{
  w_er_name:'Enter first and last name',
  w_er_msg:'Write your message',
  w_opening:'Opening your email client...',
+ w_sending:'Sending...',
+ w_sent:'Message sent! We will get back to you shortly.',
+ w_toomany:'You sent several messages in a row. Please try again in an hour or write to info@h3lglobalenergy.com.',
  w_mailsub:'H3L inquiry —',
  w_mn:'Name',
  w_me:'Email',
@@ -215,7 +223,7 @@ en:{
  w_nl_ph_n:'you@email.com'
 },
 fr:{
- nav_somos:'Qui sommes-nous',nav_servicios:'Services',nav_noticias:'Actualités OIL & GAS',nav_eventos:'Événements',nav_contacto:'Contacts',
+ nav_somos:'Qui sommes-nous',nav_servicios:'Services',nav_noticias:'Actualités OIL & GAS',nav_eventos:'Événements',nav_cursos:'Cours en ligne H3L',nav_contacto:'Contacts',
  hero_cta1:'Voir les services',hero_cta2:'Demander un devis',hero_cta3:'Télécharger la brochure',
  s_eyebrow:'Qui sommes-nous',s_badge:'Cabinet de conseil énergétique spécialisé',
  s_h:'Cabinet indépendant de conseil énergétique',
@@ -296,6 +304,7 @@ fr:{
  w_ct_a:'NOM *',
  w_ct_e:'E-MAIL *',
  w_ct_c:'ENTREPRISE / PROFESSION',
+ w_ct_s:'SECTEUR (facultatif)',w_ct_t:'TYPE D\'ACTIF (facultatif)',w_ct_u:'URGENCE (facultatif)',w_o_none:'Non précisé',w_s1:'Amont (exploration et production)',w_s2:'Moyen et aval',w_s3:'Transition énergétique',w_s4:'Autre',w_a1:'Gisement conventionnel',w_a2:'Non conventionnel',w_a3:'Offshore',w_a4:'Usine ou installations',w_u1:'Pas pressé',w_u2:'Dans le mois',w_u3:'Urgent (cette semaine)',w_ms:'Secteur',w_mt:'Type d\'actif',w_mu:'Urgence',
  w_ct_q:'MESSAGE *',
  w_ph_n:'Jean',
  w_ph_a:'Dupont',
@@ -313,6 +322,9 @@ fr:{
  w_er_name:'Saisissez prénom et nom',
  w_er_msg:'Écrivez votre message',
  w_opening:'Ouverture de votre messagerie...',
+ w_sending:'Envoi en cours...',
+ w_sent:'Message envoyé ! Nous vous répondrons rapidement.',
+ w_toomany:'Vous avez envoyé plusieurs messages d’affilée. Réessayez dans une heure ou écrivez à info@h3lglobalenergy.com.',
  w_mailsub:'Demande H3L —',
  w_mn:'Nom',
  w_me:'E-mail',
@@ -321,7 +333,7 @@ fr:{
  w_nl_ph_n:'vous@email.com'
 },
 pt:{
- nav_somos:'Quem somos',nav_servicios:'Serviços',nav_noticias:'Notícias OIL & GAS',nav_eventos:'Eventos',nav_contacto:'Contatos',
+ nav_somos:'Quem somos',nav_servicios:'Serviços',nav_noticias:'Notícias OIL & GAS',nav_eventos:'Eventos',nav_cursos:'Cursos online H3L',nav_contacto:'Contatos',
  hero_cta1:'Ver serviços',hero_cta2:'Solicitar orçamento',hero_cta3:'Baixar brochure',
  s_eyebrow:'Quem somos',s_badge:'Consultoria energética especializada',
  s_h:'Empresa independente de assessoria energética',
@@ -402,6 +414,7 @@ pt:{
  w_ct_a:'SOBRENOME *',
  w_ct_e:'E-MAIL *',
  w_ct_c:'EMPRESA / OCUPAÇÃO',
+ w_ct_s:'SETOR (opcional)',w_ct_t:'TIPO DE ATIVO (opcional)',w_ct_u:'URGÊNCIA (opcional)',w_o_none:'Não informado',w_s1:'Upstream (exploração e produção)',w_s2:'Midstream e downstream',w_s3:'Transição energética',w_s4:'Outro',w_a1:'Campo convencional',w_a2:'Não convencional',w_a3:'Offshore',w_a4:'Planta ou instalações',w_u1:'Sem pressa',w_u2:'Dentro do mês',w_u3:'Urgente (esta semana)',w_ms:'Setor',w_mt:'Tipo de ativo',w_mu:'Urgência',
  w_ct_q:'MENSAGEM *',
  w_ph_n:'João',
  w_ph_a:'Silva',
@@ -419,6 +432,9 @@ pt:{
  w_er_name:'Informe nome e sobrenome',
  w_er_msg:'Escreva sua mensagem',
  w_opening:'Abrindo o cliente de e-mail...',
+ w_sending:'Enviando...',
+ w_sent:'Mensagem enviada! Responderemos em breve.',
+ w_toomany:'Você enviou várias mensagens seguidas. Tente novamente em uma hora ou escreva para info@h3lglobalenergy.com.',
  w_mailsub:'Consulta H3L —',
  w_mn:'Nome',
  w_me:'E-mail',
@@ -516,7 +532,7 @@ function renderServicios(){
   S.forEach(function(s,i){
     var title=s.t[lang],tool=s.tool[lang];
     h+='<article class="svc" id="svc-'+s.id+'">'+
-      '<div class="svc-media"><video class="svc-video" muted playsinline preload="none" poster="media/svc-'+s.id+sfx+'.jpg" aria-label="'+esc(tr('sv_vid')+': '+tool)+'">'+
+      '<div class="svc-media"><video class="svc-video" muted playsinline controlsList="nodownload noremoteplayback" disablePictureInPicture disableRemotePlayback preload="none" poster="media/svc-'+s.id+sfx+'.jpg" aria-label="'+esc(tr('sv_vid')+': '+tool)+'">'+
         '<source src="'+vurl('svc-'+s.id+sfx+'.mp4')+'" type="video/mp4">'+(sfx||VIDEO_BASE?'':'<source src="media/svc-'+s.id+'.webm" type="video/webm">')+'</video>'+
         '<button type="button" class="svc-play" data-svc="'+s.id+'" aria-label="'+esc(tr('sv_play'))+'"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>'+
         '<button type="button" class="svc-fs" aria-label="'+esc(tr('sv_fs'))+'"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="en" d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/><path class="ex" d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/></svg></button>'+
@@ -598,6 +614,7 @@ document.addEventListener('play',function(e){
   if(fsActive()){var fe=document.fullscreenElement||document.webkitFullscreenElement||document.querySelector('.svc-media.svc-full');if(fe&&!fe.contains(e.target)){e.target.pause();return}} /* nunca arranca otro video detrás de la pantalla completa */
   document.querySelectorAll('.svc-video').forEach(function(o){if(o!==e.target)o.muted=true});
 },true);
+document.addEventListener('contextmenu',function(e){if(e.target.closest&&e.target.closest('.svc-media'))e.preventDefault()});
 function pauseAll(){document.querySelectorAll('.svc-video').forEach(function(v){v.pause()})}
 
 function quote(name){

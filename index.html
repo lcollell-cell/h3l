@@ -7,7 +7,7 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <script src="assets/inline/guard.14800652.js"></script>
 
-<script src="assets/inline/index.5096e1d5.js"></script>
+<script src="assets/inline/index.70704500.js"></script>
 <link rel="icon" href="LOGO_H3L_icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>H3L Global Energy — Consultoría en Oil &amp; Gas y Transición Energética</title>
@@ -1105,7 +1105,7 @@ tr:hover td{background:var(--blue-ghost);}
   .dash-chart-title{font-size:12px !important;}
 }
 </style>
-<script src="assets/vendor/chart.umd.min.js"></script>
+<script src="assets/inline/chartlazy.89b9ac25.js"></script>
 <style id="h3l-resp-fixes">
 /* Ajustes de visualización (PC y móvil) */
 @media (min-width:901px) and (max-width:1180px){
@@ -1134,7 +1134,8 @@ tr:hover td{background:var(--blue-ghost);}
 </style>
 <link rel="stylesheet" href="assets/fonts.css?v=1">
 <link rel="stylesheet" href="assets/site.css?v=12">
-<script src="assets/site.js?v=16" defer></script>
+<script src="assets/site.js?v=19" defer></script>
+<script src="assets/podcast.js?v=6" defer></script>
 <script src="assets/calc-i18n.js?v=1" defer></script>
 <script src="v2/chat.js?v=7" defer></script>
 </head>
@@ -1955,6 +1956,12 @@ tr:hover td{background:var(--blue-ghost);}
       </div>
     </div>
 
+    <div id="pod-ctl" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;max-width:1100px;margin:0 auto 16px;">
+      <button type="button" id="pod-play" style="background:var(--accent);border:none;color:#fff;font-family:var(--font-body);font-size:13px;font-weight:600;padding:9px 18px;border-radius:8px;cursor:pointer;min-height:40px">Escuchar resumen</button>
+      <button type="button" id="pod-stop" hidden style="background:transparent;border:1px solid var(--border);color:var(--text-muted);font-family:var(--font-body);font-size:13px;font-weight:600;padding:9px 16px;border-radius:8px;cursor:pointer;min-height:40px">Detener</button>
+      <span id="pod-note" role="status" aria-live="polite" style="font-size:12px;color:var(--text-muted)"></span>
+    </div>
+
     <!-- GRID NOTICIAS -->
     <div id="noticias-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:1100px;margin:0 auto;">
       <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px;grid-column:1/-1;text-align:center;color:var(--text-muted);font-size:13px;">
@@ -1979,7 +1986,9 @@ tr:hover td{background:var(--blue-ghost);}
         </div>
         <div style="margin-bottom:12px;"><label class="form-label" data-t="w_ct_e">EMAIL *</label><input class="form-input" type="email" id="ctc-email" placeholder="juan@empresa.com"></div>
         <div style="margin-bottom:12px;"><label class="form-label" data-t="w_ct_c">EMPRESA / OCUPACIÓN</label><input class="form-input" type="text" id="ctc-empresa" placeholder="Empresa SA" data-t-ph="w_ph_c"></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:12px;"><div><label class="form-label" data-t="w_ct_s">SECTOR (opcional)</label><select class="form-input" id="ctc-sector"><option value="" data-t="w_o_none">Sin indicar</option><option value="w_s1" data-t="w_s1">Upstream (exploración y producción)</option><option value="w_s2" data-t="w_s2">Midstream y downstream</option><option value="w_s3" data-t="w_s3">Transición energética</option><option value="w_s4" data-t="w_s4">Otro</option></select></div><div><label class="form-label" data-t="w_ct_t">TIPO DE ACTIVO (opcional)</label><select class="form-input" id="ctc-activo"><option value="" data-t="w_o_none">Sin indicar</option><option value="w_a1" data-t="w_a1">Yacimiento convencional</option><option value="w_a2" data-t="w_a2">No convencional</option><option value="w_a3" data-t="w_a3">Offshore</option><option value="w_a4" data-t="w_a4">Planta o instalaciones</option></select></div><div><label class="form-label" data-t="w_ct_u">URGENCIA (opcional)</label><select class="form-input" id="ctc-urgencia"><option value="" data-t="w_o_none">Sin indicar</option><option value="w_u1" data-t="w_u1">Sin apuro</option><option value="w_u2" data-t="w_u2">Dentro del mes</option><option value="w_u3" data-t="w_u3">Urgente (esta semana)</option></select></div></div>
         <div style="margin-bottom:16px;"><label class="form-label" data-t="w_ct_q">CONSULTA *</label><textarea class="form-input" id="ctc-mensaje" rows="4" style="resize:vertical;" data-t-val="w_ct_def">Buenas tardes, quiero información de sus servicios. Mi contacto es </textarea></div>
+        <div aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden"><label>Web <input type="text" id="ctc-web" tabindex="-1" autocomplete="off"></label></div>
         <button onclick="enviarContacto()" class="btn-calc" style="width:100%;" data-t="w_ct_send">Enviar a info@h3lglobalenergy.com</button>
         <div id="ctc-status" style="margin-top:10px;text-align:center;font-size:12px;min-height:18px;"></div>
       </div>
@@ -3517,7 +3526,7 @@ tr:hover td{background:var(--blue-ghost);}
 }
 </style>
 
-<script src="assets/inline/index.7a1e3d6f.js"></script>
+<script src="assets/inline/index.cafca771.js"></script>
 
 
 </section>
@@ -3539,7 +3548,7 @@ tr:hover td{background:var(--blue-ghost);}
   </div>
 </div>
 
-<script src="assets/inline/index.96be458b.js"></script>
+<script src="assets/inline/index.ee270c9b.js"></script>
 
 
 

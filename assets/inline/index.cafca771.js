@@ -73,7 +73,8 @@ function buildETGrid(){
   }).join('');
 }
 
-function openETModal(id){
+function openETModal(id){ h3lChart(function(){ _openETModal(id); }); }
+function _openETModal(id){
   const app0 = ET_APPS.find(a=>a.id===id);
   if(!app0) return;
   const app = etApp(app0);
@@ -124,12 +125,4 @@ document.addEventListener('DOMContentLoaded', function(){
   buildETGrid();
 });
 
-// Lazy load Chart.js if not present
-(function(){
-  if(!window.Chart){
-    const s=document.createElement('script');
-    s.src='assets/vendor/chart.umd.min.js';
-    s.onload=function(){ buildETGrid(); };
-    document.head.appendChild(s);
-  }
-})();
+

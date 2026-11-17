@@ -100,9 +100,12 @@ function goSection(id){
   if(id === 'dashboard'){
     setTimeout(()=>{
       const activeType = document.querySelector('.dash-tab.active')?.id?.replace('dtab-','') || 'ejecutivo';
-      if(!_dashInit[activeType] && window.Chart){
-        _dashInit[activeType]=true;
-        _initDashCharts(activeType);
+      if(!_dashInit[activeType]){
+        h3lChart(()=>{
+          if(_dashInit[activeType]) return;
+          _dashInit[activeType]=true;
+          _initDashCharts(activeType);
+        });
       }
     }, 100);
   }
@@ -1300,15 +1303,42 @@ function enviarContacto(){
   const email=document.getElementById('ctc-email')?.value?.trim();
   const empresa=document.getElementById('ctc-empresa')?.value?.trim()||'';
   const mensaje=document.getElementById('ctc-mensaje')?.value?.trim();
+  const selv=id=>{const el=document.getElementById(id);return el&&el.value?el.value:'';};
+  const selt=id=>{const el=document.getElementById(id);return el&&el.value?el.options[el.selectedIndex].text:'';};
+  const sector=selv('ctc-sector'),activo=selv('ctc-activo'),urgencia=selv('ctc-urgencia');
+  const trampa=document.getElementById('ctc-web')?.value||'';
   const status=document.getElementById('ctc-status');
+  const btn=document.querySelector('button[onclick="enviarContacto()"]');
   if(!nombre||!apellido){if(status)status.innerHTML='<span style="color:var(--danger)">'+W('w_er_name')+'</span>';return;}
   if(!email||!email.includes('@')){if(status)status.innerHTML='<span style="color:var(--danger)">'+W('w_bad')+'</span>';return;}
   if(!mensaje){if(status)status.innerHTML='<span style="color:var(--danger)">'+W('w_er_msg')+'</span>';return;}
-  const subject=encodeURIComponent(W('w_mailsub')+' '+nombre+' '+apellido);
-  const body=encodeURIComponent(W('w_mn')+': '+nombre+' '+apellido+'\n'+W('w_me')+': '+email+'\n'+W('w_mc')+': '+empresa+'\n\n'+mensaje);
-  window.location.href='mailto:info@h3lglobalenergy.com?subject='+subject+'&body='+body; /* Safari bloquea window.open para mailto */
-  if(status)status.innerHTML='<span style="color:var(--success)">'+W('w_opening')+'</span>';
-  setTimeout(()=>{if(status)status.innerHTML='';},3000);
+  /* respaldo: abre el programa de correo con el mensaje armado (sin Worker, p. ej. en la copia de prueba de GitHub Pages, o si el envío falla) */
+  const viaMailto=()=>{
+    const subject=encodeURIComponent(W('w_mailsub')+' '+nombre+' '+apellido);
+    const body=encodeURIComponent(W('w_mn')+': '+nombre+' '+apellido+'\n'+W('w_me')+': '+email+'\n'+W('w_mc')+': '+empresa+'\n'+[['w_ms','ctc-sector'],['w_mt','ctc-activo'],['w_mu','ctc-urgencia']].map(p=>selt(p[1])?W(p[0])+': '+selt(p[1])+'\n':'').join('')+'\n'+mensaje);
+    window.location.href='mailto:info@h3lglobalenergy.com?subject='+subject+'&body='+body; /* Safari bloquea window.open para mailto */
+    if(status)status.innerHTML='<span style="color:var(--success)">'+W('w_opening')+'</span>';
+    setTimeout(()=>{if(status)status.innerHTML='';},3000);
+  };
+  if(btn&&btn.disabled)return;
+  if(btn)btn.disabled=true;
+  if(status)status.innerHTML='<span style="color:var(--text-muted,#6b7a90)">'+W('w_sending')+'</span>';
+  const lang=(function(){try{return localStorage.getItem('h3l_lang')||'es'}catch(e){return 'es'}})();
+  const ctl=typeof AbortController==='function'?new AbortController():null;
+  const to=ctl?setTimeout(()=>ctl.abort(),12000):0;
+  fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'omit',signal:ctl?ctl.signal:undefined,
+    body:JSON.stringify({nombre,apellido,email,empresa,sector,activo,urgencia,mensaje,lang,hp:trampa})})
+    .then(r=>r.json().then(j=>({st:r.status,ok:!!(j&&j.ok)}),()=>({st:r.status,ok:false})))
+    .then(res=>{
+      clearTimeout(to);if(btn)btn.disabled=false;
+      if(res.ok){
+        if(status)status.innerHTML='<span style="color:var(--success)">'+W('w_sent')+'</span>';
+        ['ctc-nombre','ctc-apellido','ctc-email','ctc-empresa','ctc-sector','ctc-activo','ctc-urgencia','ctc-mensaje'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+      }else if(res.st===429){
+        if(status)status.innerHTML='<span style="color:var(--danger)">'+W('w_toomany')+'</span>';
+      }else viaMailto();
+    })
+    .catch(()=>{clearTimeout(to);if(btn)btn.disabled=false;viaMailto();});
 }
 
 // ═══ REGISTRO + CSV ═══
@@ -2125,19 +2155,7 @@ function _initDashCharts(type) {
   }
 }
 
-// Init Estratégico on page load (it's the default active tab)
-document.addEventListener('DOMContentLoaded', () => {
-  // Only init charts if Chart.js is loaded
-  const tryInitDash = () => {
-    if (window.Chart) {
-      _dashInit['ejecutivo'] = true;
-      _initDashCharts('ejecutivo');
-    } else {
-      setTimeout(tryInitDash, 300);
-    }
-  };
-  tryInitDash();
-});
+// Los gráficos del tablero se crean al abrir la sección (goSection('dashboard')); Chart.js se carga recién ahí.
 
 // ═══ NEWS TABS — Argentina / Internacional ═══
 let currentNewsTab = 'todas';
