@@ -61,8 +61,11 @@ function renderScene(c){ensureCC();var L=flat[li],j=ci,s;while(j>=0&&!L.cues[j].
     else if(t==='chap'){var nm=C.modules.length,mi=s.i||0,mo=C.modules[mi],pad=function(n){return n<10?'0'+n:''+n};
       if(s.m==='agenda')node=mount('<div class="scene chap ag"><div class="ck"><span></span>'+esc(s.k||'Lo que vas a ver')+'</div><h4>'+esc(s.h||'Un recorrido en '+nm+' módulos')+'</h4><ul id="ags" class="ags">'+C.modules.map(function(m,i){return '<li data-i="'+i+'"><em>'+pad(i+1)+'</em><div><b>'+esc(m.title)+'</b><span>'+m.lessons.length+' lecciones</span></div></li>'}).join('')+'</ul></div>');
       else{var lc=0;C.modules.forEach(function(m,i){if(i<mi)lc+=m.lessons.length});
-        node=mount('<div class="scene chap mc'+(s.go?' go':'')+'"><div class="cn" aria-hidden="true">'+pad(mi+1)+'</div><div class="cm"><div class="ck"><span></span>Módulo '+(mi+1)+' de '+nm+'</div><h4>'+esc(mo.title)+'</h4><ol class="cl">'+mo.lessons.map(function(l,i){return '<li><i>'+(mi+1)+'.'+(i+1)+'</i>'+esc(l.title)+'</li>'}).join('')+'</ol>'+(s.go?'<div class="cg">¡Comencemos!</div>':'')+'</div><div class="rail" aria-hidden="true">'+C.modules.map(function(m,i){return '<b class="'+(i<mi?'d':(i===mi?'c':''))+'"></b>'}).join('')+'</div></div>')}}
-    else if(t==='dg'){node=mount('<div class="scene dgs"><div class="hd"><div class="kick">'+esc(s.k||'Esquema')+'</div><h4>'+esc(s.h||'')+'</h4></div><div class="dgbox"></div></div>');dgn=HD.mount($('.dgbox',node),s.d,s.p)}
+        node=mount('<div class="scene chap mc'+(s.go?' go':'')+(mo.title.length>40?' sm':'')+'"><div class="cn" aria-hidden="true">'+pad(mi+1)+'</div><div class="chm"><div class="ck"><span></span>Módulo '+(mi+1)+' de '+nm+'</div><h4>'+esc(mo.title)+'</h4><ol class="cl">'+mo.lessons.map(function(l,i){return '<li><i>'+(mi+1)+'.'+(i+1)+'</i>'+esc(l.title)+'</li>'}).join('')+'</ol>'+(s.go?'<div class="cg">¡Comencemos!</div>':'')+'</div><div class="rail" aria-hidden="true">'+C.modules.map(function(m,i){return '<b class="'+(i<mi?'d':(i===mi?'c':''))+'"></b>'}).join('')+'</div></div>')}}
+    else if(t==='les'){var Ls=flat[li],lm=0,lj=0;C.modules.forEach(function(m,i){m.lessons.forEach(function(x,j){if(x.id===Ls.id){lm=i;lj=j}})});
+      node=mount('<div class="scene chap les"><div class="cn" aria-hidden="true">'+(lm+1)+'.'+(lj+1)+'</div><div class="chm"><div class="ck"><span></span>Lección '+(lm+1)+'.'+(lj+1)+' · Módulo '+(lm+1)+' de '+C.modules.length+'</div><h4>'+esc(Ls.title)+'</h4><blockquote class="lq">'+esc(s.q||'')+'</blockquote></div><div class="rail" aria-hidden="true">'+C.modules[lm].lessons.map(function(x,j){return '<b class="'+(j<lj?'d':(j===lj?'c':''))+'"></b>'}).join('')+'</div></div>')}
+    else if(t==='dec'){node=mount('<div class="scene chap dec"><div class="chm"><div class="ck"><span></span>Cierre de la lección</div><h4>La decisión que sostiene esta lección</h4><blockquote class="lq big">'+esc(s.q||'')+'</blockquote></div></div>')}
+    else if(t==='dg'){node=mount('<div class="scene dgs"><div class="hd"><div class="kick">'+esc(s.k||'Esquema')+'</div><h4>'+esc(s.h||'')+'</h4></div><div class="dgbox"></div>'+(s.src?'<div class="dgsrc">'+(/^(Fuente|Ejemplo|Esquema|Elaboraci|Valores|Umbrales|Curvas|Clasificaci|Rangos|Comunicado)/.test(s.src)?'':'Fuente: ')+esc(s.src)+'</div>':'')+'</div>');dgn=HD.mount($('.dgbox',node),s.d,s.p)}
     else if(t==='viz'){node=mount('<div class="scene"><div class="kick">'+esc(s.k||'Laboratorio interactivo')+'</div><h4>'+esc(s.h||'')+'</h4><div id="wdbox" style="flex:1;min-height:0;display:flex;flex-direction:column"></div></div>');
       var box=$('#wdbox',node);var h=el('div','');h.style.cssText='flex:1;min-height:0;display:grid';box.appendChild(h);wd=HW.build(s.w,h,s.p,{touch:function(){var r=CS.l[flat[li].id];if(r&&!r.lab){r.lab=1;scheduleSave()}}})}
     /* cada escena de bullets etc. entra con animación; el título del curso persiste */
@@ -97,7 +100,7 @@ function showCheckpoint(c,i){hideCheckpoint();var q=c.q,d=el('div',{class:'cp',i
   $('#cpGo',d).addEventListener('click',function(){hideCheckpoint();if(waiting||playing){waiting=false;next()}})}
 function hideCheckpoint(){var d=$('#cpbox');if(d)d.remove()}
 /* ---------- reproducción ---------- */
-var keepU=[];
+var keepU=[],autoNext=false;
 function stopSpeech(){tok++;keepU=[];if(hasTTS)try{SS.cancel()}catch(e){}clearInterval(timer);timer=null}
 /* trozos de frase: evita el corte de voces largas en Chrome y mantiene las referencias vivas (Safari/Chrome descartan el objeto y no disparan onend) */
 /* el primer trozo es corto (la voz en linea tarda en sintetizar y empieza a sonar antes); los demas se encolan juntos */
@@ -109,11 +112,15 @@ var warmed=false;function warm(){if(warmed||!hasTTS||!voice||playing)return;warm
 document.addEventListener('pointerdown',warm,{once:true,passive:true});
 function speakCue(){var busy=false;try{busy=!!(hasTTS&&(SS.speaking||SS.pending))}catch(e){}stopSpeech();var L=flat[li],c=L.cues[ci],my=tok;
   timer=setInterval(function(){if(!playing||waiting)return;elapsed+=.2*speed;if(elapsed>HC.cueDur(c)*(ttsOn&&voice?1.5:1)&&!(ttsOn&&voice)){cueEnd(my)}tickUI()},200);
-  if(ttsOn&&voice){var parts=chunks(HC.pron(c.tts||c.say,C.lang));
-    var go=function(){if(tok!==my)return;parts.forEach(function(txt,k){var u=new SpeechSynthesisUtterance(txt);try{u.voice=voice}catch(e){}u.lang=voice.lang;u.rate=Math.min(2,speed);keepU.push(u);
-      if(k===parts.length-1)u.onend=function(){if(tok===my)cueEnd(my)};
+  if(ttsOn&&voice){var parts=chunks(HC.pron(c.tts||c.say,C.lang)),groups=[],gg=[];
+    parts.forEach(function(t){gg.push(t);if(/[.!?…]$/.test(t)){groups.push(gg);gg=[]}});if(gg.length)groups.push(gg);
+    /* respiro natural: al cambiar de cue (y más si cambia la diapositiva) se espera antes de hablar, y entre oraciones se hace una pausa corta */
+    var lead=autoNext?(c.scene?700:400):0;autoNext=false;if(lead&&elapsed<.3)elapsed=-lead/1000*speed;else lead=0;
+    var sayG=function(n){if(tok!==my)return;var grp=groups[n];grp.forEach(function(txt,k){var u=new SpeechSynthesisUtterance(txt);try{u.voice=voice}catch(e){}u.lang=voice.lang;u.rate=Math.min(2,speed);keepU.push(u);
+      if(k===grp.length-1)u.onend=function(){if(tok!==my)return;if(n>=groups.length-1)cueEnd(my);else setTimeout(function(){sayG(n+1)},(/\?$/.test(txt)?420:320)/Math.max(.8,speed))};
       u.onerror=function(e){if(tok===my&&e.error!=='interrupted'&&e.error!=='canceled'){ttsOn=false;updateUI()}};
       try{SS.speak(u)}catch(e){ttsOn=false}})};
+    var go=function(){if(tok!==my)return;if(lead)setTimeout(function(){sayG(0)},lead/Math.max(.8,speed));else sayG(0)};
     /* tras un cancel() inmediato algunos navegadores ignoran el speak(): se espera un instante solo si había algo sonando (así el primer play conserva el gesto del usuario en iOS) */
     if(busy)setTimeout(go,80);else go();
     /* respaldo por si el navegador no dispara onend */
@@ -121,14 +128,14 @@ function speakCue(){var busy=false;try{busy=!!(hasTTS&&(SS.speaking||SS.pending)
 function cueEnd(my){if(my!==tok||!playing)return;var c=flat[li].cues[ci];clearInterval(timer);timer=null;revealRest(true);dgTick(true);
   if(c.q&&!answered[ci]){waiting=true;updateUI();return}
   if(c.lab){waiting=true;updateUI();return}
-  next()}
+  autoNext=true;next()}
 function next(){if(ci<flat[li].cues.length-1)setCue(ci+1,true);else lessonEnd()}
 function lessonEnd(){var L=flat[li],cues=L.cues,i;for(i=0;i<cues.length;i++)if(cues[i].q&&!answered[i]){playing=true;setCue(i,true);return}
   stopSpeech();playing=false;waiting=false;var r=CS.l[L.id]||(CS.l[L.id]={});r.d=1;r.pos=0;HC.save();updateUI();buildSide();showEnd();if(li<flat.length)buildTabsRefresh()}
-function play(){if(!flat)return;hideBig();try{if(window.matchMedia&&matchMedia('(orientation:landscape) and (max-height:520px)').matches&&!$('#player').classList.contains('fs'))$('#player').scrollIntoView({block:'start'})}catch(e){}playing=true;var c=flat[li].cues[ci];if(waiting){updateUI();return}if(c.q&&!answered[ci]&&!$('#cpbox'))showCheckpoint(c,ci);speakCue();updateUI()}
+function play(){if(!flat)return;autoNext=false;hideBig();try{if(window.matchMedia&&matchMedia('(orientation:landscape) and (max-height:520px)').matches&&!$('#player').classList.contains('fs'))$('#player').scrollIntoView({block:'start'})}catch(e){}playing=true;var c=flat[li].cues[ci];if(waiting){updateUI();return}if(c.q&&!answered[ci]&&!$('#cpbox'))showCheckpoint(c,ci);speakCue();updateUI()}
 function pause(){playing=false;stopSpeech();updateUI()}
 function toggle(){playing?pause():play()}
-function seek(t,keep){t=Math.max(0,Math.min(total-.1,t));var i=cueAt(t),was=playing;stopSpeech();playing=was;setCue(i,false);elapsed=t-starts[i];if(was&&!waiting)speakCue();else updateUI();tickUI()}
+function seek(t,keep){autoNext=false;t=Math.max(0,Math.min(total-.1,t));var i=cueAt(t),was=playing;stopSpeech();playing=was;setCue(i,false);elapsed=t-starts[i];if(was&&!waiting)speakCue();else updateUI();tickUI()}
 function go(n){if(n<0||n>=flat.length)return;loadLesson(n,0,true)}
 /* ---------- UI del reproductor ---------- */
 function bindControls(){
@@ -224,7 +231,7 @@ function levels(comp){var lessons=comp.lessons,cs=CS,all=lessons.every(function(
   var lab=lessons.some(function(id){return cs.l[id]&&cs.l[id].lab})||lessons.every(function(id){var L=flat.filter(function(x){return x.id===id})[0];return L&&!L.cues.some(function(c){return c.scene&&c.scene.t==='viz'})}),xl=Object.keys(cs.x||{}).some(function(k){return cs.x[k]});
   var mods=C.modules.filter(function(m){return m.lessons.some(function(l){return lessons.indexOf(l.id)>=0})}),q=mods.every(function(m){return cs.q[m.id]&&cs.q[m.id].best>=70}),ex=cs.e&&cs.e.best>=85;
   var lv=0;if(all)lv=1;if(lv===1&&cpOk)lv=2;if(lv===2&&lab&&xl)lv=3;if(lv===3&&q)lv=4;if(lv===4&&ex)lv=5;return lv}
-function paneCm(){var p=$('#p_cm');if(!p)return;var h='<h3>'+HC.t('tab_cm')+'</h3><p class="note-s" style="margin-bottom:10px">'+esc(HC.t('cm_p'))+'</p><div class="cm"><table><thead><tr><th>'+HC.t('cm_c')+'</th>'+[1,2,3,4,5].map(function(i){return '<th>'+i+' · '+HC.t('lv'+i)+'</th>'}).join('')+'</tr></thead><tbody>';
+function paneCm(){var p=$('#p_cm');if(!p)return;var h='<h3>'+HC.t('tab_cm')+'</h3><p class="note-s" style="margin-bottom:10px">'+esc(HC.t('cm_p'))+'</p><div class="chm"><table><thead><tr><th>'+HC.t('cm_c')+'</th>'+[1,2,3,4,5].map(function(i){return '<th>'+i+' · '+HC.t('lv'+i)+'</th>'}).join('')+'</tr></thead><tbody>';
   (C.competencies||[]).forEach(function(c){var lv=flat?levels(c):0;h+='<tr><td>'+esc(c.name)+'</td>'+[1,2,3,4,5].map(function(i){return '<td><i class="'+(i<=lv?'f':'')+'"></i></td>'}).join('')+'</tr>'});
   p.innerHTML=h+'</tbody></table></div><p class="note-s" style="margin-top:10px">Esquema de 5 niveles de dominio: conocer → aprender → aplicar → transferir → transformar. Las competencias del curso se basan en un mapa de competencias técnicas de exploración y producción (geología, reservorios, producción, perforación).</p>'}
 /* ---------- lateral ---------- */

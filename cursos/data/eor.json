@@ -186,13 +186,39 @@
        }
       },
       {
+       "say": "Al terminar esta lección vas a aprender, primero, a distinguir recuperación primaria, secundaria y mejorada (EOR), y EOR de IOR.",
+       "hl": 0,
+       "obj": 1,
+       "scene": {
+        "t": "bul",
+        "k": "Objetivos de la lección",
+        "h": "Qué vas a aprender",
+        "items": [
+         "Distinguir recuperación primaria, secundaria y mejorada (EOR), y EOR de IOR.",
+         "Descomponer el factor de recuperación en las eficiencias areal, vertical y de desplazamiento.",
+         "Diagnosticar qué eficiencia limita el recobro a partir de datos de campo."
+        ]
+       }
+      },
+      {
+       "say": "Segundo, a descomponer el factor de recuperación en las eficiencias areal, vertical y de desplazamiento.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a diagnosticar qué eficiencia limita el recobro a partir de datos de campo.",
+       "hl": 2,
+       "obj": 1
+      },
+      {
        "say": "La producción de un yacimiento se suele describir en etapas. En la primaria, el petróleo sale por la energía natural del reservorio.",
        "hl": 0,
        "scene": {
         "t": "dg",
         "d": "stg",
         "k": "Etapas de recuperación",
-        "h": "De la primaria a la terciaria"
+        "h": "De la primaria a la terciaria",
+        "src": "Esquema didáctico H3L · Craig (1971), SPE Monograph 3; Willhite (1986)"
        }
       },
       {
@@ -214,7 +240,8 @@
         "t": "dg",
         "d": "rf",
         "k": "Factor de recuperación",
-        "h": "Del petróleo original al recuperado"
+        "h": "Del petróleo original al recuperado",
+        "src": "Ejemplo del modelo de capas del curso · Craig (1971), SPE Monograph 3"
        }
       },
       {
@@ -227,7 +254,8 @@
         "t": "dg",
         "d": "ed",
         "k": "Eficiencia de desplazamiento",
-        "h": "Escala de poro"
+        "h": "Escala de poro",
+        "src": "Esquema didáctico H3L · Craig (1971), SPE Monograph 3"
        }
       },
       {
@@ -248,7 +276,8 @@
         "t": "dg",
         "d": "sweep",
         "k": "Eficiencia de barrido",
-        "h": "El agua toma los caminos permeables"
+        "h": "El agua toma los caminos permeables",
+        "src": "Esquema didáctico H3L · Craig (1971), SPE Monograph 3"
        },
        "hs": [
         0,
@@ -263,7 +292,8 @@
         "t": "dg",
         "d": "rf",
         "k": "Factor de recuperación",
-        "h": "Ejemplo del modelo de capas"
+        "h": "Ejemplo del modelo de capas",
+        "src": "Ejemplo del modelo de capas del curso · Craig (1971), SPE Monograph 3"
        },
        "hs": [
         1,
@@ -331,7 +361,11 @@
        "say": "En el segundo, el barrido es bueno según los trazadores y el corte sube despacio, pero los registros muestran una saturación de petróleo remanente alta. En el tercero, hay una capa muy permeable que se lleva más de la mitad del caudal. Para cada uno, escribí qué eficiencia limita el recobro y qué palanca elegirías."
       },
       {
-       "say": "La decisión que sostiene la lección es no elegir un método por moda. Una técnica poderosa aplicada a la eficiencia equivocada no recupera nada."
+       "say": "La decisión que sostiene la lección es no elegir un método por moda. Una técnica poderosa aplicada a la eficiencia equivocada no recupera nada.",
+       "scene": {
+        "t": "dec",
+        "q": "No elegir un método por moda"
+       }
       },
       {
        "say": "Pregunta rápida. Un yacimiento muestra irrupción temprana de agua y barrido pobre, pero el petróleo en la zona barrida está bien desplazado. ¿Qué eficiencia limita el recobro? Respondé en pantalla.",
@@ -364,8 +398,17 @@
       {
        "say": "La movilidad de un fluido es su facilidad para fluir en la roca: la permeabilidad relativa dividida por la viscosidad. Cuanto mayor la permeabilidad relativa y menor la viscosidad, más móvil es. La razón de movilidad, M, compara el agua con el petróleo: es la movilidad del agua, medida con sus valores extremos, dividida por la movilidad del petróleo.",
        "scene": {
+        "t": "les",
+        "q": "La movilidad de un fluido es su facilidad para fluir en la roca: la permeabilidad relativa dividida por la viscosidad."
+       }
+      },
+      {
+       "say": "Al terminar esta lección vas a aprender, primero, a calcular la razón de movilidad y explicar qué significa que sea mayor o menor que uno.",
+       "hl": 0,
+       "obj": 1,
+       "scene": {
         "t": "bul",
-        "k": "Razón de movilidad y flujo fraccional",
+        "k": "Objetivos de la lección",
         "h": "Qué vas a aprender",
         "items": [
          "Calcular la razón de movilidad y explicar qué significa que sea mayor o menor que uno.",
@@ -375,13 +418,24 @@
        }
       },
       {
+       "say": "Segundo, a interpretar la curva de flujo fraccional y el frente de Buckley y Leverett.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a estimar qué viscosidad de agua lleva la razón de movilidad a uno.",
+       "hl": 2,
+       "obj": 1
+      },
+      {
        "say": "Tomemos un ejemplo. La permeabilidad relativa al agua, en el extremo de petróleo residual, es cero coma treinta y cinco. La del petróleo, en el extremo de agua connata, es cero coma nueve. El agua tiene una viscosidad de cero coma cinco centipoise y el petróleo, seis. La movilidad del agua es cero coma treinta y cinco sobre cero coma cinco, igual a cero coma siete.",
        "hl": 0,
        "scene": {
         "t": "dg",
         "d": "mob",
         "k": "Movilidad y razón de movilidad",
-        "h": "M = λw / λo"
+        "h": "M = λw / λo",
+        "src": "Esquema didáctico H3L · ejemplo del curso (hoja Capas)"
        }
       },
       {
@@ -410,7 +464,8 @@
         "t": "dg",
         "d": "fw",
         "k": "Flujo fraccional",
-        "h": "Curva de Buckley–Leverett"
+        "h": "Curva de Buckley–Leverett",
+        "src": "Curvas ilustrativas · Buckley y Leverett (1942), Trans. AIME 142"
        },
        "hs": [
         0,
@@ -436,7 +491,8 @@
         "t": "dg",
         "d": "mred",
         "k": "Cómo bajar M",
-        "h": "Viscosidad del agua inyectada"
+        "h": "Viscosidad del agua inyectada",
+        "src": "Ejemplo del curso (hoja Capas): M = 2,33 / μw"
        }
       },
       {
@@ -450,8 +506,30 @@
        ]
       },
       {
-       "say": "Con cinco centipoise, M baja a cero coma cuarenta y siete: el desplazamiento es estable. Conviene una advertencia sobre este modelo. Con valores extremos, M es una referencia. En un yacimiento real, las permeabilidades relativas cambian con la saturación, hay heterogeneidad y gravedad, y el polímero pierde viscosidad por salinidad, por cizalla y por degradación.",
+       "say": "Con cinco centipoise, M baja a cero coma cuarenta y siete: el desplazamiento es estable.",
        "hl": 4
+      },
+      {
+       "say": "Conviene una advertencia: con valores extremos, M es una referencia, no un pronóstico. En un yacimiento real, las permeabilidades relativas cambian con la saturación.",
+       "scene": {
+        "t": "bul",
+        "k": "Modelo de extremos",
+        "h": "M es una referencia, no un pronóstico",
+        "items": [
+         "Las permeabilidades relativas cambian con la saturación",
+         "Hay heterogeneidad y gravedad",
+         "El polímero pierde viscosidad: salinidad, cizalla, degradación"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Además hay heterogeneidad y gravedad.",
+       "hl": 1
+      },
+      {
+       "say": "Y el polímero pierde viscosidad por salinidad, por cizalla y por degradación.",
+       "hl": 2
       },
       {
        "say": "M da una guía, no un pronóstico.",
@@ -492,7 +570,7 @@
        "lab": true
       },
       {
-       "say": "Anotá M en cada caso. La decisión que sostiene la lección es si hace falta control de movilidad. Con M cercano a uno o menor, un polímero aporta poco. Con M de cuatro o cinco, es la primera palanca a evaluar. Y en Grimbeek, con un petróleo de ciento veinte centipoise, M para agua sin polímero es, a todas luces, muy desfavorable.",
+       "say": "Anotá M en cada caso.",
        "scene": {
         "t": "tbl",
         "k": "Razón de movilidad y flujo fraccional",
@@ -526,6 +604,13 @@
        }
       },
       {
+       "say": "La decisión que sostiene la lección es si hace falta control de movilidad. Con M cercano a uno o menor, un polímero aporta poco. Con M de cuatro o cinco, es la primera palanca a evaluar. Y en Grimbeek, con un petróleo de ciento veinte centipoise, M para agua sin polímero es, a todas luces, muy desfavorable.",
+       "scene": {
+        "t": "dec",
+        "q": "Si hace falta control de movilidad"
+       }
+      },
+      {
        "say": "Pregunta rápida. Con la viscosidad del petróleo en seis centipoise, permeabilidades relativas de cero coma treinta y cinco y cero coma nueve y agua de dos coma tres centipoise, ¿cuánto vale M aproximadamente? Respondé en pantalla.",
        "q": {
         "q": "Con μo = 6 cP, krw0 = 0,35, kro0 = 0,9 y agua de 2,33 cP, ¿cuánto vale M aproximadamente?",
@@ -556,8 +641,17 @@
       {
        "say": "Los yacimientos no son homogéneos. Un reservorio fluvial como Grimbeek está formado por muchas capas de arena de distinta permeabilidad, y el agua inyectada toma preferentemente las más permeables. La heterogeneidad vertical es la causa más común de un barrido vertical pobre, y el modelo de capas es la forma más simple de entenderla y de medirla.",
        "scene": {
+        "t": "les",
+        "q": "Los yacimientos no son homogéneos. Un reservorio fluvial como Grimbeek está formado por muchas capas de arena de distinta permeabilidad, y el agua inyectada toma preferentemente las más permeables."
+       }
+      },
+      {
+       "say": "Al terminar esta lección vas a aprender, primero, a describir un yacimiento de capas con el coeficiente de Dykstra y Parsons.",
+       "hl": 0,
+       "obj": 1,
+       "scene": {
         "t": "bul",
-        "k": "Heterogeneidad y barrido vertical: el modelo de capas",
+        "k": "Objetivos de la lección",
         "h": "Qué vas a aprender",
         "items": [
          "Describir un yacimiento de capas con el coeficiente de Dykstra y Parsons.",
@@ -567,13 +661,24 @@
        }
       },
       {
+       "say": "Segundo, a explicar por qué la razón de movilidad desfavorable acelera las capas más permeables.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a usar el modelo de capas para estimar el barrido vertical y comparar escenarios.",
+       "hl": 2,
+       "obj": 1
+      },
+      {
        "say": "Para describir la heterogeneidad se usa el coeficiente de Dykstra y Parsons, V. Se obtiene ordenando las permeabilidades de los datos de núcleo, y es la diferencia entre la mediana y el valor que deja el ochenta y cuatro por ciento de los datos por encima, dividida por la mediana.",
        "hl": 1,
        "scene": {
         "t": "dg",
         "d": "dpv",
         "k": "Coeficiente de Dykstra–Parsons",
-        "h": "Heterogeneidad del reservorio"
+        "h": "Heterogeneidad del reservorio",
+        "src": "Ejemplo didáctico: modelo de capas del curso (planilla H3L_EOR_Barrido_en_Capas_y_Screening.xlsx)"
        },
        "hs": [
         0,
@@ -591,7 +696,8 @@
         "t": "dg",
         "d": "lay",
         "k": "Modelo de capas",
-        "h": "Cada capa avanza a su velocidad"
+        "h": "Cada capa avanza a su velocidad",
+        "src": "Ejemplo didáctico: modelo de capas del curso (planilla H3L_EOR_Barrido_en_Capas_y_Screening.xlsx)"
        }
       },
       {
@@ -624,7 +730,8 @@
         "t": "dg",
         "d": "polres",
         "k": "Efecto del polímero",
-        "h": "Barrido y recuperación del modelo"
+        "h": "Barrido y recuperación del modelo",
+        "src": "Ejemplo didáctico: modelo de capas del curso (planilla H3L_EOR_Barrido_en_Capas_y_Screening.xlsx)"
        }
       },
       {
@@ -672,7 +779,11 @@
        "say": "Cambiá después V de cero coma cinco a cero coma ocho y anotá cómo cambia el barrido con cada viscosidad. Compará con la hoja Comparacion, donde se calculan los escenarios."
       },
       {
-       "say": "La decisión que sostiene la lección es si el problema es de movilidad, de heterogeneidad, o de las dos cosas. Con V alto y M alto, el barrido vertical es muy pobre y un polímero solo mejora mucho, pero un yacimiento con capas ladronas extremas puede necesitar además conformancia."
+       "say": "La decisión que sostiene la lección es si el problema es de movilidad, de heterogeneidad, o de las dos cosas. Con V alto y M alto, el barrido vertical es muy pobre y un polímero solo mejora mucho, pero un yacimiento con capas ladronas extremas puede necesitar además conformancia.",
+       "scene": {
+        "t": "dec",
+        "q": "Si el problema es de movilidad, de heterogeneidad, o de las dos cosas"
+       }
       },
       {
        "say": "Pregunta rápida. En el modelo de capas, ¿qué efecto tiene un polímero que lleva M de mayor que uno a menor que uno? Respondé en pantalla.",
@@ -808,8 +919,17 @@
       {
        "say": "Un polímero se disuelve en el agua inyectada y la vuelve más viscosa. Con eso baja la razón de movilidad y mejora el barrido, tanto areal como vertical. Además, al retenerse en la roca, reduce la permeabilidad efectiva al agua. Lo que un polímero no hace es cambiar el petróleo residual: actúa sobre el barrido, no sobre el desplazamiento a escala de poro.",
        "scene": {
+        "t": "les",
+        "q": "Un polímero se disuelve en el agua inyectada y la vuelve más viscosa."
+       }
+      },
+      {
+       "say": "Al terminar esta lección vas a aprender, primero, a explicar cómo actúa un polímero y qué eficiencia mejora.",
+       "hl": 0,
+       "obj": 1,
+       "scene": {
         "t": "bul",
-        "k": "Polímeros y control de movilidad",
+        "k": "Objetivos de la lección",
         "h": "Qué vas a aprender",
         "items": [
          "Explicar cómo actúa un polímero y qué eficiencia mejora.",
@@ -819,13 +939,24 @@
        }
       },
       {
+       "say": "Segundo, a comparar los polímeros más usados y sus límites de salinidad, cizalla y temperatura.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a identificar las variables de diseño y los desafíos operativos a partir del caso Grimbeek.",
+       "hl": 2,
+       "obj": 1
+      },
+      {
        "say": "Los polímeros más usados son dos. La poliacrilamida parcialmente hidrolizada, HPAM, es la más común: es barata, tiene mucho poder viscosificante y es la que se usa en la mayoría de los proyectos de campo.",
        "hl": 0,
        "scene": {
         "t": "dg",
         "d": "pol",
         "k": "Polímeros",
-        "h": "HPAM y xantano"
+        "h": "HPAM y xantano",
+        "src": "Esquema didáctico H3L"
        }
       },
       {
@@ -843,7 +974,8 @@
         "t": "dg",
         "d": "mred",
         "k": "Objetivo de viscosidad",
-        "h": "M en función de la viscosidad del agua"
+        "h": "M en función de la viscosidad del agua",
+        "src": "Ejemplo del curso (hoja Capas): M = 2,33 / μw"
        }
       },
       {
@@ -887,7 +1019,8 @@
            "s": "sólidos, hierro|y oxígeno"
           }
          ]
-        }
+        },
+        "src": "Elaboración H3L"
        },
        "hs": [
         0,
@@ -930,7 +1063,8 @@
            "s": "expansión por etapas"
           }
          ]
-        }
+        },
+        "src": "YPF (2024), Petrotecnia 124, IAPG: datos publicados del yacimiento Grimbeek"
        },
        "hs": [
         0,
@@ -967,7 +1101,8 @@
            "k": "g"
           }
          ]
-        }
+        },
+        "src": "Elaboración H3L"
        },
        "hs": [
         0,
@@ -1014,7 +1149,11 @@
        "lab": true
       },
       {
-       "say": "La decisión que sostiene la lección es la viscosidad objetivo, y qué polímero y qué calidad de agua la permiten. Una viscosidad mayor mejora el barrido, pero también el costo y el riesgo de inyectividad."
+       "say": "La decisión que sostiene la lección es la viscosidad objetivo, y qué polímero y qué calidad de agua la permiten. Una viscosidad mayor mejora el barrido, pero también el costo y el riesgo de inyectividad.",
+       "scene": {
+        "t": "dec",
+        "q": "La viscosidad objetivo, y qué polímero y qué calidad de agua la permiten"
+       }
       },
       {
        "say": "Pregunta rápida. ¿Qué eficiencia mejora principalmente un polímero? Respondé en pantalla.",
@@ -1047,8 +1186,17 @@
       {
        "say": "En la lección uno vimos que, aun en la zona barrida, el agua deja una saturación residual de petróleo, atrapada por fuerzas capilares en forma de gotas. Los tensioactivos actúan sobre esa palanca. Bajan la tensión interfacial entre el petróleo y el agua, y liberan el petróleo atrapado. Por eso se usan para bajar la saturación residual, a menudo combinados con polímero.",
        "scene": {
+        "t": "les",
+        "q": "En la lección uno vimos que, aun en la zona barrida, el agua deja una saturación residual de petróleo, atrapada por fuerzas capilares en forma de gotas."
+       }
+      },
+      {
+       "say": "Al terminar esta lección vas a aprender, primero, a explicar por qué queda petróleo atrapado y cómo lo libera un tensioactivo.",
+       "hl": 0,
+       "obj": 1,
+       "scene": {
         "t": "bul",
-        "k": "Tensioactivos, álcali y número capilar",
+        "k": "Objetivos de la lección",
         "h": "Qué vas a aprender",
         "items": [
          "Explicar por qué queda petróleo atrapado y cómo lo libera un tensioactivo.",
@@ -1058,13 +1206,24 @@
        }
       },
       {
+       "say": "Segundo, a relacionar el número capilar con la saturación residual de petróleo.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a describir el diseño de un tapón de tensioactivo, álcali y polímero (ASP) y sus riesgos.",
+       "hl": 2,
+       "obj": 1
+      },
+      {
        "say": "La forma de medir esa competencia entre fuerzas es el número capilar, que es la relación entre las fuerzas viscosas y las capilares: la viscosidad del fluido que desplaza, por su velocidad, dividida por la tensión interfacial.",
        "hl": 0,
        "scene": {
         "t": "dg",
         "d": "ncap",
         "k": "Número capilar",
-        "h": "Fuerzas viscosas frente a capilares"
+        "h": "Fuerzas viscosas frente a capilares",
+        "src": "Esquema didáctico H3L · Hirasaki, Miller y Puerto (2011), SPE Journal 16(4)"
        }
       },
       {
@@ -1082,7 +1241,8 @@
         "t": "dg",
         "d": "win",
         "k": "Comportamiento de fases",
-        "h": "Winsor I, III y II según la salinidad"
+        "h": "Winsor I, III y II según la salinidad",
+        "src": "Esquema didáctico H3L · Hirasaki, Miller y Puerto (2011), SPE Journal 16(4)"
        }
       },
       {
@@ -1121,7 +1281,8 @@
            "s": "protege el tapón|y controla la movilidad"
           }
          ]
-        }
+        },
+        "src": "Elaboración H3L"
        },
        "hs": [
         0,
@@ -1167,7 +1328,8 @@
            "k": "g"
           }
          ]
-        }
+        },
+        "src": "Ejemplo didáctico: hoja Comparación de la planilla del curso"
        },
        "hs": [
         0,
@@ -1216,7 +1378,11 @@
        "say": "Para el laboratorio, en la hoja Comparacion cambiá la Sor con tensioactivo a cero coma veinte y a cero coma diez. Anotá la eficiencia de desplazamiento y el factor de recuperación en cada caso. Después hacé el ejercicio de números capilares con la ficha."
       },
       {
-       "say": "La decisión que sostiene la lección es si la eficiencia que limita el recobro es de desplazamiento, y si el petróleo y el agua del campo permiten una formulación robusta."
+       "say": "La decisión que sostiene la lección es si la eficiencia que limita el recobro es de desplazamiento, y si el petróleo y el agua del campo permiten una formulación robusta.",
+       "scene": {
+        "t": "dec",
+        "q": "Si la eficiencia que limita el recobro es de desplazamiento, y si el petróleo y el agua del campo permiten una formulación robusta"
+       }
       },
       {
        "say": "Pregunta rápida. ¿Qué es lo que baja principalmente un tensioactivo? Respondé en pantalla.",
@@ -1247,13 +1413,39 @@
      "comp": "Gas y térmica",
      "cues": [
       {
+       "say": "Al terminar esta lección vas a aprender, primero, a diferenciar el desplazamiento por gas inmiscible y miscible, y el rol de la presión mínima de miscibilidad.",
+       "hl": 0,
+       "obj": 1,
+       "scene": {
+        "t": "bul",
+        "k": "Objetivos de la lección",
+        "h": "Qué vas a aprender",
+        "items": [
+         "Diferenciar el desplazamiento por gas inmiscible y miscible, y el rol de la presión mínima de miscibilidad.",
+         "Explicar por qué el gas barre poco y cómo lo mitiga la inyección alternada de agua y gas.",
+         "Entender que el almacenamiento de CO₂ se mide y se verifica, no se supone."
+        ]
+       }
+      },
+      {
+       "say": "Segundo, a explicar por qué el gas barre poco y cómo lo mitiga la inyección alternada de agua y gas.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a entender que el almacenamiento de CO₂ se mide y se verifica, no se supone.",
+       "hl": 2,
+       "obj": 1
+      },
+      {
        "say": "Un gas puede desplazar petróleo de dos maneras. Inmiscible, empuja como un pistón de baja viscosidad: el petróleo residual sigue siendo alto, porque el gas no se mezcla con él. Miscible, se mezcla con el petróleo y elimina la tensión interfacial, de modo que casi no queda petróleo residual donde pasa. Es la palanca del desplazamiento llevada al extremo.",
        "hl": 0,
        "scene": {
         "t": "dg",
         "d": "mis",
         "k": "Gas inmiscible y miscible",
-        "h": "Presión mínima de miscibilidad"
+        "h": "Presión mínima de miscibilidad",
+        "src": "Esquema didáctico H3L"
        }
       },
       {
@@ -1281,7 +1473,8 @@
         "t": "dg",
         "d": "wag",
         "k": "Control de movilidad del gas",
-        "h": "WAG: agua y gas alternados"
+        "h": "WAG: agua y gas alternados",
+        "src": "Esquema didáctico H3L"
        }
       },
       {
@@ -1321,7 +1514,8 @@
            "s": "medición, monitoreo|y verificación"
           }
          ]
-        }
+        },
+        "src": "Elaboración H3L"
        },
        "hs": [
         0,
@@ -1342,7 +1536,11 @@
        "say": "La criba no elige: deja candidatos. Para el laboratorio, hacé ese cambio en la hoja Screening y anotá qué métodos quedan como candidatos con cada campo. Después, escribí en tres líneas qué dato adicional pedirías para decidir entre dióxido de carbono y gas de hidrocarburo: por ejemplo, la MMP del slim-tube y la disponibilidad de la fuente."
       },
       {
-       "say": "La decisión que sostiene la lección es si el campo tiene la presión, la composición y la logística para un gas miscible. Y, si hay dióxido de carbono de por medio, cómo se va a medir lo que queda almacenado."
+       "say": "La decisión que sostiene la lección es si el campo tiene la presión, la composición y la logística para un gas miscible. Y, si hay dióxido de carbono de por medio, cómo se va a medir lo que queda almacenado.",
+       "scene": {
+        "t": "dec",
+        "q": "Si el campo tiene la presión, la composición y la logística para un gas miscible"
+       }
       },
       {
        "say": "Pregunta rápida. ¿Qué técnica se usa para mejorar el barrido de un gas de baja viscosidad? Respondé en pantalla.",
@@ -1478,8 +1676,20 @@
       {
        "say": "En los petróleos pesados, la viscosidad cae mucho al calentar. Por eso el calor es el método principal para crudos viscosos: baja la viscosidad y, con ella, la razón de movilidad, y el petróleo fluye hacia el pozo.",
        "scene": {
+        "t": "les",
+        "q": "En los petróleos pesados, la viscosidad cae mucho al calentar. Por eso el calor es el método principal para crudos viscosos: baja la viscosidad y, con ella, la razón de movilidad, y el petróleo fluye hacia el pozo."
+       }
+      },
+      {
+       "say": "Además de la viscosidad, el calor expande el petróleo, destila fracciones livianas, que luego se condensan y ayudan al desplazamiento, y en algunos casos mejora la permeabilidad relativa."
+      },
+      {
+       "say": "Al terminar esta lección vas a aprender, primero, a explicar por qué el calor es la palanca principal en petróleos viscosos.",
+       "hl": 0,
+       "obj": 1,
+       "scene": {
         "t": "bul",
-        "k": "Métodos térmicos: vapor y combustión",
+        "k": "Objetivos de la lección",
         "h": "Qué vas a aprender",
         "items": [
          "Explicar por qué el calor es la palanca principal en petróleos viscosos.",
@@ -1489,7 +1699,14 @@
        }
       },
       {
-       "say": "Además de la viscosidad, el calor expande el petróleo, destila fracciones livianas, que luego se condensan y ayudan al desplazamiento, y en algunos casos mejora la permeabilidad relativa."
+       "say": "Segundo, a describir las variantes térmicas más conocidas y sus indicadores.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a estimar el costo energético y las emisiones de la generación de vapor con un balance simple.",
+       "hl": 2,
+       "obj": 1
       },
       {
        "say": "Las variantes más conocidas son tres. La estimulación cíclica con vapor, o huff and puff, usa un solo pozo en tres etapas: se inyecta vapor, se cierra el pozo unos días para que el calor se distribuya, y luego se produce el mismo pozo.",
@@ -1498,7 +1715,8 @@
         "t": "dg",
         "d": "therm",
         "k": "Métodos térmicos",
-        "h": "Cuatro variantes"
+        "h": "Cuatro variantes",
+        "src": "Esquema didáctico H3L"
        }
       },
       {
@@ -1535,7 +1753,8 @@
            "s": "hacia las rocas de arriba|y abajo: pesan más en|espesores chicos"
           }
          ]
-        }
+        },
+        "src": "Elaboración H3L"
        }
       },
       {
@@ -1615,7 +1834,11 @@
        "say": "Para el laboratorio, hacé el balance de la ficha con otros valores de SOR, dos, cuatro y seis, y completá la energía y las emisiones por barril. Después, en la hoja Screening, cambiá la profundidad a dos mil quinientos metros y mirá qué pasa con el vapor."
       },
       {
-       "say": "La decisión que sostiene la lección es si el costo energético y ambiental de calentar se justifica frente a otras palancas. Un método eficaz pero de SOR alta o con emisiones altas puede no ser la mejor elección."
+       "say": "La decisión que sostiene la lección es si el costo energético y ambiental de calentar se justifica frente a otras palancas. Un método eficaz pero de SOR alta o con emisiones altas puede no ser la mejor elección.",
+       "scene": {
+        "t": "dec",
+        "q": "Si el costo energético y ambiental de calentar se justifica frente a otras palancas"
+       }
       },
       {
        "say": "Pregunta rápida. ¿Qué mide la SOR en un proyecto de vapor? Respondé en pantalla.",
@@ -1648,8 +1871,20 @@
       {
        "say": "Hay muchos métodos de EOR y pocos recursos para estudiarlos todos. La selección empieza por criterios técnicos de profundidad, viscosidad del petróleo, permeabilidad, temperatura y salinidad. Taber, Martin y Seright publicaron en mil novecientos noventa y siete una revisión de esos criterios, a partir de proyectos reales, que sigue siendo referencia de partida.",
        "scene": {
+        "t": "les",
+        "q": "Hay muchos métodos de EOR y pocos recursos para estudiarlos todos. La selección empieza por criterios técnicos de profundidad, viscosidad del petróleo, permeabilidad, temperatura y salinidad."
+       }
+      },
+      {
+       "say": "La idea es sencilla: para cada método hay un rango de propiedades de petróleo y de reservorio en el que se ha aplicado con éxito. La hoja Screening de la planilla aplica esa lógica. Arriba cargás los datos del campo: gravedad API, viscosidad, permeabilidad, profundidad y temperatura."
+      },
+      {
+       "say": "Al terminar esta lección vas a aprender, primero, a aplicar un screening con rangos de referencia y leer sus resultados.",
+       "hl": 0,
+       "obj": 1,
+       "scene": {
         "t": "bul",
-        "k": "Criterios de selección y screening de métodos EOR",
+        "k": "Objetivos de la lección",
         "h": "Qué vas a aprender",
         "items": [
          "Aplicar un screening con rangos de referencia y leer sus resultados.",
@@ -1659,7 +1894,14 @@
        }
       },
       {
-       "say": "La idea es sencilla: para cada método hay un rango de propiedades de petróleo y de reservorio en el que se ha aplicado con éxito. La hoja Screening de la planilla aplica esa lógica. Arriba cargás los datos del campo: gravedad API, viscosidad, permeabilidad, profundidad y temperatura."
+       "say": "Segundo, a reconocer los límites de una criba y qué viene después.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a armar un camino de decisión con laboratorio, simulación, piloto y economía.",
+       "hl": 2,
+       "obj": 1
       },
       {
        "say": "Abajo hay una tabla con siete métodos, y para cada uno un rango de cada propiedad. Los rangos están en celdas editables, y son orientativos: basados en la publicación de Taber y colaboradores, y hay que confirmarlos con la fuente antes de usarlos en un trabajo real.",
@@ -1668,7 +1910,8 @@
         "t": "dg",
         "d": "scr",
         "k": "Screening de siete métodos",
-        "h": "Campo de ejemplo"
+        "h": "Campo de ejemplo",
+        "src": "Rangos orientativos de Taber, Martin y Seright (1997) · campo de ejemplo con datos de Grimbeek (YPF, 2024); API supuesta"
        }
       },
       {
@@ -1720,7 +1963,8 @@
            "s": "escenarios de precio|y de respuesta"
           }
          ]
-        }
+        },
+        "src": "Elaboración H3L"
        },
        "hs": [
         0,
@@ -1797,7 +2041,14 @@
        }
       },
       {
-       "say": "Anotá los resultados en una tabla y escribí, para cada campo, tres datos que pedirías antes de seguir. La decisión que sostiene la lección es qué métodos pasan a la siguiente etapa y qué datos faltan. No se elige un método con una criba."
+       "say": "Anotá los resultados en una tabla y escribí, para cada campo, tres datos que pedirías antes de seguir."
+      },
+      {
+       "say": "La decisión que sostiene la lección es qué métodos pasan a la siguiente etapa y qué datos faltan. No se elige un método con una criba.",
+       "scene": {
+        "t": "dec",
+        "q": "Qué métodos pasan a la siguiente etapa y qué datos faltan"
+       }
       },
       {
        "say": "Pregunta rápida. Un método aparece como «Revisar» en el screening porque falla un solo criterio. ¿Qué corresponde? Respondé en pantalla.",
@@ -1830,8 +2081,39 @@
       {
        "say": "Un piloto de EOR responde una pregunta concreta: ¿funciona este método en este yacimiento, y a qué costo? Para que pueda responderla, hay que diseñarlo bien antes de inyectar el primer litro.",
        "scene": {
+        "t": "les",
+        "q": "Un piloto de EOR responde una pregunta concreta: ¿funciona este método en este yacimiento, y a qué costo?"
+       }
+      },
+      {
+       "say": "Una buena práctica es definir antes del piloto qué resultado lo considera exitoso y cómo se medirá. Por ejemplo: una reducción mínima del corte de agua, una producción incremental respecto de la línea base, o un costo máximo por barril incremental.",
+       "scene": {
         "t": "bul",
-        "k": "Piloto, escala y economía: el caso Manantiales Behr",
+        "k": "Antes de inyectar",
+        "h": "Tres decisiones del piloto",
+        "items": [
+         "Definir antes qué resultado se considera exitoso y cómo se mide",
+         "Diseñar el piloto para poder atribuir la respuesta al método",
+         "Establecer la línea base con curvas de declinación"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Atribuir la respuesta al método y no a otros cambios del campo exige un diseño. Un patrón con un productor central y pozos de observación alrededor permite ver el avance. Los trazadores marcan el camino del fluido inyectado. Los balances de masa, con mediciones confiables de inyección y producción, cierran las cuentas.",
+       "hl": 1
+      },
+      {
+       "say": "Y la línea base, es decir, cómo habría seguido la producción sin el proyecto, se establece antes con las curvas de declinación. Sin línea base no hay incremental, y sin pozos de observación no hay explicación.",
+       "hl": 2
+      },
+      {
+       "say": "Al terminar esta lección vas a aprender, primero, a diseñar un piloto con criterios de éxito definidos antes de empezar y atribuir la respuesta al método.",
+       "hl": 0,
+       "obj": 1,
+       "scene": {
+        "t": "bul",
+        "k": "Objetivos de la lección",
         "h": "Qué vas a aprender",
         "items": [
          "Diseñar un piloto con criterios de éxito definidos antes de empezar y atribuir la respuesta al método.",
@@ -1841,13 +2123,14 @@
        }
       },
       {
-       "say": "Una buena práctica es definir antes del piloto qué resultado lo considera exitoso y cómo se medirá. Por ejemplo: una reducción mínima del corte de agua, una producción incremental respecto de la línea base, o un costo máximo por barril incremental."
+       "say": "Segundo, a describir la secuencia de optimización, piloto y escala del caso Grimbeek con los datos publicados.",
+       "hl": 1,
+       "obj": 1
       },
       {
-       "say": "Atribuir la respuesta al método y no a otros cambios del campo exige un diseño. Un patrón con un productor central y pozos de observación alrededor permite ver el avance. Los trazadores marcan el camino del fluido inyectado. Los balances de masa, con mediciones confiables de inyección y producción, cierran las cuentas."
-      },
-      {
-       "say": "Y la línea base, es decir, cómo habría seguido la producción sin el proyecto, se establece antes con las curvas de declinación. Sin línea base no hay incremental, y sin pozos de observación no hay explicación."
+       "say": "Y tercero, a evaluar la economía de un piloto con escenarios de precio bajo y de respuesta menor.",
+       "hl": 2,
+       "obj": 1
       },
       {
        "say": "Después del piloto viene la escala. Y acá el caso de Manantiales Behr deja una enseñanza de secuencia. Primero se optimizó la inyección de agua, que en Grimbeek comenzó a principios de dos mil trece. Después se hizo un piloto de polímeros, en dos mil quince, con cuatro pozos inyectores, un productor central y nueve productores periféricos.",
@@ -1873,7 +2156,8 @@
            "s": "móviles y modulares"
           }
          ]
-        }
+        },
+        "src": "YPF (2024), Petrotecnia 124, IAPG: datos publicados del yacimiento Grimbeek"
        },
        "hs": [
         0,
@@ -1913,7 +2197,8 @@
            "k": "g"
           }
          ]
-        }
+        },
+        "src": "Elaboración H3L"
        },
        "hs": [
         0,
@@ -1937,7 +2222,8 @@
         "t": "dg",
         "d": "econ",
         "k": "Economía del piloto",
-        "h": "Ejemplo con números inventados"
+        "h": "Ejemplo con números inventados",
+        "src": "Ejemplo didáctico con números inventados (hoja Economia_piloto de la planilla del curso)"
        }
       },
       {
@@ -1962,7 +2248,31 @@
        ]
       },
       {
-       "say": "Las lecciones prácticas del caso son pocas y firmes. El proyecto de polímeros es un proyecto de agua, de plantas y de operación continua, no solo de reservorio. Se mide la viscosidad en el pozo, no solo en la planta. Cada etapa tiene criterios de éxito. Y la escala es modular, para poder frenar o ajustar."
+       "say": "Las lecciones prácticas del caso son pocas y firmes. El proyecto de polímeros es un proyecto de agua, de plantas y de operación continua, no solo de reservorio.",
+       "scene": {
+        "t": "bul",
+        "k": "Caso Manantiales Behr",
+        "h": "Lecciones prácticas",
+        "items": [
+         "Un proyecto de agua, de plantas y de operación continua",
+         "Se mide la viscosidad en el pozo, no solo en la planta",
+         "Cada etapa tiene criterios de éxito",
+         "Escala modular, para poder frenar o ajustar"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Se mide la viscosidad en el pozo, no solo en la planta.",
+       "hl": 1
+      },
+      {
+       "say": "Cada etapa tiene criterios de éxito.",
+       "hl": 2
+      },
+      {
+       "say": "Y la escala es modular, para poder frenar o ajustar.",
+       "hl": 3
       },
       {
        "say": "Para el laboratorio, usá la hoja Economia_piloto. Cambiá la recuperación incremental a cuatro por ciento y la demora a tres años, y anotá el valor actual neto en los tres escenarios. Después, escribí un plan de piloto de una página: objetivo, patrón, mediciones, línea base, criterios de éxito y criterio de parada.",
@@ -2005,31 +2315,8 @@
       {
        "say": "La decisión que sostiene la lección es cuánto invertir antes de la prueba y qué resultado hace avanzar, ajustar o detener.",
        "scene": {
-        "t": "tbl",
-        "k": "Piloto, escala y economía: el caso Manantiales Behr",
-        "h": "Escenario",
-        "cols": [
-         "Escenario",
-         "Precio (USD/bbl)",
-         "VAN simple (MMUSD)"
-        ],
-        "rows": [
-         [
-          "Base",
-          "65",
-          "5,5"
-         ],
-         [
-          "Precio bajo",
-          "45",
-          "2,0"
-         ],
-         [
-          "Precio bajo y respuesta menor (50 %)",
-          "45",
-          "−2,0"
-         ]
-        ]
+        "t": "dec",
+        "q": "Cuánto invertir antes de la prueba y qué resultado hace avanzar, ajustar o detener"
        }
       },
       {

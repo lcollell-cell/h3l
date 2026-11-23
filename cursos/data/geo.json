@@ -193,8 +193,17 @@
       {
        "say": "Un sistema petrolero es una roca generadora madura más todos los elementos y procesos geológicos necesarios para que exista una acumulación de petróleo o gas. La definición clásica es de Magoon y Dow, de 1994, en la memoria 60 de la AAPG. La palabra clave es sistema: si falta una pieza, o si una pieza aparece en el momento equivocado, no hay campo.",
        "scene": {
+        "t": "les",
+        "q": "Un sistema petrolero es una roca generadora madura más todos los elementos y procesos geológicos necesarios para que exista una acumulación de petróleo o gas."
+       }
+      },
+      {
+       "say": "Al terminar esta lección vas a aprender, primero, a distinguir los elementos y los procesos de un sistema petrolero y ubicarlos en un diagrama de eventos.",
+       "hl": 0,
+       "obj": 1,
+       "scene": {
         "t": "bul",
-        "k": "Elementos y procesos del sistema petrolero",
+        "k": "Objetivos de la lección",
         "h": "Qué vas a aprender",
         "items": [
          "Distinguir los elementos y los procesos de un sistema petrolero y ubicarlos en un diagrama de eventos.",
@@ -204,13 +213,24 @@
        }
       },
       {
+       "say": "Segundo, a definir el momento crítico y evaluar la sincronía entre trampa, generación y migración.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a estimar la probabilidad de éxito geológico como producto de componentes independientes.",
+       "hl": 2,
+       "obj": 1
+      },
+      {
        "say": "Los elementos son cuatro roles de roca. La roca generadora, que contiene materia orgánica y, con enterramiento suficiente, genera hidrocarburos. La roca reservorio, con porosidad y permeabilidad para almacenarlos y dejarlos fluir.",
        "hl": 1,
        "scene": {
         "t": "dg",
         "d": "sp",
         "k": "Sistema petrolero",
-        "h": "Elementos y procesos, en orden"
+        "h": "Elementos y procesos, en orden",
+        "src": "Esquema didáctico H3L · Magoon y Dow (1994), AAPG Memoir 60"
        },
        "hs": [
         0,
@@ -256,7 +276,8 @@
         "t": "dg",
         "d": "ev",
         "k": "Diagrama de eventos",
-        "h": "Eventos en el tiempo geológico"
+        "h": "Eventos en el tiempo geológico",
+        "src": "Esquema didáctico H3L · Magoon y Dow (1994), AAPG Memoir 60"
        },
        "hs": [
         0,
@@ -304,7 +325,8 @@
         "t": "dg",
         "d": "risk",
         "k": "Riesgo geológico",
-        "h": "Probabilidad de éxito"
+        "h": "Probabilidad de éxito",
+        "src": "Ejemplo didáctico: probabilidades supuestas para ilustrar el método"
        }
       },
       {
@@ -325,7 +347,8 @@
         "t": "dg",
         "d": "neu",
         "k": "Cuenca Neuquina",
-        "h": "Convencional y no convencional"
+        "h": "Convencional y no convencional",
+        "src": "Esquema didáctico H3L · Howell et al. (2005), Geol. Soc. London Spec. Publ. 252"
        },
        "hs": [
         0
@@ -391,8 +414,17 @@
       {
        "say": "Antes de hablar de madurez a lo largo del tiempo, hay que responder tres preguntas sobre una roca generadora: cuánta materia orgánica tiene, de qué tipo es y hasta dónde maduró. La geoquímica orgánica responde las tres con análisis de laboratorio sobre muestras de núcleos, de recortes de perforación o de afloramientos.",
        "scene": {
+        "t": "les",
+        "q": "Antes de hablar de madurez a lo largo del tiempo, hay que responder tres preguntas sobre una roca generadora: cuánta materia orgánica tiene, de qué tipo es y hasta dónde maduró."
+       }
+      },
+      {
+       "say": "Al terminar esta lección vas a aprender, primero, a clasificar una roca generadora por riqueza (TOC), tipo de querógeno y madurez con datos de pirólisis Rock-Eval.",
+       "hl": 0,
+       "obj": 1,
+       "scene": {
         "t": "bul",
-        "k": "Geoquímica de la roca generadora",
+        "k": "Objetivos de la lección",
         "h": "Qué vas a aprender",
         "items": [
          "Clasificar una roca generadora por riqueza (TOC), tipo de querógeno y madurez con datos de pirólisis Rock-Eval.",
@@ -402,13 +434,24 @@
        }
       },
       {
+       "say": "Segundo, a calcular e interpretar los índices de hidrógeno, de oxígeno y de producción.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a reconocer las limitaciones de la reflectancia de vitrinita y del TOC actual en rocas maduras.",
+       "hl": 2,
+       "obj": 1
+      },
+      {
        "say": "La materia orgánica que se preserva en un sedimento se divide en bitumen, que es soluble en solventes orgánicos, y querógeno, que es insoluble. El querógeno es la fuente de la mayor parte de los hidrocarburos que se generan. Su composición se describe con la relación entre hidrógeno y carbono, y entre oxígeno y carbono, en el diagrama de van Krevelen.",
        "hl": 0,
        "scene": {
         "t": "dg",
         "d": "kg",
         "k": "Materia orgánica",
-        "h": "Bitumen, querógeno y sus tipos"
+        "h": "Bitumen, querógeno y sus tipos",
+        "src": "Esquema didáctico H3L · Tissot y Welte (1984), Petroleum Formation and Occurrence"
        }
       },
       {
@@ -429,7 +472,8 @@
         "t": "dg",
         "d": "toc",
         "k": "Riqueza y pirólisis",
-        "h": "TOC y Rock-Eval"
+        "h": "TOC y Rock-Eval",
+        "src": "Clasificación de Peters y Cassa (1994), AAPG Memoir 60 · Esquema didáctico H3L"
        }
       },
       {
@@ -495,7 +539,8 @@
         "t": "dg",
         "d": "hi",
         "k": "Tipo de querógeno",
-        "h": "Índice de hidrógeno"
+        "h": "Índice de hidrógeno",
+        "src": "Valores orientativos · Esquema didáctico H3L · Tissot y Welte (1984)"
        },
        "hs": [
         0,
@@ -552,7 +597,8 @@
         "t": "dg",
         "d": "mat",
         "k": "Madurez térmica",
-        "h": "Tmax y reflectancia de vitrinita"
+        "h": "Tmax y reflectancia de vitrinita",
+        "src": "Umbrales orientativos · Esquema didáctico H3L · Tissot y Welte (1984)"
        },
        "hl": 0
       },
@@ -574,7 +620,8 @@
         "t": "dg",
         "d": "mat",
         "k": "Madurez térmica",
-        "h": "Vaca Muerta: gradiente de madurez"
+        "h": "Vaca Muerta: gradiente de madurez",
+        "src": "Umbrales orientativos · Esquema didáctico H3L · Tissot y Welte (1984)"
        }
       },
       {
@@ -584,7 +631,8 @@
         "t": "dg",
         "d": "vmtoc",
         "k": "Vaca Muerta",
-        "h": "Retención y perfil de TOC"
+        "h": "Retención y perfil de TOC",
+        "src": "Esquema didáctico H3L; el umbral de 100 mg/g de TOC es una regla empírica"
        }
       },
       {
@@ -596,14 +644,37 @@
        ]
       },
       {
-       "say": "Ese intervalo basal, asociado a una superficie de máxima inundación del Tithoniano temprano, es el que más interesa como objetivo, y lo vamos a retomar en el próximo módulo. Tres recomendaciones prácticas sobre la calidad del dato. Primero, muestreá con densidad suficiente y no solo en la zona de interés: las variaciones verticales de TOC son grandes.",
+       "say": "Ese intervalo basal, asociado a una superficie de máxima inundación del Tithoniano temprano, es el que más interesa como objetivo, y lo vamos a retomar en el próximo módulo.",
        "hl": 2
       },
       {
-       "say": "Segundo, cuidado con la contaminación: el lodo con base aceite eleva S1 y puede enmascarar la señal, así que las muestras se lavan o se interpretan con cautela. Tercero, descartá la Tmax cuando S2 es muy bajo, por ejemplo por debajo de medio miligramo por gramo, porque el pico no es confiable."
+       "say": "Tres recomendaciones prácticas sobre la calidad del dato. Primero, muestreá con densidad suficiente y no solo en la zona de interés: las variaciones verticales de TOC son grandes.",
+       "scene": {
+        "t": "bul",
+        "k": "Calidad del dato",
+        "h": "Tres recomendaciones prácticas",
+        "items": [
+         "Muestrear con densidad suficiente, y no solo en la zona de interés",
+         "Cuidado con la contaminación: el lodo base aceite eleva S1",
+         "Descartar la Tmax cuando S2 es muy bajo (< 0,5 mg/g)"
+        ]
+       },
+       "hl": 0
       },
       {
-       "say": "La decisión que sostiene esta lección es simple: ¿esta roca vale la pena como generadora y como objetivo? Si el TOC es bueno, el querógeno es de tipo uno o dos y la madurez cae en la ventana de petróleo o de gas, la respuesta es sí."
+       "say": "Segundo, cuidado con la contaminación: el lodo con base aceite eleva S1 y puede enmascarar la señal, así que las muestras se lavan o se interpretan con cautela.",
+       "hl": 1
+      },
+      {
+       "say": "Tercero, descartá la Tmax cuando S2 es muy bajo, por ejemplo por debajo de medio miligramo por gramo, porque el pico no es confiable.",
+       "hl": 2
+      },
+      {
+       "say": "La decisión que sostiene esta lección es simple: ¿esta roca vale la pena como generadora y como objetivo? Si el TOC es bueno, el querógeno es de tipo uno o dos y la madurez cae en la ventana de petróleo o de gas, la respuesta es sí.",
+       "scene": {
+        "t": "dec",
+        "q": "¿Esta roca vale la pena como generadora y como objetivo?"
+       }
       },
       {
        "say": "En la próxima lección vemos cómo se llega a esa madurez a través del tiempo."
@@ -639,8 +710,17 @@
       {
        "say": "La materia orgánica se transforma en hidrocarburo por temperatura y tiempo. Por eso la historia de enterramiento, es decir, cuánto y cuándo se hundió la roca generadora, decide si hay petróleo, gas o nada. En esta lección vamos a ver cómo se reconstruye esa historia y cómo se traduce en madurez.",
        "scene": {
+        "t": "les",
+        "q": "La materia orgánica se transforma en hidrocarburo por temperatura y tiempo."
+       }
+      },
+      {
+       "say": "Al terminar esta lección vas a aprender, primero, a construir e interpretar una curva de enterramiento y estimar la temperatura con el gradiente geotérmico.",
+       "hl": 0,
+       "obj": 1,
+       "scene": {
         "t": "bul",
-        "k": "Historia de enterramiento y madurez térmica",
+        "k": "Objetivos de la lección",
         "h": "Qué vas a aprender",
         "items": [
          "Construir e interpretar una curva de enterramiento y estimar la temperatura con el gradiente geotérmico.",
@@ -650,12 +730,23 @@
        }
       },
       {
+       "say": "Segundo, a explicar la relación tiempo-temperatura en la maduración y calcular un índice TTI simple.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a ubicar la madurez de Vaca Muerta en el mapa de la cuenca Neuquina y reconocer las fuentes de incertidumbre del modelo.",
+       "hl": 2,
+       "obj": 1
+      },
+      {
        "say": "La curva de enterramiento es un gráfico de profundidad contra tiempo geológico. Se construye a partir de los espesores y las edades de las unidades estratigráficas, descompactándolas, es decir, devolviéndoles el espesor que tenían antes de que el peso de las capas superiores las comprimiera.",
        "scene": {
         "t": "dg",
         "d": "bur",
         "k": "Historia de enterramiento",
-        "h": "Profundidad, temperatura y tiempo"
+        "h": "Profundidad, temperatura y tiempo",
+        "src": "Esquema didáctico H3L · TTI de Lopatin, según Waples (1980)"
        },
        "hl": 0
       },
@@ -704,7 +795,8 @@
         "t": "dg",
         "d": "neum",
         "k": "Cuenca Neuquina",
-        "h": "Etapas y madurez regional"
+        "h": "Etapas y madurez regional",
+        "src": "Esquema didáctico H3L · Howell et al. (2005), Geol. Soc. London Spec. Publ. 252"
        },
        "hl": 0
       },
@@ -735,7 +827,14 @@
        "lab": true
       },
       {
-       "say": "Después repetí variando el factor de enterramiento y anotá cuál de las dos variables mueve más el resultado. La decisión que sostiene esta lección es qué fluido esperar y dónde. Una generadora en ventana de petróleo, con presión alta y buena riqueza, justifica un proyecto de petróleo."
+       "say": "Después repetí variando el factor de enterramiento y anotá cuál de las dos variables mueve más el resultado."
+      },
+      {
+       "say": "La decisión que sostiene esta lección es qué fluido esperar y dónde. Una generadora en ventana de petróleo, con presión alta y buena riqueza, justifica un proyecto de petróleo.",
+       "scene": {
+        "t": "dec",
+        "q": "Qué fluido esperar y dónde"
+       }
       },
       {
        "say": "Una en ventana de gas seco apunta a gas. Y entre ambas, la zona de gas húmedo y condensado exige un análisis cuidadoso de los fluidos y de la economía."
@@ -874,8 +973,20 @@
       {
        "say": "La estratigrafía de secuencias divide el registro sedimentario en paquetes limitados por superficies de discordancia o por sus equivalentes concordantes. Es el marco que usamos los geólogos para predecir dónde están las rocas reservorio, las rocas sello y las generadoras.",
        "scene": {
+        "t": "les",
+        "q": "La estratigrafía de secuencias divide el registro sedimentario en paquetes limitados por superficies de discordancia o por sus equivalentes concordantes."
+       }
+      },
+      {
+       "say": "El trabajo fundacional es de Vail y colaboradores, de 1977, en la memoria 26 de la AAPG. En este módulo, el marco estratigráfico es la base sobre la que se apoyan los registros, los cortes y, más adelante, el modelo."
+      },
+      {
+       "say": "Al terminar esta lección vas a aprender, primero, a identificar secuencias, tractos de sistemas y superficies clave en un registro sedimentario.",
+       "hl": 0,
+       "obj": 1,
+       "scene": {
         "t": "bul",
-        "k": "Estratigrafía de secuencias y correlación",
+        "k": "Objetivos de la lección",
         "h": "Qué vas a aprender",
         "items": [
          "Identificar secuencias, tractos de sistemas y superficies clave en un registro sedimentario.",
@@ -885,7 +996,14 @@
        }
       },
       {
-       "say": "El trabajo fundacional es de Vail y colaboradores, de 1977, en la memoria 26 de la AAPG. En este módulo, el marco estratigráfico es la base sobre la que se apoyan los registros, los cortes y, más adelante, el modelo."
+       "say": "Segundo, a correlacionar pozos por superficies de tiempo y no por parecido litológico.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a explicar por qué los límites de formación de Vaca Muerta y Quintuco son diacrónicos y cómo definir zonas para el modelo.",
+       "hl": 2,
+       "obj": 1
       },
       {
        "say": "La idea central es el espacio de acomodación: el espacio disponible para que se acumule sedimento. Lo controlan el nivel relativo del mar, que combina las variaciones del nivel del mar global con la subsidencia, y el aporte de sedimento determina cómo se llena ese espacio.",
@@ -893,7 +1011,8 @@
         "t": "dg",
         "d": "acom",
         "k": "Estratigrafía de secuencias",
-        "h": "Espacio de acomodación y aporte"
+        "h": "Espacio de acomodación y aporte",
+        "src": "Esquema didáctico H3L · Vail et al. (1977), AAPG Memoir 26"
        },
        "hl": 0
       },
@@ -907,7 +1026,8 @@
         "t": "dg",
         "d": "tract",
         "k": "Tractos y superficies clave",
-        "h": "Nivel relativo del mar"
+        "h": "Nivel relativo del mar",
+        "src": "Esquema didáctico H3L · Vail et al. (1977), AAPG Memoir 26"
        },
        "hs": [
         0,
@@ -969,7 +1089,8 @@
         "t": "dg",
         "d": "corr",
         "k": "Correlación",
-        "h": "Por tiempo y no por litología"
+        "h": "Por tiempo y no por litología",
+        "src": "Esquema didáctico H3L · Vail et al. (1977), AAPG Memoir 26"
        },
        "hs": [
         0
@@ -996,7 +1117,8 @@
         "t": "dg",
         "d": "clino",
         "k": "Vaca Muerta",
-        "h": "Clinoformas y sección condensada"
+        "h": "Clinoformas y sección condensada",
+        "src": "Esquema didáctico H3L · Mitchum y Uliana (1985), AAPG Memoir 39"
        },
        "hl": 0
       },
@@ -1038,7 +1160,8 @@
            "s": "proporcionales,|paralelas al tope|o a la base"
           }
          ]
-        }
+        },
+        "src": "Elaboración H3L"
        },
        "hs": [
         0,
@@ -1052,7 +1175,26 @@
        "hl": 3
       },
       {
-       "say": "Los errores típicos son correlacionar picos de rayos gamma sin confirmar que son superficies de inundación, ignorar fallas que desplazan los marcadores, y usar un único marcador regional como si fuera una superficie de tiempo. Cada uno produce modelos que parecen razonables y fallan cuando se perfora."
+       "say": "Los errores típicos son tres. Primero, correlacionar picos de rayos gamma sin confirmar que son superficies de inundación.",
+       "scene": {
+        "t": "bul",
+        "k": "Correlación",
+        "h": "Tres errores típicos",
+        "items": [
+         "Correlacionar picos de rayos gamma sin confirmar que son superficies de inundación",
+         "Ignorar fallas que desplazan los marcadores",
+         "Usar un único marcador regional como superficie de tiempo"
+        ]
+       },
+       "hl": 0
+      },
+      {
+       "say": "Segundo, ignorar fallas que desplazan los marcadores.",
+       "hl": 1
+      },
+      {
+       "say": "Y tercero, usar un único marcador regional como si fuera una superficie de tiempo. Cada uno produce modelos que parecen razonables y fallan cuando se perfora.",
+       "hl": 2
       },
       {
        "say": "Ejercicio. En la ficha tenés los datos de tres pozos: A, B y C. Una arenisca similar aparece en los tres, pero la bioestratigrafía asigna la de C a una zona de amonites más joven. Decidí cuáles de esas areniscas correlacionan entre sí, y cuál es el impacto sobre la continuidad del cuerpo arenoso que vas a poner en el modelo.",
@@ -1089,7 +1231,11 @@
        }
       },
       {
-       "say": "La decisión que sostiene esta lección es la zonación del modelo: qué intervalos se tratan como unidades de tiempo, cómo se las divide en capas y qué continuidad lateral se supone. Una buena zonación evita la mayor parte de los errores que después se propagan al modelo completo."
+       "say": "La decisión que sostiene esta lección es la zonación del modelo: qué intervalos se tratan como unidades de tiempo, cómo se las divide en capas y qué continuidad lateral se supone. Una buena zonación evita la mayor parte de los errores que después se propagan al modelo completo.",
+       "scene": {
+        "t": "dec",
+        "q": "La zonación del modelo"
+       }
       },
       {
        "say": "Pregunta rápida. Dos pozos tienen una arenisca de aspecto muy similar en los registros. ¿Con qué criterio decidís si la correlacionás? Respondé en pantalla.",
@@ -1122,8 +1268,20 @@
       {
        "say": "Los registros de pozo convierten mediciones físicas en propiedades de roca. Con rayos gamma estimamos la arcillosidad, con densidad, neutrón y sónico la porosidad, y con resistividad la saturación de agua.",
        "scene": {
+        "t": "les",
+        "q": "Los registros de pozo convierten mediciones físicas en propiedades de roca."
+       }
+      },
+      {
+       "say": "En lutitas orgánicas como Vaca Muerta, además, se estima la materia orgánica. En esta lección vemos cada paso, con sus supuestos y sus límites, porque cada propiedad que sale de un registro es un modelo y no una medición directa."
+      },
+      {
+       "say": "Al terminar esta lección vas a aprender, primero, a calcular arcillosidad, porosidad y saturación de agua a partir de registros y explicar los supuestos de cada método.",
+       "hl": 0,
+       "obj": 1,
+       "scene": {
         "t": "bul",
-        "k": "Registros de pozo: del dato a la propiedad",
+        "k": "Objetivos de la lección",
         "h": "Qué vas a aprender",
         "items": [
          "Calcular arcillosidad, porosidad y saturación de agua a partir de registros y explicar los supuestos de cada método.",
@@ -1133,7 +1291,14 @@
        }
       },
       {
-       "say": "En lutitas orgánicas como Vaca Muerta, además, se estima la materia orgánica. En esta lección vemos cada paso, con sus supuestos y sus límites, porque cada propiedad que sale de un registro es un modelo y no una medición directa."
+       "say": "Segundo, a reconocer por qué la ecuación de Archie con parámetros por defecto falla en rocas arcillosas y en lutitas orgánicas.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a estimar el carbono orgánico total con el método de Passey y calibrarlo con laboratorio.",
+       "hl": 2,
+       "obj": 1
       },
       {
        "say": "Empecemos por la arcillosidad. El registro de rayos gamma mide la radiactividad natural de la roca. El índice de rayos gamma se calcula restando el valor mínimo, en una arena limpia, y dividiendo por la diferencia entre el máximo, en una lutita, y el mínimo.",
@@ -1141,7 +1306,8 @@
         "t": "dg",
         "d": "logs",
         "k": "Registros de pozo",
-        "h": "Del dato a la propiedad"
+        "h": "Del dato a la propiedad",
+        "src": "Esquema didáctico H3L · Archie (1942), Trans. AIME 146"
        },
        "hl": 0
       },
@@ -1218,7 +1384,8 @@
         "t": "dg",
         "d": "logs",
         "k": "Registros de pozo",
-        "h": "Del dato a la propiedad"
+        "h": "Del dato a la propiedad",
+        "src": "Esquema didáctico H3L · Archie (1942), Trans. AIME 146"
        },
        "hl": 4
       },
@@ -1244,7 +1411,14 @@
        "say": "Un modelo petrofísico sofisticado sobre un registro mal corregido solo produce errores con apariencia de precisión. Ejercicio. En la ficha hay tres cálculos para practicar: una porosidad de densidad, una saturación de Archie y un TOC por Passey."
       },
       {
-       "say": "Resolvelos y verificá con las respuestas. La decisión que sostiene esta lección es qué intervalos son potencial reservorio, cuánta materia orgánica tienen y con qué incertidumbre. En la próxima lección usamos núcleos para calibrar esas propiedades y definimos los cortes."
+       "say": "Resolvelos y verificá con las respuestas."
+      },
+      {
+       "say": "La decisión que sostiene esta lección es qué intervalos son potencial reservorio, cuánta materia orgánica tienen y con qué incertidumbre. En la próxima lección usamos núcleos para calibrar esas propiedades y definimos los cortes.",
+       "scene": {
+        "t": "dec",
+        "q": "Qué intervalos son potencial reservorio, cuánta materia orgánica tienen y con qué incertidumbre"
+       }
       },
       {
        "say": "Pregunta rápida. ¿Por qué es riesgoso aplicar la ecuación de Archie con sus parámetros por defecto en una lutita orgánica? Respondé en pantalla.",
@@ -1277,8 +1451,20 @@
       {
        "say": "Un registro es un modelo; un núcleo es una medición directa. Por eso los núcleos son el ancla de toda la evaluación: con ellos se calibran los registros, se definen los parámetros de los modelos petrofísicos y se justifican los cortes.",
        "scene": {
+        "t": "les",
+        "q": "Un registro es un modelo; un núcleo es una medición directa. Por eso los núcleos son el ancla de toda la evaluación: con ellos se calibran los registros, se definen los parámetros de los modelos petrofísicos y se justifican los cortes."
+       }
+      },
+      {
+       "say": "En esta lección vemos qué se mide en un núcleo, cómo se calibra y cómo se llega a la roca neta. El análisis de rutina mide porosidad, permeabilidad y densidad de grano. En rocas convencionales se usa porosimetría de helio y permeabilidad con corrección por deslizamiento de gas."
+      },
+      {
+       "say": "Al terminar esta lección vas a aprender, primero, a enumerar los análisis de núcleo que calibran los registros y explicar cómo se hace la calibración núcleo-registro.",
+       "hl": 0,
+       "obj": 1,
+       "scene": {
         "t": "bul",
-        "k": "Núcleos, calibración y cortes: de la propiedad a la roca ne…",
+        "k": "Objetivos de la lección",
         "h": "Qué vas a aprender",
         "items": [
          "Enumerar los análisis de núcleo que calibran los registros y explicar cómo se hace la calibración núcleo-registro.",
@@ -1288,7 +1474,14 @@
        }
       },
       {
-       "say": "En esta lección vemos qué se mide en un núcleo, cómo se calibra y cómo se llega a la roca neta. El análisis de rutina mide porosidad, permeabilidad y densidad de grano. En rocas convencionales se usa porosimetría de helio y permeabilidad con corrección por deslizamiento de gas."
+       "say": "Segundo, a distinguir roca bruta, neta, reservorio y net pay, y calcular el net-to-gross.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a evaluar el efecto de los cortes sobre el espesor útil y el volumen en sitio usando la planilla.",
+       "hl": 2,
+       "obj": 1
       },
       {
        "say": "En lutitas, donde la permeabilidad es de nanodarcys, se trabaja con roca triturada y métodos especiales, y los resultados dependen del protocolo, por lo que siempre hay que documentarlo. El análisis especial incluye presiones capilares, permeabilidades relativas y propiedades eléctricas, que dan los exponentes de cementación y de saturación para Archie.",
@@ -1344,7 +1537,8 @@
         "t": "dg",
         "d": "calib",
         "k": "Calibración núcleo–registro",
-        "h": "Tres pasos, en orden"
+        "h": "Tres pasos, en orden",
+        "src": "Ejemplo didáctico: planilla del curso (H3L_Geo_Volumetria_y_Cortes.xlsx)"
        },
        "hl": 0
       },
@@ -1365,7 +1559,8 @@
         "t": "dg",
         "d": "cut",
         "k": "Cortes",
-        "h": "Del espesor bruto al net pay (esquema)"
+        "h": "Del espesor bruto al net pay (esquema)",
+        "src": "Ejemplo didáctico: planilla del curso (H3L_Geo_Volumetria_y_Cortes.xlsx)"
        },
        "hs": [
         0,
@@ -1404,7 +1599,8 @@
         "t": "dg",
         "d": "scen",
         "k": "Escenarios de cortes",
-        "h": "Net pay y petróleo en sitio"
+        "h": "Net pay y petróleo en sitio",
+        "src": "Ejemplo didáctico: planilla del curso (H3L_Geo_Volumetria_y_Cortes.xlsx)"
        },
        "hl": 0
       },
@@ -1423,7 +1619,11 @@
        "say": "La segunda: no se aplica el corte dos veces, ni sobre los registros ni sobre los promedios, y se documenta si el modelo ya incluye un corte antes de calcular volúmenes."
       },
       {
-       "say": "La decisión que sostiene esta lección es cuánta roca cuenta y con qué criterio. No hay un corte correcto único: hay un corte justificado, con su sensibilidad medida, y esa sensibilidad es parte del resultado que se presenta."
+       "say": "La decisión que sostiene esta lección es cuánta roca cuenta y con qué criterio. No hay un corte correcto único: hay un corte justificado, con su sensibilidad medida, y esa sensibilidad es parte del resultado que se presenta.",
+       "scene": {
+        "t": "dec",
+        "q": "Cuánta roca cuenta y con qué criterio"
+       }
       },
       {
        "say": "Pregunta rápida. Si endurecés el corte de saturación de agua, ¿qué pasa con el net pay y con el volumen de petróleo en sitio? Respondé en pantalla.",
@@ -1559,8 +1759,17 @@
       {
        "say": "Hasta ahora trabajamos con datos de pozo, que son muy precisos pero puntuales. La sísmica de reflexión aporta lo que falta: una imagen continua del subsuelo entre los pozos. En esta lección vemos qué nos da, qué no nos da y cómo se transforma en el marco estructural que sostiene el modelo estático.",
        "scene": {
+        "t": "les",
+        "q": "Hasta ahora trabajamos con datos de pozo, que son muy precisos pero puntuales."
+       }
+      },
+      {
+       "say": "Al terminar esta lección vas a aprender, primero, a explicar qué puede y qué no puede resolver la sísmica de reflexión y calcular la resolución vertical.",
+       "hl": 0,
+       "obj": 1,
+       "scene": {
         "t": "bul",
-        "k": "Sísmica y marco estructural",
+        "k": "Objetivos de la lección",
         "h": "Qué vas a aprender",
         "items": [
          "Explicar qué puede y qué no puede resolver la sísmica de reflexión y calcular la resolución vertical.",
@@ -1570,12 +1779,23 @@
        }
       },
       {
+       "say": "Segundo, a convertir tiempo a profundidad y estimar el efecto de la incertidumbre de velocidad y de picado en el espesor.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a describir cómo se construye un marco estructural consistente para el modelo.",
+       "hl": 2,
+       "obj": 1
+      },
+      {
        "say": "La sísmica funciona así. Una fuente genera una onda que viaja por el subsuelo y se refleja cada vez que encuentra un cambio de impedancia acústica, que es el producto de la densidad por la velocidad de la roca.",
        "scene": {
         "t": "dg",
         "d": "seis",
         "k": "Sísmica de reflexión",
-        "h": "Del contraste de impedancias a la traza"
+        "h": "Del contraste de impedancias a la traza",
+        "src": "Esquema didáctico H3L"
        },
        "hl": 0
       },
@@ -1593,7 +1813,8 @@
         "t": "dg",
         "d": "res",
         "k": "Resolución vertical",
-        "h": "Un cuarto de la longitud de onda"
+        "h": "Un cuarto de la longitud de onda",
+        "src": "Esquema didáctico H3L"
        },
        "hl": 0
       },
@@ -1649,7 +1870,8 @@
         "t": "dg",
         "d": "tdr",
         "k": "Tiempo a profundidad",
-        "h": "Velocidad e incertidumbre"
+        "h": "Velocidad e incertidumbre",
+        "src": "Esquema didáctico H3L"
        },
        "hl": 0
       },
@@ -1691,7 +1913,8 @@
            "s": "área × espesor|del intervalo"
           }
          ]
-        }
+        },
+        "src": "Elaboración H3L"
        },
        "hl": 0
       },
@@ -1724,7 +1947,11 @@
        "say": "Laboratorio. Abrí la hoja Sismica de la planilla. Cambiá la velocidad y la frecuencia y observá cómo varía la resolución vertical. Después modificá el error de picado y mirá cuánto representa del espesor bruto. Respondé: ¿qué frecuencia necesitarías para resolver un intervalo de veinte metros con esa velocidad?"
       },
       {
-       "say": "La decisión que sostiene esta lección es qué estructura se lleva al modelo y con qué incertidumbre: qué horizontes y fallas son confiables, cuáles son interpretativos, y cuánto cambia el volumen si la interpretación cambia."
+       "say": "La decisión que sostiene esta lección es qué estructura se lleva al modelo y con qué incertidumbre: qué horizontes y fallas son confiables, cuáles son interpretativos, y cuánto cambia el volumen si la interpretación cambia.",
+       "scene": {
+        "t": "dec",
+        "q": "Qué estructura se lleva al modelo y con qué incertidumbre"
+       }
       },
       {
        "say": "Pregunta rápida. Con una velocidad de tres mil metros por segundo y una frecuencia dominante de veinticinco hertz, ¿cuál es la resolución vertical aproximada? Respondé en pantalla.",
@@ -1757,8 +1984,17 @@
       {
        "say": "Un geomodelo estático es una representación numérica tridimensional del reservorio. Contiene la estructura, la estratigrafía, las facies y las propiedades de la roca, como porosidad, saturación y permeabilidad, distribuidas celda por celda. Sirve para calcular volúmenes, para diseñar pozos y, escalado, como entrada del simulador dinámico. En esta lección vemos cómo se construye, y por qué el orden de los pasos importa tanto.",
        "scene": {
+        "t": "les",
+        "q": "Un geomodelo estático es una representación numérica tridimensional del reservorio."
+       }
+      },
+      {
+       "say": "Al terminar esta lección vas a aprender, primero, a ordenar el flujo de construcción de un modelo estático y explicar por qué cada capa de decisión condiciona a la siguiente.",
+       "hl": 0,
+       "obj": 1,
+       "scene": {
         "t": "bul",
-        "k": "Geomodelado: del dato al modelo estático",
+        "k": "Objetivos de la lección",
         "h": "Qué vas a aprender",
         "items": [
          "Ordenar el flujo de construcción de un modelo estático y explicar por qué cada capa de decisión condiciona a la siguiente.",
@@ -1766,6 +2002,16 @@
          "Calcular promedios aritmético, armónico y geométrico para escalar propiedades sin perder la conectividad."
         ]
        }
+      },
+      {
+       "say": "Segundo, a distinguir kriging de simulación estocástica e interpretar un variograma.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a calcular promedios aritmético, armónico y geométrico para escalar propiedades sin perder la conectividad.",
+       "hl": 2,
+       "obj": 1
       },
       {
        "say": "El modelo se construye en capas de decisión. Primero el marco estructural, que vimos en la lección anterior. Segundo, el marco estratigráfico: las superficies de tiempo que definimos en el módulo dos delimitan las zonas. Tercero, la grilla, que subdivide cada zona en capas con una geometría que respeta cómo se depositó: capas proporcionales entre dos superficies, paralelas al tope o paralelas a la base.",
@@ -1798,7 +2044,8 @@
           }
          ],
          "note": "Un error en el marco estratigráfico se propaga a todo lo que sigue"
-        }
+        },
+        "src": "Elaboración H3L"
        },
        "hl": 1
       },
@@ -1829,7 +2076,8 @@
         "t": "dg",
         "d": "vario",
         "k": "Variograma",
-        "h": "Pepita, meseta y alcance"
+        "h": "Pepita, meseta y alcance",
+        "src": "Esquema didáctico H3L · Matheron (1963), Economic Geology 58"
        },
        "hs": [
         0,
@@ -1885,7 +2133,8 @@
         "t": "dg",
         "d": "ups",
         "k": "Escalado",
-        "h": "Promedios de permeabilidad"
+        "h": "Promedios de permeabilidad",
+        "src": "Ejemplo didáctico con valores del curso"
        },
        "hl": 0
       },
@@ -1919,7 +2168,14 @@
        "say": "Laboratorio. En la hoja Upscaling, calculá los tres promedios de permeabilidad y verificá la desigualdad entre ellos. Después cambiá el grupo de cada capa para formar celdas gruesas distintas, y observá qué le pasa a la permeabilidad vertical equivalente."
       },
       {
-       "say": "¿Qué agrupación conserva mejor la conectividad? Anotá tus conclusiones. La decisión que sostiene esta lección es qué supuestos pone el modelo: el concepto de facies, las longitudes de correlación, las tendencias, y cuántas realizaciones y escenarios hacen falta para mostrar honestamente la incertidumbre."
+       "say": "¿Qué agrupación conserva mejor la conectividad? Anotá tus conclusiones."
+      },
+      {
+       "say": "La decisión que sostiene esta lección es qué supuestos pone el modelo: el concepto de facies, las longitudes de correlación, las tendencias, y cuántas realizaciones y escenarios hacen falta para mostrar honestamente la incertidumbre.",
+       "scene": {
+        "t": "dec",
+        "q": "Qué supuestos pone el modelo"
+       }
       },
       {
        "say": "Pregunta rápida. Para flujo perpendicular a las capas, ¿qué promedio de permeabilidad corresponde? Respondé en pantalla.",
@@ -1952,8 +2208,17 @@
       {
        "say": "Llegamos a la pregunta que cierra el curso: cuánto hidrocarburo hay en sitio y qué tan seguros estamos de esa cifra. Todo lo que vimos converge acá: el sistema petrolero dice que hay carga, la geoquímica y la madurez dicen qué fluido esperar, el marco estratigráfico y la sísmica dicen dónde y cuánto espesor, y los registros, los núcleos y los cortes dicen cuánta roca cuenta.",
        "scene": {
+        "t": "les",
+        "q": "Llegamos a la pregunta que cierra el curso: cuánto hidrocarburo hay en sitio y qué tan seguros estamos de esa cifra."
+       }
+      },
+      {
+       "say": "Al terminar esta lección vas a aprender, primero, a calcular el petróleo original en sitio con unidades consistentes y explicar las limitaciones del método en no convencionales.",
+       "hl": 0,
+       "obj": 1,
+       "scene": {
         "t": "bul",
-        "k": "Volumetría, incertidumbre y caso Vaca Muerta",
+        "k": "Objetivos de la lección",
         "h": "Qué vas a aprender",
         "items": [
          "Calcular el petróleo original en sitio con unidades consistentes y explicar las limitaciones del método en no convencionales.",
@@ -1963,12 +2228,23 @@
        }
       },
       {
+       "say": "Segundo, a interpretar P90, P50 y P10 y construir un rango con simulación Monte Carlo.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a usar la sensibilidad para decidir qué dato reduciría más la incertidumbre y priorizar áreas piloto.",
+       "hl": 2,
+       "obj": 1
+      },
+      {
        "say": "El petróleo original en sitio, o STOIIP, se calcula con una fórmula simple cuyo peso está en cada parámetro: el volumen de roca, por la porosidad, por uno menos la saturación de agua, dividido por el factor volumétrico del petróleo, Bo, que convierte el volumen en el reservorio a volumen en superficie.",
        "scene": {
         "t": "dg",
         "d": "stoiip",
         "k": "Petróleo original en sitio",
-        "h": "De la fórmula al número"
+        "h": "De la fórmula al número",
+        "src": "Ejemplo didáctico: planilla del curso (H3L_Geo_Volumetria_y_Cortes.xlsx)"
        },
        "hl": -1
       },
@@ -2013,7 +2289,8 @@
         "t": "dg",
         "d": "mc",
         "k": "Incertidumbre",
-        "h": "Escenarios extremos y Monte Carlo"
+        "h": "Escenarios extremos y Monte Carlo",
+        "src": "Ejemplo didáctico: planilla del curso (H3L_Geo_Volumetria_y_Cortes.xlsx)"
        },
        "hl": 0
       },
@@ -2058,7 +2335,8 @@
         "t": "dg",
         "d": "mc",
         "k": "Incertidumbre",
-        "h": "Escenarios extremos y Monte Carlo"
+        "h": "Escenarios extremos y Monte Carlo",
+        "src": "Ejemplo didáctico: planilla del curso (H3L_Geo_Volumetria_y_Cortes.xlsx)"
        },
        "hl": 2
       },
@@ -2071,10 +2349,25 @@
        "hl": 4
       },
       {
-       "say": "Dos advertencias metodológicas. Primero, la planilla supone parámetros independientes. En la realidad hay correlaciones: la porosidad y la saturación suelen ir en sentido contrario, y el área y el espesor pueden estar relacionados por la estructura."
+       "say": "Dos advertencias metodológicas. Primero, la planilla supone parámetros independientes. En la realidad hay correlaciones: la porosidad y la saturación suelen ir en sentido contrario, y el área y el espesor pueden estar relacionados por la estructura.",
+       "scene": {
+        "t": "bul",
+        "k": "Metodología",
+        "h": "Dos advertencias sobre el rango",
+        "items": [
+         "La planilla supone parámetros independientes; en la realidad hay correlaciones",
+         "El rango es tan bueno como las distribuciones de entrada"
+        ]
+       },
+       "hl": 0
       },
       {
-       "say": "Ignorarlas cambia el ancho del rango. Segundo, la calidad del rango depende de la calidad de las distribuciones de entrada: si el mínimo y el máximo son una opinión sin respaldo, el P90 y el P10 también lo son."
+       "say": "Ignorarlas cambia el ancho del rango.",
+       "hl": 0
+      },
+      {
+       "say": "Segundo, la calidad del rango depende de la calidad de las distribuciones de entrada: si el mínimo y el máximo son una opinión sin respaldo, el P90 y el P10 también lo son.",
+       "hl": 1
       },
       {
        "say": "La simulación además responde la tercera pregunta del curso: qué dato reduciría la incertidumbre. La planilla calcula la correlación entre cada parámetro y el resultado. En el ejemplo, el espesor neto tiene una correlación de cero coma setenta y cuatro y el área, de cero coma cincuenta y ocho; la porosidad, cero coma veintiocho; la saturación de agua y el factor volumétrico, casi nada.",
@@ -2082,7 +2375,8 @@
         "t": "dg",
         "d": "tor",
         "k": "Valor de la información",
-        "h": "Qué parámetro pesa más"
+        "h": "Qué parámetro pesa más",
+        "src": "Ejemplo didáctico: planilla del curso (H3L_Geo_Volumetria_y_Cortes.xlsx)"
        },
        "hs": [
         0,
@@ -2126,7 +2420,8 @@
            "s": "recién después de|evaluar el piloto"
           }
          ]
-        }
+        },
+        "src": "Comunicado de Chevron (16/07/2013); formulario 6-K de YPF ante la SEC (2013)"
        },
        "hs": [
         0,

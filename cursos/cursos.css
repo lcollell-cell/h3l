@@ -636,7 +636,7 @@ body.game .gtop select{width:auto;flex:none;min-width:64px}
 .chap .cl li{background:none!important;border:0!important;padding:0!important;box-shadow:none!important;min-height:0!important}
 .chap .cl i{background:none!important;width:auto!important;height:auto!important;border-radius:0!important;box-shadow:none!important;display:inline!important}
 .chap .cn{position:absolute;right:3cqw;top:50%;transform:translateY(-52%);font:800 31cqw/1 var(--font);color:transparent;-webkit-text-stroke:.2cqw rgba(95,209,164,.55);opacity:.55;animation:chNum .9s ease both;pointer-events:none}
-.chap .cm{position:relative;z-index:1;padding:3cqw 5.4cqw 15cqw;max-width:72%}
+.chap .chm{position:relative;z-index:1;padding:3cqw 5.4cqw 15cqw;max-width:72%}
 .chap.mc h4{font:700 4.5cqw/1.12 var(--font);margin:0 0 2.2cqw;letter-spacing:-.01em;padding-bottom:1.6cqw;position:relative;animation:chUp .6s .15s ease both}
 .chap.mc h4::after{content:"";position:absolute;left:0;bottom:0;width:9cqw;height:.45cqw;border-radius:9px;background:var(--green2)}
 .chap .cl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1cqw;animation:chUp .6s .3s ease both}
@@ -651,3 +651,17 @@ body.game .gtop select{width:auto;flex:none;min-width:64px}
 @keyframes chNum{from{opacity:0;transform:translate(3cqw,-52%)}to{opacity:.55;transform:translateY(-52%)}}
 @keyframes chPop{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.chap *{animation:none!important;transition:none!important}}
+
+.chap.les .cn{font-size:24cqw}
+.chap.les h4{font:700 3.8cqw/1.14 var(--font);margin:0 0 2.4cqw;letter-spacing:-.01em;padding-bottom:1.5cqw;position:relative;animation:chUp .6s .1s ease both}
+.chap.les h4::after{content:"";position:absolute;left:0;bottom:0;width:8cqw;height:.4cqw;border-radius:9px;background:var(--green2)}
+.chap .lq{margin:0;padding:.4cqw 0 .4cqw 2cqw;border-left:.45cqw solid var(--green2);font:500 2.15cqw/1.45 var(--font);color:rgba(255,255,255,.92);max-width:46ch;animation:chUp .7s .35s ease both}
+
+.chap.dec{align-items:center;justify-content:center;flex-direction:row}
+.chap.dec .chm{max-width:86%;padding:3cqw 5.4cqw 12cqw}
+.chap.dec h4{font:700 2.6cqw/1.2 var(--font);margin:0 0 2.4cqw;color:rgba(255,255,255,.78);animation:chUp .6s ease both}
+.chap .lq.big{font:700 3.6cqw/1.25 var(--font);max-width:30ch;border-left-width:.6cqw;animation:chUp .7s .25s ease both}
+
+.dgsrc{margin-top:.7cqw;font:500 1.1cqw/1.3 var(--font);color:rgba(255,255,255,.55);letter-spacing:.01em}
+.dgsrc::before{content:"";display:inline-block;width:1.6cqw;height:.14cqw;background:rgba(95,209,164,.7);vertical-align:middle;margin-right:.8cqw}
+.chap.mc.sm h4{font-size:3.5cqw}.chap.mc.sm .cl li{font-size:1.75cqw}

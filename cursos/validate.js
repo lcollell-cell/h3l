@@ -3,7 +3,7 @@
 var SCENES=['bul','tbl','fm','viz','case'];
 HV.SCENES=SCENES;
 /* pantallas que genera el equipo (no se crean desde el editor del tutor, pero se aceptan y se conservan) */
-var KEEP=SCENES.concat(['dg','wel','chap']);
+var KEEP=SCENES.concat(['dg','wel','chap','les','dec']);
 function isS(x){return typeof x==='string'&&x.trim().length>0}
 function words(s){return String(s||'').trim().split(/\s+/).filter(Boolean).length}
 HV.widgets=function(){var W=window.HW||{};return Object.keys(W).filter(function(k){return typeof W[k]==='function'&&k!=='build'}).sort()};
