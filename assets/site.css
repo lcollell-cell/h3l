@@ -58,8 +58,8 @@
 .svc-top-act{display:flex;gap:10px;flex-wrap:wrap}
 .svc-list{display:grid;gap:22px}
 .svc{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0;background:#fff;border:1px solid var(--h-line);border-radius:14px;overflow:hidden}
-.svc:nth-child(even){grid-template-columns:minmax(0,1fr) minmax(0,1.1fr)}
-.svc:nth-child(even) .svc-media{order:2}
+.svc.alt{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr)}
+.svc.alt .svc-media{order:2}
 .svc-media{position:relative;background:#0c1626;align-self:stretch;min-width:0;overflow:hidden}
 .svc-media::before{content:"";display:block;padding-top:56.25%}
 .svc-video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#0c1626;display:block}
@@ -87,8 +87,8 @@
  .about-top,.mv,.pv{grid-template-columns:minmax(0,1fr);gap:22px}
  .goals{grid-template-columns:minmax(0,1fr)}
  .xp{grid-template-columns:minmax(0,1fr);padding:24px 22px;gap:12px}
- .svc,.svc:nth-child(even){grid-template-columns:minmax(0,1fr)}
- .svc:nth-child(even) .svc-media{order:0}
+ .svc,.svc.alt{grid-template-columns:minmax(0,1fr)}
+ .svc.alt .svc-media{order:0}
  .svc-media{align-self:start;width:100%}
  .svc-body{padding:20px 20px 22px}
 }
@@ -153,3 +153,13 @@ html.svc-lock main.main{z-index:2147483001}
 .site-legal .site-priv a{color:inherit;text-decoration:underline}
 
 .svc-video{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+
+.svc[hidden]{display:none}
+.svc-tabs{display:flex;gap:4px;border-bottom:1px solid var(--h-line);margin:0 0 24px;overflow-x:auto;scrollbar-width:none}
+.svc-tabs::-webkit-scrollbar{display:none}
+.svc-tab{appearance:none;background:none;border:0;border-bottom:3px solid transparent;margin-bottom:-1px;padding:12px 22px;font:700 15px/1.2 var(--font-body);color:var(--text-secondary);cursor:pointer;white-space:nowrap;transition:color .15s,border-color .15s}
+.svc-tab:hover{color:var(--h-navy)}
+.svc-tab[aria-selected="true"]{color:var(--h-navy);border-bottom-color:var(--h-green)}
+.svc-tab:focus-visible{outline:3px solid var(--blue-light);outline-offset:-3px;border-radius:6px}
+@media(max-width:520px){.svc-tabs{gap:0}.svc-tab{flex:1 1 0;min-width:0;padding:10px 6px;font-size:13px;line-height:1.25;white-space:normal;text-align:center}}
+@media(prefers-reduced-motion:reduce){.svc-tab{transition:none}}

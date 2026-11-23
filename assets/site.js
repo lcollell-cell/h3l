@@ -33,7 +33,7 @@ es:{
  sv_eyebrow:'Servicios',sv_title:'Gestión integral de recursos energéticos',
  sv_desc:'Ocho líneas de servicio, cada una con la herramienta que usamos en el trabajo. Mirá el video y pedí tu propuesta.',
  sv_end:'¿Necesitás una propuesta para tu activo o proyecto?',
- sv_dl:'Descargar brochure',sv_q:'Solicitar propuesta',sv_qall:'Solicitar propuesta',sv_more:'Probar la herramienta',sv_tool:'Herramienta',
+sv_tab_up:'Upstream',sv_tab_et:'Transición Energética',sv_tab_ds:'Ciencia de Datos',sv_tabs:'Líneas de servicio', sv_dl:'Descargar brochure',sv_q:'Solicitar propuesta',sv_qall:'Solicitar propuesta',sv_more:'Probar la herramienta',sv_tool:'Herramienta',
  sv_vid:'Video demostrativo de la herramienta',sv_fs:'Pantalla completa',sv_fsx:'Salir de pantalla completa',sv_snd:'Activar sonido',sv_mute:'Silenciar',sv_play:'Reproducir',sv_pause:'Pausar',sv_seek:'Barra de progreso del video',
  sv_note:'Los videos muestran la plataforma H3L con datos de ejemplo.',priv_link:'Privacidad y cookies',legal:'© 2026 H3L Global Energy S.R.L. Todos los derechos reservados. Los textos, videos y herramientas de este sitio están protegidos por derecho de autor. Las marcas de terceros pertenecen a sus titulares y se mencionan solo de forma descriptiva.',
  q_msg:'Hola, quiero solicitar una propuesta del servicio: ',
@@ -143,7 +143,7 @@ en:{
  sv_eyebrow:'Services',sv_title:'Integrated energy resources management',
  sv_desc:'Eight service lines, each with the tool we use on the job. Watch the video and request your proposal.',
  sv_end:'Need a proposal for your asset or project?',
- sv_dl:'Download brochure',sv_q:'Request a proposal',sv_qall:'Request a proposal',sv_more:'Try the tool',sv_tool:'Tool',
+sv_tab_up:'Upstream',sv_tab_et:'Energy Transition',sv_tab_ds:'Data Science',sv_tabs:'Service lines', sv_dl:'Download brochure',sv_q:'Request a proposal',sv_qall:'Request a proposal',sv_more:'Try the tool',sv_tool:'Tool',
  sv_vid:'Tool demo video',sv_fs:'Full screen',sv_fsx:'Exit full screen',sv_snd:'Turn sound on',sv_mute:'Mute',sv_play:'Play',sv_pause:'Pause',sv_seek:'Video progress bar',
  sv_note:'The videos show the H3L platform with sample data.',priv_link:'Privacy and cookies',legal:'© 2026 H3L Global Energy S.R.L. All rights reserved. The texts, videos and tools on this site are protected by copyright. Third-party trademarks belong to their respective owners and are mentioned for descriptive purposes only.',
  q_msg:'Hello, I would like to request a proposal for the service: ',
@@ -253,7 +253,7 @@ fr:{
  sv_eyebrow:'Services',sv_title:'Gestion intégrale des ressources énergétiques',
  sv_desc:'Huit lignes de services, chacune avec l’outil que nous utilisons sur le terrain. Regardez la vidéo et demandez votre proposition.',
  sv_end:'Besoin d’une proposition pour votre actif ou projet ?',
- sv_dl:'Télécharger la brochure',sv_q:'Demander une proposition',sv_qall:'Demander une proposition',sv_more:'Essayer l’outil',sv_tool:'Outil',
+sv_tab_up:'Amont (Upstream)',sv_tab_et:'Transition énergétique',sv_tab_ds:'Data science',sv_tabs:'Lignes de service', sv_dl:'Télécharger la brochure',sv_q:'Demander une proposition',sv_qall:'Demander une proposition',sv_more:'Essayer l’outil',sv_tool:'Outil',
  sv_vid:'Vidéo de démonstration de l’outil',sv_fs:'Plein écran',sv_fsx:'Quitter le plein écran',sv_snd:'Activer le son',sv_mute:'Couper le son',sv_play:'Lire',sv_pause:'Pause',sv_seek:'Barre de progression de la vidéo',
  sv_note:'Les vidéos montrent la plateforme H3L avec des données d’exemple.',priv_link:'Confidentialité et cookies',legal:'© 2026 H3L Global Energy S.R.L. Tous droits réservés. Les textes, vidéos et outils de ce site sont protégés par le droit d’auteur. Les marques de tiers appartiennent à leurs titulaires respectifs et ne sont citées qu’à titre descriptif.',
  q_msg:'Bonjour, je souhaite demander une proposition pour le service : ',
@@ -363,7 +363,7 @@ pt:{
  sv_eyebrow:'Serviços',sv_title:'Gestão integral de recursos energéticos',
  sv_desc:'Oito linhas de serviço, cada uma com a ferramenta que usamos no trabalho. Veja o vídeo e solicite sua proposta.',
  sv_end:'Precisa de uma proposta para seu ativo ou projeto?',
- sv_dl:'Baixar brochure',sv_q:'Solicitar proposta',sv_qall:'Solicitar proposta',sv_more:'Testar a ferramenta',sv_tool:'Ferramenta',
+sv_tab_up:'Upstream',sv_tab_et:'Transição Energética',sv_tab_ds:'Ciência de Dados',sv_tabs:'Linhas de serviço', sv_dl:'Baixar brochure',sv_q:'Solicitar proposta',sv_qall:'Solicitar proposta',sv_more:'Testar a ferramenta',sv_tool:'Ferramenta',
  sv_vid:'Vídeo de demonstração da ferramenta',sv_fs:'Tela cheia',sv_fsx:'Sair da tela cheia',sv_snd:'Ativar som',sv_mute:'Silenciar',sv_play:'Reproduzir',sv_pause:'Pausar',sv_seek:'Barra de progresso do vídeo',
  sv_note:'Os vídeos mostram a plataforma H3L com dados de exemplo.',priv_link:'Privacidade e cookies',legal:'© 2026 H3L Global Energy S.R.L. Todos os direitos reservados. Os textos, vídeos e ferramentas deste site são protegidos por direitos autorais. As marcas de terceiros pertencem aos seus titulares e são citadas apenas de forma descritiva.',
  q_msg:'Olá, gostaria de solicitar uma proposta do serviço: ',
@@ -507,6 +507,19 @@ var S=[
 var VIDEO_BASE='https://media.h3lglobalenergy.com/',VIDEO_VER='1';
 function vurl(f){return VIDEO_BASE?VIDEO_BASE+f+'?v='+VIDEO_VER:'media/'+f}
 
+/* Solapas de servicios: up = Upstream, et = Transición Energética, ds = Ciencia de Datos */
+var GRP={reservas:'up',geociencias:'up',capacitacion:'up',auditoria:'et',emisiones:'et',transicion:'et',datos:'ds',plataformas:'ds'},svcTab='up';
+function showTab(g,focus){
+  svcTab=g;
+  var bs=document.querySelectorAll('#svc-tabs [data-tab]');
+  Array.prototype.forEach.call(bs,function(b){var on=b.getAttribute('data-tab')===g;b.setAttribute('aria-selected',on?'true':'false');b.tabIndex=on?0:-1;if(on&&focus)b.focus()});
+  var n=0;
+  Array.prototype.forEach.call(document.querySelectorAll('#svc-list .svc'),function(a){
+    var vis=a.getAttribute('data-g')===g;a.hidden=!vis;
+    if(!vis){var v=a.querySelector('video');if(v&&!v.paused)v.pause()}
+    else{a.classList.toggle('alt',n%2===1);n++}
+  });
+}
 var lang='es';
 function L(l){return T[l]?l:'es'}
 function tr(k){return (T[lang]&&T[lang][k]!==undefined)?T[lang][k]:T.es[k]}
@@ -531,7 +544,7 @@ function renderServicios(){
   var h='',sfx=(lang==='en'||lang==='fr'||lang==='pt')?'-'+lang:'';
   S.forEach(function(s,i){
     var title=s.t[lang],tool=s.tool[lang];
-    h+='<article class="svc" id="svc-'+s.id+'">'+
+    h+='<article class="svc" id="svc-'+s.id+'" data-g="'+(GRP[s.id]||'up')+'">'+
       '<div class="svc-media"><video class="svc-video" muted playsinline controlsList="nodownload noremoteplayback" disablePictureInPicture disableRemotePlayback preload="none" poster="media/svc-'+s.id+sfx+'.jpg" aria-label="'+esc(tr('sv_vid')+': '+tool)+'">'+
         '<source src="'+vurl('svc-'+s.id+sfx+'.mp4')+'" type="video/mp4">'+(sfx||VIDEO_BASE?'':'<source src="media/svc-'+s.id+'.webm" type="video/webm">')+'</video>'+
         '<button type="button" class="svc-play" data-svc="'+s.id+'" aria-label="'+esc(tr('sv_play'))+'"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>'+
@@ -543,6 +556,7 @@ function renderServicios(){
       (s.go?'<div class="svc-act"><button type="button" class="btn-p" data-go="'+esc(s.go)+'">'+esc(tr('sv_more'))+'</button></div>':'')+'</div></article>';
   });
   host.innerHTML=h;
+  showTab(svcTab);
   /* sin descarga del video: se anula el menú contextual (Guardar video como) y el arrastre */
   Array.prototype.forEach.call(host.querySelectorAll('.svc-media,.svc-video'),function(el){el.addEventListener('contextmenu',function(e){e.preventDefault()});el.addEventListener('dragstart',function(e){e.preventDefault()})});
   setupVideos();
@@ -625,6 +639,13 @@ function quote(name){
   setTimeout(function(){var n=document.getElementById('ctc-nombre');if(n)try{n.focus({preventScroll:true})}catch(e){}},150);
 }
 window.h3lQuote=function(){quote('')};
+document.addEventListener('click',function(e){var t=e.target.closest&&e.target.closest('#svc-tabs [data-tab]');if(t)showTab(t.getAttribute('data-tab'))});
+document.addEventListener('keydown',function(e){
+  var t=e.target.closest&&e.target.closest('#svc-tabs [data-tab]');if(!t)return;
+  var ks=Array.prototype.map.call(document.querySelectorAll('#svc-tabs [data-tab]'),function(b){return b.getAttribute('data-tab')}),i=ks.indexOf(t.getAttribute('data-tab')),n=-1;
+  if(e.key==='ArrowRight')n=(i+1)%ks.length;else if(e.key==='ArrowLeft')n=(i+ks.length-1)%ks.length;else if(e.key==='Home')n=0;else if(e.key==='End')n=ks.length-1;
+  if(n>=0){e.preventDefault();showTab(ks[n],true)}
+});
 document.addEventListener('click',function(e){
   var q=e.target.closest&&e.target.closest('[data-quote]');
   if(q){var i=+q.getAttribute('data-quote');quote(S[i].t[lang]);return}

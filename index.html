@@ -1133,8 +1133,8 @@ tr:hover td{background:var(--blue-ghost);}
 @media (prefers-reduced-motion:reduce){.calc-tab-btn,.calc-card{transition:none;}}
 </style>
 <link rel="stylesheet" href="assets/fonts.css?v=1">
-<link rel="stylesheet" href="assets/site.css?v=13">
-<script src="assets/site.js?v=21" defer></script>
+<link rel="stylesheet" href="assets/site.css?v=15">
+<script src="assets/site.js?v=22" defer></script>
 <script src="assets/podcast.js?v=6" defer></script>
 <script src="assets/calc-i18n.js?v=1" defer></script>
 <script src="v2/chat.js?v=7" defer></script>
@@ -1877,7 +1877,12 @@ tr:hover td{background:var(--blue-ghost);}
           <button type="button" class="btn-p" onclick="h3lQuote()" data-t="sv_q">Solicitar propuesta</button>
         </div>
       </div>
-      <div class="svc-list" id="svc-list"></div>
+      <div class="svc-tabs" id="svc-tabs" role="tablist" data-t-aria="sv_tabs" aria-label="Líneas de servicio">
+        <button type="button" role="tab" class="svc-tab" data-tab="up" aria-selected="true" data-t="sv_tab_up">Upstream</button>
+        <button type="button" role="tab" class="svc-tab" data-tab="et" aria-selected="false" tabindex="-1" data-t="sv_tab_et">Transición Energética</button>
+        <button type="button" role="tab" class="svc-tab" data-tab="ds" aria-selected="false" tabindex="-1" data-t="sv_tab_ds">Ciencia de Datos</button>
+      </div>
+      <div class="svc-list" id="svc-list" role="tabpanel"></div>
       <div class="svc-end">
         <p data-t="sv_end">¿Necesitás una propuesta para tu activo o proyecto?</p>
         <div class="svc-top-act">
