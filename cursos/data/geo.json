@@ -128,8 +128,24 @@
     "say": "Conviene tener nociones básicas de geología y de registros de pozo, y Excel a mano. Una advertencia honesta: este es un curso de nivel introductorio a intermedio y no reemplaza el estudio integrado de un proyecto específico."
    },
    {
-    "say": "Empecemos."
+    "say": "Empecemos.",
+    "q": {
+     "q": "¿Qué hace el curso con los datos de los laboratorios y de las planillas?",
+     "o": [
+      "Son datos sintéticos para practicar el método.",
+      "Son los datos oficiales de Vaca Muerta.",
+      "Son datos de un pozo real de la cuenca Neuquina.",
+      "Se pueden usar directamente en una evaluación de reservas."
+     ],
+     "a": 0,
+     "e": "Los laboratorios y las planillas usan datos sintéticos; los números de Vaca Muerta son órdenes de magnitud de la literatura pública."
+    }
    }
+  ],
+  "ficha": "**Ruta del curso.** Sistema petrolero (M1) → marco estratigráfico y petrofísica (M2) → modelo estático y volumetría (M3).\n\n**Las tres preguntas.** 1) ¿Existe el sistema? 2) ¿Cuánta roca neta y cuánto petróleo en sitio? 3) ¿Qué tan incierto es y qué dato lo reduciría?\n\n**Secuencia de cada lección.** Pregunta → método → laboratorio → decisión.\n\n**Qué se necesita.** Nociones de geología y registros de pozo; Excel (planilla H3L_Geo_Volumetria_y_Cortes_v2.xlsx).",
+  "obj": [
+   "Conocer las tres preguntas que ordenan el curso y cómo se organiza.",
+   "Entender el caso conductor (Vaca Muerta) y la metodología de cada lección."
   ]
  },
  "modules": [
@@ -1997,11 +2013,27 @@
     "say": "En el catálogo de H3L tenés además cursos complementarios de perforación y de recuperación mejorada. Del dato a la roca, de la roca al volumen, y del volumen a la decisión. Gracias por aprender con H3L Global Energy.",
     "scene": {
      "t": "bout"
+    },
+    "q": {
+     "q": "¿Qué se informa junto con un volumen en sitio?",
+     "o": [
+      "Solo el valor más probable.",
+      "El rango (P90, P50, P10), los supuestos principales y el dato que más lo reduciría.",
+      "El valor máximo simulado.",
+      "El factor de recuperación únicamente."
+     ],
+     "a": 1,
+     "e": "Un volumen siempre se presenta con su rango, sus supuestos principales y las incertidumbres que más pesan."
     }
    },
    {
     "say": "Contacto: info@h3lglobalenergy.com."
    }
+  ],
+  "ficha": "**Secuencia completa.** Sistema petrolero → geoquímica y madurez → marco estratigráfico → registros y núcleos → cortes y roca neta → sísmica y estructura → modelo estático → volumen con incertidumbre → decisión.\n\n**Las tres preguntas, respondidas.** 1) Elementos y procesos sincronizados (M1). 2) Roca neta y petróleo en sitio con cortes justificados (M2 y M3). 3) Rango P90–P50–P10 y valor de la información (M3).",
+  "obj": [
+   "Integrar los tres módulos en una secuencia de trabajo completa.",
+   "Conocer los próximos pasos: examen final y certificado."
   ]
  },
  "downloads": [

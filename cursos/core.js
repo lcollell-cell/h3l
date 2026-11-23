@@ -249,9 +249,9 @@ HC.loadCourse=function(id){var lg=HC.cLang(),key=id+':'+lg;if(HC.courseCache[key
   if(lg!=='en')return es();
   return HC.loadCatalog().then(function(){if(!HC.hasEn(id))throw 0;return fetch('data/en/'+id+'.json')}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json()}).then(function(c){c.lang='en';return finish(id,key,c)}).catch(function(){return es().then(function(c){c.fb=1;HC.courseCache[key]=c;return c})})};
 /* lecciones planas del curso: presentación → lecciones → cierre */
-HC.flat=function(c){var a=[{id:'intro',title:c.intro.title||'Presentación del curso',kind:'intro',cues:c.intro.cues,dur:c.introDur,mod:null}];
+HC.flat=function(c){var a=[{id:'intro',title:c.intro.title||'Presentación del curso',kind:'intro',cues:c.intro.cues,dur:c.introDur,mod:null,ficha:c.intro.ficha,obj:c.intro.obj}];
   c.modules.forEach(function(m){m.lessons.forEach(function(l){a.push({id:l.id,title:l.title,kind:'lesson',cues:l.cues,dur:l.dur,mod:m.id,comp:l.comp,ficha:l.ficha,obj:l.obj,practica:l.practica})})});
-  a.push({id:'outro',title:c.outro.title||'Cierre',kind:'outro',cues:c.outro.cues,dur:c.outroDur,mod:null});return a};
+  a.push({id:'outro',title:c.outro.title||'Cierre',kind:'outro',cues:c.outro.cues,dur:c.outroDur,mod:null,ficha:c.outro.ficha,obj:c.outro.obj});return a};
 HC.lessonsOnly=function(c){var a=[];c.modules.forEach(function(m){m.lessons.forEach(function(l){a.push(l)})});return a};
 HC.progress=function(c){var cs=HC.cs(c.id),all=HC.flat(c),d=0;all.forEach(function(l){if(cs.l[l.id]&&cs.l[l.id].d)d++});
   var qm=c.modules.filter(function(m){return cs.q[m.id]&&cs.q[m.id].best>=70}).length;var ex=cs.e&&cs.e.best>=70;

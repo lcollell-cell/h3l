@@ -123,8 +123,24 @@
     }
    },
    {
-    "say": "Empecemos."
+    "say": "Empecemos.",
+    "q": {
+     "q": "Según el curso, ¿cuál es el primer paso antes de elegir un método de EOR?",
+     "o": [
+      "Elegir el método con mayor producción en el mundo.",
+      "Entender qué eficiencia (areal, vertical o de desplazamiento) limita el recobro.",
+      "Instalar la planta de inyección.",
+      "Medir el precio del polímero."
+     ],
+     "a": 1,
+     "e": "Cada método mueve una palanca distinta; por eso primero se identifica la eficiencia limitante y luego se elige la palanca."
+    }
    }
+  ],
+  "ficha": "**Ruta del curso.** Por qué queda petróleo (M1) → métodos químicos y de gas (M2) → térmicos, screening y piloto (M3).\n\n**Las tres preguntas.** 1) ¿Por qué el agua deja petróleo atrás? 2) ¿Qué palanca mueve cada método de EOR? 3) ¿Cómo se pasa de una idea de laboratorio a un proyecto de campo?\n\n**Idea central.** Factor de recuperación = eficiencia areal × eficiencia vertical × eficiencia de desplazamiento. Primero entender qué eficiencia limita; después elegir la palanca.\n\n**Caso conductor (fuentes públicas).** Manantiales Behr, Golfo San Jorge, Chubut. Grimbeek: petróleo de ≈ 120 cP, ≈ 1.000–1.150 m, k > 2 D, porosidad 25–28 %, T ≈ 60 °C. Piloto de polímeros en 2015 (YPF); expansión con plantas modulares desde 2019; 3.747 m³/d en diciembre de 2020.\n\n**Material.** Planilla H3L_EOR_Barrido_en_Capas_y_Screening_v2.xlsx (Capas, Tiempo, Tiempo_polimero, Comparacion, Seleccion, Screening y Economia_piloto).",
+  "obj": [
+   "Conocer las tres preguntas que ordenan el curso y su organización.",
+   "Entender el caso conductor (Manantiales Behr, Grimbeek) y la secuencia de cada lección."
   ]
  },
  "modules": [
@@ -1830,7 +1846,18 @@
     }
    },
    {
-    "say": "Y podés plantear un piloto y evaluar su economía. Recordá el alcance. Este curso es una introducción. Los rangos de la criba y los modelos de la planilla son herramientas de aprendizaje y no sustituyen el laboratorio, la simulación ni el estudio de un proyecto."
+    "say": "Y podés plantear un piloto y evaluar su economía. Recordá el alcance. Este curso es una introducción. Los rangos de la criba y los modelos de la planilla son herramientas de aprendizaje y no sustituyen el laboratorio, la simulación ni el estudio de un proyecto.",
+    "q": {
+     "q": "¿Qué debe hacerse antes de escalar un proyecto de EOR, según el cierre del curso?",
+     "o": [
+      "Instalar todas las plantas a la vez.",
+      "Pasar de la criba al laboratorio, la simulación y un piloto medido.",
+      "Elegir el método con el precio más bajo.",
+      "Esperar un récord de producción."
+     ],
+     "a": 1,
+     "e": "Se pasa de la criba al laboratorio, la simulación y el piloto medido, y recién después se escala."
+    }
    },
    {
     "say": "Ítems vistos: nueve lecciones en tres módulos, dos laboratorios interactivos, nueve prácticas o ejercicios con la planilla Excel, un cuestionario por módulo y un examen final. Primero entender qué eficiencia limita; después elegir la palanca. Gracias por aprender con H3L Global Energy. Contacto: info@h3lglobalenergy.com",
@@ -1838,6 +1865,11 @@
      "t": "bout"
     }
    }
+  ],
+  "ficha": "**Ideas clave**\n1. FR = E_A · E_V · E_D. Primero diagnosticar la eficiencia limitante.\n2. M = (krw0/μw)/(kro0/μo). Con M > 1 las capas rápidas se aceleran; con M < 1 se frenan y el barrido mejora.\n3. Polímero: barrido. Tensioactivo, ASP y gas miscible: desplazamiento. Calor: viscosidad.\n4. El almacenamiento de CO₂ se mide y se verifica.\n5. Screening: criba, no decisión. Camino: laboratorio → simulación → piloto medido → economía con precio bajo.\n6. Piloto: criterios de éxito, línea base, pozos de observación, criterio de parada.\n\n**Resultados de la planilla (modelo de capas, V = 0,7, corte límite 95 %).** Base: FR 41,0 %. Polímero: 55,9 %. Tensioactivo: 53,4 %. Polímero + tensioactivo: 72,7 %.\n\n**Pasos siguientes.** Estudio de laboratorio y simulación con los datos de tu campo; lectura de la publicación original de Grimbeek (YPF, Petrotecnia 2024) y de Taber, Martin y Seright (1997).",
+  "obj": [
+   "Repasar los conceptos centrales de los tres módulos.",
+   "Reconocer las competencias practicadas y los pasos siguientes."
   ]
  },
  "downloads": [
