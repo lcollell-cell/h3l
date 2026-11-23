@@ -457,7 +457,9 @@ W.eor=function(box,p,api){var h=mkui(box,[{k:'V',l:'Heterogeneidad (Dykstra-Pars
   function draw(V){svg.innerHTML='';var M=.389*muo/V.mu,sg=V.V>0?-Math.log(1-V.V):0,k=[],i;for(i=0;i<N;i++)k.push(Math.exp(sg*zinv((i+.5)/N)));
     function xs(t,ki,m){var tb=(m+1)/(2*ki);if(t>=tb)return 1;var x=Math.abs(m-1)<1e-6?ki*t:(-1+Math.sqrt(1+2*(m-1)*ki*t))/(m-1);return Math.min(1,Math.max(0,x))}
     function wc(t,m){var a=0,b=0,j,x;for(j=0;j<N;j++){x=xs(t,k[j],m);if(x>=1)a+=k[j]/m;else b+=k[j]/(m*x+1-x)}return a/(a+b+1e-12)}
-    var lo=0,hi=1e4,mid;for(i=0;i<60;i++){mid=(lo+hi)/2;if(wc(mid,M)<.95)lo=mid;else hi=mid}var t95=hi,x95=k.map(function(ki){return xs(t95,ki,M)}),Ev=x95.reduce(function(a,b){return a+b},0)/N,Ed=(1-swc-V.sor)/(1-swc),RF=Ev*Ed;
+    /* v2 (2026-11): se usa 1/M en el modelo de capas y la misma grilla de 60 pasos de la hoja Tiempo de la planilla v2, con Ev interpolado al 95 % de corte de agua; así el laboratorio y la planilla dan el mismo resultado. */
+    var mi=1/M,kmn=k[0],kmx=k[N-1],tg=[],ev=[],wv=[],jj=-1,j2;for(j2=0;j2<60;j2++){var tt=kmn*.2*Math.pow(kmx*3/(kmn*.2),j2/59);tg.push(tt);var xx=k.map(function(ki){return xs(tt,ki,mi)});ev.push(xx.reduce(function(a,b){return a+b},0)/N);wv.push(wc(tt,mi));if(jj<0&&wv[j2]>=.95)jj=j2}
+    if(jj<0)jj=59;var t95=tg[jj],x95=k.map(function(ki){return xs(t95,ki,mi)}),Ev=(jj===0?ev[0]:ev[jj-1]+(.95-wv[jj-1])/(wv[jj]-wv[jj-1])*(ev[jj]-ev[jj-1])),Ed=(1-swc-V.sor)/(1-swc),RF=Ev*Ed;
     var P=plot(svg,700,340,{l:56,r:330,t:22,b:42},[0,1],[0,N],{nx:2,ny:0,xl:'Posición del frente (inyector → productor)',xf:function(v){return nf(v,1)}});
     for(i=0;i<N;i++){var y=P.Y(i+1),hh=P.h/N-1.5;sv('rect',{x:P.X(0),y:y,width:P.w,height:hh,fill:'rgba(255,255,255,.06)'},svg);sv('rect',{x:P.X(0),y:y,width:Math.max(1,P.w*x95[i]),height:hh,fill:x95[i]>=1?BL:GN,'fill-opacity':.85},svg)}
     lbl(svg,P.m.l,P.m.t-6,'Capas (arriba: la más permeable)',TX,10);lbl(svg,P.m.l+P.w,P.m.t-6,'Al 95 % de corte de agua',TX,10,'end');

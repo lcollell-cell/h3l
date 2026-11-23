@@ -30,7 +30,7 @@ function cueAt(t){var i,n=starts.length;for(i=n-1;i>=0;i--)if(t>=starts[i])retur
 function loadLesson(i,c0,autoplay){stopSpeech();li=i;ci=0;elapsed=0;waiting=false;playing=false;answered={};lastSceneKey='';calc();
   var L=flat[li],r=CS.l[L.id]||(CS.l[L.id]={});if(r.cp)Object.keys(r.cp).forEach(function(k){answered[k]=1});
   try{var u=new URL(location.href);u.searchParams.set('l',L.id);history.replaceState(null,'',u.toString())}catch(e){}
-  buildTranscript();drawMarkers();c0=Math.min(c0||0,L.cues.length-1);setCue(c0,false);showBig(true);updateUI();highlightSide();if(autoplay)play()}
+  buildTranscript();if($('#p_lc'))paneLc();drawMarkers();c0=Math.min(c0||0,L.cues.length-1);setCue(c0,false);showBig(true);updateUI();highlightSide();if(autoplay)play()}
 function setCue(i,speak){ci=i;elapsed=0;waiting=false;var L=flat[li],c=L.cues[i];renderScene(c);chipShow(c,'c'+li+'_'+i+'_');
   var r=CS.l[L.id]||(CS.l[L.id]={});r.pos=i;CS.last={li:li,ci:i};scheduleSave();
   $('#cc').innerHTML=ccOn?'<span>'+esc(c.say)+'</span>':'';markTranscript();updateUI();fitScene();
@@ -170,12 +170,12 @@ document.addEventListener('click',function(e){var t=e.target;if(!t||!t.closest)r
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&ntPop){var f=ntFrom;ntClose();try{if(f&&f.focus&&f.isConnected)f.focus()}catch(x){}}});
 function paneGl(){var p=$('#p_gl');if(!p)return;var a=gloss();p.innerHTML='<h3>'+esc(HC.t('tab_gl'))+'</h3><p class="note-s" style="margin-bottom:10px">'+esc(HC.t('gl_p'))+'</p><ul class="refs">'+a.map(function(g){return '<li><span class="tg">'+esc(g.at)+'</span>'+esc(g.n)+'</li>'}).join('')+'</ul>'}
 /* ---------- pestañas ---------- */
-var TABS=['ov','tr','nt','fl','rf','ce'],curTab='ov';
+var TABS=['ov','tr','lc','nt','fl','rf','ce'],curTab='ov';
 function buildTabs(){if(gloss().length&&TABS.indexOf('gl')<0)TABS.splice(3,0,'gl');var t=$('#tabs');t.innerHTML='';TABS.forEach(function(k){var b=el('button',{role:'tab','aria-selected':k===curTab,'data-k':k},HC.t('tab_'+k));b.addEventListener('click',function(){selectTab(k)});t.appendChild(b)});
   var p=$('#panes');p.innerHTML='';TABS.forEach(function(k){var d=el('div',{class:'pane',id:'p_'+k,role:'tabpanel'});d.hidden=k!==curTab;p.appendChild(d)});
-  paneOv();paneTr();paneNt();paneGl();paneFl();paneRf();paneCm();paneCe();if(flat&&starts.length){buildTranscript()}}
+  paneOv();paneTr();paneLc();paneNt();paneGl();paneFl();paneRf();paneCm();paneCe();if(flat&&starts.length){buildTranscript()}}
 function buildTabsRefresh(){paneCm();paneCe();paneFl()}
-function selectTab(k){ntClose();curTab=k;$$('#tabs button').forEach(function(b){b.setAttribute('aria-selected',b.getAttribute('data-k')===k)});TABS.forEach(function(x){$('#p_'+x).hidden=x!==k});if(k==='cm')paneCm();if(k==='ce')paneCe();if(k==='nt')paneNt()}
+function selectTab(k){ntClose();curTab=k;$$('#tabs button').forEach(function(b){b.setAttribute('aria-selected',b.getAttribute('data-k')===k)});TABS.forEach(function(x){$('#p_'+x).hidden=x!==k});if(k==='lc')paneLc();if(k==='cm')paneCm();if(k==='ce')paneCe();if(k==='nt')paneNt()}
 function paneOv(){var p=$('#p_ov'),nl=HC.lessonsOnly(C).length;p.innerHTML='<h3>'+esc(C.title)+'</h3><p>'+esc(C.desc||'')+'</p><h3 style="margin-top:16px">Objetivos de aprendizaje</h3><ul>'+(C.objectives||[]).map(function(o){return '<li>'+esc(o)+'</li>'}).join('')+'</ul><h3 style="margin-top:16px">Qué incluye</h3><ul><li>'+nl+' lecciones narradas + presentación y cierre (≈ '+Math.round(C.totalSec/60)+' min de narración)</li><li>Laboratorios interactivos y mapas: '+esc((C.labs||[]).join(' · '))+'</li><li>'+(C.downloads||[]).length+' planilla(s) Excel de práctica con fórmulas vivas</li><li>'+C.modules.length+' quizzes de módulo, preguntas rápidas en las lecciones y examen final</li><li>Certificado H3L verificable, para compartir en tu perfil profesional</li></ul><h3 style="margin-top:16px">Herramientas de estudio</h3><ul><li>Pausa, retroceso/avance de 10 s, línea de tiempo con capítulos y velocidad de 0,75× a 2×</li><li>Subtítulos y transcripción sincronizada con búsqueda, copia, impresión y descarga</li><li>Notas con marca de tiempo; teclado: espacio = pausa, ← → = ±10 s, C = subtítulos</li></ul><p class="note-s" style="margin-top:12px">'+esc(HC.t('demo'))+'</p>'}
 function paneTr(){var p=$('#p_tr');p.innerHTML='<h3 id="txTitle"></h3><div class="tools"><input type="search" id="txQ" placeholder="'+esc(HC.t('srch'))+'" aria-label="'+esc(HC.t('srch'))+'"><button class="btn o s" id="txCopy">'+HC.t('copy')+'</button><button class="btn o s" id="txDl">'+HC.t('dl_tx')+' (lección)</button><button class="btn o s" id="txDlAll">'+HC.t('dl_tx')+' (curso)</button><button class="btn o s" id="txPr">'+HC.t('print')+'</button></div><div class="tx" id="txList" role="list"></div>';
   $('#txQ').addEventListener('input',function(){var q=this.value.trim().toLowerCase();$$('#txList button').forEach(function(b){var s=$('span',b),raw=flat[li].cues[+b.getAttribute('data-i')].say;if(!q){b.style.display='';var ii=+b.getAttribute('data-i');s.innerHTML=HC.noted(raw,flat[li].cues[ii].notes,'t'+li+'_'+ii+'_');return}var ok=raw.toLowerCase().indexOf(q)>=0;b.style.display=ok?'':'none';if(ok){var i=raw.toLowerCase().indexOf(q);s.innerHTML=esc(raw.slice(0,i))+'<mark>'+esc(raw.slice(i,i+q.length))+'</mark>'+esc(raw.slice(i+q.length))}})});
@@ -183,6 +183,22 @@ function paneTr(){var p=$('#p_tr');p.innerHTML='<h3 id="txTitle"></h3><div class
   $('#txDl').addEventListener('click',function(){dl(cid+'_'+flat[li].id+'_transcripcion.txt',txtOf(flat[li],true))});
   $('#txDlAll').addEventListener('click',function(){dl(cid+'_transcripcion_curso.txt',C.title+'\nH3L Global Energy · Cursos Online\n\n'+flat.map(function(L){return txtOf(L,true)}).join('\n\n'))});
   $('#txPr').addEventListener('click',function(){window.print()})}
+/* ficha de lectura de la lección (campo ficha, obj y practica del JSON del curso; Markdown mínimo escapado) */
+function mdInline(t){return esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')}
+function mdHtml(md){var L=String(md||'').split('\n'),o=[],i=0,r;while(i<L.length){var ln=L[i].trim();
+  if(!ln){i++;continue}
+  if(ln.charAt(0)==='|'){var rows=[];while(i<L.length&&L[i].trim().charAt(0)==='|'){rows.push(L[i].trim());i++}
+    rows=rows.filter(function(x){return !/^\|\s*:?-{2,}/.test(x)}).map(function(x){return x.replace(/^\||\|$/g,'').split('|').map(function(c){return c.trim()})});
+    if(rows.length){o.push('<div class="lc-t"><table><thead><tr>'+rows[0].map(function(c){return '<th>'+mdInline(c)+'</th>'}).join('')+'</tr></thead><tbody>'+rows.slice(1).map(function(r2){return '<tr>'+r2.map(function(c){return '<td>'+mdInline(c)+'</td>'}).join('')+'</tr>'}).join('')+'</tbody></table></div>')}continue}
+  if(/^[-*]\s/.test(ln)){var li=[];while(i<L.length&&/^[-*]\s/.test(L[i].trim())){li.push('<li>'+mdInline(L[i].trim().replace(/^[-*]\s/,''))+'</li>');i++}o.push('<ul>'+li.join('')+'</ul>');continue}
+  o.push('<p>'+mdInline(ln)+'</p>');i++}
+  return o.join('')}
+function paneLc(){var p=$('#p_lc');if(!p)return;var L=flat&&flat[li];
+  if(!L||!L.ficha){p.innerHTML='<h3>'+esc(HC.t('tab_lc'))+(L?' · '+esc(L.title):'')+'</h3><p class="note-s">'+esc(HC.t('lc_none'))+'</p>';return}
+  p.innerHTML='<div class="lc"><h3>'+esc(HC.t('tab_lc'))+' · '+esc(L.title)+'</h3>'
+   +((L.obj||[]).length?'<h4>'+esc(HC.t('lc_obj'))+'</h4><ul>'+L.obj.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul>':'')
+   +mdHtml(L.ficha)
+   +(L.practica?'<div class="lc-p"><h4>'+esc(HC.t('lc_prac'))+'</h4><p>'+mdInline(L.practica)+'</p></div>':'')+'</div>'}
 function paneNt(){var p=$('#p_nt'),notes=CS.n||(CS.n=[]);p.innerHTML='<h3>'+HC.t('tab_nt')+'</h3><div class="field"><textarea id="ntT" rows="3" placeholder="'+esc(HC.t('note_ph'))+'" style="font:500 13.5px var(--font);padding:10px;border:1px solid var(--line);border-radius:8px"></textarea></div><div class="tools"><button class="btn g s" id="ntAdd">'+HC.t('add_note')+'</button><button class="btn o s" id="ntDl">'+HC.t('dl_nt')+'</button></div><div id="ntL"></div>';
   function list(){var box=$('#ntL');box.innerHTML=notes.length?'':'<p class="note-s" style="margin-top:10px">'+HC.t('nonotes')+'</p>';notes.forEach(function(n,i){var L=flat&&flat.filter(function(x){return x.id===n.l})[0],d=el('div',{class:'note'},'<div><b data-i="'+i+'">'+esc(L?L.title:n.l)+' · '+HC.fmt(n.t)+'</b>'+esc(n.x)+'</div><button class="btn o s" data-d="'+i+'">'+HC.t('del')+'</button>');box.appendChild(d)});
     $$('b[data-i]',box).forEach(function(b){b.addEventListener('click',function(){var n=notes[+b.getAttribute('data-i')],k=flat.findIndex(function(x){return x.id===n.l});if(k>=0){loadLesson(k,0,false);seek(n.t);showBig()}})});

@@ -2,7 +2,7 @@
  "id": "eor",
  "title": "Recuperación mejorada (EOR): química, gas y térmica",
  "subtitle": "Cómo mover el petróleo que el agua no barre, con criterios de selección, piloto y casos reales.",
- "desc": "Curso que continúa Waterflooding: eficiencias de barrido y de desplazamiento, inyección de polímeros y tensioactivos, gases miscibles y CO₂, métodos térmicos, selección por criterios técnicos y la ruta de piloto a escala, con el caso de polímeros de Manantiales Behr.",
+ "desc": "Curso que continúa Waterflooding: eficiencias de barrido y de desplazamiento, razón de movilidad y modelo de capas, polímeros, tensioactivos y álcali, gases miscibles y CO₂, métodos térmicos, screening con rangos de referencia, y piloto, escala y economía, con el caso de polímeros de Manantiales Behr.",
  "objectives": [
   "Descomponer la recuperación en eficiencia areal, vertical y de desplazamiento e identificar cuál limita un campo.",
   "Explicar qué palanca mueve cada método: polímeros, tensioactivos, gases y calor.",
@@ -11,35 +11,37 @@
  ],
  "labs": [
   "flujo fraccional y razón de movilidad",
-  "barrido vertical por capas y efecto del polímero",
-  "eficiencia de desplazamiento y petróleo residual"
+  "barrido vertical por capas y efecto del polímero"
  ],
  "practiceMin": 85,
  "competencies": [
   {
-   "name": "Eficiencias de recuperación",
+   "name": "Eficiencias, movilidad y heterogeneidad",
    "lessons": [
-    "e1"
+    "e1",
+    "e2",
+    "e3"
    ]
   },
   {
    "name": "Métodos químicos",
    "lessons": [
-    "e2"
+    "e4",
+    "e5"
    ]
   },
   {
    "name": "Gas y térmica",
    "lessons": [
-    "e3",
-    "e4"
+    "e6",
+    "e7"
    ]
   },
   {
-   "name": "Selección, piloto y escala",
+   "name": "Selección, piloto y economía",
    "lessons": [
-    "e5",
-    "e6"
+    "e8",
+    "e9"
    ]
   }
  ],
@@ -51,35 +53,328 @@
    "¿Cómo se pasa de una idea de laboratorio a un proyecto de campo?"
   ],
   "star": {
-   "caso": "Manantiales Behr: polímeros en un campo de 90 años",
-   "S": "Manantiales Behr, en la Cuenca del Golfo San Jorge, Chubut, a unos 40 km al noroeste de Comodoro Rivadavia, es un campo maduro con petróleo viscoso.",
+   "caso": "Manantiales Behr: polímeros en un campo de casi un siglo",
+   "S": "Manantiales Behr, en la Cuenca del Golfo San Jorge, Chubut, cerca de Comodoro Rivadavia, es un campo con casi un siglo de producción y petróleo viscoso. En el yacimiento Grimbeek ronda los 120 cP, a unos 1.000 m de profundidad.",
    "T": "Aumentar la producción de un campo con casi un siglo de actividad.",
-   "A": "Se potenció la recuperación secundaria y se inició la terciaria: el primer piloto en la zona de Grimbeek comenzó en 2019, y se instalaron cinco plantas de inyección de polímeros.",
-   "R": "En diciembre de 2020 el campo llegó a 3.747 metros cúbicos diarios, su mayor producción en 90 años de actividad."
-  }
+   "A": "Inyección de agua desde 2013; en 2015, YPF inició un piloto de inyección de polímeros y, desde 2019, lo expandió con plantas modulares.",
+   "R": "En diciembre de 2020 el campo alcanzó 3.747 m³/d, la mayor producción de sus 90 años de actividad hasta ese momento."
+  },
+  "cues": [
+   {
+    "say": "Bienvenido a Recuperación mejorada, EOR: química, gas y térmica, de H3L Global Energy. Después de la inyección de agua, en muchos yacimientos queda más de la mitad del petróleo en la roca.",
+    "scene": {
+     "t": "bin"
+    },
+    "hl": -1
+   },
+   {
+    "say": "En este curso vamos a ver por qué, y qué se puede hacer. El curso responde tres preguntas que agregan valor a cualquier equipo técnico. La primera: ¿por qué el agua deja petróleo atrás? La segunda: ¿qué palanca mueve cada método de recuperación mejorada?",
+    "hl": 1
+   },
+   {
+    "say": "Y la tercera: ¿cómo se pasa de una idea de laboratorio a un proyecto de campo? La respuesta a la primera pregunta es una idea que ordena todo el curso: el factor de recuperación es el producto de tres eficiencias.",
+    "hl": 2
+   },
+   {
+    "say": "La eficiencia areal indica qué fracción del área barre el fluido inyectado; la vertical, qué fracción del espesor; y la de desplazamiento, cuánto petróleo saca en la roca que sí barre."
+   },
+   {
+    "say": "Cada método de EOR mueve una palanca distinta, y por eso el primer paso es entender qué eficiencia limita el recobro, y recién después elegir el método. El curso tiene tres módulos de tres lecciones. El primero explica por qué queda petróleo: las eficiencias, la razón de movilidad y el efecto de la heterogeneidad."
+   },
+   {
+    "say": "El segundo presenta los métodos: polímeros, tensioactivos y álcali, y gases. Y el tercero cierra con los métodos térmicos, el screening para elegir un método y el paso de la idea al piloto y a la escala."
+   },
+   {
+    "say": "El hilo conductor es un caso real de Argentina: Manantiales Behr, en la cuenca del Golfo San Jorge, provincia de Chubut, cerca de Comodoro Rivadavia. Es un campo con casi un siglo de producción y petróleo viscoso. En uno de sus yacimientos, Grimbeek, el petróleo ronda los ciento veinte centipoise de viscosidad, a una profundidad de unos mil metros.",
+    "scene": {
+     "t": "star"
+    },
+    "hl": 0
+   },
+   {
+    "say": "YPF inició allí en dos mil quince un piloto de inyección de polímeros y, a partir de dos mil diecinueve, lo expandió con plantas modulares. En diciembre de dos mil veinte, el campo alcanzó tres mil setecientos cuarenta y siete metros cúbicos diarios, la mayor producción de sus noventa años de actividad hasta ese momento.",
+    "hl": 1
+   },
+   {
+    "say": "No dejamos el caso para el final: volvemos a él en cada módulo, con los datos que se han publicado. En cada lección seguimos la misma secuencia: una pregunta técnica, el método, un laboratorio donde probás el efecto de cada variable, y la decisión que ese resultado sostiene."
+   },
+   {
+    "say": "Los laboratorios y la planilla Excel usan datos de ejemplo, pensados para practicar; los números de la planilla no representan un campo real, salvo los que se indican como tomados de fuentes públicas."
+   },
+   {
+    "say": "Un aviso sobre el alcance. Este es un curso de nivel introductorio a intermedio. Los criterios de selección y los cálculos son una primera criba y una herramienta de aprendizaje: no sustituyen el laboratorio, la simulación ni el estudio de un proyecto."
+   },
+   {
+    "say": "Al terminar vas a poder: descomponer un factor de recuperación en sus eficiencias; calcular la razón de movilidad y explicar su efecto; describir la palanca de cada método químico, de gas y térmico; hacer un screening con rangos de referencia; y plantear un piloto con criterios de éxito y una economía con escenario de precio bajo."
+   },
+   {
+    "say": "Cada módulo termina con un cuestionario, hay una planilla Excel para practicar y un examen final. Al aprobar, obtenés tu certificado H3L, con código de verificación, listo para compartir en tu perfil profesional.",
+    "scene": {
+     "t": "bul",
+     "k": "Ruta del curso",
+     "h": "Cómo está organizado",
+     "items": [
+      "Por qué queda petróleo: eficiencias, movilidad y heterogeneidad",
+      "Métodos químicos y de gas: polímeros, tensioactivos y gases",
+      "Térmicos, screening y piloto: del laboratorio al campo",
+      "Excel de práctica",
+      "Examen final y certificado H3L"
+     ]
+    }
+   },
+   {
+    "say": "Empecemos."
+   }
+  ]
  },
  "modules": [
   {
    "id": "em1",
-   "title": "Módulo 1 · Por qué queda petróleo",
+   "title": "Por qué queda petróleo: eficiencias, movilidad y heterogeneidad",
    "lessons": [
     {
      "id": "e1",
      "title": "Eficiencias de barrido y de desplazamiento",
-     "comp": "Eficiencias de recuperación",
+     "comp": "Eficiencias, movilidad y heterogeneidad",
      "cues": [
       {
-       "say": "El factor de recuperación se descompone en tres eficiencias. La areal indica qué fracción del área barre el agua. La vertical, qué fracción del espesor. Y la de desplazamiento, cuánto petróleo saca el agua en la roca que sí barre.",
+       "say": "La producción de un yacimiento se suele describir en etapas. En la primaria, el petróleo sale por la energía natural del reservorio.",
        "scene": {
-        "t": "fm",
-        "k": "Factor de recuperación",
-        "h": "Tres eficiencias",
-        "f": "FR = E areal × E vertical × E desplazamiento\n\nE desplazamiento = ( 1 − Swc − Sor ) / ( 1 − Swc )",
-        "n": "Sor es la saturación de petróleo residual: lo que el agua no puede mover aunque pase por la roca."
+        "t": "bul",
+        "k": "Eficiencias de barrido y de desplazamiento",
+        "h": "Qué vas a aprender",
+        "items": [
+         "Distinguir recuperación primaria, secundaria y mejorada (EOR), y EOR de IOR.",
+         "Descomponer el factor de recuperación en las eficiencias areal, vertical y de desplazamiento.",
+         "Diagnosticar qué eficiencia limita el recobro a partir de datos de campo."
+        ]
        }
       },
       {
-       "say": "Laboratorio. Es el flujo fraccional con la solución de Buckley y Leverett. Subí la viscosidad del petróleo y mirá la razón de movilidad. Con razón mayor que uno, el agua es más móvil que el petróleo, se adelanta, y la irrupción ocurre antes.",
+       "say": "En la secundaria, se inyecta agua o gas para mantener la presión y empujar el petróleo hacia los pozos. Y en la terciaria, o recuperación mejorada, EOR, se inyectan fluidos o energía que cambian las propiedades del petróleo o de la roca: polímeros, tensioactivos, gases miscibles, calor."
+      },
+      {
+       "say": "A veces se habla de IOR, recuperación incrementada, que es un término más amplio: incluye también mejoras operativas, perforación de relleno o mejor gestión del barrido, sin que cambie la naturaleza del fluido inyectado."
+      },
+      {
+       "say": "Aun después de una buena inyección de agua, en muchos yacimientos queda más de la mitad del petróleo original. ¿Por qué? Para contestar conviene descomponer el factor de recuperación en tres eficiencias que se multiplican. La eficiencia areal es la fracción del área del patrón que el fluido inyectado barre. La eficiencia vertical es la fracción del espesor que barre."
+      },
+      {
+       "say": "Y la eficiencia de desplazamiento es cuánto petróleo saca el fluido de la roca que sí barre. El producto es el factor de recuperación."
+      },
+      {
+       "say": "Empecemos por la de desplazamiento, que depende de la roca y de los fluidos a escala de poro. Cuando el agua desplaza petróleo, no lo saca todo: queda una saturación residual de petróleo, Sor, atrapada por fuerzas capilares en forma de gotas aisladas.",
+       "scene": {
+        "t": "tbl",
+        "k": "Eficiencias de barrido y de desplazamiento",
+        "h": "Fórmulas",
+        "cols": [
+         "Concepto",
+         "Fórmula"
+        ],
+        "rows": [
+         [
+          "Factor de recuperación",
+          "FR = E_A · E_V · E_D"
+         ],
+         [
+          "Eficiencia de desplazamiento",
+          "E_D = (1 − Swc − Sor) / (1 − Swc)"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Si la saturación de agua connata es Swc, la eficiencia de desplazamiento máxima es uno menos Swc menos Sor, dividido por uno menos Swc. Con una Swc de cero coma dos y una Sor de cero coma tres, el desplazamiento llega a sesenta y dos y medio por ciento."
+      },
+      {
+       "say": "Aunque barras todo el yacimiento, no podés pasar de ahí con agua. Después viene el barrido, que depende de la escala del yacimiento. Aunque el agua desplace bien donde pasa, puede no pasar por todos lados."
+      },
+      {
+       "say": "El petróleo queda sin tocar porque el agua toma los caminos más permeables, por ejemplo una capa de alta permeabilidad, o porque es más móvil que el petróleo y avanza en dedos, o porque se mueve por gravedad."
+      },
+      {
+       "say": "Esa es la eficiencia de barrido, areal y vertical. Juntando las dos, con una eficiencia de barrido vertical de sesenta y seis por ciento, que es la que da el modelo de capas que vamos a ver en la lección tres, y el desplazamiento de sesenta y dos y medio, el recobro es cuarenta y uno por ciento, con barrido areal supuesto de cien por ciento."
+      },
+      {
+       "say": "Es decir, queda cincuenta y nueve por ciento del petróleo en la roca. Ese es el orden de magnitud de lo que ocurre en muchos campos. La utilidad práctica de esta descomposición es el diagnóstico, porque cada problema pide una solución distinta. Si el agua irrumpe temprano en los productores y el corte de agua sube rápido, el problema es de barrido, vertical o areal."
+      },
+      {
+       "say": "Se ataca con control de movilidad, por ejemplo con polímero, o con control de conformancia, que bloquea las capas ladronas con geles o con sellos. Si, en cambio, en las zonas que sí fueron barridas se miden saturaciones altas de petróleo, el problema es de desplazamiento. Se ataca bajando la saturación residual, con tensioactivos, con gas miscible o con calor, que reduce la viscosidad.",
+       "scene": {
+        "t": "tbl",
+        "k": "Eficiencias de barrido y de desplazamiento",
+        "h": "Diagnóstico",
+        "cols": [
+         "Señal de campo",
+         "Eficiencia limitante",
+         "Palanca"
+        ],
+        "rows": [
+         [
+          "Irrupción temprana, corte de agua alto, capas ladronas",
+          "Barrido (vertical o areal)",
+          "Control de movilidad (polímero), conformancia"
+         ],
+         [
+          "Barrido bueno, pero Sor alta en la zona barrida",
+          "Desplazamiento",
+          "Tensioactivos, gas miscible, calor"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Los datos para diferenciarlos son los registros de saturación en pozos productores o de observación, los ensayos con trazadores de un solo pozo, el análisis de los núcleos y la historia de los cortes de agua."
+      },
+      {
+       "say": "Veamos un ejemplo del caso. En Grimbeek, un yacimiento fluvial con muchas capas de distinta permeabilidad y un petróleo de ciento veinte centipoise, el agua inyectada es mucho menos viscosa que el petróleo. Eso predice un barrido pobre: el agua va por las capas más permeables y se adelanta. Es un problema de barrido y de movilidad, no de desplazamiento."
+      },
+      {
+       "say": "Por eso el polímero, que sube la viscosidad del agua, es una palanca razonable. En la lección dos vemos cómo se mide eso con la razón de movilidad. Para el laboratorio, hacé un ejercicio guiado. Te damos tres casos. En el primero, el agua irrumpe a los pocos meses de iniciar la inyección y el corte supera el noventa por ciento rápidamente."
+      },
+      {
+       "say": "En el segundo, el barrido es bueno según los trazadores y el corte sube despacio, pero los registros muestran una saturación de petróleo remanente alta. En el tercero, hay una capa muy permeable que se lleva más de la mitad del caudal. Para cada uno, escribí qué eficiencia limita el recobro y qué palanca elegirías."
+      },
+      {
+       "say": "La decisión que sostiene la lección es no elegir un método por moda. Una técnica poderosa aplicada a la eficiencia equivocada no recupera nada."
+      },
+      {
+       "say": "Pregunta rápida. Un yacimiento muestra irrupción temprana de agua y barrido pobre, pero el petróleo en la zona barrida está bien desplazado. ¿Qué eficiencia limita el recobro? Respondé en pantalla.",
+       "q": {
+        "q": "Un yacimiento muestra irrupción temprana de agua y barrido pobre, pero el petróleo en la zona barrida está bien desplazado. ¿Qué eficiencia limita el recobro?",
+        "o": [
+         "La eficiencia de desplazamiento.",
+         "La eficiencia de barrido (vertical o areal).",
+         "Ninguna, es un caso normal.",
+         "La saturación de agua connata."
+        ],
+        "a": 1,
+        "e": "La irrupción temprana indica que el fluido inyectado no barre bien el yacimiento. El problema es de barrido y se ataca con control de movilidad o de conformancia."
+       }
+      }
+     ],
+     "obj": [
+      "Distinguir recuperación primaria, secundaria y mejorada (EOR), y EOR de IOR.",
+      "Descomponer el factor de recuperación en las eficiencias areal, vertical y de desplazamiento.",
+      "Diagnosticar qué eficiencia limita el recobro a partir de datos de campo."
+     ],
+     "ficha": "**Etapas.** Primaria (energía natural). Secundaria (inyección de agua o gas). Terciaria o EOR (fluidos o energía que cambian propiedades). IOR: término más amplio, incluye mejoras operativas.\n\n**Fórmulas**\n\n| Concepto | Fórmula |\n|---|---|\n| Factor de recuperación | FR = E_A · E_V · E_D |\n| Eficiencia de desplazamiento | E_D = (1 − Swc − Sor) / (1 − Swc) |\n\n**Ejemplo.** Swc = 0,2 y Sor = 0,3: E_D = 0,625. Con E_V = 0,66 (hoja Capas) y E_A = 1: FR ≈ 41 %; queda ≈ 59 % del petróleo original.\n\n**Diagnóstico**\n\n| Señal de campo | Eficiencia limitante | Palanca |\n|---|---|---|\n| Irrupción temprana, corte de agua alto, capas ladronas | Barrido (vertical o areal) | Control de movilidad (polímero), conformancia |\n| Barrido bueno, pero Sor alta en la zona barrida | Desplazamiento | Tensioactivos, gas miscible, calor |\n\n**Datos para diagnosticar.** Registros de saturación, trazador de un solo pozo, núcleos, curvas de corte de agua, perfiles de inyección.\n\n**Errores frecuentes.** Elegir un método sin diagnóstico; confundir EOR con IOR; suponer barrido areal de 100 % sin verificarlo.",
+     "practica": "Ejercicio guiado, sin software: para los tres casos descritos en la lección, escribí la eficiencia limitante, las mediciones que pedirías para confirmarlo y la palanca elegida. Después, en la hoja Capas de la planilla, cambiá Sor de 0,3 a 0,15 y observá cuánto cambia la eficiencia de desplazamiento y el factor de recuperación."
+    },
+    {
+     "id": "e2",
+     "title": "Razón de movilidad y flujo fraccional",
+     "comp": "Eficiencias, movilidad y heterogeneidad",
+     "cues": [
+      {
+       "say": "La movilidad de un fluido es su facilidad para fluir en la roca: la permeabilidad relativa dividida por la viscosidad. Cuanto mayor la permeabilidad relativa y menor la viscosidad, más móvil es. La razón de movilidad, M, compara el agua con el petróleo: es la movilidad del agua, medida con sus valores extremos, dividida por la movilidad del petróleo.",
+       "scene": {
+        "t": "bul",
+        "k": "Razón de movilidad y flujo fraccional",
+        "h": "Qué vas a aprender",
+        "items": [
+         "Calcular la razón de movilidad y explicar qué significa que sea mayor o menor que uno.",
+         "Interpretar la curva de flujo fraccional y el frente de Buckley y Leverett.",
+         "Estimar qué viscosidad de agua lleva la razón de movilidad a uno."
+        ]
+       }
+      },
+      {
+       "say": "Tomemos un ejemplo. La permeabilidad relativa al agua, en el extremo de petróleo residual, es cero coma treinta y cinco. La del petróleo, en el extremo de agua connata, es cero coma nueve. El agua tiene una viscosidad de cero coma cinco centipoise y el petróleo, seis. La movilidad del agua es cero coma treinta y cinco sobre cero coma cinco, igual a cero coma siete."
+      },
+      {
+       "say": "La del petróleo es cero coma nueve sobre seis, igual a cero coma quince. La razón de movilidad es cero coma siete sobre cero coma quince: cuatro coma siete."
+      },
+      {
+       "say": "¿Qué significa? Con M mayor que uno, el agua es más móvil que el petróleo. Se adelanta, forma dedos que atraviesan el petróleo y llega antes a los productores: la irrupción ocurre antes y el barrido es peor."
+      },
+      {
+       "say": "Con M menor que uno, el petróleo es más móvil que el agua y el frente es estable, casi un pistón. Con M igual a uno, los dos se mueven con la misma facilidad. Por eso, en una inyección de agua, un M de cuatro coma siete es una mala noticia."
+      },
+      {
+       "say": "Para ver cómo se comporta el desplazamiento en una dimensión se usa el flujo fraccional. Es la fracción de agua en el fluido total que se mueve, en función de la saturación de agua. En su forma más simple, es uno dividido por uno más la razón entre la movilidad del petróleo y la del agua.",
+       "scene": {
+        "t": "tbl",
+        "k": "Razón de movilidad y flujo fraccional",
+        "h": "Definiciones",
+        "cols": [
+         "Concepto",
+         "Fórmula"
+        ],
+        "rows": [
+         [
+          "Movilidad",
+          "λ = k · kr / μ"
+         ],
+         [
+          "Razón de movilidad (extremos)",
+          "M = (krw0 / μw) / (kro0 / μo)"
+         ],
+         [
+          "Flujo fraccional (sin gravedad ni capilaridad)",
+          "fw = 1 / [1 + (kro · μw) / (krw · μo)]"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "La curva tiene forma de S: baja para saturaciones bajas de agua, sube en la zona central y llega a uno cuando el petróleo ya no se mueve. Buckley y Leverett, en mil novecientos cuarenta y dos, mostraron cómo se mueve una saturación en el yacimiento: con una velocidad proporcional a la pendiente de esa curva."
+      },
+      {
+       "say": "Como la pendiente no es constante, las saturaciones más altas viajarían más rápido que las bajas, y el frente se vuelve un salto, un shock. Con la tangente de Welge, trazada desde la saturación de agua connata hasta la curva, se obtiene la saturación en el frente y la saturación media detrás de él."
+      },
+      {
+       "say": "El volumen poroso inyectado hasta la irrupción es el inverso de esa pendiente en el frente. Y después de la irrupción, el corte de agua sube y el petróleo se sigue recuperando, pero cada vez con más agua."
+      },
+      {
+       "say": "Lo que une las dos ideas: cuanto mayor es M, más a la izquierda está el frente, menor es la saturación media detrás de él y antes llega la irrupción. Controlar M es, entonces, mover el barrido en la dirección correcta."
+      },
+      {
+       "say": "¿Cómo se baja M? Se puede subir la viscosidad del agua, con polímero. Se puede bajar la del petróleo, con calor. Y se puede reducir la permeabilidad relativa al agua, por ejemplo con geles y con espumas.",
+       "scene": {
+        "t": "tbl",
+        "k": "Razón de movilidad y flujo fraccional",
+        "h": "Ejemplo (hoja Capas)",
+        "cols": [
+         "μw (cP)",
+         "M"
+        ],
+        "rows": [
+         [
+          "0,5",
+          "4,67"
+         ],
+         [
+          "1,0",
+          "2,33"
+         ],
+         [
+          "2,0",
+          "1,17"
+         ],
+         [
+          "2,33",
+          "1,00"
+         ],
+         [
+          "5,0",
+          "0,47"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Un criterio práctico es llevar M cerca de uno, o por debajo. En el ejemplo, M es igual a dos coma tres, treinta y tres, dividido por la viscosidad del agua. Con cero coma cinco, da cuatro coma siete. Con uno, dos coma tres. Con dos, uno coma dos. Y M llega a uno con una viscosidad del agua de dos coma tres centipoise."
+      },
+      {
+       "say": "Con cinco centipoise, M baja a cero coma cuarenta y siete: el desplazamiento es estable. Conviene una advertencia sobre este modelo. Con valores extremos, M es una referencia. En un yacimiento real, las permeabilidades relativas cambian con la saturación, hay heterogeneidad y gravedad, y el polímero pierde viscosidad por salinidad, por cizalla y por degradación."
+      },
+      {
+       "say": "M da una guía, no un pronóstico."
+      },
+      {
+       "say": "Para el laboratorio, usá primero el laboratorio interactivo de flujo fraccional: subí la viscosidad del petróleo y mirá cómo cambia la razón de movilidad y cuándo ocurre la irrupción. Después, en la hoja Capas de la planilla, mirá la celda de la razón de movilidad y cambiá la viscosidad del agua de cero coma cinco a dos coma tres, y a cinco.",
        "scene": {
         "t": "viz",
         "w": "bl",
@@ -91,91 +386,328 @@
        "lab": true
       },
       {
-       "say": "Las tres eficiencias señalan problemas distintos. Un barrido pobre se corrige con control de movilidad y de conformancia. Un desplazamiento pobre exige bajar la saturación residual, con tensioactivos, gas miscible o calor.",
+       "say": "Anotá M en cada caso. La decisión que sostiene la lección es si hace falta control de movilidad. Con M cercano a uno o menor, un polímero aporta poco. Con M de cuatro o cinco, es la primera palanca a evaluar. Y en Grimbeek, con un petróleo de ciento veinte centipoise, M para agua sin polímero es, a todas luces, muy desfavorable."
+      },
+      {
+       "say": "Pregunta rápida. Con la viscosidad del petróleo en seis centipoise, permeabilidades relativas de cero coma treinta y cinco y cero coma nueve y agua de dos coma tres centipoise, ¿cuánto vale M aproximadamente? Respondé en pantalla.",
+       "q": {
+        "q": "Con μo = 6 cP, krw0 = 0,35, kro0 = 0,9 y agua de 2,33 cP, ¿cuánto vale M aproximadamente?",
+        "o": [
+         "0,5",
+         "1,0",
+         "2,3",
+         "4,7"
+        ],
+        "a": 1,
+        "e": "M = (0,35 / 2,33) / (0,9 / 6) = 0,150 / 0,150 ≈ 1. Con esa viscosidad del agua el desplazamiento es del tipo pistón."
+       }
+      }
+     ],
+     "obj": [
+      "Calcular la razón de movilidad y explicar qué significa que sea mayor o menor que uno.",
+      "Interpretar la curva de flujo fraccional y el frente de Buckley y Leverett.",
+      "Estimar qué viscosidad de agua lleva la razón de movilidad a uno."
+     ],
+     "ficha": "**Definiciones**\n\n| Concepto | Fórmula |\n|---|---|\n| Movilidad | λ = k · kr / μ |\n| Razón de movilidad (extremos) | M = (krw0 / μw) / (kro0 / μo) |\n| Flujo fraccional (sin gravedad ni capilaridad) | fw = 1 / [1 + (kro · μw) / (krw · μo)] |\n\n**Interpretación.** M > 1 desfavorable (irrupción temprana, dedos). M = 1 equilibrio. M < 1 favorable (frente estable).\n\n**Ejemplo (hoja Capas).** krw0 = 0,35; kro0 = 0,9; μo = 6 cP: M = 2,333 / μw.\n\n| μw (cP) | M |\n|---|---|\n| 0,5 | 4,67 |\n| 1,0 | 2,33 |\n| 2,0 | 1,17 |\n| 2,33 | 1,00 |\n| 5,0 | 0,47 |\n\n**Buckley–Leverett (1942).** La velocidad de una saturación es proporcional a dfw/dSw; el frente es un shock; la tangente de Welge desde Swc da la saturación del frente; PV inyectados hasta la irrupción = 1 / (dfw/dSw) en el frente.\n\n**Cómo bajar M.** Subir μw (polímero), bajar μo (calor), reducir krw (geles, espumas).\n\n**Errores frecuentes.** Calcular M con permeabilidades relativas que no son los extremos; ignorar la pérdida de viscosidad del polímero; usar M como pronóstico.",
+     "practica": "Laboratorio interactivo de flujo fraccional (ya publicado): variables viscosidad del petróleo y del agua; salidas: razón de movilidad, saturación del frente y volumen poral inyectado hasta la irrupción. Práctica con planilla: hoja Capas, celdas de viscosidad del agua y de razón de movilidad."
+    },
+    {
+     "id": "e3",
+     "title": "Heterogeneidad y barrido vertical: el modelo de capas",
+     "comp": "Eficiencias, movilidad y heterogeneidad",
+     "cues": [
+      {
+       "say": "Los yacimientos no son homogéneos. Un reservorio fluvial como Grimbeek está formado por muchas capas de arena de distinta permeabilidad, y el agua inyectada toma preferentemente las más permeables. La heterogeneidad vertical es la causa más común de un barrido vertical pobre, y el modelo de capas es la forma más simple de entenderla y de medirla.",
+       "scene": {
+        "t": "bul",
+        "k": "Heterogeneidad y barrido vertical: el modelo de capas",
+        "h": "Qué vas a aprender",
+        "items": [
+         "Describir un yacimiento de capas con el coeficiente de Dykstra y Parsons.",
+         "Explicar por qué la razón de movilidad desfavorable acelera las capas más permeables.",
+         "Usar el modelo de capas para estimar el barrido vertical y comparar escenarios."
+        ]
+       }
+      },
+      {
+       "say": "Para describir la heterogeneidad se usa el coeficiente de Dykstra y Parsons, V. Se obtiene ordenando las permeabilidades de los datos de núcleo, y es la diferencia entre la mediana y el valor que deja el ochenta y cuatro por ciento de los datos por encima, dividida por la mediana."
+      },
+      {
+       "say": "Va de cero, un reservorio uniforme, a uno, extremadamente heterogéneo. Si las permeabilidades siguen una distribución lognormal, V equivale a uno menos la exponencial de menos la desviación estándar del logaritmo. En nuestro ejemplo V es cero coma siete, que es un reservorio bastante heterogéneo."
+      },
+      {
+       "say": "El modelo supone veinte capas de igual espesor, con permeabilidades repartidas según esa distribución, sin comunicación vertical entre ellas. El desplazamiento en cada capa es de tipo pistón: el frente de agua avanza dejando atrás el petróleo residual."
+      },
+      {
+       "say": "Con una presión de inyección común, cada capa avanza a su velocidad, proporcional a su permeabilidad. Cuando el frente llega al pozo productor, esa capa irrumpe y, desde ahí, produce solo agua."
+      },
+      {
+       "say": "Acá hay una idea que conviene entender bien, porque conecta con la lección anterior. La velocidad de una capa depende de cuánta resistencia encuentra el fluido: la de la zona barrida, por agua, y la de la zona no barrida, por petróleo."
+      },
+      {
+       "say": "Si el agua es más móvil que el petróleo, que es el caso M mayor que uno, a medida que el frente avanza la zona barrida, de baja resistencia, crece, y la resistencia total baja: la capa se acelera."
+      },
+      {
+       "say": "Las capas rápidas se aceleran más y se alejan de las lentas. El barrido se vuelve más desparejo. En cambio, si M es menor que uno, la resistencia crece al avanzar el frente: las capas rápidas se frenan, y las lentas las alcanzan."
+      },
+      {
+       "say": "El polímero, al bajar M, no solo retrasa la irrupción: ordena el avance de todas las capas. El modelo calcula el corte de agua como la fracción del caudal total que sale de las capas que ya irrumpieron, y el barrido vertical, Ev, como el promedio del avance de las capas.",
        "scene": {
         "t": "tbl",
-        "k": "Diagnóstico",
-        "h": "Qué limita y qué se hace",
+        "k": "Heterogeneidad y barrido vertical: el modelo de capas",
+        "h": "Resultados (hoja Comparacion; corte de agua límite 95 %)",
         "cols": [
-         "Limitación",
-         "Causa",
-         "Palanca"
+         "Escenario",
+         "M",
+         "Ev",
+         "Ed",
+         "FR"
         ],
         "rows": [
          [
-          "Barrido areal",
-          "Razón de movilidad alta, arreglo de pozos",
-          "Polímero, cambio de arreglo"
+          "Base (agua, 0,5 cP)",
+          "4,67",
+          "0,66",
+          "0,625",
+          "41,0 %"
          ],
          [
-          "Barrido vertical",
-          "Capas muy distintas en permeabilidad",
-          "Control de conformancia, polímero, geles"
-         ],
-         [
-          "Desplazamiento",
-          "Petróleo atrapado por capilaridad",
-          "Tensioactivos, gas miscible, calor"
+          "Polímero (5 cP)",
+          "0,47",
+          "0,90",
+          "0,625",
+          "55,9 %"
          ]
-        ],
-        "n": "Antes de elegir un método, hay que identificar cuál de las tres eficiencias limita al campo."
+        ]
        }
       },
       {
-       "say": "Pregunta rápida.",
+       "say": "Se detiene cuando el corte llega a un límite económico, por ejemplo noventa y cinco por ciento. Con los datos de la planilla, razón de movilidad de cuatro coma siete y V de cero coma siete, el barrido vertical llega a sesenta y seis por ciento al corte de noventa y cinco por ciento."
+      },
+      {
+       "say": "Con un polímero que lleva la viscosidad del agua de cero coma cinco a cinco centipoise, M baja a cero coma cuarenta y siete, y el barrido sube a casi noventa por ciento. En términos de factor de recuperación, con el desplazamiento de sesenta y dos y medio por ciento, eso pasa de cuarenta y uno a cincuenta y seis por ciento."
+      },
+      {
+       "say": "Esa es la forma en que el polímero, que no cambia el petróleo residual, mejora la recuperación: ordena el barrido. Cuidado con los límites. No hay flujo cruzado entre capas, que en la realidad puede ayudar al barrido; no hay gravedad ni capilaridad; el barrido areal es cien por ciento; el desplazamiento es un pistón."
+      },
+      {
+       "say": "Es un modelo didáctico, que muestra tendencias y órdenes de magnitud, no un pronóstico de campo. Cuando el problema es la heterogeneidad extrema, hay otras palancas además del polímero. El control de conformancia bloquea o reduce la permeabilidad de las capas ladronas con geles, con sellos mecánicos o con inyección selectiva."
+      },
+      {
+       "say": "También puede ayudar la inyección en pozos más cercanos o el cambio de los intervalos abiertos. La elección depende de si las capas ladronas son identificables, aisladas o están conectadas. Para el laboratorio, abrí la hoja Capas de la planilla. Cambiá la viscosidad del agua de cero coma cinco a cinco y observá el barrido vertical."
+      },
+      {
+       "say": "Cambiá después V de cero coma cinco a cero coma ocho y anotá cómo cambia el barrido con cada viscosidad. Compará con la hoja Comparacion, donde se calculan los escenarios."
+      },
+      {
+       "say": "La decisión que sostiene la lección es si el problema es de movilidad, de heterogeneidad, o de las dos cosas. Con V alto y M alto, el barrido vertical es muy pobre y un polímero solo mejora mucho, pero un yacimiento con capas ladronas extremas puede necesitar además conformancia."
+      },
+      {
+       "say": "Pregunta rápida. En el modelo de capas, ¿qué efecto tiene un polímero que lleva M de mayor que uno a menor que uno? Respondé en pantalla.",
        "q": {
-        "q": "Un petróleo residual alto después del barrido indica un problema de:",
+        "q": "En el modelo de capas, ¿qué efecto tiene un polímero que lleva M de mayor que uno a menor que uno?",
         "o": [
-         "Precio del petróleo",
-         "Eficiencia de desplazamiento",
-         "Cantidad de pozos",
-         "Profundidad"
+         "Frena las capas rápidas, acerca la velocidad de todas las capas y mejora el barrido vertical.",
+         "Baja la saturación residual de petróleo.",
+         "Acelera las capas más permeables.",
+         "No tiene ningún efecto sobre el barrido."
         ],
-        "a": 1,
-        "e": "Es el petróleo que el agua no puede mover aunque barra la roca."
+        "a": 0,
+        "e": "Con M menor que uno, la resistencia crece al avanzar el frente: las capas rápidas se frenan y las lentas las alcanzan. El polímero mejora el barrido; no cambia el petróleo residual."
        }
       }
-     ]
+     ],
+     "obj": [
+      "Describir un yacimiento de capas con el coeficiente de Dykstra y Parsons.",
+      "Explicar por qué la razón de movilidad desfavorable acelera las capas más permeables.",
+      "Usar el modelo de capas para estimar el barrido vertical y comparar escenarios."
+     ],
+     "ficha": "**Coeficiente de Dykstra–Parsons.** V = (k50 − k84,1) / k50. Con distribución lognormal: V = 1 − exp(−σ), con σ la desviación estándar de ln k.\n\n**Modelo de capas de la planilla.** 20 capas de igual espesor; V = 0,7; sin flujo cruzado; pistón; presión común. Posición del frente (con la hoja Tiempo): x = [−1 + √(1 + 2(1/M − 1) · k · t)] / (1/M − 1). Irrupción de cada capa: t = (1/M + 1) / (2k). Flujo de cada capa: k / (x/M + 1 − x).\n\n**Resultados (hoja Comparacion; corte de agua límite 95 %)**\n\n| Escenario | M | Ev | Ed | FR |\n|---|---|---|---|---|\n| Base (agua, 0,5 cP) | 4,67 | 0,66 | 0,625 | 41,0 % |\n| Polímero (5 cP) | 0,47 | 0,90 | 0,625 | 55,9 % |\n\n**Idea clave.** Si M > 1, las capas rápidas se aceleran y el barrido empeora. Si M < 1, se frenan y las lentas las alcanzan.\n\n**Límites.** Sin flujo cruzado, gravedad ni capilaridad; barrido areal 100 %; pistón.\n\n**Errores frecuentes.** Esperar que el polímero cambie la Sor; ignorar la heterogeneidad extrema; usar el modelo como pronóstico.",
+     "practica": "Práctica con planilla: H3L_EOR_Barrido_en_Capas_y_Screening_v2.xlsx, hojas Capas y Comparacion. Cambiá la viscosidad del agua (0,5 y 5 cP) y V (0,5 y 0,8) y completá una tabla con M, Ev y FR para los cuatro casos. Control: en la hoja Comparacion, Ev del polímero debe ser mayor que el del caso base."
+    }
+   ],
+   "quiz": [
+    {
+     "q": "¿Cómo se descompone el factor de recuperación de un desplazamiento?",
+     "o": [
+      "Suma de las eficiencias areal, vertical y de desplazamiento.",
+      "Solo la eficiencia de desplazamiento.",
+      "Solo el barrido areal.",
+      "Producto de las eficiencias areal, vertical y de desplazamiento."
+     ],
+     "a": 3,
+     "e": "FR = E_A · E_V · E_D: las tres eficiencias se multiplican."
     },
     {
-     "id": "e2",
-     "title": "Química: polímeros y tensioactivos",
+     "q": "Con Swc = 0,25 y Sor = 0,25, ¿cuál es la eficiencia de desplazamiento máxima?",
+     "o": [
+      "0,50",
+      "0,75",
+      "0,25",
+      "0,67"
+     ],
+     "a": 3,
+     "e": "E_D = (1 − 0,25 − 0,25) / (1 − 0,25) = 0,50 / 0,75 = 0,67."
+    },
+    {
+     "q": "Con barrido areal 100 %, E_V = 0,60 y E_D = 0,70, ¿cuál es el factor de recuperación?",
+     "o": [
+      "60 %",
+      "42 %",
+      "13 %",
+      "70 %"
+     ],
+     "a": 1,
+     "e": "FR = 1,0 · 0,60 · 0,70 = 0,42."
+    },
+    {
+     "q": "El agua irrumpe a los pocos meses y el corte sube muy rápido, pero la zona barrida está bien desplazada. ¿Qué eficiencia limita?",
+     "o": [
+      "La de desplazamiento",
+      "Ninguna",
+      "La saturación connata",
+      "La de barrido"
+     ],
+     "a": 3,
+     "e": "La irrupción temprana indica barrido pobre; se ataca con control de movilidad o de conformancia."
+    },
+    {
+     "q": "Con krw0 = 0,3, kro0 = 0,8, μw = 1 cP y μo = 8 cP, ¿cuánto vale M?",
+     "o": [
+      "3,0",
+      "8,0",
+      "0,33",
+      "1,0"
+     ],
+     "a": 0,
+     "e": "M = (0,3 / 1) / (0,8 / 8) = 0,3 / 0,1 = 3,0: desfavorable."
+    },
+    {
+     "q": "Con los mismos datos, ¿qué viscosidad de agua lleva M a 1?",
+     "o": [
+      "0,3 cP",
+      "1 cP",
+      "3 cP",
+      "8 cP"
+     ],
+     "a": 2,
+     "e": "M = 1 cuando μw = krw0 · μo / kro0 = 0,3 · 8 / 0,8 = 3 cP."
+    },
+    {
+     "q": "Con k50 = 100 mD y k84,1 = 30 mD, ¿cuánto vale V?",
+     "o": [
+      "3,3",
+      "0,7",
+      "0,5",
+      "0,3"
+     ],
+     "a": 1,
+     "e": "V = (100 − 30) / 100 = 0,7: yacimiento bastante heterogéneo."
+    },
+    {
+     "q": "En el modelo de capas, ¿qué ocurre con las capas rápidas si M < 1?",
+     "o": [
+      "Se aceleran.",
+      "Se frenan y las lentas las alcanzan, y el barrido mejora.",
+      "No cambian.",
+      "Dejan de producir."
+     ],
+     "a": 1,
+     "e": "Con M < 1 la resistencia crece al avanzar el frente: las capas rápidas se frenan."
+    }
+   ]
+  },
+  {
+   "id": "em2",
+   "title": "Métodos químicos y de gas: polímeros, tensioactivos y gases",
+   "lessons": [
+    {
+     "id": "e4",
+     "title": "Polímeros y control de movilidad",
      "comp": "Métodos químicos",
      "cues": [
       {
-       "say": "Un polímero se disuelve en el agua inyectada y la vuelve más viscosa. Sube la viscosidad del agua y baja la razón de movilidad.",
+       "say": "Un polímero se disuelve en el agua inyectada y la vuelve más viscosa. Con eso baja la razón de movilidad y mejora el barrido, tanto areal como vertical. Además, al retenerse en la roca, reduce la permeabilidad efectiva al agua. Lo que un polímero no hace es cambiar el petróleo residual: actúa sobre el barrido, no sobre el desplazamiento a escala de poro.",
        "scene": {
         "t": "bul",
-        "k": "Polímero",
-        "h": "Qué hace y qué exige",
+        "k": "Polímeros y control de movilidad",
+        "h": "Qué vas a aprender",
         "items": [
-         "Sube la viscosidad del agua y baja la razón de movilidad",
-         "Mejora el barrido areal y vertical",
-         "Necesita agua compatible, con salinidad y dureza controladas",
-         "Puede degradarse con temperatura y cizalla",
-         "Requiere planta de preparación y control de calidad"
+         "Explicar cómo actúa un polímero y qué eficiencia mejora.",
+         "Comparar los polímeros más usados y sus límites de salinidad, cizalla y temperatura.",
+         "Identificar las variables de diseño y los desafíos operativos a partir del caso Grimbeek."
         ]
-       },
-       "hl": 0
+       }
       },
       {
-       "say": "Con eso mejora el barrido, tanto areal como vertical. No cambia el petróleo residual: actúa sobre el barrido.",
-       "hl": 1
+       "say": "Los polímeros más usados son dos. La poliacrilamida parcialmente hidrolizada, HPAM, es la más común: es barata, tiene mucho poder viscosificante y es la que se usa en la mayoría de los proyectos de campo."
       },
       {
-       "say": "Necesita agua compatible, con salinidad y dureza controladas.",
-       "hl": 2
+       "say": "Su debilidad es la sensibilidad a la salinidad y a la dureza del agua, porque los cationes divalentes comprimen la molécula y bajan la viscosidad, además de la degradación por cizalla mecánica y por temperatura alta u oxígeno."
       },
       {
-       "say": "Puede degradarse con la temperatura y la cizalla.",
-       "hl": 3
+       "say": "El segundo es el xantano, un biopolímero, más tolerante a la sal y a la cizalla, pero más caro, sensible a la degradación biológica y con tendencia a taponar. La elección depende del agua disponible, de la temperatura del yacimiento y de la economía."
       },
       {
-       "say": "Y requiere una planta de preparación y control de calidad.",
-       "hl": 4
+       "say": "El diseño empieza por el objetivo de viscosidad. En la lección dos vimos que, en el ejemplo, M llega a uno con una viscosidad de agua de dos coma tres centipoise."
       },
       {
-       "say": "Laboratorio. Es un modelo de capas con distinta permeabilidad. Subí la viscosidad del agua para simular el polímero y mirá cómo sube el barrido vertical. Después bajá el petróleo residual y comparalo.",
+       "say": "Con cinco centipoise, M baja a cero coma cuarenta y siete. La planilla, en la hoja Comparacion, muestra el efecto con el modelo de capas: el barrido vertical pasa de sesenta y seis a noventa por ciento y el factor de recuperación, de cuarenta y uno a cincuenta y seis por ciento, casi quince puntos más."
+      },
+      {
+       "say": "En un petróleo de ciento veinte centipoise, como el de Grimbeek, el objetivo de viscosidad del agua con polímero es mucho más alto que en este ejemplo. Después se definen la concentración y el tamaño del tapón de polímero, que suele expresarse como fracción del volumen poral. Mayor concentración y mayor tapón mejoran el control de movilidad, pero cuestan más polímero."
+      },
+      {
+       "say": "Hay que considerar la retención: parte del polímero se adsorbe en la roca y parte queda en poros a los que no puede entrar, el llamado volumen poroso inaccesible."
+      },
+      {
+       "say": "Ambos efectos consumen polímero y retrasan el frente. Y está la inyectividad: una solución viscosa exige más presión para inyectarse, y hay que cuidar de no fracturar la formación, ni de degradar el polímero en bombas y estranguladores.",
+       "scene": {
+        "t": "tbl",
+        "k": "Polímeros y control de movilidad",
+        "h": "Polímeros",
+        "cols": [
+         "",
+         "HPAM",
+         "Xantano"
+        ],
+        "rows": [
+         [
+          "Ventajas",
+          "Barato; alta eficiencia viscosificante",
+          "Tolerante a sal y a cizalla"
+         ],
+         [
+          "Límites",
+          "Sensible a salinidad y dureza; cizalla; temperatura y oxígeno",
+          "Más caro; degradación biológica; taponamiento"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "La calidad del agua es un factor decisivo. Los sólidos, los residuos de petróleo, el hierro y el oxígeno degradan el polímero y taponan los pozos. En las plantas se prepara una solución madre concentrada, que luego se diluye, con filtración, control de oxígeno y monitoreo diario de viscosidad y concentración."
+      },
+      {
+       "say": "El caso de Grimbeek aporta datos concretos, publicados por YPF en Petrotecnia. Es un yacimiento fluvial, de la base de la formación El Trébol, de unos mil a mil ciento cincuenta metros de profundidad, con petróleo de ciento veinte centipoise, permeabilidad mayor a dos darcys, porosidad de veinticinco a veintiocho por ciento y una temperatura de unos sesenta grados."
+      },
+      {
+       "say": "La inyección de agua comenzó a principios de dos mil trece. En dos mil quince se inició un piloto de polímeros con cuatro pozos inyectores, un productor central y nueve productores periféricos. A partir de dos mil diecinueve se expandió con plantas móviles modulares."
+      },
+      {
+       "say": "Según esa publicación, los problemas de calidad del agua llevaron al equipo a aumentar la concentración de la solución madre y a reducir el caudal por pozo, lo que mejoró el resultado."
+      },
+      {
+       "say": "Entre los efectos reportados están una caída del corte de agua de cerca de treinta puntos y una producción incremental del orden de ochocientos noventa metros cúbicos por día respecto de la línea base de recuperación secundaria. La eficiencia del agua inyectada también mejoró: en lugar de hasta diez metros cúbicos de agua por metro cúbico de petróleo, se pasó a unos tres."
+      },
+      {
+       "say": "Y entre los desafíos aparecen la producción de arena, la fricción por el polímero residual en los sistemas de levantamiento, los lodos en las plantas de tratamiento y la vida útil de las bombas. Son datos de un proyecto, con su contexto, y conviene leer la publicación original antes de generalizar."
+      },
+      {
+       "say": "Una lección práctica del caso: un proyecto de polímeros es un proyecto de agua, de plantas y de operación continua, no solo de reservorio. El monitoreo diario de viscosidad en el pozo, y no solo en la planta, y el seguimiento del polímero producido, son parte del diseño."
+      },
+      {
+       "say": "Para el laboratorio, abrí la hoja Comparacion. Cambiá la viscosidad del agua con polímero de cinco a dos coma tres, y a diez. Anotá M, Ev y el factor de recuperación en cada caso, y calculá cuántos puntos de recuperación agrega cada centipoise adicional. ¿A partir de qué viscosidad el beneficio se achata?",
        "scene": {
         "t": "viz",
         "w": "eor",
@@ -185,737 +717,1142 @@
        "lab": true
       },
       {
-       "say": "Los tensioactivos actúan sobre otra palanca. Bajan la tensión interfacial entre el petróleo y el agua, y liberan el petróleo atrapado por capilaridad. Por eso bajan la saturación residual.",
-       "scene": {
-        "t": "bul",
-        "k": "Tensioactivo",
-        "h": "Qué hace y qué exige",
-        "items": [
-         "Baja la tensión interfacial y la saturación residual",
-         "Se combina con álcali y polímero en proyectos ASP",
-         "Es sensible a la salinidad y a la roca",
-         "Se pierde por adsorción en la matriz",
-         "Se valida con ensayos de laboratorio y piloto"
-        ]
-       },
-       "hl": 0
+       "say": "La decisión que sostiene la lección es la viscosidad objetivo, y qué polímero y qué calidad de agua la permiten. Una viscosidad mayor mejora el barrido, pero también el costo y el riesgo de inyectividad."
       },
       {
-       "say": "A menudo se combinan con álcali y polímero, en proyectos ASP.",
-       "hl": 1
-      },
-      {
-       "say": "Son sensibles a la salinidad y a la roca.",
-       "hl": 2
-      },
-      {
-       "say": "Se pierden por adsorción en la matriz.",
-       "hl": 3
-      },
-      {
-       "say": "Y se validan con ensayos de laboratorio y piloto.",
-       "hl": 4
-      },
-      {
-       "say": "Pregunta rápida.",
+       "say": "Pregunta rápida. ¿Qué eficiencia mejora principalmente un polímero? Respondé en pantalla.",
        "q": {
-        "q": "Un polímero en el agua inyectada actúa principalmente sobre:",
+        "q": "¿Qué eficiencia mejora principalmente un polímero?",
         "o": [
-         "La presión capilar",
-         "La saturación residual",
-         "La porosidad",
-         "El barrido, al bajar la razón de movilidad"
-        ],
-        "a": 3,
-        "e": "Hace más viscosa el agua y estabiliza el frente."
-       }
-      }
-     ]
-    }
-   ],
-   "quiz": [
-    {
-     "q": "Si el barrido vertical es el problema, conviene:",
-     "o": [
-      "Aumentar la profundidad",
-      "Bajar la tensión interfacial solamente",
-      "Mejorar la conformancia o la movilidad",
-      "Cerrar el campo"
-     ],
-     "a": 2,
-     "e": "Las capas muy permeables concentran el agua."
-    },
-    {
-     "q": "La eficiencia de desplazamiento depende de:",
-     "o": [
-      "El número de pozos",
-      "La saturación residual de petróleo",
-      "El precio",
-      "La edad del campo"
-     ],
-     "a": 1,
-     "e": "Es la parte del petróleo que se mueve en la roca barrida."
-    },
-    {
-     "q": "Un tensioactivo actúa sobre:",
-     "o": [
-      "La tensión interfacial",
-      "El espesor",
-      "La permeabilidad absoluta",
-      "La profundidad"
-     ],
-     "a": 0,
-     "e": "Libera el petróleo atrapado por capilaridad."
-    }
-   ]
-  },
-  {
-   "id": "em2",
-   "title": "Módulo 2 · Gas y calor",
-   "lessons": [
-    {
-     "id": "e3",
-     "title": "Gases miscibles, CO₂ y nitrógeno",
-     "comp": "Gas y térmica",
-     "cues": [
-      {
-       "say": "Un gas puede desplazar petróleo de dos maneras. Inmiscible, empuja como un pistón de baja viscosidad, para empuje y mantenimiento de presión.",
-       "scene": {
-        "t": "bul",
-        "k": "Gas",
-        "h": "Modos de desplazamiento",
-        "items": [
-         "Inmiscible: empuje y mantenimiento de presión",
-         "Miscible: elimina la tensión interfacial en la zona barrida",
-         "La miscibilidad depende de la presión: hay una presión mínima de miscibilidad",
-         "El CO₂ extrae componentes y reduce la viscosidad del petróleo",
-         "El nitrógeno se usa sobre todo para mantener presión"
-        ]
-       },
-       "hl": 0
-      },
-      {
-       "say": "Miscible, se mezcla con el petróleo y elimina la tensión interfacial en la zona barrida, de modo que casi no queda petróleo residual donde pasa.",
-       "hl": 1
-      },
-      {
-       "say": "La miscibilidad depende de la presión: hay una presión mínima de miscibilidad.",
-       "hl": 2
-      },
-      {
-       "say": "El CO₂ extrae componentes y reduce la viscosidad del petróleo.",
-       "hl": 3
-      },
-      {
-       "say": "Y el nitrógeno se usa sobre todo para mantener presión.",
-       "hl": 4
-      },
-      {
-       "say": "El gran problema de los gases es su baja viscosidad y densidad. Se mueven más rápido que el petróleo y suben por gravedad, y barren una fracción pequeña del reservorio. Para controlarlo se alterna agua y gas, en la técnica llamada WAG.",
-       "scene": {
-        "t": "tbl",
-        "k": "Problemas del gas",
-        "h": "Y cómo se enfrentan",
-        "cols": [
-         "Problema",
-         "Efecto",
-         "Respuesta"
-        ],
-        "rows": [
-         [
-          "Razón de movilidad muy alta",
-          "Digitación viscosa",
-          "Inyección alternada de agua y gas (WAG)"
-         ],
-         [
-          "Diferencia de densidad",
-          "Gas que sube por gravedad",
-          "Inyectar en la parte alta con espesor controlado"
-         ],
-         [
-          "Heterogeneidad",
-          "Irrupción temprana",
-          "Control de conformancia, espumas"
-         ],
-         [
-          "Corrosión por CO₂ con agua",
-          "Daño a tuberías",
-          "Metalurgia y control de humedad"
-         ]
-        ]
-       }
-      },
-      {
-       "say": "El CO₂ para EOR tiene un valor adicional: parte del gas inyectado queda en el reservorio. Eso conecta la recuperación mejorada con el almacenamiento de carbono, que se ve en otro curso.",
-       "scene": {
-        "t": "bul",
-        "k": "CO₂-EOR y almacenamiento",
-        "h": "Qué cuidar",
-        "items": [
-         "Parte del CO₂ inyectado queda en el reservorio",
-         "El CO₂ que vuelve con la producción se separa y se reinyecta",
-         "El balance de CO₂ requiere medición y verificación",
-         "El almacenamiento no es el objetivo principal del diseño EOR"
-        ]
-       },
-       "hl": 0
-      },
-      {
-       "say": "El CO₂ que vuelve con la producción se separa y se reinyecta.",
-       "hl": 1
-      },
-      {
-       "say": "Hay que medir y verificar ese balance de CO₂, y no suponerlo.",
-       "hl": 2
-      },
-      {
-       "say": "Y el almacenamiento no es el objetivo principal del diseño EOR.",
-       "hl": 3
-      },
-      {
-       "say": "En desplazamientos miscibles, la inestabilidad viscosa produce dedos que reducen el barrido.",
-       "scene": {
-        "t": "bul",
-        "k": "Gases miscibles",
-        "h": "Dedos viscosos y su modelado",
-        "items": [
-         "Dedos viscosos: menor barrido",
-         "Factor de Koval: heterogeneidad y viscosidades efectivas",
-         "Todd–Longstaff: mezcla parcial en simulación",
-         "Útiles para cribar, no para reemplazar el estudio"
-        ]
-       },
-       "hl": 0
-      },
-      {
-       "say": "Koval propuso en 1963 un factor que combina la heterogeneidad y las viscosidades efectivas.",
-       "hl": 1
-      },
-      {
-       "say": "Todd y Longstaff, un modelo de mezcla parcial para simulación.",
-       "hl": 2
-      },
-      {
-       "say": "Son aproximaciones útiles para cribar, no sustituyen al estudio detallado.",
-       "hl": 3
-      },
-      {
-       "say": "Pregunta rápida.",
-       "q": {
-        "q": "La inyección alternada de agua y gas (WAG) se usa para:",
-        "o": [
-         "Controlar la movilidad y mejorar el barrido",
-         "Aumentar la corrosión",
-         "Reducir la presión",
-         "Eliminar el agua"
-        ],
-        "a": 0,
-        "e": "Compensa la baja viscosidad del gas."
-       }
-      }
-     ]
-    },
-    {
-     "id": "e4",
-     "title": "Métodos térmicos: vapor y combustión",
-     "comp": "Gas y térmica",
-     "cues": [
-      {
-       "say": "En petróleos pesados, la viscosidad baja de manera marcada al calentar. Por eso el calor es el método principal para crudos viscosos.",
-       "scene": {
-        "t": "bul",
-        "k": "Efecto del calor",
-        "h": "Qué cambia",
-        "items": [
-         "La viscosidad baja de manera marcada con la temperatura",
-         "Se expande el petróleo y se aporta energía de empuje",
-         "Aumenta la movilidad y mejora el barrido",
-         "Es el método habitual para petróleos pesados y bitúmenes"
-        ]
-       },
-       "hl": 0
-      },
-      {
-       "say": "Además, se expande el petróleo y se aporta energía de empuje.",
-       "hl": 1
-      },
-      {
-       "say": "Aumenta la movilidad y mejora el barrido, y el petróleo fluye hacia el pozo.",
-       "hl": 2
-      },
-      {
-       "say": "Es el método habitual para petróleos pesados y bitúmenes.",
-       "hl": 3
-      },
-      {
-       "say": "Las variantes más conocidas son la estimulación cíclica con vapor, el vapor continuo y el drenaje gravitacional asistido con vapor, o SAGD, con dos pozos horizontales superpuestos. La combustión in situ genera el calor dentro del reservorio, y es más compleja de controlar.",
-       "scene": {
-        "t": "tbl",
-        "k": "Métodos térmicos",
-        "h": "Principales variantes",
-        "cols": [
-         "Método",
-         "Cómo funciona",
-         "Uso típico"
-        ],
-        "rows": [
-         [
-          "Vapor cíclico",
-          "Un mismo pozo inyecta, espera y produce",
-          "Crudos pesados, primeras etapas"
-         ],
-         [
-          "Vapor continuo",
-          "Pozos inyectores y productores separados",
-          "Campos con arreglo de pozos"
-         ],
-         [
-          "SAGD",
-          "Dos horizontales: el vapor arriba, la producción abajo",
-          "Bitúmenes de arenas petrolíferas"
-         ],
-         [
-          "Combustión in situ",
-          "Se quema parte del petróleo para generar calor",
-          "Casos específicos, mayor riesgo operativo"
-         ]
-        ]
-       }
-      },
-      {
-       "say": "Los métodos térmicos tienen un costo energético y ambiental alto. La relación vapor-petróleo es el indicador central: más vapor por barril, más costo y emisiones.",
-       "scene": {
-        "t": "bul",
-        "k": "Costo energético",
-        "h": "Qué mirar",
-        "items": [
-         "Relación vapor-petróleo: más vapor por barril, más costo y emisiones",
-         "Pérdidas de calor en el pozo y en el reservorio",
-         "Origen y tratamiento del agua que se vaporiza",
-         "Integración con la gestión de emisiones del campo"
-        ]
-       },
-       "hl": 0
-      },
-      {
-       "say": "Generar vapor consume gas o energía, y se pierde calor en el pozo y en el reservorio.",
-       "hl": 1
-      },
-      {
-       "say": "Importan el origen y el tratamiento del agua que se vaporiza.",
-       "hl": 2
-      },
-      {
-       "say": "Y se integra con la gestión de emisiones del campo.",
-       "hl": 3
-      },
-      {
-       "say": "Pregunta rápida.",
-       "q": {
-        "q": "El calor ayuda a recuperar petróleo pesado porque:",
-        "o": [
-         "Aumenta la porosidad",
-         "Baja la viscosidad del petróleo",
-         "Elimina el agua",
-         "Sube la densidad"
+         "La eficiencia de desplazamiento, porque baja la Sor.",
+         "La eficiencia de barrido, porque baja la razón de movilidad.",
+         "Ninguna.",
+         "La eficiencia de la planta de agua solamente."
         ],
         "a": 1,
-        "e": "Un petróleo menos viscoso se mueve mucho mejor."
+        "e": "El polímero sube la viscosidad del agua, baja M y mejora el barrido areal y vertical. No cambia el petróleo residual."
        }
       }
-     ]
+     ],
+     "obj": [
+      "Explicar cómo actúa un polímero y qué eficiencia mejora.",
+      "Comparar los polímeros más usados y sus límites de salinidad, cizalla y temperatura.",
+      "Identificar las variables de diseño y los desafíos operativos a partir del caso Grimbeek."
+     ],
+     "ficha": "**Mecanismo.** Aumenta la viscosidad del agua y reduce su permeabilidad efectiva por retención. Mejora el barrido areal y vertical. No cambia el petróleo residual.\n\n**Polímeros**\n\n| | HPAM | Xantano |\n|---|---|---|\n| Ventajas | Barato; alta eficiencia viscosificante | Tolerante a sal y a cizalla |\n| Límites | Sensible a salinidad y dureza; cizalla; temperatura y oxígeno | Más caro; degradación biológica; taponamiento |\n\n**Variables de diseño.** Viscosidad objetivo, concentración, tamaño del tapón (fracción del volumen poral), retención y volumen poroso inaccesible, inyectividad, calidad del agua, monitoreo.\n\n**Escenario de la hoja Comparacion (μw = 5 cP).** M 0,47; Ev 0,90; FR 55,9 % (+14,9 puntos frente al caso base de 41,0 %).\n\n**Datos públicos de Grimbeek (YPF, Petrotecnia 2024).** ≈ 120 cP; 1.000–1.150 m; k > 2 D; φ 25–28 %; T ≈ 60 °C. Agua desde 2013; piloto de polímeros en 2015 (4 inyectores); expansión modular desde 2019. Caída del corte de agua ≈ 30 puntos; incremental ≈ 890 m³/d. Desafíos: calidad del agua, arena, fricción por polímero residual, lodos en plantas.\n\n**Errores frecuentes.** Esperar que reduzca la Sor; diseñar sin medir la viscosidad en el pozo; ignorar la calidad del agua; extrapolar un caso a otro sin mirar el contexto.",
+     "practica": "Laboratorio interactivo de capas (ya publicado): variables viscosidad del agua y petróleo residual; salida: barrido vertical. Práctica con planilla: hoja Comparacion de H3L_EOR_Barrido_en_Capas_y_Screening_v2.xlsx; completá una tabla de M, Ev y FR para 2,3, 5 y 10 cP."
+    },
+    {
+     "id": "e5",
+     "title": "Tensioactivos, álcali y número capilar",
+     "comp": "Métodos químicos",
+     "cues": [
+      {
+       "say": "En la lección uno vimos que, aun en la zona barrida, el agua deja una saturación residual de petróleo, atrapada por fuerzas capilares en forma de gotas. Los tensioactivos actúan sobre esa palanca. Bajan la tensión interfacial entre el petróleo y el agua, y liberan el petróleo atrapado. Por eso se usan para bajar la saturación residual, a menudo combinados con polímero.",
+       "scene": {
+        "t": "bul",
+        "k": "Tensioactivos, álcali y número capilar",
+        "h": "Qué vas a aprender",
+        "items": [
+         "Explicar por qué queda petróleo atrapado y cómo lo libera un tensioactivo.",
+         "Relacionar el número capilar con la saturación residual de petróleo.",
+         "Describir el diseño de un tapón de tensioactivo, álcali y polímero (ASP) y sus riesgos."
+        ]
+       }
+      },
+      {
+       "say": "La forma de medir esa competencia entre fuerzas es el número capilar, que es la relación entre las fuerzas viscosas y las capilares: la viscosidad del fluido que desplaza, por su velocidad, dividida por la tensión interfacial."
+      },
+      {
+       "say": "En una inyección de agua normal, el número capilar es muy bajo, del orden de diez a la menos siete o diez a la menos seis, y la saturación residual es alta. Cuando el número capilar sube por encima de un valor crítico, la saturación residual empieza a bajar, y para vaciarla de modo importante hay que aumentarlo mil veces o más."
+      },
+      {
+       "say": "Subir la velocidad o la viscosidad ayuda poco y es difícil de lograr en el yacimiento. En cambio, bajar la tensión interfacial desde valores de decenas de milinewtons por metro hasta milésimas, la tensión ultrabaja, produce justo ese aumento."
+      },
+      {
+       "say": "¿Cómo se consigue una tensión ultrabaja? El comportamiento de fases de la mezcla de agua, petróleo y tensioactivo depende de la salinidad. A baja salinidad se forma una microemulsión de petróleo en agua, tipo Winsor uno. A alta salinidad, una de agua en petróleo, tipo Winsor dos."
+      },
+      {
+       "say": "Entre ambas, a una salinidad óptima, aparece una fase intermedia, tipo Winsor tres, donde la tensión interfacial con el petróleo y con el agua es mínima. Los ensayos de laboratorio, los barridos de salinidad, buscan esa salinidad óptima para el petróleo y el agua del campo."
+      },
+      {
+       "say": "El tensioactivo no actúa solo. Se adsorbe en la roca, y eso lo consume y lo retrasa. La dureza del agua puede precipitarlo."
+      },
+      {
+       "say": "Por eso se agregan cotensioactivos y solventes, y se usa álcali. El álcali, por ejemplo carbonato o hidróxido de sodio, reacciona con los ácidos nafténicos del petróleo y genera jabones dentro del yacimiento, que suman tensioactivo propio y reducen la adsorción del tensioactivo inyectado."
+      },
+      {
+       "say": "Su límite es el riesgo de incrustaciones y de precipitados, y la necesidad de un petróleo con cierta acidez. La combinación de álcali, tensioactivo y polímero se llama ASP. El polímero es indispensable por una razón: el banco de petróleo liberado tiene que ser desplazado de manera estable, y sin control de movilidad el tapón de químico se disipa y se desvía por las capas permeables.",
+       "scene": {
+        "t": "tbl",
+        "k": "Tensioactivos, álcali y número capilar",
+        "h": "Escenarios de la hoja Comparacion",
+        "cols": [
+         "Escenario",
+         "Ev",
+         "Ed",
+         "FR"
+        ],
+        "rows": [
+         [
+          "Base",
+          "0,66",
+          "0,625",
+          "41,0 %"
+         ],
+         [
+          "Tensioactivo (Sor 0,15)",
+          "0,66",
+          "0,8125",
+          "53,4 %"
+         ],
+         [
+          "Polímero + tensioactivo",
+          "0,90",
+          "0,8125",
+          "72,7 %"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Un diseño típico tiene una inyección previa de agua con la salinidad adecuada, un tapón de ASP de tamaño moderado respecto del volumen poral, y un tapón de polímero de empuje. Los tamaños y concentraciones salen del laboratorio y de la simulación."
+      },
+      {
+       "say": "El camino del laboratorio al campo tiene pasos que no se pueden saltar: ensayos de comportamiento de fases, medida de la tensión interfacial, estabilidad térmica y compatibilidad con el agua del campo, adsorción en el núcleo, inundaciones en núcleos para medir cuánta saturación residual se logra bajar, y un ensayo de trazador de un solo pozo para medir la saturación residual in situ antes y después."
+      },
+      {
+       "say": "Los costos incluyen los químicos, las plantas y el tratamiento de las emulsiones producidas. Veamos qué aporta en el modelo. En la hoja Comparacion, con una saturación residual de cero coma quince en lugar de cero coma treinta, la eficiencia de desplazamiento sube de sesenta y dos y medio a ochenta y uno por ciento."
+      },
+      {
+       "say": "Con el barrido del caso base, el factor de recuperación pasa de cuarenta y uno a cincuenta y tres por ciento, doce puntos más. Y combinado con polímero, que mejora el barrido, el factor llega a setenta y tres por ciento. Las dos palancas se multiplican, y por eso el ASP incluye polímero."
+      },
+      {
+       "say": "Pero un aviso: cero coma quince es un valor optimista de laboratorio. En campo, la reducción de Sor suele ser parcial, por la adsorción, la heterogeneidad y la dilución del tapón. Y una observación sobre el screening. Los rangos de referencia para tensioactivos y ASP son más restrictivos que los del polímero: piden petróleos más livianos y viscosidades menores, y temperaturas moderadas."
+      },
+      {
+       "say": "Con un petróleo de ciento veinte centipoise, como el de Grimbeek, el screening de la planilla los descarta, mientras que el polímero pasa. Esa es una razón técnica por la que el polímero tiene sentido allí."
+      },
+      {
+       "say": "Para el laboratorio, en la hoja Comparacion cambiá la Sor con tensioactivo a cero coma veinte y a cero coma diez. Anotá la eficiencia de desplazamiento y el factor de recuperación en cada caso. Después hacé el ejercicio de números capilares con la ficha."
+      },
+      {
+       "say": "La decisión que sostiene la lección es si la eficiencia que limita el recobro es de desplazamiento, y si el petróleo y el agua del campo permiten una formulación robusta."
+      },
+      {
+       "say": "Pregunta rápida. ¿Qué es lo que baja principalmente un tensioactivo? Respondé en pantalla.",
+       "q": {
+        "q": "¿Qué baja principalmente un tensioactivo?",
+        "o": [
+         "La viscosidad del petróleo.",
+         "La tensión interfacial entre el petróleo y el agua, y con ella la saturación residual de petróleo.",
+         "La razón de movilidad.",
+         "La presión de inyección."
+        ],
+        "a": 1,
+        "e": "Al bajar la tensión interfacial sube el número capilar y se libera el petróleo atrapado por capilaridad, lo que reduce la saturación residual."
+       }
+      }
+     ],
+     "obj": [
+      "Explicar por qué queda petróleo atrapado y cómo lo libera un tensioactivo.",
+      "Relacionar el número capilar con la saturación residual de petróleo.",
+      "Describir el diseño de un tapón de tensioactivo, álcali y polímero (ASP) y sus riesgos."
+     ],
+     "ficha": "**Mecanismo.** Reduce la tensión interfacial (σ) entre petróleo y agua, sube el número capilar y libera petróleo atrapado: baja la Sor.\n\n**Número capilar.** Nc = μ · v / σ. Inyección de agua: ≈ 10⁻⁷–10⁻⁶. Para reducir Sor de modo importante hace falta un aumento de varios órdenes de magnitud, que se logra bajando σ a valores ultrabajos (≈ 10⁻³ mN/m).\n\n**Comportamiento de fases (Winsor).** Tipo I (baja salinidad, petróleo en agua), tipo III (salinidad óptima, tensión mínima), tipo II (alta salinidad, agua en petróleo).\n\n**ASP.** Álcali (jabones in situ, menos adsorción) + tensioactivo (baja σ) + polímero (control de movilidad). Diseño: preflush, tapón de ASP, tapón de polímero.\n\n**Escenarios de la hoja Comparacion**\n\n| Escenario | Ev | Ed | FR |\n|---|---|---|---|\n| Base | 0,66 | 0,625 | 41,0 % |\n| Tensioactivo (Sor 0,15) | 0,66 | 0,8125 | 53,4 % |\n| Polímero + tensioactivo | 0,90 | 0,8125 | 72,7 % |\n\n**Riesgos.** Adsorción, dureza, incrustaciones del álcali, emulsiones producidas, costo. Sor = 0,15 es un valor optimista de laboratorio.\n\n**Ejercicio resuelto.** μ = 1 cP = 1·10⁻³ Pa·s; v = 1 ft/d = 3,53·10⁻⁶ m/s; σ = 25 mN/m = 0,025 N/m. Nc = 1·10⁻³ · 3,53·10⁻⁶ / 0,025 ≈ 1,4·10⁻⁷. Para multiplicarlo por mil, σ ≈ 0,025 mN/m.\n\n**Del laboratorio al campo.** Fases y tensión interfacial → estabilidad y compatibilidad → adsorción → inundación de núcleos → trazador de un solo pozo → piloto.\n\n**Errores frecuentes.** Diseñar sin barrido de salinidad; olvidar el polímero de empuje; asumir que la Sor de laboratorio se repite en campo.",
+     "practica": "Práctica con planilla: hoja Comparacion de H3L_EOR_Barrido_en_Capas_y_Screening_v2.xlsx; cambiá la Sor con tensioactivo a 0,20, 0,15 y 0,10 y completá E_D y FR. Después calculá en papel el número capilar de una inyección de agua con μ = 1 cP, v = 1 ft/día y σ = 25 mN/m (usá unidades consistentes) y qué σ haría falta para multiplicarlo por mil."
+    },
+    {
+     "id": "e6",
+     "title": "Gases miscibles, CO₂ y WAG",
+     "comp": "Gas y térmica",
+     "cues": [
+      {
+       "say": "Un gas puede desplazar petróleo de dos maneras. Inmiscible, empuja como un pistón de baja viscosidad: el petróleo residual sigue siendo alto, porque el gas no se mezcla con él. Miscible, se mezcla con el petróleo y elimina la tensión interfacial, de modo que casi no queda petróleo residual donde pasa. Es la palanca del desplazamiento llevada al extremo.",
+       "scene": {
+        "t": "bul",
+        "k": "Gases miscibles, CO₂ y WAG",
+        "h": "Qué vas a aprender",
+        "items": [
+         "Diferenciar el desplazamiento por gas inmiscible y miscible, y el rol de la presión mínima de miscibilidad.",
+         "Explicar por qué el gas barre poco y cómo lo mitiga la inyección alternada de agua y gas.",
+         "Entender que el almacenamiento de CO₂ se mide y se verifica, no se supone."
+        ]
+       }
+      },
+      {
+       "say": "La miscibilidad depende de la presión, de la temperatura y de la composición del petróleo y del gas. La presión mínima de miscibilidad, o MMP, es la presión por encima de la cual el gas y el petróleo se vuelven miscibles."
+      },
+      {
+       "say": "Se determina en el laboratorio con un tubo delgado, el slim-tube, o con otras técnicas, y se estima con correlaciones. Si la presión del yacimiento está por debajo de la MMP, el desplazamiento es inmiscible o parcialmente miscible."
+      },
+      {
+       "say": "Y no se puede subir la presión sin límite, porque la fractura del reservorio impone un techo. El dióxido de carbono es el gas más usado. Por encima de su punto crítico, treinta y un grados y setenta y cuatro bares, se comporta como un fluido denso, parecido a un líquido, que extrae componentes livianos e intermedios del petróleo, lo hincha y baja su viscosidad."
+      },
+      {
+       "say": "Alcanza la miscibilidad a presiones menores que las del nitrógeno o el metano, lo que lo hace atractivo para petróleos livianos o medianos y yacimientos profundos. Los gases de hidrocarburos enriquecidos y el nitrógeno son alternativas, con requisitos más exigentes: el nitrógeno necesita petróleos muy livianos y mayor profundidad."
+      },
+      {
+       "say": "El gran problema de los gases es su baja viscosidad y densidad. Se mueven más rápido que el petróleo y suben por gravedad, y barren una fracción pequeña del reservorio."
+      },
+      {
+       "say": "Con una razón de movilidad muy desfavorable, forman dedos viscosos y canales. Eso se controla alternando agua y gas, en la técnica llamada WAG: el agua, más viscosa, frena el gas y mejora el barrido, y el gas desplaza el petróleo en el contacto."
+      },
+      {
+       "say": "El diseño del WAG define la relación entre volúmenes de agua y gas, el tamaño de los ciclos y los efectos de histéresis de las permeabilidades relativas, que pueden reducir la inyectividad."
+      },
+      {
+       "say": "Para el modelado, hay aproximaciones útiles. En desplazamientos miscibles, la inestabilidad viscosa produce dedos que reducen el barrido. Koval propuso, en mil novecientos sesenta y tres, un factor que combina la heterogeneidad y la razón de viscosidades efectiva, y Todd y Longstaff, en mil novecientos setenta y dos, un modelo de mezcla parcial para simulación."
+      },
+      {
+       "say": "Son herramientas de cribado, no sustituyen el estudio detallado. Un tema que no podemos dejar de lado es el dióxido de carbono y su almacenamiento. En un proyecto de dióxido de carbono para EOR, parte del gas inyectado queda en el reservorio, y eso conecta la recuperación mejorada con el almacenamiento de carbono, que se ve en otro curso."
+      },
+      {
+       "say": "Pero acá hace falta rigor: el almacenamiento se mide y se verifica, no se supone. Se hace un balance de masa que descuenta lo producido y reciclado, se monitorea la integridad de pozos y sello, y se documenta con un plan de medición, monitoreo y verificación."
+      },
+      {
+       "say": "Y el balance de emisiones del proyecto incluye la energía de captura, compresión y reciclado. Las limitaciones operativas también cuentan: disponibilidad y costo de una fuente de dióxido de carbono, transporte a alta presión, corrosión en presencia de agua, deshidratación y manejo seguro."
+      },
+      {
+       "say": "Un proyecto de gas depende tanto de la logística del gas como de la geología. Veamos cómo entra en la planilla. En la hoja Screening, el campo de ejemplo, con un petróleo de dieciocho grados API y ciento veinte centipoise, a mil cien metros, queda descartado para dióxido de carbono, gas de hidrocarburo y nitrógeno: no cumplen la gravedad ni la viscosidad."
+      },
+      {
+       "say": "Es un petróleo viscoso y pesado para un gas miscible. Pero si cambiás los datos del campo por un petróleo liviano, de treinta y cinco grados API, dos centipoise, dos mil metros de profundidad y ochenta grados, el dióxido de carbono y el gas de hidrocarburo pasan la primera criba, igual que el polímero y el ASP, y el nitrógeno queda en «Revisar» por la viscosidad."
+      },
+      {
+       "say": "La criba no elige: deja candidatos. Para el laboratorio, hacé ese cambio en la hoja Screening y anotá qué métodos quedan como candidatos con cada campo. Después, escribí en tres líneas qué dato adicional pedirías para decidir entre dióxido de carbono y gas de hidrocarburo: por ejemplo, la MMP del slim-tube y la disponibilidad de la fuente."
+      },
+      {
+       "say": "La decisión que sostiene la lección es si el campo tiene la presión, la composición y la logística para un gas miscible. Y, si hay dióxido de carbono de por medio, cómo se va a medir lo que queda almacenado."
+      },
+      {
+       "say": "Pregunta rápida. ¿Qué técnica se usa para mejorar el barrido de un gas de baja viscosidad? Respondé en pantalla.",
+       "q": {
+        "q": "¿Qué técnica se usa para mejorar el barrido de un gas de baja viscosidad?",
+        "o": [
+         "Inyectar el gas a mayor velocidad.",
+         "La inyección alternada de agua y gas (WAG).",
+         "Subir la temperatura del gas.",
+         "Perforar un pozo menos."
+        ],
+        "a": 1,
+        "e": "El WAG alterna agua y gas: el agua, más viscosa, frena el gas y mejora el barrido; el gas desplaza el petróleo donde contacta."
+       }
+      }
+     ],
+     "obj": [
+      "Diferenciar el desplazamiento por gas inmiscible y miscible, y el rol de la presión mínima de miscibilidad.",
+      "Explicar por qué el gas barre poco y cómo lo mitiga la inyección alternada de agua y gas.",
+      "Entender que el almacenamiento de CO₂ se mide y se verifica, no se supone."
+     ],
+     "ficha": "**Inmiscible frente a miscible.** Inmiscible: pistón de baja viscosidad, Sor alta. Miscible: se mezcla y elimina la tensión interfacial; casi sin petróleo residual donde pasa.\n\n**MMP.** Presión mínima de miscibilidad; se mide con slim-tube y se estima con correlaciones. Debe estar por debajo de la presión de fractura del yacimiento.\n\n**CO₂.** Punto crítico: 31,1 °C y 73,8 bar. Extrae componentes, hincha el petróleo y baja su viscosidad. MMP menor que la del N₂ o el metano.\n\n**WAG.** Inyección alternada de agua y gas: el agua frena el gas y mejora el barrido. Variables: relación agua/gas, tamaño de ciclo, histéresis, inyectividad.\n\n**Modelos de cribado.** Koval (1963), Todd y Longstaff (1972).\n\n**Almacenamiento de CO₂.** Balance de masa (inyectado − producido y reciclado), integridad de pozos y sello, plan de medición, monitoreo y verificación.\n\n**Screening (hoja Screening).** Campo de ejemplo (18 °API, 120 cP, 1.100 m): CO₂, gas de hidrocarburo y N₂ descartados. Campo liviano (35 °API, 2 cP, 500 mD, 2.000 m, 80 °C): CO₂, gas de hidrocarburo, polímero, ASP y combustión candidatos; vapor para revisar (profundidad); N₂ para revisar por viscosidad.\n\n**Errores frecuentes.** Suponer miscibilidad sin MMP; ignorar la gravedad y la logística del gas; contar el CO₂ almacenado sin medirlo.",
+     "practica": "Práctica con planilla: hoja Screening de H3L_EOR_Barrido_en_Capas_y_Screening_v2.xlsx. 1) Con el campo de ejemplo, anotá qué métodos son candidatos. 2) Cambiá los datos por 35 °API, 2 cP, 500 mD, 2.000 m y 80 °C y anotá de nuevo. 3) Escribí qué dato adicional pedirías para decidir entre CO₂ y gas de hidrocarburo."
     }
    ],
    "quiz": [
     {
-     "q": "El CO₂ miscible reduce el petróleo residual porque:",
+     "q": "¿Qué eficiencia mejora principalmente un polímero?",
      "o": [
-      "Baja la presión",
-      "Aumenta la viscosidad del petróleo",
-      "Cierra los poros",
-      "Elimina la tensión interfacial en la zona barrida"
+      "Ninguna.",
+      "El desplazamiento, porque baja la Sor.",
+      "Solo la inyectividad.",
+      "El barrido, porque baja la razón de movilidad."
      ],
      "a": 3,
-     "e": "Al mezclarse, ya no hay interfaz que atrape petróleo."
+     "e": "El polímero sube la viscosidad del agua y mejora el barrido; no cambia el petróleo residual."
     },
     {
-     "q": "El WAG es:",
+     "q": "¿Cuál es una debilidad conocida de la poliacrilamida parcialmente hidrolizada (HPAM)?",
      "o": [
-      "Una prueba de pozo",
-      "Un tipo de polímero",
-      "Inyección alternada de agua y gas",
-      "Una pérdida de lodo"
+      "Aumenta la tensión interfacial.",
+      "Es muy cara.",
+      "Pierde viscosidad con la salinidad y la dureza del agua.",
+      "No se disuelve en agua."
      ],
      "a": 2,
-     "e": "Es un control de movilidad para el gas."
+     "e": "Los cationes divalentes comprimen la molécula y bajan la viscosidad; también sufre cizalla y degradación."
     },
     {
-     "q": "El SAGD se usa para:",
+     "q": "En el modelo de la planilla (V = 0,7), llevar μw de 0,5 a 5 cP, ¿qué efecto tiene?",
      "o": [
-      "Reservorios de baja presión",
-      "Bitúmenes y petróleos extrapesados",
-      "Pozos de agua",
-      "Gas seco"
+      "No cambia el barrido.",
+      "Sube la Sor.",
+      "Baja el barrido vertical.",
+      "Sube el barrido vertical de ≈ 0,66 a ≈ 0,90."
      ],
-     "a": 1,
-     "e": "Dos pozos horizontales con drenaje gravitacional."
+     "a": 3,
+     "e": "M baja de 4,67 a 0,47: el barrido vertical sube y el FR pasa de 41 % a 56 %."
+    },
+    {
+     "q": "¿Cómo se logra un aumento importante del número capilar en el yacimiento?",
+     "o": [
+      "Bajando la tensión interfacial a valores ultrabajos.",
+      "Aumentando la salinidad sin criterio.",
+      "Subiendo mucho la velocidad de inyección.",
+      "Bajando la presión."
+     ],
+     "a": 0,
+     "e": "Nc = μ·v/σ: bajar σ en varios órdenes de magnitud es la vía práctica."
+    },
+    {
+     "q": "En un sistema agua-petróleo-tensioactivo, ¿qué ocurre a la salinidad óptima?",
+     "o": [
+      "El petróleo queda atrapado.",
+      "El tensioactivo precipita siempre.",
+      "Aparece una fase intermedia (Winsor III) con tensión interfacial mínima.",
+      "No hay microemulsión."
+     ],
+     "a": 2,
+     "e": "A la salinidad óptima se forma la microemulsión de fase intermedia, con la tensión más baja."
+    },
+    {
+     "q": "¿Por qué un tapón de ASP incluye polímero?",
+     "o": [
+      "Para bajar el pH.",
+      "Para subir la Sor.",
+      "Para aumentar la adsorción.",
+      "Para controlar la movilidad y desplazar el banco de petróleo de manera estable."
+     ],
+     "a": 3,
+     "e": "Sin control de movilidad el tapón de químico se disipa y se desvía por las capas permeables."
+    },
+    {
+     "q": "Si la presión del yacimiento es menor que la MMP, ¿cómo es el desplazamiento por gas?",
+     "o": [
+      "Siempre exitoso.",
+      "Imposible.",
+      "Miscible.",
+      "Inmiscible o parcialmente miscible."
+     ],
+     "a": 3,
+     "e": "Por debajo de la MMP el gas y el petróleo no son miscibles."
+    },
+    {
+     "q": "¿Cómo debe tratarse el CO₂ almacenado en un proyecto de EOR?",
+     "o": [
+      "Se declara según el volumen inyectado.",
+      "Se ignora.",
+      "Se supone que todo queda en el reservorio.",
+      "Se mide y se verifica con un balance de masa y un plan de monitoreo."
+     ],
+     "a": 3,
+     "e": "El almacenamiento se mide y se verifica; no se supone."
     }
    ]
   },
   {
    "id": "em3",
-   "title": "Módulo 3 · De la selección a la escala",
+   "title": "Térmicos, screening y piloto: del laboratorio al campo",
    "lessons": [
     {
-     "id": "e5",
-     "title": "Criterios de selección de métodos EOR",
-     "comp": "Selección, piloto y escala",
+     "id": "e7",
+     "title": "Métodos térmicos: vapor y combustión",
+     "comp": "Gas y térmica",
      "cues": [
       {
-       "say": "La selección empieza con criterios técnicos. Primero, la viscosidad y la densidad del petróleo.",
+       "say": "En los petróleos pesados, la viscosidad cae mucho al calentar. Por eso el calor es el método principal para crudos viscosos: baja la viscosidad y, con ella, la razón de movilidad, y el petróleo fluye hacia el pozo.",
        "scene": {
         "t": "bul",
-        "k": "Criterios",
-        "h": "Qué se mira primero",
+        "k": "Métodos térmicos: vapor y combustión",
+        "h": "Qué vas a aprender",
         "items": [
-         "Viscosidad y densidad del petróleo",
-         "Profundidad, presión y temperatura",
-         "Permeabilidad y heterogeneidad",
-         "Salinidad y dureza del agua",
-         "Disponibilidad de agua, gas y calor en superficie"
+         "Explicar por qué el calor es la palanca principal en petróleos viscosos.",
+         "Describir las variantes térmicas más conocidas y sus indicadores.",
+         "Estimar el costo energético y las emisiones de la generación de vapor con un balance simple."
         ]
-       },
-       "hl": 0
+       }
       },
       {
-       "say": "Luego la profundidad, la presión y la temperatura.",
-       "hl": 1
+       "say": "Además de la viscosidad, el calor expande el petróleo, destila fracciones livianas, que luego se condensan y ayudan al desplazamiento, y en algunos casos mejora la permeabilidad relativa."
       },
       {
-       "say": "La permeabilidad y la heterogeneidad.",
-       "hl": 2
+       "say": "Las variantes más conocidas son tres. La estimulación cíclica con vapor, o huff and puff, usa un solo pozo en tres etapas: se inyecta vapor, se cierra el pozo unos días para que el calor se distribuya, y luego se produce el mismo pozo."
       },
       {
-       "say": "La salinidad y la dureza del agua.",
-       "hl": 3
+       "say": "Es la más simple de arrancar y suele ser el primer paso de un proyecto. El vapor continuo, o empuje con vapor, usa pozos inyectores y productores, y barre el yacimiento con una zona de vapor que avanza."
       },
       {
-       "say": "Y la disponibilidad de agua, gas y calor en superficie. Taber, Martin y Seright publicaron en 1997 una revisión de estos criterios, que sigue siendo referencia de partida.",
-       "hl": 4
+       "say": "Y el drenaje gravitacional asistido con vapor, SAGD, usa dos pozos horizontales superpuestos: el superior inyecta vapor, forma una cámara y el petróleo calentado drena por gravedad hacia el inferior, que produce. Se usa en petróleos extrapesados y espesores grandes."
       },
       {
-       "say": "Los criterios de pantalla son una primera criba y no un diseño. Los proyectos reales rompen sus rangos con frecuencia. Después de pasar la criba se valida con laboratorio, simulación y piloto, y se hace la economía con precios de escenarios bajos.",
+       "say": "La combustión in situ genera el calor dentro del reservorio. Se inyecta aire, se enciende una parte del petróleo y el frente de combustión avanza, calentando, destilando y empujando el petróleo hacia los productores.",
        "scene": {
         "t": "tbl",
-        "k": "Del screening al proyecto",
-        "h": "Etapas y evidencia",
+        "k": "Métodos térmicos: vapor y combustión",
+        "h": "Variantes",
         "cols": [
-         "Etapa",
-         "Qué se hace",
-         "Evidencia que produce"
+         "Variante",
+         "Descripción"
         ],
         "rows": [
          [
-          "Pantalla",
-          "Comparar el campo con criterios de referencia",
-          "Lista corta de métodos"
+          "Estimulación cíclica (huff and puff)",
+          "Un pozo: inyección, remojo y producción"
          ],
          [
-          "Laboratorio",
-          "Ensayos sobre muestras y fluidos reales",
-          "Eficiencia de desplazamiento y compatibilidad"
+          "Vapor continuo",
+          "Inyectores y productores; zona de vapor que avanza"
          ],
          [
-          "Simulación",
-          "Modelo con datos de laboratorio",
-          "Pronósticos y rango de incertidumbre"
+          "SAGD",
+          "Dos pozos horizontales superpuestos; drenaje por gravedad"
          ],
          [
-          "Piloto",
-          "Prueba en campo con medición",
-          "Respuesta real y costo"
-         ],
-         [
-          "Escala",
-          "Extensión por etapas",
-          "Plan con puntos de decisión"
+          "Combustión in situ",
+          "Inyección de aire; el calor se genera en el reservorio"
          ]
         ]
        }
       },
       {
-       "say": "Una buena práctica es definir antes del piloto qué resultado lo considera exitoso, y qué lo considera un fracaso.",
+       "say": "Es atractiva porque no requiere generar vapor en superficie, pero es más compleja de controlar: depende del encendido, de la estabilidad del frente, del manejo de los gases producidos y de la corrosión. El indicador central de un proyecto de vapor es la relación entre el vapor inyectado y el petróleo producido, la SOR. Se expresa en barriles de agua equivalente por barril de petróleo."
+      },
+      {
+       "say": "Cuanto más baja, mejor, porque cada barril de vapor consume energía. El valor económico límite depende del precio del petróleo y del costo del combustible. Las pérdidas de calor condicionan dónde funciona. En el pozo, el vapor pierde calor a medida que baja: por eso la profundidad está limitada, y se usan tuberías aisladas."
+      },
+      {
+       "say": "En el yacimiento, parte del calor se va a las rocas de arriba y de abajo: en espesores chicos, la proporción de pérdida es alta y el proyecto se vuelve ineficiente. Por eso los criterios de selección piden espesor mínimo y profundidades moderadas, y la saturación de petróleo inicial debe ser alta."
+      },
+      {
+       "say": "Los métodos térmicos tienen un costo energético y ambiental alto. Generar vapor consume gas o energía, y emite dióxido de carbono. Para tener una idea del orden de magnitud: un barril de agua convertido en vapor de calidad del setenta por ciento a doscientos cincuenta grados necesita unos trescientos cincuenta megajulios, es decir, tres décimas de millón de BTU."
+      },
+      {
+       "say": "Con una caldera de ochenta por ciento de eficiencia, unos cuatro décimos de millón de BTU de gas. Ese gas emite unos veintidós kilos de dióxido de carbono. Con una SOR de cuatro, que es un valor razonable de ejemplo, cada barril de petróleo lleva uno coma siete millones de BTU y casi noventa kilos de dióxido de carbono, solo por generar el vapor.",
        "scene": {
-        "t": "bul",
-        "k": "Diseño del piloto",
-        "h": "Condiciones de éxito",
-        "items": [
-         "Criterio de éxito y de fracaso definidos de antemano",
-         "Un caso base de referencia, con su pronóstico sin el método",
-         "Pozos de observación y trazadores",
-         "Medición de caudales, presiones y calidad de agua",
-         "Plan de decisión: escalar, repetir o abandonar"
+        "t": "tbl",
+        "k": "Métodos térmicos: vapor y combustión",
+        "h": "Balance de energía y emisiones (ejemplo; supuestos explícitos)",
+        "cols": [
+         "SOR",
+         "Gas (MMBtu/bbl petróleo)",
+         "CO₂ (kg/bbl petróleo)"
+        ],
+        "rows": [
+         [
+          "2",
+          "0,83",
+          "44"
+         ],
+         [
+          "4",
+          "1,66",
+          "88"
+         ],
+         [
+          "6",
+          "2,49",
+          "132"
+         ]
         ]
-       },
-       "hl": 0
+       }
       },
       {
-       "say": "Hace falta un caso base de referencia, con su pronóstico sin el método.",
-       "hl": 1
+       "say": "Hay formas de reducirlo, como la cogeneración, el uso de energía solar para producir vapor o la captura de carbono, y hay que tratar el agua que se usa y se produce. Esos números son estimaciones con supuestos, y cada proyecto los calcula con sus datos."
       },
       {
-       "say": "Pozos de observación y trazadores permiten atribuir la respuesta al método y no a otros cambios del campo.",
-       "hl": 2
+       "say": "Veamos qué dice el screening para el campo de ejemplo, con un petróleo de ciento veinte centipoise, mil cien metros y permeabilidad de dos darcys. En la hoja Screening, el vapor y la combustión pasan la primera criba, igual que el polímero. Es una lección importante: pasar la criba no es elegir."
       },
       {
-       "say": "Se miden caudales, presiones y calidad de agua.",
-       "hl": 3
+       "say": "Para decidir entre calor y polímero habría que tener el espesor de las capas, las pérdidas de calor esperables, el costo y la disponibilidad de gas o agua, y la infraestructura. Con los datos de este curso no se puede decidir, y por eso no afirmamos por qué se eligió una u otra en un campo real."
       },
       {
-       "say": "Y se prepara un plan de decisión: escalar, repetir o abandonar.",
-       "hl": 4
+       "say": "Para el laboratorio, hacé el balance de la ficha con otros valores de SOR, dos, cuatro y seis, y completá la energía y las emisiones por barril. Después, en la hoja Screening, cambiá la profundidad a dos mil quinientos metros y mirá qué pasa con el vapor."
       },
       {
-       "say": "Pregunta rápida.",
+       "say": "La decisión que sostiene la lección es si el costo energético y ambiental de calentar se justifica frente a otras palancas. Un método eficaz pero de SOR alta o con emisiones altas puede no ser la mejor elección."
+      },
+      {
+       "say": "Pregunta rápida. ¿Qué mide la SOR en un proyecto de vapor? Respondé en pantalla.",
        "q": {
-        "q": "Los criterios de selección sirven para:",
+        "q": "¿Qué mide la SOR en un proyecto de vapor?",
         "o": [
-         "Una primera criba antes del estudio detallado",
-         "Reemplazar el piloto",
-         "Fijar el precio",
-         "Evitar el laboratorio"
+         "La relación entre el vapor inyectado y el petróleo producido.",
+         "La saturación residual de petróleo.",
+         "La razón de movilidad.",
+         "La salinidad del agua inyectada."
         ],
         "a": 0,
-        "e": "Después de la criba se valida con laboratorio, simulación y piloto."
+        "e": "La SOR relaciona el vapor inyectado (en barriles de agua equivalente) con el petróleo producido. Es un indicador central de la eficiencia y de las emisiones."
        }
       }
-     ]
+     ],
+     "obj": [
+      "Explicar por qué el calor es la palanca principal en petróleos viscosos.",
+      "Describir las variantes térmicas más conocidas y sus indicadores.",
+      "Estimar el costo energético y las emisiones de la generación de vapor con un balance simple."
+     ],
+     "ficha": "**Efectos del calor.** Reduce la viscosidad (y M), expande el petróleo, destila fracciones livianas.\n\n**Variantes**\n\n| Variante | Descripción |\n|---|---|\n| Estimulación cíclica (huff and puff) | Un pozo: inyección, remojo y producción |\n| Vapor continuo | Inyectores y productores; zona de vapor que avanza |\n| SAGD | Dos pozos horizontales superpuestos; drenaje por gravedad |\n| Combustión in situ | Inyección de aire; el calor se genera en el reservorio |\n\n**Indicador.** SOR = barriles de vapor (agua equivalente) inyectados / barriles de petróleo producidos.\n\n**Balance de energía y emisiones (ejemplo; supuestos explícitos).** Vapor a 250 °C, calidad 70 %, agua de alimentación a 20 °C: Δh ≈ 2.200 kJ/kg. 1 bbl ≈ 159 kg → ≈ 350 MJ ≈ 0,33 MMBtu. Eficiencia de caldera 80 % → ≈ 0,41 MMBtu de gas por barril de vapor. Factor de emisión del gas ≈ 53 kg CO₂/MMBtu → ≈ 22 kg CO₂ por barril de vapor.\n\n| SOR | Gas (MMBtu/bbl petróleo) | CO₂ (kg/bbl petróleo) |\n|---|---|---|\n| 2 | 0,83 | 44 |\n| 4 | 1,66 | 88 |\n| 6 | 2,49 | 132 |\n\n**Límites.** Pérdidas de calor en el pozo y en el yacimiento (espesor y profundidad), saturación de petróleo, agua disponible, emisiones.\n\n**Screening (campo de ejemplo).** Vapor y combustión in situ pasan la criba, igual que el polímero; la criba no elige.\n\n**Errores frecuentes.** Ignorar las pérdidas de calor; comparar métodos sin su costo energético; tratar un valor de criba como decisión.",
+     "practica": "Ejercicio guiado y práctica con planilla: 1) completá el balance de energía y emisiones con SOR 2, 4 y 6. 2) En la hoja Screening, cambiá la profundidad a 2.500 m y anotá qué pasa con el vapor y la combustión. 3) Escribí cinco datos que pedirías para decidir entre calor y polímero en el campo de ejemplo."
     },
     {
-     "id": "e6",
-     "title": "Piloto, escala y el caso de Manantiales Behr",
-     "comp": "Selección, piloto y escala",
+     "id": "e8",
+     "title": "Criterios de selección y screening de métodos EOR",
+     "comp": "Selección, piloto y economía",
      "cues": [
       {
-       "say": "Manantiales Behr, en el Golfo San Jorge, es un campo con casi un siglo de producción y petróleo viscoso. El operador potenció la recuperación secundaria y comenzó la terciaria: el primer piloto de polímeros fue en la zona de Grimbeek, en 2019.",
+       "say": "Hay muchos métodos de EOR y pocos recursos para estudiarlos todos. La selección empieza por criterios técnicos de profundidad, viscosidad del petróleo, permeabilidad, temperatura y salinidad. Taber, Martin y Seright publicaron en mil novecientos noventa y siete una revisión de esos criterios, a partir de proyectos reales, que sigue siendo referencia de partida.",
        "scene": {
-        "t": "case",
-        "h": "Manantiales Behr, Chubut",
-        "src": "iProfesional, nota sobre la producción récord del yacimiento Manantiales Behr",
-        "S": "Campo en la Cuenca del Golfo San Jorge, a unos 40 km al noroeste de Comodoro Rivadavia, con 90 años de actividad.",
-        "T": "Aumentar la producción de un campo maduro de petróleo viscoso.",
-        "A": "Recuperación secundaria potenciada y primer piloto terciario con polímeros en Grimbeek en 2019; luego, cinco plantas de inyección de polímeros.",
-        "R": "En diciembre de 2020 el campo alcanzó 3.747 metros cúbicos diarios, la producción más alta de su historia."
+        "t": "bul",
+        "k": "Criterios de selección y screening de métodos EOR",
+        "h": "Qué vas a aprender",
+        "items": [
+         "Aplicar un screening con rangos de referencia y leer sus resultados.",
+         "Reconocer los límites de una criba y qué viene después.",
+         "Armar un camino de decisión con laboratorio, simulación, piloto y economía."
+        ]
        }
       },
       {
-       "say": "Una lección del caso es la secuencia. Primero se optimizó la inyección de agua, antes de pensar en polímeros.",
+       "say": "La idea es sencilla: para cada método hay un rango de propiedades de petróleo y de reservorio en el que se ha aplicado con éxito. La hoja Screening de la planilla aplica esa lógica. Arriba cargás los datos del campo: gravedad API, viscosidad, permeabilidad, profundidad y temperatura."
+      },
+      {
+       "say": "Abajo hay una tabla con siete métodos, y para cada uno un rango de cada propiedad. Los rangos están en celdas editables, y son orientativos: basados en la publicación de Taber y colaboradores, y hay que confirmarlos con la fuente antes de usarlos en un trabajo real."
+      },
+      {
+       "say": "La planilla compara, propiedad por propiedad, y marca con un tilde si cumple, con una cruz si no, y con n/a si el rango no aplica. Cuenta los criterios fallados y da un resultado: Candidato si no falla ninguno, Revisar si falla uno, y Descartado si fallan dos o más."
+      },
+      {
+       "say": "Probemos con el campo de ejemplo, con datos públicos de Grimbeek: ciento veinte centipoise, más de dos darcys, mil cien metros y unos sesenta grados. La gravedad API no figura en la fuente, de modo que usamos dieciocho como supuesto didáctico. El polímero cumple los cinco criterios: es candidato."
+      },
+      {
+       "say": "El vapor y la combustión in situ cumplen todos los criterios que se evalúan, y son candidatos. Los tensioactivos y el ASP fallan por la gravedad y por la viscosidad, y los gases, también. Notá algo: tres métodos pasan, y el screening no dice cuál elegir."
+      },
+      {
+       "say": "Ahora cambiá la viscosidad a doscientos centipoise. El polímero falla un criterio y pasa a «Revisar». Eso no es «no». Los proyectos reales rompen los rangos con frecuencia, y los rangos son una síntesis de lo que se hizo, no una ley."
+      },
+      {
+       "say": "Un método en «Revisar» se examina con más datos, y puede ser perfectamente viable.",
        "scene": {
-        "t": "bul",
-        "k": "Lecciones",
-        "h": "Qué enseña el caso",
-        "items": [
-         "Optimizar el agua antes de pensar en polímeros",
-         "Piloto con medición antes de escalar",
-         "Plantas de preparación de polímero como parte del proyecto",
-         "El resultado se mide contra el pronóstico base, no contra el pasado"
-        ]
-       },
-       "hl": 0
-      },
-      {
-       "say": "Después se hizo un piloto, con medición antes de escalar.",
-       "hl": 1
-      },
-      {
-       "say": "Recién entonces se instalaron plantas de preparación de polímero a escala, como parte del proyecto.",
-       "hl": 2
-      },
-      {
-       "say": "Cada etapa tuvo su medición, y el resultado se mide contra el pronóstico base, no contra el pasado.",
-       "hl": 3
-      },
-      {
-       "say": "Por último, la economía. Un proyecto EOR tiene costo del inyectante por barril incremental.",
-       "scene": {
-        "t": "bul",
-        "k": "Economía",
-        "h": "Qué incluir",
-        "items": [
-         "Costo del inyectante por barril incremental",
-         "Inversión en plantas y en tratamiento de agua",
-         "Demora entre inyección y respuesta",
-         "Escenarios de precio bajo y de respuesta menor al esperado",
-         "Reservas: el incremental de EOR se clasifica según su madurez en PRMS"
-        ]
-       },
-       "hl": 0
-      },
-      {
-       "say": "Inversión en plantas y en tratamiento de agua.",
-       "hl": 1
-      },
-      {
-       "say": "Una respuesta que llega con demora entre la inyección y el resultado.",
-       "hl": 2
-      },
-      {
-       "say": "Por eso la evaluación debe incluir escenarios de precio bajo y de respuesta menor a la esperada.",
-       "hl": 3
-      },
-      {
-       "say": "Y las reservas: el incremental de EOR se clasifica según su madurez en PRMS.",
-       "hl": 4
-      },
-      {
-       "say": "Pregunta rápida.",
-       "q": {
-        "q": "Antes de escalar un proyecto EOR conviene:",
-        "o": [
-         "Esperar que suba el precio",
-         "Instalar todo de una vez",
-         "Evitar la simulación",
-         "Medir el piloto contra un caso base"
+        "t": "tbl",
+        "k": "Criterios de selección y screening de métodos EOR",
+        "h": "Resultados esperados",
+        "cols": [
+         "Método",
+         "Campo de ejemplo (18 °API, 120 cP, 2.000 mD, 1.100 m, 60 °C)",
+         "Campo liviano (35 °API, 2 cP, 500 mD, 2.000 m, 80 °C)",
+         "Campo extrapesado (12 °API, 5.000 cP, 800 mD, 1.200 m, 45 °C)"
         ],
-        "a": 3,
-        "e": "El piloto debe poder atribuir la respuesta al método."
+        "rows": [
+         [
+          "Polímero",
+          "Candidato",
+          "Candidato",
+          "Descartado"
+         ],
+         [
+          "Tensioactivo / ASP",
+          "Descartado",
+          "Candidato",
+          "Descartado"
+         ],
+         [
+          "CO₂ miscible",
+          "Descartado",
+          "Candidato",
+          "Descartado"
+         ],
+         [
+          "Gas de hidrocarburo",
+          "Descartado",
+          "Candidato",
+          "Descartado"
+         ],
+         [
+          "N₂ y gas de combustión",
+          "Descartado",
+          "Revisar (viscosidad)",
+          "Descartado"
+         ],
+         [
+          "Vapor",
+          "Candidato",
+          "Revisar (profundidad)",
+          "Candidato"
+         ],
+         [
+          "Combustión in situ",
+          "Candidato",
+          "Candidato",
+          "Candidato"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "La criba tiene límites que conviene tener claros. Los rangos salen de proyectos pasados, con tecnologías de su época. No incluyen todo lo que importa: la heterogeneidad, la presencia de un acuífero o un casquete de gas, las fracturas, la salinidad y la dureza del agua, el espesor, la infraestructura y el costo."
+      },
+      {
+       "say": "Es una primera criba, no un diseño. Después de la criba viene un camino de validación. Primero, el laboratorio: ensayos de fluidos, de núcleos y de compatibilidad. Segundo, la simulación, que integra la heterogeneidad y la geología y permite comparar variantes."
+      },
+      {
+       "say": "Tercero, el piloto, que prueba el método en campo con un diseño medible. Y cuarto, la economía, con escenarios de precio bajo y de respuesta menor. Cada etapa reduce la incertidumbre y justifica, o no, el gasto de la siguiente. Una buena práctica es definir antes de avanzar qué resultado haría que el proyecto se detenga."
+      },
+      {
+       "say": "La decisión final combina varios criterios, además de los técnicos. El potencial de recuperación incremental. La viabilidad operativa: disponibilidad de agua, de gas o de dióxido de carbono, de energía, de plantas. La economía: costo por barril incremental y precio de equilibrio. El riesgo de ejecución. Y el impacto ambiental. Una matriz simple, con pesos explícitos, ordena la discusión sin esconder las preferencias."
+      },
+      {
+       "say": "Para el laboratorio, evaluá tres campos con la hoja Screening: el de ejemplo, uno de petróleo liviano, treinta y cinco grados API, dos centipoise, quinientos milidarcys, dos mil metros y ochenta grados, y uno de petróleo extrapesado: doce grados API, cinco mil centipoise, ochocientos milidarcys, mil doscientos metros y cuarenta y cinco grados."
+      },
+      {
+       "say": "Anotá los resultados en una tabla y escribí, para cada campo, tres datos que pedirías antes de seguir. La decisión que sostiene la lección es qué métodos pasan a la siguiente etapa y qué datos faltan. No se elige un método con una criba."
+      },
+      {
+       "say": "Pregunta rápida. Un método aparece como «Revisar» en el screening porque falla un solo criterio. ¿Qué corresponde? Respondé en pantalla.",
+       "q": {
+        "q": "Un método aparece como «Revisar» en el screening porque falla un solo criterio. ¿Qué corresponde?",
+        "o": [
+         "Descartarlo sin más análisis.",
+         "Examinarlo con más datos: los rangos son una síntesis de proyectos pasados y los proyectos reales los rompen con frecuencia.",
+         "Elegirlo directamente.",
+         "Ignorar el resultado del screening."
+        ],
+        "a": 1,
+        "e": "Un «Revisar» no es un «no». Se examina con más datos (laboratorio, simulación, economía) antes de descartarlo."
        }
       }
-     ]
+     ],
+     "obj": [
+      "Aplicar un screening con rangos de referencia y leer sus resultados.",
+      "Reconocer los límites de una criba y qué viene después.",
+      "Armar un camino de decisión con laboratorio, simulación, piloto y economía."
+     ],
+     "ficha": "**Rangos de referencia en la planilla (orientativos; confirmar con Taber, Martin y Seright, 1997).** Polímero: ≥ 15 °API, ≤ 150 cP, ≥ 10 mD, ≤ 2.743 m, ≤ 93 °C. Tensioactivo / ASP: ≥ 20 °API, ≤ 35 cP, ≥ 10 mD, ≤ 2.743 m, ≤ 93 °C. CO₂ miscible: ≥ 22 °API, ≤ 10 cP, ≥ 762 m. Gas de hidrocarburo: ≥ 23 °API, ≤ 3 cP, ≥ 1.219 m. N₂ y gas de combustión: ≥ 35 °API, ≤ 0,4 cP, ≥ 1.829 m. Vapor: ≥ 8 °API, ≤ 200.000 cP, ≥ 200 mD, ≤ 1.372 m. Combustión in situ: ≥ 10 °API, ≤ 5.000 cP, ≥ 50 mD, 152–3.505 m.\n\n**Resultado.** Candidato (0 fallados), Revisar (1), Descartado (2 o más).\n\n**Resultados esperados**\n\n| Método | Campo de ejemplo (18 °API, 120 cP, 2.000 mD, 1.100 m, 60 °C) | Campo liviano (35 °API, 2 cP, 500 mD, 2.000 m, 80 °C) | Campo extrapesado (12 °API, 5.000 cP, 800 mD, 1.200 m, 45 °C) |\n|---|---|---|---|\n| Polímero | Candidato | Candidato | Descartado |\n| Tensioactivo / ASP | Descartado | Candidato | Descartado |\n| CO₂ miscible | Descartado | Candidato | Descartado |\n| Gas de hidrocarburo | Descartado | Candidato | Descartado |\n| N₂ y gas de combustión | Descartado | Revisar (viscosidad) | Descartado |\n| Vapor | Candidato | Revisar (profundidad) | Candidato |\n| Combustión in situ | Candidato | Candidato | Candidato |\n\n**Camino de validación.** Screening → laboratorio → simulación → piloto medido → economía con precio bajo.\n\n**Criterios de decisión.** Potencial incremental; viabilidad operativa; costo por barril incremental; riesgo de ejecución; impacto ambiental.\n\n**Errores frecuentes.** Elegir con la criba; descartar un «Revisar» sin mirar; olvidar la heterogeneidad, el acuífero y la salinidad; no definir cuándo se detiene el proyecto.",
+     "practica": "Práctica con planilla: hoja Screening de H3L_EOR_Barrido_en_Capas_y_Screening_v2.xlsx. Cargá los tres campos de la ficha, completá la tabla de resultados esperados y comparala con la de la planilla. Después cambiá la viscosidad del campo de ejemplo a 200 cP y anotá qué pasa con el polímero. Por último, escribí para cada campo tres datos que pedirías antes de seguir."
+    },
+    {
+     "id": "e9",
+     "title": "Piloto, escala y economía: el caso Manantiales Behr",
+     "comp": "Selección, piloto y economía",
+     "cues": [
+      {
+       "say": "Un piloto de EOR responde una pregunta concreta: ¿funciona este método en este yacimiento, y a qué costo? Para que pueda responderla, hay que diseñarlo bien antes de inyectar el primer litro.",
+       "scene": {
+        "t": "bul",
+        "k": "Piloto, escala y economía: el caso Manantiales Behr",
+        "h": "Qué vas a aprender",
+        "items": [
+         "Diseñar un piloto con criterios de éxito definidos antes de empezar y atribuir la respuesta al método.",
+         "Describir la secuencia de optimización, piloto y escala del caso Grimbeek con los datos publicados.",
+         "Evaluar la economía de un piloto con escenarios de precio bajo y de respuesta menor."
+        ]
+       }
+      },
+      {
+       "say": "Una buena práctica es definir antes del piloto qué resultado lo considera exitoso y cómo se medirá. Por ejemplo: una reducción mínima del corte de agua, una producción incremental respecto de la línea base, o un costo máximo por barril incremental."
+      },
+      {
+       "say": "Atribuir la respuesta al método y no a otros cambios del campo exige un diseño. Un patrón con un productor central y pozos de observación alrededor permite ver el avance. Los trazadores marcan el camino del fluido inyectado. Los balances de masa, con mediciones confiables de inyección y producción, cierran las cuentas."
+      },
+      {
+       "say": "Y la línea base, es decir, cómo habría seguido la producción sin el proyecto, se establece antes con las curvas de declinación. Sin línea base no hay incremental, y sin pozos de observación no hay explicación."
+      },
+      {
+       "say": "Después del piloto viene la escala. Y acá el caso de Manantiales Behr deja una enseñanza de secuencia. Primero se optimizó la inyección de agua, que en Grimbeek comenzó a principios de dos mil trece. Después se hizo un piloto de polímeros, en dos mil quince, con cuatro pozos inyectores, un productor central y nueve productores periféricos."
+      },
+      {
+       "say": "Recién a partir de dos mil diecinueve se instalaron plantas a escala, móviles y modulares, que permitieron crecer por etapas: cinco plantas en la primera etapa de la expansión, desde agosto de dos mil diecinueve, y otras dos durante dos mil veintiuno, hasta llegar a cuarenta y siete pozos inyectores."
+      },
+      {
+       "say": "Cada etapa tuvo su medición antes de pasar a la siguiente. Esa secuencia, con cuatro años entre el piloto y la escala, es la lección: no se escala lo que no se midió.",
+       "scene": {
+        "t": "tbl",
+        "k": "Piloto, escala y economía: el caso Manantiales Behr",
+        "h": "Economía del ejemplo (hoja Economia_piloto; números inventados)",
+        "cols": [
+         "Concepto",
+         "Valor"
+        ],
+        "rows": [
+         [
+          "Petróleo incremental (6 % del original)",
+          "≈ 287.500 bbl"
+         ],
+         [
+          "Polímero",
+          "300 t; 1,05 MMUSD"
+         ],
+         [
+          "Costo total del piloto",
+          "6,05 MMUSD"
+         ],
+         [
+          "Costo por barril incremental",
+          "≈ 21 USD/bbl"
+         ],
+         [
+          "Polímero por barril incremental",
+          "≈ 1,0 kg/bbl"
+         ],
+         [
+          "Precio de equilibrio (sin descontar)",
+          "≈ 28 USD/bbl"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Los resultados publicados son un buen ejemplo de qué se mide. La publicación de YPF reporta una caída del corte de agua de cerca de treinta puntos y una producción incremental del orden de ochocientos noventa metros cúbicos por día frente a la línea base de recuperación secundaria."
+      },
+      {
+       "say": "En diciembre de dos mil veinte, el campo alcanzó tres mil setecientos cuarenta y siete metros cúbicos diarios, la mayor producción de sus noventa años de actividad hasta ese momento, y se informaron nuevos récords después."
+      },
+      {
+       "say": "Son datos del proyecto en su contexto: la calidad del agua obligó a ajustar la concentración y el caudal por pozo, y aparecieron desafíos operativos como la arena, el polímero residual en los sistemas de levantamiento y los lodos en las plantas de tratamiento."
+      },
+      {
+       "say": "Ahora, la economía. Un proyecto EOR tiene costos de inyectante, de plantas y de tratamiento, y una respuesta que llega con demora. Por eso la evaluación debe incluir un escenario de precio bajo y de respuesta menor, y definir hasta dónde se está dispuesto a invertir antes de la prueba."
+      },
+      {
+       "say": "La hoja Economia_piloto de la planilla tiene un ejemplo con números inventados. Un patrón de un millón de metros cúbicos de volumen poral, un tapón de polímero de treinta por ciento del volumen poral y mil miligramos por litro de concentración."
+      },
+      {
+       "say": "Eso son trescientas toneladas de polímero, que a tres coma cinco dólares el kilo cuestan un millón cincuenta mil dólares. Con una recuperación incremental de seis por ciento del petróleo original, unos doscientos ochenta y siete mil barriles, y una inversión en pozos y planta de cuatro millones más un millón de otros costos, el piloto cuesta seis millones cincuenta mil dólares.",
+       "scene": {
+        "t": "tbl",
+        "k": "Piloto, escala y economía: el caso Manantiales Behr",
+        "h": "Escenario",
+        "cols": [
+         "Escenario",
+         "Precio (USD/bbl)",
+         "VAN simple (MMUSD)"
+        ],
+        "rows": [
+         [
+          "Base",
+          "65",
+          "5,5"
+         ],
+         [
+          "Precio bajo",
+          "45",
+          "2,0"
+         ],
+         [
+          "Precio bajo y respuesta menor (50 %)",
+          "45",
+          "−2,0"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "El costo por barril incremental es de veintiún dólares, y el polímero consumido por barril, un kilo. El precio de equilibrio, sin descontar, es de veintiocho dólares el barril. Con un precio de sesenta y cinco dólares, un netback de setenta y cinco por ciento y dos años de demora, el valor actual neto simple es de cinco coma cinco millones de dólares."
+      },
+      {
+       "say": "Con precio de cuarenta y cinco, baja a dos millones. Pero si además la respuesta es la mitad de lo esperado, el valor actual neto pasa a negativo, menos dos millones. Esa es la lección económica: un proyecto atractivo con el precio base puede dejar de serlo si el precio cae y la respuesta es menor, y eso hay que saberlo antes de decidir cuánto invertir."
+      },
+      {
+       "say": "Las lecciones prácticas del caso son pocas y firmes. El proyecto de polímeros es un proyecto de agua, de plantas y de operación continua, no solo de reservorio. Se mide la viscosidad en el pozo, no solo en la planta. Cada etapa tiene criterios de éxito. Y la escala es modular, para poder frenar o ajustar."
+      },
+      {
+       "say": "Para el laboratorio, usá la hoja Economia_piloto. Cambiá la recuperación incremental a cuatro por ciento y la demora a tres años, y anotá el valor actual neto en los tres escenarios. Después, escribí un plan de piloto de una página: objetivo, patrón, mediciones, línea base, criterios de éxito y criterio de parada."
+      },
+      {
+       "say": "La decisión que sostiene la lección es cuánto invertir antes de la prueba y qué resultado hace avanzar, ajustar o detener."
+      },
+      {
+       "say": "Pregunta rápida. En la secuencia del caso Grimbeek, ¿qué se hizo antes de instalar plantas de polímero a escala? Respondé en pantalla.",
+       "q": {
+        "q": "En la secuencia del caso Grimbeek, ¿qué se hizo antes de instalar plantas de polímero a escala?",
+        "o": [
+         "Nada: se instalaron las plantas directamente.",
+         "Se optimizó la inyección de agua y se hizo un piloto medido (2015).",
+         "Se cambió el petróleo del yacimiento.",
+         "Se esperó a que subiera el precio."
+        ],
+        "a": 1,
+        "e": "Primero se optimizó la inyección de agua (desde 2013), luego se hizo un piloto de polímeros (2015) y recién a partir de 2019 se instalaron plantas modulares a escala."
+       }
+      }
+     ],
+     "obj": [
+      "Diseñar un piloto con criterios de éxito definidos antes de empezar y atribuir la respuesta al método.",
+      "Describir la secuencia de optimización, piloto y escala del caso Grimbeek con los datos publicados.",
+      "Evaluar la economía de un piloto con escenarios de precio bajo y de respuesta menor."
+     ],
+     "ficha": "**Diseño de un piloto.** Objetivo; criterios de éxito definidos de antemano; patrón con productor central y pozos de observación; trazadores; balances; línea base (declinación); duración; criterio de parada.\n\n**Secuencia en Grimbeek (YPF, Petrotecnia 2024 y prensa).** Agua desde 2013 → piloto de polímeros en 2015 (4 inyectores, 1 productor central, 9 periféricos) → plantas modulares desde agosto/septiembre de 2019 (5 plantas en la primera etapa; 2 más en 2021; 47 pozos inyectores). Registro de 3.747 m³/d en diciembre de 2020 (mayor producción en 90 años); nuevos récords posteriores.\n\n**Resultados publicados.** Caída del corte de agua ≈ 30 puntos; incremental ≈ 890 m³/d frente a la línea base. Desafíos: calidad del agua, arena, polímero residual, lodos en plantas.\n\n**Economía del ejemplo (hoja Economia_piloto; números inventados)**\n\n| Concepto | Valor |\n|---|---|\n| Petróleo incremental (6 % del original) | ≈ 287.500 bbl |\n| Polímero | 300 t; 1,05 MMUSD |\n| Costo total del piloto | 6,05 MMUSD |\n| Costo por barril incremental | ≈ 21 USD/bbl |\n| Polímero por barril incremental | ≈ 1,0 kg/bbl |\n| Precio de equilibrio (sin descontar) | ≈ 28 USD/bbl |\n\n| Escenario | Precio (USD/bbl) | VAN simple (MMUSD) |\n|---|---|---|\n| Base | 65 | 5,5 |\n| Precio bajo | 45 | 2,0 |\n| Precio bajo y respuesta menor (50 %) | 45 | −2,0 |\n\n**Errores frecuentes.** No fijar la línea base; escalar sin medir; evaluar solo con el precio base; confundir un récord con una atribución causal.",
+     "practica": "Práctica con planilla: hoja Economia_piloto de H3L_EOR_Barrido_en_Capas_y_Screening_v2.xlsx. Cambiá la recuperación incremental a 4 % y la demora a 3 años y anotá el VAN de los tres escenarios. Después escribí un plan de piloto de una página: objetivo, patrón, mediciones, línea base, criterios de éxito y criterio de parada."
     }
    ],
    "quiz": [
     {
-     "q": "El primer paso en la selección de un método es:",
+     "q": "¿Qué mide la SOR?",
      "o": [
-      "Comparar el campo con criterios técnicos de referencia",
-      "Perforar pozos nuevos",
-      "Comprar el equipo",
-      "Fijar el precio de venta"
-     ],
-     "a": 0,
-     "e": "Es la criba inicial."
-    },
-    {
-     "q": "Un piloto bien diseñado debe tener:",
-     "o": [
-      "Ninguna medición",
-      "Solo un pozo sin control",
-      "Un resultado conocido de antemano",
-      "Criterios de éxito definidos y caso base"
-     ],
-     "a": 3,
-     "e": "Así se atribuye la respuesta al método."
-    },
-    {
-     "q": "En Manantiales Behr, el primer piloto terciario con polímeros fue en:",
-     "o": [
-      "El Mar del Norte",
-      "Mendoza, en 2010",
-      "La zona de Grimbeek, en 2019",
-      "La zona de Neuquén, en 1995"
+      "La salinidad óptima.",
+      "La razón de movilidad.",
+      "La relación entre el vapor inyectado y el petróleo producido.",
+      "La saturación residual de petróleo."
      ],
      "a": 2,
-     "e": "Según la prensa, luego se instalaron cinco plantas de polímeros."
+     "e": "SOR = barriles de vapor (agua equivalente) inyectados / barriles de petróleo producidos."
+    },
+    {
+     "q": "¿Qué condición vuelve ineficiente un proyecto de vapor?",
+     "o": [
+      "Un petróleo muy viscoso.",
+      "Un espesor grande de arena.",
+      "Un espesor pequeño, con alta proporción de pérdidas hacia las rocas vecinas.",
+      "Una saturación de petróleo alta."
+     ],
+     "a": 2,
+     "e": "En espesores chicos, buena parte del calor se pierde a las rocas de arriba y de abajo."
+    },
+    {
+     "q": "Con SOR = 4, ≈ 0,41 MMBtu de gas por barril de vapor y 22 kg de CO₂ por barril de vapor, ¿cuánto CO₂ se emite por barril de petróleo?",
+     "o": [
+      "≈ 176 kg",
+      "≈ 22 kg",
+      "≈ 88 kg",
+      "≈ 44 kg"
+     ],
+     "a": 2,
+     "e": "4 · 22 ≈ 88 kg de CO₂ por barril de petróleo, solo por generar el vapor."
+    },
+    {
+     "q": "¿Qué significa «Candidato» en la hoja Screening?",
+     "o": [
+      "Es el más barato.",
+      "Cumple todos los criterios evaluados: pasa la primera criba.",
+      "No cumple ningún criterio.",
+      "El método está elegido."
+     ],
+     "a": 1,
+     "e": "Pasar la criba no es elegir: sigue el laboratorio, la simulación, el piloto y la economía."
+    },
+    {
+     "q": "Un método falla un solo criterio del screening. ¿Qué corresponde?",
+     "o": [
+      "Examinarlo con más datos antes de decidir.",
+      "Esperar a otro proyecto.",
+      "Descartarlo sin más.",
+      "Elegirlo."
+     ],
+     "a": 0,
+     "e": "Los rangos son una síntesis de proyectos pasados; un «Revisar» no es un «no»."
+    },
+    {
+     "q": "¿Para qué sirve la línea base de un piloto?",
+     "o": [
+      "Para fijar el precio.",
+      "Para estimar el incremental frente a lo que habría producido el campo sin el proyecto.",
+      "Para decorar el informe.",
+      "Para elegir el polímero."
+     ],
+     "a": 1,
+     "e": "Sin línea base no hay incremental: no se puede atribuir la respuesta al método."
+    },
+    {
+     "q": "Un piloto cuesta 6,05 MMUSD y deja 287.500 bbl incrementales. ¿Cuál es su costo por barril incremental?",
+     "o": [
+      "≈ 21 USD/bbl",
+      "≈ 45 USD/bbl",
+      "≈ 12 USD/bbl",
+      "≈ 28 USD/bbl"
+     ],
+     "a": 0,
+     "e": "6,05 · 10⁶ / 287.500 ≈ 21,0 USD/bbl."
+    },
+    {
+     "q": "¿En qué año se inició el piloto de polímeros de Grimbeek, según la publicación de YPF?",
+     "o": [
+      "2015",
+      "2020",
+      "2013",
+      "2019"
+     ],
+     "a": 0,
+     "e": "El piloto se inició en 2015; la expansión con plantas modulares, a partir de 2019."
     }
    ]
   }
  ],
  "exam": [
   {
-   "q": "Un polímero en el agua inyectada mejora principalmente:",
+   "q": "¿Qué distingue a la recuperación mejorada (EOR)?",
    "o": [
-    "La temperatura",
-    "El barrido, por menor razón de movilidad",
-    "La saturación residual",
-    "La porosidad"
-   ],
-   "a": 1,
-   "e": "Hace más viscosa el agua y estabiliza el frente."
-  },
-  {
-   "q": "Un tensioactivo se usa para:",
-   "o": [
-    "Bajar la tensión interfacial y la saturación residual",
-    "Reducir el espesor",
-    "Aumentar la presión",
-    "Subir la viscosidad"
-   ],
-   "a": 0,
-   "e": "Libera el petróleo atrapado por capilaridad."
-  },
-  {
-   "q": "La inyección alternada de agua y gas ayuda a:",
-   "o": [
-    "Evitar la inyección",
-    "Bajar la salinidad",
-    "Sellar el reservorio",
-    "Controlar la movilidad del gas"
+    "Mantener la presión con agua.",
+    "Reducir el costo del equipo.",
+    "Perforar más pozos.",
+    "Inyectar fluidos o energía que cambian las propiedades del petróleo o de la roca."
    ],
    "a": 3,
-   "e": "Compensa la baja viscosidad del gas."
+   "e": "La EOR cambia propiedades (viscosidad, tensión interfacial, movilidad); IOR es un término más amplio."
   },
   {
-   "q": "La eficiencia de desplazamiento depende de:",
+   "q": "El barrido es bueno según los trazadores, pero los registros muestran alta saturación de petróleo remanente en la zona barrida. ¿Qué palanca conviene?",
    "o": [
-    "La profundidad del mar",
-    "La cantidad de plantas",
-    "La saturación residual de petróleo",
-    "El precio del gas"
+    "Más pozos de observación.",
+    "Reducir el caudal de inyección.",
+    "Bajar la saturación residual: tensioactivos, gas miscible o calor.",
+    "Control de movilidad con polímero."
    ],
    "a": 2,
-   "e": "Es el petróleo movible dentro de la roca barrida."
+   "e": "El problema es de desplazamiento: hay que bajar la Sor."
   },
   {
-   "q": "Para petróleos extrapesados el método más habitual es:",
+   "q": "Con Swc = 0,2 y Sor = 0,15, ¿cuál es E_D?",
    "o": [
-    "Inyección de nitrógeno solamente",
-    "Térmico",
-    "Ninguno",
-    "Solo agua fría"
+    "0,65",
+    "0,81",
+    "0,85",
+    "0,75"
    ],
    "a": 1,
-   "e": "El calor baja la viscosidad."
+   "e": "E_D = (1 − 0,2 − 0,15) / (1 − 0,2) = 0,65 / 0,80 = 0,8125."
   },
   {
-   "q": "Los criterios de selección de Taber, Martin y Seright sirven como:",
+   "q": "Con E_V = 0,657 y E_D = 0,625 (barrido areal 100 %), ¿cuál es FR?",
    "o": [
-    "Una criba inicial de referencia",
-    "Una regulación",
-    "Un diseño final",
-    "Un precio"
+    "≈ 51 %",
+    "≈ 41 %",
+    "≈ 66 %",
+    "≈ 31 %"
+   ],
+   "a": 1,
+   "e": "FR = 0,657 · 0,625 ≈ 0,41: queda ≈ 59 % del petróleo en la roca."
+  },
+  {
+   "q": "Con krw0 = 0,35, kro0 = 0,9, μw = 0,5 cP y μo = 6 cP, ¿cuánto vale M?",
+   "o": [
+    "4,7",
+    "0,47",
+    "2,3",
+    "7,0"
    ],
    "a": 0,
-   "e": "Luego se valida con laboratorio, simulación y piloto."
+   "e": "M = (0,35 / 0,5) / (0,9 / 6) = 0,7 / 0,15 = 4,67."
+  },
+  {
+   "q": "Con los datos de la pregunta anterior, ¿qué viscosidad de agua lleva M a 1?",
+   "o": [
+    "≈ 6 cP",
+    "≈ 2,3 cP",
+    "≈ 4,7 cP",
+    "≈ 1,0 cP"
+   ],
+   "a": 1,
+   "e": "μw = krw0 · μo / kro0 = 0,35 · 6 / 0,9 = 2,33 cP."
+  },
+  {
+   "q": "En el modelo de capas, con M > 1, ¿qué ocurre al avanzar el frente?",
+   "o": [
+    "La resistencia crece y las capas rápidas se frenan.",
+    "La resistencia baja y las capas rápidas se aceleran.",
+    "Las capas lentas llegan primero.",
+    "Todas las capas avanzan igual."
+   ],
+   "a": 1,
+   "e": "Con M > 1 el agua es más móvil: la zona barrida ofrece menos resistencia y la capa se acelera."
+  },
+  {
+   "q": "¿Qué efecto tiene un polímero sobre la saturación residual de petróleo?",
+   "o": [
+    "La reduce de modo importante.",
+    "La duplica.",
+    "En general no la cambia: actúa sobre el barrido.",
+    "La elimina."
+   ],
+   "a": 2,
+   "e": "El polímero mejora el barrido; la Sor se baja con tensioactivos, gas miscible o calor."
+  },
+  {
+   "q": "¿Cuál es una ventaja del xantano frente a la HPAM?",
+   "o": [
+    "Es más tolerante a la sal y a la cizalla.",
+    "No se degrada biológicamente.",
+    "No tapona nunca.",
+    "Es más barato."
+   ],
+   "a": 0,
+   "e": "El xantano tolera mejor la salinidad y la cizalla, pero es más caro y sensible a la degradación biológica."
+  },
+  {
+   "q": "¿Qué relación expresa el número capilar?",
+   "o": [
+    "Densidad frente a viscosidad.",
+    "Permeabilidad frente a porosidad.",
+    "Temperatura frente a presión.",
+    "Fuerzas viscosas frente a fuerzas capilares."
+   ],
+   "a": 3,
+   "e": "Nc = μ · v / σ: las fuerzas viscosas frente a las capilares."
+  },
+  {
+   "q": "Con tensioactivo (Sor = 0,15) y polímero (5 cP), el modelo de la planilla da FR ≈ 73 %. ¿Por qué se combinan?",
+   "o": [
+    "Porque ambos bajan la Sor.",
+    "Porque cada palanca mueve una eficiencia distinta y los efectos se multiplican.",
+    "Porque el polímero baja la tensión interfacial.",
+    "Porque el tensioactivo sube la viscosidad."
+   ],
+   "a": 1,
+   "e": "El polímero mejora el barrido (E_V) y el tensioactivo el desplazamiento (E_D); FR = E_V · E_D."
+  },
+  {
+   "q": "¿Cómo se determina habitualmente la presión mínima de miscibilidad en el laboratorio?",
+   "o": [
+    "Con un tubo delgado (slim-tube).",
+    "Con un viscosímetro de caída de bola.",
+    "Con un termómetro.",
+    "Con un densímetro."
+   ],
+   "a": 0,
+   "e": "El slim-tube es el ensayo de referencia; también hay otras técnicas y correlaciones."
+  },
+  {
+   "q": "¿Qué problema busca mitigar el WAG?",
+   "o": [
+    "La corrosión del acero.",
+    "La baja viscosidad y la gravedad del gas, que dan mal barrido.",
+    "La salinidad del agua.",
+    "El costo del polímero."
+   ],
+   "a": 1,
+   "e": "El agua, más viscosa, frena el gas y mejora el barrido."
+  },
+  {
+   "q": "¿Por qué el calor es el método principal para crudos viscosos?",
+   "o": [
+    "Porque eleva la salinidad.",
+    "Porque aumenta la tensión interfacial.",
+    "Porque disminuye la porosidad.",
+    "Porque baja la viscosidad y, con ella, la razón de movilidad."
+   ],
+   "a": 3,
+   "e": "La viscosidad de los crudos pesados cae mucho al calentar."
+  },
+  {
+   "q": "¿Cómo se describe el SAGD?",
+   "o": [
+    "Inyección de CO₂ con agua.",
+    "Dos pozos horizontales superpuestos: el superior inyecta vapor y el inferior produce por gravedad.",
+    "Inyección de aire para encender el petróleo.",
+    "Un solo pozo con ciclos de inyección y producción."
+   ],
+   "a": 1,
+   "e": "SAGD = drenaje gravitacional asistido con vapor, con dos pozos horizontales."
+  },
+  {
+   "q": "¿Cuál es la afirmación correcta sobre los rangos de un screening?",
+   "o": [
+    "Son leyes.",
+    "Reemplazan el laboratorio.",
+    "Son una primera criba, orientativa; los proyectos reales rompen los rangos.",
+    "Definen el diseño del proyecto."
+   ],
+   "a": 2,
+   "e": "El screening no es un diseño: después vienen laboratorio, simulación, piloto y economía."
+  },
+  {
+   "q": "¿Qué se define antes de iniciar un piloto?",
+   "o": [
+    "El nombre del proyecto.",
+    "El precio del petróleo del año siguiente.",
+    "Solo el contratista.",
+    "Qué resultado lo considera exitoso, cómo se medirá y la línea base."
+   ],
+   "a": 3,
+   "e": "Los criterios de éxito se fijan antes, con una línea base y un diseño que permita atribuir la respuesta."
+  },
+  {
+   "q": "Un proyecto con VAN positivo a precio base da negativo con precio bajo y respuesta del 50 %. ¿Qué conclusión corresponde?",
+   "o": [
+    "Cambiar el precio base.",
+    "Invertir todo de inmediato.",
+    "Definir cuánto invertir antes de la prueba y qué resultado hace avanzar, ajustar o detener.",
+    "Ignorar el escenario bajo."
+   ],
+   "a": 2,
+   "e": "La evaluación debe incluir escenarios de precio bajo y de respuesta menor para decidir cuánto invertir antes de la prueba."
+  },
+  {
+   "q": "¿Cuál es la secuencia documentada del caso Grimbeek?",
+   "o": [
+    "Optimización de la inyección de agua, piloto de polímeros en 2015 y plantas modulares desde 2019.",
+    "Piloto en 2019 y plantas en 2015.",
+    "Solo inyección de agua.",
+    "Escala directa en 2019."
+   ],
+   "a": 0,
+   "e": "Cada etapa se midió antes de pasar a la siguiente."
   }
  ],
  "outro": {
   "can": [
-   "las eficiencias de barrido y de desplazamiento que limitan el recobro",
-   "métodos químicos, de gas y térmicos de EOR",
-   "los criterios de selección de un método EOR para un yacimiento",
-   "el diseño y la escala de un piloto de EOR"
+   "descomponer un factor de recuperación y diagnosticar qué eficiencia lo limita",
+   "calcular la razón de movilidad y usar el modelo de capas para comparar escenarios",
+   "describir la palanca de cada método químico, de gas y térmico",
+   "hacer un screening con rangos de referencia y leer sus resultados",
+   "plantear un piloto y evaluar su economía"
   ],
   "phrase": "Primero entender qué eficiencia limita; después elegir la palanca.",
   "recap": [
    "La recuperación es el producto de tres eficiencias, y cada método mueve una palanca distinta.",
    "Los polímeros mejoran el barrido; los tensioactivos y el gas miscible, el desplazamiento; el calor, la viscosidad.",
    "Se pasa de la criba al laboratorio, la simulación, el piloto medido y recién después la escala."
+  ],
+  "cues": [
+   {
+    "say": "Repasemos lo esencial. La recuperación es el producto de tres eficiencias, la areal, la vertical y la de desplazamiento, y cada método mueve una palanca distinta. La razón de movilidad dice cuánto se adelanta el agua, y el modelo de capas muestra por qué una razón desfavorable acelera las capas más permeables y empeora el barrido.",
+    "scene": {
+     "t": "bul",
+     "k": "Para llevarte",
+     "h": "Ideas clave",
+     "items": [
+      "La recuperación es el producto de tres eficiencias, y cada método mueve una palanca distinta.",
+      "Los polímeros mejoran el barrido; los tensioactivos y el gas miscible, el desplazamiento; el calor, la viscosidad.",
+      "Se pasa de la criba al laboratorio, la simulación, el piloto medido y recién después la escala."
+     ]
+    }
+   },
+   {
+    "say": "Los polímeros mejoran el barrido, porque bajan la razón de movilidad. Los tensioactivos y el gas miscible mejoran el desplazamiento, porque bajan la saturación residual. El calor baja la viscosidad, y con ella la razón de movilidad, aunque con un costo energético y ambiental que hay que medir."
+   },
+   {
+    "say": "Y el dióxido de carbono puede almacenarse en parte, pero se mide y se verifica, no se supone. Se pasa de la criba al laboratorio, la simulación, el piloto medido y, recién después, la escala. El screening deja candidatos, no decisiones."
+   },
+   {
+    "say": "Un piloto se diseña con criterios de éxito antes de empezar, con una línea base y con pozos de observación. Y la economía se evalúa con precio bajo y con una respuesta menor."
+   },
+   {
+    "say": "Ahora podés descomponer un factor de recuperación y diagnosticar qué eficiencia lo limita. Podés calcular la razón de movilidad y usar el modelo de capas para comparar escenarios. Podés describir la palanca de cada método químico, de gas y térmico. Podés hacer un screening con rangos de referencia y leer sus resultados.",
+    "scene": {
+     "t": "can",
+     "k": "Lo que lograste",
+     "h": "Ahora podés reconocer y aplicar",
+     "items": [
+      "descomponer un factor de recuperación y diagnosticar qué eficiencia lo limita",
+      "calcular la razón de movilidad y usar el modelo de capas para comparar escenarios",
+      "describir la palanca de cada método químico, de gas y térmico",
+      "hacer un screening con rangos de referencia y leer sus resultados",
+      "plantear un piloto y evaluar su economía"
+     ]
+    }
+   },
+   {
+    "say": "Y podés plantear un piloto y evaluar su economía. Recordá el alcance. Este curso es una introducción. Los rangos de la criba y los modelos de la planilla son herramientas de aprendizaje y no sustituyen el laboratorio, la simulación ni el estudio de un proyecto."
+   },
+   {
+    "say": "Ítems vistos: nueve lecciones en tres módulos, dos laboratorios interactivos, nueve prácticas o ejercicios con la planilla Excel, un cuestionario por módulo y un examen final. Primero entender qué eficiencia limita; después elegir la palanca. Gracias por aprender con H3L Global Energy. Contacto: info@h3lglobalenergy.com",
+    "scene": {
+     "t": "bout"
+    }
+   }
   ]
  },
  "downloads": [
   {
    "file": "xlsx/H3L_EOR_Barrido_en_Capas_y_Screening.xlsx",
-   "title": "Barrido por capas y recuperación (Excel)",
-   "desc": "Modelo de 20 capas con desplazamiento tipo pistón y razón de movilidad editable, que calcula barrido vertical al 95 % de corte de agua, eficiencia de desplazamiento y factor de recuperación; más una tabla de criterios de selección para completar con datos de un campo.",
-   "task": "Con V = 0,7 y viscosidad de agua de 0,5 cP, anotá el factor de recuperación. Subí la viscosidad a 10 cP y calculá cuánto sube."
+   "title": "Barrido por capas, comparación de escenarios, screening y economía del piloto (Excel)",
+   "desc": "Modelo de 20 capas con razón de movilidad corregida (1/M internamente), comparación de escenarios (base, polímero, tensioactivo y ambos), screening con rangos de referencia editables y economía del piloto con escenario de precio bajo. Datos sintéticos o de ejemplo.",
+   "task": "Con V = 0,7 y viscosidad de agua de 0,5 cP, anotá el factor de recuperación (≈ 41 %). Subí la viscosidad del agua a 5 cP y calculá cuánto sube."
   }
  ],
  "cases": [
   {
    "title": "Manantiales Behr (Chubut)",
-   "text": "En diciembre de 2020, el campo en la Cuenca del Golfo San Jorge alcanzó 3.747 metros cúbicos diarios, su mayor producción en 90 años de actividad. El aumento se atribuyó a la recuperación secundaria y terciaria; el primer piloto terciario, en la zona de Grimbeek, comenzó en 2019, y se instalaron cinco plantas de inyección de polímeros.",
-   "src": "iProfesional, nota sobre la producción récord del yacimiento Manantiales Behr"
+   "text": "Campo de la Cuenca del Golfo San Jorge, cerca de Comodoro Rivadavia. YPF inició en 2015 un piloto de inyección de polímeros en el yacimiento Grimbeek y, desde 2019, lo expandió con plantas modulares. En diciembre de 2020 el campo alcanzó 3.747 m³/d, la mayor producción de sus 90 años de actividad hasta ese momento; hay registros posteriores.",
+   "src": "YPF, Petrotecnia 124 (IAPG, 2024); prensa (iProfesional, El Economista, Río Negro)"
   }
  ],
  "refs": [
@@ -953,6 +1890,16 @@
    "tag": "Paper",
    "cite": "Hirasaki, G. J., Miller, C. A. y Puerto, M. (2011). Recent advances in surfactant EOR. SPE Journal 16(4) (SPE 115386).",
    "why": "tensioactivos y diseño de mezclas"
+  },
+  {
+   "tag": "Paper",
+   "cite": "Todd, M. R. y Longstaff, W. J. (1972). The development, testing, and application of a numerical simulator for predicting miscible flood performance. Journal of Petroleum Technology 24(7), 874–882.",
+   "why": "mezcla de gases miscibles"
+  },
+  {
+   "tag": "Fuente",
+   "cite": "YPF (2024). Petrotecnia 124, Instituto Argentino del Petróleo y del Gas. iapg.org.ar/petrotecnia_notas/124/38-47.pdf",
+   "why": "datos de Grimbeek"
   }
  ]
 }
