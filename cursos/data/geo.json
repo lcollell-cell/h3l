@@ -161,6 +161,12 @@
      "comp": "Análisis de cuenca y sistema petrolero",
      "cues": [
       {
+       "say": "Te damos la bienvenida a este curso. Empecemos. En esta primera lección vamos a ver qué es un sistema petrolero: qué elementos y qué procesos necesita una cuenca para que haya hidrocarburos acumulados.",
+       "scene": {
+        "t": "wel"
+       }
+      },
+      {
        "say": "Un sistema petrolero es una roca generadora madura más todos los elementos y procesos geológicos necesarios para que exista una acumulación de petróleo o gas. La definición clásica es de Magoon y Dow, de 1994, en la memoria 60 de la AAPG. La palabra clave es sistema: si falta una pieza, o si una pieza aparece en el momento equivocado, no hay campo.",
        "scene": {
         "t": "bul",

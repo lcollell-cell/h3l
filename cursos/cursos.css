@@ -613,7 +613,7 @@ body.game .gtop select{width:auto;flex:none;min-width:64px}
 .wel .wm{display:flex;flex-wrap:wrap;gap:.9cqw}
 .wel .wm span{font:600 1.35cqw/1 var(--font);padding:.8cqw 1.3cqw;border:1px solid rgba(255,255,255,.22);border-radius:99px;background:rgba(255,255,255,.06);color:#e9eff9}
 .wel .wf{position:absolute;left:5.4cqw;bottom:2.6cqw;font:600 1.2cqw/1 var(--font);letter-spacing:.08em;color:rgba(255,255,255,.5);text-transform:uppercase;display:none}
-.stage[data-k=wel] .big{background:transparent;justify-content:flex-start;align-items:flex-end;padding:0 0 15cqw 5.4cqw}
+.stage[data-k=wel] .big{background:transparent;justify-content:flex-end;align-items:flex-end;padding:0 5.4cqw 15cqw 0}
 .stage[data-k=wel] .big button{width:6.4cqw;height:6.4cqw;box-shadow:0 0 0 .7cqw rgba(95,209,164,.25)}
 .stage[data-k=dg] .cc span{font-size:1.7cqw}
 @media(prefers-reduced-motion:reduce){.dg .st{transition:none}}

@@ -156,6 +156,12 @@
      "comp": "Eficiencias, movilidad y heterogeneidad",
      "cues": [
       {
+       "say": "Te damos la bienvenida a este curso. Empecemos. En esta primera lección vamos a ver por qué el agua deja petróleo atrás, y cómo se descompone el recobro en eficiencias de barrido y de desplazamiento.",
+       "scene": {
+        "t": "wel"
+       }
+      },
+      {
        "say": "La producción de un yacimiento se suele describir en etapas. En la primaria, el petróleo sale por la energía natural del reservorio.",
        "hl": 0,
        "scene": {
