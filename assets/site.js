@@ -540,10 +540,11 @@ function renderServicios(){
         '<div class="svc-bar"><span class="svc-t">0:00</span><input type="range" class="svc-seek" min="0" max="1000" step="1" value="0" aria-label="'+esc(tr('sv_seek'))+'"><span class="svc-d">0:00</span></div>'+
         '<div class="svc-cap">'+esc(tool)+'</div></div>'+
       '<div class="svc-body"><h3>'+esc(title)+'</h3><ul>'+s.b[lang].map(function(b){return '<li>'+esc(b)+'</li>'}).join('')+'</ul>'+
-      '<div class="svc-act"><button type="button" class="btn-p" data-quote="'+i+'">'+esc(tr('sv_q'))+'</button>'+
-      (s.go?'<button type="button" class="btn-s" data-go="'+esc(s.go)+'">'+esc(tr('sv_more'))+'</button>':'')+'</div></div></article>';
+      (s.go?'<div class="svc-act"><button type="button" class="btn-p" data-go="'+esc(s.go)+'">'+esc(tr('sv_more'))+'</button></div>':'')+'</div></article>';
   });
   host.innerHTML=h;
+  /* sin descarga del video: se anula el menú contextual (Guardar video como) y el arrastre */
+  Array.prototype.forEach.call(host.querySelectorAll('.svc-media,.svc-video'),function(el){el.addEventListener('contextmenu',function(e){e.preventDefault()});el.addEventListener('dragstart',function(e){e.preventDefault()})});
   setupVideos();
 }
 
