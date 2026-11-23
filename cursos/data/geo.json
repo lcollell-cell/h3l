@@ -371,7 +371,7 @@
        "hl": 3
       },
       {
-       "say": "Laboratorio. Vas a mover el momento geológico y ver qué elementos y procesos están activos. Primero dejá el escenario base, en el que la trampa se forma antes de la migración, y observá que el indicador de sincronía marca acumulación.",
+       "say": "Laboratorio. Vas a mover el momento geológico y ver qué elementos y procesos están activos. Primero dejá la edad de la trampa en ciento diez millones de años, de modo que se forma antes de la migración, y observá que el indicador de sincronía marca acumulación.",
        "scene": {
         "t": "viz",
         "w": "syst",
@@ -381,7 +381,7 @@
        "lab": true
       },
       {
-       "say": "Después activá el escenario en el que la trampa se forma después de la migración y mirá qué pasa con la sincronía. Anotá cuál es el momento crítico en cada escenario y escribí una conclusión de una línea para un comité técnico."
+       "say": "Después bajá la edad de formación de la trampa a unos cincuenta millones de años, de modo que se forme después de la migración, y mirá qué pasa con la sincronía. Probá también mover el momento geológico y observá qué elementos están activos en cada instante. Anotá cuál es el momento crítico en cada escenario y escribí una conclusión de una línea para un comité técnico."
       },
       {
        "say": "Pregunta rápida. Pensá en el momento crítico del sistema y en la sincronía entre trampa y migración. Si una trampa se forma cuando la migración ya terminó, ¿puede haber acumulación en ella? Respondé en pantalla.",
@@ -404,7 +404,7 @@
       "Estimar la probabilidad de éxito geológico como producto de componentes independientes."
      ],
      "ficha": "**Elementos y procesos (Magoon y Dow, 1994)**\n\n| Categoría | Componentes | Pregunta que responde |\n|---|---|---|\n| Elementos | Generadora, reservorio, sello, sobrecarga | ¿Existe la roca? |\n| Procesos | Formación de la trampa; generación–migración–acumulación | ¿Ocurrió, y cuándo? |\n| Posterior | Tiempo de preservación | ¿Se conservó? |\n\n**Diagrama de eventos.** Eje horizontal: tiempo geológico. Filas: unidades de roca, procesos, preservación y momento crítico. Los mapas del sistema se dibujan al momento crítico.\n\n**Chance de éxito geológico** = P(carga) × P(reservorio) × P(sello) × P(trampa). Ejemplo: 0,8 × 0,7 × 0,9 × 0,6 = 0,30 (30 %). Supone componentes razonablemente independientes.\n\n**Nombre del sistema:** Generadora–Reservorio (!) conocido, (.) hipotético con evidencia geoquímica, (?) especulativo.\n\n**Errores frecuentes.** Dibujar el sistema a la configuración actual y no al momento crítico; olvidar la preservación; dar por buena la trampa sin fechar su formación.\n\n**Glosario.** Sistema petrolero, momento crítico, sincronía, migración primaria y secundaria, sobrecarga, sweet spot.",
-     "practica": "Laboratorio interactivo de sincronía. Variables: momento geológico (control deslizante), escenario (trampa antes o después de la migración). Salida: elementos y procesos activos, indicador de sincronía y momento crítico. Tarea del alumno: comparar los dos escenarios y redactar una conclusión de una línea."
+     "practica": "Laboratorio interactivo de sincronía. Variables: momento geológico (control deslizante), edad de formación de la trampa. Salida: elementos y procesos activos, indicador de sincronía y momento crítico. Tarea del alumno: comparar una trampa temprana y una tardía, y redactar una conclusión de una línea."
     },
     {
      "id": "g2",

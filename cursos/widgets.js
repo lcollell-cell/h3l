@@ -77,13 +77,24 @@ W.basin=function(box,p,api){var h=mkui(box,[{k:'mat',l:'Madurez térmica (profun
   draw(h.V)};
 
 /* ===== EVENTOS DEL SISTEMA PETROLERO ===== */
-W.syst=function(box,p,api){var h=mkui(box,[{k:'t',l:'Momento geológico (Ma)',min:0,max:160,step:1,v:100,f:function(v){return v+' Ma'}},{k:'late',l:'Escenario: trampa formada DESPUÉS de la migración',t:'chk',v:false}],draw,{w:640,h:340,touch:api.touch});
-  var svg=h.svg;function draw(V){svg.innerHTML='';var rows=[['Roca generadora',150,130,GN],['Roca reservorio',140,120,BL],['Roca sello',130,110,VI],['Sobrecarga',130,0,'#8ea2bd'],['Formación de trampa',V.late?50:110,V.late?30:90,AM],['Generación – migración – acumulación',100,40,RD],['Preservación',90,0,'#8ea2bd']];
-    var P=plot(svg,640,340,{l:190,r:14,t:26,b:44},[160,0],[0,rows.length],{nx:8,ny:0,xl:'Millones de años antes del presente (Ma)',xf:function(v){return v}});
-    rows.forEach(function(r,i){var y=P.Y(i)+10;lbl(svg,8,y+14,r[0],TX,11);sv('rect',{x:P.X(r[1]),y:y,width:Math.max(3,P.X(r[2])-P.X(r[1])),height:20,rx:5,fill:r[3],'fill-opacity':.85},svg)});
-    var cx=P.X(V.t);sv('line',{x1:cx,x2:cx,y1:P.m.t-6,y2:P.m.t+P.h,stroke:'#fff','stroke-width':2},svg);lbl(svg,cx,P.m.t-9,V.t+' Ma','#fff',11,'middle');
+W.syst=function(box,p,api){var h=mkui(box,[{k:'t',l:'Momento geológico (Ma)',min:0,max:160,step:1,v:100,f:function(v){return v+' Ma'}},{k:'tr',l:'Edad de formación de la trampa (Ma)',min:20,max:140,step:5,v:110,f:function(v){return v+' Ma'}}],draw,{w:640,h:360,touch:api.touch});
+  var svg=h.svg,MI=[100,40]; /* ventana de generación–migración–acumulación (Ma) */
+  function draw(V){svg.innerHTML='';var tc=V.tr-20; /* la trampa se forma durante 20 Ma */
+    var rows=[['Roca generadora',150,130,GN],['Roca reservorio',140,120,BL],['Roca sello',130,110,VI],['Sobrecarga',130,0,'#8ea2bd'],['Formación de trampa',V.tr,tc,AM],['Generación–migración–acumulación',MI[0],MI[1],RD],['Preservación',90,0,'#8ea2bd']];
+    var P=plot(svg,640,360,{l:196,r:14,t:34,b:48},[160,0],[0,1],{nx:8,ny:0,xl:'Millones de años antes del presente (Ma)',xf:function(v){return v}});
+    var rh=P.h/rows.length,bh=Math.min(20,rh-8);
+    sv('rect',{x:P.X(MI[0]),y:P.m.t,width:P.X(MI[1])-P.X(MI[0]),height:P.h,fill:RD,'fill-opacity':.08},svg);
+    rows.forEach(function(r,i){var y=P.m.t+i*rh+(rh-bh)/2;lbl(svg,8,y+bh/2+4,r[0],TX,10.5);sv('rect',{x:P.X(r[1]),y:y,width:Math.max(3,P.X(r[2])-P.X(r[1])),height:bh,rx:4,fill:r[3],'fill-opacity':.88},svg)});
+    var ov=Math.max(0,Math.min(MI[0],tc)-MI[1]),pct=Math.round(100*ov/(MI[0]-MI[1])),cm=ov>0?(MI[1]+Math.min(MI[0],tc))/2:null;
+    if(cm!=null){var cx2=P.X(cm);sv('path',{d:'M'+cx2+' '+(P.m.t+P.h+2)+' l-6 9 h12z',fill:'#fff'},svg);lbl(svg,cx2,P.m.t+P.h+22,'',TX,9)}
+    var cx=P.X(V.t);sv('line',{x1:cx,x2:cx,y1:P.m.t-6,y2:P.m.t+P.h,stroke:'#fff','stroke-width':2},svg);lbl(svg,cx,P.m.t-10,V.t+' Ma','#fff',11,'middle');
     var present=rows.filter(function(r){return V.t<=r[1]&&V.t>=r[2]||(r[2]===0&&V.t<=r[1])}).map(function(r){return r[0]});
-    var ok=!V.late;h.out('En <strong>'+V.t+' Ma</strong> están activos: '+(present.join(', ')||'ninguno')+'.<br>Sincronía trampa–migración: <strong style="color:'+(ok?GN:RD)+'">'+(ok?'✓ la trampa ya existía cuando migró el hidrocarburo':'✗ la trampa se formó después: el petróleo migró y se perdió')+'</strong>. Un sistema petrolero exige elementos <em>y</em> procesos en el orden correcto.')}
+    var inMig=V.t<=MI[0]&&V.t>=MI[1],trapState=V.t>V.tr?'aún no existe':(V.t>tc?'en formación':'formada');
+    var now;if(V.t>MI[0])now='Todavía no hay migración: la roca generadora aún no alcanzó la madurez.';
+      else if(inMig)now=trapState==='formada'?'Hay migración y la trampa ya está formada: el hidrocarburo se <strong style="color:'+GN+'">acumula</strong>.':trapState==='en formación'?'Hay migración y la trampa se está formando: acumulación <strong style="color:'+AM+'">parcial</strong>.':'Hay migración, pero la trampa <strong style="color:'+RD+'">aún no existe</strong>: el hidrocarburo no tiene dónde acumularse.';
+      else now=(tc>=MI[1]&&ov>0)?'La migración terminó y la trampa retiene lo que se acumuló (preservación).':'La migración terminó antes de que la trampa estuviera formada: <strong style="color:'+RD+'">no hay nada que preservar</strong>.';
+    var verdict=pct>=75?['✓ sincronía buena: la trampa existía durante '+pct+' % de la migración',GN]:pct>=25?['≈ sincronía parcial: la trampa existía durante '+pct+' % de la migración',AM]:['✗ sincronía mala: la trampa se formó después de la migración ('+pct+' %)',RD];
+    h.out('En <strong>'+V.t+' Ma</strong> están activos: '+(present.join(', ')||'ninguno')+'. Trampa: '+trapState+'.<br>'+now+'<br>Sincronía: <strong style="color:'+verdict[1]+'">'+verdict[0]+'</strong>. '+(cm!=null?'Momento crítico ≈ <strong>'+Math.round(cm)+' Ma</strong> (▲ en el eje: mitad del período en que hay migración y trampa).':'Sin acumulación no hay momento crítico.'))}
   draw(h.V)};
 
 /* ===== HISTORIA DE ENTERRAMIENTO ===== */
