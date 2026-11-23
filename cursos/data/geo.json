@@ -161,9 +161,33 @@
      "comp": "Análisis de cuenca y sistema petrolero",
      "cues": [
       {
-       "say": "Te damos la bienvenida a este curso. Empecemos. En esta primera lección vamos a ver qué es un sistema petrolero: qué elementos y qué procesos necesita una cuenca para que haya hidrocarburos acumulados.",
+       "say": "Te damos la bienvenida al curso Geociencias: sistema petrolero y caracterización estática. Veremos tres módulos, y te cuento para qué sirve cada uno.",
        "scene": {
         "t": "wel"
+       }
+      },
+      {
+       "say": "El primero, Sistema petrolero y roca generadora. Sirve para responder la pregunta que va antes de cualquier modelo: si en esta cuenca hubo, de verdad, con qué generar y acumular hidrocarburos.",
+       "hl": 0,
+       "scene": {
+        "t": "chap",
+        "m": "agenda"
+       }
+      },
+      {
+       "say": "El segundo, Marco estratigráfico y petrofísica. Sirve para ordenar la roca en el tiempo y convertir lo que miden los pozos en propiedades que se puedan usar.",
+       "hl": 1
+      },
+      {
+       "say": "Y el tercero, Modelo estático y volumetría. Sirve para llegar a un número, cuánto petróleo hay en sitio, y saber qué tan incierto es.",
+       "hl": 2
+      },
+      {
+       "say": "Y ahora sí, ¡comencemos!",
+       "scene": {
+        "t": "chap",
+        "i": 0,
+        "go": 1
        }
       },
       {
@@ -840,6 +864,13 @@
      "title": "Estratigrafía de secuencias y correlación",
      "comp": "Análisis estratigráfico",
      "cues": [
+      {
+       "say": "Módulo dos, Marco estratigráfico y petrofísica. Ya vimos si la cuenca pudo generar y acumular petróleo; ahora ordenamos la roca y aprendemos a leer lo que dicen los pozos.",
+       "scene": {
+        "t": "chap",
+        "i": 1
+       }
+      },
       {
        "say": "La estratigrafía de secuencias divide el registro sedimentario en paquetes limitados por superficies de discordancia o por sus equivalentes concordantes. Es el marco que usamos los geólogos para predecir dónde están las rocas reservorio, las rocas sello y las generadoras.",
        "scene": {
@@ -1518,6 +1549,13 @@
      "title": "Sísmica y marco estructural",
      "comp": "Geomodelado del reservorio",
      "cues": [
+      {
+       "say": "Módulo tres, Modelo estático y volumetría. Con el marco y las propiedades en mano, armamos el modelo y llegamos al número que sostiene la decisión.",
+       "scene": {
+        "t": "chap",
+        "i": 2
+       }
+      },
       {
        "say": "Hasta ahora trabajamos con datos de pozo, que son muy precisos pero puntuales. La sísmica de reflexión aporta lo que falta: una imagen continua del subsuelo entre los pozos. En esta lección vemos qué nos da, qué no nos da y cómo se transforma en el marco estructural que sostiene el modelo estático.",
        "scene": {

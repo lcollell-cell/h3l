@@ -156,9 +156,33 @@
      "comp": "Eficiencias, movilidad y heterogeneidad",
      "cues": [
       {
-       "say": "Te damos la bienvenida a este curso. Empecemos. En esta primera lección vamos a ver por qué el agua deja petróleo atrás, y cómo se descompone el recobro en eficiencias de barrido y de desplazamiento.",
+       "say": "Te damos la bienvenida al curso Recuperación mejorada, EOR: química, gas y térmica. Veremos tres módulos, y te cuento para qué sirve cada uno.",
        "scene": {
         "t": "wel"
+       }
+      },
+      {
+       "say": "El primero, Por qué queda petróleo. Sirve para entender, antes de elegir ninguna técnica, por qué el agua deja petróleo atrás y qué eficiencia es la que falla.",
+       "hl": 0,
+       "scene": {
+        "t": "chap",
+        "m": "agenda"
+       }
+      },
+      {
+       "say": "El segundo, Métodos químicos y de gas. Sirve para conocer las palancas, polímeros, tensioactivos y gases, y saber qué problema ataca cada una.",
+       "hl": 1
+      },
+      {
+       "say": "Y el tercero, Térmicos, screening y piloto. Sirve para decidir con criterio qué método conviene a un campo, y cómo se pasa del laboratorio al campo.",
+       "hl": 2
+      },
+      {
+       "say": "Y ahora sí, ¡comencemos!",
+       "scene": {
+        "t": "chap",
+        "i": 0,
+        "go": 1
        }
       },
       {
@@ -774,6 +798,13 @@
      "title": "Polímeros y control de movilidad",
      "comp": "Métodos químicos",
      "cues": [
+      {
+       "say": "Módulo dos, Métodos químicos y de gas. Ya sabemos por qué queda petróleo; ahora vemos las herramientas para ir a buscarlo.",
+       "scene": {
+        "t": "chap",
+        "i": 1
+       }
+      },
       {
        "say": "Un polímero se disuelve en el agua inyectada y la vuelve más viscosa. Con eso baja la razón de movilidad y mejora el barrido, tanto areal como vertical. Además, al retenerse en la roca, reduce la permeabilidad efectiva al agua. Lo que un polímero no hace es cambiar el petróleo residual: actúa sobre el barrido, no sobre el desplazamiento a escala de poro.",
        "scene": {
@@ -1437,6 +1468,13 @@
      "title": "Métodos térmicos: vapor y combustión",
      "comp": "Gas y térmica",
      "cues": [
+      {
+       "say": "Módulo tres, Térmicos, screening y piloto. Con las herramientas a la vista, falta lo más importante: elegir bien y probar antes de escalar.",
+       "scene": {
+        "t": "chap",
+        "i": 2
+       }
+      },
       {
        "say": "En los petróleos pesados, la viscosidad cae mucho al calentar. Por eso el calor es el método principal para crudos viscosos: baja la viscosidad y, con ella, la razón de movilidad, y el petróleo fluye hacia el pozo.",
        "scene": {

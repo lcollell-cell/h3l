@@ -617,3 +617,37 @@ body.game .gtop select{width:auto;flex:none;min-width:64px}
 .stage[data-k=wel] .big button{width:6.4cqw;height:6.4cqw;box-shadow:0 0 0 .7cqw rgba(95,209,164,.25)}
 .stage[data-k=dg] .cc span{font-size:1.7cqw}
 @media(prefers-reduced-motion:reduce){.dg .st{transition:none}}
+
+/* capítulos: agenda del curso y portada de cada módulo */
+.scene.chap{position:relative;overflow:hidden;background:radial-gradient(70% 90% at 85% 40%,rgba(95,209,164,.10),transparent 70%)}
+.chap .ck{font:700 1.45cqw/1 var(--font);letter-spacing:.14em;text-transform:uppercase;color:var(--green2);display:flex;align-items:center;gap:1.2cqw;margin-bottom:1.6cqw}
+.chap .ck span{width:3.2cqw;height:.22cqw;background:var(--green2);border-radius:9px;display:block}
+.chap.ag{padding:5cqw 5.4cqw 9cqw}
+.chap.ag h4{font:700 3.6cqw/1.12 var(--font);margin:0 0 2.6cqw;letter-spacing:-.01em}
+.chap .ags{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1.5cqw}
+.chap .ags li{display:flex;align-items:center;gap:2.4cqw;padding:1.5cqw 2.2cqw;border:1px solid rgba(255,255,255,.14);border-radius:1.4cqw;background:rgba(255,255,255,.04);transition:all .45s ease;animation:chUp .6s ease both}
+.chap .ags li.hl{border-color:var(--green2);background:linear-gradient(90deg,rgba(95,209,164,.2),rgba(95,209,164,.05));box-shadow:0 .8cqw 2.6cqw rgba(0,0,0,.28);transform:translateX(.8cqw)}
+.chap .ags li:not(.hl){opacity:.62}
+.chap .ags em{font:800 4.4cqw/1 var(--font);font-style:normal;color:transparent;-webkit-text-stroke:.14cqw var(--green2);min-width:6.4cqw}
+.chap .ags li.hl em{color:var(--green2);-webkit-text-stroke:0}
+.chap .ags b{display:block;font:700 2.5cqw/1.2 var(--font);margin-bottom:.5cqw}
+.chap .ags span{font:500 1.5cqw/1 var(--font);color:rgba(255,255,255,.65)}
+.chap.mc{padding:0;flex-direction:row;align-items:center}
+.chap .cl li{background:none!important;border:0!important;padding:0!important;box-shadow:none!important;min-height:0!important}
+.chap .cl i{background:none!important;width:auto!important;height:auto!important;border-radius:0!important;box-shadow:none!important;display:inline!important}
+.chap .cn{position:absolute;right:3cqw;top:50%;transform:translateY(-52%);font:800 31cqw/1 var(--font);color:transparent;-webkit-text-stroke:.2cqw rgba(95,209,164,.55);opacity:.55;animation:chNum .9s ease both;pointer-events:none}
+.chap .cm{position:relative;z-index:1;padding:3cqw 5.4cqw 15cqw;max-width:72%}
+.chap.mc h4{font:700 4.5cqw/1.12 var(--font);margin:0 0 2.2cqw;letter-spacing:-.01em;padding-bottom:1.6cqw;position:relative;animation:chUp .6s .15s ease both}
+.chap.mc h4::after{content:"";position:absolute;left:0;bottom:0;width:9cqw;height:.45cqw;border-radius:9px;background:var(--green2)}
+.chap .cl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1cqw;animation:chUp .6s .3s ease both}
+.chap .cl li{font:500 1.9cqw/1.3 var(--font);color:rgba(255,255,255,.88);display:flex;gap:1.4cqw;align-items:baseline}
+.chap .cl i{font:700 1.5cqw/1 var(--font);font-style:normal;color:var(--green2);min-width:3.6cqw}
+.chap .cg{margin-top:2.6cqw;display:inline-block;font:800 3.4cqw/1 var(--font);color:#06241a;background:linear-gradient(90deg,#5fd1a4,#a7f0d3);padding:1.2cqw 2.6cqw;border-radius:99px;box-shadow:0 0 0 .6cqw rgba(95,209,164,.22),0 1cqw 3cqw rgba(0,0,0,.3);animation:chPop .7s .6s cubic-bezier(.2,1.4,.4,1) both}
+.chap .rail{position:absolute;left:5.4cqw;right:5.4cqw;bottom:10.5cqw;display:flex;gap:.8cqw}
+.chap .rail b{flex:1;height:.4cqw;border-radius:9px;background:rgba(255,255,255,.16)}
+.chap .rail b.d{background:rgba(95,209,164,.55)}
+.chap .rail b.c{background:var(--green2);box-shadow:0 0 1.4cqw rgba(95,209,164,.7)}
+@keyframes chUp{from{opacity:0;transform:translateY(1.4cqw)}to{opacity:1;transform:none}}
+@keyframes chNum{from{opacity:0;transform:translate(3cqw,-52%)}to{opacity:.55;transform:translateY(-52%)}}
+@keyframes chPop{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.chap *{animation:none!important;transition:none!important}}

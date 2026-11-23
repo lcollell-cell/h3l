@@ -18,7 +18,7 @@ st_caso:'Título del caso|Case title|Titre du cas|Título do caso',st_S:'Situaci
 cname:'Competencia|Competency|Compétence|Competência',clessons:'Lecciones (ids separados por coma)|Lessons (comma-separated ids)|Leçons (ids séparés par des virgules)|Lições (ids separados por vírgula)',
 lid:'Identificador (no se cambia)|Identifier (fixed)|Identifiant (fixe)|Identificador (fixo)',lcomp:'Competencia|Competency|Compétence|Competência',
 cues:'Bloques de narración|Narration blocks|Blocs de narration|Blocos de narração',cue:'Bloque|Block|Bloc|Bloco',say:'Narración (lo que se escucha)|Narration (spoken text)|Narration (texte lu)|Narração (texto falado)',words:'palabras|words|mots|palavras',
-scene:'Pantalla|Screen|Écran|Tela',s_none:'Sin pantalla nueva|No new screen|Pas de nouvel écran|Sem nova tela',s_bul:'Viñetas|Bullets|Puces|Tópicos',s_tbl:'Tabla|Table|Tableau|Tabela',s_fm:'Fórmula|Formula|Formule|Fórmula',s_viz:'Laboratorio / diagrama|Lab / diagram|Laboratoire / schéma|Laboratório / diagrama',s_dg:'Diagrama|Diagram|Schéma|Diagrama',s_wel:'Bienvenida|Welcome|Bienvenue|Boas-vindas',s_case:'Caso real|Real case|Cas réel|Caso real',
+scene:'Pantalla|Screen|Écran|Tela',s_none:'Sin pantalla nueva|No new screen|Pas de nouvel écran|Sem nova tela',s_bul:'Viñetas|Bullets|Puces|Tópicos',s_tbl:'Tabla|Table|Tableau|Tabela',s_fm:'Fórmula|Formula|Formule|Fórmula',s_viz:'Laboratorio / diagrama|Lab / diagram|Laboratoire / schéma|Laboratório / diagrama',s_dg:'Diagrama|Diagram|Schéma|Diagrama',s_chap:'Portada de módulo|Module cover|Page de module|Capa de módulo',s_wel:'Bienvenida|Welcome|Bienvenue|Boas-vindas',s_case:'Caso real|Real case|Cas réel|Caso real',
 k:'Etiqueta superior|Top label|Étiquette|Rótulo',hh:'Título de la pantalla|Screen title|Titre de l’écran|Título da tela',items:'Viñetas (una por línea)|Bullets (one per line)|Puces (une par ligne)|Tópicos (um por linha)',
 f:'Fórmula (texto)|Formula (text)|Formule (texte)|Fórmula (texto)',n:'Nota|Note|Note|Nota',w:'Laboratorio|Lab|Laboratoire|Laboratório',vp:'Parámetros (JSON)|Parameters (JSON)|Paramètres (JSON)|Parâmetros (JSON)',
 prev:'Vista previa|Preview|Aperçu|Pré-visualização',src:'Fuente verificable|Verifiable source|Source vérifiable|Fonte verificável',
@@ -74,7 +74,7 @@ function sceneForm(p){var s=get(S.w,p);if(!s)return '';var h='';
   if(s.t==='case')h=fld(tt('hh'),p+'.h')+fld(tt('src'),p+'.src')+['S','T','A','R'].map(function(k){return fld(tt('st_'+k),p+'.'+k,{rows:2})}).join('');
   return '<div class="sc">'+h+'</div>'}
 function cueForm(lp,ci){var p=lp+'.cues.'+ci,c=get(S.w,p),n=HV.words(c.say),st=c.scene?c.scene.t:'';
-  var opts=[['',tt('s_none')]].concat(HV.SCENES.concat(st==='dg'||st==='wel'?[st]:[]).map(function(t){return [t,tt('s_'+t)]}));
+  var opts=[['',tt('s_none')]].concat(HV.SCENES.concat(st==='dg'||st==='wel'||st==='chap'?[st]:[]).map(function(t){return [t,tt('s_'+t)]}));
   var key=p;return '<details class="cue" data-key="'+key+'"'+(S.open[key]?' open':'')+'><summary><b>'+tt('cue')+' '+(ci+1)+'</b> · '+esc(HV.short(c.say,70))+(st?' <em>['+tt('s_'+st)+']</em>':'')+(c.q?' <em>[?]</em>':'')+'</summary>'+
    '<div class="tools">'+btn('up',lp+'.cues',ci,'▲')+btn('dn',lp+'.cues',ci,'▼')+btn('del',lp+'.cues',ci,tt('del'),'dg')+'</div>'+
    fld(tt('say')+' ('+n+' '+tt('words')+', ≈'+Math.round(Math.max(3.2,n/2.4+.8))+' s)',p+'.say',{rows:4})+
