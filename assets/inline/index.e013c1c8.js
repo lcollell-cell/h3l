@@ -22,6 +22,7 @@ const SP=.25; /* separación extra entre una nota del listado y la siguiente (el
 const SD=4*SP;
 const AUD_END=11.0+GAP+SD;
 const HOLD=-1.05+GAP+SD, HERO_AT=6.0+GAP+SD; /* sin espera: la cortina abre en el acento de los 6 s del sonido original y las dos últimas notas (6 s y 7,05 s) suenan dentro del Hero; HOLD<0 adelanta el Hero respecto del sonido */
+const SILENT=.7; /* sin sonido la intro corre a 0,7x (≈ 43 % más lenta) para poder leer cada servicio sin apuro; con sonido sigue el reloj del audio */
 const HK=1.35; /* el Hero corre 1,35x más rápido para quedar completo en el pico del acorde final (7,75 s del sonido) */
 /* reloj visual: cada nota-pop del audio (1,25 · 2,70 · 4,15 · 5,60 · 7,05 s) confirma su servicio justo en su golpe; luego el listado completo queda fijo hasta el acento que abre el Hero */
 const KN=[[0,0],[1.25,1.25],[2.2+SP,2.2],[3.15+2*SP,3.15],[4.1+3*SP,4.1],[5.05+4*SP,5.05],[HERO_AT,7.05]];
@@ -591,7 +592,7 @@ function start(){
   let last=performance.now();
   function frame(now){
     const dt=Math.min(.1,(now-last)/1000); last=now;
-    if(!frozen&&!holding){ t+=dt;
+    if(!frozen&&!holding){ t+=dt*((soundOn&&!blocked&&!snd.paused)?1:SILENT);
       /* las tildes y escenas se enganchan al reloj del audio para que caigan justo en cada nota */
       if(soundOn&&!blocked&&!snd.paused&&t<AUD_END){ const ct=snd.currentTime; if(ct!==aLast){ aLast=ct; aAt=now; } const est=aLast+Math.min(.25,(now-aAt)/1000), d=est-t; if(Math.abs(d)<.6) t+=d*.12; } }
     if(!frozen||needsPaint){ render(t); needsPaint=false; }
