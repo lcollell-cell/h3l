@@ -1305,7 +1305,7 @@ function enviarContacto(){
   const mensaje=document.getElementById('ctc-mensaje')?.value?.trim();
   const selv=id=>{const el=document.getElementById(id);return el&&el.value?el.value:'';};
   const selt=id=>{const el=document.getElementById(id);return el&&el.value?el.options[el.selectedIndex].text:'';};
-  const sector=selv('ctc-sector'),activo=selv('ctc-activo'),urgencia=selv('ctc-urgencia');
+  const sector=selv('ctc-sector'),activo=selv('ctc-activo'),urgencia=selv('ctc-urgencia'),servicio=selv('ctc-servicio');
   const trampa=document.getElementById('ctc-web')?.value||'';
   const status=document.getElementById('ctc-status');
   const btn=document.querySelector('button[onclick="enviarContacto()"]');
@@ -1315,7 +1315,7 @@ function enviarContacto(){
   /* respaldo: abre el programa de correo con el mensaje armado (sin Worker, p. ej. en la copia de prueba de GitHub Pages, o si el envío falla) */
   const viaMailto=()=>{
     const subject=encodeURIComponent(W('w_mailsub')+' '+nombre+' '+apellido);
-    const body=encodeURIComponent(W('w_mn')+': '+nombre+' '+apellido+'\n'+W('w_me')+': '+email+'\n'+W('w_mc')+': '+empresa+'\n'+[['w_ms','ctc-sector'],['w_mt','ctc-activo'],['w_mu','ctc-urgencia']].map(p=>selt(p[1])?W(p[0])+': '+selt(p[1])+'\n':'').join('')+'\n'+mensaje);
+    const body=encodeURIComponent(W('w_mn')+': '+nombre+' '+apellido+'\n'+W('w_me')+': '+email+'\n'+W('w_mc')+': '+empresa+'\n'+[['w_ms','ctc-sector'],['w_mt','ctc-activo'],['w_mu','ctc-urgencia'],['w_mv','ctc-servicio']].map(p=>selt(p[1])?W(p[0])+': '+selt(p[1])+'\n':'').join('')+'\n'+mensaje);
     window.location.href='mailto:info@h3lglobalenergy.com?subject='+subject+'&body='+body; /* Safari bloquea window.open para mailto */
     if(status)status.innerHTML='<span style="color:var(--success)">'+W('w_opening')+'</span>';
     setTimeout(()=>{if(status)status.innerHTML='';},3000);
@@ -1327,13 +1327,14 @@ function enviarContacto(){
   const ctl=typeof AbortController==='function'?new AbortController():null;
   const to=ctl?setTimeout(()=>ctl.abort(),12000):0;
   fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'omit',signal:ctl?ctl.signal:undefined,
-    body:JSON.stringify({nombre,apellido,email,empresa,sector,activo,urgencia,mensaje,lang,hp:trampa})})
+    body:JSON.stringify({nombre,apellido,email,empresa,sector,activo,urgencia,servicio,mensaje,lang,hp:trampa})})
     .then(r=>r.json().then(j=>({st:r.status,ok:!!(j&&j.ok)}),()=>({st:r.status,ok:false})))
     .then(res=>{
       clearTimeout(to);if(btn)btn.disabled=false;
       if(res.ok){
         if(status)status.innerHTML='<span style="color:var(--success)">'+W('w_sent')+'</span>';
         ['ctc-nombre','ctc-apellido','ctc-email','ctc-empresa','ctc-sector','ctc-activo','ctc-urgencia','ctc-mensaje'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+        const sv=document.getElementById('ctc-servicio');if(sv)sv.value='w_v0';
       }else if(res.st===429){
         if(status)status.innerHTML='<span style="color:var(--danger)">'+W('w_toomany')+'</span>';
       }else viaMailto();
