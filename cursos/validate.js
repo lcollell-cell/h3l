@@ -2,6 +2,8 @@
 (function(){'use strict';var HV=window.HV={};
 var SCENES=['bul','tbl','fm','viz','case'];
 HV.SCENES=SCENES;
+/* pantallas que genera el equipo (no se crean desde el editor del tutor, pero se aceptan y se conservan) */
+var KEEP=SCENES.concat(['dg','wel']);
 function isS(x){return typeof x==='string'&&x.trim().length>0}
 function words(s){return String(s||'').trim().split(/\s+/).filter(Boolean).length}
 HV.widgets=function(){var W=window.HW||{};return Object.keys(W).filter(function(k){return typeof W[k]==='function'&&k!=='build'}).sort()};
@@ -36,7 +38,8 @@ HV.validate=function(c,orig){var E=[],W=[];function e(p,m){E.push({p:p,m:m})}fun
         if(q.lab&&!(q.scene&&q.scene.t==='viz'))w(cp+'.lab','labviz')});
       if(tw<60)w(lp,'short');if(tw>260)w(lp,'longl')}) });
   function qcheck(q,p){if(!isS(q.q))e(p+'.q','req');if(!Array.isArray(q.o)||q.o.length!==4||!q.o.every(isS))e(p+'.o','four');if(!(Number.isInteger(q.a)&&q.a>=0&&q.a<4))e(p+'.a','ans');if(!isS(q.e))e(p+'.e','req')}
-  function scene(s,p){if(SCENES.indexOf(s.t)<0){e(p+'.t','type');return}
+  function scene(s,p){if(KEEP.indexOf(s.t)<0){e(p+'.t','type');return}
+    if(s.t==='dg'){var HD=window.HD;if(!isS(s.d)||(HD&&HD.defs&&!HD.defs[s.d]))e(p+'.d','diag')}
     if(s.t==='bul'){if(!isS(s.k))e(p+'.k','req');if(!Array.isArray(s.items)||!s.items.length||!s.items.every(isS))e(p+'.items','req')}
     if(s.t==='tbl'){if(!Array.isArray(s.cols)||!s.cols.length)e(p+'.cols','req');else if(!Array.isArray(s.rows)||!s.rows.length||!s.rows.every(function(r){return Array.isArray(r)&&r.length===s.cols.length}))e(p+'.rows','rows')}
     if(s.t==='fm'){if(!isS(s.f))e(p+'.f','req')}

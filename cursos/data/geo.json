@@ -71,13 +71,15 @@
    {
     "say": "Bienvenido a Geociencias: sistema petrolero y caracterización estática, de H3L Global Energy. Durante este curso vas a recorrer, paso a paso, el camino que va desde una cuenca sedimentaria hasta un modelo estático, es decir, un modelo tridimensional de la roca y de sus propiedades, que sostiene decisiones de inversión.",
     "scene": {
-     "t": "bin"
-    },
-    "hl": -1
+     "t": "wel"
+    }
    },
    {
     "say": "El curso responde tres preguntas que agregan valor a cualquier equipo técnico. La primera: ¿existen realmente todos los elementos y procesos para que haya hidrocarburos acumulados? La segunda: ¿qué parte de la roca es neta y cuánto petróleo hay en sitio? Y la tercera: ¿qué tan incierto es ese volumen y qué dato lo reduciría?",
-    "hl": 2
+    "hl": 2,
+    "scene": {
+     "t": "bin"
+    }
    },
    {
     "say": "Para responderlas, el curso se organiza en tres módulos de tres lecciones cada uno. El primer módulo trata el sistema petrolero: sus elementos y procesos, la geoquímica de la roca generadora y la historia de enterramiento y madurez térmica."
@@ -172,28 +174,65 @@
        }
       },
       {
-       "say": "Los elementos son cuatro roles de roca. La roca generadora, que contiene materia orgánica y, con enterramiento suficiente, genera hidrocarburos. La roca reservorio, con porosidad y permeabilidad para almacenarlos y dejarlos fluir."
+       "say": "Los elementos son cuatro roles de roca. La roca generadora, que contiene materia orgánica y, con enterramiento suficiente, genera hidrocarburos. La roca reservorio, con porosidad y permeabilidad para almacenarlos y dejarlos fluir.",
+       "hl": 1,
+       "scene": {
+        "t": "dg",
+        "d": "sp",
+        "k": "Sistema petrolero",
+        "h": "Elementos y procesos, en orden"
+       },
+       "hs": [
+        0,
+        1
+       ]
       },
       {
-       "say": "La roca sello, que los retiene e impide que escapen hacia arriba. Y la sobrecarga, la columna de rocas que cubre a la generadora: su peso la entierra hasta la madurez y, además, protege la acumulación. Una misma formación puede cumplir dos roles. Vaca Muerta es generadora y también reservorio."
+       "say": "La roca sello, que los retiene e impide que escapen hacia arriba. Y la sobrecarga, la columna de rocas que cubre a la generadora: su peso la entierra hasta la madurez y, además, protege la acumulación. Una misma formación puede cumplir dos roles. Vaca Muerta es generadora y también reservorio.",
+       "hl": 3,
+       "hs": [
+        2,
+        3
+       ]
       },
       {
-       "say": "Los procesos son los que ponen en juego esos elementos a lo largo del tiempo. Según Magoon y Dow, son la formación de la trampa y la generación, migración y acumulación de los hidrocarburos."
+       "say": "Los procesos son los que ponen en juego esos elementos a lo largo del tiempo. Según Magoon y Dow, son la formación de la trampa y la generación, migración y acumulación de los hidrocarburos.",
+       "hl": 3
       },
       {
-       "say": "A ellos se suma el tiempo de preservación: lo que ocurre después de la acumulación, cuando el petróleo puede conservarse o, por el contrario, degradarse, escapar o ser alterado por levantamiento y erosión. La trampa es la geometría que retiene el hidrocarburo, estructural, estratigráfica o combinada, y su formación es un proceso con su propia fecha."
+       "say": "A ellos se suma el tiempo de preservación: lo que ocurre después de la acumulación, cuando el petróleo puede conservarse o, por el contrario, degradarse, escapar o ser alterado por levantamiento y erosión. La trampa es la geometría que retiene el hidrocarburo, estructural, estratigráfica o combinada, y su formación es un proceso con su propia fecha.",
+       "hl": 4
       },
       {
-       "say": "Muchos textos la cuentan como un quinto elemento; es una convención de enseñanza y lo importante es no perder de vista cuándo se forma. La generación ocurre cuando la roca generadora madura por temperatura y tiempo. La migración tiene dos etapas: la primaria, o expulsión, desde la generadora hacia las rocas vecinas, y la secundaria, a lo largo de rocas transportadoras y fallas hasta la trampa."
+       "say": "Muchos textos la cuentan como un quinto elemento; es una convención de enseñanza y lo importante es no perder de vista cuándo se forma. La generación ocurre cuando la roca generadora madura por temperatura y tiempo. La migración tiene dos etapas: la primaria, o expulsión, desde la generadora hacia las rocas vecinas, y la secundaria, a lo largo de rocas transportadoras y fallas hasta la trampa.",
+       "hl": 6,
+       "hs": [
+        5,
+        6
+       ]
       },
       {
-       "say": "La acumulación es el llenado de la trampa, y exige que el sello retenga. Cada uno de estos procesos puede fallar, y alcanza con que falle uno para que no haya campo. Ahora, el aspecto que más proyectos arruina: el orden en el tiempo, la sincronía. Para que haya acumulación, la trampa debe existir antes de que termine la migración, o formarse mientras ocurre."
+       "say": "La acumulación es el llenado de la trampa, y exige que el sello retenga. Cada uno de estos procesos puede fallar, y alcanza con que falle uno para que no haya campo. Ahora, el aspecto que más proyectos arruina: el orden en el tiempo, la sincronía. Para que haya acumulación, la trampa debe existir antes de que termine la migración, o formarse mientras ocurre.",
+       "hl": 7
       },
       {
-       "say": "Si la trampa se forma después, los hidrocarburos ya migraron y se dispersaron o escaparon. Y si el sello se rompe más tarde, por levantamiento o por fallamiento, lo acumulado se pierde. Por eso un mapa de estructuras bonito no alcanza: hay que preguntar cuándo se formó cada cosa."
+       "say": "Si la trampa se forma después, los hidrocarburos ya migraron y se dispersaron o escaparon. Y si el sello se rompe más tarde, por levantamiento o por fallamiento, lo acumulado se pierde. Por eso un mapa de estructuras bonito no alcanza: hay que preguntar cuándo se formó cada cosa.",
+       "hl": 8
       },
       {
-       "say": "La herramienta estándar para ver esto es el diagrama de eventos, o events chart. Es un gráfico con el tiempo geológico en el eje horizontal y, en filas, las unidades de roca generadora, reservorio, sello y sobrecarga, los procesos de formación de la trampa y de generación, migración y acumulación, y el tiempo de preservación."
+       "say": "La herramienta estándar para ver esto es el diagrama de eventos, o events chart. Es un gráfico con el tiempo geológico en el eje horizontal y, en filas, las unidades de roca generadora, reservorio, sello y sobrecarga, los procesos de formación de la trampa y de generación, migración y acumulación, y el tiempo de preservación.",
+       "hl": 2,
+       "scene": {
+        "t": "dg",
+        "d": "ev",
+        "k": "Diagrama de eventos",
+        "h": "Eventos en el tiempo geológico"
+       },
+       "hs": [
+        0,
+        1,
+        2
+       ]
       },
       {
        "say": "Sobre ese diagrama se marca el momento crítico: el instante que mejor representa la generación, la migración y la acumulación de la mayor parte de los hidrocarburos del sistema. Los mapas y las secciones del sistema se dibujan a ese momento, porque es el que explica dónde está el petróleo.",
@@ -229,22 +268,54 @@
        "say": "Un sistema petrolero se nombra con la roca generadora y el reservorio principal, seguidos de un símbolo de certeza. El signo de admiración indica que el petróleo está correlacionado con su generadora; el punto, que hay evidencia geoquímica; y el signo de interrogación, que la relación es especulativa."
       },
       {
-       "say": "En un sistema no convencional como el de Vaca Muerta, donde generadora y reservorio coinciden, el nombre repite la formación. Con estos conceptos se evalúa el riesgo. La probabilidad de éxito geológico de un prospecto se aproxima como el producto de las probabilidades de cada componente, por ejemplo carga, reservorio, sello y trampa, siempre que sean razonablemente independientes."
+       "say": "En un sistema no convencional como el de Vaca Muerta, donde generadora y reservorio coinciden, el nombre repite la formación. Con estos conceptos se evalúa el riesgo. La probabilidad de éxito geológico de un prospecto se aproxima como el producto de las probabilidades de cada componente, por ejemplo carga, reservorio, sello y trampa, siempre que sean razonablemente independientes.",
+       "hl": -1,
+       "scene": {
+        "t": "dg",
+        "d": "risk",
+        "k": "Riesgo geológico",
+        "h": "Probabilidad de éxito"
+       }
       },
       {
-       "say": "Si la carga tiene ochenta por ciento, el reservorio setenta, el sello noventa y la trampa sesenta, la probabilidad conjunta es de treinta por ciento. Fijate que cuatro componentes bastante buenos dan un resultado modesto. Por eso el primer trabajo del geólogo es identificar el elemento más débil."
+       "say": "Si la carga tiene ochenta por ciento, el reservorio setenta, el sello noventa y la trampa sesenta, la probabilidad conjunta es de treinta por ciento. Fijate que cuatro componentes bastante buenos dan un resultado modesto. Por eso el primer trabajo del geólogo es identificar el elemento más débil.",
+       "hl": 4,
+       "hs": [
+        0,
+        1,
+        2,
+        3,
+        4
+       ]
       },
       {
-       "say": "La cuenca Neuquina es un buen ejemplo. Tiene más de una generadora: la formación Los Molles, del Jurásico, y Vaca Muerta, del Tithoniano al Valanginiano temprano, que es la principal."
+       "say": "La cuenca Neuquina es un buen ejemplo. Tiene más de una generadora: la formación Los Molles, del Jurásico, y Vaca Muerta, del Tithoniano al Valanginiano temprano, que es la principal.",
+       "hl": 0,
+       "scene": {
+        "t": "dg",
+        "d": "neu",
+        "k": "Cuenca Neuquina",
+        "h": "Convencional y no convencional"
+       },
+       "hs": [
+        0
+       ]
       },
       {
-       "say": "Tiene reservorios convencionales, como las formaciones Tordillo, Quintuco y Mulichinco, y sellos de lutitas y evaporitas. Y tiene, en Vaca Muerta, un sistema no convencional en el que el petróleo prácticamente no migró: quedó retenido en la propia roca madre."
+       "say": "Tiene reservorios convencionales, como las formaciones Tordillo, Quintuco y Mulichinco, y sellos de lutitas y evaporitas. Y tiene, en Vaca Muerta, un sistema no convencional en el que el petróleo prácticamente no migró: quedó retenido en la propia roca madre.",
+       "hl": 2,
+       "hs": [
+        1,
+        2
+       ]
       },
       {
-       "say": "En un sistema no convencional la trampa pierde peso. El hidrocarburo no está atrapado por una geometría, sino retenido por una roca de grano fino y muy baja permeabilidad. Ganan importancia la riqueza orgánica, la madurez, el espesor, la presión de poro y las propiedades mecánicas: en una palabra, la calidad de la roca y la presión."
+       "say": "En un sistema no convencional la trampa pierde peso. El hidrocarburo no está atrapado por una geometría, sino retenido por una roca de grano fino y muy baja permeabilidad. Ganan importancia la riqueza orgánica, la madurez, el espesor, la presión de poro y las propiedades mecánicas: en una palabra, la calidad de la roca y la presión.",
+       "hl": 2
       },
       {
-       "say": "Se habla de acumulaciones continuas, que se extienden por grandes áreas, con zonas de mejor calidad que se denominan sweet spots."
+       "say": "Se habla de acumulaciones continuas, que se extienden por grandes áreas, con zonas de mejor calidad que se denominan sweet spots.",
+       "hl": 3
       },
       {
        "say": "Laboratorio. Vas a mover el momento geológico y ver qué elementos y procesos están activos. Primero dejá el escenario base, en el que la trampa se forma antes de la migración, y observá que el indicador de sincronía marca acumulación.",
@@ -301,22 +372,51 @@
        }
       },
       {
-       "say": "La materia orgánica que se preserva en un sedimento se divide en bitumen, que es soluble en solventes orgánicos, y querógeno, que es insoluble. El querógeno es la fuente de la mayor parte de los hidrocarburos que se generan. Su composición se describe con la relación entre hidrógeno y carbono, y entre oxígeno y carbono, en el diagrama de van Krevelen."
+       "say": "La materia orgánica que se preserva en un sedimento se divide en bitumen, que es soluble en solventes orgánicos, y querógeno, que es insoluble. El querógeno es la fuente de la mayor parte de los hidrocarburos que se generan. Su composición se describe con la relación entre hidrógeno y carbono, y entre oxígeno y carbono, en el diagrama de van Krevelen.",
+       "hl": 0,
+       "scene": {
+        "t": "dg",
+        "d": "kg",
+        "k": "Materia orgánica",
+        "h": "Bitumen, querógeno y sus tipos"
+       }
       },
       {
-       "say": "Se distinguen cuatro tipos. El tipo uno proviene de algas lacustres, es muy rico en hidrógeno y genera petróleo. El tipo dos es de origen marino, mezcla de algas y bacterias, y genera petróleo y, a mayor madurez, gas; es el tipo predominante en Vaca Muerta."
+       "say": "Se distinguen cuatro tipos. El tipo uno proviene de algas lacustres, es muy rico en hidrógeno y genera petróleo. El tipo dos es de origen marino, mezcla de algas y bacterias, y genera petróleo y, a mayor madurez, gas; es el tipo predominante en Vaca Muerta.",
+       "hl": 1,
+       "hs": [
+        1
+       ]
       },
       {
-       "say": "El tipo tres viene de plantas terrestres, es más pobre en hidrógeno y genera sobre todo gas. Y el tipo cuatro es material inerte, sin potencial de generación."
+       "say": "El tipo tres viene de plantas terrestres, es más pobre en hidrógeno y genera sobre todo gas. Y el tipo cuatro es material inerte, sin potencial de generación.",
+       "hl": 2
       },
       {
-       "say": "La riqueza se mide con el carbono orgánico total, o TOC, en porcentaje en peso de la roca. Como referencia clásica, de Peters y Cassa, de 1994: por debajo de medio por ciento la roca es pobre; de medio a uno, regular; de uno a dos, buena; de dos a cuatro, muy buena; y por encima de cuatro, excelente."
+       "say": "La riqueza se mide con el carbono orgánico total, o TOC, en porcentaje en peso de la roca. Como referencia clásica, de Peters y Cassa, de 1994: por debajo de medio por ciento la roca es pobre; de medio a uno, regular; de uno a dos, buena; de dos a cuatro, muy buena; y por encima de cuatro, excelente.",
+       "hl": 0,
+       "scene": {
+        "t": "dg",
+        "d": "toc",
+        "k": "Riqueza y pirólisis",
+        "h": "TOC y Rock-Eval"
+       }
       },
       {
-       "say": "En Vaca Muerta, los valores actuales publicados promedian entre aproximadamente uno y ocho por ciento, según la zona y el intervalo. La pirólisis Rock-Eval calienta la muestra en una atmósfera inerte y mide cuatro cosas. S1, los hidrocarburos libres que la roca ya contiene, en miligramos por gramo de roca."
+       "say": "En Vaca Muerta, los valores actuales publicados promedian entre aproximadamente uno y ocho por ciento, según la zona y el intervalo. La pirólisis Rock-Eval calienta la muestra en una atmósfera inerte y mide cuatro cosas. S1, los hidrocarburos libres que la roca ya contiene, en miligramos por gramo de roca.",
+       "hl": 2,
+       "hs": [
+        1,
+        2
+       ]
       },
       {
-       "say": "S2, los hidrocarburos que genera el querógeno al pirolizarse: es el potencial que le queda a la roca. S3, el dióxido de carbono liberado, asociado al oxígeno del querógeno. Y Tmax, la temperatura a la que S2 alcanza su máximo, que sirve como indicador de madurez. Con ellos se calculan tres índices."
+       "say": "S2, los hidrocarburos que genera el querógeno al pirolizarse: es el potencial que le queda a la roca. S3, el dióxido de carbono liberado, asociado al oxígeno del querógeno. Y Tmax, la temperatura a la que S2 alcanza su máximo, que sirve como indicador de madurez. Con ellos se calculan tres índices.",
+       "hl": 4,
+       "hs": [
+        3,
+        4
+       ]
       },
       {
        "say": "El índice de hidrógeno es S2 dividido por TOC, por cien. El índice de oxígeno es S3 dividido por TOC, por cien. Y el índice de producción es S1 dividido por la suma de S1 y S2.",
@@ -359,25 +459,27 @@
        }
       },
       {
-       "say": "Con esos índices se clasifica el querógeno. Como orientación: un índice de hidrógeno superior a seiscientos indica tipo uno; entre trescientos y seiscientos, tipo dos; entre doscientos y trescientos, una mezcla de tipo dos y tres; y entre cincuenta y doscientos, tipo tres."
+       "say": "Con esos índices se clasifica el querógeno. Como orientación: un índice de hidrógeno superior a seiscientos indica tipo uno; entre trescientos y seiscientos, tipo dos; entre doscientos y trescientos, una mezcla de tipo dos y tres; y entre cincuenta y doscientos, tipo tres.",
+       "hl": 3,
+       "scene": {
+        "t": "dg",
+        "d": "hi",
+        "k": "Tipo de querógeno",
+        "h": "Índice de hidrógeno"
+       },
+       "hs": [
+        0,
+        1,
+        2,
+        3
+       ]
       },
       {
-       "say": "La Tmax depende del tipo de querógeno, pero como referencia: por debajo de unos 435 grados Celsius la roca es inmadura, entre 435 y 470 está en la ventana de petróleo, y por encima de 470 entra en la ventana de gas."
+       "say": "La Tmax depende del tipo de querógeno, pero como referencia: por debajo de unos 435 grados Celsius la roca es inmadura, entre 435 y 470 está en la ventana de petróleo, y por encima de 470 entra en la ventana de gas.",
+       "hl": 0
       },
       {
-       "say": "Veamos un ejemplo. Una muestra tiene un TOC de cuatro coma uno por ciento, un S1 de dos coma uno y un S2 de doce coma cuatro miligramos por gramo, con una Tmax de 441. El índice de hidrógeno es doce coma cuatro dividido cuatro coma uno, por cien: unos 302. Es querógeno de tipo dos, propenso a petróleo."
-      },
-      {
-       "say": "El índice de producción es dos coma uno dividido catorce coma cinco: cerca de cero coma catorce, un valor típico del comienzo de la ventana de petróleo. Y la Tmax de 441 coincide: la roca está al inicio de la generación."
-      },
-      {
-       "say": "La otra medida de madurez es la reflectancia de vitrinita, Ro, que se mide al microscopio sobre partículas de vitrinita pulidas, como el porcentaje de luz que reflejan. Como referencia: por debajo de 0,6 la roca es inmadura; entre 0,6 y 1,0 está en la ventana de petróleo; entre 1,0 y 1,3, en condensado y gas húmedo; y por encima de 1,3, en gas seco."
-      },
-      {
-       "say": "Son umbrales orientativos que varían con el tipo de querógeno y con la velocidad de calentamiento. Además, la vitrinita proviene de plantas terrestres, de modo que en rocas marinas hay poca, puede estar suprimida o ser retrabajada, y a veces se mide la reflectancia del bitumen sólido y se convierte."
-      },
-      {
-       "say": "Por eso la buena práctica es combinar Ro, Tmax e índices, y no apoyarse en uno solo. Un punto clave en rocas maduras: el TOC actual no es el TOC original. Al generar hidrocarburos, el querógeno pierde carbono e hidrógeno y baja el índice de hidrógeno.",
+       "say": "Veamos un ejemplo. Una muestra tiene un TOC de cuatro coma uno por ciento, un S1 de dos coma uno y un S2 de doce coma cuatro miligramos por gramo, con una Tmax de 441. El índice de hidrógeno es doce coma cuatro dividido cuatro coma uno, por cien: unos 302. Es querógeno de tipo dos, propenso a petróleo.",
        "scene": {
         "t": "tbl",
         "k": "Geoquímica de la roca generadora",
@@ -415,16 +517,57 @@
        }
       },
       {
-       "say": "Por eso una roca madura subestima su riqueza original, y conviene reconstruir el TOC original antes de interpretar tendencias regionales. En Vaca Muerta, los estudios publicados muestran un gradiente de madurez que va desde petróleo temprano en el este hasta gas seco en el oeste, acompañado por cambios en el índice de hidrógeno y en la porosidad asociada a la materia orgánica."
+       "say": "El índice de producción es dos coma uno dividido catorce coma cinco: cerca de cero coma catorce, un valor típico del comienzo de la ventana de petróleo. Y la Tmax de 441 coincide: la roca está al inicio de la generación.",
+       "scene": {
+        "t": "dg",
+        "d": "mat",
+        "k": "Madurez térmica",
+        "h": "Tmax y reflectancia de vitrinita"
+       },
+       "hl": 0
       },
       {
-       "say": "En un sistema no convencional importa no solo cuánto generó la roca, sino cuánto retuvo. S1 en relación con el TOC, el llamado índice de saturación de petróleo, se usa como indicador: cuando es alto, la roca contiene hidrocarburo libre en cantidad."
+       "say": "La otra medida de madurez es la reflectancia de vitrinita, Ro, que se mide al microscopio sobre partículas de vitrinita pulidas, como el porcentaje de luz que reflejan. Como referencia: por debajo de 0,6 la roca es inmadura; entre 0,6 y 1,0 está en la ventana de petróleo; entre 1,0 y 1,3, en condensado y gas húmedo; y por encima de 1,3, en gas seco.",
+       "hl": 1
       },
       {
-       "say": "Un valor superior a cien miligramos por gramo de TOC se suele tomar como umbral de interés, aunque es una regla empírica y no una garantía de producción. Vaca Muerta tiene además un patrón estratigráfico claro. El TOC máximo se concentra en la sección basal condensada y disminuye hacia arriba."
+       "say": "Son umbrales orientativos que varían con el tipo de querógeno y con la velocidad de calentamiento. Además, la vitrinita proviene de plantas terrestres, de modo que en rocas marinas hay poca, puede estar suprimida o ser retrabajada, y a veces se mide la reflectancia del bitumen sólido y se convierte."
       },
       {
-       "say": "Ese intervalo basal, asociado a una superficie de máxima inundación del Tithoniano temprano, es el que más interesa como objetivo, y lo vamos a retomar en el próximo módulo. Tres recomendaciones prácticas sobre la calidad del dato. Primero, muestreá con densidad suficiente y no solo en la zona de interés: las variaciones verticales de TOC son grandes."
+       "say": "Por eso la buena práctica es combinar Ro, Tmax e índices, y no apoyarse en uno solo. Un punto clave en rocas maduras: el TOC actual no es el TOC original. Al generar hidrocarburos, el querógeno pierde carbono e hidrógeno y baja el índice de hidrógeno.",
+       "hl": 2
+      },
+      {
+       "say": "Por eso una roca madura subestima su riqueza original, y conviene reconstruir el TOC original antes de interpretar tendencias regionales. En Vaca Muerta, los estudios publicados muestran un gradiente de madurez que va desde petróleo temprano en el este hasta gas seco en el oeste, acompañado por cambios en el índice de hidrógeno y en la porosidad asociada a la materia orgánica.",
+       "hl": 3,
+       "scene": {
+        "t": "dg",
+        "d": "mat",
+        "k": "Madurez térmica",
+        "h": "Vaca Muerta: gradiente de madurez"
+       }
+      },
+      {
+       "say": "En un sistema no convencional importa no solo cuánto generó la roca, sino cuánto retuvo. S1 en relación con el TOC, el llamado índice de saturación de petróleo, se usa como indicador: cuando es alto, la roca contiene hidrocarburo libre en cantidad.",
+       "hl": 0,
+       "scene": {
+        "t": "dg",
+        "d": "vmtoc",
+        "k": "Vaca Muerta",
+        "h": "Retención y perfil de TOC"
+       }
+      },
+      {
+       "say": "Un valor superior a cien miligramos por gramo de TOC se suele tomar como umbral de interés, aunque es una regla empírica y no una garantía de producción. Vaca Muerta tiene además un patrón estratigráfico claro. El TOC máximo se concentra en la sección basal condensada y disminuye hacia arriba.",
+       "hl": 1,
+       "hs": [
+        1,
+        1
+       ]
+      },
+      {
+       "say": "Ese intervalo basal, asociado a una superficie de máxima inundación del Tithoniano temprano, es el que más interesa como objetivo, y lo vamos a retomar en el próximo módulo. Tres recomendaciones prácticas sobre la calidad del dato. Primero, muestreá con densidad suficiente y no solo en la zona de interés: las variaciones verticales de TOC son grandes.",
+       "hl": 2
       },
       {
        "say": "Segundo, cuidado con la contaminación: el lodo con base aceite eleva S1 y puede enmascarar la señal, así que las muestras se lavan o se interpretan con cautela. Tercero, descartá la Tmax cuando S2 es muy bajo, por ejemplo por debajo de medio miligramo por gramo, porque el pico no es confiable."
@@ -477,19 +620,30 @@
        }
       },
       {
-       "say": "La curva de enterramiento es un gráfico de profundidad contra tiempo geológico. Se construye a partir de los espesores y las edades de las unidades estratigráficas, descompactándolas, es decir, devolviéndoles el espesor que tenían antes de que el peso de las capas superiores las comprimiera."
+       "say": "La curva de enterramiento es un gráfico de profundidad contra tiempo geológico. Se construye a partir de los espesores y las edades de las unidades estratigráficas, descompactándolas, es decir, devolviéndoles el espesor que tenían antes de que el peso de las capas superiores las comprimiera.",
+       "scene": {
+        "t": "dg",
+        "d": "bur",
+        "k": "Historia de enterramiento",
+        "h": "Profundidad, temperatura y tiempo"
+       },
+       "hl": 0
       },
       {
-       "say": "Cada formación tiene su curva. Si hubo períodos de levantamiento y erosión, la curva sube y hay que restaurar el espesor que se perdió, porque esa roca ya no está pero calentó a la generadora mientras estuvo encima."
+       "say": "Cada formación tiene su curva. Si hubo períodos de levantamiento y erosión, la curva sube y hay que restaurar el espesor que se perdió, porque esa roca ya no está pero calentó a la generadora mientras estuvo encima.",
+       "hl": 1
       },
       {
-       "say": "De la profundidad se pasa a la temperatura con el gradiente geotérmico. La temperatura a una profundidad dada es la temperatura de superficie más el gradiente por la profundidad. Con quince grados en superficie, un gradiente de treinta grados por kilómetro y tres kilómetros y medio de profundidad, se llega a ciento veinte grados."
+       "say": "De la profundidad se pasa a la temperatura con el gradiente geotérmico. La temperatura a una profundidad dada es la temperatura de superficie más el gradiente por la profundidad. Con quince grados en superficie, un gradiente de treinta grados por kilómetro y tres kilómetros y medio de profundidad, se llega a ciento veinte grados.",
+       "hl": 2
       },
       {
-       "say": "Un valor medio continental ronda entre veinticinco y treinta grados por kilómetro, pero varía mucho entre cuencas y también a lo largo del tiempo. Por eso los modelos serios no trabajan solo con el gradiente actual: reconstruyen el flujo de calor a través de la historia de la cuenca, que suele ser más alto durante las etapas de extensión."
+       "say": "Un valor medio continental ronda entre veinticinco y treinta grados por kilómetro, pero varía mucho entre cuencas y también a lo largo del tiempo. Por eso los modelos serios no trabajan solo con el gradiente actual: reconstruyen el flujo de calor a través de la historia de la cuenca, que suele ser más alto durante las etapas de extensión.",
+       "hl": 2
       },
       {
-       "say": "Ahora, el tiempo. Las reacciones químicas que generan hidrocarburos se aceleran con la temperatura, aproximadamente al doble por cada diez grados de aumento. Esto significa que una roca que pasó mucho tiempo a una temperatura moderada puede madurar tanto como una que pasó poco tiempo a una temperatura mayor."
+       "say": "Ahora, el tiempo. Las reacciones químicas que generan hidrocarburos se aceleran con la temperatura, aproximadamente al doble por cada diez grados de aumento. Esto significa que una roca que pasó mucho tiempo a una temperatura moderada puede madurar tanto como una que pasó poco tiempo a una temperatura mayor.",
+       "hl": 3
       },
       {
        "say": "Lopatin formalizó esta idea con el índice tiempo-temperatura, o TTI: se divide la historia en intervalos de temperatura, a cada uno se le asigna un factor que se duplica cada diez grados, y se suman los tiempos pesados por ese factor."
@@ -501,28 +655,44 @@
        "say": "Hoy los modelos usan cinética de reacción con distribuciones de energías de activación, y calculan la reflectancia con métodos como el de Sweeney y Burnham, de 1990, pero el TTI sigue siendo la mejor forma de entender la lógica."
       },
       {
-       "say": "Las ventanas, como vimos, se definen por madurez. En petróleo, la generación se concentra aproximadamente entre sesenta y ciento veinte grados, y el gas se genera hasta temperaturas bastante más altas."
+       "say": "Las ventanas, como vimos, se definen por madurez. En petróleo, la generación se concentra aproximadamente entre sesenta y ciento veinte grados, y el gas se genera hasta temperaturas bastante más altas.",
+       "hl": 4
       },
       {
        "say": "Esas temperaturas son solo una referencia: dependen del tipo de querógeno y de la velocidad de calentamiento. A mayor enterramiento, la generadora pasa sucesivamente por la ventana de petróleo, luego la de gas húmedo y condensado, y finalmente la de gas seco."
       },
       {
-       "say": "Un modelo de enterramiento no se acepta sin calibrarlo. Se compara la reflectancia calculada con la medida, en función de la profundidad, y también con la Tmax y con las temperaturas de fondo de pozo corregidas. Con enterramiento continuo, la reflectancia crece de forma aproximadamente exponencial con la profundidad, de modo que en un gráfico semilogarítmico se alinea."
+       "say": "Un modelo de enterramiento no se acepta sin calibrarlo. Se compara la reflectancia calculada con la medida, en función de la profundidad, y también con la Tmax y con las temperaturas de fondo de pozo corregidas. Con enterramiento continuo, la reflectancia crece de forma aproximadamente exponencial con la profundidad, de modo que en un gráfico semilogarítmico se alinea.",
+       "hl": 5
       },
       {
        "say": "Las incertidumbres principales son el flujo de calor y el espesor erosionado: errores de un kilómetro en la erosión pueden cambiar la temperatura máxima en decenas de grados. Un modelo unidimensional, además, ignora variaciones laterales; por eso, para una cuenca completa se usa el modelado de sistemas petroleros en dos o tres dimensiones, que incorpora también la expulsión y la migración."
       },
       {
-       "say": "Veamos la cuenca Neuquina. Su historia incluye una etapa de rift en el Triásico y el Jurásico temprano, una etapa de cuenca de retroarco con subsidencia térmica desde el Jurásico hasta el Cretácico temprano, durante la cual se depositó Vaca Muerta, y una etapa de antepaís andino desde el Cretácico tardío, con carga tectónica y sedimentaria creciente hacia el oeste."
+       "say": "Veamos la cuenca Neuquina. Su historia incluye una etapa de rift en el Triásico y el Jurásico temprano, una etapa de cuenca de retroarco con subsidencia térmica desde el Jurásico hasta el Cretácico temprano, durante la cual se depositó Vaca Muerta, y una etapa de antepaís andino desde el Cretácico tardío, con carga tectónica y sedimentaria creciente hacia el oeste.",
+       "scene": {
+        "t": "dg",
+        "d": "neum",
+        "k": "Cuenca Neuquina",
+        "h": "Etapas y madurez regional"
+       },
+       "hl": 0
       },
       {
-       "say": "Los modelos publicados para Vaca Muerta muestran una disminución clara de la madurez hacia el borde este de la cuenca, y una generación máxima en los sectores internos de la faja plegada. La compresión del Mioceno, entre quince y siete millones de años atrás, levantó parte de esos sectores, redujo el estrés térmico y provocó pérdida de fluidos y caída de presión de poro."
+       "say": "Los modelos publicados para Vaca Muerta muestran una disminución clara de la madurez hacia el borde este de la cuenca, y una generación máxima en los sectores internos de la faja plegada. La compresión del Mioceno, entre quince y siete millones de años atrás, levantó parte de esos sectores, redujo el estrés térmico y provocó pérdida de fluidos y caída de presión de poro.",
+       "hs": [
+        1,
+        2
+       ],
+       "hl": 2
       },
       {
-       "say": "En el mapa, entonces, las ventanas de petróleo, de gas húmedo y de gas seco se suceden hacia el depocentro, que en Neuquén está hacia el oeste, en dirección a la faja plegada. Es una tendencia regional: en el detalle hay variaciones, y por eso se mapea con datos de pozo y modelos calibrados. Además, hay una consecuencia importante para la presión."
+       "say": "En el mapa, entonces, las ventanas de petróleo, de gas húmedo y de gas seco se suceden hacia el depocentro, que en Neuquén está hacia el oeste, en dirección a la faja plegada. Es una tendencia regional: en el detalle hay variaciones, y por eso se mapea con datos de pozo y modelos calibrados. Además, hay una consecuencia importante para la presión.",
+       "hl": 2
       },
       {
-       "say": "La generación de hidrocarburos en una roca de muy baja permeabilidad produce sobrepresión, que se conserva si la roca se mantuvo sellada. Por eso la madurez, la presión y la porosidad asociada a la materia orgánica suelen variar juntas."
+       "say": "La generación de hidrocarburos en una roca de muy baja permeabilidad produce sobrepresión, que se conserva si la roca se mantuvo sellada. Por eso la madurez, la presión y la porosidad asociada a la materia orgánica suelen variar juntas.",
+       "hl": 3
       },
       {
        "say": "Laboratorio. Vas a cambiar el gradiente geotérmico y el factor de enterramiento y observar cuándo empieza la generación de petróleo y en qué ventana está hoy la roca generadora. Corré primero un gradiente de veinticinco grados por kilómetro, después uno de cuarenta, con el mismo enterramiento, y completá la tabla: edad de inicio de la generación y ventana actual.",
@@ -681,16 +851,36 @@
        "say": "El trabajo fundacional es de Vail y colaboradores, de 1977, en la memoria 26 de la AAPG. En este módulo, el marco estratigráfico es la base sobre la que se apoyan los registros, los cortes y, más adelante, el modelo."
       },
       {
-       "say": "La idea central es el espacio de acomodación: el espacio disponible para que se acumule sedimento. Lo controlan el nivel relativo del mar, que combina las variaciones del nivel del mar global con la subsidencia, y el aporte de sedimento determina cómo se llena ese espacio."
+       "say": "La idea central es el espacio de acomodación: el espacio disponible para que se acumule sedimento. Lo controlan el nivel relativo del mar, que combina las variaciones del nivel del mar global con la subsidencia, y el aporte de sedimento determina cómo se llena ese espacio.",
+       "scene": {
+        "t": "dg",
+        "d": "acom",
+        "k": "Estratigrafía de secuencias",
+        "h": "Espacio de acomodación y aporte"
+       },
+       "hl": 0
       },
       {
-       "say": "Si el aporte supera a la acomodación, el sistema prograda: los ambientes de aguas someras avanzan hacia la cuenca. Si ambos se equilibran, el sistema agrada. Y si la acomodación supera al aporte, el sistema retrograda: el mar avanza hacia el continente."
+       "say": "Si el aporte supera a la acomodación, el sistema prograda: los ambientes de aguas someras avanzan hacia la cuenca. Si ambos se equilibran, el sistema agrada. Y si la acomodación supera al aporte, el sistema retrograda: el mar avanza hacia el continente.",
+       "hl": 1
       },
       {
-       "say": "Estos patrones ordenan los tractos de sistemas. En el esquema más usado, el tracto de nivel bajo se forma cuando el nivel relativo del mar es bajo o empieza a subir; el tracto transgresivo, cuando el mar avanza sobre la costa; y el tracto de nivel alto, cuando el aporte alcanza y vuelve a progradar."
+       "say": "Estos patrones ordenan los tractos de sistemas. En el esquema más usado, el tracto de nivel bajo se forma cuando el nivel relativo del mar es bajo o empieza a subir; el tracto transgresivo, cuando el mar avanza sobre la costa; y el tracto de nivel alto, cuando el aporte alcanza y vuelve a progradar.",
+       "scene": {
+        "t": "dg",
+        "d": "tract",
+        "k": "Tractos y superficies clave",
+        "h": "Nivel relativo del mar"
+       },
+       "hs": [
+        0,
+        1
+       ],
+       "hl": 1
       },
       {
-       "say": "Entre ellos hay superficies clave. El límite de secuencia es una discordancia, o su equivalente concordante en la cuenca. La superficie transgresiva marca la primera inundación importante. Y la superficie de máxima inundación marca el momento de mayor profundidad relativa, a partir del cual vuelve a progradar el sistema."
+       "say": "Entre ellos hay superficies clave. El límite de secuencia es una discordancia, o su equivalente concordante en la cuenca. La superficie transgresiva marca la primera inundación importante. Y la superficie de máxima inundación marca el momento de mayor profundidad relativa, a partir del cual vuelve a progradar el sistema.",
+       "hl": 2
       },
       {
        "say": "La superficie de máxima inundación merece atención especial. Allí el sedimento clástico llega poco y se forma una sección condensada, con poca sedimentación, mucha materia orgánica preservada y, en los registros, una respuesta alta de rayos gamma, a veces asociada al uranio."
@@ -737,10 +927,25 @@
        "say": "Con ella se ordenan los tractos de sistemas y se interpreta la sucesión vertical de un pozo como una ventana a lo que ocurre lateralmente. La aclaración importante es que vale solo en sucesiones sin hiatos: una discordancia rompe la regla, y es justamente lo que marca el límite de secuencia."
       },
       {
-       "say": "Esto nos lleva a la regla de oro de la correlación: correlacionar por superficies de tiempo y no por litología. Una arenisca puede ser de edades distintas en dos pozos, porque los cuerpos arenosos migran lateralmente con el tiempo."
+       "say": "Esto nos lleva a la regla de oro de la correlación: correlacionar por superficies de tiempo y no por litología. Una arenisca puede ser de edades distintas en dos pozos, porque los cuerpos arenosos migran lateralmente con el tiempo.",
+       "scene": {
+        "t": "dg",
+        "d": "corr",
+        "k": "Correlación",
+        "h": "Por tiempo y no por litología"
+       },
+       "hs": [
+        0
+       ],
+       "hl": 0
       },
       {
-       "say": "Si los unís por parecerse, construís un modelo equivocado, con continuidad que no existe y barreras donde no las hay. Las superficies de tiempo, como las de máxima inundación o los límites de secuencia, cortan las litologías, y no al revés."
+       "say": "Si los unís por parecerse, construís un modelo equivocado, con continuidad que no existe y barreras donde no las hay. Las superficies de tiempo, como las de máxima inundación o los límites de secuencia, cortan las litologías, y no al revés.",
+       "hs": [
+        0,
+        1
+       ],
+       "hl": 1
       },
       {
        "say": "Para identificar esas superficies se combinan varias herramientas. Los registros muestran patrones: una curva de rayos gamma que disminuye hacia arriba, con forma de embudo, sugiere una sucesión que se hace más gruesa hacia arriba y progradante; una curva con forma de campana sugiere lo contrario."
@@ -749,10 +954,71 @@
        "say": "Estos patrones ayudan, pero no son únicos, y conviene confirmarlos con núcleos. La sísmica aporta las terminaciones de los reflectores: truncaciones, onlap, downlap, toplap. La bioestratigrafía, con amonites en el caso de Vaca Muerta, aporta edades. Y la quimioestratigrafía, con isótopos y elementos, ayuda a correlacionar intervalos monótonos."
       },
       {
-       "say": "Vaca Muerta es un buen ejemplo de por qué esto importa. Es una unidad marina del Tithoniano al Valanginiano temprano. Su base está asociada a una superficie de máxima inundación del Tithoniano temprano, con una sección condensada rica en materia orgánica."
+       "say": "Vaca Muerta es un buen ejemplo de por qué esto importa. Es una unidad marina del Tithoniano al Valanginiano temprano. Su base está asociada a una superficie de máxima inundación del Tithoniano temprano, con una sección condensada rica en materia orgánica.",
+       "scene": {
+        "t": "dg",
+        "d": "clino",
+        "k": "Vaca Muerta",
+        "h": "Clinoformas y sección condensada"
+       },
+       "hl": 0
       },
       {
        "say": "El contenido de TOC es máximo en esa sección basal y disminuye hacia arriba. Pero además, la unidad se depositó en un sistema de clinoformas, es decir, superficies inclinadas que progradaron hacia la cuenca, descritas por Mitchum y Uliana en 1985.",
+       "hl": 1
+      },
+      {
+       "say": "El resultado es que los límites entre Vaca Muerta y la formación Quintuco, que la cubre, no son superficies de tiempo: son diacrónicos. Y los intervalos de mayor TOC se concentran en la parte basal y distal de esas clinoformas, de modo que la misma roca rica no representa el mismo tiempo en todos lados.",
+       "hl": 1
+      },
+      {
+       "say": "La consecuencia práctica es clara. Si en el modelo usás el tope de la formación como una superficie única en toda el área, estás mezclando tiempos distintos, y un intervalo rico en un pozo puede quedar correlacionado con uno pobre en otro.",
+       "hl": 2
+      },
+      {
+       "say": "El flujo de trabajo correcto es este. Primero, elegí un pozo clave con núcleo y definí en él los límites de secuencia y las superficies de máxima inundación, con apoyo de bioestratigrafía. Segundo, extendé esas superficies a los demás pozos usando la firma de los registros y los datos sísmicos. Tercero, verificá la consistencia cerrando circuitos de correlación entre tres o más pozos.",
+       "scene": {
+        "t": "dg",
+        "d": "flow",
+        "k": "Flujo de trabajo",
+        "h": "Cuatro pasos para zonificar el modelo",
+        "p": {
+         "items": [
+          {
+           "t": "Pozo clave|con núcleo",
+           "s": "límites de secuencia|y máxima inundación|con bioestratigrafía"
+          },
+          {
+           "t": "Extender a|otros pozos",
+           "s": "firma de registros|y datos sísmicos"
+          },
+          {
+           "t": "Verificar|consistencia",
+           "s": "cerrar circuitos de|correlación en 3 o|más pozos"
+          },
+          {
+           "t": "Zonas y|capas",
+           "s": "proporcionales,|paralelas al tope|o a la base"
+          }
+         ]
+        }
+       },
+       "hs": [
+        0,
+        1,
+        2
+       ],
+       "hl": 2
+      },
+      {
+       "say": "Y cuarto, definí zonas entre superficies de tiempo y, dentro de cada zona, la forma de las capas del modelo: proporcionales, paralelas al tope o paralelas a la base, según cómo se depositó cada intervalo.",
+       "hl": 3
+      },
+      {
+       "say": "Los errores típicos son correlacionar picos de rayos gamma sin confirmar que son superficies de inundación, ignorar fallas que desplazan los marcadores, y usar un único marcador regional como si fuera una superficie de tiempo. Cada uno produce modelos que parecen razonables y fallan cuando se perfora."
+      },
+      {
+       "say": "Ejercicio. En la ficha tenés los datos de tres pozos: A, B y C. Una arenisca similar aparece en los tres, pero la bioestratigrafía asigna la de C a una zona de amonites más joven. Decidí cuáles de esas areniscas correlacionan entre sí, y cuál es el impacto sobre la continuidad del cuerpo arenoso que vas a poner en el modelo.",
        "scene": {
         "t": "tbl",
         "k": "Estratigrafía de secuencias y correlación",
@@ -784,24 +1050,6 @@
          ]
         ]
        }
-      },
-      {
-       "say": "El resultado es que los límites entre Vaca Muerta y la formación Quintuco, que la cubre, no son superficies de tiempo: son diacrónicos. Y los intervalos de mayor TOC se concentran en la parte basal y distal de esas clinoformas, de modo que la misma roca rica no representa el mismo tiempo en todos lados."
-      },
-      {
-       "say": "La consecuencia práctica es clara. Si en el modelo usás el tope de la formación como una superficie única en toda el área, estás mezclando tiempos distintos, y un intervalo rico en un pozo puede quedar correlacionado con uno pobre en otro."
-      },
-      {
-       "say": "El flujo de trabajo correcto es este. Primero, elegí un pozo clave con núcleo y definí en él los límites de secuencia y las superficies de máxima inundación, con apoyo de bioestratigrafía. Segundo, extendé esas superficies a los demás pozos usando la firma de los registros y los datos sísmicos. Tercero, verificá la consistencia cerrando circuitos de correlación entre tres o más pozos."
-      },
-      {
-       "say": "Y cuarto, definí zonas entre superficies de tiempo y, dentro de cada zona, la forma de las capas del modelo: proporcionales, paralelas al tope o paralelas a la base, según cómo se depositó cada intervalo."
-      },
-      {
-       "say": "Los errores típicos son correlacionar picos de rayos gamma sin confirmar que son superficies de inundación, ignorar fallas que desplazan los marcadores, y usar un único marcador regional como si fuera una superficie de tiempo. Cada uno produce modelos que parecen razonables y fallan cuando se perfora."
-      },
-      {
-       "say": "Ejercicio. En la ficha tenés los datos de tres pozos: A, B y C. Una arenisca similar aparece en los tres, pero la bioestratigrafía asigna la de C a una zona de amonites más joven. Decidí cuáles de esas areniscas correlacionan entre sí, y cuál es el impacto sobre la continuidad del cuerpo arenoso que vas a poner en el modelo."
       },
       {
        "say": "La decisión que sostiene esta lección es la zonación del modelo: qué intervalos se tratan como unidades de tiempo, cómo se las divide en capas y qué continuidad lateral se supone. Una buena zonación evita la mayor parte de los errores que después se propagan al modelo completo."
@@ -851,13 +1099,21 @@
        "say": "En lutitas orgánicas como Vaca Muerta, además, se estima la materia orgánica. En esta lección vemos cada paso, con sus supuestos y sus límites, porque cada propiedad que sale de un registro es un modelo y no una medición directa."
       },
       {
-       "say": "Empecemos por la arcillosidad. El registro de rayos gamma mide la radiactividad natural de la roca. El índice de rayos gamma se calcula restando el valor mínimo, en una arena limpia, y dividiendo por la diferencia entre el máximo, en una lutita, y el mínimo."
+       "say": "Empecemos por la arcillosidad. El registro de rayos gamma mide la radiactividad natural de la roca. El índice de rayos gamma se calcula restando el valor mínimo, en una arena limpia, y dividiendo por la diferencia entre el máximo, en una lutita, y el mínimo.",
+       "scene": {
+        "t": "dg",
+        "d": "logs",
+        "k": "Registros de pozo",
+        "h": "Del dato a la propiedad"
+       },
+       "hl": 0
       },
       {
        "say": "Ese índice se convierte en volumen de arcilla, con una relación lineal o con correcciones no lineales, como la de Larionov. Una advertencia: en lutitas orgánicas, parte de la señal de rayos gamma proviene del uranio asociado a la materia orgánica y no de las arcillas, de modo que el gamma total sobrestima la arcilla."
       },
       {
-       "say": "La herramienta espectral, que separa potasio, torio y uranio, ayuda a distinguirlos. La porosidad se obtiene principalmente del registro de densidad. La porosidad de densidad es la diferencia entre la densidad de la matriz y la densidad medida, dividida por la diferencia entre la densidad de la matriz y la del fluido."
+       "say": "La herramienta espectral, que separa potasio, torio y uranio, ayuda a distinguirlos. La porosidad se obtiene principalmente del registro de densidad. La porosidad de densidad es la diferencia entre la densidad de la matriz y la densidad medida, dividida por la diferencia entre la densidad de la matriz y la del fluido.",
+       "hl": 1
       },
       {
        "say": "Por ejemplo, en una caliza con matriz de dos coma setenta y uno gramos por centímetro cúbico, un fluido de uno y una densidad medida de dos coma cuarenta y cinco, la porosidad es de quince por ciento."
@@ -866,13 +1122,15 @@
        "say": "El neutrón responde al contenido de hidrógeno, incluido el del agua ligada a las arcillas; el sónico responde a la velocidad de la onda y se relaciona con la porosidad mediante relaciones empíricas como la de Wyllie. El calibre es importante: en zonas ensanchadas por derrumbes, la densidad y el neutrón pierden calidad."
       },
       {
-       "say": "En lutitas orgánicas hay un detalle crítico. El querógeno tiene una densidad baja, alrededor de uno coma dos a uno coma cuatro gramos por centímetro cúbico."
+       "say": "En lutitas orgánicas hay un detalle crítico. El querógeno tiene una densidad baja, alrededor de uno coma dos a uno coma cuatro gramos por centímetro cúbico.",
+       "hl": 2
       },
       {
        "say": "Si se ignora, la densidad total baja y la porosidad se sobrestima. Por eso se usan modelos multimineral, que resuelven simultáneamente los volúmenes de cuarzo, carbonato, arcilla, pirita, querógeno y porosidad, y se calibran con difracción de rayos X y con análisis de núcleo."
       },
       {
-       "say": "Pasemos a la saturación de agua, que sale de la resistividad. La ecuación de Archie dice que la saturación de agua es igual a la raíz enésima de la resistividad del agua, por el factor de tortuosidad, dividido por la porosidad elevada al exponente de cementación y por la resistividad de la formación."
+       "say": "Pasemos a la saturación de agua, que sale de la resistividad. La ecuación de Archie dice que la saturación de agua es igual a la raíz enésima de la resistividad del agua, por el factor de tortuosidad, dividido por la porosidad elevada al exponente de cementación y por la resistividad de la formación.",
+       "hl": 3
       },
       {
        "say": "Con resistividad del agua de cero coma cero cinco, porosidad de quince por ciento, resistividad de formación de veinte y los parámetros clásicos de uno, dos y dos, la saturación de agua es de treinta y tres por ciento."
@@ -918,7 +1176,14 @@
        "say": "Nunca se aplica Archie con parámetros por defecto. Se calibra con núcleos, con mediciones eléctricas en laboratorio y con saturaciones medidas, y se deja constancia del modelo elegido. La resistividad del agua también es un dato que hay que justificar: se obtiene de análisis de agua de formación, del potencial espontáneo o de gráficos como el de Pickett."
       },
       {
-       "say": "Un error pequeño en ese valor se traslada directamente a la saturación. Ahora, la materia orgánica. El método de Passey, de 1990, estima el TOC superponiendo la curva de resistividad, en escala logarítmica, con la curva sónica, en escalas compatibles: una década de resistividad corresponde a cincuenta microsegundos por pie."
+       "say": "Un error pequeño en ese valor se traslada directamente a la saturación. Ahora, la materia orgánica. El método de Passey, de 1990, estima el TOC superponiendo la curva de resistividad, en escala logarítmica, con la curva sónica, en escalas compatibles: una década de resistividad corresponde a cincuenta microsegundos por pie.",
+       "scene": {
+        "t": "dg",
+        "d": "logs",
+        "k": "Registros de pozo",
+        "h": "Del dato a la propiedad"
+       },
+       "hl": 4
       },
       {
        "say": "En una lutita sin materia orgánica, las dos curvas se superponen y definen una línea base. En una roca rica y poco madura, o en ventana de petróleo, se separan: el sónico aumenta por el querógeno y la resistividad por los hidrocarburos."
@@ -989,28 +1254,7 @@
        "say": "En esta lección vemos qué se mide en un núcleo, cómo se calibra y cómo se llega a la roca neta. El análisis de rutina mide porosidad, permeabilidad y densidad de grano. En rocas convencionales se usa porosimetría de helio y permeabilidad con corrección por deslizamiento de gas."
       },
       {
-       "say": "En lutitas, donde la permeabilidad es de nanodarcys, se trabaja con roca triturada y métodos especiales, y los resultados dependen del protocolo, por lo que siempre hay que documentarlo. El análisis especial incluye presiones capilares, permeabilidades relativas y propiedades eléctricas, que dan los exponentes de cementación y de saturación para Archie."
-      },
-      {
-       "say": "Se suman la difracción de rayos X, que da la mineralogía de cuarzo, carbonato y arcilla; el carbono orgánico total; la inyección de mercurio para la distribución de tamaños de poro; la microscopía electrónica para ver el sistema poroso; las propiedades geomecánicas, como el módulo de Young y la relación de Poisson; y las saturaciones de fluidos medidas por extracción o retorta."
-      },
-      {
-       "say": "La calibración núcleo-registro sigue un orden. Primero, se corrige la profundidad del núcleo para que coincida con la del registro, porque el desfase entre ambos puede ser de decenas de centímetros y, en capas finas, arruina cualquier comparación."
-      },
-      {
-       "say": "Segundo, se comparan las propiedades: porosidad de núcleo contra porosidad de registro, TOC de laboratorio contra TOC calculado, mineralogía de rayos X contra el modelo multimineral. Tercero, se ajustan los parámetros, como la densidad de matriz, el exponente de cementación, el nivel de madurez orgánica o la resistividad del agua, hasta que el modelo reproduzca el núcleo."
-      },
-      {
-       "say": "Y cuarto, se valida con un pozo que no se usó en el ajuste: si funciona ahí, el modelo es transferible. Hay límites que conviene tener presentes. El núcleo cubre un intervalo pequeño y no necesariamente representa todo el reservorio. Puede estar dañado o alterado al llevarlo a superficie."
-      },
-      {
-       "say": "Y las muestras de laboratorio se miden a condiciones distintas de las del subsuelo, por lo que a veces hay que corregirlas por presión de confinamiento. Con las propiedades calculadas pasamos a la roca neta. Conviene usar los términos con precisión. La roca bruta es el espesor total del intervalo."
-      },
-      {
-       "say": "La roca neta es la parte que no es arcilla o roca pobre, según un corte de arcillosidad. La roca reservorio es la parte neta que, además, tiene porosidad suficiente. Y el net pay es la parte de la roca reservorio que contiene hidrocarburos en saturación suficiente, según un corte de saturación de agua."
-      },
-      {
-       "say": "El cociente entre el espesor neto y el bruto es el net-to-gross. Los cortes no son datos: son decisiones de ingeniería. Se definen con valores máximos de arcillosidad y de saturación de agua y un mínimo de porosidad, y se justifican con información del núcleo y de la producción.",
+       "say": "En lutitas, donde la permeabilidad es de nanodarcys, se trabaja con roca triturada y métodos especiales, y los resultados dependen del protocolo, por lo que siempre hay que documentarlo. El análisis especial incluye presiones capilares, permeabilidades relativas y propiedades eléctricas, que dan los exponentes de cementación y de saturación para Archie.",
        "scene": {
         "t": "tbl",
         "k": "Núcleos, calibración y cortes: de la propiedad a la roca ne…",
@@ -1055,6 +1299,50 @@
        }
       },
       {
+       "say": "Se suman la difracción de rayos X, que da la mineralogía de cuarzo, carbonato y arcilla; el carbono orgánico total; la inyección de mercurio para la distribución de tamaños de poro; la microscopía electrónica para ver el sistema poroso; las propiedades geomecánicas, como el módulo de Young y la relación de Poisson; y las saturaciones de fluidos medidas por extracción o retorta."
+      },
+      {
+       "say": "La calibración núcleo-registro sigue un orden. Primero, se corrige la profundidad del núcleo para que coincida con la del registro, porque el desfase entre ambos puede ser de decenas de centímetros y, en capas finas, arruina cualquier comparación.",
+       "scene": {
+        "t": "dg",
+        "d": "calib",
+        "k": "Calibración núcleo–registro",
+        "h": "Tres pasos, en orden"
+       },
+       "hl": 0
+      },
+      {
+       "say": "Segundo, se comparan las propiedades: porosidad de núcleo contra porosidad de registro, TOC de laboratorio contra TOC calculado, mineralogía de rayos X contra el modelo multimineral. Tercero, se ajustan los parámetros, como la densidad de matriz, el exponente de cementación, el nivel de madurez orgánica o la resistividad del agua, hasta que el modelo reproduzca el núcleo.",
+       "hl": 1
+      },
+      {
+       "say": "Y cuarto, se valida con un pozo que no se usó en el ajuste: si funciona ahí, el modelo es transferible. Hay límites que conviene tener presentes. El núcleo cubre un intervalo pequeño y no necesariamente representa todo el reservorio. Puede estar dañado o alterado al llevarlo a superficie.",
+       "hl": 2
+      },
+      {
+       "say": "Y las muestras de laboratorio se miden a condiciones distintas de las del subsuelo, por lo que a veces hay que corregirlas por presión de confinamiento. Con las propiedades calculadas pasamos a la roca neta. Conviene usar los términos con precisión. La roca bruta es el espesor total del intervalo."
+      },
+      {
+       "say": "La roca neta es la parte que no es arcilla o roca pobre, según un corte de arcillosidad. La roca reservorio es la parte neta que, además, tiene porosidad suficiente. Y el net pay es la parte de la roca reservorio que contiene hidrocarburos en saturación suficiente, según un corte de saturación de agua.",
+       "scene": {
+        "t": "dg",
+        "d": "cut",
+        "k": "Cortes",
+        "h": "Del espesor bruto al net pay (esquema)"
+       },
+       "hs": [
+        0,
+        1,
+        2,
+        3
+       ],
+       "hl": 3
+      },
+      {
+       "say": "El cociente entre el espesor neto y el bruto es el net-to-gross. Los cortes no son datos: son decisiones de ingeniería. Se definen con valores máximos de arcillosidad y de saturación de agua y un mínimo de porosidad, y se justifican con información del núcleo y de la producción.",
+       "hl": 4
+      },
+      {
        "say": "En rocas convencionales, a menudo se parte del gráfico de porosidad contra permeabilidad y se elige la porosidad por debajo de la cual la roca no aporta flujo útil, o se usan las presiones capilares. En no convencionales, el corte debe reflejar qué roca puede contribuir a la producción después de estimular, y se calibra con pruebas de producción y registros de producción."
       },
       {
@@ -1074,13 +1362,22 @@
        "say": "Después, repetí el ejercicio con la planilla de la lección. Abrí la hoja Parámetros y probá los tres cortes. Con los valores base, que son un máximo de arcillosidad de cero coma cuatro, una porosidad mínima de cero coma cero seis y una saturación de agua máxima de cero coma seis, el espesor bruto del perfil sintético es de sesenta metros y el net pay es de treinta y nueve, un net-to-gross de sesenta y cinco por ciento."
       },
       {
-       "say": "La porosidad media neta es de nueve coma dos por ciento y la saturación media, ponderada por porosidad, de treinta coma seis por ciento. Con esos valores el petróleo en sitio es de cuatrocientos sesenta y cuatro millones de barriles estándar, en este ejemplo didáctico."
+       "say": "La porosidad media neta es de nueve coma dos por ciento y la saturación media, ponderada por porosidad, de treinta coma seis por ciento. Con esos valores el petróleo en sitio es de cuatrocientos sesenta y cuatro millones de barriles estándar, en este ejemplo didáctico.",
+       "scene": {
+        "t": "dg",
+        "d": "scen",
+        "k": "Escenarios de cortes",
+        "h": "Net pay y petróleo en sitio"
+       },
+       "hl": 0
       },
       {
-       "say": "Ahora compará escenarios. En el conservador, con cortes más exigentes, el net pay cae a veintisiete coma cinco metros, casi treinta por ciento menos, y el petróleo en sitio baja a trescientos setenta y ocho millones, dieciocho por ciento menos."
+       "say": "Ahora compará escenarios. En el conservador, con cortes más exigentes, el net pay cae a veintisiete coma cinco metros, casi treinta por ciento menos, y el petróleo en sitio baja a trescientos setenta y ocho millones, dieciocho por ciento menos.",
+       "hl": 1
       },
       {
-       "say": "En el optimista, con cortes más laxos, el net pay sube a cuarenta y siete metros, un veinte por ciento más, pero el volumen sube solo siete por ciento. ¿Por qué? Porque la roca que se agrega es pobre: menor porosidad, mayor saturación de agua. El espesor sube mucho más que el volumen."
+       "say": "En el optimista, con cortes más laxos, el net pay sube a cuarenta y siete metros, un veinte por ciento más, pero el volumen sube solo siete por ciento. ¿Por qué? Porque la roca que se agrega es pobre: menor porosidad, mayor saturación de agua. El espesor sube mucho más que el volumen.",
+       "hl": 2
       },
       {
        "say": "Moraleja: cuando alguien dice que cambió el corte y ganó metros, preguntá cuánto volumen ganó. Dos advertencias de método. La primera: las propiedades medias se calculan con los pesos correctos. La porosidad se promedia por espesor, la saturación de agua se pondera por porosidad, y el volumen poroso de hidrocarburo se calcula muestra por muestra, como porosidad por uno menos saturación de agua por espesor."
@@ -1229,34 +1526,43 @@
        }
       },
       {
-       "say": "La sísmica funciona así. Una fuente genera una onda que viaja por el subsuelo y se refleja cada vez que encuentra un cambio de impedancia acústica, que es el producto de la densidad por la velocidad de la roca."
+       "say": "La sísmica funciona así. Una fuente genera una onda que viaja por el subsuelo y se refleja cada vez que encuentra un cambio de impedancia acústica, que es el producto de la densidad por la velocidad de la roca.",
+       "scene": {
+        "t": "dg",
+        "d": "seis",
+        "k": "Sísmica de reflexión",
+        "h": "Del contraste de impedancias a la traza"
+       },
+       "hl": 0
       },
       {
-       "say": "El coeficiente de reflexión depende del contraste de impedancias entre las dos capas. La traza sísmica que se registra es, en términos simples, la serie de reflectividades del subsuelo convolucionada con un pulso, el wavelet."
+       "say": "El coeficiente de reflexión depende del contraste de impedancias entre las dos capas. La traza sísmica que se registra es, en términos simples, la serie de reflectividades del subsuelo convolucionada con un pulso, el wavelet.",
+       "hl": 1
       },
       {
-       "say": "Para saber a qué roca corresponde cada reflector se construye un sismograma sintético a partir del registro sónico y de densidad de un pozo, y se lo compara con la sísmica: es el amarre de pozo a sísmica, el paso que conecta ambos mundos."
+       "say": "Para saber a qué roca corresponde cada reflector se construye un sismograma sintético a partir del registro sónico y de densidad de un pozo, y se lo compara con la sísmica: es el amarre de pozo a sísmica, el paso que conecta ambos mundos.",
+       "hl": 2
       },
       {
-       "say": "Lo primero que hay que saber es la resolución. La resolución vertical es del orden de un cuarto de la longitud de onda dominante, que se calcula como velocidad dividida por frecuencia."
+       "say": "Lo primero que hay que saber es la resolución. La resolución vertical es del orden de un cuarto de la longitud de onda dominante, que se calcula como velocidad dividida por frecuencia.",
+       "scene": {
+        "t": "dg",
+        "d": "res",
+        "k": "Resolución vertical",
+        "h": "Un cuarto de la longitud de onda"
+       },
+       "hl": 0
       },
       {
-       "say": "Con una velocidad de cuatro mil metros por segundo y una frecuencia dominante de treinta hertz, la longitud de onda es de ciento treinta y tres metros y la resolución vertical es de unos treinta y tres metros."
+       "say": "Con una velocidad de cuatro mil metros por segundo y una frecuencia dominante de treinta hertz, la longitud de onda es de ciento treinta y tres metros y la resolución vertical es de unos treinta y tres metros.",
+       "hl": 1
       },
       {
-       "say": "Un intervalo más fino que eso no se resuelve como dos reflectores separados: se observa un solo evento cuya amplitud depende del espesor, un efecto llamado sintonía. En la práctica, el espesor de capas finas se estima combinando sísmica con calibración de pozos y atributos, y no leyendo dos picos."
+       "say": "Un intervalo más fino que eso no se resuelve como dos reflectores separados: se observa un solo evento cuya amplitud depende del espesor, un efecto llamado sintonía. En la práctica, el espesor de capas finas se estima combinando sísmica con calibración de pozos y atributos, y no leyendo dos picos.",
+       "hl": 2
       },
       {
-       "say": "La resolución horizontal, por su parte, está dada por la zona de Fresnel, y la migración la mejora. Segundo, la sísmica mide tiempo y no profundidad. Se registra el tiempo doble de viaje, ida y vuelta, y se convierte a profundidad con un modelo de velocidades."
-      },
-      {
-       "say": "La profundidad es la velocidad media por el tiempo doble, dividido por dos. Con una velocidad media de tres mil quinientos metros por segundo y novecientos milisegundos de tiempo doble, el tope está a mil quinientos setenta y cinco metros."
-      },
-      {
-       "say": "La velocidad sale de datos de pozo, como los registros sónicos, los tiros de verificación y el perfil sísmico vertical, y de las velocidades de procesamiento. Es una de las mayores fuentes de incertidumbre estructural, y como cualquier error de velocidad se traslada a profundidad, en general se trabaja con más de un modelo de velocidades."
-      },
-      {
-       "say": "Esa incertidumbre llega al volumen. Si el error de picado de cada horizonte es de cuatro milisegundos, y la velocidad del intervalo es de cuatro mil metros por segundo, el error por horizonte es de ocho metros. Con dos horizontes independientes, el error de espesor es de unos once metros. En un intervalo de sesenta metros, eso es casi veinte por ciento.",
+       "say": "La resolución horizontal, por su parte, está dada por la zona de Fresnel, y la migración la mejora. Segundo, la sísmica mide tiempo y no profundidad. Se registra el tiempo doble de viaje, ida y vuelta, y se convierte a profundidad con un modelo de velocidades.",
        "scene": {
         "t": "tbl",
         "k": "Sísmica y marco estructural",
@@ -1294,19 +1600,71 @@
        }
       },
       {
-       "say": "Por eso el espesor, que entra de forma directa en el volumen de roca, merece tanta atención como el área. Tercero, la interpretación. Se pican horizontes y fallas. Para los horizontes se usa seguimiento automático controlado por el intérprete, y conviene que los horizontes representen las superficies de tiempo que definimos en la estratigrafía de secuencias, como la superficie de máxima inundación, y no topes litológicos."
+       "say": "La profundidad es la velocidad media por el tiempo doble, dividido por dos. Con una velocidad media de tres mil quinientos metros por segundo y novecientos milisegundos de tiempo doble, el tope está a mil quinientos setenta y cinco metros.",
+       "scene": {
+        "t": "dg",
+        "d": "tdr",
+        "k": "Tiempo a profundidad",
+        "h": "Velocidad e incertidumbre"
+       },
+       "hl": 0
       },
       {
-       "say": "Para las fallas se interpretan planos o segmentos, con ayuda de atributos como la coherencia y la curvatura, que resaltan discontinuidades. En Vaca Muerta, la sísmica además muestra la geometría de clinoformas, que es una evidencia directa de su arquitectura de progradación."
+       "say": "La velocidad sale de datos de pozo, como los registros sónicos, los tiros de verificación y el perfil sísmico vertical, y de las velocidades de procesamiento. Es una de las mayores fuentes de incertidumbre estructural, y como cualquier error de velocidad se traslada a profundidad, en general se trabaja con más de un modelo de velocidades.",
+       "hl": 1
       },
       {
-       "say": "Cuarto, los atributos e inversiones. La inversión sísmica convierte la amplitud en propiedades elásticas, como impedancia acústica, relación entre velocidades de ondas compresionales y de corte, y densidad."
+       "say": "Esa incertidumbre llega al volumen. Si el error de picado de cada horizonte es de cuatro milisegundos, y la velocidad del intervalo es de cuatro mil metros por segundo, el error por horizonte es de ocho metros. Con dos horizontes independientes, el error de espesor es de unos once metros. En un intervalo de sesenta metros, eso es casi veinte por ciento.",
+       "hl": 2
+      },
+      {
+       "say": "Por eso el espesor, que entra de forma directa en el volumen de roca, merece tanta atención como el área. Tercero, la interpretación. Se pican horizontes y fallas. Para los horizontes se usa seguimiento automático controlado por el intérprete, y conviene que los horizontes representen las superficies de tiempo que definimos en la estratigrafía de secuencias, como la superficie de máxima inundación, y no topes litológicos.",
+       "scene": {
+        "t": "dg",
+        "d": "flow",
+        "k": "Marco estructural",
+        "h": "De la interpretación al volumen bruto",
+        "p": {
+         "items": [
+          {
+           "t": "Horizontes",
+           "s": "picado e|interpretación"
+          },
+          {
+           "t": "Fallas",
+           "s": "planos y segmentos;|coherencia y|curvatura"
+          },
+          {
+           "t": "Atributos|e inversión",
+           "s": "impedancia y|propiedades elásticas|calibradas con pozos"
+          },
+          {
+           "t": "Marco|consistente",
+           "s": "fallas cortan|horizontes: grilla|sin celdas distorsionadas"
+          },
+          {
+           "t": "Volumen|bruto",
+           "s": "área × espesor|del intervalo"
+          }
+         ]
+        }
+       },
+       "hl": 0
+      },
+      {
+       "say": "Para las fallas se interpretan planos o segmentos, con ayuda de atributos como la coherencia y la curvatura, que resaltan discontinuidades. En Vaca Muerta, la sísmica además muestra la geometría de clinoformas, que es una evidencia directa de su arquitectura de progradación.",
+       "hl": 1
+      },
+      {
+       "say": "Cuarto, los atributos e inversiones. La inversión sísmica convierte la amplitud en propiedades elásticas, como impedancia acústica, relación entre velocidades de ondas compresionales y de corte, y densidad.",
+       "hl": 2
       },
       {
        "say": "Estas propiedades se relacionan, con calibración de pozos, con la riqueza orgánica, la porosidad, la mineralogía y la fragilidad. Sirven para extrapolar tendencias entre pozos, no para reemplazarlos: la relación entre propiedades elásticas y propiedades de reservorio no es única y debe calibrarse y validarse con pozos que no se usaron en el ajuste."
       },
       {
-       "say": "Quinto, el marco estructural. Para construir una grilla se necesita un conjunto de horizontes y fallas consistentes entre sí: las fallas deben cortar los horizontes de manera coherente, el esquema de conexiones debe ser claro y los desplazamientos deben ser compatibles con la interpretación."
+       "say": "Quinto, el marco estructural. Para construir una grilla se necesita un conjunto de horizontes y fallas consistentes entre sí: las fallas deben cortar los horizontes de manera coherente, el esquema de conexiones debe ser claro y los desplazamientos deben ser compatibles con la interpretación.",
+       "hl": 3
       },
       {
        "say": "Un marco estructural con inconsistencias produce celdas distorsionadas y volúmenes erróneos. En Vaca Muerta, además de las fallas de gran escala, importan las fracturas naturales y, en algunos sectores de la cuenca, se han descrito intrusiones ígneas que pueden afectar la madurez local y complicar la perforación."
@@ -1315,7 +1673,8 @@
        "say": "Por eso el marco estructural no es solo un insumo del volumen: es también un insumo del diseño de pozos y de la estimulación."
       },
       {
-       "say": "Todo esto se resume en el concepto de volumen bruto de roca, que es el área por el espesor del intervalo. Esa área y ese espesor dependen de la interpretación y de la conversión a profundidad, y su incertidumbre debe declararse y propagarse al volumen, con escenarios estructurales alternativos."
+       "say": "Todo esto se resume en el concepto de volumen bruto de roca, que es el área por el espesor del intervalo. Esa área y ese espesor dependen de la interpretación y de la conversión a profundidad, y su incertidumbre debe declararse y propagarse al volumen, con escenarios estructurales alternativos.",
+       "hl": 4
       },
       {
        "say": "Laboratorio. Abrí la hoja Sismica de la planilla. Cambiá la velocidad y la frecuencia y observá cómo varía la resolución vertical. Después modificá el error de picado y mirá cuánto representa del espesor bruto. Respondé: ¿qué frecuencia necesitarías para resolver un intervalo de veinte metros con esa velocidad?"
@@ -1365,10 +1724,48 @@
        }
       },
       {
-       "say": "El modelo se construye en capas de decisión. Primero el marco estructural, que vimos en la lección anterior. Segundo, el marco estratigráfico: las superficies de tiempo que definimos en el módulo dos delimitan las zonas. Tercero, la grilla, que subdivide cada zona en capas con una geometría que respeta cómo se depositó: capas proporcionales entre dos superficies, paralelas al tope o paralelas a la base."
+       "say": "El modelo se construye en capas de decisión. Primero el marco estructural, que vimos en la lección anterior. Segundo, el marco estratigráfico: las superficies de tiempo que definimos en el módulo dos delimitan las zonas. Tercero, la grilla, que subdivide cada zona en capas con una geometría que respeta cómo se depositó: capas proporcionales entre dos superficies, paralelas al tope o paralelas a la base.",
+       "scene": {
+        "t": "dg",
+        "d": "flow",
+        "k": "Capas de decisión",
+        "h": "Cada una se condiciona a la anterior",
+        "p": {
+         "items": [
+          {
+           "t": "Marco|estructural",
+           "s": "horizontes|y fallas"
+          },
+          {
+           "t": "Marco|estratigráfico",
+           "s": "superficies|de tiempo"
+          },
+          {
+           "t": "Grilla",
+           "s": "tamaño|de celdas"
+          },
+          {
+           "t": "Facies",
+           "s": "tipos|de roca"
+          },
+          {
+           "t": "Propiedades",
+           "s": "φ, k, S_{w}"
+          }
+         ],
+         "note": "Un error en el marco estratigráfico se propaga a todo lo que sigue"
+        }
+       },
+       "hl": 1
       },
       {
-       "say": "Cuarto, las facies. Y quinto, las propiedades. Cada capa de decisión se condiciona a la anterior, y por eso un error en el marco estratigráfico se propaga a todo el modelo."
+       "say": "Cuarto, las facies. Y quinto, las propiedades. Cada capa de decisión se condiciona a la anterior, y por eso un error en el marco estratigráfico se propaga a todo el modelo.",
+       "hs": [
+        2,
+        3,
+        4
+       ],
+       "hl": 4
       },
       {
        "say": "La grilla requiere elegir el tamaño de las celdas. Las dimensiones horizontales suelen ser de decenas de metros y las verticales, de fracciones de metro a un par de metros, pero lo importante es el criterio: el tamaño debe permitir representar la heterogeneidad que controla el flujo y el volumen, sin superar la capacidad de cálculo."
@@ -1383,10 +1780,24 @@
        "say": "Todos pueden usar tendencias verticales y probabilidades derivadas de la sísmica como datos blandos. Las propiedades se distribuyen con geoestadística, dentro de cada facies. La herramienta fundamental es el variograma, que mide cómo se parecen dos valores de una propiedad en función de la distancia que los separa."
       },
       {
-       "say": "Tiene tres parámetros. El efecto pepita, que expresa la variabilidad a distancia casi cero, por error de medición o por heterogeneidad fina. La meseta, que es la varianza total. Y el alcance, la distancia a partir de la cual dos puntos dejan de estar correlacionados."
+       "say": "Tiene tres parámetros. El efecto pepita, que expresa la variabilidad a distancia casi cero, por error de medición o por heterogeneidad fina. La meseta, que es la varianza total. Y el alcance, la distancia a partir de la cual dos puntos dejan de estar correlacionados.",
+       "scene": {
+        "t": "dg",
+        "d": "vario",
+        "k": "Variograma",
+        "h": "Pepita, meseta y alcance"
+       },
+       "hs": [
+        0,
+        1,
+        2,
+        3
+       ],
+       "hl": 3
       },
       {
-       "say": "Casi siempre hay anisotropía: el alcance vertical es de metros y el horizontal, de cientos de metros o más. Con pocos pozos, el variograma vertical se estima bien y el horizontal casi nunca, así que se completa con analogías, afloramientos y sísmica."
+       "say": "Casi siempre hay anisotropía: el alcance vertical es de metros y el horizontal, de cientos de metros o más. Con pocos pozos, el variograma vertical se estima bien y el horizontal casi nunca, así que se completa con analogías, afloramientos y sísmica.",
+       "hl": 4
       },
       {
        "say": "Con el variograma se puede estimar o simular. El kriging, desarrollado a partir del trabajo de Matheron, de 1963, da la mejor estimación lineal, y por eso produce una superficie suave que subestima los extremos: es útil para mapas, pero no para representar variabilidad."
@@ -1425,13 +1836,22 @@
        }
       },
       {
-       "say": "Llegamos al escalado, o upscaling. El modelo geológico tiene demasiadas celdas para un simulador, así que hay que agruparlas, y las propiedades se promedian de manera consistente con la física. La porosidad se promedia de forma aritmética, ponderada por volumen. La saturación se pondera por volumen poroso. La permeabilidad es la que requiere más cuidado."
+       "say": "Llegamos al escalado, o upscaling. El modelo geológico tiene demasiadas celdas para un simulador, así que hay que agruparlas, y las propiedades se promedian de manera consistente con la física. La porosidad se promedia de forma aritmética, ponderada por volumen. La saturación se pondera por volumen poroso. La permeabilidad es la que requiere más cuidado.",
+       "scene": {
+        "t": "dg",
+        "d": "ups",
+        "k": "Escalado",
+        "h": "Promedios de permeabilidad"
+       },
+       "hl": 0
       },
       {
-       "say": "Si el flujo es paralelo a las capas, el promedio correcto es el aritmético. Si es perpendicular a las capas, el armónico, que está dominado por las capas de menor permeabilidad. Si la distribución es aleatoria, se aproxima con el geométrico. Siempre se cumple que el armónico es menor o igual que el geométrico, y este menor o igual que el aritmético."
+       "say": "Si el flujo es paralelo a las capas, el promedio correcto es el aritmético. Si es perpendicular a las capas, el armónico, que está dominado por las capas de menor permeabilidad. Si la distribución es aleatoria, se aproxima con el geométrico. Siempre se cumple que el armónico es menor o igual que el geométrico, y este menor o igual que el aritmético.",
+       "hl": 1
       },
       {
-       "say": "Un ejemplo. Tres capas de igual espesor con permeabilidades de cien, diez y uno. El promedio aritmético es treinta y siete; el geométrico, diez; el armónico, dos coma siete. La diferencia entre treinta y siete y dos coma siete no es un detalle: es un orden de magnitud en la capacidad de flujo vertical."
+       "say": "Un ejemplo. Tres capas de igual espesor con permeabilidades de cien, diez y uno. El promedio aritmético es treinta y siete; el geométrico, diez; el armónico, dos coma siete. La diferencia entre treinta y siete y dos coma siete no es un detalle: es un orden de magnitud en la capacidad de flujo vertical.",
+       "hl": 2
       },
       {
        "say": "En la hoja Upscaling de la planilla tenés un caso de diez capas: la permeabilidad aritmética es de unos cincuenta y uno milidarcys, la geométrica de dieciséis y la armónica de tres coma tres, con una relación entre permeabilidad vertical y horizontal de seis y medio por ciento."
@@ -1499,7 +1919,14 @@
        }
       },
       {
-       "say": "El petróleo original en sitio, o STOIIP, se calcula con una fórmula simple cuyo peso está en cada parámetro: el volumen de roca, por la porosidad, por uno menos la saturación de agua, dividido por el factor volumétrico del petróleo, Bo, que convierte el volumen en el reservorio a volumen en superficie."
+       "say": "El petróleo original en sitio, o STOIIP, se calcula con una fórmula simple cuyo peso está en cada parámetro: el volumen de roca, por la porosidad, por uno menos la saturación de agua, dividido por el factor volumétrico del petróleo, Bo, que convierte el volumen en el reservorio a volumen en superficie.",
+       "scene": {
+        "t": "dg",
+        "d": "stoiip",
+        "k": "Petróleo original en sitio",
+        "h": "De la fórmula al número"
+       },
+       "hl": -1
       },
       {
        "say": "En unidades de campo, con el área en acres y el espesor en pies, el factor siete mil setecientos cincuenta y ocho convierte acre-pie en barriles."
@@ -1508,13 +1935,21 @@
        "say": "En unidades métricas, el volumen en metros cúbicos se multiplica por seis coma dos ocho nueve ocho para obtener barriles. El error más común es mezclar unidades: usar el factor siete mil setecientos cincuenta y ocho con el espesor en metros subestima el volumen por un factor de tres coma tres."
       },
       {
-       "say": "Veamos el ejemplo de la planilla. Cuarenta kilómetros cuadrados de área, treinta y nueve metros de espesor neto, porosidad de nueve coma dos por ciento, saturación de agua de treinta coma seis y Bo de uno coma treinta y cinco."
+       "say": "Veamos el ejemplo de la planilla. Cuarenta kilómetros cuadrados de área, treinta y nueve metros de espesor neto, porosidad de nueve coma dos por ciento, saturación de agua de treinta coma seis y Bo de uno coma treinta y cinco.",
+       "hl": 0
       },
       {
-       "say": "El volumen de roca es de mil quinientos sesenta millones de metros cúbicos. Multiplicado por la porosidad da ciento cuarenta y tres millones de metros cúbicos de poros; por uno menos la saturación, noventa y nueve millones y medio de hidrocarburo en el reservorio; dividido por Bo, setenta y cuatro millones de metros cúbicos en superficie, que son cuatrocientos sesenta y cuatro millones de barriles."
+       "say": "El volumen de roca es de mil quinientos sesenta millones de metros cúbicos. Multiplicado por la porosidad da ciento cuarenta y tres millones de metros cúbicos de poros; por uno menos la saturación, noventa y nueve millones y medio de hidrocarburo en el reservorio; dividido por Bo, setenta y cuatro millones de metros cúbicos en superficie, que son cuatrocientos sesenta y cuatro millones de barriles.",
+       "hs": [
+        1,
+        2,
+        3
+       ],
+       "hl": 3
       },
       {
-       "say": "Con un factor de recuperación didáctico de ocho por ciento, el recuperable es de treinta y siete millones. Dos aclaraciones sobre ese número. Primera: petróleo en sitio no es petróleo recuperable, y recuperable no es reservas. El factor de recuperación en no convencionales depende del diseño de pozos y de la estimulación, y se calibra con producción real."
+       "say": "Con un factor de recuperación didáctico de ocho por ciento, el recuperable es de treinta y siete millones. Dos aclaraciones sobre ese número. Primera: petróleo en sitio no es petróleo recuperable, y recuperable no es reservas. El factor de recuperación en no convencionales depende del diseño de pozos y de la estimulación, y se calibra con producción real.",
+       "hl": 4
       },
       {
        "say": "Segunda: el método volumétrico clásico cuenta el fluido libre en la porosidad efectiva. En lutitas orgánicas, parte del hidrocarburo está adsorbido en el querógeno o contenido en la porosidad orgánica, y la saturación de agua es difícil de medir."
@@ -1529,10 +1964,18 @@
        "say": "Hay incertidumbre de parámetros, que se cuantifica con rangos, e incertidumbre de modelo, que se cubre con escenarios alternativos, como otra interpretación de fallas o de facies."
       },
       {
-       "say": "Una forma de verlo son los escenarios determinísticos. En la planilla, el caso bajo combina un área veinte por ciento menor, un espesor veinte por ciento menor, menos porosidad, más agua y un Bo mayor: da doscientos treinta y nueve millones de barriles."
+       "say": "Una forma de verlo son los escenarios determinísticos. En la planilla, el caso bajo combina un área veinte por ciento menor, un espesor veinte por ciento menor, menos porosidad, más agua y un Bo mayor: da doscientos treinta y nueve millones de barriles.",
+       "scene": {
+        "t": "dg",
+        "d": "mc",
+        "k": "Incertidumbre",
+        "h": "Escenarios extremos y Monte Carlo"
+       },
+       "hl": 0
       },
       {
-       "say": "El caso alto combina todos los extremos del otro lado: ochocientos dieciocho millones. La razón entre ambos es de tres coma cuatro. Pero ojo: es muy poco probable que todos los parámetros estén en su extremo a la vez."
+       "say": "El caso alto combina todos los extremos del otro lado: ochocientos dieciocho millones. La razón entre ambos es de tres coma cuatro. Pero ojo: es muy poco probable que todos los parámetros estén en su extremo a la vez.",
+       "hl": 1
       },
       {
        "say": "Por eso se usa la simulación Monte Carlo. Se asigna a cada parámetro una distribución, por ejemplo triangular, con mínimo, más probable y máximo. Se sortean valores al azar, se calcula el volumen, y se repite miles de veces. Se ordenan los resultados y se leen los percentiles.",
@@ -1566,13 +2009,22 @@
        }
       },
       {
-       "say": "La convención de la industria es la de probabilidad de excedencia: el P90 es el valor que se supera con noventa por ciento de probabilidad, el P50 es la mediana y el P10 es el valor que se supera con apenas diez por ciento de probabilidad."
+       "say": "La convención de la industria es la de probabilidad de excedencia: el P90 es el valor que se supera con noventa por ciento de probabilidad, el P50 es la mediana y el P10 es el valor que se supera con apenas diez por ciento de probabilidad.",
+       "scene": {
+        "t": "dg",
+        "d": "mc",
+        "k": "Incertidumbre",
+        "h": "Escenarios extremos y Monte Carlo"
+       },
+       "hl": 2
       },
       {
-       "say": "Por eso el P90 es el más bajo y el P10 el más alto. En la hoja MonteCarlo hay dos mil corridas con los mismos rangos de la hoja Escenarios. El resultado: el P90 es de trescientos sesenta y cinco millones de barriles, el P50 de cuatrocientos cuarenta y cinco y el P10 de quinientos treinta y dos."
+       "say": "Por eso el P90 es el más bajo y el P10 el más alto. En la hoja MonteCarlo hay dos mil corridas con los mismos rangos de la hoja Escenarios. El resultado: el P90 es de trescientos sesenta y cinco millones de barriles, el P50 de cuatrocientos cuarenta y cinco y el P10 de quinientos treinta y dos.",
+       "hl": 3
       },
       {
-       "say": "La razón entre P10 y P90 es de uno coma cuatro seis, mucho menor que el tres coma cuatro de los escenarios extremos. Esa diferencia es la lección: apilar todos los extremos no produce un P90 ni un P10. Y la probabilidad de superar, por ejemplo, trescientos millones de barriles es, en este ejemplo, de más de noventa y nueve por ciento."
+       "say": "La razón entre P10 y P90 es de uno coma cuatro seis, mucho menor que el tres coma cuatro de los escenarios extremos. Esa diferencia es la lección: apilar todos los extremos no produce un P90 ni un P10. Y la probabilidad de superar, por ejemplo, trescientos millones de barriles es, en este ejemplo, de más de noventa y nueve por ciento.",
+       "hl": 4
       },
       {
        "say": "Dos advertencias metodológicas. Primero, la planilla supone parámetros independientes. En la realidad hay correlaciones: la porosidad y la saturación suelen ir en sentido contrario, y el área y el espesor pueden estar relacionados por la estructura."
@@ -1581,22 +2033,70 @@
        "say": "Ignorarlas cambia el ancho del rango. Segundo, la calidad del rango depende de la calidad de las distribuciones de entrada: si el mínimo y el máximo son una opinión sin respaldo, el P90 y el P10 también lo son."
       },
       {
-       "say": "La simulación además responde la tercera pregunta del curso: qué dato reduciría la incertidumbre. La planilla calcula la correlación entre cada parámetro y el resultado. En el ejemplo, el espesor neto tiene una correlación de cero coma setenta y cuatro y el área, de cero coma cincuenta y ocho; la porosidad, cero coma veintiocho; la saturación de agua y el factor volumétrico, casi nada."
+       "say": "La simulación además responde la tercera pregunta del curso: qué dato reduciría la incertidumbre. La planilla calcula la correlación entre cada parámetro y el resultado. En el ejemplo, el espesor neto tiene una correlación de cero coma setenta y cuatro y el área, de cero coma cincuenta y ocho; la porosidad, cero coma veintiocho; la saturación de agua y el factor volumétrico, casi nada.",
+       "scene": {
+        "t": "dg",
+        "d": "tor",
+        "k": "Valor de la información",
+        "h": "Qué parámetro pesa más"
+       },
+       "hs": [
+        0,
+        1,
+        2,
+        3,
+        4
+       ],
+       "hl": 4
       },
       {
-       "say": "Entonces, el dato con mayor valor es el que reduce la incertidumbre del espesor y del área: mejor interpretación sísmica y conversión a profundidad, más pozos con control de espesor neto y calibración de cortes con núcleo. Agregar mediciones de saturación, en cambio, mejoraría poco el rango en este caso. Esto se llama valor de la información: se gasta donde la incertidumbre pesa más."
+       "say": "Entonces, el dato con mayor valor es el que reduce la incertidumbre del espesor y del área: mejor interpretación sísmica y conversión a profundidad, más pozos con control de espesor neto y calibración de cortes con núcleo. Agregar mediciones de saturación, en cambio, mejoraría poco el rango en este caso. Esto se llama valor de la información: se gasta donde la incertidumbre pesa más.",
+       "hl": 5
       },
       {
        "say": "Con esto se prioriza. Se calculan el P90, el P50 y el P10 de cada área candidata, por unidad de superficie, y se los compara con el volumen mínimo que justifica la inversión. Se favorecen las áreas donde el P90 supera ese umbral, porque el proyecto sigue siendo viable incluso en el escenario pesimista, y se evalúa el resto con su riesgo explícito."
       },
       {
-       "say": "Y volvamos a Vaca Muerta. El acuerdo de julio de 2013 entre YPF y Chevron previó un programa inicial de unos cien pozos en un área de aproximadamente cinco mil acres, unos veinte kilómetros cuadrados, dentro de una concesión de casi cuatrocientos."
+       "say": "Y volvamos a Vaca Muerta. El acuerdo de julio de 2013 entre YPF y Chevron previó un programa inicial de unos cien pozos en un área de aproximadamente cinco mil acres, unos veinte kilómetros cuadrados, dentro de una concesión de casi cuatrocientos.",
+       "scene": {
+        "t": "dg",
+        "d": "flow",
+        "k": "Caso Vaca Muerta",
+        "h": "Piloto escalonado",
+        "p": {
+         "items": [
+          {
+           "t": "Programa inicial",
+           "s": "≈ 100 pozos en|≈ 5 000 acres|(≈ 20 km²)"
+          },
+          {
+           "t": "Dentro de una|concesión",
+           "s": "de casi 400 km²"
+          },
+          {
+           "t": "Piloto|escalonado",
+           "s": "rango de volumen e|incertidumbre|bien declarados"
+          },
+          {
+           "t": "Extender|por etapas",
+           "s": "recién después de|evaluar el piloto"
+          }
+         ]
+        }
+       },
+       "hs": [
+        0,
+        1
+       ],
+       "hl": 1
       },
       {
-       "say": "Ese es un piloto escalonado: se evalúa una porción acotada, con el rango de volumen y de incertidumbre bien declarado, antes de extender el desarrollo. Es exactamente la lógica de este curso: un modelo estático con su incertidumbre sostiene la decisión de dónde, cuánto y con qué riesgo invertir."
+       "say": "Ese es un piloto escalonado: se evalúa una porción acotada, con el rango de volumen y de incertidumbre bien declarado, antes de extender el desarrollo. Es exactamente la lógica de este curso: un modelo estático con su incertidumbre sostiene la decisión de dónde, cuánto y con qué riesgo invertir.",
+       "hl": 2
       },
       {
-       "say": "Al comunicar resultados, siempre se presenta el rango y no un número: P90, P50 y P10, los supuestos principales, las dos o tres incertidumbres que más pesan y el dato que más la reduciría."
+       "say": "Al comunicar resultados, siempre se presenta el rango y no un número: P90, P50 y P10, los supuestos principales, las dos o tres incertidumbres que más pesan y el dato que más la reduciría.",
+       "hl": 3
       },
       {
        "say": "Laboratorio. Primero, en la simulación Monte Carlo interactiva, subí la incertidumbre de los parámetros y observá cómo se abren el P90, el P50 y el P10 sin ningún dato nuevo. Después, en la hoja MonteCarlo de la planilla, cambiá el mínimo y el máximo del área y observá cómo cambian el P90 y el P10.",
