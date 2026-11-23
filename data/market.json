@@ -1,20 +1,20 @@
 {
  "brent": {
-  "v": 92.14,
-  "prev": 90.16,
-  "date": "2026-11-11"
+  "v": 92.94,
+  "prev": 92.9,
+  "date": "2026-11-17"
  },
  "wti": {
-  "v": 89.62,
-  "prev": 89.62,
-  "date": "2026-11-11"
+  "v": 89.53,
+  "prev": 89.24,
+  "date": "2026-11-17"
  },
  "gas": {
-  "v": 3.0,
-  "prev": 3.0,
-  "date": "2026-11-11"
+  "v": 3.1,
+  "prev": 3.2,
+  "date": "2026-11-17"
  },
- "date": "2026-11-11",
+ "date": "2026-11-17",
  "source": "EIA — U.S. Energy Information Administration (api.eia.gov)",
- "checked": "2026-11-13T18:33Z"
+ "checked": "2026-11-18T19:25Z"
 }
