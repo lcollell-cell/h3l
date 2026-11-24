@@ -40,7 +40,7 @@ HD.def('cem',{n:5,alt:'Etapas de una cementación primaria y ventana de presión
   o+=S(3,R(30,274,900,56,'bx-am','El desplazamiento debe terminar con el tapón asentado en el collar y sin retorno al soltar','t3'));
   o+=S(4,R(30,14,900,34,'bx-g','Registro de cemento (CBL / ultrasónico) y prueba de la barrera','t3'));return o}});
 /* ---------- la cementación en la ventana ---------- */
-HD.def('win',{n:4,alt:'Ventana operativa: la densidad equivalente debe quedar entre la presión de poro y la de fractura',draw:function(){
+HD.def('spwin',{n:4,alt:'Ventana operativa: la densidad equivalente debe quedar entre la presión de poro y la de fractura',draw:function(){
   var X=function(r){return 90+(r-8)/(18-8)*820},o=HD.axes(90,300,910,50,'Densidad equivalente (ppg)','');
   o+=S(0,'<rect x="'+X(8)+'" y="70" width="'+(X(10)-X(8))+'" height="70" class="f-wat"/>'+T(X(9),112,'Poro','t2 w','middle')+'<rect x="'+X(15)+'" y="70" width="'+(X(18)-X(15))+'" height="70" fill="rgba(255,100,80,.4)"/>'+T(X(16.5),112,'Fractura','t2 w','middle'));
   o+=S(1,'<rect x="'+X(10)+'" y="70" width="'+(X(15)-X(10))+'" height="70" fill="rgba(95,209,164,.18)"/>'+T(X(12.5),112,'Ventana operativa','t2 g','middle'));
@@ -59,7 +59,7 @@ HD.def('moc',{n:6,alt:'Pasos de la gestión del cambio: solicitar, evaluar, apro
   var p={items:[{t:'Solicitar',s:'qué cambia|y por qué'},{t:'Evaluar',s:'riesgos con|HAZOP'},{t:'Aprobar',s:'por quien|corresponda'},{t:'Implementar',s:'procedimientos|y capacitación'},{t:'Verificar',s:'antes de|arrancar'},{t:'Cerrar',s:'actualizar|documentos'}],h:200,last:true,note:'Un cambio temporal que se vuelve permanente sin evaluación es la causa clásica de accidentes'};
   return HD.defs.flow.draw(p)}});
 /* ---------- corrosión y ductos ---------- */
-HD.def('corr',{n:5,alt:'Corte de una cañería con pérdida de metal por corrosión y sus parámetros de profundidad y largo',draw:function(){
+HD.def('spcorr',{n:5,alt:'Corte de una cañería con pérdida de metal por corrosión y sus parámetros de profundidad y largo',draw:function(){
   var o='<rect x="60" y="80" width="520" height="150" rx="8" class="f-sh"/>';
   o+=G(0,'<path d="M60 150 Q200 150 260 162 Q300 190 340 162 Q400 150 580 150 L580 230 L60 230 Z" class="f-oil" opacity=".35"/>'+T(320,118,'Pared de la cañería (espesor t)','t3 mut','middle'));
   o+=S(1,'<path d="M230 80 Q290 80 290 155 Q290 190 330 190 Q370 190 370 80 Z" fill="rgba(255,120,90,.55)"/>'+T(300,70,'Defecto','t2 r','middle'));

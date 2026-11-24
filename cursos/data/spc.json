@@ -1123,7 +1123,7 @@
        "say": "La densidad equivalente debe quedar en una ventana. Por debajo de la presión de poro entra fluido; por encima de la de fractura se pierde cemento en la formación.",
        "scene": {
         "t": "dg",
-        "d": "win",
+        "d": "spwin",
         "k": "Ventana de presión",
         "h": "Entre poro y fractura",
         "src": "Esquema didáctico H3L · API 65-2"
@@ -2240,7 +2240,7 @@
        "say": "Un defecto de corrosión se describe con dos medidas. La profundidad, d, que es cuánto espesor se perdió, y el largo axial, L. La cañería tiene un espesor nominal, t.",
        "scene": {
         "t": "dg",
-        "d": "corr",
+        "d": "spcorr",
         "k": "Pérdida de metal",
         "h": "Profundidad, largo y espesor",
         "src": "Esquema didáctico H3L · ASME B31G (2012) y API 579-1/ASME FFS-1"
