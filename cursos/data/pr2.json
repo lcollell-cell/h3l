@@ -14,10 +14,14 @@
  ],
  "labs": [
   "marco PRMS y subclases de madurez",
+  "clasificador de madurez del proyecto: criterios de comercialidad y plazo",
   "escalera de madurez de los recursos contingentes",
   "precio y viabilidad económica de un contingente",
-  "rango de un recurso prospectivo",
-  "probabilidad de éxito y valor esperado"
+  "rango de un recurso prospectivo (Monte Carlo)",
+  "De Pg y Pd a la chance de comercialidad",
+  "probabilidad de éxito y valor esperado",
+  "gasto menor y reservas desarrolladas no productivas",
+  "escenarios de decisión: descubrimiento de gas, informe bajo la regla de la SEC y qué variable respaldar"
  ],
  "practiceMin": 90,
  "competencies": [
@@ -77,7 +81,85 @@
    "T": "Dar a los inversores información más completa y alinear el reporte con las prácticas y la tecnología actuales.",
    "A": "Una regla final permitió informar de forma opcional reservas probables y posibles, con definiciones consistentes con PRMS, y pasó al precio promedio de doce meses.",
    "R": "Rige para informes anuales de ejercicios que terminan desde el 31 de diciembre de 2009; informar probables y posibles es opcional."
-  }
+  },
+  "cues": [
+   {
+    "say": "Bienvenido a Más allá de las reservas comprobadas, de H3L Global Energy. Durante este curso vas a recorrer, paso a paso, todo lo que queda por fuera de la reserva probada: cómo se ordena cada volumen según qué tan cerca está de ser comercial.",
+    "scene": {
+     "t": "wel"
+    }
+   },
+   {
+    "say": "El curso responde tres preguntas. La primera: ¿qué tan cerca de ser reserva está un descubrimiento sin desarrollar? La segunda: ¿qué le falta a un recurso contingente para pasar a reserva? Y la tercera: ¿qué probabilidad tiene un prospecto de llegar a ser un proyecto comercial?",
+    "scene": {
+     "t": "bin"
+    },
+    "hl": 2
+   },
+   {
+    "say": "Para responderlas, el curso se organiza en cuatro módulos. El primero trata la madurez del proyecto y las reservas probables y posibles."
+   },
+   {
+    "say": "El segundo, los recursos contingentes, su estado económico y el paso a reserva."
+   },
+   {
+    "say": "El tercero, los recursos prospectivos, las chances de descubrimiento, de desarrollo y de comercialidad, y el caso de la SEC."
+   },
+   {
+    "say": "Y el cuarto, las reservas desarrolladas no productivas, el rendimiento pendiente y las sensibilidades."
+   },
+   {
+    "say": "El hilo conductor es un caso real. A fines de dos mil ocho, la SEC de los Estados Unidos adoptó una regla que permitió informar de forma opcional reservas probables y posibles, que hasta entonces no podían presentarse.",
+    "scene": {
+     "t": "star"
+    },
+    "hl": 0
+   },
+   {
+    "say": "El objetivo fue dar a los inversores información más completa y alinear el reporte con las prácticas y la tecnología actuales.",
+    "hl": 1
+   },
+   {
+    "say": "Para usar bien esa libertad hay que saber qué es cada categoría, qué le falta a cada volumen y con qué probabilidad llegará a ser comercial.",
+    "hl": 2
+   },
+   {
+    "say": "En cada lección seguimos la misma secuencia: una pregunta técnica, el método, el laboratorio o el escenario de decisiones, y la decisión que sostiene la lección."
+   },
+   {
+    "say": "Los laboratorios, los escenarios y la planilla Excel usan datos de ejemplo, pensados para practicar. No reemplazan una evaluación de reservas ni un informe a un regulador."
+   },
+   {
+    "say": "Al terminar el curso vas a poder: ubicar un proyecto en su subclase de madurez; distinguir probables, posibles y contingentes; explicar qué falta para ser reserva; calcular la chance de comercialidad de un prospecto; y leer una sensibilidad para decidir qué dato respaldar."
+   },
+   {
+    "say": "Cada módulo termina con un cuestionario, hay una planilla Excel para practicar, y el curso cierra con un examen final y el certificado H3L.",
+    "scene": {
+     "t": "bul",
+     "k": "Ruta del curso",
+     "h": "Cómo está organizado",
+     "items": [
+      "Madurez del proyecto y reservas",
+      "Recursos contingentes y paso a reserva",
+      "Prospectivos, riesgo y reporte",
+      "Desarrolladas no productivas y sensibilidades",
+      "Excel de práctica",
+      "Examen final y certificado H3L"
+     ]
+    }
+   },
+   {
+    "say": "Conviene conocer los conceptos básicos de reservas y recursos, como los del curso Recursos y Reservas SPE-PRMS, y manejar una planilla de cálculo."
+   },
+   {
+    "say": "Empecemos."
+   }
+  ],
+  "ficha": "**Ruta del curso.** Madurez del proyecto (M1) → recursos contingentes (M2) → prospectivos, riesgo y reporte (M3) → desarrolladas no productivas y sensibilidades (M4).\n\n**Las tres preguntas.** 1) ¿Qué tan cerca de ser reserva está un descubrimiento? 2) ¿Qué le falta a un contingente para pasar a reserva? 3) ¿Qué probabilidad tiene un prospecto de ser comercial?\n\n**Secuencia de cada lección.** Pregunta → método → laboratorio o escenario → decisión.\n\n**Qué se necesita.** Conceptos básicos de reservas y recursos; Excel (planilla H3L_Reservas_Recursos_Contingentes_y_Prospectivos.xlsx).\n\n**Aviso.** Los datos son de ejemplo con fines didácticos; el curso no reemplaza una evaluación de reservas ni un informe a un regulador.",
+  "obj": [
+   "Conocer las tres preguntas que ordenan el curso y cómo se organiza.",
+   "Entender el caso conductor (la regla de la SEC de 2008) y la metodología de cada lección."
+  ]
  },
  "modules": [
   {
@@ -87,10 +169,106 @@
     {
      "id": "x1",
      "title": "Las subclases de madurez del proyecto",
-     "comp": "Clasificación y madurez del proyecto",
+     "comp": "Clasificación de recursos y madurez del proyecto",
      "cues": [
       {
-       "say": "PRMS clasifica por proyecto, no por pozo ni por yacimiento. Y lo que decide la clase es la chance de comercialidad del proyecto: qué tan probable es que se apruebe y llegue a producir. Cuanto más maduro el proyecto, mayor esa chance.",
+       "say": "Te damos la bienvenida al curso Más allá de las reservas comprobadas. Veremos cuatro módulos, y te cuento para qué sirve cada uno.",
+       "scene": {
+        "t": "wel"
+       }
+      },
+      {
+       "say": "El primero, Madurez del proyecto y reservas más allá de las probadas. Sirve para entender cómo PRMS ordena todos los volúmenes según qué tan cerca está cada proyecto de ser comercial.",
+       "scene": {
+        "t": "chap",
+        "m": "agenda"
+       },
+       "hl": 0
+      },
+      {
+       "say": "El segundo, Recursos contingentes y el paso a reserva. Sirve para saber qué le falta a un descubrimiento para convertirse en reserva.",
+       "hl": 1
+      },
+      {
+       "say": "El tercero, Recursos prospectivos, riesgo y reporte. Sirve para valorar volúmenes que todavía no se descubrieron y para ver cómo la SEC abrió el reporte a las reservas probables y posibles.",
+       "hl": 2
+      },
+      {
+       "say": "Y el cuarto, Desarrolladas no productivas, rendimiento pendiente y sensibilidades. Sirve para clasificar pozos cerrados, interpretar volúmenes sin historia y decidir qué dato respaldar.",
+       "hl": 3
+      },
+      {
+       "say": "Y ahora sí, ¡comencemos!",
+       "scene": {
+        "t": "chap",
+        "i": 0,
+        "go": 1
+       }
+      },
+      {
+       "say": "PRMS clasifica por proyecto: no por pozo ni por yacimiento. Esa es la idea de partida de todo el curso.",
+       "scene": {
+        "t": "les",
+        "q": "PRMS clasifica por proyecto: no por pozo ni por yacimiento."
+       }
+      },
+      {
+       "say": "En el sistema PRMS, el proyecto es la unidad de clasificación. Se define por las actividades que llevan una acumulación a producción y venta, y a ese proyecto se asocia el volumen recuperable. Por eso un mismo yacimiento puede tener varios proyectos, cada uno en una clase distinta."
+      },
+      {
+       "say": "Al terminar esta lección vas a aprender, primero, a distinguir la clase, que depende de la chance de comercialidad, de la categoría, que depende de la incertidumbre del volumen.",
+       "scene": {
+        "t": "bul",
+        "k": "Objetivos de la lección",
+        "h": "Qué vas a aprender",
+        "items": [
+         "Distinguir la clase, que depende de la chance de comercialidad, de la categoría, que depende de la incertidumbre del volumen.",
+         "Ubicar un proyecto en su subclase de madurez, de en producción a play.",
+         "Explicar qué hace avanzar o retroceder a un proyecto entre subclases."
+        ]
+       },
+       "hl": 0,
+       "obj": 1
+      },
+      {
+       "say": "segundo, a ubicar un proyecto en su subclase de madurez, de en producción a play.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a explicar qué hace avanzar o retroceder a un proyecto entre subclases.",
+       "hl": 2,
+       "obj": 1
+      },
+      {
+       "say": "El marco de PRMS tiene dos ejes. En el horizontal está el rango de incertidumbre de los volúmenes recuperables: estimación baja, mejor y alta.",
+       "scene": {
+        "t": "dg",
+        "d": "pxfra",
+        "k": "Marco de clasificación",
+        "h": "Clase y categoría",
+        "src": "PRMS 2018 (SPE et al.), figura 1.1 y su guía de aplicación; esquema didáctico"
+       },
+       "hl": 0
+      },
+      {
+       "say": "En el vertical está la chance de comercialidad, que es la probabilidad de que el proyecto se comprometa para desarrollo y llegue a producir en condiciones comerciales. En lo más alto están las reservas.",
+       "hl": 1
+      },
+      {
+       "say": "Debajo, los recursos contingentes: acumulaciones descubiertas cuyo proyecto todavía no es comercial. Como ya están descubiertas, su chance de comercialidad es la chance de desarrollo.",
+       "hl": 2
+      },
+      {
+       "say": "Y más abajo, los recursos prospectivos, que son volúmenes de acumulaciones sin descubrir. Acá se suma el riesgo de que el pozo no descubra nada.",
+       "hl": 3
+      },
+      {
+       "say": "La regla de lectura es simple: se clasifica por la chance de comercialidad y se categoriza por la incertidumbre del volumen.",
+       "hl": 4
+      },
+      {
+       "say": "Dentro de cada clase, las subclases comunican la madurez del proyecto, que se mide por la chance de comercialidad. PRMS dos mil dieciocho recomienda usarlas, sobre todo para los recursos contingentes, donde la distancia a ser reserva varía mucho de un proyecto a otro.",
        "scene": {
         "t": "tbl",
         "k": "Clases y subclases",
@@ -124,16 +302,22 @@
        ]
       },
       {
-       "say": "Primero, las reservas. En producción, si el proyecto ya vende hidrocarburos. Aprobado para desarrollo, si tiene todas las aprobaciones, los fondos comprometidos y la obra en marcha. Y justificado para desarrollo, si cumple los criterios de comercialidad y hay intención firme de avanzar.",
+       "say": "Primero, las reservas. En producción, si el proyecto ya vende hidrocarburos. Aprobado para desarrollo, si tiene todas las aprobaciones, los fondos comprometidos y la obra en marcha. Y justificado para desarrollo, si la decisión de desarrollar está justificada y se esperan razonablemente las aprobaciones que faltan.",
        "hl": 0
       },
       {
-       "say": "Después, los recursos contingentes: acumulaciones descubiertas cuyo proyecto todavía no es comercial. Del más maduro al menos maduro: desarrollo pendiente, en espera, sin aclarar y no viable.",
+       "say": "Después, los recursos contingentes. Del más maduro al menos maduro: desarrollo pendiente, desarrollo en espera, desarrollo sin aclarar y desarrollo no viable. Los vemos con detalle en el módulo dos.",
        "hl": 1
       },
       {
-       "say": "Y los recursos prospectivos, que son volúmenes de acumulaciones aún sin descubrir. Se subclasifican como prospecto, lead y play, del objetivo más definido al menos definido.",
+       "say": "Y los recursos prospectivos, que se subclasifican como prospecto, lead y play, del objetivo más definido al menos definido.",
        "hl": 2
+      },
+      {
+       "say": "La subclase no es fija. Un proyecto avanza cuando se resuelven sus contingencias: se aprueba, se financia, se construye. Y retrocede si se pierde una aprobación, cae el precio o se demora el mercado. Por eso toda clasificación lleva su fecha."
+      },
+      {
+       "say": "Hay una advertencia de la actualización de dos mil dieciocho. Un proyecto no debería quedar mucho tiempo como justificado para desarrollo si no hay señales de que las aprobaciones van a llegar sin demoras indebidas."
       },
       {
        "say": "Laboratorio. Explorá el marco completo. Tocá cada bloque y fijate dónde caen las subclases de madurez. Después buscá los dos ejes: la chance de comercialidad y el rango de incertidumbre.",
@@ -146,28 +330,97 @@
        "lab": true
       },
       {
-       "say": "Pregunta rápida.",
+       "say": "Laboratorio del clasificador. Es una acumulación descubierta con la tecnología y la economía resueltas, pero sin aprobaciones, mercado ni intención firme. Tildá cada criterio que se resuelve y mirá cómo sube de subclase. Después llevá el plazo de inicio de tres a seis años y medio y fijate qué pasa sin justificación.",
+       "scene": {
+        "t": "viz",
+        "w": "px_clas",
+        "h": "Clasificador de madurez del proyecto",
+        "p": {
+         "v": {
+          "tech": true,
+          "econ": true,
+          "appr": false,
+          "mkt": false,
+          "intent": false,
+          "yrs": 3,
+          "estado": "active"
+         }
+        }
+       },
+       "lab": true
+      },
+      {
+       "say": "La decisión que sostiene esta lección es en qué clase y subclase informar un proyecto. Primero se mira si hay descubrimiento; después, qué criterios de comercialidad se cumplen hoy. Se informa lo que el proyecto cumple ahora, no lo que se espera que cumpla.",
+       "scene": {
+        "t": "dec",
+        "q": "En qué clase y subclase informar un proyecto"
+       }
+      },
+      {
+       "say": "Pregunta rápida. Respondé en pantalla.",
        "q": {
         "q": "¿Qué subclase de reservas exige fondos comprometidos y obra en marcha?",
         "o": [
-         "Justificado para desarrollo",
          "Aprobado para desarrollo",
-         "Desarrollo pendiente",
-         "Lead"
+         "Justificado para desarrollo",
+         "Lead",
+         "Desarrollo pendiente"
         ],
-        "a": 1,
+        "a": 0,
         "e": "Aprobado para desarrollo: tiene todas las aprobaciones, los fondos comprometidos y la implementación en marcha."
        }
       }
-     ]
+     ],
+     "obj": [
+      "Distinguir la clase, que depende de la chance de comercialidad, de la categoría, que depende de la incertidumbre del volumen.",
+      "Ubicar un proyecto en su subclase de madurez, de en producción a play.",
+      "Explicar qué hace avanzar o retroceder a un proyecto entre subclases."
+     ],
+     "ficha": "**Marco de PRMS 2018**\n\n| Concepto | Qué determina |\n|---|---|\n| Clase (reservas, contingentes, prospectivos) | Chance de comercialidad |\n| Categoría (1, 2, 3) | Incertidumbre del volumen |\n| Subclase | Madurez del proyecto |\n\n**Subclases.** Reservas: en producción, aprobado para desarrollo, justificado para desarrollo. Contingentes (de más a menos maduro): desarrollo pendiente, en espera, sin aclarar y no viable. Prospectivos: prospecto, lead y play.\n\n**Idea clave.** PRMS clasifica por proyecto, no por pozo ni por yacimiento. La clasificación lleva su fecha: un proyecto avanza al resolver contingencias y retrocede si pierde una aprobación o cae el precio.\n\n**Errores frecuentes.** Informar lo que se espera cumplir en vez de lo que se cumple hoy; mezclar clase con categoría.",
+     "practica": "Abrí el laboratorio del clasificador. Tildá los criterios uno a uno y anotá en qué subclase cae el proyecto en cada paso. Después llevá el plazo de inicio a seis años y medio sin justificar y anotá qué pasa. Resultado esperado: sin todos los criterios, es contingente; con todos, reservas."
     },
     {
      "id": "x2",
      "title": "Reservas probables y posibles: qué agregan sobre las probadas",
-     "comp": "Incertidumbre y reporte",
+     "comp": "Incertidumbre y reporte de reservas",
      "cues": [
       {
-       "say": "Dentro de una misma reserva hay tres escenarios de incertidumbre. Las probadas son la estimación baja, con alta confianza de ser igualadas o superadas. Sumadas las probables, forman la mejor estimación. Y con las posibles, la estimación alta.",
+       "say": "Dentro de un mismo proyecto de reservas hay tres escenarios de incertidumbre: baja, mejor y alta.",
+       "scene": {
+        "t": "les",
+        "q": "Dentro de un mismo proyecto de reservas hay tres escenarios de incertidumbre: baja, mejor y alta."
+       }
+      },
+      {
+       "say": "Las reservas probadas son la estimación baja, con alta confianza de que se igualen o superen. Si se suman las probables, se llega a la mejor estimación. Y con las posibles, a la estimación alta."
+      },
+      {
+       "say": "Al terminar esta lección vas a aprender, primero, a distinguir probadas, probables y posibles, y las estimaciones acumuladas uno P, dos P y tres P.",
+       "scene": {
+        "t": "bul",
+        "k": "Objetivos de la lección",
+        "h": "Qué vas a aprender",
+        "items": [
+         "Distinguir probadas, probables y posibles, y las estimaciones acumuladas 1P, 2P y 3P.",
+         "Leer la curva de probabilidad y ubicar P90, P50 y P10.",
+         "Explicar por qué un volumen es probable o posible y no probado, y por qué la estimación alta no es el plan de inversión."
+        ]
+       },
+       "hl": 0,
+       "obj": 1
+      },
+      {
+       "say": "segundo, a leer la curva de probabilidad y ubicar P90, P50 y P10.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a explicar por qué un volumen es probable o posible y no probado, y por qué la estimación alta no es el plan de inversión.",
+       "hl": 2,
+       "obj": 1
+      },
+      {
+       "say": "Con métodos probabilistas, cada estimación tiene una probabilidad asociada. Para la baja, al menos noventa por ciento de probabilidad de que la cantidad recuperada la iguale o la supere. Para la mejor, al menos cincuenta. Y para la alta, al menos diez por ciento.",
        "scene": {
         "t": "tbl",
         "k": "Categorías de reservas",
@@ -201,6 +454,32 @@
        "say": "Un punto clave: probables y posibles nombran solo el incremento. Las reservas probables son las que se agregan a las probadas. Las posibles son las que se agregan a las probables. En cambio, las estimaciones baja, mejor y alta son acumuladas."
       },
       {
+       "say": "Es la misma idea en una curva. En el eje horizontal, el volumen; en el vertical, la probabilidad de igualarlo o superarlo. A mayor volumen, menor probabilidad.",
+       "scene": {
+        "t": "dg",
+        "d": "pxcat",
+        "k": "Estimaciones de reservas",
+        "h": "La curva de probabilidad",
+        "src": "PRMS 2018 (SPE et al.), categorías de incertidumbre; curva de ejemplo"
+       },
+       "hl": 0
+      },
+      {
+       "say": "En el punto de noventa por ciento está la estimación baja, que corresponde a las reservas probadas, o 1P.",
+       "hl": 1
+      },
+      {
+       "say": "En cincuenta por ciento, la mejor estimación, o 2P: probadas más probables.",
+       "hl": 2
+      },
+      {
+       "say": "Y en diez por ciento, la estimación alta, o 3P. Lo que queda entre dos puntos es el incremento: probable, entre la baja y la mejor; posible, entre la mejor y la alta.",
+       "hl": 3
+      },
+      {
+       "say": "La curva es una forma de ver la incertidumbre. También se puede estimar por escenarios determinísticos. PRMS dos mil dieciocho aclara que se pueden usar ambos métodos, el determinístico y el probabilista."
+      },
+      {
        "say": "¿Qué hace que un volumen sea probable o posible y no probado? Casi siempre, una incertidumbre técnica que todavía no se resolvió. Por ejemplo, contactos de fluidos o límites del yacimiento sin confirmar.",
        "scene": {
         "t": "bul",
@@ -228,13 +507,38 @@
        "hl": 3
       },
       {
+       "say": "Hay una aclaración de dos mil dieciocho sobre cómo se verifica la comercialidad. El proyecto se evalúa con la mejor estimación, o una de mayor confianza. Si pasa, se prueba la economía de los escenarios bajo y alto para ver si también califican como 1P y 3P."
+      },
+      {
+       "say": "Entonces puede haber reservas 2P sin reservas 1P, cuando el caso bajo no es económico. Esas cantidades no pasan a contingentes: sería una clasificación dividida, y PRMS no permite dividir un mismo proyecto entre reservas y contingentes."
+      },
+      {
+       "say": "Laboratorio. Es un portafolio de pozos de ejemplo. Subí la cantidad de pozos y mirá cómo se angosta el rango entre P90 y P10. Con pocos pozos la incertidumbre del total es grande; con muchos pozos independientes, relativamente menor.",
+       "scene": {
+        "t": "viz",
+        "w": "mc",
+        "h": "Rango de un portafolio de pozos",
+        "p": {
+         "mode": "port"
+        }
+       },
+       "lab": true
+      },
+      {
        "say": "La estimación alta no es el plan de inversión. Es el resultado del mismo proyecto cuando todo sale mejor de lo esperado, con baja probabilidad. Decidir mirando solo la estimación alta es un error frecuente."
       },
       {
-       "say": "Y hay una consecuencia de reporte. Hasta 2008, las reglas de la SEC no permitían informar reservas probables y posibles. Desde entonces es opcional, y las definiciones quedaron consistentes con PRMS. Lo vemos en el caso del final del curso."
+       "say": "Y hay una consecuencia de reporte. Hasta dos mil ocho, las reglas de la SEC no permitían informar reservas probables y posibles. Desde entonces es opcional. Lo vemos en el caso del módulo tres."
       },
       {
-       "say": "Pregunta rápida.",
+       "say": "La decisión que sostiene esta lección es qué estimación mirar para cada pregunta. La mejor estimación sostiene la decisión comercial del proyecto, y la baja y la alta muestran el rango alrededor. Se informan juntas, nunca solo la alta.",
+       "scene": {
+        "t": "dec",
+        "q": "Qué estimación mirar para cada decisión"
+       }
+      },
+      {
+       "say": "Pregunta rápida. Respondé en pantalla.",
        "q": {
         "q": "Las reservas posibles son:",
         "o": [
@@ -247,42 +551,104 @@
         "e": "Las posibles son el incremento sobre las probables y llevan al total de la estimación alta, con al menos 10 % de probabilidad de ser igualada o superada."
        }
       }
-     ]
+     ],
+     "obj": [
+      "Distinguir probadas, probables y posibles, y las estimaciones acumuladas 1P, 2P y 3P.",
+      "Leer la curva de probabilidad y ubicar P90, P50 y P10.",
+      "Explicar por qué un volumen es probable o posible y no probado, y por qué la estimación alta no es el plan de inversión."
+     ],
+     "ficha": "**Categorías de reservas**\n\n| Estimación | Rótulo | Probabilidad (método probabilista) |\n|---|---|---|\n| Baja | 1P (probadas) | al menos 90 % |\n| Mejor | 2P (probadas + probables) | al menos 50 % |\n| Alta | 3P (probadas + probables + posibles) | al menos 10 % |\n\n**Probables y posibles** nombran solo el incremento. Las estimaciones baja, mejor y alta son acumuladas.\n\n**Ejemplo.** 1P = 40 MMbbl, 2P = 55 MMbbl, 3P = 70 MMbbl: probables = 15 MMbbl; posibles = 15 MMbbl (datos de ejemplo).\n\n**Comercialidad.** Se evalúa con la mejor estimación; si pasa, se prueba la economía de los casos bajo y alto. Puede haber 2P sin 1P, sin dividir el proyecto.\n\n**Errores frecuentes.** Decidir mirando solo 3P; sumar proyectos con distinta categoría sin explicarlo.",
+     "practica": "Abrí el laboratorio del portafolio de pozos. Subí la cantidad de pozos de 1 a 20 y anotá cómo cambia el rango entre P90 y P10. En la planilla, hoja Clasificacion, mirá cómo se suman los volúmenes por clase y explicá por qué no se suman entre sí."
     }
    ],
    "quiz": [
     {
-     "q": "¿Qué decide la clase de un proyecto en PRMS?",
+     "q": "En PRMS, ¿qué determina la clase de un proyecto (reservas, contingentes o prospectivos)?",
      "o": [
       "La chance de comercialidad del proyecto",
-      "El tipo de roca del yacimiento",
-      "La cantidad de pozos perforados",
-      "La compañía operadora"
+      "La profundidad a la que está el yacimiento",
+      "El precio del petróleo del día",
+      "La incertidumbre del volumen recuperable"
      ],
      "a": 0,
-     "e": "PRMS clasifica por la chance de comercialidad del proyecto y categoriza por la incertidumbre del volumen."
+     "e": "La clase se decide por la chance de comercialidad; la categoría (1, 2 o 3), por la incertidumbre del volumen."
     },
     {
-     "q": "Aprobado para desarrollo implica que el proyecto tiene:",
+     "q": "¿Qué distingue a las categorías 1, 2 y 3 dentro de una misma clase?",
      "o": [
-      "Solo una idea de proyecto",
-      "Aprobaciones, fondos comprometidos y obra en marcha",
-      "Producción agotada",
-      "El mercado todavía sin definir"
+      "El tipo de fluido",
+      "La edad de la acumulación",
+      "La empresa operadora",
+      "La incertidumbre del volumen recuperable"
      ],
-     "a": 1,
-     "e": "Todas las aprobaciones necesarias, los fondos comprometidos y la implementación en marcha."
+     "a": 3,
+     "e": "Las categorías miden la incertidumbre del volumen: baja, mejor y alta."
+    },
+    {
+     "q": "¿Cuál es la unidad de clasificación en PRMS?",
+     "o": [
+      "El proyecto",
+      "El pozo",
+      "El yacimiento completo",
+      "El bloque exploratorio"
+     ],
+     "a": 0,
+     "e": "PRMS clasifica por proyecto: un mismo yacimiento puede tener varios proyectos en clases distintas."
+    },
+    {
+     "q": "¿Qué subclase de reservas exige aprobaciones completas, fondos comprometidos y obra en marcha?",
+     "o": [
+      "Desarrollo pendiente",
+      "En producción",
+      "Justificado para desarrollo",
+      "Aprobado para desarrollo"
+     ],
+     "a": 3,
+     "e": "Aprobado para desarrollo: tiene todas las aprobaciones, los fondos comprometidos y la implementación en marcha."
     },
     {
      "q": "Las reservas probables son:",
      "o": [
-      "Las que ya se produjeron",
-      "Las que se agregan a las probadas",
-      "Las que se agregan a las posibles",
-      "Las que no tienen proyecto"
+      "El incremento sobre las probadas, hasta la mejor estimación",
+      "Un tipo de recurso prospectivo sin descubrimiento asociado",
+      "Las reservas que ya se produjeron y se vendieron en el ejercicio",
+      "La suma de todas las probadas y todas las posibles del proyecto"
      ],
-     "a": 1,
-     "e": "Probable es el incremento sobre las probadas; sumadas, forman la mejor estimación."
+     "a": 0,
+     "e": "Probables nombra solo el incremento sobre las probadas; probadas más probables dan la mejor estimación, 2P."
+    },
+    {
+     "q": "Con métodos probabilistas, la estimación baja de reservas debe tener:",
+     "o": [
+      "Al menos 90 % de probabilidad de ser igualada o superada",
+      "Al menos 50 % de probabilidad de ser igualada o superada",
+      "Una probabilidad que cada empresa elige",
+      "Al menos 10 % de probabilidad de ser igualada o superada"
+     ],
+     "a": 0,
+     "e": "Baja: al menos 90 %; mejor: al menos 50 %; alta: al menos 10 %."
+    },
+    {
+     "q": "Puede haber reservas 2P sin reservas 1P cuando:",
+     "o": [
+      "El precio sube",
+      "No hay pozos perforados",
+      "El caso bajo del proyecto no es económico",
+      "Se informan solo probables"
+     ],
+     "a": 2,
+     "e": "Si la economía del caso bajo no se sostiene, hay 2P sin 1P. Esas cantidades no pasan a contingentes: no se divide un proyecto."
+    },
+    {
+     "q": "La estimación alta, 3P, es:",
+     "o": [
+      "El escenario optimista del mismo proyecto, de baja probabilidad",
+      "Un volumen que no guarda relación con el proyecto",
+      "El plan de inversión recomendado para el proyecto",
+      "La estimación más conservadora que se puede informar"
+     ],
+     "a": 0,
+     "e": "La alta no es el plan: es el escenario optimista, con al menos 10 % de probabilidad de ser igualado o superado."
     }
    ]
   },
@@ -296,7 +662,49 @@
      "comp": "Evaluación de recursos contingentes",
      "cues": [
       {
-       "say": "Un recurso contingente es un volumen de una acumulación ya descubierta, pero cuyo proyecto todavía no cumple los criterios para ser reserva. Hay una o más contingencias por resolver. Puede faltar un mercado o un contrato de venta.",
+       "say": "Pasamos al módulo dos, Recursos contingentes y el paso a reserva. Ya vimos cómo se ordena todo el marco; ahora nos detenemos en lo que está descubierto pero todavía no es comercial.",
+       "scene": {
+        "t": "chap",
+        "i": 1
+       }
+      },
+      {
+       "say": "Un recurso contingente es un volumen de una acumulación ya descubierta, pero cuyo proyecto todavía no cumple los criterios para ser reserva.",
+       "scene": {
+        "t": "les",
+        "q": "Un recurso contingente es un volumen de una acumulación ya descubierta, pero cuyo proyecto todavía no cumple los criterios para ser reserva."
+       }
+      },
+      {
+       "say": "Hay una o más contingencias por resolver, y puede llevar años resolverlas. El volumen existe y está descubierto: lo que falta es que el proyecto sea comercial. Esa distancia es lo que miden las subclases."
+      },
+      {
+       "say": "Al terminar esta lección vas a aprender, primero, a definir un recurso contingente y reconocer las contingencias típicas que lo frenan.",
+       "scene": {
+        "t": "bul",
+        "k": "Objetivos de la lección",
+        "h": "Qué vas a aprender",
+        "items": [
+         "Definir un recurso contingente y reconocer las contingencias típicas que lo frenan.",
+         "Ordenar las cuatro subclases de madurez, de desarrollo pendiente a no viable.",
+         "Explicar qué cambió en dos mil dieciocho con en espera y sin aclarar."
+        ]
+       },
+       "hl": 0,
+       "obj": 1
+      },
+      {
+       "say": "segundo, a ordenar las cuatro subclases de madurez, de desarrollo pendiente a no viable.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a explicar qué cambió en dos mil dieciocho con en espera y sin aclarar.",
+       "hl": 2,
+       "obj": 1
+      },
+      {
+       "say": "Puede faltar un mercado o un contrato de venta.",
        "scene": {
         "t": "bul",
         "k": "Contingencias típicas",
@@ -328,7 +736,13 @@
        "hl": 4
       },
       {
-       "say": "Las subclases describen cuánto avanzó el proyecto para resolver esas contingencias. Del más maduro al menos maduro: desarrollo pendiente, en espera, sin aclarar y no viable. Tocá cada bloque para ver qué significa.",
+       "say": "Cada subclase describe cuánto avanzó el proyecto para resolver esas contingencias. Pendiente: hay actividades en curso para justificar el desarrollo comercial en un futuro previsible. En espera: las actividades están detenidas, o la justificación puede demorarse de forma significativa."
+      },
+      {
+       "say": "Sin aclarar: el proyecto está en evaluación y todavía no se sabe si se justifica. No viable: por ahora no hay planes de desarrollo ni de conseguir más datos, por el limitado potencial de producción."
+      },
+      {
+       "say": "Laboratorio. Es la escalera de madurez de los recursos contingentes. Tocá cada bloque para leer la definición y ver hacia dónde avanza un proyecto cuando resuelve sus contingencias.",
        "scene": {
         "t": "viz",
         "w": "concept",
@@ -396,23 +810,60 @@
        "lab": true
       },
       {
-       "say": "Un detalle de la actualización de 2018: separó desarrollo en espera de desarrollo sin aclarar, que antes eran una sola subclase. Y un recurso en desarrollo no viable sigue siendo contingente: no pasa a irrecuperable por eso."
+       "say": "Un detalle de la actualización de dos mil dieciocho: separó desarrollo en espera de desarrollo sin aclarar, que antes eran una sola subclase. Y un recurso en desarrollo no viable sigue siendo contingente."
       },
       {
-       "say": "Pregunta rápida.",
+       "say": "Laboratorio del clasificador, ahora con una contingencia. El gas descubierto no tiene contrato de venta. Cambiá el estado del proyecto entre pendiente, en espera, sin aclarar y no viable, y mirá qué subclase y qué chance de comercialidad le corresponden.",
+       "scene": {
+        "t": "viz",
+        "w": "px_clas",
+        "h": "Clasificador de madurez del proyecto",
+        "p": {
+         "v": {
+          "tech": true,
+          "econ": true,
+          "appr": true,
+          "mkt": false,
+          "intent": false,
+          "yrs": 3,
+          "estado": "hold"
+         }
+        }
+       },
+       "lab": true
+      },
+      {
+       "say": "Las subclases son una herramienta de comunicación. Dos proyectos contingentes pueden estar a años de distancia de ser reservas, y la subclase lo dice sin necesidad de un porcentaje."
+      },
+      {
+       "say": "La decisión que sostiene esta lección es en qué subclase contingente informar un descubrimiento. Depende de qué está haciendo el proyecto hoy: avanzando, detenido, en evaluación o sin planes. No depende de cuánto petróleo tenga.",
+       "scene": {
+        "t": "dec",
+        "q": "En qué subclase contingente informar un descubrimiento"
+       }
+      },
+      {
+       "say": "Pregunta rápida. Respondé en pantalla.",
        "q": {
         "q": "¿Cuál es la subclase más madura entre los recursos contingentes?",
         "o": [
-         "Desarrollo pendiente",
          "Desarrollo en espera",
          "Desarrollo sin aclarar",
-         "Desarrollo no viable"
+         "Desarrollo no viable",
+         "Desarrollo pendiente"
         ],
-        "a": 0,
+        "a": 3,
         "e": "Desarrollo pendiente: hay actividad en curso para justificar el desarrollo comercial en un plazo previsible."
        }
       }
-     ]
+     ],
+     "obj": [
+      "Definir un recurso contingente y reconocer las contingencias típicas que lo frenan.",
+      "Ordenar las cuatro subclases de madurez, de desarrollo pendiente a no viable.",
+      "Explicar qué cambió en dos mil dieciocho con en espera y sin aclarar."
+     ],
+     "ficha": "**Recursos contingentes**\n\n| Subclase | Situación |\n|---|---|\n| Desarrollo pendiente | Actividad en curso para justificar el desarrollo en un plazo previsible |\n| Desarrollo en espera | Detenido, o con justificación que puede demorarse de forma significativa |\n| Desarrollo sin aclarar | Evaluación en curso, sin saber todavía si se justifica |\n| Desarrollo no viable | Sin planes de desarrollo ni de obtener más datos |\n\n**Contingencias típicas.** Mercado o contrato; infraestructura; aprobaciones; economía; tecnología.\n\n**2007 y 2018.** La edición de 2018 separó en espera y sin aclarar, que antes eran una sola subclase. Un recurso no viable sigue siendo contingente.\n\n**Errores frecuentes.** Confundir contingente con prospectivo (ya está descubierto); omitir la subclase.",
+     "practica": "Abrí la escalera de madurez y tocá cada bloque. Después, en el clasificador, ponelo en estado detenido y escribí qué contingencia lo frena. Resultado esperado: desarrollo en espera."
     },
     {
      "id": "x4",
@@ -420,7 +871,42 @@
      "comp": "Evaluación de recursos contingentes",
      "cues": [
       {
-       "say": "Los recursos contingentes también se estiman con tres escenarios: baja, mejor y alta. Se rotulan con la letra C, para no confundirlos con las reservas, que usan la P. Los prospectivos, en cambio, usan la letra U.",
+       "say": "Los recursos contingentes también se estiman con tres escenarios, baja, mejor y alta, y se rotulan con la letra C.",
+       "scene": {
+        "t": "les",
+        "q": "Los recursos contingentes también se estiman con tres escenarios, baja, mejor y alta, y se rotulan con la letra C."
+       }
+      },
+      {
+       "say": "Cada clase tiene su letra, para no confundir un contingente con una reserva. Las reservas usan la P, los contingentes la C y los prospectivos la U."
+      },
+      {
+       "say": "Al terminar esta lección vas a aprender, primero, a rotular las estimaciones de cada clase con P, C y U.",
+       "scene": {
+        "t": "bul",
+        "k": "Objetivos de la lección",
+        "h": "Qué vas a aprender",
+        "items": [
+         "Rotular las estimaciones de cada clase con P, C y U.",
+         "Distinguir un proyecto económicamente viable de uno comercial.",
+         "Ver cómo el precio mueve el caudal límite económico y la viabilidad de un contingente."
+        ]
+       },
+       "hl": 0,
+       "obj": 1
+      },
+      {
+       "say": "segundo, a distinguir un proyecto económicamente viable de uno comercial.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a ver cómo el precio mueve el caudal límite económico y la viabilidad de un contingente.",
+       "hl": 2,
+       "obj": 1
+      },
+      {
+       "say": "Las estimaciones acumuladas son uno P, dos P y tres P para reservas; uno C, dos C y tres C para contingentes; y uno U, dos U y tres U para prospectivos. La edición de dos mil dieciocho agregó designaciones para los incrementos de contingentes, C1, C2 y C3, y para las estimaciones prospectivas.",
        "scene": {
         "t": "tbl",
         "k": "Rótulos de las estimaciones",
@@ -455,7 +941,10 @@
        }
       },
       {
-       "say": "Hay una diferencia con las reservas. Una reserva se declara solo si el proyecto es comercial. Un contingente, en cambio, puede ser económico o no serlo. La versión de 2007 hablaba de marginal y submarginal. La de 2018 los renombró: económicamente viable y económicamente no viable."
+       "say": "Hay una diferencia con las reservas. Una reserva se declara solo si el proyecto es comercial. Un contingente, en cambio, puede ser económico o no serlo. La versión de dos mil siete hablaba de marginal y submarginal. La de dos mil dieciocho los renombró: económicamente viable y económicamente no viable."
+      },
+      {
+       "say": "Y qué es económico. Según las erratas de PRMS dos mil dieciocho, un proyecto es económico cuando su flujo de caja neto acumulado, sin descontar, es positivo."
       },
       {
        "say": "Laboratorio. Es un pozo de ejemplo con el precio del crudo editable. Bajá el precio y mirá cuándo el caudal límite económico supera al caudal inicial. En ese punto el proyecto deja de ser económicamente viable, aunque el volumen en el subsuelo sea el mismo.",
@@ -476,34 +965,89 @@
        "lab": true
       },
       {
-       "say": "Atención al matiz. Que un proyecto sea económicamente viable no alcanza para que sea reserva. Para eso tiene que ser comercial, que es más que económico: pide aprobaciones, financiamiento e intención firme de desarrollar."
+       "say": "Atención al matiz. Que un proyecto sea económicamente viable no alcanza para que sea reserva. Las preguntas frecuentes de la SPE lo dicen así: la economía es solo un elemento de la comercialidad. Además hacen falta aprobaciones, financiamiento e intención firme de desarrollar."
+      },
+      {
+       "say": "Otra aclaración de esas preguntas. Los recursos contingentes no se truncan de forma automática en el límite económico. Si el evaluador quiere mostrar reservas potenciales con el proyecto previsto, aplica un límite económico. Si quiere mostrar el potencial total, puede usar un límite técnico."
+      },
+      {
+       "say": "Lo importante es declarar cuál usó. Un volumen informado hasta el límite técnico y otro informado hasta el límite económico no se pueden comparar sin esa aclaración."
       },
       {
        "say": "Por eso los recursos contingentes no se suman a las reservas. Tienen una chance de comercialidad menor y cada uno carga contingencias distintas. Se informan por separado, cada uno con su rango."
       },
       {
-       "say": "Pregunta rápida.",
+       "say": "La decisión que sostiene esta lección es con qué límite estimar un contingente y cómo declararlo. El límite económico responde cuánto podría llegar a ser reserva; el técnico, cuánto podría recuperarse en total. Se informa el que se usó.",
+       "scene": {
+        "t": "dec",
+        "q": "Con qué límite estimar un contingente y cómo declararlo"
+       }
+      },
+      {
+       "say": "Pregunta rápida. Respondé en pantalla.",
        "q": {
         "q": "Un proyecto económicamente viable, pero sin aprobaciones ni financiamiento, es:",
         "o": [
+         "Producción acumulada",
          "Una reserva probada",
-         "Un recurso contingente",
          "Un recurso prospectivo",
-         "Producción acumulada"
+         "Un recurso contingente"
         ],
-        "a": 1,
+        "a": 3,
         "e": "Puede ser económico, pero para ser reserva debe ser comercial: con aprobaciones, financiamiento e intención firme."
        }
       }
-     ]
+     ],
+     "obj": [
+      "Rotular las estimaciones de cada clase con P, C y U.",
+      "Distinguir un proyecto económicamente viable de uno comercial.",
+      "Ver cómo el precio mueve el caudal límite económico y la viabilidad de un contingente."
+     ],
+     "ficha": "**Rótulos y estado económico**\n\n| Estimación | Reservas | Contingentes | Prospectivos |\n|---|---|---|---|\n| Baja | 1P | 1C | 1U |\n| Mejor | 2P | 2C | 2U |\n| Alta | 3P | 3C | 3U |\n\n**Económico.** Según las erratas de PRMS 2018, un proyecto es económico cuando su flujo de caja neto acumulado, sin descontar, es positivo. Los contingentes se califican como económicamente viables o no viables (antes, marginal y submarginal).\n\n**Ejemplo de límite.** Un pozo de ejemplo con precio de 65 USD por barril es viable; si el precio baja y el caudal límite económico supera al inicial, deja de serlo.\n\n**Aclaraciones de las FAQ.** Ser económico no alcanza para ser reserva. El contingente no se trunca de forma automática en el límite económico: se declara el límite usado.",
+     "practica": "En el laboratorio de precio, bajá el precio hasta que el proyecto deje de ser viable y anotá el precio de corte. En la planilla, hoja Contingentes, bajá el precio de 65 a 45 USD por barril y anotá qué proyectos dejan de ser viables."
     },
     {
      "id": "x5",
      "title": "Del recurso contingente a la reserva",
-     "comp": "Clasificación y madurez del proyecto",
+     "comp": "Clasificación de recursos y madurez del proyecto",
      "cues": [
       {
-       "say": "¿Cuándo un contingente pasa a reserva? Cuando se resuelven todas las contingencias y el proyecto es comercial. Se mira que tenga todo lo necesario, empezando por una tecnología establecida para el proyecto.",
+       "say": "Un contingente pasa a reserva cuando se resuelven todas las contingencias y el proyecto es comercial.",
+       "scene": {
+        "t": "les",
+        "q": "Un contingente pasa a reserva cuando se resuelven todas las contingencias y el proyecto es comercial."
+       }
+      },
+      {
+       "say": "Es un cambio de clase, no de categoría: el volumen puede ser el mismo, pero el proyecto ya cumple lo que antes le faltaba. Esa lista de condiciones es el umbral de reserva."
+      },
+      {
+       "say": "Al terminar esta lección vas a aprender, primero, a enumerar los criterios de comercialidad que debe cumplir un proyecto para ser reserva.",
+       "scene": {
+        "t": "bul",
+        "k": "Objetivos de la lección",
+        "h": "Qué vas a aprender",
+        "items": [
+         "Enumerar los criterios de comercialidad que debe cumplir un proyecto para ser reserva.",
+         "Explicar el umbral de noventa por ciento de chance de desarrollo y la referencia de cinco años.",
+         "Reconocer cuándo una reserva vuelve a ser contingente y por qué no se divide un proyecto."
+        ]
+       },
+       "hl": 0,
+       "obj": 1
+      },
+      {
+       "say": "segundo, a explicar el umbral de noventa por ciento de chance de desarrollo y la referencia de cinco años.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a reconocer cuándo una reserva vuelve a ser contingente y por qué no se divide un proyecto.",
+       "hl": 2,
+       "obj": 1
+      },
+      {
+       "say": "Se mira que el proyecto tenga todo lo necesario, empezando por una tecnología establecida.",
        "scene": {
         "t": "bul",
         "k": "Umbral de reserva",
@@ -535,64 +1079,272 @@
        "hl": 4
       },
       {
-       "say": "La probabilidad lo resume. Para ser reserva, la chance de que el desarrollo avance tiene que ser de por lo menos noventa por ciento, y muchas veces se evalúa en cien. Es el umbral de justificado para desarrollo."
+       "say": "La probabilidad lo resume. Con probabilidades, la chance de desarrollo comercial debe ser de noventa por ciento o más, y muchas veces se evalúa en cien. Es lo que las preguntas frecuentes de la SPE aclaran para la subclase justificado para desarrollo."
       },
       {
-       "say": "Dos reglas prácticas. Un proyecto no se puede dividir: no se admite una parte en reservas y otra en contingentes dentro del mismo proyecto. Y para las reservas no desarrolladas, se espera iniciar el desarrollo dentro de cinco años de su clasificación inicial."
+       "say": "El tiempo también cuenta. Para las reservas no desarrolladas, PRMS toma como referencia cinco años desde la clasificación inicial para iniciar el desarrollo.",
+       "scene": {
+        "t": "dg",
+        "d": "pxtime",
+        "k": "Reservas no desarrolladas",
+        "h": "La referencia de cinco años",
+        "src": "PRMS 2018 (cambios clave) y FAQ 4.7 de la SPE; ejemplos didácticos"
+       },
+       "hl": 0
       },
       {
-       "say": "El camino de vuelta también existe. Si el precio cae, se pierde una aprobación o el proyecto se posterga, una reserva puede volver a ser contingente."
+       "say": "Es una referencia recomendada, no un límite rígido: si hay una justificación clara, puede aplicarse un plazo mayor.",
+       "hl": 1
       },
       {
-       "say": "Pregunta rápida.",
+       "say": "Un ejemplo. Un proyecto que decide invertir a los dos años y medio inicia su desarrollo dentro de la referencia.",
+       "hl": 2
+      },
+      {
+       "say": "Otro que inicia recién a los seis años y medio necesita justificarlo con claridad. Si no puede, no cumple el criterio y sigue como contingente.",
+       "hl": 3
+      },
+      {
+       "say": "Dos reglas más. La regla de los cinco años aplica a la clase reservas, y no solo a las probadas. Y un mismo proyecto no puede dividirse: no se admite una parte en reservas y otra en contingentes."
+      },
+      {
+       "say": "El camino de vuelta también existe. Si el precio cae, se pierde una aprobación o el proyecto se posterga, una reserva puede volver a ser contingente. Por eso las reservas se informan siempre a una fecha."
+      },
+      {
+       "say": "Laboratorio del clasificador. Este proyecto cumple casi todo: solo le falta la intención firme de desarrollar, y el plazo de inicio es de seis años y medio. Tildá lo que se resuelve, justificá el plazo y mirá cuándo pasa a reservas.",
+       "scene": {
+        "t": "viz",
+        "w": "px_clas",
+        "h": "Clasificador de madurez del proyecto",
+        "p": {
+         "v": {
+          "tech": true,
+          "econ": true,
+          "appr": true,
+          "mkt": true,
+          "intent": false,
+          "yrs": 6.5,
+          "just": false,
+          "estado": "active"
+         }
+        }
+       },
+       "lab": true
+      },
+      {
+       "say": "Escenario. Un descubrimiento de gas pasa por tres decisiones: qué informar sin contrato, qué cambia cuando se firma y cómo tratar un plazo largo. Respondé en pantalla.",
+       "scene": {
+        "t": "viz",
+        "w": "spc_case",
+        "h": "Escenario: clasificar un descubrimiento de gas",
+        "p": {
+         "title": "Un descubrimiento de gas",
+         "intro": "Tu compañía descubrió un yacimiento de gas. Tiene tecnología establecida y economía positiva, y hoy la compañía evalúa qué informar. Datos de ejemplo.",
+         "src": "PRMS 2018 (SPE et al.) y sus preguntas frecuentes de 2022. Datos de ejemplo.",
+         "close": "La clase la decide el estado del proyecto, no el entusiasmo: se informa lo que se cumple hoy, con su fecha, y se revisa cuando cambia una condición.",
+         "steps": [
+          {
+           "s": "No hay contrato de venta ni gasoducto comprometido, y el socio todavía no aprobó el plan. El área de negocios quiere informarlo ya como reserva probada. ¿Qué corresponde?",
+           "st": {
+            "Tecnología": "establecida",
+            "Economía": "positiva",
+            "Contrato": "sin firmar",
+            "Aprobación del socio": "pendiente"
+           },
+           "o": [
+            {
+             "t": "Informarlo como reserva probada: la economía es positiva y eso alcanza.",
+             "ok": 0,
+             "fb": "La economía es solo un elemento de la comercialidad. Sin mercado ni aprobaciones, el proyecto no cumple los criterios para ser reserva."
+            },
+            {
+             "t": "Informarlo como recurso contingente y usar la subclase que corresponde a la actividad actual del proyecto.",
+             "ok": 2,
+             "fb": "Está descubierto pero no es comercial: es contingente. Si hay actividades en curso para resolver mercado y aprobaciones, corresponde desarrollo pendiente; si están detenidas, en espera."
+            },
+            {
+             "t": "Informarlo como recurso prospectivo hasta tener el contrato.",
+             "ok": 0,
+             "fb": "Ya está descubierto. Prospectivo es solo para acumulaciones sin descubrir."
+            }
+           ],
+           "dt": "Con el contrato firmado y la aprobación del socio, se vuelve a clasificar."
+          },
+          {
+           "s": "Pasan ocho meses. El contrato de venta se firma y el gasoducto queda comprometido, pero el plan de desarrollo todavía no tiene decisión de inversión. ¿Qué cambió?",
+           "st": {
+            "Contrato": "firmado",
+            "Gasoducto": "comprometido",
+            "Decisión de inversión": "pendiente"
+           },
+           "o": [
+            {
+             "t": "Pasa directo a reserva en producción.",
+             "ok": 0,
+             "fb": "En producción es solo para un proyecto que ya vende hidrocarburos."
+            },
+            {
+             "t": "Pasa a reserva justificada para desarrollo, si además se esperan razonablemente las aprobaciones y hay intención firme de desarrollar.",
+             "ok": 2,
+             "fb": "Si se cumplen todos los criterios de comercialidad, el proyecto es reserva. Con la decisión tomada pero sin fondos comprometidos ni obra en marcha, la subclase es justificado para desarrollo."
+            },
+            {
+             "t": "Divide el proyecto: la mitad pasa a reserva y la otra mitad queda como contingente.",
+             "ok": 0,
+             "fb": "PRMS no permite clasificaciones divididas dentro de un mismo proyecto."
+            }
+           ],
+           "dt": "Falta que el proyecto avance a aprobado para desarrollo."
+          },
+          {
+           "s": "El plan prevé iniciar el desarrollo recién dentro de seis años y medio, por limitaciones de la capacidad del gasoducto. ¿Cómo lo informás?",
+           "st": {
+            "Inicio previsto": "6,5 años",
+            "Referencia de PRMS": "5 años"
+           },
+           "o": [
+            {
+             "t": "Como reserva, sin mencionar el plazo.",
+             "ok": 0,
+             "fb": "La referencia de cinco años es un punto de partida: un plazo mayor debe justificarse con claridad."
+            },
+            {
+             "t": "Como reserva solo si hay una justificación clara del plazo mayor; si no, como contingente.",
+             "ok": 2,
+             "fb": "Las preguntas frecuentes describen los cinco años como referencia recomendada y admiten un plazo mayor cuando está justificado. Sin justificación, el criterio de reservas no se cumple."
+            },
+            {
+             "t": "Como recurso irrecuperable.",
+             "ok": 0,
+             "fb": "Hay un proyecto posible y recuperable: lo que falta es justificar el plazo."
+            }
+           ],
+           "dt": "Documentar la justificación forma parte del informe."
+          }
+         ]
+        }
+       },
+       "lab": true
+      },
+      {
+       "say": "La decisión que sostiene esta lección es cuándo declarar una reserva. Cuando todos los criterios están resueltos y se espera razonablemente que el proyecto avance, con el plazo justificado. Antes de eso, el volumen es contingente y se informa con su subclase.",
+       "scene": {
+        "t": "dec",
+        "q": "Cuándo declarar una reserva"
+       }
+      },
+      {
+       "say": "Pregunta rápida. Respondé en pantalla.",
        "q": {
         "q": "Dentro de un mismo proyecto, PRMS:",
         "o": [
-         "No admite dividirlo entre reservas y contingentes",
-         "Permite reservas y contingentes a la vez",
          "Obliga a informar solo la estimación alta",
+         "No admite dividirlo entre reservas y contingentes",
+         "Permite informar una parte como reserva y otra como contingente",
          "Exige que sea siempre un solo pozo"
         ],
-        "a": 0,
+        "a": 1,
         "e": "Según las aclaraciones de la SPE, no se admiten clasificaciones divididas dentro de un mismo proyecto."
        }
       }
-     ]
+     ],
+     "obj": [
+      "Enumerar los criterios de comercialidad que debe cumplir un proyecto para ser reserva.",
+      "Explicar el umbral de noventa por ciento de chance de desarrollo y la referencia de cinco años.",
+      "Reconocer cuándo una reserva vuelve a ser contingente y por qué no se divide un proyecto."
+     ],
+     "ficha": "**Umbral de reserva**\n\n| Criterio | Pregunta |\n|---|---|\n| Tecnología | ¿Está establecida para este proyecto? |\n| Economía | ¿Es positiva con las condiciones previstas? |\n| Aprobaciones | ¿Se esperan razonablemente, internas y externas? |\n| Mercado y transporte | ¿Están razonablemente asegurados? |\n| Intención | ¿Hay intención firme de desarrollar en un plazo razonable? |\n\n**Probabilidad.** Pd de al menos 90 % (FAQ de la SPE).\n\n**Plazo.** Referencia de cinco años para iniciar el desarrollo de reservas no desarrolladas; un plazo mayor se acepta con justificación clara.\n\n**Ejemplo.** Inicio a los 2,5 años: dentro de la referencia. Inicio a los 6,5 años sin justificación: sigue como contingente (datos de ejemplo).\n\n**Reglas.** No hay clasificación dividida. Una reserva puede volver a contingente si pierde una condición.",
+     "practica": "Resolvé el escenario del descubrimiento de gas y repetilo hasta lograr 6 de 6. En el clasificador, partí de aprobaciones y mercado resueltos, sin intención firme, y buscá qué hay que resolver para llegar a reservas. En la planilla, hoja Umbral_Reserva, marcá 1 en los dos criterios que faltan y mirá el resultado."
     }
    ],
    "quiz": [
     {
-     "q": "Un contingente con evaluación incompleta, sin alcance definido, está en:",
+     "q": "Un recurso contingente es un volumen:",
      "o": [
-      "Desarrollo pendiente",
-      "Desarrollo en espera",
-      "Desarrollo sin aclarar",
-      "Desarrollo no viable"
-     ],
-     "a": 2,
-     "e": "Desarrollo sin aclarar: la evaluación sigue incompleta y hay actividad para resolver riesgos e incertidumbres."
-    },
-    {
-     "q": "En PRMS 2018, marginal y submarginal pasaron a llamarse:",
-     "o": [
-      "Probable y posible",
-      "Económicamente viable y no viable",
-      "Pendiente y en espera",
-      "Comercial y no comercial"
-     ],
-     "a": 1,
-     "e": "La versión de 2018 renombró esos términos de 2007 como económicamente viable y económicamente no viable."
-    },
-    {
-     "q": "Para ser reserva, la chance de desarrollo debe ser, en la práctica, de por lo menos:",
-     "o": [
-      "10 %",
-      "30 %",
-      "50 %",
-      "90 %"
+      "De una acumulación todavía sin descubrir ni perforar",
+      "Que ya se produjo y se vendió en el ejercicio anterior",
+      "Que no es técnicamente recuperable con ninguna tecnología",
+      "De una acumulación descubierta cuyo proyecto aún no es comercial"
      ],
      "a": 3,
-     "e": "Según las aclaraciones de la SPE, la chance de desarrollo comercial debe ser de 90 % o más."
+     "e": "Contingente: descubierto, pero con una o más contingencias sin resolver."
+    },
+    {
+     "q": "En 2018, PRMS separó una subclase contingente en dos. ¿Cuáles?",
+     "o": [
+      "Prospecto y lead",
+      "Pendiente y no viable",
+      "En espera y sin aclarar",
+      "Probado y probable"
+     ],
+     "a": 2,
+     "e": "Desarrollo en espera y desarrollo sin aclarar eran una sola subclase antes de 2018."
+    },
+    {
+     "q": "Las estimaciones baja, mejor y alta de los recursos contingentes se rotulan:",
+     "o": [
+      "1R, 2R y 3R",
+      "1P, 2P y 3P",
+      "1U, 2U y 3U",
+      "1C, 2C y 3C"
+     ],
+     "a": 3,
+     "e": "C de contingente; P de reservas; U de prospectivo (sin riesgo)."
+    },
+    {
+     "q": "Según las erratas de PRMS 2018, un proyecto es económico cuando:",
+     "o": [
+      "Su tasa de retorno supera a la inflación",
+      "Produce más de 100 barriles por día",
+      "Tiene contrato de venta",
+      "Tiene un flujo de caja neto acumulado sin descontar positivo"
+     ],
+     "a": 3,
+     "e": "La definición de económico usa el flujo de caja neto acumulado, sin descontar, positivo."
+    },
+    {
+     "q": "Un proyecto económicamente viable, pero sin aprobaciones ni financiamiento, es:",
+     "o": [
+      "Una reserva probada",
+      "Un recurso prospectivo",
+      "Un recurso contingente",
+      "Producción acumulada"
+     ],
+     "a": 2,
+     "e": "Economía positiva es solo un elemento de la comercialidad. Sin los demás, es contingente."
+    },
+    {
+     "q": "Los recursos contingentes, ¿se truncan automáticamente en el límite económico?",
+     "o": [
+      "No: se declara cuál límite se usó, técnico o económico",
+      "Sí, siempre se truncan en el límite técnico de cada pozo",
+      "Sí, siempre se truncan en el límite económico del proyecto",
+      "No se estiman con ningún límite, ni técnico ni económico"
+     ],
+     "a": 0,
+     "e": "Las FAQ de la SPE aclaran que no es automático; lo esencial es declarar el límite usado."
+    },
+    {
+     "q": "Para la subclase justificado para desarrollo, la chance de desarrollo debe ser:",
+     "o": [
+      "Exactamente 100 %",
+      "De 90 % o más",
+      "Menor que 50 %",
+      "Un valor que cada empresa elige"
+     ],
+     "a": 1,
+     "e": "Las FAQ de la SPE aclaran que Pd debe ser de por lo menos 90 %, y a menudo se evalúa en 100 %."
+    },
+    {
+     "q": "La referencia de cinco años para iniciar el desarrollo de reservas no desarrolladas:",
+     "o": [
+      "Es una referencia, con excepciones justificadas",
+      "Aplica solamente a los recursos prospectivos del play",
+      "Es un límite rígido que no admite ninguna excepción",
+      "No existe en PRMS ni en sus preguntas frecuentes"
+     ],
+     "a": 0,
+     "e": "Es un punto de referencia recomendado; un plazo mayor debe justificarse con claridad."
     }
    ]
   },
@@ -606,7 +1358,49 @@
      "comp": "Recursos prospectivos y riesgo exploratorio",
      "cues": [
       {
-       "say": "Los recursos prospectivos son volúmenes de acumulaciones que todavía no se descubrieron. Como no hay descubrimiento, son los de mayor riesgo. Se subclasifican según cuán definido está el objetivo exploratorio.",
+       "say": "Pasamos al módulo tres, Recursos prospectivos, riesgo y reporte. Ahora salimos del terreno de lo descubierto y miramos volúmenes que todavía nadie perforó.",
+       "scene": {
+        "t": "chap",
+        "i": 2
+       }
+      },
+      {
+       "say": "Los recursos prospectivos son volúmenes de acumulaciones que todavía no se descubrieron.",
+       "scene": {
+        "t": "les",
+        "q": "Los recursos prospectivos son volúmenes de acumulaciones que todavía no se descubrieron."
+       }
+      },
+      {
+       "say": "Como no hay descubrimiento, son los de mayor riesgo. Se subclasifican según cuán definido está el objetivo exploratorio, y se estiman sin aplicar la chance de éxito."
+      },
+      {
+       "say": "Al terminar esta lección vas a aprender, primero, a distinguir prospecto, lead y play.",
+       "scene": {
+        "t": "bul",
+        "k": "Objetivos de la lección",
+        "h": "Qué vas a aprender",
+        "items": [
+         "Distinguir prospecto, lead y play.",
+         "Leer las estimaciones sin riesgo, rotuladas con la letra U.",
+         "Explicar por qué un prospecto necesita un plan de desarrollo conceptual."
+        ]
+       },
+       "hl": 0,
+       "obj": 1
+      },
+      {
+       "say": "segundo, a leer las estimaciones sin riesgo, rotuladas con la letra U.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a explicar por qué un prospecto necesita un plan de desarrollo conceptual.",
+       "hl": 2,
+       "obj": 1
+      },
+      {
+       "say": "Los recursos prospectivos se subclasifican del objetivo más definido al menos definido.",
        "scene": {
         "t": "tbl",
         "k": "Recursos prospectivos",
@@ -629,7 +1423,8 @@
           "Tendencia geológica reconocida donde todavía no hay prospectos definidos"
          ]
         ]
-       }
+       },
+       "notes": null
       },
       {
        "say": "Un prospecto está lo bastante definido como para ser un objetivo de perforación.",
@@ -644,7 +1439,7 @@
        "hl": 2
       },
       {
-       "say": "Las estimaciones de un recurso prospectivo son sin riesgo. Se rotulan con la letra U: baja, mejor y alta. Muestran el volumen que se recuperaría si hubiera descubrimiento y desarrollo, no el volumen esperado."
+       "say": "Las estimaciones de un recurso prospectivo se rotulan con la letra U: uno U, dos U y tres U para baja, mejor y alta. Y PRMS pide informarlas sin riesgo. Muestran el volumen que se recuperaría si hubiera descubrimiento y desarrollo, no el volumen esperado."
       },
       {
        "say": "Laboratorio. Es el petróleo original de un prospecto de ejemplo, estimado con Monte Carlo a partir de área, espesor, porosidad y saturación. Subí la incertidumbre de los parámetros y mirá cómo se abre el rango. Ese rango es la base de las estimaciones baja, mejor y alta. Todavía no incluye la chance de éxito.",
@@ -662,20 +1457,37 @@
        "say": "Un último requisito. Para evaluar un prospecto sin perforar hay que imaginar el proyecto. Se necesita un plan de desarrollo conceptual, para estimar costos y volúmenes recuperables si el pozo descubre."
       },
       {
-       "say": "Pregunta rápida.",
+       "say": "Ese plan es lo que permite hablar después de chance de desarrollo. Sin un concepto de desarrollo no hay forma de decir si el descubrimiento sería comercial."
+      },
+      {
+       "say": "La decisión que sostiene esta lección es qué subclase asignar a un objetivo exploratorio. Depende de cuánto dato lo respalda: un objetivo definido para perforar es un prospecto; uno que necesita datos, un lead; y una tendencia sin objetivos, un play.",
+       "scene": {
+        "t": "dec",
+        "q": "Qué subclase asignar a un objetivo exploratorio"
+       }
+      },
+      {
+       "say": "Pregunta rápida. Respondé en pantalla.",
        "q": {
         "q": "La letra U en las estimaciones prospectivas indica que son:",
         "o": [
          "Sin riesgo geológico aplicado",
          "Uniformes en toda el área",
-         "Verificadas con producción",
-         "Útiles solo para contingentes"
+         "Útiles solo para contingentes",
+         "Verificadas con producción"
         ],
         "a": 0,
-        "e": "U viene de unrisked: es el volumen si hay descubrimiento, sin aplicar la probabilidad de éxito."
+        "e": "Las estimaciones 1U, 2U y 3U muestran el volumen si hay descubrimiento y desarrollo, sin aplicar la probabilidad de éxito."
        }
       }
-     ]
+     ],
+     "obj": [
+      "Distinguir prospecto, lead y play.",
+      "Leer las estimaciones sin riesgo, rotuladas con la letra U.",
+      "Explicar por qué un prospecto necesita un plan de desarrollo conceptual."
+     ],
+     "ficha": "**Recursos prospectivos**\n\n| Subclase | Qué es |\n|---|---|\n| Prospecto | Objetivo de perforación bien definido |\n| Lead | Mal definido; necesita más datos |\n| Play | Tendencia reconocida sin prospectos definidos |\n\n**Estimaciones.** 1U, 2U y 3U: sin riesgo (unrisked), es decir, si hay descubrimiento y desarrollo.\n\n**Monte Carlo.** El rango del petróleo original sale de la incertidumbre de área, espesor, porosidad y saturación. No incluye la chance de éxito.\n\n**Requisito.** Un plan de desarrollo conceptual para estimar costos y volúmenes recuperables.",
+     "practica": "En el laboratorio Monte Carlo, subí la incertidumbre de área y anotá qué parámetro abre más el rango. En la planilla, hoja Prospectos, clasificá los tres objetivos de ejemplo en prospecto, lead y play."
     },
     {
      "id": "x7",
@@ -683,35 +1495,83 @@
      "comp": "Recursos prospectivos y riesgo exploratorio",
      "cues": [
       {
-       "say": "Un prospecto tiene dos riesgos distintos. Primero, que el pozo descubra: es la chance de descubrimiento geológico, Pg. Segundo, que, si descubre, el proyecto se desarrolle: es la chance de desarrollo, Pd.",
+       "say": "Un prospecto tiene dos riesgos distintos: que el pozo descubra y que el proyecto se desarrolle.",
        "scene": {
-        "t": "fm",
-        "k": "Chance de comercialidad",
-        "h": "Prospectivos, contingentes y reservas",
-        "f": "Pc = Pg × Pd\n\nProspectivos: Pc = Pg × Pd\nContingentes: Pg = 1, entonces Pc = Pd\nReservas: Pd de al menos 90 %, entonces Pc de 90 % o más",
-        "n": "Pc: chance de comercialidad. Pg: chance de descubrimiento geológico. Pd: chance de desarrollo."
-       },
-       "notes": [
-        {
-         "t": "chance de desarrollo",
-         "k": "chance de desarrollo",
-         "n": "Chance de desarrollo (chance of development, Pd): probabilidad de que un proyecto descubierto cumpla los criterios de comercialidad y se comprometa para su desarrollo."
-        }
-       ]
+        "t": "les",
+        "q": "Un prospecto tiene dos riesgos distintos: que el pozo descubra y que el proyecto se desarrolle."
+       }
       },
       {
-       "say": "La chance de comercialidad, Pc, es el producto de las dos. Para un recurso prospectivo, Pc es Pg por Pd. Un contingente ya está descubierto, así que no tiene riesgo de descubrimiento, y Pc es igual a Pd. En una reserva, Pc es de por lo menos noventa por ciento.",
+       "say": "Cada riesgo tiene su probabilidad, y juntos dan la chance de comercialidad. Es la medida que ordena las tres clases de recursos."
+      },
+      {
+       "say": "Al terminar esta lección vas a aprender, primero, a calcular la chance de comercialidad Pc a partir de Pg y Pd.",
+       "scene": {
+        "t": "bul",
+        "k": "Objetivos de la lección",
+        "h": "Qué vas a aprender",
+        "items": [
+         "Calcular la chance de comercialidad Pc a partir de Pg y Pd.",
+         "Aplicar la regla para prospectivos, contingentes y reservas.",
+         "Explicar por qué PRMS pide informar los volúmenes prospectivos sin riesgo."
+        ]
+       },
+       "hl": 0,
+       "obj": 1
+      },
+      {
+       "say": "segundo, a aplicar la regla para prospectivos, contingentes y reservas.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a explicar por qué PRMS pide informar los volúmenes prospectivos sin riesgo.",
+       "hl": 2,
+       "obj": 1
+      },
+      {
+       "say": "Primero, que el pozo descubra: es la chance de descubrimiento geológico, Pg. Para un recurso prospectivo, la chance de comercialidad es el producto de Pg por Pd.",
+       "scene": {
+        "t": "dg",
+        "d": "pxpc",
+        "k": "Chance de comercialidad",
+        "h": "Pc es el producto de Pg y Pd",
+        "src": "PRMS 2018 (SPE et al.) y FAQ de la SPE; esquema didáctico"
+       },
        "hl": 0
       },
       {
-       "say": "Un ejemplo didáctico. Un prospecto con Pg de treinta por ciento y Pd de cincuenta por ciento tiene una Pc de quince por ciento. Aunque el volumen sin riesgo sea grande, el volumen esperado es mucho menor.",
+       "say": "Segundo, que si descubre, el proyecto se desarrolle: es la chance de desarrollo, Pd. Un contingente ya está descubierto, así que su Pg es uno y Pc es igual a Pd.",
+       "hl": 1
+      },
+      {
+       "say": "En una reserva, Pg es uno y Pd es de por lo menos noventa por ciento. Por eso Pc es de noventa por ciento o más.",
+       "hl": 2
+      },
+      {
+       "say": "Un ejemplo didáctico. Un prospecto con Pg de treinta por ciento y Pd de cincuenta por ciento tiene una Pc de quince por ciento.",
+       "hl": 3
+      },
+      {
+       "say": "Aunque el volumen sin riesgo sea grande, el volumen que se espera es mucho menor. Y Pd exige cumplir los criterios de comercialidad y el compromiso de desarrollo.",
+       "hl": 4
+      },
+      {
+       "say": "Laboratorio. Cambiá Pg y Pd y mirá cómo cambia Pc. Después tildá que ya está descubierto: Pg pasa a uno y Pc es igual a Pd. Los volúmenes son de ejemplo.",
        "scene": {
-        "t": "fm",
-        "k": "Ejemplo didáctico",
-        "h": "Chance de comercialidad de un prospecto",
-        "f": "Pg = 30 %\nPd = 50 %\nPc = 30 % × 50 % = 15 %",
-        "n": "Datos de ejemplo con fines didácticos."
-       }
+        "t": "viz",
+        "w": "px_pc",
+        "h": "De Pg y Pd a la chance de comercialidad",
+        "p": {
+         "pg": 30,
+         "pd": 50,
+         "u2": 200
+        }
+       },
+       "lab": true
+      },
+      {
+       "say": "Hay una regla de reporte que importa. Para los recursos prospectivos, PRMS pide informar las estimaciones sin riesgo, uno U, dos U y tres U. Si además se informa un valor con riesgo, hay que informar también Pg, Pd y las cifras sin riesgo."
       },
       {
        "say": "Laboratorio. Es un pozo exploratorio de ejemplo. Cambiá la probabilidad de éxito, el valor y el costo, y mirá el valor monetario esperado. Después subí el número de pozos y fijate cómo cambia la probabilidad de terminar con pérdida. Un solo prospecto se gana o se pierde entero.",
@@ -727,36 +1587,85 @@
        "say": "Cómo se reportan. Reservas, recursos contingentes y recursos prospectivos se informan por separado, cada uno con su rango. No se suman entre sí, porque sus chances de comercialidad son muy distintas."
       },
       {
-       "say": "Pregunta rápida.",
+       "say": "La decisión que sostiene esta lección es qué cifra comunicar de un prospecto. Se informa el volumen sin riesgo con su rango, y las probabilidades Pg y Pd a su lado. El volumen multiplicado por Pc sirve para comparar prospectos, no para sumarlo a las reservas.",
+       "scene": {
+        "t": "dec",
+        "q": "Qué cifra comunicar de un prospecto"
+       }
+      },
+      {
+       "say": "Pregunta rápida. Respondé en pantalla.",
        "q": {
         "q": "Con Pg de 40 % y Pd de 50 %, la chance de comercialidad Pc es:",
         "o": [
-         "10 %",
          "45 %",
          "90 %",
-         "20 %"
+         "20 %",
+         "10 %"
         ],
-        "a": 3,
+        "a": 2,
         "e": "Pc = Pg × Pd = 0,40 × 0,50 = 0,20, o sea 20 %."
        }
       }
-     ]
+     ],
+     "obj": [
+      "Calcular la chance de comercialidad Pc a partir de Pg y Pd.",
+      "Aplicar la regla para prospectivos, contingentes y reservas.",
+      "Explicar por qué PRMS pide informar los volúmenes prospectivos sin riesgo."
+     ],
+     "ficha": "**Chance de comercialidad**\n\n| Clase | Pg | Pd | Pc |\n|---|---|---|---|\n| Prospectivo | Pg | Pd | Pg × Pd |\n| Contingente | 1 | Pd | Pd |\n| Reserva | 1 | al menos 90 % | al menos 90 % |\n\n**Ejemplo.** Pg = 30 %, Pd = 50 %: Pc = 15 %. Con un volumen sin riesgo de 200 MMbbl, el volumen multiplicado por Pc es 30 MMbbl (solo comparativo).\n\n**Reporte.** Los prospectivos se informan sin riesgo (1U, 2U, 3U); un valor con riesgo exige informar también Pg, Pd y las cifras sin riesgo (FAQ 5.2). Reservas, contingentes y prospectivos no se suman.",
+     "practica": "En el laboratorio de Pc, probá Pg 30 y Pd 50 (Pc = 15 %), y después tildá descubierto. En la planilla, hoja Prospectos, subí Pd del prospecto B de 40 a 70 por ciento y anotá cuánto cambia el volumen esperado."
     },
     {
      "id": "x8",
      "title": "Caso real: la SEC abre el reporte a las reservas probables y posibles",
-     "comp": "Incertidumbre y reporte",
+     "comp": "Incertidumbre y reporte de reservas",
      "cues": [
       {
-       "say": "A fines de diciembre de 2008 la SEC de los Estados Unidos adoptó una regla final de modernización del reporte de petróleo y gas. Hasta entonces, sus reglas prohibían informar reservas probables y posibles.",
+       "say": "Un caso real muestra cómo una regla de reporte cambió lo que una empresa puede informar de sus reservas.",
+       "scene": {
+        "t": "les",
+        "q": "Un caso real muestra cómo una regla de reporte cambió lo que una empresa puede informar de sus reservas."
+       }
+      },
+      {
+       "say": "Es el hilo conductor del curso: la regla que la SEC adoptó a fines de dos mil ocho."
+      },
+      {
+       "say": "Al terminar esta lección vas a aprender, primero, a explicar qué cambió en el reporte de reservas ante la SEC desde la regla de dos mil ocho.",
+       "scene": {
+        "t": "bul",
+        "k": "Objetivos de la lección",
+        "h": "Qué vas a aprender",
+        "items": [
+         "Explicar qué cambió en el reporte de reservas ante la SEC desde la regla de 2008.",
+         "Distinguir lo que la regla permite de lo que exige.",
+         "Aplicar el criterio de rigor al informar probables y posibles."
+        ]
+       },
+       "hl": 0,
+       "obj": 1
+      },
+      {
+       "say": "segundo, a distinguir lo que la regla permite de lo que exige.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a aplicar el criterio de rigor al informar probables y posibles.",
+       "hl": 2,
+       "obj": 1
+      },
+      {
+       "say": "Veamos el caso. A fines de diciembre de dos mil ocho, la SEC de los Estados Unidos adoptó la regla final de modernización del reporte de petróleo y gas. Hasta entonces, sus reglas no permitían informar reservas probables y posibles en las presentaciones.",
        "scene": {
         "t": "case",
         "h": "Reservas probables y posibles ante la SEC",
         "src": "SEC, Modernization of Oil and Gas Reporting, Release No. 33-8995 (2008)",
-        "S": "Hasta 2008 las reglas de la SEC prohibían informar reservas probables y posibles, y valuaban las reservas con el precio de un solo día de cierre del ejercicio.",
+        "S": "Hasta 2008 las reglas de la SEC permitían informar solo reservas probadas, y las valuaban con el precio de un solo día: el cierre del ejercicio.",
         "T": "Dar a los inversores información más completa y alinear el reporte con las prácticas y la tecnología actuales.",
-        "A": "Una regla final permitió informar de forma opcional reservas probables y posibles, con definiciones consistentes con PRMS, y reemplazó el precio de un día por el promedio de doce meses.",
-        "R": "Rige para informes anuales de ejercicios que terminan desde el 31 de diciembre de 2009. Informar reservas probables y posibles pasó a ser opcional, no obligatorio."
+        "A": "Una regla final permitió informar de forma opcional reservas probables y posibles, con definiciones consistentes con PRMS, y reemplazó el precio de un día por un promedio de doce meses.",
+        "R": "Rige para informes anuales de ejercicios que terminan desde el 31 de diciembre de 2009. Informar probables y posibles es opcional, no obligatorio."
        },
        "hl": 0
       },
@@ -765,7 +1674,7 @@
        "hl": 1
       },
       {
-       "say": "La regla permitió informar de forma opcional reservas probables y posibles, con definiciones consistentes con PRMS. También cambió el precio: del valor de un solo día, al promedio de los primeros días de cada mes de los doce meses previos.",
+       "say": "La regla permitió informar de forma opcional reservas probables y posibles, con definiciones consistentes con PRMS. También cambió el precio: del valor de un solo día, al promedio de los precios del primer día de cada mes de los doce meses previos.",
        "hl": 2
       },
       {
@@ -776,61 +1685,223 @@
        "say": "La regla también aceptó reservas de fuentes no tradicionales, como bitumen, shale y gas de capas de carbón, y permitió usar tecnología confiable para estimar reservas probadas."
       },
       {
+       "say": "Y pidió más transparencia sobre quién prepara las estimaciones: hay que informar la calificación de la persona técnica responsable y, si participó un tercero, su rol."
+      },
+      {
+       "say": "Escenario. Una empresa prepara su informe anual bajo la regla de la SEC. Tres decisiones sobre qué informar y con qué precio. Respondé en pantalla.",
+       "scene": {
+        "t": "viz",
+        "w": "spc_case",
+        "h": "Escenario: informe anual bajo la regla de la SEC de 2008",
+        "p": {
+         "title": "El informe anual de una empresa de ejemplo",
+         "intro": "Una empresa de ejemplo cierra su ejercicio el 31 de diciembre. Tiene reservas probadas, probables y posibles estimadas con criterio PRMS. Datos de ejemplo.",
+         "src": "SEC, Release No. 33-8995 (2008). Datos de ejemplo.",
+         "close": "La regla permite más información, pero no relaja el rigor: cada categoría con su definición, el precio como lo fija la regla y la calificación de quien estima a la vista.",
+         "steps": [
+          {
+           "s": "La gerencia quiere mostrar a los inversores las reservas probables y posibles. ¿Qué dice la regla?",
+           "st": {
+            "Reservas probadas": "informadas",
+            "Probables y posibles": "estimadas"
+           },
+           "o": [
+            {
+             "t": "Es obligatorio informarlas desde el primer ejercicio.",
+             "ok": 0,
+             "fb": "La regla las permite, pero no las exige."
+            },
+            {
+             "t": "Puede informarlas de forma opcional, con definiciones consistentes con PRMS.",
+             "ok": 2,
+             "fb": "Es una decisión de comunicación: si se informan, se informan con la definición de cada categoría."
+            },
+            {
+             "t": "Siguen prohibidas: solo se informan las probadas.",
+             "ok": 0,
+             "fb": "Eso era así hasta la regla de 2008."
+            }
+           ],
+           "dt": "Falta definir el precio."
+          },
+          {
+           "s": "Para estimar las reservas probadas, el equipo propone usar el precio de cierre del 31 de diciembre. ¿Es correcto?",
+           "st": {
+            "Precio propuesto": "cierre del 31 de diciembre"
+           },
+           "o": [
+            {
+             "t": "Sí: es el precio vigente al final del ejercicio.",
+             "ok": 0,
+             "fb": "Esa era la regla anterior."
+            },
+            {
+             "t": "No: corresponde el promedio de doce meses, calculado con el precio del primer día de cada mes.",
+             "ok": 2,
+             "fb": "La regla de 2008 reemplazó el precio de un solo día por un promedio de doce meses."
+            },
+            {
+             "t": "Da lo mismo: cualquier precio razonable sirve.",
+             "ok": 0,
+             "fb": "La regla fija cómo se calcula el precio para las reservas probadas."
+            }
+           ],
+           "dt": "Falta documentar quién estima."
+          },
+          {
+           "s": "El informe anual debe indicar quién preparó las estimaciones. ¿Qué corresponde?",
+           "st": {
+            "Preparación": "equipo propio, con un consultor externo"
+           },
+           "o": [
+            {
+             "t": "No hace falta decir nada: es una decisión interna.",
+             "ok": 0,
+             "fb": "La regla pidió transparencia sobre quién estima."
+            },
+            {
+             "t": "Informar la calificación de la persona técnica responsable y el rol del tercero.",
+             "ok": 2,
+             "fb": "La regla pidió informar la calificación de quien prepara o audita y, si participó un tercero, su rol."
+            },
+            {
+             "t": "Informar solo el nombre de la empresa auditora.",
+             "ok": 0,
+             "fb": "Hace falta la calificación de la persona técnica responsable, no solo el nombre de una firma."
+            }
+           ],
+           "dt": "Informe completo."
+          }
+         ]
+        }
+       },
+       "lab": true
+      },
+      {
        "say": "La lección técnica: informar probables y posibles es una decisión de comunicación, pero exige el mismo rigor. Cada categoría tiene su definición, y por eso la regla las alineó con PRMS."
       },
       {
        "say": "Y la lección de gestión: quien informa probables y posibles asume que un inversor los va a leer como un rango. Hay que explicar qué contingencias faltan resolver y no mezclar categorías."
       },
       {
-       "say": "Pregunta rápida.",
+       "say": "La decisión que sostiene este caso es si informar probables y posibles. Se informan cuando la empresa puede respaldarlas con la misma calidad de datos y definiciones que las probadas, y cuando el inversor las va a leer como un rango, no como un plan.",
+       "scene": {
+        "t": "dec",
+        "q": "Si informar reservas probables y posibles"
+       }
+      },
+      {
+       "say": "Pregunta rápida. Respondé en pantalla.",
        "q": {
-        "q": "Según la regla de 2008, la SEC con respecto a las reservas probables y posibles:",
+        "q": "Según la regla de la SEC de 2008, las reservas probables y posibles:",
         "o": [
-         "Permitió informarlas de forma opcional",
-         "Las hizo obligatorias para todos",
-         "Siguió prohibiéndolas",
-         "Las reemplazó por recursos prospectivos"
+         "Se reemplazaron por recursos prospectivos",
+         "Pueden informarse de forma opcional",
+         "Pasaron a ser obligatorias para todos",
+         "Siguieron prohibidas"
         ],
-        "a": 0,
+        "a": 1,
         "e": "La regla permitió, pero no exigió, informar reservas probables y posibles."
        }
       }
-     ]
+     ],
+     "obj": [
+      "Explicar qué cambió en el reporte de reservas ante la SEC desde la regla de 2008.",
+      "Distinguir lo que la regla permite de lo que exige.",
+      "Aplicar el criterio de rigor al informar probables y posibles."
+     ],
+     "ficha": "**Regla de la SEC de 2008 (Release 33-8995)**\n\n| Tema | Qué cambió |\n|---|---|\n| Probables y posibles | Informe opcional, con definiciones consistentes con PRMS |\n| Precio | Promedio de doce meses (precio del primer día de cada mes) |\n| Fuentes no tradicionales | Bitumen, shale y gas de capas de carbón |\n| Tecnología | Tecnología confiable para estimar probadas |\n| Quién estima | Calificación de la persona técnica responsable |\n\n**Fechas.** Adoptada a fines de diciembre de 2008; rige para ejercicios que terminan desde el 31 de diciembre de 2009.\n\n**Lección.** Más información permitida no es menos rigor: cada categoría con su definición y el rango bien explicado.",
+     "practica": "Resolvé el escenario del informe anual bajo la regla de la SEC y repetilo hasta lograr 6 de 6. Redactá en tres líneas qué le explicarías a un inversor sobre la diferencia entre probadas, probables y posibles."
     }
    ],
    "quiz": [
     {
-     "q": "Un lead es:",
+     "q": "Un lead es una acumulación potencial:",
      "o": [
-      "Un prospecto con el pozo ya en perforación",
-      "Una acumulación descubierta en espera",
-      "Una acumulación potencial aún mal definida",
-      "Un contingente con desarrollo en espera"
+      "Descubierta, con actividades detenidas por el mercado",
+      "Mal definida, que necesita más datos",
+      "Bien definida como objetivo de perforación inmediato",
+      "Ya en producción y con ventas regulares"
+     ],
+     "a": 1,
+     "e": "Lead: mal definido. Prospecto: definido para perforar. Play: tendencia sin prospectos definidos."
+    },
+    {
+     "q": "¿Qué indica la U en 1U, 2U y 3U?",
+     "o": [
+      "Que ya se verificaron con producción de pozos vecinos",
+      "Que no incluyen la probabilidad de éxito",
+      "Que son estimaciones uniformes en toda el área evaluada",
+      "Que son útiles solamente para proyectos contingentes"
+     ],
+     "a": 1,
+     "e": "U viene de unrisked: no incluyen la probabilidad de éxito."
+    },
+    {
+     "q": "Un prospecto tiene Pg de 25 % y Pd de 60 %. Su chance de comercialidad es:",
+     "o": [
+      "85 %",
+      "15 %",
+      "35 %",
+      "60 %"
+     ],
+     "a": 1,
+     "e": "Pc = 0,25 × 0,60 = 0,15, o sea 15 %."
+    },
+    {
+     "q": "En un recurso contingente, la chance de comercialidad Pc es igual a:",
+     "o": [
+      "Pg, porque Pd vale 1",
+      "Cero",
+      "Pd, porque Pg vale 1",
+      "Pg × Pd, como en un prospecto"
      ],
      "a": 2,
-     "e": "Un lead es una acumulación potencial mal definida que necesita más datos para ser prospecto."
+     "e": "Ya está descubierto: Pg = 1, y entonces Pc = Pd."
     },
     {
-     "q": "Si Pg es 20 % y Pd es 50 %, la chance de comercialidad Pc es:",
+     "q": "Si se informa un volumen prospectivo con riesgo, PRMS pide informar además:",
      "o": [
-      "70 %",
-      "10 %",
-      "30 %",
-      "25 %"
+      "Solo la mejor estimación",
+      "Solo el precio usado",
+      "Nada más",
+      "Pg, Pd y las cifras sin riesgo"
      ],
-     "a": 1,
-     "e": "Pc = Pg × Pd = 0,20 × 0,50 = 0,10, o sea 10 %."
+     "a": 3,
+     "e": "El volumen con riesgo exige informar también Pg, Pd y los volúmenes sin riesgo."
     },
     {
-     "q": "En un recurso contingente, la chance de descubrimiento Pg vale:",
+     "q": "La regla de la SEC de 2008, con respecto a las reservas probables y posibles:",
      "o": [
-      "0",
-      "1",
-      "0,5",
-      "Lo mismo que en un prospecto"
+      "Las hizo obligatorias",
+      "Las reemplazó por recursos contingentes",
+      "Las siguió prohibiendo",
+      "Las permitió de forma opcional"
+     ],
+     "a": 3,
+     "e": "Permitió, pero no exigió, informar reservas probables y posibles."
+    },
+    {
+     "q": "La regla de la SEC de 2008 reemplazó el precio del último día del ejercicio por:",
+     "o": [
+      "El precio que fije cada empresa según su criterio",
+      "El promedio de doce meses de los primeros días de cada mes",
+      "El precio del contrato de venta más barato del ejercicio",
+      "El precio vigente el día de la presentación del informe"
      ],
      "a": 1,
-     "e": "Ya está descubierto: Pg = 1, y por eso Pc = Pd."
+     "e": "El promedio de doce meses de los precios del primer día de cada mes."
+    },
+    {
+     "q": "¿Para qué se necesita un plan de desarrollo conceptual en un prospecto?",
+     "o": [
+      "Para estimar costos y volúmenes si descubre",
+      "Para evitar perforar el pozo exploratorio del prospecto",
+      "Para convertirlo en reserva sin necesidad de perforar",
+      "No se necesita: basta con la estimación sin riesgo"
+     ],
+     "a": 0,
+     "e": "Sin un concepto de desarrollo no se puede estimar si un descubrimiento sería comercial."
     }
    ]
   },
@@ -841,10 +1912,52 @@
     {
      "id": "x9",
      "title": "Reservas desarrolladas no productivas: cerrados y behind-pipe",
-     "comp": "Reservas desarrolladas no productivas",
+     "comp": "Reservas desarrolladas no productivas y desarrollo pendiente",
      "cues": [
       {
-       "say": "Hay reservas desarrolladas que todavía no producen. Son las desarrolladas no productivas. Su volumen está en pozos e instalaciones que ya existen, por eso se llaman desarrolladas, pero hoy no entregan producción. Hay dos tipos: cerrados y detrás de la tubería.",
+       "say": "Llegamos al módulo cuatro, Desarrolladas no productivas, rendimiento pendiente y sensibilidades. Es el módulo más práctico: pozos cerrados, volúmenes sin historia y variables que mueven el resultado.",
+       "scene": {
+        "t": "chap",
+        "i": 3
+       }
+      },
+      {
+       "say": "Hay reservas desarrolladas que todavía no producen. Son las desarrolladas no productivas.",
+       "scene": {
+        "t": "les",
+        "q": "Hay reservas desarrolladas que todavía no producen. Son las desarrolladas no productivas."
+       }
+      },
+      {
+       "say": "Su volumen está en pozos e instalaciones que ya existen, por eso se llaman desarrolladas, pero hoy no entregan producción. Hay dos tipos: cerrados y detrás de la tubería."
+      },
+      {
+       "say": "Al terminar esta lección vas a aprender, primero, a distinguir un pozo cerrado de una zona detrás de la tubería.",
+       "scene": {
+        "t": "bul",
+        "k": "Objetivos de la lección",
+        "h": "Qué vas a aprender",
+        "items": [
+         "Distinguir un pozo cerrado de una zona detrás de la tubería.",
+         "Aplicar el criterio de gasto menor frente a un pozo nuevo.",
+         "Estimar el efecto de la declinación sobre las reservas de un pozo cerrado."
+        ]
+       },
+       "hl": 0,
+       "obj": 1
+      },
+      {
+       "say": "segundo, a aplicar el criterio de gasto menor frente a un pozo nuevo.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a estimar el efecto de la declinación sobre las reservas de un pozo cerrado.",
+       "hl": 2,
+       "obj": 1
+      },
+      {
+       "say": "Los dos tipos, cerrados y detrás de la tubería, comparten una condición: ponerlas en producción cuesta poco frente a un pozo nuevo.",
        "scene": {
         "t": "tbl",
         "k": "Desarrolladas no productivas",
@@ -877,41 +1990,48 @@
        ]
       },
       {
-       "say": "La condición clave es el gasto menor. Reactivar el pozo tiene que costar poco frente a un pozo nuevo.",
-       "hl": 0,
+       "say": "La condición clave es el gasto menor. Reactivar o completar el pozo tiene que costar poco frente a perforar uno nuevo, que es el cien por ciento de referencia.",
        "scene": {
-        "t": "bul",
+        "t": "dg",
+        "d": "pxdnp",
         "k": "Gasto menor",
-        "h": "Cómo se decide",
-        "items": [
-         "Costo de reactivar frente al costo de un pozo nuevo",
-         "Diez por ciento es menor; noventa por ciento es significativo",
-         "Sin porcentaje fijo: el criterio se documenta",
-         "Si es significativo, el volumen es no desarrollado"
-        ]
+        "h": "Costo frente a un pozo nuevo",
+        "src": "PRMS 2018 y FAQ 3.10 de la SPE; ejemplos didácticos"
        },
-       "notes": [
-        {
-         "t": "gasto menor",
-         "k": "gasto menor",
-         "n": "Gasto menor: costo de reactivar o completar un pozo existente, pequeño en comparación con el de un pozo nuevo."
-        }
-       ]
+       "hl": 0
       },
       {
-       "say": "Una reparación que cuesta el diez por ciento de un pozo nuevo es claramente un gasto menor. Una que cuesta el noventa por ciento es una inversión significativa.",
+       "say": "Las compañías usan umbrales de entre diez y cincuenta por ciento del costo de un pozo nuevo.",
        "hl": 1
       },
       {
-       "say": "Ni PRMS ni la SEC fijan un porcentaje. La empresa tiene que escribir su criterio y aplicarlo igual a todos los pozos.",
+       "say": "Lo más común es un umbral de entre veinticinco y treinta y cinco por ciento. Pero PRMS no fija un porcentaje: cada compañía define y documenta el suyo, y lo aplica igual a todos los pozos.",
        "hl": 2
       },
       {
-       "say": "Si el costo es significativo, el volumen no es desarrollado: pasa a no desarrollado y se evalúa como tal.",
+       "say": "Un ejemplo con un umbral de treinta por ciento. Reactivar por un quince por ciento es gasto menor. Hacerlo por un setenta por ciento es una inversión significativa, y el volumen pasa a no desarrollado.",
        "hl": 3
       },
       {
-       "say": "Ejemplo. Un pozo cerrado por falta de ducto reabriría con 300 barriles por día, con un límite económico de 20 barriles por día. Con una declinación del veinte por ciento anual, las reservas son unas 511 mil barriles. Fijate cuánto cambia el resultado con la declinación: es la variable que más pesa.",
+       "say": "Laboratorio. Cambiá el tipo de volumen, el costo de reactivar y el umbral de la compañía. Fijate qué pasa si falta evidencia de que el intervalo produce, o si no hay mercado esperable. Los datos son de ejemplo.",
+       "scene": {
+        "t": "viz",
+        "w": "px_dnp",
+        "h": "Gasto menor y desarrolladas no productivas",
+        "p": {
+         "v": {
+          "tipo": "shut",
+          "pct": 20,
+          "thr": 30,
+          "evid": true,
+          "mkt": true
+         }
+        }
+       },
+       "lab": true
+      },
+      {
+       "say": "Ejemplo. Un pozo cerrado reabriría con 300 barriles por día, con un límite económico de 20 barriles por día. Con una declinación del veinte por ciento anual, las reservas son unas 511 mil barriles. Fijate cuánto cambia el resultado con la declinación: es la variable que más pesa.",
        "scene": {
         "t": "tbl",
         "k": "Sensibilidad del pozo cerrado",
@@ -953,34 +2073,86 @@
        ]
       },
       {
-       "say": "Si el cierre depende de un contrato o de un ducto sin compromiso firme, el volumen no es reserva: es un recurso contingente en espera. Con contrato firmado y conexión aprobada, vuelve a ser reserva probada desarrollada no productiva."
+       "say": "Si el pozo está cerrado a la espera de un ducto, el volumen sigue siendo reserva desarrollada no productiva siempre que se espere razonablemente la conexión y la venta. No hace falta un contrato firmado: hace falta una expectativa razonable."
+      },
+      {
+       "say": "Si no hay expectativa razonable de mercado o de conexión, el proyecto no cumple el criterio de comercialidad y el volumen es un recurso contingente, en espera."
       },
       {
        "say": "Y cuando el pozo vuelve a producir, se compara con lo previsto. Si da 250 barriles por día en lugar de 300, las reservas bajan de 511 mil a unos 420 mil barriles. Eso es una revisión por comportamiento, no producción."
       },
       {
-       "say": "Pregunta rápida.",
+       "say": "La decisión que sostiene esta lección es cómo clasificar un volumen de un pozo cerrado. Se compara el costo con el umbral documentado, se pide evidencia de producibilidad y se verifica que haya una expectativa razonable de mercado.",
+       "scene": {
+        "t": "dec",
+        "q": "Cómo clasificar el volumen de un pozo cerrado"
+       }
+      },
+      {
+       "say": "Pregunta rápida. Respondé en pantalla.",
        "q": {
         "q": "Un pozo cerrado necesita una reparación que cuesta una décima parte de un pozo nuevo. El volumen asociado es:",
         "o": [
          "Reserva no desarrollada, porque el pozo está cerrado",
+         "Recurso prospectivo",
          "Recurso contingente sin aclarar",
-         "Reserva desarrollada no productiva, si hay evidencia de producibilidad",
-         "Recurso prospectivo"
+         "Reserva desarrollada no productiva, si hay evidencia de producibilidad y mercado esperable"
         ],
-        "a": 2,
-        "e": "Con gasto menor y evidencia de que el intervalo produce, el volumen es reserva desarrollada no productiva."
+        "a": 3,
+        "e": "Con gasto menor, evidencia de que el intervalo produce y mercado razonablemente esperable, el volumen es reserva desarrollada no productiva."
        }
       }
-     ]
+     ],
+     "obj": [
+      "Distinguir un pozo cerrado de una zona detrás de la tubería.",
+      "Aplicar el criterio de gasto menor frente a un pozo nuevo.",
+      "Estimar el efecto de la declinación sobre las reservas de un pozo cerrado."
+     ],
+     "ficha": "**Desarrolladas no productivas**\n\n| Tipo | Qué falta |\n|---|---|\n| Cerrado | Reabrir, conectar o reparar |\n| Detrás de la tubería | Cañonear y ensayar |\n\n**Gasto menor.** Costo de reactivar o completar frente al de un pozo nuevo. Umbrales de 10 a 50 %, con 25 a 35 % como lo más común (FAQ 3.10); cada compañía documenta el suyo.\n\n**Cálculo de ejemplo.** Reservas del pozo cerrado = (qi − qa) × 365 / D. Con qi = 300 bbl/d, qa = 20 bbl/d y D = 0,20 por año: 511 mil barriles. Con qi = 250: 420 mil.\n\n**Mercado.** Con expectativa razonable de venta y conexión, sigue siendo reserva; sin ella, contingente en espera.",
+     "practica": "En el laboratorio de gasto menor, probá con umbral de 30 por ciento un costo de 15 y uno de 70. En la planilla, hoja Sensibilidades, reproducí las reservas del pozo cerrado: 511 mil con 300 bbl/d y D = 0,20 (resultado esperado)."
     },
     {
      "id": "x10",
      "title": "Desarrollo pendiente y rendimiento pendiente (pending performance)",
-     "comp": "Desarrollo pendiente y rendimiento",
+     "comp": "Reservas desarrolladas no productivas y desarrollo pendiente",
      "cues": [
       {
-       "say": "Desarrollo pendiente es la subclase contingente más madura. Hay actividad en curso para justificar el desarrollo y una expectativa razonable de comercialidad en un plazo razonable. Veamos dónde se ubica y qué mueve a un volumen entre subclases.",
+       "say": "Desarrollo pendiente es la subclase contingente más madura. Hay actividad en curso para justificar el desarrollo.",
+       "scene": {
+        "t": "les",
+        "q": "Desarrollo pendiente es la subclase contingente más madura."
+       }
+      },
+      {
+       "say": "Hay una expectativa razonable de comercialidad en un plazo razonable. En esta lección vemos dónde se ubica, qué la mueve y qué pasa cuando un volumen todavía no tiene historia de producción."
+      },
+      {
+       "say": "Al terminar esta lección vas a aprender, primero, a ubicar el desarrollo pendiente entre las subclases contingentes.",
+       "scene": {
+        "t": "bul",
+        "k": "Objetivos de la lección",
+        "h": "Qué vas a aprender",
+        "items": [
+         "Ubicar el desarrollo pendiente entre las subclases contingentes.",
+         "Explicar qué es el rendimiento pendiente y por qué no es una categoría de PRMS.",
+         "Ver cómo la historia de producción angosta el rango y mueve parte del volumen hacia reservas."
+        ]
+       },
+       "hl": 0,
+       "obj": 1
+      },
+      {
+       "say": "segundo, a explicar qué es el rendimiento pendiente y por qué no es una categoría de PRMS.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a ver cómo la historia de producción angosta el rango y mueve parte del volumen hacia reservas.",
+       "hl": 2,
+       "obj": 1
+      },
+      {
+       "say": "Cada subclase contingente tiene una situación y algo que la mueve. La más madura es desarrollo pendiente.",
        "scene": {
         "t": "tbl",
         "k": "Subclases contingentes",
@@ -1015,7 +2187,7 @@
        },
        "notes": [
         {
-         "t": "Desarrollo pendiente",
+         "t": "desarrollo pendiente",
          "k": "desarrollo pendiente",
          "n": "Desarrollo pendiente (development pending): recurso contingente con actividad en curso para justificar su desarrollo comercial."
         }
@@ -1033,7 +2205,6 @@
       },
       {
        "say": "Un ensayo corto dice que el pozo produce, pero no cuánto va a recuperar.",
-       "hl": 0,
        "scene": {
         "t": "bul",
         "k": "Rendimiento pendiente",
@@ -1044,7 +2215,8 @@
          "Tres a doce meses: permiten ajustar una declinación",
          "Más historia: el rango se angosta"
         ]
-       }
+       },
+       "hl": 0
       },
       {
        "say": "Una presión estable sugiere conectividad, pero no la demuestra.",
@@ -1059,7 +2231,7 @@
        "hl": 3
       },
       {
-       "say": "Un ejemplo. Un pozo de descubrimiento fluyó noventa días a mil doscientos barriles por día. El rango por pozo iba de medio millón a casi tres millones de barriles. Tras un año cayó a 780 barriles por día: la declinación observada es de 43 por ciento anual y, con un límite de 60 barriles por día, quedan unos 610 mil barriles.",
+       "say": "Un ejemplo. Un pozo de descubrimiento fluyó noventa días a mil doscientos barriles por día, con una presión estable. El rango por pozo iba de medio millón a casi tres millones de barriles. Tras un año de producción cayó a 780 barriles por día: la declinación observada es de 43 por ciento anual y, con un límite de 60 barriles por día, quedan unos 610 mil barriles.",
        "scene": {
         "t": "tbl",
         "k": "Del ensayo a la historia",
@@ -1085,32 +2257,103 @@
        }
       },
       {
-       "say": "El reloj también cuenta. PRMS toma unos cinco años como referencia para empezar el desarrollo. Si la decisión llega a los dos años y medio y la construcción lleva dos más, la producción empieza a los cuatro años y medio. Si la decisión llega a los tres años y medio y la obra lleva tres, son seis años y medio: hace falta justificarlo, o el volumen sigue como contingente."
+       "say": "Con esa historia, una parte puede evaluarse como reserva. La fracción que no tiene respaldo sigue como contingente, y se informa por separado. No se divide un mismo proyecto: lo que cambia es el alcance del proyecto que se evalúa."
       },
       {
-       "say": "Pregunta rápida.",
+       "say": "El reloj también cuenta. Recordá la referencia de cinco años para iniciar el desarrollo de las reservas no desarrolladas.",
+       "scene": {
+        "t": "dg",
+        "d": "pxtime",
+        "k": "Desarrollo pendiente",
+        "h": "El reloj de cinco años",
+        "src": "PRMS 2018 (cambios clave) y FAQ 4.7 de la SPE; ejemplos didácticos"
+       },
+       "hl": 0
+      },
+      {
+       "say": "Es una referencia, no un límite rígido: un plazo mayor se acepta si hay una justificación clara.",
+       "hl": 1
+      },
+      {
+       "say": "Un proyecto con decisión a los dos años y medio inicia el desarrollo dentro de la referencia.",
+       "hl": 2
+      },
+      {
+       "say": "Uno que inicia a los seis años y medio necesita justificarlo, o sigue como contingente.",
+       "hl": 3
+      },
+      {
+       "say": "La decisión que sostiene esta lección es qué volumen respaldar con la historia disponible. Se reserva lo que la historia de producción sostiene y se deja como contingente lo que todavía depende de datos que faltan.",
+       "scene": {
+        "t": "dec",
+        "q": "Qué volumen respaldar con la historia disponible"
+       }
+      },
+      {
+       "say": "Pregunta rápida. Respondé en pantalla.",
        "q": {
         "q": "¿Qué pasa con un volumen con rendimiento pendiente cuando se acumula historia de producción?",
         "o": [
-         "Se reclasifica automáticamente como reserva probada",
-         "El rango se angosta y parte del volumen puede evaluarse como reserva",
          "Pasa a recurso prospectivo",
-         "Deja de necesitar aprobaciones"
+         "Deja de necesitar aprobaciones",
+         "El rango se angosta y parte del volumen puede evaluarse como reserva",
+         "Se reclasifica automáticamente como reserva probada"
         ],
-        "a": 1,
+        "a": 2,
         "e": "Más historia reduce la incertidumbre; la parte con respaldo de datos puede evaluarse como reserva y el resto sigue como contingente."
        }
       }
-     ]
+     ],
+     "obj": [
+      "Ubicar el desarrollo pendiente entre las subclases contingentes.",
+      "Explicar qué es el rendimiento pendiente y por qué no es una categoría de PRMS.",
+      "Ver cómo la historia de producción angosta el rango y mueve parte del volumen hacia reservas."
+     ],
+     "ficha": "**Desarrollo pendiente y rendimiento pendiente**\n\n| Etapa | Qué dice |\n|---|---|\n| Ensayo corto | Producibilidad, no recuperación |\n| Presión estable | Sugiere conectividad |\n| Tres a doce meses | Permiten ajustar una declinación |\n| Más historia | El rango se angosta |\n\n**Ejemplo.** 1.200 bbl/d inicial, 780 bbl/d al año: declinación observada = ln(1.200 / 780) = 0,43 por año. Remanente hasta 60 bbl/d: (780 − 60) × 365 / 0,43 ≈ 610 mil barriles.\n\n**Aclaración.** Rendimiento pendiente es un término de este curso, no una categoría de PRMS.\n\n**Plazo.** Referencia de cinco años para iniciar el desarrollo; un plazo mayor necesita justificación.",
+     "practica": "Reproducí el ejemplo del pozo: declinación observada de 43 por ciento y 610 mil barriles remanentes hasta 60 bbl/d. Probá con un límite de 100 bbl/d y anotá cuánto bajan las reservas."
     },
     {
      "id": "x11",
      "title": "Sensibilidades: qué variable mueve el resultado",
-     "comp": "Sensibilidades y decisión",
+     "comp": "Sensibilidades y decisión bajo incertidumbre",
      "cues": [
       {
-       "say": "Una cifra de reservas sin su sensibilidad es una cifra a medias. La sensibilidad muestra cuánto cambia el resultado cuando cambia una variable, y sirve para saber qué dato hay que respaldar mejor.",
+       "say": "Una cifra de reservas sin su sensibilidad es una cifra a medias.",
+       "scene": {
+        "t": "les",
+        "q": "Una cifra de reservas sin su sensibilidad es una cifra a medias."
+       }
+      },
+      {
+       "say": "La sensibilidad muestra cuánto cambia el resultado cuando cambia una variable, y sirve para saber qué dato hay que respaldar mejor."
+      },
+      {
+       "say": "Al terminar esta lección vas a aprender, primero, a nombrar las variables que mueven el límite económico, la cola de la producción y la economía de una ubicación.",
+       "scene": {
+        "t": "bul",
+        "k": "Objetivos de la lección",
+        "h": "Qué vas a aprender",
+        "items": [
+         "Nombrar las variables que mueven el límite económico, la cola de la producción y la economía de una ubicación.",
+         "Medir el efecto del exponente b sobre el volumen acumulado.",
+         "Leer la probabilidad de superar el equilibrio de un proyecto."
+        ]
+       },
        "hl": 0,
+       "obj": 1
+      },
+      {
+       "say": "segundo, a medir el efecto del exponente b sobre el volumen acumulado.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a leer la probabilidad de superar el equilibrio de un proyecto.",
+       "hl": 2,
+       "obj": 1
+      },
+      {
+       "say": "En una sensibilidad, cada variable mueve una parte distinta del resultado. El precio y los costos mueven el límite económico, y con él las reservas.",
        "scene": {
         "t": "bul",
         "k": "Sensibilidades",
@@ -1128,26 +2371,23 @@
          "k": "sensibilidad",
          "n": "Sensibilidad: variación del resultado al cambiar una variable de entrada, manteniendo las demás."
         }
-       ]
-      },
-      {
-       "say": "El precio y los costos mueven el límite económico, y con él las reservas.",
-       "hl": 1
+       ],
+       "hl": 0
       },
       {
        "say": "El exponente b y la declinación terminal mueven la cola de la producción.",
-       "hl": 2
+       "hl": 1
       },
       {
        "say": "El factor de recuperación y los contactos mueven el volumen.",
-       "hl": 3
+       "hl": 2
       },
       {
        "say": "La inversión por pozo mueve la economía de cada ubicación no desarrollada.",
-       "hl": 4
+       "hl": 3
       },
       {
-       "say": "Tomemos una ubicación no desarrollada de 300 mil barriles, con quince dólares y medio de margen presente por barril. Con una inversión de cuatro millones doscientos mil el valor es positivo. Si el costo sube quince por ciento, el valor pasa a negativo y la ubicación deja de ser probada.",
+       "say": "Tomemos una ubicación no desarrollada de 300 mil barriles, con quince dólares y medio de margen por barril. Con una inversión de cuatro millones doscientos mil el valor es positivo. Si el costo sube quince por ciento, el valor pasa a negativo y la ubicación deja de justificarse. Datos de ejemplo.",
        "scene": {
         "t": "tbl",
         "k": "Ubicación no desarrollada",
@@ -1160,10 +2400,10 @@
         ],
         "rows": [
          [
-          "250",
-          "+0,27",
-          "−0,33",
-          "−0,96"
+          "240",
+          "+0,12",
+          "−0,48",
+          "−1,11"
          ],
          [
           "300",
@@ -1172,13 +2412,13 @@
           "−0,18"
          ],
          [
-          "350",
-          "+1,82",
-          "+1,22",
-          "+0,59"
+          "360",
+          "+1,98",
+          "+1,38",
+          "+0,75"
          ]
         ],
-        "n": "Datos de ejemplo. El volumen y el costo se leen juntos."
+        "n": "Datos de ejemplo: margen de 15,5 USD por barril. El volumen y el costo se leen juntos."
        }
       },
       {
@@ -1218,7 +2458,7 @@
        }
       },
       {
-       "say": "Las sensibilidades también sirven para decidir. En un proyecto con equilibrio de 11 millones 600 mil barriles, con 25 dólares de margen la probabilidad de superarlo es de 66 por ciento. Con 20 dólares baja a 47 por ciento y con 30 sube a 80 por ciento.",
+       "say": "Las sensibilidades también sirven para decidir. Un proyecto de ejemplo tiene una inversión de 280 millones de dólares y un volumen recuperable con mediana de 14 millones de barriles y dispersión lognormal. Con 25 dólares de margen, el equilibrio es de 11 millones 200 mil barriles y la probabilidad de superarlo es de 67 por ciento. Con 20 baja a 50 y con 30 sube a 79.",
        "scene": {
         "t": "tbl",
         "k": "Probabilidad de superar el equilibrio",
@@ -1231,159 +2471,448 @@
         "rows": [
          [
           "20",
-          "14,5",
-          "47 %"
+          "14,0",
+          "50 %"
          ],
          [
           "25",
-          "11,6",
-          "66 %"
+          "11,2",
+          "67 %"
          ],
          [
           "30",
-          "9,7",
-          "80 %"
+          "9,3",
+          "79 %"
          ]
         ],
-        "n": "Datos de ejemplo: lognormal con P50 de 14 MMbbl; inversión de 180 MMUSD."
+        "n": "Datos de ejemplo: lognormal con mediana de 14 MMbbl y dispersión de 0,5; inversión de 280 MMUSD. Equilibrio = inversión / margen."
        }
+      },
+      {
+       "say": "Escenario. Tenés una cifra base y tres variables que podrían moverla. Decidí cuál respaldar primero. Respondé en pantalla.",
+       "scene": {
+        "t": "viz",
+        "w": "spc_case",
+        "h": "Escenario: qué variable respaldar primero",
+        "p": {
+         "title": "Una ubicación no desarrollada de ejemplo",
+         "intro": "Una ubicación de ejemplo tiene valor positivo con el caso base. Hay poco dinero para estudios y hay que elegir qué dato respaldar. Datos de ejemplo.",
+         "src": "Datos de ejemplo; tabla de sensibilidades de esta lección.",
+         "close": "Se respalda primero la variable que más mueve el resultado y que menos se conoce: es donde un dato nuevo cambia la decisión.",
+         "steps": [
+          {
+           "s": "Con el caso base de 300 mil barriles y 4,20 millones de inversión, el valor es +0,45. Si la inversión sube a 4,83 millones, el valor es −0,18. Si el volumen baja a 240 mil, con la misma inversión de 4,20, el valor es −0,48. ¿Qué conviene respaldar primero?",
+           "st": {
+            "Base": "+0,45 MMUSD",
+            "Inversión +15 %": "−0,18",
+            "Volumen −20 %": "−0,48"
+           },
+           "o": [
+            {
+             "t": "El volumen: una baja de veinte por ciento mueve más el valor que un aumento de quince por ciento en la inversión.",
+             "ok": 2,
+             "fb": "Con estos datos, el volumen es la variable que más mueve el resultado. Un estudio que lo respalde cambia más la decisión."
+            },
+            {
+             "t": "Ninguna: el caso base ya es positivo.",
+             "ok": 0,
+             "fb": "Una cifra positiva con una sensibilidad que la vuelve negativa es una cifra frágil."
+            },
+            {
+             "t": "La inversión, porque siempre es la más fácil de medir.",
+             "ok": 1,
+             "fb": "Es útil, pero con estos datos el volumen mueve más el resultado."
+            }
+           ],
+           "dt": "Falta mirar la cola de la producción."
+          },
+          {
+           "s": "El ajuste de declinación usa b de ocho décimos y no hay declinación terminal. El volumen resultante es el más alto de la tabla. ¿Qué hacés?",
+           "st": {
+            "b": "0,8",
+            "Vida del pozo": "más de 30 años",
+            "Declinación terminal": "no incluida"
+           },
+           "o": [
+            {
+             "t": "Informo ese volumen: el ajuste es matemáticamente correcto.",
+             "ok": 0,
+             "fb": "Sin declinación terminal ni tope de vida, el resultado no se puede defender."
+            },
+            {
+             "t": "Agrego una declinación terminal y un tope de vida, y muestro el resultado con y sin ellos.",
+             "ok": 2,
+             "fb": "Es la forma de acotar la cola y de mostrar cuánto pesa la hipótesis."
+            },
+            {
+             "t": "Uso el caso exponencial y descarto todo lo demás.",
+             "ok": 1,
+             "fb": "Es conservador, pero oculta el rango: conviene mostrarlo con su sensibilidad."
+            }
+           ],
+           "dt": "Falta decidir cómo comunicar."
+          }
+         ]
+        }
+       },
+       "lab": true
       },
       {
        "say": "Regla práctica: informe el caso base y el rango, y diga qué variable lo domina. Las sensibilidades no cambian la categoría por sí solas, pero muestran cuándo hay que revisarla."
       },
       {
-       "say": "Pregunta rápida.",
+       "say": "La decisión que sostiene esta lección es qué dato respaldar primero. Se elige la variable que más mueve el resultado y que menos se conoce, porque ahí un dato nuevo puede cambiar la decisión.",
+       "scene": {
+        "t": "dec",
+        "q": "Qué dato respaldar primero"
+       }
+      },
+      {
+       "say": "Pregunta rápida. Respondé en pantalla.",
        "q": {
         "q": "¿Para qué sirve una sensibilidad?",
         "o": [
-         "Para reemplazar la categoría de reservas por un valor esperado",
          "Para mostrar cuánto cambia el resultado al variar una variable y saber qué dato respaldar",
-         "Para sumar probables y posibles a las probadas",
-         "Para eliminar la incertidumbre de la estimación"
+         "Para reemplazar la categoría de reservas por un valor esperado",
+         "Para eliminar la incertidumbre de la estimación",
+         "Para sumar probables y posibles a las probadas"
         ],
-        "a": 1,
+        "a": 0,
         "e": "Muestra el efecto de cada variable sobre el volumen o el valor; no cambia la categoría ni elimina la incertidumbre."
        }
       }
-     ]
+     ],
+     "obj": [
+      "Nombrar las variables que mueven el límite económico, la cola de la producción y la economía de una ubicación.",
+      "Medir el efecto del exponente b sobre el volumen acumulado.",
+      "Leer la probabilidad de superar el equilibrio de un proyecto."
+     ],
+     "ficha": "**Sensibilidades**\n\n| Variable | Qué mueve |\n|---|---|\n| Precio y costos | El límite económico |\n| Exponente b y declinación terminal | La cola de la producción |\n| Factor de recuperación y contactos | El volumen |\n| Inversión por pozo | La economía de cada ubicación |\n\n**Fórmulas.** VPN = EUR × margen / 1000 − inversión (EUR en Mbbl, margen en USD por barril, inversión en MMUSD). Equilibrio = inversión / margen (MMbbl).\n\n**Ejemplo.** EUR 300 Mbbl, margen 15,5, inversión 4,20: VPN = +0,45 MMUSD; con inversión 4,83: −0,18.\n\n**Probabilidad.** Con mediana de 14 MMbbl, dispersión 0,5 e inversión de 280 MMUSD: margen 20, probabilidad de superar el equilibrio 50 %; margen 25, 67 %; margen 30, 79 %.",
+     "practica": "En la planilla, hoja Sensibilidades, cambiá el margen de 15,5 a 12 USD por barril y anotá qué ubicaciones pasan a valor negativo. Resolvé el escenario de qué variable respaldar y repetilo hasta lograr 4 de 4."
     }
    ],
    "quiz": [
     {
-     "q": "¿Cuándo el volumen de un pozo cerrado es reserva desarrollada no productiva?",
+     "q": "Las reservas desarrolladas no productivas comprenden:",
      "o": [
-      "Cuando el pozo produjo alguna vez",
-      "Cuando reactivarlo cuesta poco frente a un pozo nuevo, y hay evidencia de producibilidad",
-      "Cuando hay un contrato en negociación",
-      "Cuando se perfora un pozo nuevo en el área"
+      "Solo ubicaciones sin pozo",
+      "Pozos cerrados y zonas detrás de la tubería",
+      "Solo recursos contingentes",
+      "Pozos productores y pozos en construcción"
      ],
      "a": 1,
-     "e": "La condición es el gasto menor frente a un pozo nuevo y la evidencia de producibilidad y comercialidad."
+     "e": "Hay dos tipos: cerrados y detrás de la tubería (behind-pipe)."
     },
     {
-     "q": "¿Qué significa rendimiento pendiente (pending performance) en este curso?",
+     "q": "Sobre el porcentaje de gasto menor que separa desarrollada de no desarrollada:",
      "o": [
-      "Un volumen sin historia de producción suficiente para sostener reservas",
-      "Una categoría oficial de PRMS",
-      "Una reserva probada con producción en baja",
-      "Un recurso prospectivo con riesgo geológico alto"
-     ],
-     "a": 0,
-     "e": "Es un término del curso, no de PRMS; se clasifica en una subclase, casi siempre desarrollo pendiente."
-    },
-    {
-     "q": "Un gas descubierto sin contrato ni ducto comprometidos es:",
-     "o": [
-      "Reserva probada no desarrollada",
-      "Reserva probable",
-      "Recurso contingente en desarrollo pendiente",
-      "Recurso contingente en espera"
+      "La SEC fija 50 %",
+      "PRMS fija 25 %",
+      "PRMS fija 10 %",
+      "No hay un valor fijo: cada compañía define y documenta el suyo"
      ],
      "a": 3,
-     "e": "Sin compromiso firme de mercado o transporte, el volumen es contingente en espera hasta resolver esa contingencia."
+     "e": "Las FAQ de la SPE describen umbrales de 10 a 50 %, con 25 a 35 % como lo más común."
+    },
+    {
+     "q": "Un pozo cerrado reabriría con 300 bbl/d, con límite económico de 20 bbl/d y declinación nominal de 0,20 por año. Las reservas son, aproximadamente:",
+     "o": [
+      "600 mil barriles",
+      "341 mil barriles",
+      "511 mil barriles",
+      "420 mil barriles"
+     ],
+     "a": 2,
+     "e": "(300 − 20) × 365 / 0,20 = 511.000 barriles."
+    },
+    {
+     "q": "Un pozo cerrado sin expectativa razonable de mercado ni de conexión se informa como:",
+     "o": [
+      "Recurso contingente en espera",
+      "Reserva probada desarrollada",
+      "Reserva desarrollada no productiva",
+      "Recurso prospectivo"
+     ],
+     "a": 0,
+     "e": "Sin expectativa razonable de venta no se cumple el criterio de comercialidad: es contingente."
+    },
+    {
+     "q": "El rendimiento pendiente (pending performance) es:",
+     "o": [
+      "Una categoría oficial de reservas probadas de PRMS",
+      "Una subclase de los recursos prospectivos de un play",
+      "Un término del curso, no una categoría de PRMS",
+      "Un tipo de pozo cerrado por razones mecánicas"
+     ],
+     "a": 2,
+     "e": "Es una situación que se clasifica en alguna subclase, casi siempre desarrollo pendiente."
+    },
+    {
+     "q": "Un pozo pasó de 1.200 a 780 bbl/d en un año. La declinación nominal observada es de:",
+     "o": [
+      "65 % por año",
+      "27 % por año",
+      "35 % por año",
+      "43 % por año"
+     ],
+     "a": 3,
+     "e": "ln(1.200 / 780) = 0,43, o sea 43 % por año."
+    },
+    {
+     "q": "¿Por qué es delicado un exponente b alto en una declinación hiperbólica?",
+     "o": [
+      "Porque reduce el volumen recuperable del pozo",
+      "Porque no se puede calcular con la ecuación de Arps",
+      "Porque agranda la cola y da vidas muy largas",
+      "Porque anula el límite económico del proyecto"
+     ],
+     "a": 2,
+     "e": "Sin declinación terminal ni tope de vida, un b alto da volúmenes difíciles de defender."
+    },
+    {
+     "q": "Una inversión de 280 MMUSD y un margen de 25 USD por barril dan un volumen de equilibrio de:",
+     "o": [
+      "11,2 MMbbl",
+      "7,0 MMbbl",
+      "9,3 MMbbl",
+      "14,0 MMbbl"
+     ],
+     "a": 0,
+     "e": "Equilibrio = 280 / 25 = 11,2 MMbbl."
     }
    ]
   }
  ],
  "exam": [
   {
-   "q": "¿Cuál es la subclase más madura de los recursos contingentes?",
+   "q": "Un proyecto con decisión de desarrollar tomada, pero sin fondos comprometidos ni obra en marcha, se informa como:",
    "o": [
+    "Aprobado para desarrollo",
     "Desarrollo pendiente",
-    "Desarrollo en espera",
-    "Desarrollo sin aclarar",
-    "Desarrollo no viable"
-   ],
-   "a": 0,
-   "e": "Desarrollo pendiente: hay actividad en curso para justificar el desarrollo comercial en un plazo previsible."
-  },
-  {
-   "q": "Un pozo cerrado necesita una reparación que cuesta la décima parte de un pozo nuevo y hay evidencia de producibilidad. El volumen es:",
-   "o": [
-    "Reserva no desarrollada",
-    "Recurso contingente sin aclarar",
-    "Reserva desarrollada no productiva",
-    "Recurso prospectivo"
+    "Justificado para desarrollo",
+    "En producción"
    ],
    "a": 2,
-   "e": "Con gasto menor y evidencia de producibilidad, es reserva desarrollada no productiva."
+   "e": "Justificado para desarrollo: la decisión está tomada, pero aún faltan fondos u obra para llegar a aprobado."
   },
   {
-   "q": "¿Cuál es la relación correcta para un recurso prospectivo?",
+   "q": "Un recurso contingente con actividades detenidas por falta de mercado está en la subclase:",
    "o": [
-    "Pc = Pg + Pd",
-    "Pc = Pg ÷ Pd",
-    "Pc = Pd − Pg",
-    "Pc = Pg × Pd"
+    "Prospecto",
+    "Desarrollo sin aclarar",
+    "Desarrollo pendiente",
+    "Desarrollo en espera"
    ],
    "a": 3,
-   "e": "La chance de comercialidad es el producto de la chance de descubrimiento y la chance de desarrollo."
+   "e": "En espera: el proyecto está detenido, o su justificación puede demorarse de forma significativa."
   },
   {
-   "q": "Un gas descubierto sin contrato ni ducto comprometidos es:",
+   "q": "La subclase prospectiva más definida es:",
    "o": [
-    "Reserva desarrollada no productiva",
-    "Recurso contingente en espera",
-    "Recurso contingente no viable",
-    "Reserva probable"
+    "Pendiente",
+    "Play",
+    "Prospecto",
+    "Lead"
+   ],
+   "a": 2,
+   "e": "Prospecto: lo bastante definido como para ser objetivo de perforación."
+  },
+  {
+   "q": "La estimación alta de reservas tiene asociada una probabilidad de:",
+   "o": [
+    "Ninguna",
+    "Al menos 90 %",
+    "Exactamente 50 %",
+    "Al menos 10 % de ser igualada o superada"
+   ],
+   "a": 3,
+   "e": "Alta: al menos 10 %."
+  },
+  {
+   "q": "Una acumulación descubierta cumple tecnología y economía, pero no tiene aprobaciones ni mercado. La clase es:",
+   "o": [
+    "Reservas",
+    "Recursos prospectivos",
+    "Recursos contingentes",
+    "Producción"
+   ],
+   "a": 2,
+   "e": "Faltan criterios de comercialidad: es un recurso contingente."
+  },
+  {
+   "q": "El rótulo 2C corresponde a:",
+   "o": [
+    "La estimación alta de prospectivos",
+    "La suma de dos pozos",
+    "La mejor estimación de recursos contingentes",
+    "La estimación baja de reservas"
+   ],
+   "a": 2,
+   "e": "2C: mejor estimación de contingentes."
+  },
+  {
+   "q": "Para ser reserva, la chance de desarrollo debe ser de al menos:",
+   "o": [
+    "70 %",
+    "100 %",
+    "50 %",
+    "90 %"
+   ],
+   "a": 3,
+   "e": "Pd de al menos 90 %."
+  },
+  {
+   "q": "Un contingente con Pd de 40 % tiene una chance de comercialidad de:",
+   "o": [
+    "60 %",
+    "40 %",
+    "90 %",
+    "16 %"
    ],
    "a": 1,
-   "e": "Sin compromiso firme de mercado o transporte, es contingente en espera."
+   "e": "Pg = 1, entonces Pc = Pd = 40 %."
   },
   {
-   "q": "En una declinación hiperbólica, elegir un b alto sin declinación terminal ni tope de vida lleva a:",
+   "q": "Un prospecto con Pg de 20 % y Pd de 50 % tiene Pc de:",
    "o": [
-    "Subestimar las reservas",
-    "Resultados idénticos a la exponencial",
-    "Reducir el rango de incertidumbre",
-    "Sobrestimar la recuperación final"
+    "25 %",
+    "10 %",
+    "30 %",
+    "70 %"
    ],
-   "a": 3,
-   "e": "Un b alto alarga la cola de producción; sin declinación terminal ni tope de vida, la recuperación se sobrestima."
+   "a": 1,
+   "e": "0,20 × 0,50 = 0,10."
   },
   {
-   "q": "Según la regla de 2008, la SEC con las reservas probables y posibles:",
+   "q": "La regla final de la SEC rige para informes anuales de ejercicios que terminan desde el:",
    "o": [
-    "Las prohibió desde 2010",
-    "Las hizo obligatorias",
-    "Las igualó a las probadas",
-    "Permitió informarlas"
+    "31 de diciembre de 2012",
+    "31 de diciembre de 2009",
+    "1 de enero de 2008",
+    "No tiene fecha"
+   ],
+   "a": 1,
+   "e": "Rige para ejercicios que terminan a partir del 31 de diciembre de 2009."
+  },
+  {
+   "q": "¿Cuál de estas fuentes aceptó la SEC como no tradicional en 2008?",
+   "o": [
+    "Energía solar",
+    "Solo petróleo convencional",
+    "Solo gas licuado",
+    "Bitumen, shale y gas de capas de carbón"
    ],
    "a": 3,
-   "e": "La regla permitió, pero no exigió, informar reservas probables y posibles."
+   "e": "La regla aceptó bitumen, shale y gas de capas de carbón entre las fuentes no tradicionales."
+  },
+  {
+   "q": "Una zona detrás de la tubería (behind-pipe) es:",
+   "o": [
+    "Una zona que todavía no se perforó",
+    "Un recurso prospectivo de un play reconocido",
+    "Una reserva que ya está en producción regular",
+    "Una zona perforada y cementada, sin cañonear"
+   ],
+   "a": 3,
+   "e": "Behind-pipe: intervalo detrás del casing, aún sin terminar."
+  },
+  {
+   "q": "El rango de umbrales de gasto menor más común entre las compañías es de:",
+   "o": [
+    "60 a 70 %",
+    "1 a 5 %",
+    "25 a 35 %",
+    "90 a 100 %"
+   ],
+   "a": 2,
+   "e": "Las FAQ de la SPE: umbrales de 10 a 50 %, con 25 a 35 % como lo más común."
+  },
+  {
+   "q": "Con 250 bbl/d iniciales, límite de 20 bbl/d y declinación de 0,20 por año, las reservas del pozo cerrado son de unos:",
+   "o": [
+    "280 mil barriles",
+    "420 mil barriles",
+    "560 mil barriles",
+    "511 mil barriles"
+   ],
+   "a": 1,
+   "e": "(250 − 20) × 365 / 0,20 = 419.750 barriles."
+  },
+  {
+   "q": "Cuando se acumula historia de producción de un volumen con rendimiento pendiente:",
+   "o": [
+    "Se vuelve obligatorio informarlo como reserva probada",
+    "Se cancela la clasificación del proyecto completo",
+    "El rango se angosta y parte puede ser reserva",
+    "El volumen pasa a ser un recurso prospectivo"
+   ],
+   "a": 2,
+   "e": "Más historia reduce la incertidumbre; la parte con respaldo se evalúa como reserva."
+  },
+  {
+   "q": "Una ubicación con 300 Mbbl, margen de 15,5 USD por barril e inversión de 4,20 MMUSD tiene un valor presente neto de:",
+   "o": [
+    "+0,45 MMUSD",
+    "0",
+    "+4,65 MMUSD",
+    "−0,45 MMUSD"
+   ],
+   "a": 0,
+   "e": "300 × 15,5 / 1000 = 4,65; 4,65 − 4,20 = +0,45 MMUSD."
+  },
+  {
+   "q": "Con el mismo caudal inicial, el volumen acumulado hasta el límite económico es mayor con:",
+   "o": [
+    "Ninguna de las dos: los acumulados son iguales",
+    "Una declinación exponencial con el mismo caudal",
+    "Una hiperbólica de b alto, con vida muy larga",
+    "Un b igual a cero, que es el caso exponencial"
+   ],
+   "a": 2,
+   "e": "A mayor b, mayor acumulado y mayor vida, por eso hay que acotar la cola."
+  },
+  {
+   "q": "Si el margen por barril sube y la inversión no cambia, el volumen de equilibrio:",
+   "o": [
+    "No cambia",
+    "Se anula",
+    "Aumenta",
+    "Baja"
+   ],
+   "a": 3,
+   "e": "Equilibrio = inversión / margen: a más margen, menos volumen para recuperar la inversión."
+  },
+  {
+   "q": "Dentro de un mismo proyecto, PRMS:",
+   "o": [
+    "Permite informar una parte como reserva y otra como contingente",
+    "No admite dividirlo entre reservas y contingentes",
+    "Exige informar solo la estimación alta",
+    "Obliga a que sea un solo pozo"
+   ],
+   "a": 1,
+   "e": "No se admiten clasificaciones divididas dentro de un mismo proyecto."
+  },
+  {
+   "q": "¿Qué se informa de un prospecto?",
+   "o": [
+    "Solo el volumen multiplicado por Pc, sin su rango",
+    "Nada, porque todavía no hay descubrimiento alguno",
+    "El volumen sin riesgo y su rango, con Pg y Pd",
+    "Solo la estimación alta del prospecto elegido"
+   ],
+   "a": 2,
+   "e": "Los volúmenes prospectivos se informan sin riesgo, y con Pg y Pd a su lado."
   }
  ],
  "outro": {
   "can": [
-   "la clasificación completa por madurez del proyecto, de en producción a play",
-   "las reservas probables y posibles y sus escenarios de incertidumbre",
-   "los recursos contingentes, sus subclases y su estado económico",
-   "el paso de contingente a reserva y sus criterios",
-   "las chances de descubrimiento, de desarrollo y de comercialidad de un prospecto",
-   "por qué se informan por separado reservas, contingentes y prospectivos",
-   "las reservas desarrolladas no productivas y el criterio de gasto menor",
-   "el desarrollo pendiente y el rendimiento pendiente (pending performance)",
-   "qué variable domina una estimación, con sensibilidades"
+   "ubicar un proyecto en su subclase de madurez, de en producción a play",
+   "distinguir reservas probables y posibles, y contingentes por subclase y estado económico",
+   "explicar qué debe cumplir un contingente para ser reserva, incluido el plazo de cinco años",
+   "calcular la chance de comercialidad de un prospecto y leer sus estimaciones sin riesgo",
+   "clasificar un pozo cerrado o una zona detrás de la tubería con el criterio de gasto menor",
+   "leer una sensibilidad y decidir qué dato respaldar"
   ],
   "phrase": "Del descubrimiento a la reserva, cada volumen con su chance.",
   "recap": [
@@ -1393,20 +2922,93 @@
    "Reservas, contingentes y prospectivos se informan por separado, cada uno con su rango.",
    "Una reserva desarrollada no productiva exige gasto menor frente a un pozo nuevo y evidencia de producibilidad.",
    "Más historia de producción angosta el rango; la sensibilidad dice qué dato respaldar."
+  ],
+  "cues": [
+   {
+    "say": "Repasemos lo esencial. La clase la decide la chance de comercialidad; la categoría, la incertidumbre del volumen. Un contingente pasa a reserva cuando se resuelven todas sus contingencias, y no alcanza con que sea económico.",
+    "scene": {
+     "t": "bul",
+     "k": "Para llevarte",
+     "h": "Ideas clave",
+     "items": [
+      "Clase por chance de comercialidad; categoría por incertidumbre.",
+      "Un contingente es reserva cuando el proyecto es comercial, no solo económico.",
+      "En un prospecto, Pc es Pg por Pd, y se informa sin riesgo.",
+      "Un pozo cerrado es reserva con gasto menor, evidencia y mercado esperable.",
+      "Una sensibilidad dice qué dato respaldar primero."
+     ]
+    }
+   },
+   {
+    "say": "En un prospecto, la chance de comercialidad es el producto de la chance de descubrimiento y la de desarrollo. Reservas, contingentes y prospectivos se informan por separado, cada uno con su rango."
+   },
+   {
+    "say": "Una reserva desarrollada no productiva exige gasto menor frente a un pozo nuevo, evidencia de producibilidad y mercado razonablemente esperable."
+   },
+   {
+    "say": "Y con más historia de producción el rango se angosta. La sensibilidad dice qué variable domina el resultado y cuál conviene respaldar."
+   },
+   {
+    "say": "Al terminar este curso, podés: ubicar un proyecto en su subclase de madurez; distinguir reservas probables y posibles y contingentes; explicar qué debe cumplir un contingente para ser reserva; calcular la chance de comercialidad de un prospecto; clasificar un pozo cerrado; y leer una sensibilidad para decidir qué dato respaldar.",
+    "scene": {
+     "t": "can",
+     "k": "Lo que lograste",
+     "h": "Ahora podés reconocer y aplicar",
+     "items": [
+      "ubicar un proyecto en su subclase de madurez, de en producción a play",
+      "distinguir reservas probables y posibles, y contingentes por subclase y estado económico",
+      "explicar qué debe cumplir un contingente para ser reserva, incluido el plazo de cinco años",
+      "calcular la chance de comercialidad de un prospecto y leer sus estimaciones sin riesgo",
+      "clasificar un pozo cerrado o una zona detrás de la tubería con el criterio de gasto menor",
+      "leer una sensibilidad y decidir qué dato respaldar"
+     ]
+    }
+   },
+   {
+    "say": "Ítems vistos: once lecciones en cuatro módulos, nueve laboratorios y escenarios interactivos, una planilla Excel con ejercicios, un cuestionario por módulo y el examen final. El siguiente paso es el examen final. Al aprobarlo, obtenés tu certificado H3L, con código de verificación. Mientras tanto, seguí practicando con la planilla: cambiá los datos y fijate cómo se mueve el resultado.",
+    "scene": {
+     "t": "seen"
+    }
+   },
+   {
+    "say": "En el catálogo de H3L tenés además cursos complementarios de reservas, de evaluación económica y de geociencias. Del descubrimiento a la reserva, cada volumen con su chance. Gracias por aprender con H3L Global Energy.",
+    "scene": {
+     "t": "bout"
+    },
+    "q": {
+     "q": "¿Cuál es la pregunta que resume la clasificación de un volumen?",
+     "o": [
+      "¿Cuántos pozos hay en el yacimiento?",
+      "¿Cuál es el precio más alto del año?",
+      "¿Quién firmó el último informe?",
+      "¿Qué criterios de comercialidad cumple hoy el proyecto, y con qué incertidumbre?"
+     ],
+     "a": 3,
+     "e": "La clase surge de lo que el proyecto cumple hoy; la categoría, de la incertidumbre del volumen."
+    }
+   },
+   {
+    "say": "Contacto: info@h3lglobalenergy.com."
+   }
+  ],
+  "ficha": "**Lo que lograste.** ubicar un proyecto en su subclase de madurez, de en producción a play; distinguir reservas probables y posibles, y contingentes por subclase y estado económico; explicar qué debe cumplir un contingente para ser reserva, incluido el plazo de cinco años; calcular la chance de comercialidad de un prospecto y leer sus estimaciones sin riesgo; clasificar un pozo cerrado o una zona detrás de la tubería con el criterio de gasto menor; leer una sensibilidad y decidir qué dato respaldar.\n\n**Siguiente paso.** Examen final y certificado H3L.",
+  "obj": [
+   "Repasar las ideas clave del curso.",
+   "Conocer el camino hacia el examen final y el certificado."
   ]
  },
  "downloads": [
   {
    "file": "xlsx/H3L_Reservas_Recursos_Contingentes_y_Prospectivos.xlsx",
    "title": "Contingentes y prospectivos: viabilidad económica, Pc y volumen esperado (Excel)",
-   "desc": "Cinco hojas con datos de ejemplo: clasificación por subclase, proyectos contingentes con precio editable, prospectos con Pg, Pd y Pc, lista de verificación del umbral de reserva y sensibilidades (declinación, inversión y exponente b).",
+   "desc": "Cinco hojas con datos de ejemplo: clasificación por subclase, proyectos contingentes con precio editable, prospectos con Pg, Pd y Pc, lista de verificación del umbral de reserva y sensibilidades (declinación, inversión, exponente b y probabilidad de superar el equilibrio).",
    "task": "En la hoja Contingentes bajá el precio de 65 a 45 USD por barril y observá qué proyectos dejan de ser económicamente viables. Después, en Prospectos, subí Pd del prospecto B de 40 a 70 por ciento y mirá cuánto cambia el volumen esperado. Por último, en Sensibilidades cambiá el margen de 15,5 a 12 USD por barril y mirá qué ubicaciones pasan a valor negativo."
   }
  ],
  "cases": [
   {
    "title": "La SEC abre el reporte a las reservas probables y posibles (diciembre de 2008)",
-   "text": "A fines de diciembre de 2008 la SEC adoptó la regla final de modernización del reporte de petróleo y gas. Permitió informar de forma opcional reservas probables y posibles, con definiciones consistentes con PRMS, que antes estaban prohibidas en las presentaciones. Reemplazó el precio de un solo día por el promedio de doce meses, aceptó reservas de fuentes no tradicionales y habilitó tecnología confiable para estimar reservas probadas. Rige para informes anuales de ejercicios que terminan desde el 31 de diciembre de 2009.",
+   "text": "A fines de diciembre de 2008 la SEC adoptó la regla final de modernización del reporte de petróleo y gas. Permitió informar de forma opcional reservas probables y posibles, con definiciones consistentes con PRMS, que antes no podían presentarse. Reemplazó el precio de un solo día por el promedio de doce meses, calculado con el precio del primer día de cada mes, aceptó reservas de fuentes no tradicionales, habilitó tecnología confiable para estimar reservas probadas y pidió informar la calificación de quien prepara las estimaciones. Rige para informes anuales de ejercicios que terminan desde el 31 de diciembre de 2009.",
    "src": "SEC, Modernization of Oil and Gas Reporting, Release No. 33-8995 (2008)"
   }
  ],
