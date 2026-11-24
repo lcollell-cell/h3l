@@ -140,6 +140,11 @@
    "title": "Beyond proved reserves",
    "short": "Probable and possible reserves, development pending (pending performance) and contingent and prospective resources, with project maturity, chance of commerciality and the 2008 SEC case.",
    "tag": "Reserves"
+  },
+  "spc": {
+   "title": "Process safety and well control",
+   "short": "Kicks, BOP and cementing; HAZOP, LOPA and management of change; corrosion, pipelines and well abandonment.",
+   "tag": "Safety and wells"
   }
  },
  "available": [

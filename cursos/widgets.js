@@ -769,5 +769,8 @@ W.horner=function(box,p,api){var h=mkui(box,[{k:'ls',l:'La recta de Horner empie
     h.out('k real = <strong>20 md</strong>; con esta ventana, k = 162,6·q·B·μ/(m·h) = <strong style="color:'+(good?GN:RD)+'">'+nf(kest,1)+' md</strong> ('+(err>=0?'+':'')+nf(err,0)+' %). Daño estimado <strong>'+nf(sest,1)+'</strong> (real '+nf(V.s,1)+'). '+(good?'La ventana cae en el tramo radial.':'<strong>La ventana incluye puntos dominados por el almacenamiento:</strong> la pendiente y k salen mal. Subí el inicio de la recta hasta que la recta se alinee.')+src(h,'Horner, T. R. (1951), Reservoir Behavior in Time-Dependent Operations; Earlougher (1977), SPE Monograph 5: m = 162,6·q·B·μ/(k·h). Solución analítica con almacenamiento y daño; pozo de ejemplo (q = 500 stb/d, B = 1,2, μ = 1 cP, h = 50 pies, tp = 240 h).'))}
   draw(h.V)};
 
+/* utilidades compartidas con otros archivos de laboratorios (p. ej. spc-labs.js) */
+W._u={sv:sv,nf:nf,mkui:mkui,plot:plot,path:path,lbl:lbl,wrap:wrap,src:src,rng:rng,TX:TX,GR:GR,GN:GN,AM:AM,BL:BL,RD:RD,VI:VI};
+
 W.build=function(name,box,p,api){if(!W[name]){box.innerHTML='<div class="out">Laboratorio no disponible: '+name+'</div>';return{}}return W[name](box,p||{},api||{touch:function(){}})||{}};
 })();

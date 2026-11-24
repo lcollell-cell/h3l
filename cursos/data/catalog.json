@@ -56,7 +56,8 @@
    "desc": "Transporte, medición fiscal, integridad y gestión del riesgo de procesos.",
    "courses": [
     "mid",
-    "hse"
+    "hse",
+    "spc"
    ]
   },
   {
@@ -610,6 +611,22 @@
    ],
    "topics": [
     "reservas"
+   ]
+  },
+  {
+   "id": "spc",
+   "n": 32,
+   "title": "Seguridad de procesos y control de pozos",
+   "short": "Surgencias, BOP y cementación; HAZOP, LOPA y gestión del cambio; corrosión, ductos y abandono de pozos.",
+   "level": "Intermedio",
+   "color": "#c0392b",
+   "icon": "hse",
+   "tag": "Seguridad y pozos",
+   "levels": [
+    "i"
+   ],
+   "topics": [
+    "seg"
    ]
   }
  ],

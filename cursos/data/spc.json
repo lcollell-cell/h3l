@@ -1,0 +1,3332 @@
+{
+ "id": "spc",
+ "title": "Seguridad de procesos y control de pozos",
+ "subtitle": "Las barreras que mantienen contenidos los fluidos: del pozo a la instalación de superficie y al activo en servicio.",
+ "desc": "Recorrido práctico por el control de pozos (surgencias, cierre, métodos de control, BOP, cementación y prueba de presión negativa), la seguridad de procesos (pérdidas de contención, HAZOP, LOPA, paradas de emergencia, gestión del cambio e integridad mecánica) y la integridad de activos (corrosión, ductos, pozos viejos y abandonados y barreras durante el ciclo de vida), con laboratorios y escenarios de decisión basados en normas y casos reales.",
+ "objectives": [
+  "Reconocer una surgencia, cerrar el pozo y calcular el peso de control y las presiones de circulación de un control.",
+  "Verificar las barreras de un pozo: BOP, cementación y prueba de presión negativa, con criterios de aceptación.",
+  "Estimar una pérdida de contención y evaluar las capas de protección con HAZOP y LOPA, y gestionar el cambio.",
+  "Evaluar un defecto de corrosión, un pozo viejo y un abandono con criterio de barreras."
+ ],
+ "labs": [
+  "surgencia perforando: detección, cierre y primeras acciones (decisiones)",
+  "hoja de control y circulación de un influjo de gas",
+  "BOP: selección, prueba y tiempos de cierre",
+  "cementación: ventana de presión, volumen y efecto U-tube",
+  "prueba de presión negativa: interpretar y decidir",
+  "pérdida de contención: caudal, masa liberada y aislamiento",
+  "corrosión: resistencia remanente (B31G modificado) y vida remanente",
+  "abandono de pozos: barreras, largo y verificación"
+ ],
+ "practiceMin": 90,
+ "competencies": [
+  {
+   "name": "Control de pozos y barreras",
+   "lessons": [
+    "s1",
+    "s2",
+    "s3",
+    "s4"
+   ]
+  },
+  {
+   "name": "Seguridad de procesos (PSM)",
+   "lessons": [
+    "s5",
+    "s6",
+    "s7"
+   ]
+  },
+  {
+   "name": "Integridad de activos y barreras del pozo",
+   "lessons": [
+    "s8",
+    "s9",
+    "s10"
+   ]
+  }
+ ],
+ "intro": {
+  "hook": "Vamos a recorrer, paso a paso, cómo se mantienen las barreras que evitan que un pozo se descontrole o que una instalación libere lo que contiene, con el caso Macondo como hilo conductor.",
+  "questions": [
+   "¿Qué hace falta para mantener un pozo bajo control y cómo se actúa si se pierde?",
+   "¿Qué capas de protección evitan una pérdida de contención en una instalación de superficie?",
+   "¿Cómo se mantienen las barreras durante toda la vida del pozo y del activo?"
+  ],
+  "star": {
+   "caso": "Macondo, Golfo de México",
+   "S": "El 20 de abril de 2010, un reventón en el pozo Macondo causó una explosión e incendio en la plataforma Deepwater Horizon: murieron once personas y hubo un derrame de petróleo de gran escala.",
+   "T": "Entender qué barreras había, cuáles fallaron y qué decisiones se tomaron, para no repetir el evento en ningún pozo ni instalación.",
+   "A": "Recorrer el control de pozos, la seguridad de procesos y la integridad de activos, con cálculos, laboratorios y escenarios de decisión.",
+   "R": "Un criterio práctico: dos barreras independientes y verificadas en cada momento, y una decisión clara cuando una falla."
+  },
+  "cues": [
+   {
+    "say": "Bienvenido a Seguridad de procesos y control de pozos, de H3L Global Energy. Durante este curso vas a recorrer, paso a paso, las barreras que evitan que un fluido de formación o un material peligroso salgan de donde deben estar contenidos.",
+    "scene": {
+     "t": "wel"
+    }
+   },
+   {
+    "say": "El curso responde tres preguntas que valen para cualquier equipo técnico. La primera: ¿qué hace falta para mantener un pozo bajo control y cómo se actúa si se pierde? La segunda: ¿qué capas de protección tiene una instalación de superficie para evitar una pérdida de contención? Y la tercera: ¿cómo se mantienen las barreras durante toda la vida del activo?",
+    "scene": {
+     "t": "bin"
+    },
+    "hl": 2
+   },
+   {
+    "say": "Para responderlas, el curso se organiza en tres módulos. El primero trata el control de pozos: surgencias, cierre, métodos de control, el BOP, la cementación y la prueba de presión negativa."
+   },
+   {
+    "say": "El segundo, la seguridad de procesos: pérdidas de contención en baterías, plantas, separadores y tanques, el análisis de peligros con HAZOP y LOPA, las paradas de emergencia, la gestión del cambio y la integridad mecánica."
+   },
+   {
+    "say": "El tercero, la integridad de los activos: corrosión y ductos, pozos viejos y abandonados, y la gestión de barreras durante todo el ciclo de vida del pozo."
+   },
+   {
+    "say": "El hilo conductor es un caso real: el pozo Macondo, en el Golfo de México. El veinte de abril de dos mil diez, un reventón causó una explosión en la plataforma Deepwater Horizon y once personas murieron.",
+    "scene": {
+     "t": "star"
+    },
+    "hl": 0
+   },
+   {
+    "say": "La investigación de la Junta de Seguridad Química de Estados Unidos señaló varias barreras que no cumplieron su función: la cementación, la prueba de presión negativa y el ariete ciego-cortante.",
+    "hl": 1
+   },
+   {
+    "say": "Para evitar que algo así se repita hay que responder, con criterio técnico, qué barreras hay, cómo se verifican y qué se hace cuando fallan.",
+    "hl": 2
+   },
+   {
+    "say": "En cada lección seguimos la misma secuencia: una pregunta técnica, el método, el laboratorio o el escenario de decisiones, y la decisión que sostiene la lección."
+   },
+   {
+    "say": "Los laboratorios, los escenarios y la planilla Excel usan datos de ejemplo, pensados para practicar. No reemplazan los procedimientos del operador ni una certificación de control de pozos."
+   },
+   {
+    "say": "Al terminar el curso vas a poder: reconocer una surgencia y actuar; calcular el peso de control y las presiones de circulación; verificar las barreras de un pozo; estimar una pérdida de contención y las capas de protección; y decidir sobre la integridad de un ducto o de un pozo viejo."
+   },
+   {
+    "say": "Cada módulo termina con un cuestionario, hay una planilla Excel para practicar, y el curso cierra con un examen final y el certificado H3L.",
+    "scene": {
+     "t": "bul",
+     "k": "Ruta del curso",
+     "h": "Cómo está organizado",
+     "items": [
+      "Control de pozos y barreras",
+      "Seguridad de procesos",
+      "Integridad de activos",
+      "Excel de práctica",
+      "Examen final y certificado H3L"
+     ]
+    }
+   },
+   {
+    "say": "Conviene tener nociones básicas de perforación o de operaciones de superficie, y manejar una planilla de cálculo."
+   },
+   {
+    "say": "Empecemos."
+   }
+  ],
+  "ficha": "**Ruta del curso.** Control de pozos (M1) → seguridad de procesos (M2) → integridad de activos (M3).\n\n**Las tres preguntas.** 1) ¿Cómo se mantiene y se recupera el control del pozo? 2) ¿Qué capas de protección evitan una pérdida de contención? 3) ¿Cómo se mantienen las barreras durante toda la vida del activo?\n\n**Secuencia de cada lección.** Pregunta → método → laboratorio o escenario → decisión.\n\n**Qué se necesita.** Nociones de perforación u operaciones de superficie; Excel (planilla H3L_SPC_Presiones_Barreras_e_Integridad.xlsx).\n\n**Aviso.** Los datos son de ejemplo con fines didácticos; el curso no reemplaza los procedimientos del operador ni una certificación de control de pozos (IWCF o IADC WellSharp).",
+  "obj": [
+   "Conocer las tres preguntas que ordenan el curso y cómo se organiza.",
+   "Entender el caso conductor (Macondo) y la metodología de cada lección."
+  ]
+ },
+ "modules": [
+  {
+   "id": "m1",
+   "title": "Control de pozos y barreras",
+   "lessons": [
+    {
+     "id": "s1",
+     "title": "Presión, balance y señales de surgencia",
+     "comp": "Control de pozos y barreras",
+     "cues": [
+      {
+       "say": "Te damos la bienvenida al curso Seguridad de procesos y control de pozos. Veremos tres módulos, y te cuento para qué sirve cada uno.",
+       "scene": {
+        "t": "wel"
+       }
+      },
+      {
+       "say": "El primero, Control de pozos. Sirve para evitar el evento de mayor severidad de la perforación, la terminación y el workover: que un fluido de formación entre al pozo y no se pueda controlar.",
+       "scene": {
+        "t": "chap",
+        "m": "agenda"
+       },
+       "hl": 0
+      },
+      {
+       "say": "El segundo, Seguridad de procesos. Sirve para evitar pérdidas de contención en baterías, plantas, separadores y tanques, y para saber qué capas de protección tiene cada instalación.",
+       "hl": 1
+      },
+      {
+       "say": "Y el tercero, Integridad de activos. Sirve para que la corrosión, los ductos y los pozos viejos o abandonados no se conviertan en la próxima fuga: las barreras se mantienen durante toda la vida del activo.",
+       "hl": 2
+      },
+      {
+       "say": "Y ahora sí, ¡comencemos!",
+       "scene": {
+        "t": "chap",
+        "i": 0,
+        "go": 1
+       }
+      },
+      {
+       "say": "Un pozo está bajo control mientras la presión del fluido de perforación en el fondo supera la presión de los fluidos de la formación.",
+       "scene": {
+        "t": "les",
+        "q": "Un pozo está bajo control mientras la presión del fluido de perforación en el fondo supera la presión de los fluidos de la formación."
+       }
+      },
+      {
+       "say": "Un pozo está bajo control mientras la presión del lodo en el fondo supera la presión de los fluidos de la formación. Esa es la barrera primaria. Si se pierde y no se recupera a tiempo, aparece una surgencia, en inglés kick, y si no se la controla, un reventón, o blowout."
+      },
+      {
+       "say": "Al terminar esta lección vas a aprender, primero, a calcular la presión hidrostática y distinguir sobrebalance de subbalance.",
+       "scene": {
+        "t": "bul",
+        "k": "Objetivos de la lección",
+        "h": "Qué vas a aprender",
+        "items": [
+         "Calcular la presión hidrostática y distinguir sobrebalance de subbalance.",
+         "Reconocer las señales primarias y secundarias de una surgencia.",
+         "Explicar las causas más frecuentes de una surgencia y por qué las maniobras son críticas."
+        ]
+       },
+       "hl": 0,
+       "obj": 1
+      },
+      {
+       "say": "segundo, a reconocer las señales primarias y secundarias de una surgencia.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a explicar las causas más frecuentes de una surgencia y por qué las maniobras son críticas.",
+       "hl": 2,
+       "obj": 1
+      },
+      {
+       "say": "Mirá el pozo del diagrama. Hay una columna de lodo, y el lodo pesa: esa columna presiona el fondo.",
+       "scene": {
+        "t": "dg",
+        "d": "hyd",
+        "k": "Balance de presiones",
+        "h": "Hidrostática contra presión de formación",
+        "src": "Esquema didáctico H3L · Grace, Blowout and Well Control Handbook (Gulf Professional)"
+       },
+       "hl": 0
+      },
+      {
+       "say": "Enfrente, la roca tiene su propia presión de poro, que llamamos presión de formación. Es la presión que empuja a los fluidos hacia el pozo.",
+       "hl": 1
+      },
+      {
+       "say": "La presión hidrostática, en psi, es cero coma cero cincuenta y dos por la densidad del lodo en libras por galón por la profundidad vertical verdadera en pies. Ese cero coma cero cincuenta y dos es una constante de conversión de unidades.",
+       "hl": 2
+      },
+      {
+       "say": "Si la hidrostática supera a la presión de formación hay sobrebalance y el pozo está controlado. Si queda por debajo hay subbalance, y el fluido de formación puede entrar.",
+       "hl": 3
+      },
+      {
+       "say": "Al sacar la sarta se deja de circular y el pistoneo resta presión, por eso se agrega un margen de maniobra: el lodo se densifica un poco más.",
+       "hl": 4
+      },
+      {
+       "say": "Veamos un ejemplo. Un lodo de diez libras por galón a diez mil pies de profundidad vertical da cero coma cero cincuenta y dos por diez por diez mil: cinco mil doscientos psi. Si la formación tiene cinco mil quinientos, el pozo está en subbalance por trescientos psi y el fluido va a entrar.",
+       "scene": {
+        "t": "tbl",
+        "k": "Presión, balance y señales de surgencia",
+        "h": "Ejemplo de balance (datos de ejemplo)",
+        "cols": [
+         "Dato",
+         "Valor"
+        ],
+        "rows": [
+         [
+          "Densidad del lodo (MW)",
+          "10,0 ppg"
+         ],
+         [
+          "Profundidad vertical (TVD)",
+          "10.000 ft"
+         ],
+         [
+          "Hidrostática = 0,052 × 10 × 10.000",
+          "5.200 psi"
+         ],
+         [
+          "Presión de formación",
+          "5.500 psi"
+         ],
+         [
+          "Balance",
+          "−300 psi (subbalance)"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Las surgencias avisan. Estas son las señales, de las más claras a las indirectas. La primera: el caudal de retorno aumenta con la bomba sin cambios.",
+       "scene": {
+        "t": "dg",
+        "d": "kick",
+        "k": "Señales de una surgencia",
+        "h": "De la advertencia a la confirmación",
+        "src": "Esquema didáctico H3L · API RP 59 y prácticas IWCF/IADC"
+       },
+       "hl": 0
+      },
+      {
+       "say": "La segunda es la ganancia en piletas: el nivel sube sin que se haya agregado fluido. Estas dos son las señales positivas.",
+       "hl": 1
+      },
+      {
+       "say": "La tercera es que el pozo fluye con la bomba parada. La prueba de flujo, o flow check, confirma la surgencia.",
+       "hl": 2
+      },
+      {
+       "say": "En maniobra, la señal es que el pozo no toma el volumen que corresponde a la sarta que sale. Se lleva en una hoja de maniobra.",
+       "hl": 3
+      },
+      {
+       "say": "También hay señales indirectas, como un cambio en la presión de bombeo o en las emboladas, y el gas de conexión y de maniobra, que indican poco sobrebalance. Hay que vigilarlas como tendencia.",
+       "hl": 4
+      },
+      {
+       "say": "Ante la duda, se cierra el pozo. Una falsa alarma cuesta minutos; una surgencia que no se controla puede costar el pozo y vidas.",
+       "hl": 5
+      },
+      {
+       "say": "Las causas más frecuentes de una surgencia son pocas, y casi todas se previenen. Una de las más frecuentes es no mantener el pozo lleno al sacar la sarta.",
+       "scene": {
+        "t": "tbl",
+        "k": "Presión, balance y señales de surgencia",
+        "h": "Causas frecuentes de una surgencia",
+        "cols": [
+         "Causa",
+         "Qué ocurre",
+         "Prevención"
+        ],
+        "rows": [
+         [
+          "Llenado incorrecto",
+          "El pozo no toma el volumen de la sarta que sale",
+          "Hoja de maniobra y tanque de maniobra"
+         ],
+         [
+          "Pistoneo (swabbing)",
+          "Se saca demasiado rápido y baja la presión de fondo",
+          "Velocidad de salida y margen de maniobra"
+         ],
+         [
+          "Densidad insuficiente",
+          "Subbalance por un lodo liviano o contaminado",
+          "Control continuo de la densidad"
+         ],
+         [
+          "Pérdida de circulación",
+          "Baja el nivel y cae la hidrostática",
+          "Material de pérdida y control de volumen"
+         ],
+         [
+          "Presiones anormales",
+          "No se previó la presión de poro",
+          "Estudio de geopresiones y detección temprana"
+         ],
+         [
+          "Gas en el lodo",
+          "El gas se expande al subir y alivia la columna",
+          "Desgasificación y vigilancia"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Laboratorio. Es un escenario de decisiones: perforando, aparece una ganancia en piletas. Elegí en cada paso lo que harías, mirá la consecuencia y comparala con la mejor práctica. Si no elegís la mejor, repetilo hasta que la secuencia te salga sin dudar.",
+       "scene": {
+        "t": "viz",
+        "w": "spc_case",
+        "h": "Surgencia perforando",
+        "p": {
+         "title": "Surgencia perforando",
+         "intro": "Estás perforando un pozo a diez mil pies de profundidad vertical, con lodo de diez libras por galón. Datos de ejemplo.",
+         "src": "Prácticas de IWCF/IADC WellSharp y API RP 59, con valores de ejemplo.",
+         "close": "La regla de fondo: ante una señal positiva se asegura el pozo primero y se discute después. Una falsa alarma cuesta minutos.",
+         "steps": [
+          {
+           "s": "Perforando, el nivel de la pileta sube ocho barriles en cinco minutos y el caudal de retorno aumenta con la bomba sin cambios. ¿Qué hacés?",
+           "st": {
+            "Ganancia": "8 bbl",
+            "Retorno": "en aumento",
+            "Bomba": "sin cambios"
+           },
+           "o": [
+            {
+             "t": "Seguir perforando y observar un rato más: puede ser un movimiento de la pileta.",
+             "ok": 0,
+             "fb": "Dos señales positivas juntas no se explican con el movimiento de la pileta; cada minuto de demora es más influjo adentro del pozo."
+            },
+            {
+             "t": "Cerrar el BOP en el momento, sin levantar la sarta.",
+             "ok": 1,
+             "fb": "Es rápido, pero puede dejar una junta de herramienta frente al ariete y no se espacia la sarta. Solo es válido si el procedimiento del operador lo indica así."
+            },
+            {
+             "t": "Dar la alarma, parar la rotación, levantar hasta espaciar con el cuerpo del tubo frente al ariete, parar la bomba y hacer la prueba de flujo.",
+             "ok": 2,
+             "fb": "Es la secuencia estándar de detección: se alerta, se saca la barrena del fondo, se para la bomba y se verifica si el pozo fluye."
+            },
+            {
+             "t": "Bajar el caudal de la bomba y circular fondos arriba.",
+             "ok": 0,
+             "fb": "Circular con un influjo adentro lo lleva hacia arriba sin control y reduce la presión de fondo cuando el gas se expande."
+            }
+           ],
+           "dt": "El pozo fluye con la bomba parada."
+          },
+          {
+           "s": "Con la bomba parada, el pozo sigue fluyendo por la línea de retorno. ¿Cómo lo cerrás?",
+           "st": {
+            "Bomba": "parada",
+            "Pozo": "fluye"
+           },
+           "o": [
+            {
+             "t": "Abrir el choke para medir cuánto sale.",
+             "ok": 0,
+             "fb": "Dejar fluir el pozo suma influjo; la única medida es aislarlo."
+            },
+            {
+             "t": "Cerrar el BOP con la válvula del choke abierta y cerrarla después (cierre blando).",
+             "ok": 1,
+             "fb": "Es una variante aceptada por algunos operadores, pero demora el cierre y permite más influjo; hoy se prefiere el cierre duro."
+            },
+            {
+             "t": "Cerrar el BOP con el choke cerrado (cierre duro) y avisar al supervisor.",
+             "ok": 2,
+             "fb": "El cierre duro minimiza el influjo y las presiones transitorias se manejan con los equipos de superficie; se informa de inmediato."
+            },
+            {
+             "t": "Seguir circulando por el choke con presión baja.",
+             "ok": 0,
+             "fb": "Circular sin calcular ni conocer las presiones sube el riesgo de pérdida en el zapato o de reventón."
+            }
+           ],
+           "dt": "El pozo queda cerrado: ahora hay que leer las presiones."
+          },
+          {
+           "s": "Pozo cerrado: la presión en la sarta (SIDPP) marca 520 psi y la del casing (SICP) 700 psi; la ganancia fue de veinte barriles y las presiones suben despacio. ¿Qué hacés?",
+           "st": {
+            "SIDPP": "520 psi",
+            "SICP": "700 psi",
+            "Ganancia": "20 bbl"
+           },
+           "o": [
+            {
+             "t": "Purgar presión por el choke hasta que el casing marque cero.",
+             "ok": 0,
+             "fb": "Eso baja la presión de fondo por debajo de la de formación y deja entrar más fluido."
+            },
+            {
+             "t": "Registrar las presiones estabilizadas, avisar al supervisor, calcular el peso de control y preparar la hoja de control.",
+             "ok": 2,
+             "fb": "Con SIDPP y la ganancia se arma la hoja de control: peso de control, presión inicial y final de circulación y volumen de lodo."
+            },
+            {
+             "t": "Empezar a circular de inmediato con el lodo original, sin hoja de control.",
+             "ok": 0,
+             "fb": "Sin hoja de control no hay una referencia contra la cual regular el choke; el error se paga en presión de fondo."
+            },
+            {
+             "t": "Esperar varias horas sin registrar nada.",
+             "ok": 0,
+             "fb": "Las presiones deben registrarse con el tiempo: si suben, hay migración de gas y se necesitan medidas, como el método volumétrico."
+            }
+           ],
+           "dt": "Con SIDPP = 520 psi y diez mil pies, el peso de control es once libras por galón."
+          }
+         ]
+        }
+       },
+       "lab": true
+      },
+      {
+       "say": "La decisión que sostiene esta lección es cuándo se confirma una surgencia y se cierra el pozo. Con una señal positiva se asegura el pozo. Con una señal dudosa se hace la prueba de flujo, y si sigue la duda, se cierra.",
+       "scene": {
+        "t": "dec",
+        "q": "Cuándo se confirma una surgencia y se cierra el pozo"
+       }
+      },
+      {
+       "say": "En la próxima lección vemos qué hacer una vez que el pozo está cerrado: cómo se leen las presiones y cómo se calcula el peso de control."
+      },
+      {
+       "say": "Pregunta rápida. Un lodo de once libras por galón a diez mil pies de profundidad vertical, frente a una formación de cinco mil ochocientos psi. ¿Está en sobrebalance? Respondé en pantalla.",
+       "q": {
+        "q": "Lodo de 11 ppg a 10.000 ft TVD frente a una formación de 5.800 psi: ¿cuál es el balance?",
+        "o": [
+         "Sobrebalance de 80 psi.",
+         "Subbalance de 80 psi.",
+         "Equilibrio exacto.",
+         "Sobrebalance de 520 psi."
+        ],
+        "a": 1,
+        "e": "Hidrostática = 0,052 × 11 × 10.000 = 5.720 psi, menor que los 5.800 psi de la formación: subbalance de 80 psi. Es una surgencia en potencia."
+       }
+      }
+     ],
+     "obj": [
+      "Calcular la presión hidrostática y distinguir sobrebalance de subbalance.",
+      "Reconocer las señales primarias y secundarias de una surgencia.",
+      "Explicar las causas más frecuentes de una surgencia y por qué las maniobras son críticas."
+     ],
+     "ficha": "**Presión y balance**\n\n| Concepto | Fórmula |\n|---|---|\n| Presión hidrostática (psi) | 0,052 × MW (ppg) × TVD (ft) |\n| Gradiente del lodo (psi/ft) | 0,052 × MW |\n| Balance | Hidrostática − presión de formación |\n\n**Ejemplo.** MW = 10 ppg, TVD = 10.000 ft → 5.200 psi. Con Pf = 5.500 psi, subbalance de 300 psi.\n\n**Señales de surgencia.** Positivas: aumento del caudal de retorno con la bomba sin cambios; ganancia en piletas. Confirmación: el pozo fluye con la bomba parada (prueba de flujo). En maniobra: el pozo no toma el volumen de la sarta que sale.\n\n**Causas frecuentes.** Llenado incorrecto, pistoneo, densidad insuficiente, pérdida de circulación, presiones anormales, gas en el lodo.\n\n**Errores frecuentes.** Esperar a tener certeza; circular con el influjo adentro; no llevar la hoja de maniobra; ignorar el gas de conexión.\n\n**Ejercicio guiado.** MW = 11 ppg, TVD = 10.000 ft, Pf = 5.800 psi. Hidrostática = 0,052 × 11 × 10.000 = 5.720 psi. Balance = −80 psi (subbalance).",
+     "practica": "Laboratorio de decisiones «Surgencia perforando». Resolvé las tres decisiones y anotá el puntaje. Repetilo hasta lograr 6 de 6. En la planilla, hoja Hidrostatica: calculá el balance con MW = 11 ppg, TVD = 10.000 ft y Pf = 5.800 psi (resultado: −80 psi) y encontrá el MW que da un sobrebalance de 200 psi."
+    },
+    {
+     "id": "s2",
+     "title": "Cierre del pozo y métodos de control",
+     "comp": "Control de pozos y barreras",
+     "cues": [
+      {
+       "say": "Con el pozo cerrado, el influjo ya no crece y el pozo nos habla por las presiones de superficie.",
+       "scene": {
+        "t": "les",
+        "q": "Con el pozo cerrado, el influjo ya no crece y el pozo nos habla por las presiones de superficie."
+       }
+      },
+      {
+       "say": "Hay dos presiones que leer. La de la sarta, SIDPP, y la del casing, SICP. La sarta está llena de lodo de densidad conocida, por eso la SIDPP es el dato con el que se calcula el peso de control."
+      },
+      {
+       "say": "Al terminar esta lección vas a aprender, primero, a leer la SIDPP y la SICP y calcular el peso de control y las presiones de circulación.",
+       "scene": {
+        "t": "bul",
+        "k": "Objetivos de la lección",
+        "h": "Qué vas a aprender",
+        "items": [
+         "Leer la SIDPP y la SICP y calcular el peso de control y las presiones de circulación.",
+         "Comparar el método del perforador con el de esperar y densificar.",
+         "Usar la presión máxima admisible del anular y la del zapato para decidir y vigilar el control."
+        ]
+       },
+       "hl": 0,
+       "obj": 1
+      },
+      {
+       "say": "segundo, a comparar el método del perforador con el de esperar y densificar.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a usar la presión máxima admisible del anular y la del zapato para decidir y vigilar el control.",
+       "hl": 2,
+       "obj": 1
+      },
+      {
+       "say": "La secuencia de cierre empieza con la alarma y termina con la hoja de control. Primero se alerta, se levanta la sarta y se para la bomba.",
+       "scene": {
+        "t": "dg",
+        "d": "shut",
+        "k": "Secuencia de cierre",
+        "h": "Del primer indicio a la hoja de control",
+        "src": "Esquema didáctico H3L · Grace, Blowout and Well Control Handbook (Gulf Professional)"
+       },
+       "hl": 0
+      },
+      {
+       "say": "Se verifica el flujo con la bomba parada y se cierra el BOP con el choke cerrado. Después se avisa al supervisor y se registra la hora.",
+       "hl": 3
+      },
+      {
+       "say": "Con el pozo estable se leen la SIDPP, la SICP y la ganancia, y recién entonces se calcula el peso de control. Es en la secuencia donde se gana o se pierde el pozo.",
+       "hl": 6
+      },
+      {
+       "say": "Las fórmulas del control son pocas. El peso de control es el del lodo más la SIDPP dividida por cero coma cero cincuenta y dos por la profundidad. La presión inicial de circulación, ICP, es la SIDPP más la presión a caudal reducido. La final, FCP, es esa presión por la relación de pesos.",
+       "scene": {
+        "t": "tbl",
+        "k": "Cierre del pozo y métodos de control",
+        "h": "Fórmulas de la hoja de control (unidades de campo)",
+        "cols": [
+         "Concepto",
+         "Fórmula"
+        ],
+        "rows": [
+         [
+          "Peso de control (KMW)",
+          "KMW = MW + SIDPP / (0,052 × TVD)"
+         ],
+         [
+          "Presión inicial de circulación",
+          "ICP = SIDPP + SCR"
+         ],
+         [
+          "Presión final de circulación",
+          "FCP = SCR × KMW / MW"
+         ],
+         [
+          "Altura del influjo",
+          "h = ganancia / capacidad anular"
+         ],
+         [
+          "Gradiente del influjo",
+          "g = 0,052 × MW − (SICP − SIDPP) / h"
+         ],
+         [
+          "Presión máxima en el zapato (MAASP)",
+          "MAASP = (FG − MW) × 0,052 × TVD zapato"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Con SIDPP de quinientos veinte psi, diez libras por galón y diez mil pies, el peso de control es once libras por galón. Con setecientos psi a caudal reducido, la presión inicial es mil doscientos veinte y la final, setecientos setenta. Y con el zapato a seis mil pies y fractura de catorce y medio, la presión máxima es mil cuatrocientos cuatro psi.",
+       "scene": {
+        "t": "tbl",
+        "k": "Cierre del pozo y métodos de control",
+        "h": "Ejemplo resuelto (datos de ejemplo)",
+        "cols": [
+         "Dato / resultado",
+         "Valor"
+        ],
+        "rows": [
+         [
+          "SIDPP / SICP",
+          "520 psi / 700 psi"
+         ],
+         [
+          "Ganancia",
+          "20 bbl"
+         ],
+         [
+          "Peso de control",
+          "11,0 ppg"
+         ],
+         [
+          "ICP",
+          "1.220 psi"
+         ],
+         [
+          "FCP",
+          "770 psi"
+         ],
+         [
+          "MAASP (zapato a 6.000 ft, FG 14,5 ppg)",
+          "1.404 psi"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "En el método del perforador se circula dos veces. En la primera se saca el influjo con el lodo original, manteniendo la presión de bombeo en el valor inicial. En la segunda se bombea el lodo pesado, y la presión del casing se mantiene en la SIDPP hasta que el lodo llega a la barrena."
+      },
+      {
+       "say": "En esperar y densificar se prepara primero el lodo de control y se circula una sola vez. La presión de bombeo baja de la inicial a la final en la proporción en que el lodo llena la sarta, y después se mantiene constante."
+      },
+      {
+       "say": "El perforador empieza ya, sin esperar al lodo pesado, pero deja el pozo más tiempo con el influjo y exige más presión en el casing. Esperar y densificar da menos presión en el casing, pero exige preparar el lodo y exige más control. Los dos mantienen la presión de fondo constante."
+      },
+      {
+       "say": "Laboratorio. Con el método del perforador, SIDPP de quinientos veinte psi, ganancia de veinte barriles, zapato a seis mil pies y fractura de catorce y medio, leé el pico en el casing: unos mil doscientos ochenta psi. Cambiá a esperar y densificar: baja a unos mil ciento veinte. Después subí la ganancia a sesenta barriles y bajá la fractura a doce y medio, y anotá qué contingencia aplicarías.",
+       "scene": {
+        "t": "viz",
+        "w": "spc_kill",
+        "h": "Hoja de control y burbuja de gas",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "Un segundo escenario, esta vez sacando la sarta. La hoja de maniobra muestra que el pozo no toma el volumen calculado. Resolvé las tres decisiones y compará con la mejor práctica.",
+       "scene": {
+        "t": "viz",
+        "w": "spc_case",
+        "h": "Surgencia sacando la sarta",
+        "p": {
+         "title": "Surgencia sacando la sarta",
+         "intro": "Estás sacando la sarta del pozo. Los datos son de ejemplo.",
+         "src": "Prácticas de IWCF/IADC WellSharp y API RP 59, con valores de ejemplo.",
+         "close": "En maniobra no se circula, y por eso el control de volumen en la hoja de maniobra es la defensa principal.",
+         "steps": [
+          {
+           "s": "Con la barrena a cinco mil pies del fondo, la hoja de maniobra muestra que el pozo toma menos lodo del calculado: faltan tres barriles. ¿Qué hacés?",
+           "st": {
+            "Desvío": "+3 bbl",
+            "Maniobra": "sacando"
+           },
+           "o": [
+            {
+             "t": "Seguir sacando: es el pistoneo y se compensa después.",
+             "ok": 0,
+             "fb": "El pistoneo (swabbing) puede haber hecho entrar fluido; seguir sacando aleja la barrena del fondo."
+            },
+            {
+             "t": "Parar, instalar la válvula de seguridad de apertura total y hacer la prueba de flujo.",
+             "ok": 2,
+             "fb": "Se asegura la sarta y se verifica el pozo antes de cualquier otra decisión."
+            },
+            {
+             "t": "Volver al fondo directamente sin observar el pozo.",
+             "ok": 1,
+             "fb": "Puede ser válido si el procedimiento lo establece y la prueba de flujo fue negativa; sin observar, no."
+            },
+            {
+             "t": "Seguir sacando y agregar la bomba para compensar el volumen.",
+             "ok": 0,
+             "fb": "Eso oculta la señal: el volumen que falta es el dato que hay que respetar."
+            }
+           ],
+           "dt": "La prueba de flujo da positivo: el pozo fluye."
+          },
+          {
+           "s": "La prueba de flujo es positiva. ¿Qué secuencia sigue?",
+           "st": {
+            "Prueba de flujo": "positiva"
+           },
+           "o": [
+            {
+             "t": "Sacar la sarta lo más rápido posible hasta poder cerrar el ariete ciego.",
+             "ok": 0,
+             "fb": "Sacar con el pozo fluyendo agrava el influjo y deja al equipo sin barrera."
+            },
+            {
+             "t": "Instalar la válvula de seguridad, cerrarla, cerrar el BOP, y colocar el top drive o la válvula de contrapresión.",
+             "ok": 2,
+             "fb": "Se asegura primero el interior de la sarta, después el espacio anular, y se llevan las presiones a registro."
+            },
+            {
+             "t": "Cerrar el BOP sin cerrar la válvula de la sarta.",
+             "ok": 1,
+             "fb": "Aísla el anular, pero deja el interior de la sarta abierto: por ahí también puede salir el fluido."
+            },
+            {
+             "t": "Hacer stripping de inmediato sin cerrar.",
+             "ok": 0,
+             "fb": "El stripping es una operación controlada con el pozo cerrado y con procedimiento; no es una forma de seguir sacando."
+            }
+           ],
+           "dt": "El pozo quedó cerrado con la barrena fuera del fondo."
+          },
+          {
+           "s": "Pozo cerrado, barrena a cinco mil pies del fondo. SIDPP y SICP son iguales: 400 psi. ¿Qué plan armás?",
+           "st": {
+            "SIDPP": "400 psi",
+            "SICP": "400 psi",
+            "Barrena": "5.000 ft del fondo"
+           },
+           "o": [
+            {
+             "t": "Abrir el pozo para bajar con normalidad.",
+             "ok": 0,
+             "fb": "Con el pozo abierto el influjo sigue entrando."
+            },
+            {
+             "t": "Circular de inmediato por el anular, con la barrena afuera del fondo.",
+             "ok": 0,
+             "fb": "Con la barrena arriba no se desplaza el influjo que está debajo; el resultado es impredecible."
+            },
+            {
+             "t": "Planificar el regreso al fondo con stripping controlado o con el método volumétrico, según el procedimiento, y controlar el pozo con la barrena en el fondo.",
+             "ok": 2,
+             "fb": "Es la ruta prevista: volver al fondo con el pozo cerrado y controlado, y recién ahí circular el influjo."
+            },
+            {
+             "t": "Dejar el pozo cerrado e indefinido y esperar.",
+             "ok": 1,
+             "fb": "No es una mala práctica corta, pero sin plan el gas migra y las presiones suben; hay que planificar."
+            }
+           ],
+           "dt": "El retorno al fondo se hace con un procedimiento aprobado."
+          }
+         ]
+        }
+       },
+       "lab": true
+      },
+      {
+       "say": "La decisión que sostiene esta lección es qué método usar y con qué presión máxima. Se elige el que mantiene el casing y el zapato dentro de lo admisible, y si no es posible, se consulta antes de superar la fractura.",
+       "scene": {
+        "t": "dec",
+        "q": "Qué método usar y con qué presión máxima"
+       }
+      },
+      {
+       "say": "En la próxima lección vemos las barreras que sostienen todo esto: el BOP y la gestión de las barreras del pozo."
+      },
+      {
+       "say": "Pregunta rápida. Una SIDPP de seiscientos psi, lodo de doce libras por galón y quince mil pies de profundidad vertical. ¿Cuál es el peso de control? Respondé en pantalla.",
+       "q": {
+        "q": "SIDPP = 600 psi, MW = 12 ppg, TVD = 15.000 ft. ¿Cuál es el peso de control?",
+        "o": [
+         "12,0 ppg",
+         "12,4 ppg",
+         "12,8 ppg",
+         "13,2 ppg"
+        ],
+        "a": 2,
+        "e": "KMW = 12 + 600 / (0,052 × 15.000) = 12 + 0,77 = 12,77 ppg, que se redondea hacia arriba a 12,8 ppg."
+       }
+      }
+     ],
+     "obj": [
+      "Leer la SIDPP y la SICP y calcular el peso de control y las presiones de circulación.",
+      "Comparar el método del perforador con el de esperar y densificar.",
+      "Usar la presión máxima admisible del anular y la del zapato para decidir y vigilar el control."
+     ],
+     "ficha": "**Fórmulas de la hoja de control (unidades de campo)**\n\n| Concepto | Fórmula |\n|---|---|\n| Peso de control | KMW = MW + SIDPP / (0,052 × TVD) |\n| ICP | SIDPP + SCR |\n| FCP | SCR × KMW / MW |\n| Altura del influjo | h = ganancia / capacidad anular |\n| Gradiente del influjo | g = 0,052 × MW − (SICP − SIDPP) / h |\n| MAASP | (FG − MW) × 0,052 × TVD zapato |\n\n**Ejemplo resuelto.** SIDPP = 520 psi, MW = 10 ppg, TVD = 10.000 ft, SCR = 700 psi: KMW = 11,0 ppg; ICP = 1.220 psi; FCP = 770 psi. Zapato a 6.000 ft con FG = 14,5 ppg: MAASP = 1.404 psi.\n\n**Métodos.** Perforador: dos circulaciones (la primera con lodo original, la segunda con lodo de control). Esperar y densificar: una circulación con el lodo de control. Ambos mantienen constante la presión de fondo.\n\n**Referencia del laboratorio (SIDPP 520 psi, ganancia 20 bbl, zapato a 6.000 ft, FG 14,5 ppg).** Pico en casing ≈ 1.280 psi (perforador, 1.ª circulación) y ≈ 1.120 psi (esperar y densificar); presión en el zapato ≈ 3.900 psi frente a 4.524 psi de fractura.\n\n**Errores frecuentes.** Purgar el casing a cero; cambiar la DPP sin confirmar con el casing; superar la fractura sin consultar.",
+     "practica": "Laboratorio «Hoja de control y burbuja de gas». Con SIDPP = 520 psi, ganancia 20 bbl, zapato a 6.000 ft y FG = 14,5 ppg, anotá el pico en casing para los tres métodos. Después subí la ganancia a 60 bbl y bajá la FG a 12,5 ppg: anotá cuándo aparece el riesgo de pérdida y la contingencia. En la planilla, hoja HojaControl: reproducí KMW = 11,0 ppg, ICP = 1.220 psi y FCP = 770 psi, y armá la tabla de presión de bombeo por emboladas."
+    },
+    {
+     "id": "s3",
+     "title": "BOP y gestión de las barreras",
+     "comp": "Control de pozos y barreras",
+     "cues": [
+      {
+       "say": "Una barrera es un elemento o un conjunto de elementos que impide el flujo no intencional de fluidos de la formación hacia el ambiente.",
+       "scene": {
+        "t": "les",
+        "q": "Una barrera es un elemento o un conjunto de elementos que impide el flujo no intencional de fluidos de la formación hacia el ambiente."
+       }
+      },
+      {
+       "say": "La buena práctica exige dos barreras independientes y verificadas entre el reservorio y la superficie. La primera es, en perforación, el lodo con su hidrostática. La segunda es el equipo: el BOP y el pozo cerrado, con la cañería y el cemento."
+      },
+      {
+       "say": "Al terminar esta lección vas a aprender, primero, a explicar el principio de dos barreras independientes y verificadas.",
+       "scene": {
+        "t": "bul",
+        "k": "Objetivos de la lección",
+        "h": "Qué vas a aprender",
+        "items": [
+         "Explicar el principio de dos barreras independientes y verificadas.",
+         "Describir los componentes del BOP y la presión de prueba que corresponde.",
+         "Aplicar los criterios de prueba y los tiempos de cierre para decidir si se continúa."
+        ]
+       },
+       "hl": 0,
+       "obj": 1
+      },
+      {
+       "say": "segundo, a describir los componentes del BOP y la presión de prueba que corresponde.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a aplicar los criterios de prueba y los tiempos de cierre para decidir si se continúa.",
+       "hl": 2,
+       "obj": 1
+      },
+      {
+       "say": "Este es el modelo del queso suizo. Cada barrera es una capa con agujeros: el diseño del pozo y del lodo, la detección, el BOP y el cierre, y la respuesta de las personas.",
+       "scene": {
+        "t": "dg",
+        "d": "swiss",
+        "k": "Barreras y defensas en capas",
+        "h": "Los agujeros se alinean",
+        "src": "Esquema didáctico H3L · Reason (1990), Human Error · NORSOK D-010"
+       },
+       "hl": 0
+      },
+      {
+       "say": "Ninguna capa es perfecta. El accidente ocurre cuando los agujeros de varias capas coinciden. Por eso se mantienen dos envolventes verificadas, y por eso una barrera sin verificar no cuenta.",
+       "hl": 4
+      },
+      {
+       "say": "Este es un conjunto de BOP de superficie. Arriba, el preventor anular, que sella sobre distintas formas, incluso el pozo vacío.",
+       "scene": {
+        "t": "dg",
+        "d": "stack",
+        "k": "Conjunto de BOP",
+        "h": "Anular, arietes y líneas",
+        "src": "Esquema didáctico H3L · API Standard 53 (sistemas de BOP)"
+       },
+       "hl": 0
+      },
+      {
+       "say": "Debajo, los arietes de tubería, que sellan sobre un diámetro de tubo definido y se traban. El ariete ciego-cortante corta la sarta y sella el pozo: es el último recurso.",
+       "hl": 2
+      },
+      {
+       "say": "Las líneas del choke y de kill salen por debajo de los arietes. Por la primera se controla la salida del pozo; por la segunda se bombea al pozo con el BOP cerrado.",
+       "hl": 3
+      },
+      {
+       "say": "Todo se cierra con energía almacenada en el acumulador, que debe cerrar aun sin potencia en el equipo. Y se verifica con pruebas de presión y de función con registro.",
+       "hl": 4
+      },
+      {
+       "say": "La presión de prueba depende de la presión de trabajo nominal. Se prueba a baja presión, entre doscientos cincuenta y trescientos cincuenta psi, y a alta presión a la nominal en los arietes y al setenta por ciento en el anular. Los tiempos de cierre también tienen un límite.",
+       "scene": {
+        "t": "tbl",
+        "k": "BOP y gestión de las barreras",
+        "h": "Criterios de prueba del BOP (API Std 53)",
+        "cols": [
+         "Concepto",
+         "Criterio de referencia"
+        ],
+        "rows": [
+         [
+          "Baja presión",
+          "250 a 350 psi"
+         ],
+         [
+          "Alta presión, arietes",
+          "A la presión de trabajo nominal (RWP)"
+         ],
+         [
+          "Alta presión, anular",
+          "70 % de la RWP"
+         ],
+         [
+          "Cierre de arietes",
+          "30 s como máximo"
+         ],
+         [
+          "Cierre del anular",
+          "30 s (menor de 18¾ in); 45 s (18¾ in o mayor)"
+         ],
+         [
+          "Frecuencia de prueba",
+          "21 días (API Std 53); 14 días (30 CFR 250.737, aguas federales de EE. UU.)"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "La presión máxima esperada en superficie, MASP, se estima como la presión de formación menos la presión de una columna de gas hasta la superficie, con cero coma uno psi por pie. Con nueve mil psi a doce mil pies es siete mil ochocientos psi, y el BOP debe tener una clase que la cubra."
+      },
+      {
+       "say": "El accidente de Macondo, el veinte de abril de dos mil diez, mató a once personas. El ariete ciego-cortante no logró cortar y sellar la sarta, que se había desplazado del centro. Una lección: el último recurso también tiene límites de diseño, y no reemplaza a las otras barreras."
+      },
+      {
+       "say": "Laboratorio. Elegí la situación de la sarta frente al ariete y mirá qué sella. Después probá una presión de formación de nueve mil psi con un BOP de cinco mil y verificá que no cubre la presión máxima esperada. Por último, subí el tiempo de cierre a cuarenta segundos: no cumple. Decidí qué hacés antes de continuar.",
+       "scene": {
+        "t": "viz",
+        "w": "spc_bop",
+        "h": "BOP: selección, prueba y cierre",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "Un tercer escenario: problemas durante el control. Una boquilla tapada, una pérdida en el zapato y un choke erosionado. Resolvé cada decisión.",
+       "scene": {
+        "t": "viz",
+        "w": "spc_case",
+        "h": "Problemas durante el control",
+        "p": {
+         "title": "Problemas durante el control",
+         "intro": "Estás circulando el influjo con el método del perforador. Datos de ejemplo.",
+         "src": "Prácticas de IWCF/IADC WellSharp, con valores de ejemplo.",
+         "close": "Durante un control la presión de fondo se mantiene constante: cada problema se resuelve sin perder esa referencia.",
+         "steps": [
+          {
+           "s": "La presión de bombeo (DPP) sube de golpe 400 psi y la presión del casing no cambia. ¿Qué hacés?",
+           "st": {
+            "DPP": "+400 psi",
+            "Casing": "sin cambios"
+           },
+           "o": [
+            {
+             "t": "Abrir el choke hasta que la DPP vuelva al valor de la hoja.",
+             "ok": 0,
+             "fb": "Eso baja la presión de fondo y permite que entre más influjo."
+            },
+            {
+             "t": "Mantener la presión del casing, tomar la nueva DPP como referencia y vigilarla.",
+             "ok": 1,
+             "fb": "Es lo habitual con una boquilla tapada si se confirma que el casing no se mueve; hay que vigilar que no sea otra cosa."
+            },
+            {
+             "t": "Parar la bomba, cerrar el pozo, reestablecer la presión de circulación y confirmar la nueva DPP con el casing.",
+             "ok": 2,
+             "fb": "Se controla la variable sin perder la presión de fondo: se confirma la nueva referencia en un estado estable."
+            },
+            {
+             "t": "Cerrar el choke para subir el casing y volver a la DPP anterior.",
+             "ok": 0,
+             "fb": "Subir el casing aumenta la presión de fondo y la del zapato; puede llevar a pérdidas."
+            }
+           ],
+           "dt": "La circulación continúa con una nueva referencia."
+          },
+          {
+           "s": "Mientras circulás, la presión del casing cae de golpe y baja el nivel de las piletas. ¿Qué es probable y qué hacés?",
+           "st": {
+            "Casing": "cae",
+            "Piletas": "bajan"
+           },
+           "o": [
+            {
+             "t": "Es una pérdida de circulación en el zapato: parar la bomba, cerrar el pozo y evaluar con el supervisor las alternativas.",
+             "ok": 2,
+             "fb": "La pérdida y el influjo en el mismo pozo requieren un plan: reducir caudal, usar material de pérdida o pasar al método volumétrico."
+            },
+            {
+             "t": "Aumentar el caudal de la bomba para reponer el volumen.",
+             "ok": 0,
+             "fb": "Más caudal aumenta la presión en el zapato y empeora la pérdida."
+            },
+            {
+             "t": "Subir la presión del casing para compensar.",
+             "ok": 0,
+             "fb": "Aumenta la presión en el zapato, donde ya se perdió el sello."
+            },
+            {
+             "t": "Reducir el caudal y continuar sin parar, vigilando.",
+             "ok": 1,
+             "fb": "Puede mitigar, pero no define la causa; sin parar y evaluar es arriesgado."
+            }
+           ],
+           "dt": "El pozo se cerró de nuevo y se ajusta el plan."
+          },
+          {
+           "s": "El choke operativo se erosiona y la presión del casing sube sin control. ¿Qué hacés?",
+           "st": {
+            "Casing": "sube",
+            "Choke": "falla"
+           },
+           "o": [
+            {
+             "t": "Seguir bombeando sin cambiar nada.",
+             "ok": 0,
+             "fb": "El choke dañado no regula y se pierde el control."
+            },
+            {
+             "t": "Parar la bomba, aislar el choke dañado con la válvula aguas arriba y pasar al choke de respaldo, siguiendo el procedimiento de falla de choke.",
+             "ok": 2,
+             "fb": "La línea del choke debe tener redundancia: se aísla el equipo dañado y se continúa con el alternativo."
+            },
+            {
+             "t": "Cerrar la válvula del anular del BOP con el pozo fluyendo.",
+             "ok": 0,
+             "fb": "El anular no es un equipo para regular el flujo."
+            },
+            {
+             "t": "Cerrar la línea del choke sin parar la bomba.",
+             "ok": 1,
+             "fb": "Puede subir mucho la presión en el casing; hay que parar la bomba primero."
+            }
+           ],
+           "dt": "El control sigue con el equipo alternativo."
+          }
+         ]
+        }
+       },
+       "lab": true
+      },
+      {
+       "say": "La decisión que sostiene esta lección es si se continúa o se detiene la operación: sin dos barreras verificadas, o con una prueba que no cumple, no se sigue hasta corregir.",
+       "scene": {
+        "t": "dec",
+        "q": "Si se continúa o se detiene la operación"
+       }
+      },
+      {
+       "say": "En la próxima lección vemos otra barrera clave: el cemento, y la prueba que verifica el aislamiento."
+      },
+      {
+       "say": "Pregunta rápida. Con la sarta con una junta de herramienta frente al ariete de tubería, ¿qué conviene hacer? Respondé en pantalla.",
+       "q": {
+        "q": "Con una junta de herramienta frente al ariete de tubería, ¿qué conviene hacer?",
+        "o": [
+         "Cerrar el ariete igual: sella sobre la junta.",
+         "Cerrar el ariete ciego.",
+         "Esperar a que el pozo se estabilice.",
+         "Espaciar la sarta para que el cuerpo del tubo quede frente al ariete; mientras tanto se puede usar el anular."
+        ],
+        "a": 3,
+        "e": "Un ariete de tubería no sella bien sobre una junta y se daña. Se espacia la sarta: el cuerpo del tubo frente al ariete."
+       }
+      }
+     ],
+     "obj": [
+      "Explicar el principio de dos barreras independientes y verificadas.",
+      "Describir los componentes del BOP y la presión de prueba que corresponde.",
+      "Aplicar los criterios de prueba y los tiempos de cierre para decidir si se continúa."
+     ],
+     "ficha": "**Barreras y BOP**\n\n| Concepto | Criterio |\n|---|---|\n| Principio | Dos barreras independientes y verificadas |\n| Prueba baja / alta | 250–350 psi / RWP (arietes) y 70 % de RWP (anular) |\n| Cierre de arietes | ≤ 30 s |\n| Cierre del anular | ≤ 30 s (< 18¾ in); ≤ 45 s (≥ 18¾ in) |\n| Frecuencia | 21 días (API Std 53); 14 días (30 CFR 250.737) |\n| MASP | Pf − 0,1 psi/ft × TVD |\n\n**Ejemplo.** Pf = 9.000 psi, TVD = 12.000 ft: MASP = 9.000 − 1.200 = 7.800 psi; un BOP de 10.000 psi cubre; el anular se prueba a 7.000 psi.\n\n**Caso.** Macondo (20/04/2010): once muertos; el ariete ciego-cortante no selló la sarta, que se había desplazado del centro.\n\n**Errores frecuentes.** Cerrar un ariete de tubería sobre una junta; operar sin verificar las dos barreras; probar el BOP fuera de plazo.",
+     "practica": "Laboratorio «BOP: selección, prueba y cierre». Probá las cuatro situaciones y registrá qué ariete corresponde. Con Pf = 9.000 psi y TVD = 12.000 ft, verificá la MASP (7.800 psi) y qué clase de BOP cubre. En la planilla, hoja BOP: calculá las presiones de prueba para un BOP de 10.000 psi (7.000 psi en el anular). Escenario «Problemas durante el control»: resolvé las tres decisiones."
+    },
+    {
+     "id": "s4",
+     "title": "Cementación y prueba de presión negativa",
+     "comp": "Control de pozos y barreras",
+     "cues": [
+      {
+       "say": "El cemento es la barrera que aísla las formaciones entre sí y del pozo durante toda la vida del pozo.",
+       "scene": {
+        "t": "les",
+        "q": "El cemento es la barrera que aísla las formaciones entre sí y del pozo durante toda la vida del pozo."
+       }
+      },
+      {
+       "say": "Una cementación bien diseñada llena el espacio anular con cemento que aísla, sostiene la cañería y protege contra la corrosión. Una mala cementación es una barrera ausente que parece presente."
+      },
+      {
+       "say": "Al terminar esta lección vas a aprender, primero, a describir las etapas de una cementación primaria y calcular su volumen.",
+       "scene": {
+        "t": "bul",
+        "k": "Objetivos de la lección",
+        "h": "Qué vas a aprender",
+        "items": [
+         "Describir las etapas de una cementación primaria y calcular su volumen.",
+         "Verificar que la densidad equivalente quede dentro de la ventana de presión de poro y fractura.",
+         "Interpretar una prueba de presión negativa y decidir si se acepta."
+        ]
+       },
+       "hl": 0,
+       "obj": 1
+      },
+      {
+       "say": "segundo, a verificar que la densidad equivalente quede dentro de la ventana entre la presión de poro y la de fractura.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a interpretar una prueba de presión negativa y decidir si se acepta.",
+       "hl": 2,
+       "obj": 1
+      },
+      {
+       "say": "La cementación primaria sigue cinco etapas: acondicionar el lodo, bombear el espaciador, bombear las lechadas, soltar el tapón y desplazar, y verificar.",
+       "scene": {
+        "t": "dg",
+        "d": "cem",
+        "k": "Cementación primaria",
+        "h": "Cinco etapas",
+        "src": "Esquema didáctico H3L · API 65-2 y Nelson y Guillot, Well Cementing (Schlumberger)"
+       },
+       "hl": 0
+      },
+      {
+       "say": "El espaciador separa el lodo del cemento: sin él se contaminan y la lechada no fragua bien.",
+       "hl": 1
+      },
+      {
+       "say": "Se bombea la lechada guía y luego la de cola, más pesada, frente a la zona de interés. Se suelta el tapón y se desplaza hasta asentarlo en el collar.",
+       "hl": 3
+      },
+      {
+       "say": "Se verifica con un registro de cemento y con una prueba de presión. Un registro dice dónde hay material; la prueba de presión dice si aísla.",
+       "hl": 4
+      },
+      {
+       "say": "La densidad equivalente debe quedar en una ventana. Por debajo de la presión de poro entra fluido; por encima de la de fractura se pierde cemento en la formación.",
+       "scene": {
+        "t": "dg",
+        "d": "win",
+        "k": "Ventana de presión",
+        "h": "Entre poro y fractura",
+        "src": "Esquema didáctico H3L · API 65-2"
+       },
+       "hl": 0
+      },
+      {
+       "say": "La ventana operativa es lo que queda entre las dos.",
+       "hl": 1
+      },
+      {
+       "say": "La hidrostática da el equivalente estático. Durante el bombeo se suma la fricción del anular, y esa suma es la densidad equivalente de circulación, ECD. Esa es la que no debe tocar la fractura.",
+       "hl": 2
+      },
+      {
+       "say": "Si el ECD se acerca a la fractura, se reduce el caudal, se aligera la lechada o se cementa por etapas.",
+       "hl": 3
+      },
+      {
+       "say": "El cálculo es una suma de columnas. Con la geometría y las lechadas del laboratorio, el equivalente estático es once coma ocho libras por galón, con fricción doce coma tres, bien dentro de una ventana entre nueve y quince. Se necesitan unos ochenta y ocho barriles de cemento, y el desplazamiento son trescientos ochenta barriles, es decir, unas tres mil ochocientas emboladas.",
+       "scene": {
+        "t": "tbl",
+        "k": "Cementación y prueba de presión negativa",
+        "h": "Ejemplo (datos del laboratorio)",
+        "cols": [
+         "Dato / resultado",
+         "Valor"
+        ],
+        "rows": [
+         [
+          "Equivalente estático",
+          "11,8 ppg"
+         ],
+         [
+          "Con fricción (ECD)",
+          "12,3 ppg"
+         ],
+         [
+          "Ventana (poro / fractura)",
+          "9,0 / 15,0 ppg"
+         ],
+         [
+          "Volumen de cemento (con 30 % de exceso)",
+          "≈ 88 bbl (≈ 412 sacos)"
+         ],
+         [
+          "Desplazamiento",
+          "≈ 380 bbl (≈ 3.800 emboladas)"
+         ],
+         [
+          "Efecto U-tube al final",
+          "≈ 650 psi"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Laboratorio. Con los valores de partida, fijate que el ECD queda bien dentro de la ventana. Subí la fricción a ochocientos psi y la lechada guía a catorce y medio: el margen contra la fractura se achica. Después bajá la fractura a doce y medio y decidí qué contingencia aplicarías.",
+       "scene": {
+        "t": "viz",
+        "w": "spc_cem",
+        "h": "Cementación: hidrostática, ventana y U-tube",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "La prueba de presión negativa verifica que la barrera aguante cuando se saca el lodo pesado. Se llena el pozo, hasta una profundidad definida, con un fluido liviano; la hidrostática baja, y la barrera queda con una diferencia de presión que ve la formación."
+      },
+      {
+       "say": "Se cierra el anular, se purga la presión de la sarta y de la línea de kill hasta cero, y se observa el tiempo definido. El criterio es sencillo: sin flujo, presión cero y estable, y lecturas coherentes entre todas las líneas."
+      },
+      {
+       "say": "En Macondo se aceptó una prueba con unos mil cuatrocientos psi en la sarta y cero en la línea de kill. Eran lecturas incoherentes: eso no es una prueba exitosa, y se explicó con un efecto que no existía. Un resultado que no cuadra se investiga; no se interpreta a favor."
+      },
+      {
+       "say": "Laboratorio. Dejá la comunicación de la barrera en cero: la prueba es válida y se aprueba. Después subí la comunicación a cincuenta por ciento: aparece presión en la sarta de unos ochocientos noventa psi. Cambiá el estado de la línea de kill a obstruida y observá lecturas incoherentes. Elegí si aprobás o rechazás, y leé la consecuencia.",
+       "scene": {
+        "t": "viz",
+        "w": "spc_neg",
+        "h": "Prueba de presión negativa",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "La decisión que sostiene esta lección es si se acepta o se rechaza la prueba: se acepta solo con sin flujo, presión cero y lecturas coherentes durante el tiempo definido. Si no, se investiga y se restablece la barrera.",
+       "scene": {
+        "t": "dec",
+        "q": "Si se acepta o se rechaza la prueba de presión"
+       }
+      },
+      {
+       "say": "Con esto cerramos el módulo de control de pozos. Sigue la seguridad de procesos en instalaciones de superficie."
+      },
+      {
+       "say": "Pregunta rápida. En una prueba de presión negativa, la sarta muestra mil cuatrocientos psi y la línea de kill, cero. ¿Qué decidís? Respondé en pantalla.",
+       "q": {
+        "q": "En una prueba negativa la sarta muestra 1.400 psi y la línea de kill 0 psi. ¿Qué se decide?",
+        "o": [
+         "Se repite sin cambiar nada.",
+         "Se aprueba: la línea de kill está en cero.",
+         "Se rechaza: las lecturas incoherentes indican que la prueba no es concluyente.",
+         "Se aprueba si la presión es estable."
+        ],
+        "a": 2,
+        "e": "Con la barrera íntegra, la sarta y la línea de kill deben dar presión cero y coherente. Una lectura incoherente se investiga y la prueba se rechaza hasta restablecer la barrera."
+       }
+      }
+     ],
+     "obj": [
+      "Describir las etapas de una cementación primaria y calcular su volumen.",
+      "Verificar que la densidad equivalente quede dentro de la ventana de presión de poro y fractura.",
+      "Interpretar una prueba de presión negativa y decidir si se acepta."
+     ],
+     "ficha": "**Cementación y prueba negativa**\n\n| Concepto | Fórmula o criterio |\n|---|---|\n| Equivalente estático | Σ(ρ × L) / TVD |\n| ECD durante el bombeo | Estático + fricción / (0,052 × TVD) |\n| Ventana | Entre la presión de poro y la de fractura |\n| U-tube | Hidrostática del anular − hidrostática de la cañería |\n\n**Ejemplo (laboratorio).** Estático 11,8 ppg; ECD 12,3 ppg; ventana 9–15 ppg; cemento ≈ 88 bbl con 30 % de exceso; desplazamiento ≈ 380 bbl (≈ 3.800 emboladas).\n\n**Prueba de presión negativa.** Se sustituye el lodo pesado por un fluido liviano, se purga a cero y se observa. Se acepta solo con sin flujo, presión cero y estable en todas las líneas, y lecturas coherentes. Con comunicación del 50 %, la presión en la sarta es ≈ 890 psi.\n\n**Caso.** Macondo: ≈ 1.400 psi en la sarta y 0 en la línea de kill, aceptado con una explicación que no se sostenía.\n\n**Errores frecuentes.** Explicar una lectura anómala en lugar de investigarla; bajar el caudal sin revisar el ECD; no verificar el cemento.",
+     "practica": "Laboratorios «Cementación» y «Prueba de presión negativa». En el primero, con los valores iniciales, anotá estático, ECD, volumen de cemento y emboladas de desplazamiento; después subí la fricción a 800 psi y mirá el margen. En el segundo, con comunicación del 50 %, anotá la presión en la sarta (≈ 890 psi) y decidí. En la planilla, hoja Cemento: reproducí el cálculo del laboratorio."
+    }
+   ],
+   "quiz": [
+    {
+     "q": "Un lodo de 12,5 ppg a 8.000 ft de profundidad vertical. ¿Cuál es la presión hidrostática en el fondo?",
+     "o": [
+      "5.000 psi",
+      "4.160 psi",
+      "6.240 psi",
+      "5.200 psi"
+     ],
+     "a": 3,
+     "e": "0,052 × 12,5 × 8.000 = 5.200 psi."
+    },
+    {
+     "q": "¿Cuáles son las dos señales positivas de una surgencia mientras se perfora?",
+     "o": [
+      "Aumento del torque y baja del peso sobre la barrena",
+      "Baja de la presión de bombeo y aumento de la velocidad de penetración",
+      "Cambio de color del lodo y olor",
+      "Aumento del caudal de retorno y ganancia en piletas"
+     ],
+     "a": 3,
+     "e": "El aumento del caudal de retorno con la bomba sin cambios y la ganancia en piletas son las señales positivas; el resto son indirectas."
+    },
+    {
+     "q": "Al sacar la sarta rápido, la presión de fondo baja por el efecto de pistoneo. ¿Qué se hace para compensarlo?",
+     "o": [
+      "Se aumenta la velocidad de salida para terminar la maniobra antes de que se note",
+      "Nada: el pistoneo es despreciable si el pozo está lleno de lodo",
+      "Se agrega un margen de maniobra a la densidad y se controla la velocidad de salida",
+      "Se reduce la densidad del lodo para facilitar la salida de la sarta"
+     ],
+     "a": 2,
+     "e": "El margen de maniobra y una velocidad de salida controlada compensan el pistoneo, y la hoja de maniobra lo verifica."
+    },
+    {
+     "q": "SIDPP = 400 psi, MW = 10 ppg, TVD = 8.000 ft. ¿Cuál es el peso de control?",
+     "o": [
+      "11,5 ppg",
+      "10,5 ppg",
+      "11,0 ppg",
+      "12,0 ppg"
+     ],
+     "a": 2,
+     "e": "KMW = 10 + 400 / (0,052 × 8.000) = 10 + 0,96 = 10,96 ≈ 11,0 ppg."
+    },
+    {
+     "q": "SCR = 600 psi, MW = 10 ppg, KMW = 11,5 ppg. ¿Cuál es la presión final de circulación?",
+     "o": [
+      "690 psi",
+      "1.140 psi",
+      "780 psi",
+      "600 psi"
+     ],
+     "a": 0,
+     "e": "FCP = SCR × KMW / MW = 600 × 11,5 / 10 = 690 psi."
+    },
+    {
+     "q": "¿Cuál es una característica del método de esperar y densificar?",
+     "o": [
+      "No requiere calcular el peso de control porque se usa el lodo original",
+      "Se circula una sola vez con el lodo de control y suele dar menos presión en el casing",
+      "Deja el pozo abierto y circulando mientras se prepara el lodo de control",
+      "Se circula dos veces: primero con el lodo original y después con el de control"
+     ],
+     "a": 1,
+     "e": "Esperar y densificar usa una sola circulación con el lodo de control; la presión máxima en el casing suele ser menor."
+    },
+    {
+     "q": "Un BOP con presión de trabajo de 10.000 psi. ¿A qué presión se prueba el anular en alta presión?",
+     "o": [
+      "10.000 psi",
+      "5.000 psi",
+      "3.000 psi",
+      "7.000 psi"
+     ],
+     "a": 3,
+     "e": "El anular se prueba al 70 % de su presión de trabajo: 7.000 psi."
+    },
+    {
+     "q": "En una prueba de presión negativa, ¿cuándo se acepta?",
+     "o": [
+      "Si hay presión estable, aunque sea baja",
+      "Si hay una explicación posible para una lectura distinta",
+      "Si la presión de la sarta es menor a la de la línea de kill y no hay flujo visible",
+      "Sin flujo, presión cero y estable, y lecturas coherentes en todas las líneas"
+     ],
+     "a": 3,
+     "e": "Un resultado que no es cero y coherente se investiga; no se interpreta a favor."
+    }
+   ]
+  },
+  {
+   "id": "m2",
+   "title": "Seguridad de procesos",
+   "lessons": [
+    {
+     "id": "s5",
+     "title": "Pérdidas de contención en instalaciones de superficie",
+     "comp": "Seguridad de procesos (PSM)",
+     "cues": [
+      {
+       "say": "Pasamos a la seguridad de procesos. Módulo dos, Seguridad de procesos. Ya vimos cómo se evita que el pozo se descontrole; ahora, cómo se evita que una instalación de superficie libere lo que contiene.",
+       "scene": {
+        "t": "chap",
+        "i": 1
+       }
+      },
+      {
+       "say": "La seguridad de procesos es la gestión de la integridad de los sistemas que contienen materiales peligrosos, para evitar su liberación.",
+       "scene": {
+        "t": "les",
+        "q": "La seguridad de procesos es la gestión de la integridad de los sistemas que contienen materiales peligrosos, para evitar su liberación."
+       }
+      },
+      {
+       "say": "La pérdida de contención, o LOPC, es la liberación no planificada de un material desde su recipiente, cañería, tanque o equipo. Es el evento que da origen a los incendios y las explosiones."
+      },
+      {
+       "say": "Al terminar esta lección vas a aprender, primero, a definir la pérdida de contención y reconocer los elementos de la gestión de seguridad de procesos.",
+       "scene": {
+        "t": "bul",
+        "k": "Objetivos de la lección",
+        "h": "Qué vas a aprender",
+        "items": [
+         "Definir la pérdida de contención y reconocer los elementos de la gestión de seguridad de procesos.",
+         "Estimar el caudal y la masa liberada, y el efecto de detectar y aislar rápido.",
+         "Clasificar un evento con los niveles de API RP 754."
+        ]
+       },
+       "hl": 0,
+       "obj": 1
+      },
+      {
+       "say": "segundo, a estimar el caudal y la masa liberada, y el efecto de detectar y aislar rápido.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a clasificar un evento con los niveles de API RP 754.",
+       "hl": 2,
+       "obj": 1
+      },
+      {
+       "say": "La gestión de seguridad de procesos, PSM, se organiza en elementos. La norma de la OSHA, el título veintinueve, parte mil novecientos diez coma ciento diecinueve, define catorce. Estos son los que más tocan a una batería.",
+       "scene": {
+        "t": "tbl",
+        "k": "Pérdidas de contención en instalaciones de superficie",
+        "h": "Elementos de la gestión de seguridad de procesos (OSHA 1910.119)",
+        "cols": [
+         "Elemento",
+         "Para qué sirve"
+        ],
+        "rows": [
+         [
+          "Información de seguridad del proceso",
+          "Conocer los límites seguros y los materiales"
+         ],
+         [
+          "Análisis de peligros (PHA)",
+          "Identificar qué puede salir mal (HAZOP, what-if)"
+         ],
+         [
+          "Procedimientos operativos",
+          "Hacer lo mismo, de la misma manera segura"
+         ],
+         [
+          "Gestión del cambio",
+          "Evaluar cada cambio antes de hacerlo"
+         ],
+         [
+          "Integridad mecánica",
+          "Inspeccionar, probar y mantener lo crítico"
+         ],
+         [
+          "Revisión previa al arranque (PSSR)",
+          "Verificar que todo está listo para operar"
+         ],
+         [
+          "Investigación de incidentes",
+          "Aprender de cada evento y de los casi-eventos"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "El accidente de Texas City, el veintitrés de marzo de dos mil cinco, mató a quince personas e hirió a ciento ochenta. Una torre de la unidad de isomerización se llenó de más, los instrumentos de nivel no funcionaron bien, y el líquido salió por una chimenea de venteo. Se formó una nube de vapor que explotó, cerca de unos trailers donde había gente."
+      },
+      {
+       "say": "En Buncefield, el once de diciembre de dos mil cinco, un tanque de gasolina se rebalsó. El medidor de nivel quedó fijo y el interruptor independiente de nivel muy alto no actuó. Se formó una gran nube de vapor que explotó, hubo cuarenta y tres heridos y ninguna víctima fatal. La causa fue una cadena de fallas en protecciones."
+      },
+      {
+       "say": "La industria clasifica los eventos en niveles. El primero es el más grave: una pérdida de contención con consecuencias mayores. Para gas inflamable, se considera de nivel uno una liberación de quinientos kilogramos o más en una hora.",
+       "scene": {
+        "t": "tbl",
+        "k": "Pérdidas de contención en instalaciones de superficie",
+        "h": "Pirámide de indicadores (API RP 754)",
+        "cols": [
+         "Nivel",
+         "Qué mide"
+        ],
+        "rows": [
+         [
+          "Nivel 1",
+          "Pérdida de contención de mayor consecuencia (p. ej., gas inflamable ≥ 500 kg en 1 h)"
+         ],
+         [
+          "Nivel 2",
+          "Pérdida de contención de menor consecuencia"
+         ],
+         [
+          "Nivel 3",
+          "Desafíos a los sistemas de seguridad (alarmas, válvulas que actuaron)"
+         ],
+         [
+          "Nivel 4",
+          "Indicadores de gestión (inspecciones, capacitación, cambios)"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Cuánto se libera depende del tamaño del agujero, de la presión y del tiempo hasta aislar. Para un gas a alta presión el caudal por un orificio es crítico, o bloqueado: no depende de la presión de salida. Para un líquido, depende de la raíz de la presión."
+      },
+      {
+       "say": "Con un gas natural a cuatro megapascales por un agujero de veinticinco milímetros, la fuga es de unos tres coma cuatro kilogramos por segundo. Si se detecta en sesenta segundos y se aísla en otros ciento veinte, se liberan unos seiscientos veinte kilogramos, por encima del umbral. Con una parada de emergencia en noventa segundos, serían unos trescientos diez."
+      },
+      {
+       "say": "Laboratorio. Dejá el gas, el agujero de una pulgada, inventario de ocho mil kilogramos, detección en sesenta segundos y aislamiento en ciento veinte. Anotá la masa liberada y verificá que supera quinientos kilogramos. Después bajá el tiempo de detección y el de aislamiento hasta que la masa quede por debajo. Por último, cambiá a petróleo y pasá el agujero a rotura de línea: observá que se agota el inventario aislable.",
+       "scene": {
+        "t": "viz",
+        "w": "spc_loc",
+        "h": "Pérdida de contención: caudal y masa liberada",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "La decisión que sostiene esta lección es qué se invierte para reducir la masa liberada: la detección rápida y el aislamiento automático pesan más que cualquier otra medida, porque cada minuto suma al inventario.",
+       "scene": {
+        "t": "dec",
+        "q": "Qué se invierte para reducir la masa liberada"
+       }
+      },
+      {
+       "say": "En la próxima lección vemos cómo se anticipan estos eventos con HAZOP y LOPA, y cómo actúa una parada de emergencia."
+      },
+      {
+       "say": "Pregunta rápida. Una fuga de gas libera tres kilogramos por segundo y se aísla a los ciento ochenta segundos. ¿Cuánta masa se libera, aproximadamente? Respondé en pantalla.",
+       "q": {
+        "q": "Una fuga de gas de 3 kg/s se aísla a los 180 s. ¿Cuántos kilogramos se liberan, aproximadamente?",
+        "o": [
+         "540 kg",
+         "180 kg",
+         "54 kg",
+         "5.400 kg"
+        ],
+        "a": 0,
+        "e": "Masa = caudal × tiempo = 3 × 180 = 540 kg, por encima del umbral de 500 kg en una hora del nivel 1 de API RP 754 para gas inflamable."
+       }
+      }
+     ],
+     "obj": [
+      "Definir la pérdida de contención y reconocer los elementos de la gestión de seguridad de procesos.",
+      "Estimar el caudal y la masa liberada, y el efecto de detectar y aislar rápido.",
+      "Clasificar un evento con los niveles de API RP 754."
+     ],
+     "ficha": "**Pérdida de contención (LOPC)**\n\n| Concepto | Dato |\n|---|---|\n| Gas por un orificio | Caudal bloqueado (no depende de la presión de salida) |\n| Líquido por un orificio | W = Cd · A · √(2 ρ ΔP) |\n| Nivel 1 (API RP 754, gas inflamable) | ≥ 500 kg en 1 h |\n\n**Ejemplo (laboratorio).** Gas a 4 MPa, agujero de 25 mm: ≈ 3,4 kg/s. Detección 60 s + aislamiento 120 s → ≈ 620 kg (nivel 1). Con 30 s + 60 s → ≈ 310 kg.\n\n**Casos.** Texas City (2005): 15 muertos, 180 heridos. Buncefield (2005): sin víctimas fatales, 43 heridos.\n\n**Errores frecuentes.** Esperar la verificación humana con la fuga en curso; no medir el tiempo real de aislamiento; confiar en un único medidor de nivel.",
+     "practica": "Laboratorio «Pérdida de contención». Anotá la masa liberada con 60 s de detección y 120 s de aislamiento (≈ 620 kg), y encontrá los tiempos con los que queda por debajo de 500 kg. Probá el petróleo con rotura de línea y observá que se agota el inventario. En la planilla, hoja Liberacion: reproducí el caudal de gas (≈ 3,4 kg/s)."
+    },
+    {
+     "id": "s6",
+     "title": "HAZOP, LOPA y paradas de emergencia",
+     "comp": "Seguridad de procesos (PSM)",
+     "cues": [
+      {
+       "say": "La seguridad de procesos hace tres preguntas: qué puede salir mal, con qué frecuencia, y si las protecciones alcanzan.",
+       "scene": {
+        "t": "les",
+        "q": "La seguridad de procesos hace tres preguntas: qué puede salir mal, con qué frecuencia, y si las protecciones alcanzan."
+       }
+      },
+      {
+       "say": "El HAZOP responde la primera. LOPA responde la tercera con números. Y la parada de emergencia es una de las protecciones más importantes de una instalación."
+      },
+      {
+       "say": "Al terminar esta lección vas a aprender, primero, a aplicar las palabras guía de un HAZOP para identificar desviaciones y sus consecuencias.",
+       "scene": {
+        "t": "bul",
+        "k": "Objetivos de la lección",
+        "h": "Qué vas a aprender",
+        "items": [
+         "Aplicar las palabras guía de un HAZOP para identificar desviaciones y sus consecuencias.",
+         "Calcular con LOPA la frecuencia del evento y la reducción de riesgo que falta.",
+         "Describir cómo se diseña, se prueba y se mantiene una parada de emergencia."
+        ]
+       },
+       "hl": 0,
+       "obj": 1
+      },
+      {
+       "say": "segundo, a calcular con LOPA la frecuencia del evento y la reducción de riesgo que falta.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a describir cómo se diseña, se prueba y se mantiene una parada de emergencia.",
+       "hl": 2,
+       "obj": 1
+      },
+      {
+       "say": "El HAZOP, estudio de peligros y operabilidad, divide el proceso en nodos y aplica palabras guía a cada parámetro, como caudal, presión o nivel. Cada combinación es una desviación que se analiza. El método está descrito en la norma IEC sesenta y un mil ochocientos ochenta y dos.",
+       "scene": {
+        "t": "tbl",
+        "k": "HAZOP, LOPA y paradas de emergencia",
+        "h": "Palabras guía de un HAZOP",
+        "cols": [
+         "Palabra guía",
+         "Desviación de ejemplo (nivel del separador)"
+        ],
+        "rows": [
+         [
+          "No / Nada",
+          "Sin flujo de salida del líquido"
+         ],
+         [
+          "Más",
+          "Más nivel: rebalse"
+         ],
+         [
+          "Menos",
+          "Menos nivel: gas hacia la línea de líquido"
+         ],
+         [
+          "Inverso",
+          "Flujo inverso por una válvula abierta"
+         ],
+         [
+          "Además de",
+          "Agua o sólidos junto con el crudo"
+         ],
+         [
+          "Parte de",
+          "Composición diferente de la prevista"
+         ],
+         [
+          "Otro que",
+          "Operación distinta del arranque o la parada"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Para cada desviación se registran las causas, las consecuencias, las salvaguardas existentes y las recomendaciones. Un HAZOP bien hecho es un trabajo de equipo, con operación, mantenimiento y proceso en la sala."
+      },
+      {
+       "say": "LOPA, análisis por capas de protección, toma un escenario del HAZOP y lo cuantifica. Las capas rodean al proceso: el control y las alarmas, la intervención del operador, el sistema instrumentado, el alivio físico y la contención.",
+       "scene": {
+        "t": "dg",
+        "d": "lopa",
+        "k": "Capas de protección",
+        "h": "De la causa a la consecuencia",
+        "src": "Esquema didáctico H3L · CCPS, Layer of Protection Analysis (2001) · IEC 61511"
+       },
+       "hl": 0
+      },
+      {
+       "say": "La frecuencia del evento es la frecuencia del suceso iniciador por la probabilidad de falla de cada capa independiente. Cada capa se mide con su PFD, la probabilidad de falla a demanda.",
+       "hl": 2
+      },
+      {
+       "say": "Una capa solo cuenta si es independiente, específica, confiable y auditable. Si falla por la misma causa que otra capa, no se suma.",
+       "hl": 5
+      },
+      {
+       "say": "Veamos un ejemplo. Un lazo de nivel falla una vez cada diez años: cero coma uno por año. Una alarma con operador y un alivio, con PFD de cero coma uno cada uno, dan un evento de uno por mil por año. Con meta de uno por diez mil, falta un factor de diez: una función instrumentada con PFD de cero coma uno, es decir, SIL uno.",
+       "scene": {
+        "t": "tbl",
+        "k": "HAZOP, LOPA y paradas de emergencia",
+        "h": "Ejemplo de LOPA (datos de ejemplo)",
+        "cols": [
+         "Concepto",
+         "Valor"
+        ],
+        "rows": [
+         [
+          "Frecuencia iniciadora",
+          "0,1 /año"
+         ],
+         [
+          "Capa 1: alarma y operador (PFD)",
+          "0,1"
+         ],
+         [
+          "Capa 2: válvula de alivio (PFD)",
+          "0,1"
+         ],
+         [
+          "Frecuencia del evento",
+          "0,1 × 0,1 × 0,1 = 1 × 10⁻³ /año"
+         ],
+         [
+          "Meta de riesgo",
+          "1 × 10⁻⁴ /año"
+         ],
+         [
+          "Reducción requerida",
+          "× 10, es decir, función instrumentada de SIL 1"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "La parada de emergencia, ESD, es una función instrumentada de seguridad. Detecta una condición peligrosa, y lleva el proceso a un estado seguro: cierra las válvulas de entrada, aísla el inventario y despresuriza si hace falta. Se diseña a falla segura, de modo que perder energía o señal lleva al estado seguro."
+      },
+      {
+       "say": "Se mantiene con pruebas periódicas del lazo completo, desde el detector hasta la válvula, con el tiempo de respuesta medido. Una función con bypass o inhibida es una capa que no está, y se debe tratar como un cambio: con evaluación, plazo y medidas compensatorias."
+      },
+      {
+       "say": "El incendio de Piper Alpha, en el Mar del Norte, el seis de julio de mil novecientos ochenta y ocho, mató a ciento sesenta y siete personas. Una de las lecciones fue el control de los permisos de trabajo y la transferencia de información entre turnos: un equipo fuera de servicio no se comunicó."
+      },
+      {
+       "say": "Laboratorio. Resolvé el escenario de la fuga de gas en una batería: los detectores, la parada de emergencia, el aislamiento y la decisión de arrancar de nuevo. Para cada decisión compará tu elección con la mejor práctica.",
+       "scene": {
+        "t": "viz",
+        "w": "spc_case",
+        "h": "Fuga de gas en una batería",
+        "p": {
+         "title": "Fuga de gas en una batería",
+         "intro": "Sos operador de una batería de producción con separadores de gas y petróleo. Datos de ejemplo.",
+         "src": "Prácticas de seguridad de procesos (CCPS, API RP 754, IEC 61511), con valores de ejemplo.",
+         "close": "Detectar, aislar, despresurizar, evacuar y recién después investigar: el orden evita que un evento menor se convierta en uno mayor.",
+         "steps": [
+          {
+           "s": "Dos detectores de gas del patio de separadores marcan el veinte por ciento del límite inferior de explosividad. Hay olor, sin fuego visible. ¿Qué hacés?",
+           "st": {
+            "Detectores": "2 de 2 en alarma",
+            "Gas": "20 % LIE",
+            "Fuego": "no visible"
+           },
+           "o": [
+            {
+             "t": "Mandar a un operador a verificar con un detector portátil.",
+             "ok": 0,
+             "fb": "Expone a una persona dentro de una atmósfera que puede encenderse; con dos detectores en alarma se actúa sin esperar la verificación."
+            },
+            {
+             "t": "Activar la parada de emergencia, avisar por radio y alejarse a favor del viento hasta el punto de reunión.",
+             "ok": 2,
+             "fb": "Es la acción correcta: se aísla el inventario, se alerta y se aleja a las personas, sin acercarse a la fuga."
+            },
+            {
+             "t": "Esperar a la ronda para confirmar.",
+             "ok": 0,
+             "fb": "Cada minuto de fuga es masa de gas liberada. Con dos detectores de acuerdo, no se espera."
+            },
+            {
+             "t": "Cerrar manualmente la válvula más cercana a la fuga.",
+             "ok": 1,
+             "fb": "Solo si la parada automática falla y el acceso es seguro, con autorización. No es la primera acción."
+            }
+           ],
+           "dt": "La parada de emergencia cerró las válvulas de entrada, pero la fuga continúa."
+          },
+          {
+           "s": "La parada de emergencia aisló la entrada, pero el inventario del separador sigue saliendo a presión decreciente. ¿Qué hacés?",
+           "st": {
+            "ESD": "actuó",
+            "Entrada": "aislada",
+            "Fuga": "continúa"
+           },
+           "o": [
+            {
+             "t": "Reabrir las válvulas para ver si la fuga cesa.",
+             "ok": 0,
+             "fb": "Reabrir suma más masa a la fuga y anula el aislamiento."
+            },
+            {
+             "t": "Despresurizar el equipo al sistema de alivio, mantener el área sin fuentes de ignición y hacer el recuento de personas.",
+             "ok": 2,
+             "fb": "El aislamiento corta el aporte, el venteo controlado reduce el inventario, y el recuento da certeza sobre las personas."
+            },
+            {
+             "t": "Acercar el camión de bomberos al separador para enfriarlo.",
+             "ok": 1,
+             "fb": "El enfriamiento puede ser válido, pero desde una distancia segura y bajo el plan de emergencia; no es lo primero."
+            },
+            {
+             "t": "Arrancar un generador para iluminar la zona.",
+             "ok": 0,
+             "fb": "Es una fuente de ignición en una atmósfera con gas."
+            }
+           ],
+           "dt": "La fuga cesó. La supervisión pide reanudar la producción cuanto antes."
+          },
+          {
+           "s": "La fuga cesó. La supervisión te pide reanudar para no perder producción. ¿Qué decís?",
+           "st": {
+            "Fuga": "cesó",
+            "Causa": "sin determinar"
+           },
+           "o": [
+            {
+             "t": "Reanudar tras una inspección visual sin fuga.",
+             "ok": 0,
+             "fb": "No se conoce la causa: arrancar sin investigar es repetir las condiciones del evento."
+            },
+            {
+             "t": "Investigar la causa, reparar, hacer la revisión de seguridad previa al arranque y obtener la autorización formal.",
+             "ok": 2,
+             "fb": "El arranque se hace cuando la causa está corregida y verificada; es la revisión prevista para el arranque, que forma parte de la gestión de la seguridad de procesos."
+            },
+            {
+             "t": "Reanudar a baja carga para minimizar el riesgo.",
+             "ok": 0,
+             "fb": "Una carga menor no elimina la causa; la fuga puede repetirse."
+            },
+            {
+             "t": "Reparar y reanudar sin la revisión previa, porque es el mismo equipo.",
+             "ok": 1,
+             "fb": "Repara el equipo, pero se saltea la verificación de que todo está listo para operar con seguridad."
+            }
+           ],
+           "dt": "El evento se registra y se investiga como un incidente de pérdida de contención."
+          }
+         ]
+        }
+       },
+       "lab": true
+      },
+      {
+       "say": "La decisión que sostiene esta lección es si las protecciones alcanzan para la meta de riesgo: si no alcanzan, se agrega una capa independiente, medida y probada, y no una promesa de atención.",
+       "scene": {
+        "t": "dec",
+        "q": "Si las protecciones alcanzan para la meta de riesgo"
+       }
+      },
+      {
+       "say": "En la próxima lección vemos las dos disciplinas que mantienen esas capas en pie: la gestión del cambio y la integridad mecánica."
+      },
+      {
+       "say": "Pregunta rápida. Un evento iniciador de cero coma uno por año, con dos capas independientes de PFD cero coma uno cada una, y una meta de uno por cien mil por año. ¿Qué SIL hace falta? Respondé en pantalla.",
+       "q": {
+        "q": "Frecuencia iniciadora 0,1 /año; dos capas con PFD 0,1 cada una; meta 1 × 10⁻⁵ /año. ¿Qué función instrumentada hace falta?",
+        "o": [
+         "SIL 3 (PFD 0,001)",
+         "SIL 1 (PFD 0,1)",
+         "SIL 2 (PFD 0,01)",
+         "Ninguna: ya cumple"
+        ],
+        "a": 2,
+        "e": "Frecuencia = 0,1 × 0,1 × 0,1 = 1 × 10⁻³ /año. Para llegar a 1 × 10⁻⁵ hay que reducir ×100: PFD = 0,01, que corresponde a SIL 2 (IEC 61511)."
+       }
+      }
+     ],
+     "obj": [
+      "Aplicar las palabras guía de un HAZOP para identificar desviaciones y sus consecuencias.",
+      "Calcular con LOPA la frecuencia del evento y la reducción de riesgo que falta.",
+      "Describir cómo se diseña, se prueba y se mantiene una parada de emergencia."
+     ],
+     "ficha": "**HAZOP y LOPA**\n\n| Palabra guía | Ejemplo con el nivel |\n|---|---|\n| No | Sin salida del líquido |\n| Más | Rebalse |\n| Menos | Gas hacia la línea de líquido |\n| Inverso | Flujo inverso |\n\n**LOPA.** Frecuencia del evento = frecuencia iniciadora × PFD₁ × PFD₂ × … Una capa cuenta solo si es independiente, específica, confiable y auditable.\n\n**Ejemplo.** 0,1 /año × 0,1 × 0,1 = 1 × 10⁻³ /año; meta 1 × 10⁻⁴ → falta ×10 → SIL 1 (PFD 0,1). Si la meta es 1 × 10⁻⁵, hace falta ×100 → SIL 2.\n\n**ESD.** Función instrumentada a falla segura, con prueba periódica del lazo completo y tiempo de respuesta medido; un bypass es un cambio y se gestiona como tal.\n\n**Caso.** Piper Alpha (06/07/1988): 167 muertos; el control de los permisos de trabajo y la comunicación entre turnos fueron centrales.",
+     "practica": "Escenario «Fuga de gas en una batería»: resolvé las tres decisiones. En la planilla, hoja LOPA: con frecuencia iniciadora 0,1 /año, dos capas con PFD 0,1 y meta 1 × 10⁻⁴ /año, obtené la brecha (×10) y el SIL requerido (SIL 1). Cambiá la meta a 1 × 10⁻⁵ y anotá el SIL (SIL 2)."
+    },
+    {
+     "id": "s7",
+     "title": "Gestión del cambio e integridad mecánica",
+     "comp": "Seguridad de procesos (PSM)",
+     "cues": [
+      {
+       "say": "Muchos accidentes graves tienen detrás un cambio que no se evaluó con el rigor suficiente.",
+       "scene": {
+        "t": "les",
+        "q": "Muchos accidentes graves tienen detrás un cambio que no se evaluó con el rigor suficiente."
+       }
+      },
+      {
+       "say": "La gestión del cambio, MOC, es el proceso que evalúa cada cambio antes de hacerlo. La integridad mecánica es el que asegura que el equipo crítico siga siendo apto para su servicio."
+      },
+      {
+       "say": "Al terminar esta lección vas a aprender, primero, a aplicar el proceso de gestión del cambio, incluidos los cambios temporales.",
+       "scene": {
+        "t": "bul",
+        "k": "Objetivos de la lección",
+        "h": "Qué vas a aprender",
+        "items": [
+         "Aplicar el proceso de gestión del cambio, incluidos los cambios temporales.",
+         "Relacionar los equipos críticos con la inspección y los códigos que los rigen.",
+         "Reconocer cuándo una desviación del equipo exige una evaluación de aptitud para el servicio."
+        ]
+       },
+       "hl": 0,
+       "obj": 1
+      },
+      {
+       "say": "segundo, a relacionar los equipos críticos con la inspección y los códigos que los rigen.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a reconocer cuándo una desviación del equipo exige una evaluación de aptitud para el servicio.",
+       "hl": 2,
+       "obj": 1
+      },
+      {
+       "say": "El proceso tiene seis pasos. Se solicita el cambio, con qué cambia y por qué. Se evalúan los riesgos con un HAZOP o un what-if.",
+       "scene": {
+        "t": "dg",
+        "d": "moc",
+        "k": "Gestión del cambio",
+        "h": "Seis pasos, en orden",
+        "src": "Esquema didáctico H3L · CCPS, Guidelines for Management of Change for Process Safety"
+       },
+       "hl": 0
+      },
+      {
+       "say": "Se aprueba por quien corresponde, se implementa con procedimientos y capacitación, y se verifica antes de arrancar con la revisión previa. Se cierra actualizando planos y documentos.",
+       "hl": 4
+      },
+      {
+       "say": "Los cambios temporales merecen un cuidado especial: tienen plazo y se revierten. Un cambio temporal que se vuelve permanente sin evaluación es la causa clásica de accidentes.",
+       "hl": 5
+      },
+      {
+       "say": "En Flixborough, Inglaterra, en mil novecientos setenta y cuatro, una cañería provisoria que reemplazaba un reactor se rompió y la nube de vapor explotó. Murieron veintiocho personas. El cambio no se había evaluado con rigor de ingeniería."
+      },
+      {
+       "say": "La integridad mecánica empieza por definir qué equipos son críticos, es decir, los que contienen materiales peligrosos o cumplen una función de seguridad. Para cada uno hay un código que fija cómo se inspecciona y cada cuánto.",
+       "scene": {
+        "t": "tbl",
+        "k": "Gestión del cambio e integridad mecánica",
+        "h": "Equipos críticos y su referencia",
+        "cols": [
+         "Equipo",
+         "Código de referencia",
+         "Qué se vigila"
+        ],
+        "rows": [
+         [
+          "Recipientes a presión",
+          "API 510",
+          "Espesores, corrosión, estado interno"
+         ],
+         [
+          "Cañerías de proceso",
+          "API 570",
+          "Espesores, puntos de inyección, bajo aislamiento"
+         ],
+         [
+          "Tanques de almacenamiento",
+          "API 653",
+          "Fondos, paredes, techos, cimientos"
+         ],
+         [
+          "Válvulas de alivio",
+          "API 520 / 521",
+          "Prueba y reposición en plazo"
+         ],
+         [
+          "Instrumentos de seguridad",
+          "IEC 61511",
+          "Prueba del lazo completo"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "La inspección se programa por riesgo. La inspección basada en riesgo, descrita en API quinientos ochenta y quinientos ochenta y uno, combina la probabilidad de falla con la consecuencia, y pone el esfuerzo donde el riesgo es mayor."
+      },
+      {
+       "say": "Cuando la inspección encuentra una desviación, como una pérdida de espesor, no se decide a ojo: se evalúa la aptitud para el servicio, con métodos como API quinientos setenta y nueve. La evaluación dice si el equipo sigue, si baja su presión de trabajo o si se repara."
+      },
+      {
+       "say": "Laboratorio. Resolvé el escenario de un puente temporal sobre el interruptor de nivel muy alto de un tanque. Fijate cómo cada decisión mantiene, o no, la protección contra el rebalse.",
+       "scene": {
+        "t": "viz",
+        "w": "spc_case",
+        "h": "Gestión del cambio: puente temporal",
+        "p": {
+         "title": "Gestión del cambio: puente temporal",
+         "intro": "Trabajás en una planta de tratamiento con tanques de almacenamiento. Datos de ejemplo.",
+         "src": "Prácticas de gestión del cambio (CCPS) y de prevención de rebalse (HSE, Buncefield), con valores de ejemplo.",
+         "close": "Una protección retirada sin evaluar es una capa de defensa menos: cada cambio, incluso uno temporal, pasa por la evaluación de riesgos.",
+         "steps": [
+          {
+           "s": "El interruptor de nivel muy alto de un tanque da falsas alarmas y un instrumentista propone puentearlo unos días, hasta conseguir el repuesto. ¿Qué hacés?",
+           "st": {
+            "Instrumento": "interruptor de nivel muy alto",
+            "Tanque": "gasolina",
+            "Propuesta": "puentear"
+           },
+           "o": [
+            {
+             "t": "Aprobarlo con un permiso verbal del jefe de turno.",
+             "ok": 0,
+             "fb": "Un cambio sin registro ni evaluación no existe para quien llega después."
+            },
+            {
+             "t": "Rechazarlo y dejar las falsas alarmas sin investigar.",
+             "ok": 1,
+             "fb": "No es peligroso en lo inmediato, pero tampoco resuelve el problema: las falsas alarmas se investigan."
+            },
+            {
+             "t": "Abrir una solicitud de cambio formal con evaluación de riesgos, aprobación, medidas compensatorias y un plazo.",
+             "ok": 2,
+             "fb": "Es el camino: el cambio queda registrado, evaluado y con responsable."
+            },
+            {
+             "t": "Hacerlo y anotarlo en el libro de guardia.",
+             "ok": 0,
+             "fb": "Anotarlo no es evaluarlo."
+            }
+           ],
+           "dt": "En la evaluación se ve que ese interruptor es la protección independiente contra el rebalse."
+          },
+          {
+           "s": "El análisis muestra que ese interruptor es la protección independiente contra el rebalse, como en Buncefield. ¿Qué medidas compensatorias aprobás?",
+           "st": {
+            "Función": "protección contra rebalse"
+           },
+           "o": [
+            {
+             "t": "Mantener la protección: reparar el interruptor o sustituirlo por un control continuo del nivel con un operador designado, con un plazo definido.",
+             "ok": 2,
+             "fb": "La función de protección se mantiene, aunque sea por otro medio, y el cambio tiene un plazo."
+            },
+            {
+             "t": "Aprobar el puente sin medidas, porque hay otra alarma de nivel.",
+             "ok": 0,
+             "fb": "Una alarma que depende del mismo instrumento no es independiente."
+            },
+            {
+             "t": "Aprobar el puente por treinta días renovables automáticamente.",
+             "ok": 0,
+             "fb": "Una renovación automática convierte lo temporal en permanente sin evaluarlo."
+            },
+            {
+             "t": "Reducir el nivel máximo de llenado y mantener la medición normal.",
+             "ok": 1,
+             "fb": "Puede ser una medida complementaria, pero no reemplaza la protección independiente."
+            }
+           ],
+           "dt": "El cambio se aprobó con medidas compensatorias y un plazo de diez días."
+          },
+          {
+           "s": "A los veinte días la reparación sigue sin hacerse y el puente continúa. ¿Qué hacés?",
+           "st": {
+            "Plazo aprobado": "10 días",
+            "Estado": "vencido"
+           },
+           "o": [
+            {
+             "t": "Dejarlo hasta la próxima parada de planta.",
+             "ok": 0,
+             "fb": "El cambio temporal vencido es un riesgo sin dueño."
+            },
+            {
+             "t": "Cerrar el cambio: revertir, o renovarlo con una nueva evaluación, y actualizar documentos y capacitación.",
+             "ok": 2,
+             "fb": "El plazo del cambio se respeta: se revierte, o se reevalúa."
+            },
+            {
+             "t": "Convertirlo en permanente sin otro trámite.",
+             "ok": 0,
+             "fb": "Un cambio permanente exige la evaluación completa, no un trámite administrativo."
+            },
+            {
+             "t": "Pedir al operador que lo recuerde en cada turno.",
+             "ok": 1,
+             "fb": "Ayuda, pero no reemplaza el control del plazo por el sistema de gestión del cambio."
+            }
+           ],
+           "dt": "El cambio se cierra y se registra la lección."
+          }
+         ]
+        }
+       },
+       "lab": true
+      },
+      {
+       "say": "La decisión que sostiene esta lección es qué cambios y qué desviaciones se aceptan y con qué condiciones: todo cambio, incluso uno temporal, tiene evaluación, plazo y responsable.",
+       "scene": {
+        "t": "dec",
+        "q": "Qué cambios y qué desviaciones se aceptan y con qué condiciones"
+       }
+      },
+      {
+       "say": "Con esto cerramos la seguridad de procesos. Sigue la integridad de los activos que contienen y conducen los fluidos."
+      },
+      {
+       "say": "Pregunta rápida. Un cambio temporal vence y el trabajo no está terminado. ¿Qué corresponde? Respondé en pantalla.",
+       "q": {
+        "q": "Un cambio temporal vence y el trabajo no terminó. ¿Qué corresponde?",
+        "o": [
+         "Convertirlo en permanente sin trámite.",
+         "Revertirlo o renovarlo con una nueva evaluación de riesgos.",
+         "Dejarlo hasta la próxima parada.",
+         "Pedir a los operadores que lo recuerden."
+        ],
+        "a": 1,
+        "e": "El plazo es parte del cambio. Al vencer se revierte, o se reevalúa y se renueva con una nueva aprobación."
+       }
+      }
+     ],
+     "obj": [
+      "Aplicar el proceso de gestión del cambio, incluidos los cambios temporales.",
+      "Relacionar los equipos críticos con la inspección y los códigos que los rigen.",
+      "Reconocer cuándo una desviación del equipo exige una evaluación de aptitud para el servicio."
+     ],
+     "ficha": "**Gestión del cambio e integridad mecánica**\n\n| Paso del MOC | Cambia |\n|---|---|\n| 1. Solicitar | Qué y por qué |\n| 2. Evaluar | HAZOP o what-if |\n| 3. Aprobar | Por quien corresponda |\n| 4. Implementar | Con procedimientos y capacitación |\n| 5. Verificar | Revisión previa al arranque |\n| 6. Cerrar | Planos y documentos |\n\n**Cambios temporales.** Tienen plazo y se revierten; no se convierten en permanentes sin evaluación.\n\n**Equipos y códigos.** Recipientes: API 510. Cañerías: API 570. Tanques: API 653. Alivio: API 520/521. Instrumentos de seguridad: IEC 61511. Riesgo: API 580/581. Aptitud para el servicio: API 579-1/ASME FFS-1.\n\n**Casos.** Flixborough (1974): 28 muertos, cañería provisoria. Buncefield (2005): protección independiente de nivel muy alto fuera de servicio.",
+     "practica": "Escenario «Gestión del cambio: puente temporal»: resolvé las tres decisiones y escribí en una línea qué condiciones pondrías a la aprobación. Ejercicio guiado en la ficha: asociá cada equipo (recipiente, cañería, tanque, válvula de alivio, instrumento de seguridad) con su código."
+    }
+   ],
+   "quiz": [
+    {
+     "q": "¿Qué es una pérdida de contención (LOPC)?",
+     "o": [
+      "Una falla del sistema de comunicaciones o del sistema de control de la planta",
+      "La liberación no planificada de un material desde su recipiente, cañería o equipo",
+      "Una parada programada de la planta para hacer mantenimiento de equipos",
+      "Una caída sostenida de la producción por restricciones del sistema"
+     ],
+     "a": 1,
+     "e": "La LOPC es la liberación no planificada de material desde el sistema que lo contiene."
+    },
+    {
+     "q": "Según API RP 754, ¿qué liberación de gas inflamable es de nivel 1?",
+     "o": [
+      "500 kg o más en una hora",
+      "5 kg en un día",
+      "Toda liberación sin ignición",
+      "50 kg en una hora"
+     ],
+     "a": 0,
+     "e": "Para gas inflamable, 500 kg o más en una hora es de nivel 1."
+    },
+    {
+     "q": "Un gas a alta presión sale por un orificio pequeño a la atmósfera. El caudal es crítico (bloqueado). ¿Qué significa?",
+     "o": [
+      "Depende solo de la presión de salida y no de la presión aguas arriba",
+      "No depende de la presión de salida; depende de la presión aguas arriba",
+      "Es nulo, porque el gas queda retenido por la contrapresión atmosférica",
+      "Solo ocurre cuando el fluido que sale es un líquido incompresible"
+     ],
+     "a": 1,
+     "e": "En flujo bloqueado el caudal queda fijado por las condiciones aguas arriba, no por la presión de salida."
+    },
+    {
+     "q": "En un HAZOP aplicado al nivel de un separador, ¿qué palabra guía produce la desviación «rebalse»?",
+     "o": [
+      "No",
+      "Menos",
+      "Más",
+      "Inverso"
+     ],
+     "a": 2,
+     "e": "«Más nivel» es el rebalse."
+    },
+    {
+     "q": "Frecuencia iniciadora de 0,01 /año y dos capas independientes con PFD de 0,1 cada una. ¿Cuál es la frecuencia del evento?",
+     "o": [
+      "1 × 10⁻⁴ /año",
+      "1 × 10⁻³ /año",
+      "1 × 10⁻² /año",
+      "1 × 10⁻⁶ /año"
+     ],
+     "a": 0,
+     "e": "0,01 × 0,1 × 0,1 = 1 × 10⁻⁴ /año."
+    },
+    {
+     "q": "¿Cuál de estas condiciones debe cumplir una capa de protección independiente?",
+     "o": [
+      "No necesitar pruebas, porque se supone que no falla nunca",
+      "Depender siempre de una decisión del operador, sin automatismos",
+      "Fallar por la misma causa que las demás capas, para simplificar el análisis",
+      "Ser independiente, específica, confiable y auditable"
+     ],
+     "a": 3,
+     "e": "Una capa solo cuenta si es independiente de la causa y de las otras capas, específica, confiable y auditable."
+    },
+    {
+     "q": "¿Por qué una parada de emergencia se diseña a falla segura?",
+     "o": [
+      "Para que no sea necesario probarla durante la vida de la planta",
+      "Para ahorrar cableado y reducir el costo de la instalación eléctrica",
+      "Para que se rearme sola cuando vuelve la energía o la señal",
+      "Para que perder energía o señal lleve el proceso al estado seguro"
+     ],
+     "a": 3,
+     "e": "A falla segura, perder energía o señal lleva al estado seguro."
+    },
+    {
+     "q": "Un cambio temporal vence y el trabajo no terminó. ¿Qué corresponde?",
+     "o": [
+      "Pedir que los operadores lo recuerden en cada turno de guardia",
+      "Dejarlo hasta la próxima parada de planta, cuando haya tiempo disponible",
+      "Convertirlo en permanente sin otro trámite que una firma",
+      "Revertirlo o renovarlo con una nueva evaluación"
+     ],
+     "a": 3,
+     "e": "El plazo forma parte del cambio: al vencer se revierte o se reevalúa."
+    }
+   ]
+  },
+  {
+   "id": "m3",
+   "title": "Integridad de activos",
+   "lessons": [
+    {
+     "id": "s8",
+     "title": "Corrosión y ductos",
+     "comp": "Integridad de activos y barreras del pozo",
+     "cues": [
+      {
+       "say": "Módulo tres, Integridad de activos. Ya vimos cómo se controla un pozo y cómo se evita una pérdida de contención; ahora, cómo se mantiene la integridad de lo que contiene y conduce los fluidos.",
+       "scene": {
+        "t": "chap",
+        "i": 2
+       }
+      },
+      {
+       "say": "La corrosión es el deterioro de un metal por reacción con su ambiente, y es la causa más frecuente de pérdida de espesor en ductos y equipos.",
+       "scene": {
+        "t": "les",
+        "q": "La corrosión es el deterioro de un metal por reacción con su ambiente, y es la causa más frecuente de pérdida de espesor en ductos y equipos."
+       }
+      },
+      {
+       "say": "En petróleo y gas hay agua, gases ácidos, sólidos y microorganismos. Cada uno ataca el acero a su manera, y cada uno se vigila con un método distinto."
+      },
+      {
+       "say": "Al terminar esta lección vas a aprender, primero, a reconocer los mecanismos de corrosión más comunes y cómo se monitorean.",
+       "scene": {
+        "t": "bul",
+        "k": "Objetivos de la lección",
+        "h": "Qué vas a aprender",
+        "items": [
+         "Reconocer los mecanismos de corrosión más comunes y cómo se monitorean.",
+         "Evaluar un defecto de pérdida de metal con el método de ASME B31G modificado.",
+         "Calcular la vida remanente y fijar el intervalo de inspección."
+        ]
+       },
+       "hl": 0,
+       "obj": 1
+      },
+      {
+       "say": "segundo, a evaluar un defecto de pérdida de metal con el método de ASME B31G modificado.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a calcular la vida remanente y fijar el intervalo de inspección.",
+       "hl": 2,
+       "obj": 1
+      },
+      {
+       "say": "Estos son los mecanismos que más aparecen. La corrosión dulce, por dióxido de carbono disuelto en agua, produce pérdida de espesor localizada. La agria, por ácido sulfhídrico, además puede fisurar el acero, y exige materiales calificados según NACE MR cero uno siete cinco, ISO quince mil ciento cincuenta y seis.",
+       "scene": {
+        "t": "tbl",
+        "k": "Corrosión y ductos",
+        "h": "Mecanismos de corrosión y monitoreo",
+        "cols": [
+         "Mecanismo",
+         "Qué es",
+         "Cómo se vigila"
+        ],
+        "rows": [
+         [
+          "Dulce (CO₂)",
+          "Pérdida de metal por CO₂ y agua",
+          "Cupones, sondas, espesores, inhibidor"
+         ],
+         [
+          "Agria (H₂S)",
+          "Fisuración y pérdida de metal",
+          "Materiales calificados, dureza, inspección"
+         ],
+         [
+          "Microbiológica (MIC)",
+          "Bacterias bajo depósitos",
+          "Análisis microbiológico, limpieza con scraper"
+         ],
+         [
+          "Bajo aislamiento (CUI)",
+          "Humedad bajo el aislante",
+          "Inspección por muestreo y por riesgo"
+         ],
+         [
+          "Erosión-corrosión",
+          "Sólidos y alta velocidad",
+          "Límites de velocidad, espesores en codos"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Un defecto de corrosión se describe con dos medidas. La profundidad, d, que es cuánto espesor se perdió, y el largo axial, L. La cañería tiene un espesor nominal, t.",
+       "scene": {
+        "t": "dg",
+        "d": "corr",
+        "k": "Pérdida de metal",
+        "h": "Profundidad, largo y espesor",
+        "src": "Esquema didáctico H3L · ASME B31G (2012) y API 579-1/ASME FFS-1"
+       },
+       "hl": 0
+      },
+      {
+       "say": "El defecto reduce la presión que la cañería aguanta. El método de ASME B31G modificado estima la presión de falla con la tensión de flujo, el espesor y el factor de Folias, que crece con el largo.",
+       "hl": 1
+      },
+      {
+       "say": "La presión segura es esa presión por un factor de diseño. Si la presión de operación está por debajo de la segura, el defecto es aceptable hoy.",
+       "hl": 3
+      },
+      {
+       "say": "Para decidir cuándo volver a inspeccionar, se mide la velocidad de corrosión y se estima la vida remanente hasta el límite. El intervalo no debe superar la mitad de esa vida remanente.",
+       "hl": 4
+      },
+      {
+       "say": "Ejemplo: línea de veinte pulgadas, siete coma nueve milímetros, grado X cincuenta y dos, defecto de cuarenta por ciento de pared y cien milímetros de largo, a seis megapascales. La presión segura es ocho megapascales y el factor de reparación, cero coma setenta y cinco: aceptable. Con cero coma dos milímetros por año, llega al límite en unos trece años; se inspecciona en unos seis años y medio.",
+       "scene": {
+        "t": "tbl",
+        "k": "Corrosión y ductos",
+        "h": "Ejemplo del laboratorio (datos de ejemplo)",
+        "cols": [
+         "Dato / resultado",
+         "d/t = 40 %",
+         "d/t = 60 %"
+        ],
+        "rows": [
+         [
+          "Presión de falla",
+          "11,2 MPa",
+          "9,6 MPa"
+         ],
+         [
+          "Presión segura (× 0,72)",
+          "8,0 MPa",
+          "6,9 MPa"
+         ],
+         [
+          "Factor de reparación (MAOP 6 MPa)",
+          "0,75",
+          "0,87"
+         ],
+         [
+          "Años hasta el límite (0,2 mm/año)",
+          "≈ 13",
+          "≈ 5"
+         ],
+         [
+          "Intervalo máximo de inspección",
+          "≈ 6,5 años",
+          "≈ 2,5 años"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Laboratorio. Con la línea de veinte pulgadas, defecto de cuarenta por ciento y cien milímetros de largo, leé el factor de reparación: cero coma setenta y cinco. Subí la profundidad a sesenta por ciento y mirá cómo se acorta el intervalo. Probá un largo doble. Por último, subí la presión a diez megapascales y decidí la contingencia.",
+       "scene": {
+        "t": "viz",
+        "w": "spc_b31g",
+        "h": "Corrosión: resistencia remanente y vida",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "Para los ductos, la inspección en línea con herramientas instrumentadas, los llamados chanchos inteligentes, mide pérdida de metal a lo largo del tendido. La ASME B31.8S, para gas, y la API mil ciento sesenta, para líquidos, organizan la gestión de integridad: datos, riesgo, inspección, evaluación y mitigación."
+      },
+      {
+       "say": "La decisión que sostiene esta lección es si el defecto se acepta, se repara o se baja la presión: se decide con la presión segura, con la velocidad de corrosión y con la incertidumbre de la medición.",
+       "scene": {
+        "t": "dec",
+        "q": "Si el defecto se acepta, se repara o se baja la presión"
+       }
+      },
+      {
+       "say": "En la próxima lección pasamos de los ductos a los pozos viejos y abandonados."
+      },
+      {
+       "say": "Pregunta rápida. Un defecto llegará al límite en ocho años con la corrosión actual. ¿Cuál es el máximo intervalo de inspección razonable? Respondé en pantalla.",
+       "q": {
+        "q": "La vida remanente de un defecto es de 8 años. ¿Cuál es el intervalo máximo de inspección?",
+        "o": [
+         "16 años",
+         "4 años",
+         "8 años",
+         "2 años"
+        ],
+        "a": 1,
+        "e": "Se limita a la mitad de la vida remanente: 8 / 2 = 4 años (criterio de API 570)."
+       }
+      }
+     ],
+     "obj": [
+      "Reconocer los mecanismos de corrosión más comunes y cómo se monitorean.",
+      "Evaluar un defecto de pérdida de metal con el método de ASME B31G modificado.",
+      "Calcular la vida remanente y fijar el intervalo de inspección."
+     ],
+     "ficha": "**Corrosión y ductos**\n\n| Mecanismo | Vigilancia |\n|---|---|\n| Dulce (CO₂) | Cupones, sondas, espesores, inhibidor |\n| Agria (H₂S) | Materiales calificados (NACE MR0175/ISO 15156) |\n| MIC | Análisis microbiológico y limpieza |\n| Bajo aislamiento | Inspección por muestreo y por riesgo |\n\n**Método de ASME B31G modificado (resumen).** Tensión de flujo = SMYS + 10 ksi (68,95 MPa). La presión de falla depende del espesor, el diámetro, la profundidad y el largo (factor de Folias). Presión segura = F × presión de falla (F = 0,72). Factor de reparación = MAOP / presión segura (≥ 1: no aceptable).\n\n**Ejemplo (laboratorio).** 20 in × 7,9 mm, X52, MAOP 6 MPa, L = 100 mm: d/t = 40 % → ERF 0,75; d/t = 60 % → ERF 0,87. Con 0,2 mm/año: ≈ 13 y ≈ 5 años hasta el límite; inspección en la mitad.\n\n**Errores frecuentes.** Usar el método fuera de su alcance (> 80 % de pared; fisuras); inspeccionar a intervalo fijo sin mirar la velocidad de corrosión.",
+     "practica": "Laboratorio «Corrosión: resistencia remanente y vida». Con la línea de 20 in, X52, d/t = 40 % y L = 100 mm, anotá el factor de reparación (0,75) y el intervalo de inspección. Subí d/t a 60 % y comprobá 0,87. Subí la MAOP a 10 MPa y decidí la contingencia. En la planilla, hoja Corrosion: reproducí los dos casos."
+    },
+    {
+     "id": "s9",
+     "title": "Pozos antiguos y abandonados",
+     "comp": "Integridad de activos y barreras del pozo",
+     "cues": [
+      {
+       "say": "Un pozo viejo es un activo con barreras envejecidas, y un pozo abandonado es una barrera que debe durar para siempre.",
+       "scene": {
+        "t": "les",
+        "q": "Un pozo viejo es un activo con barreras envejecidas, y un pozo abandonado es una barrera que debe durar para siempre."
+       }
+      },
+      {
+       "say": "La integridad de un pozo se degrada con el tiempo: corrosión de las cañerías, cemento que se fisura, sellos que envejecen. El primer síntoma suele ser una presión en un anular."
+      },
+      {
+       "say": "Al terminar esta lección vas a aprender, primero, a interpretar la presión sostenida en un anular y compararla con su límite.",
+       "scene": {
+        "t": "bul",
+        "k": "Objetivos de la lección",
+        "h": "Qué vas a aprender",
+        "items": [
+         "Interpretar la presión sostenida en un anular y compararla con su límite.",
+         "Definir las barreras de un abandono, su largo mínimo y su verificación.",
+         "Extraer lecciones de casos reales de pérdida de integridad."
+        ]
+       },
+       "hl": 0,
+       "obj": 1
+      },
+      {
+       "say": "segundo, a definir las barreras de un abandono, su largo mínimo y su verificación.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a extraer lecciones de casos reales de pérdida de integridad.",
+       "hl": 2,
+       "obj": 1
+      },
+      {
+       "say": "Los anulares de un pozo pueden tener presión por tres razones. Térmica, cuando el fluido se calienta. Aplicada, cuando se presuriza a propósito, por ejemplo en gas lift. Y sostenida, que se reconstituye al purgar. Esta última indica comunicación y es la que se debe diagnosticar."
+      },
+      {
+       "say": "El método API RP noventa y dos, y su versión para pozos en tierra, establece un límite admisible de presión para cada anular, calculado con la resistencia de la cañería. Se purga y se mide cuánto tarda en volver, y con eso se decide si se sigue, se reduce la presión o se interviene."
+      },
+      {
+       "say": "En Aliso Canyon, California, el pozo SS veinticinco tuvo una falla en la cañería de producción, y perdió gas durante casi cuatro meses, entre octubre de dos mil quince y febrero de dos mil dieciséis. Fue una de las mayores emisiones de metano de la historia de Estados Unidos."
+      },
+      {
+       "say": "En Montara, en el Mar de Timor, en dos mil nueve, el pozo H uno descontroló durante setenta y cuatro días. La cementación de la zapata de la cañería de nueve y cinco octavos no cumplió su función como barrera, y la segunda barrera no estaba instalada. Fue el centro del informe de la comisión de investigación."
+      },
+      {
+       "say": "Cuando se abandona un pozo, cada zona con hidrocarburos o con riesgo de flujo cruzado necesita una barrera permanente. Se pone un tapón de cemento frente a la zona.",
+       "scene": {
+        "t": "dg",
+        "d": "abd",
+        "k": "Abandono de un pozo",
+        "h": "Tapones y verificación",
+        "src": "Esquema didáctico H3L · NORSOK D-010, sección de abandono"
+       },
+       "hl": 0
+      },
+      {
+       "say": "Cuando puede haber flujo hasta la superficie, se exigen dos envolventes: la primaria y la secundaria. El primer tapón aísla la zona.",
+       "hl": 1
+      },
+      {
+       "say": "El segundo tapón es la barrera secundaria, independiente del primero.",
+       "hl": 2
+      },
+      {
+       "say": "Cada tapón se verifica con peso, o tag, y con prueba de presión. Se corta el cabezal y se identifica el pozo con una chapa. Un tapón sin verificar no cuenta como barrera.",
+       "hl": 3
+      },
+      {
+       "say": "Como referencia de ejemplo, la norma noruega NORSOK D-diez exige una envolvente donde hay riesgo de flujo cruzado y dos donde puede haber flujo a superficie. El tapón de cemento debe tener, como mínimo, cien metros de largo, o cincuenta si se apoya en una base mecánica. En Argentina rige la resolución cinco de mil novecientos noventa y seis de la Secretaría de Energía y las normas provinciales: se aplica la edición vigente.",
+       "scene": {
+        "t": "tbl",
+        "k": "Pozos antiguos y abandonados",
+        "h": "Criterio de ejemplo para abandono",
+        "cols": [
+         "Situación",
+         "Envolventes",
+         "Largo mínimo del tapón"
+        ],
+        "rows": [
+         [
+          "Flujo posible a superficie (hidrocarburos)",
+          "2 (primaria y secundaria)",
+          "100 m (50 m sobre base mecánica)"
+         ],
+         [
+          "Riesgo de flujo cruzado entre zonas",
+          "1",
+          "100 m (50 m sobre base mecánica)"
+         ],
+         [
+          "Verificación",
+          "Peso (tag) y prueba de presión",
+          "Obligatoria para cada tapón"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "Laboratorio. Elegí la zona con hidrocarburos y probá un tapón de sesenta metros, sin base mecánica y con una sola envolvente: el abandono no cumple. Agregá la segunda envolvente, llevá el tapón a cien metros y marcá la verificación. Después poné la base mecánica y mirá cuánto se puede acortar el tapón.",
+       "scene": {
+        "t": "viz",
+        "w": "spc_abd",
+        "h": "Abandono de pozos: barreras y verificación",
+        "p": {}
+       },
+       "lab": true
+      },
+      {
+       "say": "La decisión que sostiene esta lección es si el pozo sigue, se interviene o se abandona: se decide con el diagnóstico del anular, con el límite de presión y con la barrera que queda.",
+       "scene": {
+        "t": "dec",
+        "q": "Si el pozo sigue, se interviene o se abandona"
+       }
+      },
+      {
+       "say": "En la última lección ordenamos todo en una visión: las barreras a lo largo de la vida del pozo."
+      },
+      {
+       "say": "Pregunta rápida. Con riesgo de flujo a superficie desde una zona de hidrocarburos, ¿cuántas envolventes de barrera se exigen en el abandono? Respondé en pantalla.",
+       "q": {
+        "q": "Con posible flujo a superficie desde una zona con hidrocarburos, ¿cuántas envolventes de barrera exige el criterio de ejemplo?",
+        "o": [
+         "Dos, primaria y secundaria",
+         "Tres",
+         "Ninguna si hay lodo",
+         "Una"
+        ],
+        "a": 0,
+        "e": "NORSOK D-010 pide dos envolventes (primaria y secundaria) donde puede haber flujo a superficie, y una donde solo hay riesgo de flujo cruzado."
+       }
+      }
+     ],
+     "obj": [
+      "Interpretar la presión sostenida en un anular y compararla con su límite.",
+      "Definir las barreras de un abandono, su largo mínimo y su verificación.",
+      "Extraer lecciones de casos reales de pérdida de integridad."
+     ],
+     "ficha": "**Pozos antiguos y abandonados**\n\n| Presión en el anular | Interpretación |\n|---|---|\n| Térmica | Se reconstituye con la temperatura y se alivia |\n| Aplicada | Se aplica a propósito (p. ej., gas lift) |\n| Sostenida | Se reconstituye al purgar: comunicación |\n\n**Abandono (NORSOK D-010, ejemplo).** Una envolvente donde hay riesgo de flujo cruzado y dos donde puede haber flujo a superficie. Tapón de cemento ≥ 100 m, o ≥ 50 m sobre una base mecánica. Cada tapón se verifica con peso (tag) y prueba de presión.\n\n**Casos.** Montara (2009): 74 días de descontrol. Aliso Canyon (2015–2016): falla de la cañería de producción y pérdida de gas durante casi cuatro meses.\n\n**Normas.** API RP 90-2 (anulares en tierra); en Argentina, Res. SE 5/96 y las normas provinciales.",
+     "practica": "Laboratorio «Abandono de pozos». Para la zona con hidrocarburos, ajustá envolventes, largo y base hasta cumplir el criterio, y anotá el mínimo con y sin base mecánica. Después, ejercicio guiado de la ficha: clasificá tres presiones de anular (térmica, aplicada, sostenida)."
+    },
+    {
+     "id": "s10",
+     "title": "Barreras durante el ciclo de vida del pozo",
+     "comp": "Integridad de activos y barreras del pozo",
+     "cues": [
+      {
+       "say": "La gestión de barreras no termina cuando se completa el pozo: es un proceso que dura toda su vida, hasta el abandono permanente.",
+       "scene": {
+        "t": "les",
+        "q": "La gestión de barreras no termina cuando se completa el pozo: es un proceso que dura toda su vida, hasta el abandono permanente."
+       }
+      },
+      {
+       "say": "Un mismo principio, dos barreras independientes y verificadas, se aplica en cada fase. Lo que cambia es qué elementos cumplen esa función."
+      },
+      {
+       "say": "Al terminar esta lección vas a aprender, primero, a identificar las barreras requeridas en cada fase del ciclo de vida del pozo.",
+       "scene": {
+        "t": "bul",
+        "k": "Objetivos de la lección",
+        "h": "Qué vas a aprender",
+        "items": [
+         "Identificar las barreras requeridas en cada fase del ciclo de vida del pozo.",
+         "Aplicar un esquema de estado de barreras con semáforo para decidir.",
+         "Integrar el control de pozos, la seguridad de procesos y la integridad en un solo sistema de gestión."
+        ]
+       },
+       "hl": 0,
+       "obj": 1
+      },
+      {
+       "say": "segundo, a aplicar un esquema de estado de barreras con semáforo para decidir.",
+       "hl": 1,
+       "obj": 1
+      },
+      {
+       "say": "Y tercero, a integrar el control de pozos, la seguridad de procesos y la integridad en un solo sistema de gestión.",
+       "hl": 2,
+       "obj": 1
+      },
+      {
+       "say": "En perforación, las barreras son el lodo y el BOP, con las cañerías y el cemento. En la terminación, la cañería, el packer y las válvulas.",
+       "scene": {
+        "t": "dg",
+        "d": "life",
+        "k": "Ciclo de vida del pozo",
+        "h": "Barreras en cada fase",
+        "src": "Esquema didáctico H3L · NORSOK D-010 · ISO 16530-1"
+       },
+       "hl": 0
+      },
+      {
+       "say": "En producción, el cabezal, el árbol de producción y la válvula de seguridad de fondo. En la intervención, el fluido de control y el BOP de intervención.",
+       "hl": 2
+      },
+      {
+       "say": "En el abandono, los tapones de cemento y el cierre del cabezal. Y después del abandono, la vigilancia: el pozo sigue siendo un activo con un responsable.",
+       "hl": 5
+      },
+      {
+       "say": "Para cada pozo se mantiene un esquema de barreras que muestra la envolvente primaria y la secundaria, con el estado de cada elemento. Muchos operadores usan un semáforo.",
+       "scene": {
+        "t": "tbl",
+        "k": "Barreras en el ciclo de vida",
+        "h": "Estado de barreras (semáforo de ejemplo)",
+        "cols": [
+         "Estado",
+         "Significado",
+         "Acción"
+        ],
+        "rows": [
+         [
+          "Verde",
+          "Dos barreras íntegras y verificadas",
+          "Operar con el monitoreo normal"
+         ],
+         [
+          "Amarillo",
+          "Una barrera degradada, la otra íntegra",
+          "Plan de remediación con plazo"
+         ],
+         [
+          "Naranja",
+          "Una barrera falló, la otra íntegra",
+          "Reducir el riesgo y planificar la intervención"
+         ],
+         [
+          "Rojo",
+          "Sin dos barreras verificadas",
+          "Detener y corregir de inmediato"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "La norma ISO dieciséis mil quinientos treinta, parte uno, fija el marco de gobierno de la integridad del pozo durante todo su ciclo de vida. Se definen criterios de aceptación, se monitorea, se evalúan las desviaciones y se actúa."
+      },
+      {
+       "say": "Laboratorio final. Resolvé el escenario de un pozo de veinticinco años con presión sostenida en el anular: diagnóstico, comparación con el límite, y el abandono. En cada paso, compará tu decisión con la mejor práctica.",
+       "scene": {
+        "t": "viz",
+        "w": "spc_case",
+        "h": "Presión sostenida en un pozo viejo",
+        "p": {
+         "title": "Presión sostenida en un pozo viejo",
+         "intro": "Tenés a cargo un pozo productor de veinticinco años. Datos de ejemplo.",
+         "src": "API RP 90-2 (manejo de presión en anulares de pozos en tierra) y NORSOK D-010, con valores de ejemplo.",
+         "close": "Una presión en un anular es un síntoma: se diagnostica, se compara con un límite y se actúa antes de que sea una fuga.",
+         "steps": [
+          {
+           "s": "En el anular entre la cañería de producción y la intermedia hay novecientos psi, y vuelven a subir después de purgar. ¿Qué hacés?",
+           "st": {
+            "Pozo": "25 años",
+            "Presión del anular": "900 psi",
+            "Tras purgar": "vuelve a subir"
+           },
+           "o": [
+            {
+             "t": "Dejarlo así, es habitual en pozos viejos.",
+             "ok": 0,
+             "fb": "Una presión que se reconstituye no es normal: es una comunicación que hay que entender."
+            },
+            {
+             "t": "Diagnosticar con una prueba de purga y de restauración, y clasificar si es térmica, aplicada o sostenida; comparar con el límite del anular.",
+             "ok": 2,
+             "fb": "El diagnóstico define el riesgo: sin entender el origen, la purga no resuelve nada."
+            },
+            {
+             "t": "Purgar todas las semanas y registrar.",
+             "ok": 1,
+             "fb": "Es un control mínimo, pero purgar sin diagnosticar puede ocultar un problema creciente y emite gas."
+            },
+            {
+             "t": "Cerrar el anular para que no se pierda presión.",
+             "ok": 0,
+             "fb": "Cerrar un anular con presión sostenida lo lleva a un límite mecánico."
+            }
+           ],
+           "dt": "El diagnóstico indica comunicación con un nivel de gas."
+          },
+          {
+           "s": "La prueba confirma una comunicación con gas y la presión sube hasta mil cien psi; el límite admisible del anular es mil. ¿Qué hacés?",
+           "st": {
+            "Presión": "1.100 psi",
+            "Límite": "1.000 psi"
+           },
+           "o": [
+            {
+             "t": "Subir el límite admisible porque el pozo anda bien.",
+             "ok": 0,
+             "fb": "Un límite no se sube para que el pozo entre; se calcula con la resistencia de la cañería."
+            },
+            {
+             "t": "Reducir la presión de operación o cerrar el pozo, evaluar la barrera secundaria y planificar la intervención o el abandono.",
+             "ok": 2,
+             "fb": "Con la presión sobre el límite se reduce el riesgo primero y se evalúa la barrera que queda."
+            },
+            {
+             "t": "Seguir produciendo y monitorear una vez por mes.",
+             "ok": 0,
+             "fb": "Un pozo sobre su límite necesita acción inmediata."
+            },
+            {
+             "t": "Cambiar el manómetro por uno de mayor rango.",
+             "ok": 0,
+             "fb": "El instrumento no cambia la presión del anular."
+            }
+           ],
+           "dt": "Se decide abandonar el pozo."
+          },
+          {
+           "s": "Se decide abandonar el pozo. ¿Qué se exige para darlo por abandonado?",
+           "st": {
+            "Decisión": "abandono"
+           },
+           "o": [
+            {
+             "t": "Un tapón de cemento solo en superficie.",
+             "ok": 0,
+             "fb": "No aísla las zonas de abajo; el fluido puede subir por detrás de la cañería."
+            },
+            {
+             "t": "Tapones de cemento frente a las zonas con hidrocarburos y con riesgo de flujo cruzado, verificados con tag y prueba de presión, corte del cabezal y registro.",
+             "ok": 2,
+             "fb": "Es la práctica: barreras en cada zona, verificadas, y cierre de superficie con identificación."
+            },
+            {
+             "t": "Un tapón largo frente a la zona, sin verificarlo.",
+             "ok": 1,
+             "fb": "Un tapón no verificado no cuenta como barrera."
+            },
+            {
+             "t": "Rellenar el pozo con lodo y dejarlo.",
+             "ok": 0,
+             "fb": "El lodo no es una barrera permanente."
+            }
+           ],
+           "dt": "El pozo se abandona con registro de las barreras."
+          }
+         ]
+        }
+       },
+       "lab": true
+      },
+      {
+       "say": "Para integrar el curso: un mismo hilo une los tres módulos. En cada caso hay una barrera, una forma de verificarla y una decisión cuando falla.",
+       "scene": {
+        "t": "tbl",
+        "k": "Barreras en el ciclo de vida",
+        "h": "Síntesis del curso",
+        "cols": [
+         "Tema",
+         "Barrera",
+         "Verificación",
+         "Si falla"
+        ],
+        "rows": [
+         [
+          "Control de pozos",
+          "Lodo y BOP",
+          "Prueba de flujo, prueba del BOP",
+          "Cerrar, calcular y controlar"
+         ],
+         [
+          "Cementación",
+          "Cemento y cañería",
+          "Registro y prueba negativa",
+          "Rechazar y restablecer"
+         ],
+         [
+          "Seguridad de procesos",
+          "Contención y capas de protección",
+          "Prueba del lazo completo",
+          "Aislar, despresurizar, investigar"
+         ],
+         [
+          "Integridad",
+          "Espesor y sellos",
+          "Inspección y vigilancia",
+          "Reparar, bajar presión, abandonar"
+         ]
+        ]
+       }
+      },
+      {
+       "say": "La decisión que sostiene esta lección es si la operación tiene dos barreras independientes y verificadas en este momento: si la respuesta no es sí, la operación se detiene hasta corregirlo.",
+       "scene": {
+        "t": "dec",
+        "q": "Si la operación tiene dos barreras independientes y verificadas"
+       }
+      },
+      {
+       "say": "Con esto cerramos el curso. Hacé el cuestionario del módulo y el examen final."
+      },
+      {
+       "say": "Pregunta rápida. Un pozo en estado rojo según el semáforo de barreras. ¿Qué corresponde? Respondé en pantalla.",
+       "q": {
+        "q": "En un esquema de barreras con semáforo, ¿qué significa el estado rojo?",
+        "o": [
+         "Sin dos barreras verificadas: se detiene y se corrige.",
+         "Operación normal.",
+         "Una barrera degradada y otra íntegra.",
+         "Falta una inspección menor."
+        ],
+        "a": 0,
+        "e": "Rojo significa que no hay dos barreras verificadas: la operación se detiene hasta restablecerlas."
+       }
+      }
+     ],
+     "obj": [
+      "Identificar las barreras requeridas en cada fase del ciclo de vida del pozo.",
+      "Aplicar un esquema de estado de barreras con semáforo para decidir.",
+      "Integrar el control de pozos, la seguridad de procesos y la integridad en un solo sistema de gestión."
+     ],
+     "ficha": "**Barreras en el ciclo de vida**\n\n| Fase | Barreras típicas |\n|---|---|\n| Perforación | Lodo, BOP, cañerías y cemento |\n| Terminación | Cañería, packer, válvulas |\n| Producción | Cabezal, árbol, válvula de seguridad de fondo |\n| Intervención | Fluido de control y BOP |\n| Abandono | Tapones de cemento y cierre del cabezal |\n\n**Semáforo de barreras.** Verde: dos barreras íntegras y verificadas. Amarillo: una degradada. Naranja: una falló. Rojo: sin dos barreras verificadas, se detiene.\n\n**Norma.** ISO 16530-1: gobierno de la integridad del pozo durante todo su ciclo de vida.\n\n**Pregunta de cierre.** ¿Tiene esta operación, ahora, dos barreras independientes y verificadas?",
+     "practica": "Escenario «Presión sostenida en un pozo viejo»: resolvé las tres decisiones. Después, armá en una tabla el esquema de barreras de un pozo productor de tu elección (barrera primaria, secundaria, verificación y estado en semáforo)."
+    }
+   ],
+   "quiz": [
+    {
+     "q": "¿Qué característica distingue a la corrosión agria (H₂S) de la dulce (CO₂)?",
+     "o": [
+      "Además de la pérdida de metal, puede fisurar el acero",
+      "No daña el acero, pero deteriora los elastómeros y los sellos",
+      "Solo ocurre en tanques de agua dulce sin hidrocarburos",
+      "Se elimina por completo colocando aislamiento térmico"
+     ],
+     "a": 0,
+     "e": "El H₂S puede provocar fisuración del acero, por eso se exigen materiales calificados (NACE MR0175/ISO 15156)."
+    },
+    {
+     "q": "En el método de ASME B31G modificado, un factor de reparación igual o mayor que 1 significa:",
+     "o": [
+      "No hay defecto: la medición dio un espesor igual al nominal",
+      "Hay que inspeccionar cada diez años, sin importar la corrosión",
+      "La presión de operación iguala o supera la presión segura: no es aceptable",
+      "El defecto es aceptable y no requiere ninguna acción de seguimiento"
+     ],
+     "a": 2,
+     "e": "ERF = MAOP / presión segura; si es ≥ 1, no es aceptable a esa presión."
+    },
+    {
+     "q": "Un defecto llegará al límite en 8 años. ¿Cuál es el máximo intervalo de inspección razonable?",
+     "o": [
+      "16 años",
+      "8 años",
+      "4 años",
+      "2 años"
+     ],
+     "a": 2,
+     "e": "Se limita a la mitad de la vida remanente: 4 años."
+    },
+    {
+     "q": "Espesor 8 mm, espesor mínimo requerido 5 mm, velocidad de corrosión 0,25 mm/año. ¿Cuál es la vida remanente?",
+     "o": [
+      "6 años",
+      "32 años",
+      "20 años",
+      "12 años"
+     ],
+     "a": 3,
+     "e": "(8 − 5) / 0,25 = 12 años."
+    },
+    {
+     "q": "Un anular recupera su presión después de purgarlo. ¿Cómo se clasifica?",
+     "o": [
+      "Normal",
+      "Aplicada",
+      "Térmica",
+      "Sostenida: indica comunicación"
+     ],
+     "a": 3,
+     "e": "Una presión que se reconstituye al purgar es sostenida: hay comunicación que se debe diagnosticar."
+    },
+    {
+     "q": "Según el criterio de ejemplo, ¿cuántas envolventes se exigen donde puede haber flujo a superficie desde una zona de hidrocarburos?",
+     "o": [
+      "Una",
+      "Tres",
+      "Dos",
+      "Ninguna"
+     ],
+     "a": 2,
+     "e": "Dos envolventes: primaria y secundaria."
+    },
+    {
+     "q": "¿Cómo se verifica un tapón de cemento de abandono?",
+     "o": [
+      "Con peso (tag) y prueba de presión",
+      "No se verifica porque el cemento fragua solo",
+      "Con una foto del cabezal y la chapa de identificación",
+      "Solo con el registro de volumen bombeado"
+     ],
+     "a": 0,
+     "e": "Un tapón sin verificar no cuenta como barrera: se prueba con peso y presión."
+    },
+    {
+     "q": "En un semáforo de barreras, el estado rojo significa:",
+     "o": [
+      "Sin dos barreras verificadas: se detiene y se corrige",
+      "Una inspección menor pendiente que no afecta las barreras",
+      "Una barrera degradada y otra íntegra",
+      "Dos barreras íntegras y verificadas: operación normal"
+     ],
+     "a": 0,
+     "e": "Rojo: no hay dos barreras verificadas; la operación se detiene hasta restablecerlas."
+    }
+   ]
+  }
+ ],
+ "exam": [
+  {
+   "q": "Un lodo de 9,5 ppg a 12.000 ft de profundidad vertical frente a una formación de 6.000 psi. ¿Cuál es el balance?",
+   "o": [
+    "Sobrebalance de 80 psi",
+    "Equilibrio",
+    "Subbalance de 70 psi",
+    "Subbalance de 80 psi"
+   ],
+   "a": 2,
+   "e": "Hidrostática = 0,052 × 9,5 × 12.000 = 5.928 psi; 5.928 − 6.000 = −72 psi, un subbalance de unos 70 psi."
+  },
+  {
+   "q": "Durante una maniobra el pozo toma menos lodo del calculado. ¿Qué hacés primero?",
+   "o": [
+    "Aumentar la velocidad de salida para terminar antes de que se note",
+    "Seguir sacando y compensar el faltante al llegar a superficie",
+    "Parar, instalar la válvula de seguridad y hacer la prueba de flujo",
+    "Cerrar el ariete ciego de inmediato con la sarta en el pozo"
+   ],
+   "a": 2,
+   "e": "Se asegura la sarta y se verifica el flujo antes de decidir."
+  },
+  {
+   "q": "¿Cuál es el motivo principal de preferir el cierre duro?",
+   "o": [
+    "Minimiza el influjo",
+    "No requiere el choke",
+    "Es más barato",
+    "Evita la hoja de control"
+   ],
+   "a": 0,
+   "e": "El cierre duro reduce el volumen de influjo que entra mientras se cierra."
+  },
+  {
+   "q": "SIDPP = 520 psi, MW = 10 ppg, TVD = 10.000 ft. ¿Cuál es el peso de control?",
+   "o": [
+    "11,5 ppg",
+    "10,5 ppg",
+    "11,0 ppg",
+    "12,0 ppg"
+   ],
+   "a": 2,
+   "e": "KMW = 10 + 520 / 520 = 11,0 ppg."
+  },
+  {
+   "q": "Con SIDPP = 520 psi y SCR = 700 psi, ¿cuál es la presión inicial de circulación?",
+   "o": [
+    "700 psi",
+    "520 psi",
+    "1.220 psi",
+    "1.400 psi"
+   ],
+   "a": 2,
+   "e": "ICP = 520 + 700 = 1.220 psi."
+  },
+  {
+   "q": "En la segunda circulación del método del perforador, ¿qué presión se mantiene en el casing mientras el lodo de control llena la sarta?",
+   "o": [
+    "La FCP",
+    "La presión de fractura",
+    "La SIDPP",
+    "Cero"
+   ],
+   "a": 2,
+   "e": "La presión del casing se mantiene en la SIDPP hasta que el lodo de control llega a la barrena."
+  },
+  {
+   "q": "La presión del casing cae de golpe y baja el nivel de las piletas durante el control. ¿Qué es probable?",
+   "o": [
+    "Un aumento del influjo",
+    "Un problema de la bomba",
+    "Una pérdida de circulación en el zapato",
+    "Una falla del manómetro"
+   ],
+   "a": 2,
+   "e": "Pérdida de circulación: se para, se cierra y se evalúan alternativas."
+  },
+  {
+   "q": "¿Cuál es el ariete que se usa en un pozo sin tubería?",
+   "o": [
+    "Ariete ciego",
+    "Línea de kill",
+    "Preventor anular únicamente",
+    "Ariete de tubería"
+   ],
+   "a": 0,
+   "e": "El ariete ciego sella el pozo vacío."
+  },
+  {
+   "q": "Una cementación llega a un ECD de 15,2 ppg con una fractura de 15,0 ppg. ¿Qué se hace?",
+   "o": [
+    "Bajar la presión de poro con un lodo más liviano",
+    "Nada: es un valor normal y la lechada se bombea igual",
+    "Aumentar el caudal para terminar antes del fraguado",
+    "Reducir el caudal, aligerar la lechada o cementar por etapas"
+   ],
+   "a": 3,
+   "e": "El ECD no debe tocar la fractura: se reduce la fricción o la densidad."
+  },
+  {
+   "q": "¿Qué demostró el caso de Macondo respecto de la prueba de presión negativa?",
+   "o": [
+    "Que no es necesaria cuando el cemento ya fue bombeado",
+    "Que alcanza con cinco minutos de observación sin flujo",
+    "Que la línea de kill nunca se usa en una prueba de presión",
+    "Que una lectura incoherente se debe investigar y no explicar a favor"
+   ],
+   "a": 3,
+   "e": "Se aceptó una prueba con presión en la sarta y cero en la línea de kill."
+  },
+  {
+   "q": "Un gas a 4 MPa sale por un agujero de 25 mm a 3,4 kg/s. Se aísla a los 180 s. ¿Cuál es la masa liberada, aproximadamente?",
+   "o": [
+    "3.400 kg",
+    "620 kg",
+    "60 kg",
+    "310 kg"
+   ],
+   "a": 1,
+   "e": "3,4 × 180 ≈ 612 kg (≈ 620 kg), por encima de 500 kg."
+  },
+  {
+   "q": "En Buncefield (2005), ¿qué protección falló?",
+   "o": [
+    "El sistema de espuma de los tanques vecinos",
+    "La medición de nivel y el interruptor independiente de nivel muy alto",
+    "El aislamiento eléctrico de las bombas de transferencia",
+    "La alarma de incendio y la red de agua contra incendio"
+   ],
+   "a": 1,
+   "e": "El medidor de nivel quedó fijo y el interruptor independiente no actuó."
+  },
+  {
+   "q": "¿Qué es el PFD de una capa de protección?",
+   "o": [
+    "El tiempo de prueba",
+    "La probabilidad de falla a demanda",
+    "El costo de instalación de la capa de protección",
+    "La frecuencia anual del evento no deseado"
+   ],
+   "a": 1,
+   "e": "PFD: probabilidad de falla a demanda."
+  },
+  {
+   "q": "Frecuencia iniciadora 0,1 /año, dos capas de PFD 0,1, meta 1 × 10⁻⁵ /año. ¿Qué SIL hace falta?",
+   "o": [
+    "SIL 1",
+    "SIL 3",
+    "SIL 2",
+    "Ninguno"
+   ],
+   "a": 2,
+   "e": "0,1 × 0,1 × 0,1 = 10⁻³; falta ×100: PFD 0,01 → SIL 2."
+  },
+  {
+   "q": "¿Cuál de estos es un cambio temporal bien gestionado?",
+   "o": [
+    "Uno sin fecha de fin, para no tener que renovarlo",
+    "Uno que se renueva solo cada mes sin nueva evaluación",
+    "Un puente de un instrumento con permiso verbal del jefe de turno",
+    "Un cambio con evaluación, medidas compensatorias y plazo"
+   ],
+   "a": 3,
+   "e": "Evaluación, medidas compensatorias y plazo."
+  },
+  {
+   "q": "¿Qué código rige la inspección de cañerías de proceso en servicio?",
+   "o": [
+    "API 570",
+    "API 520",
+    "API 510",
+    "API 653"
+   ],
+   "a": 0,
+   "e": "API 570 rige las cañerías; 510 recipientes; 653 tanques; 520 alivio."
+  },
+  {
+   "q": "Una línea con ERF = 1,2 a la presión de operación. ¿Qué corresponde?",
+   "o": [
+    "Subir la presión para compensar la pérdida de capacidad",
+    "Seguir operando y programar una inspección para el año siguiente",
+    "Esperar a la próxima inspección programada del tramo",
+    "Bajar la presión por debajo de la presión segura y programar la reparación"
+   ],
+   "a": 3,
+   "e": "ERF ≥ 1: se baja la presión de inmediato y se repara."
+  },
+  {
+   "q": "Una corrosión de 0,3 mm/año, espesor medido 9 mm y mínimo 6 mm. ¿Cuál es la vida remanente y el intervalo máximo?",
+   "o": [
+    "3 años y 1,5 años",
+    "10 años y 10 años",
+    "30 años y 15 años",
+    "10 años y 5 años"
+   ],
+   "a": 3,
+   "e": "(9 − 6) / 0,3 = 10 años; el intervalo es la mitad: 5 años."
+  },
+  {
+   "q": "Un anular presenta presión que vuelve tras purgarlo y supera su límite admisible. ¿Qué se hace?",
+   "o": [
+    "Cerrar el anular para que la presión no se pierda",
+    "Reducir la presión de operación o cerrar el pozo, evaluar la barrera y planificar la intervención",
+    "Subir el límite admisible para que el pozo siga operando sin restricciones",
+    "Ignorarlo, porque es habitual en pozos de muchos años"
+   ],
+   "a": 1,
+   "e": "Se reduce el riesgo primero y se evalúa la barrera restante."
+  },
+  {
+   "q": "¿Qué pregunta de cierre resume la gestión de barreras?",
+   "o": [
+    "¿Quién es el operador responsable del pozo?",
+    "¿Hay, ahora, dos barreras independientes y verificadas?",
+    "¿Cuánto produce el pozo por día?",
+    "¿Cuánto cuesta el pozo y cuánto cuesta abandonarlo?"
+   ],
+   "a": 1,
+   "e": "Si la respuesta no es sí, la operación se detiene hasta corregirlo."
+  }
+ ],
+ "outro": {
+  "can": [
+   "reconocer una surgencia, cerrar el pozo y calcular el peso de control y las presiones de circulación",
+   "verificar las barreras de un pozo: BOP, cementación y prueba de presión negativa",
+   "estimar una pérdida de contención y evaluar las capas de protección con HAZOP y LOPA",
+   "gestionar un cambio y mantener la integridad mecánica de los equipos críticos",
+   "decidir sobre un defecto de corrosión, un pozo viejo o un abandono con criterio de barreras"
+  ],
+  "phrase": "Dos barreras, verificadas, siempre.",
+  "recap": [
+   "Un pozo se controla con presión de fondo constante; se cierra ante una señal positiva.",
+   "Una prueba que no cuadra no se acepta: se investiga y se restablece la barrera.",
+   "Las capas de protección, la gestión del cambio y la integridad sostienen la seguridad de procesos."
+  ],
+  "cues": [
+   {
+    "say": "Repasemos lo esencial. Un pozo está bajo control mientras la hidrostática supera la presión de formación, y se cierra ante una señal positiva. Con el pozo cerrado se calcula el peso de control y se circula manteniendo constante la presión de fondo.",
+    "scene": {
+     "t": "bul",
+     "k": "Para llevarte",
+     "h": "Ideas clave",
+     "items": [
+      "Dos barreras independientes y verificadas, siempre.",
+      "Una lectura que no cuadra se investiga: no se interpreta a favor.",
+      "Detectar y aislar rápido reduce la masa liberada más que cualquier otra medida.",
+      "Un cambio, incluso temporal, se evalúa y tiene plazo.",
+      "Una presión sostenida en un anular es un síntoma que se diagnostica."
+     ]
+    }
+   },
+   {
+    "say": "El BOP y el cemento son barreras que se verifican con pruebas, con criterios claros de aceptación. Un resultado incoherente no se acepta."
+   },
+   {
+    "say": "En las instalaciones de superficie, las capas de protección se identifican con HAZOP, se cuantifican con LOPA y se sostienen con la gestión del cambio y la integridad mecánica."
+   },
+   {
+    "say": "Y en la vida del activo, se vigila la corrosión, se diagnostican las presiones de los anulares y se abandona con tapones verificados."
+   },
+   {
+    "say": "Al terminar este curso, podés: reconocer una surgencia, cerrar el pozo y calcular el peso de control y las presiones de circulación; verificar las barreras de un pozo; estimar una pérdida de contención y evaluar las capas de protección; gestionar un cambio y mantener la integridad mecánica; y decidir sobre un defecto de corrosión, un pozo viejo o un abandono.",
+    "scene": {
+     "t": "can",
+     "k": "Lo que lograste",
+     "h": "Ahora podés reconocer y aplicar",
+     "items": [
+      "reconocer una surgencia, cerrar el pozo y calcular el peso de control y las presiones de circulación",
+      "verificar las barreras de un pozo: BOP, cementación y prueba de presión negativa",
+      "estimar una pérdida de contención y evaluar las capas de protección con HAZOP y LOPA",
+      "gestionar un cambio y mantener la integridad mecánica de los equipos críticos",
+      "decidir sobre un defecto de corrosión, un pozo viejo o un abandono con criterio de barreras"
+     ]
+    }
+   },
+   {
+    "say": "Ítems vistos: diez lecciones en tres módulos, ocho laboratorios y escenarios interactivos, una planilla Excel con ejercicios, un cuestionario por módulo y el examen final. El siguiente paso es el examen final. Al aprobarlo, obtenés tu certificado H3L, con código de verificación. Mientras tanto, seguí practicando con la planilla: cambiá los datos y fijate cómo se mueve el resultado.",
+    "scene": {
+     "t": "seen"
+    }
+   },
+   {
+    "say": "En el catálogo de H3L tenés además cursos complementarios de perforación, de producción y de integridad. Dos barreras, verificadas, en todo momento. Gracias por aprender con H3L Global Energy.",
+    "scene": {
+     "t": "bout"
+    },
+    "q": {
+     "q": "¿Cuál es la pregunta que resume la gestión de barreras?",
+     "o": [
+      "¿Cuánto produce el pozo por día en la última semana?",
+      "¿Cuándo es la próxima parada de planta programada?",
+      "¿Quién es el operador de la plataforma?",
+      "¿Hay, ahora, dos barreras independientes y verificadas?"
+     ],
+     "a": 3,
+     "e": "Si la respuesta no es sí, la operación se detiene hasta corregirlo."
+    }
+   },
+   {
+    "say": "Contacto: info@h3lglobalenergy.com."
+   }
+  ],
+  "ficha": "**Lo que lograste.** reconocer una surgencia, cerrar el pozo y calcular el peso de control y las presiones de circulación; verificar las barreras de un pozo: BOP, cementación y prueba de presión negativa; estimar una pérdida de contención y evaluar las capas de protección con HAZOP y LOPA; gestionar un cambio y mantener la integridad mecánica de los equipos críticos; decidir sobre un defecto de corrosión, un pozo viejo o un abandono con criterio de barreras.\n\n**Siguiente paso.** Examen final y certificado H3L.",
+  "obj": [
+   "Repasar las ideas clave del curso.",
+   "Conocer el camino hacia el examen final y el certificado."
+  ]
+ },
+ "downloads": [
+  {
+   "file": "xlsx/H3L_SPC_Presiones_Barreras_e_Integridad.xlsx",
+   "title": "Presiones, barreras e integridad: siete hojas de cálculo (Excel)",
+   "desc": "Hidrostática y balance; hoja de control con presión de bombeo por emboladas; BOP y presiones de prueba; cementación; liberación de gas y líquido; LOPA; y corrosión con B31G modificado y vida remanente. Datos de ejemplo.",
+   "task": "Reproducí en la planilla los ejemplos del curso (peso de control 11,0 ppg; ICP 1.220 psi; FCP 770 psi; masa liberada ≈ 620 kg; ERF 0,75). Después cambiá un dato por vez y anotá cuál mueve más el resultado."
+  }
+ ],
+ "cases": [
+  {
+   "title": "Macondo (Deepwater Horizon), Golfo de México",
+   "text": "El 20 de abril de 2010 se produjo un reventón en el pozo Macondo; la explosión y el incendio de la plataforma mataron a once personas. Entre los factores que la CSB identificó están una cementación que no cumplió su función como barrera, la aceptación de una prueba de presión negativa con lecturas incoherentes y un ariete ciego-cortante que no logró sellar la sarta, desplazada del centro.",
+   "src": "CSB, Investigation Report Volume 3: Drilling Rig Explosion and Fire at the Macondo Well (2016)"
+  },
+  {
+   "title": "Texas City (refinería), Estados Unidos",
+   "text": "El 23 de marzo de 2005, durante el arranque de una unidad de isomerización, una torre se llenó de más y el líquido salió por una chimenea de venteo; la nube de vapor explotó. Murieron 15 personas y hubo 180 heridos. La CSB señaló fallas organizacionales y de instrumentación de nivel.",
+   "src": "CSB, Refinery Explosion and Fire, BP Texas City (2007)"
+  },
+  {
+   "title": "Buncefield (depósito de combustibles), Reino Unido",
+   "text": "El 11 de diciembre de 2005 un tanque de gasolina se rebalsó; el medidor de nivel quedó fijo y el interruptor independiente de nivel muy alto no actuó. La nube de vapor explotó: 43 heridos y ninguna víctima fatal. La investigación motivó guías de prevención de rebalse.",
+   "src": "HSE y Major Incident Investigation Board, Buncefield (2008)"
+  },
+  {
+   "title": "Piper Alpha, Mar del Norte",
+   "text": "El 6 de julio de 1988 una explosión y un incendio en la plataforma Piper Alpha causaron 167 muertes. La investigación de Cullen puso el foco en el sistema de permisos de trabajo y en la transmisión de información entre turnos.",
+   "src": "Cullen (1990), The Public Inquiry into the Piper Alpha Disaster"
+  },
+  {
+   "title": "Flixborough, Reino Unido",
+   "text": "El 1 de junio de 1974 una cañería provisoria que reemplazaba un reactor se rompió y la nube de vapor explotó: 28 muertos. Es el ejemplo clásico de un cambio sin evaluación de ingeniería.",
+   "src": "Court of Inquiry, The Flixborough Disaster (1975)"
+  },
+  {
+   "title": "Montara, Mar de Timor",
+   "text": "En agosto de 2009 el pozo H1 de la plataforma Montara quedó descontrolado durante 74 días. La investigación señaló la falla de la barrera de cemento en la zapata y la ausencia de una segunda barrera instalada.",
+   "src": "Report of the Montara Commission of Inquiry (2010)"
+  },
+  {
+   "title": "Aliso Canyon, California",
+   "text": "Entre octubre de 2015 y febrero de 2016, el pozo SS-25 de un almacenamiento subterráneo de gas perdió gas durante casi cuatro meses tras la falla de una cañería. Fue una de las mayores emisiones de metano registradas en Estados Unidos.",
+   "src": "Informes de la CPUC y del DOGGR sobre Aliso Canyon (2016-2019)"
+  }
+ ],
+ "refs": [
+  {
+   "tag": "Libro",
+   "cite": "Grace, R. D. (2017). Blowout and Well Control Handbook (2.ª ed.). Gulf Professional Publishing.",
+   "why": "surgencias, reventones y métodos de control"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Bourgoyne, A. T. et al. (1986). Applied Drilling Engineering. SPE Textbook Series, vol. 2.",
+   "why": "hidrostática, presiones y control de pozo"
+  },
+  {
+   "tag": "Norma",
+   "cite": "API Standard 53. Well Control Equipment Systems for Drilling Wells.",
+   "why": "BOP: pruebas, tiempos de cierre y acumuladores"
+  },
+  {
+   "tag": "Norma",
+   "cite": "API RP 59. Recommended Practice for Well Control Operations.",
+   "why": "procedimientos de control de pozo"
+  },
+  {
+   "tag": "Norma",
+   "cite": "API 65-2. Isolating Potential Flow Zones During Well Construction.",
+   "why": "cementación y aislamiento de zonas"
+  },
+  {
+   "tag": "Norma",
+   "cite": "NORSOK D-010. Well Integrity in Drilling and Well Operations.",
+   "why": "envolventes de barrera y abandono"
+  },
+  {
+   "tag": "Norma",
+   "cite": "ISO 16530-1. Well Integrity, Part 1: Life Cycle Governance.",
+   "why": "gestión de integridad del pozo"
+  },
+  {
+   "tag": "Norma",
+   "cite": "API RP 90-2. Annular Casing Pressure Management for Onshore Wells.",
+   "why": "presión sostenida en anulares"
+  },
+  {
+   "tag": "Norma",
+   "cite": "US OSHA, 29 CFR 1910.119. Process Safety Management of Highly Hazardous Chemicals.",
+   "why": "elementos de la gestión de seguridad de procesos"
+  },
+  {
+   "tag": "Norma",
+   "cite": "API RP 754. Process Safety Performance Indicators for the Refining and Petrochemical Industries.",
+   "why": "niveles de eventos de pérdida de contención"
+  },
+  {
+   "tag": "Libro",
+   "cite": "CCPS (2001). Layer of Protection Analysis: Simplified Process Risk Assessment. AIChE.",
+   "why": "método LOPA"
+  },
+  {
+   "tag": "Norma",
+   "cite": "IEC 61511. Functional Safety: Safety Instrumented Systems for the Process Industry Sector.",
+   "why": "funciones instrumentadas y niveles de integridad (SIL)"
+  },
+  {
+   "tag": "Norma",
+   "cite": "IEC 61882. Hazard and Operability Studies (HAZOP Studies): Application Guide.",
+   "why": "método HAZOP"
+  },
+  {
+   "tag": "Libro",
+   "cite": "CCPS (2008). Guidelines for the Management of Change for Process Safety. Wiley.",
+   "why": "gestión del cambio"
+  },
+  {
+   "tag": "Norma",
+   "cite": "API 580 y API 581. Risk-Based Inspection.",
+   "why": "inspección basada en riesgo"
+  },
+  {
+   "tag": "Norma",
+   "cite": "ASME B31G. Manual for Determining the Remaining Strength of Corroded Pipelines.",
+   "why": "resistencia remanente por pérdida de metal"
+  },
+  {
+   "tag": "Norma",
+   "cite": "API 579-1/ASME FFS-1. Fitness-for-Service.",
+   "why": "aptitud para el servicio"
+  },
+  {
+   "tag": "Norma",
+   "cite": "ASME B31.8S. Managing System Integrity of Gas Pipelines.",
+   "why": "gestión de integridad de gasoductos"
+  },
+  {
+   "tag": "Informe",
+   "cite": "CSB (2016). Investigation Report Volume 3: Drilling Rig Explosion and Fire at the Macondo Well.",
+   "why": "el caso Macondo"
+  },
+  {
+   "tag": "Informe",
+   "cite": "CSB (2007). Refinery Explosion and Fire, BP Texas City, March 23, 2005.",
+   "why": "el caso Texas City"
+  },
+  {
+   "tag": "Informe",
+   "cite": "HSE (2008). The Buncefield Incident 11 December 2005: The Final Report of the Major Incident Investigation Board.",
+   "why": "el caso Buncefield"
+  },
+  {
+   "tag": "Libro",
+   "cite": "Reason, J. (1990). Human Error. Cambridge University Press.",
+   "why": "modelo del queso suizo"
+  }
+ ]
+}
