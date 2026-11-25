@@ -141,7 +141,7 @@ document.documentElement.lang=lang;
 HC.esc=function(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})};
 HC.fmt=function(s){s=Math.max(0,Math.round(s));var m=Math.floor(s/60),x=s%60;return m+':'+(x<10?'0':'')+x};
 HC.words=function(s){return String(s).trim().split(/\s+/).length};
-HC.cueDur=function(c){var t=c.say||'',n=(t.match(/[.!?…](\s|$)/g)||[]).length;return Math.max(3.2,HC.words(t)/2.4+0.8+0.3*Math.max(0,n-1)+0.4)};
+HC.cueDur=function(c){var t=c.say||'',n=(t.match(/[.!?…](\s|$)/g)||[]).length,k=(t.match(/[,;:]/g)||[]).length;return Math.max(3.2,HC.words(t)/2.25+0.8+0.55*Math.max(0,n-1)+0.2*k+0.4)};
 HC.$=function(s,r){return(r||document).querySelector(s)};
 HC.$$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
 HC.el=function(tag,attrs,html){var e=document.createElement(tag);if(attrs)for(var k in attrs){if(k==='class')e.className=attrs[k];else e.setAttribute(k,attrs[k])}if(html!=null)e.innerHTML=html;return e};
