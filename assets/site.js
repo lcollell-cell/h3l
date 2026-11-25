@@ -3,7 +3,7 @@
 'use strict';
 var T={
 es:{
- nav_somos:'Quiénes somos',nav_servicios:'Servicios',nav_noticias:'Noticias OIL & GAS',nav_eventos:'Eventos',nav_cursos:'Cursos online H3L',nav_contacto:'Contactos',
+ nav_somos:'Quiénes somos',nav_servicios:'Servicios',nav_noticias:'Noticias OIL & GAS',nav_eventos:'Eventos',nav_cursos:'Campus Virtual H3L',nav_contacto:'Contactos',
  hero_cta1:'Ver servicios',hero_cta2:'Solicitar cotización',hero_cta3:'Descargar brochure',
  s_eyebrow:'Quiénes somos',s_badge:'Consultora energética especializada',
  s_h:'Firma independiente de asesoría energética',
@@ -113,7 +113,7 @@ sv_tab_up:'Upstream',sv_tab_et:'Transición Energética',sv_tab_ds:'Ciencia de D
  w_nl_ph_n:'tu@email.com'
 },
 en:{
- nav_somos:'About us',nav_servicios:'Services',nav_noticias:'OIL & GAS News',nav_eventos:'Events',nav_cursos:'Online courses H3L',nav_contacto:'Contact',
+ nav_somos:'About us',nav_servicios:'Services',nav_noticias:'OIL & GAS News',nav_eventos:'Events',nav_cursos:'H3L Virtual Campus',nav_contacto:'Contact',
  hero_cta1:'View services',hero_cta2:'Request a quote',hero_cta3:'Download brochure',
  s_eyebrow:'About us',s_badge:'Specialized energy consultancy',
  s_h:'Independent energy advisory firm',
@@ -223,7 +223,7 @@ sv_tab_up:'Upstream',sv_tab_et:'Energy Transition',sv_tab_ds:'Data Science',sv_t
  w_nl_ph_n:'you@email.com'
 },
 fr:{
- nav_somos:'Qui sommes-nous',nav_servicios:'Services',nav_noticias:'Actualités OIL & GAS',nav_eventos:'Événements',nav_cursos:'Cours en ligne H3L',nav_contacto:'Contacts',
+ nav_somos:'Qui sommes-nous',nav_servicios:'Services',nav_noticias:'Actualités OIL & GAS',nav_eventos:'Événements',nav_cursos:'Campus virtuel H3L',nav_contacto:'Contacts',
  hero_cta1:'Voir les services',hero_cta2:'Demander un devis',hero_cta3:'Télécharger la brochure',
  s_eyebrow:'Qui sommes-nous',s_badge:'Cabinet de conseil énergétique spécialisé',
  s_h:'Cabinet indépendant de conseil énergétique',
@@ -333,7 +333,7 @@ sv_tab_up:'Amont (Upstream)',sv_tab_et:'Transition énergétique',sv_tab_ds:'Dat
  w_nl_ph_n:'vous@email.com'
 },
 pt:{
- nav_somos:'Quem somos',nav_servicios:'Serviços',nav_noticias:'Notícias OIL & GAS',nav_eventos:'Eventos',nav_cursos:'Cursos online H3L',nav_contacto:'Contatos',
+ nav_somos:'Quem somos',nav_servicios:'Serviços',nav_noticias:'Notícias OIL & GAS',nav_eventos:'Eventos',nav_cursos:'Campus Virtual H3L',nav_contacto:'Contatos',
  hero_cta1:'Ver serviços',hero_cta2:'Solicitar orçamento',hero_cta3:'Baixar brochure',
  s_eyebrow:'Quem somos',s_badge:'Consultoria energética especializada',
  s_h:'Empresa independente de assessoria energética',
