@@ -665,3 +665,9 @@ body.game .gtop select{width:auto;flex:none;min-width:64px}
 .dgsrc{margin-top:.7cqw;font:500 1.1cqw/1.3 var(--font);color:rgba(255,255,255,.55);letter-spacing:.01em}
 .dgsrc::before{content:"";display:inline-block;width:1.6cqw;height:.14cqw;background:rgba(95,209,164,.7);vertical-align:middle;margin-right:.8cqw}
 .chap.mc.sm h4{font-size:3.5cqw}.chap.mc.sm .cl li{font-size:1.75cqw}
+
+/* Página de curso: sin título duplicado. El título y el subtítulo se conservan para lectores de pantalla y buscadores,
+   pero solo se ve el video (que ya muestra el título del curso) y el enlace "← Catálogo". */
+.chead{padding:10px 0!important}
+.chead .crumb{display:block!important;margin:0!important}
+.chead h1,.chead p{position:absolute!important;width:1px;height:1px;margin:-1px!important;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
