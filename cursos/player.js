@@ -118,6 +118,8 @@ function emSpans(t,lang){var sp=[],es=!lang||/^(es|pt)/i.test(lang),m;
   var add=function(a,b,w,txt){sp.push({s:a,e:b,w:!!w,txt:txt})};
   var rq=/(«[^»]{2,80}»|“[^”]{2,80}”|"[^"]{2,80}")/g;while((m=rq.exec(t)))add(m.index,m.index+m[0].length,0,m[0].slice(1,-1));
   if(es){var rl=/(?:se llama|se denomina|se conoce como|llamamos|denominamos|conocid[oa] como)\s+([^,.;:!?]{3,60})/gi;while((m=rl.exec(t))){var o=m.index+m[0].lastIndexOf(m[1]);add(o,o+m[1].length,0,m[1])}
+    var rd=/(?:^|[.!?…]\s+)(?:El|La|Los|Las)\s+([a-záéíóúñ]{4,}(?:\s+(?:de la|del|de|y)\s+[a-záéíóúñ]{3,}|\s+[a-záéíóúñ]{4,}){0,2})\s+(?:es|son|se define|se mide|se calcula|se expresa|representa|mide|permite|describe)\b/g;
+    while((m=rd.exec(t))){var w0=m[1].split(' ')[0].toLowerCase();if(/^(primero|segundo|tercero|cuarto|quinto|siguiente|[uú]ltimo|resto|mismo|hecho|motivo|punto|idea|pregunta|respuesta|regla|clave)$/.test(w0))continue;var o3=m.index+m[0].indexOf(m[1]);add(o3,o3+m[1].length,0,m[1])}
     var ra=/^(?:El|La)\s+(?:primero|primera|segundo|segunda|tercero|tercera|cuarto|cuarta|quinto|quinta|[uú]ltimo|[uú]ltima),\s+([^.]{3,90})\./i;m=ra.exec(t);if(m){var o2=m[0].indexOf(m[1]);add(o2,o2+m[1].length,0,m[1])}
   }
   sp.sort(function(a,b){return a.s-b.s});var out=[],last=-1;sp.forEach(function(x){if(x.s>=last){out.push(x);last=x.e}});return out}
@@ -134,7 +136,7 @@ function prosody(text,lang){
   return out.map(function(p,i){var pitch=1,rate=.95;
     if(p.em){rate=.88;pitch=1.07}
     else if(p.end===','){pitch=1.04}else if(p.end===';'||p.end===':'){pitch=1.02}else if(p.end==='?'){pitch=1.08}else if(p.end==='!'){pitch=1.05}else if(p.end==='.'||p.end==='…'){pitch=.96}
-    if(!p.em&&/\b(nunca|jam[aá]s|siempre|clave|fundamental|esencial|atenci[oó]n|ojo)\b/i.test(p.t)){rate*=.95;pitch+=.03}
+    if(!p.em&&/\b(nunca|jam[aá]s|siempre|clave|fundamental|esencial|atenci[oó]n|ojo|cuidado|lo importante|lo central|lo esencial|record[aá]|tené presente|tenga presente|fijate)\b/i.test(p.t)){rate*=.95;pitch+=.03}
     pitch+=((i*7)%5-2)*.008;var jit=.92+((i*5)%8)*.02;
     return{t:restoreTxt(p.t),pause:Math.round(p.pause*jit),p:Math.max(.5,Math.min(2,pitch)),r:rate}})}
 /* calentamiento: con el primer toque en la pagina se abre la conexion de la voz (silencioso) para que el primer play no espere */
