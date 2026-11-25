@@ -178,3 +178,12 @@ select[data-f=att]{min-width:64px}
 .lf .ct small{display:block;color:var(--mut);font-size:12px}
 .lf .btn{padding:5px 12px;font-size:13px}
 .cnt{margin-left:auto;margin-right:0;font-weight:400;font-size:12px;color:var(--mut)}
+
+/* analítico: sin scroll horizontal */
+.tw{overflow-x:auto}
+table.an{table-layout:fixed;font-size:13.5px}
+table.an th,table.an td{white-space:normal;padding:10px 8px;vertical-align:middle}
+table.an th:nth-child(1){width:27%}table.an th:nth-child(2){width:13%}table.an th:nth-child(3){width:17%}
+table.an th:nth-child(4),table.an th:nth-child(5),table.an th:nth-child(6){width:7.5%}
+table.an th:nth-child(7){width:11%}table.an th:nth-child(8){width:10.5%}
+@media(max-width:900px){table.an{table-layout:auto;min-width:760px}}
