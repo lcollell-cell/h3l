@@ -144,3 +144,8 @@ footer{max-width:1080px;margin:30px auto 0;padding:18px 24px 40px;border-top:1px
 .cx{margin:26px 0 0;font-size:11px;color:var(--bad)}
 @page cert{size:A4 landscape;margin:12mm}
 @media print{.top,footer{display:none!important}.cert{border:0;padding:0;max-width:none}}
+
+/* alineación de listas desplegables y columnas de controles */
+select{min-width:140px}
+select[data-f=att]{min-width:64px}
+.vcol{display:inline-flex;align-items:center;justify-content:flex-end;min-width:170px}

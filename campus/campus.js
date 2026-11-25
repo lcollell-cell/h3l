@@ -186,7 +186,7 @@ function tAsis(){
   if(doc&&!d.enr.length)return h+`<div class="empty">Sin alumnos inscriptos.</div>`;
   d.cls.forEach(c=>{
     h+=`<div class="row"><div class="ext">${esc(c.f.slice(8))}/${esc(c.f.slice(5,7))}</div><div class="m"><b>${esc(c.t)}</b><small>${esc(c.f)} · ${c.mod}</small></div>`;
-    if(doc)h+=`<div class="ctl"><select data-f="cmod" data-v="${c.id}"><option ${c.mod==="Virtual"?"selected":""}>Virtual</option><option ${c.mod==="Presencial"?"selected":""}>Presencial</option></select>${c.mod==="Virtual"?`<label class="t">Video visible <button class="sw" role="switch" aria-checked="${c.vis}" data-act="cvis" data-v="${c.id}"></button></label>`:`<span class="mu sm">Sin video</span>`}</div>`;
+    if(doc)h+=`<div class="ctl"><select data-f="cmod" data-v="${c.id}"><option ${c.mod==="Virtual"?"selected":""}>Virtual</option><option ${c.mod==="Presencial"?"selected":""}>Presencial</option></select><span class="vcol">${c.mod==="Virtual"?`<label class="t">Video visible <button class="sw" role="switch" aria-checked="${c.vis}" data-act="cvis" data-v="${c.id}"></button></label>`:`<span class="mu sm">Sin video</span>`}</span></div>`;
     else{const v=c.asis[ME];h+=`<div class="ctl"><span class="pill ${v==="P"?"p-ok":v==="A"?"p-off":v==="J"?"p-i":"p-sch"}">${v==="P"?"Presente":v==="A"?"Ausente":v==="J"?"Justificada":"Sin registrar"}</span>${c.mod==="Virtual"&&c.vis?`<button class="btn" data-act="cdown">Descargar video de la clase</button>`:""}</div>`}
     h+=`</div>`});
   if(doc&&d.cls.length)h+=`<h3>Registro de asistencia</h3><div class="tw"><table><tr><th>Alumno</th>${d.cls.map(c=>`<th class="n">${esc(c.f.slice(5))}</th>`).join("")}<th class="n">%</th></tr>`+
