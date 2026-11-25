@@ -2,70 +2,28 @@
  "items": [
   {
    "source": "Oil & Gas Journal",
+   "title": "EIA: US crude oil inventories up 1.1 million bbl",
+   "url": "https://www.ogj.com/general-interest/economics-markets/news/55421642/eia-us-crude-oil-inventories-up-11-million-bbl",
+   "date": "2026-11-25"
+  },
+  {
+   "source": "Oil & Gas Journal",
+   "title": "Equinor boosts Verdande stake in $65-million NCS asset swap with JAPEX",
+   "url": "https://www.ogj.com/general-interest/companies/news/55421599/equinor-boosts-verdande-stake-in-65-million-ncs-asset-swap-with-japex",
+   "date": "2026-11-25"
+  },
+  {
+   "source": "Oil & Gas Journal",
+   "title": "Alby PtX advances proposed 66,000-tpy Swedish e-SAF plant",
+   "url": "https://www.ogj.com/energy-transition/news/55421525/alby-ptx-advances-proposed-66000-tpy-swedish-e-saf-plant",
+   "date": "2026-11-25"
+  },
+  {
+   "source": "Oil & Gas Journal",
    "title": "Masirah Oil reaches TD in Block 50 well",
    "url": "https://www.ogj.com/drilling-production/news/55421358/masirah-oil-reaches-td-in-block-50-well",
    "date": "2026-11-24"
-  },
-  {
-   "source": "Oil & Gas Journal",
-   "title": "Equinor signs 18-year natural gas supply contract with German VNG",
-   "url": "https://www.ogj.com/general-interest/news/55421288/equinor-signs-18-year-natural-gas-supply-contract-with-german-vng",
-   "date": "2026-11-24"
-  },
-  {
-   "source": "Oil & Gas Journal",
-   "title": "Petrobras targets refining, renewable fuels growth in new 2027-31 business plan",
-   "url": "https://www.ogj.com/general-interest/companies/news/55421329/petrobras-targets-refining-renewable-fuels-growth-in-new-2027-31-business-plan",
-   "date": "2026-11-24"
-  },
-  {
-   "source": "Oil & Gas Journal",
-   "title": "Then & Now: The voyage that launched the LNG trade",
-   "url": "https://www.ogj.com/pipelines-transportation/lng/podcast/55420642/then-now-the-voyage-that-launched-the-lng-trade",
-   "date": "2026-11-24"
-  },
-  {
-   "source": "Infobae",
-   "title": "La petrolera argentina YPF pide incentivos para el desarrollo de un área en Vaca Muerta",
-   "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxNN2hOcER5ZzVTZ0RfYWxKUk56V08tN3FobzZqTWdFUjNxY3dkSUZVMko4QmF2WF9JRUxwbExBR1EzMDMtdUxEeC1NMnFJdUZWUnY4WGFUTUN1ZEZDeE1BZ2l0bzlZLWtQWk11VUE5dHFxV3BGcGlDam5la1h0MGVKWkV6cEhPUURVQ2M1eGpmNnZmYkEyT2lFQjJsdEhfNVp2N3RaLXNSRzFQcmhzNENIWm9kNGdBNldHY0d1eWNtMC1ITlQtUWtlNmJDN0prc2Vld1hRRUw4UdIB8gFBVV95cUxPQzItaEgyd0FiN09DTGpMSXVxQk9qZjVsSzZiSWl4alVMUGpMX21hb24tWGJuUlFhaUQ1RDJoY2VuZlMtY2Ytb2lzX3h2T0dlY01veWJ6V0kxbXRGbE1KS0dGNkpxbzhnRUlEaXNlU1RGeG5rOWZXVnV5c2xZUTBQZEFRbG5td2lTNVNqVEQ4XzZZWnluSzltQ3BDNmMzYkw4UkJLdVA2b2hCUERkdFJJTlo3MjhNaEdmbnR6V05OeGhUb1MydWxHRHFnNDdEMXdkbFhiUEU2Z1BBRXVuOXF5ZUxrOWhnTFN1NUZKT1lRT0hIZw?oc=5",
-   "date": "2026-11-24",
-   "region": "AR"
-  },
-  {
-   "source": "Bloomberg Línea",
-   "title": "Vaca Muerta: YPF presenta otro megaproyecto al RIGI por US$11.688 millones",
-   "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPaWxXOElLeHdaNGx1XzNKdU9tMjY3QWJyUE9rMUtWZVRIQnROMHhWSmE0VVZpaFZuWUFWYkNzRUkzdnBWVDVzOXlaZWVWeUprcGNDUHVNbllqcW14WmE3aVJuTHFwS2dvNnkwVGFqT3NWcmRCTUVXZExydXBEMDZZMG91QWR6amY4ejdjbnZUYVd6ajNGZ1pqOUNqM1F6SDlhcm1JRDFGRnRGQXZwdDZiRUZxSnlPOXdZWFMtVmVVSVFiVWZtYlHSAdoBQVVfeXFMT1k5X0hyQm0zdGpNZEZGTE9hWk1KbzVtc1ZjUVdXdkM0S1I1RW53YmhDVmlqeDRkdVUydEdtSmZPVmM3Q0VCZmMtRlNEaGVmeUJKcXVSaVdUcTdBd0tvOEthUzVBNlN3Rk1ubFZLUTI1VVktd3ExVkFTdDJIcTNpM1NiaGlYSFh0LVBMNHdkLThLWDFEQUVSS1NCTkZXOEZDbm9ObUN2elhkOTFRekNEWEhSZEFEeDhrbDRaRXg3V2kxSTlPMkNvRHdWQ3ZkSXllVWsyOUZzWWVwZ2c?oc=5",
-   "date": "2026-11-24",
-   "region": "AR"
-  },
-  {
-   "source": "Yahoo",
-   "title": "Precio de acciones, noticias, cotización e historial de YPF Sociedad Anónima (YPFD.BA)",
-   "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFB1MWZiV2VYcDJRczBYMkR4RzNndzR1bWp4X3pKa1hiV0VOT3JJaTV0bFJrYXVRazZuSmdiZnZIazFkVDhLUGlLaTRZT205MVMtaGZfM29B?oc=5",
-   "date": "2026-11-24",
-   "region": "AR"
-  },
-  {
-   "source": "Radio Nacional Rock",
-   "title": "YPF solicitó la adhesión al RIGI del proyecto Narambuena para desarrollar el norte de Vaca Muerta",
-   "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxQYlhGaHdoSHdFdmxweVZaR1c5clF5bkhiME9KbFV6VE83NkhjeEZJTlFQZDRPTUFiYWhFU1c4TW5zME1NS2Iyd2lRZWgzVlp5OGpZMjFRSWljRUZNQUJUUElaV3lZbjRvbUFpbWp1X2owQXVyRVhBV24wNTRROE1PV1ZNbWtQNkV4c2tSc0pwOVlqcTdFSGFrWmhteHZwWEFqeFh6SVI3RUVtRC1vcTV3M3NBYWdaT1JiWFkxRTR4RFh2Sm5lOVRDOHpjbw?oc=5",
-   "date": "2026-11-24",
-   "region": "AR"
-  },
-  {
-   "source": "Mongabay Latam",
-   "title": "Argentina: nace la reserva marina Corredor de los Cinco Grandes cercada por proyectos de petróleo y gas licuado de Vaca Muerta",
-   "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxOYm5EeEt5SUVGTnhMS0JLSEwyRWpzVnpzbEh6SGh4OFBId2FObmhXUVlQUWtuY0V2T3AyRndtNlBEQ194VnNEUmpLMV9SSUh0M1dpUWlWb0xIS2k0N1YxTU1maFN3WG9ELXcwXzBKQnM1cW5QX3hOcVBDN25mQUJyREU3UXZQVF9kc01pSkpKWm5SeUhoX0lsWkQ4WUUtTlI4SGhxSS0tUHZsY2R6OWIwX3Ruejg4eldQS0QtaWdMNE00eVRTc0JXUTAzTUNabHkyMGc?oc=5",
-   "date": "2026-11-24",
-   "region": "AR"
-  },
-  {
-   "source": "Ambito",
-   "title": "Argentina y Chile buscan ampliar su integración energética: Vaca Muerta, electricidad y fusión nuclear",
-   "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxQQXlpLVdfcWlZRTdJbU5lbWRIenRYRGM0NXJDMFpzWjh1RGc4Wm1ESkgzanFwNkJDVWVqNzE2aE5WN1B4S0FZZkZGS0Z2Z3FoX0FYLTVBMHZuWURDa3pWRVNGZVRUMGJ1Qm5rMi16bnlFa3VFOThUeUNuaEZMT3Vod01ZOUZ3eEkwNHpZdTVUMlJYZVFKMjdXejFkdTQ5Ujl6ZWVneHY2STZnam5ILXBkUHFIXzd0Sk9xWEx1MnFtRGhlU3NSTUlCV1ZoRVo1a0hFQXdsbUE2aw?oc=5",
-   "date": "2026-11-24",
-   "region": "AR"
   }
  ],
- "checked": "2026-11-24T21:17Z"
+ "checked": "2026-11-25T20:30Z"
 }
