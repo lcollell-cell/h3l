@@ -88,6 +88,7 @@ function menuList(){
 function page(){
   if(ST.page==="curso")return curso();
   if(ST.page==="perfil")return perfil();
+  if(ST.page==="cert")return certPage();
   if(ST.page==="calif")return califIndex();
   return inicio();
 }
@@ -206,7 +207,7 @@ function tCal(){
       <tr><td><b>Promedio de TPs</b></td><td class="n"><b>${f1(tpAvg(id,ME))}</b></td></tr>
       <tr><td>Examen</td><td class="n">${f1(gr.ex)}</td></tr>
       <tr><td><b>Nota final</b></td><td class="n"><b>${f1(gr.fin)}</b></td></tr></table></div>
-      <p style="margin:10px 0 0">Condición: <span class="pill ${k}">${c}</span></p></div>
+      <p style="margin:10px 0 0">Condición: <span class="pill ${k}">${c}</span> ${c==="Aprobado"?`<button class="btn g" data-act="cert" data-v="${id}" style="margin-left:8px;padding:4px 12px;font-size:13px">Ver certificado de aprobación</button>`:""}</p></div>
       <p class="mu sm">Todas sus calificaciones figuran en <button class="btn g" data-act="go" data-v="perfil" style="padding:3px 10px;font-size:13px">Mi perfil y analítico</button></p>`;
   }
   if(!d.enr.length)return `<div class="empty">Este curso no tiene alumnos inscriptos en la versión de prueba.<p><button class="btn" data-act="enroll">Inscribir alumnos de ejemplo</button></p></div>`;
@@ -245,12 +246,32 @@ function perfil(){
    <div class="dl"><div><span>Legajo</span>${me.leg}</div><div><span>Correo (ejemplo)</span>${me.mail}</div><div><span>Ingreso</span>${me.ing}</div><div><span>Programa</span>Capacitación H3L</div></div></div></div>
   <div class="kpis"><div class="kpi"><b>${ap}</b><small>cursos aprobados</small></div><div class="kpi"><b>${enc}</b><small>en curso</small></div><div class="kpi"><b>${f1(prom)}</b><small>promedio general</small></div></div>
   <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><h2 style="margin:10px 0">Analítico de calificaciones</h2><div class="sp" style="flex:1"></div><span class="noprint"><button class="btn g" data-act="csvp">Descargar CSV</button> <button class="btn g" data-act="print">Imprimir</button></span></div>
-  <div class="tw"><table><tr><th>Curso</th><th>Período</th><th>TPs</th><th class="n">Prom. TPs</th><th class="n">Examen</th><th class="n">Nota final</th><th>Condición</th></tr>`+
+  <div class="tw"><table><tr><th>Curso</th><th>Período</th><th>TPs</th><th class="n">Prom. TPs</th><th class="n">Examen</th><th class="n">Nota final</th><th>Condición</th><th class="noprint">Certificado</th></tr>`+
   rows.map(r=>{const gr=r.d.g[ME]||{tp:{}},[c,k]=cond(r.id,ME);
-   return `<tr><td style="white-space:normal;min-width:220px"><b>${esc(r.m.title)}</b></td><td>${esc(r.d.per)}</td><td>${r.d.tps.map(t=>esc(t)+": "+f1((gr.tp||{})[t])).join(" · ")}</td><td class="n">${f1(tpAvg(r.id,ME))}</td><td class="n">${f1(gr.ex)}</td><td class="n"><b>${f1(gr.fin)}</b></td><td><span class="pill ${k}">${c}</span></td></tr>`}).join("")+`</table></div>
+   return `<tr><td style="white-space:normal;min-width:220px"><b>${esc(r.m.title)}</b></td><td>${esc(r.d.per)}</td><td>${r.d.tps.map(t=>esc(t)+": "+f1((gr.tp||{})[t])).join(" · ")}</td><td class="n">${f1(tpAvg(r.id,ME))}</td><td class="n">${f1(gr.ex)}</td><td class="n"><b>${f1(gr.fin)}</b></td><td><span class="pill ${k}">${c}</span></td><td class="noprint">${c==="Aprobado"?`<button class="btn g" data-act="cert" data-v="${r.id}" style="padding:4px 12px;font-size:13px">Ver certificado</button>`:"—"}</td></tr>`}).join("")+`</table></div>
   <p class="mu sm">Escala 0–10; aprobación desde ${PASS}. Documento de ejemplo: no tiene validez académica ni certifica estudios.</p>`;
 }
 
+/* certificado de aprobación */
+function certCode(id){let h=0;const t="H3L-0001|"+id;for(let i=0;i<t.length;i++)h=(h*31+t.charCodeAt(i))>>>0;return"H3L-EJ-"+h.toString(36).toUpperCase().padStart(7,"0")}
+function fecha(iso){const[a,m,d]=iso.split("-");const M=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];return +d+" de "+M[+m-1]+" de "+a}
+function certPage(){
+  const id=ST.cid,m=meta(id),d=CD(id),gr=d.g[ME]||{},me=STUDENTS[0];
+  if(!m||gr.fin==null||gr.fin<PASS)return `<div class="empty">El certificado se emite solo para cursos aprobados.<p><button class="btn g" data-act="go" data-v="perfil">Volver al perfil</button></p></div>`;
+  return `<div class="noprint" style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap"><button class="btn g" data-act="go" data-v="perfil">← Volver al analítico</button><button class="btn" data-act="print">Imprimir / Guardar como PDF</button></div>
+  <section class="cert" aria-label="Certificado de aprobación"><div class="cin">
+   <img src="../LOGO_H3L.png" alt="H3L Global Energy" class="clogo">
+   <div class="ck">Campus Virtual H3L</div>
+   <h1>Certificado de aprobación</h1>
+   <p class="cl1">H3L Global Energy certifica que</p>
+   <p class="cn">${esc(me.n)}</p><p class="cs">Legajo ${esc(me.leg)}</p>
+   <p class="cl1">aprobó el curso</p>
+   <p class="cc2">${esc(m.title)}</p>
+   <p class="cs">${esc(m.tag)} · Período ${esc(d.per)} · Nota final ${f1(gr.fin)} (escala 0–10, aprobación desde ${PASS})</p>
+   <div class="cf"><div><div class="line"></div>Dirección académica<br>H3L Global Energy</div><div class="cq"><span>Código</span><b>${certCode(id)}</b><span>Emitido el ${fecha(TODAY)}</span></div></div>
+   <p class="cx">Documento de ejemplo emitido por la versión de prueba del campus. No tiene validez académica ni certifica estudios.</p>
+  </div></section>`;
+}
 /* exportar */
 function dl(name,text){try{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["﻿"+text],{type:"text/csv;charset=utf-8"}));a.download=name;document.body.appendChild(a);a.click();a.remove()}catch(e){}toast("Descarga solicitada: "+name)}
 const csvq=v=>'"'+String(v??"").replace(/"/g,'""')+'"';
@@ -281,6 +302,7 @@ document.addEventListener("click",e=>{
    case"csv":{const h=["Alumno",...d.tps,"Prom. TPs","Examen","Nota final","Condición"];const r=d.enr.map(s=>{const gr=d.g[s]||{tp:{}};return [stName(s),...tpVals(ST.cid,s).map(x=>x??""),tpAvg(ST.cid,s)==null?"":f1(tpAvg(ST.cid,s)),gr.ex??"",gr.fin??"",cond(ST.cid,s)[0]]});dl("calificaciones_"+ST.cid+".csv",[h,...r].map(x=>x.map(csvq).join(";")).join("\n"));return}
    case"csvp":{const h=["Curso","Período","TPs","Prom. TPs","Examen","Nota final","Condición"];const r=Object.keys(DB.c).filter(id=>meta(id)&&DB.c[id].enr.includes(ME)).map(id=>{const gr=CD(id).g[ME]||{tp:{}};return [meta(id).title,CD(id).per,CD(id).tps.map(t=>t+": "+f1((gr.tp||{})[t])).join(" | "),f1(tpAvg(id,ME)),f1(gr.ex),f1(gr.fin),cond(id,ME)[0]]});dl("analitico_H3L-0001.csv",[h,...r].map(x=>x.map(csvq).join(";")).join("\n"));return}
    case"print":window.print();return;
+   case"cert":ST.cid=v;ST.page="cert";window.scrollTo(0,0);break;
   }
   render();
 });
