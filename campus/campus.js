@@ -44,7 +44,7 @@ const CD=id=>(DB.c[id]=Object.assign(blank(),DB.c[id]||{}));
 
 /* ---------- catálogo (mismo de Cursos H3L) ---------- */
 let CAT=null; const PROG={};
-const ST={role:"alumno",page:"inicio",cid:null,tab:"prog",menu:false,q:""};
+const ST={role:"alumno",page:"inicio",cid:null,tab:"prog",menu:false,q:"",hq:"",f:""};
 const meta=id=>CAT.courses.find(c=>c.id===id);
 const secOf=id=>CAT.sections.find(s=>s.courses.includes(id));
 const norm=s=>String(s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
@@ -76,11 +76,13 @@ function nav(){
    ${items.slice(1).map(([k,l])=>`<button data-act="go" data-v="${k}" ${p===k&&!ST.menu?'aria-current="page"':""}>${l}</button>`).join("")}
   </div></nav>`;
 }
+const LV={b:"Básico",i:"Intermedio",a:"Avanzado"};
+const lvTxt=m=>(m.levels||[]).map(l=>LV[l]).filter(Boolean).join(" – ");
 function menuList(){
   const q=norm(ST.q.trim());
   const out=CAT.sections.map(s=>{const l=s.courses.map(meta).filter(m=>m&&(!q||norm(m.title+" "+m.tag).includes(q)));
     if(!l.length)return"";
-    return `<details ${q?"open":""}><summary>${esc(s.title)} <span class="cnt">${l.length}</span></summary>${l.map(m=>`<button class="cl" role="menuitem" data-act="curso" data-v="${m.id}"><i class="dot" style="background:${esc(m.color)}"></i>${esc(m.title)}</button>`).join("")}</details>`}).join("");
+    return `<div class="mh">${esc(s.title)}</div>${l.map(m=>`<button class="cl" role="menuitem" data-act="curso" data-v="${m.id}"><i class="dot" style="background:${esc(m.color)}"></i><span class="ct">${esc(m.title)}</span><span class="lv">${esc(lvTxt(m))}</span></button>`).join("")}`}).join("");
   return out||`<p class="mu sm" style="padding:8px">Sin resultados.</p>`;
 }
 function page(){
@@ -99,13 +101,24 @@ function courseCard(id){
   else sub=`<small>${d.enr.length} alumnos · ${esc(d.per)}</small>`;
   return `<button class="cc" style="--c:${esc(m.color)}" data-act="curso" data-v="${id}"><b>${esc(m.title)}</b>${sub}</button>`;
 }
+function catalog(){
+  const q=norm(ST.hq.trim());
+  const out=CAT.sections.filter(x=>!ST.f||x.id===ST.f).map(x=>{
+    const l=x.courses.map(meta).filter(m=>m&&(!q||norm(m.title+" "+m.short+" "+m.tag).includes(q)));
+    if(!l.length)return"";
+    return `<h3 class="sech">${esc(x.title)} <span class="cnt">${l.length} ${l.length===1?"curso":"cursos"}</span></h3><div class="grid">${l.map(m=>{const mine=(DB.c[m.id]&&(DB.c[m.id].enr||[]).includes(ME));
+      return `<button class="cc" style="--c:${esc(m.color)}" data-act="curso" data-v="${m.id}"><span class="tg">${esc(m.tag)}${mine&&ST.role==="alumno"?' · <b class="in">Inscripto/a</b>':""}</span><b>${esc(m.title)}</b><small class="sh">${esc(m.short)}</small><small class="lvl">${esc(lvTxt(m))}</small></button>`}).join("")}</div>`}).join("");
+  return out||`<div class="empty">Ningún curso coincide con la búsqueda.</div>`;
+}
 function inicio(){
   const mine=myCourses();
   return `<h1>${ST.role==="alumno"?"Mis cursos":"Cursos a mi cargo"}</h1>
   <p class="mu">${ST.role==="alumno"?"Cursos en los que está inscripto/a.":"Cursos con alumnos inscriptos."}</p>
   ${mine.length?`<div class="grid">${mine.map(courseCard).join("")}</div>`:`<div class="empty">Todavía no hay cursos para mostrar.</div>`}
-  <h2>Cursos H3L</h2><p class="mu sm" style="margin-top:-6px">Catálogo completo, organizado por área. Abra un curso para ver su programa y materiales.</p>
-  <div class="tree">${CAT.sections.map(s=>`<details><summary>${esc(s.title)} <span class="cnt">${s.courses.length} cursos</span></summary><div class="d">${esc(s.desc)}</div>${s.courses.map(meta).filter(Boolean).map(m=>`<button class="cl" data-act="curso" data-v="${m.id}"><i class="dot" style="background:${esc(m.color)}"></i>${esc(m.title)}</button>`).join("")}</details>`).join("")}</div>
+  <h2>Cursos H3L</h2><p class="mu sm" style="margin-top:-6px">${CAT.courses.length} cursos organizados por área. Elija uno para ver su programa y materiales.</p>
+  <div class="bar"><input type="search" id="hq" placeholder="Buscar por nombre o tema…" value="${esc(ST.hq)}" autocomplete="off"></div>
+  <div class="chips" role="group" aria-label="Filtrar por área"><button class="chip" data-act="fsec" data-v="" aria-pressed="${ST.f===""}">Todas</button>${CAT.sections.map(x=>`<button class="chip" data-act="fsec" data-v="${x.id}" aria-pressed="${ST.f===x.id}">${esc(x.title)}</button>`).join("")}</div>
+  <div id="cg">${catalog()}</div>
   <h2>Clase piloto</h2><div class="card"><b>Ingeniería de Reservorios · Balance de materiales</b><p class="mu sm" style="margin:4px 0 10px">Modelo piloto con video de la clase, actividad guiada, evaluación y asistencia.</p><a class="btn g" style="text-decoration:none;display:inline-block" href="piloto-reservorios/">Abrir clase piloto</a></div>`;
 }
 
@@ -253,6 +266,7 @@ document.addEventListener("click",e=>{
    case"menu":ST.menu=!ST.menu;break;
    case"curso":ST.cid=v;ST.page="curso";ST.tab=b.dataset.tab||"prog";ST.menu=false;ST.q="";window.scrollTo(0,0);break;
    case"tab":ST.tab=v;break;
+   case"fsec":ST.f=v;break;
    case"mvis":{const m=d.mat.find(x=>x.id==v);m.vis=!m.vis;if(m.vis)m.desde="";save();break}
    case"mdel":d.mat=d.mat.filter(x=>x.id!=v);save();break;
    case"mopen":toast("En la versión definitiva se abre el visor del archivo.");return;
@@ -285,7 +299,8 @@ document.addEventListener("change",e=>{
   }
   render();
 });
-document.addEventListener("input",e=>{if(e.target.id==="mq"){ST.q=e.target.value;$("#ml").innerHTML=menuList()}});
+document.addEventListener("input",e=>{if(e.target.id==="mq"){ST.q=e.target.value;$("#ml").innerHTML=menuList()}
+  if(e.target.id==="hq"){ST.hq=e.target.value;$("#cg").innerHTML=catalog()}});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&ST.menu){ST.menu=false;render()}});
 ["dragover","dragenter"].forEach(ev=>document.addEventListener(ev,e=>{const z=e.target.closest&&e.target.closest("#drop");if(z){e.preventDefault();z.classList.add("over")}}));
 document.addEventListener("dragleave",e=>{const z=e.target.closest&&e.target.closest("#drop");if(z)z.classList.remove("over")});
