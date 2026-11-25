@@ -154,3 +154,27 @@ select[data-f=att]{min-width:64px}
 .sub{flex-basis:100%;border-top:1px solid var(--line);margin-top:4px;padding-top:10px}
 .subr{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin-bottom:8px}
 .subr input[type=url]{min-width:240px}
+
+/* búsqueda y árbol de cursos */
+.bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.bar input{flex:1;min-width:240px;max-width:520px}
+.row.res .m small{display:block}
+.row.res .sh2{margin-top:2px;color:var(--mut)}
+.ov{position:fixed;inset:0;background:rgba(27,41,67,.55);z-index:40;display:flex;align-items:flex-start;justify-content:center;padding:5vh 16px;overflow:auto}
+.dlg{background:#fff;border-radius:10px;width:min(760px,100%);max-height:88vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.35);border-top:4px solid var(--green)}
+.dh{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;padding:16px 20px;border-bottom:1px solid var(--line)}
+.dh b{display:block;font:600 21px var(--serif)}
+.db{overflow:auto;padding:8px 20px 18px}
+.tree2 details{border-bottom:1px solid var(--line)}
+.tree2 summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px}
+.tree2 summary::-webkit-details-marker{display:none}
+.tree2 summary::before{content:"▸";color:var(--mut);font-size:12px;transition:.15s}
+.tree2 details[open]>summary::before{transform:rotate(90deg)}
+.g1{font:600 18px var(--serif);padding:12px 2px}
+.g2{font-weight:600;font-size:14px;padding:9px 2px 9px 18px}
+.tree2 .sb{border-bottom:0}
+.lf{display:flex;align-items:center;gap:10px;padding:7px 4px 7px 40px;flex-wrap:wrap}
+.lf .ct{flex:1;min-width:200px;line-height:1.35}
+.lf .ct small{display:block;color:var(--mut);font-size:12px}
+.lf .btn{padding:5px 12px;font-size:13px}
+.cnt{margin-left:auto;margin-right:0;font-weight:400;font-size:12px;color:var(--mut)}

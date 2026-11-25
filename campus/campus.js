@@ -47,13 +47,14 @@ function eorSeed(){
 }
 let DB; try{DB=JSON.parse(localStorage.getItem(KEY));}catch(e){DB=null}
 if(!DB||DB.v!==2||!DB.c)DB=seed();
+if(!DB.sub)DB.sub={free:["geo"]};
 if(!DB.c.eor){DB.c.eor=eorSeed();try{localStorage.setItem(KEY,JSON.stringify(DB))}catch(e){}}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(DB))}catch(e){}}
 const CD=id=>(DB.c[id]=Object.assign(blank(),DB.c[id]||{}));
 
 /* ---------- catálogo (mismo de Cursos H3L) ---------- */
 let CAT=null; const PROG={};
-const ST={role:"alumno",page:"inicio",cid:null,tab:"prog",menu:false,q:"",hq:"",f:""};
+const ST={role:"alumno",page:"inicio",cid:null,tab:"prog",menu:false,q:"",hq:"",modal:false};
 const meta=id=>CAT.courses.find(c=>c.id===id);
 const secOf=id=>CAT.sections.find(s=>s.courses.includes(id));
 const norm=s=>String(s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
@@ -74,7 +75,7 @@ function render(){
   <header class="top"><div class="in"><img src="../LOGO_H3L.png" alt="H3L Global Energy"><div class="ttl"><b>Campus Virtual</b><small>Oil &amp; Gas · Transición energética · Ciencia de datos</small></div><div class="sp"></div>
    <div class="seg" role="group" aria-label="Perfil de uso"><button data-act="role" data-v="alumno" aria-pressed="${ST.role==="alumno"}">Alumno</button><button data-act="role" data-v="docente" aria-pressed="${ST.role==="docente"}">Docente</button></div>
    <div class="who"><b>${ST.role==="docente"?"Prof. Leandro Collell":"Alumno/a de ejemplo"}</b>${ST.role==="docente"?"Docente":"Legajo H3L-0001"}</div></div></header>
-  ${nav()}<main id="pg">${CAT?page():`<div class="empty">Cargando cursos…</div>`}</main>
+  ${nav()}<main id="pg">${CAT?page():`<div class="empty">Cargando cursos…</div>`}</main>${ST.modal&&CAT?treeModal():""}
   <footer>Campus Virtual H3L · desarrollado por H3L Global Energy (autor: Leandro Collell) · © 2026 H3L Global Energy S.R.L. · Escala de calificaciones 0–10, aprobación desde ${PASS}.</footer>`;
 }
 function nav(){
@@ -111,24 +112,53 @@ function courseCard(id){
   else sub=`<small>${d.enr.length} alumnos · ${esc(d.per)}</small>`;
   return `<button class="cc" style="--c:${esc(m.color)}" data-act="curso" data-v="${id}"><b>${esc(m.title)}</b>${sub}</button>`;
 }
-function catalog(){
+/* agrupación del árbol "Ver cursos" (editable) */
+const TREE=[
+ {g:"Upstream",sub:[
+  {s:"Geociencias",c:["geo"]},
+  {s:"Reservas",c:["res","rpx","pr2","frr"]},
+  {s:"Reservorios",c:["pvt","gas","pta","sim","wf","eor"]},
+  {s:"Perforación y producción",c:["per","nod","frac","rta","fac"]},
+  {s:"Economía y comercialización",c:["eco","com"]},
+  {s:"Midstream",c:["mid"]},
+  {s:"Gestión de proyectos (Jira y Primavera P6)",c:["jkb","jsc","jbg","jcl","p6p","p6r","p6c","p6k"]}]},
+ {g:"Transición energética",sub:[{s:"Emisiones y metano",c:["gei"]},{s:"Captura y almacenamiento de CO₂",c:["alm"]}]},
+ {g:"Ciencia de datos",sub:[{s:"Ciencia de datos e IA",c:["dat"]}]},
+ {g:"HSE",sub:[{s:"Seguridad de procesos y control de pozos",c:["hse","spc"]}]}];
+const FREE_MAX=2, SUB_URL="../cursos/suscripcion.html";
+function treeOf(){const out=TREE.map(g=>({g:g.g,sub:g.sub.map(x=>({s:x.s,c:x.c.filter(id=>meta(id))}))}));
+  const seen=new Set(TREE.flatMap(g=>g.sub.flatMap(x=>x.c)));const rest=CAT.courses.map(c=>c.id).filter(id=>!seen.has(id));
+  if(rest.length)out.push({g:"Otros",sub:[{s:"Otros cursos",c:rest}]});return out}
+function groupOf(id){for(const g of treeOf())for(const x of g.sub)if(x.c.includes(id))return g.g+" "+x.s;return""}
+const enrolled=id=>!!(DB.c[id]&&(DB.c[id].enr||[]).includes(ME));
+const freeLeft=()=>Math.max(0,FREE_MAX-DB.sub.free.length);
+function addBtn(m){
+  if(ST.role==="docente")return `<button class="btn g" data-act="curso" data-v="${m.id}">Ver curso</button>`;
+  if(enrolled(m.id))return `<span class="pill p-ok">Inscripto/a</span> <button class="btn g" data-act="curso" data-v="${m.id}">Ver curso</button>`;
+  if(freeLeft()>0)return `<button class="btn" data-act="addfree" data-v="${m.id}"><span class="al">Añadir curso</span> · Free</button>`;
+  return `<a class="btn" style="text-decoration:none;display:inline-block" href="${SUB_URL}" target="_blank" rel="noopener noreferrer"><span class="al">Añadir curso</span> · Acceda con suscripción</a>`;
+}
+function results(){
   const q=norm(ST.hq.trim());
-  const out=CAT.sections.filter(x=>!ST.f||x.id===ST.f).map(x=>{
-    const l=x.courses.map(meta).filter(m=>m&&(!q||norm(m.title+" "+m.short+" "+m.tag).includes(q)));
-    if(!l.length)return"";
-    return `<h3 class="sech">${esc(x.title)} <span class="cnt">${l.length} ${l.length===1?"curso":"cursos"}</span></h3><div class="grid">${l.map(m=>{const mine=(DB.c[m.id]&&(DB.c[m.id].enr||[]).includes(ME));
-      return `<button class="cc" style="--c:${esc(m.color)}" data-act="curso" data-v="${m.id}"><span class="tg">${esc(m.tag)}${mine&&ST.role==="alumno"?' · <span class="in">Inscripto/a</span>':""}</span><b>${esc(m.title)}</b><small class="sh">${esc(m.short)}</small><small class="lvl">${esc(lvTxt(m))}</small></button>`}).join("")}</div>`}).join("");
-  return out||`<div class="empty">Ningún curso coincide con la búsqueda.</div>`;
+  if(!q)return"";
+  const l=CAT.courses.filter(m=>norm(m.title+" "+m.short+" "+m.tag+" "+groupOf(m.id)).includes(q));
+  if(!l.length)return `<div class="empty">Ningún curso coincide con “${esc(ST.hq.trim())}”.</div>`;
+  return `<p class="mu sm" style="margin:8px 0">${l.length} ${l.length===1?"resultado":"resultados"}</p>`+l.map(m=>`<div class="row res" style="border-left:4px solid ${esc(m.color)}"><div class="m"><b>${esc(m.title)}</b><small>${esc(m.tag)} · ${esc(lvTxt(m))}</small><small class="sh2">${esc(m.short)}</small></div><div class="ctl">${addBtn(m)}</div></div>`).join("");
+}
+function treeModal(){
+  return `<div class="ov" data-act="closemodal"><div class="dlg" role="dialog" aria-modal="true" aria-labelledby="dt" data-stop="1">
+   <div class="dh"><div><b id="dt">Cursos H3L</b><small class="mu">Agrupados por área y especialidad</small></div><div class="ctl"><button class="btn g" data-act="treeall" data-v="1">Expandir todo</button><button class="btn g" data-act="treeall" data-v="0">Contraer todo</button><button class="btn g" data-act="closemodal" aria-label="Cerrar">✕</button></div></div>
+   <div class="db tree2">${treeOf().map((g,i)=>`<details ${i===0?"open":""}><summary class="g1">${esc(g.g)} <span class="cnt">${(n=>n+" "+(n===1?"curso":"cursos"))(g.sub.reduce((a,x)=>a+x.c.length,0))}</span></summary>${g.sub.map(x=>`<details class="sb"><summary class="g2">${esc(x.s)} <span class="cnt">${x.c.length}</span></summary>${x.c.map(id=>{const m=meta(id);return `<div class="lf"><i class="dot" style="background:${esc(m.color)}"></i><span class="ct">${esc(m.title)}<small>${esc(lvTxt(m))}</small></span><button class="btn g" data-act="curso" data-v="${id}">Ver curso</button></div>`}).join("")}</details>`).join("")}</details>`).join("")}</div></div></div>`;
 }
 function inicio(){
   const mine=myCourses();
   return `<h1>${ST.role==="alumno"?"Mis cursos":"Cursos a mi cargo"}</h1>
   <p class="mu">${ST.role==="alumno"?"Cursos en los que está inscripto/a.":"Cursos con alumnos inscriptos."}</p>
   ${mine.length?`<div class="grid">${mine.map(courseCard).join("")}</div>`:`<div class="empty">Todavía no hay cursos para mostrar.</div>`}
-  <h2>Cursos H3L</h2><p class="mu sm" style="margin-top:-6px">${CAT.courses.length} cursos organizados por área. Elija uno para ver su programa y materiales.</p>
-  <div class="bar"><input type="search" id="hq" placeholder="Buscar por nombre o tema…" value="${esc(ST.hq)}" autocomplete="off"></div>
-  <div class="chips" role="group" aria-label="Filtrar por área"><button class="chip" data-act="fsec" data-v="" aria-pressed="${ST.f===""}">Todas</button>${CAT.sections.map(x=>`<button class="chip" data-act="fsec" data-v="${x.id}" aria-pressed="${ST.f===x.id}">${esc(x.title)}</button>`).join("")}</div>
-  <div id="cg">${catalog()}</div>
+  <h2>Suscríbase a cursos H3L</h2>
+  <p class="mu sm" style="margin-top:-6px">${ST.role==="alumno"?`Tiene <b>${freeLeft()}</b> de ${FREE_MAX} cursos gratis disponibles; los demás se habilitan con suscripción. `:""}Busque por nombre o tema, o explore todos los cursos.</p>
+  <div class="bar"><input type="search" id="hq" placeholder="Buscar curso por palabra…" value="${esc(ST.hq)}" autocomplete="off"> <button class="btn g" data-act="openmodal">Ver cursos</button></div>
+  <div id="cg">${results()}</div>
   <h2>Clase piloto</h2><div class="card"><b>Ingeniería de Reservorios · Balance de materiales</b><p class="mu sm" style="margin:4px 0 10px">Modelo piloto con video de la clase, actividad guiada, evaluación y asistencia.</p><a class="btn g" style="text-decoration:none;display:inline-block" href="piloto-reservorios/">Abrir clase piloto</a></div>`;
 }
 
@@ -334,9 +364,12 @@ document.addEventListener("click",e=>{
    case"role":ST.role=v;ST.page=ST.page==="perfil"&&v==="docente"?"inicio":ST.page==="calif"&&v==="alumno"?"inicio":ST.page;ST.menu=false;break;
    case"go":ST.page=v;ST.menu=false;break;
    case"menu":ST.menu=!ST.menu;break;
-   case"curso":ST.cid=v;ST.page="curso";ST.tab=b.dataset.tab||"prog";ST.menu=false;ST.q="";window.scrollTo(0,0);break;
+   case"curso":ST.modal=false;ST.cid=v;ST.page="curso";ST.tab=b.dataset.tab||"prog";ST.menu=false;ST.q="";window.scrollTo(0,0);break;
    case"tab":ST.tab=v;break;
-   case"fsec":ST.f=v;break;
+   case"openmodal":ST.modal=true;break;
+   case"closemodal":if(e.target.closest("[data-stop]")&&b.classList.contains("ov"))return;ST.modal=false;break;
+   case"treeall":$$(".tree2 details").forEach(x=>{x.open=v==="1"});return;
+   case"addfree":{if(freeLeft()<1){render();return}const dd=CD(v);if(!dd.enr.includes(ME))dd.enr.push(ME);DB.sub.free.push(v);save();toast("Curso añadido a Mis cursos");break}
    case"mvis":{const m=d.mat.find(x=>x.id==v);m.vis=!m.vis;if(m.vis)m.desde="";save();break}
    case"mdel":d.mat=d.mat.filter(x=>x.id!=v);save();break;
    case"mopen":toast("En la versión definitiva se abre el visor del archivo.");return;
@@ -376,8 +409,8 @@ document.addEventListener("change",e=>{
   render();
 });
 document.addEventListener("input",e=>{if(e.target.id==="mq"){ST.q=e.target.value;$("#ml").innerHTML=menuList()}
-  if(e.target.id==="hq"){ST.hq=e.target.value;$("#cg").innerHTML=catalog()}});
-document.addEventListener("keydown",e=>{if(e.key==="Escape"&&ST.menu){ST.menu=false;render()}});
+  if(e.target.id==="hq"){ST.hq=e.target.value;$("#cg").innerHTML=results()}});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&(ST.menu||ST.modal)){ST.menu=false;ST.modal=false;render()}});
 ["dragover","dragenter"].forEach(ev=>document.addEventListener(ev,e=>{const z=e.target.closest&&e.target.closest("#drop");if(z){e.preventDefault();z.classList.add("over")}}));
 document.addEventListener("dragleave",e=>{const z=e.target.closest&&e.target.closest("#drop");if(z)z.classList.remove("over")});
 document.addEventListener("drop",e=>{const z=e.target.closest&&e.target.closest("#drop");if(z){e.preventDefault();addFiles(e.dataTransfer.files)}});
