@@ -107,7 +107,7 @@ function catalog(){
     const l=x.courses.map(meta).filter(m=>m&&(!q||norm(m.title+" "+m.short+" "+m.tag).includes(q)));
     if(!l.length)return"";
     return `<h3 class="sech">${esc(x.title)} <span class="cnt">${l.length} ${l.length===1?"curso":"cursos"}</span></h3><div class="grid">${l.map(m=>{const mine=(DB.c[m.id]&&(DB.c[m.id].enr||[]).includes(ME));
-      return `<button class="cc" style="--c:${esc(m.color)}" data-act="curso" data-v="${m.id}"><span class="tg">${esc(m.tag)}${mine&&ST.role==="alumno"?' · <b class="in">Inscripto/a</b>':""}</span><b>${esc(m.title)}</b><small class="sh">${esc(m.short)}</small><small class="lvl">${esc(lvTxt(m))}</small></button>`}).join("")}</div>`}).join("");
+      return `<button class="cc" style="--c:${esc(m.color)}" data-act="curso" data-v="${m.id}"><span class="tg">${esc(m.tag)}${mine&&ST.role==="alumno"?' · <span class="in">Inscripto/a</span>':""}</span><b>${esc(m.title)}</b><small class="sh">${esc(m.short)}</small><small class="lvl">${esc(lvTxt(m))}</small></button>`}).join("")}</div>`}).join("");
   return out||`<div class="empty">Ningún curso coincide con la búsqueda.</div>`;
 }
 function inicio(){
