@@ -673,3 +673,20 @@ body.game .gtop select{width:auto;flex:none;min-width:64px}
 .chead h1,.chead p{position:absolute!important;width:1px;height:1px;margin:-1px!important;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
 .how[hidden],.sect[hidden]{display:none!important}
+
+/* portada: todo el contenido en una sola pantalla */
+body.land{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}
+body.land main{flex:1;display:flex;flex-direction:column}
+body.land .hero{flex:1;display:flex;align-items:center;padding:34px 0}
+body.land .hero .wrap{width:100%}
+body.land .hero h1{max-width:26ch;margin:14px 0 10px}
+body.land .hero .stats{margin-top:20px}
+body.land .hero .how.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:26px 0 0;counter-reset:st}
+body.land .hero .how.steps div{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-top:3px solid var(--green2);border-radius:10px;padding:14px 16px}
+body.land .hero .how.steps b{color:#fff;font-size:14.5px;margin-bottom:4px}
+body.land .hero .how.steps p{color:rgba(255,255,255,.78);font-size:12.5px;line-height:1.45;max-width:none}
+body.land .hero .acts{margin-top:24px}
+body.land .foot{margin:0;padding:14px 0;font-size:11.5px;line-height:1.45}
+body.land .foot .wrap{gap:6px 20px}
+@media(max-width:900px){body.land .hero .how.steps{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){body.land .hero .how.steps{grid-template-columns:1fr}}
