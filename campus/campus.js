@@ -35,10 +35,19 @@ function seed(){
  C.geo=Object.assign(blank(),{per:"2025 · 2.º cuatrimestre",enr:["s1","s2"],tps:["TP1","TP2","TP3"],
   g:{s1:g({TP1:9,TP2:9,TP3:10},9,9),s2:g({TP1:7,TP2:8,TP3:7},7,7)}});
  C.wf=Object.assign(blank(),{per:"2025 · 1.er cuatrimestre",enr:["s1"],tps:["TP1","TP2"],g:{s1:g({TP1:7,TP2:8},7,7)}});
+ C.eor=eorSeed();
  return{v:2,c:C};
+}
+function eorSeed(){
+ return Object.assign(blank(),{per:"2026 · 2.º cuatrimestre",enr:["s1","s2","s3","s4"],tps:["TP1","TP2"],nid:10,
+  mat:[{id:1,mod:"Módulo 3 · Térmicos, screening y piloto",t:"Barrido en capas y screening EOR (Excel)",ext:"XLS",file:"H3L_EOR_Barrido_en_Capas_y_Screening.xlsx",kb:106,vis:true,desde:"",dl:true}],
+  cls:[{id:1,f:"2026-11-20",t:"Clase 1 · Por qué queda petróleo",mod:"Virtual",video:true,vis:true,link:"",asis:{s1:"P",s2:"P",s3:"P",s4:"A"}},
+       {id:2,f:"2026-11-27",t:"Clase 2 · Métodos químicos y de gas",mod:"Presencial",video:false,vis:false,link:"",asis:{}}],
+  g:{s1:g({TP1:8,TP2:null},null,null),s2:g({TP1:7,TP2:8},null,null),s3:g({TP1:9,TP2:null},null,null),s4:g({TP1:6,TP2:null},null,null)}});
 }
 let DB; try{DB=JSON.parse(localStorage.getItem(KEY));}catch(e){DB=null}
 if(!DB||DB.v!==2||!DB.c)DB=seed();
+if(!DB.c.eor){DB.c.eor=eorSeed();try{localStorage.setItem(KEY,JSON.stringify(DB))}catch(e){}}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(DB))}catch(e){}}
 const CD=id=>(DB.c[id]=Object.assign(blank(),DB.c[id]||{}));
 
