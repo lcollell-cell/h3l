@@ -691,3 +691,13 @@ body.land .foot .wrap{gap:6px 20px}
 @media(max-width:900px){body.land .hero .how.steps{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:520px){body.land .hero .how.steps{grid-template-columns:1fr}}
 @media(min-width:901px) and (max-height:780px){body.land .hero{padding:18px 0}body.land .hero h1{font-size:clamp(26px,3.3vw,36px);margin:10px 0 8px}body.land .hero p{font-size:14.5px}body.land .hero .stats{margin-top:14px}body.land .hero .how.steps{margin-top:16px}body.land .hero .acts{margin-top:16px}body.land .foot{padding:10px 0}}
+/* Móvil: encabezado sobrio, sin botones; solo logo, título y selector de idioma discreto */
+@media(max-width:700px){
+ .top{grid-template-columns:auto minmax(0,1fr) auto;column-gap:10px;row-gap:0;padding:8px 14px;border-bottom:1px solid var(--line)}
+ .top img{height:28px}
+ .top .sec{font-size:10.5px;letter-spacing:.09em;padding-left:10px;border-left:1px solid var(--line);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ .top nav{grid-column:auto;width:auto;margin:0;padding:0;border:0;display:flex;align-items:center;justify-content:flex-end}
+ .top nav a{display:none}
+ .top nav select#lang{min-height:36px;padding:4px 6px;border:0;border-radius:6px;background:transparent;color:#6b7686;font:600 11px var(--font);letter-spacing:.06em;cursor:pointer}
+ .top nav select#lang:hover,.top nav select#lang:focus-visible{background:var(--soft);color:var(--navy)}
+}
