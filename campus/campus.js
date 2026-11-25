@@ -185,14 +185,54 @@ function tAsis(){
   let h=`<p class="mu sm">Cada clase es <b>Virtual</b> o <b>Presencial</b>. El video de la clase del docente existe solo en las virtuales y lo habilita el docente.</p>`;
   if(doc&&!d.enr.length)return h+`<div class="empty">Sin alumnos inscriptos.</div>`;
   d.cls.forEach(c=>{
-    h+=`<div class="row"><div class="ext">${esc(c.f.slice(8))}/${esc(c.f.slice(5,7))}</div><div class="m"><b>${esc(c.t)}</b><small>${esc(c.f)} · ${c.mod}</small></div>`;
+    h+=`<div class="row"><div class="ext">${esc(c.f.slice(8))}/${esc(c.f.slice(5,7))}</div><div class="m"><b>${esc(c.t)}</b><small>${esc(c.f)} · ${c.mod}${c.mod==="Virtual"?" · puede ser grabada por el docente":""}</small></div>`;
     if(doc)h+=`<div class="ctl"><select data-f="cmod" data-v="${c.id}"><option ${c.mod==="Virtual"?"selected":""}>Virtual</option><option ${c.mod==="Presencial"?"selected":""}>Presencial</option></select><span class="vcol">${c.mod==="Virtual"?`<label class="t">Video visible <button class="sw" role="switch" aria-checked="${c.vis}" data-act="cvis" data-v="${c.id}"></button></label>`:`<span class="mu sm">Sin video</span>`}</span></div>`;
-    else{const v=c.asis[ME];h+=`<div class="ctl"><span class="pill ${v==="P"?"p-ok":v==="A"?"p-off":v==="J"?"p-i":"p-sch"}">${v==="P"?"Presente":v==="A"?"Ausente":v==="J"?"Justificada":"Sin registrar"}</span>${c.mod==="Virtual"&&c.vis?`<button class="btn" data-act="cdown">Descargar video de la clase</button>`:""}</div>`}
+    else{const v=c.asis[ME];h+=`<div class="ctl"><span class="pill ${v==="P"?"p-ok":v==="A"?"p-off":v==="J"?"p-i":"p-sch"}">${v==="P"?"Presente":v==="A"?"Ausente":v==="J"?"Justificada":"Sin registrar"}</span>${c.mod==="Virtual"?(c.link?`<a class="btn" style="text-decoration:none" href="${esc(c.link)}" target="_blank" rel="noopener noreferrer">Unirse a la clase virtual</a>`:`<span class="mu sm">Enlace a confirmar</span>`):""}${c.mod==="Virtual"&&c.vis?`<button class="btn g" data-act="cdown">Descargar video de la clase</button>`:""}</div>`}
+    if(doc&&c.mod==="Virtual")h+=virtualPanel(c);
     h+=`</div>`});
   if(doc&&d.cls.length)h+=`<h3>Registro de asistencia</h3><div class="tw"><table><tr><th>Alumno</th>${d.cls.map(c=>`<th class="n">${esc(c.f.slice(5))}</th>`).join("")}<th class="n">%</th></tr>`+
     d.enr.map(s=>`<tr><td>${esc(stName(s))}</td>${d.cls.map(c=>`<td class="n"><select data-f="att" data-c="${c.id}" data-s="${s}"><option value="">—</option>${["P","A","J"].map(o=>`<option ${c.asis[s]===o?"selected":""}>${o}</option>`).join("")}</select></td>`).join("")}<td class="n">${attPct(ST.cid,s)??"—"}${attPct(ST.cid,s)!=null?" %":""}</td></tr>`).join("")+`</table></div><p class="mu sm">P = presente · A = ausente · J = justificada (no cuenta).</p>`;
   if(!doc){const a=attPct(ST.cid,ME);h+=`<p class="mu sm">Asistencia acumulada: <b>${a==null?"—":a+" %"}</b></p>`}
   return h;
+}
+const BLOBS={}, REC={on:null,t0:0,timer:null,mr:null,chunks:[],streams:[],ac:null}, PV={};
+const bkey=(cid,id)=>cid+":"+id;
+function virtualPanel(c){
+  const k=bkey(ST.cid,c.id),rec=REC.on===k,b=BLOBS[k];
+  return `<div class="sub"><div class="subr"><label class="t" style="flex:1;min-width:260px">Enlace a la clase online <input type="url" placeholder="https://… (Meet, Zoom, Teams)" value="${esc(c.link||"")}" data-f="clink" data-v="${c.id}" style="flex:1"></label>${c.link?`<a class="btn g" style="text-decoration:none" href="${esc(c.link)}" target="_blank" rel="noopener noreferrer">Abrir enlace</a>`:""}</div>
+   <div class="subr">${rec?`<span class="pill p-off">● Grabando <span id="rt">${mmss((Date.now()-REC.t0)/1000)}</span></span><button class="btn" data-act="recstop">Detener grabación</button>`:`<button class="btn g" data-act="rec" data-v="${c.id}" ${REC.on?"disabled":""}>● Grabar clase</button>`}
+    ${b?`<span class="pill p-ok">Grabación lista · ${size(Math.round(b.blob.size/1024))}</span><button class="btn g" data-act="recview" data-v="${c.id}">${PV[k]?"Ocultar":"Ver"}</button><button class="btn" data-act="recdl" data-v="${c.id}">Descargar (.webm)</button>`:""}</div>
+   ${b&&PV[k]?`<video controls src="${b.url}" style="width:100%;max-width:560px;border-radius:8px;margin-top:8px"></video>`:""}
+   <p class="mu sm" style="margin:6px 0 0">Al grabar, el navegador pide elegir la pestaña o ventana de la clase (marque “compartir audio”) y el micrófono. Avise a los alumnos antes de grabar. En esta versión de prueba la grabación queda solo en esta sesión: descárguela; en la versión definitiva se guarda en el servidor.</p></div>`;
+}
+const mmss=s=>String(Math.floor(s/60)).padStart(2,"0")+":"+String(Math.floor(s%60)).padStart(2,"0");
+async function startRec(id){
+  const k=bkey(ST.cid,id);
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getDisplayMedia||!window.MediaRecorder){toast("Este navegador no permite grabar. Use Chrome, Edge o Firefox de escritorio.");return}
+  try{
+    const disp=await navigator.mediaDevices.getDisplayMedia({video:true,audio:true});
+    let mic=null;try{mic=await navigator.mediaDevices.getUserMedia({audio:true})}catch(e){toast("Sin micrófono: se grabará solo el audio compartido.")}
+    const ac=new (window.AudioContext||window.webkitAudioContext)(),dest=ac.createMediaStreamDestination();let na=0;
+    [disp,mic].forEach(st=>{if(st&&st.getAudioTracks().length){ac.createMediaStreamSource(new MediaStream(st.getAudioTracks())).connect(dest);na++}});
+    const out=new MediaStream([...disp.getVideoTracks(),...(na?dest.stream.getAudioTracks():[])]);
+    const mt=["video/webm;codecs=vp9,opus","video/webm;codecs=vp8,opus","video/webm"].find(t=>MediaRecorder.isTypeSupported(t))||"";
+    const mr=new MediaRecorder(out,mt?{mimeType:mt}:undefined);
+    REC.chunks=[];REC.mr=mr;REC.ac=ac;REC.streams=[disp,mic].filter(Boolean);REC.on=k;REC.t0=Date.now();
+    mr.ondataavailable=e=>{if(e.data&&e.data.size)REC.chunks.push(e.data)};
+    mr.onstop=()=>{
+      const blob=new Blob(REC.chunks,{type:"video/webm"});
+      if(BLOBS[k])try{URL.revokeObjectURL(BLOBS[k].url)}catch(e){}
+      BLOBS[k]={blob,url:URL.createObjectURL(blob)};
+      REC.streams.forEach(st=>st.getTracks().forEach(t=>t.stop()));try{ac.close()}catch(e){}
+      clearInterval(REC.timer);REC.on=null;
+      const [cid,cl]=k.split(":");const c=CD(cid).cls.find(x=>x.id==cl);if(c){c.video=true;save()}
+      toast("Grabación finalizada. Descárguela para conservarla.");render();
+    };
+    disp.getVideoTracks()[0].addEventListener("ended",()=>{if(REC.mr&&REC.mr.state!=="inactive")REC.mr.stop()});
+    mr.start(1000);
+    REC.timer=setInterval(()=>{const e=$("#rt");if(e)e.textContent=mmss((Date.now()-REC.t0)/1000)},1000);
+    toast("Grabando la clase");render();
+  }catch(e){REC.on=null;toast(e&&e.name==="NotAllowedError"?"Grabación cancelada o sin permiso.":"No se pudo iniciar la grabación.");render()}
 }
 const stName=id=>(STUDENTS.find(s=>s.id===id)||{n:id}).n;
 
@@ -293,6 +333,10 @@ document.addEventListener("click",e=>{
    case"mopen":toast("En la versión definitiva se abre el visor del archivo.");return;
    case"mdown":toast("Descarga autorizada por el docente (versión definitiva).");return;
    case"cvis":{const c=d.cls.find(x=>x.id==v);c.vis=!c.vis;save();break}
+   case"rec":startRec(v);return;
+   case"recstop":if(REC.mr&&REC.mr.state!=="inactive")REC.mr.stop();return;
+   case"recview":{const k=bkey(ST.cid,v);PV[k]=!PV[k];break}
+   case"recdl":{const k=bkey(ST.cid,v),bb=BLOBS[k];if(bb){const a=document.createElement("a");a.href=bb.url;a.download="clase_"+ST.cid+"_"+v+"_"+TODAY+".webm";document.body.appendChild(a);a.click();a.remove();toast("Descarga solicitada")}return}
    case"cdown":toast("Descarga del video de la clase del docente (versión definitiva).");return;
    case"addtp":d.tps.push("TP"+(d.tps.length+1));save();break;
    case"deltp":if(d.tps.length<2){toast("Debe quedar al menos un TP");return}d.tps=d.tps.filter(t=>t!==v);save();break;
@@ -312,6 +356,7 @@ document.addEventListener("change",e=>{
   switch(f){
    case"mdesde":d.mat.find(x=>x.id==t.dataset.v).desde=t.value;save();break;
    case"mdl":d.mat.find(x=>x.id==t.dataset.v).dl=t.checked;save();return;
+   case"clink":{const c=d.cls.find(x=>x.id==t.dataset.v);const u=t.value.trim();if(u&&!/^https:\/\/[^\s]+$/i.test(u)){toast("El enlace debe comenzar con https://");t.value=c.link||"";return}c.link=u;save();toast(u?"Enlace guardado":"Enlace quitado");break}
    case"cmod":{const c=d.cls.find(x=>x.id==t.dataset.v);c.mod=t.value;if(c.mod==="Presencial")c.vis=false;save();break}
    case"att":{const c=d.cls.find(x=>x.id==t.dataset.c);if(t.value)c.asis[t.dataset.s]=t.value;else delete c.asis[t.dataset.s];save();break}
    case"wtp":d.wTP=Math.min(100,Math.max(0,parseInt(t.value)||0));save();break;

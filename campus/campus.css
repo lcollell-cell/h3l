@@ -149,3 +149,8 @@ footer{max-width:1080px;margin:30px auto 0;padding:18px 24px 40px;border-top:1px
 select{min-width:140px}
 select[data-f=att]{min-width:64px}
 .vcol{display:inline-flex;align-items:center;justify-content:flex-end;min-width:170px}
+
+/* clase virtual: enlace y grabación */
+.sub{flex-basis:100%;border-top:1px solid var(--line);margin-top:4px;padding-top:10px}
+.subr{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin-bottom:8px}
+.subr input[type=url]{min-width:240px}
