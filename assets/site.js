@@ -515,7 +515,7 @@ var VIDEO_BASE='https://media.h3lglobalenergy.com/',VIDEO_VER='1';
 function vurl(f){return VIDEO_BASE?VIDEO_BASE+f+'?v='+VIDEO_VER:'media/'+f}
 
 /* Solapas de servicios: up = Upstream, et = Transición Energética, ds = Ciencia de Datos */
-var GRP={reservas:'up',geociencias:'up',capacitacion:'up',auditoria:'et',emisiones:'et',transicion:'et',datos:'ds',plataformas:'ds'},svcTab='up';
+var GRP={reservas:'up',geociencias:'up',capacitacion:'up',auditoria:'et',emisiones:'et',cbam:'et',transicion:'et',datos:'ds',plataformas:'ds'},svcTab='up';
 function showTab(g,focus){
   svcTab=g;
   var bs=document.querySelectorAll('#svc-tabs [data-tab]');
