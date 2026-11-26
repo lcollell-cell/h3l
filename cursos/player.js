@@ -133,12 +133,9 @@ function prosody(text,lang){
   var t=protectTxt(String(text).replace(/\s+/g,' ').trim()),sp=emSpans(t,lang),out=[],pos=0;
   sp.forEach(function(x){phrases(t.slice(pos,x.s),out);if(out.length&&out[out.length-1].pause<170)out[out.length-1].pause=170;out.push({t:x.txt,pause:220,end:'',em:true});pos=x.e});
   phrases(t.slice(pos),out);
-  return out.map(function(p,i){var pitch=1,rate=1.02;
-    if(p.em){rate=.94;pitch=1.07}
-    else if(p.end===','){pitch=1.04}else if(p.end===';'||p.end===':'){pitch=1.02}else if(p.end==='?'){pitch=1.08}else if(p.end==='!'){pitch=1.05}else if(p.end==='.'||p.end==='…'){pitch=.96}
-    if(!p.em&&/\b(nunca|jam[aá]s|siempre|clave|fundamental|esencial|atenci[oó]n|ojo|cuidado|lo importante|lo central|lo esencial|record[aá]|tené presente|tenga presente|fijate)\b/i.test(p.t)){rate*=.95;pitch+=.03}
-    pitch+=((i*7)%5-2)*.008;var jit=.92+((i*5)%8)*.02;
-    return{t:restoreTxt(p.t),pause:Math.round(p.pause*jit*.9),p:Math.max(.5,Math.min(2,pitch)),r:rate}})}
+  return out.map(function(p,i){var pitch=1,rate=1;
+    if(p.em)rate=.97;
+    var jit=.94+((i*5)%6)*.02;return{t:restoreTxt(p.t),pause:Math.round(p.pause*jit*.9),p:Math.max(.5,Math.min(2,pitch)),r:rate}})}
 /* calentamiento: con el primer toque en la pagina se abre la conexion de la voz (silencioso) para que el primer play no espere */
 var warmed=false;function warm(){if(warmed||!hasTTS||!voice||playing)return;warmed=true;try{var u=new SpeechSynthesisUtterance(' ');u.voice=voice;u.lang=voice.lang;u.volume=0;SS.speak(u)}catch(e){}}
 document.addEventListener('pointerdown',warm,{once:true,passive:true});
@@ -147,8 +144,7 @@ function speakCue(){var busy=false;try{busy=!!(hasTTS&&(SS.speaking||SS.pending)
   timer=setInterval(function(){if(!playing||waiting)return;elapsed+=.2*speed;if(elapsed>HC.cueDur(c)*(ttsOn&&voice?1.5:1)&&!(ttsOn&&voice)){cueEnd(my)}tickUI()},200);
   if(ttsOn&&voice){var raw=String(c.tts||c.say);try{var ti=(META&&META.title)||(C&&C.title);if(ti&&ti.indexOf(':')>-1&&raw.indexOf(ti)>-1)raw=raw.split(ti).join(ti.replace(/\s*:\s*/g,' '))}catch(e){}
     var segs=prosody(HC.pron(raw,C.lang),C.lang),enV=null;
-    if(!/^en/i.test(C.lang||'')&&/Global Energy/i.test(raw)){enV=enVoice();if(enV){var o2=[];segs.forEach(function(g){var m=g.t.match(/^(.*?)\b(Global Energy)\b(.*)$/i);if(!m){o2.push(g);return}
-      if(m[1].trim())o2.push({t:m[1].trim(),pause:30,p:g.p,r:g.r});var tl=/^[\s,;:.!?…—–]*$/.test(m[3]);o2.push({t:m[2]+(tl?m[3].trim():''),pause:tl?g.pause:30,p:g.p,r:g.r,en:true});if(!tl)o2.push({t:m[3].trim(),pause:g.pause,p:g.p,r:g.r})});segs=o2}}
+
     /* respiro natural: al cambiar de cue (y más si cambia la diapositiva) se espera antes de hablar; entre frases se respeta la puntuación */
     var lead=autoNext?(c.scene?900:550):0;autoNext=false;if(lead&&elapsed<.3)elapsed=-lead/1000*speed;else lead=0;
     var sayG=function(n){if(tok!==my)return;if(n>=segs.length){cueEnd(my);return}
