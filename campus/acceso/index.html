@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; media-src 'self' blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'">
+<meta name="author" content="Leandro Collell · H3L Global Energy">
+<title>Campus Virtual H3L · Acceso</title>
+<link rel="stylesheet" href="../../assets/fonts.css">
+<link rel="stylesheet" href="acceso.css?v=3">
+</head>
+<body>
+<header>
+  <a href="../index.html" class="brand"><img src="../../LOGO_H3L.png" alt="H3L Global Energy"><span>Campus Virtual H3L</span></a>
+  <select id="lang" aria-label="Idioma"><option value="es">ES</option><option value="en">EN</option><option value="fr">FR</option><option value="pt">PT</option></select>
+</header>
+<main>
+  <section id="login">
+    <h1 data-k="title"></h1>
+    <p class="sub" data-k="sub"></p>
+    <div class="roles" role="radiogroup">
+      <button type="button" role="radio" data-rol="alumno"><b data-k="alumno"></b><small data-k="alumno_d"></small></button>
+      <button type="button" role="radio" data-rol="profesor"><b data-k="profesor"></b><small data-k="profesor_d"></small></button>
+      <button type="button" role="radio" data-rol="interna"><b data-k="interna"></b><small data-k="interna_d"></small></button>
+    </div>
+    <form id="f">
+      <label><span data-k="user"></span><input id="u" name="username" autocomplete="username" autocapitalize="none" spellcheck="false" required></label>
+      <label><span data-k="pass"></span><input id="p" name="password" type="password" autocomplete="current-password" required></label>
+      <button type="submit" id="go" data-k="enter"></button>
+      <p id="msg" role="alert"></p>
+    </form>
+  </section>
+  <section id="area" hidden></section>
+</main>
+<footer>H3L Global Energy · info@h3lglobalenergy.com</footer>
+<script src="curso.js?v=1"></script>
+<script src="acceso.js?v=3"></script>
+</body>
+</html>

@@ -1748,7 +1748,7 @@ function chatTour(){
     '🗺️ <strong>Visita Guiada H3L</strong><br><br>Te muestro las secciones principales:',
     '1️⃣ <strong>Inicio</strong> — Resumen de la plataforma y acceso rápido a todas las funciones.',
     '2️⃣ <strong>Quiénes somos</strong> — Conocé nuestra firma, su misión y su visión.',
-    '3️⃣ <strong>Servicios</strong> — Las ocho líneas de servicio, cada una con un video de la herramienta.',
+    '3️⃣ <strong>Servicios</strong> — Las nueve líneas de servicio, cada una con un video de la herramienta.',
     '4️⃣ <strong>Noticias O&G</strong> — Precios BRENT/WTI/GAS/GNL actualizados y noticias del sector.',
     '5️⃣ <strong>Eventos y Contacto</strong> — Agenda del sector y formulario de cotización.',
     '6️⃣ <strong>Contacto</strong> — Escribinos a info@h3lglobalenergy.com o pedí una cotización desde Servicios.<br><br><button onclick="goSection(&quot;servicios&quot;);toggleChat();" style="background:var(--accent);color:#000;border:none;padding:6px 14px;border-radius:6px;font-weight:700;font-size:12px;cursor:pointer;margin-top:6px;">Ver servicios &rarr;</button>'

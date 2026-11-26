@@ -1,0 +1,43 @@
+:root{--navy:#1b2943;--green:#17755a;--bg:#f5f7fa;--line:#dde3ec;--mut:#5a6577}
+*{box-sizing:border-box;margin:0}
+[hidden]{display:none!important}
+body{font-family:Inter,Barlow,system-ui,sans-serif;background:var(--bg);color:var(--navy);line-height:1.5}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;background:#fff;border-bottom:1px solid var(--line);padding:10px 20px}
+.brand{display:flex;align-items:center;gap:12px;color:inherit;text-decoration:none;font-weight:600}
+.brand img{height:40px;width:auto}
+select{border:0;background:none;color:var(--mut);font:inherit;font-size:14px;min-height:40px}
+main{max-width:860px;margin:0 auto;padding:28px 18px 40px}
+h1{font-size:26px;line-height:1.25}h2{font-size:19px;margin:28px 0 10px}h3{font-size:16px;margin-bottom:6px}
+.sub{color:var(--mut);margin:6px 0 20px}
+.roles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+.roles button{text-align:left;background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px;cursor:pointer;color:inherit;font:inherit}
+.roles button[aria-checked=true]{border-color:var(--green);box-shadow:0 0 0 2px var(--green) inset}
+.roles small{display:block;color:var(--mut);font-size:13px;margin-top:4px}
+form{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px;max-width:420px}
+label{display:block;font-size:14px;font-weight:600;margin-bottom:14px}
+input{display:block;width:100%;margin-top:6px;padding:11px;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:16px}
+#go,.btn{background:var(--navy);color:#fff;border:0;border-radius:8px;padding:12px 20px;font:inherit;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block}
+#go{width:100%}#go:disabled{opacity:.6}
+#msg{color:#a12626;font-size:14px;margin-top:10px;min-height:1.5em}
+:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:10px}
+.card ul{padding-left:18px}.card li{margin:4px 0}
+.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+video{width:100%;aspect-ratio:16/9;background:#0b1a30;border-radius:12px}
+details.card summary{cursor:pointer;font-weight:600}details.card[open] summary{margin-bottom:8px}
+.pre{white-space:pre-line}
+a{color:var(--green)}a.btn{color:#fff}
+footer{text-align:center;color:var(--mut);font-size:13px;padding:20px}
+@media(max-width:640px){.roles{grid-template-columns:1fr}h1{font-size:22px}}
+.curso h3{margin:8px 0 6px}.curso p{margin:6px 0}.curso ul{padding-left:18px}.curso li{margin:6px 0}.curso li.hl{background:#e3f2e8;border-radius:6px;padding:2px 6px}
+.curso button{font:inherit;border:1px solid var(--line);background:#fff;border-radius:8px;padding:10px 12px;cursor:pointer;color:var(--navy)}
+.curso button.on,.curso button.pri{background:var(--navy);color:#fff;border-color:var(--navy)}.curso button:disabled{opacity:.4;cursor:default}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:4px 0 10px}.tabs button{white-space:nowrap}
+.curso .k{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--green);font-weight:700}
+.tw{overflow-x:auto}.curso table{border-collapse:collapse;width:100%;font-size:13.5px}.curso th{background:var(--navy);color:#fff;text-align:left;padding:7px}.curso td{border-bottom:1px solid var(--line);padding:7px;vertical-align:top}
+.fm{font:700 16px "Courier New",monospace;background:#eef3f9;padding:14px;border-radius:8px;overflow-x:auto}.say{border-left:4px solid var(--green);padding:8px 12px;background:#fff}.note{font-size:13px;color:var(--mut)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}.curso button.opt{display:block;width:100%;text-align:left;margin:6px 0}.curso button.ok{background:#d9f0e1;border-color:var(--green)}.curso button.no{background:#fbe0dc}
+.curso label select{display:block;width:100%;background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px;margin-top:4px;color:var(--navy)}
+.curso input[type=range]{padding:0}.big{font-size:26px;font-weight:800}.kp{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.top{flex-wrap:wrap}.top .btn{white-space:nowrap;flex:0 0 auto}

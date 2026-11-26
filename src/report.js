@@ -4,6 +4,7 @@ const SERVICES = [
   ['reservas', 'Reservas y recursos'],
   ['auditoria', 'Auditoría energética'],
   ['emisiones', 'Emisiones y compensación'],
+  ['cbam', 'CBAM y huella de carbono'],
   ['datos', 'Ciencia de datos'],
   ['transicion', 'Transición energética'],
   ['plataformas', 'Plataformas digitales'],

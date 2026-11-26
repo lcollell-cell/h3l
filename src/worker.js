@@ -6,7 +6,7 @@
 import { buildReport, dayOf, shiftDay } from './report.js';
 
 const TYPES = new Set(['pv', 'eng', 'sec', 'vclick', 'vplay', 'vsec', 'vend', 'click', 'hum', 'scr', 'ttc']);
-const SERVICES = new Set(['reservas', 'auditoria', 'emisiones', 'datos', 'transicion', 'plataformas', 'geociencias', 'capacitacion']);
+const SERVICES = new Set(['reservas', 'auditoria', 'emisiones', 'cbam', 'datos', 'transicion', 'plataformas', 'geociencias', 'capacitacion']);
 const LANGS = new Set(['es', 'en', 'fr', 'pt']);
 const DEVS = new Set(['movil', 'tablet', 'escritorio']);
 const BOT_RE = /bot|crawl|spider|slurp|headless|lighthouse|pagespeed|preview|monitor|uptime|curl|wget|python|node-fetch|axios|java\/|go-http|facebookexternalhit|whatsapp|telegram/i;
