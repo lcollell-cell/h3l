@@ -110,7 +110,7 @@ function chunks(t){var m=String(t).match(/[^.!?;:…]+[.!?;:…]*\s*/g)||[t],u=[
   u.forEach(function(s){var lim=out.length?150:80;if(cur&&(cur+s).length>lim){out.push(cur);cur=s}else cur+=s});if(cur)out.push(cur);return out.map(function(x){return x.trim()}).filter(Boolean)}
 
 /* ---------- prosodia: narración como relato (pausas por puntuación, entonación y énfasis en conceptos) ---------- */
-var PAUSE={'.':640,'?':720,'!':680,'…':820,';':360,':':400,',':240,'—':280,'–':280};
+var PAUSE={'.':640,'?':720,'!':680,'…':820,';':280,':':300,',':130,'—':200,'–':200};
 var EMKEY=/\b(nunca|jam[aá]s|siempre|clave|fundamental|esencial|atenci[oó]n|ojo)\b/gi;
 function protectTxt(t){return t.replace(/(\d)([.,])(?=\d)/g,function(m,a,b){return a+(b==='.'?'\u0005':'\u0006')}).replace(/\bp\. ?ej\./gi,function(m){return m.replace(/\./g,'\u0005')}).replace(/\b(etc|Sr|Sra|Dr|Dra|Ing|vs|ej|aprox|Fig|Tab|Cap)\./gi,function(m){return m.slice(0,-1)+'\u0005'})}
 function restoreTxt(t){return t.replace(/\u0005/g,'.').replace(/\u0006/g,',')}
@@ -125,9 +125,9 @@ function emSpans(t,lang){var sp=[],es=!lang||/^(es|pt)/i.test(lang),m;
   sp.sort(function(a,b){return a.s-b.s});var out=[],last=-1;sp.forEach(function(x){if(x.s>=last){out.push(x);last=x.e}});return out}
 function phrases(str,out){
   var lead=str.match(/^\s*([,;:.!?…—–]+)\s*/);if(lead&&out.length){out[out.length-1].pause=PAUSE[lead[1].charAt(0)]||240;str=str.slice(lead[0].length)}
-  var m=str.match(/[^,;:.!?…—–]+[,;:.!?…—–]*\s*/g)||[];
+  var m=str.match(/[^;:.!?…—–]+[;:.!?…—–]*\s*/g)||[];
   m.forEach(function(p){p=p.trim();if(!p)return;
-    while(p.length>140){var k=p.lastIndexOf(' ',120);if(k<40)break;out.push({t:p.slice(0,k),pause:110,end:''});p=p.slice(k+1)}
+    while(p.length>130){var kc=p.lastIndexOf(', ',115),k=kc>=45?kc+1:p.lastIndexOf(' ',115);if(k<40)break;var cm=kc>=45;out.push({t:p.slice(0,k),pause:cm?PAUSE[',']:110,end:cm?',':''});p=p.slice(k+1)}
     var e=(p.match(/([,;:.!?…—–])+$/)||[''])[0].charAt(0);out.push({t:p,pause:e?PAUSE[e]:120,end:e})})}
 function prosody(text,lang){
   var t=protectTxt(String(text).replace(/\s+/g,' ').trim()),sp=emSpans(t,lang),out=[],pos=0;
